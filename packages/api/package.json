@@ -9,6 +9,9 @@
 		"@cosmjs/stargate": "^0.24.0-alpha.1",
 		"@grpc/grpc-js": "^1.2.1"
 	},
+	"scripts": {
+		"build": "tsc"
+	},
 	"devDependencies": {
 		"jsdoc": "^3.6.6"
 	}

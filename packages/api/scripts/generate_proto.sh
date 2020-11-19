@@ -2,8 +2,7 @@
 set -e
 
 GENERATED_DIR="./src/generated"
-
-proto_files=$(find ./proto -path -prune -o -name '*.proto')
+PROTO_FILE=$(find ./proto -path -prune -o -name '*.proto')
 
 rm -rf $GENERATED_DIR
 mkdir $GENERATED_DIR
@@ -13,6 +12,6 @@ yarn pbjs \
   -t static-module \
   -w es6 \
   -o "$GENERATED_DIR/protoImpl.js" \
-  $proto_files
+  $PROTO_FILE
 
-yarn pbts -o "$GENERATED_DIR/protoImpl.ts" "$GENERATED_DIR/protoImpl.js"
+yarn pbts -o "$GENERATED_DIR/protoImpl.d.ts" -n protoImpl "$GENERATED_DIR/protoImpl.js"
