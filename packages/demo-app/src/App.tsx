@@ -1,27 +1,48 @@
-import React from 'react';
-import logo from './logo.svg';
+import { RegenApi } from '@regennetwork/api';
+import React, { useEffect, useState } from 'react';
 
-import './App.css';
+import { Block } from './Block';
 
-function App() {
+export function App(): React.ReactElement {
+	const [grpcUrl, setGrpcUrl] = useState('18.223.151.187:9090');
+	const [tmUrl, setTmUrl] = useState('http://18.223.151.187:26657');
+
+	const [regenApi, setRegenApi] = useState<RegenApi | undefined>(undefined);
+
+	useEffect(() => {
+		RegenApi.connect({ grpcUrl, tendermintUrl: tmUrl })
+			.then(setRegenApi)
+			.catch(console.error);
+	}, [grpcUrl, tmUrl]);
+
 	return (
-		<div className="App">
-			<header className="App-header">
-				<img src={logo} className="App-logo" alt="logo" />
-				<p>
-					Edit <code>src/App.tsx</code> and save to reload.
-				</p>
-				<a
-					className="App-link"
-					href="https://reactjs.org"
-					target="_blank"
-					rel="noopener noreferrer"
-				>
-					Learn React
-				</a>
-			</header>
+		<div>
+			<h1>
+				Regen Network Demo App using <code>@regennetwork/api</code>
+			</h1>
+			<div>
+				<h2>Settings</h2>
+				<label htmlFor="grpcUrl">gRPC URL:</label>
+				<input
+					name="grpc"
+					value={grpcUrl}
+					onChange={({ target: { value } }) => setGrpcUrl(value)}
+				/>
+				<label htmlFor="tm">Tendermint URL:</label>
+				<input
+					name="tmUrl"
+					value={tmUrl}
+					onChange={({ target: { value } }) => setTmUrl(value)}
+				/>
+			</div>
+
+			{regenApi ? (
+				<div>
+					<Block />
+				</div>
+			) : (
+				<p>Loading RegenApi...</p>
+			)}
 		</div>
 	);
 }
-
-export default App;

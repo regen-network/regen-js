@@ -1,3 +1,7 @@
 {
+	"compilerOptions": {
+		"declaration": true,
+		"outDir": "lib"
+	},
 	"extends": "../../tsconfig"
 }
