@@ -1,0 +1,21 @@
+{
+	"name": "regen-js",
+	"version": "0.1.0",
+	"author": "admin@regen.network",
+	"description": "Regen Network does JavaScript",
+	"license": "Apache-2.0",
+	"private": true,
+	"repository": "https://github.com/regen-network/regen-js",
+	"workspaces": [
+		"packages/*"
+	],
+	"scripts": {
+		"demo": "yarn workspace @regennetwork/demo-app start",
+		"format": "yarn lint --fix",
+		"lint": "tsc --noEmit && eslint . --ext .ts"
+	},
+	"devDependencies": {
+		"@amaurymartiny/eslintrc": "^1.3.3",
+		"typescript": "^4.0.5"
+	}
+}
