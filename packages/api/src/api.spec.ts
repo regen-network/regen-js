@@ -5,8 +5,8 @@ let api: RegenApi;
 describe('RegenApi', () => {
 	beforeAll(async () => {
 		api = await RegenApi.connect({
-			grpcUrl: '18.223.151.187:9090',
-			tendermintUrl: 'http://18.223.151.187:26657',
+			grpcUrl: 'devnet.regen.network:9090',
+			tendermintUrl: 'http://devnet.regen.network:26657',
 		});
 	});
 
@@ -16,11 +16,17 @@ describe('RegenApi', () => {
 	});
 
 	it('should fetch balances using grpc client', async () => {
-		const queryClient = api.protoImpl.cosmos.bank.v1beta1.Query.create(
+		const queryClient = api.pb.cosmos.bank.v1beta1.Query.create(
 			api.rpcImpl
 		);
-		const a = await queryClient.allBalances({});
-		console.log(a);
-		expect(a).toBe(true);
+		const balances = await queryClient.allBalances({});
+
+		// TODO
+		// The two lines above could ideally be squashed into one:
+		// ``
+		// const balances = await api.pb.cosmos.bank.v1beta1.Query.allBalances({})
+		// ```
+
+		expect(Object.keys(balances.balances)).toBeGreaterThan(0);
 	});
 });
