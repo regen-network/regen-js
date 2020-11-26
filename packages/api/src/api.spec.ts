@@ -6,7 +6,7 @@ let api: RegenApi;
 describe('RegenApi', () => {
 	beforeAll(async () => {
 		api = await RegenApi.connect({
-			clientConn: {
+			connection: {
 				type: 'tendermint',
 				url: 'http://devnet.regen.network:26657',
 			},
@@ -14,7 +14,7 @@ describe('RegenApi', () => {
 	});
 
 	it('should fetch balances using tendermint client', async () => {
-		const impl = new QueryClientImpl(api.clientConn);
+		const impl = new QueryClientImpl(api.connection);
 		const res = await impl.AllBalances({
 			address: 'regen:1j9h8dpu7ah2hl9rg7ycu0e64kh90rrlpk9kagz', // Amaury's account.
 		});
