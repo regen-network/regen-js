@@ -11,7 +11,7 @@ export interface Snapshot {
   format: number;
   chunks: number;
   hash: Uint8Array;
-  metadata: Metadata | undefined;
+  metadata?: Metadata;
 }
 
 /**

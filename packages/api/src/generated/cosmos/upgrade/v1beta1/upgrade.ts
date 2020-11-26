@@ -23,7 +23,7 @@ export interface Plan {
    *  The time after which the upgrade must be performed.
    *  Leave set to its zero value to use a pre-defined Height instead.
    */
-  time: Date | undefined;
+  time?: Date;
   /**
    *  The height at which the upgrade must be performed.
    *  Only used if Time is not set.
@@ -41,7 +41,7 @@ export interface Plan {
    *  previous version of the chain.
    *  This will allow IBC connections to persist smoothly across planned chain upgrades
    */
-  upgradedClientState: Any | undefined;
+  upgradedClientState?: Any;
 }
 
 /**
@@ -51,7 +51,7 @@ export interface Plan {
 export interface SoftwareUpgradeProposal {
   title: string;
   description: string;
-  plan: Plan | undefined;
+  plan?: Plan;
 }
 
 /**

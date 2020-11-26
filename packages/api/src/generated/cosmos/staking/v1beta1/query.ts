@@ -16,7 +16,7 @@ export interface QueryValidatorsRequest {
   /**
    *  pagination defines an optional pagination for the request.
    */
-  pagination: PageRequest | undefined;
+  pagination?: PageRequest;
 }
 
 /**
@@ -30,7 +30,7 @@ export interface QueryValidatorsResponse {
   /**
    *  pagination defines the pagination in the response.
    */
-  pagination: PageResponse | undefined;
+  pagination?: PageResponse;
 }
 
 /**
@@ -50,7 +50,7 @@ export interface QueryValidatorResponse {
   /**
    *  validator defines the the validator info.
    */
-  validator: Validator | undefined;
+  validator?: Validator;
 }
 
 /**
@@ -65,7 +65,7 @@ export interface QueryValidatorDelegationsRequest {
   /**
    *  pagination defines an optional pagination for the request.
    */
-  pagination: PageRequest | undefined;
+  pagination?: PageRequest;
 }
 
 /**
@@ -77,7 +77,7 @@ export interface QueryValidatorDelegationsResponse {
   /**
    *  pagination defines the pagination in the response.
    */
-  pagination: PageResponse | undefined;
+  pagination?: PageResponse;
 }
 
 /**
@@ -92,7 +92,7 @@ export interface QueryValidatorUnbondingDelegationsRequest {
   /**
    *  pagination defines an optional pagination for the request.
    */
-  pagination: PageRequest | undefined;
+  pagination?: PageRequest;
 }
 
 /**
@@ -104,7 +104,7 @@ export interface QueryValidatorUnbondingDelegationsResponse {
   /**
    *  pagination defines the pagination in the response.
    */
-  pagination: PageResponse | undefined;
+  pagination?: PageResponse;
 }
 
 /**
@@ -128,7 +128,7 @@ export interface QueryDelegationResponse {
   /**
    *  delegation_responses defines the delegation info of a delegation.
    */
-  delegationResponse: DelegationResponse | undefined;
+  delegationResponse?: DelegationResponse;
 }
 
 /**
@@ -154,7 +154,7 @@ export interface QueryUnbondingDelegationResponse {
   /**
    *  unbond defines the unbonding information of a delegation.
    */
-  unbond: UnbondingDelegation | undefined;
+  unbond?: UnbondingDelegation;
 }
 
 /**
@@ -169,7 +169,7 @@ export interface QueryDelegatorDelegationsRequest {
   /**
    *  pagination defines an optional pagination for the request.
    */
-  pagination: PageRequest | undefined;
+  pagination?: PageRequest;
 }
 
 /**
@@ -184,7 +184,7 @@ export interface QueryDelegatorDelegationsResponse {
   /**
    *  pagination defines the pagination in the response.
    */
-  pagination: PageResponse | undefined;
+  pagination?: PageResponse;
 }
 
 /**
@@ -199,7 +199,7 @@ export interface QueryDelegatorUnbondingDelegationsRequest {
   /**
    *  pagination defines an optional pagination for the request.
    */
-  pagination: PageRequest | undefined;
+  pagination?: PageRequest;
 }
 
 /**
@@ -211,7 +211,7 @@ export interface QueryDelegatorUnbondingDelegationsResponse {
   /**
    *  pagination defines the pagination in the response.
    */
-  pagination: PageResponse | undefined;
+  pagination?: PageResponse;
 }
 
 /**
@@ -234,7 +234,7 @@ export interface QueryRedelegationsRequest {
   /**
    *  pagination defines an optional pagination for the request.
    */
-  pagination: PageRequest | undefined;
+  pagination?: PageRequest;
 }
 
 /**
@@ -246,7 +246,7 @@ export interface QueryRedelegationsResponse {
   /**
    *  pagination defines the pagination in the response.
    */
-  pagination: PageResponse | undefined;
+  pagination?: PageResponse;
 }
 
 /**
@@ -261,7 +261,7 @@ export interface QueryDelegatorValidatorsRequest {
   /**
    *  pagination defines an optional pagination for the request.
    */
-  pagination: PageRequest | undefined;
+  pagination?: PageRequest;
 }
 
 /**
@@ -276,7 +276,7 @@ export interface QueryDelegatorValidatorsResponse {
   /**
    *  pagination defines the pagination in the response.
    */
-  pagination: PageResponse | undefined;
+  pagination?: PageResponse;
 }
 
 /**
@@ -302,7 +302,7 @@ export interface QueryDelegatorValidatorResponse {
   /**
    *  validator defines the the validator info.
    */
-  validator: Validator | undefined;
+  validator?: Validator;
 }
 
 /**
@@ -324,7 +324,7 @@ export interface QueryHistoricalInfoResponse {
   /**
    *  hist defines the historical info at the given height.
    */
-  hist: HistoricalInfo | undefined;
+  hist?: HistoricalInfo;
 }
 
 /**
@@ -340,7 +340,7 @@ export interface QueryPoolResponse {
   /**
    *  pool defines the pool info.
    */
-  pool: Pool | undefined;
+  pool?: Pool;
 }
 
 /**
@@ -356,7 +356,7 @@ export interface QueryParamsResponse {
   /**
    *  params holds all the parameters of this module.
    */
-  params: Params | undefined;
+  params?: Params;
 }
 
 const baseQueryValidatorsRequest: object = {

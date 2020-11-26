@@ -27,7 +27,7 @@ export interface MsgAnchorDataResponse {
   /**
    *  timestamp is the timestamp of the block at which the data was anchored.
    */
-  timestamp: Date | undefined;
+  timestamp?: Date;
 }
 
 /**

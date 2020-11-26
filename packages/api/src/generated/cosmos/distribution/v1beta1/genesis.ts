@@ -47,7 +47,7 @@ export interface ValidatorAccumulatedCommissionRecord {
   /**
    *  accumulated is the accumulated commission of a validator.
    */
-  accumulated: ValidatorAccumulatedCommission | undefined;
+  accumulated?: ValidatorAccumulatedCommission;
 }
 
 /**
@@ -66,7 +66,7 @@ export interface ValidatorHistoricalRewardsRecord {
   /**
    *  rewards defines the historical rewards of a validator.
    */
-  rewards: ValidatorHistoricalRewards | undefined;
+  rewards?: ValidatorHistoricalRewards;
 }
 
 /**
@@ -80,7 +80,7 @@ export interface ValidatorCurrentRewardsRecord {
   /**
    *  rewards defines the current rewards of a validator.
    */
-  rewards: ValidatorCurrentRewards | undefined;
+  rewards?: ValidatorCurrentRewards;
 }
 
 /**
@@ -98,7 +98,7 @@ export interface DelegatorStartingInfoRecord {
   /**
    *  starting_info defines the starting info of a delegator.
    */
-  startingInfo: DelegatorStartingInfo | undefined;
+  startingInfo?: DelegatorStartingInfo;
 }
 
 /**
@@ -120,7 +120,7 @@ export interface ValidatorSlashEventRecord {
   /**
    *  validator_slash_event describes the slash event.
    */
-  validatorSlashEvent: ValidatorSlashEvent | undefined;
+  validatorSlashEvent?: ValidatorSlashEvent;
 }
 
 /**
@@ -130,11 +130,11 @@ export interface GenesisState {
   /**
    *  params defines all the paramaters of the module.
    */
-  params: Params | undefined;
+  params?: Params;
   /**
    *  fee_pool defines the fee pool at genesis.
    */
-  feePool: FeePool | undefined;
+  feePool?: FeePool;
   /**
    *  fee_pool defines the delegator withdraw infos at genesis.
    */

@@ -18,7 +18,7 @@ export interface PartSetHeader {
 export interface Part {
   index: number;
   bytes: Uint8Array;
-  proof: Proof | undefined;
+  proof?: Proof;
 }
 
 /**
@@ -26,7 +26,7 @@ export interface Part {
  */
 export interface BlockID {
   hash: Uint8Array;
-  partSetHeader: PartSetHeader | undefined;
+  partSetHeader?: PartSetHeader;
 }
 
 /**
@@ -36,14 +36,14 @@ export interface Header {
   /**
    *  basic block info
    */
-  version: Consensus | undefined;
+  version?: Consensus;
   chainId: string;
   height: number;
-  time: Date | undefined;
+  time?: Date;
   /**
    *  prev block info
    */
-  lastBlockId: BlockID | undefined;
+  lastBlockId?: BlockID;
   /**
    *  hashes of block data
    */
@@ -105,8 +105,8 @@ export interface Vote {
   /**
    *  zero if vote is nil.
    */
-  blockId: BlockID | undefined;
-  timestamp: Date | undefined;
+  blockId?: BlockID;
+  timestamp?: Date;
   validatorAddress: Uint8Array;
   validatorIndex: number;
   signature: Uint8Array;
@@ -118,7 +118,7 @@ export interface Vote {
 export interface Commit {
   height: number;
   round: number;
-  blockId: BlockID | undefined;
+  blockId?: BlockID;
   signatures: CommitSig[];
 }
 
@@ -128,7 +128,7 @@ export interface Commit {
 export interface CommitSig {
   blockIdFlag: BlockIDFlag;
   validatorAddress: Uint8Array;
-  timestamp: Date | undefined;
+  timestamp?: Date;
   signature: Uint8Array;
 }
 
@@ -137,25 +137,25 @@ export interface Proposal {
   height: number;
   round: number;
   polRound: number;
-  blockId: BlockID | undefined;
-  timestamp: Date | undefined;
+  blockId?: BlockID;
+  timestamp?: Date;
   signature: Uint8Array;
 }
 
 export interface SignedHeader {
-  header: Header | undefined;
-  commit: Commit | undefined;
+  header?: Header;
+  commit?: Commit;
 }
 
 export interface LightBlock {
-  signedHeader: SignedHeader | undefined;
-  validatorSet: ValidatorSet | undefined;
+  signedHeader?: SignedHeader;
+  validatorSet?: ValidatorSet;
 }
 
 export interface BlockMeta {
-  blockId: BlockID | undefined;
+  blockId?: BlockID;
   blockSize: number;
-  header: Header | undefined;
+  header?: Header;
   numTxs: number;
 }
 
@@ -165,7 +165,7 @@ export interface BlockMeta {
 export interface TxProof {
   rootHash: Uint8Array;
   data: Uint8Array;
-  proof: Proof | undefined;
+  proof?: Proof;
 }
 
 const basePartSetHeader: object = {

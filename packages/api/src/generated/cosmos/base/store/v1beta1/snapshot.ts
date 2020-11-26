@@ -7,8 +7,8 @@ import { Writer, Reader, util, configure } from 'protobufjs/minimal';
  *  SnapshotItem is an item contained in a rootmulti.Store snapshot.
  */
 export interface SnapshotItem {
-  store: SnapshotStoreItem | undefined;
-  iavl: SnapshotIAVLItem | undefined;
+  store?: SnapshotStoreItem | undefined;
+  iavl?: SnapshotIAVLItem | undefined;
 }
 
 /**

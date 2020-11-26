@@ -6,19 +6,19 @@ import { Writer, Reader, util, configure } from 'protobufjs/minimal';
 
 export interface ValidatorSet {
   validators: Validator[];
-  proposer: Validator | undefined;
+  proposer?: Validator;
   totalVotingPower: number;
 }
 
 export interface Validator {
   address: Uint8Array;
-  pubKey: PublicKey | undefined;
+  pubKey?: PublicKey;
   votingPower: number;
   proposerPriority: number;
 }
 
 export interface SimpleValidator {
-  pubKey: PublicKey | undefined;
+  pubKey?: PublicKey;
   votingPower: number;
 }
 

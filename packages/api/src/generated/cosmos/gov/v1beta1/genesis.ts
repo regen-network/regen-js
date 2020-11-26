@@ -27,15 +27,15 @@ export interface GenesisState {
   /**
    *  params defines all the paramaters of related to deposit.
    */
-  depositParams: DepositParams | undefined;
+  depositParams?: DepositParams;
   /**
    *  params defines all the paramaters of related to voting.
    */
-  votingParams: VotingParams | undefined;
+  votingParams?: VotingParams;
   /**
    *  params defines all the paramaters of related to tally.
    */
-  tallyParams: TallyParams | undefined;
+  tallyParams?: TallyParams;
 }
 
 const baseGenesisState: object = {

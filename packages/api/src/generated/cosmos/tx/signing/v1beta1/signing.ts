@@ -25,8 +25,8 @@ export interface SignatureDescriptor {
   /**
    *  public_key is the public key of the signer
    */
-  publicKey: Any | undefined;
-  data: SignatureDescriptor_Data | undefined;
+  publicKey?: Any;
+  data?: SignatureDescriptor_Data;
   /**
    *  sequence is the sequence of the account, which describes the
    *  number of committed transactions signed by a given address. It is used to prevent
@@ -42,11 +42,11 @@ export interface SignatureDescriptor_Data {
   /**
    *  single represents a single signer
    */
-  single: SignatureDescriptor_Data_Single | undefined;
+  single?: SignatureDescriptor_Data_Single | undefined;
   /**
    *  multi represents a multisig signer
    */
-  multi: SignatureDescriptor_Data_Multi | undefined;
+  multi?: SignatureDescriptor_Data_Multi | undefined;
 }
 
 /**
@@ -70,7 +70,7 @@ export interface SignatureDescriptor_Data_Multi {
   /**
    *  bitarray specifies which keys within the multisig are signing
    */
-  bitarray: CompactBitArray | undefined;
+  bitarray?: CompactBitArray;
   /**
    *  signatures is the signatures of the multi-signature
    */

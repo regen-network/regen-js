@@ -11,7 +11,7 @@ import * as Long from 'long';
  *  proposal Content.
  */
 export interface MsgSubmitProposal {
-  content: Any | undefined;
+  content?: Any;
   initialDeposit: Coin[];
   proposer: string;
 }

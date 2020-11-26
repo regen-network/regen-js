@@ -19,7 +19,7 @@ export interface QueryCurrentPlanResponse {
   /**
    *  plan is the current upgrade plan.
    */
-  plan: Plan | undefined;
+  plan?: Plan;
 }
 
 /**

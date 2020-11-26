@@ -20,7 +20,7 @@ export interface QueryClassInfoResponse {
   /**
    *  info is the ClassInfo for the credit class.
    */
-  info: ClassInfo | undefined;
+  info?: ClassInfo;
 }
 
 /**
@@ -40,7 +40,7 @@ export interface QueryBatchInfoResponse {
   /**
    *  info is the BatchInfo for the credit batch.
    */
-  info: BatchInfo | undefined;
+  info?: BatchInfo;
 }
 
 /**

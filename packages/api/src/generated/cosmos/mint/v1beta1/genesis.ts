@@ -10,11 +10,11 @@ export interface GenesisState {
   /**
    *  minter is a space for holding current inflation information.
    */
-  minter: Minter | undefined;
+  minter?: Minter;
   /**
    *  params defines all the paramaters of the module.
    */
-  params: Params | undefined;
+  params?: Params;
 }
 
 const baseGenesisState: object = {

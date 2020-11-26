@@ -18,7 +18,7 @@ export interface CommitInfo {
  */
 export interface StoreInfo {
   name: string;
-  commitId: CommitID | undefined;
+  commitId?: CommitID;
 }
 
 /**

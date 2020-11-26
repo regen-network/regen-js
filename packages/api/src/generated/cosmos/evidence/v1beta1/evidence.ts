@@ -10,7 +10,7 @@ import { Writer, Reader, util, configure } from 'protobufjs/minimal';
  */
 export interface Equivocation {
   height: number;
-  time: Date | undefined;
+  time?: Date;
   power: number;
   consensusAddress: string;
 }

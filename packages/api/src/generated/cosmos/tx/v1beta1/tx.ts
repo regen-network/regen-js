@@ -14,12 +14,12 @@ export interface Tx {
   /**
    *  body is the processable content of the transaction
    */
-  body: TxBody | undefined;
+  body?: TxBody;
   /**
    *  auth_info is the authorization related content of the transaction,
    *  specifically signers, signer modes and fee
    */
-  authInfo: AuthInfo | undefined;
+  authInfo?: AuthInfo;
   /**
    *  signatures is a list of signatures that matches the length and order of
    *  AuthInfo's signer_infos to allow connecting signature meta information like
@@ -136,7 +136,7 @@ export interface AuthInfo {
    *  based on the cost of evaluating the body and doing signature verification
    *  of the signers. This can be estimated via simulation.
    */
-  fee: Fee | undefined;
+  fee?: Fee;
 }
 
 /**
@@ -149,12 +149,12 @@ export interface SignerInfo {
    *  that already exist in state. If unset, the verifier can use the required \
    *  signer address for this position and lookup the public key.
    */
-  publicKey: Any | undefined;
+  publicKey?: Any;
   /**
    *  mode_info describes the signing mode of the signer and is a nested
    *  structure to support nested multisig pubkey's
    */
-  modeInfo: ModeInfo | undefined;
+  modeInfo?: ModeInfo;
   /**
    *  sequence is the sequence of the account, which describes the
    *  number of committed transactions signed by a given address. It is used to
@@ -170,11 +170,11 @@ export interface ModeInfo {
   /**
    *  single represents a single signer
    */
-  single: ModeInfo_Single | undefined;
+  single?: ModeInfo_Single | undefined;
   /**
    *  multi represents a nested multisig signer
    */
-  multi: ModeInfo_Multi | undefined;
+  multi?: ModeInfo_Multi | undefined;
 }
 
 /**
@@ -196,7 +196,7 @@ export interface ModeInfo_Multi {
   /**
    *  bitarray specifies which keys within the multisig are signing
    */
-  bitarray: CompactBitArray | undefined;
+  bitarray?: CompactBitArray;
   /**
    *  mode_infos is the corresponding modes of the signers of the multisig
    *  which could include nested multisig public keys

@@ -21,7 +21,7 @@ export interface QueryAccountResponse {
   /**
    *  account defines the account of the corresponding address.
    */
-  account: Any | undefined;
+  account?: Any;
 }
 
 /**
@@ -37,7 +37,7 @@ export interface QueryParamsResponse {
   /**
    *  params defines the parameters of the module.
    */
-  params: Params | undefined;
+  params?: Params;
 }
 
 const baseQueryAccountRequest: object = {

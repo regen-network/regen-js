@@ -31,14 +31,14 @@ export interface Deposit {
  */
 export interface Proposal {
   proposalId: number;
-  content: Any | undefined;
+  content?: Any;
   status: ProposalStatus;
-  finalTallyResult: TallyResult | undefined;
-  submitTime: Date | undefined;
-  depositEndTime: Date | undefined;
+  finalTallyResult?: TallyResult;
+  submitTime?: Date;
+  depositEndTime?: Date;
   totalDeposit: Coin[];
-  votingStartTime: Date | undefined;
-  votingEndTime: Date | undefined;
+  votingStartTime?: Date;
+  votingEndTime?: Date;
 }
 
 /**
@@ -73,7 +73,7 @@ export interface DepositParams {
    *   Maximum period for Atom holders to deposit on a proposal. Initial value: 2
    *   months.
    */
-  maxDepositPeriod: Duration | undefined;
+  maxDepositPeriod?: Duration;
 }
 
 /**
@@ -83,7 +83,7 @@ export interface VotingParams {
   /**
    *   Length of the voting period.
    */
-  votingPeriod: Duration | undefined;
+  votingPeriod?: Duration;
 }
 
 /**

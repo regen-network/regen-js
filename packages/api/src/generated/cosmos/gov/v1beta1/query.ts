@@ -19,7 +19,7 @@ export interface QueryProposalRequest {
  *  QueryProposalResponse is the response type for the Query/Proposal RPC method.
  */
 export interface QueryProposalResponse {
-  proposal: Proposal | undefined;
+  proposal?: Proposal;
 }
 
 /**
@@ -41,7 +41,7 @@ export interface QueryProposalsRequest {
   /**
    *  pagination defines an optional pagination for the request.
    */
-  pagination: PageRequest | undefined;
+  pagination?: PageRequest;
 }
 
 /**
@@ -53,7 +53,7 @@ export interface QueryProposalsResponse {
   /**
    *  pagination defines the pagination in the response.
    */
-  pagination: PageResponse | undefined;
+  pagination?: PageResponse;
 }
 
 /**
@@ -77,7 +77,7 @@ export interface QueryVoteResponse {
   /**
    *  vote defined the queried vote.
    */
-  vote: Vote | undefined;
+  vote?: Vote;
 }
 
 /**
@@ -91,7 +91,7 @@ export interface QueryVotesRequest {
   /**
    *  pagination defines an optional pagination for the request.
    */
-  pagination: PageRequest | undefined;
+  pagination?: PageRequest;
 }
 
 /**
@@ -105,7 +105,7 @@ export interface QueryVotesResponse {
   /**
    *  pagination defines the pagination in the response.
    */
-  pagination: PageResponse | undefined;
+  pagination?: PageResponse;
 }
 
 /**
@@ -126,15 +126,15 @@ export interface QueryParamsResponse {
   /**
    *  voting_params defines the parameters related to voting.
    */
-  votingParams: VotingParams | undefined;
+  votingParams?: VotingParams;
   /**
    *  deposit_params defines the parameters related to deposit.
    */
-  depositParams: DepositParams | undefined;
+  depositParams?: DepositParams;
   /**
    *  tally_params defines the parameters related to tally.
    */
-  tallyParams: TallyParams | undefined;
+  tallyParams?: TallyParams;
 }
 
 /**
@@ -158,7 +158,7 @@ export interface QueryDepositResponse {
   /**
    *  deposit defines the requested deposit.
    */
-  deposit: Deposit | undefined;
+  deposit?: Deposit;
 }
 
 /**
@@ -172,7 +172,7 @@ export interface QueryDepositsRequest {
   /**
    *  pagination defines an optional pagination for the request.
    */
-  pagination: PageRequest | undefined;
+  pagination?: PageRequest;
 }
 
 /**
@@ -183,7 +183,7 @@ export interface QueryDepositsResponse {
   /**
    *  pagination defines the pagination in the response.
    */
-  pagination: PageResponse | undefined;
+  pagination?: PageResponse;
 }
 
 /**
@@ -203,7 +203,7 @@ export interface QueryTallyResultResponse {
   /**
    *  tally defines the requested tally.
    */
-  tally: TallyResult | undefined;
+  tally?: TallyResult;
 }
 
 const baseQueryProposalRequest: object = {

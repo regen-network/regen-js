@@ -43,14 +43,14 @@ export interface FileDescriptorProto {
   enumType: EnumDescriptorProto[];
   service: ServiceDescriptorProto[];
   extension: FieldDescriptorProto[];
-  options: FileOptions | undefined;
+  options?: FileOptions;
   /**
    *  This field contains optional information about the original source code.
    *  You may safely remove this entire field without harming runtime
    *  functionality of the descriptors -- the information is needed only by
    *  development tools.
    */
-  sourceCodeInfo: SourceCodeInfo | undefined;
+  sourceCodeInfo?: SourceCodeInfo;
   /**
    *  The syntax of the proto file.
    *  The supported values are "proto2" and "proto3".
@@ -69,7 +69,7 @@ export interface DescriptorProto {
   enumType: EnumDescriptorProto[];
   extensionRange: DescriptorProto_ExtensionRange[];
   oneofDecl: OneofDescriptorProto[];
-  options: MessageOptions | undefined;
+  options?: MessageOptions;
   reservedRange: DescriptorProto_ReservedRange[];
   /**
    *  Reserved field names, which may not be used by fields in the same message.
@@ -87,7 +87,7 @@ export interface DescriptorProto_ExtensionRange {
    *  Exclusive.
    */
   end: number;
-  options: ExtensionRangeOptions | undefined;
+  options?: ExtensionRangeOptions;
 }
 
 /**
@@ -158,7 +158,7 @@ export interface FieldDescriptorProto {
    *  it to camelCase.
    */
   jsonName: string;
-  options: FieldOptions | undefined;
+  options?: FieldOptions;
   /**
    *  If true, this is a proto3 "optional". When a proto3 field is optional, it
    *  tracks presence regardless of field type.
@@ -190,7 +190,7 @@ export interface FieldDescriptorProto {
  */
 export interface OneofDescriptorProto {
   name: string;
-  options: OneofOptions | undefined;
+  options?: OneofOptions;
 }
 
 /**
@@ -199,7 +199,7 @@ export interface OneofDescriptorProto {
 export interface EnumDescriptorProto {
   name: string;
   value: EnumValueDescriptorProto[];
-  options: EnumOptions | undefined;
+  options?: EnumOptions;
   /**
    *  Range of reserved numeric values. Reserved numeric values may not be used
    *  by enum values in the same enum declaration. Reserved ranges may not
@@ -238,7 +238,7 @@ export interface EnumDescriptorProto_EnumReservedRange {
 export interface EnumValueDescriptorProto {
   name: string;
   number: number;
-  options: EnumValueOptions | undefined;
+  options?: EnumValueOptions;
 }
 
 /**
@@ -247,7 +247,7 @@ export interface EnumValueDescriptorProto {
 export interface ServiceDescriptorProto {
   name: string;
   method: MethodDescriptorProto[];
-  options: ServiceOptions | undefined;
+  options?: ServiceOptions;
 }
 
 /**
@@ -261,7 +261,7 @@ export interface MethodDescriptorProto {
    */
   inputType: string;
   outputType: string;
-  options: MethodOptions | undefined;
+  options?: MethodOptions;
   /**
    *  Identifies if client streams multiple client messages
    */

@@ -10,6 +10,7 @@ for dir in $proto_dirs; do
     -I "proto" \
     -I "proto/third_party" \
     --plugin=${TS_PROTO_BIN} \
+    --ts_proto_opt=useOptionals=true \
     --ts_proto_out=src/generated \
     $(find "${dir}" -maxdepth 1 -name '*.proto')
 done

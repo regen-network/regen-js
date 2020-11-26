@@ -9,21 +9,21 @@ import * as Long from 'long';
 
 
 export interface Request {
-  echo: RequestEcho | undefined;
-  flush: RequestFlush | undefined;
-  info: RequestInfo | undefined;
-  setOption: RequestSetOption | undefined;
-  initChain: RequestInitChain | undefined;
-  query: RequestQuery | undefined;
-  beginBlock: RequestBeginBlock | undefined;
-  checkTx: RequestCheckTx | undefined;
-  deliverTx: RequestDeliverTx | undefined;
-  endBlock: RequestEndBlock | undefined;
-  commit: RequestCommit | undefined;
-  listSnapshots: RequestListSnapshots | undefined;
-  offerSnapshot: RequestOfferSnapshot | undefined;
-  loadSnapshotChunk: RequestLoadSnapshotChunk | undefined;
-  applySnapshotChunk: RequestApplySnapshotChunk | undefined;
+  echo?: RequestEcho | undefined;
+  flush?: RequestFlush | undefined;
+  info?: RequestInfo | undefined;
+  setOption?: RequestSetOption | undefined;
+  initChain?: RequestInitChain | undefined;
+  query?: RequestQuery | undefined;
+  beginBlock?: RequestBeginBlock | undefined;
+  checkTx?: RequestCheckTx | undefined;
+  deliverTx?: RequestDeliverTx | undefined;
+  endBlock?: RequestEndBlock | undefined;
+  commit?: RequestCommit | undefined;
+  listSnapshots?: RequestListSnapshots | undefined;
+  offerSnapshot?: RequestOfferSnapshot | undefined;
+  loadSnapshotChunk?: RequestLoadSnapshotChunk | undefined;
+  applySnapshotChunk?: RequestApplySnapshotChunk | undefined;
 }
 
 export interface RequestEcho {
@@ -48,9 +48,9 @@ export interface RequestSetOption {
 }
 
 export interface RequestInitChain {
-  time: Date | undefined;
+  time?: Date;
   chainId: string;
-  consensusParams: ConsensusParams | undefined;
+  consensusParams?: ConsensusParams;
   validators: ValidatorUpdate[];
   appStateBytes: Uint8Array;
   initialHeight: number;
@@ -65,8 +65,8 @@ export interface RequestQuery {
 
 export interface RequestBeginBlock {
   hash: Uint8Array;
-  header: Header | undefined;
-  lastCommitInfo: LastCommitInfo | undefined;
+  header?: Header;
+  lastCommitInfo?: LastCommitInfo;
   byzantineValidators: Evidence[];
 }
 
@@ -99,7 +99,7 @@ export interface RequestOfferSnapshot {
   /**
    *  snapshot offered by peers
    */
-  snapshot: Snapshot | undefined;
+  snapshot?: Snapshot;
   /**
    *  light client-verified app hash for snapshot height
    */
@@ -125,22 +125,22 @@ export interface RequestApplySnapshotChunk {
 }
 
 export interface Response {
-  exception: ResponseException | undefined;
-  echo: ResponseEcho | undefined;
-  flush: ResponseFlush | undefined;
-  info: ResponseInfo | undefined;
-  setOption: ResponseSetOption | undefined;
-  initChain: ResponseInitChain | undefined;
-  query: ResponseQuery | undefined;
-  beginBlock: ResponseBeginBlock | undefined;
-  checkTx: ResponseCheckTx | undefined;
-  deliverTx: ResponseDeliverTx | undefined;
-  endBlock: ResponseEndBlock | undefined;
-  commit: ResponseCommit | undefined;
-  listSnapshots: ResponseListSnapshots | undefined;
-  offerSnapshot: ResponseOfferSnapshot | undefined;
-  loadSnapshotChunk: ResponseLoadSnapshotChunk | undefined;
-  applySnapshotChunk: ResponseApplySnapshotChunk | undefined;
+  exception?: ResponseException | undefined;
+  echo?: ResponseEcho | undefined;
+  flush?: ResponseFlush | undefined;
+  info?: ResponseInfo | undefined;
+  setOption?: ResponseSetOption | undefined;
+  initChain?: ResponseInitChain | undefined;
+  query?: ResponseQuery | undefined;
+  beginBlock?: ResponseBeginBlock | undefined;
+  checkTx?: ResponseCheckTx | undefined;
+  deliverTx?: ResponseDeliverTx | undefined;
+  endBlock?: ResponseEndBlock | undefined;
+  commit?: ResponseCommit | undefined;
+  listSnapshots?: ResponseListSnapshots | undefined;
+  offerSnapshot?: ResponseOfferSnapshot | undefined;
+  loadSnapshotChunk?: ResponseLoadSnapshotChunk | undefined;
+  applySnapshotChunk?: ResponseApplySnapshotChunk | undefined;
 }
 
 /**
@@ -178,7 +178,7 @@ export interface ResponseSetOption {
 }
 
 export interface ResponseInitChain {
-  consensusParams: ConsensusParams | undefined;
+  consensusParams?: ConsensusParams;
   validators: ValidatorUpdate[];
   appHash: Uint8Array;
 }
@@ -196,7 +196,7 @@ export interface ResponseQuery {
   index: number;
   key: Uint8Array;
   value: Uint8Array;
-  proofOps: ProofOps | undefined;
+  proofOps?: ProofOps;
   height: number;
   codespace: string;
 }
@@ -241,7 +241,7 @@ export interface ResponseDeliverTx {
 
 export interface ResponseEndBlock {
   validatorUpdates: ValidatorUpdate[];
-  consensusParamUpdates: ConsensusParams | undefined;
+  consensusParamUpdates?: ConsensusParams;
   events: Event[];
 }
 
@@ -282,10 +282,10 @@ export interface ResponseApplySnapshotChunk {
  *  that can be adjusted by the abci app
  */
 export interface ConsensusParams {
-  block: BlockParams | undefined;
-  evidence: EvidenceParams | undefined;
-  validator: ValidatorParams | undefined;
-  version: VersionParams | undefined;
+  block?: BlockParams;
+  evidence?: EvidenceParams;
+  validator?: ValidatorParams;
+  version?: VersionParams;
 }
 
 /**
@@ -338,7 +338,7 @@ export interface TxResult {
   height: number;
   index: number;
   tx: Uint8Array;
-  result: ResponseDeliverTx | undefined;
+  result?: ResponseDeliverTx;
 }
 
 /**
@@ -359,7 +359,7 @@ export interface Validator {
  *  ValidatorUpdate
  */
 export interface ValidatorUpdate {
-  pubKey: PublicKey | undefined;
+  pubKey?: PublicKey;
   power: number;
 }
 
@@ -367,7 +367,7 @@ export interface ValidatorUpdate {
  *  VoteInfo
  */
 export interface VoteInfo {
-  validator: Validator | undefined;
+  validator?: Validator;
   signedLastBlock: boolean;
 }
 
@@ -376,7 +376,7 @@ export interface Evidence {
   /**
    *  The offending validator
    */
-  validator: Validator | undefined;
+  validator?: Validator;
   /**
    *  The height when the offense occurred
    */
@@ -384,7 +384,7 @@ export interface Evidence {
   /**
    *  The corresponding time where the offense occurred
    */
-  time: Date | undefined;
+  time?: Date;
   /**
    *  Total voting power of the validator set in case the ABCI application does
    *  not store historical validators.

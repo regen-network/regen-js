@@ -54,7 +54,7 @@ export interface TxResponse {
   /**
    *  The request transaction bytes.
    */
-  tx: Any | undefined;
+  tx?: Any;
   /**
    *  Time of the previous block. For heights > 1, it's the weighted median of
    *  the timestamps of the valid votes in the block.LastCommit. For height == 1,
@@ -133,8 +133,8 @@ export interface Result {
  *  successfully simulated.
  */
 export interface SimulationResponse {
-  gasInfo: GasInfo | undefined;
-  result: Result | undefined;
+  gasInfo?: GasInfo;
+  result?: Result;
 }
 
 /**

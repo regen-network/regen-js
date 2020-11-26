@@ -21,7 +21,7 @@ export interface QueryByCidResponse {
   /**
    *  timestamp is the timestamp of the block at which the data was anchored.
    */
-  timestamp: Date | undefined;
+  timestamp?: Date;
   /**
    *  signers are the addresses of the accounts which have signed the data.
    */

@@ -15,7 +15,7 @@ import { Writer, Reader, util, configure } from 'protobufjs/minimal';
  *  (`n` is set by the staking module's `historical_entries` parameter).
  */
 export interface HistoricalInfo {
-  header: Header | undefined;
+  header?: Header;
   valset: Validator[];
 }
 
@@ -33,8 +33,8 @@ export interface CommissionRates {
  *  Commission defines commission parameters for a given validator.
  */
 export interface Commission {
-  commissionRates: CommissionRates | undefined;
-  updateTime: Date | undefined;
+  commissionRates?: CommissionRates;
+  updateTime?: Date;
 }
 
 /**
@@ -60,15 +60,15 @@ export interface Description {
  */
 export interface Validator {
   operatorAddress: string;
-  consensusPubkey: Any | undefined;
+  consensusPubkey?: Any;
   jailed: boolean;
   status: BondStatus;
   tokens: string;
   delegatorShares: string;
-  description: Description | undefined;
+  description?: Description;
   unbondingHeight: number;
-  unbondingTime: Date | undefined;
-  commission: Commission | undefined;
+  unbondingTime?: Date;
+  commission?: Commission;
   minSelfDelegation: string;
 }
 
@@ -144,7 +144,7 @@ export interface UnbondingDelegation {
  */
 export interface UnbondingDelegationEntry {
   creationHeight: number;
-  completionTime: Date | undefined;
+  completionTime?: Date;
   initialBalance: string;
   balance: string;
 }
@@ -154,7 +154,7 @@ export interface UnbondingDelegationEntry {
  */
 export interface RedelegationEntry {
   creationHeight: number;
-  completionTime: Date | undefined;
+  completionTime?: Date;
   initialBalance: string;
   sharesDst: string;
 }
@@ -177,7 +177,7 @@ export interface Redelegation {
  *  Params defines the parameters for the staking module.
  */
 export interface Params {
-  unbondingTime: Duration | undefined;
+  unbondingTime?: Duration;
   maxValidators: number;
   maxEntries: number;
   historicalEntries: number;
@@ -189,8 +189,8 @@ export interface Params {
  *  balance in addition to shares which is more suitable for client responses.
  */
 export interface DelegationResponse {
-  delegation: Delegation | undefined;
-  balance: Coin | undefined;
+  delegation?: Delegation;
+  balance?: Coin;
 }
 
 /**
@@ -199,7 +199,7 @@ export interface DelegationResponse {
  *  responses.
  */
 export interface RedelegationEntryResponse {
-  redelegationEntry: RedelegationEntry | undefined;
+  redelegationEntry?: RedelegationEntry;
   balance: string;
 }
 
@@ -209,7 +209,7 @@ export interface RedelegationEntryResponse {
  *  responses.
  */
 export interface RedelegationResponse {
-  redelegation: Redelegation | undefined;
+  redelegation?: Redelegation;
   entries: RedelegationEntryResponse[];
 }
 

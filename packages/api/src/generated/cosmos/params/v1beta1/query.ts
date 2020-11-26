@@ -24,7 +24,7 @@ export interface QueryParamsResponse {
   /**
    *  param defines the queried parameter.
    */
-  param: ParamChange | undefined;
+  param?: ParamChange;
 }
 
 const baseQueryParamsRequest: object = {

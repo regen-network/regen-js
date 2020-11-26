@@ -17,7 +17,7 @@ export interface GetTxsEventRequest {
   /**
    *  pagination defines an pagination for the request.
    */
-  pagination: PageRequest | undefined;
+  pagination?: PageRequest;
 }
 
 /**
@@ -36,7 +36,7 @@ export interface GetTxsEventResponse {
   /**
    *  pagination defines an pagination for the response.
    */
-  pagination: PageResponse | undefined;
+  pagination?: PageResponse;
 }
 
 /**
@@ -47,7 +47,7 @@ export interface SimulateRequest {
   /**
    *  tx is the transaction to simulate.
    */
-  tx: Tx | undefined;
+  tx?: Tx;
 }
 
 /**
@@ -58,11 +58,11 @@ export interface SimulateResponse {
   /**
    *  gas_info is the information about gas used in the simulation.
    */
-  gasInfo: GasInfo | undefined;
+  gasInfo?: GasInfo;
   /**
    *  result is the result of the simulation.
    */
-  result: Result | undefined;
+  result?: Result;
 }
 
 /**
@@ -83,11 +83,11 @@ export interface GetTxResponse {
   /**
    *  tx is the queried transaction.
    */
-  tx: Tx | undefined;
+  tx?: Tx;
   /**
    *  tx_response is the queried TxResponses.
    */
-  txResponse: TxResponse | undefined;
+  txResponse?: TxResponse;
 }
 
 const baseGetTxsEventRequest: object = {

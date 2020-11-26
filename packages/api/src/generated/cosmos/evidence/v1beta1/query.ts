@@ -21,7 +21,7 @@ export interface QueryEvidenceResponse {
   /**
    *  evidence returns the requested evidence.
    */
-  evidence: Any | undefined;
+  evidence?: Any;
 }
 
 /**
@@ -32,7 +32,7 @@ export interface QueryAllEvidenceRequest {
   /**
    *  pagination defines an optional pagination for the request.
    */
-  pagination: PageRequest | undefined;
+  pagination?: PageRequest;
 }
 
 /**
@@ -47,7 +47,7 @@ export interface QueryAllEvidenceResponse {
   /**
    *  pagination defines the pagination in the response.
    */
-  pagination: PageResponse | undefined;
+  pagination?: PageResponse;
 }
 
 const baseQueryEvidenceRequest: object = {

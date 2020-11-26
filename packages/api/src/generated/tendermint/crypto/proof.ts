@@ -18,7 +18,7 @@ export interface ValueOp {
   /**
    *  To encode in ProofOp.Data
    */
-  proof: Proof | undefined;
+  proof?: Proof;
 }
 
 export interface DominoOp {

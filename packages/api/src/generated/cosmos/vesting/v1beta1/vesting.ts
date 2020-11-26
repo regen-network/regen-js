@@ -10,7 +10,7 @@ import { Writer, Reader, util, configure } from 'protobufjs/minimal';
  *  the necessary fields needed for any vesting account implementation.
  */
 export interface BaseVestingAccount {
-  baseAccount: BaseAccount | undefined;
+  baseAccount?: BaseAccount;
   originalVesting: Coin[];
   delegatedFree: Coin[];
   delegatedVesting: Coin[];
@@ -22,7 +22,7 @@ export interface BaseVestingAccount {
  *  continuously vests by unlocking coins linearly with respect to time.
  */
 export interface ContinuousVestingAccount {
-  baseVestingAccount: BaseVestingAccount | undefined;
+  baseVestingAccount?: BaseVestingAccount;
   startTime: number;
 }
 
@@ -32,7 +32,7 @@ export interface ContinuousVestingAccount {
  *  locked until a specified time.
  */
 export interface DelayedVestingAccount {
-  baseVestingAccount: BaseVestingAccount | undefined;
+  baseVestingAccount?: BaseVestingAccount;
 }
 
 /**
@@ -48,7 +48,7 @@ export interface Period {
  *  periodically vests by unlocking coins during each specified period.
  */
 export interface PeriodicVestingAccount {
-  baseVestingAccount: BaseVestingAccount | undefined;
+  baseVestingAccount?: BaseVestingAccount;
   startTime: number;
   vestingPeriods: Period[];
 }

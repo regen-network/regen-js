@@ -19,7 +19,7 @@ export interface QueryParamsResponse {
   /**
    *  params defines the parameters of the module.
    */
-  params: Params | undefined;
+  params?: Params;
 }
 
 /**
@@ -38,7 +38,7 @@ export interface QueryValidatorOutstandingRewardsRequest {
  *  Query/ValidatorOutstandingRewards RPC method.
  */
 export interface QueryValidatorOutstandingRewardsResponse {
-  rewards: ValidatorOutstandingRewards | undefined;
+  rewards?: ValidatorOutstandingRewards;
 }
 
 /**
@@ -60,7 +60,7 @@ export interface QueryValidatorCommissionResponse {
   /**
    *  commission defines the commision the validator received.
    */
-  commission: ValidatorAccumulatedCommission | undefined;
+  commission?: ValidatorAccumulatedCommission;
 }
 
 /**
@@ -83,7 +83,7 @@ export interface QueryValidatorSlashesRequest {
   /**
    *  pagination defines an optional pagination for the request.
    */
-  pagination: PageRequest | undefined;
+  pagination?: PageRequest;
 }
 
 /**
@@ -98,7 +98,7 @@ export interface QueryValidatorSlashesResponse {
   /**
    *  pagination defines the pagination in the response.
    */
-  pagination: PageResponse | undefined;
+  pagination?: PageResponse;
 }
 
 /**

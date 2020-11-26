@@ -11,7 +11,7 @@ export interface GenesisState {
   /**
    *  params defines all the paramaters of related to deposit.
    */
-  params: Params | undefined;
+  params?: Params;
   /**
    *  signing_infos represents a map between validator addresses and their
    *  signing infos.
@@ -35,7 +35,7 @@ export interface SigningInfo {
   /**
    *  validator_signing_info represents the signing info of this validator.
    */
-  validatorSigningInfo: ValidatorSigningInfo | undefined;
+  validatorSigningInfo?: ValidatorSigningInfo;
 }
 
 /**

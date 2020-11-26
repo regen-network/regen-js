@@ -26,7 +26,7 @@ export interface QueryBalanceResponse {
   /**
    *  balance is the balance of the coin.
    */
-  balance: Coin | undefined;
+  balance?: Coin;
 }
 
 /**
@@ -40,7 +40,7 @@ export interface QueryAllBalancesRequest {
   /**
    *  pagination defines an optional pagination for the request.
    */
-  pagination: PageRequest | undefined;
+  pagination?: PageRequest;
 }
 
 /**
@@ -55,7 +55,7 @@ export interface QueryAllBalancesResponse {
   /**
    *  pagination defines the pagination in the response.
    */
-  pagination: PageResponse | undefined;
+  pagination?: PageResponse;
 }
 
 /**
@@ -93,7 +93,7 @@ export interface QuerySupplyOfResponse {
   /**
    *  amount is the supply of the coin.
    */
-  amount: Coin | undefined;
+  amount?: Coin;
 }
 
 /**
@@ -106,7 +106,7 @@ export interface QueryParamsRequest {
  *  QueryParamsResponse defines the response type for querying x/bank parameters.
  */
 export interface QueryParamsResponse {
-  params: Params | undefined;
+  params?: Params;
 }
 
 const baseQueryBalanceRequest: object = {

@@ -14,7 +14,7 @@ export interface QueryParamsRequest {
  *  QueryParamsResponse is the response type for the Query/Params RPC method
  */
 export interface QueryParamsResponse {
-  params: Params | undefined;
+  params?: Params;
 }
 
 /**
@@ -36,7 +36,7 @@ export interface QuerySigningInfoResponse {
   /**
    *  val_signing_info is the signing info of requested val cons address
    */
-  valSigningInfo: ValidatorSigningInfo | undefined;
+  valSigningInfo?: ValidatorSigningInfo;
 }
 
 /**
@@ -44,7 +44,7 @@ export interface QuerySigningInfoResponse {
  *  method
  */
 export interface QuerySigningInfosRequest {
-  pagination: PageRequest | undefined;
+  pagination?: PageRequest;
 }
 
 /**
@@ -56,7 +56,7 @@ export interface QuerySigningInfosResponse {
    *  info is the signing info of all validators
    */
   info: ValidatorSigningInfo[];
-  pagination: PageResponse | undefined;
+  pagination?: PageResponse;
 }
 
 const baseQueryParamsRequest: object = {

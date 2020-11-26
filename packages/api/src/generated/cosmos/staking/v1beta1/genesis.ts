@@ -11,7 +11,7 @@ export interface GenesisState {
   /**
    *  params defines all the paramaters of related to deposit.
    */
-  params: Params | undefined;
+  params?: Params;
   /**
    *  last_total_power tracks the total amounts of bonded tokens recorded during
    *  the previous end block.

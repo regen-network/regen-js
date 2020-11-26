@@ -11,7 +11,7 @@ import { Writer, Reader, util, configure } from 'protobufjs/minimal';
  */
 export interface BaseAccount {
   address: string;
-  pubKey: Any | undefined;
+  pubKey?: Any;
   accountNumber: number;
   sequence: number;
 }
@@ -20,7 +20,7 @@ export interface BaseAccount {
  *  ModuleAccount defines an account for modules that holds coins on a pool.
  */
 export interface ModuleAccount {
-  baseAccount: BaseAccount | undefined;
+  baseAccount?: BaseAccount;
   name: string;
   permissions: string[];
 }

@@ -15,7 +15,7 @@ export interface GenesisOwners {
   /**
    *  index_owners are the owners at the given index.
    */
-  indexOwners: CapabilityOwners | undefined;
+  indexOwners?: CapabilityOwners;
 }
 
 /**

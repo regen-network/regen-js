@@ -27,7 +27,7 @@ import { Writer, Reader } from 'protobufjs/minimal';
 export interface ExistenceProof {
   key: Uint8Array;
   value: Uint8Array;
-  leaf: LeafOp | undefined;
+  leaf?: LeafOp;
   path: InnerOp[];
 }
 
@@ -42,8 +42,8 @@ export interface NonExistenceProof {
    *  TODO: remove this as unnecessary??? we prove a range
    */
   key: Uint8Array;
-  left: ExistenceProof | undefined;
-  right: ExistenceProof | undefined;
+  left?: ExistenceProof;
+  right?: ExistenceProof;
 }
 
 /**
@@ -51,10 +51,10 @@ export interface NonExistenceProof {
  * CommitmentProof is either an ExistenceProof or a NonExistenceProof, or a Batch of such messages
  */
 export interface CommitmentProof {
-  exist: ExistenceProof | undefined;
-  nonexist: NonExistenceProof | undefined;
-  batch: BatchProof | undefined;
-  compressed: CompressedBatchProof | undefined;
+  exist?: ExistenceProof | undefined;
+  nonexist?: NonExistenceProof | undefined;
+  batch?: BatchProof | undefined;
+  compressed?: CompressedBatchProof | undefined;
 }
 
 /**
@@ -128,8 +128,8 @@ export interface ProofSpec {
    *  any field in the ExistenceProof must be the same as in this spec.
    *  except Prefix, which is just the first bytes of prefix (spec can be longer) 
    */
-  leafSpec: LeafOp | undefined;
-  innerSpec: InnerSpec | undefined;
+  leafSpec?: LeafOp;
+  innerSpec?: InnerSpec;
   /**
    *  max_depth (if > 0) is the maximum number of InnerOps allowed (mainly for fixed-depth tries)
    */
@@ -183,8 +183,8 @@ export interface BatchProof {
  *  Use BatchEntry not CommitmentProof, to avoid recursion
  */
 export interface BatchEntry {
-  exist: ExistenceProof | undefined;
-  nonexist: NonExistenceProof | undefined;
+  exist?: ExistenceProof | undefined;
+  nonexist?: NonExistenceProof | undefined;
 }
 
 export interface CompressedBatchProof {
@@ -196,14 +196,14 @@ export interface CompressedBatchProof {
  *  Use BatchEntry not CommitmentProof, to avoid recursion
  */
 export interface CompressedBatchEntry {
-  exist: CompressedExistenceProof | undefined;
-  nonexist: CompressedNonExistenceProof | undefined;
+  exist?: CompressedExistenceProof | undefined;
+  nonexist?: CompressedNonExistenceProof | undefined;
 }
 
 export interface CompressedExistenceProof {
   key: Uint8Array;
   value: Uint8Array;
-  leaf: LeafOp | undefined;
+  leaf?: LeafOp;
   /**
    *  these are indexes into the lookup_inners table in CompressedBatchProof
    */
@@ -215,8 +215,8 @@ export interface CompressedNonExistenceProof {
    *  TODO: remove this as unnecessary??? we prove a range
    */
   key: Uint8Array;
-  left: CompressedExistenceProof | undefined;
-  right: CompressedExistenceProof | undefined;
+  left?: CompressedExistenceProof;
+  right?: CompressedExistenceProof;
 }
 
 const baseExistenceProof: object = {

@@ -10,13 +10,13 @@ import { Timestamp } from '../../../google/protobuf/timestamp';
  *  MsgCreateValidator defines a SDK message for creating a new validator.
  */
 export interface MsgCreateValidator {
-  description: Description | undefined;
-  commission: CommissionRates | undefined;
+  description?: Description;
+  commission?: CommissionRates;
   minSelfDelegation: string;
   delegatorAddress: string;
   validatorAddress: string;
-  pubkey: Any | undefined;
-  value: Coin | undefined;
+  pubkey?: Any;
+  value?: Coin;
 }
 
 /**
@@ -29,7 +29,7 @@ export interface MsgCreateValidatorResponse {
  *  MsgEditValidator defines a SDK message for editing an existing validator.
  */
 export interface MsgEditValidator {
-  description: Description | undefined;
+  description?: Description;
   validatorAddress: string;
   /**
    *  We pass a reference to the new commission rate and min self delegation as
@@ -55,7 +55,7 @@ export interface MsgEditValidatorResponse {
 export interface MsgDelegate {
   delegatorAddress: string;
   validatorAddress: string;
-  amount: Coin | undefined;
+  amount?: Coin;
 }
 
 /**
@@ -72,14 +72,14 @@ export interface MsgBeginRedelegate {
   delegatorAddress: string;
   validatorSrcAddress: string;
   validatorDstAddress: string;
-  amount: Coin | undefined;
+  amount?: Coin;
 }
 
 /**
  *  MsgBeginRedelegateResponse defines the Msg/BeginRedelegate response type.
  */
 export interface MsgBeginRedelegateResponse {
-  completionTime: Date | undefined;
+  completionTime?: Date;
 }
 
 /**
@@ -89,14 +89,14 @@ export interface MsgBeginRedelegateResponse {
 export interface MsgUndelegate {
   delegatorAddress: string;
   validatorAddress: string;
-  amount: Coin | undefined;
+  amount?: Coin;
 }
 
 /**
  *  MsgUndelegateResponse defines the Msg/Undelegate response type.
  */
 export interface MsgUndelegateResponse {
-  completionTime: Date | undefined;
+  completionTime?: Date;
 }
 
 const baseMsgCreateValidator: object = {

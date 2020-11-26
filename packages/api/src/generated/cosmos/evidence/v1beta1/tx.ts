@@ -9,7 +9,7 @@ import { Reader, Writer } from 'protobufjs/minimal';
  */
 export interface MsgSubmitEvidence {
   submitter: string;
-  evidence: Any | undefined;
+  evidence?: Any;
 }
 
 /**

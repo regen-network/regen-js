@@ -22,7 +22,7 @@ export interface ValidatorSigningInfo {
   /**
    *  timestamp validator cannot be unjailed until
    */
-  jailedUntil: Date | undefined;
+  jailedUntil?: Date;
   /**
    *  whether or not a validator has been tombstoned (killed out of validator
    *  set)
@@ -40,7 +40,7 @@ export interface ValidatorSigningInfo {
 export interface Params {
   signedBlocksWindow: number;
   minSignedPerWindow: Uint8Array;
-  downtimeJailDuration: Duration | undefined;
+  downtimeJailDuration?: Duration;
   slashFractionDoubleSign: Uint8Array;
   slashFractionDowntime: Uint8Array;
 }
