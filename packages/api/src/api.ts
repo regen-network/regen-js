@@ -1,8 +1,8 @@
 import { Client as TendermintClient } from '@cosmjs/tendermint-rpc';
 
-import { ClientConn, createTendermintClientConn } from './clientConn';
+import { Connection, createTendermintConnection } from './connection';
 
-interface TendermintClientConn {
+interface TendermintConnection {
 	type: 'tendermint';
 	url: string;
 }
@@ -11,14 +11,18 @@ interface TendermintClientConn {
  * Options to pass into the RegenApi constructor.
  */
 export interface RegenApiOptions {
-	clientConn: TendermintClientConn;
+	connection: TendermintConnection;
 }
 
+/**
+ * The main entry point for interacting with the Regen Ledger. The class needs
+ * a client connection
+ */
 export class RegenApi {
-	readonly clientConn: ClientConn;
+	readonly connection: Connection;
 
-	constructor(clientConn: ClientConn) {
-		this.clientConn = clientConn;
+	constructor(connection: Connection) {
+		this.connection = connection;
 	}
 
 	/**
@@ -28,14 +32,14 @@ export class RegenApi {
 	 * @param options - Options to pass into RegenAPI.
 	 */
 	public static async connect(options: RegenApiOptions): Promise<RegenApi> {
-		switch (options.clientConn.type) {
+		switch (options.connection.type) {
 			case 'tendermint': {
 				const tendermintClient = await TendermintClient.connect(
-					options.clientConn.url
+					options.connection.url
 				);
 
 				return new RegenApi(
-					createTendermintClientConn(tendermintClient)
+					createTendermintConnection(tendermintClient)
 				);
 			}
 		}

@@ -16,7 +16,7 @@ const api = new RegenApi({
 	// - via gRPC
 	// - via gRPC-web
 	// - via REST and gRPC-gateway
-	clientConn: {
+	connection: {
 		// Here, we are using the Tendermint RPC client connection.
 		type: 'tendermint',
 		url: 'http://devnet.regen.network:26657',

@@ -4,7 +4,7 @@ import { Client } from '@cosmjs/tendermint-rpc';
  * This is the RPC interface needed by ts-proto to implement a client-side
  * connection.
  */
-export interface ClientConn {
+export interface Connection {
 	request(
 		service: string,
 		method: string,
@@ -13,12 +13,12 @@ export interface ClientConn {
 }
 
 /**
- * Given a Tendermint client, generate the RPC object to be passed into the
- * ts-proto generated objects.
+ * Given a Tendermint client, generate the client connection object to be
+ * passed into the ts-proto generated functions.
  *
  * @param client - A Tendermint client.
  */
-export function createTendermintClientConn(client: Client): ClientConn {
+export function createTendermintConnection(client: Client): Connection {
 	return {
 		request(
 			service: string,
