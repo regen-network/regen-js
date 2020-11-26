@@ -1,17 +1,19 @@
-#!/bin/bash
-set -e
+#!/usr/bin/env bash
 
-GENERATED_DIR="./src/generated"
-PROTO_FILE=$(find ./proto -path -prune -o -name '*.proto')
+set -eo pipefail
 
-rm -rf $GENERATED_DIR
-mkdir $GENERATED_DIR
+TS_PROTO_BIN=./node_modules/.bin/protoc-gen-ts_proto
 
-# Can't use --sparse for some reason. Seems related to https://github.com/protobufjs/protobuf.js/issues/1165
-yarn pbjs \
-  -t static-module \
-  -w es6 \
-  -o "$GENERATED_DIR/protoImpl.js" \
-  $PROTO_FILE
+proto_dirs=$(find ./proto -path -prune -o -name '*.proto' -print0 | xargs -0 -n1 dirname | sort | uniq)
+for dir in $proto_dirs; do
+  protoc \
+    -I "proto" \
+    -I "proto/third_party" \
+    --plugin=${TS_PROTO_BIN} \
+    --ts_proto_out=src/generated \
+    $(find "${dir}" -maxdepth 1 -name '*.proto')
+done
 
-yarn pbts -o "$GENERATED_DIR/protoImpl.d.ts" -n protoImpl "$GENERATED_DIR/protoImpl.js"
+# move proto files to the right places
+cp -r github.com/cosmos/cosmos-sdk/* ./
+rm -rf github.com
