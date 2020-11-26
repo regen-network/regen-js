@@ -18,7 +18,7 @@ export function App(): React.ReactElement {
 		setTmError(undefined);
 
 		RegenApi.connect({
-			clientConn: {
+			connection: {
 				type: 'tendermint',
 				url: tmUrl,
 			},
