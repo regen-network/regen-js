@@ -40,21 +40,4 @@ export class RegenApi {
 			}
 		}
 	}
-
-	// /**
-	//  * A RPC implementation using gRPC to pass into protobuf services.
-	//  *
-	//  * @todo Make this private, and create helper functions that will use this
-	//  * implementation under the hood.
-	//  */
-	// public rpcImpl: RPCImpl = (method, requestData, callback) => {
-	// 	console.log('AAA', (method as any).parent, requestData);
-	// 	this.grpcClient.makeUnaryRequest<Uint8Array, Uint8Array>(
-	// 		method.toString(),
-	// 		(arg) => Buffer.from(arg),
-	// 		(arg) => arg,
-	// 		requestData,
-	// 		callback
-	// 	);
-	// };
 }

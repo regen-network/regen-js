@@ -1,8 +1,7 @@
 {
 	"compilerOptions": {
-		"allowJs": true,
+		"esModuleInterop": true,
 		"jsx": "react",
-		"outDir": "lib",
 		"strict": true
 	},
 	"exclude": ["**/lib/**/*"]

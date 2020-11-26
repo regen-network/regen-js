@@ -15,7 +15,7 @@
 		"demo": "yarn workspace @regennetwork/demo-app start",
 		"format": "yarn lint --fix",
 		"lint": "tsc --noEmit && eslint --ext js,ts,tsx .",
-		"test": "jest"
+		"test": "lerna run test"
 	},
 	"devDependencies": {
 		"@amaurymartiny/eslintrc": "^1.3.3",
