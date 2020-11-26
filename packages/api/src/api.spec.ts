@@ -17,8 +17,12 @@ describe('RegenApi', () => {
 		const impl = new QueryClientImpl(api.clientConn);
 		const res = await impl.AllBalances({
 			address: 'regen:1j9h8dpu7ah2hl9rg7ycu0e64kh90rrlpk9kagz',
-			pagination: undefined,
 		});
+
+		// TODO So ideally, the two lines would be combined into one:
+		// ```
+		// api.query.cosmos.bank.v1beta1.AllBalances({});`
+		// ```
 
 		expect(res.balances).toHaveLength(1);
 	});
