@@ -16,7 +16,7 @@ describe('RegenApi', () => {
 	it('should fetch balances using tendermint client', async () => {
 		const impl = new QueryClientImpl(api.clientConn);
 		const res = await impl.AllBalances({
-			address: 'regen:1j9h8dpu7ah2hl9rg7ycu0e64kh90rrlpk9kagz',
+			address: 'regen:1j9h8dpu7ah2hl9rg7ycu0e64kh90rrlpk9kagz', // Amaury's account.
 		});
 
 		// TODO So ideally, the two lines would be combined into one:
