@@ -18,13 +18,13 @@ export function MyBalance(props: MyBalanceProps): React.ReactElement {
 	>();
 
 	useEffect(() => {
-		const impl = new QueryClientImpl(api.clientConn);
+		const impl = new QueryClientImpl(api.connection);
 		impl.AllBalances({
 			address,
 		})
 			.then(setBalance)
 			.catch(console.error);
-	}, [address, api.clientConn]);
+	}, [address, api.connection]);
 
 	return (
 		<div>
