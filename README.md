@@ -6,6 +6,8 @@ Regen Network does JavaScript. This monorepo contains JavaScript libraries and U
 
 "JS" is short for runs everywhere – we actually develop in TypeScript.
 
+🚧 This API is still under heavy construction, be ready for unexpected breaking changes.
+
 ## Get Started
 
 ```bash
