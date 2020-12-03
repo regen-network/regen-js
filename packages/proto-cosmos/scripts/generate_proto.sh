@@ -4,7 +4,7 @@ set -eo pipefail
 
 TS_PROTO_BIN=./node_modules/.bin/protoc-gen-ts_proto
 PROTO_DIRS=$(find ./proto -path -prune -o -name '*.proto' -print0 | xargs -0 -n1 dirname | sort | uniq)
-GENERATED_DIR=./src/generated
+GENERATED_DIR=./src
 
 rm -rf $GENERATED_DIR
 mkdir $GENERATED_DIR
@@ -13,7 +13,6 @@ mkdir $GENERATED_DIR
 for dir in $PROTO_DIRS; do
   protoc \
     -I "proto" \
-    -I "../proto-cosmos/proto" \
     --plugin=${TS_PROTO_BIN} \
     --ts_proto_opt=useOptionals=true \
     --ts_proto_opt=forceLong=long \
