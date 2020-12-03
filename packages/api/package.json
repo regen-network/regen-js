@@ -7,7 +7,7 @@
 	"main": "lib",
 	"repository": "https://github.com/regen-network/regen-js",
 	"dependencies": {
-		"@cosmjs/stargate": "^0.24.0-alpha.1"
+		"@cosmjs/stargate": "^0.24.0-alpha.10"
 	},
 	"scripts": {
 		"build": "rimraf lib && tsc",

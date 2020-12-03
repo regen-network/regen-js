@@ -1,10 +1,10 @@
 /* eslint-disable */
+import * as Long from 'long';
 import { Any } from '../../../google/protobuf/any';
 import { SignMode, signModeFromJSON, signModeToJSON } from '../../../cosmos/tx/signing/v1beta1/signing';
 import { CompactBitArray } from '../../../cosmos/crypto/multisig/v1beta1/multisig';
 import { Coin } from '../../../cosmos/base/v1beta1/coin';
-import * as Long from 'long';
-import { Writer, Reader, util, configure } from 'protobufjs/minimal';
+import { Writer, Reader } from 'protobufjs/minimal';
 
 
 /**
@@ -77,7 +77,7 @@ export interface SignDoc {
   /**
    *  account_number is the account number of the account in state
    */
-  accountNumber: number;
+  accountNumber: Long;
 }
 
 /**
@@ -103,7 +103,7 @@ export interface TxBody {
    *  timeout is the block height after which this transaction will not
    *  be processed by the chain
    */
-  timeoutHeight: number;
+  timeoutHeight: Long;
   /**
    *  extension_options are arbitrary options that can be added by chains
    *  when the default options are not sufficient. If any of these are present
@@ -160,7 +160,7 @@ export interface SignerInfo {
    *  number of committed transactions signed by a given address. It is used to
    *  prevent replay attacks.
    */
-  sequence: number;
+  sequence: Long;
 }
 
 /**
@@ -218,7 +218,7 @@ export interface Fee {
    *  gas_limit is the maximum gas that can be used in transaction processing
    *  before an out of gas error occurs
    */
-  gasLimit: number;
+  gasLimit: Long;
   /**
    *  if unset, the first signer is responsible for paying the fees. If set, the specified account must pay the fees.
    *  the payer must be a tx signer (and thus have signed this field in AuthInfo).
@@ -241,19 +241,19 @@ const baseTxRaw: object = {
 
 const baseSignDoc: object = {
   chainId: "",
-  accountNumber: 0,
+  accountNumber: Long.UZERO,
 };
 
 const baseTxBody: object = {
   memo: "",
-  timeoutHeight: 0,
+  timeoutHeight: Long.UZERO,
 };
 
 const baseAuthInfo: object = {
 };
 
 const baseSignerInfo: object = {
-  sequence: 0,
+  sequence: Long.UZERO,
 };
 
 const baseModeInfo: object = {
@@ -267,17 +267,10 @@ const baseModeInfo_Multi: object = {
 };
 
 const baseFee: object = {
-  gasLimit: 0,
+  gasLimit: Long.UZERO,
   payer: "",
   granter: "",
 };
-
-function longToNumber(long: Long) {
-  if (long.gt(Number.MAX_SAFE_INTEGER)) {
-    throw new globalThis.Error("Value is larger than Number.MAX_SAFE_INTEGER");
-  }
-  return long.toNumber();
-}
 
 export const protobufPackage = 'cosmos.tx.v1beta1'
 
@@ -478,7 +471,7 @@ export const SignDoc = {
           message.chainId = reader.string();
           break;
         case 4:
-          message.accountNumber = longToNumber(reader.uint64() as Long);
+          message.accountNumber = reader.uint64() as Long;
           break;
         default:
           reader.skipType(tag & 7);
@@ -501,9 +494,9 @@ export const SignDoc = {
       message.chainId = "";
     }
     if (object.accountNumber !== undefined && object.accountNumber !== null) {
-      message.accountNumber = Number(object.accountNumber);
+      message.accountNumber = Long.fromString(object.accountNumber);
     } else {
-      message.accountNumber = 0;
+      message.accountNumber = Long.UZERO;
     }
     return message;
   },
@@ -525,9 +518,9 @@ export const SignDoc = {
       message.chainId = "";
     }
     if (object.accountNumber !== undefined && object.accountNumber !== null) {
-      message.accountNumber = object.accountNumber;
+      message.accountNumber = object.accountNumber as Long;
     } else {
-      message.accountNumber = 0;
+      message.accountNumber = Long.UZERO;
     }
     return message;
   },
@@ -536,7 +529,7 @@ export const SignDoc = {
     message.bodyBytes !== undefined && (obj.bodyBytes = base64FromBytes(message.bodyBytes !== undefined ? message.bodyBytes : new Uint8Array()));
     message.authInfoBytes !== undefined && (obj.authInfoBytes = base64FromBytes(message.authInfoBytes !== undefined ? message.authInfoBytes : new Uint8Array()));
     message.chainId !== undefined && (obj.chainId = message.chainId);
-    message.accountNumber !== undefined && (obj.accountNumber = message.accountNumber);
+    message.accountNumber !== undefined && (obj.accountNumber = (message.accountNumber || Long.UZERO).toString());
     return obj;
   },
 };
@@ -573,7 +566,7 @@ export const TxBody = {
           message.memo = reader.string();
           break;
         case 3:
-          message.timeoutHeight = longToNumber(reader.uint64() as Long);
+          message.timeoutHeight = reader.uint64() as Long;
           break;
         case 1023:
           message.extensionOptions.push(Any.decode(reader, reader.uint32()));
@@ -604,9 +597,9 @@ export const TxBody = {
       message.memo = "";
     }
     if (object.timeoutHeight !== undefined && object.timeoutHeight !== null) {
-      message.timeoutHeight = Number(object.timeoutHeight);
+      message.timeoutHeight = Long.fromString(object.timeoutHeight);
     } else {
-      message.timeoutHeight = 0;
+      message.timeoutHeight = Long.UZERO;
     }
     if (object.extensionOptions !== undefined && object.extensionOptions !== null) {
       for (const e of object.extensionOptions) {
@@ -636,9 +629,9 @@ export const TxBody = {
       message.memo = "";
     }
     if (object.timeoutHeight !== undefined && object.timeoutHeight !== null) {
-      message.timeoutHeight = object.timeoutHeight;
+      message.timeoutHeight = object.timeoutHeight as Long;
     } else {
-      message.timeoutHeight = 0;
+      message.timeoutHeight = Long.UZERO;
     }
     if (object.extensionOptions !== undefined && object.extensionOptions !== null) {
       for (const e of object.extensionOptions) {
@@ -660,7 +653,7 @@ export const TxBody = {
       obj.messages = [];
     }
     message.memo !== undefined && (obj.memo = message.memo);
-    message.timeoutHeight !== undefined && (obj.timeoutHeight = message.timeoutHeight);
+    message.timeoutHeight !== undefined && (obj.timeoutHeight = (message.timeoutHeight || Long.UZERO).toString());
     if (message.extensionOptions) {
       obj.extensionOptions = message.extensionOptions.map(e => e ? Any.toJSON(e) : undefined);
     } else {
@@ -773,7 +766,7 @@ export const SignerInfo = {
           message.modeInfo = ModeInfo.decode(reader, reader.uint32());
           break;
         case 3:
-          message.sequence = longToNumber(reader.uint64() as Long);
+          message.sequence = reader.uint64() as Long;
           break;
         default:
           reader.skipType(tag & 7);
@@ -795,9 +788,9 @@ export const SignerInfo = {
       message.modeInfo = undefined;
     }
     if (object.sequence !== undefined && object.sequence !== null) {
-      message.sequence = Number(object.sequence);
+      message.sequence = Long.fromString(object.sequence);
     } else {
-      message.sequence = 0;
+      message.sequence = Long.UZERO;
     }
     return message;
   },
@@ -814,9 +807,9 @@ export const SignerInfo = {
       message.modeInfo = undefined;
     }
     if (object.sequence !== undefined && object.sequence !== null) {
-      message.sequence = object.sequence;
+      message.sequence = object.sequence as Long;
     } else {
-      message.sequence = 0;
+      message.sequence = Long.UZERO;
     }
     return message;
   },
@@ -824,7 +817,7 @@ export const SignerInfo = {
     const obj: any = {};
     message.publicKey !== undefined && (obj.publicKey = message.publicKey ? Any.toJSON(message.publicKey) : undefined);
     message.modeInfo !== undefined && (obj.modeInfo = message.modeInfo ? ModeInfo.toJSON(message.modeInfo) : undefined);
-    message.sequence !== undefined && (obj.sequence = message.sequence);
+    message.sequence !== undefined && (obj.sequence = (message.sequence || Long.UZERO).toString());
     return obj;
   },
 };
@@ -1037,7 +1030,7 @@ export const Fee = {
           message.amount.push(Coin.decode(reader, reader.uint32()));
           break;
         case 2:
-          message.gasLimit = longToNumber(reader.uint64() as Long);
+          message.gasLimit = reader.uint64() as Long;
           break;
         case 3:
           message.payer = reader.string();
@@ -1061,9 +1054,9 @@ export const Fee = {
       }
     }
     if (object.gasLimit !== undefined && object.gasLimit !== null) {
-      message.gasLimit = Number(object.gasLimit);
+      message.gasLimit = Long.fromString(object.gasLimit);
     } else {
-      message.gasLimit = 0;
+      message.gasLimit = Long.UZERO;
     }
     if (object.payer !== undefined && object.payer !== null) {
       message.payer = String(object.payer);
@@ -1086,9 +1079,9 @@ export const Fee = {
       }
     }
     if (object.gasLimit !== undefined && object.gasLimit !== null) {
-      message.gasLimit = object.gasLimit;
+      message.gasLimit = object.gasLimit as Long;
     } else {
-      message.gasLimit = 0;
+      message.gasLimit = Long.UZERO;
     }
     if (object.payer !== undefined && object.payer !== null) {
       message.payer = object.payer;
@@ -1109,17 +1102,12 @@ export const Fee = {
     } else {
       obj.amount = [];
     }
-    message.gasLimit !== undefined && (obj.gasLimit = message.gasLimit);
+    message.gasLimit !== undefined && (obj.gasLimit = (message.gasLimit || Long.UZERO).toString());
     message.payer !== undefined && (obj.payer = message.payer);
     message.granter !== undefined && (obj.granter = message.granter);
     return obj;
   },
 };
-
-if (util.Long !== Long as any) {
-  util.Long = Long as any;
-  configure();
-}
 
 interface WindowBase64 {
   atob(b64: string): string;

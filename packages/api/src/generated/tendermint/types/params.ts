@@ -1,7 +1,7 @@
 /* eslint-disable */
-import { Duration } from '../../google/protobuf/duration';
 import * as Long from 'long';
-import { Writer, Reader, util, configure } from 'protobufjs/minimal';
+import { Duration } from '../../google/protobuf/duration';
+import { Writer, Reader } from 'protobufjs/minimal';
 
 
 /**
@@ -23,19 +23,19 @@ export interface BlockParams {
    *  Max block size, in bytes.
    *  Note: must be greater than 0
    */
-  maxBytes: number;
+  maxBytes: Long;
   /**
    *  Max gas per block.
    *  Note: must be greater or equal to -1
    */
-  maxGas: number;
+  maxGas: Long;
   /**
    *  Minimum time increment between consecutive blocks (in milliseconds) If the
    *  block header timestamp is ahead of the system clock, decrease this value.
    *
    *  Not exposed to the application.
    */
-  timeIotaMs: number;
+  timeIotaMs: Long;
 }
 
 /**
@@ -48,7 +48,7 @@ export interface EvidenceParams {
    *  The basic formula for calculating this is: MaxAgeDuration / {average block
    *  time}.
    */
-  maxAgeNumBlocks: number;
+  maxAgeNumBlocks: Long;
   /**
    *  Max age of evidence, in time.
    *
@@ -62,7 +62,7 @@ export interface EvidenceParams {
    *  and should fall comfortably under the max block bytes.
    *  Default is 1048576 or 1MB
    */
-  maxBytes: number;
+  maxBytes: Long;
 }
 
 /**
@@ -77,7 +77,7 @@ export interface ValidatorParams {
  *  VersionParams contains the ABCI application version.
  */
 export interface VersionParams {
-  appVersion: number;
+  appVersion: Long;
 }
 
 /**
@@ -86,22 +86,22 @@ export interface VersionParams {
  *  It is hashed into the Header.ConsensusHash.
  */
 export interface HashedParams {
-  blockMaxBytes: number;
-  blockMaxGas: number;
+  blockMaxBytes: Long;
+  blockMaxGas: Long;
 }
 
 const baseConsensusParams: object = {
 };
 
 const baseBlockParams: object = {
-  maxBytes: 0,
-  maxGas: 0,
-  timeIotaMs: 0,
+  maxBytes: Long.ZERO,
+  maxGas: Long.ZERO,
+  timeIotaMs: Long.ZERO,
 };
 
 const baseEvidenceParams: object = {
-  maxAgeNumBlocks: 0,
-  maxBytes: 0,
+  maxAgeNumBlocks: Long.ZERO,
+  maxBytes: Long.ZERO,
 };
 
 const baseValidatorParams: object = {
@@ -109,20 +109,13 @@ const baseValidatorParams: object = {
 };
 
 const baseVersionParams: object = {
-  appVersion: 0,
+  appVersion: Long.UZERO,
 };
 
 const baseHashedParams: object = {
-  blockMaxBytes: 0,
-  blockMaxGas: 0,
+  blockMaxBytes: Long.ZERO,
+  blockMaxGas: Long.ZERO,
 };
-
-function longToNumber(long: Long) {
-  if (long.gt(Number.MAX_SAFE_INTEGER)) {
-    throw new globalThis.Error("Value is larger than Number.MAX_SAFE_INTEGER");
-  }
-  return long.toNumber();
-}
 
 export const protobufPackage = 'tendermint.types'
 
@@ -241,13 +234,13 @@ export const BlockParams = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          message.maxBytes = longToNumber(reader.int64() as Long);
+          message.maxBytes = reader.int64() as Long;
           break;
         case 2:
-          message.maxGas = longToNumber(reader.int64() as Long);
+          message.maxGas = reader.int64() as Long;
           break;
         case 3:
-          message.timeIotaMs = longToNumber(reader.int64() as Long);
+          message.timeIotaMs = reader.int64() as Long;
           break;
         default:
           reader.skipType(tag & 7);
@@ -259,46 +252,46 @@ export const BlockParams = {
   fromJSON(object: any): BlockParams {
     const message = { ...baseBlockParams } as BlockParams;
     if (object.maxBytes !== undefined && object.maxBytes !== null) {
-      message.maxBytes = Number(object.maxBytes);
+      message.maxBytes = Long.fromString(object.maxBytes);
     } else {
-      message.maxBytes = 0;
+      message.maxBytes = Long.ZERO;
     }
     if (object.maxGas !== undefined && object.maxGas !== null) {
-      message.maxGas = Number(object.maxGas);
+      message.maxGas = Long.fromString(object.maxGas);
     } else {
-      message.maxGas = 0;
+      message.maxGas = Long.ZERO;
     }
     if (object.timeIotaMs !== undefined && object.timeIotaMs !== null) {
-      message.timeIotaMs = Number(object.timeIotaMs);
+      message.timeIotaMs = Long.fromString(object.timeIotaMs);
     } else {
-      message.timeIotaMs = 0;
+      message.timeIotaMs = Long.ZERO;
     }
     return message;
   },
   fromPartial(object: DeepPartial<BlockParams>): BlockParams {
     const message = { ...baseBlockParams } as BlockParams;
     if (object.maxBytes !== undefined && object.maxBytes !== null) {
-      message.maxBytes = object.maxBytes;
+      message.maxBytes = object.maxBytes as Long;
     } else {
-      message.maxBytes = 0;
+      message.maxBytes = Long.ZERO;
     }
     if (object.maxGas !== undefined && object.maxGas !== null) {
-      message.maxGas = object.maxGas;
+      message.maxGas = object.maxGas as Long;
     } else {
-      message.maxGas = 0;
+      message.maxGas = Long.ZERO;
     }
     if (object.timeIotaMs !== undefined && object.timeIotaMs !== null) {
-      message.timeIotaMs = object.timeIotaMs;
+      message.timeIotaMs = object.timeIotaMs as Long;
     } else {
-      message.timeIotaMs = 0;
+      message.timeIotaMs = Long.ZERO;
     }
     return message;
   },
   toJSON(message: BlockParams): unknown {
     const obj: any = {};
-    message.maxBytes !== undefined && (obj.maxBytes = message.maxBytes);
-    message.maxGas !== undefined && (obj.maxGas = message.maxGas);
-    message.timeIotaMs !== undefined && (obj.timeIotaMs = message.timeIotaMs);
+    message.maxBytes !== undefined && (obj.maxBytes = (message.maxBytes || Long.ZERO).toString());
+    message.maxGas !== undefined && (obj.maxGas = (message.maxGas || Long.ZERO).toString());
+    message.timeIotaMs !== undefined && (obj.timeIotaMs = (message.timeIotaMs || Long.ZERO).toString());
     return obj;
   },
 };
@@ -320,13 +313,13 @@ export const EvidenceParams = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          message.maxAgeNumBlocks = longToNumber(reader.int64() as Long);
+          message.maxAgeNumBlocks = reader.int64() as Long;
           break;
         case 2:
           message.maxAgeDuration = Duration.decode(reader, reader.uint32());
           break;
         case 3:
-          message.maxBytes = longToNumber(reader.int64() as Long);
+          message.maxBytes = reader.int64() as Long;
           break;
         default:
           reader.skipType(tag & 7);
@@ -338,9 +331,9 @@ export const EvidenceParams = {
   fromJSON(object: any): EvidenceParams {
     const message = { ...baseEvidenceParams } as EvidenceParams;
     if (object.maxAgeNumBlocks !== undefined && object.maxAgeNumBlocks !== null) {
-      message.maxAgeNumBlocks = Number(object.maxAgeNumBlocks);
+      message.maxAgeNumBlocks = Long.fromString(object.maxAgeNumBlocks);
     } else {
-      message.maxAgeNumBlocks = 0;
+      message.maxAgeNumBlocks = Long.ZERO;
     }
     if (object.maxAgeDuration !== undefined && object.maxAgeDuration !== null) {
       message.maxAgeDuration = Duration.fromJSON(object.maxAgeDuration);
@@ -348,18 +341,18 @@ export const EvidenceParams = {
       message.maxAgeDuration = undefined;
     }
     if (object.maxBytes !== undefined && object.maxBytes !== null) {
-      message.maxBytes = Number(object.maxBytes);
+      message.maxBytes = Long.fromString(object.maxBytes);
     } else {
-      message.maxBytes = 0;
+      message.maxBytes = Long.ZERO;
     }
     return message;
   },
   fromPartial(object: DeepPartial<EvidenceParams>): EvidenceParams {
     const message = { ...baseEvidenceParams } as EvidenceParams;
     if (object.maxAgeNumBlocks !== undefined && object.maxAgeNumBlocks !== null) {
-      message.maxAgeNumBlocks = object.maxAgeNumBlocks;
+      message.maxAgeNumBlocks = object.maxAgeNumBlocks as Long;
     } else {
-      message.maxAgeNumBlocks = 0;
+      message.maxAgeNumBlocks = Long.ZERO;
     }
     if (object.maxAgeDuration !== undefined && object.maxAgeDuration !== null) {
       message.maxAgeDuration = Duration.fromPartial(object.maxAgeDuration);
@@ -367,17 +360,17 @@ export const EvidenceParams = {
       message.maxAgeDuration = undefined;
     }
     if (object.maxBytes !== undefined && object.maxBytes !== null) {
-      message.maxBytes = object.maxBytes;
+      message.maxBytes = object.maxBytes as Long;
     } else {
-      message.maxBytes = 0;
+      message.maxBytes = Long.ZERO;
     }
     return message;
   },
   toJSON(message: EvidenceParams): unknown {
     const obj: any = {};
-    message.maxAgeNumBlocks !== undefined && (obj.maxAgeNumBlocks = message.maxAgeNumBlocks);
+    message.maxAgeNumBlocks !== undefined && (obj.maxAgeNumBlocks = (message.maxAgeNumBlocks || Long.ZERO).toString());
     message.maxAgeDuration !== undefined && (obj.maxAgeDuration = message.maxAgeDuration ? Duration.toJSON(message.maxAgeDuration) : undefined);
-    message.maxBytes !== undefined && (obj.maxBytes = message.maxBytes);
+    message.maxBytes !== undefined && (obj.maxBytes = (message.maxBytes || Long.ZERO).toString());
     return obj;
   },
 };
@@ -451,7 +444,7 @@ export const VersionParams = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          message.appVersion = longToNumber(reader.uint64() as Long);
+          message.appVersion = reader.uint64() as Long;
           break;
         default:
           reader.skipType(tag & 7);
@@ -463,24 +456,24 @@ export const VersionParams = {
   fromJSON(object: any): VersionParams {
     const message = { ...baseVersionParams } as VersionParams;
     if (object.appVersion !== undefined && object.appVersion !== null) {
-      message.appVersion = Number(object.appVersion);
+      message.appVersion = Long.fromString(object.appVersion);
     } else {
-      message.appVersion = 0;
+      message.appVersion = Long.UZERO;
     }
     return message;
   },
   fromPartial(object: DeepPartial<VersionParams>): VersionParams {
     const message = { ...baseVersionParams } as VersionParams;
     if (object.appVersion !== undefined && object.appVersion !== null) {
-      message.appVersion = object.appVersion;
+      message.appVersion = object.appVersion as Long;
     } else {
-      message.appVersion = 0;
+      message.appVersion = Long.UZERO;
     }
     return message;
   },
   toJSON(message: VersionParams): unknown {
     const obj: any = {};
-    message.appVersion !== undefined && (obj.appVersion = message.appVersion);
+    message.appVersion !== undefined && (obj.appVersion = (message.appVersion || Long.UZERO).toString());
     return obj;
   },
 };
@@ -499,10 +492,10 @@ export const HashedParams = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          message.blockMaxBytes = longToNumber(reader.int64() as Long);
+          message.blockMaxBytes = reader.int64() as Long;
           break;
         case 2:
-          message.blockMaxGas = longToNumber(reader.int64() as Long);
+          message.blockMaxGas = reader.int64() as Long;
           break;
         default:
           reader.skipType(tag & 7);
@@ -514,43 +507,38 @@ export const HashedParams = {
   fromJSON(object: any): HashedParams {
     const message = { ...baseHashedParams } as HashedParams;
     if (object.blockMaxBytes !== undefined && object.blockMaxBytes !== null) {
-      message.blockMaxBytes = Number(object.blockMaxBytes);
+      message.blockMaxBytes = Long.fromString(object.blockMaxBytes);
     } else {
-      message.blockMaxBytes = 0;
+      message.blockMaxBytes = Long.ZERO;
     }
     if (object.blockMaxGas !== undefined && object.blockMaxGas !== null) {
-      message.blockMaxGas = Number(object.blockMaxGas);
+      message.blockMaxGas = Long.fromString(object.blockMaxGas);
     } else {
-      message.blockMaxGas = 0;
+      message.blockMaxGas = Long.ZERO;
     }
     return message;
   },
   fromPartial(object: DeepPartial<HashedParams>): HashedParams {
     const message = { ...baseHashedParams } as HashedParams;
     if (object.blockMaxBytes !== undefined && object.blockMaxBytes !== null) {
-      message.blockMaxBytes = object.blockMaxBytes;
+      message.blockMaxBytes = object.blockMaxBytes as Long;
     } else {
-      message.blockMaxBytes = 0;
+      message.blockMaxBytes = Long.ZERO;
     }
     if (object.blockMaxGas !== undefined && object.blockMaxGas !== null) {
-      message.blockMaxGas = object.blockMaxGas;
+      message.blockMaxGas = object.blockMaxGas as Long;
     } else {
-      message.blockMaxGas = 0;
+      message.blockMaxGas = Long.ZERO;
     }
     return message;
   },
   toJSON(message: HashedParams): unknown {
     const obj: any = {};
-    message.blockMaxBytes !== undefined && (obj.blockMaxBytes = message.blockMaxBytes);
-    message.blockMaxGas !== undefined && (obj.blockMaxGas = message.blockMaxGas);
+    message.blockMaxBytes !== undefined && (obj.blockMaxBytes = (message.blockMaxBytes || Long.ZERO).toString());
+    message.blockMaxGas !== undefined && (obj.blockMaxGas = (message.blockMaxGas || Long.ZERO).toString());
     return obj;
   },
 };
-
-if (util.Long !== Long as any) {
-  util.Long = Long as any;
-  configure();
-}
 
 type Builtin = Date | Function | Uint8Array | string | number | undefined;
 export type DeepPartial<T> = T extends Builtin

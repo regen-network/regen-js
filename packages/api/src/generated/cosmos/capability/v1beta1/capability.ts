@@ -1,6 +1,6 @@
 /* eslint-disable */
 import * as Long from 'long';
-import { Writer, Reader, util, configure } from 'protobufjs/minimal';
+import { Writer, Reader } from 'protobufjs/minimal';
 
 
 /**
@@ -8,7 +8,7 @@ import { Writer, Reader, util, configure } from 'protobufjs/minimal';
  *  provided to a Capability must be globally unique.
  */
 export interface Capability {
-  index: number;
+  index: Long;
 }
 
 /**
@@ -29,7 +29,7 @@ export interface CapabilityOwners {
 }
 
 const baseCapability: object = {
-  index: 0,
+  index: Long.UZERO,
 };
 
 const baseOwner: object = {
@@ -39,13 +39,6 @@ const baseOwner: object = {
 
 const baseCapabilityOwners: object = {
 };
-
-function longToNumber(long: Long) {
-  if (long.gt(Number.MAX_SAFE_INTEGER)) {
-    throw new globalThis.Error("Value is larger than Number.MAX_SAFE_INTEGER");
-  }
-  return long.toNumber();
-}
 
 export const protobufPackage = 'cosmos.capability.v1beta1'
 
@@ -62,7 +55,7 @@ export const Capability = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          message.index = longToNumber(reader.uint64() as Long);
+          message.index = reader.uint64() as Long;
           break;
         default:
           reader.skipType(tag & 7);
@@ -74,24 +67,24 @@ export const Capability = {
   fromJSON(object: any): Capability {
     const message = { ...baseCapability } as Capability;
     if (object.index !== undefined && object.index !== null) {
-      message.index = Number(object.index);
+      message.index = Long.fromString(object.index);
     } else {
-      message.index = 0;
+      message.index = Long.UZERO;
     }
     return message;
   },
   fromPartial(object: DeepPartial<Capability>): Capability {
     const message = { ...baseCapability } as Capability;
     if (object.index !== undefined && object.index !== null) {
-      message.index = object.index;
+      message.index = object.index as Long;
     } else {
-      message.index = 0;
+      message.index = Long.UZERO;
     }
     return message;
   },
   toJSON(message: Capability): unknown {
     const obj: any = {};
-    message.index !== undefined && (obj.index = message.index);
+    message.index !== undefined && (obj.index = (message.index || Long.UZERO).toString());
     return obj;
   },
 };
@@ -213,11 +206,6 @@ export const CapabilityOwners = {
     return obj;
   },
 };
-
-if (util.Long !== Long as any) {
-  util.Long = Long as any;
-  configure();
-}
 
 type Builtin = Date | Function | Uint8Array | string | number | undefined;
 export type DeepPartial<T> = T extends Builtin

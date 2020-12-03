@@ -1,7 +1,7 @@
 /* eslint-disable */
+import * as Long from 'long';
 import { Any } from '../../../google/protobuf/any';
 import { Timestamp } from '../../../google/protobuf/timestamp';
-import * as Long from 'long';
 import { Writer, Reader, util, configure } from 'protobufjs/minimal';
 
 
@@ -28,7 +28,7 @@ export interface Plan {
    *  The height at which the upgrade must be performed.
    *  Only used if Time is not set.
    */
-  height: number;
+  height: Long;
   /**
    *  Any application specific upgrade info to be included on-chain
    *  such as a git commit that validators could automatically upgrade to
@@ -65,7 +65,7 @@ export interface CancelSoftwareUpgradeProposal {
 
 const basePlan: object = {
   name: "",
-  height: 0,
+  height: Long.ZERO,
   info: "",
 };
 
@@ -90,22 +90,19 @@ function fromJsonTimestamp(o: any): Date {
 }
 
 function toTimestamp(date: Date): Timestamp {
-  const seconds = date.getTime() / 1_000;
+  const seconds = numberToLong(date.getTime() / 1_000);
   const nanos = (date.getTime() % 1_000) * 1_000_000;
   return { seconds, nanos };
 }
 
 function fromTimestamp(t: Timestamp): Date {
-  let millis = t.seconds * 1_000;
+  let millis = t.seconds.toNumber() * 1_000;
   millis += t.nanos / 1_000_000;
   return new Date(millis);
 }
 
-function longToNumber(long: Long) {
-  if (long.gt(Number.MAX_SAFE_INTEGER)) {
-    throw new globalThis.Error("Value is larger than Number.MAX_SAFE_INTEGER");
-  }
-  return long.toNumber();
+function numberToLong(number: number) {
+  return Long.fromNumber(number);
 }
 
 export const protobufPackage = 'cosmos.upgrade.v1beta1'
@@ -137,7 +134,7 @@ export const Plan = {
           message.time = fromTimestamp(Timestamp.decode(reader, reader.uint32()));
           break;
         case 3:
-          message.height = longToNumber(reader.int64() as Long);
+          message.height = reader.int64() as Long;
           break;
         case 4:
           message.info = reader.string();
@@ -165,9 +162,9 @@ export const Plan = {
       message.time = undefined;
     }
     if (object.height !== undefined && object.height !== null) {
-      message.height = Number(object.height);
+      message.height = Long.fromString(object.height);
     } else {
-      message.height = 0;
+      message.height = Long.ZERO;
     }
     if (object.info !== undefined && object.info !== null) {
       message.info = String(object.info);
@@ -194,9 +191,9 @@ export const Plan = {
       message.time = undefined;
     }
     if (object.height !== undefined && object.height !== null) {
-      message.height = object.height;
+      message.height = object.height as Long;
     } else {
-      message.height = 0;
+      message.height = Long.ZERO;
     }
     if (object.info !== undefined && object.info !== null) {
       message.info = object.info;
@@ -214,7 +211,7 @@ export const Plan = {
     const obj: any = {};
     message.name !== undefined && (obj.name = message.name);
     message.time !== undefined && (obj.time = message.time !== undefined ? message.time.toISOString() : null);
-    message.height !== undefined && (obj.height = message.height);
+    message.height !== undefined && (obj.height = (message.height || Long.ZERO).toString());
     message.info !== undefined && (obj.info = message.info);
     message.upgradedClientState !== undefined && (obj.upgradedClientState = message.upgradedClientState ? Any.toJSON(message.upgradedClientState) : undefined);
     return obj;

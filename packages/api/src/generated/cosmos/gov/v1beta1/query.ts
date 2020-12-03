@@ -1,8 +1,8 @@
 /* eslint-disable */
+import * as Long from 'long';
 import { Proposal, ProposalStatus, Vote, VotingParams, DepositParams, TallyParams, Deposit, TallyResult, proposalStatusFromJSON, proposalStatusToJSON } from '../../../cosmos/gov/v1beta1/gov';
 import { PageRequest, PageResponse } from '../../../cosmos/base/query/v1beta1/pagination';
-import { Reader, Writer, util, configure } from 'protobufjs/minimal';
-import * as Long from 'long';
+import { Reader, Writer } from 'protobufjs/minimal';
 
 
 /**
@@ -12,7 +12,7 @@ export interface QueryProposalRequest {
   /**
    *  proposal_id defines the unique id of the proposal.
    */
-  proposalId: number;
+  proposalId: Long;
 }
 
 /**
@@ -63,7 +63,7 @@ export interface QueryVoteRequest {
   /**
    *  proposal_id defines the unique id of the proposal.
    */
-  proposalId: number;
+  proposalId: Long;
   /**
    *  voter defines the oter address for the proposals.
    */
@@ -87,7 +87,7 @@ export interface QueryVotesRequest {
   /**
    *  proposal_id defines the unique id of the proposal.
    */
-  proposalId: number;
+  proposalId: Long;
   /**
    *  pagination defines an optional pagination for the request.
    */
@@ -144,7 +144,7 @@ export interface QueryDepositRequest {
   /**
    *  proposal_id defines the unique id of the proposal.
    */
-  proposalId: number;
+  proposalId: Long;
   /**
    *  depositor defines the deposit addresses from the proposals.
    */
@@ -168,7 +168,7 @@ export interface QueryDepositsRequest {
   /**
    *  proposal_id defines the unique id of the proposal.
    */
-  proposalId: number;
+  proposalId: Long;
   /**
    *  pagination defines an optional pagination for the request.
    */
@@ -193,7 +193,7 @@ export interface QueryTallyResultRequest {
   /**
    *  proposal_id defines the unique id of the proposal.
    */
-  proposalId: number;
+  proposalId: Long;
 }
 
 /**
@@ -207,7 +207,7 @@ export interface QueryTallyResultResponse {
 }
 
 const baseQueryProposalRequest: object = {
-  proposalId: 0,
+  proposalId: Long.UZERO,
 };
 
 const baseQueryProposalResponse: object = {
@@ -223,7 +223,7 @@ const baseQueryProposalsResponse: object = {
 };
 
 const baseQueryVoteRequest: object = {
-  proposalId: 0,
+  proposalId: Long.UZERO,
   voter: "",
 };
 
@@ -231,7 +231,7 @@ const baseQueryVoteResponse: object = {
 };
 
 const baseQueryVotesRequest: object = {
-  proposalId: 0,
+  proposalId: Long.UZERO,
 };
 
 const baseQueryVotesResponse: object = {
@@ -245,7 +245,7 @@ const baseQueryParamsResponse: object = {
 };
 
 const baseQueryDepositRequest: object = {
-  proposalId: 0,
+  proposalId: Long.UZERO,
   depositor: "",
 };
 
@@ -253,14 +253,14 @@ const baseQueryDepositResponse: object = {
 };
 
 const baseQueryDepositsRequest: object = {
-  proposalId: 0,
+  proposalId: Long.UZERO,
 };
 
 const baseQueryDepositsResponse: object = {
 };
 
 const baseQueryTallyResultRequest: object = {
-  proposalId: 0,
+  proposalId: Long.UZERO,
 };
 
 const baseQueryTallyResultResponse: object = {
@@ -377,13 +377,6 @@ interface Rpc {
 
 }
 
-function longToNumber(long: Long) {
-  if (long.gt(Number.MAX_SAFE_INTEGER)) {
-    throw new globalThis.Error("Value is larger than Number.MAX_SAFE_INTEGER");
-  }
-  return long.toNumber();
-}
-
 export const protobufPackage = 'cosmos.gov.v1beta1'
 
 export const QueryProposalRequest = {
@@ -399,7 +392,7 @@ export const QueryProposalRequest = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          message.proposalId = longToNumber(reader.uint64() as Long);
+          message.proposalId = reader.uint64() as Long;
           break;
         default:
           reader.skipType(tag & 7);
@@ -411,24 +404,24 @@ export const QueryProposalRequest = {
   fromJSON(object: any): QueryProposalRequest {
     const message = { ...baseQueryProposalRequest } as QueryProposalRequest;
     if (object.proposalId !== undefined && object.proposalId !== null) {
-      message.proposalId = Number(object.proposalId);
+      message.proposalId = Long.fromString(object.proposalId);
     } else {
-      message.proposalId = 0;
+      message.proposalId = Long.UZERO;
     }
     return message;
   },
   fromPartial(object: DeepPartial<QueryProposalRequest>): QueryProposalRequest {
     const message = { ...baseQueryProposalRequest } as QueryProposalRequest;
     if (object.proposalId !== undefined && object.proposalId !== null) {
-      message.proposalId = object.proposalId;
+      message.proposalId = object.proposalId as Long;
     } else {
-      message.proposalId = 0;
+      message.proposalId = Long.UZERO;
     }
     return message;
   },
   toJSON(message: QueryProposalRequest): unknown {
     const obj: any = {};
-    message.proposalId !== undefined && (obj.proposalId = message.proposalId);
+    message.proposalId !== undefined && (obj.proposalId = (message.proposalId || Long.UZERO).toString());
     return obj;
   },
 };
@@ -663,7 +656,7 @@ export const QueryVoteRequest = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          message.proposalId = longToNumber(reader.uint64() as Long);
+          message.proposalId = reader.uint64() as Long;
           break;
         case 2:
           message.voter = reader.string();
@@ -678,9 +671,9 @@ export const QueryVoteRequest = {
   fromJSON(object: any): QueryVoteRequest {
     const message = { ...baseQueryVoteRequest } as QueryVoteRequest;
     if (object.proposalId !== undefined && object.proposalId !== null) {
-      message.proposalId = Number(object.proposalId);
+      message.proposalId = Long.fromString(object.proposalId);
     } else {
-      message.proposalId = 0;
+      message.proposalId = Long.UZERO;
     }
     if (object.voter !== undefined && object.voter !== null) {
       message.voter = String(object.voter);
@@ -692,9 +685,9 @@ export const QueryVoteRequest = {
   fromPartial(object: DeepPartial<QueryVoteRequest>): QueryVoteRequest {
     const message = { ...baseQueryVoteRequest } as QueryVoteRequest;
     if (object.proposalId !== undefined && object.proposalId !== null) {
-      message.proposalId = object.proposalId;
+      message.proposalId = object.proposalId as Long;
     } else {
-      message.proposalId = 0;
+      message.proposalId = Long.UZERO;
     }
     if (object.voter !== undefined && object.voter !== null) {
       message.voter = object.voter;
@@ -705,7 +698,7 @@ export const QueryVoteRequest = {
   },
   toJSON(message: QueryVoteRequest): unknown {
     const obj: any = {};
-    message.proposalId !== undefined && (obj.proposalId = message.proposalId);
+    message.proposalId !== undefined && (obj.proposalId = (message.proposalId || Long.UZERO).toString());
     message.voter !== undefined && (obj.voter = message.voter);
     return obj;
   },
@@ -776,7 +769,7 @@ export const QueryVotesRequest = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          message.proposalId = longToNumber(reader.uint64() as Long);
+          message.proposalId = reader.uint64() as Long;
           break;
         case 2:
           message.pagination = PageRequest.decode(reader, reader.uint32());
@@ -791,9 +784,9 @@ export const QueryVotesRequest = {
   fromJSON(object: any): QueryVotesRequest {
     const message = { ...baseQueryVotesRequest } as QueryVotesRequest;
     if (object.proposalId !== undefined && object.proposalId !== null) {
-      message.proposalId = Number(object.proposalId);
+      message.proposalId = Long.fromString(object.proposalId);
     } else {
-      message.proposalId = 0;
+      message.proposalId = Long.UZERO;
     }
     if (object.pagination !== undefined && object.pagination !== null) {
       message.pagination = PageRequest.fromJSON(object.pagination);
@@ -805,9 +798,9 @@ export const QueryVotesRequest = {
   fromPartial(object: DeepPartial<QueryVotesRequest>): QueryVotesRequest {
     const message = { ...baseQueryVotesRequest } as QueryVotesRequest;
     if (object.proposalId !== undefined && object.proposalId !== null) {
-      message.proposalId = object.proposalId;
+      message.proposalId = object.proposalId as Long;
     } else {
-      message.proposalId = 0;
+      message.proposalId = Long.UZERO;
     }
     if (object.pagination !== undefined && object.pagination !== null) {
       message.pagination = PageRequest.fromPartial(object.pagination);
@@ -818,7 +811,7 @@ export const QueryVotesRequest = {
   },
   toJSON(message: QueryVotesRequest): unknown {
     const obj: any = {};
-    message.proposalId !== undefined && (obj.proposalId = message.proposalId);
+    message.proposalId !== undefined && (obj.proposalId = (message.proposalId || Long.UZERO).toString());
     message.pagination !== undefined && (obj.pagination = message.pagination ? PageRequest.toJSON(message.pagination) : undefined);
     return obj;
   },
@@ -1041,7 +1034,7 @@ export const QueryDepositRequest = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          message.proposalId = longToNumber(reader.uint64() as Long);
+          message.proposalId = reader.uint64() as Long;
           break;
         case 2:
           message.depositor = reader.string();
@@ -1056,9 +1049,9 @@ export const QueryDepositRequest = {
   fromJSON(object: any): QueryDepositRequest {
     const message = { ...baseQueryDepositRequest } as QueryDepositRequest;
     if (object.proposalId !== undefined && object.proposalId !== null) {
-      message.proposalId = Number(object.proposalId);
+      message.proposalId = Long.fromString(object.proposalId);
     } else {
-      message.proposalId = 0;
+      message.proposalId = Long.UZERO;
     }
     if (object.depositor !== undefined && object.depositor !== null) {
       message.depositor = String(object.depositor);
@@ -1070,9 +1063,9 @@ export const QueryDepositRequest = {
   fromPartial(object: DeepPartial<QueryDepositRequest>): QueryDepositRequest {
     const message = { ...baseQueryDepositRequest } as QueryDepositRequest;
     if (object.proposalId !== undefined && object.proposalId !== null) {
-      message.proposalId = object.proposalId;
+      message.proposalId = object.proposalId as Long;
     } else {
-      message.proposalId = 0;
+      message.proposalId = Long.UZERO;
     }
     if (object.depositor !== undefined && object.depositor !== null) {
       message.depositor = object.depositor;
@@ -1083,7 +1076,7 @@ export const QueryDepositRequest = {
   },
   toJSON(message: QueryDepositRequest): unknown {
     const obj: any = {};
-    message.proposalId !== undefined && (obj.proposalId = message.proposalId);
+    message.proposalId !== undefined && (obj.proposalId = (message.proposalId || Long.UZERO).toString());
     message.depositor !== undefined && (obj.depositor = message.depositor);
     return obj;
   },
@@ -1154,7 +1147,7 @@ export const QueryDepositsRequest = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          message.proposalId = longToNumber(reader.uint64() as Long);
+          message.proposalId = reader.uint64() as Long;
           break;
         case 2:
           message.pagination = PageRequest.decode(reader, reader.uint32());
@@ -1169,9 +1162,9 @@ export const QueryDepositsRequest = {
   fromJSON(object: any): QueryDepositsRequest {
     const message = { ...baseQueryDepositsRequest } as QueryDepositsRequest;
     if (object.proposalId !== undefined && object.proposalId !== null) {
-      message.proposalId = Number(object.proposalId);
+      message.proposalId = Long.fromString(object.proposalId);
     } else {
-      message.proposalId = 0;
+      message.proposalId = Long.UZERO;
     }
     if (object.pagination !== undefined && object.pagination !== null) {
       message.pagination = PageRequest.fromJSON(object.pagination);
@@ -1183,9 +1176,9 @@ export const QueryDepositsRequest = {
   fromPartial(object: DeepPartial<QueryDepositsRequest>): QueryDepositsRequest {
     const message = { ...baseQueryDepositsRequest } as QueryDepositsRequest;
     if (object.proposalId !== undefined && object.proposalId !== null) {
-      message.proposalId = object.proposalId;
+      message.proposalId = object.proposalId as Long;
     } else {
-      message.proposalId = 0;
+      message.proposalId = Long.UZERO;
     }
     if (object.pagination !== undefined && object.pagination !== null) {
       message.pagination = PageRequest.fromPartial(object.pagination);
@@ -1196,7 +1189,7 @@ export const QueryDepositsRequest = {
   },
   toJSON(message: QueryDepositsRequest): unknown {
     const obj: any = {};
-    message.proposalId !== undefined && (obj.proposalId = message.proposalId);
+    message.proposalId !== undefined && (obj.proposalId = (message.proposalId || Long.UZERO).toString());
     message.pagination !== undefined && (obj.pagination = message.pagination ? PageRequest.toJSON(message.pagination) : undefined);
     return obj;
   },
@@ -1288,7 +1281,7 @@ export const QueryTallyResultRequest = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          message.proposalId = longToNumber(reader.uint64() as Long);
+          message.proposalId = reader.uint64() as Long;
           break;
         default:
           reader.skipType(tag & 7);
@@ -1300,24 +1293,24 @@ export const QueryTallyResultRequest = {
   fromJSON(object: any): QueryTallyResultRequest {
     const message = { ...baseQueryTallyResultRequest } as QueryTallyResultRequest;
     if (object.proposalId !== undefined && object.proposalId !== null) {
-      message.proposalId = Number(object.proposalId);
+      message.proposalId = Long.fromString(object.proposalId);
     } else {
-      message.proposalId = 0;
+      message.proposalId = Long.UZERO;
     }
     return message;
   },
   fromPartial(object: DeepPartial<QueryTallyResultRequest>): QueryTallyResultRequest {
     const message = { ...baseQueryTallyResultRequest } as QueryTallyResultRequest;
     if (object.proposalId !== undefined && object.proposalId !== null) {
-      message.proposalId = object.proposalId;
+      message.proposalId = object.proposalId as Long;
     } else {
-      message.proposalId = 0;
+      message.proposalId = Long.UZERO;
     }
     return message;
   },
   toJSON(message: QueryTallyResultRequest): unknown {
     const obj: any = {};
-    message.proposalId !== undefined && (obj.proposalId = message.proposalId);
+    message.proposalId !== undefined && (obj.proposalId = (message.proposalId || Long.UZERO).toString());
     return obj;
   },
 };
@@ -1370,11 +1363,6 @@ export const QueryTallyResultResponse = {
     return obj;
   },
 };
-
-if (util.Long !== Long as any) {
-  util.Long = Long as any;
-  configure();
-}
 
 type Builtin = Date | Function | Uint8Array | string | number | undefined;
 export type DeepPartial<T> = T extends Builtin

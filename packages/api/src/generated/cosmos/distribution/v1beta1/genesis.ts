@@ -2,7 +2,7 @@
 import { DecCoin } from '../../../cosmos/base/v1beta1/coin';
 import { ValidatorAccumulatedCommission, ValidatorHistoricalRewards, ValidatorCurrentRewards, DelegatorStartingInfo, ValidatorSlashEvent, Params, FeePool } from '../../../cosmos/distribution/v1beta1/distribution';
 import * as Long from 'long';
-import { Writer, Reader, util, configure } from 'protobufjs/minimal';
+import { Writer, Reader } from 'protobufjs/minimal';
 
 
 /**
@@ -62,7 +62,7 @@ export interface ValidatorHistoricalRewardsRecord {
   /**
    *  period defines the period the historical rewards apply to.
    */
-  period: number;
+  period: Long;
   /**
    *  rewards defines the historical rewards of a validator.
    */
@@ -112,11 +112,11 @@ export interface ValidatorSlashEventRecord {
   /**
    *  height defines the block height at which the slash event occured.
    */
-  height: number;
+  height: Long;
   /**
    *  period is the period of the slash event.
    */
-  period: number;
+  period: Long;
   /**
    *  validator_slash_event describes the slash event.
    */
@@ -184,7 +184,7 @@ const baseValidatorAccumulatedCommissionRecord: object = {
 
 const baseValidatorHistoricalRewardsRecord: object = {
   validatorAddress: "",
-  period: 0,
+  period: Long.UZERO,
 };
 
 const baseValidatorCurrentRewardsRecord: object = {
@@ -198,20 +198,13 @@ const baseDelegatorStartingInfoRecord: object = {
 
 const baseValidatorSlashEventRecord: object = {
   validatorAddress: "",
-  height: 0,
-  period: 0,
+  height: Long.UZERO,
+  period: Long.UZERO,
 };
 
 const baseGenesisState: object = {
   previousProposer: "",
 };
-
-function longToNumber(long: Long) {
-  if (long.gt(Number.MAX_SAFE_INTEGER)) {
-    throw new globalThis.Error("Value is larger than Number.MAX_SAFE_INTEGER");
-  }
-  return long.toNumber();
-}
 
 export const protobufPackage = 'cosmos.distribution.v1beta1'
 
@@ -432,7 +425,7 @@ export const ValidatorHistoricalRewardsRecord = {
           message.validatorAddress = reader.string();
           break;
         case 2:
-          message.period = longToNumber(reader.uint64() as Long);
+          message.period = reader.uint64() as Long;
           break;
         case 3:
           message.rewards = ValidatorHistoricalRewards.decode(reader, reader.uint32());
@@ -452,9 +445,9 @@ export const ValidatorHistoricalRewardsRecord = {
       message.validatorAddress = "";
     }
     if (object.period !== undefined && object.period !== null) {
-      message.period = Number(object.period);
+      message.period = Long.fromString(object.period);
     } else {
-      message.period = 0;
+      message.period = Long.UZERO;
     }
     if (object.rewards !== undefined && object.rewards !== null) {
       message.rewards = ValidatorHistoricalRewards.fromJSON(object.rewards);
@@ -471,9 +464,9 @@ export const ValidatorHistoricalRewardsRecord = {
       message.validatorAddress = "";
     }
     if (object.period !== undefined && object.period !== null) {
-      message.period = object.period;
+      message.period = object.period as Long;
     } else {
-      message.period = 0;
+      message.period = Long.UZERO;
     }
     if (object.rewards !== undefined && object.rewards !== null) {
       message.rewards = ValidatorHistoricalRewards.fromPartial(object.rewards);
@@ -485,7 +478,7 @@ export const ValidatorHistoricalRewardsRecord = {
   toJSON(message: ValidatorHistoricalRewardsRecord): unknown {
     const obj: any = {};
     message.validatorAddress !== undefined && (obj.validatorAddress = message.validatorAddress);
-    message.period !== undefined && (obj.period = message.period);
+    message.period !== undefined && (obj.period = (message.period || Long.UZERO).toString());
     message.rewards !== undefined && (obj.rewards = message.rewards ? ValidatorHistoricalRewards.toJSON(message.rewards) : undefined);
     return obj;
   },
@@ -655,10 +648,10 @@ export const ValidatorSlashEventRecord = {
           message.validatorAddress = reader.string();
           break;
         case 2:
-          message.height = longToNumber(reader.uint64() as Long);
+          message.height = reader.uint64() as Long;
           break;
         case 3:
-          message.period = longToNumber(reader.uint64() as Long);
+          message.period = reader.uint64() as Long;
           break;
         case 4:
           message.validatorSlashEvent = ValidatorSlashEvent.decode(reader, reader.uint32());
@@ -678,14 +671,14 @@ export const ValidatorSlashEventRecord = {
       message.validatorAddress = "";
     }
     if (object.height !== undefined && object.height !== null) {
-      message.height = Number(object.height);
+      message.height = Long.fromString(object.height);
     } else {
-      message.height = 0;
+      message.height = Long.UZERO;
     }
     if (object.period !== undefined && object.period !== null) {
-      message.period = Number(object.period);
+      message.period = Long.fromString(object.period);
     } else {
-      message.period = 0;
+      message.period = Long.UZERO;
     }
     if (object.validatorSlashEvent !== undefined && object.validatorSlashEvent !== null) {
       message.validatorSlashEvent = ValidatorSlashEvent.fromJSON(object.validatorSlashEvent);
@@ -702,14 +695,14 @@ export const ValidatorSlashEventRecord = {
       message.validatorAddress = "";
     }
     if (object.height !== undefined && object.height !== null) {
-      message.height = object.height;
+      message.height = object.height as Long;
     } else {
-      message.height = 0;
+      message.height = Long.UZERO;
     }
     if (object.period !== undefined && object.period !== null) {
-      message.period = object.period;
+      message.period = object.period as Long;
     } else {
-      message.period = 0;
+      message.period = Long.UZERO;
     }
     if (object.validatorSlashEvent !== undefined && object.validatorSlashEvent !== null) {
       message.validatorSlashEvent = ValidatorSlashEvent.fromPartial(object.validatorSlashEvent);
@@ -721,8 +714,8 @@ export const ValidatorSlashEventRecord = {
   toJSON(message: ValidatorSlashEventRecord): unknown {
     const obj: any = {};
     message.validatorAddress !== undefined && (obj.validatorAddress = message.validatorAddress);
-    message.height !== undefined && (obj.height = message.height);
-    message.period !== undefined && (obj.period = message.period);
+    message.height !== undefined && (obj.height = (message.height || Long.UZERO).toString());
+    message.period !== undefined && (obj.period = (message.period || Long.UZERO).toString());
     message.validatorSlashEvent !== undefined && (obj.validatorSlashEvent = message.validatorSlashEvent ? ValidatorSlashEvent.toJSON(message.validatorSlashEvent) : undefined);
     return obj;
   },
@@ -976,11 +969,6 @@ export const GenesisState = {
     return obj;
   },
 };
-
-if (util.Long !== Long as any) {
-  util.Long = Long as any;
-  configure();
-}
 
 type Builtin = Date | Function | Uint8Array | string | number | undefined;
 export type DeepPartial<T> = T extends Builtin

@@ -1,8 +1,8 @@
 /* eslint-disable */
 import { Any } from '../../../../google/protobuf/any';
-import { CompactBitArray } from '../../../../cosmos/crypto/multisig/v1beta1/multisig';
 import * as Long from 'long';
-import { Writer, Reader, util, configure } from 'protobufjs/minimal';
+import { CompactBitArray } from '../../../../cosmos/crypto/multisig/v1beta1/multisig';
+import { Writer, Reader } from 'protobufjs/minimal';
 
 
 /**
@@ -32,7 +32,7 @@ export interface SignatureDescriptor {
    *  number of committed transactions signed by a given address. It is used to prevent
    *  replay attacks.
    */
-  sequence: number;
+  sequence: Long;
 }
 
 /**
@@ -81,7 +81,7 @@ const baseSignatureDescriptors: object = {
 };
 
 const baseSignatureDescriptor: object = {
-  sequence: 0,
+  sequence: Long.UZERO,
 };
 
 const baseSignatureDescriptor_Data: object = {
@@ -93,13 +93,6 @@ const baseSignatureDescriptor_Data_Single: object = {
 
 const baseSignatureDescriptor_Data_Multi: object = {
 };
-
-function longToNumber(long: Long) {
-  if (long.gt(Number.MAX_SAFE_INTEGER)) {
-    throw new globalThis.Error("Value is larger than Number.MAX_SAFE_INTEGER");
-  }
-  return long.toNumber();
-}
 
 export const protobufPackage = 'cosmos.tx.signing.v1beta1'
 
@@ -243,7 +236,7 @@ export const SignatureDescriptor = {
           message.data = SignatureDescriptor_Data.decode(reader, reader.uint32());
           break;
         case 3:
-          message.sequence = longToNumber(reader.uint64() as Long);
+          message.sequence = reader.uint64() as Long;
           break;
         default:
           reader.skipType(tag & 7);
@@ -265,9 +258,9 @@ export const SignatureDescriptor = {
       message.data = undefined;
     }
     if (object.sequence !== undefined && object.sequence !== null) {
-      message.sequence = Number(object.sequence);
+      message.sequence = Long.fromString(object.sequence);
     } else {
-      message.sequence = 0;
+      message.sequence = Long.UZERO;
     }
     return message;
   },
@@ -284,9 +277,9 @@ export const SignatureDescriptor = {
       message.data = undefined;
     }
     if (object.sequence !== undefined && object.sequence !== null) {
-      message.sequence = object.sequence;
+      message.sequence = object.sequence as Long;
     } else {
-      message.sequence = 0;
+      message.sequence = Long.UZERO;
     }
     return message;
   },
@@ -294,7 +287,7 @@ export const SignatureDescriptor = {
     const obj: any = {};
     message.publicKey !== undefined && (obj.publicKey = message.publicKey ? Any.toJSON(message.publicKey) : undefined);
     message.data !== undefined && (obj.data = message.data ? SignatureDescriptor_Data.toJSON(message.data) : undefined);
-    message.sequence !== undefined && (obj.sequence = message.sequence);
+    message.sequence !== undefined && (obj.sequence = (message.sequence || Long.UZERO).toString());
     return obj;
   },
 };
@@ -497,11 +490,6 @@ export const SignatureDescriptor_Data_Multi = {
     return obj;
   },
 };
-
-if (util.Long !== Long as any) {
-  util.Long = Long as any;
-  configure();
-}
 
 interface WindowBase64 {
   atob(b64: string): string;

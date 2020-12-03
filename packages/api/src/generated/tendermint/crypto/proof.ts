@@ -1,11 +1,11 @@
 /* eslint-disable */
 import * as Long from 'long';
-import { Writer, Reader, util, configure } from 'protobufjs/minimal';
+import { Writer, Reader } from 'protobufjs/minimal';
 
 
 export interface Proof {
-  total: number;
-  index: number;
+  total: Long;
+  index: Long;
   leafHash: Uint8Array;
   aunts: Uint8Array[];
 }
@@ -46,8 +46,8 @@ export interface ProofOps {
 }
 
 const baseProof: object = {
-  total: 0,
-  index: 0,
+  total: Long.ZERO,
+  index: Long.ZERO,
 };
 
 const baseValueOp: object = {
@@ -65,13 +65,6 @@ const baseProofOp: object = {
 
 const baseProofOps: object = {
 };
-
-function longToNumber(long: Long) {
-  if (long.gt(Number.MAX_SAFE_INTEGER)) {
-    throw new globalThis.Error("Value is larger than Number.MAX_SAFE_INTEGER");
-  }
-  return long.toNumber();
-}
 
 export const protobufPackage = 'tendermint.crypto'
 
@@ -94,10 +87,10 @@ export const Proof = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          message.total = longToNumber(reader.int64() as Long);
+          message.total = reader.int64() as Long;
           break;
         case 2:
-          message.index = longToNumber(reader.int64() as Long);
+          message.index = reader.int64() as Long;
           break;
         case 3:
           message.leafHash = reader.bytes();
@@ -116,14 +109,14 @@ export const Proof = {
     const message = { ...baseProof } as Proof;
     message.aunts = [];
     if (object.total !== undefined && object.total !== null) {
-      message.total = Number(object.total);
+      message.total = Long.fromString(object.total);
     } else {
-      message.total = 0;
+      message.total = Long.ZERO;
     }
     if (object.index !== undefined && object.index !== null) {
-      message.index = Number(object.index);
+      message.index = Long.fromString(object.index);
     } else {
-      message.index = 0;
+      message.index = Long.ZERO;
     }
     if (object.leafHash !== undefined && object.leafHash !== null) {
       message.leafHash = bytesFromBase64(object.leafHash);
@@ -139,14 +132,14 @@ export const Proof = {
     const message = { ...baseProof } as Proof;
     message.aunts = [];
     if (object.total !== undefined && object.total !== null) {
-      message.total = object.total;
+      message.total = object.total as Long;
     } else {
-      message.total = 0;
+      message.total = Long.ZERO;
     }
     if (object.index !== undefined && object.index !== null) {
-      message.index = object.index;
+      message.index = object.index as Long;
     } else {
-      message.index = 0;
+      message.index = Long.ZERO;
     }
     if (object.leafHash !== undefined && object.leafHash !== null) {
       message.leafHash = object.leafHash;
@@ -162,8 +155,8 @@ export const Proof = {
   },
   toJSON(message: Proof): unknown {
     const obj: any = {};
-    message.total !== undefined && (obj.total = message.total);
-    message.index !== undefined && (obj.index = message.index);
+    message.total !== undefined && (obj.total = (message.total || Long.ZERO).toString());
+    message.index !== undefined && (obj.index = (message.index || Long.ZERO).toString());
     message.leafHash !== undefined && (obj.leafHash = base64FromBytes(message.leafHash !== undefined ? message.leafHash : new Uint8Array()));
     if (message.aunts) {
       obj.aunts = message.aunts.map(e => base64FromBytes(e !== undefined ? e : new Uint8Array()));
@@ -441,11 +434,6 @@ export const ProofOps = {
     return obj;
   },
 };
-
-if (util.Long !== Long as any) {
-  util.Long = Long as any;
-  configure();
-}
 
 interface WindowBase64 {
   atob(b64: string): string;

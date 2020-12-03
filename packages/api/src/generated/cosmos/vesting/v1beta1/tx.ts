@@ -1,7 +1,7 @@
 /* eslint-disable */
 import { Coin } from '../../../cosmos/base/v1beta1/coin';
-import { Reader, Writer, util, configure } from 'protobufjs/minimal';
 import * as Long from 'long';
+import { Reader, Writer } from 'protobufjs/minimal';
 
 
 /**
@@ -12,7 +12,7 @@ export interface MsgCreateVestingAccount {
   fromAddress: string;
   toAddress: string;
   amount: Coin[];
-  endTime: number;
+  endTime: Long;
   delayed: boolean;
 }
 
@@ -25,7 +25,7 @@ export interface MsgCreateVestingAccountResponse {
 const baseMsgCreateVestingAccount: object = {
   fromAddress: "",
   toAddress: "",
-  endTime: 0,
+  endTime: Long.ZERO,
   delayed: false,
 };
 
@@ -67,13 +67,6 @@ interface Rpc {
 
 }
 
-function longToNumber(long: Long) {
-  if (long.gt(Number.MAX_SAFE_INTEGER)) {
-    throw new globalThis.Error("Value is larger than Number.MAX_SAFE_INTEGER");
-  }
-  return long.toNumber();
-}
-
 export const protobufPackage = 'cosmos.vesting.v1beta1'
 
 export const MsgCreateVestingAccount = {
@@ -105,7 +98,7 @@ export const MsgCreateVestingAccount = {
           message.amount.push(Coin.decode(reader, reader.uint32()));
           break;
         case 4:
-          message.endTime = longToNumber(reader.int64() as Long);
+          message.endTime = reader.int64() as Long;
           break;
         case 5:
           message.delayed = reader.bool();
@@ -136,9 +129,9 @@ export const MsgCreateVestingAccount = {
       }
     }
     if (object.endTime !== undefined && object.endTime !== null) {
-      message.endTime = Number(object.endTime);
+      message.endTime = Long.fromString(object.endTime);
     } else {
-      message.endTime = 0;
+      message.endTime = Long.ZERO;
     }
     if (object.delayed !== undefined && object.delayed !== null) {
       message.delayed = Boolean(object.delayed);
@@ -166,9 +159,9 @@ export const MsgCreateVestingAccount = {
       }
     }
     if (object.endTime !== undefined && object.endTime !== null) {
-      message.endTime = object.endTime;
+      message.endTime = object.endTime as Long;
     } else {
-      message.endTime = 0;
+      message.endTime = Long.ZERO;
     }
     if (object.delayed !== undefined && object.delayed !== null) {
       message.delayed = object.delayed;
@@ -186,7 +179,7 @@ export const MsgCreateVestingAccount = {
     } else {
       obj.amount = [];
     }
-    message.endTime !== undefined && (obj.endTime = message.endTime);
+    message.endTime !== undefined && (obj.endTime = (message.endTime || Long.ZERO).toString());
     message.delayed !== undefined && (obj.delayed = message.delayed);
     return obj;
   },
@@ -223,11 +216,6 @@ export const MsgCreateVestingAccountResponse = {
     return obj;
   },
 };
-
-if (util.Long !== Long as any) {
-  util.Long = Long as any;
-  configure();
-}
 
 type Builtin = Date | Function | Uint8Array | string | number | undefined;
 export type DeepPartial<T> = T extends Builtin

@@ -1,6 +1,6 @@
 /* eslint-disable */
 import * as Long from 'long';
-import { Writer, Reader, util, configure } from 'protobufjs/minimal';
+import { Writer, Reader } from 'protobufjs/minimal';
 
 
 /**
@@ -620,8 +620,8 @@ export interface UninterpretedOption {
    *  identified it as during parsing. Exactly one of these should be set.
    */
   identifierValue: string;
-  positiveIntValue: number;
-  negativeIntValue: number;
+  positiveIntValue: Long;
+  negativeIntValue: Long;
   doubleValue: number;
   stringValue: Uint8Array;
   aggregateValue: string;
@@ -953,8 +953,8 @@ const baseMethodOptions: object = {
 
 const baseUninterpretedOption: object = {
   identifierValue: "",
-  positiveIntValue: 0,
-  negativeIntValue: 0,
+  positiveIntValue: Long.UZERO,
+  negativeIntValue: Long.ZERO,
   doubleValue: 0,
   aggregateValue: "",
 };
@@ -984,13 +984,6 @@ const baseGeneratedCodeInfo_Annotation: object = {
   begin: 0,
   end: 0,
 };
-
-function longToNumber(long: Long) {
-  if (long.gt(Number.MAX_SAFE_INTEGER)) {
-    throw new globalThis.Error("Value is larger than Number.MAX_SAFE_INTEGER");
-  }
-  return long.toNumber();
-}
 
 export const protobufPackage = 'google.protobuf'
 
@@ -3934,10 +3927,10 @@ export const UninterpretedOption = {
           message.identifierValue = reader.string();
           break;
         case 4:
-          message.positiveIntValue = longToNumber(reader.uint64() as Long);
+          message.positiveIntValue = reader.uint64() as Long;
           break;
         case 5:
-          message.negativeIntValue = longToNumber(reader.int64() as Long);
+          message.negativeIntValue = reader.int64() as Long;
           break;
         case 6:
           message.doubleValue = reader.double();
@@ -3969,14 +3962,14 @@ export const UninterpretedOption = {
       message.identifierValue = "";
     }
     if (object.positiveIntValue !== undefined && object.positiveIntValue !== null) {
-      message.positiveIntValue = Number(object.positiveIntValue);
+      message.positiveIntValue = Long.fromString(object.positiveIntValue);
     } else {
-      message.positiveIntValue = 0;
+      message.positiveIntValue = Long.UZERO;
     }
     if (object.negativeIntValue !== undefined && object.negativeIntValue !== null) {
-      message.negativeIntValue = Number(object.negativeIntValue);
+      message.negativeIntValue = Long.fromString(object.negativeIntValue);
     } else {
-      message.negativeIntValue = 0;
+      message.negativeIntValue = Long.ZERO;
     }
     if (object.doubleValue !== undefined && object.doubleValue !== null) {
       message.doubleValue = Number(object.doubleValue);
@@ -4007,14 +4000,14 @@ export const UninterpretedOption = {
       message.identifierValue = "";
     }
     if (object.positiveIntValue !== undefined && object.positiveIntValue !== null) {
-      message.positiveIntValue = object.positiveIntValue;
+      message.positiveIntValue = object.positiveIntValue as Long;
     } else {
-      message.positiveIntValue = 0;
+      message.positiveIntValue = Long.UZERO;
     }
     if (object.negativeIntValue !== undefined && object.negativeIntValue !== null) {
-      message.negativeIntValue = object.negativeIntValue;
+      message.negativeIntValue = object.negativeIntValue as Long;
     } else {
-      message.negativeIntValue = 0;
+      message.negativeIntValue = Long.ZERO;
     }
     if (object.doubleValue !== undefined && object.doubleValue !== null) {
       message.doubleValue = object.doubleValue;
@@ -4041,8 +4034,8 @@ export const UninterpretedOption = {
       obj.name = [];
     }
     message.identifierValue !== undefined && (obj.identifierValue = message.identifierValue);
-    message.positiveIntValue !== undefined && (obj.positiveIntValue = message.positiveIntValue);
-    message.negativeIntValue !== undefined && (obj.negativeIntValue = message.negativeIntValue);
+    message.positiveIntValue !== undefined && (obj.positiveIntValue = (message.positiveIntValue || Long.UZERO).toString());
+    message.negativeIntValue !== undefined && (obj.negativeIntValue = (message.negativeIntValue || Long.ZERO).toString());
     message.doubleValue !== undefined && (obj.doubleValue = message.doubleValue);
     message.stringValue !== undefined && (obj.stringValue = base64FromBytes(message.stringValue !== undefined ? message.stringValue : new Uint8Array()));
     message.aggregateValue !== undefined && (obj.aggregateValue = message.aggregateValue);
@@ -4485,11 +4478,6 @@ export const GeneratedCodeInfo_Annotation = {
     return obj;
   },
 };
-
-if (util.Long !== Long as any) {
-  util.Long = Long as any;
-  configure();
-}
 
 interface WindowBase64 {
   atob(b64: string): string;

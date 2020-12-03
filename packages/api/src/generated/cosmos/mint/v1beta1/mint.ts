@@ -1,6 +1,6 @@
 /* eslint-disable */
 import * as Long from 'long';
-import { Writer, Reader, util, configure } from 'protobufjs/minimal';
+import { Writer, Reader } from 'protobufjs/minimal';
 
 
 /**
@@ -44,7 +44,7 @@ export interface Params {
   /**
    *  expected blocks per year
    */
-  blocksPerYear: number;
+  blocksPerYear: Long;
 }
 
 const baseMinter: object = {
@@ -58,15 +58,8 @@ const baseParams: object = {
   inflationMax: "",
   inflationMin: "",
   goalBonded: "",
-  blocksPerYear: 0,
+  blocksPerYear: Long.UZERO,
 };
-
-function longToNumber(long: Long) {
-  if (long.gt(Number.MAX_SAFE_INTEGER)) {
-    throw new globalThis.Error("Value is larger than Number.MAX_SAFE_INTEGER");
-  }
-  return long.toNumber();
-}
 
 export const protobufPackage = 'cosmos.mint.v1beta1'
 
@@ -165,7 +158,7 @@ export const Params = {
           message.goalBonded = reader.string();
           break;
         case 6:
-          message.blocksPerYear = longToNumber(reader.uint64() as Long);
+          message.blocksPerYear = reader.uint64() as Long;
           break;
         default:
           reader.skipType(tag & 7);
@@ -202,9 +195,9 @@ export const Params = {
       message.goalBonded = "";
     }
     if (object.blocksPerYear !== undefined && object.blocksPerYear !== null) {
-      message.blocksPerYear = Number(object.blocksPerYear);
+      message.blocksPerYear = Long.fromString(object.blocksPerYear);
     } else {
-      message.blocksPerYear = 0;
+      message.blocksPerYear = Long.UZERO;
     }
     return message;
   },
@@ -236,9 +229,9 @@ export const Params = {
       message.goalBonded = "";
     }
     if (object.blocksPerYear !== undefined && object.blocksPerYear !== null) {
-      message.blocksPerYear = object.blocksPerYear;
+      message.blocksPerYear = object.blocksPerYear as Long;
     } else {
-      message.blocksPerYear = 0;
+      message.blocksPerYear = Long.UZERO;
     }
     return message;
   },
@@ -249,15 +242,10 @@ export const Params = {
     message.inflationMax !== undefined && (obj.inflationMax = message.inflationMax);
     message.inflationMin !== undefined && (obj.inflationMin = message.inflationMin);
     message.goalBonded !== undefined && (obj.goalBonded = message.goalBonded);
-    message.blocksPerYear !== undefined && (obj.blocksPerYear = message.blocksPerYear);
+    message.blocksPerYear !== undefined && (obj.blocksPerYear = (message.blocksPerYear || Long.UZERO).toString());
     return obj;
   },
 };
-
-if (util.Long !== Long as any) {
-  util.Long = Long as any;
-  configure();
-}
 
 type Builtin = Date | Function | Uint8Array | string | number | undefined;
 export type DeepPartial<T> = T extends Builtin

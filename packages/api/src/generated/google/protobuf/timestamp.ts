@@ -1,6 +1,6 @@
 /* eslint-disable */
 import * as Long from 'long';
-import { Writer, Reader, util, configure } from 'protobufjs/minimal';
+import { Writer, Reader } from 'protobufjs/minimal';
 
 
 /**
@@ -104,7 +104,7 @@ export interface Timestamp {
    *  1970-01-01T00:00:00Z. Must be from 0001-01-01T00:00:00Z to
    *  9999-12-31T23:59:59Z inclusive.
    */
-  seconds: number;
+  seconds: Long;
   /**
    *  Non-negative fractions of a second at nanosecond resolution. Negative
    *  second values with fractions must still have non-negative nanos values
@@ -115,16 +115,9 @@ export interface Timestamp {
 }
 
 const baseTimestamp: object = {
-  seconds: 0,
+  seconds: Long.ZERO,
   nanos: 0,
 };
-
-function longToNumber(long: Long) {
-  if (long.gt(Number.MAX_SAFE_INTEGER)) {
-    throw new globalThis.Error("Value is larger than Number.MAX_SAFE_INTEGER");
-  }
-  return long.toNumber();
-}
 
 export const protobufPackage = 'google.protobuf'
 
@@ -142,7 +135,7 @@ export const Timestamp = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          message.seconds = longToNumber(reader.int64() as Long);
+          message.seconds = reader.int64() as Long;
           break;
         case 2:
           message.nanos = reader.int32();
@@ -157,9 +150,9 @@ export const Timestamp = {
   fromJSON(object: any): Timestamp {
     const message = { ...baseTimestamp } as Timestamp;
     if (object.seconds !== undefined && object.seconds !== null) {
-      message.seconds = Number(object.seconds);
+      message.seconds = Long.fromString(object.seconds);
     } else {
-      message.seconds = 0;
+      message.seconds = Long.ZERO;
     }
     if (object.nanos !== undefined && object.nanos !== null) {
       message.nanos = Number(object.nanos);
@@ -171,9 +164,9 @@ export const Timestamp = {
   fromPartial(object: DeepPartial<Timestamp>): Timestamp {
     const message = { ...baseTimestamp } as Timestamp;
     if (object.seconds !== undefined && object.seconds !== null) {
-      message.seconds = object.seconds;
+      message.seconds = object.seconds as Long;
     } else {
-      message.seconds = 0;
+      message.seconds = Long.ZERO;
     }
     if (object.nanos !== undefined && object.nanos !== null) {
       message.nanos = object.nanos;
@@ -184,16 +177,11 @@ export const Timestamp = {
   },
   toJSON(message: Timestamp): unknown {
     const obj: any = {};
-    message.seconds !== undefined && (obj.seconds = message.seconds);
+    message.seconds !== undefined && (obj.seconds = (message.seconds || Long.ZERO).toString());
     message.nanos !== undefined && (obj.nanos = message.nanos);
     return obj;
   },
 };
-
-if (util.Long !== Long as any) {
-  util.Long = Long as any;
-  configure();
-}
 
 type Builtin = Date | Function | Uint8Array | string | number | undefined;
 export type DeepPartial<T> = T extends Builtin

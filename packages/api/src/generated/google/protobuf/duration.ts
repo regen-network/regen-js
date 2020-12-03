@@ -1,6 +1,6 @@
 /* eslint-disable */
 import * as Long from 'long';
-import { Writer, Reader, util, configure } from 'protobufjs/minimal';
+import { Writer, Reader } from 'protobufjs/minimal';
 
 
 /**
@@ -71,7 +71,7 @@ export interface Duration {
    *  to +315,576,000,000 inclusive. Note: these bounds are computed from:
    *  60 sec/min * 60 min/hr * 24 hr/day * 365.25 days/year * 10000 years
    */
-  seconds: number;
+  seconds: Long;
   /**
    *  Signed fractions of a second at nanosecond resolution of the span
    *  of time. Durations less than one second are represented with a 0
@@ -84,16 +84,9 @@ export interface Duration {
 }
 
 const baseDuration: object = {
-  seconds: 0,
+  seconds: Long.ZERO,
   nanos: 0,
 };
-
-function longToNumber(long: Long) {
-  if (long.gt(Number.MAX_SAFE_INTEGER)) {
-    throw new globalThis.Error("Value is larger than Number.MAX_SAFE_INTEGER");
-  }
-  return long.toNumber();
-}
 
 export const protobufPackage = 'google.protobuf'
 
@@ -111,7 +104,7 @@ export const Duration = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          message.seconds = longToNumber(reader.int64() as Long);
+          message.seconds = reader.int64() as Long;
           break;
         case 2:
           message.nanos = reader.int32();
@@ -126,9 +119,9 @@ export const Duration = {
   fromJSON(object: any): Duration {
     const message = { ...baseDuration } as Duration;
     if (object.seconds !== undefined && object.seconds !== null) {
-      message.seconds = Number(object.seconds);
+      message.seconds = Long.fromString(object.seconds);
     } else {
-      message.seconds = 0;
+      message.seconds = Long.ZERO;
     }
     if (object.nanos !== undefined && object.nanos !== null) {
       message.nanos = Number(object.nanos);
@@ -140,9 +133,9 @@ export const Duration = {
   fromPartial(object: DeepPartial<Duration>): Duration {
     const message = { ...baseDuration } as Duration;
     if (object.seconds !== undefined && object.seconds !== null) {
-      message.seconds = object.seconds;
+      message.seconds = object.seconds as Long;
     } else {
-      message.seconds = 0;
+      message.seconds = Long.ZERO;
     }
     if (object.nanos !== undefined && object.nanos !== null) {
       message.nanos = object.nanos;
@@ -153,16 +146,11 @@ export const Duration = {
   },
   toJSON(message: Duration): unknown {
     const obj: any = {};
-    message.seconds !== undefined && (obj.seconds = message.seconds);
+    message.seconds !== undefined && (obj.seconds = (message.seconds || Long.ZERO).toString());
     message.nanos !== undefined && (obj.nanos = message.nanos);
     return obj;
   },
 };
-
-if (util.Long !== Long as any) {
-  util.Long = Long as any;
-  configure();
-}
 
 type Builtin = Date | Function | Uint8Array | string | number | undefined;
 export type DeepPartial<T> = T extends Builtin

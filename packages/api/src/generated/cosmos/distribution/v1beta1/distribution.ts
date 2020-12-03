@@ -1,7 +1,7 @@
 /* eslint-disable */
 import { DecCoin, Coin } from '../../../cosmos/base/v1beta1/coin';
 import * as Long from 'long';
-import { Writer, Reader, util, configure } from 'protobufjs/minimal';
+import { Writer, Reader } from 'protobufjs/minimal';
 
 
 /**
@@ -40,7 +40,7 @@ export interface ValidatorHistoricalRewards {
  */
 export interface ValidatorCurrentRewards {
   rewards: DecCoin[];
-  period: number;
+  period: Long;
 }
 
 /**
@@ -66,7 +66,7 @@ export interface ValidatorOutstandingRewards {
  *  for delegations which are withdrawn after a slash has occurred.
  */
 export interface ValidatorSlashEvent {
-  validatorPeriod: number;
+  validatorPeriod: Long;
   fraction: string;
 }
 
@@ -105,9 +105,9 @@ export interface CommunityPoolSpendProposal {
  *  thus sdk.Dec is used.
  */
 export interface DelegatorStartingInfo {
-  previousPeriod: number;
+  previousPeriod: Long;
   stake: string;
-  height: number;
+  height: Long;
 }
 
 /**
@@ -143,7 +143,7 @@ const baseValidatorHistoricalRewards: object = {
 };
 
 const baseValidatorCurrentRewards: object = {
-  period: 0,
+  period: Long.UZERO,
 };
 
 const baseValidatorAccumulatedCommission: object = {
@@ -153,7 +153,7 @@ const baseValidatorOutstandingRewards: object = {
 };
 
 const baseValidatorSlashEvent: object = {
-  validatorPeriod: 0,
+  validatorPeriod: Long.UZERO,
   fraction: "",
 };
 
@@ -170,9 +170,9 @@ const baseCommunityPoolSpendProposal: object = {
 };
 
 const baseDelegatorStartingInfo: object = {
-  previousPeriod: 0,
+  previousPeriod: Long.UZERO,
   stake: "",
-  height: 0,
+  height: Long.UZERO,
 };
 
 const baseDelegationDelegatorReward: object = {
@@ -186,13 +186,6 @@ const baseCommunityPoolSpendProposalWithDeposit: object = {
   amount: "",
   deposit: "",
 };
-
-function longToNumber(long: Long) {
-  if (long.gt(Number.MAX_SAFE_INTEGER)) {
-    throw new globalThis.Error("Value is larger than Number.MAX_SAFE_INTEGER");
-  }
-  return long.toNumber();
-}
 
 export const protobufPackage = 'cosmos.distribution.v1beta1'
 
@@ -379,7 +372,7 @@ export const ValidatorCurrentRewards = {
           message.rewards.push(DecCoin.decode(reader, reader.uint32()));
           break;
         case 2:
-          message.period = longToNumber(reader.uint64() as Long);
+          message.period = reader.uint64() as Long;
           break;
         default:
           reader.skipType(tag & 7);
@@ -397,9 +390,9 @@ export const ValidatorCurrentRewards = {
       }
     }
     if (object.period !== undefined && object.period !== null) {
-      message.period = Number(object.period);
+      message.period = Long.fromString(object.period);
     } else {
-      message.period = 0;
+      message.period = Long.UZERO;
     }
     return message;
   },
@@ -412,9 +405,9 @@ export const ValidatorCurrentRewards = {
       }
     }
     if (object.period !== undefined && object.period !== null) {
-      message.period = object.period;
+      message.period = object.period as Long;
     } else {
-      message.period = 0;
+      message.period = Long.UZERO;
     }
     return message;
   },
@@ -425,7 +418,7 @@ export const ValidatorCurrentRewards = {
     } else {
       obj.rewards = [];
     }
-    message.period !== undefined && (obj.period = message.period);
+    message.period !== undefined && (obj.period = (message.period || Long.UZERO).toString());
     return obj;
   },
 };
@@ -556,7 +549,7 @@ export const ValidatorSlashEvent = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          message.validatorPeriod = longToNumber(reader.uint64() as Long);
+          message.validatorPeriod = reader.uint64() as Long;
           break;
         case 2:
           message.fraction = reader.string();
@@ -571,9 +564,9 @@ export const ValidatorSlashEvent = {
   fromJSON(object: any): ValidatorSlashEvent {
     const message = { ...baseValidatorSlashEvent } as ValidatorSlashEvent;
     if (object.validatorPeriod !== undefined && object.validatorPeriod !== null) {
-      message.validatorPeriod = Number(object.validatorPeriod);
+      message.validatorPeriod = Long.fromString(object.validatorPeriod);
     } else {
-      message.validatorPeriod = 0;
+      message.validatorPeriod = Long.UZERO;
     }
     if (object.fraction !== undefined && object.fraction !== null) {
       message.fraction = String(object.fraction);
@@ -585,9 +578,9 @@ export const ValidatorSlashEvent = {
   fromPartial(object: DeepPartial<ValidatorSlashEvent>): ValidatorSlashEvent {
     const message = { ...baseValidatorSlashEvent } as ValidatorSlashEvent;
     if (object.validatorPeriod !== undefined && object.validatorPeriod !== null) {
-      message.validatorPeriod = object.validatorPeriod;
+      message.validatorPeriod = object.validatorPeriod as Long;
     } else {
-      message.validatorPeriod = 0;
+      message.validatorPeriod = Long.UZERO;
     }
     if (object.fraction !== undefined && object.fraction !== null) {
       message.fraction = object.fraction;
@@ -598,7 +591,7 @@ export const ValidatorSlashEvent = {
   },
   toJSON(message: ValidatorSlashEvent): unknown {
     const obj: any = {};
-    message.validatorPeriod !== undefined && (obj.validatorPeriod = message.validatorPeriod);
+    message.validatorPeriod !== undefined && (obj.validatorPeriod = (message.validatorPeriod || Long.UZERO).toString());
     message.fraction !== undefined && (obj.fraction = message.fraction);
     return obj;
   },
@@ -832,13 +825,13 @@ export const DelegatorStartingInfo = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          message.previousPeriod = longToNumber(reader.uint64() as Long);
+          message.previousPeriod = reader.uint64() as Long;
           break;
         case 2:
           message.stake = reader.string();
           break;
         case 3:
-          message.height = longToNumber(reader.uint64() as Long);
+          message.height = reader.uint64() as Long;
           break;
         default:
           reader.skipType(tag & 7);
@@ -850,9 +843,9 @@ export const DelegatorStartingInfo = {
   fromJSON(object: any): DelegatorStartingInfo {
     const message = { ...baseDelegatorStartingInfo } as DelegatorStartingInfo;
     if (object.previousPeriod !== undefined && object.previousPeriod !== null) {
-      message.previousPeriod = Number(object.previousPeriod);
+      message.previousPeriod = Long.fromString(object.previousPeriod);
     } else {
-      message.previousPeriod = 0;
+      message.previousPeriod = Long.UZERO;
     }
     if (object.stake !== undefined && object.stake !== null) {
       message.stake = String(object.stake);
@@ -860,18 +853,18 @@ export const DelegatorStartingInfo = {
       message.stake = "";
     }
     if (object.height !== undefined && object.height !== null) {
-      message.height = Number(object.height);
+      message.height = Long.fromString(object.height);
     } else {
-      message.height = 0;
+      message.height = Long.UZERO;
     }
     return message;
   },
   fromPartial(object: DeepPartial<DelegatorStartingInfo>): DelegatorStartingInfo {
     const message = { ...baseDelegatorStartingInfo } as DelegatorStartingInfo;
     if (object.previousPeriod !== undefined && object.previousPeriod !== null) {
-      message.previousPeriod = object.previousPeriod;
+      message.previousPeriod = object.previousPeriod as Long;
     } else {
-      message.previousPeriod = 0;
+      message.previousPeriod = Long.UZERO;
     }
     if (object.stake !== undefined && object.stake !== null) {
       message.stake = object.stake;
@@ -879,17 +872,17 @@ export const DelegatorStartingInfo = {
       message.stake = "";
     }
     if (object.height !== undefined && object.height !== null) {
-      message.height = object.height;
+      message.height = object.height as Long;
     } else {
-      message.height = 0;
+      message.height = Long.UZERO;
     }
     return message;
   },
   toJSON(message: DelegatorStartingInfo): unknown {
     const obj: any = {};
-    message.previousPeriod !== undefined && (obj.previousPeriod = message.previousPeriod);
+    message.previousPeriod !== undefined && (obj.previousPeriod = (message.previousPeriod || Long.UZERO).toString());
     message.stake !== undefined && (obj.stake = message.stake);
-    message.height !== undefined && (obj.height = message.height);
+    message.height !== undefined && (obj.height = (message.height || Long.UZERO).toString());
     return obj;
   },
 };
@@ -1071,11 +1064,6 @@ export const CommunityPoolSpendProposalWithDeposit = {
     return obj;
   },
 };
-
-if (util.Long !== Long as any) {
-  util.Long = Long as any;
-  configure();
-}
 
 type Builtin = Date | Function | Uint8Array | string | number | undefined;
 export type DeepPartial<T> = T extends Builtin

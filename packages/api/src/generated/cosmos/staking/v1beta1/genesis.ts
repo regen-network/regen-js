@@ -1,7 +1,7 @@
 /* eslint-disable */
 import { Params, Validator, Delegation, UnbondingDelegation, Redelegation } from '../../../cosmos/staking/v1beta1/staking';
 import * as Long from 'long';
-import { Writer, Reader, util, configure } from 'protobufjs/minimal';
+import { Writer, Reader } from 'protobufjs/minimal';
 
 
 /**
@@ -52,7 +52,7 @@ export interface LastValidatorPower {
   /**
    *  power defines the power of the validator.
    */
-  power: number;
+  power: Long;
 }
 
 const baseGenesisState: object = {
@@ -61,15 +61,8 @@ const baseGenesisState: object = {
 
 const baseLastValidatorPower: object = {
   address: "",
-  power: 0,
+  power: Long.ZERO,
 };
-
-function longToNumber(long: Long) {
-  if (long.gt(Number.MAX_SAFE_INTEGER)) {
-    throw new globalThis.Error("Value is larger than Number.MAX_SAFE_INTEGER");
-  }
-  return long.toNumber();
-}
 
 export const protobufPackage = 'cosmos.staking.v1beta1'
 
@@ -287,7 +280,7 @@ export const LastValidatorPower = {
           message.address = reader.string();
           break;
         case 2:
-          message.power = longToNumber(reader.int64() as Long);
+          message.power = reader.int64() as Long;
           break;
         default:
           reader.skipType(tag & 7);
@@ -304,9 +297,9 @@ export const LastValidatorPower = {
       message.address = "";
     }
     if (object.power !== undefined && object.power !== null) {
-      message.power = Number(object.power);
+      message.power = Long.fromString(object.power);
     } else {
-      message.power = 0;
+      message.power = Long.ZERO;
     }
     return message;
   },
@@ -318,24 +311,19 @@ export const LastValidatorPower = {
       message.address = "";
     }
     if (object.power !== undefined && object.power !== null) {
-      message.power = object.power;
+      message.power = object.power as Long;
     } else {
-      message.power = 0;
+      message.power = Long.ZERO;
     }
     return message;
   },
   toJSON(message: LastValidatorPower): unknown {
     const obj: any = {};
     message.address !== undefined && (obj.address = message.address);
-    message.power !== undefined && (obj.power = message.power);
+    message.power !== undefined && (obj.power = (message.power || Long.ZERO).toString());
     return obj;
   },
 };
-
-if (util.Long !== Long as any) {
-  util.Long = Long as any;
-  configure();
-}
 
 interface WindowBase64 {
   atob(b64: string): string;

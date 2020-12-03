@@ -1,9 +1,9 @@
 /* eslint-disable */
 import { Params, ValidatorOutstandingRewards, ValidatorAccumulatedCommission, ValidatorSlashEvent, DelegationDelegatorReward } from '../../../cosmos/distribution/v1beta1/distribution';
+import * as Long from 'long';
 import { PageRequest, PageResponse } from '../../../cosmos/base/query/v1beta1/pagination';
 import { DecCoin } from '../../../cosmos/base/v1beta1/coin';
-import { Reader, Writer, util, configure } from 'protobufjs/minimal';
-import * as Long from 'long';
+import { Reader, Writer } from 'protobufjs/minimal';
 
 
 /**
@@ -75,11 +75,11 @@ export interface QueryValidatorSlashesRequest {
   /**
    *  starting_height defines the optional starting height to query the slashes.
    */
-  startingHeight: number;
+  startingHeight: Long;
   /**
    *  starting_height defines the optional ending height to query the slashes.
    */
-  endingHeight: number;
+  endingHeight: Long;
   /**
    *  pagination defines an optional pagination for the request.
    */
@@ -237,8 +237,8 @@ const baseQueryValidatorCommissionResponse: object = {
 
 const baseQueryValidatorSlashesRequest: object = {
   validatorAddress: "",
-  startingHeight: 0,
-  endingHeight: 0,
+  startingHeight: Long.UZERO,
+  endingHeight: Long.UZERO,
 };
 
 const baseQueryValidatorSlashesResponse: object = {
@@ -402,13 +402,6 @@ interface Rpc {
 
   request(service: string, method: string, data: Uint8Array): Promise<Uint8Array>;
 
-}
-
-function longToNumber(long: Long) {
-  if (long.gt(Number.MAX_SAFE_INTEGER)) {
-    throw new globalThis.Error("Value is larger than Number.MAX_SAFE_INTEGER");
-  }
-  return long.toNumber();
 }
 
 export const protobufPackage = 'cosmos.distribution.v1beta1'
@@ -707,10 +700,10 @@ export const QueryValidatorSlashesRequest = {
           message.validatorAddress = reader.string();
           break;
         case 2:
-          message.startingHeight = longToNumber(reader.uint64() as Long);
+          message.startingHeight = reader.uint64() as Long;
           break;
         case 3:
-          message.endingHeight = longToNumber(reader.uint64() as Long);
+          message.endingHeight = reader.uint64() as Long;
           break;
         case 4:
           message.pagination = PageRequest.decode(reader, reader.uint32());
@@ -730,14 +723,14 @@ export const QueryValidatorSlashesRequest = {
       message.validatorAddress = "";
     }
     if (object.startingHeight !== undefined && object.startingHeight !== null) {
-      message.startingHeight = Number(object.startingHeight);
+      message.startingHeight = Long.fromString(object.startingHeight);
     } else {
-      message.startingHeight = 0;
+      message.startingHeight = Long.UZERO;
     }
     if (object.endingHeight !== undefined && object.endingHeight !== null) {
-      message.endingHeight = Number(object.endingHeight);
+      message.endingHeight = Long.fromString(object.endingHeight);
     } else {
-      message.endingHeight = 0;
+      message.endingHeight = Long.UZERO;
     }
     if (object.pagination !== undefined && object.pagination !== null) {
       message.pagination = PageRequest.fromJSON(object.pagination);
@@ -754,14 +747,14 @@ export const QueryValidatorSlashesRequest = {
       message.validatorAddress = "";
     }
     if (object.startingHeight !== undefined && object.startingHeight !== null) {
-      message.startingHeight = object.startingHeight;
+      message.startingHeight = object.startingHeight as Long;
     } else {
-      message.startingHeight = 0;
+      message.startingHeight = Long.UZERO;
     }
     if (object.endingHeight !== undefined && object.endingHeight !== null) {
-      message.endingHeight = object.endingHeight;
+      message.endingHeight = object.endingHeight as Long;
     } else {
-      message.endingHeight = 0;
+      message.endingHeight = Long.UZERO;
     }
     if (object.pagination !== undefined && object.pagination !== null) {
       message.pagination = PageRequest.fromPartial(object.pagination);
@@ -773,8 +766,8 @@ export const QueryValidatorSlashesRequest = {
   toJSON(message: QueryValidatorSlashesRequest): unknown {
     const obj: any = {};
     message.validatorAddress !== undefined && (obj.validatorAddress = message.validatorAddress);
-    message.startingHeight !== undefined && (obj.startingHeight = message.startingHeight);
-    message.endingHeight !== undefined && (obj.endingHeight = message.endingHeight);
+    message.startingHeight !== undefined && (obj.startingHeight = (message.startingHeight || Long.UZERO).toString());
+    message.endingHeight !== undefined && (obj.endingHeight = (message.endingHeight || Long.UZERO).toString());
     message.pagination !== undefined && (obj.pagination = message.pagination ? PageRequest.toJSON(message.pagination) : undefined);
     return obj;
   },
@@ -1382,11 +1375,6 @@ export const QueryCommunityPoolResponse = {
     return obj;
   },
 };
-
-if (util.Long !== Long as any) {
-  util.Long = Long as any;
-  configure();
-}
 
 type Builtin = Date | Function | Uint8Array | string | number | undefined;
 export type DeepPartial<T> = T extends Builtin

@@ -1,7 +1,7 @@
 /* eslint-disable */
-import { Deposit, Vote, Proposal, DepositParams, VotingParams, TallyParams } from '../../../cosmos/gov/v1beta1/gov';
 import * as Long from 'long';
-import { Writer, Reader, util, configure } from 'protobufjs/minimal';
+import { Deposit, Vote, Proposal, DepositParams, VotingParams, TallyParams } from '../../../cosmos/gov/v1beta1/gov';
+import { Writer, Reader } from 'protobufjs/minimal';
 
 
 /**
@@ -11,7 +11,7 @@ export interface GenesisState {
   /**
    *  starting_proposal_id is the ID of the starting proposal.
    */
-  startingProposalId: number;
+  startingProposalId: Long;
   /**
    *  deposits defines all the deposits present at genesis.
    */
@@ -39,15 +39,8 @@ export interface GenesisState {
 }
 
 const baseGenesisState: object = {
-  startingProposalId: 0,
+  startingProposalId: Long.UZERO,
 };
-
-function longToNumber(long: Long) {
-  if (long.gt(Number.MAX_SAFE_INTEGER)) {
-    throw new globalThis.Error("Value is larger than Number.MAX_SAFE_INTEGER");
-  }
-  return long.toNumber();
-}
 
 export const protobufPackage = 'cosmos.gov.v1beta1'
 
@@ -85,7 +78,7 @@ export const GenesisState = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          message.startingProposalId = longToNumber(reader.uint64() as Long);
+          message.startingProposalId = reader.uint64() as Long;
           break;
         case 2:
           message.deposits.push(Deposit.decode(reader, reader.uint32()));
@@ -118,9 +111,9 @@ export const GenesisState = {
     message.votes = [];
     message.proposals = [];
     if (object.startingProposalId !== undefined && object.startingProposalId !== null) {
-      message.startingProposalId = Number(object.startingProposalId);
+      message.startingProposalId = Long.fromString(object.startingProposalId);
     } else {
-      message.startingProposalId = 0;
+      message.startingProposalId = Long.UZERO;
     }
     if (object.deposits !== undefined && object.deposits !== null) {
       for (const e of object.deposits) {
@@ -160,9 +153,9 @@ export const GenesisState = {
     message.votes = [];
     message.proposals = [];
     if (object.startingProposalId !== undefined && object.startingProposalId !== null) {
-      message.startingProposalId = object.startingProposalId;
+      message.startingProposalId = object.startingProposalId as Long;
     } else {
-      message.startingProposalId = 0;
+      message.startingProposalId = Long.UZERO;
     }
     if (object.deposits !== undefined && object.deposits !== null) {
       for (const e of object.deposits) {
@@ -198,7 +191,7 @@ export const GenesisState = {
   },
   toJSON(message: GenesisState): unknown {
     const obj: any = {};
-    message.startingProposalId !== undefined && (obj.startingProposalId = message.startingProposalId);
+    message.startingProposalId !== undefined && (obj.startingProposalId = (message.startingProposalId || Long.UZERO).toString());
     if (message.deposits) {
       obj.deposits = message.deposits.map(e => e ? Deposit.toJSON(e) : undefined);
     } else {
@@ -220,11 +213,6 @@ export const GenesisState = {
     return obj;
   },
 };
-
-if (util.Long !== Long as any) {
-  util.Long = Long as any;
-  configure();
-}
 
 type Builtin = Date | Function | Uint8Array | string | number | undefined;
 export type DeepPartial<T> = T extends Builtin

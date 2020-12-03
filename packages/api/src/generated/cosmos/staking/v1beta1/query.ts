@@ -1,8 +1,8 @@
 /* eslint-disable */
 import { PageRequest, PageResponse } from '../../../cosmos/base/query/v1beta1/pagination';
 import { Validator, DelegationResponse, UnbondingDelegation, RedelegationResponse, HistoricalInfo, Pool, Params } from '../../../cosmos/staking/v1beta1/staking';
-import { Reader, Writer, util, configure } from 'protobufjs/minimal';
 import * as Long from 'long';
+import { Reader, Writer } from 'protobufjs/minimal';
 
 
 /**
@@ -313,7 +313,7 @@ export interface QueryHistoricalInfoRequest {
   /**
    *  height defines at which height to query the historical info.
    */
-  height: number;
+  height: Long;
 }
 
 /**
@@ -442,7 +442,7 @@ const baseQueryDelegatorValidatorResponse: object = {
 };
 
 const baseQueryHistoricalInfoRequest: object = {
-  height: 0,
+  height: Long.ZERO,
 };
 
 const baseQueryHistoricalInfoResponse: object = {
@@ -639,13 +639,6 @@ interface Rpc {
 
   request(service: string, method: string, data: Uint8Array): Promise<Uint8Array>;
 
-}
-
-function longToNumber(long: Long) {
-  if (long.gt(Number.MAX_SAFE_INTEGER)) {
-    throw new globalThis.Error("Value is larger than Number.MAX_SAFE_INTEGER");
-  }
-  return long.toNumber();
 }
 
 export const protobufPackage = 'cosmos.staking.v1beta1'
@@ -2081,7 +2074,7 @@ export const QueryHistoricalInfoRequest = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          message.height = longToNumber(reader.int64() as Long);
+          message.height = reader.int64() as Long;
           break;
         default:
           reader.skipType(tag & 7);
@@ -2093,24 +2086,24 @@ export const QueryHistoricalInfoRequest = {
   fromJSON(object: any): QueryHistoricalInfoRequest {
     const message = { ...baseQueryHistoricalInfoRequest } as QueryHistoricalInfoRequest;
     if (object.height !== undefined && object.height !== null) {
-      message.height = Number(object.height);
+      message.height = Long.fromString(object.height);
     } else {
-      message.height = 0;
+      message.height = Long.ZERO;
     }
     return message;
   },
   fromPartial(object: DeepPartial<QueryHistoricalInfoRequest>): QueryHistoricalInfoRequest {
     const message = { ...baseQueryHistoricalInfoRequest } as QueryHistoricalInfoRequest;
     if (object.height !== undefined && object.height !== null) {
-      message.height = object.height;
+      message.height = object.height as Long;
     } else {
-      message.height = 0;
+      message.height = Long.ZERO;
     }
     return message;
   },
   toJSON(message: QueryHistoricalInfoRequest): unknown {
     const obj: any = {};
-    message.height !== undefined && (obj.height = message.height);
+    message.height !== undefined && (obj.height = (message.height || Long.ZERO).toString());
     return obj;
   },
 };
@@ -2325,11 +2318,6 @@ export const QueryParamsResponse = {
     return obj;
   },
 };
-
-if (util.Long !== Long as any) {
-  util.Long = Long as any;
-  configure();
-}
 
 type Builtin = Date | Function | Uint8Array | string | number | undefined;
 export type DeepPartial<T> = T extends Builtin

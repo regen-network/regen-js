@@ -1,7 +1,7 @@
 /* eslint-disable */
 import { Params, ValidatorSigningInfo } from '../../../cosmos/slashing/v1beta1/slashing';
 import * as Long from 'long';
-import { Writer, Reader, util, configure } from 'protobufjs/minimal';
+import { Writer, Reader } from 'protobufjs/minimal';
 
 
 /**
@@ -60,7 +60,7 @@ export interface MissedBlock {
   /**
    *  index is the height at which the block was missed.
    */
-  index: number;
+  index: Long;
   /**
    *  missed is the missed status.
    */
@@ -79,16 +79,9 @@ const baseValidatorMissedBlocks: object = {
 };
 
 const baseMissedBlock: object = {
-  index: 0,
+  index: Long.ZERO,
   missed: false,
 };
-
-function longToNumber(long: Long) {
-  if (long.gt(Number.MAX_SAFE_INTEGER)) {
-    throw new globalThis.Error("Value is larger than Number.MAX_SAFE_INTEGER");
-  }
-  return long.toNumber();
-}
 
 export const protobufPackage = 'cosmos.slashing.v1beta1'
 
@@ -338,7 +331,7 @@ export const MissedBlock = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          message.index = longToNumber(reader.int64() as Long);
+          message.index = reader.int64() as Long;
           break;
         case 2:
           message.missed = reader.bool();
@@ -353,9 +346,9 @@ export const MissedBlock = {
   fromJSON(object: any): MissedBlock {
     const message = { ...baseMissedBlock } as MissedBlock;
     if (object.index !== undefined && object.index !== null) {
-      message.index = Number(object.index);
+      message.index = Long.fromString(object.index);
     } else {
-      message.index = 0;
+      message.index = Long.ZERO;
     }
     if (object.missed !== undefined && object.missed !== null) {
       message.missed = Boolean(object.missed);
@@ -367,9 +360,9 @@ export const MissedBlock = {
   fromPartial(object: DeepPartial<MissedBlock>): MissedBlock {
     const message = { ...baseMissedBlock } as MissedBlock;
     if (object.index !== undefined && object.index !== null) {
-      message.index = object.index;
+      message.index = object.index as Long;
     } else {
-      message.index = 0;
+      message.index = Long.ZERO;
     }
     if (object.missed !== undefined && object.missed !== null) {
       message.missed = object.missed;
@@ -380,16 +373,11 @@ export const MissedBlock = {
   },
   toJSON(message: MissedBlock): unknown {
     const obj: any = {};
-    message.index !== undefined && (obj.index = message.index);
+    message.index !== undefined && (obj.index = (message.index || Long.ZERO).toString());
     message.missed !== undefined && (obj.missed = message.missed);
     return obj;
   },
 };
-
-if (util.Long !== Long as any) {
-  util.Long = Long as any;
-  configure();
-}
 
 type Builtin = Date | Function | Uint8Array | string | number | undefined;
 export type DeepPartial<T> = T extends Builtin

@@ -1,9 +1,9 @@
 /* eslint-disable */
 import { Proof } from '../../tendermint/crypto/proof';
 import { Consensus } from '../../tendermint/version/types';
+import * as Long from 'long';
 import { ValidatorSet } from '../../tendermint/types/validator';
 import { Timestamp } from '../../google/protobuf/timestamp';
-import * as Long from 'long';
 import { Writer, Reader, util, configure } from 'protobufjs/minimal';
 
 
@@ -38,7 +38,7 @@ export interface Header {
    */
   version?: Consensus;
   chainId: string;
-  height: number;
+  height: Long;
   time?: Date;
   /**
    *  prev block info
@@ -100,7 +100,7 @@ export interface Data {
  */
 export interface Vote {
   type: SignedMsgType;
-  height: number;
+  height: Long;
   round: number;
   /**
    *  zero if vote is nil.
@@ -116,7 +116,7 @@ export interface Vote {
  *  Commit contains the evidence that a block was committed by a set of validators.
  */
 export interface Commit {
-  height: number;
+  height: Long;
   round: number;
   blockId?: BlockID;
   signatures: CommitSig[];
@@ -134,7 +134,7 @@ export interface CommitSig {
 
 export interface Proposal {
   type: SignedMsgType;
-  height: number;
+  height: Long;
   round: number;
   polRound: number;
   blockId?: BlockID;
@@ -154,9 +154,9 @@ export interface LightBlock {
 
 export interface BlockMeta {
   blockId?: BlockID;
-  blockSize: number;
+  blockSize: Long;
   header?: Header;
-  numTxs: number;
+  numTxs: Long;
 }
 
 /**
@@ -181,7 +181,7 @@ const baseBlockID: object = {
 
 const baseHeader: object = {
   chainId: "",
-  height: 0,
+  height: Long.ZERO,
 };
 
 const baseData: object = {
@@ -189,13 +189,13 @@ const baseData: object = {
 
 const baseVote: object = {
   type: 0,
-  height: 0,
+  height: Long.ZERO,
   round: 0,
   validatorIndex: 0,
 };
 
 const baseCommit: object = {
-  height: 0,
+  height: Long.ZERO,
   round: 0,
 };
 
@@ -205,7 +205,7 @@ const baseCommitSig: object = {
 
 const baseProposal: object = {
   type: 0,
-  height: 0,
+  height: Long.ZERO,
   round: 0,
   polRound: 0,
 };
@@ -217,8 +217,8 @@ const baseLightBlock: object = {
 };
 
 const baseBlockMeta: object = {
-  blockSize: 0,
-  numTxs: 0,
+  blockSize: Long.ZERO,
+  numTxs: Long.ZERO,
 };
 
 const baseTxProof: object = {
@@ -235,22 +235,19 @@ function fromJsonTimestamp(o: any): Date {
 }
 
 function toTimestamp(date: Date): Timestamp {
-  const seconds = date.getTime() / 1_000;
+  const seconds = numberToLong(date.getTime() / 1_000);
   const nanos = (date.getTime() % 1_000) * 1_000_000;
   return { seconds, nanos };
 }
 
 function fromTimestamp(t: Timestamp): Date {
-  let millis = t.seconds * 1_000;
+  let millis = t.seconds.toNumber() * 1_000;
   millis += t.nanos / 1_000_000;
   return new Date(millis);
 }
 
-function longToNumber(long: Long) {
-  if (long.gt(Number.MAX_SAFE_INTEGER)) {
-    throw new globalThis.Error("Value is larger than Number.MAX_SAFE_INTEGER");
-  }
-  return long.toNumber();
+function numberToLong(number: number) {
+  return Long.fromNumber(number);
 }
 
 export const protobufPackage = 'tendermint.types'
@@ -588,7 +585,7 @@ export const Header = {
           message.chainId = reader.string();
           break;
         case 3:
-          message.height = longToNumber(reader.int64() as Long);
+          message.height = reader.int64() as Long;
           break;
         case 4:
           message.time = fromTimestamp(Timestamp.decode(reader, reader.uint32()));
@@ -643,9 +640,9 @@ export const Header = {
       message.chainId = "";
     }
     if (object.height !== undefined && object.height !== null) {
-      message.height = Number(object.height);
+      message.height = Long.fromString(object.height);
     } else {
-      message.height = 0;
+      message.height = Long.ZERO;
     }
     if (object.time !== undefined && object.time !== null) {
       message.time = fromJsonTimestamp(object.time);
@@ -699,9 +696,9 @@ export const Header = {
       message.chainId = "";
     }
     if (object.height !== undefined && object.height !== null) {
-      message.height = object.height;
+      message.height = object.height as Long;
     } else {
-      message.height = 0;
+      message.height = Long.ZERO;
     }
     if (object.time !== undefined && object.time !== null) {
       message.time = object.time;
@@ -764,7 +761,7 @@ export const Header = {
     const obj: any = {};
     message.version !== undefined && (obj.version = message.version ? Consensus.toJSON(message.version) : undefined);
     message.chainId !== undefined && (obj.chainId = message.chainId);
-    message.height !== undefined && (obj.height = message.height);
+    message.height !== undefined && (obj.height = (message.height || Long.ZERO).toString());
     message.time !== undefined && (obj.time = message.time !== undefined ? message.time.toISOString() : null);
     message.lastBlockId !== undefined && (obj.lastBlockId = message.lastBlockId ? BlockID.toJSON(message.lastBlockId) : undefined);
     message.lastCommitHash !== undefined && (obj.lastCommitHash = base64FromBytes(message.lastCommitHash !== undefined ? message.lastCommitHash : new Uint8Array()));
@@ -863,7 +860,7 @@ export const Vote = {
           message.type = reader.int32() as any;
           break;
         case 2:
-          message.height = longToNumber(reader.int64() as Long);
+          message.height = reader.int64() as Long;
           break;
         case 3:
           message.round = reader.int32();
@@ -898,9 +895,9 @@ export const Vote = {
       message.type = 0;
     }
     if (object.height !== undefined && object.height !== null) {
-      message.height = Number(object.height);
+      message.height = Long.fromString(object.height);
     } else {
-      message.height = 0;
+      message.height = Long.ZERO;
     }
     if (object.round !== undefined && object.round !== null) {
       message.round = Number(object.round);
@@ -938,9 +935,9 @@ export const Vote = {
       message.type = 0;
     }
     if (object.height !== undefined && object.height !== null) {
-      message.height = object.height;
+      message.height = object.height as Long;
     } else {
-      message.height = 0;
+      message.height = Long.ZERO;
     }
     if (object.round !== undefined && object.round !== null) {
       message.round = object.round;
@@ -977,7 +974,7 @@ export const Vote = {
   toJSON(message: Vote): unknown {
     const obj: any = {};
     message.type !== undefined && (obj.type = signedMsgTypeToJSON(message.type));
-    message.height !== undefined && (obj.height = message.height);
+    message.height !== undefined && (obj.height = (message.height || Long.ZERO).toString());
     message.round !== undefined && (obj.round = message.round);
     message.blockId !== undefined && (obj.blockId = message.blockId ? BlockID.toJSON(message.blockId) : undefined);
     message.timestamp !== undefined && (obj.timestamp = message.timestamp !== undefined ? message.timestamp.toISOString() : null);
@@ -1009,7 +1006,7 @@ export const Commit = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          message.height = longToNumber(reader.int64() as Long);
+          message.height = reader.int64() as Long;
           break;
         case 2:
           message.round = reader.int32();
@@ -1031,9 +1028,9 @@ export const Commit = {
     const message = { ...baseCommit } as Commit;
     message.signatures = [];
     if (object.height !== undefined && object.height !== null) {
-      message.height = Number(object.height);
+      message.height = Long.fromString(object.height);
     } else {
-      message.height = 0;
+      message.height = Long.ZERO;
     }
     if (object.round !== undefined && object.round !== null) {
       message.round = Number(object.round);
@@ -1056,9 +1053,9 @@ export const Commit = {
     const message = { ...baseCommit } as Commit;
     message.signatures = [];
     if (object.height !== undefined && object.height !== null) {
-      message.height = object.height;
+      message.height = object.height as Long;
     } else {
-      message.height = 0;
+      message.height = Long.ZERO;
     }
     if (object.round !== undefined && object.round !== null) {
       message.round = object.round;
@@ -1079,7 +1076,7 @@ export const Commit = {
   },
   toJSON(message: Commit): unknown {
     const obj: any = {};
-    message.height !== undefined && (obj.height = message.height);
+    message.height !== undefined && (obj.height = (message.height || Long.ZERO).toString());
     message.round !== undefined && (obj.round = message.round);
     message.blockId !== undefined && (obj.blockId = message.blockId ? BlockID.toJSON(message.blockId) : undefined);
     if (message.signatures) {
@@ -1207,7 +1204,7 @@ export const Proposal = {
           message.type = reader.int32() as any;
           break;
         case 2:
-          message.height = longToNumber(reader.int64() as Long);
+          message.height = reader.int64() as Long;
           break;
         case 3:
           message.round = reader.int32();
@@ -1239,9 +1236,9 @@ export const Proposal = {
       message.type = 0;
     }
     if (object.height !== undefined && object.height !== null) {
-      message.height = Number(object.height);
+      message.height = Long.fromString(object.height);
     } else {
-      message.height = 0;
+      message.height = Long.ZERO;
     }
     if (object.round !== undefined && object.round !== null) {
       message.round = Number(object.round);
@@ -1276,9 +1273,9 @@ export const Proposal = {
       message.type = 0;
     }
     if (object.height !== undefined && object.height !== null) {
-      message.height = object.height;
+      message.height = object.height as Long;
     } else {
-      message.height = 0;
+      message.height = Long.ZERO;
     }
     if (object.round !== undefined && object.round !== null) {
       message.round = object.round;
@@ -1310,7 +1307,7 @@ export const Proposal = {
   toJSON(message: Proposal): unknown {
     const obj: any = {};
     message.type !== undefined && (obj.type = signedMsgTypeToJSON(message.type));
-    message.height !== undefined && (obj.height = message.height);
+    message.height !== undefined && (obj.height = (message.height || Long.ZERO).toString());
     message.round !== undefined && (obj.round = message.round);
     message.polRound !== undefined && (obj.polRound = message.polRound);
     message.blockId !== undefined && (obj.blockId = message.blockId ? BlockID.toJSON(message.blockId) : undefined);
@@ -1475,13 +1472,13 @@ export const BlockMeta = {
           message.blockId = BlockID.decode(reader, reader.uint32());
           break;
         case 2:
-          message.blockSize = longToNumber(reader.int64() as Long);
+          message.blockSize = reader.int64() as Long;
           break;
         case 3:
           message.header = Header.decode(reader, reader.uint32());
           break;
         case 4:
-          message.numTxs = longToNumber(reader.int64() as Long);
+          message.numTxs = reader.int64() as Long;
           break;
         default:
           reader.skipType(tag & 7);
@@ -1498,9 +1495,9 @@ export const BlockMeta = {
       message.blockId = undefined;
     }
     if (object.blockSize !== undefined && object.blockSize !== null) {
-      message.blockSize = Number(object.blockSize);
+      message.blockSize = Long.fromString(object.blockSize);
     } else {
-      message.blockSize = 0;
+      message.blockSize = Long.ZERO;
     }
     if (object.header !== undefined && object.header !== null) {
       message.header = Header.fromJSON(object.header);
@@ -1508,9 +1505,9 @@ export const BlockMeta = {
       message.header = undefined;
     }
     if (object.numTxs !== undefined && object.numTxs !== null) {
-      message.numTxs = Number(object.numTxs);
+      message.numTxs = Long.fromString(object.numTxs);
     } else {
-      message.numTxs = 0;
+      message.numTxs = Long.ZERO;
     }
     return message;
   },
@@ -1522,9 +1519,9 @@ export const BlockMeta = {
       message.blockId = undefined;
     }
     if (object.blockSize !== undefined && object.blockSize !== null) {
-      message.blockSize = object.blockSize;
+      message.blockSize = object.blockSize as Long;
     } else {
-      message.blockSize = 0;
+      message.blockSize = Long.ZERO;
     }
     if (object.header !== undefined && object.header !== null) {
       message.header = Header.fromPartial(object.header);
@@ -1532,18 +1529,18 @@ export const BlockMeta = {
       message.header = undefined;
     }
     if (object.numTxs !== undefined && object.numTxs !== null) {
-      message.numTxs = object.numTxs;
+      message.numTxs = object.numTxs as Long;
     } else {
-      message.numTxs = 0;
+      message.numTxs = Long.ZERO;
     }
     return message;
   },
   toJSON(message: BlockMeta): unknown {
     const obj: any = {};
     message.blockId !== undefined && (obj.blockId = message.blockId ? BlockID.toJSON(message.blockId) : undefined);
-    message.blockSize !== undefined && (obj.blockSize = message.blockSize);
+    message.blockSize !== undefined && (obj.blockSize = (message.blockSize || Long.ZERO).toString());
     message.header !== undefined && (obj.header = message.header ? Header.toJSON(message.header) : undefined);
-    message.numTxs !== undefined && (obj.numTxs = message.numTxs);
+    message.numTxs !== undefined && (obj.numTxs = (message.numTxs || Long.ZERO).toString());
     return obj;
   },
 };
