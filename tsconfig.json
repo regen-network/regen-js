@@ -2,7 +2,9 @@
 	"compilerOptions": {
 		"esModuleInterop": true,
 		"jsx": "react",
-		"strict": true
+		"moduleResolution": "node",
+		"strict": true,
+		"target": "ES2015"
 	},
 	"exclude": ["**/lib/**/*"]
 }
