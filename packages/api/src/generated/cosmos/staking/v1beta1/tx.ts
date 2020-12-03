@@ -2,8 +2,9 @@
 import { Description, CommissionRates } from '../../../cosmos/staking/v1beta1/staking';
 import { Any } from '../../../google/protobuf/any';
 import { Coin } from '../../../cosmos/base/v1beta1/coin';
-import { Reader, Writer } from 'protobufjs/minimal';
+import { Reader, Writer, util, configure } from 'protobufjs/minimal';
 import { Timestamp } from '../../../google/protobuf/timestamp';
+import * as Long from 'long';
 
 
 /**
@@ -234,15 +235,19 @@ function fromJsonTimestamp(o: any): Date {
 }
 
 function toTimestamp(date: Date): Timestamp {
-  const seconds = date.getTime() / 1_000;
+  const seconds = numberToLong(date.getTime() / 1_000);
   const nanos = (date.getTime() % 1_000) * 1_000_000;
   return { seconds, nanos };
 }
 
 function fromTimestamp(t: Timestamp): Date {
-  let millis = t.seconds * 1_000;
+  let millis = t.seconds.toNumber() * 1_000;
   millis += t.nanos / 1_000_000;
   return new Date(millis);
+}
+
+function numberToLong(number: number) {
+  return Long.fromNumber(number);
 }
 
 export const protobufPackage = 'cosmos.staking.v1beta1'
@@ -931,6 +936,11 @@ export const MsgUndelegateResponse = {
     return obj;
   },
 };
+
+if (util.Long !== Long as any) {
+  util.Long = Long as any;
+  configure();
+}
 
 type Builtin = Date | Function | Uint8Array | string | number | undefined;
 export type DeepPartial<T> = T extends Builtin

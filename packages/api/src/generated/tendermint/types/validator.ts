@@ -1,46 +1,39 @@
 /* eslint-disable */
-import { PublicKey } from '../../tendermint/crypto/keys';
 import * as Long from 'long';
-import { Writer, Reader, util, configure } from 'protobufjs/minimal';
+import { PublicKey } from '../../tendermint/crypto/keys';
+import { Writer, Reader } from 'protobufjs/minimal';
 
 
 export interface ValidatorSet {
   validators: Validator[];
   proposer?: Validator;
-  totalVotingPower: number;
+  totalVotingPower: Long;
 }
 
 export interface Validator {
   address: Uint8Array;
   pubKey?: PublicKey;
-  votingPower: number;
-  proposerPriority: number;
+  votingPower: Long;
+  proposerPriority: Long;
 }
 
 export interface SimpleValidator {
   pubKey?: PublicKey;
-  votingPower: number;
+  votingPower: Long;
 }
 
 const baseValidatorSet: object = {
-  totalVotingPower: 0,
+  totalVotingPower: Long.ZERO,
 };
 
 const baseValidator: object = {
-  votingPower: 0,
-  proposerPriority: 0,
+  votingPower: Long.ZERO,
+  proposerPriority: Long.ZERO,
 };
 
 const baseSimpleValidator: object = {
-  votingPower: 0,
+  votingPower: Long.ZERO,
 };
-
-function longToNumber(long: Long) {
-  if (long.gt(Number.MAX_SAFE_INTEGER)) {
-    throw new globalThis.Error("Value is larger than Number.MAX_SAFE_INTEGER");
-  }
-  return long.toNumber();
-}
 
 export const protobufPackage = 'tendermint.types'
 
@@ -70,7 +63,7 @@ export const ValidatorSet = {
           message.proposer = Validator.decode(reader, reader.uint32());
           break;
         case 3:
-          message.totalVotingPower = longToNumber(reader.int64() as Long);
+          message.totalVotingPower = reader.int64() as Long;
           break;
         default:
           reader.skipType(tag & 7);
@@ -93,9 +86,9 @@ export const ValidatorSet = {
       message.proposer = undefined;
     }
     if (object.totalVotingPower !== undefined && object.totalVotingPower !== null) {
-      message.totalVotingPower = Number(object.totalVotingPower);
+      message.totalVotingPower = Long.fromString(object.totalVotingPower);
     } else {
-      message.totalVotingPower = 0;
+      message.totalVotingPower = Long.ZERO;
     }
     return message;
   },
@@ -113,9 +106,9 @@ export const ValidatorSet = {
       message.proposer = undefined;
     }
     if (object.totalVotingPower !== undefined && object.totalVotingPower !== null) {
-      message.totalVotingPower = object.totalVotingPower;
+      message.totalVotingPower = object.totalVotingPower as Long;
     } else {
-      message.totalVotingPower = 0;
+      message.totalVotingPower = Long.ZERO;
     }
     return message;
   },
@@ -127,7 +120,7 @@ export const ValidatorSet = {
       obj.validators = [];
     }
     message.proposer !== undefined && (obj.proposer = message.proposer ? Validator.toJSON(message.proposer) : undefined);
-    message.totalVotingPower !== undefined && (obj.totalVotingPower = message.totalVotingPower);
+    message.totalVotingPower !== undefined && (obj.totalVotingPower = (message.totalVotingPower || Long.ZERO).toString());
     return obj;
   },
 };
@@ -156,10 +149,10 @@ export const Validator = {
           message.pubKey = PublicKey.decode(reader, reader.uint32());
           break;
         case 3:
-          message.votingPower = longToNumber(reader.int64() as Long);
+          message.votingPower = reader.int64() as Long;
           break;
         case 4:
-          message.proposerPriority = longToNumber(reader.int64() as Long);
+          message.proposerPriority = reader.int64() as Long;
           break;
         default:
           reader.skipType(tag & 7);
@@ -179,14 +172,14 @@ export const Validator = {
       message.pubKey = undefined;
     }
     if (object.votingPower !== undefined && object.votingPower !== null) {
-      message.votingPower = Number(object.votingPower);
+      message.votingPower = Long.fromString(object.votingPower);
     } else {
-      message.votingPower = 0;
+      message.votingPower = Long.ZERO;
     }
     if (object.proposerPriority !== undefined && object.proposerPriority !== null) {
-      message.proposerPriority = Number(object.proposerPriority);
+      message.proposerPriority = Long.fromString(object.proposerPriority);
     } else {
-      message.proposerPriority = 0;
+      message.proposerPriority = Long.ZERO;
     }
     return message;
   },
@@ -203,14 +196,14 @@ export const Validator = {
       message.pubKey = undefined;
     }
     if (object.votingPower !== undefined && object.votingPower !== null) {
-      message.votingPower = object.votingPower;
+      message.votingPower = object.votingPower as Long;
     } else {
-      message.votingPower = 0;
+      message.votingPower = Long.ZERO;
     }
     if (object.proposerPriority !== undefined && object.proposerPriority !== null) {
-      message.proposerPriority = object.proposerPriority;
+      message.proposerPriority = object.proposerPriority as Long;
     } else {
-      message.proposerPriority = 0;
+      message.proposerPriority = Long.ZERO;
     }
     return message;
   },
@@ -218,8 +211,8 @@ export const Validator = {
     const obj: any = {};
     message.address !== undefined && (obj.address = base64FromBytes(message.address !== undefined ? message.address : new Uint8Array()));
     message.pubKey !== undefined && (obj.pubKey = message.pubKey ? PublicKey.toJSON(message.pubKey) : undefined);
-    message.votingPower !== undefined && (obj.votingPower = message.votingPower);
-    message.proposerPriority !== undefined && (obj.proposerPriority = message.proposerPriority);
+    message.votingPower !== undefined && (obj.votingPower = (message.votingPower || Long.ZERO).toString());
+    message.proposerPriority !== undefined && (obj.proposerPriority = (message.proposerPriority || Long.ZERO).toString());
     return obj;
   },
 };
@@ -243,7 +236,7 @@ export const SimpleValidator = {
           message.pubKey = PublicKey.decode(reader, reader.uint32());
           break;
         case 2:
-          message.votingPower = longToNumber(reader.int64() as Long);
+          message.votingPower = reader.int64() as Long;
           break;
         default:
           reader.skipType(tag & 7);
@@ -260,9 +253,9 @@ export const SimpleValidator = {
       message.pubKey = undefined;
     }
     if (object.votingPower !== undefined && object.votingPower !== null) {
-      message.votingPower = Number(object.votingPower);
+      message.votingPower = Long.fromString(object.votingPower);
     } else {
-      message.votingPower = 0;
+      message.votingPower = Long.ZERO;
     }
     return message;
   },
@@ -274,24 +267,19 @@ export const SimpleValidator = {
       message.pubKey = undefined;
     }
     if (object.votingPower !== undefined && object.votingPower !== null) {
-      message.votingPower = object.votingPower;
+      message.votingPower = object.votingPower as Long;
     } else {
-      message.votingPower = 0;
+      message.votingPower = Long.ZERO;
     }
     return message;
   },
   toJSON(message: SimpleValidator): unknown {
     const obj: any = {};
     message.pubKey !== undefined && (obj.pubKey = message.pubKey ? PublicKey.toJSON(message.pubKey) : undefined);
-    message.votingPower !== undefined && (obj.votingPower = message.votingPower);
+    message.votingPower !== undefined && (obj.votingPower = (message.votingPower || Long.ZERO).toString());
     return obj;
   },
 };
-
-if (util.Long !== Long as any) {
-  util.Long = Long as any;
-  configure();
-}
 
 interface WindowBase64 {
   atob(b64: string): string;

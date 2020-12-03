@@ -1,8 +1,8 @@
 /* eslint-disable */
+import * as Long from 'long';
 import { Any } from '../../../../google/protobuf/any';
 import { Event } from '../../../../tendermint/abci/types';
-import * as Long from 'long';
-import { Writer, Reader, util, configure } from 'protobufjs/minimal';
+import { Writer, Reader } from 'protobufjs/minimal';
 
 
 /**
@@ -13,7 +13,7 @@ export interface TxResponse {
   /**
    *  The block height
    */
-  height: number;
+  height: Long;
   /**
    *  The transaction hash.
    */
@@ -46,11 +46,11 @@ export interface TxResponse {
   /**
    *  Amount of gas requested for transaction.
    */
-  gasWanted: number;
+  gasWanted: Long;
   /**
    *  Amount of gas consumed by transaction.
    */
-  gasUsed: number;
+  gasUsed: Long;
   /**
    *  The request transaction bytes.
    */
@@ -101,11 +101,11 @@ export interface GasInfo {
   /**
    *  GasWanted is the maximum units of work we allow this tx to perform.
    */
-  gasWanted: number;
+  gasWanted: Long;
   /**
    *  GasUsed is the amount of gas actually consumed.
    */
-  gasUsed: number;
+  gasUsed: Long;
 }
 
 /**
@@ -161,23 +161,23 @@ export interface SearchTxsResult {
   /**
    *  Count of all txs
    */
-  totalCount: number;
+  totalCount: Long;
   /**
    *  Count of txs in current page
    */
-  count: number;
+  count: Long;
   /**
    *  Index of current page, start from 1
    */
-  pageNumber: number;
+  pageNumber: Long;
   /**
    *  Count of total pages
    */
-  pageTotal: number;
+  pageTotal: Long;
   /**
    *  Max count txs per page
    */
-  limit: number;
+  limit: Long;
   /**
    *  List of txs in current page
    */
@@ -185,15 +185,15 @@ export interface SearchTxsResult {
 }
 
 const baseTxResponse: object = {
-  height: 0,
+  height: Long.ZERO,
   txhash: "",
   codespace: "",
   code: 0,
   data: "",
   rawLog: "",
   info: "",
-  gasWanted: 0,
-  gasUsed: 0,
+  gasWanted: Long.ZERO,
+  gasUsed: Long.ZERO,
   timestamp: "",
 };
 
@@ -212,8 +212,8 @@ const baseAttribute: object = {
 };
 
 const baseGasInfo: object = {
-  gasWanted: 0,
-  gasUsed: 0,
+  gasWanted: Long.UZERO,
+  gasUsed: Long.UZERO,
 };
 
 const baseResult: object = {
@@ -231,19 +231,12 @@ const baseTxMsgData: object = {
 };
 
 const baseSearchTxsResult: object = {
-  totalCount: 0,
-  count: 0,
-  pageNumber: 0,
-  pageTotal: 0,
-  limit: 0,
+  totalCount: Long.UZERO,
+  count: Long.UZERO,
+  pageNumber: Long.UZERO,
+  pageTotal: Long.UZERO,
+  limit: Long.UZERO,
 };
-
-function longToNumber(long: Long) {
-  if (long.gt(Number.MAX_SAFE_INTEGER)) {
-    throw new globalThis.Error("Value is larger than Number.MAX_SAFE_INTEGER");
-  }
-  return long.toNumber();
-}
 
 export const protobufPackage = 'cosmos.base.abci.v1beta1'
 
@@ -276,7 +269,7 @@ export const TxResponse = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          message.height = longToNumber(reader.int64() as Long);
+          message.height = reader.int64() as Long;
           break;
         case 2:
           message.txhash = reader.string();
@@ -300,10 +293,10 @@ export const TxResponse = {
           message.info = reader.string();
           break;
         case 9:
-          message.gasWanted = longToNumber(reader.int64() as Long);
+          message.gasWanted = reader.int64() as Long;
           break;
         case 10:
-          message.gasUsed = longToNumber(reader.int64() as Long);
+          message.gasUsed = reader.int64() as Long;
           break;
         case 11:
           message.tx = Any.decode(reader, reader.uint32());
@@ -322,9 +315,9 @@ export const TxResponse = {
     const message = { ...baseTxResponse } as TxResponse;
     message.logs = [];
     if (object.height !== undefined && object.height !== null) {
-      message.height = Number(object.height);
+      message.height = Long.fromString(object.height);
     } else {
-      message.height = 0;
+      message.height = Long.ZERO;
     }
     if (object.txhash !== undefined && object.txhash !== null) {
       message.txhash = String(object.txhash);
@@ -362,14 +355,14 @@ export const TxResponse = {
       message.info = "";
     }
     if (object.gasWanted !== undefined && object.gasWanted !== null) {
-      message.gasWanted = Number(object.gasWanted);
+      message.gasWanted = Long.fromString(object.gasWanted);
     } else {
-      message.gasWanted = 0;
+      message.gasWanted = Long.ZERO;
     }
     if (object.gasUsed !== undefined && object.gasUsed !== null) {
-      message.gasUsed = Number(object.gasUsed);
+      message.gasUsed = Long.fromString(object.gasUsed);
     } else {
-      message.gasUsed = 0;
+      message.gasUsed = Long.ZERO;
     }
     if (object.tx !== undefined && object.tx !== null) {
       message.tx = Any.fromJSON(object.tx);
@@ -387,9 +380,9 @@ export const TxResponse = {
     const message = { ...baseTxResponse } as TxResponse;
     message.logs = [];
     if (object.height !== undefined && object.height !== null) {
-      message.height = object.height;
+      message.height = object.height as Long;
     } else {
-      message.height = 0;
+      message.height = Long.ZERO;
     }
     if (object.txhash !== undefined && object.txhash !== null) {
       message.txhash = object.txhash;
@@ -427,14 +420,14 @@ export const TxResponse = {
       message.info = "";
     }
     if (object.gasWanted !== undefined && object.gasWanted !== null) {
-      message.gasWanted = object.gasWanted;
+      message.gasWanted = object.gasWanted as Long;
     } else {
-      message.gasWanted = 0;
+      message.gasWanted = Long.ZERO;
     }
     if (object.gasUsed !== undefined && object.gasUsed !== null) {
-      message.gasUsed = object.gasUsed;
+      message.gasUsed = object.gasUsed as Long;
     } else {
-      message.gasUsed = 0;
+      message.gasUsed = Long.ZERO;
     }
     if (object.tx !== undefined && object.tx !== null) {
       message.tx = Any.fromPartial(object.tx);
@@ -450,7 +443,7 @@ export const TxResponse = {
   },
   toJSON(message: TxResponse): unknown {
     const obj: any = {};
-    message.height !== undefined && (obj.height = message.height);
+    message.height !== undefined && (obj.height = (message.height || Long.ZERO).toString());
     message.txhash !== undefined && (obj.txhash = message.txhash);
     message.codespace !== undefined && (obj.codespace = message.codespace);
     message.code !== undefined && (obj.code = message.code);
@@ -462,8 +455,8 @@ export const TxResponse = {
       obj.logs = [];
     }
     message.info !== undefined && (obj.info = message.info);
-    message.gasWanted !== undefined && (obj.gasWanted = message.gasWanted);
-    message.gasUsed !== undefined && (obj.gasUsed = message.gasUsed);
+    message.gasWanted !== undefined && (obj.gasWanted = (message.gasWanted || Long.ZERO).toString());
+    message.gasUsed !== undefined && (obj.gasUsed = (message.gasUsed || Long.ZERO).toString());
     message.tx !== undefined && (obj.tx = message.tx ? Any.toJSON(message.tx) : undefined);
     message.timestamp !== undefined && (obj.timestamp = message.timestamp);
     return obj;
@@ -703,10 +696,10 @@ export const GasInfo = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          message.gasWanted = longToNumber(reader.uint64() as Long);
+          message.gasWanted = reader.uint64() as Long;
           break;
         case 2:
-          message.gasUsed = longToNumber(reader.uint64() as Long);
+          message.gasUsed = reader.uint64() as Long;
           break;
         default:
           reader.skipType(tag & 7);
@@ -718,35 +711,35 @@ export const GasInfo = {
   fromJSON(object: any): GasInfo {
     const message = { ...baseGasInfo } as GasInfo;
     if (object.gasWanted !== undefined && object.gasWanted !== null) {
-      message.gasWanted = Number(object.gasWanted);
+      message.gasWanted = Long.fromString(object.gasWanted);
     } else {
-      message.gasWanted = 0;
+      message.gasWanted = Long.UZERO;
     }
     if (object.gasUsed !== undefined && object.gasUsed !== null) {
-      message.gasUsed = Number(object.gasUsed);
+      message.gasUsed = Long.fromString(object.gasUsed);
     } else {
-      message.gasUsed = 0;
+      message.gasUsed = Long.UZERO;
     }
     return message;
   },
   fromPartial(object: DeepPartial<GasInfo>): GasInfo {
     const message = { ...baseGasInfo } as GasInfo;
     if (object.gasWanted !== undefined && object.gasWanted !== null) {
-      message.gasWanted = object.gasWanted;
+      message.gasWanted = object.gasWanted as Long;
     } else {
-      message.gasWanted = 0;
+      message.gasWanted = Long.UZERO;
     }
     if (object.gasUsed !== undefined && object.gasUsed !== null) {
-      message.gasUsed = object.gasUsed;
+      message.gasUsed = object.gasUsed as Long;
     } else {
-      message.gasUsed = 0;
+      message.gasUsed = Long.UZERO;
     }
     return message;
   },
   toJSON(message: GasInfo): unknown {
     const obj: any = {};
-    message.gasWanted !== undefined && (obj.gasWanted = message.gasWanted);
-    message.gasUsed !== undefined && (obj.gasUsed = message.gasUsed);
+    message.gasWanted !== undefined && (obj.gasWanted = (message.gasWanted || Long.UZERO).toString());
+    message.gasUsed !== undefined && (obj.gasUsed = (message.gasUsed || Long.UZERO).toString());
     return obj;
   },
 };
@@ -1038,19 +1031,19 @@ export const SearchTxsResult = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          message.totalCount = longToNumber(reader.uint64() as Long);
+          message.totalCount = reader.uint64() as Long;
           break;
         case 2:
-          message.count = longToNumber(reader.uint64() as Long);
+          message.count = reader.uint64() as Long;
           break;
         case 3:
-          message.pageNumber = longToNumber(reader.uint64() as Long);
+          message.pageNumber = reader.uint64() as Long;
           break;
         case 4:
-          message.pageTotal = longToNumber(reader.uint64() as Long);
+          message.pageTotal = reader.uint64() as Long;
           break;
         case 5:
-          message.limit = longToNumber(reader.uint64() as Long);
+          message.limit = reader.uint64() as Long;
           break;
         case 6:
           message.txs.push(TxResponse.decode(reader, reader.uint32()));
@@ -1066,29 +1059,29 @@ export const SearchTxsResult = {
     const message = { ...baseSearchTxsResult } as SearchTxsResult;
     message.txs = [];
     if (object.totalCount !== undefined && object.totalCount !== null) {
-      message.totalCount = Number(object.totalCount);
+      message.totalCount = Long.fromString(object.totalCount);
     } else {
-      message.totalCount = 0;
+      message.totalCount = Long.UZERO;
     }
     if (object.count !== undefined && object.count !== null) {
-      message.count = Number(object.count);
+      message.count = Long.fromString(object.count);
     } else {
-      message.count = 0;
+      message.count = Long.UZERO;
     }
     if (object.pageNumber !== undefined && object.pageNumber !== null) {
-      message.pageNumber = Number(object.pageNumber);
+      message.pageNumber = Long.fromString(object.pageNumber);
     } else {
-      message.pageNumber = 0;
+      message.pageNumber = Long.UZERO;
     }
     if (object.pageTotal !== undefined && object.pageTotal !== null) {
-      message.pageTotal = Number(object.pageTotal);
+      message.pageTotal = Long.fromString(object.pageTotal);
     } else {
-      message.pageTotal = 0;
+      message.pageTotal = Long.UZERO;
     }
     if (object.limit !== undefined && object.limit !== null) {
-      message.limit = Number(object.limit);
+      message.limit = Long.fromString(object.limit);
     } else {
-      message.limit = 0;
+      message.limit = Long.UZERO;
     }
     if (object.txs !== undefined && object.txs !== null) {
       for (const e of object.txs) {
@@ -1101,29 +1094,29 @@ export const SearchTxsResult = {
     const message = { ...baseSearchTxsResult } as SearchTxsResult;
     message.txs = [];
     if (object.totalCount !== undefined && object.totalCount !== null) {
-      message.totalCount = object.totalCount;
+      message.totalCount = object.totalCount as Long;
     } else {
-      message.totalCount = 0;
+      message.totalCount = Long.UZERO;
     }
     if (object.count !== undefined && object.count !== null) {
-      message.count = object.count;
+      message.count = object.count as Long;
     } else {
-      message.count = 0;
+      message.count = Long.UZERO;
     }
     if (object.pageNumber !== undefined && object.pageNumber !== null) {
-      message.pageNumber = object.pageNumber;
+      message.pageNumber = object.pageNumber as Long;
     } else {
-      message.pageNumber = 0;
+      message.pageNumber = Long.UZERO;
     }
     if (object.pageTotal !== undefined && object.pageTotal !== null) {
-      message.pageTotal = object.pageTotal;
+      message.pageTotal = object.pageTotal as Long;
     } else {
-      message.pageTotal = 0;
+      message.pageTotal = Long.UZERO;
     }
     if (object.limit !== undefined && object.limit !== null) {
-      message.limit = object.limit;
+      message.limit = object.limit as Long;
     } else {
-      message.limit = 0;
+      message.limit = Long.UZERO;
     }
     if (object.txs !== undefined && object.txs !== null) {
       for (const e of object.txs) {
@@ -1134,11 +1127,11 @@ export const SearchTxsResult = {
   },
   toJSON(message: SearchTxsResult): unknown {
     const obj: any = {};
-    message.totalCount !== undefined && (obj.totalCount = message.totalCount);
-    message.count !== undefined && (obj.count = message.count);
-    message.pageNumber !== undefined && (obj.pageNumber = message.pageNumber);
-    message.pageTotal !== undefined && (obj.pageTotal = message.pageTotal);
-    message.limit !== undefined && (obj.limit = message.limit);
+    message.totalCount !== undefined && (obj.totalCount = (message.totalCount || Long.UZERO).toString());
+    message.count !== undefined && (obj.count = (message.count || Long.UZERO).toString());
+    message.pageNumber !== undefined && (obj.pageNumber = (message.pageNumber || Long.UZERO).toString());
+    message.pageTotal !== undefined && (obj.pageTotal = (message.pageTotal || Long.UZERO).toString());
+    message.limit !== undefined && (obj.limit = (message.limit || Long.UZERO).toString());
     if (message.txs) {
       obj.txs = message.txs.map(e => e ? TxResponse.toJSON(e) : undefined);
     } else {
@@ -1147,11 +1140,6 @@ export const SearchTxsResult = {
     return obj;
   },
 };
-
-if (util.Long !== Long as any) {
-  util.Long = Long as any;
-  configure();
-}
 
 interface WindowBase64 {
   atob(b64: string): string;

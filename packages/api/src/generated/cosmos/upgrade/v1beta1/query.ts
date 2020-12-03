@@ -1,7 +1,7 @@
 /* eslint-disable */
 import { Plan } from '../../../cosmos/upgrade/v1beta1/upgrade';
-import { Reader, Writer, util, configure } from 'protobufjs/minimal';
 import * as Long from 'long';
+import { Reader, Writer } from 'protobufjs/minimal';
 
 
 /**
@@ -41,7 +41,7 @@ export interface QueryAppliedPlanResponse {
   /**
    *  height is the block height at which the plan was applied.
    */
-  height: number;
+  height: Long;
 }
 
 const baseQueryCurrentPlanRequest: object = {
@@ -55,7 +55,7 @@ const baseQueryAppliedPlanRequest: object = {
 };
 
 const baseQueryAppliedPlanResponse: object = {
-  height: 0,
+  height: Long.ZERO,
 };
 
 /**
@@ -101,13 +101,6 @@ interface Rpc {
 
   request(service: string, method: string, data: Uint8Array): Promise<Uint8Array>;
 
-}
-
-function longToNumber(long: Long) {
-  if (long.gt(Number.MAX_SAFE_INTEGER)) {
-    throw new globalThis.Error("Value is larger than Number.MAX_SAFE_INTEGER");
-  }
-  return long.toNumber();
 }
 
 export const protobufPackage = 'cosmos.upgrade.v1beta1'
@@ -253,7 +246,7 @@ export const QueryAppliedPlanResponse = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          message.height = longToNumber(reader.int64() as Long);
+          message.height = reader.int64() as Long;
           break;
         default:
           reader.skipType(tag & 7);
@@ -265,32 +258,27 @@ export const QueryAppliedPlanResponse = {
   fromJSON(object: any): QueryAppliedPlanResponse {
     const message = { ...baseQueryAppliedPlanResponse } as QueryAppliedPlanResponse;
     if (object.height !== undefined && object.height !== null) {
-      message.height = Number(object.height);
+      message.height = Long.fromString(object.height);
     } else {
-      message.height = 0;
+      message.height = Long.ZERO;
     }
     return message;
   },
   fromPartial(object: DeepPartial<QueryAppliedPlanResponse>): QueryAppliedPlanResponse {
     const message = { ...baseQueryAppliedPlanResponse } as QueryAppliedPlanResponse;
     if (object.height !== undefined && object.height !== null) {
-      message.height = object.height;
+      message.height = object.height as Long;
     } else {
-      message.height = 0;
+      message.height = Long.ZERO;
     }
     return message;
   },
   toJSON(message: QueryAppliedPlanResponse): unknown {
     const obj: any = {};
-    message.height !== undefined && (obj.height = message.height);
+    message.height !== undefined && (obj.height = (message.height || Long.ZERO).toString());
     return obj;
   },
 };
-
-if (util.Long !== Long as any) {
-  util.Long = Long as any;
-  configure();
-}
 
 type Builtin = Date | Function | Uint8Array | string | number | undefined;
 export type DeepPartial<T> = T extends Builtin

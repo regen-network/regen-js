@@ -1,6 +1,6 @@
 /* eslint-disable */
 import * as Long from 'long';
-import { Writer, Reader, util, configure } from 'protobufjs/minimal';
+import { Writer, Reader } from 'protobufjs/minimal';
 
 
 /**
@@ -8,7 +8,7 @@ import { Writer, Reader, util, configure } from 'protobufjs/minimal';
  *  a version/height.
  */
 export interface CommitInfo {
-  version: number;
+  version: Long;
   storeInfos: StoreInfo[];
 }
 
@@ -26,12 +26,12 @@ export interface StoreInfo {
  *  committed.
  */
 export interface CommitID {
-  version: number;
+  version: Long;
   hash: Uint8Array;
 }
 
 const baseCommitInfo: object = {
-  version: 0,
+  version: Long.ZERO,
 };
 
 const baseStoreInfo: object = {
@@ -39,15 +39,8 @@ const baseStoreInfo: object = {
 };
 
 const baseCommitID: object = {
-  version: 0,
+  version: Long.ZERO,
 };
-
-function longToNumber(long: Long) {
-  if (long.gt(Number.MAX_SAFE_INTEGER)) {
-    throw new globalThis.Error("Value is larger than Number.MAX_SAFE_INTEGER");
-  }
-  return long.toNumber();
-}
 
 export const protobufPackage = 'cosmos.base.store.v1beta1'
 
@@ -68,7 +61,7 @@ export const CommitInfo = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          message.version = longToNumber(reader.int64() as Long);
+          message.version = reader.int64() as Long;
           break;
         case 2:
           message.storeInfos.push(StoreInfo.decode(reader, reader.uint32()));
@@ -84,9 +77,9 @@ export const CommitInfo = {
     const message = { ...baseCommitInfo } as CommitInfo;
     message.storeInfos = [];
     if (object.version !== undefined && object.version !== null) {
-      message.version = Number(object.version);
+      message.version = Long.fromString(object.version);
     } else {
-      message.version = 0;
+      message.version = Long.ZERO;
     }
     if (object.storeInfos !== undefined && object.storeInfos !== null) {
       for (const e of object.storeInfos) {
@@ -99,9 +92,9 @@ export const CommitInfo = {
     const message = { ...baseCommitInfo } as CommitInfo;
     message.storeInfos = [];
     if (object.version !== undefined && object.version !== null) {
-      message.version = object.version;
+      message.version = object.version as Long;
     } else {
-      message.version = 0;
+      message.version = Long.ZERO;
     }
     if (object.storeInfos !== undefined && object.storeInfos !== null) {
       for (const e of object.storeInfos) {
@@ -112,7 +105,7 @@ export const CommitInfo = {
   },
   toJSON(message: CommitInfo): unknown {
     const obj: any = {};
-    message.version !== undefined && (obj.version = message.version);
+    message.version !== undefined && (obj.version = (message.version || Long.ZERO).toString());
     if (message.storeInfos) {
       obj.storeInfos = message.storeInfos.map(e => e ? StoreInfo.toJSON(e) : undefined);
     } else {
@@ -200,7 +193,7 @@ export const CommitID = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          message.version = longToNumber(reader.int64() as Long);
+          message.version = reader.int64() as Long;
           break;
         case 2:
           message.hash = reader.bytes();
@@ -215,9 +208,9 @@ export const CommitID = {
   fromJSON(object: any): CommitID {
     const message = { ...baseCommitID } as CommitID;
     if (object.version !== undefined && object.version !== null) {
-      message.version = Number(object.version);
+      message.version = Long.fromString(object.version);
     } else {
-      message.version = 0;
+      message.version = Long.ZERO;
     }
     if (object.hash !== undefined && object.hash !== null) {
       message.hash = bytesFromBase64(object.hash);
@@ -227,9 +220,9 @@ export const CommitID = {
   fromPartial(object: DeepPartial<CommitID>): CommitID {
     const message = { ...baseCommitID } as CommitID;
     if (object.version !== undefined && object.version !== null) {
-      message.version = object.version;
+      message.version = object.version as Long;
     } else {
-      message.version = 0;
+      message.version = Long.ZERO;
     }
     if (object.hash !== undefined && object.hash !== null) {
       message.hash = object.hash;
@@ -240,16 +233,11 @@ export const CommitID = {
   },
   toJSON(message: CommitID): unknown {
     const obj: any = {};
-    message.version !== undefined && (obj.version = message.version);
+    message.version !== undefined && (obj.version = (message.version || Long.ZERO).toString());
     message.hash !== undefined && (obj.hash = base64FromBytes(message.hash !== undefined ? message.hash : new Uint8Array()));
     return obj;
   },
 };
-
-if (util.Long !== Long as any) {
-  util.Long = Long as any;
-  configure();
-}
 
 interface WindowBase64 {
   atob(b64: string): string;

@@ -1,9 +1,9 @@
 /* eslint-disable */
 import { Any } from '../../../google/protobuf/any';
 import { Coin } from '../../../cosmos/base/v1beta1/coin';
-import { VoteOption, voteOptionFromJSON, voteOptionToJSON } from '../../../cosmos/gov/v1beta1/gov';
-import { Reader, Writer, util, configure } from 'protobufjs/minimal';
 import * as Long from 'long';
+import { VoteOption, voteOptionFromJSON, voteOptionToJSON } from '../../../cosmos/gov/v1beta1/gov';
+import { Reader, Writer } from 'protobufjs/minimal';
 
 
 /**
@@ -20,14 +20,14 @@ export interface MsgSubmitProposal {
  *  MsgSubmitProposalResponse defines the Msg/SubmitProposal response type.
  */
 export interface MsgSubmitProposalResponse {
-  proposalId: number;
+  proposalId: Long;
 }
 
 /**
  *  MsgVote defines a message to cast a vote.
  */
 export interface MsgVote {
-  proposalId: number;
+  proposalId: Long;
   voter: string;
   option: VoteOption;
 }
@@ -42,7 +42,7 @@ export interface MsgVoteResponse {
  *  MsgDeposit defines a message to submit a deposit to an existing proposal.
  */
 export interface MsgDeposit {
-  proposalId: number;
+  proposalId: Long;
   depositor: string;
   amount: Coin[];
 }
@@ -58,11 +58,11 @@ const baseMsgSubmitProposal: object = {
 };
 
 const baseMsgSubmitProposalResponse: object = {
-  proposalId: 0,
+  proposalId: Long.UZERO,
 };
 
 const baseMsgVote: object = {
-  proposalId: 0,
+  proposalId: Long.UZERO,
   voter: "",
   option: 0,
 };
@@ -71,7 +71,7 @@ const baseMsgVoteResponse: object = {
 };
 
 const baseMsgDeposit: object = {
-  proposalId: 0,
+  proposalId: Long.UZERO,
   depositor: "",
 };
 
@@ -132,13 +132,6 @@ interface Rpc {
 
   request(service: string, method: string, data: Uint8Array): Promise<Uint8Array>;
 
-}
-
-function longToNumber(long: Long) {
-  if (long.gt(Number.MAX_SAFE_INTEGER)) {
-    throw new globalThis.Error("Value is larger than Number.MAX_SAFE_INTEGER");
-  }
-  return long.toNumber();
 }
 
 export const protobufPackage = 'cosmos.gov.v1beta1'
@@ -244,7 +237,7 @@ export const MsgSubmitProposalResponse = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          message.proposalId = longToNumber(reader.uint64() as Long);
+          message.proposalId = reader.uint64() as Long;
           break;
         default:
           reader.skipType(tag & 7);
@@ -256,24 +249,24 @@ export const MsgSubmitProposalResponse = {
   fromJSON(object: any): MsgSubmitProposalResponse {
     const message = { ...baseMsgSubmitProposalResponse } as MsgSubmitProposalResponse;
     if (object.proposalId !== undefined && object.proposalId !== null) {
-      message.proposalId = Number(object.proposalId);
+      message.proposalId = Long.fromString(object.proposalId);
     } else {
-      message.proposalId = 0;
+      message.proposalId = Long.UZERO;
     }
     return message;
   },
   fromPartial(object: DeepPartial<MsgSubmitProposalResponse>): MsgSubmitProposalResponse {
     const message = { ...baseMsgSubmitProposalResponse } as MsgSubmitProposalResponse;
     if (object.proposalId !== undefined && object.proposalId !== null) {
-      message.proposalId = object.proposalId;
+      message.proposalId = object.proposalId as Long;
     } else {
-      message.proposalId = 0;
+      message.proposalId = Long.UZERO;
     }
     return message;
   },
   toJSON(message: MsgSubmitProposalResponse): unknown {
     const obj: any = {};
-    message.proposalId !== undefined && (obj.proposalId = message.proposalId);
+    message.proposalId !== undefined && (obj.proposalId = (message.proposalId || Long.UZERO).toString());
     return obj;
   },
 };
@@ -293,7 +286,7 @@ export const MsgVote = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          message.proposalId = longToNumber(reader.uint64() as Long);
+          message.proposalId = reader.uint64() as Long;
           break;
         case 2:
           message.voter = reader.string();
@@ -311,9 +304,9 @@ export const MsgVote = {
   fromJSON(object: any): MsgVote {
     const message = { ...baseMsgVote } as MsgVote;
     if (object.proposalId !== undefined && object.proposalId !== null) {
-      message.proposalId = Number(object.proposalId);
+      message.proposalId = Long.fromString(object.proposalId);
     } else {
-      message.proposalId = 0;
+      message.proposalId = Long.UZERO;
     }
     if (object.voter !== undefined && object.voter !== null) {
       message.voter = String(object.voter);
@@ -330,9 +323,9 @@ export const MsgVote = {
   fromPartial(object: DeepPartial<MsgVote>): MsgVote {
     const message = { ...baseMsgVote } as MsgVote;
     if (object.proposalId !== undefined && object.proposalId !== null) {
-      message.proposalId = object.proposalId;
+      message.proposalId = object.proposalId as Long;
     } else {
-      message.proposalId = 0;
+      message.proposalId = Long.UZERO;
     }
     if (object.voter !== undefined && object.voter !== null) {
       message.voter = object.voter;
@@ -348,7 +341,7 @@ export const MsgVote = {
   },
   toJSON(message: MsgVote): unknown {
     const obj: any = {};
-    message.proposalId !== undefined && (obj.proposalId = message.proposalId);
+    message.proposalId !== undefined && (obj.proposalId = (message.proposalId || Long.UZERO).toString());
     message.voter !== undefined && (obj.voter = message.voter);
     message.option !== undefined && (obj.option = voteOptionToJSON(message.option));
     return obj;
@@ -405,7 +398,7 @@ export const MsgDeposit = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          message.proposalId = longToNumber(reader.uint64() as Long);
+          message.proposalId = reader.uint64() as Long;
           break;
         case 2:
           message.depositor = reader.string();
@@ -424,9 +417,9 @@ export const MsgDeposit = {
     const message = { ...baseMsgDeposit } as MsgDeposit;
     message.amount = [];
     if (object.proposalId !== undefined && object.proposalId !== null) {
-      message.proposalId = Number(object.proposalId);
+      message.proposalId = Long.fromString(object.proposalId);
     } else {
-      message.proposalId = 0;
+      message.proposalId = Long.UZERO;
     }
     if (object.depositor !== undefined && object.depositor !== null) {
       message.depositor = String(object.depositor);
@@ -444,9 +437,9 @@ export const MsgDeposit = {
     const message = { ...baseMsgDeposit } as MsgDeposit;
     message.amount = [];
     if (object.proposalId !== undefined && object.proposalId !== null) {
-      message.proposalId = object.proposalId;
+      message.proposalId = object.proposalId as Long;
     } else {
-      message.proposalId = 0;
+      message.proposalId = Long.UZERO;
     }
     if (object.depositor !== undefined && object.depositor !== null) {
       message.depositor = object.depositor;
@@ -462,7 +455,7 @@ export const MsgDeposit = {
   },
   toJSON(message: MsgDeposit): unknown {
     const obj: any = {};
-    message.proposalId !== undefined && (obj.proposalId = message.proposalId);
+    message.proposalId !== undefined && (obj.proposalId = (message.proposalId || Long.UZERO).toString());
     message.depositor !== undefined && (obj.depositor = message.depositor);
     if (message.amount) {
       obj.amount = message.amount.map(e => e ? Coin.toJSON(e) : undefined);
@@ -504,11 +497,6 @@ export const MsgDepositResponse = {
     return obj;
   },
 };
-
-if (util.Long !== Long as any) {
-  util.Long = Long as any;
-  configure();
-}
 
 type Builtin = Date | Function | Uint8Array | string | number | undefined;
 export type DeepPartial<T> = T extends Builtin

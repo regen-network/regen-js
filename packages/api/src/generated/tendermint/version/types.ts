@@ -1,6 +1,6 @@
 /* eslint-disable */
 import * as Long from 'long';
-import { Writer, Reader, util, configure } from 'protobufjs/minimal';
+import { Writer, Reader } from 'protobufjs/minimal';
 
 
 /**
@@ -9,7 +9,7 @@ import { Writer, Reader, util, configure } from 'protobufjs/minimal';
  *  updated in ResponseEndBlock.
  */
 export interface App {
-  protocol: number;
+  protocol: Long;
   software: string;
 }
 
@@ -19,26 +19,19 @@ export interface App {
  *  state transition machine.
  */
 export interface Consensus {
-  block: number;
-  app: number;
+  block: Long;
+  app: Long;
 }
 
 const baseApp: object = {
-  protocol: 0,
+  protocol: Long.UZERO,
   software: "",
 };
 
 const baseConsensus: object = {
-  block: 0,
-  app: 0,
+  block: Long.UZERO,
+  app: Long.UZERO,
 };
-
-function longToNumber(long: Long) {
-  if (long.gt(Number.MAX_SAFE_INTEGER)) {
-    throw new globalThis.Error("Value is larger than Number.MAX_SAFE_INTEGER");
-  }
-  return long.toNumber();
-}
 
 export const protobufPackage = 'tendermint.version'
 
@@ -56,7 +49,7 @@ export const App = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          message.protocol = longToNumber(reader.uint64() as Long);
+          message.protocol = reader.uint64() as Long;
           break;
         case 2:
           message.software = reader.string();
@@ -71,9 +64,9 @@ export const App = {
   fromJSON(object: any): App {
     const message = { ...baseApp } as App;
     if (object.protocol !== undefined && object.protocol !== null) {
-      message.protocol = Number(object.protocol);
+      message.protocol = Long.fromString(object.protocol);
     } else {
-      message.protocol = 0;
+      message.protocol = Long.UZERO;
     }
     if (object.software !== undefined && object.software !== null) {
       message.software = String(object.software);
@@ -85,9 +78,9 @@ export const App = {
   fromPartial(object: DeepPartial<App>): App {
     const message = { ...baseApp } as App;
     if (object.protocol !== undefined && object.protocol !== null) {
-      message.protocol = object.protocol;
+      message.protocol = object.protocol as Long;
     } else {
-      message.protocol = 0;
+      message.protocol = Long.UZERO;
     }
     if (object.software !== undefined && object.software !== null) {
       message.software = object.software;
@@ -98,7 +91,7 @@ export const App = {
   },
   toJSON(message: App): unknown {
     const obj: any = {};
-    message.protocol !== undefined && (obj.protocol = message.protocol);
+    message.protocol !== undefined && (obj.protocol = (message.protocol || Long.UZERO).toString());
     message.software !== undefined && (obj.software = message.software);
     return obj;
   },
@@ -118,10 +111,10 @@ export const Consensus = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          message.block = longToNumber(reader.uint64() as Long);
+          message.block = reader.uint64() as Long;
           break;
         case 2:
-          message.app = longToNumber(reader.uint64() as Long);
+          message.app = reader.uint64() as Long;
           break;
         default:
           reader.skipType(tag & 7);
@@ -133,43 +126,38 @@ export const Consensus = {
   fromJSON(object: any): Consensus {
     const message = { ...baseConsensus } as Consensus;
     if (object.block !== undefined && object.block !== null) {
-      message.block = Number(object.block);
+      message.block = Long.fromString(object.block);
     } else {
-      message.block = 0;
+      message.block = Long.UZERO;
     }
     if (object.app !== undefined && object.app !== null) {
-      message.app = Number(object.app);
+      message.app = Long.fromString(object.app);
     } else {
-      message.app = 0;
+      message.app = Long.UZERO;
     }
     return message;
   },
   fromPartial(object: DeepPartial<Consensus>): Consensus {
     const message = { ...baseConsensus } as Consensus;
     if (object.block !== undefined && object.block !== null) {
-      message.block = object.block;
+      message.block = object.block as Long;
     } else {
-      message.block = 0;
+      message.block = Long.UZERO;
     }
     if (object.app !== undefined && object.app !== null) {
-      message.app = object.app;
+      message.app = object.app as Long;
     } else {
-      message.app = 0;
+      message.app = Long.UZERO;
     }
     return message;
   },
   toJSON(message: Consensus): unknown {
     const obj: any = {};
-    message.block !== undefined && (obj.block = message.block);
-    message.app !== undefined && (obj.app = message.app);
+    message.block !== undefined && (obj.block = (message.block || Long.UZERO).toString());
+    message.app !== undefined && (obj.app = (message.app || Long.UZERO).toString());
     return obj;
   },
 };
-
-if (util.Long !== Long as any) {
-  util.Long = Long as any;
-  configure();
-}
 
 type Builtin = Date | Function | Uint8Array | string | number | undefined;
 export type DeepPartial<T> = T extends Builtin

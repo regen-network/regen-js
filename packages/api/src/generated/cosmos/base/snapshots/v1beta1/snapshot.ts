@@ -1,13 +1,13 @@
 /* eslint-disable */
 import * as Long from 'long';
-import { Writer, Reader, util, configure } from 'protobufjs/minimal';
+import { Writer, Reader } from 'protobufjs/minimal';
 
 
 /**
  *  Snapshot contains Tendermint state sync snapshot info.
  */
 export interface Snapshot {
-  height: number;
+  height: Long;
   format: number;
   chunks: number;
   hash: Uint8Array;
@@ -25,20 +25,13 @@ export interface Metadata {
 }
 
 const baseSnapshot: object = {
-  height: 0,
+  height: Long.UZERO,
   format: 0,
   chunks: 0,
 };
 
 const baseMetadata: object = {
 };
-
-function longToNumber(long: Long) {
-  if (long.gt(Number.MAX_SAFE_INTEGER)) {
-    throw new globalThis.Error("Value is larger than Number.MAX_SAFE_INTEGER");
-  }
-  return long.toNumber();
-}
 
 export const protobufPackage = 'cosmos.base.snapshots.v1beta1'
 
@@ -61,7 +54,7 @@ export const Snapshot = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          message.height = longToNumber(reader.uint64() as Long);
+          message.height = reader.uint64() as Long;
           break;
         case 2:
           message.format = reader.uint32();
@@ -85,9 +78,9 @@ export const Snapshot = {
   fromJSON(object: any): Snapshot {
     const message = { ...baseSnapshot } as Snapshot;
     if (object.height !== undefined && object.height !== null) {
-      message.height = Number(object.height);
+      message.height = Long.fromString(object.height);
     } else {
-      message.height = 0;
+      message.height = Long.UZERO;
     }
     if (object.format !== undefined && object.format !== null) {
       message.format = Number(object.format);
@@ -112,9 +105,9 @@ export const Snapshot = {
   fromPartial(object: DeepPartial<Snapshot>): Snapshot {
     const message = { ...baseSnapshot } as Snapshot;
     if (object.height !== undefined && object.height !== null) {
-      message.height = object.height;
+      message.height = object.height as Long;
     } else {
-      message.height = 0;
+      message.height = Long.UZERO;
     }
     if (object.format !== undefined && object.format !== null) {
       message.format = object.format;
@@ -140,7 +133,7 @@ export const Snapshot = {
   },
   toJSON(message: Snapshot): unknown {
     const obj: any = {};
-    message.height !== undefined && (obj.height = message.height);
+    message.height !== undefined && (obj.height = (message.height || Long.UZERO).toString());
     message.format !== undefined && (obj.format = message.format);
     message.chunks !== undefined && (obj.chunks = message.chunks);
     message.hash !== undefined && (obj.hash = base64FromBytes(message.hash !== undefined ? message.hash : new Uint8Array()));
@@ -204,11 +197,6 @@ export const Metadata = {
     return obj;
   },
 };
-
-if (util.Long !== Long as any) {
-  util.Long = Long as any;
-  configure();
-}
 
 interface WindowBase64 {
   atob(b64: string): string;

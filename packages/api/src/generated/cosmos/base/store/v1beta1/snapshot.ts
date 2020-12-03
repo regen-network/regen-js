@@ -1,6 +1,6 @@
 /* eslint-disable */
 import * as Long from 'long';
-import { Writer, Reader, util, configure } from 'protobufjs/minimal';
+import { Writer, Reader } from 'protobufjs/minimal';
 
 
 /**
@@ -24,7 +24,7 @@ export interface SnapshotStoreItem {
 export interface SnapshotIAVLItem {
   key: Uint8Array;
   value: Uint8Array;
-  version: number;
+  version: Long;
   height: number;
 }
 
@@ -36,16 +36,9 @@ const baseSnapshotStoreItem: object = {
 };
 
 const baseSnapshotIAVLItem: object = {
-  version: 0,
+  version: Long.ZERO,
   height: 0,
 };
-
-function longToNumber(long: Long) {
-  if (long.gt(Number.MAX_SAFE_INTEGER)) {
-    throw new globalThis.Error("Value is larger than Number.MAX_SAFE_INTEGER");
-  }
-  return long.toNumber();
-}
 
 export const protobufPackage = 'cosmos.base.store.v1beta1'
 
@@ -184,7 +177,7 @@ export const SnapshotIAVLItem = {
           message.value = reader.bytes();
           break;
         case 3:
-          message.version = longToNumber(reader.int64() as Long);
+          message.version = reader.int64() as Long;
           break;
         case 4:
           message.height = reader.int32();
@@ -205,9 +198,9 @@ export const SnapshotIAVLItem = {
       message.value = bytesFromBase64(object.value);
     }
     if (object.version !== undefined && object.version !== null) {
-      message.version = Number(object.version);
+      message.version = Long.fromString(object.version);
     } else {
-      message.version = 0;
+      message.version = Long.ZERO;
     }
     if (object.height !== undefined && object.height !== null) {
       message.height = Number(object.height);
@@ -229,9 +222,9 @@ export const SnapshotIAVLItem = {
       message.value = new Uint8Array();
     }
     if (object.version !== undefined && object.version !== null) {
-      message.version = object.version;
+      message.version = object.version as Long;
     } else {
-      message.version = 0;
+      message.version = Long.ZERO;
     }
     if (object.height !== undefined && object.height !== null) {
       message.height = object.height;
@@ -244,16 +237,11 @@ export const SnapshotIAVLItem = {
     const obj: any = {};
     message.key !== undefined && (obj.key = base64FromBytes(message.key !== undefined ? message.key : new Uint8Array()));
     message.value !== undefined && (obj.value = base64FromBytes(message.value !== undefined ? message.value : new Uint8Array()));
-    message.version !== undefined && (obj.version = message.version);
+    message.version !== undefined && (obj.version = (message.version || Long.ZERO).toString());
     message.height !== undefined && (obj.height = message.height);
     return obj;
   },
 };
-
-if (util.Long !== Long as any) {
-  util.Long = Long as any;
-  configure();
-}
 
 interface WindowBase64 {
   atob(b64: string): string;

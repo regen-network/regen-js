@@ -1,7 +1,7 @@
 /* eslint-disable */
 import { Any } from '../../../google/protobuf/any';
 import * as Long from 'long';
-import { Writer, Reader, util, configure } from 'protobufjs/minimal';
+import { Writer, Reader } from 'protobufjs/minimal';
 
 
 /**
@@ -12,8 +12,8 @@ import { Writer, Reader, util, configure } from 'protobufjs/minimal';
 export interface BaseAccount {
   address: string;
   pubKey?: Any;
-  accountNumber: number;
-  sequence: number;
+  accountNumber: Long;
+  sequence: Long;
 }
 
 /**
@@ -29,17 +29,17 @@ export interface ModuleAccount {
  *  Params defines the parameters for the auth module.
  */
 export interface Params {
-  maxMemoCharacters: number;
-  txSigLimit: number;
-  txSizeCostPerByte: number;
-  sigVerifyCostEd25519: number;
-  sigVerifyCostSecp256k1: number;
+  maxMemoCharacters: Long;
+  txSigLimit: Long;
+  txSizeCostPerByte: Long;
+  sigVerifyCostEd25519: Long;
+  sigVerifyCostSecp256k1: Long;
 }
 
 const baseBaseAccount: object = {
   address: "",
-  accountNumber: 0,
-  sequence: 0,
+  accountNumber: Long.UZERO,
+  sequence: Long.UZERO,
 };
 
 const baseModuleAccount: object = {
@@ -48,19 +48,12 @@ const baseModuleAccount: object = {
 };
 
 const baseParams: object = {
-  maxMemoCharacters: 0,
-  txSigLimit: 0,
-  txSizeCostPerByte: 0,
-  sigVerifyCostEd25519: 0,
-  sigVerifyCostSecp256k1: 0,
+  maxMemoCharacters: Long.UZERO,
+  txSigLimit: Long.UZERO,
+  txSizeCostPerByte: Long.UZERO,
+  sigVerifyCostEd25519: Long.UZERO,
+  sigVerifyCostSecp256k1: Long.UZERO,
 };
-
-function longToNumber(long: Long) {
-  if (long.gt(Number.MAX_SAFE_INTEGER)) {
-    throw new globalThis.Error("Value is larger than Number.MAX_SAFE_INTEGER");
-  }
-  return long.toNumber();
-}
 
 export const protobufPackage = 'cosmos.auth.v1beta1'
 
@@ -88,10 +81,10 @@ export const BaseAccount = {
           message.pubKey = Any.decode(reader, reader.uint32());
           break;
         case 3:
-          message.accountNumber = longToNumber(reader.uint64() as Long);
+          message.accountNumber = reader.uint64() as Long;
           break;
         case 4:
-          message.sequence = longToNumber(reader.uint64() as Long);
+          message.sequence = reader.uint64() as Long;
           break;
         default:
           reader.skipType(tag & 7);
@@ -113,14 +106,14 @@ export const BaseAccount = {
       message.pubKey = undefined;
     }
     if (object.accountNumber !== undefined && object.accountNumber !== null) {
-      message.accountNumber = Number(object.accountNumber);
+      message.accountNumber = Long.fromString(object.accountNumber);
     } else {
-      message.accountNumber = 0;
+      message.accountNumber = Long.UZERO;
     }
     if (object.sequence !== undefined && object.sequence !== null) {
-      message.sequence = Number(object.sequence);
+      message.sequence = Long.fromString(object.sequence);
     } else {
-      message.sequence = 0;
+      message.sequence = Long.UZERO;
     }
     return message;
   },
@@ -137,14 +130,14 @@ export const BaseAccount = {
       message.pubKey = undefined;
     }
     if (object.accountNumber !== undefined && object.accountNumber !== null) {
-      message.accountNumber = object.accountNumber;
+      message.accountNumber = object.accountNumber as Long;
     } else {
-      message.accountNumber = 0;
+      message.accountNumber = Long.UZERO;
     }
     if (object.sequence !== undefined && object.sequence !== null) {
-      message.sequence = object.sequence;
+      message.sequence = object.sequence as Long;
     } else {
-      message.sequence = 0;
+      message.sequence = Long.UZERO;
     }
     return message;
   },
@@ -152,8 +145,8 @@ export const BaseAccount = {
     const obj: any = {};
     message.address !== undefined && (obj.address = message.address);
     message.pubKey !== undefined && (obj.pubKey = message.pubKey ? Any.toJSON(message.pubKey) : undefined);
-    message.accountNumber !== undefined && (obj.accountNumber = message.accountNumber);
-    message.sequence !== undefined && (obj.sequence = message.sequence);
+    message.accountNumber !== undefined && (obj.accountNumber = (message.accountNumber || Long.UZERO).toString());
+    message.sequence !== undefined && (obj.sequence = (message.sequence || Long.UZERO).toString());
     return obj;
   },
 };
@@ -263,19 +256,19 @@ export const Params = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          message.maxMemoCharacters = longToNumber(reader.uint64() as Long);
+          message.maxMemoCharacters = reader.uint64() as Long;
           break;
         case 2:
-          message.txSigLimit = longToNumber(reader.uint64() as Long);
+          message.txSigLimit = reader.uint64() as Long;
           break;
         case 3:
-          message.txSizeCostPerByte = longToNumber(reader.uint64() as Long);
+          message.txSizeCostPerByte = reader.uint64() as Long;
           break;
         case 4:
-          message.sigVerifyCostEd25519 = longToNumber(reader.uint64() as Long);
+          message.sigVerifyCostEd25519 = reader.uint64() as Long;
           break;
         case 5:
-          message.sigVerifyCostSecp256k1 = longToNumber(reader.uint64() as Long);
+          message.sigVerifyCostSecp256k1 = reader.uint64() as Long;
           break;
         default:
           reader.skipType(tag & 7);
@@ -287,76 +280,71 @@ export const Params = {
   fromJSON(object: any): Params {
     const message = { ...baseParams } as Params;
     if (object.maxMemoCharacters !== undefined && object.maxMemoCharacters !== null) {
-      message.maxMemoCharacters = Number(object.maxMemoCharacters);
+      message.maxMemoCharacters = Long.fromString(object.maxMemoCharacters);
     } else {
-      message.maxMemoCharacters = 0;
+      message.maxMemoCharacters = Long.UZERO;
     }
     if (object.txSigLimit !== undefined && object.txSigLimit !== null) {
-      message.txSigLimit = Number(object.txSigLimit);
+      message.txSigLimit = Long.fromString(object.txSigLimit);
     } else {
-      message.txSigLimit = 0;
+      message.txSigLimit = Long.UZERO;
     }
     if (object.txSizeCostPerByte !== undefined && object.txSizeCostPerByte !== null) {
-      message.txSizeCostPerByte = Number(object.txSizeCostPerByte);
+      message.txSizeCostPerByte = Long.fromString(object.txSizeCostPerByte);
     } else {
-      message.txSizeCostPerByte = 0;
+      message.txSizeCostPerByte = Long.UZERO;
     }
     if (object.sigVerifyCostEd25519 !== undefined && object.sigVerifyCostEd25519 !== null) {
-      message.sigVerifyCostEd25519 = Number(object.sigVerifyCostEd25519);
+      message.sigVerifyCostEd25519 = Long.fromString(object.sigVerifyCostEd25519);
     } else {
-      message.sigVerifyCostEd25519 = 0;
+      message.sigVerifyCostEd25519 = Long.UZERO;
     }
     if (object.sigVerifyCostSecp256k1 !== undefined && object.sigVerifyCostSecp256k1 !== null) {
-      message.sigVerifyCostSecp256k1 = Number(object.sigVerifyCostSecp256k1);
+      message.sigVerifyCostSecp256k1 = Long.fromString(object.sigVerifyCostSecp256k1);
     } else {
-      message.sigVerifyCostSecp256k1 = 0;
+      message.sigVerifyCostSecp256k1 = Long.UZERO;
     }
     return message;
   },
   fromPartial(object: DeepPartial<Params>): Params {
     const message = { ...baseParams } as Params;
     if (object.maxMemoCharacters !== undefined && object.maxMemoCharacters !== null) {
-      message.maxMemoCharacters = object.maxMemoCharacters;
+      message.maxMemoCharacters = object.maxMemoCharacters as Long;
     } else {
-      message.maxMemoCharacters = 0;
+      message.maxMemoCharacters = Long.UZERO;
     }
     if (object.txSigLimit !== undefined && object.txSigLimit !== null) {
-      message.txSigLimit = object.txSigLimit;
+      message.txSigLimit = object.txSigLimit as Long;
     } else {
-      message.txSigLimit = 0;
+      message.txSigLimit = Long.UZERO;
     }
     if (object.txSizeCostPerByte !== undefined && object.txSizeCostPerByte !== null) {
-      message.txSizeCostPerByte = object.txSizeCostPerByte;
+      message.txSizeCostPerByte = object.txSizeCostPerByte as Long;
     } else {
-      message.txSizeCostPerByte = 0;
+      message.txSizeCostPerByte = Long.UZERO;
     }
     if (object.sigVerifyCostEd25519 !== undefined && object.sigVerifyCostEd25519 !== null) {
-      message.sigVerifyCostEd25519 = object.sigVerifyCostEd25519;
+      message.sigVerifyCostEd25519 = object.sigVerifyCostEd25519 as Long;
     } else {
-      message.sigVerifyCostEd25519 = 0;
+      message.sigVerifyCostEd25519 = Long.UZERO;
     }
     if (object.sigVerifyCostSecp256k1 !== undefined && object.sigVerifyCostSecp256k1 !== null) {
-      message.sigVerifyCostSecp256k1 = object.sigVerifyCostSecp256k1;
+      message.sigVerifyCostSecp256k1 = object.sigVerifyCostSecp256k1 as Long;
     } else {
-      message.sigVerifyCostSecp256k1 = 0;
+      message.sigVerifyCostSecp256k1 = Long.UZERO;
     }
     return message;
   },
   toJSON(message: Params): unknown {
     const obj: any = {};
-    message.maxMemoCharacters !== undefined && (obj.maxMemoCharacters = message.maxMemoCharacters);
-    message.txSigLimit !== undefined && (obj.txSigLimit = message.txSigLimit);
-    message.txSizeCostPerByte !== undefined && (obj.txSizeCostPerByte = message.txSizeCostPerByte);
-    message.sigVerifyCostEd25519 !== undefined && (obj.sigVerifyCostEd25519 = message.sigVerifyCostEd25519);
-    message.sigVerifyCostSecp256k1 !== undefined && (obj.sigVerifyCostSecp256k1 = message.sigVerifyCostSecp256k1);
+    message.maxMemoCharacters !== undefined && (obj.maxMemoCharacters = (message.maxMemoCharacters || Long.UZERO).toString());
+    message.txSigLimit !== undefined && (obj.txSigLimit = (message.txSigLimit || Long.UZERO).toString());
+    message.txSizeCostPerByte !== undefined && (obj.txSizeCostPerByte = (message.txSizeCostPerByte || Long.UZERO).toString());
+    message.sigVerifyCostEd25519 !== undefined && (obj.sigVerifyCostEd25519 = (message.sigVerifyCostEd25519 || Long.UZERO).toString());
+    message.sigVerifyCostSecp256k1 !== undefined && (obj.sigVerifyCostSecp256k1 = (message.sigVerifyCostSecp256k1 || Long.UZERO).toString());
     return obj;
   },
 };
-
-if (util.Long !== Long as any) {
-  util.Long = Long as any;
-  configure();
-}
 
 type Builtin = Date | Function | Uint8Array | string | number | undefined;
 export type DeepPartial<T> = T extends Builtin

@@ -1,7 +1,7 @@
 /* eslint-disable */
-import { CapabilityOwners } from '../../../cosmos/capability/v1beta1/capability';
 import * as Long from 'long';
-import { Writer, Reader, util, configure } from 'protobufjs/minimal';
+import { CapabilityOwners } from '../../../cosmos/capability/v1beta1/capability';
+import { Writer, Reader } from 'protobufjs/minimal';
 
 
 /**
@@ -11,7 +11,7 @@ export interface GenesisOwners {
   /**
    *  index is the index of the capability owner.
    */
-  index: number;
+  index: Long;
   /**
    *  index_owners are the owners at the given index.
    */
@@ -25,7 +25,7 @@ export interface GenesisState {
   /**
    *  index is the capability global index.
    */
-  index: number;
+  index: Long;
   /**
    *  owners represents a map from index to owners of the capability index
    *  index key is string to allow amino marshalling.
@@ -34,19 +34,12 @@ export interface GenesisState {
 }
 
 const baseGenesisOwners: object = {
-  index: 0,
+  index: Long.UZERO,
 };
 
 const baseGenesisState: object = {
-  index: 0,
+  index: Long.UZERO,
 };
-
-function longToNumber(long: Long) {
-  if (long.gt(Number.MAX_SAFE_INTEGER)) {
-    throw new globalThis.Error("Value is larger than Number.MAX_SAFE_INTEGER");
-  }
-  return long.toNumber();
-}
 
 export const protobufPackage = 'cosmos.capability.v1beta1'
 
@@ -66,7 +59,7 @@ export const GenesisOwners = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          message.index = longToNumber(reader.uint64() as Long);
+          message.index = reader.uint64() as Long;
           break;
         case 2:
           message.indexOwners = CapabilityOwners.decode(reader, reader.uint32());
@@ -81,9 +74,9 @@ export const GenesisOwners = {
   fromJSON(object: any): GenesisOwners {
     const message = { ...baseGenesisOwners } as GenesisOwners;
     if (object.index !== undefined && object.index !== null) {
-      message.index = Number(object.index);
+      message.index = Long.fromString(object.index);
     } else {
-      message.index = 0;
+      message.index = Long.UZERO;
     }
     if (object.indexOwners !== undefined && object.indexOwners !== null) {
       message.indexOwners = CapabilityOwners.fromJSON(object.indexOwners);
@@ -95,9 +88,9 @@ export const GenesisOwners = {
   fromPartial(object: DeepPartial<GenesisOwners>): GenesisOwners {
     const message = { ...baseGenesisOwners } as GenesisOwners;
     if (object.index !== undefined && object.index !== null) {
-      message.index = object.index;
+      message.index = object.index as Long;
     } else {
-      message.index = 0;
+      message.index = Long.UZERO;
     }
     if (object.indexOwners !== undefined && object.indexOwners !== null) {
       message.indexOwners = CapabilityOwners.fromPartial(object.indexOwners);
@@ -108,7 +101,7 @@ export const GenesisOwners = {
   },
   toJSON(message: GenesisOwners): unknown {
     const obj: any = {};
-    message.index !== undefined && (obj.index = message.index);
+    message.index !== undefined && (obj.index = (message.index || Long.UZERO).toString());
     message.indexOwners !== undefined && (obj.indexOwners = message.indexOwners ? CapabilityOwners.toJSON(message.indexOwners) : undefined);
     return obj;
   },
@@ -131,7 +124,7 @@ export const GenesisState = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          message.index = longToNumber(reader.uint64() as Long);
+          message.index = reader.uint64() as Long;
           break;
         case 2:
           message.owners.push(GenesisOwners.decode(reader, reader.uint32()));
@@ -147,9 +140,9 @@ export const GenesisState = {
     const message = { ...baseGenesisState } as GenesisState;
     message.owners = [];
     if (object.index !== undefined && object.index !== null) {
-      message.index = Number(object.index);
+      message.index = Long.fromString(object.index);
     } else {
-      message.index = 0;
+      message.index = Long.UZERO;
     }
     if (object.owners !== undefined && object.owners !== null) {
       for (const e of object.owners) {
@@ -162,9 +155,9 @@ export const GenesisState = {
     const message = { ...baseGenesisState } as GenesisState;
     message.owners = [];
     if (object.index !== undefined && object.index !== null) {
-      message.index = object.index;
+      message.index = object.index as Long;
     } else {
-      message.index = 0;
+      message.index = Long.UZERO;
     }
     if (object.owners !== undefined && object.owners !== null) {
       for (const e of object.owners) {
@@ -175,7 +168,7 @@ export const GenesisState = {
   },
   toJSON(message: GenesisState): unknown {
     const obj: any = {};
-    message.index !== undefined && (obj.index = message.index);
+    message.index !== undefined && (obj.index = (message.index || Long.UZERO).toString());
     if (message.owners) {
       obj.owners = message.owners.map(e => e ? GenesisOwners.toJSON(e) : undefined);
     } else {
@@ -184,11 +177,6 @@ export const GenesisState = {
     return obj;
   },
 };
-
-if (util.Long !== Long as any) {
-  util.Long = Long as any;
-  configure();
-}
 
 type Builtin = Date | Function | Uint8Array | string | number | undefined;
 export type DeepPartial<T> = T extends Builtin

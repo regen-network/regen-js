@@ -1,9 +1,9 @@
 /* eslint-disable */
+import * as Long from 'long';
 import { Coin } from '../../../cosmos/base/v1beta1/coin';
 import { Any } from '../../../google/protobuf/any';
 import { Duration } from '../../../google/protobuf/duration';
 import { Timestamp } from '../../../google/protobuf/timestamp';
-import * as Long from 'long';
 import { Writer, Reader, util, configure } from 'protobufjs/minimal';
 
 
@@ -21,7 +21,7 @@ export interface TextProposal {
  *  proposal.
  */
 export interface Deposit {
-  proposalId: number;
+  proposalId: Long;
   depositor: string;
   amount: Coin[];
 }
@@ -30,7 +30,7 @@ export interface Deposit {
  *  Proposal defines the core field members of a governance proposal.
  */
 export interface Proposal {
-  proposalId: number;
+  proposalId: Long;
   content?: Any;
   status: ProposalStatus;
   finalTallyResult?: TallyResult;
@@ -56,7 +56,7 @@ export interface TallyResult {
  *  A Vote consists of a proposal ID, the voter, and the vote option.
  */
 export interface Vote {
-  proposalId: number;
+  proposalId: Long;
   voter: string;
   option: VoteOption;
 }
@@ -112,12 +112,12 @@ const baseTextProposal: object = {
 };
 
 const baseDeposit: object = {
-  proposalId: 0,
+  proposalId: Long.UZERO,
   depositor: "",
 };
 
 const baseProposal: object = {
-  proposalId: 0,
+  proposalId: Long.UZERO,
   status: 0,
 };
 
@@ -129,7 +129,7 @@ const baseTallyResult: object = {
 };
 
 const baseVote: object = {
-  proposalId: 0,
+  proposalId: Long.UZERO,
   voter: "",
   option: 0,
 };
@@ -154,22 +154,19 @@ function fromJsonTimestamp(o: any): Date {
 }
 
 function toTimestamp(date: Date): Timestamp {
-  const seconds = date.getTime() / 1_000;
+  const seconds = numberToLong(date.getTime() / 1_000);
   const nanos = (date.getTime() % 1_000) * 1_000_000;
   return { seconds, nanos };
 }
 
 function fromTimestamp(t: Timestamp): Date {
-  let millis = t.seconds * 1_000;
+  let millis = t.seconds.toNumber() * 1_000;
   millis += t.nanos / 1_000_000;
   return new Date(millis);
 }
 
-function longToNumber(long: Long) {
-  if (long.gt(Number.MAX_SAFE_INTEGER)) {
-    throw new globalThis.Error("Value is larger than Number.MAX_SAFE_INTEGER");
-  }
-  return long.toNumber();
+function numberToLong(number: number) {
+  return Long.fromNumber(number);
 }
 
 export const protobufPackage = 'cosmos.gov.v1beta1'
@@ -391,7 +388,7 @@ export const Deposit = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          message.proposalId = longToNumber(reader.uint64() as Long);
+          message.proposalId = reader.uint64() as Long;
           break;
         case 2:
           message.depositor = reader.string();
@@ -410,9 +407,9 @@ export const Deposit = {
     const message = { ...baseDeposit } as Deposit;
     message.amount = [];
     if (object.proposalId !== undefined && object.proposalId !== null) {
-      message.proposalId = Number(object.proposalId);
+      message.proposalId = Long.fromString(object.proposalId);
     } else {
-      message.proposalId = 0;
+      message.proposalId = Long.UZERO;
     }
     if (object.depositor !== undefined && object.depositor !== null) {
       message.depositor = String(object.depositor);
@@ -430,9 +427,9 @@ export const Deposit = {
     const message = { ...baseDeposit } as Deposit;
     message.amount = [];
     if (object.proposalId !== undefined && object.proposalId !== null) {
-      message.proposalId = object.proposalId;
+      message.proposalId = object.proposalId as Long;
     } else {
-      message.proposalId = 0;
+      message.proposalId = Long.UZERO;
     }
     if (object.depositor !== undefined && object.depositor !== null) {
       message.depositor = object.depositor;
@@ -448,7 +445,7 @@ export const Deposit = {
   },
   toJSON(message: Deposit): unknown {
     const obj: any = {};
-    message.proposalId !== undefined && (obj.proposalId = message.proposalId);
+    message.proposalId !== undefined && (obj.proposalId = (message.proposalId || Long.UZERO).toString());
     message.depositor !== undefined && (obj.depositor = message.depositor);
     if (message.amount) {
       obj.amount = message.amount.map(e => e ? Coin.toJSON(e) : undefined);
@@ -495,7 +492,7 @@ export const Proposal = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          message.proposalId = longToNumber(reader.uint64() as Long);
+          message.proposalId = reader.uint64() as Long;
           break;
         case 2:
           message.content = Any.decode(reader, reader.uint32());
@@ -532,9 +529,9 @@ export const Proposal = {
     const message = { ...baseProposal } as Proposal;
     message.totalDeposit = [];
     if (object.proposalId !== undefined && object.proposalId !== null) {
-      message.proposalId = Number(object.proposalId);
+      message.proposalId = Long.fromString(object.proposalId);
     } else {
-      message.proposalId = 0;
+      message.proposalId = Long.UZERO;
     }
     if (object.content !== undefined && object.content !== null) {
       message.content = Any.fromJSON(object.content);
@@ -582,9 +579,9 @@ export const Proposal = {
     const message = { ...baseProposal } as Proposal;
     message.totalDeposit = [];
     if (object.proposalId !== undefined && object.proposalId !== null) {
-      message.proposalId = object.proposalId;
+      message.proposalId = object.proposalId as Long;
     } else {
-      message.proposalId = 0;
+      message.proposalId = Long.UZERO;
     }
     if (object.content !== undefined && object.content !== null) {
       message.content = Any.fromPartial(object.content);
@@ -630,7 +627,7 @@ export const Proposal = {
   },
   toJSON(message: Proposal): unknown {
     const obj: any = {};
-    message.proposalId !== undefined && (obj.proposalId = message.proposalId);
+    message.proposalId !== undefined && (obj.proposalId = (message.proposalId || Long.UZERO).toString());
     message.content !== undefined && (obj.content = message.content ? Any.toJSON(message.content) : undefined);
     message.status !== undefined && (obj.status = proposalStatusToJSON(message.status));
     message.finalTallyResult !== undefined && (obj.finalTallyResult = message.finalTallyResult ? TallyResult.toJSON(message.finalTallyResult) : undefined);
@@ -754,7 +751,7 @@ export const Vote = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          message.proposalId = longToNumber(reader.uint64() as Long);
+          message.proposalId = reader.uint64() as Long;
           break;
         case 2:
           message.voter = reader.string();
@@ -772,9 +769,9 @@ export const Vote = {
   fromJSON(object: any): Vote {
     const message = { ...baseVote } as Vote;
     if (object.proposalId !== undefined && object.proposalId !== null) {
-      message.proposalId = Number(object.proposalId);
+      message.proposalId = Long.fromString(object.proposalId);
     } else {
-      message.proposalId = 0;
+      message.proposalId = Long.UZERO;
     }
     if (object.voter !== undefined && object.voter !== null) {
       message.voter = String(object.voter);
@@ -791,9 +788,9 @@ export const Vote = {
   fromPartial(object: DeepPartial<Vote>): Vote {
     const message = { ...baseVote } as Vote;
     if (object.proposalId !== undefined && object.proposalId !== null) {
-      message.proposalId = object.proposalId;
+      message.proposalId = object.proposalId as Long;
     } else {
-      message.proposalId = 0;
+      message.proposalId = Long.UZERO;
     }
     if (object.voter !== undefined && object.voter !== null) {
       message.voter = object.voter;
@@ -809,7 +806,7 @@ export const Vote = {
   },
   toJSON(message: Vote): unknown {
     const obj: any = {};
-    message.proposalId !== undefined && (obj.proposalId = message.proposalId);
+    message.proposalId !== undefined && (obj.proposalId = (message.proposalId || Long.UZERO).toString());
     message.voter !== undefined && (obj.voter = message.voter);
     message.option !== undefined && (obj.option = voteOptionToJSON(message.option));
     return obj;

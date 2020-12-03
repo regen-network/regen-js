@@ -1,6 +1,6 @@
 /* eslint-disable */
 import * as Long from 'long';
-import { Writer, Reader, util, configure } from 'protobufjs/minimal';
+import { Writer, Reader } from 'protobufjs/minimal';
 
 
 /**
@@ -24,12 +24,12 @@ export interface PageRequest {
    *  It is less efficient than using key. Only one of offset or key should
    *  be set.
    */
-  offset: number;
+  offset: Long;
   /**
    *  limit is the total number of results to be returned in the result page.
    *  If left empty it will default to a value to be set by each app.
    */
-  limit: number;
+  limit: Long;
   /**
    *  count_total is set to true  to indicate that the result set should include
    *  a count of the total number of items available for pagination in UIs.
@@ -58,25 +58,18 @@ export interface PageResponse {
    *  total is total number of results available if PageRequest.count_total
    *  was set, its value is undefined otherwise
    */
-  total: number;
+  total: Long;
 }
 
 const basePageRequest: object = {
-  offset: 0,
-  limit: 0,
+  offset: Long.UZERO,
+  limit: Long.UZERO,
   countTotal: false,
 };
 
 const basePageResponse: object = {
-  total: 0,
+  total: Long.UZERO,
 };
-
-function longToNumber(long: Long) {
-  if (long.gt(Number.MAX_SAFE_INTEGER)) {
-    throw new globalThis.Error("Value is larger than Number.MAX_SAFE_INTEGER");
-  }
-  return long.toNumber();
-}
 
 export const protobufPackage = 'cosmos.base.query.v1beta1'
 
@@ -99,10 +92,10 @@ export const PageRequest = {
           message.key = reader.bytes();
           break;
         case 2:
-          message.offset = longToNumber(reader.uint64() as Long);
+          message.offset = reader.uint64() as Long;
           break;
         case 3:
-          message.limit = longToNumber(reader.uint64() as Long);
+          message.limit = reader.uint64() as Long;
           break;
         case 4:
           message.countTotal = reader.bool();
@@ -120,14 +113,14 @@ export const PageRequest = {
       message.key = bytesFromBase64(object.key);
     }
     if (object.offset !== undefined && object.offset !== null) {
-      message.offset = Number(object.offset);
+      message.offset = Long.fromString(object.offset);
     } else {
-      message.offset = 0;
+      message.offset = Long.UZERO;
     }
     if (object.limit !== undefined && object.limit !== null) {
-      message.limit = Number(object.limit);
+      message.limit = Long.fromString(object.limit);
     } else {
-      message.limit = 0;
+      message.limit = Long.UZERO;
     }
     if (object.countTotal !== undefined && object.countTotal !== null) {
       message.countTotal = Boolean(object.countTotal);
@@ -144,14 +137,14 @@ export const PageRequest = {
       message.key = new Uint8Array();
     }
     if (object.offset !== undefined && object.offset !== null) {
-      message.offset = object.offset;
+      message.offset = object.offset as Long;
     } else {
-      message.offset = 0;
+      message.offset = Long.UZERO;
     }
     if (object.limit !== undefined && object.limit !== null) {
-      message.limit = object.limit;
+      message.limit = object.limit as Long;
     } else {
-      message.limit = 0;
+      message.limit = Long.UZERO;
     }
     if (object.countTotal !== undefined && object.countTotal !== null) {
       message.countTotal = object.countTotal;
@@ -163,8 +156,8 @@ export const PageRequest = {
   toJSON(message: PageRequest): unknown {
     const obj: any = {};
     message.key !== undefined && (obj.key = base64FromBytes(message.key !== undefined ? message.key : new Uint8Array()));
-    message.offset !== undefined && (obj.offset = message.offset);
-    message.limit !== undefined && (obj.limit = message.limit);
+    message.offset !== undefined && (obj.offset = (message.offset || Long.UZERO).toString());
+    message.limit !== undefined && (obj.limit = (message.limit || Long.UZERO).toString());
     message.countTotal !== undefined && (obj.countTotal = message.countTotal);
     return obj;
   },
@@ -187,7 +180,7 @@ export const PageResponse = {
           message.nextKey = reader.bytes();
           break;
         case 2:
-          message.total = longToNumber(reader.uint64() as Long);
+          message.total = reader.uint64() as Long;
           break;
         default:
           reader.skipType(tag & 7);
@@ -202,9 +195,9 @@ export const PageResponse = {
       message.nextKey = bytesFromBase64(object.nextKey);
     }
     if (object.total !== undefined && object.total !== null) {
-      message.total = Number(object.total);
+      message.total = Long.fromString(object.total);
     } else {
-      message.total = 0;
+      message.total = Long.UZERO;
     }
     return message;
   },
@@ -216,24 +209,19 @@ export const PageResponse = {
       message.nextKey = new Uint8Array();
     }
     if (object.total !== undefined && object.total !== null) {
-      message.total = object.total;
+      message.total = object.total as Long;
     } else {
-      message.total = 0;
+      message.total = Long.UZERO;
     }
     return message;
   },
   toJSON(message: PageResponse): unknown {
     const obj: any = {};
     message.nextKey !== undefined && (obj.nextKey = base64FromBytes(message.nextKey !== undefined ? message.nextKey : new Uint8Array()));
-    message.total !== undefined && (obj.total = message.total);
+    message.total !== undefined && (obj.total = (message.total || Long.UZERO).toString());
     return obj;
   },
 };
-
-if (util.Long !== Long as any) {
-  util.Long = Long as any;
-  configure();
-}
 
 interface WindowBase64 {
   atob(b64: string): string;
