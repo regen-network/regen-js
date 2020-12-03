@@ -1,5 +1,6 @@
+import { QueryClientImpl } from '@regennetwork/proto-cosmos/lib/cosmos/bank/v1beta1/query';
+
 import { RegenApi } from './api';
-import { QueryClientImpl } from './generated/cosmos/bank/v1beta1/query';
 
 let api: RegenApi;
 
