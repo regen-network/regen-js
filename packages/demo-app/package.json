@@ -1,13 +1,13 @@
 {
-	"name": "@regennetwork/demo-app",
+	"name": "@stakebird/demo-app",
 	"version": "0.1.0",
 	"author": "admin@regen.network",
-	"description": "Demo web application using @regennetwork/api",
+	"description": "Demo web application using @stakebird/api",
 	"license": "Apache-2.0",
 	"private": true,
-	"repository": "https://github.com/regen-network/regen-js",
+	"repository": "https://github.com/public-awesome/stakebird-js",
 	"dependencies": {
-		"@regennetwork/api": "^0.1.0",
+		"@stakebird/api": "^0.1.0",
 		"@testing-library/jest-dom": "^5.11.4",
 		"@testing-library/react": "^11.1.0",
 		"@testing-library/user-event": "^12.1.10",

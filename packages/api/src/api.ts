@@ -8,9 +8,9 @@ interface TendermintConnection {
 }
 
 /**
- * Options to pass into the RegenApi constructor.
+ * Options to pass into the StakebirdApi constructor.
  */
-export interface RegenApiOptions {
+export interface StakebirdApiOptions {
 	connection: TendermintConnection;
 }
 
@@ -18,7 +18,7 @@ export interface RegenApiOptions {
  * The main entry point for interacting with the Regen Ledger. The class needs
  * a client connection
  */
-export class RegenApi {
+export class StakebirdApi {
 	readonly connection: Connection;
 
 	constructor(connection: Connection) {
@@ -26,19 +26,19 @@ export class RegenApi {
 	}
 
 	/**
-	 * Create a RegenApi object which connects to the gRPC and Tendermint
+	 * Create a StakebirdApi object which connects to the gRPC and Tendermint
 	 * endpoints.
 	 *
-	 * @param options - Options to pass into RegenAPI.
+	 * @param options - Options to pass into StakebirdApi.
 	 */
-	public static async connect(options: RegenApiOptions): Promise<RegenApi> {
+	public static async connect(options: StakebirdApiOptions): Promise<StakebirdApi> {
 		switch (options.connection.type) {
 			case 'tendermint': {
 				const tendermintClient = await TendermintClient.connect(
 					options.connection.url
 				);
 
-				return new RegenApi(
+				return new StakebirdApi(
 					createTendermintConnection(tendermintClient)
 				);
 			}

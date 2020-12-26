@@ -1,14 +1,14 @@
-import { RegenApi } from './api';
+import { StakebirdApi } from './api';
 import { QueryClientImpl } from './generated/cosmos/bank/v1beta1/query';
 
-let api: RegenApi;
+let api: StakebirdApi;
 
-describe('RegenApi', () => {
+describe('StakebirdApi', () => {
 	beforeAll(async () => {
-		api = await RegenApi.connect({
+		api = await StakebirdApi.connect({
 			connection: {
 				type: 'tendermint',
-				url: 'http://devnet.regen.network:26657',
+				url: 'http://devnet.stakebird.com:26657',
 			},
 		});
 	});

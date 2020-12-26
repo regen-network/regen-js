@@ -1,11 +1,11 @@
 {
-	"name": "@regennetwork/api",
+	"name": "@stakebird/api",
 	"version": "0.1.0",
-	"author": "admin@regen.network",
-	"description": "A client library for the Regen Ledger",
+	"author": "shane@publicawesome.com",
+	"description": "A client library for the Stakebird blockchain",
 	"license": "Apache-2.0",
 	"main": "lib",
-	"repository": "https://github.com/regen-network/regen-js",
+	"repository": "https://github.com/public-awesome/stakebird-js",
 	"dependencies": {
 		"@cosmjs/stargate": "^0.24.0-alpha.10"
 	},

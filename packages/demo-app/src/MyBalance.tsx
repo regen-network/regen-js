@@ -1,10 +1,10 @@
-import type { RegenApi } from '@regennetwork/api';
-import type { QueryAllBalancesResponse } from '@regennetwork/api/lib/generated/cosmos/bank/v1beta1/query';
-import { QueryClientImpl } from '@regennetwork/api/lib/generated/cosmos/bank/v1beta1/query';
+import type { StakebirdApi } from '@stakebird/api';
+import type { QueryAllBalancesResponse } from '@stakebird/api/lib/generated/cosmos/bank/v1beta1/query';
+import { QueryClientImpl } from '@stakebird/api/lib/generated/cosmos/bank/v1beta1/query';
 import React, { useEffect, useState } from 'react';
 
 interface MyBalanceProps {
-	api: RegenApi;
+	api: StakebirdApi;
 }
 
 export function MyBalance(props: MyBalanceProps): React.ReactElement {
