@@ -1,6 +1,6 @@
 {
 	"name": "@stakebird/api",
-	"version": "0.1.0",
+	"version": "0.1.1",
 	"author": "shanev@gmail.com",
 	"description": "A client library for the Stakebird blockchain",
 	"license": "Apache-2.0",
