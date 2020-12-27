@@ -24,6 +24,6 @@ describe('StakebirdApi', () => {
 		// api.query.cosmos.bank.v1beta1.AllBalances({});`
 		// ```
 
-		expect(res.balances).toHaveLength(1);
+		expect(res.balances).toHaveLength(2);
 	});
 });

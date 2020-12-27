@@ -31,7 +31,9 @@ export class StakebirdApi {
 	 *
 	 * @param options - Options to pass into StakebirdApi.
 	 */
-	public static async connect(options: StakebirdApiOptions): Promise<StakebirdApi> {
+	public static async connect(
+		options: StakebirdApiOptions
+	): Promise<StakebirdApi> {
 		switch (options.connection.type) {
 			case 'tendermint': {
 				const tendermintClient = await TendermintClient.connect(
