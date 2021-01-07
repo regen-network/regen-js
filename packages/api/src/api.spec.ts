@@ -1,11 +1,11 @@
-import { StakebirdApi } from './api';
+import { StargazeApi } from './api';
 import { QueryClientImpl } from './generated/cosmos/bank/v1beta1/query';
 
-let api: StakebirdApi;
+let api: StargazeApi;
 
-describe('StakebirdApi', () => {
+describe('StargazeApi', () => {
 	beforeAll(async () => {
-		api = await StakebirdApi.connect({
+		api = await StargazeApi.connect({
 			connection: {
 				type: 'tendermint',
 				url: 'localhost:26657',

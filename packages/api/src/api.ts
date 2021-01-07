@@ -8,9 +8,9 @@ interface TendermintConnection {
 }
 
 /**
- * Options to pass into the StakebirdApi constructor.
+ * Options to pass into the StargazeApi constructor.
  */
-export interface StakebirdApiOptions {
+export interface StargazeApiOptions {
 	connection: TendermintConnection;
 }
 
@@ -18,7 +18,7 @@ export interface StakebirdApiOptions {
  * The main entry point for interacting with the Regen Ledger. The class needs
  * a client connection
  */
-export class StakebirdApi {
+export class StargazeApi {
 	readonly connection: Connection;
 
 	constructor(connection: Connection) {
@@ -26,21 +26,21 @@ export class StakebirdApi {
 	}
 
 	/**
-	 * Create a StakebirdApi object which connects to the gRPC and Tendermint
+	 * Create a StargazeApi object which connects to the gRPC and Tendermint
 	 * endpoints.
 	 *
-	 * @param options - Options to pass into StakebirdApi.
+	 * @param options - Options to pass into StargazeApi.
 	 */
 	public static async connect(
-		options: StakebirdApiOptions
-	): Promise<StakebirdApi> {
+		options: StargazeApiOptions
+	): Promise<StargazeApi> {
 		switch (options.connection.type) {
 			case 'tendermint': {
 				const tendermintClient = await TendermintClient.connect(
 					options.connection.url
 				);
 
-				return new StakebirdApi(
+				return new StargazeApi(
 					createTendermintConnection(tendermintClient)
 				);
 			}

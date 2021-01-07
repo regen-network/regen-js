@@ -1,4 +1,4 @@
-import { StakebirdApi } from '@stakebird/api';
+import { StargazeApi } from '@stargaze/api';
 import { useEffect, useState } from 'react';
 import * as React from 'react';
 
@@ -11,13 +11,13 @@ export function App(): React.ReactElement {
 	const [tmUrl, setTmUrl] = useState(AMAURY_NODE_TM_URL);
 	const [tmError, setTmError] = useState<Error | undefined>();
 
-	const [api, setApi] = useState<StakebirdApi | undefined>(undefined);
+	const [api, setApi] = useState<StargazeApi | undefined>(undefined);
 
 	useEffect(() => {
 		setApi(undefined);
 		setTmError(undefined);
 
-		StakebirdApi.connect({
+		StargazeApi.connect({
 			connection: {
 				type: 'tendermint',
 				url: tmUrl,
@@ -33,7 +33,7 @@ export function App(): React.ReactElement {
 	return (
 		<div>
 			<h1>
-				Regen Network Demo App using <code>@stakebird/api</code>
+				Regen Network Demo App using <code>@stargaze/api</code>
 			</h1>
 
 			{api ? (
@@ -41,7 +41,7 @@ export function App(): React.ReactElement {
 					<MyBalance api={api} />
 				</div>
 			) : (
-				<p>Loading StakebirdApi...</p>
+				<p>Loading StargazeApi...</p>
 			)}
 
 			<div>

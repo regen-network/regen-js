@@ -1,17 +1,17 @@
-# `@stakebird/api`
+# `@stargaze/api`
 
 A client library for the Regen Ledger.
 
 ## Get Started
 
-The library exposes one main TypeScript class: the `StakebirdApi` class. Import it like this in your code:
+The library exposes one main TypeScript class: the `StargazeApi` class. Import it like this in your code:
 
 ```ts
-import { StakebirdApi } from '@stakebird/api';
+import { StargazeApi } from '@stargaze/api';
 
-// Create a new instance of the StakebirdApi class.
-const api = new StakebirdApi({
-	// StakebirdApi supports multiple client connections to interact with a node:
+// Create a new instance of the StargazeApi class.
+const api = new StargazeApi({
+	// StargazeApi supports multiple client connections to interact with a node:
 	// - via the Tendermint RPC
 	// - via gRPC
 	// - via gRPC-web
@@ -19,7 +19,7 @@ const api = new StakebirdApi({
 	connection: {
 		// Here, we are using the Tendermint RPC client connection.
 		type: 'tendermint',
-		url: 'http://devnet.stakebird.com:26657',
+		url: 'http://devnet.stargaze.fi:26657',
 	},
 });
 
