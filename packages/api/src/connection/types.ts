@@ -6,9 +6,9 @@
  */
 export interface TsProtoRpc {
 	request(
-		service: string,
-		method: string,
-		data: Uint8Array
+		_service: string,
+		_method: string,
+		_data: Uint8Array
 	): Promise<Uint8Array>;
 }
 

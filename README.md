@@ -6,7 +6,9 @@ Regen Network does JavaScript. This monorepo contains JavaScript libraries and U
 
 "JS" is short for runs everywhere – we actually develop in TypeScript.
 
-🚧 This API is still under heavy construction, be ready for unexpected breaking changes.
+## 🚧 Warning
+
+This API is still under heavy construction, be ready for unexpected breaking changes. In particular, the Regen team is discussing with [CosmJS](https://github.com/cosmos/cosmjs) on using [`ts-proto`](https://github.com/stephenh/ts-proto) for client JS code generation across the whole Cosmos ecosystem.
 
 ## Get Started
 
@@ -17,7 +19,8 @@ git clone https://github.com/regen-network/regen-js
 # Install dependencies.
 yarn install
 
-# Make sure to run this command, or else some TypeScript references won't be
+# Make sure to run this command to build the `api` package, so that other
+# packages can reference it. Or else, some TypeScript references won't be
 # available statically.
 yarn build:api
 ```
@@ -35,7 +38,7 @@ The app should be running on http://localhost:3000.
 
 ## Packages
 
-Regen-JS consists of many smaller npm packages within the [@regennetwork namespace](https://www.npmjs.com/org/regennetwork), a so called monorepo. Here is the list of all packages.
+Regen-JS consists of smaller npm packages within the [@regen-network namespace](https://www.npmjs.com/org/regennetwork), a so called monorepo. Here is the list of all packages.
 
 | Package                                      | Description                                         | Latest                                                                                                                  |
 | -------------------------------------------- | --------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------- |
