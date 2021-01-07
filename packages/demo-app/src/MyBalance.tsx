@@ -1,6 +1,6 @@
-import type { RegenApi } from '@regennetwork/api';
-import type { QueryAllBalancesResponse } from '@regennetwork/api/lib/generated/cosmos/bank/v1beta1/query';
-import { QueryClientImpl } from '@regennetwork/api/lib/generated/cosmos/bank/v1beta1/query';
+import type { RegenApi } from '@regen-network/api';
+import type { QueryAllBalancesResponse } from '@regen-network/api/lib/generated/cosmos/bank/v1beta1/query';
+import { QueryClientImpl } from '@regen-network/api/lib/generated/cosmos/bank/v1beta1/query';
 import React, { useEffect, useState } from 'react';
 
 interface MyBalanceProps {
@@ -18,10 +18,11 @@ export function MyBalance(props: MyBalanceProps): React.ReactElement {
 	>();
 
 	useEffect(() => {
-		const impl = new QueryClientImpl(api.connection.queryConnection);
-		impl.AllBalances({
-			address,
-		})
+		const bankClient = new QueryClientImpl(api.connection.queryConnection);
+		bankClient
+			.AllBalances({
+				address,
+			})
 			.then(setBalance)
 			.catch(console.error);
 	}, [address, api.connection]);
