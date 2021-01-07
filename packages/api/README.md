@@ -19,7 +19,7 @@ const api = new StargazeApi({
 	connection: {
 		// Here, we are using the Tendermint RPC client connection.
 		type: 'tendermint',
-		url: 'http://devnet.stargaze.com:26657',
+		url: 'http://devnet.stargaze.fi:26657',
 	},
 });
 
