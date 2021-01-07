@@ -1,4 +1,4 @@
-import { RegenApi } from '@regennetwork/api';
+import { RegenApi } from '@regen-network/api';
 import { useEffect, useState } from 'react';
 import * as React from 'react';
 
@@ -33,7 +33,7 @@ export function App(): React.ReactElement {
 	return (
 		<div>
 			<h1>
-				Regen Network Demo App using <code>@regennetwork/api</code>
+				Regen Network Demo App using <code>@regen-network/api</code>
 			</h1>
 
 			{api ? (

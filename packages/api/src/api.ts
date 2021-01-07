@@ -26,8 +26,7 @@ export class RegenApi {
 	}
 
 	/**
-	 * Create a RegenApi object which connects to the gRPC and Tendermint
-	 * endpoints.
+	 * Create a RegenApi object which connects to the given gRPC connection.
 	 *
 	 * @param options - Options to pass into RegenAPI.
 	 */

@@ -1,4 +1,4 @@
-# `@regennetwork/api`
+# `@regen-network/api`
 
 A client library for the Regen Ledger.
 
@@ -7,7 +7,7 @@ A client library for the Regen Ledger.
 The library exposes one main TypeScript class: the `RegenApi` class. Import it like this in your code:
 
 ```ts
-import { RegenApi } from '@regennetwork/api';
+import { RegenApi } from '@regen-network/api';
 
 // Create a new instance of the RegenApi class.
 const api = new RegenApi({
