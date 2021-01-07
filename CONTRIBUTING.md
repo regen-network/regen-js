@@ -1,5 +1,7 @@
 # Contributing Guide
 
+_This guide is still work in progress._
+
 ## For Maintainers
 
 ### Publishing Packages on npm
