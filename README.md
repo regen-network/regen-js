@@ -1,8 +1,14 @@
-[![Actions Status](https://github.com/regen-network/regen-js/workflows/pr/badge.svg)](https://github.com/regen-network/regen-js/actions)
+[![Actions Status](https://github.com/regen-network/regen-js/workflows/CI/badge.svg?branch=main)](https://github.com/regen-network/regen-js/actions)
 
-# Regen-JS
+<br /><br /><br />
 
-Regen Network does JavaScript. This monorepo contains JavaScript libraries and UIs for interacting with the [Regen Ledger](https://github.com/regen-network/regen-ledger).
+<h1 align="center">Regen-JS</h1>
+
+<h4 align="center">
+  Regen Network does JavaScript. This monorepo contains JavaScript libraries and UIs for interacting with the [Regen Ledger](https://github.com/regen-network/regen-ledger).
+</h4>
+
+<br /><br /><br />
 
 "JS" is short for runs everywhere – we actually develop in TypeScript.
 

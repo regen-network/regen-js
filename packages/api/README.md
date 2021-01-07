@@ -1,6 +1,12 @@
-# `@regen-network/api`
+<br /><br /><br />
 
-A TypeScript client library for the Regen Ledger.
+<h1 align="center">@regen-network/api</h1>
+
+<h4 align="center">
+  A TypeScript client library for the Regen Ledger.
+</h4>
+
+<br /><br /><br />
 
 ## 🚧 Warning
 
