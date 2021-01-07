@@ -15,6 +15,7 @@ coverage
 build
 lib
 tmp
+.eslintcache
 
 # Dependency directories
 node_modules/
