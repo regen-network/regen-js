@@ -1,10 +1,10 @@
-import type { StakebirdApi } from '@stakebird/api';
-import type { QueryAllBalancesResponse } from '@stakebird/api/lib/generated/cosmos/bank/v1beta1/query';
-import { QueryClientImpl } from '@stakebird/api/lib/generated/cosmos/bank/v1beta1/query';
+import type { StargazeApi } from '@stargaze/api';
+import type { QueryAllBalancesResponse } from '@stargaze/api/lib/generated/cosmos/bank/v1beta1/query';
+import { QueryClientImpl } from '@stargaze/api/lib/generated/cosmos/bank/v1beta1/query';
 import React, { useEffect, useState } from 'react';
 
 interface MyBalanceProps {
-	api: StakebirdApi;
+	api: StargazeApi;
 }
 
 export function MyBalance(props: MyBalanceProps): React.ReactElement {

@@ -1,11 +1,11 @@
 {
-	"name": "@stakebird/api",
+	"name": "@stargaze/api",
 	"version": "0.1.1",
 	"author": "shanev@gmail.com",
-	"description": "A client library for the Stakebird blockchain",
+	"description": "A client library for the Stargaze blockchain",
 	"license": "Apache-2.0",
 	"main": "lib",
-	"repository": "https://github.com/public-awesome/stakebird-js",
+	"repository": "https://github.com/public-awesome/stargaze-js",
 	"dependencies": {
 		"@cosmjs/stargate": "^0.24.0-alpha.10"
 	},

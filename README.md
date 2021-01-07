@@ -1,4 +1,4 @@
-# Stakebird-JS
+# Stargaze-JS
 
 Regen Network does JavaScript. This monorepo contains JavaScript libraries and UIs for interacting with the [Regen Ledger](https://github.com/regen-network/regen-ledger).
 
@@ -29,16 +29,16 @@ yarn start
 
 The app should be running on http://localhost:3000.
 
-> Pro tip 💡: everytime you modify the `@stakebird/api` package, be sure to run again `yarn build:api`, to let the other packages in the monorepo be aware of your latest changes. You can also add to `--watch` flag on this command to build on file change.
+> Pro tip 💡: everytime you modify the `@stargaze/api` package, be sure to run again `yarn build:api`, to let the other packages in the monorepo be aware of your latest changes. You can also add to `--watch` flag on this command to build on file change.
 
 ## Packages
 
-Regen-JS consists of many smaller npm packages within the [@stakebird namespace](https://www.npmjs.com/org/regennetwork), a so called monorepo. Here is the list of all packages.
+Regen-JS consists of many smaller npm packages within the [@stargaze namespace](https://www.npmjs.com/org/regennetwork), a so called monorepo. Here is the list of all packages.
 
 | Package                                     | Description                                         | Latest                                                                                                                |
 | ------------------------------------------- | --------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------- |
-| [@stakebird/api](packages/api)           | A client library interacting with the Regen Ledger. | [![npm version](https://img.shields.io/npm/v/@stakebird/api.svg)](https://www.npmjs.com/package/@stakebird/api) |
-| [@stakebird/demo-app](packages/demo-app) | A demo React app using `@stakebird/api`.         | Not published on npm.                                                                                                 |
+| [@stargaze/api](packages/api)           | A client library interacting with the Regen Ledger. | [![npm version](https://img.shields.io/npm/v/@stargaze/api.svg)](https://www.npmjs.com/package/@stargaze/api) |
+| [@stargaze/demo-app](packages/demo-app) | A demo React app using `@stargaze/api`.         | Not published on npm.                                                                                                 |
 
 ## Build the packages from source
 
