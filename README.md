@@ -1,16 +1,17 @@
 [![Actions Status](https://github.com/regen-network/regen-js/workflows/CI/badge.svg?branch=main)](https://github.com/regen-network/regen-js/actions)
+![GitHub License](https://img.shields.io/github/license/regen-network/regen-js)
 
-<br /><br /><br />
+<br /><br />
 
 <h1 align="center">Regen-JS</h1>
 
 <h4 align="center">
-  Regen Network does JavaScript. This monorepo contains JavaScript libraries and UIs for interacting with the [Regen Ledger](https://github.com/regen-network/regen-ledger).
+  Regen Network does JavaScript. This monorepo contains JavaScript libraries and UIs for interacting with the <a href="https://github.com/regen-network/regen-ledger">Regen Ledger</a>.
 </h4>
 
 <br /><br /><br />
 
-"JS" is short for runs everywhere – we actually develop in TypeScript.
+_"JS" is short for runs everywhere – we actually develop in TypeScript._
 
 ## 🚧 Warning
 
@@ -46,10 +47,10 @@ The app should be running on http://localhost:3000.
 
 Regen-JS consists of smaller npm packages within the [@regen-network namespace](https://www.npmjs.com/org/regennetwork), a so called monorepo. Here is the list of all packages.
 
-| Package                                      | Description                                         | Latest                                                                                                                  |
-| -------------------------------------------- | --------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------- |
-| [@regen-network/api](packages/api)           | A client library interacting with the Regen Ledger. | [![npm version](https://img.shields.io/npm/v/@regen-network/api.svg)](https://www.npmjs.com/package/@regen-network/api) |
-| [@regen-network/demo-app](packages/demo-app) | A demo React app using `@regen-network/api`.        | Not published on npm.                                                                                                   |
+| Package                                        | Description                                         | Latest                                                                                                                  |
+| ---------------------------------------------- | --------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------- |
+| [`@regen-network/api`](packages/api)           | A client library interacting with the Regen Ledger. | [![npm version](https://img.shields.io/npm/v/@regen-network/api.svg)](https://www.npmjs.com/package/@regen-network/api) |
+| [`@regen-network/demo-app`](packages/demo-app) | A demo React app using `@regen-network/api`.        | Not published on npm.                                                                                                   |
 
 ## Build the packages from source
 

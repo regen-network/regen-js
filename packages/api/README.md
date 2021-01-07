@@ -1,3 +1,6 @@
+[![Actions Status](https://github.com/regen-network/regen-js/workflows/CI/badge.svg?branch=main)](https://github.com/regen-network/regen-js/actions)
+![GitHub License](https://img.shields.io/github/license/regen-network/regen-js)
+
 <br /><br /><br />
 
 <h1 align="center">@regen-network/api</h1>
