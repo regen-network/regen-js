@@ -80,7 +80,18 @@ The list of all available methods to call can be found in:
 
 Alternatively, you can just explore the [`./src/generated/` folder](./src/generated), all methods are commented in the code.
 
-## How it Works
+## Differences with CosmJS
 
-TODO (Protobuf, ts-proto, cosmjs, signing)
+The main difference with [CosmJS](https://github.com/cosmos/cosmjs) is that RegenJS is 100%-generated TS client, while CosmJS recommends manually decorating your own TS classes. For this code generation, RegenJS uses [`ts-proto`](https://github.com/stephenh/ts-proto). However, the generated types create imcompatibilities with CosmJS (which uses [protobufjs](https://github.com/protobufjs/protobuf.js)).
+
+Regen's team goal is not to divide the JS/TS community in the Cosmos ecosystem. We are currently actively talking with the CosmJS team to discuss to use the same foundation, based on `ts-proto`. The progress can be followed [here](https://github.com/cosmos/cosmjs/issues/586).
+
+Other than that, RegenJS actually plans to use multiple components of CosmJS under the hood: the Tendermint client, the `proto-signing` package...
+
+## Long-term Roadmap
+
+- Create a "JS Client generator": you input some proto files, the generator outputs a fully-functional TS client.
+- Make it compatible with CosmJS.
+
+
 ```
