@@ -1,13 +1,13 @@
-# `@public-awesome/stargaze-api`
+# `@stargazefi/api`
 
-A client library for the Regen Ledger.
+A client library for the Stargaze blockchain.
 
 ## Get Started
 
 The library exposes one main TypeScript class: the `StargazeApi` class. Import it like this in your code:
 
 ```ts
-import { StargazeApi } from '@public-awesome/stargaze-api';
+import { StargazeApi } from '@stargazefi/api';
 
 // Create a new instance of the StargazeApi class.
 const api = new StargazeApi({
@@ -30,7 +30,3 @@ const balances = await api.query.cosmos.bank.v1beta1.AllBalances({
 });
 console.log(balances); // Prints `{"balances":[{"denom":"uegg","amount":"10000000000"}],"pagination":{"total":1}}`
 ```
-
-## How it Works
-
-TODO (Protobuf, decoration, signing)
