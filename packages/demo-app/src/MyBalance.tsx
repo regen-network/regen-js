@@ -1,6 +1,6 @@
-import type { StargazeApi } from '@stargaze/api';
-import type { QueryAllBalancesResponse } from '@stargaze/api/lib/generated/cosmos/bank/v1beta1/query';
-import { QueryClientImpl } from '@stargaze/api/lib/generated/cosmos/bank/v1beta1/query';
+import type { StargazeApi } from '@public-awesome/stargaze-api';
+import type { QueryAllBalancesResponse } from '@public-awesome/stargaze-api/lib/generated/cosmos/bank/v1beta1/query';
+import { QueryClientImpl } from '@public-awesome/stargaze-api/lib/generated/cosmos/bank/v1beta1/query';
 import React, { useEffect, useState } from 'react';
 
 interface MyBalanceProps {

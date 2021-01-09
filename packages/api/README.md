@@ -1,4 +1,4 @@
-# `@stargaze/api`
+# `@public-awesome/stargaze-api`
 
 A client library for the Regen Ledger.
 
@@ -7,7 +7,7 @@ A client library for the Regen Ledger.
 The library exposes one main TypeScript class: the `StargazeApi` class. Import it like this in your code:
 
 ```ts
-import { StargazeApi } from '@stargaze/api';
+import { StargazeApi } from '@public-awesome/stargaze-api';
 
 // Create a new instance of the StargazeApi class.
 const api = new StargazeApi({

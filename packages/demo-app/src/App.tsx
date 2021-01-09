@@ -1,4 +1,4 @@
-import { StargazeApi } from '@stargaze/api';
+import { StargazeApi } from '@public-awesome/stargaze-api';
 import { useEffect, useState } from 'react';
 import * as React from 'react';
 
@@ -33,7 +33,8 @@ export function App(): React.ReactElement {
 	return (
 		<div>
 			<h1>
-				Regen Network Demo App using <code>@stargaze/api</code>
+				Regen Network Demo App using{' '}
+				<code>@public-awesome/stargaze-api</code>
 			</h1>
 
 			{api ? (
