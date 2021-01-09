@@ -8,7 +8,7 @@
 	"repository": "https://github.com/public-awesome/stargaze-js",
 	"workspaces": ["packages/*"],
 	"scripts": {
-		"build:api": "yarn workspace @public-awesome/stargaze-api build",
+		"build:api": "yarn workspace @stargazefi/api build",
 		"build": "lerna run build --stream",
 		"format": "yarn lint --fix",
 		"lint": "tsc --noEmit && eslint --ext js,ts,tsx .",

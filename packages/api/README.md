@@ -1,4 +1,4 @@
-# `@public-awesome/stargaze-api`
+# `@stargazefi/api`
 
 A client library for the Stargaze blockchain.
 
@@ -7,7 +7,7 @@ A client library for the Stargaze blockchain.
 The library exposes one main TypeScript class: the `StargazeApi` class. Import it like this in your code:
 
 ```ts
-import { StargazeApi } from '@public-awesome/stargaze-api';
+import { StargazeApi } from '@stargazefi/api';
 
 // Create a new instance of the StargazeApi class.
 const api = new StargazeApi({

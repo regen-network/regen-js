@@ -29,16 +29,16 @@ yarn start
 
 The app should be running on http://localhost:3000.
 
-> Pro tip 💡: everytime you modify the `@public-awesome/stargaze-api` package, be sure to run again `yarn build:api`, to let the other packages in the monorepo be aware of your latest changes. You can also add to `--watch` flag on this command to build on file change.
+> Pro tip 💡: everytime you modify the `@stargazefi/api` package, be sure to run again `yarn build:api`, to let the other packages in the monorepo be aware of your latest changes. You can also add to `--watch` flag on this command to build on file change.
 
 ## Packages
 
-Stargaze-JS consists of many smaller npm packages within the [@public-awesome namespace](https://www.npmjs.com/org/public-awesome), a so called monorepo. Here is the list of all packages.
+Stargaze-JS consists of many smaller npm packages within the [@stargazefi namespace](https://www.npmjs.com/org/stargazefi), a so called monorepo. Here is the list of all packages.
 
-| Package                                      | Description                                            | Latest                                                                                                                                      |
-| -------------------------------------------- | ------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------- |
-| [@public-awesome/stargaze-api](packages/api) | A client library interacting with the Regen Ledger.    | [![npm version](https://img.shields.io/npm/v/@public-awesome/stargaze-api.svg)](https://www.npmjs.com/package/@public-awesome/stargaze-api) |
-| [@stargaze/demo-app](packages/demo-app)      | A demo React app using `@public-awesome/stargaze-api`. | Not published on npm.                                                                                                                       |
+| Package                                   | Description                                         | Latest                                                                                                            |
+| ----------------------------------------- | --------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------- |
+| [@stargazefi/api](packages/api)           | A client library interacting with the Regen Ledger. | [![npm version](https://img.shields.io/npm/v/@stargazefi/api.svg)](https://www.npmjs.com/package/@stargazefi/api) |
+| [@stargazefi/demo-app](packages/demo-app) | A demo React app using `@stargazefi/api`.           | Not published on npm.                                                                                             |
 
 ## Build the packages from source
 

@@ -1,5 +1,5 @@
 {
-	"name": "@public-awesome/stargaze-api",
+	"name": "@stargazefi/api",
 	"version": "0.1.2",
 	"author": "shanev@gmail.com",
 	"description": "A client library for the Stargaze blockchain",
