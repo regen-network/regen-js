@@ -1,6 +1,6 @@
 # `@public-awesome/stargaze-api`
 
-A client library for the Regen Ledger.
+A client library for the Stargaze blockchain.
 
 ## Get Started
 
@@ -30,7 +30,3 @@ const balances = await api.query.cosmos.bank.v1beta1.AllBalances({
 });
 console.log(balances); // Prints `{"balances":[{"denom":"uegg","amount":"10000000000"}],"pagination":{"total":1}}`
 ```
-
-## How it Works
-
-TODO (Protobuf, decoration, signing)

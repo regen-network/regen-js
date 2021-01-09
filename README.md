@@ -1,6 +1,6 @@
 # Stargaze-JS
 
-Regen Network does JavaScript. This monorepo contains JavaScript libraries and UIs for interacting with the [Regen Ledger](https://github.com/regen-network/regen-ledger).
+This monorepo contains JavaScript libraries and UIs for interacting with the Stargaze Blockchain.
 
 "JS" is short for runs everywhere – we actually develop in TypeScript.
 
@@ -33,7 +33,7 @@ The app should be running on http://localhost:3000.
 
 ## Packages
 
-Regen-JS consists of many smaller npm packages within the [@stargaze namespace](https://www.npmjs.com/org/regennetwork), a so called monorepo. Here is the list of all packages.
+Stargaze-JS consists of many smaller npm packages within the [@public-awesome namespace](https://www.npmjs.com/org/public-awesome), a so called monorepo. Here is the list of all packages.
 
 | Package                                      | Description                                            | Latest                                                                                                                                      |
 | -------------------------------------------- | ------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------- |
