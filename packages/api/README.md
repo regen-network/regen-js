@@ -24,7 +24,7 @@ import { RegenApi } from '@regen-network/api';
 import { QueryClientImpl } from '@regen-network/api/lib/generated/cosmos/bank/v1beta1/query';
 
 // Create a new instance of the RegenApi class.
-const api = new RegenApi({
+const api = RegenApi.connect({
 	// RegenApi supports multiple client connections to interact with a node:
 	// - via the Tendermint RPC
 	// - via gRPC

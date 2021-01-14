@@ -36,7 +36,6 @@ export interface MsgEditValidator {
    *  We pass a reference to the new commission rate and min self delegation as
    *  it's not mandatory to update. If not updated, the deserialized rate will be
    *  zero with no way to distinguish if an update was intended.
-   *
    *  REF: #2373
    */
   commissionRate: string;
