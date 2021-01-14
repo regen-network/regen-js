@@ -1,7 +1,8 @@
 /* eslint-disable */
 import { Coin } from '../../../cosmos/base/v1beta1/coin';
 import * as Long from 'long';
-import { Reader, Writer } from 'protobufjs/minimal';
+import { SigningStargateClient } from '@cosmjs/stargate';
+import { Writer, Reader } from 'protobufjs/minimal';
 
 
 /**
@@ -47,16 +48,18 @@ export interface Msg {
 
 export class MsgClientImpl implements Msg {
 
-  private readonly rpc: Rpc;
+  private readonly signingClient: SigningStargateClient;
 
-  constructor(rpc: Rpc) {
-    this.rpc = rpc;
+  constructor(signingClient: SigningStargateClient) {
+    this.signingClient = signingClient;
   }
 
-  CreateVestingAccount(request: MsgCreateVestingAccount): Promise<MsgCreateVestingAccountResponse> {
+  CreateVestingAccount(request: MsgCreateVestingAccount, callback?: function (response: MsgCreateVestingAccountResponse): void | Promise<void>): void {
     const data = MsgCreateVestingAccount.encode(request).finish();
-    const promise = this.rpc.request("cosmos.vesting.v1beta1.Msg", "CreateVestingAccount", data);
-    return promise.then(data => MsgCreateVestingAccountResponse.decode(new Reader(data)));
+    this.signingClient.addMsg({
+      typeUrl: "cosmos.vesting.v1beta1.Msg/CreateVestingAccount",
+      value: data
+    }, callback);
   }
 
 }

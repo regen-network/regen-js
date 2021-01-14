@@ -1,7 +1,8 @@
 /* eslint-disable */
 import { Coin } from '../../../cosmos/base/v1beta1/coin';
 import { Input, Output } from '../../../cosmos/bank/v1beta1/bank';
-import { Reader, Writer } from 'protobufjs/minimal';
+import { SigningStargateClient } from '@cosmjs/stargate';
+import { Writer, Reader } from 'protobufjs/minimal';
 
 
 /**
@@ -66,22 +67,26 @@ export interface Msg {
 
 export class MsgClientImpl implements Msg {
 
-  private readonly rpc: Rpc;
+  private readonly signingClient: SigningStargateClient;
 
-  constructor(rpc: Rpc) {
-    this.rpc = rpc;
+  constructor(signingClient: SigningStargateClient) {
+    this.signingClient = signingClient;
   }
 
-  Send(request: MsgSend): Promise<MsgSendResponse> {
+  Send(request: MsgSend, callback?: function (response: MsgSendResponse): void | Promise<void>): void {
     const data = MsgSend.encode(request).finish();
-    const promise = this.rpc.request("cosmos.bank.v1beta1.Msg", "Send", data);
-    return promise.then(data => MsgSendResponse.decode(new Reader(data)));
+    this.signingClient.addMsg({
+      typeUrl: "cosmos.bank.v1beta1.Msg/Send",
+      value: data
+    }, callback);
   }
 
-  MultiSend(request: MsgMultiSend): Promise<MsgMultiSendResponse> {
+  MultiSend(request: MsgMultiSend, callback?: function (response: MsgMultiSendResponse): void | Promise<void>): void {
     const data = MsgMultiSend.encode(request).finish();
-    const promise = this.rpc.request("cosmos.bank.v1beta1.Msg", "MultiSend", data);
-    return promise.then(data => MsgMultiSendResponse.decode(new Reader(data)));
+    this.signingClient.addMsg({
+      typeUrl: "cosmos.bank.v1beta1.Msg/MultiSend",
+      value: data
+    }, callback);
   }
 
 }

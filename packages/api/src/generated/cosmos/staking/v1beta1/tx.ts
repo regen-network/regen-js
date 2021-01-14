@@ -2,9 +2,10 @@
 import { Description, CommissionRates } from '../../../cosmos/staking/v1beta1/staking';
 import { Any } from '../../../google/protobuf/any';
 import { Coin } from '../../../cosmos/base/v1beta1/coin';
-import { Reader, Writer, util, configure } from 'protobufjs/minimal';
+import { SigningStargateClient } from '@cosmjs/stargate';
 import { Timestamp } from '../../../google/protobuf/timestamp';
 import * as Long from 'long';
+import { Writer, Reader, util, configure } from 'protobufjs/minimal';
 
 
 /**
@@ -179,40 +180,50 @@ export interface Msg {
 
 export class MsgClientImpl implements Msg {
 
-  private readonly rpc: Rpc;
+  private readonly signingClient: SigningStargateClient;
 
-  constructor(rpc: Rpc) {
-    this.rpc = rpc;
+  constructor(signingClient: SigningStargateClient) {
+    this.signingClient = signingClient;
   }
 
-  CreateValidator(request: MsgCreateValidator): Promise<MsgCreateValidatorResponse> {
+  CreateValidator(request: MsgCreateValidator, callback?: function (response: MsgCreateValidatorResponse): void | Promise<void>): void {
     const data = MsgCreateValidator.encode(request).finish();
-    const promise = this.rpc.request("cosmos.staking.v1beta1.Msg", "CreateValidator", data);
-    return promise.then(data => MsgCreateValidatorResponse.decode(new Reader(data)));
+    this.signingClient.addMsg({
+      typeUrl: "cosmos.staking.v1beta1.Msg/CreateValidator",
+      value: data
+    }, callback);
   }
 
-  EditValidator(request: MsgEditValidator): Promise<MsgEditValidatorResponse> {
+  EditValidator(request: MsgEditValidator, callback?: function (response: MsgEditValidatorResponse): void | Promise<void>): void {
     const data = MsgEditValidator.encode(request).finish();
-    const promise = this.rpc.request("cosmos.staking.v1beta1.Msg", "EditValidator", data);
-    return promise.then(data => MsgEditValidatorResponse.decode(new Reader(data)));
+    this.signingClient.addMsg({
+      typeUrl: "cosmos.staking.v1beta1.Msg/EditValidator",
+      value: data
+    }, callback);
   }
 
-  Delegate(request: MsgDelegate): Promise<MsgDelegateResponse> {
+  Delegate(request: MsgDelegate, callback?: function (response: MsgDelegateResponse): void | Promise<void>): void {
     const data = MsgDelegate.encode(request).finish();
-    const promise = this.rpc.request("cosmos.staking.v1beta1.Msg", "Delegate", data);
-    return promise.then(data => MsgDelegateResponse.decode(new Reader(data)));
+    this.signingClient.addMsg({
+      typeUrl: "cosmos.staking.v1beta1.Msg/Delegate",
+      value: data
+    }, callback);
   }
 
-  BeginRedelegate(request: MsgBeginRedelegate): Promise<MsgBeginRedelegateResponse> {
+  BeginRedelegate(request: MsgBeginRedelegate, callback?: function (response: MsgBeginRedelegateResponse): void | Promise<void>): void {
     const data = MsgBeginRedelegate.encode(request).finish();
-    const promise = this.rpc.request("cosmos.staking.v1beta1.Msg", "BeginRedelegate", data);
-    return promise.then(data => MsgBeginRedelegateResponse.decode(new Reader(data)));
+    this.signingClient.addMsg({
+      typeUrl: "cosmos.staking.v1beta1.Msg/BeginRedelegate",
+      value: data
+    }, callback);
   }
 
-  Undelegate(request: MsgUndelegate): Promise<MsgUndelegateResponse> {
+  Undelegate(request: MsgUndelegate, callback?: function (response: MsgUndelegateResponse): void | Promise<void>): void {
     const data = MsgUndelegate.encode(request).finish();
-    const promise = this.rpc.request("cosmos.staking.v1beta1.Msg", "Undelegate", data);
-    return promise.then(data => MsgUndelegateResponse.decode(new Reader(data)));
+    this.signingClient.addMsg({
+      typeUrl: "cosmos.staking.v1beta1.Msg/Undelegate",
+      value: data
+    }, callback);
   }
 
 }

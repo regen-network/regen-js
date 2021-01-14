@@ -3,7 +3,8 @@ import { Any } from '../../../google/protobuf/any';
 import { Coin } from '../../../cosmos/base/v1beta1/coin';
 import * as Long from 'long';
 import { VoteOption, voteOptionFromJSON, voteOptionToJSON } from '../../../cosmos/gov/v1beta1/gov';
-import { Reader, Writer } from 'protobufjs/minimal';
+import { SigningStargateClient } from '@cosmjs/stargate';
+import { Writer, Reader } from 'protobufjs/minimal';
 
 
 /**
@@ -102,28 +103,34 @@ export interface Msg {
 
 export class MsgClientImpl implements Msg {
 
-  private readonly rpc: Rpc;
+  private readonly signingClient: SigningStargateClient;
 
-  constructor(rpc: Rpc) {
-    this.rpc = rpc;
+  constructor(signingClient: SigningStargateClient) {
+    this.signingClient = signingClient;
   }
 
-  SubmitProposal(request: MsgSubmitProposal): Promise<MsgSubmitProposalResponse> {
+  SubmitProposal(request: MsgSubmitProposal, callback?: function (response: MsgSubmitProposalResponse): void | Promise<void>): void {
     const data = MsgSubmitProposal.encode(request).finish();
-    const promise = this.rpc.request("cosmos.gov.v1beta1.Msg", "SubmitProposal", data);
-    return promise.then(data => MsgSubmitProposalResponse.decode(new Reader(data)));
+    this.signingClient.addMsg({
+      typeUrl: "cosmos.gov.v1beta1.Msg/SubmitProposal",
+      value: data
+    }, callback);
   }
 
-  Vote(request: MsgVote): Promise<MsgVoteResponse> {
+  Vote(request: MsgVote, callback?: function (response: MsgVoteResponse): void | Promise<void>): void {
     const data = MsgVote.encode(request).finish();
-    const promise = this.rpc.request("cosmos.gov.v1beta1.Msg", "Vote", data);
-    return promise.then(data => MsgVoteResponse.decode(new Reader(data)));
+    this.signingClient.addMsg({
+      typeUrl: "cosmos.gov.v1beta1.Msg/Vote",
+      value: data
+    }, callback);
   }
 
-  Deposit(request: MsgDeposit): Promise<MsgDepositResponse> {
+  Deposit(request: MsgDeposit, callback?: function (response: MsgDepositResponse): void | Promise<void>): void {
     const data = MsgDeposit.encode(request).finish();
-    const promise = this.rpc.request("cosmos.gov.v1beta1.Msg", "Deposit", data);
-    return promise.then(data => MsgDepositResponse.decode(new Reader(data)));
+    this.signingClient.addMsg({
+      typeUrl: "cosmos.gov.v1beta1.Msg/Deposit",
+      value: data
+    }, callback);
   }
 
 }
