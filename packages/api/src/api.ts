@@ -1,4 +1,4 @@
-import { Client as TendermintClient } from '@cosmjs/tendermint-rpc';
+import { adaptor34, Client as TendermintClient } from '@cosmjs/tendermint-rpc';
 
 import { Connection, createTendermintConnection } from './connection';
 
@@ -34,7 +34,8 @@ export class RegenApi {
 		switch (options.connection.type) {
 			case 'tendermint': {
 				const tendermintClient = await TendermintClient.connect(
-					options.connection.url
+					options.connection.url,
+					adaptor34
 				);
 
 				return new RegenApi(
