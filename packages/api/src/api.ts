@@ -35,6 +35,9 @@ export class RegenApi {
 			case 'tendermint': {
 				const tendermintClient = await TendermintClient.connect(
 					options.connection.url,
+					// Since v0.40.0, CosmJS cannot detect the Tendermint
+					// version used by the node. Here, we just hardcode to use
+					// an adaptor for Tendermint 0.34.x.
 					adaptor34
 				);
 
