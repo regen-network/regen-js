@@ -11,17 +11,18 @@ export function MyBalance(props: MyBalanceProps): React.ReactElement {
 	const { api } = props;
 
 	const [address, setAddress] = useState(
-		'regen:1j9h8dpu7ah2hl9rg7ycu0e64kh90rrlpk9kagz'
+		'stars1j9h8dpu7ah2hl9rg7ycu0e64kh90rrlpk9kagz'
 	);
 	const [balance, setBalance] = useState<
 		QueryAllBalancesResponse | undefined
 	>();
 
 	useEffect(() => {
-		const impl = new QueryClientImpl(api.connection.queryConnection);
-		impl.AllBalances({
-			address,
-		})
+		const bankClient = new QueryClientImpl(api.connection.queryConnection);
+		bankClient
+			.AllBalances({
+				address,
+			})
 			.then(setBalance)
 			.catch(console.error);
 	}, [address, api.connection]);

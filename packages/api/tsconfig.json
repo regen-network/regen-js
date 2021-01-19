@@ -4,5 +4,6 @@
 		"esModuleInterop": false, // Somehow protobuf.js doesn't work when this is set to true.
 		"outDir": "lib"
 	},
-	"extends": "../../tsconfig"
+	"extends": "../../tsconfig",
+	"include": ["src"]
 }

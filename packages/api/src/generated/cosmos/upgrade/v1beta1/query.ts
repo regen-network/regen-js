@@ -1,6 +1,7 @@
 /* eslint-disable */
 import { Plan } from '../../../cosmos/upgrade/v1beta1/upgrade';
 import * as Long from 'long';
+import { Any } from '../../../google/protobuf/any';
 import { Reader, Writer } from 'protobufjs/minimal';
 
 
@@ -44,6 +45,26 @@ export interface QueryAppliedPlanResponse {
   height: Long;
 }
 
+/**
+ *  QueryUpgradedConsensusStateRequest is the request type for the Query/UpgradedConsensusState
+ *  RPC method.
+ */
+export interface QueryUpgradedConsensusStateRequest {
+  /**
+   *  last height of the current chain must be sent in request
+   *  as this is the height under which next consensus state is stored
+   */
+  lastHeight: Long;
+}
+
+/**
+ *  QueryUpgradedConsensusStateResponse is the response type for the Query/UpgradedConsensusState
+ *  RPC method.
+ */
+export interface QueryUpgradedConsensusStateResponse {
+  upgradedConsensusState?: Any;
+}
+
 const baseQueryCurrentPlanRequest: object = {
 };
 
@@ -56,6 +77,13 @@ const baseQueryAppliedPlanRequest: object = {
 
 const baseQueryAppliedPlanResponse: object = {
   height: Long.ZERO,
+};
+
+const baseQueryUpgradedConsensusStateRequest: object = {
+  lastHeight: Long.ZERO,
+};
+
+const baseQueryUpgradedConsensusStateResponse: object = {
 };
 
 /**
@@ -72,6 +100,14 @@ export interface Query {
    *  AppliedPlan queries a previously applied upgrade plan by its name.
    */
   AppliedPlan(request: QueryAppliedPlanRequest): Promise<QueryAppliedPlanResponse>;
+
+  /**
+   *  UpgradedConsensusState queries the consensus state that will serve
+   *  as a trusted kernel for the next version of this chain. It will only be
+   *  stored at the last height of this chain.
+   *  UpgradedConsensusState RPC not supported with legacy querier
+   */
+  UpgradedConsensusState(request: QueryUpgradedConsensusStateRequest): Promise<QueryUpgradedConsensusStateResponse>;
 
 }
 
@@ -93,6 +129,12 @@ export class QueryClientImpl implements Query {
     const data = QueryAppliedPlanRequest.encode(request).finish();
     const promise = this.rpc.request("cosmos.upgrade.v1beta1.Query", "AppliedPlan", data);
     return promise.then(data => QueryAppliedPlanResponse.decode(new Reader(data)));
+  }
+
+  UpgradedConsensusState(request: QueryUpgradedConsensusStateRequest): Promise<QueryUpgradedConsensusStateResponse> {
+    const data = QueryUpgradedConsensusStateRequest.encode(request).finish();
+    const promise = this.rpc.request("cosmos.upgrade.v1beta1.Query", "UpgradedConsensusState", data);
+    return promise.then(data => QueryUpgradedConsensusStateResponse.decode(new Reader(data)));
   }
 
 }
@@ -276,6 +318,102 @@ export const QueryAppliedPlanResponse = {
   toJSON(message: QueryAppliedPlanResponse): unknown {
     const obj: any = {};
     message.height !== undefined && (obj.height = (message.height || Long.ZERO).toString());
+    return obj;
+  },
+};
+
+export const QueryUpgradedConsensusStateRequest = {
+  encode(message: QueryUpgradedConsensusStateRequest, writer: Writer = Writer.create()): Writer {
+    writer.uint32(8).int64(message.lastHeight);
+    return writer;
+  },
+  decode(input: Uint8Array | Reader, length?: number): QueryUpgradedConsensusStateRequest {
+    const reader = input instanceof Uint8Array ? new Reader(input) : input;
+    let end = length === undefined ? reader.len : reader.pos + length;
+    const message = { ...baseQueryUpgradedConsensusStateRequest } as QueryUpgradedConsensusStateRequest;
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+        case 1:
+          message.lastHeight = reader.int64() as Long;
+          break;
+        default:
+          reader.skipType(tag & 7);
+          break;
+      }
+    }
+    return message;
+  },
+  fromJSON(object: any): QueryUpgradedConsensusStateRequest {
+    const message = { ...baseQueryUpgradedConsensusStateRequest } as QueryUpgradedConsensusStateRequest;
+    if (object.lastHeight !== undefined && object.lastHeight !== null) {
+      message.lastHeight = Long.fromString(object.lastHeight);
+    } else {
+      message.lastHeight = Long.ZERO;
+    }
+    return message;
+  },
+  fromPartial(object: DeepPartial<QueryUpgradedConsensusStateRequest>): QueryUpgradedConsensusStateRequest {
+    const message = { ...baseQueryUpgradedConsensusStateRequest } as QueryUpgradedConsensusStateRequest;
+    if (object.lastHeight !== undefined && object.lastHeight !== null) {
+      message.lastHeight = object.lastHeight as Long;
+    } else {
+      message.lastHeight = Long.ZERO;
+    }
+    return message;
+  },
+  toJSON(message: QueryUpgradedConsensusStateRequest): unknown {
+    const obj: any = {};
+    message.lastHeight !== undefined && (obj.lastHeight = (message.lastHeight || Long.ZERO).toString());
+    return obj;
+  },
+};
+
+export const QueryUpgradedConsensusStateResponse = {
+  encode(message: QueryUpgradedConsensusStateResponse, writer: Writer = Writer.create()): Writer {
+    if (message.upgradedConsensusState !== undefined && message.upgradedConsensusState !== undefined) {
+      Any.encode(message.upgradedConsensusState, writer.uint32(10).fork()).ldelim();
+    }
+    return writer;
+  },
+  decode(input: Uint8Array | Reader, length?: number): QueryUpgradedConsensusStateResponse {
+    const reader = input instanceof Uint8Array ? new Reader(input) : input;
+    let end = length === undefined ? reader.len : reader.pos + length;
+    const message = { ...baseQueryUpgradedConsensusStateResponse } as QueryUpgradedConsensusStateResponse;
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+        case 1:
+          message.upgradedConsensusState = Any.decode(reader, reader.uint32());
+          break;
+        default:
+          reader.skipType(tag & 7);
+          break;
+      }
+    }
+    return message;
+  },
+  fromJSON(object: any): QueryUpgradedConsensusStateResponse {
+    const message = { ...baseQueryUpgradedConsensusStateResponse } as QueryUpgradedConsensusStateResponse;
+    if (object.upgradedConsensusState !== undefined && object.upgradedConsensusState !== null) {
+      message.upgradedConsensusState = Any.fromJSON(object.upgradedConsensusState);
+    } else {
+      message.upgradedConsensusState = undefined;
+    }
+    return message;
+  },
+  fromPartial(object: DeepPartial<QueryUpgradedConsensusStateResponse>): QueryUpgradedConsensusStateResponse {
+    const message = { ...baseQueryUpgradedConsensusStateResponse } as QueryUpgradedConsensusStateResponse;
+    if (object.upgradedConsensusState !== undefined && object.upgradedConsensusState !== null) {
+      message.upgradedConsensusState = Any.fromPartial(object.upgradedConsensusState);
+    } else {
+      message.upgradedConsensusState = undefined;
+    }
+    return message;
+  },
+  toJSON(message: QueryUpgradedConsensusStateResponse): unknown {
+    const obj: any = {};
+    message.upgradedConsensusState !== undefined && (obj.upgradedConsensusState = message.upgradedConsensusState ? Any.toJSON(message.upgradedConsensusState) : undefined);
     return obj;
   },
 };

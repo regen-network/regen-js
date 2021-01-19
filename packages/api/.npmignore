@@ -1,0 +1,18 @@
+# dependencies
+node_modules
+
+# testing
+coverage
+
+# logs
+*.log*
+
+# os-generated files
+.DS_Store
+
+# TS source code
+src
+
+# Proto definitions
+proto
+scripts

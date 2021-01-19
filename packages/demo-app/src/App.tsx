@@ -4,11 +4,11 @@ import * as React from 'react';
 
 import { MyBalance } from './MyBalance';
 
-const DEVNET_NODE_TM_URL = 'http://devnet.regen.network:26657'; // CORS not enabled on this one yet.
-const AMAURY_NODE_TM_URL = 'http://18.223.151.187:26657';
+const DEVNET_NODE_TM_URL = 'http://rpc.devnet.stargaze.fi'; // CORS not enabled on this one yet.
+const TESTNET_NODE_TM_URL = 'http://18.223.151.187:26657';
 
 export function App(): React.ReactElement {
-	const [tmUrl, setTmUrl] = useState(AMAURY_NODE_TM_URL);
+	const [tmUrl, setTmUrl] = useState(DEVNET_NODE_TM_URL);
 	const [tmError, setTmError] = useState<Error | undefined>();
 
 	const [api, setApi] = useState<StargazeApi | undefined>(undefined);
@@ -33,7 +33,7 @@ export function App(): React.ReactElement {
 	return (
 		<div>
 			<h1>
-				Regen Network Demo App using{' '}
+				Stargaze Demo App using{' '}
 				<code>@stargazefi/api</code>
 			</h1>
 
@@ -58,10 +58,10 @@ export function App(): React.ReactElement {
 				<p>
 					Switch to a known public endpoint:
 					<button onClick={() => setTmUrl(DEVNET_NODE_TM_URL)}>
-						Official Regen Devnet node
+						Official Stargaze Devnet node
 					</button>
-					<button onClick={() => setTmUrl(AMAURY_NODE_TM_URL)}>
-						Amaury&apos;s node
+					<button onClick={() => setTmUrl(TESTNET_NODE_TM_URL)}>
+						Testnet&apos;s node
 					</button>
 				</p>
 

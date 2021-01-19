@@ -1,19 +1,23 @@
 {
 	"name": "@stargazefi/api",
-	"version": "0.1.2",
-	"author": "shanev@gmail.com",
+	"version": "0.1.3",
+	"author": "Public Awesome",
 	"description": "A client library for the Stargaze blockchain",
 	"license": "Apache-2.0",
 	"main": "lib",
 	"repository": "https://github.com/public-awesome/stargaze-js",
+	"publishConfig": {
+		"access": "public"
+	},
 	"dependencies": {
-		"@cosmjs/stargate": "^0.24.0-alpha.10"
+		"@cosmjs/stargate": "^0.24.0-alpha.17"
 	},
 	"scripts": {
 		"build": "rimraf lib && tsc",
+		"gen": "rimraf src/generated && mkdir src/generated && ./scripts/protocgen.sh",
 		"test": "jest"
 	},
 	"devDependencies": {
-		"ts-proto": "^1.39.0"
+		"ts-proto": "^1.41.1"
 	}
 }
