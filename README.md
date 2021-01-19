@@ -4,13 +4,13 @@ This monorepo contains JavaScript libraries and UIs for interacting with the Sta
 
 "JS" is short for runs everywhere – we actually develop in TypeScript.
 
-🚧 This API is still under heavy construction, be ready for unexpected breaking changes.
+🚧 This API is still under heavy construction, be ready for unexpected breaking changes. Stargaze-js is a fork of [Regen-js](https://github.com/regen-network/regen-js).
 
 ## Get Started
 
 ```bash
 # Clone the repo.
-git clone https://github.com/regen-network/regen-js
+git clone https://github.com/public-awesome/stargaze-js
 
 # Install dependencies.
 yarn install

@@ -11,9 +11,9 @@ import { Reader, Writer } from 'protobufjs/minimal';
  */
 export interface GetTxsEventRequest {
   /**
-   *  event is the transaction event type.
+   *  events is the list of transaction event type.
    */
-  event: string;
+  events: string[];
   /**
    *  pagination defines an pagination for the request.
    */
@@ -37,6 +37,29 @@ export interface GetTxsEventResponse {
    *  pagination defines an pagination for the response.
    */
   pagination?: PageResponse;
+}
+
+/**
+ *  BroadcastTxRequest is the request type for the Service.BroadcastTxRequest
+ *  RPC method.
+ */
+export interface BroadcastTxRequest {
+  /**
+   *  tx_bytes is the raw transaction.
+   */
+  txBytes: Uint8Array;
+  mode: BroadcastMode;
+}
+
+/**
+ *  BroadcastTxResponse is the response type for the
+ *  Service.BroadcastTx method.
+ */
+export interface BroadcastTxResponse {
+  /**
+   *  tx_response is the queried TxResponses.
+   */
+  txResponse?: TxResponse;
 }
 
 /**
@@ -91,10 +114,17 @@ export interface GetTxResponse {
 }
 
 const baseGetTxsEventRequest: object = {
-  event: "",
+  events: "",
 };
 
 const baseGetTxsEventResponse: object = {
+};
+
+const baseBroadcastTxRequest: object = {
+  mode: 0,
+};
+
+const baseBroadcastTxResponse: object = {
 };
 
 const baseSimulateRequest: object = {
@@ -126,6 +156,11 @@ export interface Service {
   GetTx(request: GetTxRequest): Promise<GetTxResponse>;
 
   /**
+   *  BroadcastTx broadcast transaction.
+   */
+  BroadcastTx(request: BroadcastTxRequest): Promise<BroadcastTxResponse>;
+
+  /**
    *  GetTxsEvent fetches txs by event.
    */
   GetTxsEvent(request: GetTxsEventRequest): Promise<GetTxsEventResponse>;
@@ -152,6 +187,12 @@ export class ServiceClientImpl implements Service {
     return promise.then(data => GetTxResponse.decode(new Reader(data)));
   }
 
+  BroadcastTx(request: BroadcastTxRequest): Promise<BroadcastTxResponse> {
+    const data = BroadcastTxRequest.encode(request).finish();
+    const promise = this.rpc.request("cosmos.tx.v1beta1.Service", "BroadcastTx", data);
+    return promise.then(data => BroadcastTxResponse.decode(new Reader(data)));
+  }
+
   GetTxsEvent(request: GetTxsEventRequest): Promise<GetTxsEventResponse> {
     const data = GetTxsEventRequest.encode(request).finish();
     const promise = this.rpc.request("cosmos.tx.v1beta1.Service", "GetTxsEvent", data);
@@ -168,9 +209,68 @@ interface Rpc {
 
 export const protobufPackage = 'cosmos.tx.v1beta1'
 
+/**  BroadcastMode specifies the broadcast mode for the TxService.Broadcast RPC method.
+ */
+export enum BroadcastMode {
+  /** BROADCAST_MODE_UNSPECIFIED -  zero-value for mode ordering
+   */
+  BROADCAST_MODE_UNSPECIFIED = 0,
+  /** BROADCAST_MODE_BLOCK -  BROADCAST_MODE_BLOCK defines a tx broadcasting mode where the client waits for
+   the tx to be committed in a block.
+   */
+  BROADCAST_MODE_BLOCK = 1,
+  /** BROADCAST_MODE_SYNC -  BROADCAST_MODE_SYNC defines a tx broadcasting mode where the client waits for
+   a CheckTx execution response only.
+   */
+  BROADCAST_MODE_SYNC = 2,
+  /** BROADCAST_MODE_ASYNC -  BROADCAST_MODE_ASYNC defines a tx broadcasting mode where the client returns
+   immediately.
+   */
+  BROADCAST_MODE_ASYNC = 3,
+  UNRECOGNIZED = -1,
+}
+
+export function broadcastModeFromJSON(object: any): BroadcastMode {
+  switch (object) {
+    case 0:
+    case "BROADCAST_MODE_UNSPECIFIED":
+      return BroadcastMode.BROADCAST_MODE_UNSPECIFIED;
+    case 1:
+    case "BROADCAST_MODE_BLOCK":
+      return BroadcastMode.BROADCAST_MODE_BLOCK;
+    case 2:
+    case "BROADCAST_MODE_SYNC":
+      return BroadcastMode.BROADCAST_MODE_SYNC;
+    case 3:
+    case "BROADCAST_MODE_ASYNC":
+      return BroadcastMode.BROADCAST_MODE_ASYNC;
+    case -1:
+    case "UNRECOGNIZED":
+    default:
+      return BroadcastMode.UNRECOGNIZED;
+  }
+}
+
+export function broadcastModeToJSON(object: BroadcastMode): string {
+  switch (object) {
+    case BroadcastMode.BROADCAST_MODE_UNSPECIFIED:
+      return "BROADCAST_MODE_UNSPECIFIED";
+    case BroadcastMode.BROADCAST_MODE_BLOCK:
+      return "BROADCAST_MODE_BLOCK";
+    case BroadcastMode.BROADCAST_MODE_SYNC:
+      return "BROADCAST_MODE_SYNC";
+    case BroadcastMode.BROADCAST_MODE_ASYNC:
+      return "BROADCAST_MODE_ASYNC";
+    default:
+      return "UNKNOWN";
+  }
+}
+
 export const GetTxsEventRequest = {
   encode(message: GetTxsEventRequest, writer: Writer = Writer.create()): Writer {
-    writer.uint32(10).string(message.event);
+    for (const v of message.events) {
+      writer.uint32(10).string(v!);
+    }
     if (message.pagination !== undefined && message.pagination !== undefined) {
       PageRequest.encode(message.pagination, writer.uint32(18).fork()).ldelim();
     }
@@ -180,11 +280,12 @@ export const GetTxsEventRequest = {
     const reader = input instanceof Uint8Array ? new Reader(input) : input;
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = { ...baseGetTxsEventRequest } as GetTxsEventRequest;
+    message.events = [];
     while (reader.pos < end) {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          message.event = reader.string();
+          message.events.push(reader.string());
           break;
         case 2:
           message.pagination = PageRequest.decode(reader, reader.uint32());
@@ -198,10 +299,11 @@ export const GetTxsEventRequest = {
   },
   fromJSON(object: any): GetTxsEventRequest {
     const message = { ...baseGetTxsEventRequest } as GetTxsEventRequest;
-    if (object.event !== undefined && object.event !== null) {
-      message.event = String(object.event);
-    } else {
-      message.event = "";
+    message.events = [];
+    if (object.events !== undefined && object.events !== null) {
+      for (const e of object.events) {
+        message.events.push(String(e));
+      }
     }
     if (object.pagination !== undefined && object.pagination !== null) {
       message.pagination = PageRequest.fromJSON(object.pagination);
@@ -212,10 +314,11 @@ export const GetTxsEventRequest = {
   },
   fromPartial(object: DeepPartial<GetTxsEventRequest>): GetTxsEventRequest {
     const message = { ...baseGetTxsEventRequest } as GetTxsEventRequest;
-    if (object.event !== undefined && object.event !== null) {
-      message.event = object.event;
-    } else {
-      message.event = "";
+    message.events = [];
+    if (object.events !== undefined && object.events !== null) {
+      for (const e of object.events) {
+        message.events.push(e);
+      }
     }
     if (object.pagination !== undefined && object.pagination !== null) {
       message.pagination = PageRequest.fromPartial(object.pagination);
@@ -226,7 +329,11 @@ export const GetTxsEventRequest = {
   },
   toJSON(message: GetTxsEventRequest): unknown {
     const obj: any = {};
-    message.event !== undefined && (obj.event = message.event);
+    if (message.events) {
+      obj.events = message.events.map(e => e);
+    } else {
+      obj.events = [];
+    }
     message.pagination !== undefined && (obj.pagination = message.pagination ? PageRequest.toJSON(message.pagination) : undefined);
     return obj;
   },
@@ -325,6 +432,115 @@ export const GetTxsEventResponse = {
       obj.txResponses = [];
     }
     message.pagination !== undefined && (obj.pagination = message.pagination ? PageResponse.toJSON(message.pagination) : undefined);
+    return obj;
+  },
+};
+
+export const BroadcastTxRequest = {
+  encode(message: BroadcastTxRequest, writer: Writer = Writer.create()): Writer {
+    writer.uint32(10).bytes(message.txBytes);
+    writer.uint32(16).int32(message.mode);
+    return writer;
+  },
+  decode(input: Uint8Array | Reader, length?: number): BroadcastTxRequest {
+    const reader = input instanceof Uint8Array ? new Reader(input) : input;
+    let end = length === undefined ? reader.len : reader.pos + length;
+    const message = { ...baseBroadcastTxRequest } as BroadcastTxRequest;
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+        case 1:
+          message.txBytes = reader.bytes();
+          break;
+        case 2:
+          message.mode = reader.int32() as any;
+          break;
+        default:
+          reader.skipType(tag & 7);
+          break;
+      }
+    }
+    return message;
+  },
+  fromJSON(object: any): BroadcastTxRequest {
+    const message = { ...baseBroadcastTxRequest } as BroadcastTxRequest;
+    if (object.txBytes !== undefined && object.txBytes !== null) {
+      message.txBytes = bytesFromBase64(object.txBytes);
+    }
+    if (object.mode !== undefined && object.mode !== null) {
+      message.mode = broadcastModeFromJSON(object.mode);
+    } else {
+      message.mode = 0;
+    }
+    return message;
+  },
+  fromPartial(object: DeepPartial<BroadcastTxRequest>): BroadcastTxRequest {
+    const message = { ...baseBroadcastTxRequest } as BroadcastTxRequest;
+    if (object.txBytes !== undefined && object.txBytes !== null) {
+      message.txBytes = object.txBytes;
+    } else {
+      message.txBytes = new Uint8Array();
+    }
+    if (object.mode !== undefined && object.mode !== null) {
+      message.mode = object.mode;
+    } else {
+      message.mode = 0;
+    }
+    return message;
+  },
+  toJSON(message: BroadcastTxRequest): unknown {
+    const obj: any = {};
+    message.txBytes !== undefined && (obj.txBytes = base64FromBytes(message.txBytes !== undefined ? message.txBytes : new Uint8Array()));
+    message.mode !== undefined && (obj.mode = broadcastModeToJSON(message.mode));
+    return obj;
+  },
+};
+
+export const BroadcastTxResponse = {
+  encode(message: BroadcastTxResponse, writer: Writer = Writer.create()): Writer {
+    if (message.txResponse !== undefined && message.txResponse !== undefined) {
+      TxResponse.encode(message.txResponse, writer.uint32(10).fork()).ldelim();
+    }
+    return writer;
+  },
+  decode(input: Uint8Array | Reader, length?: number): BroadcastTxResponse {
+    const reader = input instanceof Uint8Array ? new Reader(input) : input;
+    let end = length === undefined ? reader.len : reader.pos + length;
+    const message = { ...baseBroadcastTxResponse } as BroadcastTxResponse;
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+        case 1:
+          message.txResponse = TxResponse.decode(reader, reader.uint32());
+          break;
+        default:
+          reader.skipType(tag & 7);
+          break;
+      }
+    }
+    return message;
+  },
+  fromJSON(object: any): BroadcastTxResponse {
+    const message = { ...baseBroadcastTxResponse } as BroadcastTxResponse;
+    if (object.txResponse !== undefined && object.txResponse !== null) {
+      message.txResponse = TxResponse.fromJSON(object.txResponse);
+    } else {
+      message.txResponse = undefined;
+    }
+    return message;
+  },
+  fromPartial(object: DeepPartial<BroadcastTxResponse>): BroadcastTxResponse {
+    const message = { ...baseBroadcastTxResponse } as BroadcastTxResponse;
+    if (object.txResponse !== undefined && object.txResponse !== null) {
+      message.txResponse = TxResponse.fromPartial(object.txResponse);
+    } else {
+      message.txResponse = undefined;
+    }
+    return message;
+  },
+  toJSON(message: BroadcastTxResponse): unknown {
+    const obj: any = {};
+    message.txResponse !== undefined && (obj.txResponse = message.txResponse ? TxResponse.toJSON(message.txResponse) : undefined);
     return obj;
   },
 };
@@ -557,6 +773,31 @@ export const GetTxResponse = {
   },
 };
 
+interface WindowBase64 {
+  atob(b64: string): string;
+  btoa(bin: string): string;
+}
+
+const windowBase64 = (globalThis as unknown as WindowBase64);
+const atob = windowBase64.atob || ((b64: string) => Buffer.from(b64, 'base64').toString('binary'));
+const btoa = windowBase64.btoa || ((bin: string) => Buffer.from(bin, 'binary').toString('base64'));
+
+function bytesFromBase64(b64: string): Uint8Array {
+  const bin = atob(b64);
+  const arr = new Uint8Array(bin.length);
+  for (let i = 0; i < bin.length; ++i) {
+      arr[i] = bin.charCodeAt(i);
+  }
+  return arr;
+}
+
+function base64FromBytes(arr: Uint8Array): string {
+  const bin: string[] = [];
+  for (let i = 0; i < arr.byteLength; ++i) {
+    bin.push(String.fromCharCode(arr[i]));
+  }
+  return btoa(bin.join(''));
+}
 type Builtin = Date | Function | Uint8Array | string | number | undefined;
 export type DeepPartial<T> = T extends Builtin
   ? T

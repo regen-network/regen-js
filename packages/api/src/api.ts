@@ -1,4 +1,4 @@
-import { Client as TendermintClient } from '@cosmjs/tendermint-rpc';
+import { adaptor34, Client as TendermintClient } from '@cosmjs/tendermint-rpc';
 
 import { Connection, createTendermintConnection } from './connection';
 
@@ -26,8 +26,7 @@ export class StargazeApi {
 	}
 
 	/**
-	 * Create a StargazeApi object which connects to the gRPC and Tendermint
-	 * endpoints.
+	 * Create a StargazeApi object which connects to the given gRPC connection.
 	 *
 	 * @param options - Options to pass into StargazeApi.
 	 */
@@ -37,7 +36,11 @@ export class StargazeApi {
 		switch (options.connection.type) {
 			case 'tendermint': {
 				const tendermintClient = await TendermintClient.connect(
-					options.connection.url
+					options.connection.url,
+					// Since v0.40.0, CosmJS cannot detect the Tendermint
+					// version used by the node. Here, we just hardcode to use
+					// an adaptor for Tendermint 0.34.x.
+					adaptor34
 				);
 
 				return new StargazeApi(
