@@ -1,7 +1,8 @@
 /* eslint-disable */
-import { Reader, Writer, util, configure } from 'protobufjs/minimal';
+import { SigningStargateClient } from '@cosmjs/stargate';
 import { Timestamp } from '../../../google/protobuf/timestamp';
 import * as Long from 'long';
+import { Writer, Reader, util, configure } from 'protobufjs/minimal';
 
 
 /**
@@ -162,28 +163,34 @@ export interface Msg {
 
 export class MsgClientImpl implements Msg {
 
-  private readonly rpc: Rpc;
+  private readonly signingClient: SigningStargateClient;
 
-  constructor(rpc: Rpc) {
-    this.rpc = rpc;
+  constructor(signingClient: SigningStargateClient) {
+    this.signingClient = signingClient;
   }
 
-  AnchorData(request: MsgAnchorDataRequest): Promise<MsgAnchorDataResponse> {
+  AnchorData(request: MsgAnchorDataRequest, callback?: function (response: MsgAnchorDataResponse): void | Promise<void>): void {
     const data = MsgAnchorDataRequest.encode(request).finish();
-    const promise = this.rpc.request("regen.data.v1alpha1.Msg", "AnchorData", data);
-    return promise.then(data => MsgAnchorDataResponse.decode(new Reader(data)));
+    this.signingClient.addMsg({
+      typeUrl: "regen.data.v1alpha1.Msg/AnchorData",
+      value: data
+    }, callback);
   }
 
-  SignData(request: MsgSignDataRequest): Promise<MsgSignDataResponse> {
+  SignData(request: MsgSignDataRequest, callback?: function (response: MsgSignDataResponse): void | Promise<void>): void {
     const data = MsgSignDataRequest.encode(request).finish();
-    const promise = this.rpc.request("regen.data.v1alpha1.Msg", "SignData", data);
-    return promise.then(data => MsgSignDataResponse.decode(new Reader(data)));
+    this.signingClient.addMsg({
+      typeUrl: "regen.data.v1alpha1.Msg/SignData",
+      value: data
+    }, callback);
   }
 
-  StoreData(request: MsgStoreDataRequest): Promise<MsgStoreDataResponse> {
+  StoreData(request: MsgStoreDataRequest, callback?: function (response: MsgStoreDataResponse): void | Promise<void>): void {
     const data = MsgStoreDataRequest.encode(request).finish();
-    const promise = this.rpc.request("regen.data.v1alpha1.Msg", "StoreData", data);
-    return promise.then(data => MsgStoreDataResponse.decode(new Reader(data)));
+    this.signingClient.addMsg({
+      typeUrl: "regen.data.v1alpha1.Msg/StoreData",
+      value: data
+    }, callback);
   }
 
 }

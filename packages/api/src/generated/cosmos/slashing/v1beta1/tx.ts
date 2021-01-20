@@ -1,5 +1,6 @@
 /* eslint-disable */
-import { Reader, Writer } from 'protobufjs/minimal';
+import { SigningStargateClient } from '@cosmjs/stargate';
+import { Writer, Reader } from 'protobufjs/minimal';
 
 
 /**
@@ -38,16 +39,18 @@ export interface Msg {
 
 export class MsgClientImpl implements Msg {
 
-  private readonly rpc: Rpc;
+  private readonly signingClient: SigningStargateClient;
 
-  constructor(rpc: Rpc) {
-    this.rpc = rpc;
+  constructor(signingClient: SigningStargateClient) {
+    this.signingClient = signingClient;
   }
 
-  Unjail(request: MsgUnjail): Promise<MsgUnjailResponse> {
+  Unjail(request: MsgUnjail, callback?: function (response: MsgUnjailResponse): void | Promise<void>): void {
     const data = MsgUnjail.encode(request).finish();
-    const promise = this.rpc.request("cosmos.slashing.v1beta1.Msg", "Unjail", data);
-    return promise.then(data => MsgUnjailResponse.decode(new Reader(data)));
+    this.signingClient.addMsg({
+      typeUrl: "cosmos.slashing.v1beta1.Msg/Unjail",
+      value: data
+    }, callback);
   }
 
 }

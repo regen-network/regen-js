@@ -1,5 +1,6 @@
 /* eslint-disable */
-import { Reader, Writer } from 'protobufjs/minimal';
+import { SigningStargateClient } from '@cosmjs/stargate';
+import { Writer, Reader } from 'protobufjs/minimal';
 
 
 /**
@@ -40,16 +41,18 @@ export interface Msg {
 
 export class MsgClientImpl implements Msg {
 
-  private readonly rpc: Rpc;
+  private readonly signingClient: SigningStargateClient;
 
-  constructor(rpc: Rpc) {
-    this.rpc = rpc;
+  constructor(signingClient: SigningStargateClient) {
+    this.signingClient = signingClient;
   }
 
-  VerifyInvariant(request: MsgVerifyInvariant): Promise<MsgVerifyInvariantResponse> {
+  VerifyInvariant(request: MsgVerifyInvariant, callback?: function (response: MsgVerifyInvariantResponse): void | Promise<void>): void {
     const data = MsgVerifyInvariant.encode(request).finish();
-    const promise = this.rpc.request("cosmos.crisis.v1beta1.Msg", "VerifyInvariant", data);
-    return promise.then(data => MsgVerifyInvariantResponse.decode(new Reader(data)));
+    this.signingClient.addMsg({
+      typeUrl: "cosmos.crisis.v1beta1.Msg/VerifyInvariant",
+      value: data
+    }, callback);
   }
 
 }

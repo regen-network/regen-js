@@ -1,6 +1,7 @@
 /* eslint-disable */
 import { Any } from '../../../google/protobuf/any';
-import { Reader, Writer } from 'protobufjs/minimal';
+import { SigningStargateClient } from '@cosmjs/stargate';
+import { Writer, Reader } from 'protobufjs/minimal';
 
 
 /**
@@ -44,16 +45,18 @@ export interface Msg {
 
 export class MsgClientImpl implements Msg {
 
-  private readonly rpc: Rpc;
+  private readonly signingClient: SigningStargateClient;
 
-  constructor(rpc: Rpc) {
-    this.rpc = rpc;
+  constructor(signingClient: SigningStargateClient) {
+    this.signingClient = signingClient;
   }
 
-  SubmitEvidence(request: MsgSubmitEvidence): Promise<MsgSubmitEvidenceResponse> {
+  SubmitEvidence(request: MsgSubmitEvidence, callback?: function (response: MsgSubmitEvidenceResponse): void | Promise<void>): void {
     const data = MsgSubmitEvidence.encode(request).finish();
-    const promise = this.rpc.request("cosmos.evidence.v1beta1.Msg", "SubmitEvidence", data);
-    return promise.then(data => MsgSubmitEvidenceResponse.decode(new Reader(data)));
+    this.signingClient.addMsg({
+      typeUrl: "cosmos.evidence.v1beta1.Msg/SubmitEvidence",
+      value: data
+    }, callback);
   }
 
 }

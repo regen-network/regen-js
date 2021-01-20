@@ -1,5 +1,6 @@
 /* eslint-disable */
-import { Reader, Writer } from 'protobufjs/minimal';
+import { SigningStargateClient } from '@cosmjs/stargate';
+import { Writer, Reader } from 'protobufjs/minimal';
 
 
 /**
@@ -292,40 +293,50 @@ export interface Msg {
 
 export class MsgClientImpl implements Msg {
 
-  private readonly rpc: Rpc;
+  private readonly signingClient: SigningStargateClient;
 
-  constructor(rpc: Rpc) {
-    this.rpc = rpc;
+  constructor(signingClient: SigningStargateClient) {
+    this.signingClient = signingClient;
   }
 
-  CreateClass(request: MsgCreateClassRequest): Promise<MsgCreateClassResponse> {
+  CreateClass(request: MsgCreateClassRequest, callback?: function (response: MsgCreateClassResponse): void | Promise<void>): void {
     const data = MsgCreateClassRequest.encode(request).finish();
-    const promise = this.rpc.request("regen.ecocredit.v1alpha1.Msg", "CreateClass", data);
-    return promise.then(data => MsgCreateClassResponse.decode(new Reader(data)));
+    this.signingClient.addMsg({
+      typeUrl: "regen.ecocredit.v1alpha1.Msg/CreateClass",
+      value: data
+    }, callback);
   }
 
-  CreateBatch(request: MsgCreateBatchRequest): Promise<MsgCreateBatchResponse> {
+  CreateBatch(request: MsgCreateBatchRequest, callback?: function (response: MsgCreateBatchResponse): void | Promise<void>): void {
     const data = MsgCreateBatchRequest.encode(request).finish();
-    const promise = this.rpc.request("regen.ecocredit.v1alpha1.Msg", "CreateBatch", data);
-    return promise.then(data => MsgCreateBatchResponse.decode(new Reader(data)));
+    this.signingClient.addMsg({
+      typeUrl: "regen.ecocredit.v1alpha1.Msg/CreateBatch",
+      value: data
+    }, callback);
   }
 
-  Send(request: MsgSendRequest): Promise<MsgSendResponse> {
+  Send(request: MsgSendRequest, callback?: function (response: MsgSendResponse): void | Promise<void>): void {
     const data = MsgSendRequest.encode(request).finish();
-    const promise = this.rpc.request("regen.ecocredit.v1alpha1.Msg", "Send", data);
-    return promise.then(data => MsgSendResponse.decode(new Reader(data)));
+    this.signingClient.addMsg({
+      typeUrl: "regen.ecocredit.v1alpha1.Msg/Send",
+      value: data
+    }, callback);
   }
 
-  Retire(request: MsgRetireRequest): Promise<MsgRetireResponse> {
+  Retire(request: MsgRetireRequest, callback?: function (response: MsgRetireResponse): void | Promise<void>): void {
     const data = MsgRetireRequest.encode(request).finish();
-    const promise = this.rpc.request("regen.ecocredit.v1alpha1.Msg", "Retire", data);
-    return promise.then(data => MsgRetireResponse.decode(new Reader(data)));
+    this.signingClient.addMsg({
+      typeUrl: "regen.ecocredit.v1alpha1.Msg/Retire",
+      value: data
+    }, callback);
   }
 
-  SetPrecision(request: MsgSetPrecisionRequest): Promise<MsgSetPrecisionResponse> {
+  SetPrecision(request: MsgSetPrecisionRequest, callback?: function (response: MsgSetPrecisionResponse): void | Promise<void>): void {
     const data = MsgSetPrecisionRequest.encode(request).finish();
-    const promise = this.rpc.request("regen.ecocredit.v1alpha1.Msg", "SetPrecision", data);
-    return promise.then(data => MsgSetPrecisionResponse.decode(new Reader(data)));
+    this.signingClient.addMsg({
+      typeUrl: "regen.ecocredit.v1alpha1.Msg/SetPrecision",
+      value: data
+    }, callback);
   }
 
 }

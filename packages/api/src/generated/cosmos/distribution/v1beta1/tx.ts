@@ -1,6 +1,7 @@
 /* eslint-disable */
 import { Coin } from '../../../cosmos/base/v1beta1/coin';
-import { Reader, Writer } from 'protobufjs/minimal';
+import { SigningStargateClient } from '@cosmjs/stargate';
+import { Writer, Reader } from 'protobufjs/minimal';
 
 
 /**
@@ -125,34 +126,42 @@ export interface Msg {
 
 export class MsgClientImpl implements Msg {
 
-  private readonly rpc: Rpc;
+  private readonly signingClient: SigningStargateClient;
 
-  constructor(rpc: Rpc) {
-    this.rpc = rpc;
+  constructor(signingClient: SigningStargateClient) {
+    this.signingClient = signingClient;
   }
 
-  SetWithdrawAddress(request: MsgSetWithdrawAddress): Promise<MsgSetWithdrawAddressResponse> {
+  SetWithdrawAddress(request: MsgSetWithdrawAddress, callback?: function (response: MsgSetWithdrawAddressResponse): void | Promise<void>): void {
     const data = MsgSetWithdrawAddress.encode(request).finish();
-    const promise = this.rpc.request("cosmos.distribution.v1beta1.Msg", "SetWithdrawAddress", data);
-    return promise.then(data => MsgSetWithdrawAddressResponse.decode(new Reader(data)));
+    this.signingClient.addMsg({
+      typeUrl: "cosmos.distribution.v1beta1.Msg/SetWithdrawAddress",
+      value: data
+    }, callback);
   }
 
-  WithdrawDelegatorReward(request: MsgWithdrawDelegatorReward): Promise<MsgWithdrawDelegatorRewardResponse> {
+  WithdrawDelegatorReward(request: MsgWithdrawDelegatorReward, callback?: function (response: MsgWithdrawDelegatorRewardResponse): void | Promise<void>): void {
     const data = MsgWithdrawDelegatorReward.encode(request).finish();
-    const promise = this.rpc.request("cosmos.distribution.v1beta1.Msg", "WithdrawDelegatorReward", data);
-    return promise.then(data => MsgWithdrawDelegatorRewardResponse.decode(new Reader(data)));
+    this.signingClient.addMsg({
+      typeUrl: "cosmos.distribution.v1beta1.Msg/WithdrawDelegatorReward",
+      value: data
+    }, callback);
   }
 
-  WithdrawValidatorCommission(request: MsgWithdrawValidatorCommission): Promise<MsgWithdrawValidatorCommissionResponse> {
+  WithdrawValidatorCommission(request: MsgWithdrawValidatorCommission, callback?: function (response: MsgWithdrawValidatorCommissionResponse): void | Promise<void>): void {
     const data = MsgWithdrawValidatorCommission.encode(request).finish();
-    const promise = this.rpc.request("cosmos.distribution.v1beta1.Msg", "WithdrawValidatorCommission", data);
-    return promise.then(data => MsgWithdrawValidatorCommissionResponse.decode(new Reader(data)));
+    this.signingClient.addMsg({
+      typeUrl: "cosmos.distribution.v1beta1.Msg/WithdrawValidatorCommission",
+      value: data
+    }, callback);
   }
 
-  FundCommunityPool(request: MsgFundCommunityPool): Promise<MsgFundCommunityPoolResponse> {
+  FundCommunityPool(request: MsgFundCommunityPool, callback?: function (response: MsgFundCommunityPoolResponse): void | Promise<void>): void {
     const data = MsgFundCommunityPool.encode(request).finish();
-    const promise = this.rpc.request("cosmos.distribution.v1beta1.Msg", "FundCommunityPool", data);
-    return promise.then(data => MsgFundCommunityPoolResponse.decode(new Reader(data)));
+    this.signingClient.addMsg({
+      typeUrl: "cosmos.distribution.v1beta1.Msg/FundCommunityPool",
+      value: data
+    }, callback);
   }
 
 }
