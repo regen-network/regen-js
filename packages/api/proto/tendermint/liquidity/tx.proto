@@ -3,8 +3,8 @@ package tendermint.liquidity;
 
 import "gogoproto/gogo.proto";
 import "google/api/annotations.proto";
-import "cosmos_proto/coin.proto";
-import "protoc-gen-openapiv2/options/annotations.proto";
+import "cosmos/base/v1beta1/coin.proto";
+import "google/api/annotations.proto";
 
 option go_package = "github.com/tendermint/liquidity/types";
 //option (gogoproto.goproto_getters_all) = false;

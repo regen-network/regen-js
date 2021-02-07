@@ -2,10 +2,9 @@ syntax = "proto3";
 package tendermint.liquidity;
 
 import "gogoproto/gogo.proto";
-import "liquidity.proto";
+import "tendermint/liquidity/liquidity.proto";
 import "google/api/annotations.proto";
-import "cosmos_proto/pagination.proto";
-import "protoc-gen-openapiv2/options/annotations.proto";
+import "cosmos/base/query/v1beta1/pagination.proto";
 
 option go_package = "github.com/tendermint/liquidity/types";
 
