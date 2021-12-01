@@ -13,11 +13,11 @@
 		"@cosmjs/stargate": "^0.24.0-alpha.17"
 	},
 	"scripts": {
-		"build": "rimraf lib && tsc",
+		"build": "rimraf lib && tsc --downlevelIteration",
 		"gen": "rimraf src/generated && mkdir src/generated && ./scripts/protocgen.sh",
 		"test": "jest"
 	},
 	"devDependencies": {
-		"ts-proto": "^1.41.1"
+		"ts-proto": "^1.92"
 	}
 }
