@@ -1,4 +1,4 @@
-import { adaptor34, Client as TendermintClient } from '@cosmjs/tendermint-rpc';
+import { Tendermint34Client as Client } from '@cosmjs/tendermint-rpc/build/tendermint34';
 
 import { Connection, createTendermintConnection } from './connection';
 
@@ -33,12 +33,8 @@ export class RegenApi {
 	public static async connect(options: RegenApiOptions): Promise<RegenApi> {
 		switch (options.connection.type) {
 			case 'tendermint': {
-				const tendermintClient = await TendermintClient.connect(
+				const tendermintClient = await Client.connect(
 					options.connection.url,
-					// Since v0.40.0, CosmJS cannot detect the Tendermint
-					// version used by the node. Here, we just hardcode to use
-					// an adaptor for Tendermint 0.34.x.
-					adaptor34
 				);
 
 				return new RegenApi(
