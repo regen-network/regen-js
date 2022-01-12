@@ -1,4 +1,4 @@
-import type { Tendermint34Client } from '@cosmjs/tendermint-rpc/build/tendermint34';
+import type { Tendermint34Client } from '@cosmjs/tendermint-rpc';
 
 import type { Connection } from './types';
 

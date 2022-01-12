@@ -1,4 +1,4 @@
-import { Tendermint34Client as Client } from '@cosmjs/tendermint-rpc/build/tendermint34';
+import { Tendermint34Client as Client } from '@cosmjs/tendermint-rpc';
 
 import { Connection, createTendermintConnection } from './connection';
 
