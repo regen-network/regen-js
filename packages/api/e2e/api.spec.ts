@@ -8,7 +8,7 @@ describe('RegenApi with tendermint connection', () => {
 		api = await RegenApi.connect({
 			connection: {
 				type: 'tendermint',
-				url: 'http://hambach.regen.network:26657',
+				url: 'http://devnet.regen.network:26657',
 			},
 		});
 	});
@@ -16,8 +16,9 @@ describe('RegenApi with tendermint connection', () => {
 	it('should fetch balances using tendermint client', async () => {
 		const bankClient = new QueryClientImpl(api.connection.queryConnection);
 		const res = await bankClient.AllBalances({
-			address: 'regen1df675r9vnf7pdedn4sf26svdsem3ugavgxmy46', // Test account.
+			address: 'regen:1j9h8dpu7ah2hl9rg7ycu0e64kh90rrlpk9kagz', // Amaury's account.
 		});
+
 		expect(res.balances.length).toBeGreaterThanOrEqual(1);
 	});
 });

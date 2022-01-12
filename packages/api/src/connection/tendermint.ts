@@ -1,4 +1,4 @@
-import type { Tendermint34Client } from '@cosmjs/tendermint-rpc/build/tendermint34';
+import type { Client } from '@cosmjs/tendermint-rpc';
 
 import type { Connection } from './types';
 
@@ -8,7 +8,7 @@ import type { Connection } from './types';
  *
  * @param client - A Tendermint client.
  */
-export function createTendermintConnection(client: Tendermint34Client): Connection {
+export function createTendermintConnection(client: Client): Connection {
 	return {
 		queryConnection: {
 			async request(
