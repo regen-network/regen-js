@@ -7,7 +7,7 @@ import { MyBalance } from './MyBalance';
 const DEVNET_NODE_TM_URL = 'http://devnet.regen.network:26657'; // CORS not enabled on this one yet.
 const AMAURY_NODE_TM_URL = 'http://18.223.151.187:26657';
 const REDWOOD_NODE_TM_URL = 'http://209.182.218.23:26657';
-const HAMBACH_NODE_TM_URL = 'http://209.182.218.23:26657';
+const HAMBACH_NODE_TM_URL = 'http://hambach.regen.network:26657';
 
 export function App(): React.ReactElement {
 	const [tmUrl, setTmUrl] = useState(REDWOOD_NODE_TM_URL);
