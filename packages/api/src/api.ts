@@ -2,8 +2,8 @@ import { createProtobufRpcClient, QueryClient } from "@cosmjs/stargate";
 import { Tendermint34Client } from "@cosmjs/tendermint-rpc";
 import { QueryClientImpl } from "./generated/regen/data/v1alpha1/query";
 
-interface TendermintConnection {
-	type: 'tendermint' | 'rpc';
+interface ConnectionOptions {
+	type: 'tendermint';
 	url: string;
 }
 
@@ -11,7 +11,7 @@ interface TendermintConnection {
  * Options to pass into the RegenApi constructor.
  */
 export interface RegenApiOptions {
-	connection: TendermintConnection;
+	connection: ConnectionOptions;
 }
 
 /**
