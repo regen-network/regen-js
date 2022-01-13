@@ -11,7 +11,7 @@ export function MyBalance(props: MyBalanceProps): React.ReactElement {
 	const { api } = props;
 
 	const [address, setAddress] = useState(
-		'regen1j9h8dpu7ah2hl9rg7ycu0e64kh90rrlpk9kagz'
+		'regen1df675r9vnf7pdedn4sf26svdsem3ugavgxmy46'
 	);
 	const [balance, setBalance] = useState<
 		QueryAllBalancesResponse | undefined
