@@ -5,12 +5,11 @@ import * as React from 'react';
 import { MyBalance } from './MyBalance';
 
 const DEVNET_NODE_TM_URL = 'http://devnet.regen.network:26657'; // CORS not enabled on this one yet.
-const AMAURY_NODE_TM_URL = 'http://18.223.151.187:26657';
 const REDWOOD_NODE_TM_URL = 'http://209.182.218.23:26657';
 const HAMBACH_NODE_TM_URL = 'http://hambach.regen.network:26657';
 
 export function App(): React.ReactElement {
-	const [tmUrl, setTmUrl] = useState(REDWOOD_NODE_TM_URL);
+	const [tmUrl, setTmUrl] = useState(HAMBACH_NODE_TM_URL);
 	const [tmError, setTmError] = useState<Error | undefined>();
 
 	const [api, setApi] = useState<RegenApi | undefined>(undefined);
@@ -60,9 +59,6 @@ export function App(): React.ReactElement {
 					Switch to a known public endpoint:
 					<button onClick={() => setTmUrl(DEVNET_NODE_TM_URL)}>
 						Official Regen Devnet node
-					</button>
-					<button onClick={() => setTmUrl(AMAURY_NODE_TM_URL)}>
-						Amaury&apos;s node
 					</button>
 					<button onClick={() => setTmUrl(REDWOOD_NODE_TM_URL)}>
 						Redwood Testnet node
