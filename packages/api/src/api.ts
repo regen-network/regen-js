@@ -1,6 +1,5 @@
-import { createProtobufRpcClient, QueryClient } from "@cosmjs/stargate";
-import { Tendermint34Client } from "@cosmjs/tendermint-rpc";
-import { QueryClientImpl } from "./generated/regen/data/v1alpha1/query";
+import { createProtobufRpcClient, QueryClient, ProtobufRpcClient } from "@cosmjs/stargate";
+import { Tendermint34Client  } from "@cosmjs/tendermint-rpc";
 
 interface ConnectionOptions {
 	type: 'tendermint';
@@ -19,9 +18,9 @@ export interface RegenApiOptions {
  * a client connection
  */
 export class RegenApi {
-	readonly connection: QueryClientImpl;
+	readonly connection: ProtobufRpcClient;
 
-	constructor(connection: QueryClientImpl) {
+	constructor(connection: ProtobufRpcClient) {
 		this.connection = connection;
 	}
 
@@ -40,13 +39,10 @@ export class RegenApi {
 		
 		// This helper function wraps the generic Stargate query client for use by the specific generated query client
 		const rpcClient = createProtobufRpcClient(queryClient);
-		
-		// Here we instantiate a specific query client which will have the custom methods defined in the .proto file
-		const queryService = new QueryClientImpl(rpcClient);
 
 		switch (options.connection.type) {
 			case 'tendermint': {
-				return new RegenApi(queryService);
+				return new RegenApi(rpcClient);
 			}
 		}
 	}

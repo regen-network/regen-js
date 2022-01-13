@@ -18,8 +18,8 @@ export function MyBalance(props: MyBalanceProps): React.ReactElement {
 	>();
 
 	useEffect(() => {
-		const bankClient = new QueryClientImpl(api.connection.queryConnection);
-		bankClient
+		const queryClient = new QueryClientImpl(api.connection);
+		queryClient
 			.AllBalances({
 				address,
 			})
