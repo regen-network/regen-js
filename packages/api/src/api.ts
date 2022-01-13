@@ -18,10 +18,10 @@ export interface RegenApiOptions {
  * a client connection
  */
 export class RegenApi {
-	readonly connection: ProtobufRpcClient;
+	readonly client: ProtobufRpcClient;
 
-	constructor(connection: ProtobufRpcClient) {
-		this.connection = connection;
+	constructor(client: ProtobufRpcClient) {
+		this.client = client;
 	}
 
 	/**
