@@ -44,6 +44,10 @@ export class RegenApi {
 		// Here we instantiate a specific query client which will have the custom methods defined in the .proto file
 		const queryService = new QueryClientImpl(rpcClient);
 
-		return new RegenApi(queryService);
+		switch (options.connection.type) {
+			case 'tendermint': {
+				return new RegenApi(queryService);
+			}
+		}
 	}
 }
