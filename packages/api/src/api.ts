@@ -40,6 +40,7 @@ export class RegenApi {
 				
 				// This helper function wraps the generic Stargate query client for use by the specific generated query client
 				const rpcClient = createProtobufRpcClient(queryClient);
+				
 				return new RegenApi(rpcClient);
 			}
 		}
