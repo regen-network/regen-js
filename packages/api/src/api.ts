@@ -30,18 +30,16 @@ export class RegenApi {
 	 * @param options - Options to pass into RegenAPI.
 	 */
 	public static async connect(options: RegenApiOptions): Promise<RegenApi> {
-		// Inside an async function...
-		// The Tendermint client knows how to talk to the Tendermint RPC endpoint
-		const tendermintClient = await Tendermint34Client.connect(options.connection.url);
-		
-		// The generic Stargate query client knows how to use the Tendermint client to submit unverified ABCI queries
-		const queryClient = new QueryClient(tendermintClient);
-		
-		// This helper function wraps the generic Stargate query client for use by the specific generated query client
-		const rpcClient = createProtobufRpcClient(queryClient);
-
 		switch (options.connection.type) {
 			case 'tendermint': {
+				// The Tendermint client knows how to talk to the Tendermint RPC endpoint
+				const tendermintClient = await Tendermint34Client.connect(options.connection.url);
+				
+				// The generic Stargate query client knows how to use the Tendermint client to submit unverified ABCI queries
+				const queryClient = new QueryClient(tendermintClient);
+				
+				// This helper function wraps the generic Stargate query client for use by the specific generated query client
+				const rpcClient = createProtobufRpcClient(queryClient);
 				return new RegenApi(rpcClient);
 			}
 		}

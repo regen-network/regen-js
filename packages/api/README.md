@@ -13,7 +13,7 @@
 
 ## 🚧 Warning
 
-This API is still under heavy construction, be ready for unexpected breaking changes. In particular, the Regen team is discussing with [CosmJS](https://github.com/cosmos/cosmjs) on using [`ts-proto`](https://github.com/stephenh/ts-proto) for client JS code generation across the whole Cosmos ecosystem.
+This API is still under heavy construction, be ready for unexpected breaking changes.
 
 ## Get Started
 

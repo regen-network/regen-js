@@ -25,7 +25,7 @@ export function MyBalance(props: MyBalanceProps): React.ReactElement {
 			})
 			.then(setBalance)
 			.catch(console.error);
-	}, [address, api.connection]);
+	}, [address, api.client]);
 
 	return (
 		<div>
