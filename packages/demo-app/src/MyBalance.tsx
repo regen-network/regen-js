@@ -1,7 +1,7 @@
-import { RegenApi } from "@regen-network/api";
-import { QueryAllBalancesResponse } from "@regen-network/api/lib/generated/cosmos/bank/v1beta1/query";
-import { QueryClientImpl } from "@regen-network/api/lib/generated/cosmos/bank/v1beta1/query";
-import React, { useEffect, useState } from "react";
+import { RegenApi } from '@regen-network/api';
+import { QueryAllBalancesResponse } from '@regen-network/api/lib/generated/cosmos/bank/v1beta1/query';
+import { QueryClientImpl } from '@regen-network/api/lib/generated/cosmos/bank/v1beta1/query';
+import React, { useEffect, useState } from 'react';
 
 interface MyBalanceProps {
   api: RegenApi;
@@ -10,18 +10,14 @@ interface MyBalanceProps {
 export function MyBalance(props: MyBalanceProps): React.ReactElement {
   const { api } = props;
 
-  const [address, setAddress] = useState(
-    "regen:1j9h8dpu7ah2hl9rg7ycu0e64kh90rrlpk9kagz"
-  );
-  const [balance, setBalance] = useState<
-    QueryAllBalancesResponse | undefined
-  >();
+  const [address, setAddress] = useState('regen:1j9h8dpu7ah2hl9rg7ycu0e64kh90rrlpk9kagz');
+  const [balance, setBalance] = useState<QueryAllBalancesResponse | undefined>();
 
   useEffect(() => {
     const bankClient = new QueryClientImpl(api.connection.queryConnection);
     bankClient
       .AllBalances({
-        address
+        address,
       })
       .then(setBalance)
       /* eslint-disable */
