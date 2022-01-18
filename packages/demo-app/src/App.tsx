@@ -25,6 +25,7 @@ export function App(): React.ReactElement {
     })
       .then(setApi)
       .catch((err: Error) => {
+        /* eslint-disable */
         console.error(err);
         setTmError(err);
       });

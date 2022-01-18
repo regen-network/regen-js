@@ -1,6 +1,6 @@
-import type { Client } from '@cosmjs/tendermint-rpc';
+import { Client } from "@cosmjs/tendermint-rpc";
 
-import type { Connection } from './types';
+import { Connection } from "./types";
 
 /**
  * Given a Tendermint client, generate the client connection object to be
@@ -9,20 +9,20 @@ import type { Connection } from './types';
  * @param client - A Tendermint client.
  */
 export function createTendermintConnection(client: Client): Connection {
-	return {
-		queryConnection: {
-			async request(
-				service: string,
-				method: string,
-				data: Uint8Array
-			): Promise<Uint8Array> {
-				const { value } = await client.abciQuery({
-					path: `/${service}/${method}`,
-					data,
-				});
+  return {
+    queryConnection: {
+      async request(
+        service: string,
+        method: string,
+        data: Uint8Array
+      ): Promise<Uint8Array> {
+        const { value } = await client.abciQuery({
+          path: `/${service}/${method}`,
+          data
+        });
 
-				return value;
-			},
-		},
-	};
+        return value;
+      }
+    }
+  };
 }
