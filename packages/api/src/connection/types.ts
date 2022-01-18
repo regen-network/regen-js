@@ -5,11 +5,11 @@
  * from ts-proto, so we're copy pasting here.
  */
 export interface TsProtoRpc {
-	request(
-		_service: string,
-		_method: string,
-		_data: Uint8Array
-	): Promise<Uint8Array>;
+  request(
+    _service: string,
+    _method: string,
+    _data: Uint8Array
+  ): Promise<Uint8Array>;
 }
 
 /**
@@ -17,8 +17,8 @@ export interface TsProtoRpc {
  * connection.
  */
 export interface Connection {
-	/**
-	 * Custom connection implementation for `Query` services.
-	 */
-	queryConnection: TsProtoRpc;
+  /**
+   * Custom connection implementation for `Query` services.
+   */
+  queryConnection: TsProtoRpc;
 }

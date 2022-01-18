@@ -1,2 +1,2 @@
-export * from './tendermint';
-export * from './types';
+export * from "./tendermint";
+export * from "./types";
