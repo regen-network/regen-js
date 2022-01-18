@@ -2,8 +2,14 @@
 	"compilerOptions": {
 		"esModuleInterop": true,
 		"jsx": "react",
+		"module": "es2020",
+		"moduleResolution": "node",
 		"skipLibCheck": true,
-		"strict": true
+		"strict": true,
+		"target": "es6",
+		"typeRoots": ["./node_modules/@types"],
 	},
-	"exclude": ["**/lib/**/*"]
+	"exclude": ["**/lib/**/*"],
+	"ecmaVersion": 6,
+	"sourceType": "module",
 }
