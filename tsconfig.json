@@ -1,9 +1,25 @@
 {
 	"compilerOptions": {
+		"jsx": "react-jsx",
 		"esModuleInterop": true,
-		"jsx": "react",
+		"forceConsistentCasingInFileNames": true,
+		"moduleResolution": "node",
+		"newLine": "LF",
+		"noFallthroughCasesInSwitch": true,
+		"noImplicitAny": true,
+		"noImplicitReturns": true,
+		"noImplicitThis": true,
+		"noUnusedLocals": false,
+		"noUnusedParameters": false,
+		"pretty": true,
+		"removeComments": false,
+		"sourceMap": true,
 		"skipLibCheck": true,
-		"strict": true
+		"strict": true,
+		"target": "es6",
+		"typeRoots": ["./node_modules/@types"]
 	},
-	"exclude": ["**/lib/**/*"]
+	"exclude": ["**/lib/**/*"],
+	"ecmaVersion": 6,
+	"sourceType": "module",
 }
