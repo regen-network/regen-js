@@ -9,41 +9,42 @@ const REDWOOD_NODE_TM_URL = 'http://209.182.218.23:26657';
 const HAMBACH_NODE_TM_URL = 'http://hambach.regen.network:26657';
 
 export function App(): React.ReactElement {
-	const [tmUrl, setTmUrl] = useState(HAMBACH_NODE_TM_URL);
-	const [tmError, setTmError] = useState<Error | undefined>();
+  const [tmUrl, setTmUrl] = useState(HAMBACH_NODE_TM_URL);
+  const [tmError, setTmError] = useState<Error | undefined>();
 
-	const [api, setApi] = useState<RegenApi | undefined>(undefined);
+  const [api, setApi] = useState<RegenApi | undefined>(undefined);
 
-	useEffect(() => {
-		setApi(undefined);
-		setTmError(undefined);
+  useEffect(() => {
+    setApi(undefined);
+    setTmError(undefined);
 
-		RegenApi.connect({
-			connection: {
-				type: 'tendermint',
-				url: tmUrl,
-			},
-		})
-			.then(setApi)
-			.catch((err: Error) => {
-				console.error(err);
-				setTmError(err);
-			});
-	}, [tmUrl]);
+    RegenApi.connect({
+      connection: {
+        type: 'tendermint',
+        url: tmUrl,
+      },
+    })
+      .then(setApi)
+      .catch((err: Error) => {
+        /* eslint-disable */
+        console.error(err);
+        setTmError(err);
+      });
+  }, [tmUrl]);
 
-	return (
-		<div>
-			<h1>
-				Regen Network Demo App using <code>@regen-network/api</code>
-			</h1>
+  return (
+    <div>
+      <h1>
+        Regen Network Demo App using <code>@regen-network/api</code>
+      </h1>
 
-			{api ? (
-				<div>
-					<MyBalance api={api} />
-				</div>
-			) : (
-				<p>Loading RegenApi...</p>
-			)}
+      {api ? (
+        <div>
+          <MyBalance api={api} />
+        </div>
+      ) : (
+        <p>Loading RegenApi...</p>
+      )}
 
 			<div>
 				<h2>Settings</h2>
@@ -68,15 +69,11 @@ export function App(): React.ReactElement {
 					</button>
 				</p>
 
-				<p>
-					Tendermint Client Status:{' '}
-					{tmError?.message
-						? tmError?.message
-						: api
-						? 'ok'
-						: 'loading...'}
-				</p>
-			</div>
-		</div>
-	);
+        <p>
+          Tendermint Client Status:{" "}
+          {tmError?.message ? tmError?.message : api ? "ok" : "loading..."}
+        </p>
+      </div>
+    </div>
+  );
 }
