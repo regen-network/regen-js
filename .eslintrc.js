@@ -8,7 +8,7 @@ module.exports = {
 		'no-console': 'warn',
 		'no-useless-escape': 'off',
 		'@typescript-eslint/explicit-function-return-type': [
-		'error',
+			'error',
 			{
 				allowExpressions: true,
 			},
