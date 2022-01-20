@@ -24,6 +24,7 @@ export function MyBalance(props: MyBalanceProps): React.ReactElement {
         address,
       })
       .then(setBalance)
+      /* eslint-disable */
       .catch(console.error);
   }, [address, api.client]);
 
