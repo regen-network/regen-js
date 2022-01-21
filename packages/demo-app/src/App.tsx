@@ -68,7 +68,6 @@ export function App(): React.ReactElement {
 						Hambach Testnet node
 					</button>
 				</p>
-
         <p>
           Tendermint Client Status:{" "}
           {tmError?.message ? tmError?.message : api ? "ok" : "loading..."}
