@@ -2,12 +2,19 @@ import {
   createProtobufRpcClient,
   QueryClient,
   ProtobufRpcClient,
+  SigningStargateClient,
+  SigningStargateClientOptions,
 } from '@cosmjs/stargate';
 import { Tendermint34Client } from '@cosmjs/tendermint-rpc';
 
+import { OfflineSigner } from '@cosmjs/proto-signing';
+
 interface ConnectionOptions {
   type: 'tendermint';
+  clientType?: 'query' | 'signing';
   url: string;
+  signer?: OfflineSigner; // TODO
+  clientOptions?: SigningStargateClientOptions;
 }
 
 /**
@@ -36,18 +43,36 @@ export class RegenApi {
   public static async connect(options: RegenApiOptions): Promise<RegenApi> {
     switch (options.connection.type) {
       case 'tendermint': {
-        // The Tendermint client knows how to talk to the Tendermint RPC endpoint
-        const tendermintClient = await Tendermint34Client.connect(
-          options.connection.url,
-        );
+        switch (options.connection.clientType) {
+          case 'signing': {
+            const chainRpc = options.connection.url;
+            const offlineSigner: OfflineSigner = {};
+            const clientOptions: SigningStargateClientOptions = {};
 
-        // The generic Stargate query client knows how to use the Tendermint client to submit unverified ABCI queries
-        const queryClient = new QueryClient(tendermintClient);
+            const signingClient = await SigningStargateClient.connectWithSigner(
+              chainRpc,
+              offlineSigner,
+              clientOptions,
+            );
 
-        // This helper function wraps the generic Stargate query client for use by the specific generated query client
-        const rpcClient = createProtobufRpcClient(queryClient);
+            return new RegenApi(signingClient);
+          }
 
-        return new RegenApi(rpcClient);
+          default: {
+            // The Tendermint client knows how to talk to the Tendermint RPC endpoint
+            const tendermintClient = await Tendermint34Client.connect(
+              options.connection.url,
+            );
+
+            // The generic Stargate query client knows how to use the Tendermint client to submit unverified ABCI queries
+            const queryClient = new QueryClient(tendermintClient);
+
+            // This helper function wraps the generic Stargate query client for use by the specific generated query client
+            const rpcClient = createProtobufRpcClient(queryClient);
+
+            return new RegenApi(rpcClient);
+          }
+        }
       }
     }
   }
