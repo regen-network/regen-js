@@ -29,10 +29,15 @@ export interface RegenApiOptions {
  * a client connection
  */
 export class RegenApi {
-  readonly queryClient: ProtobufRpcClient;
+  readonly queryClient?: ProtobufRpcClient;
+  readonly txClient?: SigningStargateClient;
 
-  constructor(queryClient: ProtobufRpcClient) {
+  constructor(
+    queryClient?: ProtobufRpcClient,
+    txClient?: SigningStargateClient,
+  ) {
     this.queryClient = queryClient;
+    this.txClient = txClient;
   }
 
   /**
@@ -55,7 +60,7 @@ export class RegenApi {
               clientOptions,
             );
 
-            return new RegenApi(signingClient);
+            return new RegenApi(undefined, signingClient);
           }
 
           default: {

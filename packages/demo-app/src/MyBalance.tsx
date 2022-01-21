@@ -20,9 +20,7 @@ export function MyBalance(props: MyBalanceProps): React.ReactElement {
   useEffect(() => {
     const queryClient = new QueryClientImpl(api.queryClient);
     queryClient
-      .AllBalances({
-        address,
-      })
+      .AllBalances({ address })
       .then(setBalance)
       /* eslint-disable */
       .catch(console.error);
