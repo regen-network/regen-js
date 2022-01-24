@@ -8,12 +8,14 @@ import {
 import { Tendermint34Client } from '@cosmjs/tendermint-rpc';
 
 import { OfflineSigner } from '@cosmjs/proto-signing';
+import { createStargateSigningClient } from './tx/stargate-signing';
+import { setupTxExtension, MessageClient } from './tx/msg';
 
-interface ConnectionOptions {
+export interface ConnectionOptions {
   type: 'tendermint';
   clientType?: 'query' | 'signing';
   url: string;
-  signer?: OfflineSigner; // TODO
+  signer?: OfflineSigner;
   clientOptions?: SigningStargateClientOptions;
 }
 
@@ -30,14 +32,14 @@ export interface RegenApiOptions {
  */
 export class RegenApi {
   readonly queryClient?: ProtobufRpcClient;
-  readonly txClient?: SigningStargateClient;
+  readonly msgClient?: MessageClient;
 
   constructor(
     queryClient?: ProtobufRpcClient,
-    txClient?: SigningStargateClient,
+    msgClient?: SigningStargateClient,
   ) {
     this.queryClient = queryClient;
-    this.txClient = txClient;
+    this.msgClient = msgClient;
   }
 
   /**
@@ -50,17 +52,11 @@ export class RegenApi {
       case 'tendermint': {
         switch (options.connection.clientType) {
           case 'signing': {
-            const chainRpc = options.connection.url;
-            const offlineSigner: OfflineSigner = {};
-            const clientOptions: SigningStargateClientOptions = {};
+            const { connection } = options;
+            const msgClient = await setupTxExtension(connection);
+            // const signingClient = await createStargateSigningClient(connection);
 
-            const signingClient = await SigningStargateClient.connectWithSigner(
-              chainRpc,
-              offlineSigner,
-              clientOptions,
-            );
-
-            return new RegenApi(undefined, signingClient);
+            return new RegenApi(undefined, msgClient);
           }
 
           default: {
