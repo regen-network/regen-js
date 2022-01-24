@@ -34,10 +34,7 @@ export class RegenApi {
   readonly queryClient?: ProtobufRpcClient;
   readonly msgClient?: MessageClient;
 
-  constructor(
-    queryClient?: ProtobufRpcClient,
-    msgClient?: SigningStargateClient,
-  ) {
+  constructor(queryClient?: ProtobufRpcClient, msgClient?: MessageClient) {
     this.queryClient = queryClient;
     this.msgClient = msgClient;
   }

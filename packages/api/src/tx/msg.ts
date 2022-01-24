@@ -1,5 +1,10 @@
 import { TxRaw } from 'cosmjs-types/cosmos/tx/v1beta1/tx';
 import { assert } from '@cosmjs/utils';
+// import {
+//   assertIsBroadcastTxSuccess,
+//   SigningStargateClient,
+//   BroadcastTxResponse,
+// } from '@cosmjs/stargate';
 
 import { ConnectionOptions } from '../api';
 import { createStargateSigningClient } from './stargate-signing';
@@ -11,6 +16,7 @@ export interface MessageClient {
       sender: string,
       recipient: string,
     ) => Promise<Uint8Array>;
+    readonly broadcast: (signedTxBytes: Uint8Array) => Promise<string>;
   };
 }
 
@@ -18,8 +24,6 @@ export async function setupTxExtension(
   connection: ConnectionOptions,
 ): Promise<MessageClient> {
   const signingClient = await createStargateSigningClient(connection);
-  // Use this service to get easy typed access to query methods
-  // const queryService = new QueryClientImpl(rpc);
 
   /**
    * Sign a transaction for sending tokens to a reciptient
@@ -67,9 +71,20 @@ export async function setupTxExtension(
     }
   };
 
+  /**
+   * Broadcast a signed transaction and wait for transaction hash
+   */
+  const broadcast = async (signedTxBytes: Uint8Array): Promise<string> => {
+    const result = await signingClient.broadcastTx(signedTxBytes);
+    // assertIsBroadcastTxSuccess(result);
+
+    return result.transactionHash;
+  };
+
   return {
     tx: {
       signSend,
+      broadcast,
     },
   };
 }
