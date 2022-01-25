@@ -18,12 +18,14 @@ export function MyBalance(props: MyBalanceProps): React.ReactElement {
   >();
 
   useEffect(() => {
-    const queryClient = new QueryClientImpl(api.queryClient);
-    queryClient
-      .AllBalances({ address })
-      .then(setBalance)
-      /* eslint-disable */
+    if (api.queryClient) {
+      const queryClient: QueryClientImpl = new QueryClientImpl(api.queryClient);
+      queryClient
+        .AllBalances({ address })
+        .then(setBalance)
+        /* eslint-disable */
       .catch(console.error);
+    }
   }, [address, api.queryClient]);
 
   return (

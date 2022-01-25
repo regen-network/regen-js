@@ -1,17 +1,16 @@
 import { TxRaw } from 'cosmjs-types/cosmos/tx/v1beta1/tx';
 import { assert } from '@cosmjs/utils';
-// import {
-//   assertIsBroadcastTxSuccess,
-//   SigningStargateClient,
-//   BroadcastTxResponse,
-// } from '@cosmjs/stargate';
+import { defaultRegistryTypes } from '@cosmjs/stargate';
+import { Registry } from '@cosmjs/proto-signing';
 
 import { ConnectionOptions } from '../api';
 import { createStargateSigningClient } from './stargate-signing';
 
+export const protobufPackage = 'regen.tx.v1alpha1';
+
 export interface MessageClient {
   readonly tx: {
-    readonly signSend: (
+    readonly sign: (
       amount: number,
       sender: string,
       recipient: string,
@@ -23,12 +22,21 @@ export interface MessageClient {
 export async function setupTxExtension(
   connection: ConnectionOptions,
 ): Promise<MessageClient> {
-  const signingClient = await createStargateSigningClient(connection);
+  const registry = new Registry([
+    ...defaultRegistryTypes,
+    // ["/my.custom.MsgXxx", MsgXxx], // Replace with your own type URL and Msg class
+  ]);
+
+  const connectionOptions = {
+    ...connection,
+    registry,
+  };
+  const signingClient = await createStargateSigningClient(connectionOptions);
 
   /**
-   * Sign a transaction for sending tokens to a reciptient
+   * Sign a transaction for sending tokens to a recipient
    */
-  const signSend = async (
+  const sign = async (
     amount: number,
     sender: string,
     recipient: string,
@@ -83,7 +91,7 @@ export async function setupTxExtension(
 
   return {
     tx: {
-      signSend,
+      sign,
       broadcast,
     },
   };

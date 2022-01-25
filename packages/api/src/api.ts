@@ -2,13 +2,11 @@ import {
   createProtobufRpcClient,
   QueryClient,
   ProtobufRpcClient,
-  SigningStargateClient,
   SigningStargateClientOptions,
 } from '@cosmjs/stargate';
 import { Tendermint34Client } from '@cosmjs/tendermint-rpc';
 
 import { OfflineSigner } from '@cosmjs/proto-signing';
-import { createStargateSigningClient } from './tx/stargate-signing';
 import { setupTxExtension, MessageClient } from './tx/msg';
 
 export interface ConnectionOptions {

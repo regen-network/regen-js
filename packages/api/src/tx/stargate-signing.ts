@@ -1,8 +1,9 @@
 import {
   SigningStargateClient,
   SigningStargateClientOptions,
+  defaultRegistryTypes,
 } from '@cosmjs/stargate';
-import { OfflineSigner } from '@cosmjs/proto-signing';
+import { OfflineSigner, Registry } from '@cosmjs/proto-signing';
 import { ConnectionOptions } from '../api';
 
 /**
