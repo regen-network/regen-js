@@ -10,12 +10,14 @@ describe('RegenApi with tendermint connection', () => {
       connection: {
         type: 'tendermint',
         url: 'http://hambach.regen.network:26657',
+        clientType: 'query',
       },
     });
   });
 
   it('should fetch balances using tendermint query client', async () => {
-    const bankClient = new QueryClientImpl(api.queryClient);
+    const bankClient = new QueryClientImpl(api.connection.queryClient);
+
     const res = await bankClient.AllBalances({
       address: 'regen1df675r9vnf7pdedn4sf26svdsem3ugavgxmy46', // Test account.
     });
@@ -23,7 +25,7 @@ describe('RegenApi with tendermint connection', () => {
   });
 
   it('should fetch a tx using tendermint service client', async () => {
-    const serviceClient = new ServiceClientImpl(api.queryClient);
+    const serviceClient = new ServiceClientImpl(api.connection.queryClient);
     const res = await serviceClient.GetTx({
       hash: '565A6A0134723E9EAF8ACFBF499DC65CA5C34259E74540135732BDE765E20117', // a Hambach tx
     });
