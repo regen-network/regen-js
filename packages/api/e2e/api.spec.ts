@@ -5,17 +5,27 @@ import { ServiceClientImpl } from '../src/generated/cosmos/tx/v1beta1/service';
 let api: RegenApi;
 
 describe('RegenApi with tendermint connection', () => {
-  beforeAll(async () => {
-    api = await RegenApi.connect({
+  const connect = async (clientType?: 'query' | 'signing'): Promise<RegenApi> =>
+    await RegenApi.connect({
       connection: {
         type: 'tendermint',
         url: 'http://hambach.regen.network:26657',
-        clientType: 'query',
+        clientType,
       },
     });
-  });
+
+  // beforeAll(async () => {
+  //   api = await RegenApi.connect({
+  //     connection: {
+  //       type: 'tendermint',
+  //       url: 'http://hambach.regen.network:26657',
+  //       clientType: 'query',
+  //     },
+  //   });
+  // });
 
   it('should fetch balances using tendermint query client', async () => {
+    const api = await connect();
     const bankClient = new QueryClientImpl(api.connection.queryClient);
 
     const res = await bankClient.AllBalances({
@@ -25,6 +35,7 @@ describe('RegenApi with tendermint connection', () => {
   });
 
   it('should fetch a tx using tendermint service client', async () => {
+    const api = await connect();
     const serviceClient = new ServiceClientImpl(api.connection.queryClient);
     const res = await serviceClient.GetTx({
       hash: '565A6A0134723E9EAF8ACFBF499DC65CA5C34259E74540135732BDE765E20117', // a Hambach tx
