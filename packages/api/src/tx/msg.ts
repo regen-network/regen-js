@@ -1,5 +1,4 @@
 import { TxRaw } from 'cosmjs-types/cosmos/tx/v1beta1/tx';
-import { assert } from '@cosmjs/utils';
 import { defaultRegistryTypes } from '@cosmjs/stargate';
 import { Registry } from '@cosmjs/proto-signing';
 
@@ -91,6 +90,7 @@ export async function setupTxExtension(
 
   return {
     tx: {
+      ...signingClient,
       sign,
       broadcast,
     },

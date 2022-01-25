@@ -1,35 +1,37 @@
+import { DirectSecp256k1HdWallet } from '@cosmjs/proto-signing';
 import { RegenApi } from '../src/api';
 import { QueryClientImpl } from '../src/generated/cosmos/bank/v1beta1/query';
 import { ServiceClientImpl } from '../src/generated/cosmos/tx/v1beta1/service';
 
-let api: RegenApi;
+const TEST_ADDRESS_HAMBACH = 'regen1df675r9vnf7pdedn4sf26svdsem3ugavgxmy46';
+
+const connect = async (clientType?: 'query' | 'signing'): Promise<RegenApi> => {
+  const mnemonic = // mnemonic for TEST_ADDRESS_HAMBACH
+    'coast scheme approve soccer juice wealth bunker state fetch warrior inmate belt';
+
+  // Inside an async function...
+  const signer = await DirectSecp256k1HdWallet.fromMnemonic(
+    mnemonic,
+    { prefix: 'regen' }, // Replace with your own Bech32 address prefix
+  );
+
+  return RegenApi.connect({
+    connection: {
+      type: 'tendermint',
+      url: 'http://hambach.regen.network:26657',
+      clientType,
+      signer,
+    },
+  });
+};
 
 describe('RegenApi with tendermint connection', () => {
-  const connect = async (clientType?: 'query' | 'signing'): Promise<RegenApi> =>
-    await RegenApi.connect({
-      connection: {
-        type: 'tendermint',
-        url: 'http://hambach.regen.network:26657',
-        clientType,
-      },
-    });
-
-  // beforeAll(async () => {
-  //   api = await RegenApi.connect({
-  //     connection: {
-  //       type: 'tendermint',
-  //       url: 'http://hambach.regen.network:26657',
-  //       clientType: 'query',
-  //     },
-  //   });
-  // });
-
   it('should fetch balances using tendermint query client', async () => {
     const api = await connect();
     const bankClient = new QueryClientImpl(api.connection.queryClient);
 
     const res = await bankClient.AllBalances({
-      address: 'regen1df675r9vnf7pdedn4sf26svdsem3ugavgxmy46', // Test account.
+      address: TEST_ADDRESS_HAMBACH,
     });
     expect(res.balances.length).toBeGreaterThanOrEqual(1);
   });
@@ -42,5 +44,17 @@ describe('RegenApi with tendermint connection', () => {
     });
     expect(res.txResponse).toBeTruthy();
     expect(res.txResponse?.data).toBeTruthy();
+  });
+
+  it('should get data back with a signing client - signed transaction', async () => {
+    const api = await connect('signing');
+    // TODO: this example signs a transaction to send tokens to the same address
+    const signedTxBytes = await api.connection.msgClient?.tx?.sign(
+      3.3,
+      TEST_ADDRESS_HAMBACH,
+      TEST_ADDRESS_HAMBACH,
+    );
+    expect(api.connection.msgClient).toBeTruthy();
+    expect(signedTxBytes).toBeTruthy();
   });
 });
