@@ -43,7 +43,7 @@ export async function setupTxExtension(
       amount: [
         {
           denom: 'uregen',
-          amount: '100', //TODO: what should fee and gas be?
+          amount: '5000', //TODO: what should fee and gas be?
         },
       ],
       gas: '200000',

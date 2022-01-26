@@ -3,7 +3,9 @@ import { RegenApi } from '../src/api';
 import { QueryClientImpl } from '../src/generated/cosmos/bank/v1beta1/query';
 import { ServiceClientImpl } from '../src/generated/cosmos/tx/v1beta1/service';
 
-const TEST_ADDRESS_HAMBACH = 'regen1df675r9vnf7pdedn4sf26svdsem3ugavgxmy46';
+const TEST_ADDRESS = 'regen1df675r9vnf7pdedn4sf26svdsem3ugavgxmy46';
+const REDWOOD_NODE_TM_URL = 'http://209.182.218.23:26657';
+// const HAMBACH_NODE_TM_URL = 'http://hambach.regen.network:26657';
 
 const connect = async (clientType?: 'query' | 'signing'): Promise<RegenApi> => {
   const mnemonic = // mnemonic for TEST_ADDRESS_HAMBACH
@@ -18,7 +20,7 @@ const connect = async (clientType?: 'query' | 'signing'): Promise<RegenApi> => {
   return RegenApi.connect({
     connection: {
       type: 'tendermint',
-      url: 'http://hambach.regen.network:26657',
+      url: REDWOOD_NODE_TM_URL,
       clientType,
       signer,
     },
@@ -31,21 +33,21 @@ describe('RegenApi with tendermint connection', () => {
     const bankClient = new QueryClientImpl(api.connection.queryClient);
 
     const res = await bankClient.AllBalances({
-      address: TEST_ADDRESS_HAMBACH,
+      address: TEST_ADDRESS,
     });
     expect(res.balances.length).toBeGreaterThanOrEqual(1);
   });
 
   it('should fetch a tx using tendermint service client', async () => {
-    const hambachTxHash =
-      '565A6A0134723E9EAF8ACFBF499DC65CA5C34259E74540135732BDE765E20117';
+    const redwoodTxHash =
+      'F6A31AB068F49C5719ECB3793E0C3C4412EDD1F0C3D3C954EE0D9B1C81A0BEC8';
     const api = await connect();
     const serviceClient = new ServiceClientImpl(api.connection.queryClient);
     const res = await serviceClient.GetTx({
-      hash: hambachTxHash,
+      hash: redwoodTxHash,
     });
     expect(res.txResponse).toBeTruthy();
-    expect(res.txResponse?.txhash).toEqual(hambachTxHash);
+    expect(res.txResponse?.txhash).toEqual(redwoodTxHash);
   });
 
   it('should get data back with a signing client - signed transaction', async () => {
@@ -54,11 +56,27 @@ describe('RegenApi with tendermint connection', () => {
     // TODO: this example signs a transaction to send tokens to the same address
     const signedTxBytes = await signingClient?.sendTokens(
       3.3,
-      TEST_ADDRESS_HAMBACH,
-      TEST_ADDRESS_HAMBACH,
+      TEST_ADDRESS,
+      TEST_ADDRESS,
     );
 
     expect(api.connection.msgClient).toBeTruthy();
     expect(signedTxBytes).toBeTruthy();
+  });
+
+  it('should return a tx hash when sending tokens', async () => {
+    let txHash;
+    const api = await connect('signing');
+    const signingClient = api.connection.msgClient;
+    // TODO: this example signs a transaction to send tokens to the same address
+    const signedTxBytes = await signingClient?.sendTokens(
+      0.111,
+      TEST_ADDRESS,
+      TEST_ADDRESS,
+    );
+    if (signedTxBytes) {
+      txHash = await signingClient?.broadcast(signedTxBytes);
+    }
+    expect(txHash).toBeTruthy();
   });
 });
