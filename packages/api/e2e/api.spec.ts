@@ -65,6 +65,7 @@ describe('RegenApi with tendermint connection', () => {
   });
 
   it('should return a tx hash when sending tokens', async () => {
+    jest.setTimeout(10000);
     let txHash;
     const api = await connect('signing');
     const signingClient = api.connection.msgClient;
