@@ -1,4 +1,5 @@
 import { DirectSecp256k1HdWallet } from '@cosmjs/proto-signing';
+import { SigningStargateClient } from '@cosmjs/stargate';
 import { RegenApi } from '../src/api';
 import { QueryClientImpl } from '../src/generated/cosmos/bank/v1beta1/query';
 import { ServiceClientImpl } from '../src/generated/cosmos/tx/v1beta1/service';
@@ -50,12 +51,14 @@ describe('RegenApi with tendermint connection', () => {
 
   it('should get data back with a signing client - signed transaction', async () => {
     const api = await connect('signing');
+    const signingClient = api.connection.msgClient;
     // TODO: this example signs a transaction to send tokens to the same address
-    const signedTxBytes = await api.connection.msgClient?.tx?.sign(
+    const signedTxBytes = await signingClient?.sendTokens(
       3.3,
       TEST_ADDRESS_HAMBACH,
       TEST_ADDRESS_HAMBACH,
     );
+
     expect(api.connection.msgClient).toBeTruthy();
     expect(signedTxBytes).toBeTruthy();
   });

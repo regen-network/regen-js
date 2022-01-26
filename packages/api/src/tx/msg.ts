@@ -6,14 +6,12 @@ import { ConnectionOptions } from '../api';
 import { createStargateSigningClient } from './stargate-signing';
 
 export interface MessageClient {
-  readonly tx: {
-    readonly sign: (
-      amount: number,
-      sender: string,
-      recipient: string,
-    ) => Promise<Uint8Array>;
-    readonly broadcast: (signedTxBytes: Uint8Array) => Promise<string>;
-  };
+  readonly sendTokens: (
+    amount: number,
+    sender: string,
+    recipient: string,
+  ) => Promise<Uint8Array>;
+  readonly broadcast: (signedTxBytes: Uint8Array) => Promise<string>;
 }
 
 export async function setupTxExtension(
@@ -33,7 +31,7 @@ export async function setupTxExtension(
   /**
    * Sign a transaction for sending tokens to a recipient
    */
-  const sign = async (
+  const sendTokens = async (
     amount: number,
     sender: string,
     recipient: string,
@@ -69,6 +67,7 @@ export async function setupTxExtension(
     try {
       const txRaw = await signingClient.sign(sender, [msgAny], fee, '');
       const txBytes = TxRaw.encode(txRaw).finish();
+
       return txBytes;
     } catch (err) {
       return Promise.reject(err);
@@ -85,10 +84,7 @@ export async function setupTxExtension(
   };
 
   return {
-    tx: {
-      ...signingClient,
-      sign,
-      broadcast,
-    },
+    sendTokens,
+    broadcast,
   };
 }
