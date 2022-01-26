@@ -37,13 +37,15 @@ describe('RegenApi with tendermint connection', () => {
   });
 
   it('should fetch a tx using tendermint service client', async () => {
+    const hambachTxHash =
+      '565A6A0134723E9EAF8ACFBF499DC65CA5C34259E74540135732BDE765E20117';
     const api = await connect();
     const serviceClient = new ServiceClientImpl(api.connection.queryClient);
     const res = await serviceClient.GetTx({
-      hash: '565A6A0134723E9EAF8ACFBF499DC65CA5C34259E74540135732BDE765E20117', // a Hambach tx
+      hash: hambachTxHash,
     });
     expect(res.txResponse).toBeTruthy();
-    expect(res.txResponse?.data).toBeTruthy();
+    expect(res.txResponse?.txhash).toEqual(hambachTxHash);
   });
 
   it('should get data back with a signing client - signed transaction', async () => {

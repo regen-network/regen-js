@@ -5,8 +5,6 @@ import { Registry } from '@cosmjs/proto-signing';
 import { ConnectionOptions } from '../api';
 import { createStargateSigningClient } from './stargate-signing';
 
-export const protobufPackage = 'regen.tx.v1alpha1';
-
 export interface MessageClient {
   readonly tx: {
     readonly sign: (
@@ -73,8 +71,7 @@ export async function setupTxExtension(
       const txBytes = TxRaw.encode(txRaw).finish();
       return txBytes;
     } catch (err) {
-      alert(`Client sign error: ${err}`);
-      return Promise.reject();
+      return Promise.reject(err);
     }
   };
 
@@ -83,7 +80,6 @@ export async function setupTxExtension(
    */
   const broadcast = async (signedTxBytes: Uint8Array): Promise<string> => {
     const result = await signingClient.broadcastTx(signedTxBytes);
-    // assertIsBroadcastTxSuccess(result);
 
     return result.transactionHash;
   };
