@@ -1,5 +1,4 @@
 import { DirectSecp256k1HdWallet } from '@cosmjs/proto-signing';
-import { SigningStargateClient } from '@cosmjs/stargate';
 import { RegenApi } from '../src/api';
 import { QueryClientImpl } from '../src/generated/cosmos/bank/v1beta1/query';
 import { ServiceClientImpl } from '../src/generated/cosmos/tx/v1beta1/service';
