@@ -11,22 +11,22 @@ export function MyBalance(props: MyBalanceProps): React.ReactElement {
   const { api } = props;
 
   const [address, setAddress] = useState(
-    'regen:1j9h8dpu7ah2hl9rg7ycu0e64kh90rrlpk9kagz',
+    'regen1df675r9vnf7pdedn4sf26svdsem3ugavgxmy46',
   );
   const [balance, setBalance] = useState<
     QueryAllBalancesResponse | undefined
   >();
 
   useEffect(() => {
-    const bankClient = new QueryClientImpl(api.connection.queryConnection);
-    bankClient
+    const queryClient = new QueryClientImpl(api.queryClient);
+    queryClient
       .AllBalances({
         address,
       })
       .then(setBalance)
       /* eslint-disable */
       .catch(console.error);
-  }, [address, api.connection]);
+  }, [address, api.queryClient]);
 
   return (
     <div>
@@ -38,8 +38,8 @@ export function MyBalance(props: MyBalanceProps): React.ReactElement {
         onChange={({ target: { value } }) => setAddress(value)}
       />
       <br />
-      My balance is:{" "}
-      <code>{balance ? JSON.stringify(balance) : "(loading...)"}</code>
+      My balance is:{' '}
+      <code>{balance ? JSON.stringify(balance) : '(loading...)'}</code>
     </div>
   );
 }

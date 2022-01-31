@@ -7,6 +7,7 @@ module.exports = {
 		'no-empty': 'off',
 		'no-console': 'warn',
 		'no-useless-escape': 'off',
+		'indent': ['error', 2, { 'SwitchCase': 1 }],
 		'@typescript-eslint/explicit-function-return-type': [
 			'error',
 			{

@@ -1,8 +1,11 @@
-import { adaptor34, Client as TendermintClient } from '@cosmjs/tendermint-rpc';
+import {
+  createProtobufRpcClient,
+  QueryClient,
+  ProtobufRpcClient,
+} from '@cosmjs/stargate';
+import { Tendermint34Client } from '@cosmjs/tendermint-rpc';
 
-import { Connection, createTendermintConnection } from './connection';
-
-interface TendermintConnection {
+interface ConnectionOptions {
   type: 'tendermint';
   url: string;
 }
@@ -11,7 +14,7 @@ interface TendermintConnection {
  * Options to pass into the RegenApi constructor.
  */
 export interface RegenApiOptions {
-  connection: TendermintConnection;
+  connection: ConnectionOptions;
 }
 
 /**
@@ -19,10 +22,10 @@ export interface RegenApiOptions {
  * a client connection
  */
 export class RegenApi {
-  readonly connection: Connection;
+  readonly queryClient: ProtobufRpcClient;
 
-  constructor(connection: Connection) {
-    this.connection = connection;
+  constructor(queryClient: ProtobufRpcClient) {
+    this.queryClient = queryClient;
   }
 
   /**
@@ -33,15 +36,18 @@ export class RegenApi {
   public static async connect(options: RegenApiOptions): Promise<RegenApi> {
     switch (options.connection.type) {
       case 'tendermint': {
-        const tendermintClient = await TendermintClient.connect(
+        // The Tendermint client knows how to talk to the Tendermint RPC endpoint
+        const tendermintClient = await Tendermint34Client.connect(
           options.connection.url,
-          // Since v0.40.0, CosmJS cannot detect the Tendermint
-          // version used by the node. Here, we just hardcode to use
-          // an adaptor for Tendermint 0.34.x.
-          adaptor34,
         );
 
-        return new RegenApi(createTendermintConnection(tendermintClient));
+        // The generic Stargate query client knows how to use the Tendermint client to submit unverified ABCI queries
+        const queryClient = new QueryClient(tendermintClient);
+
+        // This helper function wraps the generic Stargate query client for use by the specific generated query client
+        const rpcClient = createProtobufRpcClient(queryClient);
+
+        return new RegenApi(rpcClient);
       }
     }
   }

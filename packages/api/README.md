@@ -13,7 +13,7 @@
 
 ## 🚧 Warning
 
-This API is still under heavy construction, be ready for unexpected breaking changes. In particular, the Regen team is discussing with [CosmJS](https://github.com/cosmos/cosmjs) on using [`ts-proto`](https://github.com/stephenh/ts-proto) for client JS code generation across the whole Cosmos ecosystem.
+This API is still under heavy construction, be ready for unexpected breaking changes.
 
 ## Get Started
 
@@ -38,7 +38,7 @@ const api = RegenApi.connect({
 });
 
 // Create a client for the x/bank module.
-const bankClient = new QueryClientImpl(api.connection.queryConnection);
+const bankClient = new QueryClientImpl(api.queryClient);
 // Fetch the balance of an address.
 const myAddress = 'regen:1j9...';
 const balances = await bankClient.AllBalances({
@@ -60,7 +60,7 @@ const api = new RegenApi({ ... });
 // Fetch the balance of an address with new API.
 const myAddress = 'regen:1j9...';
 const balances = await api.query.cosmos.bank.v1beta1.AllBalances({
-address: myAddress,
+	address: myAddress,
 });
 
 console.log(balances); // Prints `{"balances":[{"denom":"utree","amount":"10000000000"}],"pagination":{"total":1}}`
