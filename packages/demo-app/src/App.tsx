@@ -1,6 +1,7 @@
 import { RegenApi } from '@regen-network/api';
 import { useEffect, useState } from 'react';
 import * as React from 'react';
+import { DirectSecp256k1HdWallet } from '@cosmjs/proto-signing';
 
 import { MyBalance } from './MyBalance';
 
@@ -9,7 +10,7 @@ const REDWOOD_NODE_TM_URL = 'http://209.182.218.23:26657';
 const HAMBACH_NODE_TM_URL = 'http://hambach.regen.network:26657';
 
 export function App(): React.ReactElement {
-  const [tmUrl, setTmUrl] = useState(HAMBACH_NODE_TM_URL);
+  const [tmUrl, setTmUrl] = useState(REDWOOD_NODE_TM_URL);
   const [tmError, setTmError] = useState<Error | undefined>();
 
   const [api, setApi] = useState<RegenApi | undefined>(undefined);
@@ -18,18 +19,33 @@ export function App(): React.ReactElement {
     setApi(undefined);
     setTmError(undefined);
 
-    RegenApi.connect({
-      connection: {
-        type: 'tendermint',
-        url: tmUrl,
-      },
-    })
-      .then(setApi)
-      .catch((err: Error) => {
-        /* eslint-disable */
-        console.error(err);
-        setTmError(err);
-      });
+    const connect = async (): Promise<void> => {
+      const mnemonic = // mnemonic for TEST_ADDRESS_HAMBACH
+        'coast scheme approve soccer juice wealth bunker state fetch warrior inmate belt';
+
+      // Inside an async function...
+      const signer = await DirectSecp256k1HdWallet.fromMnemonic(
+        mnemonic,
+        { prefix: 'regen' }, // Replace with your own Bech32 address prefix
+      );
+      RegenApi.connect({
+        connection: {
+          type: 'tendermint',
+          url: tmUrl,
+          clientType: 'signing',
+          signer,
+        },
+      })
+        .then(setApi)
+        .catch((err: Error) => {
+          console.log('err', err);
+          /* eslint-disable */
+          console.error(err);
+          setTmError(err);
+        });
+    };
+
+    connect();
   }, [tmUrl]);
 
   return (

@@ -1,5 +1,5 @@
 import { TxRaw } from 'cosmjs-types/cosmos/tx/v1beta1/tx';
-import { defaultRegistryTypes } from '@cosmjs/stargate';
+import { defaultRegistryTypes, StdFee } from '@cosmjs/stargate';
 import { Registry, GeneratedType } from '@cosmjs/proto-signing';
 
 import { ConnectionOptions } from '../api';
@@ -7,6 +7,12 @@ import { messageTypeRegistry } from '../generated/typeRegistry';
 import { createStargateSigningClient } from './stargate-signing';
 
 export interface MessageClient {
+  readonly sign: (
+    signerAddress: string,
+    msg: any,
+    fee: StdFee,
+    memo: string,
+  ) => Promise<Uint8Array>;
   readonly sendTokens: (
     amount: number,
     sender: string,
@@ -18,16 +24,12 @@ export interface MessageClient {
 export async function setupTxExtension(
   connection: ConnectionOptions,
 ): Promise<MessageClient> {
-
   const customRegistry: Array<[string, GeneratedType]> = [];
   messageTypeRegistry.forEach((value, key) => {
-    customRegistry.push([key, value]);
-  })
-  const registry = new Registry([
-    ...defaultRegistryTypes,
-    ...customRegistry,
-  ]);
-  console.log('myRegistry', registry)
+    customRegistry.push([`/${key}`, value]);
+  });
+  const registry = new Registry([...defaultRegistryTypes, ...customRegistry]);
+  console.log('myRegistry', registry);
 
   const connectionOptions = {
     ...connection,
@@ -35,6 +37,30 @@ export async function setupTxExtension(
   };
   const signingClient = await createStargateSigningClient(connectionOptions);
 
+  const sign = async (
+    signerAddress: string,
+    msg: any,
+    fee: StdFee,
+    memo: string,
+  ): Promise<Uint8Array> => {
+    const msgAny = {
+      typeUrl: `/${msg.$type}`,
+      value: msg,
+    };
+    try {
+      const txRaw = await signingClient.sign(
+        signerAddress,
+        [msgAny],
+        fee,
+        memo,
+      );
+      const txBytes = TxRaw.encode(txRaw).finish();
+
+      return txBytes;
+    } catch (err) {
+      return Promise.reject(err);
+    }
+  };
   /**
    * Sign a transaction for sending tokens to a recipient
    */
@@ -91,6 +117,7 @@ export async function setupTxExtension(
   };
 
   return {
+    sign,
     sendTokens,
     broadcast,
   };
