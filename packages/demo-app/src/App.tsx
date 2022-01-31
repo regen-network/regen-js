@@ -11,7 +11,6 @@ const HAMBACH_NODE_TM_URL = 'http://hambach.regen.network:26657';
 export function App(): React.ReactElement {
   const [tmUrl, setTmUrl] = useState(HAMBACH_NODE_TM_URL);
   const [tmError, setTmError] = useState<Error | undefined>();
-
   const [api, setApi] = useState<RegenApi | undefined>(undefined);
 
   useEffect(() => {
@@ -46,32 +45,32 @@ export function App(): React.ReactElement {
         <p>Loading RegenApi...</p>
       )}
 
-			<div>
-				<h2>Settings</h2>
-				<label htmlFor="tm">
-					The current Tendermint RPC endpoint we&apos;re using:
-				</label>
-				<input
-					name="tmUrl"
-					value={tmUrl}
-					onChange={({ target: { value } }) => setTmUrl(value)}
-				/>
-				<p>
-					Switch to a known public endpoint:
-					<button onClick={() => setTmUrl(DEVNET_NODE_TM_URL)}>
-						Official Regen Devnet node
-					</button>
-					<button onClick={() => setTmUrl(REDWOOD_NODE_TM_URL)}>
-						Redwood Testnet node
-					</button>
-					<button onClick={() => setTmUrl(HAMBACH_NODE_TM_URL)}>
-						Hambach Testnet node
-					</button>
-				</p>
-        <p>
-          Tendermint Client Status:{" "}
-          {tmError?.message ? tmError?.message : api ? "ok" : "loading..."}
-        </p>
+    <div>
+      <h2>Settings</h2>
+      <label htmlFor="tm">
+        The current Tendermint RPC endpoint we&apos;re using:
+      </label>
+      <input
+        name="tmUrl"
+        value={tmUrl}
+        onChange={({ target: { value } }) => setTmUrl(value)}
+      />
+      <p>
+        Switch to a known public endpoint:
+        <button onClick={() => setTmUrl(DEVNET_NODE_TM_URL)}>
+          Official Regen Devnet node
+        </button>
+        <button onClick={() => setTmUrl(REDWOOD_NODE_TM_URL)}>
+          Redwood Testnet node
+        </button>
+        <button onClick={() => setTmUrl(HAMBACH_NODE_TM_URL)}>
+          Hambach Testnet node
+        </button>
+      </p>
+      <p>
+        Tendermint Client Status:{" "}
+        {tmError?.message ? tmError?.message : api ? "ok" : "loading..."}
+      </p>
       </div>
     </div>
   );
