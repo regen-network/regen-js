@@ -1,8 +1,9 @@
 import { TxRaw } from 'cosmjs-types/cosmos/tx/v1beta1/tx';
 import { defaultRegistryTypes } from '@cosmjs/stargate';
-import { Registry } from '@cosmjs/proto-signing';
+import { Registry, GeneratedType } from '@cosmjs/proto-signing';
 
 import { ConnectionOptions } from '../api';
+import { messageTypeRegistry } from '../generated/typeRegistry';
 import { createStargateSigningClient } from './stargate-signing';
 
 export interface MessageClient {
@@ -17,10 +18,16 @@ export interface MessageClient {
 export async function setupTxExtension(
   connection: ConnectionOptions,
 ): Promise<MessageClient> {
+
+  const customRegistry: Array<[string, GeneratedType]> = [];
+  messageTypeRegistry.forEach((value, key) => {
+    customRegistry.push([key, value]);
+  })
   const registry = new Registry([
     ...defaultRegistryTypes,
-    // ["/my.custom.MsgXxx", MsgXxx], // Replace with your own type URL and Msg class
+    ...customRegistry,
   ]);
+  console.log('myRegistry', registry)
 
   const connectionOptions = {
     ...connection,

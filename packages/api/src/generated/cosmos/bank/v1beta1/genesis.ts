@@ -1,58 +1,55 @@
 /* eslint-disable */
+import { messageTypeRegistry } from '../../../typeRegistry';
+import Long from 'long';
+import _m0 from 'protobufjs/minimal';
 import { Params, Metadata } from '../../../cosmos/bank/v1beta1/bank';
 import { Coin } from '../../../cosmos/base/v1beta1/coin';
-import { Writer, Reader } from 'protobufjs/minimal';
 
+export const protobufPackage = 'cosmos.bank.v1beta1';
 
-/**
- *  GenesisState defines the bank module's genesis state.
- */
+/** GenesisState defines the bank module's genesis state. */
 export interface GenesisState {
-  /**
-   *  params defines all the paramaters of the module.
-   */
+  $type: 'cosmos.bank.v1beta1.GenesisState';
+  /** params defines all the paramaters of the module. */
   params?: Params;
-  /**
-   *  balances is an array containing the balances of all the accounts.
-   */
+  /** balances is an array containing the balances of all the accounts. */
   balances: Balance[];
-  /**
-   *  supply represents the total supply.
-   */
+  /** supply represents the total supply. */
   supply: Coin[];
-  /**
-   *  denom_metadata defines the metadata of the differents coins.
-   */
+  /** denom_metadata defines the metadata of the differents coins. */
   denomMetadata: Metadata[];
 }
 
 /**
- *  Balance defines an account address and balance pair used in the bank module's
- *  genesis state.
+ * Balance defines an account address and balance pair used in the bank module's
+ * genesis state.
  */
 export interface Balance {
-  /**
-   *  address is the address of the balance holder.
-   */
+  $type: 'cosmos.bank.v1beta1.Balance';
+  /** address is the address of the balance holder. */
   address: string;
-  /**
-   *  coins defines the different coins this balance holds.
-   */
+  /** coins defines the different coins this balance holds. */
   coins: Coin[];
 }
 
-const baseGenesisState: object = {
-};
-
-const baseBalance: object = {
-  address: "",
-};
-
-export const protobufPackage = 'cosmos.bank.v1beta1'
+function createBaseGenesisState(): GenesisState {
+  return {
+    $type: 'cosmos.bank.v1beta1.GenesisState',
+    params: undefined,
+    balances: [],
+    supply: [],
+    denomMetadata: [],
+  };
+}
 
 export const GenesisState = {
-  encode(message: GenesisState, writer: Writer = Writer.create()): Writer {
-    if (message.params !== undefined && message.params !== undefined) {
+  $type: 'cosmos.bank.v1beta1.GenesisState' as const,
+
+  encode(
+    message: GenesisState,
+    writer: _m0.Writer = _m0.Writer.create(),
+  ): _m0.Writer {
+    if (message.params !== undefined) {
       Params.encode(message.params, writer.uint32(10).fork()).ldelim();
     }
     for (const v of message.balances) {
@@ -66,13 +63,11 @@ export const GenesisState = {
     }
     return writer;
   },
-  decode(input: Uint8Array | Reader, length?: number): GenesisState {
-    const reader = input instanceof Uint8Array ? new Reader(input) : input;
+
+  decode(input: _m0.Reader | Uint8Array, length?: number): GenesisState {
+    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
-    const message = { ...baseGenesisState } as GenesisState;
-    message.balances = [];
-    message.supply = [];
-    message.denomMetadata = [];
+    const message = createBaseGenesisState();
     while (reader.pos < end) {
       const tag = reader.uint32();
       switch (tag >>> 3) {
@@ -95,95 +90,91 @@ export const GenesisState = {
     }
     return message;
   },
+
   fromJSON(object: any): GenesisState {
-    const message = { ...baseGenesisState } as GenesisState;
-    message.balances = [];
-    message.supply = [];
-    message.denomMetadata = [];
-    if (object.params !== undefined && object.params !== null) {
-      message.params = Params.fromJSON(object.params);
-    } else {
-      message.params = undefined;
-    }
-    if (object.balances !== undefined && object.balances !== null) {
-      for (const e of object.balances) {
-        message.balances.push(Balance.fromJSON(e));
-      }
-    }
-    if (object.supply !== undefined && object.supply !== null) {
-      for (const e of object.supply) {
-        message.supply.push(Coin.fromJSON(e));
-      }
-    }
-    if (object.denomMetadata !== undefined && object.denomMetadata !== null) {
-      for (const e of object.denomMetadata) {
-        message.denomMetadata.push(Metadata.fromJSON(e));
-      }
-    }
-    return message;
+    return {
+      $type: GenesisState.$type,
+      params: isSet(object.params) ? Params.fromJSON(object.params) : undefined,
+      balances: Array.isArray(object?.balances)
+        ? object.balances.map((e: any) => Balance.fromJSON(e))
+        : [],
+      supply: Array.isArray(object?.supply)
+        ? object.supply.map((e: any) => Coin.fromJSON(e))
+        : [],
+      denomMetadata: Array.isArray(object?.denomMetadata)
+        ? object.denomMetadata.map((e: any) => Metadata.fromJSON(e))
+        : [],
+    };
   },
-  fromPartial(object: DeepPartial<GenesisState>): GenesisState {
-    const message = { ...baseGenesisState } as GenesisState;
-    message.balances = [];
-    message.supply = [];
-    message.denomMetadata = [];
-    if (object.params !== undefined && object.params !== null) {
-      message.params = Params.fromPartial(object.params);
-    } else {
-      message.params = undefined;
-    }
-    if (object.balances !== undefined && object.balances !== null) {
-      for (const e of object.balances) {
-        message.balances.push(Balance.fromPartial(e));
-      }
-    }
-    if (object.supply !== undefined && object.supply !== null) {
-      for (const e of object.supply) {
-        message.supply.push(Coin.fromPartial(e));
-      }
-    }
-    if (object.denomMetadata !== undefined && object.denomMetadata !== null) {
-      for (const e of object.denomMetadata) {
-        message.denomMetadata.push(Metadata.fromPartial(e));
-      }
-    }
-    return message;
-  },
+
   toJSON(message: GenesisState): unknown {
     const obj: any = {};
-    message.params !== undefined && (obj.params = message.params ? Params.toJSON(message.params) : undefined);
+    message.params !== undefined &&
+      (obj.params = message.params ? Params.toJSON(message.params) : undefined);
     if (message.balances) {
-      obj.balances = message.balances.map(e => e ? Balance.toJSON(e) : undefined);
+      obj.balances = message.balances.map(e =>
+        e ? Balance.toJSON(e) : undefined,
+      );
     } else {
       obj.balances = [];
     }
     if (message.supply) {
-      obj.supply = message.supply.map(e => e ? Coin.toJSON(e) : undefined);
+      obj.supply = message.supply.map(e => (e ? Coin.toJSON(e) : undefined));
     } else {
       obj.supply = [];
     }
     if (message.denomMetadata) {
-      obj.denomMetadata = message.denomMetadata.map(e => e ? Metadata.toJSON(e) : undefined);
+      obj.denomMetadata = message.denomMetadata.map(e =>
+        e ? Metadata.toJSON(e) : undefined,
+      );
     } else {
       obj.denomMetadata = [];
     }
     return obj;
   },
+
+  fromPartial<I extends Exact<DeepPartial<GenesisState>, I>>(
+    object: I,
+  ): GenesisState {
+    const message = createBaseGenesisState();
+    message.params =
+      object.params !== undefined && object.params !== null
+        ? Params.fromPartial(object.params)
+        : undefined;
+    message.balances = object.balances?.map(e => Balance.fromPartial(e)) || [];
+    message.supply = object.supply?.map(e => Coin.fromPartial(e)) || [];
+    message.denomMetadata =
+      object.denomMetadata?.map(e => Metadata.fromPartial(e)) || [];
+    return message;
+  },
 };
 
+messageTypeRegistry.set(GenesisState.$type, GenesisState);
+
+function createBaseBalance(): Balance {
+  return { $type: 'cosmos.bank.v1beta1.Balance', address: '', coins: [] };
+}
+
 export const Balance = {
-  encode(message: Balance, writer: Writer = Writer.create()): Writer {
-    writer.uint32(10).string(message.address);
+  $type: 'cosmos.bank.v1beta1.Balance' as const,
+
+  encode(
+    message: Balance,
+    writer: _m0.Writer = _m0.Writer.create(),
+  ): _m0.Writer {
+    if (message.address !== '') {
+      writer.uint32(10).string(message.address);
+    }
     for (const v of message.coins) {
       Coin.encode(v!, writer.uint32(18).fork()).ldelim();
     }
     return writer;
   },
-  decode(input: Uint8Array | Reader, length?: number): Balance {
-    const reader = input instanceof Uint8Array ? new Reader(input) : input;
+
+  decode(input: _m0.Reader | Uint8Array, length?: number): Balance {
+    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
-    const message = { ...baseBalance } as Balance;
-    message.coins = [];
+    const message = createBaseBalance();
     while (reader.pos < end) {
       const tag = reader.uint32();
       switch (tag >>> 3) {
@@ -200,55 +191,72 @@ export const Balance = {
     }
     return message;
   },
+
   fromJSON(object: any): Balance {
-    const message = { ...baseBalance } as Balance;
-    message.coins = [];
-    if (object.address !== undefined && object.address !== null) {
-      message.address = String(object.address);
-    } else {
-      message.address = "";
-    }
-    if (object.coins !== undefined && object.coins !== null) {
-      for (const e of object.coins) {
-        message.coins.push(Coin.fromJSON(e));
-      }
-    }
-    return message;
+    return {
+      $type: Balance.$type,
+      address: isSet(object.address) ? String(object.address) : '',
+      coins: Array.isArray(object?.coins)
+        ? object.coins.map((e: any) => Coin.fromJSON(e))
+        : [],
+    };
   },
-  fromPartial(object: DeepPartial<Balance>): Balance {
-    const message = { ...baseBalance } as Balance;
-    message.coins = [];
-    if (object.address !== undefined && object.address !== null) {
-      message.address = object.address;
-    } else {
-      message.address = "";
-    }
-    if (object.coins !== undefined && object.coins !== null) {
-      for (const e of object.coins) {
-        message.coins.push(Coin.fromPartial(e));
-      }
-    }
-    return message;
-  },
+
   toJSON(message: Balance): unknown {
     const obj: any = {};
     message.address !== undefined && (obj.address = message.address);
     if (message.coins) {
-      obj.coins = message.coins.map(e => e ? Coin.toJSON(e) : undefined);
+      obj.coins = message.coins.map(e => (e ? Coin.toJSON(e) : undefined));
     } else {
       obj.coins = [];
     }
     return obj;
   },
+
+  fromPartial<I extends Exact<DeepPartial<Balance>, I>>(object: I): Balance {
+    const message = createBaseBalance();
+    message.address = object.address ?? '';
+    message.coins = object.coins?.map(e => Coin.fromPartial(e)) || [];
+    return message;
+  },
 };
 
-type Builtin = Date | Function | Uint8Array | string | number | undefined;
+messageTypeRegistry.set(Balance.$type, Balance);
+
+type Builtin =
+  | Date
+  | Function
+  | Uint8Array
+  | string
+  | number
+  | boolean
+  | undefined;
+
 export type DeepPartial<T> = T extends Builtin
   ? T
+  : T extends Long
+  ? string | number | Long
   : T extends Array<infer U>
   ? Array<DeepPartial<U>>
   : T extends ReadonlyArray<infer U>
   ? ReadonlyArray<DeepPartial<U>>
   : T extends {}
-  ? { [K in keyof T]?: DeepPartial<T[K]> }
+  ? { [K in Exclude<keyof T, '$type'>]?: DeepPartial<T[K]> }
   : Partial<T>;
+
+type KeysOfUnion<T> = T extends T ? keyof T : never;
+export type Exact<P, I extends P> = P extends Builtin
+  ? P
+  : P & { [K in keyof P]: Exact<P[K], I[K]> } & Record<
+        Exclude<keyof I, KeysOfUnion<P> | '$type'>,
+        never
+      >;
+
+if (_m0.util.Long !== Long) {
+  _m0.util.Long = Long as any;
+  _m0.configure();
+}
+
+function isSet(value: any): boolean {
+  return value !== null && value !== undefined;
+}

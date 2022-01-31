@@ -1,31 +1,37 @@
 /* eslint-disable */
+import { messageTypeRegistry } from '../../../typeRegistry';
+import Long from 'long';
+import _m0 from 'protobufjs/minimal';
 import { Params } from '../../../cosmos/auth/v1beta1/auth';
 import { Any } from '../../../google/protobuf/any';
-import { Writer, Reader } from 'protobufjs/minimal';
 
+export const protobufPackage = 'cosmos.auth.v1beta1';
 
-/**
- *  GenesisState defines the auth module's genesis state.
- */
+/** GenesisState defines the auth module's genesis state. */
 export interface GenesisState {
-  /**
-   *  params defines all the paramaters of the module.
-   */
+  $type: 'cosmos.auth.v1beta1.GenesisState';
+  /** params defines all the paramaters of the module. */
   params?: Params;
-  /**
-   *  accounts are the accounts present at genesis.
-   */
+  /** accounts are the accounts present at genesis. */
   accounts: Any[];
 }
 
-const baseGenesisState: object = {
-};
-
-export const protobufPackage = 'cosmos.auth.v1beta1'
+function createBaseGenesisState(): GenesisState {
+  return {
+    $type: 'cosmos.auth.v1beta1.GenesisState',
+    params: undefined,
+    accounts: [],
+  };
+}
 
 export const GenesisState = {
-  encode(message: GenesisState, writer: Writer = Writer.create()): Writer {
-    if (message.params !== undefined && message.params !== undefined) {
+  $type: 'cosmos.auth.v1beta1.GenesisState' as const,
+
+  encode(
+    message: GenesisState,
+    writer: _m0.Writer = _m0.Writer.create(),
+  ): _m0.Writer {
+    if (message.params !== undefined) {
       Params.encode(message.params, writer.uint32(10).fork()).ldelim();
     }
     for (const v of message.accounts) {
@@ -33,11 +39,11 @@ export const GenesisState = {
     }
     return writer;
   },
-  decode(input: Uint8Array | Reader, length?: number): GenesisState {
-    const reader = input instanceof Uint8Array ? new Reader(input) : input;
+
+  decode(input: _m0.Reader | Uint8Array, length?: number): GenesisState {
+    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
-    const message = { ...baseGenesisState } as GenesisState;
-    message.accounts = [];
+    const message = createBaseGenesisState();
     while (reader.pos < end) {
       const tag = reader.uint32();
       switch (tag >>> 3) {
@@ -54,55 +60,78 @@ export const GenesisState = {
     }
     return message;
   },
+
   fromJSON(object: any): GenesisState {
-    const message = { ...baseGenesisState } as GenesisState;
-    message.accounts = [];
-    if (object.params !== undefined && object.params !== null) {
-      message.params = Params.fromJSON(object.params);
-    } else {
-      message.params = undefined;
-    }
-    if (object.accounts !== undefined && object.accounts !== null) {
-      for (const e of object.accounts) {
-        message.accounts.push(Any.fromJSON(e));
-      }
-    }
-    return message;
+    return {
+      $type: GenesisState.$type,
+      params: isSet(object.params) ? Params.fromJSON(object.params) : undefined,
+      accounts: Array.isArray(object?.accounts)
+        ? object.accounts.map((e: any) => Any.fromJSON(e))
+        : [],
+    };
   },
-  fromPartial(object: DeepPartial<GenesisState>): GenesisState {
-    const message = { ...baseGenesisState } as GenesisState;
-    message.accounts = [];
-    if (object.params !== undefined && object.params !== null) {
-      message.params = Params.fromPartial(object.params);
-    } else {
-      message.params = undefined;
-    }
-    if (object.accounts !== undefined && object.accounts !== null) {
-      for (const e of object.accounts) {
-        message.accounts.push(Any.fromPartial(e));
-      }
-    }
-    return message;
-  },
+
   toJSON(message: GenesisState): unknown {
     const obj: any = {};
-    message.params !== undefined && (obj.params = message.params ? Params.toJSON(message.params) : undefined);
+    message.params !== undefined &&
+      (obj.params = message.params ? Params.toJSON(message.params) : undefined);
     if (message.accounts) {
-      obj.accounts = message.accounts.map(e => e ? Any.toJSON(e) : undefined);
+      obj.accounts = message.accounts.map(e => (e ? Any.toJSON(e) : undefined));
     } else {
       obj.accounts = [];
     }
     return obj;
   },
+
+  fromPartial<I extends Exact<DeepPartial<GenesisState>, I>>(
+    object: I,
+  ): GenesisState {
+    const message = createBaseGenesisState();
+    message.params =
+      object.params !== undefined && object.params !== null
+        ? Params.fromPartial(object.params)
+        : undefined;
+    message.accounts = object.accounts?.map(e => Any.fromPartial(e)) || [];
+    return message;
+  },
 };
 
-type Builtin = Date | Function | Uint8Array | string | number | undefined;
+messageTypeRegistry.set(GenesisState.$type, GenesisState);
+
+type Builtin =
+  | Date
+  | Function
+  | Uint8Array
+  | string
+  | number
+  | boolean
+  | undefined;
+
 export type DeepPartial<T> = T extends Builtin
   ? T
+  : T extends Long
+  ? string | number | Long
   : T extends Array<infer U>
   ? Array<DeepPartial<U>>
   : T extends ReadonlyArray<infer U>
   ? ReadonlyArray<DeepPartial<U>>
   : T extends {}
-  ? { [K in keyof T]?: DeepPartial<T[K]> }
+  ? { [K in Exclude<keyof T, '$type'>]?: DeepPartial<T[K]> }
   : Partial<T>;
+
+type KeysOfUnion<T> = T extends T ? keyof T : never;
+export type Exact<P, I extends P> = P extends Builtin
+  ? P
+  : P & { [K in keyof P]: Exact<P[K], I[K]> } & Record<
+        Exclude<keyof I, KeysOfUnion<P> | '$type'>,
+        never
+      >;
+
+if (_m0.util.Long !== Long) {
+  _m0.util.Long = Long as any;
+  _m0.configure();
+}
+
+function isSet(value: any): boolean {
+  return value !== null && value !== undefined;
+}

@@ -1,74 +1,42 @@
 /* eslint-disable */
-import { Reader, Writer } from 'protobufjs/minimal';
+import { messageTypeRegistry } from '../../../typeRegistry';
+import Long from 'long';
+import _m0 from 'protobufjs/minimal';
 
+export const protobufPackage = 'cosmos.slashing.v1beta1';
 
-/**
- *  MsgUnjail defines the Msg/Unjail request type
- */
+/** MsgUnjail defines the Msg/Unjail request type */
 export interface MsgUnjail {
+  $type: 'cosmos.slashing.v1beta1.MsgUnjail';
   validatorAddr: string;
 }
 
-/**
- *  MsgUnjailResponse defines the Msg/Unjail response type
- */
+/** MsgUnjailResponse defines the Msg/Unjail response type */
 export interface MsgUnjailResponse {
+  $type: 'cosmos.slashing.v1beta1.MsgUnjailResponse';
 }
 
-const baseMsgUnjail: object = {
-  validatorAddr: "",
-};
-
-const baseMsgUnjailResponse: object = {
-};
-
-/**
- *  Msg defines the slashing Msg service.
- */
-export interface Msg {
-
-  /**
-   *  Unjail defines a method for unjailing a jailed validator, thus returning
-   *  them into the bonded validator set, so they can begin receiving provisions
-   *  and rewards again.
-   */
-  Unjail(request: MsgUnjail): Promise<MsgUnjailResponse>;
-
+function createBaseMsgUnjail(): MsgUnjail {
+  return { $type: 'cosmos.slashing.v1beta1.MsgUnjail', validatorAddr: '' };
 }
-
-export class MsgClientImpl implements Msg {
-
-  private readonly rpc: Rpc;
-
-  constructor(rpc: Rpc) {
-    this.rpc = rpc;
-  }
-
-  Unjail(request: MsgUnjail): Promise<MsgUnjailResponse> {
-    const data = MsgUnjail.encode(request).finish();
-    const promise = this.rpc.request("cosmos.slashing.v1beta1.Msg", "Unjail", data);
-    return promise.then(data => MsgUnjailResponse.decode(new Reader(data)));
-  }
-
-}
-
-interface Rpc {
-
-  request(service: string, method: string, data: Uint8Array): Promise<Uint8Array>;
-
-}
-
-export const protobufPackage = 'cosmos.slashing.v1beta1'
 
 export const MsgUnjail = {
-  encode(message: MsgUnjail, writer: Writer = Writer.create()): Writer {
-    writer.uint32(10).string(message.validatorAddr);
+  $type: 'cosmos.slashing.v1beta1.MsgUnjail' as const,
+
+  encode(
+    message: MsgUnjail,
+    writer: _m0.Writer = _m0.Writer.create(),
+  ): _m0.Writer {
+    if (message.validatorAddr !== '') {
+      writer.uint32(10).string(message.validatorAddr);
+    }
     return writer;
   },
-  decode(input: Uint8Array | Reader, length?: number): MsgUnjail {
-    const reader = input instanceof Uint8Array ? new Reader(input) : input;
+
+  decode(input: _m0.Reader | Uint8Array, length?: number): MsgUnjail {
+    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
-    const message = { ...baseMsgUnjail } as MsgUnjail;
+    const message = createBaseMsgUnjail();
     while (reader.pos < end) {
       const tag = reader.uint32();
       switch (tag >>> 3) {
@@ -82,39 +50,52 @@ export const MsgUnjail = {
     }
     return message;
   },
+
   fromJSON(object: any): MsgUnjail {
-    const message = { ...baseMsgUnjail } as MsgUnjail;
-    if (object.validatorAddr !== undefined && object.validatorAddr !== null) {
-      message.validatorAddr = String(object.validatorAddr);
-    } else {
-      message.validatorAddr = "";
-    }
-    return message;
+    return {
+      $type: MsgUnjail.$type,
+      validatorAddr: isSet(object.validatorAddr)
+        ? String(object.validatorAddr)
+        : '',
+    };
   },
-  fromPartial(object: DeepPartial<MsgUnjail>): MsgUnjail {
-    const message = { ...baseMsgUnjail } as MsgUnjail;
-    if (object.validatorAddr !== undefined && object.validatorAddr !== null) {
-      message.validatorAddr = object.validatorAddr;
-    } else {
-      message.validatorAddr = "";
-    }
-    return message;
-  },
+
   toJSON(message: MsgUnjail): unknown {
     const obj: any = {};
-    message.validatorAddr !== undefined && (obj.validatorAddr = message.validatorAddr);
+    message.validatorAddr !== undefined &&
+      (obj.validatorAddr = message.validatorAddr);
     return obj;
+  },
+
+  fromPartial<I extends Exact<DeepPartial<MsgUnjail>, I>>(
+    object: I,
+  ): MsgUnjail {
+    const message = createBaseMsgUnjail();
+    message.validatorAddr = object.validatorAddr ?? '';
+    return message;
   },
 };
 
+messageTypeRegistry.set(MsgUnjail.$type, MsgUnjail);
+
+function createBaseMsgUnjailResponse(): MsgUnjailResponse {
+  return { $type: 'cosmos.slashing.v1beta1.MsgUnjailResponse' };
+}
+
 export const MsgUnjailResponse = {
-  encode(_: MsgUnjailResponse, writer: Writer = Writer.create()): Writer {
+  $type: 'cosmos.slashing.v1beta1.MsgUnjailResponse' as const,
+
+  encode(
+    _: MsgUnjailResponse,
+    writer: _m0.Writer = _m0.Writer.create(),
+  ): _m0.Writer {
     return writer;
   },
-  decode(input: Uint8Array | Reader, length?: number): MsgUnjailResponse {
-    const reader = input instanceof Uint8Array ? new Reader(input) : input;
+
+  decode(input: _m0.Reader | Uint8Array, length?: number): MsgUnjailResponse {
+    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
-    const message = { ...baseMsgUnjailResponse } as MsgUnjailResponse;
+    const message = createBaseMsgUnjailResponse();
     while (reader.pos < end) {
       const tag = reader.uint32();
       switch (tag >>> 3) {
@@ -125,27 +106,97 @@ export const MsgUnjailResponse = {
     }
     return message;
   },
+
   fromJSON(_: any): MsgUnjailResponse {
-    const message = { ...baseMsgUnjailResponse } as MsgUnjailResponse;
-    return message;
+    return {
+      $type: MsgUnjailResponse.$type,
+    };
   },
-  fromPartial(_: DeepPartial<MsgUnjailResponse>): MsgUnjailResponse {
-    const message = { ...baseMsgUnjailResponse } as MsgUnjailResponse;
-    return message;
-  },
+
   toJSON(_: MsgUnjailResponse): unknown {
     const obj: any = {};
     return obj;
   },
+
+  fromPartial<I extends Exact<DeepPartial<MsgUnjailResponse>, I>>(
+    _: I,
+  ): MsgUnjailResponse {
+    const message = createBaseMsgUnjailResponse();
+    return message;
+  },
 };
 
-type Builtin = Date | Function | Uint8Array | string | number | undefined;
+messageTypeRegistry.set(MsgUnjailResponse.$type, MsgUnjailResponse);
+
+/** Msg defines the slashing Msg service. */
+export interface Msg {
+  /**
+   * Unjail defines a method for unjailing a jailed validator, thus returning
+   * them into the bonded validator set, so they can begin receiving provisions
+   * and rewards again.
+   */
+  Unjail(request: MsgUnjail): Promise<MsgUnjailResponse>;
+}
+
+export class MsgClientImpl implements Msg {
+  private readonly rpc: Rpc;
+  constructor(rpc: Rpc) {
+    this.rpc = rpc;
+    this.Unjail = this.Unjail.bind(this);
+  }
+  Unjail(request: MsgUnjail): Promise<MsgUnjailResponse> {
+    const data = MsgUnjail.encode(request).finish();
+    const promise = this.rpc.request(
+      'cosmos.slashing.v1beta1.Msg',
+      'Unjail',
+      data,
+    );
+    return promise.then(data => MsgUnjailResponse.decode(new _m0.Reader(data)));
+  }
+}
+
+interface Rpc {
+  request(
+    service: string,
+    method: string,
+    data: Uint8Array,
+  ): Promise<Uint8Array>;
+}
+
+type Builtin =
+  | Date
+  | Function
+  | Uint8Array
+  | string
+  | number
+  | boolean
+  | undefined;
+
 export type DeepPartial<T> = T extends Builtin
   ? T
+  : T extends Long
+  ? string | number | Long
   : T extends Array<infer U>
   ? Array<DeepPartial<U>>
   : T extends ReadonlyArray<infer U>
   ? ReadonlyArray<DeepPartial<U>>
   : T extends {}
-  ? { [K in keyof T]?: DeepPartial<T[K]> }
+  ? { [K in Exclude<keyof T, '$type'>]?: DeepPartial<T[K]> }
   : Partial<T>;
+
+type KeysOfUnion<T> = T extends T ? keyof T : never;
+export type Exact<P, I extends P> = P extends Builtin
+  ? P
+  : P & { [K in keyof P]: Exact<P[K], I[K]> } & Record<
+        Exclude<keyof I, KeysOfUnion<P> | '$type'>,
+        never
+      >;
+
+if (_m0.util.Long !== Long) {
+  _m0.util.Long = Long as any;
+  _m0.configure();
+}
+
+function isSet(value: any): boolean {
+  return value !== null && value !== undefined;
+}

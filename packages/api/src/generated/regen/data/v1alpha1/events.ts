@@ -1,65 +1,66 @@
 /* eslint-disable */
-import { Writer, Reader } from 'protobufjs/minimal';
+import { messageTypeRegistry } from '../../../typeRegistry';
+import Long from 'long';
+import _m0 from 'protobufjs/minimal';
 
+export const protobufPackage = 'regen.data.v1alpha1';
 
-/**
- *  EventAnchorData is an event emitted when data is anchored on-chain.
- */
+/** EventAnchorData is an event emitted when data is anchored on-chain. */
 export interface EventAnchorData {
+  $type: 'regen.data.v1alpha1.EventAnchorData';
   /**
-   *  cid is a Content Identifier for the data corresponding to the IPFS CID
-   *  specification: https://github.com/multiformats/cid.
+   * cid is a Content Identifier for the data corresponding to the IPFS CID
+   * specification: https://github.com/multiformats/cid.
    */
   cid: Uint8Array;
 }
 
-/**
- *  EventAnchorData is an event emitted when data is signed on-chain.
- */
+/** EventAnchorData is an event emitted when data is signed on-chain. */
 export interface EventSignData {
+  $type: 'regen.data.v1alpha1.EventSignData';
   /**
-   *  cid is a Content Identifier for the data corresponding to the IPFS CID
-   *  specification: https://github.com/multiformats/cid.
+   * cid is a Content Identifier for the data corresponding to the IPFS CID
+   * specification: https://github.com/multiformats/cid.
    */
   cid: Uint8Array;
-  /**
-   *  signers are the addresses of the accounts which have signed the data.
-   */
+  /** signers are the addresses of the accounts which have signed the data. */
   signers: string[];
 }
 
-/**
- *  EventAnchorData is an event emitted when data is stored on-chain.
- */
+/** EventAnchorData is an event emitted when data is stored on-chain. */
 export interface EventStoreData {
+  $type: 'regen.data.v1alpha1.EventStoreData';
   /**
-   *  cid is a Content Identifier for the data corresponding to the IPFS CID
-   *  specification: https://github.com/multiformats/cid.
+   * cid is a Content Identifier for the data corresponding to the IPFS CID
+   * specification: https://github.com/multiformats/cid.
    */
   cid: Uint8Array;
 }
 
-const baseEventAnchorData: object = {
-};
-
-const baseEventSignData: object = {
-  signers: "",
-};
-
-const baseEventStoreData: object = {
-};
-
-export const protobufPackage = 'regen.data.v1alpha1'
+function createBaseEventAnchorData(): EventAnchorData {
+  return {
+    $type: 'regen.data.v1alpha1.EventAnchorData',
+    cid: new Uint8Array(),
+  };
+}
 
 export const EventAnchorData = {
-  encode(message: EventAnchorData, writer: Writer = Writer.create()): Writer {
-    writer.uint32(10).bytes(message.cid);
+  $type: 'regen.data.v1alpha1.EventAnchorData' as const,
+
+  encode(
+    message: EventAnchorData,
+    writer: _m0.Writer = _m0.Writer.create(),
+  ): _m0.Writer {
+    if (message.cid.length !== 0) {
+      writer.uint32(10).bytes(message.cid);
+    }
     return writer;
   },
-  decode(input: Uint8Array | Reader, length?: number): EventAnchorData {
-    const reader = input instanceof Uint8Array ? new Reader(input) : input;
+
+  decode(input: _m0.Reader | Uint8Array, length?: number): EventAnchorData {
+    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
-    const message = { ...baseEventAnchorData } as EventAnchorData;
+    const message = createBaseEventAnchorData();
     while (reader.pos < end) {
       const tag = reader.uint32();
       switch (tag >>> 3) {
@@ -73,42 +74,62 @@ export const EventAnchorData = {
     }
     return message;
   },
+
   fromJSON(object: any): EventAnchorData {
-    const message = { ...baseEventAnchorData } as EventAnchorData;
-    if (object.cid !== undefined && object.cid !== null) {
-      message.cid = bytesFromBase64(object.cid);
-    }
-    return message;
+    return {
+      $type: EventAnchorData.$type,
+      cid: isSet(object.cid) ? bytesFromBase64(object.cid) : new Uint8Array(),
+    };
   },
-  fromPartial(object: DeepPartial<EventAnchorData>): EventAnchorData {
-    const message = { ...baseEventAnchorData } as EventAnchorData;
-    if (object.cid !== undefined && object.cid !== null) {
-      message.cid = object.cid;
-    } else {
-      message.cid = new Uint8Array();
-    }
-    return message;
-  },
+
   toJSON(message: EventAnchorData): unknown {
     const obj: any = {};
-    message.cid !== undefined && (obj.cid = base64FromBytes(message.cid !== undefined ? message.cid : new Uint8Array()));
+    message.cid !== undefined &&
+      (obj.cid = base64FromBytes(
+        message.cid !== undefined ? message.cid : new Uint8Array(),
+      ));
     return obj;
+  },
+
+  fromPartial<I extends Exact<DeepPartial<EventAnchorData>, I>>(
+    object: I,
+  ): EventAnchorData {
+    const message = createBaseEventAnchorData();
+    message.cid = object.cid ?? new Uint8Array();
+    return message;
   },
 };
 
+messageTypeRegistry.set(EventAnchorData.$type, EventAnchorData);
+
+function createBaseEventSignData(): EventSignData {
+  return {
+    $type: 'regen.data.v1alpha1.EventSignData',
+    cid: new Uint8Array(),
+    signers: [],
+  };
+}
+
 export const EventSignData = {
-  encode(message: EventSignData, writer: Writer = Writer.create()): Writer {
-    writer.uint32(10).bytes(message.cid);
+  $type: 'regen.data.v1alpha1.EventSignData' as const,
+
+  encode(
+    message: EventSignData,
+    writer: _m0.Writer = _m0.Writer.create(),
+  ): _m0.Writer {
+    if (message.cid.length !== 0) {
+      writer.uint32(10).bytes(message.cid);
+    }
     for (const v of message.signers) {
       writer.uint32(18).string(v!);
     }
     return writer;
   },
-  decode(input: Uint8Array | Reader, length?: number): EventSignData {
-    const reader = input instanceof Uint8Array ? new Reader(input) : input;
+
+  decode(input: _m0.Reader | Uint8Array, length?: number): EventSignData {
+    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
-    const message = { ...baseEventSignData } as EventSignData;
-    message.signers = [];
+    const message = createBaseEventSignData();
     while (reader.pos < end) {
       const tag = reader.uint32();
       switch (tag >>> 3) {
@@ -125,37 +146,23 @@ export const EventSignData = {
     }
     return message;
   },
+
   fromJSON(object: any): EventSignData {
-    const message = { ...baseEventSignData } as EventSignData;
-    message.signers = [];
-    if (object.cid !== undefined && object.cid !== null) {
-      message.cid = bytesFromBase64(object.cid);
-    }
-    if (object.signers !== undefined && object.signers !== null) {
-      for (const e of object.signers) {
-        message.signers.push(String(e));
-      }
-    }
-    return message;
+    return {
+      $type: EventSignData.$type,
+      cid: isSet(object.cid) ? bytesFromBase64(object.cid) : new Uint8Array(),
+      signers: Array.isArray(object?.signers)
+        ? object.signers.map((e: any) => String(e))
+        : [],
+    };
   },
-  fromPartial(object: DeepPartial<EventSignData>): EventSignData {
-    const message = { ...baseEventSignData } as EventSignData;
-    message.signers = [];
-    if (object.cid !== undefined && object.cid !== null) {
-      message.cid = object.cid;
-    } else {
-      message.cid = new Uint8Array();
-    }
-    if (object.signers !== undefined && object.signers !== null) {
-      for (const e of object.signers) {
-        message.signers.push(e);
-      }
-    }
-    return message;
-  },
+
   toJSON(message: EventSignData): unknown {
     const obj: any = {};
-    message.cid !== undefined && (obj.cid = base64FromBytes(message.cid !== undefined ? message.cid : new Uint8Array()));
+    message.cid !== undefined &&
+      (obj.cid = base64FromBytes(
+        message.cid !== undefined ? message.cid : new Uint8Array(),
+      ));
     if (message.signers) {
       obj.signers = message.signers.map(e => e);
     } else {
@@ -163,17 +170,40 @@ export const EventSignData = {
     }
     return obj;
   },
+
+  fromPartial<I extends Exact<DeepPartial<EventSignData>, I>>(
+    object: I,
+  ): EventSignData {
+    const message = createBaseEventSignData();
+    message.cid = object.cid ?? new Uint8Array();
+    message.signers = object.signers?.map(e => e) || [];
+    return message;
+  },
 };
 
+messageTypeRegistry.set(EventSignData.$type, EventSignData);
+
+function createBaseEventStoreData(): EventStoreData {
+  return { $type: 'regen.data.v1alpha1.EventStoreData', cid: new Uint8Array() };
+}
+
 export const EventStoreData = {
-  encode(message: EventStoreData, writer: Writer = Writer.create()): Writer {
-    writer.uint32(10).bytes(message.cid);
+  $type: 'regen.data.v1alpha1.EventStoreData' as const,
+
+  encode(
+    message: EventStoreData,
+    writer: _m0.Writer = _m0.Writer.create(),
+  ): _m0.Writer {
+    if (message.cid.length !== 0) {
+      writer.uint32(10).bytes(message.cid);
+    }
     return writer;
   },
-  decode(input: Uint8Array | Reader, length?: number): EventStoreData {
-    const reader = input instanceof Uint8Array ? new Reader(input) : input;
+
+  decode(input: _m0.Reader | Uint8Array, length?: number): EventStoreData {
+    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
-    const message = { ...baseEventStoreData } as EventStoreData;
+    const message = createBaseEventStoreData();
     while (reader.pos < end) {
       const tag = reader.uint32();
       switch (tag >>> 3) {
@@ -187,61 +217,102 @@ export const EventStoreData = {
     }
     return message;
   },
+
   fromJSON(object: any): EventStoreData {
-    const message = { ...baseEventStoreData } as EventStoreData;
-    if (object.cid !== undefined && object.cid !== null) {
-      message.cid = bytesFromBase64(object.cid);
-    }
-    return message;
+    return {
+      $type: EventStoreData.$type,
+      cid: isSet(object.cid) ? bytesFromBase64(object.cid) : new Uint8Array(),
+    };
   },
-  fromPartial(object: DeepPartial<EventStoreData>): EventStoreData {
-    const message = { ...baseEventStoreData } as EventStoreData;
-    if (object.cid !== undefined && object.cid !== null) {
-      message.cid = object.cid;
-    } else {
-      message.cid = new Uint8Array();
-    }
-    return message;
-  },
+
   toJSON(message: EventStoreData): unknown {
     const obj: any = {};
-    message.cid !== undefined && (obj.cid = base64FromBytes(message.cid !== undefined ? message.cid : new Uint8Array()));
+    message.cid !== undefined &&
+      (obj.cid = base64FromBytes(
+        message.cid !== undefined ? message.cid : new Uint8Array(),
+      ));
     return obj;
+  },
+
+  fromPartial<I extends Exact<DeepPartial<EventStoreData>, I>>(
+    object: I,
+  ): EventStoreData {
+    const message = createBaseEventStoreData();
+    message.cid = object.cid ?? new Uint8Array();
+    return message;
   },
 };
 
-interface WindowBase64 {
-  atob(b64: string): string;
-  btoa(bin: string): string;
-}
+messageTypeRegistry.set(EventStoreData.$type, EventStoreData);
 
-const windowBase64 = (globalThis as unknown as WindowBase64);
-const atob = windowBase64.atob || ((b64: string) => Buffer.from(b64, 'base64').toString('binary'));
-const btoa = windowBase64.btoa || ((bin: string) => Buffer.from(bin, 'binary').toString('base64'));
+declare var self: any | undefined;
+declare var window: any | undefined;
+declare var global: any | undefined;
+var globalThis: any = (() => {
+  if (typeof globalThis !== 'undefined') return globalThis;
+  if (typeof self !== 'undefined') return self;
+  if (typeof window !== 'undefined') return window;
+  if (typeof global !== 'undefined') return global;
+  throw 'Unable to locate global object';
+})();
 
+const atob: (b64: string) => string =
+  globalThis.atob ||
+  (b64 => globalThis.Buffer.from(b64, 'base64').toString('binary'));
 function bytesFromBase64(b64: string): Uint8Array {
   const bin = atob(b64);
   const arr = new Uint8Array(bin.length);
   for (let i = 0; i < bin.length; ++i) {
-      arr[i] = bin.charCodeAt(i);
+    arr[i] = bin.charCodeAt(i);
   }
   return arr;
 }
 
+const btoa: (bin: string) => string =
+  globalThis.btoa ||
+  (bin => globalThis.Buffer.from(bin, 'binary').toString('base64'));
 function base64FromBytes(arr: Uint8Array): string {
   const bin: string[] = [];
-  for (let i = 0; i < arr.byteLength; ++i) {
-    bin.push(String.fromCharCode(arr[i]));
+  for (const byte of arr) {
+    bin.push(String.fromCharCode(byte));
   }
   return btoa(bin.join(''));
 }
-type Builtin = Date | Function | Uint8Array | string | number | undefined;
+
+type Builtin =
+  | Date
+  | Function
+  | Uint8Array
+  | string
+  | number
+  | boolean
+  | undefined;
+
 export type DeepPartial<T> = T extends Builtin
   ? T
+  : T extends Long
+  ? string | number | Long
   : T extends Array<infer U>
   ? Array<DeepPartial<U>>
   : T extends ReadonlyArray<infer U>
   ? ReadonlyArray<DeepPartial<U>>
   : T extends {}
-  ? { [K in keyof T]?: DeepPartial<T[K]> }
+  ? { [K in Exclude<keyof T, '$type'>]?: DeepPartial<T[K]> }
   : Partial<T>;
+
+type KeysOfUnion<T> = T extends T ? keyof T : never;
+export type Exact<P, I extends P> = P extends Builtin
+  ? P
+  : P & { [K in keyof P]: Exact<P[K], I[K]> } & Record<
+        Exclude<keyof I, KeysOfUnion<P> | '$type'>,
+        never
+      >;
+
+if (_m0.util.Long !== Long) {
+  _m0.util.Long = Long as any;
+  _m0.configure();
+}
+
+function isSet(value: any): boolean {
+  return value !== null && value !== undefined;
+}
