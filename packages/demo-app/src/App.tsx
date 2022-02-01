@@ -31,14 +31,12 @@ export function App(): React.ReactElement {
       RegenApi.connect({
         connection: {
           type: 'tendermint',
-          url: tmUrl,
-          clientType: 'signing',
+          endpoint: tmUrl,
           signer,
         },
       })
         .then(setApi)
         .catch((err: Error) => {
-          console.log('err', err);
           /* eslint-disable */
           console.error(err);
           setTmError(err);

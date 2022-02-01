@@ -10,8 +10,8 @@ export interface EventCreateClass {
   $type: 'regen.ecocredit.v1alpha1.EventCreateClass';
   /** class_id is the unique ID of credit class. */
   classId: string;
-  /** designer is the designer of the credit class. */
-  designer: string;
+  /** admin is the admin of the credit class. */
+  admin: string;
 }
 
 /** EventCreateBatch is an event emitted when a credit batch is created. */
@@ -23,8 +23,23 @@ export interface EventCreateBatch {
   batchDenom: string;
   /** issuer is the account address of the issuer of the credit batch. */
   issuer: string;
-  /** total_units is the total number of units in the credit batch. */
-  totalUnits: string;
+  /** total_amount is the total number of credits in the credit batch. */
+  totalAmount: string;
+  /**
+   * start_date is the beginning of the period during which this credit batch
+   * was quantified and verified.
+   */
+  startDate: string;
+  /**
+   * end_date is the end of the period during which this credit batch was
+   * quantified and verified.
+   */
+  endDate: string;
+  /**
+   * project_location is the location of the project backing the credits in this
+   * batch. Full documentation can be found in MsgCreateBatch.project_location.
+   */
+  projectLocation: string;
 }
 
 /**
@@ -35,42 +50,71 @@ export interface EventCreateBatch {
 export interface EventReceive {
   $type: 'regen.ecocredit.v1alpha1.EventReceive';
   /**
-   * sender is the sender of the credits in the case that this event is the result of a transfer.
-   * It will not be set when credits are received at initial issuance.
+   * sender is the sender of the credits in the case that this event is the
+   * result of a transfer. It will not be set when credits are received at
+   * initial issuance.
    */
   sender: string;
   /** recipient is the recipient of the credits */
   recipient: string;
   /** batch_denom is the unique ID of credit batch. */
   batchDenom: string;
-  /** units is the decimal number of both tradable and retired credits received. */
-  units: string;
+  /** tradable_amount is the decimal number of tradable credits received. */
+  tradableAmount: string;
+  /** retired_amount is the decimal number of retired credits received. */
+  retiredAmount: string;
 }
 
 /**
- * EventRetire is an event emitted when credits are retired. An separate event is emitted
- * for each batch_denom in the case where credits from multiple batches have been retired at once
- * for easy indexing.
+ * EventRetire is an event emitted when credits are retired. When credits are
+ * retired from multiple batches in the same transaction, a separate event is
+ * emitted for each batch_denom. This allows for easier indexing.
  */
 export interface EventRetire {
   $type: 'regen.ecocredit.v1alpha1.EventRetire';
   /**
-   * retirer is the account which has done the "retiring". This will be the account receiving credits in
-   * the case that credits were retired upon issuance using Msg/CreateBatch or retired upon transfer
-   * using Msg/Send.
+   * retirer is the account which has done the "retiring". This will be the
+   * account receiving credits in the case that credits were retired upon
+   * issuance using Msg/CreateBatch or retired upon transfer using Msg/Send.
    */
   retirer: string;
   /** batch_denom is the unique ID of credit batch. */
   batchDenom: string;
-  /** units is the decimal number of credits that have been retired. */
-  units: string;
+  /** amount is the decimal number of credits that have been retired. */
+  amount: string;
+  /**
+   * location is the location of the beneficiary or buyer of the retired
+   * credits. It is a string of the form
+   * <country-code>[-<sub-national-code>[ <postal-code>]], with the first two
+   * fields conforming to ISO 3166-2, and postal-code being up to 64
+   * alphanumeric characters.
+   */
+  location: string;
+}
+
+/**
+ * EventCancel is an event emitted when credits are cancelled. When credits are
+ * cancelled from multiple batches in the same transaction, a separate event is
+ * emitted for each batch_denom. This allows for easier indexing.
+ */
+export interface EventCancel {
+  $type: 'regen.ecocredit.v1alpha1.EventCancel';
+  /**
+   * canceller is the account which has cancelled the credits, which should be
+   * the holder of the credits.
+   */
+  canceller: string;
+  /** batch_denom is the unique ID of credit batch. */
+  batchDenom: string;
+  /** amount is the decimal number of credits that have been cancelled. */
+  amount: string;
 }
 
 function createBaseEventCreateClass(): EventCreateClass {
   return {
     $type: 'regen.ecocredit.v1alpha1.EventCreateClass',
     classId: '',
-    designer: '',
+    admin: '',
   };
 }
 
@@ -84,8 +128,8 @@ export const EventCreateClass = {
     if (message.classId !== '') {
       writer.uint32(10).string(message.classId);
     }
-    if (message.designer !== '') {
-      writer.uint32(18).string(message.designer);
+    if (message.admin !== '') {
+      writer.uint32(18).string(message.admin);
     }
     return writer;
   },
@@ -101,7 +145,7 @@ export const EventCreateClass = {
           message.classId = reader.string();
           break;
         case 2:
-          message.designer = reader.string();
+          message.admin = reader.string();
           break;
         default:
           reader.skipType(tag & 7);
@@ -115,14 +159,14 @@ export const EventCreateClass = {
     return {
       $type: EventCreateClass.$type,
       classId: isSet(object.classId) ? String(object.classId) : '',
-      designer: isSet(object.designer) ? String(object.designer) : '',
+      admin: isSet(object.admin) ? String(object.admin) : '',
     };
   },
 
   toJSON(message: EventCreateClass): unknown {
     const obj: any = {};
     message.classId !== undefined && (obj.classId = message.classId);
-    message.designer !== undefined && (obj.designer = message.designer);
+    message.admin !== undefined && (obj.admin = message.admin);
     return obj;
   },
 
@@ -131,7 +175,7 @@ export const EventCreateClass = {
   ): EventCreateClass {
     const message = createBaseEventCreateClass();
     message.classId = object.classId ?? '';
-    message.designer = object.designer ?? '';
+    message.admin = object.admin ?? '';
     return message;
   },
 };
@@ -144,7 +188,10 @@ function createBaseEventCreateBatch(): EventCreateBatch {
     classId: '',
     batchDenom: '',
     issuer: '',
-    totalUnits: '',
+    totalAmount: '',
+    startDate: '',
+    endDate: '',
+    projectLocation: '',
   };
 }
 
@@ -164,8 +211,17 @@ export const EventCreateBatch = {
     if (message.issuer !== '') {
       writer.uint32(26).string(message.issuer);
     }
-    if (message.totalUnits !== '') {
-      writer.uint32(34).string(message.totalUnits);
+    if (message.totalAmount !== '') {
+      writer.uint32(34).string(message.totalAmount);
+    }
+    if (message.startDate !== '') {
+      writer.uint32(42).string(message.startDate);
+    }
+    if (message.endDate !== '') {
+      writer.uint32(50).string(message.endDate);
+    }
+    if (message.projectLocation !== '') {
+      writer.uint32(58).string(message.projectLocation);
     }
     return writer;
   },
@@ -187,7 +243,16 @@ export const EventCreateBatch = {
           message.issuer = reader.string();
           break;
         case 4:
-          message.totalUnits = reader.string();
+          message.totalAmount = reader.string();
+          break;
+        case 5:
+          message.startDate = reader.string();
+          break;
+        case 6:
+          message.endDate = reader.string();
+          break;
+        case 7:
+          message.projectLocation = reader.string();
           break;
         default:
           reader.skipType(tag & 7);
@@ -203,7 +268,12 @@ export const EventCreateBatch = {
       classId: isSet(object.classId) ? String(object.classId) : '',
       batchDenom: isSet(object.batchDenom) ? String(object.batchDenom) : '',
       issuer: isSet(object.issuer) ? String(object.issuer) : '',
-      totalUnits: isSet(object.totalUnits) ? String(object.totalUnits) : '',
+      totalAmount: isSet(object.totalAmount) ? String(object.totalAmount) : '',
+      startDate: isSet(object.startDate) ? String(object.startDate) : '',
+      endDate: isSet(object.endDate) ? String(object.endDate) : '',
+      projectLocation: isSet(object.projectLocation)
+        ? String(object.projectLocation)
+        : '',
     };
   },
 
@@ -212,7 +282,12 @@ export const EventCreateBatch = {
     message.classId !== undefined && (obj.classId = message.classId);
     message.batchDenom !== undefined && (obj.batchDenom = message.batchDenom);
     message.issuer !== undefined && (obj.issuer = message.issuer);
-    message.totalUnits !== undefined && (obj.totalUnits = message.totalUnits);
+    message.totalAmount !== undefined &&
+      (obj.totalAmount = message.totalAmount);
+    message.startDate !== undefined && (obj.startDate = message.startDate);
+    message.endDate !== undefined && (obj.endDate = message.endDate);
+    message.projectLocation !== undefined &&
+      (obj.projectLocation = message.projectLocation);
     return obj;
   },
 
@@ -223,7 +298,10 @@ export const EventCreateBatch = {
     message.classId = object.classId ?? '';
     message.batchDenom = object.batchDenom ?? '';
     message.issuer = object.issuer ?? '';
-    message.totalUnits = object.totalUnits ?? '';
+    message.totalAmount = object.totalAmount ?? '';
+    message.startDate = object.startDate ?? '';
+    message.endDate = object.endDate ?? '';
+    message.projectLocation = object.projectLocation ?? '';
     return message;
   },
 };
@@ -236,7 +314,8 @@ function createBaseEventReceive(): EventReceive {
     sender: '',
     recipient: '',
     batchDenom: '',
-    units: '',
+    tradableAmount: '',
+    retiredAmount: '',
   };
 }
 
@@ -256,8 +335,11 @@ export const EventReceive = {
     if (message.batchDenom !== '') {
       writer.uint32(26).string(message.batchDenom);
     }
-    if (message.units !== '') {
-      writer.uint32(34).string(message.units);
+    if (message.tradableAmount !== '') {
+      writer.uint32(34).string(message.tradableAmount);
+    }
+    if (message.retiredAmount !== '') {
+      writer.uint32(42).string(message.retiredAmount);
     }
     return writer;
   },
@@ -279,7 +361,10 @@ export const EventReceive = {
           message.batchDenom = reader.string();
           break;
         case 4:
-          message.units = reader.string();
+          message.tradableAmount = reader.string();
+          break;
+        case 5:
+          message.retiredAmount = reader.string();
           break;
         default:
           reader.skipType(tag & 7);
@@ -295,7 +380,12 @@ export const EventReceive = {
       sender: isSet(object.sender) ? String(object.sender) : '',
       recipient: isSet(object.recipient) ? String(object.recipient) : '',
       batchDenom: isSet(object.batchDenom) ? String(object.batchDenom) : '',
-      units: isSet(object.units) ? String(object.units) : '',
+      tradableAmount: isSet(object.tradableAmount)
+        ? String(object.tradableAmount)
+        : '',
+      retiredAmount: isSet(object.retiredAmount)
+        ? String(object.retiredAmount)
+        : '',
     };
   },
 
@@ -304,7 +394,10 @@ export const EventReceive = {
     message.sender !== undefined && (obj.sender = message.sender);
     message.recipient !== undefined && (obj.recipient = message.recipient);
     message.batchDenom !== undefined && (obj.batchDenom = message.batchDenom);
-    message.units !== undefined && (obj.units = message.units);
+    message.tradableAmount !== undefined &&
+      (obj.tradableAmount = message.tradableAmount);
+    message.retiredAmount !== undefined &&
+      (obj.retiredAmount = message.retiredAmount);
     return obj;
   },
 
@@ -315,7 +408,8 @@ export const EventReceive = {
     message.sender = object.sender ?? '';
     message.recipient = object.recipient ?? '';
     message.batchDenom = object.batchDenom ?? '';
-    message.units = object.units ?? '';
+    message.tradableAmount = object.tradableAmount ?? '';
+    message.retiredAmount = object.retiredAmount ?? '';
     return message;
   },
 };
@@ -327,7 +421,8 @@ function createBaseEventRetire(): EventRetire {
     $type: 'regen.ecocredit.v1alpha1.EventRetire',
     retirer: '',
     batchDenom: '',
-    units: '',
+    amount: '',
+    location: '',
   };
 }
 
@@ -344,8 +439,11 @@ export const EventRetire = {
     if (message.batchDenom !== '') {
       writer.uint32(18).string(message.batchDenom);
     }
-    if (message.units !== '') {
-      writer.uint32(26).string(message.units);
+    if (message.amount !== '') {
+      writer.uint32(26).string(message.amount);
+    }
+    if (message.location !== '') {
+      writer.uint32(34).string(message.location);
     }
     return writer;
   },
@@ -364,7 +462,10 @@ export const EventRetire = {
           message.batchDenom = reader.string();
           break;
         case 3:
-          message.units = reader.string();
+          message.amount = reader.string();
+          break;
+        case 4:
+          message.location = reader.string();
           break;
         default:
           reader.skipType(tag & 7);
@@ -379,7 +480,8 @@ export const EventRetire = {
       $type: EventRetire.$type,
       retirer: isSet(object.retirer) ? String(object.retirer) : '',
       batchDenom: isSet(object.batchDenom) ? String(object.batchDenom) : '',
-      units: isSet(object.units) ? String(object.units) : '',
+      amount: isSet(object.amount) ? String(object.amount) : '',
+      location: isSet(object.location) ? String(object.location) : '',
     };
   },
 
@@ -387,7 +489,8 @@ export const EventRetire = {
     const obj: any = {};
     message.retirer !== undefined && (obj.retirer = message.retirer);
     message.batchDenom !== undefined && (obj.batchDenom = message.batchDenom);
-    message.units !== undefined && (obj.units = message.units);
+    message.amount !== undefined && (obj.amount = message.amount);
+    message.location !== undefined && (obj.location = message.location);
     return obj;
   },
 
@@ -397,12 +500,95 @@ export const EventRetire = {
     const message = createBaseEventRetire();
     message.retirer = object.retirer ?? '';
     message.batchDenom = object.batchDenom ?? '';
-    message.units = object.units ?? '';
+    message.amount = object.amount ?? '';
+    message.location = object.location ?? '';
     return message;
   },
 };
 
 messageTypeRegistry.set(EventRetire.$type, EventRetire);
+
+function createBaseEventCancel(): EventCancel {
+  return {
+    $type: 'regen.ecocredit.v1alpha1.EventCancel',
+    canceller: '',
+    batchDenom: '',
+    amount: '',
+  };
+}
+
+export const EventCancel = {
+  $type: 'regen.ecocredit.v1alpha1.EventCancel' as const,
+
+  encode(
+    message: EventCancel,
+    writer: _m0.Writer = _m0.Writer.create(),
+  ): _m0.Writer {
+    if (message.canceller !== '') {
+      writer.uint32(10).string(message.canceller);
+    }
+    if (message.batchDenom !== '') {
+      writer.uint32(18).string(message.batchDenom);
+    }
+    if (message.amount !== '') {
+      writer.uint32(26).string(message.amount);
+    }
+    return writer;
+  },
+
+  decode(input: _m0.Reader | Uint8Array, length?: number): EventCancel {
+    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+    let end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseEventCancel();
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+        case 1:
+          message.canceller = reader.string();
+          break;
+        case 2:
+          message.batchDenom = reader.string();
+          break;
+        case 3:
+          message.amount = reader.string();
+          break;
+        default:
+          reader.skipType(tag & 7);
+          break;
+      }
+    }
+    return message;
+  },
+
+  fromJSON(object: any): EventCancel {
+    return {
+      $type: EventCancel.$type,
+      canceller: isSet(object.canceller) ? String(object.canceller) : '',
+      batchDenom: isSet(object.batchDenom) ? String(object.batchDenom) : '',
+      amount: isSet(object.amount) ? String(object.amount) : '',
+    };
+  },
+
+  toJSON(message: EventCancel): unknown {
+    const obj: any = {};
+    message.canceller !== undefined && (obj.canceller = message.canceller);
+    message.batchDenom !== undefined && (obj.batchDenom = message.batchDenom);
+    message.amount !== undefined && (obj.amount = message.amount);
+    return obj;
+  },
+
+  fromPartial<I extends Exact<DeepPartial<EventCancel>, I>>(
+    object: I,
+  ): EventCancel {
+    const message = createBaseEventCancel();
+    message.canceller = object.canceller ?? '';
+    message.batchDenom = object.batchDenom ?? '';
+    message.amount = object.amount ?? '';
+    return message;
+  },
+};
+
+messageTypeRegistry.set(EventCancel.$type, EventCancel);
 
 type Builtin =
   | Date

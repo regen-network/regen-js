@@ -4,8 +4,7 @@ import {
   QueryAllBalancesRequest,
 } from '@regen-network/api/lib/generated/cosmos/bank/v1beta1/query';
 import { QueryClientImpl } from '@regen-network/api/lib/generated/cosmos/bank/v1beta1/query';
-// import { MsgSendRequest } from '@regen-network/api/lib/generated/regen/ecocredit/v1alpha1/tx';
-import { MsgSend } from '@regen-network/api/lib/generated/cosmos/bank/v1beta1/tx';
+import { MsgCreateClass } from '@regen-network/api/lib/generated/regen/ecocredit/v1alpha1/tx';
 import React, { useEffect, useState } from 'react';
 import { DirectSecp256k1HdWallet } from '@cosmjs/proto-signing';
 
@@ -23,27 +22,24 @@ export function MyBalance(props: MyBalanceProps): React.ReactElement {
     QueryAllBalancesResponse | undefined
   >();
 
+  // POC: just testing that we can sign and broadcast txs with regen specific msgs
   const sign = async (): Promise<Uint8Array | undefined> => {
-    const mnemonic = // mnemonic for TEST_ADDRESS_HAMBACH
+    const mnemonic =
       'coast scheme approve soccer juice wealth bunker state fetch warrior inmate belt';
 
-    // Inside an async function...
-    const signer = await DirectSecp256k1HdWallet.fromMnemonic(
-      mnemonic,
-      { prefix: 'regen' }, // Replace with your own Bech32 address prefix
-    );
+    const signer = await DirectSecp256k1HdWallet.fromMnemonic(mnemonic, {
+      prefix: 'regen',
+    });
     const [firstAccount] = await signer.getAccounts();
     const fromAddress = firstAccount.address;
+    // eslint-disable-next-line
     console.log(fromAddress);
-    const msg = MsgSend.fromPartial({
-      fromAddress,
-      toAddress: 'regen1gtlfmszmhv3jnlqx6smt9n6rcwsfydrhznqyk9',
-      amount: [
-        {
-          denom: 'uregen',
-          amount: '10000',
-        },
-      ],
+
+    const msg = MsgCreateClass.fromPartial({
+      admin: fromAddress,
+      issuers: [fromAddress],
+      metadata: new Uint8Array(),
+      creditTypeName: 'carbon',
     });
     const fee = {
       amount: [
@@ -60,17 +56,20 @@ export function MyBalance(props: MyBalanceProps): React.ReactElement {
       fee,
       '',
     );
+    // eslint-disable-next-line
     console.log('txBytes', txBytes);
-    // if (txBytes) {
-    //   const hash = await api.connection.msgClient?.broadcast(txBytes);
-    //   console.log(hash);
-    // }
 
-    return txBytes;
+    if (txBytes) {
+      const hash = await api.connection.msgClient?.broadcast(txBytes);
+      // eslint-disable-next-line
+      console.log('hash', hash);
+    }
+
+    return;
   };
 
   useEffect(() => {
-    sign();
+    // sign();
     const queryClient: QueryClientImpl = new QueryClientImpl(
       api.connection.queryClient,
     );
@@ -83,6 +82,7 @@ export function MyBalance(props: MyBalanceProps): React.ReactElement {
 
   return (
     <div>
+      <button onClick={sign}>SIGN</button>
       <h2>Balance Checker</h2>
       <label htmlFor="tm">My address:</label>
       <input

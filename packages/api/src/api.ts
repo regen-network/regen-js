@@ -9,12 +9,18 @@ import { Tendermint34Client } from '@cosmjs/tendermint-rpc';
 import { OfflineSigner } from '@cosmjs/proto-signing';
 import { setupTxExtension, MessageClient } from './tx/msg';
 
-export interface ConnectionOptions {
+interface DefaultConnectionOptions {
   type: 'tendermint';
-  clientType?: 'query' | 'signing';
-  url: string;
-  signer?: OfflineSigner;
+  endpoint: string;
   clientOptions?: SigningStargateClientOptions;
+}
+
+export interface ConnectionOptions extends DefaultConnectionOptions {
+  signer?: OfflineSigner;
+}
+
+export interface SigningConnectionOptions extends DefaultConnectionOptions {
+  signer: OfflineSigner;
 }
 
 export interface Connection {
@@ -54,7 +60,7 @@ export class RegenApi {
       case 'tendermint': {
         // The Tendermint client knows how to talk to the Tendermint RPC endpoint
         const tendermintClient = await Tendermint34Client.connect(
-          connection.url,
+          connection.endpoint,
         );
 
         // The generic Stargate query client knows how to use the Tendermint client to submit unverified ABCI queries
@@ -63,8 +69,10 @@ export class RegenApi {
         // This helper function wraps the generic Stargate query client for use by the specific generated query client
         const rpcClient = createProtobufRpcClient(queryClient);
 
-        if (connection.clientType === 'signing') {
-          const msgClient = await setupTxExtension(connection);
+        if (connection.signer) {
+          const msgClient = await setupTxExtension(
+            connection as SigningConnectionOptions,
+          );
           return new RegenApi(rpcClient, msgClient);
         }
 

@@ -3,7 +3,6 @@ import {
   SigningStargateClientOptions,
 } from '@cosmjs/stargate';
 import { OfflineSigner } from '@cosmjs/proto-signing';
-import { ConnectionOptions } from '../api';
 
 /**
  * Given ConnectionOptions, generate the client connection object to be
@@ -12,26 +11,28 @@ import { ConnectionOptions } from '../api';
  * @param connection - ConnectionOptions.
  */
 export async function createStargateSigningClient(
-  connection: ConnectionOptions,
+  endpoint: string,
+  signer: OfflineSigner,
+  clientOptions: SigningStargateClientOptions,
 ): Promise<SigningStargateClient> {
-  if (connection?.signer) {
-    const defaultClientOptions = {
-      broadcastPollIntervalMs: 300, //TODO test
-      broadcastTimeoutMs: 600000,
-    };
-    const chainRpc = connection.url;
-    const offlineSigner: OfflineSigner = connection.signer;
-    const clientOptions: SigningStargateClientOptions =
-      connection?.clientOptions || defaultClientOptions;
+  const defaultClientOptions = {
+    broadcastPollIntervalMs: 300, //TODO test
+    broadcastTimeoutMs: 600000,
+  };
+  const options: SigningStargateClientOptions = {
+    ...defaultClientOptions,
+    ...clientOptions,
+  };
 
+  try {
     const signingClient = await SigningStargateClient.connectWithSigner(
-      chainRpc,
-      offlineSigner,
-      clientOptions,
+      endpoint,
+      signer,
+      options,
     );
 
     return signingClient;
+  } catch (e) {
+    return Promise.reject(e);
   }
-
-  return Promise.reject();
 }

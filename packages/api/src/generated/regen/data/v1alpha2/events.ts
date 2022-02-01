@@ -3,56 +3,44 @@ import { messageTypeRegistry } from '../../../typeRegistry';
 import Long from 'long';
 import _m0 from 'protobufjs/minimal';
 
-export const protobufPackage = 'regen.data.v1alpha1';
+export const protobufPackage = 'regen.data.v1alpha2';
 
 /** EventAnchorData is an event emitted when data is anchored on-chain. */
 export interface EventAnchorData {
-  $type: 'regen.data.v1alpha1.EventAnchorData';
-  /**
-   * cid is a Content Identifier for the data corresponding to the IPFS CID
-   * specification: https://github.com/multiformats/cid.
-   */
-  cid: Uint8Array;
+  $type: 'regen.data.v1alpha2.EventAnchorData';
+  /** iri is the data IRI */
+  iri: string;
 }
 
-/** EventAnchorData is an event emitted when data is signed on-chain. */
+/** EventSignData is an event emitted when data is signed on-chain. */
 export interface EventSignData {
-  $type: 'regen.data.v1alpha1.EventSignData';
-  /**
-   * cid is a Content Identifier for the data corresponding to the IPFS CID
-   * specification: https://github.com/multiformats/cid.
-   */
-  cid: Uint8Array;
+  $type: 'regen.data.v1alpha2.EventSignData';
+  /** iri is the data IRI */
+  iri: string;
   /** signers are the addresses of the accounts which have signed the data. */
   signers: string[];
 }
 
-/** EventAnchorData is an event emitted when data is stored on-chain. */
-export interface EventStoreData {
-  $type: 'regen.data.v1alpha1.EventStoreData';
-  /**
-   * cid is a Content Identifier for the data corresponding to the IPFS CID
-   * specification: https://github.com/multiformats/cid.
-   */
-  cid: Uint8Array;
+/** EventStoreRawData is an event emitted when data is stored on-chain. */
+export interface EventStoreRawData {
+  $type: 'regen.data.v1alpha2.EventStoreRawData';
+  /** iri is the data IRI */
+  iri: string;
 }
 
 function createBaseEventAnchorData(): EventAnchorData {
-  return {
-    $type: 'regen.data.v1alpha1.EventAnchorData',
-    cid: new Uint8Array(),
-  };
+  return { $type: 'regen.data.v1alpha2.EventAnchorData', iri: '' };
 }
 
 export const EventAnchorData = {
-  $type: 'regen.data.v1alpha1.EventAnchorData' as const,
+  $type: 'regen.data.v1alpha2.EventAnchorData' as const,
 
   encode(
     message: EventAnchorData,
     writer: _m0.Writer = _m0.Writer.create(),
   ): _m0.Writer {
-    if (message.cid.length !== 0) {
-      writer.uint32(10).bytes(message.cid);
+    if (message.iri !== '') {
+      writer.uint32(10).string(message.iri);
     }
     return writer;
   },
@@ -65,7 +53,7 @@ export const EventAnchorData = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          message.cid = reader.bytes();
+          message.iri = reader.string();
           break;
         default:
           reader.skipType(tag & 7);
@@ -78,16 +66,13 @@ export const EventAnchorData = {
   fromJSON(object: any): EventAnchorData {
     return {
       $type: EventAnchorData.$type,
-      cid: isSet(object.cid) ? bytesFromBase64(object.cid) : new Uint8Array(),
+      iri: isSet(object.iri) ? String(object.iri) : '',
     };
   },
 
   toJSON(message: EventAnchorData): unknown {
     const obj: any = {};
-    message.cid !== undefined &&
-      (obj.cid = base64FromBytes(
-        message.cid !== undefined ? message.cid : new Uint8Array(),
-      ));
+    message.iri !== undefined && (obj.iri = message.iri);
     return obj;
   },
 
@@ -95,7 +80,7 @@ export const EventAnchorData = {
     object: I,
   ): EventAnchorData {
     const message = createBaseEventAnchorData();
-    message.cid = object.cid ?? new Uint8Array();
+    message.iri = object.iri ?? '';
     return message;
   },
 };
@@ -103,22 +88,18 @@ export const EventAnchorData = {
 messageTypeRegistry.set(EventAnchorData.$type, EventAnchorData);
 
 function createBaseEventSignData(): EventSignData {
-  return {
-    $type: 'regen.data.v1alpha1.EventSignData',
-    cid: new Uint8Array(),
-    signers: [],
-  };
+  return { $type: 'regen.data.v1alpha2.EventSignData', iri: '', signers: [] };
 }
 
 export const EventSignData = {
-  $type: 'regen.data.v1alpha1.EventSignData' as const,
+  $type: 'regen.data.v1alpha2.EventSignData' as const,
 
   encode(
     message: EventSignData,
     writer: _m0.Writer = _m0.Writer.create(),
   ): _m0.Writer {
-    if (message.cid.length !== 0) {
-      writer.uint32(10).bytes(message.cid);
+    if (message.iri !== '') {
+      writer.uint32(10).string(message.iri);
     }
     for (const v of message.signers) {
       writer.uint32(18).string(v!);
@@ -134,7 +115,7 @@ export const EventSignData = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          message.cid = reader.bytes();
+          message.iri = reader.string();
           break;
         case 2:
           message.signers.push(reader.string());
@@ -150,7 +131,7 @@ export const EventSignData = {
   fromJSON(object: any): EventSignData {
     return {
       $type: EventSignData.$type,
-      cid: isSet(object.cid) ? bytesFromBase64(object.cid) : new Uint8Array(),
+      iri: isSet(object.iri) ? String(object.iri) : '',
       signers: Array.isArray(object?.signers)
         ? object.signers.map((e: any) => String(e))
         : [],
@@ -159,10 +140,7 @@ export const EventSignData = {
 
   toJSON(message: EventSignData): unknown {
     const obj: any = {};
-    message.cid !== undefined &&
-      (obj.cid = base64FromBytes(
-        message.cid !== undefined ? message.cid : new Uint8Array(),
-      ));
+    message.iri !== undefined && (obj.iri = message.iri);
     if (message.signers) {
       obj.signers = message.signers.map(e => e);
     } else {
@@ -175,7 +153,7 @@ export const EventSignData = {
     object: I,
   ): EventSignData {
     const message = createBaseEventSignData();
-    message.cid = object.cid ?? new Uint8Array();
+    message.iri = object.iri ?? '';
     message.signers = object.signers?.map(e => e) || [];
     return message;
   },
@@ -183,32 +161,32 @@ export const EventSignData = {
 
 messageTypeRegistry.set(EventSignData.$type, EventSignData);
 
-function createBaseEventStoreData(): EventStoreData {
-  return { $type: 'regen.data.v1alpha1.EventStoreData', cid: new Uint8Array() };
+function createBaseEventStoreRawData(): EventStoreRawData {
+  return { $type: 'regen.data.v1alpha2.EventStoreRawData', iri: '' };
 }
 
-export const EventStoreData = {
-  $type: 'regen.data.v1alpha1.EventStoreData' as const,
+export const EventStoreRawData = {
+  $type: 'regen.data.v1alpha2.EventStoreRawData' as const,
 
   encode(
-    message: EventStoreData,
+    message: EventStoreRawData,
     writer: _m0.Writer = _m0.Writer.create(),
   ): _m0.Writer {
-    if (message.cid.length !== 0) {
-      writer.uint32(10).bytes(message.cid);
+    if (message.iri !== '') {
+      writer.uint32(10).string(message.iri);
     }
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array, length?: number): EventStoreData {
+  decode(input: _m0.Reader | Uint8Array, length?: number): EventStoreRawData {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
-    const message = createBaseEventStoreData();
+    const message = createBaseEventStoreRawData();
     while (reader.pos < end) {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          message.cid = reader.bytes();
+          message.iri = reader.string();
           break;
         default:
           reader.skipType(tag & 7);
@@ -218,66 +196,29 @@ export const EventStoreData = {
     return message;
   },
 
-  fromJSON(object: any): EventStoreData {
+  fromJSON(object: any): EventStoreRawData {
     return {
-      $type: EventStoreData.$type,
-      cid: isSet(object.cid) ? bytesFromBase64(object.cid) : new Uint8Array(),
+      $type: EventStoreRawData.$type,
+      iri: isSet(object.iri) ? String(object.iri) : '',
     };
   },
 
-  toJSON(message: EventStoreData): unknown {
+  toJSON(message: EventStoreRawData): unknown {
     const obj: any = {};
-    message.cid !== undefined &&
-      (obj.cid = base64FromBytes(
-        message.cid !== undefined ? message.cid : new Uint8Array(),
-      ));
+    message.iri !== undefined && (obj.iri = message.iri);
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<EventStoreData>, I>>(
+  fromPartial<I extends Exact<DeepPartial<EventStoreRawData>, I>>(
     object: I,
-  ): EventStoreData {
-    const message = createBaseEventStoreData();
-    message.cid = object.cid ?? new Uint8Array();
+  ): EventStoreRawData {
+    const message = createBaseEventStoreRawData();
+    message.iri = object.iri ?? '';
     return message;
   },
 };
 
-messageTypeRegistry.set(EventStoreData.$type, EventStoreData);
-
-declare var self: any | undefined;
-declare var window: any | undefined;
-declare var global: any | undefined;
-var globalThis: any = (() => {
-  if (typeof globalThis !== 'undefined') return globalThis;
-  if (typeof self !== 'undefined') return self;
-  if (typeof window !== 'undefined') return window;
-  if (typeof global !== 'undefined') return global;
-  throw 'Unable to locate global object';
-})();
-
-const atob: (b64: string) => string =
-  globalThis.atob ||
-  (b64 => globalThis.Buffer.from(b64, 'base64').toString('binary'));
-function bytesFromBase64(b64: string): Uint8Array {
-  const bin = atob(b64);
-  const arr = new Uint8Array(bin.length);
-  for (let i = 0; i < bin.length; ++i) {
-    arr[i] = bin.charCodeAt(i);
-  }
-  return arr;
-}
-
-const btoa: (bin: string) => string =
-  globalThis.btoa ||
-  (bin => globalThis.Buffer.from(bin, 'binary').toString('base64'));
-function base64FromBytes(arr: Uint8Array): string {
-  const bin: string[] = [];
-  for (const byte of arr) {
-    bin.push(String.fromCharCode(byte));
-  }
-  return btoa(bin.join(''));
-}
+messageTypeRegistry.set(EventStoreRawData.$type, EventStoreRawData);
 
 type Builtin =
   | Date
