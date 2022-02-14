@@ -12,7 +12,6 @@ const HAMBACH_NODE_TM_URL = 'http://hambach.regen.network:26657';
 export function App(): React.ReactElement {
   const [tmUrl, setTmUrl] = useState(REDWOOD_NODE_TM_URL);
   const [tmError, setTmError] = useState<Error | undefined>();
-
   const [api, setApi] = useState<RegenApi | undefined>(undefined);
 
   useEffect(() => {

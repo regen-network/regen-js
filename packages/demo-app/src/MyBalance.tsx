@@ -32,8 +32,6 @@ export function MyBalance(props: MyBalanceProps): React.ReactElement {
     });
     const [firstAccount] = await signer.getAccounts();
     const fromAddress = firstAccount.address;
-    // eslint-disable-next-line
-    console.log(fromAddress);
 
     const msg = MsgCreateClass.fromPartial({
       admin: fromAddress,
