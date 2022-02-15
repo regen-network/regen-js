@@ -1479,22 +1479,32 @@ messageTypeRegistry.set(
 /** Query defines the gRPC querier service for gov module */
 export interface Query {
   /** Proposal queries proposal details based on ProposalID. */
-  Proposal(request: QueryProposalRequest): Promise<QueryProposalResponse>;
+  Proposal(
+    request: DeepPartial<QueryProposalRequest>,
+  ): Promise<QueryProposalResponse>;
   /** Proposals queries all proposals based on given status. */
-  Proposals(request: QueryProposalsRequest): Promise<QueryProposalsResponse>;
+  Proposals(
+    request: DeepPartial<QueryProposalsRequest>,
+  ): Promise<QueryProposalsResponse>;
   /** Vote queries voted information based on proposalID, voterAddr. */
-  Vote(request: QueryVoteRequest): Promise<QueryVoteResponse>;
+  Vote(request: DeepPartial<QueryVoteRequest>): Promise<QueryVoteResponse>;
   /** Votes queries votes of a given proposal. */
-  Votes(request: QueryVotesRequest): Promise<QueryVotesResponse>;
+  Votes(request: DeepPartial<QueryVotesRequest>): Promise<QueryVotesResponse>;
   /** Params queries all parameters of the gov module. */
-  Params(request: QueryParamsRequest): Promise<QueryParamsResponse>;
+  Params(
+    request: DeepPartial<QueryParamsRequest>,
+  ): Promise<QueryParamsResponse>;
   /** Deposit queries single deposit information based proposalID, depositAddr. */
-  Deposit(request: QueryDepositRequest): Promise<QueryDepositResponse>;
+  Deposit(
+    request: DeepPartial<QueryDepositRequest>,
+  ): Promise<QueryDepositResponse>;
   /** Deposits queries all deposits of a single proposal. */
-  Deposits(request: QueryDepositsRequest): Promise<QueryDepositsResponse>;
+  Deposits(
+    request: DeepPartial<QueryDepositsRequest>,
+  ): Promise<QueryDepositsResponse>;
   /** TallyResult queries the tally of a proposal vote. */
   TallyResult(
-    request: QueryTallyResultRequest,
+    request: DeepPartial<QueryTallyResultRequest>,
   ): Promise<QueryTallyResultResponse>;
 }
 
@@ -1632,10 +1642,9 @@ export type DeepPartial<T> = T extends Builtin
 type KeysOfUnion<T> = T extends T ? keyof T : never;
 export type Exact<P, I extends P> = P extends Builtin
   ? P
-  : P & { [K in keyof P]: Exact<P[K], I[K]> } & Record<
-        Exclude<keyof I, KeysOfUnion<P> | '$type'>,
-        never
-      >;
+  : P &
+      { [K in keyof P]: Exact<P[K], I[K]> } &
+      Record<Exclude<keyof I, KeysOfUnion<P> | '$type'>, never>;
 
 if (_m0.util.Long !== Long) {
   _m0.util.Long = Long as any;

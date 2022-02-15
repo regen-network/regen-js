@@ -424,12 +424,16 @@ messageTypeRegistry.set(
 /** Query provides defines the gRPC querier service. */
 export interface Query {
   /** Params returns the total set of minting parameters. */
-  Params(request: QueryParamsRequest): Promise<QueryParamsResponse>;
+  Params(
+    request: DeepPartial<QueryParamsRequest>,
+  ): Promise<QueryParamsResponse>;
   /** Inflation returns the current minting inflation value. */
-  Inflation(request: QueryInflationRequest): Promise<QueryInflationResponse>;
+  Inflation(
+    request: DeepPartial<QueryInflationRequest>,
+  ): Promise<QueryInflationResponse>;
   /** AnnualProvisions current minting annual provisions value. */
   AnnualProvisions(
-    request: QueryAnnualProvisionsRequest,
+    request: DeepPartial<QueryAnnualProvisionsRequest>,
   ): Promise<QueryAnnualProvisionsResponse>;
 }
 
@@ -546,10 +550,9 @@ export type DeepPartial<T> = T extends Builtin
 type KeysOfUnion<T> = T extends T ? keyof T : never;
 export type Exact<P, I extends P> = P extends Builtin
   ? P
-  : P & { [K in keyof P]: Exact<P[K], I[K]> } & Record<
-        Exclude<keyof I, KeysOfUnion<P> | '$type'>,
-        never
-      >;
+  : P &
+      { [K in keyof P]: Exact<P[K], I[K]> } &
+      Record<Exclude<keyof I, KeysOfUnion<P> | '$type'>, never>;
 
 if (_m0.util.Long !== Long) {
   _m0.util.Long = Long as any;

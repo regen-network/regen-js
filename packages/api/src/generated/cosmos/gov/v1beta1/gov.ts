@@ -143,6 +143,13 @@ export function proposalStatusToJSON(object: ProposalStatus): string {
   }
 }
 
+/** WeightedVoteOption defines a unit of vote for vote split. */
+export interface WeightedVoteOption {
+  $type: 'cosmos.gov.v1beta1.WeightedVoteOption';
+  option: VoteOption;
+  weight: string;
+}
+
 /**
  * TextProposal defines a standard text proposal whose changes need to be
  * manually updated in case of approval.
@@ -195,7 +202,15 @@ export interface Vote {
   $type: 'cosmos.gov.v1beta1.Vote';
   proposalId: Long;
   voter: string;
+  /**
+   * Deprecated: Prefer to use `options` instead. This field is set in queries
+   * if and only if `len(options) == 1` and that option has weight 1. In all
+   * other cases, this field will default to VOTE_OPTION_UNSPECIFIED.
+   *
+   * @deprecated
+   */
   option: VoteOption;
+  options: WeightedVoteOption[];
 }
 
 /** DepositParams defines the params for deposits on governance proposals. */
@@ -233,6 +248,79 @@ export interface TallyParams {
    */
   vetoThreshold: Uint8Array;
 }
+
+function createBaseWeightedVoteOption(): WeightedVoteOption {
+  return {
+    $type: 'cosmos.gov.v1beta1.WeightedVoteOption',
+    option: 0,
+    weight: '',
+  };
+}
+
+export const WeightedVoteOption = {
+  $type: 'cosmos.gov.v1beta1.WeightedVoteOption' as const,
+
+  encode(
+    message: WeightedVoteOption,
+    writer: _m0.Writer = _m0.Writer.create(),
+  ): _m0.Writer {
+    if (message.option !== 0) {
+      writer.uint32(8).int32(message.option);
+    }
+    if (message.weight !== '') {
+      writer.uint32(18).string(message.weight);
+    }
+    return writer;
+  },
+
+  decode(input: _m0.Reader | Uint8Array, length?: number): WeightedVoteOption {
+    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+    let end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseWeightedVoteOption();
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+        case 1:
+          message.option = reader.int32() as any;
+          break;
+        case 2:
+          message.weight = reader.string();
+          break;
+        default:
+          reader.skipType(tag & 7);
+          break;
+      }
+    }
+    return message;
+  },
+
+  fromJSON(object: any): WeightedVoteOption {
+    return {
+      $type: WeightedVoteOption.$type,
+      option: isSet(object.option) ? voteOptionFromJSON(object.option) : 0,
+      weight: isSet(object.weight) ? String(object.weight) : '',
+    };
+  },
+
+  toJSON(message: WeightedVoteOption): unknown {
+    const obj: any = {};
+    message.option !== undefined &&
+      (obj.option = voteOptionToJSON(message.option));
+    message.weight !== undefined && (obj.weight = message.weight);
+    return obj;
+  },
+
+  fromPartial<I extends Exact<DeepPartial<WeightedVoteOption>, I>>(
+    object: I,
+  ): WeightedVoteOption {
+    const message = createBaseWeightedVoteOption();
+    message.option = object.option ?? 0;
+    message.weight = object.weight ?? '';
+    return message;
+  },
+};
+
+messageTypeRegistry.set(WeightedVoteOption.$type, WeightedVoteOption);
 
 function createBaseTextProposal(): TextProposal {
   return {
@@ -703,6 +791,7 @@ function createBaseVote(): Vote {
     proposalId: Long.UZERO,
     voter: '',
     option: 0,
+    options: [],
   };
 }
 
@@ -718,6 +807,9 @@ export const Vote = {
     }
     if (message.option !== 0) {
       writer.uint32(24).int32(message.option);
+    }
+    for (const v of message.options) {
+      WeightedVoteOption.encode(v!, writer.uint32(34).fork()).ldelim();
     }
     return writer;
   },
@@ -738,6 +830,11 @@ export const Vote = {
         case 3:
           message.option = reader.int32() as any;
           break;
+        case 4:
+          message.options.push(
+            WeightedVoteOption.decode(reader, reader.uint32()),
+          );
+          break;
         default:
           reader.skipType(tag & 7);
           break;
@@ -754,6 +851,9 @@ export const Vote = {
         : Long.UZERO,
       voter: isSet(object.voter) ? String(object.voter) : '',
       option: isSet(object.option) ? voteOptionFromJSON(object.option) : 0,
+      options: Array.isArray(object?.options)
+        ? object.options.map((e: any) => WeightedVoteOption.fromJSON(e))
+        : [],
     };
   },
 
@@ -764,6 +864,13 @@ export const Vote = {
     message.voter !== undefined && (obj.voter = message.voter);
     message.option !== undefined &&
       (obj.option = voteOptionToJSON(message.option));
+    if (message.options) {
+      obj.options = message.options.map(e =>
+        e ? WeightedVoteOption.toJSON(e) : undefined,
+      );
+    } else {
+      obj.options = [];
+    }
     return obj;
   },
 
@@ -775,6 +882,8 @@ export const Vote = {
         : Long.UZERO;
     message.voter = object.voter ?? '';
     message.option = object.option ?? 0;
+    message.options =
+      object.options?.map(e => WeightedVoteOption.fromPartial(e)) || [];
     return message;
   },
 };
@@ -1096,10 +1205,9 @@ export type DeepPartial<T> = T extends Builtin
 type KeysOfUnion<T> = T extends T ? keyof T : never;
 export type Exact<P, I extends P> = P extends Builtin
   ? P
-  : P & { [K in keyof P]: Exact<P[K], I[K]> } & Record<
-        Exclude<keyof I, KeysOfUnion<P> | '$type'>,
-        never
-      >;
+  : P &
+      { [K in keyof P]: Exact<P[K], I[K]> } &
+      Record<Exclude<keyof I, KeysOfUnion<P> | '$type'>, never>;
 
 function toTimestamp(date: Date): Timestamp {
   const seconds = numberToLong(date.getTime() / 1_000);

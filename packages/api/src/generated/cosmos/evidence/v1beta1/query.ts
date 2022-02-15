@@ -362,10 +362,12 @@ messageTypeRegistry.set(
 /** Query defines the gRPC querier service. */
 export interface Query {
   /** Evidence queries evidence based on evidence hash. */
-  Evidence(request: QueryEvidenceRequest): Promise<QueryEvidenceResponse>;
+  Evidence(
+    request: DeepPartial<QueryEvidenceRequest>,
+  ): Promise<QueryEvidenceResponse>;
   /** AllEvidence queries all evidence. */
   AllEvidence(
-    request: QueryAllEvidenceRequest,
+    request: DeepPartial<QueryAllEvidenceRequest>,
   ): Promise<QueryAllEvidenceResponse>;
 }
 
@@ -469,10 +471,9 @@ export type DeepPartial<T> = T extends Builtin
 type KeysOfUnion<T> = T extends T ? keyof T : never;
 export type Exact<P, I extends P> = P extends Builtin
   ? P
-  : P & { [K in keyof P]: Exact<P[K], I[K]> } & Record<
-        Exclude<keyof I, KeysOfUnion<P> | '$type'>,
-        never
-      >;
+  : P &
+      { [K in keyof P]: Exact<P[K], I[K]> } &
+      Record<Exclude<keyof I, KeysOfUnion<P> | '$type'>, never>;
 
 if (_m0.util.Long !== Long) {
   _m0.util.Long = Long as any;

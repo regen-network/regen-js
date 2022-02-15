@@ -7,7 +7,7 @@ import {
   PageRequest,
   PageResponse,
 } from '../../../cosmos/base/query/v1beta1/pagination';
-import { Params } from '../../../cosmos/bank/v1beta1/bank';
+import { Params, Metadata } from '../../../cosmos/bank/v1beta1/bank';
 
 export const protobufPackage = 'cosmos.bank.v1beta1';
 
@@ -54,6 +54,8 @@ export interface QueryAllBalancesResponse {
  */
 export interface QueryTotalSupplyRequest {
   $type: 'cosmos.bank.v1beta1.QueryTotalSupplyRequest';
+  /** pagination defines an optional pagination for the request. */
+  pagination?: PageRequest;
 }
 
 /**
@@ -64,6 +66,8 @@ export interface QueryTotalSupplyResponse {
   $type: 'cosmos.bank.v1beta1.QueryTotalSupplyResponse';
   /** supply is the supply of the coins */
   supply: Coin[];
+  /** pagination defines the pagination in the response. */
+  pagination?: PageResponse;
 }
 
 /** QuerySupplyOfRequest is the request type for the Query/SupplyOf RPC method. */
@@ -89,6 +93,42 @@ export interface QueryParamsRequest {
 export interface QueryParamsResponse {
   $type: 'cosmos.bank.v1beta1.QueryParamsResponse';
   params?: Params;
+}
+
+/** QueryDenomsMetadataRequest is the request type for the Query/DenomsMetadata RPC method. */
+export interface QueryDenomsMetadataRequest {
+  $type: 'cosmos.bank.v1beta1.QueryDenomsMetadataRequest';
+  /** pagination defines an optional pagination for the request. */
+  pagination?: PageRequest;
+}
+
+/**
+ * QueryDenomsMetadataResponse is the response type for the Query/DenomsMetadata RPC
+ * method.
+ */
+export interface QueryDenomsMetadataResponse {
+  $type: 'cosmos.bank.v1beta1.QueryDenomsMetadataResponse';
+  /** metadata provides the client information for all the registered tokens. */
+  metadatas: Metadata[];
+  /** pagination defines the pagination in the response. */
+  pagination?: PageResponse;
+}
+
+/** QueryDenomMetadataRequest is the request type for the Query/DenomMetadata RPC method. */
+export interface QueryDenomMetadataRequest {
+  $type: 'cosmos.bank.v1beta1.QueryDenomMetadataRequest';
+  /** denom is the coin denom to query the metadata for. */
+  denom: string;
+}
+
+/**
+ * QueryDenomMetadataResponse is the response type for the Query/DenomMetadata RPC
+ * method.
+ */
+export interface QueryDenomMetadataResponse {
+  $type: 'cosmos.bank.v1beta1.QueryDenomMetadataResponse';
+  /** metadata describes and provides all the client information for the requested token. */
+  metadata?: Metadata;
 }
 
 function createBaseQueryBalanceRequest(): QueryBalanceRequest {
@@ -417,16 +457,22 @@ messageTypeRegistry.set(
 );
 
 function createBaseQueryTotalSupplyRequest(): QueryTotalSupplyRequest {
-  return { $type: 'cosmos.bank.v1beta1.QueryTotalSupplyRequest' };
+  return {
+    $type: 'cosmos.bank.v1beta1.QueryTotalSupplyRequest',
+    pagination: undefined,
+  };
 }
 
 export const QueryTotalSupplyRequest = {
   $type: 'cosmos.bank.v1beta1.QueryTotalSupplyRequest' as const,
 
   encode(
-    _: QueryTotalSupplyRequest,
+    message: QueryTotalSupplyRequest,
     writer: _m0.Writer = _m0.Writer.create(),
   ): _m0.Writer {
+    if (message.pagination !== undefined) {
+      PageRequest.encode(message.pagination, writer.uint32(10).fork()).ldelim();
+    }
     return writer;
   },
 
@@ -440,6 +486,9 @@ export const QueryTotalSupplyRequest = {
     while (reader.pos < end) {
       const tag = reader.uint32();
       switch (tag >>> 3) {
+        case 1:
+          message.pagination = PageRequest.decode(reader, reader.uint32());
+          break;
         default:
           reader.skipType(tag & 7);
           break;
@@ -448,21 +497,32 @@ export const QueryTotalSupplyRequest = {
     return message;
   },
 
-  fromJSON(_: any): QueryTotalSupplyRequest {
+  fromJSON(object: any): QueryTotalSupplyRequest {
     return {
       $type: QueryTotalSupplyRequest.$type,
+      pagination: isSet(object.pagination)
+        ? PageRequest.fromJSON(object.pagination)
+        : undefined,
     };
   },
 
-  toJSON(_: QueryTotalSupplyRequest): unknown {
+  toJSON(message: QueryTotalSupplyRequest): unknown {
     const obj: any = {};
+    message.pagination !== undefined &&
+      (obj.pagination = message.pagination
+        ? PageRequest.toJSON(message.pagination)
+        : undefined);
     return obj;
   },
 
   fromPartial<I extends Exact<DeepPartial<QueryTotalSupplyRequest>, I>>(
-    _: I,
+    object: I,
   ): QueryTotalSupplyRequest {
     const message = createBaseQueryTotalSupplyRequest();
+    message.pagination =
+      object.pagination !== undefined && object.pagination !== null
+        ? PageRequest.fromPartial(object.pagination)
+        : undefined;
     return message;
   },
 };
@@ -470,7 +530,11 @@ export const QueryTotalSupplyRequest = {
 messageTypeRegistry.set(QueryTotalSupplyRequest.$type, QueryTotalSupplyRequest);
 
 function createBaseQueryTotalSupplyResponse(): QueryTotalSupplyResponse {
-  return { $type: 'cosmos.bank.v1beta1.QueryTotalSupplyResponse', supply: [] };
+  return {
+    $type: 'cosmos.bank.v1beta1.QueryTotalSupplyResponse',
+    supply: [],
+    pagination: undefined,
+  };
 }
 
 export const QueryTotalSupplyResponse = {
@@ -482,6 +546,12 @@ export const QueryTotalSupplyResponse = {
   ): _m0.Writer {
     for (const v of message.supply) {
       Coin.encode(v!, writer.uint32(10).fork()).ldelim();
+    }
+    if (message.pagination !== undefined) {
+      PageResponse.encode(
+        message.pagination,
+        writer.uint32(18).fork(),
+      ).ldelim();
     }
     return writer;
   },
@@ -499,6 +569,9 @@ export const QueryTotalSupplyResponse = {
         case 1:
           message.supply.push(Coin.decode(reader, reader.uint32()));
           break;
+        case 2:
+          message.pagination = PageResponse.decode(reader, reader.uint32());
+          break;
         default:
           reader.skipType(tag & 7);
           break;
@@ -513,6 +586,9 @@ export const QueryTotalSupplyResponse = {
       supply: Array.isArray(object?.supply)
         ? object.supply.map((e: any) => Coin.fromJSON(e))
         : [],
+      pagination: isSet(object.pagination)
+        ? PageResponse.fromJSON(object.pagination)
+        : undefined,
     };
   },
 
@@ -523,6 +599,10 @@ export const QueryTotalSupplyResponse = {
     } else {
       obj.supply = [];
     }
+    message.pagination !== undefined &&
+      (obj.pagination = message.pagination
+        ? PageResponse.toJSON(message.pagination)
+        : undefined);
     return obj;
   },
 
@@ -531,6 +611,10 @@ export const QueryTotalSupplyResponse = {
   ): QueryTotalSupplyResponse {
     const message = createBaseQueryTotalSupplyResponse();
     message.supply = object.supply?.map(e => Coin.fromPartial(e)) || [];
+    message.pagination =
+      object.pagination !== undefined && object.pagination !== null
+        ? PageResponse.fromPartial(object.pagination)
+        : undefined;
     return message;
   },
 };
@@ -787,22 +871,351 @@ export const QueryParamsResponse = {
 
 messageTypeRegistry.set(QueryParamsResponse.$type, QueryParamsResponse);
 
+function createBaseQueryDenomsMetadataRequest(): QueryDenomsMetadataRequest {
+  return {
+    $type: 'cosmos.bank.v1beta1.QueryDenomsMetadataRequest',
+    pagination: undefined,
+  };
+}
+
+export const QueryDenomsMetadataRequest = {
+  $type: 'cosmos.bank.v1beta1.QueryDenomsMetadataRequest' as const,
+
+  encode(
+    message: QueryDenomsMetadataRequest,
+    writer: _m0.Writer = _m0.Writer.create(),
+  ): _m0.Writer {
+    if (message.pagination !== undefined) {
+      PageRequest.encode(message.pagination, writer.uint32(10).fork()).ldelim();
+    }
+    return writer;
+  },
+
+  decode(
+    input: _m0.Reader | Uint8Array,
+    length?: number,
+  ): QueryDenomsMetadataRequest {
+    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+    let end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseQueryDenomsMetadataRequest();
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+        case 1:
+          message.pagination = PageRequest.decode(reader, reader.uint32());
+          break;
+        default:
+          reader.skipType(tag & 7);
+          break;
+      }
+    }
+    return message;
+  },
+
+  fromJSON(object: any): QueryDenomsMetadataRequest {
+    return {
+      $type: QueryDenomsMetadataRequest.$type,
+      pagination: isSet(object.pagination)
+        ? PageRequest.fromJSON(object.pagination)
+        : undefined,
+    };
+  },
+
+  toJSON(message: QueryDenomsMetadataRequest): unknown {
+    const obj: any = {};
+    message.pagination !== undefined &&
+      (obj.pagination = message.pagination
+        ? PageRequest.toJSON(message.pagination)
+        : undefined);
+    return obj;
+  },
+
+  fromPartial<I extends Exact<DeepPartial<QueryDenomsMetadataRequest>, I>>(
+    object: I,
+  ): QueryDenomsMetadataRequest {
+    const message = createBaseQueryDenomsMetadataRequest();
+    message.pagination =
+      object.pagination !== undefined && object.pagination !== null
+        ? PageRequest.fromPartial(object.pagination)
+        : undefined;
+    return message;
+  },
+};
+
+messageTypeRegistry.set(
+  QueryDenomsMetadataRequest.$type,
+  QueryDenomsMetadataRequest,
+);
+
+function createBaseQueryDenomsMetadataResponse(): QueryDenomsMetadataResponse {
+  return {
+    $type: 'cosmos.bank.v1beta1.QueryDenomsMetadataResponse',
+    metadatas: [],
+    pagination: undefined,
+  };
+}
+
+export const QueryDenomsMetadataResponse = {
+  $type: 'cosmos.bank.v1beta1.QueryDenomsMetadataResponse' as const,
+
+  encode(
+    message: QueryDenomsMetadataResponse,
+    writer: _m0.Writer = _m0.Writer.create(),
+  ): _m0.Writer {
+    for (const v of message.metadatas) {
+      Metadata.encode(v!, writer.uint32(10).fork()).ldelim();
+    }
+    if (message.pagination !== undefined) {
+      PageResponse.encode(
+        message.pagination,
+        writer.uint32(18).fork(),
+      ).ldelim();
+    }
+    return writer;
+  },
+
+  decode(
+    input: _m0.Reader | Uint8Array,
+    length?: number,
+  ): QueryDenomsMetadataResponse {
+    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+    let end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseQueryDenomsMetadataResponse();
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+        case 1:
+          message.metadatas.push(Metadata.decode(reader, reader.uint32()));
+          break;
+        case 2:
+          message.pagination = PageResponse.decode(reader, reader.uint32());
+          break;
+        default:
+          reader.skipType(tag & 7);
+          break;
+      }
+    }
+    return message;
+  },
+
+  fromJSON(object: any): QueryDenomsMetadataResponse {
+    return {
+      $type: QueryDenomsMetadataResponse.$type,
+      metadatas: Array.isArray(object?.metadatas)
+        ? object.metadatas.map((e: any) => Metadata.fromJSON(e))
+        : [],
+      pagination: isSet(object.pagination)
+        ? PageResponse.fromJSON(object.pagination)
+        : undefined,
+    };
+  },
+
+  toJSON(message: QueryDenomsMetadataResponse): unknown {
+    const obj: any = {};
+    if (message.metadatas) {
+      obj.metadatas = message.metadatas.map(e =>
+        e ? Metadata.toJSON(e) : undefined,
+      );
+    } else {
+      obj.metadatas = [];
+    }
+    message.pagination !== undefined &&
+      (obj.pagination = message.pagination
+        ? PageResponse.toJSON(message.pagination)
+        : undefined);
+    return obj;
+  },
+
+  fromPartial<I extends Exact<DeepPartial<QueryDenomsMetadataResponse>, I>>(
+    object: I,
+  ): QueryDenomsMetadataResponse {
+    const message = createBaseQueryDenomsMetadataResponse();
+    message.metadatas =
+      object.metadatas?.map(e => Metadata.fromPartial(e)) || [];
+    message.pagination =
+      object.pagination !== undefined && object.pagination !== null
+        ? PageResponse.fromPartial(object.pagination)
+        : undefined;
+    return message;
+  },
+};
+
+messageTypeRegistry.set(
+  QueryDenomsMetadataResponse.$type,
+  QueryDenomsMetadataResponse,
+);
+
+function createBaseQueryDenomMetadataRequest(): QueryDenomMetadataRequest {
+  return { $type: 'cosmos.bank.v1beta1.QueryDenomMetadataRequest', denom: '' };
+}
+
+export const QueryDenomMetadataRequest = {
+  $type: 'cosmos.bank.v1beta1.QueryDenomMetadataRequest' as const,
+
+  encode(
+    message: QueryDenomMetadataRequest,
+    writer: _m0.Writer = _m0.Writer.create(),
+  ): _m0.Writer {
+    if (message.denom !== '') {
+      writer.uint32(10).string(message.denom);
+    }
+    return writer;
+  },
+
+  decode(
+    input: _m0.Reader | Uint8Array,
+    length?: number,
+  ): QueryDenomMetadataRequest {
+    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+    let end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseQueryDenomMetadataRequest();
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+        case 1:
+          message.denom = reader.string();
+          break;
+        default:
+          reader.skipType(tag & 7);
+          break;
+      }
+    }
+    return message;
+  },
+
+  fromJSON(object: any): QueryDenomMetadataRequest {
+    return {
+      $type: QueryDenomMetadataRequest.$type,
+      denom: isSet(object.denom) ? String(object.denom) : '',
+    };
+  },
+
+  toJSON(message: QueryDenomMetadataRequest): unknown {
+    const obj: any = {};
+    message.denom !== undefined && (obj.denom = message.denom);
+    return obj;
+  },
+
+  fromPartial<I extends Exact<DeepPartial<QueryDenomMetadataRequest>, I>>(
+    object: I,
+  ): QueryDenomMetadataRequest {
+    const message = createBaseQueryDenomMetadataRequest();
+    message.denom = object.denom ?? '';
+    return message;
+  },
+};
+
+messageTypeRegistry.set(
+  QueryDenomMetadataRequest.$type,
+  QueryDenomMetadataRequest,
+);
+
+function createBaseQueryDenomMetadataResponse(): QueryDenomMetadataResponse {
+  return {
+    $type: 'cosmos.bank.v1beta1.QueryDenomMetadataResponse',
+    metadata: undefined,
+  };
+}
+
+export const QueryDenomMetadataResponse = {
+  $type: 'cosmos.bank.v1beta1.QueryDenomMetadataResponse' as const,
+
+  encode(
+    message: QueryDenomMetadataResponse,
+    writer: _m0.Writer = _m0.Writer.create(),
+  ): _m0.Writer {
+    if (message.metadata !== undefined) {
+      Metadata.encode(message.metadata, writer.uint32(10).fork()).ldelim();
+    }
+    return writer;
+  },
+
+  decode(
+    input: _m0.Reader | Uint8Array,
+    length?: number,
+  ): QueryDenomMetadataResponse {
+    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+    let end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseQueryDenomMetadataResponse();
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+        case 1:
+          message.metadata = Metadata.decode(reader, reader.uint32());
+          break;
+        default:
+          reader.skipType(tag & 7);
+          break;
+      }
+    }
+    return message;
+  },
+
+  fromJSON(object: any): QueryDenomMetadataResponse {
+    return {
+      $type: QueryDenomMetadataResponse.$type,
+      metadata: isSet(object.metadata)
+        ? Metadata.fromJSON(object.metadata)
+        : undefined,
+    };
+  },
+
+  toJSON(message: QueryDenomMetadataResponse): unknown {
+    const obj: any = {};
+    message.metadata !== undefined &&
+      (obj.metadata = message.metadata
+        ? Metadata.toJSON(message.metadata)
+        : undefined);
+    return obj;
+  },
+
+  fromPartial<I extends Exact<DeepPartial<QueryDenomMetadataResponse>, I>>(
+    object: I,
+  ): QueryDenomMetadataResponse {
+    const message = createBaseQueryDenomMetadataResponse();
+    message.metadata =
+      object.metadata !== undefined && object.metadata !== null
+        ? Metadata.fromPartial(object.metadata)
+        : undefined;
+    return message;
+  },
+};
+
+messageTypeRegistry.set(
+  QueryDenomMetadataResponse.$type,
+  QueryDenomMetadataResponse,
+);
+
 /** Query defines the gRPC querier service. */
 export interface Query {
   /** Balance queries the balance of a single coin for a single account. */
-  Balance(request: QueryBalanceRequest): Promise<QueryBalanceResponse>;
+  Balance(
+    request: DeepPartial<QueryBalanceRequest>,
+  ): Promise<QueryBalanceResponse>;
   /** AllBalances queries the balance of all coins for a single account. */
   AllBalances(
-    request: QueryAllBalancesRequest,
+    request: DeepPartial<QueryAllBalancesRequest>,
   ): Promise<QueryAllBalancesResponse>;
   /** TotalSupply queries the total supply of all coins. */
   TotalSupply(
-    request: QueryTotalSupplyRequest,
+    request: DeepPartial<QueryTotalSupplyRequest>,
   ): Promise<QueryTotalSupplyResponse>;
   /** SupplyOf queries the supply of a single coin. */
-  SupplyOf(request: QuerySupplyOfRequest): Promise<QuerySupplyOfResponse>;
+  SupplyOf(
+    request: DeepPartial<QuerySupplyOfRequest>,
+  ): Promise<QuerySupplyOfResponse>;
   /** Params queries the parameters of x/bank module. */
-  Params(request: QueryParamsRequest): Promise<QueryParamsResponse>;
+  Params(
+    request: DeepPartial<QueryParamsRequest>,
+  ): Promise<QueryParamsResponse>;
+  /** DenomsMetadata queries the client metadata of a given coin denomination. */
+  DenomMetadata(
+    request: DeepPartial<QueryDenomMetadataRequest>,
+  ): Promise<QueryDenomMetadataResponse>;
+  /** DenomsMetadata queries the client metadata for all registered coin denominations. */
+  DenomsMetadata(
+    request: DeepPartial<QueryDenomsMetadataRequest>,
+  ): Promise<QueryDenomsMetadataResponse>;
 }
 
 export class QueryClientImpl implements Query {
@@ -814,6 +1227,8 @@ export class QueryClientImpl implements Query {
     this.TotalSupply = this.TotalSupply.bind(this);
     this.SupplyOf = this.SupplyOf.bind(this);
     this.Params = this.Params.bind(this);
+    this.DenomMetadata = this.DenomMetadata.bind(this);
+    this.DenomsMetadata = this.DenomsMetadata.bind(this);
   }
   Balance(request: QueryBalanceRequest): Promise<QueryBalanceResponse> {
     const data = QueryBalanceRequest.encode(request).finish();
@@ -878,6 +1293,34 @@ export class QueryClientImpl implements Query {
       QueryParamsResponse.decode(new _m0.Reader(data)),
     );
   }
+
+  DenomMetadata(
+    request: QueryDenomMetadataRequest,
+  ): Promise<QueryDenomMetadataResponse> {
+    const data = QueryDenomMetadataRequest.encode(request).finish();
+    const promise = this.rpc.request(
+      'cosmos.bank.v1beta1.Query',
+      'DenomMetadata',
+      data,
+    );
+    return promise.then(data =>
+      QueryDenomMetadataResponse.decode(new _m0.Reader(data)),
+    );
+  }
+
+  DenomsMetadata(
+    request: QueryDenomsMetadataRequest,
+  ): Promise<QueryDenomsMetadataResponse> {
+    const data = QueryDenomsMetadataRequest.encode(request).finish();
+    const promise = this.rpc.request(
+      'cosmos.bank.v1beta1.Query',
+      'DenomsMetadata',
+      data,
+    );
+    return promise.then(data =>
+      QueryDenomsMetadataResponse.decode(new _m0.Reader(data)),
+    );
+  }
 }
 
 interface Rpc {
@@ -912,10 +1355,9 @@ export type DeepPartial<T> = T extends Builtin
 type KeysOfUnion<T> = T extends T ? keyof T : never;
 export type Exact<P, I extends P> = P extends Builtin
   ? P
-  : P & { [K in keyof P]: Exact<P[K], I[K]> } & Record<
-        Exclude<keyof I, KeysOfUnion<P> | '$type'>,
-        never
-      >;
+  : P &
+      { [K in keyof P]: Exact<P[K], I[K]> } &
+      Record<Exclude<keyof I, KeysOfUnion<P> | '$type'>, never>;
 
 if (_m0.util.Long !== Long) {
   _m0.util.Long = Long as any;

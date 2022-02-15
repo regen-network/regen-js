@@ -5149,24 +5149,30 @@ export const Snapshot = {
 messageTypeRegistry.set(Snapshot.$type, Snapshot);
 
 export interface ABCIApplication {
-  Echo(request: RequestEcho): Promise<ResponseEcho>;
-  Flush(request: RequestFlush): Promise<ResponseFlush>;
-  Info(request: RequestInfo): Promise<ResponseInfo>;
-  SetOption(request: RequestSetOption): Promise<ResponseSetOption>;
-  DeliverTx(request: RequestDeliverTx): Promise<ResponseDeliverTx>;
-  CheckTx(request: RequestCheckTx): Promise<ResponseCheckTx>;
-  Query(request: RequestQuery): Promise<ResponseQuery>;
-  Commit(request: RequestCommit): Promise<ResponseCommit>;
-  InitChain(request: RequestInitChain): Promise<ResponseInitChain>;
-  BeginBlock(request: RequestBeginBlock): Promise<ResponseBeginBlock>;
-  EndBlock(request: RequestEndBlock): Promise<ResponseEndBlock>;
-  ListSnapshots(request: RequestListSnapshots): Promise<ResponseListSnapshots>;
-  OfferSnapshot(request: RequestOfferSnapshot): Promise<ResponseOfferSnapshot>;
+  Echo(request: DeepPartial<RequestEcho>): Promise<ResponseEcho>;
+  Flush(request: DeepPartial<RequestFlush>): Promise<ResponseFlush>;
+  Info(request: DeepPartial<RequestInfo>): Promise<ResponseInfo>;
+  SetOption(request: DeepPartial<RequestSetOption>): Promise<ResponseSetOption>;
+  DeliverTx(request: DeepPartial<RequestDeliverTx>): Promise<ResponseDeliverTx>;
+  CheckTx(request: DeepPartial<RequestCheckTx>): Promise<ResponseCheckTx>;
+  Query(request: DeepPartial<RequestQuery>): Promise<ResponseQuery>;
+  Commit(request: DeepPartial<RequestCommit>): Promise<ResponseCommit>;
+  InitChain(request: DeepPartial<RequestInitChain>): Promise<ResponseInitChain>;
+  BeginBlock(
+    request: DeepPartial<RequestBeginBlock>,
+  ): Promise<ResponseBeginBlock>;
+  EndBlock(request: DeepPartial<RequestEndBlock>): Promise<ResponseEndBlock>;
+  ListSnapshots(
+    request: DeepPartial<RequestListSnapshots>,
+  ): Promise<ResponseListSnapshots>;
+  OfferSnapshot(
+    request: DeepPartial<RequestOfferSnapshot>,
+  ): Promise<ResponseOfferSnapshot>;
   LoadSnapshotChunk(
-    request: RequestLoadSnapshotChunk,
+    request: DeepPartial<RequestLoadSnapshotChunk>,
   ): Promise<ResponseLoadSnapshotChunk>;
   ApplySnapshotChunk(
-    request: RequestApplySnapshotChunk,
+    request: DeepPartial<RequestApplySnapshotChunk>,
   ): Promise<ResponseApplySnapshotChunk>;
 }
 
@@ -5421,10 +5427,9 @@ export type DeepPartial<T> = T extends Builtin
 type KeysOfUnion<T> = T extends T ? keyof T : never;
 export type Exact<P, I extends P> = P extends Builtin
   ? P
-  : P & { [K in keyof P]: Exact<P[K], I[K]> } & Record<
-        Exclude<keyof I, KeysOfUnion<P> | '$type'>,
-        never
-      >;
+  : P &
+      { [K in keyof P]: Exact<P[K], I[K]> } &
+      Record<Exclude<keyof I, KeysOfUnion<P> | '$type'>, never>;
 
 function toTimestamp(date: Date): Timestamp {
   const seconds = numberToLong(date.getTime() / 1_000);

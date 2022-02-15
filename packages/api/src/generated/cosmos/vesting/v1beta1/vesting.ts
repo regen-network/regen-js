@@ -58,6 +58,16 @@ export interface PeriodicVestingAccount {
   vestingPeriods: Period[];
 }
 
+/**
+ * PermanentLockedAccount implements the VestingAccount interface. It does
+ * not ever release coins, locking them indefinitely. Coins in this account can
+ * still be used for delegating and for governance votes even while locked.
+ */
+export interface PermanentLockedAccount {
+  $type: 'cosmos.vesting.v1beta1.PermanentLockedAccount';
+  baseVestingAccount?: BaseVestingAccount;
+}
+
 function createBaseBaseVestingAccount(): BaseVestingAccount {
   return {
     $type: 'cosmos.vesting.v1beta1.BaseVestingAccount',
@@ -578,6 +588,86 @@ export const PeriodicVestingAccount = {
 
 messageTypeRegistry.set(PeriodicVestingAccount.$type, PeriodicVestingAccount);
 
+function createBasePermanentLockedAccount(): PermanentLockedAccount {
+  return {
+    $type: 'cosmos.vesting.v1beta1.PermanentLockedAccount',
+    baseVestingAccount: undefined,
+  };
+}
+
+export const PermanentLockedAccount = {
+  $type: 'cosmos.vesting.v1beta1.PermanentLockedAccount' as const,
+
+  encode(
+    message: PermanentLockedAccount,
+    writer: _m0.Writer = _m0.Writer.create(),
+  ): _m0.Writer {
+    if (message.baseVestingAccount !== undefined) {
+      BaseVestingAccount.encode(
+        message.baseVestingAccount,
+        writer.uint32(10).fork(),
+      ).ldelim();
+    }
+    return writer;
+  },
+
+  decode(
+    input: _m0.Reader | Uint8Array,
+    length?: number,
+  ): PermanentLockedAccount {
+    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+    let end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBasePermanentLockedAccount();
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+        case 1:
+          message.baseVestingAccount = BaseVestingAccount.decode(
+            reader,
+            reader.uint32(),
+          );
+          break;
+        default:
+          reader.skipType(tag & 7);
+          break;
+      }
+    }
+    return message;
+  },
+
+  fromJSON(object: any): PermanentLockedAccount {
+    return {
+      $type: PermanentLockedAccount.$type,
+      baseVestingAccount: isSet(object.baseVestingAccount)
+        ? BaseVestingAccount.fromJSON(object.baseVestingAccount)
+        : undefined,
+    };
+  },
+
+  toJSON(message: PermanentLockedAccount): unknown {
+    const obj: any = {};
+    message.baseVestingAccount !== undefined &&
+      (obj.baseVestingAccount = message.baseVestingAccount
+        ? BaseVestingAccount.toJSON(message.baseVestingAccount)
+        : undefined);
+    return obj;
+  },
+
+  fromPartial<I extends Exact<DeepPartial<PermanentLockedAccount>, I>>(
+    object: I,
+  ): PermanentLockedAccount {
+    const message = createBasePermanentLockedAccount();
+    message.baseVestingAccount =
+      object.baseVestingAccount !== undefined &&
+      object.baseVestingAccount !== null
+        ? BaseVestingAccount.fromPartial(object.baseVestingAccount)
+        : undefined;
+    return message;
+  },
+};
+
+messageTypeRegistry.set(PermanentLockedAccount.$type, PermanentLockedAccount);
+
 type Builtin =
   | Date
   | Function
@@ -602,10 +692,9 @@ export type DeepPartial<T> = T extends Builtin
 type KeysOfUnion<T> = T extends T ? keyof T : never;
 export type Exact<P, I extends P> = P extends Builtin
   ? P
-  : P & { [K in keyof P]: Exact<P[K], I[K]> } & Record<
-        Exclude<keyof I, KeysOfUnion<P> | '$type'>,
-        never
-      >;
+  : P &
+      { [K in keyof P]: Exact<P[K], I[K]> } &
+      Record<Exclude<keyof I, KeysOfUnion<P> | '$type'>, never>;
 
 if (_m0.util.Long !== Long) {
   _m0.util.Long = Long as any;

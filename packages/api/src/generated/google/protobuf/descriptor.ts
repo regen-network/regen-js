@@ -2498,7 +2498,7 @@ export const EnumDescriptorProto_EnumReservedRange = {
   },
 
   fromPartial<
-    I extends Exact<DeepPartial<EnumDescriptorProto_EnumReservedRange>, I>,
+    I extends Exact<DeepPartial<EnumDescriptorProto_EnumReservedRange>, I>
   >(object: I): EnumDescriptorProto_EnumReservedRange {
     const message = createBaseEnumDescriptorProto_EnumReservedRange();
     message.start = object.start ?? 0;
@@ -4595,10 +4595,9 @@ export type DeepPartial<T> = T extends Builtin
 type KeysOfUnion<T> = T extends T ? keyof T : never;
 export type Exact<P, I extends P> = P extends Builtin
   ? P
-  : P & { [K in keyof P]: Exact<P[K], I[K]> } & Record<
-        Exclude<keyof I, KeysOfUnion<P> | '$type'>,
-        never
-      >;
+  : P &
+      { [K in keyof P]: Exact<P[K], I[K]> } &
+      Record<Exclude<keyof I, KeysOfUnion<P> | '$type'>, never>;
 
 if (_m0.util.Long !== Long) {
   _m0.util.Long = Long as any;

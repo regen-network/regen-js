@@ -15,6 +15,48 @@ import { Tx } from '../../../cosmos/tx/v1beta1/tx';
 
 export const protobufPackage = 'cosmos.tx.v1beta1';
 
+/** OrderBy defines the sorting order */
+export enum OrderBy {
+  /** ORDER_BY_UNSPECIFIED - ORDER_BY_UNSPECIFIED specifies an unknown sorting order. OrderBy defaults to ASC in this case. */
+  ORDER_BY_UNSPECIFIED = 0,
+  /** ORDER_BY_ASC - ORDER_BY_ASC defines ascending order */
+  ORDER_BY_ASC = 1,
+  /** ORDER_BY_DESC - ORDER_BY_DESC defines descending order */
+  ORDER_BY_DESC = 2,
+  UNRECOGNIZED = -1,
+}
+
+export function orderByFromJSON(object: any): OrderBy {
+  switch (object) {
+    case 0:
+    case 'ORDER_BY_UNSPECIFIED':
+      return OrderBy.ORDER_BY_UNSPECIFIED;
+    case 1:
+    case 'ORDER_BY_ASC':
+      return OrderBy.ORDER_BY_ASC;
+    case 2:
+    case 'ORDER_BY_DESC':
+      return OrderBy.ORDER_BY_DESC;
+    case -1:
+    case 'UNRECOGNIZED':
+    default:
+      return OrderBy.UNRECOGNIZED;
+  }
+}
+
+export function orderByToJSON(object: OrderBy): string {
+  switch (object) {
+    case OrderBy.ORDER_BY_UNSPECIFIED:
+      return 'ORDER_BY_UNSPECIFIED';
+    case OrderBy.ORDER_BY_ASC:
+      return 'ORDER_BY_ASC';
+    case OrderBy.ORDER_BY_DESC:
+      return 'ORDER_BY_DESC';
+    default:
+      return 'UNKNOWN';
+  }
+}
+
 /** BroadcastMode specifies the broadcast mode for the TxService.Broadcast RPC method. */
 export enum BroadcastMode {
   /** BROADCAST_MODE_UNSPECIFIED - zero-value for mode ordering */
@@ -83,6 +125,7 @@ export interface GetTxsEventRequest {
   events: string[];
   /** pagination defines an pagination for the request. */
   pagination?: PageRequest;
+  orderBy: OrderBy;
 }
 
 /**
@@ -126,8 +169,15 @@ export interface BroadcastTxResponse {
  */
 export interface SimulateRequest {
   $type: 'cosmos.tx.v1beta1.SimulateRequest';
-  /** tx is the transaction to simulate. */
+  /**
+   * tx is the transaction to simulate.
+   * Deprecated. Send raw tx bytes instead.
+   *
+   * @deprecated
+   */
   tx?: Tx;
+  /** tx_bytes is the raw transaction. */
+  txBytes: Uint8Array;
 }
 
 /**
@@ -166,6 +216,7 @@ function createBaseGetTxsEventRequest(): GetTxsEventRequest {
     $type: 'cosmos.tx.v1beta1.GetTxsEventRequest',
     events: [],
     pagination: undefined,
+    orderBy: 0,
   };
 }
 
@@ -182,6 +233,9 @@ export const GetTxsEventRequest = {
     if (message.pagination !== undefined) {
       PageRequest.encode(message.pagination, writer.uint32(18).fork()).ldelim();
     }
+    if (message.orderBy !== 0) {
+      writer.uint32(24).int32(message.orderBy);
+    }
     return writer;
   },
 
@@ -197,6 +251,9 @@ export const GetTxsEventRequest = {
           break;
         case 2:
           message.pagination = PageRequest.decode(reader, reader.uint32());
+          break;
+        case 3:
+          message.orderBy = reader.int32() as any;
           break;
         default:
           reader.skipType(tag & 7);
@@ -215,6 +272,7 @@ export const GetTxsEventRequest = {
       pagination: isSet(object.pagination)
         ? PageRequest.fromJSON(object.pagination)
         : undefined,
+      orderBy: isSet(object.orderBy) ? orderByFromJSON(object.orderBy) : 0,
     };
   },
 
@@ -229,6 +287,8 @@ export const GetTxsEventRequest = {
       (obj.pagination = message.pagination
         ? PageRequest.toJSON(message.pagination)
         : undefined);
+    message.orderBy !== undefined &&
+      (obj.orderBy = orderByToJSON(message.orderBy));
     return obj;
   },
 
@@ -241,6 +301,7 @@ export const GetTxsEventRequest = {
       object.pagination !== undefined && object.pagination !== null
         ? PageRequest.fromPartial(object.pagination)
         : undefined;
+    message.orderBy = object.orderBy ?? 0;
     return message;
   },
 };
@@ -504,7 +565,11 @@ export const BroadcastTxResponse = {
 messageTypeRegistry.set(BroadcastTxResponse.$type, BroadcastTxResponse);
 
 function createBaseSimulateRequest(): SimulateRequest {
-  return { $type: 'cosmos.tx.v1beta1.SimulateRequest', tx: undefined };
+  return {
+    $type: 'cosmos.tx.v1beta1.SimulateRequest',
+    tx: undefined,
+    txBytes: new Uint8Array(),
+  };
 }
 
 export const SimulateRequest = {
@@ -516,6 +581,9 @@ export const SimulateRequest = {
   ): _m0.Writer {
     if (message.tx !== undefined) {
       Tx.encode(message.tx, writer.uint32(10).fork()).ldelim();
+    }
+    if (message.txBytes.length !== 0) {
+      writer.uint32(18).bytes(message.txBytes);
     }
     return writer;
   },
@@ -530,6 +598,9 @@ export const SimulateRequest = {
         case 1:
           message.tx = Tx.decode(reader, reader.uint32());
           break;
+        case 2:
+          message.txBytes = reader.bytes();
+          break;
         default:
           reader.skipType(tag & 7);
           break;
@@ -542,6 +613,9 @@ export const SimulateRequest = {
     return {
       $type: SimulateRequest.$type,
       tx: isSet(object.tx) ? Tx.fromJSON(object.tx) : undefined,
+      txBytes: isSet(object.txBytes)
+        ? bytesFromBase64(object.txBytes)
+        : new Uint8Array(),
     };
   },
 
@@ -549,6 +623,10 @@ export const SimulateRequest = {
     const obj: any = {};
     message.tx !== undefined &&
       (obj.tx = message.tx ? Tx.toJSON(message.tx) : undefined);
+    message.txBytes !== undefined &&
+      (obj.txBytes = base64FromBytes(
+        message.txBytes !== undefined ? message.txBytes : new Uint8Array(),
+      ));
     return obj;
   },
 
@@ -560,6 +638,7 @@ export const SimulateRequest = {
       object.tx !== undefined && object.tx !== null
         ? Tx.fromPartial(object.tx)
         : undefined;
+    message.txBytes = object.txBytes ?? new Uint8Array();
     return message;
   },
 };
@@ -796,13 +875,17 @@ messageTypeRegistry.set(GetTxResponse.$type, GetTxResponse);
 /** Service defines a gRPC service for interacting with transactions. */
 export interface Service {
   /** Simulate simulates executing a transaction for estimating gas usage. */
-  Simulate(request: SimulateRequest): Promise<SimulateResponse>;
+  Simulate(request: DeepPartial<SimulateRequest>): Promise<SimulateResponse>;
   /** GetTx fetches a tx by hash. */
-  GetTx(request: GetTxRequest): Promise<GetTxResponse>;
+  GetTx(request: DeepPartial<GetTxRequest>): Promise<GetTxResponse>;
   /** BroadcastTx broadcast transaction. */
-  BroadcastTx(request: BroadcastTxRequest): Promise<BroadcastTxResponse>;
+  BroadcastTx(
+    request: DeepPartial<BroadcastTxRequest>,
+  ): Promise<BroadcastTxResponse>;
   /** GetTxsEvent fetches txs by event. */
-  GetTxsEvent(request: GetTxsEventRequest): Promise<GetTxsEventResponse>;
+  GetTxsEvent(
+    request: DeepPartial<GetTxsEventRequest>,
+  ): Promise<GetTxsEventResponse>;
 }
 
 export class ServiceClientImpl implements Service {
@@ -925,10 +1008,9 @@ export type DeepPartial<T> = T extends Builtin
 type KeysOfUnion<T> = T extends T ? keyof T : never;
 export type Exact<P, I extends P> = P extends Builtin
   ? P
-  : P & { [K in keyof P]: Exact<P[K], I[K]> } & Record<
-        Exclude<keyof I, KeysOfUnion<P> | '$type'>,
-        never
-      >;
+  : P &
+      { [K in keyof P]: Exact<P[K], I[K]> } &
+      Record<Exclude<keyof I, KeysOfUnion<P> | '$type'>, never>;
 
 if (_m0.util.Long !== Long) {
   _m0.util.Long = Long as any;

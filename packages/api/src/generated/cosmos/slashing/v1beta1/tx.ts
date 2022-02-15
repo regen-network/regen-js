@@ -135,7 +135,7 @@ export interface Msg {
    * them into the bonded validator set, so they can begin receiving provisions
    * and rewards again.
    */
-  Unjail(request: MsgUnjail): Promise<MsgUnjailResponse>;
+  Unjail(request: DeepPartial<MsgUnjail>): Promise<MsgUnjailResponse>;
 }
 
 export class MsgClientImpl implements Msg {
@@ -187,10 +187,9 @@ export type DeepPartial<T> = T extends Builtin
 type KeysOfUnion<T> = T extends T ? keyof T : never;
 export type Exact<P, I extends P> = P extends Builtin
   ? P
-  : P & { [K in keyof P]: Exact<P[K], I[K]> } & Record<
-        Exclude<keyof I, KeysOfUnion<P> | '$type'>,
-        never
-      >;
+  : P &
+      { [K in keyof P]: Exact<P[K], I[K]> } &
+      Record<Exclude<keyof I, KeysOfUnion<P> | '$type'>, never>;
 
 if (_m0.util.Long !== Long) {
   _m0.util.Long = Long as any;

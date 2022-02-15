@@ -94,7 +94,11 @@ export interface TxBody {
    * transaction.
    */
   messages: Any[];
-  /** memo is any arbitrary memo to be added to the transaction */
+  /**
+   * memo is any arbitrary note/comment to be added to the transaction.
+   * WARNING: in clients, any publicly exposed text should not be called memo,
+   * but should be called `note` instead (see https://github.com/cosmos/cosmos-sdk/issues/9122).
+   */
   memo: string;
   /**
    * timeout is the block height after which this transaction will not
@@ -1239,10 +1243,9 @@ export type DeepPartial<T> = T extends Builtin
 type KeysOfUnion<T> = T extends T ? keyof T : never;
 export type Exact<P, I extends P> = P extends Builtin
   ? P
-  : P & { [K in keyof P]: Exact<P[K], I[K]> } & Record<
-        Exclude<keyof I, KeysOfUnion<P> | '$type'>,
-        never
-      >;
+  : P &
+      { [K in keyof P]: Exact<P[K], I[K]> } &
+      Record<Exclude<keyof I, KeysOfUnion<P> | '$type'>, never>;
 
 if (_m0.util.Long !== Long) {
   _m0.util.Long = Long as any;

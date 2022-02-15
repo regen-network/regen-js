@@ -1289,29 +1289,43 @@ messageTypeRegistry.set(
 /** Msg is the regen.ecocredit.v1alpha1 Query service. */
 export interface Query {
   /** Classes queries for all credit classes with pagination. */
-  Classes(request: QueryClassesRequest): Promise<QueryClassesResponse>;
+  Classes(
+    request: DeepPartial<QueryClassesRequest>,
+  ): Promise<QueryClassesResponse>;
   /** ClassInfo queries for information on a credit class. */
-  ClassInfo(request: QueryClassInfoRequest): Promise<QueryClassInfoResponse>;
+  ClassInfo(
+    request: DeepPartial<QueryClassInfoRequest>,
+  ): Promise<QueryClassInfoResponse>;
   /** Batches queries for all batches in the given credit class with pagination. */
-  Batches(request: QueryBatchesRequest): Promise<QueryBatchesResponse>;
+  Batches(
+    request: DeepPartial<QueryBatchesRequest>,
+  ): Promise<QueryBatchesResponse>;
   /** BatchInfo queries for information on a credit batch. */
-  BatchInfo(request: QueryBatchInfoRequest): Promise<QueryBatchInfoResponse>;
+  BatchInfo(
+    request: DeepPartial<QueryBatchInfoRequest>,
+  ): Promise<QueryBatchInfoResponse>;
   /**
    * Balance queries the balance (both tradable and retired) of a given credit
    * batch for a given account.
    */
-  Balance(request: QueryBalanceRequest): Promise<QueryBalanceResponse>;
+  Balance(
+    request: DeepPartial<QueryBalanceRequest>,
+  ): Promise<QueryBalanceResponse>;
   /** Supply queries the tradable and retired supply of a credit batch. */
-  Supply(request: QuerySupplyRequest): Promise<QuerySupplyResponse>;
+  Supply(
+    request: DeepPartial<QuerySupplyRequest>,
+  ): Promise<QuerySupplyResponse>;
   /**
    * CreditTypes returns the list of allowed types that credit classes can have.
    * See Types/CreditType for more details.
    */
   CreditTypes(
-    request: QueryCreditTypesRequest,
+    request: DeepPartial<QueryCreditTypesRequest>,
   ): Promise<QueryCreditTypesResponse>;
   /** Params queries the ecocredit module parameters. */
-  Params(request: QueryParamsRequest): Promise<QueryParamsResponse>;
+  Params(
+    request: DeepPartial<QueryParamsRequest>,
+  ): Promise<QueryParamsResponse>;
 }
 
 export class QueryClientImpl implements Query {
@@ -1458,10 +1472,9 @@ export type DeepPartial<T> = T extends Builtin
 type KeysOfUnion<T> = T extends T ? keyof T : never;
 export type Exact<P, I extends P> = P extends Builtin
   ? P
-  : P & { [K in keyof P]: Exact<P[K], I[K]> } & Record<
-        Exclude<keyof I, KeysOfUnion<P> | '$type'>,
-        never
-      >;
+  : P &
+      { [K in keyof P]: Exact<P[K], I[K]> } &
+      Record<Exclude<keyof I, KeysOfUnion<P> | '$type'>, never>;
 
 if (_m0.util.Long !== Long) {
   _m0.util.Long = Long as any;

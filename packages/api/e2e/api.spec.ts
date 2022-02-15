@@ -1,6 +1,6 @@
 import { DirectSecp256k1HdWallet } from '@cosmjs/proto-signing';
 import { RegenApi } from '../src/api';
-import { QueryClientImpl } from '../src/generated/cosmos/bank/v1beta1/query';
+import { QueryClientImpl, QueryAllBalancesRequest } from '../src/generated/cosmos/bank/v1beta1/query';
 import { ServiceClientImpl } from '../src/generated/cosmos/tx/v1beta1/service';
 
 const TEST_ADDRESS = 'regen1df675r9vnf7pdedn4sf26svdsem3ugavgxmy46';
@@ -32,6 +32,7 @@ describe('RegenApi with tendermint connection', () => {
     const bankClient = new QueryClientImpl(api.queryClient);
 
     const res = await bankClient.AllBalances({
+      // $type: QueryAllBalancesRequest.$type,
       address: TEST_ADDRESS,
     });
     expect(res.balances.length).toBeGreaterThanOrEqual(1);

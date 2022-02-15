@@ -14,7 +14,10 @@ export interface GenesisState {
   params?: Params;
   /** balances is an array containing the balances of all the accounts. */
   balances: Balance[];
-  /** supply represents the total supply. */
+  /**
+   * supply represents the total supply. If it is left empty, then supply will be calculated based on the provided
+   * balances. Otherwise, it will be used to validate that the sum of the balances equals this amount.
+   */
   supply: Coin[];
   /** denom_metadata defines the metadata of the differents coins. */
   denomMetadata: Metadata[];
@@ -247,10 +250,9 @@ export type DeepPartial<T> = T extends Builtin
 type KeysOfUnion<T> = T extends T ? keyof T : never;
 export type Exact<P, I extends P> = P extends Builtin
   ? P
-  : P & { [K in keyof P]: Exact<P[K], I[K]> } & Record<
-        Exclude<keyof I, KeysOfUnion<P> | '$type'>,
-        never
-      >;
+  : P &
+      { [K in keyof P]: Exact<P[K], I[K]> } &
+      Record<Exclude<keyof I, KeysOfUnion<P> | '$type'>, never>;
 
 if (_m0.util.Long !== Long) {
   _m0.util.Long = Long as any;

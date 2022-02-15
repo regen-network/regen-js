@@ -1190,7 +1190,7 @@ export const MsgUpdateGroupAccountAdminResponse = {
   },
 
   fromPartial<
-    I extends Exact<DeepPartial<MsgUpdateGroupAccountAdminResponse>, I>,
+    I extends Exact<DeepPartial<MsgUpdateGroupAccountAdminResponse>, I>
   >(_: I): MsgUpdateGroupAccountAdminResponse {
     const message = createBaseMsgUpdateGroupAccountAdminResponse();
     return message;
@@ -1280,7 +1280,7 @@ export const MsgUpdateGroupAccountDecisionPolicy = {
   },
 
   fromPartial<
-    I extends Exact<DeepPartial<MsgUpdateGroupAccountDecisionPolicy>, I>,
+    I extends Exact<DeepPartial<MsgUpdateGroupAccountDecisionPolicy>, I>
   >(object: I): MsgUpdateGroupAccountDecisionPolicy {
     const message = createBaseMsgUpdateGroupAccountDecisionPolicy();
     message.admin = object.admin ?? '';
@@ -1305,8 +1305,7 @@ function createBaseMsgUpdateGroupAccountDecisionPolicyResponse(): MsgUpdateGroup
 }
 
 export const MsgUpdateGroupAccountDecisionPolicyResponse = {
-  $type:
-    'regen.group.v1alpha1.MsgUpdateGroupAccountDecisionPolicyResponse' as const,
+  $type: 'regen.group.v1alpha1.MsgUpdateGroupAccountDecisionPolicyResponse' as const,
 
   encode(
     _: MsgUpdateGroupAccountDecisionPolicyResponse,
@@ -1345,10 +1344,7 @@ export const MsgUpdateGroupAccountDecisionPolicyResponse = {
   },
 
   fromPartial<
-    I extends Exact<
-      DeepPartial<MsgUpdateGroupAccountDecisionPolicyResponse>,
-      I
-    >,
+    I extends Exact<DeepPartial<MsgUpdateGroupAccountDecisionPolicyResponse>, I>
   >(_: I): MsgUpdateGroupAccountDecisionPolicyResponse {
     const message = createBaseMsgUpdateGroupAccountDecisionPolicyResponse();
     return message;
@@ -1499,7 +1495,7 @@ export const MsgUpdateGroupAccountMetadataResponse = {
   },
 
   fromPartial<
-    I extends Exact<DeepPartial<MsgUpdateGroupAccountMetadataResponse>, I>,
+    I extends Exact<DeepPartial<MsgUpdateGroupAccountMetadataResponse>, I>
   >(_: I): MsgUpdateGroupAccountMetadataResponse {
     const message = createBaseMsgUpdateGroupAccountMetadataResponse();
     return message;
@@ -1994,43 +1990,45 @@ messageTypeRegistry.set(MsgExecResponse.$type, MsgExecResponse);
 /** Msg is the regen.group.v1alpha1 Msg service. */
 export interface Msg {
   /** CreateGroup creates a new group with an admin account address, a list of members and some optional metadata. */
-  CreateGroup(request: MsgCreateGroup): Promise<MsgCreateGroupResponse>;
+  CreateGroup(
+    request: DeepPartial<MsgCreateGroup>,
+  ): Promise<MsgCreateGroupResponse>;
   /** UpdateGroupMembers updates the group members with given group id and admin address. */
   UpdateGroupMembers(
-    request: MsgUpdateGroupMembers,
+    request: DeepPartial<MsgUpdateGroupMembers>,
   ): Promise<MsgUpdateGroupMembersResponse>;
   /** UpdateGroupAdmin updates the group admin with given group id and previous admin address. */
   UpdateGroupAdmin(
-    request: MsgUpdateGroupAdmin,
+    request: DeepPartial<MsgUpdateGroupAdmin>,
   ): Promise<MsgUpdateGroupAdminResponse>;
   /** UpdateGroupMetadata updates the group metadata with given group id and admin address. */
   UpdateGroupMetadata(
-    request: MsgUpdateGroupMetadata,
+    request: DeepPartial<MsgUpdateGroupMetadata>,
   ): Promise<MsgUpdateGroupMetadataResponse>;
   /** CreateGroupAccount creates a new group account using given DecisionPolicy. */
   CreateGroupAccount(
-    request: MsgCreateGroupAccount,
+    request: DeepPartial<MsgCreateGroupAccount>,
   ): Promise<MsgCreateGroupAccountResponse>;
   /** UpdateGroupAccountAdmin updates a group account admin. */
   UpdateGroupAccountAdmin(
-    request: MsgUpdateGroupAccountAdmin,
+    request: DeepPartial<MsgUpdateGroupAccountAdmin>,
   ): Promise<MsgUpdateGroupAccountAdminResponse>;
   /** UpdateGroupAccountDecisionPolicy allows a group account decision policy to be updated. */
   UpdateGroupAccountDecisionPolicy(
-    request: MsgUpdateGroupAccountDecisionPolicy,
+    request: DeepPartial<MsgUpdateGroupAccountDecisionPolicy>,
   ): Promise<MsgUpdateGroupAccountDecisionPolicyResponse>;
   /** UpdateGroupAccountMetadata updates a group account metadata. */
   UpdateGroupAccountMetadata(
-    request: MsgUpdateGroupAccountMetadata,
+    request: DeepPartial<MsgUpdateGroupAccountMetadata>,
   ): Promise<MsgUpdateGroupAccountMetadataResponse>;
   /** CreateProposal submits a new proposal. */
   CreateProposal(
-    request: MsgCreateProposal,
+    request: DeepPartial<MsgCreateProposal>,
   ): Promise<MsgCreateProposalResponse>;
   /** Vote allows a voter to vote on a proposal. */
-  Vote(request: MsgVote): Promise<MsgVoteResponse>;
+  Vote(request: DeepPartial<MsgVote>): Promise<MsgVoteResponse>;
   /** Exec executes a proposal. */
-  Exec(request: MsgExec): Promise<MsgExecResponse>;
+  Exec(request: DeepPartial<MsgExec>): Promise<MsgExecResponse>;
 }
 
 export class MsgClientImpl implements Msg {
@@ -2043,10 +2041,12 @@ export class MsgClientImpl implements Msg {
     this.UpdateGroupMetadata = this.UpdateGroupMetadata.bind(this);
     this.CreateGroupAccount = this.CreateGroupAccount.bind(this);
     this.UpdateGroupAccountAdmin = this.UpdateGroupAccountAdmin.bind(this);
-    this.UpdateGroupAccountDecisionPolicy =
-      this.UpdateGroupAccountDecisionPolicy.bind(this);
-    this.UpdateGroupAccountMetadata =
-      this.UpdateGroupAccountMetadata.bind(this);
+    this.UpdateGroupAccountDecisionPolicy = this.UpdateGroupAccountDecisionPolicy.bind(
+      this,
+    );
+    this.UpdateGroupAccountMetadata = this.UpdateGroupAccountMetadata.bind(
+      this,
+    );
     this.CreateProposal = this.CreateProposal.bind(this);
     this.Vote = this.Vote.bind(this);
     this.Exec = this.Exec.bind(this);
@@ -2254,10 +2254,9 @@ export type DeepPartial<T> = T extends Builtin
 type KeysOfUnion<T> = T extends T ? keyof T : never;
 export type Exact<P, I extends P> = P extends Builtin
   ? P
-  : P & { [K in keyof P]: Exact<P[K], I[K]> } & Record<
-        Exclude<keyof I, KeysOfUnion<P> | '$type'>,
-        never
-      >;
+  : P &
+      { [K in keyof P]: Exact<P[K], I[K]> } &
+      Record<Exclude<keyof I, KeysOfUnion<P> | '$type'>, never>;
 
 if (_m0.util.Long !== Long) {
   _m0.util.Long = Long as any;

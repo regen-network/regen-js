@@ -645,11 +645,15 @@ messageTypeRegistry.set(QuerySignersResponse.$type, QuerySignersResponse);
 /** Query is the regen.data.v1alpha2 Query service */
 export interface Query {
   /** ByHash queries data based on its ContentHash. */
-  ByIRI(request: QueryByIRIRequest): Promise<QueryByIRIResponse>;
+  ByIRI(request: DeepPartial<QueryByIRIRequest>): Promise<QueryByIRIResponse>;
   /** BySigner queries data based on signers. */
-  BySigner(request: QueryBySignerRequest): Promise<QueryBySignerResponse>;
+  BySigner(
+    request: DeepPartial<QueryBySignerRequest>,
+  ): Promise<QueryBySignerResponse>;
   /** Signers queries signers based on IRI. */
-  Signers(request: QuerySignersRequest): Promise<QuerySignersResponse>;
+  Signers(
+    request: DeepPartial<QuerySignersRequest>,
+  ): Promise<QuerySignersResponse>;
 }
 
 export class QueryClientImpl implements Query {
@@ -729,10 +733,9 @@ export type DeepPartial<T> = T extends Builtin
 type KeysOfUnion<T> = T extends T ? keyof T : never;
 export type Exact<P, I extends P> = P extends Builtin
   ? P
-  : P & { [K in keyof P]: Exact<P[K], I[K]> } & Record<
-        Exclude<keyof I, KeysOfUnion<P> | '$type'>,
-        never
-      >;
+  : P &
+      { [K in keyof P]: Exact<P[K], I[K]> } &
+      Record<Exclude<keyof I, KeysOfUnion<P> | '$type'>, never>;
 
 function toTimestamp(date: Date): Timestamp {
   const seconds = numberToLong(date.getTime() / 1_000);

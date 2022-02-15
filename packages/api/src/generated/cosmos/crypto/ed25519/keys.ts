@@ -6,18 +6,21 @@ import _m0 from 'protobufjs/minimal';
 export const protobufPackage = 'cosmos.crypto.ed25519';
 
 /**
- * PubKey defines a ed25519 public key
- * Key is the compressed form of the pubkey. The first byte depends is a 0x02 byte
- * if the y-coordinate is the lexicographically largest of the two associated with
- * the x-coordinate. Otherwise the first byte is a 0x03.
- * This prefix is followed with the x-coordinate.
+ * PubKey is an ed25519 public key for handling Tendermint keys in SDK.
+ * It's needed for Any serialization and SDK compatibility.
+ * It must not be used in a non Tendermint key context because it doesn't implement
+ * ADR-28. Nevertheless, you will like to use ed25519 in app user level
+ * then you must create a new proto message and follow ADR-28 for Address construction.
  */
 export interface PubKey {
   $type: 'cosmos.crypto.ed25519.PubKey';
   key: Uint8Array;
 }
 
-/** PrivKey defines a ed25519 private key. */
+/**
+ * Deprecated: PrivKey defines a ed25519 private key.
+ * NOTE: ed25519 keys must not be used in SDK apps except in a tendermint validator context.
+ */
 export interface PrivKey {
   $type: 'cosmos.crypto.ed25519.PrivKey';
   key: Uint8Array;
@@ -201,10 +204,9 @@ export type DeepPartial<T> = T extends Builtin
 type KeysOfUnion<T> = T extends T ? keyof T : never;
 export type Exact<P, I extends P> = P extends Builtin
   ? P
-  : P & { [K in keyof P]: Exact<P[K], I[K]> } & Record<
-        Exclude<keyof I, KeysOfUnion<P> | '$type'>,
-        never
-      >;
+  : P &
+      { [K in keyof P]: Exact<P[K], I[K]> } &
+      Record<Exclude<keyof I, KeysOfUnion<P> | '$type'>, never>;
 
 if (_m0.util.Long !== Long) {
   _m0.util.Long = Long as any;

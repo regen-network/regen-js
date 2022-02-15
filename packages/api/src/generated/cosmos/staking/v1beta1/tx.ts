@@ -977,27 +977,31 @@ messageTypeRegistry.set(MsgUndelegateResponse.$type, MsgUndelegateResponse);
 export interface Msg {
   /** CreateValidator defines a method for creating a new validator. */
   CreateValidator(
-    request: MsgCreateValidator,
+    request: DeepPartial<MsgCreateValidator>,
   ): Promise<MsgCreateValidatorResponse>;
   /** EditValidator defines a method for editing an existing validator. */
-  EditValidator(request: MsgEditValidator): Promise<MsgEditValidatorResponse>;
+  EditValidator(
+    request: DeepPartial<MsgEditValidator>,
+  ): Promise<MsgEditValidatorResponse>;
   /**
    * Delegate defines a method for performing a delegation of coins
    * from a delegator to a validator.
    */
-  Delegate(request: MsgDelegate): Promise<MsgDelegateResponse>;
+  Delegate(request: DeepPartial<MsgDelegate>): Promise<MsgDelegateResponse>;
   /**
    * BeginRedelegate defines a method for performing a redelegation
    * of coins from a delegator and source validator to a destination validator.
    */
   BeginRedelegate(
-    request: MsgBeginRedelegate,
+    request: DeepPartial<MsgBeginRedelegate>,
   ): Promise<MsgBeginRedelegateResponse>;
   /**
    * Undelegate defines a method for performing an undelegation from a
    * delegate and a validator.
    */
-  Undelegate(request: MsgUndelegate): Promise<MsgUndelegateResponse>;
+  Undelegate(
+    request: DeepPartial<MsgUndelegate>,
+  ): Promise<MsgUndelegateResponse>;
 }
 
 export class MsgClientImpl implements Msg {
@@ -1107,10 +1111,9 @@ export type DeepPartial<T> = T extends Builtin
 type KeysOfUnion<T> = T extends T ? keyof T : never;
 export type Exact<P, I extends P> = P extends Builtin
   ? P
-  : P & { [K in keyof P]: Exact<P[K], I[K]> } & Record<
-        Exclude<keyof I, KeysOfUnion<P> | '$type'>,
-        never
-      >;
+  : P &
+      { [K in keyof P]: Exact<P[K], I[K]> } &
+      Record<Exclude<keyof I, KeysOfUnion<P> | '$type'>, never>;
 
 function toTimestamp(date: Date): Timestamp {
   const seconds = numberToLong(date.getTime() / 1_000);

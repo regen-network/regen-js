@@ -1102,8 +1102,7 @@ function createBaseCommunityPoolSpendProposalWithDeposit(): CommunityPoolSpendPr
 }
 
 export const CommunityPoolSpendProposalWithDeposit = {
-  $type:
-    'cosmos.distribution.v1beta1.CommunityPoolSpendProposalWithDeposit' as const,
+  $type: 'cosmos.distribution.v1beta1.CommunityPoolSpendProposalWithDeposit' as const,
 
   encode(
     message: CommunityPoolSpendProposalWithDeposit,
@@ -1183,7 +1182,7 @@ export const CommunityPoolSpendProposalWithDeposit = {
   },
 
   fromPartial<
-    I extends Exact<DeepPartial<CommunityPoolSpendProposalWithDeposit>, I>,
+    I extends Exact<DeepPartial<CommunityPoolSpendProposalWithDeposit>, I>
   >(object: I): CommunityPoolSpendProposalWithDeposit {
     const message = createBaseCommunityPoolSpendProposalWithDeposit();
     message.title = object.title ?? '';
@@ -1224,10 +1223,9 @@ export type DeepPartial<T> = T extends Builtin
 type KeysOfUnion<T> = T extends T ? keyof T : never;
 export type Exact<P, I extends P> = P extends Builtin
   ? P
-  : P & { [K in keyof P]: Exact<P[K], I[K]> } & Record<
-        Exclude<keyof I, KeysOfUnion<P> | '$type'>,
-        never
-      >;
+  : P &
+      { [K in keyof P]: Exact<P[K], I[K]> } &
+      Record<Exclude<keyof I, KeysOfUnion<P> | '$type'>, never>;
 
 if (_m0.util.Long !== Long) {
   _m0.util.Long = Long as any;

@@ -113,6 +113,7 @@ export interface VersionInfo {
   buildTags: string;
   goVersion: string;
   buildDeps: Module[];
+  cosmosSdkVersion: string;
 }
 
 /** Module is the type for VersionInfo */
@@ -135,8 +136,7 @@ function createBaseGetValidatorSetByHeightRequest(): GetValidatorSetByHeightRequ
 }
 
 export const GetValidatorSetByHeightRequest = {
-  $type:
-    'cosmos.base.tendermint.v1beta1.GetValidatorSetByHeightRequest' as const,
+  $type: 'cosmos.base.tendermint.v1beta1.GetValidatorSetByHeightRequest' as const,
 
   encode(
     message: GetValidatorSetByHeightRequest,
@@ -227,8 +227,7 @@ function createBaseGetValidatorSetByHeightResponse(): GetValidatorSetByHeightRes
 }
 
 export const GetValidatorSetByHeightResponse = {
-  $type:
-    'cosmos.base.tendermint.v1beta1.GetValidatorSetByHeightResponse' as const,
+  $type: 'cosmos.base.tendermint.v1beta1.GetValidatorSetByHeightResponse' as const,
 
   encode(
     message: GetValidatorSetByHeightResponse,
@@ -418,8 +417,7 @@ function createBaseGetLatestValidatorSetResponse(): GetLatestValidatorSetRespons
 }
 
 export const GetLatestValidatorSetResponse = {
-  $type:
-    'cosmos.base.tendermint.v1beta1.GetLatestValidatorSetResponse' as const,
+  $type: 'cosmos.base.tendermint.v1beta1.GetLatestValidatorSetResponse' as const,
 
   encode(
     message: GetLatestValidatorSetResponse,
@@ -1205,6 +1203,7 @@ function createBaseVersionInfo(): VersionInfo {
     buildTags: '',
     goVersion: '',
     buildDeps: [],
+    cosmosSdkVersion: '',
   };
 }
 
@@ -1235,6 +1234,9 @@ export const VersionInfo = {
     }
     for (const v of message.buildDeps) {
       Module.encode(v!, writer.uint32(58).fork()).ldelim();
+    }
+    if (message.cosmosSdkVersion !== '') {
+      writer.uint32(66).string(message.cosmosSdkVersion);
     }
     return writer;
   },
@@ -1267,6 +1269,9 @@ export const VersionInfo = {
         case 7:
           message.buildDeps.push(Module.decode(reader, reader.uint32()));
           break;
+        case 8:
+          message.cosmosSdkVersion = reader.string();
+          break;
         default:
           reader.skipType(tag & 7);
           break;
@@ -1287,6 +1292,9 @@ export const VersionInfo = {
       buildDeps: Array.isArray(object?.buildDeps)
         ? object.buildDeps.map((e: any) => Module.fromJSON(e))
         : [],
+      cosmosSdkVersion: isSet(object.cosmosSdkVersion)
+        ? String(object.cosmosSdkVersion)
+        : '',
     };
   },
 
@@ -1305,6 +1313,8 @@ export const VersionInfo = {
     } else {
       obj.buildDeps = [];
     }
+    message.cosmosSdkVersion !== undefined &&
+      (obj.cosmosSdkVersion = message.cosmosSdkVersion);
     return obj;
   },
 
@@ -1319,6 +1329,7 @@ export const VersionInfo = {
     message.buildTags = object.buildTags ?? '';
     message.goVersion = object.goVersion ?? '';
     message.buildDeps = object.buildDeps?.map(e => Module.fromPartial(e)) || [];
+    message.cosmosSdkVersion = object.cosmosSdkVersion ?? '';
     return message;
   },
 };
@@ -1408,24 +1419,28 @@ messageTypeRegistry.set(Module.$type, Module);
 /** Service defines the gRPC querier service for tendermint queries. */
 export interface Service {
   /** GetNodeInfo queries the current node info. */
-  GetNodeInfo(request: GetNodeInfoRequest): Promise<GetNodeInfoResponse>;
+  GetNodeInfo(
+    request: DeepPartial<GetNodeInfoRequest>,
+  ): Promise<GetNodeInfoResponse>;
   /** GetSyncing queries node syncing. */
-  GetSyncing(request: GetSyncingRequest): Promise<GetSyncingResponse>;
+  GetSyncing(
+    request: DeepPartial<GetSyncingRequest>,
+  ): Promise<GetSyncingResponse>;
   /** GetLatestBlock returns the latest block. */
   GetLatestBlock(
-    request: GetLatestBlockRequest,
+    request: DeepPartial<GetLatestBlockRequest>,
   ): Promise<GetLatestBlockResponse>;
   /** GetBlockByHeight queries block for given height. */
   GetBlockByHeight(
-    request: GetBlockByHeightRequest,
+    request: DeepPartial<GetBlockByHeightRequest>,
   ): Promise<GetBlockByHeightResponse>;
   /** GetLatestValidatorSet queries latest validator-set. */
   GetLatestValidatorSet(
-    request: GetLatestValidatorSetRequest,
+    request: DeepPartial<GetLatestValidatorSetRequest>,
   ): Promise<GetLatestValidatorSetResponse>;
   /** GetValidatorSetByHeight queries validator-set at a given height. */
   GetValidatorSetByHeight(
-    request: GetValidatorSetByHeightRequest,
+    request: DeepPartial<GetValidatorSetByHeightRequest>,
   ): Promise<GetValidatorSetByHeightResponse>;
 }
 
@@ -1553,10 +1568,9 @@ export type DeepPartial<T> = T extends Builtin
 type KeysOfUnion<T> = T extends T ? keyof T : never;
 export type Exact<P, I extends P> = P extends Builtin
   ? P
-  : P & { [K in keyof P]: Exact<P[K], I[K]> } & Record<
-        Exclude<keyof I, KeysOfUnion<P> | '$type'>,
-        never
-      >;
+  : P &
+      { [K in keyof P]: Exact<P[K], I[K]> } &
+      Record<Exclude<keyof I, KeysOfUnion<P> | '$type'>, never>;
 
 if (_m0.util.Long !== Long) {
   _m0.util.Long = Long as any;

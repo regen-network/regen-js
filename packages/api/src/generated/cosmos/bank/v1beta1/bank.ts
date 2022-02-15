@@ -40,6 +40,9 @@ export interface Output {
 /**
  * Supply represents a struct that passively keeps track of the total supply
  * amounts in the network.
+ * This message is deprecated now that supply is indexed by denom.
+ *
+ * @deprecated
  */
 export interface Supply {
   $type: 'cosmos.bank.v1beta1.Supply';
@@ -82,6 +85,13 @@ export interface Metadata {
    * displayed in clients.
    */
   display: string;
+  /** name defines the name of the token (eg: Cosmos Atom) */
+  name: string;
+  /**
+   * symbol is the token symbol usually shown on exchanges (eg: ATOM). This can
+   * be the same as the display.
+   */
+  symbol: string;
 }
 
 function createBaseParams(): Params {
@@ -538,6 +548,8 @@ function createBaseMetadata(): Metadata {
     denomUnits: [],
     base: '',
     display: '',
+    name: '',
+    symbol: '',
   };
 }
 
@@ -559,6 +571,12 @@ export const Metadata = {
     }
     if (message.display !== '') {
       writer.uint32(34).string(message.display);
+    }
+    if (message.name !== '') {
+      writer.uint32(42).string(message.name);
+    }
+    if (message.symbol !== '') {
+      writer.uint32(50).string(message.symbol);
     }
     return writer;
   },
@@ -582,6 +600,12 @@ export const Metadata = {
         case 4:
           message.display = reader.string();
           break;
+        case 5:
+          message.name = reader.string();
+          break;
+        case 6:
+          message.symbol = reader.string();
+          break;
         default:
           reader.skipType(tag & 7);
           break;
@@ -599,6 +623,8 @@ export const Metadata = {
         : [],
       base: isSet(object.base) ? String(object.base) : '',
       display: isSet(object.display) ? String(object.display) : '',
+      name: isSet(object.name) ? String(object.name) : '',
+      symbol: isSet(object.symbol) ? String(object.symbol) : '',
     };
   },
 
@@ -615,6 +641,8 @@ export const Metadata = {
     }
     message.base !== undefined && (obj.base = message.base);
     message.display !== undefined && (obj.display = message.display);
+    message.name !== undefined && (obj.name = message.name);
+    message.symbol !== undefined && (obj.symbol = message.symbol);
     return obj;
   },
 
@@ -625,6 +653,8 @@ export const Metadata = {
       object.denomUnits?.map(e => DenomUnit.fromPartial(e)) || [];
     message.base = object.base ?? '';
     message.display = object.display ?? '';
+    message.name = object.name ?? '';
+    message.symbol = object.symbol ?? '';
     return message;
   },
 };
@@ -655,10 +685,9 @@ export type DeepPartial<T> = T extends Builtin
 type KeysOfUnion<T> = T extends T ? keyof T : never;
 export type Exact<P, I extends P> = P extends Builtin
   ? P
-  : P & { [K in keyof P]: Exact<P[K], I[K]> } & Record<
-        Exclude<keyof I, KeysOfUnion<P> | '$type'>,
-        never
-      >;
+  : P &
+      { [K in keyof P]: Exact<P[K], I[K]> } &
+      Record<Exclude<keyof I, KeysOfUnion<P> | '$type'>, never>;
 
 if (_m0.util.Long !== Long) {
   _m0.util.Long = Long as any;

@@ -1864,37 +1864,41 @@ export interface Msg {
    * CreateClass creates a new credit class with an approved list of issuers and
    * optional metadata.
    */
-  CreateClass(request: MsgCreateClass): Promise<MsgCreateClassResponse>;
+  CreateClass(
+    request: DeepPartial<MsgCreateClass>,
+  ): Promise<MsgCreateClassResponse>;
   /**
    * CreateBatch creates a new batch of credits for an existing credit class.
    * This will create a new batch denom with a fixed supply. Issued credits can
    * be distributed to recipients in either tradable or retired form.
    */
-  CreateBatch(request: MsgCreateBatch): Promise<MsgCreateBatchResponse>;
+  CreateBatch(
+    request: DeepPartial<MsgCreateBatch>,
+  ): Promise<MsgCreateBatchResponse>;
   /**
    * Send sends tradable credits from one account to another account. Sent
    * credits can either be tradable or retired on receipt.
    */
-  Send(request: MsgSend): Promise<MsgSendResponse>;
+  Send(request: DeepPartial<MsgSend>): Promise<MsgSendResponse>;
   /** Retire retires a specified number of credits in the holder's account. */
-  Retire(request: MsgRetire): Promise<MsgRetireResponse>;
+  Retire(request: DeepPartial<MsgRetire>): Promise<MsgRetireResponse>;
   /**
    * Cancel removes a number of credits from the holder's account and also
    * deducts them from the tradable supply, effectively cancelling their
    * issuance on Regen Ledger
    */
-  Cancel(request: MsgCancel): Promise<MsgCancelResponse>;
+  Cancel(request: DeepPartial<MsgCancel>): Promise<MsgCancelResponse>;
   /** UpdateClassAdmin updates the credit class admin */
   UpdateClassAdmin(
-    request: MsgUpdateClassAdmin,
+    request: DeepPartial<MsgUpdateClassAdmin>,
   ): Promise<MsgUpdateClassAdminResponse>;
   /** UpdateClassIssuers updates the credit class issuer list */
   UpdateClassIssuers(
-    request: MsgUpdateClassIssuers,
+    request: DeepPartial<MsgUpdateClassIssuers>,
   ): Promise<MsgUpdateClassIssuersResponse>;
   /** UpdateClassMetadata updates the credit class metadata */
   UpdateClassMetadata(
-    request: MsgUpdateClassMetadata,
+    request: DeepPartial<MsgUpdateClassMetadata>,
   ): Promise<MsgUpdateClassMetadataResponse>;
 }
 
@@ -2074,10 +2078,9 @@ export type DeepPartial<T> = T extends Builtin
 type KeysOfUnion<T> = T extends T ? keyof T : never;
 export type Exact<P, I extends P> = P extends Builtin
   ? P
-  : P & { [K in keyof P]: Exact<P[K], I[K]> } & Record<
-        Exclude<keyof I, KeysOfUnion<P> | '$type'>,
-        never
-      >;
+  : P &
+      { [K in keyof P]: Exact<P[K], I[K]> } &
+      Record<Exclude<keyof I, KeysOfUnion<P> | '$type'>, never>;
 
 function toTimestamp(date: Date): Timestamp {
   const seconds = numberToLong(date.getTime() / 1_000);

@@ -14,18 +14,25 @@ export const protobufPackage = 'cosmos.slashing.v1beta1';
 export interface ValidatorSigningInfo {
   $type: 'cosmos.slashing.v1beta1.ValidatorSigningInfo';
   address: string;
-  /** height at which validator was first a candidate OR was unjailed */
+  /** Height at which validator was first a candidate OR was unjailed */
   startHeight: Long;
-  /** index offset into signed block bit array */
+  /**
+   * Index which is incremented each time the validator was a bonded
+   * in a block and may have signed a precommit or not. This in conjunction with the
+   * `SignedBlocksWindow` param determines the index in the `MissedBlocksBitArray`.
+   */
   indexOffset: Long;
-  /** timestamp validator cannot be unjailed until */
+  /** Timestamp until which the validator is jailed due to liveness downtime. */
   jailedUntil?: Date;
   /**
-   * whether or not a validator has been tombstoned (killed out of validator
-   * set)
+   * Whether or not a validator has been tombstoned (killed out of validator set). It is set
+   * once the validator commits an equivocation or for any other configured misbehiavor.
    */
   tombstoned: boolean;
-  /** missed blocks counter (to avoid scanning the array every time) */
+  /**
+   * A counter kept to avoid unnecessary array reads.
+   * Note that `Sum(MissedBlocksBitArray)` always equals `MissedBlocksCounter`.
+   */
   missedBlocksCounter: Long;
 }
 
@@ -388,10 +395,9 @@ export type DeepPartial<T> = T extends Builtin
 type KeysOfUnion<T> = T extends T ? keyof T : never;
 export type Exact<P, I extends P> = P extends Builtin
   ? P
-  : P & { [K in keyof P]: Exact<P[K], I[K]> } & Record<
-        Exclude<keyof I, KeysOfUnion<P> | '$type'>,
-        never
-      >;
+  : P &
+      { [K in keyof P]: Exact<P[K], I[K]> } &
+      Record<Exclude<keyof I, KeysOfUnion<P> | '$type'>, never>;
 
 function toTimestamp(date: Date): Timestamp {
   const seconds = numberToLong(date.getTime() / 1_000);

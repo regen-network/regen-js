@@ -21,8 +21,11 @@ export interface Plan {
    */
   name: string;
   /**
-   * The time after which the upgrade must be performed.
-   * Leave set to its zero value to use a pre-defined Height instead.
+   * Deprecated: Time based upgrades have been deprecated. Time based upgrade logic
+   * has been removed from the SDK.
+   * If this field is not empty, an error will be thrown.
+   *
+   * @deprecated
    */
   time?: Date;
   /**
@@ -36,11 +39,11 @@ export interface Plan {
    */
   info: string;
   /**
-   * IBC-enabled chains can opt-in to including the upgraded client state in its upgrade plan
-   * This will make the chain commit to the correct upgraded (self) client state before the upgrade occurs,
-   * so that connecting chains can verify that the new upgraded client is valid by verifying a proof on the
-   * previous version of the chain.
-   * This will allow IBC connections to persist smoothly across planned chain upgrades
+   * Deprecated: UpgradedClientState field has been deprecated. IBC upgrade logic has been
+   * moved to the IBC module in the sub module 02-client.
+   * If this field is not empty, an error will be thrown.
+   *
+   * @deprecated
    */
   upgradedClientState?: Any;
 }
@@ -64,6 +67,15 @@ export interface CancelSoftwareUpgradeProposal {
   $type: 'cosmos.upgrade.v1beta1.CancelSoftwareUpgradeProposal';
   title: string;
   description: string;
+}
+
+/** ModuleVersion specifies a module and its consensus version. */
+export interface ModuleVersion {
+  $type: 'cosmos.upgrade.v1beta1.ModuleVersion';
+  /** name of the app module */
+  name: string;
+  /** consensus version of the app module */
+  version: Long;
 }
 
 function createBasePlan(): Plan {
@@ -353,6 +365,84 @@ messageTypeRegistry.set(
   CancelSoftwareUpgradeProposal,
 );
 
+function createBaseModuleVersion(): ModuleVersion {
+  return {
+    $type: 'cosmos.upgrade.v1beta1.ModuleVersion',
+    name: '',
+    version: Long.UZERO,
+  };
+}
+
+export const ModuleVersion = {
+  $type: 'cosmos.upgrade.v1beta1.ModuleVersion' as const,
+
+  encode(
+    message: ModuleVersion,
+    writer: _m0.Writer = _m0.Writer.create(),
+  ): _m0.Writer {
+    if (message.name !== '') {
+      writer.uint32(10).string(message.name);
+    }
+    if (!message.version.isZero()) {
+      writer.uint32(16).uint64(message.version);
+    }
+    return writer;
+  },
+
+  decode(input: _m0.Reader | Uint8Array, length?: number): ModuleVersion {
+    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+    let end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseModuleVersion();
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+        case 1:
+          message.name = reader.string();
+          break;
+        case 2:
+          message.version = reader.uint64() as Long;
+          break;
+        default:
+          reader.skipType(tag & 7);
+          break;
+      }
+    }
+    return message;
+  },
+
+  fromJSON(object: any): ModuleVersion {
+    return {
+      $type: ModuleVersion.$type,
+      name: isSet(object.name) ? String(object.name) : '',
+      version: isSet(object.version)
+        ? Long.fromString(object.version)
+        : Long.UZERO,
+    };
+  },
+
+  toJSON(message: ModuleVersion): unknown {
+    const obj: any = {};
+    message.name !== undefined && (obj.name = message.name);
+    message.version !== undefined &&
+      (obj.version = (message.version || Long.UZERO).toString());
+    return obj;
+  },
+
+  fromPartial<I extends Exact<DeepPartial<ModuleVersion>, I>>(
+    object: I,
+  ): ModuleVersion {
+    const message = createBaseModuleVersion();
+    message.name = object.name ?? '';
+    message.version =
+      object.version !== undefined && object.version !== null
+        ? Long.fromValue(object.version)
+        : Long.UZERO;
+    return message;
+  },
+};
+
+messageTypeRegistry.set(ModuleVersion.$type, ModuleVersion);
+
 type Builtin =
   | Date
   | Function
@@ -377,10 +467,9 @@ export type DeepPartial<T> = T extends Builtin
 type KeysOfUnion<T> = T extends T ? keyof T : never;
 export type Exact<P, I extends P> = P extends Builtin
   ? P
-  : P & { [K in keyof P]: Exact<P[K], I[K]> } & Record<
-        Exclude<keyof I, KeysOfUnion<P> | '$type'>,
-        never
-      >;
+  : P &
+      { [K in keyof P]: Exact<P[K], I[K]> } &
+      Record<Exclude<keyof I, KeysOfUnion<P> | '$type'>, never>;
 
 function toTimestamp(date: Date): Timestamp {
   const seconds = numberToLong(date.getTime() / 1_000);

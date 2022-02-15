@@ -360,7 +360,9 @@ export interface Msg {
    * SignData should be used to create a digital signature attesting to the
    * veracity of some piece of data.
    */
-  AnchorData(request: MsgAnchorData): Promise<MsgAnchorDataResponse>;
+  AnchorData(
+    request: DeepPartial<MsgAnchorData>,
+  ): Promise<MsgAnchorDataResponse>;
   /**
    * SignData allows for signing of an arbitrary piece of data on the
    * blockchain. By "signing" data the signers are making a statement about the
@@ -382,7 +384,7 @@ export interface Msg {
    * SignData can be called multiple times for the same content hash with different
    * signers and those signers will be appended to the list of signers.
    */
-  SignData(request: MsgSignData): Promise<MsgSignDataResponse>;
+  SignData(request: DeepPartial<MsgSignData>): Promise<MsgSignDataResponse>;
 }
 
 export class MsgClientImpl implements Msg {
@@ -449,10 +451,9 @@ export type DeepPartial<T> = T extends Builtin
 type KeysOfUnion<T> = T extends T ? keyof T : never;
 export type Exact<P, I extends P> = P extends Builtin
   ? P
-  : P & { [K in keyof P]: Exact<P[K], I[K]> } & Record<
-        Exclude<keyof I, KeysOfUnion<P> | '$type'>,
-        never
-      >;
+  : P &
+      { [K in keyof P]: Exact<P[K], I[K]> } &
+      Record<Exclude<keyof I, KeysOfUnion<P> | '$type'>, never>;
 
 function toTimestamp(date: Date): Timestamp {
   const seconds = numberToLong(date.getTime() / 1_000);

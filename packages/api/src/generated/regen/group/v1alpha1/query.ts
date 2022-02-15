@@ -929,7 +929,7 @@ export const QueryGroupAccountsByGroupRequest = {
   },
 
   fromPartial<
-    I extends Exact<DeepPartial<QueryGroupAccountsByGroupRequest>, I>,
+    I extends Exact<DeepPartial<QueryGroupAccountsByGroupRequest>, I>
   >(object: I): QueryGroupAccountsByGroupRequest {
     const message = createBaseQueryGroupAccountsByGroupRequest();
     message.groupId =
@@ -1031,7 +1031,7 @@ export const QueryGroupAccountsByGroupResponse = {
   },
 
   fromPartial<
-    I extends Exact<DeepPartial<QueryGroupAccountsByGroupResponse>, I>,
+    I extends Exact<DeepPartial<QueryGroupAccountsByGroupResponse>, I>
   >(object: I): QueryGroupAccountsByGroupResponse {
     const message = createBaseQueryGroupAccountsByGroupResponse();
     message.groupAccounts =
@@ -1118,7 +1118,7 @@ export const QueryGroupAccountsByAdminRequest = {
   },
 
   fromPartial<
-    I extends Exact<DeepPartial<QueryGroupAccountsByAdminRequest>, I>,
+    I extends Exact<DeepPartial<QueryGroupAccountsByAdminRequest>, I>
   >(object: I): QueryGroupAccountsByAdminRequest {
     const message = createBaseQueryGroupAccountsByAdminRequest();
     message.admin = object.admin ?? '';
@@ -1217,7 +1217,7 @@ export const QueryGroupAccountsByAdminResponse = {
   },
 
   fromPartial<
-    I extends Exact<DeepPartial<QueryGroupAccountsByAdminResponse>, I>,
+    I extends Exact<DeepPartial<QueryGroupAccountsByAdminResponse>, I>
   >(object: I): QueryGroupAccountsByAdminResponse {
     const message = createBaseQueryGroupAccountsByAdminResponse();
     message.groupAccounts =
@@ -1448,7 +1448,7 @@ export const QueryProposalsByGroupAccountRequest = {
   },
 
   fromPartial<
-    I extends Exact<DeepPartial<QueryProposalsByGroupAccountRequest>, I>,
+    I extends Exact<DeepPartial<QueryProposalsByGroupAccountRequest>, I>
   >(object: I): QueryProposalsByGroupAccountRequest {
     const message = createBaseQueryProposalsByGroupAccountRequest();
     message.address = object.address ?? '';
@@ -1545,7 +1545,7 @@ export const QueryProposalsByGroupAccountResponse = {
   },
 
   fromPartial<
-    I extends Exact<DeepPartial<QueryProposalsByGroupAccountResponse>, I>,
+    I extends Exact<DeepPartial<QueryProposalsByGroupAccountResponse>, I>
   >(object: I): QueryProposalsByGroupAccountResponse {
     const message = createBaseQueryProposalsByGroupAccountResponse();
     message.proposals =
@@ -1703,7 +1703,7 @@ export const QueryVoteByProposalVoterResponse = {
   },
 
   fromPartial<
-    I extends Exact<DeepPartial<QueryVoteByProposalVoterResponse>, I>,
+    I extends Exact<DeepPartial<QueryVoteByProposalVoterResponse>, I>
   >(object: I): QueryVoteByProposalVoterResponse {
     const message = createBaseQueryVoteByProposalVoterResponse();
     message.vote =
@@ -2090,44 +2090,48 @@ messageTypeRegistry.set(
 /** Query is the regen.group.v1alpha1 Query service. */
 export interface Query {
   /** GroupInfo queries group info based on group id. */
-  GroupInfo(request: QueryGroupInfoRequest): Promise<QueryGroupInfoResponse>;
+  GroupInfo(
+    request: DeepPartial<QueryGroupInfoRequest>,
+  ): Promise<QueryGroupInfoResponse>;
   /** GroupAccountInfo queries group account info based on group account address. */
   GroupAccountInfo(
-    request: QueryGroupAccountInfoRequest,
+    request: DeepPartial<QueryGroupAccountInfoRequest>,
   ): Promise<QueryGroupAccountInfoResponse>;
   /** GroupMembers queries members of a group */
   GroupMembers(
-    request: QueryGroupMembersRequest,
+    request: DeepPartial<QueryGroupMembersRequest>,
   ): Promise<QueryGroupMembersResponse>;
   /** GroupsByAdmin queries groups by admin address. */
   GroupsByAdmin(
-    request: QueryGroupsByAdminRequest,
+    request: DeepPartial<QueryGroupsByAdminRequest>,
   ): Promise<QueryGroupsByAdminResponse>;
   /** GroupAccountsByGroup queries group accounts by group id. */
   GroupAccountsByGroup(
-    request: QueryGroupAccountsByGroupRequest,
+    request: DeepPartial<QueryGroupAccountsByGroupRequest>,
   ): Promise<QueryGroupAccountsByGroupResponse>;
   /** GroupsByAdmin queries group accounts by admin address. */
   GroupAccountsByAdmin(
-    request: QueryGroupAccountsByAdminRequest,
+    request: DeepPartial<QueryGroupAccountsByAdminRequest>,
   ): Promise<QueryGroupAccountsByAdminResponse>;
   /** Proposal queries a proposal based on proposal id. */
-  Proposal(request: QueryProposalRequest): Promise<QueryProposalResponse>;
+  Proposal(
+    request: DeepPartial<QueryProposalRequest>,
+  ): Promise<QueryProposalResponse>;
   /** ProposalsByGroupAccount queries proposals based on group account address. */
   ProposalsByGroupAccount(
-    request: QueryProposalsByGroupAccountRequest,
+    request: DeepPartial<QueryProposalsByGroupAccountRequest>,
   ): Promise<QueryProposalsByGroupAccountResponse>;
   /** VoteByProposalVoter queries a vote by proposal id and voter. */
   VoteByProposalVoter(
-    request: QueryVoteByProposalVoterRequest,
+    request: DeepPartial<QueryVoteByProposalVoterRequest>,
   ): Promise<QueryVoteByProposalVoterResponse>;
   /** VotesByProposal queries a vote by proposal. */
   VotesByProposal(
-    request: QueryVotesByProposalRequest,
+    request: DeepPartial<QueryVotesByProposalRequest>,
   ): Promise<QueryVotesByProposalResponse>;
   /** VotesByVoter queries a vote by voter. */
   VotesByVoter(
-    request: QueryVotesByVoterRequest,
+    request: DeepPartial<QueryVotesByVoterRequest>,
   ): Promise<QueryVotesByVoterResponse>;
 }
 
@@ -2330,10 +2334,9 @@ export type DeepPartial<T> = T extends Builtin
 type KeysOfUnion<T> = T extends T ? keyof T : never;
 export type Exact<P, I extends P> = P extends Builtin
   ? P
-  : P & { [K in keyof P]: Exact<P[K], I[K]> } & Record<
-        Exclude<keyof I, KeysOfUnion<P> | '$type'>,
-        never
-      >;
+  : P &
+      { [K in keyof P]: Exact<P[K], I[K]> } &
+      Record<Exclude<keyof I, KeysOfUnion<P> | '$type'>, never>;
 
 if (_m0.util.Long !== Long) {
   _m0.util.Long = Long as any;

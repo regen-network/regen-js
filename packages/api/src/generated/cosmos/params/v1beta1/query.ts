@@ -170,7 +170,9 @@ export interface Query {
    * Params queries a specific parameter of a module, given its subspace and
    * key.
    */
-  Params(request: QueryParamsRequest): Promise<QueryParamsResponse>;
+  Params(
+    request: DeepPartial<QueryParamsRequest>,
+  ): Promise<QueryParamsResponse>;
 }
 
 export class QueryClientImpl implements Query {
@@ -224,10 +226,9 @@ export type DeepPartial<T> = T extends Builtin
 type KeysOfUnion<T> = T extends T ? keyof T : never;
 export type Exact<P, I extends P> = P extends Builtin
   ? P
-  : P & { [K in keyof P]: Exact<P[K], I[K]> } & Record<
-        Exclude<keyof I, KeysOfUnion<P> | '$type'>,
-        never
-      >;
+  : P &
+      { [K in keyof P]: Exact<P[K], I[K]> } &
+      Record<Exclude<keyof I, KeysOfUnion<P> | '$type'>, never>;
 
 if (_m0.util.Long !== Long) {
   _m0.util.Long = Long as any;

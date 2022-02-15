@@ -307,9 +307,9 @@ messageTypeRegistry.set(MsgMultiSendResponse.$type, MsgMultiSendResponse);
 /** Msg defines the bank Msg service. */
 export interface Msg {
   /** Send defines a method for sending coins from one account to another account. */
-  Send(request: MsgSend): Promise<MsgSendResponse>;
+  Send(request: DeepPartial<MsgSend>): Promise<MsgSendResponse>;
   /** MultiSend defines a method for sending coins from some accounts to other accounts. */
-  MultiSend(request: MsgMultiSend): Promise<MsgMultiSendResponse>;
+  MultiSend(request: DeepPartial<MsgMultiSend>): Promise<MsgMultiSendResponse>;
 }
 
 export class MsgClientImpl implements Msg {
@@ -370,10 +370,9 @@ export type DeepPartial<T> = T extends Builtin
 type KeysOfUnion<T> = T extends T ? keyof T : never;
 export type Exact<P, I extends P> = P extends Builtin
   ? P
-  : P & { [K in keyof P]: Exact<P[K], I[K]> } & Record<
-        Exclude<keyof I, KeysOfUnion<P> | '$type'>,
-        never
-      >;
+  : P &
+      { [K in keyof P]: Exact<P[K], I[K]> } &
+      Record<Exclude<keyof I, KeysOfUnion<P> | '$type'>, never>;
 
 if (_m0.util.Long !== Long) {
   _m0.util.Long = Long as any;

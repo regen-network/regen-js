@@ -323,14 +323,14 @@ export interface ReflectionService {
    * registry.
    */
   ListAllInterfaces(
-    request: ListAllInterfacesRequest,
+    request: DeepPartial<ListAllInterfacesRequest>,
   ): Promise<ListAllInterfacesResponse>;
   /**
    * ListImplementations list all the concrete types that implement a given
    * interface.
    */
   ListImplementations(
-    request: ListImplementationsRequest,
+    request: DeepPartial<ListImplementationsRequest>,
   ): Promise<ListImplementationsResponse>;
 }
 
@@ -402,10 +402,9 @@ export type DeepPartial<T> = T extends Builtin
 type KeysOfUnion<T> = T extends T ? keyof T : never;
 export type Exact<P, I extends P> = P extends Builtin
   ? P
-  : P & { [K in keyof P]: Exact<P[K], I[K]> } & Record<
-        Exclude<keyof I, KeysOfUnion<P> | '$type'>,
-        never
-      >;
+  : P &
+      { [K in keyof P]: Exact<P[K], I[K]> } &
+      Record<Exclude<keyof I, KeysOfUnion<P> | '$type'>, never>;
 
 if (_m0.util.Long !== Long) {
   _m0.util.Long = Long as any;

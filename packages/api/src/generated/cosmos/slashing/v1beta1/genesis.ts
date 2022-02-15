@@ -20,7 +20,7 @@ export interface GenesisState {
    */
   signingInfos: SigningInfo[];
   /**
-   * signing_infos represents a map between validator addresses and their
+   * missed_blocks represents a map between validator addresses and their
    * missed blocks.
    */
   missedBlocks: ValidatorMissedBlocks[];
@@ -437,10 +437,9 @@ export type DeepPartial<T> = T extends Builtin
 type KeysOfUnion<T> = T extends T ? keyof T : never;
 export type Exact<P, I extends P> = P extends Builtin
   ? P
-  : P & { [K in keyof P]: Exact<P[K], I[K]> } & Record<
-        Exclude<keyof I, KeysOfUnion<P> | '$type'>,
-        never
-      >;
+  : P &
+      { [K in keyof P]: Exact<P[K], I[K]> } &
+      Record<Exclude<keyof I, KeysOfUnion<P> | '$type'>, never>;
 
 if (_m0.util.Long !== Long) {
   _m0.util.Long = Long as any;
