@@ -48,17 +48,12 @@ export function MyBalance(props: MyBalanceProps): React.ReactElement {
       ],
       gas: '200000',
     };
-    const txBytes = await api.connection.msgClient?.sign(
-      fromAddress,
-      msg,
-      fee,
-      '',
-    );
+    const txBytes = await api.msgClient?.sign(fromAddress, msg, fee, '');
     // eslint-disable-next-line
     console.log('txBytes', txBytes);
 
     if (txBytes) {
-      const hash = await api.connection.msgClient?.broadcast(txBytes);
+      const hash = await api.msgClient?.broadcast(txBytes);
       // eslint-disable-next-line
       console.log('hash', hash);
     }
@@ -68,15 +63,13 @@ export function MyBalance(props: MyBalanceProps): React.ReactElement {
 
   useEffect(() => {
     // sign();
-    const queryClient: QueryClientImpl = new QueryClientImpl(
-      api.connection.queryClient,
-    );
+    const queryClient: QueryClientImpl = new QueryClientImpl(api.queryClient);
     queryClient
       .AllBalances(QueryAllBalancesRequest.fromPartial({ address }))
       .then(setBalance)
       /* eslint-disable */
       .catch(console.error);
-  }, [address, api.connection.queryClient]);
+  }, [address, api.queryClient]);
 
   return (
     <div>

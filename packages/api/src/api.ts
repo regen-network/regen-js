@@ -23,11 +23,6 @@ export interface SigningConnectionOptions extends DefaultConnectionOptions {
   signer: OfflineSigner;
 }
 
-export interface Connection {
-  queryClient: ProtobufRpcClient;
-  msgClient?: MessageClient;
-}
-
 /**
  * Options to pass into the RegenApi constructor.
  */
@@ -40,13 +35,12 @@ export interface RegenApiOptions {
  * a client connection
  */
 export class RegenApi {
-  readonly connection: Connection;
+  readonly queryClient: ProtobufRpcClient;
+  readonly msgClient?: MessageClient;
 
   constructor(queryClient: ProtobufRpcClient, msgClient?: MessageClient) {
-    this.connection = {
-      queryClient,
-      msgClient,
-    };
+    this.queryClient = queryClient;
+    this.msgClient = msgClient;
   }
 
   /**
