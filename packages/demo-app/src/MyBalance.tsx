@@ -51,14 +51,32 @@ export function MyBalance(props: MyBalanceProps): React.ReactElement {
       credits: [
         {
           batchDenom: 'C01-20180101-20200101-001',
-          tradableAmount: '100',
-          retiredAmount: '5',
+          tradableAmount: '1',
+          retiredAmount: '1',
           retirementLocation: 'US',
         },
         {
           batchDenom: 'C01-20190101-20210101-002',
-          tradableAmount: '101',
-          retiredAmount: '10',
+          tradableAmount: '1',
+          retiredAmount: '1',
+          retirementLocation: 'FR',
+        },
+      ],
+    });
+    const msg2 = MsgSend.fromPartial({
+      sender: fromAddress,
+      recipient: 'regen1rhvx7kpxtd0em0t2u87xu5a3xc9gs7evvr5v29',
+      credits: [
+        {
+          batchDenom: 'C01-20180101-20200101-001',
+          tradableAmount: '2',
+          retiredAmount: '1',
+          retirementLocation: 'US',
+        },
+        {
+          batchDenom: 'C01-20190101-20210101-002',
+          tradableAmount: '2',
+          retiredAmount: '1',
           retirementLocation: 'FR',
         },
       ],
@@ -73,7 +91,12 @@ export function MyBalance(props: MyBalanceProps): React.ReactElement {
       ],
       gas: '200000',
     };
-    const txBytes = await api.msgClient?.sign(fromAddress, msg, fee, '');
+    const txBytes = await api.msgClient?.sign(
+      fromAddress,
+      [msg, msg2],
+      fee,
+      '',
+    );
     // eslint-disable-next-line
     console.log('txBytes', txBytes);
 

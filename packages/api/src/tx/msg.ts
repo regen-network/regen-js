@@ -1,6 +1,6 @@
 import { TxRaw } from 'cosmjs-types/cosmos/tx/v1beta1/tx';
 import { defaultRegistryTypes, StdFee } from '@cosmjs/stargate';
-import { Registry, GeneratedType } from '@cosmjs/proto-signing';
+import { Registry, GeneratedType, EncodeObject } from '@cosmjs/proto-signing';
 
 import { SigningConnectionOptions } from '../api';
 import { messageTypeRegistry } from '../generated/typeRegistry';
@@ -33,26 +33,22 @@ export async function setupTxExtension(
 
   /**
    * Sign a transaction with msgs
-   * TODO support array of msgs instead of single msg
    */
   const sign = async (
     signerAddress: string,
-    msg: any,
+    msgs: any[],
     fee: StdFee,
     memo: string,
   ): Promise<Uint8Array> => {
-    const msgAny = {
-      typeUrl: `/${msg.$type}`,
-      value: msg,
-    };
-
+    const msgsAny: EncodeObject[] = [];
+    for (const msg of msgs) {
+      msgsAny.push({
+        typeUrl: `/${msg.$type}`,
+        value: (({ $type, ...rest }) => rest)(msg),
+      });
+    }
     try {
-      const txRaw = await signingClient.sign(
-        signerAddress,
-        [msgAny],
-        fee,
-        memo,
-      );
+      const txRaw = await signingClient.sign(signerAddress, msgsAny, fee, memo);
       const txBytes = TxRaw.encode(txRaw).finish();
 
       return txBytes;
