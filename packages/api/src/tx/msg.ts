@@ -61,9 +61,13 @@ export async function setupTxExtension(
    * Broadcast a signed transaction and wait for transaction hash
    */
   const broadcast = async (signedTxBytes: Uint8Array): Promise<string> => {
-    const result = await signingClient.broadcastTx(signedTxBytes);
+    try {
+      const result = await signingClient.broadcastTx(signedTxBytes);
 
-    return result.transactionHash;
+      return result.transactionHash;
+    } catch (err) {
+      return Promise.reject(err);
+    }
   };
 
   return {
