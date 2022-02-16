@@ -86,7 +86,7 @@ export function MyBalance(props: MyBalanceProps): React.ReactElement {
       amount: [
         {
           denom: 'uregen',
-          amount: '5000', //TODO: what should fee and gas be?
+          amount: '5000',
         },
       ],
       gas: '200000',
