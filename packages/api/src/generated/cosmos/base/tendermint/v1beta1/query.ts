@@ -1455,8 +1455,11 @@ export class ServiceClientImpl implements Service {
     this.GetLatestValidatorSet = this.GetLatestValidatorSet.bind(this);
     this.GetValidatorSetByHeight = this.GetValidatorSetByHeight.bind(this);
   }
-  GetNodeInfo(request: GetNodeInfoRequest): Promise<GetNodeInfoResponse> {
-    const data = GetNodeInfoRequest.encode(request).finish();
+  GetNodeInfo(
+    request: DeepPartial<GetNodeInfoRequest>,
+  ): Promise<GetNodeInfoResponse> {
+    const fromPartial = GetNodeInfoRequest.fromPartial(request);
+    const data = GetNodeInfoRequest.encode(fromPartial).finish();
     const promise = this.rpc.request(
       'cosmos.base.tendermint.v1beta1.Service',
       'GetNodeInfo',
@@ -1467,8 +1470,11 @@ export class ServiceClientImpl implements Service {
     );
   }
 
-  GetSyncing(request: GetSyncingRequest): Promise<GetSyncingResponse> {
-    const data = GetSyncingRequest.encode(request).finish();
+  GetSyncing(
+    request: DeepPartial<GetSyncingRequest>,
+  ): Promise<GetSyncingResponse> {
+    const fromPartial = GetSyncingRequest.fromPartial(request);
+    const data = GetSyncingRequest.encode(fromPartial).finish();
     const promise = this.rpc.request(
       'cosmos.base.tendermint.v1beta1.Service',
       'GetSyncing',
@@ -1480,9 +1486,10 @@ export class ServiceClientImpl implements Service {
   }
 
   GetLatestBlock(
-    request: GetLatestBlockRequest,
+    request: DeepPartial<GetLatestBlockRequest>,
   ): Promise<GetLatestBlockResponse> {
-    const data = GetLatestBlockRequest.encode(request).finish();
+    const fromPartial = GetLatestBlockRequest.fromPartial(request);
+    const data = GetLatestBlockRequest.encode(fromPartial).finish();
     const promise = this.rpc.request(
       'cosmos.base.tendermint.v1beta1.Service',
       'GetLatestBlock',
@@ -1494,9 +1501,10 @@ export class ServiceClientImpl implements Service {
   }
 
   GetBlockByHeight(
-    request: GetBlockByHeightRequest,
+    request: DeepPartial<GetBlockByHeightRequest>,
   ): Promise<GetBlockByHeightResponse> {
-    const data = GetBlockByHeightRequest.encode(request).finish();
+    const fromPartial = GetBlockByHeightRequest.fromPartial(request);
+    const data = GetBlockByHeightRequest.encode(fromPartial).finish();
     const promise = this.rpc.request(
       'cosmos.base.tendermint.v1beta1.Service',
       'GetBlockByHeight',
@@ -1508,9 +1516,10 @@ export class ServiceClientImpl implements Service {
   }
 
   GetLatestValidatorSet(
-    request: GetLatestValidatorSetRequest,
+    request: DeepPartial<GetLatestValidatorSetRequest>,
   ): Promise<GetLatestValidatorSetResponse> {
-    const data = GetLatestValidatorSetRequest.encode(request).finish();
+    const fromPartial = GetLatestValidatorSetRequest.fromPartial(request);
+    const data = GetLatestValidatorSetRequest.encode(fromPartial).finish();
     const promise = this.rpc.request(
       'cosmos.base.tendermint.v1beta1.Service',
       'GetLatestValidatorSet',
@@ -1522,9 +1531,10 @@ export class ServiceClientImpl implements Service {
   }
 
   GetValidatorSetByHeight(
-    request: GetValidatorSetByHeightRequest,
+    request: DeepPartial<GetValidatorSetByHeightRequest>,
   ): Promise<GetValidatorSetByHeightResponse> {
-    const data = GetValidatorSetByHeightRequest.encode(request).finish();
+    const fromPartial = GetValidatorSetByHeightRequest.fromPartial(request);
+    const data = GetValidatorSetByHeightRequest.encode(fromPartial).finish();
     const promise = this.rpc.request(
       'cosmos.base.tendermint.v1beta1.Service',
       'GetValidatorSetByHeight',

@@ -388,8 +388,11 @@ export class QueryClientImpl implements Query {
     this.Allowance = this.Allowance.bind(this);
     this.Allowances = this.Allowances.bind(this);
   }
-  Allowance(request: QueryAllowanceRequest): Promise<QueryAllowanceResponse> {
-    const data = QueryAllowanceRequest.encode(request).finish();
+  Allowance(
+    request: DeepPartial<QueryAllowanceRequest>,
+  ): Promise<QueryAllowanceResponse> {
+    const fromPartial = QueryAllowanceRequest.fromPartial(request);
+    const data = QueryAllowanceRequest.encode(fromPartial).finish();
     const promise = this.rpc.request(
       'cosmos.feegrant.v1beta1.Query',
       'Allowance',
@@ -401,9 +404,10 @@ export class QueryClientImpl implements Query {
   }
 
   Allowances(
-    request: QueryAllowancesRequest,
+    request: DeepPartial<QueryAllowancesRequest>,
   ): Promise<QueryAllowancesResponse> {
-    const data = QueryAllowancesRequest.encode(request).finish();
+    const fromPartial = QueryAllowancesRequest.fromPartial(request);
+    const data = QueryAllowancesRequest.encode(fromPartial).finish();
     const promise = this.rpc.request(
       'cosmos.feegrant.v1beta1.Query',
       'Allowances',

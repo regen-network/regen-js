@@ -32,7 +32,6 @@ describe('RegenApi with tendermint connection', () => {
     const bankClient = new QueryClientImpl(api.queryClient);
 
     const res = await bankClient.AllBalances({
-      // $type: QueryAllBalancesRequest.$type,
       address: TEST_ADDRESS,
     });
     expect(res.balances.length).toBeGreaterThanOrEqual(1);
@@ -52,9 +51,8 @@ describe('RegenApi with tendermint connection', () => {
 
   it('should get data back with a signing client - signed transaction', async () => {
     const api = await connect();
-    const signingClient = api.msgClient;
     // TODO: this example signs a transaction to send tokens to the same address
-    const signedTxBytes = await signingClient?.sendTokens(
+    const signedTxBytes = await api.msgClient?.sign(
       3.3,
       TEST_ADDRESS,
       TEST_ADDRESS,

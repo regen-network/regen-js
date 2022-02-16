@@ -5196,8 +5196,9 @@ export class ABCIApplicationClientImpl implements ABCIApplication {
     this.LoadSnapshotChunk = this.LoadSnapshotChunk.bind(this);
     this.ApplySnapshotChunk = this.ApplySnapshotChunk.bind(this);
   }
-  Echo(request: RequestEcho): Promise<ResponseEcho> {
-    const data = RequestEcho.encode(request).finish();
+  Echo(request: DeepPartial<RequestEcho>): Promise<ResponseEcho> {
+    const fromPartial = RequestEcho.fromPartial(request);
+    const data = RequestEcho.encode(fromPartial).finish();
     const promise = this.rpc.request(
       'tendermint.abci.ABCIApplication',
       'Echo',
@@ -5206,8 +5207,9 @@ export class ABCIApplicationClientImpl implements ABCIApplication {
     return promise.then(data => ResponseEcho.decode(new _m0.Reader(data)));
   }
 
-  Flush(request: RequestFlush): Promise<ResponseFlush> {
-    const data = RequestFlush.encode(request).finish();
+  Flush(request: DeepPartial<RequestFlush>): Promise<ResponseFlush> {
+    const fromPartial = RequestFlush.fromPartial(request);
+    const data = RequestFlush.encode(fromPartial).finish();
     const promise = this.rpc.request(
       'tendermint.abci.ABCIApplication',
       'Flush',
@@ -5216,8 +5218,9 @@ export class ABCIApplicationClientImpl implements ABCIApplication {
     return promise.then(data => ResponseFlush.decode(new _m0.Reader(data)));
   }
 
-  Info(request: RequestInfo): Promise<ResponseInfo> {
-    const data = RequestInfo.encode(request).finish();
+  Info(request: DeepPartial<RequestInfo>): Promise<ResponseInfo> {
+    const fromPartial = RequestInfo.fromPartial(request);
+    const data = RequestInfo.encode(fromPartial).finish();
     const promise = this.rpc.request(
       'tendermint.abci.ABCIApplication',
       'Info',
@@ -5226,8 +5229,11 @@ export class ABCIApplicationClientImpl implements ABCIApplication {
     return promise.then(data => ResponseInfo.decode(new _m0.Reader(data)));
   }
 
-  SetOption(request: RequestSetOption): Promise<ResponseSetOption> {
-    const data = RequestSetOption.encode(request).finish();
+  SetOption(
+    request: DeepPartial<RequestSetOption>,
+  ): Promise<ResponseSetOption> {
+    const fromPartial = RequestSetOption.fromPartial(request);
+    const data = RequestSetOption.encode(fromPartial).finish();
     const promise = this.rpc.request(
       'tendermint.abci.ABCIApplication',
       'SetOption',
@@ -5236,8 +5242,11 @@ export class ABCIApplicationClientImpl implements ABCIApplication {
     return promise.then(data => ResponseSetOption.decode(new _m0.Reader(data)));
   }
 
-  DeliverTx(request: RequestDeliverTx): Promise<ResponseDeliverTx> {
-    const data = RequestDeliverTx.encode(request).finish();
+  DeliverTx(
+    request: DeepPartial<RequestDeliverTx>,
+  ): Promise<ResponseDeliverTx> {
+    const fromPartial = RequestDeliverTx.fromPartial(request);
+    const data = RequestDeliverTx.encode(fromPartial).finish();
     const promise = this.rpc.request(
       'tendermint.abci.ABCIApplication',
       'DeliverTx',
@@ -5246,8 +5255,9 @@ export class ABCIApplicationClientImpl implements ABCIApplication {
     return promise.then(data => ResponseDeliverTx.decode(new _m0.Reader(data)));
   }
 
-  CheckTx(request: RequestCheckTx): Promise<ResponseCheckTx> {
-    const data = RequestCheckTx.encode(request).finish();
+  CheckTx(request: DeepPartial<RequestCheckTx>): Promise<ResponseCheckTx> {
+    const fromPartial = RequestCheckTx.fromPartial(request);
+    const data = RequestCheckTx.encode(fromPartial).finish();
     const promise = this.rpc.request(
       'tendermint.abci.ABCIApplication',
       'CheckTx',
@@ -5256,8 +5266,9 @@ export class ABCIApplicationClientImpl implements ABCIApplication {
     return promise.then(data => ResponseCheckTx.decode(new _m0.Reader(data)));
   }
 
-  Query(request: RequestQuery): Promise<ResponseQuery> {
-    const data = RequestQuery.encode(request).finish();
+  Query(request: DeepPartial<RequestQuery>): Promise<ResponseQuery> {
+    const fromPartial = RequestQuery.fromPartial(request);
+    const data = RequestQuery.encode(fromPartial).finish();
     const promise = this.rpc.request(
       'tendermint.abci.ABCIApplication',
       'Query',
@@ -5266,8 +5277,9 @@ export class ABCIApplicationClientImpl implements ABCIApplication {
     return promise.then(data => ResponseQuery.decode(new _m0.Reader(data)));
   }
 
-  Commit(request: RequestCommit): Promise<ResponseCommit> {
-    const data = RequestCommit.encode(request).finish();
+  Commit(request: DeepPartial<RequestCommit>): Promise<ResponseCommit> {
+    const fromPartial = RequestCommit.fromPartial(request);
+    const data = RequestCommit.encode(fromPartial).finish();
     const promise = this.rpc.request(
       'tendermint.abci.ABCIApplication',
       'Commit',
@@ -5276,8 +5288,11 @@ export class ABCIApplicationClientImpl implements ABCIApplication {
     return promise.then(data => ResponseCommit.decode(new _m0.Reader(data)));
   }
 
-  InitChain(request: RequestInitChain): Promise<ResponseInitChain> {
-    const data = RequestInitChain.encode(request).finish();
+  InitChain(
+    request: DeepPartial<RequestInitChain>,
+  ): Promise<ResponseInitChain> {
+    const fromPartial = RequestInitChain.fromPartial(request);
+    const data = RequestInitChain.encode(fromPartial).finish();
     const promise = this.rpc.request(
       'tendermint.abci.ABCIApplication',
       'InitChain',
@@ -5286,8 +5301,11 @@ export class ABCIApplicationClientImpl implements ABCIApplication {
     return promise.then(data => ResponseInitChain.decode(new _m0.Reader(data)));
   }
 
-  BeginBlock(request: RequestBeginBlock): Promise<ResponseBeginBlock> {
-    const data = RequestBeginBlock.encode(request).finish();
+  BeginBlock(
+    request: DeepPartial<RequestBeginBlock>,
+  ): Promise<ResponseBeginBlock> {
+    const fromPartial = RequestBeginBlock.fromPartial(request);
+    const data = RequestBeginBlock.encode(fromPartial).finish();
     const promise = this.rpc.request(
       'tendermint.abci.ABCIApplication',
       'BeginBlock',
@@ -5298,8 +5316,9 @@ export class ABCIApplicationClientImpl implements ABCIApplication {
     );
   }
 
-  EndBlock(request: RequestEndBlock): Promise<ResponseEndBlock> {
-    const data = RequestEndBlock.encode(request).finish();
+  EndBlock(request: DeepPartial<RequestEndBlock>): Promise<ResponseEndBlock> {
+    const fromPartial = RequestEndBlock.fromPartial(request);
+    const data = RequestEndBlock.encode(fromPartial).finish();
     const promise = this.rpc.request(
       'tendermint.abci.ABCIApplication',
       'EndBlock',
@@ -5308,8 +5327,11 @@ export class ABCIApplicationClientImpl implements ABCIApplication {
     return promise.then(data => ResponseEndBlock.decode(new _m0.Reader(data)));
   }
 
-  ListSnapshots(request: RequestListSnapshots): Promise<ResponseListSnapshots> {
-    const data = RequestListSnapshots.encode(request).finish();
+  ListSnapshots(
+    request: DeepPartial<RequestListSnapshots>,
+  ): Promise<ResponseListSnapshots> {
+    const fromPartial = RequestListSnapshots.fromPartial(request);
+    const data = RequestListSnapshots.encode(fromPartial).finish();
     const promise = this.rpc.request(
       'tendermint.abci.ABCIApplication',
       'ListSnapshots',
@@ -5320,8 +5342,11 @@ export class ABCIApplicationClientImpl implements ABCIApplication {
     );
   }
 
-  OfferSnapshot(request: RequestOfferSnapshot): Promise<ResponseOfferSnapshot> {
-    const data = RequestOfferSnapshot.encode(request).finish();
+  OfferSnapshot(
+    request: DeepPartial<RequestOfferSnapshot>,
+  ): Promise<ResponseOfferSnapshot> {
+    const fromPartial = RequestOfferSnapshot.fromPartial(request);
+    const data = RequestOfferSnapshot.encode(fromPartial).finish();
     const promise = this.rpc.request(
       'tendermint.abci.ABCIApplication',
       'OfferSnapshot',
@@ -5333,9 +5358,10 @@ export class ABCIApplicationClientImpl implements ABCIApplication {
   }
 
   LoadSnapshotChunk(
-    request: RequestLoadSnapshotChunk,
+    request: DeepPartial<RequestLoadSnapshotChunk>,
   ): Promise<ResponseLoadSnapshotChunk> {
-    const data = RequestLoadSnapshotChunk.encode(request).finish();
+    const fromPartial = RequestLoadSnapshotChunk.fromPartial(request);
+    const data = RequestLoadSnapshotChunk.encode(fromPartial).finish();
     const promise = this.rpc.request(
       'tendermint.abci.ABCIApplication',
       'LoadSnapshotChunk',
@@ -5347,9 +5373,10 @@ export class ABCIApplicationClientImpl implements ABCIApplication {
   }
 
   ApplySnapshotChunk(
-    request: RequestApplySnapshotChunk,
+    request: DeepPartial<RequestApplySnapshotChunk>,
   ): Promise<ResponseApplySnapshotChunk> {
-    const data = RequestApplySnapshotChunk.encode(request).finish();
+    const fromPartial = RequestApplySnapshotChunk.fromPartial(request);
+    const data = RequestApplySnapshotChunk.encode(fromPartial).finish();
     const promise = this.rpc.request(
       'tendermint.abci.ABCIApplication',
       'ApplySnapshotChunk',

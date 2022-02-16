@@ -664,8 +664,9 @@ export class QueryClientImpl implements Query {
     this.BySigner = this.BySigner.bind(this);
     this.Signers = this.Signers.bind(this);
   }
-  ByIRI(request: QueryByIRIRequest): Promise<QueryByIRIResponse> {
-    const data = QueryByIRIRequest.encode(request).finish();
+  ByIRI(request: DeepPartial<QueryByIRIRequest>): Promise<QueryByIRIResponse> {
+    const fromPartial = QueryByIRIRequest.fromPartial(request);
+    const data = QueryByIRIRequest.encode(fromPartial).finish();
     const promise = this.rpc.request(
       'regen.data.v1alpha2.Query',
       'ByIRI',
@@ -676,8 +677,11 @@ export class QueryClientImpl implements Query {
     );
   }
 
-  BySigner(request: QueryBySignerRequest): Promise<QueryBySignerResponse> {
-    const data = QueryBySignerRequest.encode(request).finish();
+  BySigner(
+    request: DeepPartial<QueryBySignerRequest>,
+  ): Promise<QueryBySignerResponse> {
+    const fromPartial = QueryBySignerRequest.fromPartial(request);
+    const data = QueryBySignerRequest.encode(fromPartial).finish();
     const promise = this.rpc.request(
       'regen.data.v1alpha2.Query',
       'BySigner',
@@ -688,8 +692,11 @@ export class QueryClientImpl implements Query {
     );
   }
 
-  Signers(request: QuerySignersRequest): Promise<QuerySignersResponse> {
-    const data = QuerySignersRequest.encode(request).finish();
+  Signers(
+    request: DeepPartial<QuerySignersRequest>,
+  ): Promise<QuerySignersResponse> {
+    const fromPartial = QuerySignersRequest.fromPartial(request);
+    const data = QuerySignersRequest.encode(fromPartial).finish();
     const promise = this.rpc.request(
       'regen.data.v1alpha2.Query',
       'Signers',

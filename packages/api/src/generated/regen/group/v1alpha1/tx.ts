@@ -2051,8 +2051,11 @@ export class MsgClientImpl implements Msg {
     this.Vote = this.Vote.bind(this);
     this.Exec = this.Exec.bind(this);
   }
-  CreateGroup(request: MsgCreateGroup): Promise<MsgCreateGroupResponse> {
-    const data = MsgCreateGroup.encode(request).finish();
+  CreateGroup(
+    request: DeepPartial<MsgCreateGroup>,
+  ): Promise<MsgCreateGroupResponse> {
+    const fromPartial = MsgCreateGroup.fromPartial(request);
+    const data = MsgCreateGroup.encode(fromPartial).finish();
     const promise = this.rpc.request(
       'regen.group.v1alpha1.Msg',
       'CreateGroup',
@@ -2064,9 +2067,10 @@ export class MsgClientImpl implements Msg {
   }
 
   UpdateGroupMembers(
-    request: MsgUpdateGroupMembers,
+    request: DeepPartial<MsgUpdateGroupMembers>,
   ): Promise<MsgUpdateGroupMembersResponse> {
-    const data = MsgUpdateGroupMembers.encode(request).finish();
+    const fromPartial = MsgUpdateGroupMembers.fromPartial(request);
+    const data = MsgUpdateGroupMembers.encode(fromPartial).finish();
     const promise = this.rpc.request(
       'regen.group.v1alpha1.Msg',
       'UpdateGroupMembers',
@@ -2078,9 +2082,10 @@ export class MsgClientImpl implements Msg {
   }
 
   UpdateGroupAdmin(
-    request: MsgUpdateGroupAdmin,
+    request: DeepPartial<MsgUpdateGroupAdmin>,
   ): Promise<MsgUpdateGroupAdminResponse> {
-    const data = MsgUpdateGroupAdmin.encode(request).finish();
+    const fromPartial = MsgUpdateGroupAdmin.fromPartial(request);
+    const data = MsgUpdateGroupAdmin.encode(fromPartial).finish();
     const promise = this.rpc.request(
       'regen.group.v1alpha1.Msg',
       'UpdateGroupAdmin',
@@ -2092,9 +2097,10 @@ export class MsgClientImpl implements Msg {
   }
 
   UpdateGroupMetadata(
-    request: MsgUpdateGroupMetadata,
+    request: DeepPartial<MsgUpdateGroupMetadata>,
   ): Promise<MsgUpdateGroupMetadataResponse> {
-    const data = MsgUpdateGroupMetadata.encode(request).finish();
+    const fromPartial = MsgUpdateGroupMetadata.fromPartial(request);
+    const data = MsgUpdateGroupMetadata.encode(fromPartial).finish();
     const promise = this.rpc.request(
       'regen.group.v1alpha1.Msg',
       'UpdateGroupMetadata',
@@ -2106,9 +2112,10 @@ export class MsgClientImpl implements Msg {
   }
 
   CreateGroupAccount(
-    request: MsgCreateGroupAccount,
+    request: DeepPartial<MsgCreateGroupAccount>,
   ): Promise<MsgCreateGroupAccountResponse> {
-    const data = MsgCreateGroupAccount.encode(request).finish();
+    const fromPartial = MsgCreateGroupAccount.fromPartial(request);
+    const data = MsgCreateGroupAccount.encode(fromPartial).finish();
     const promise = this.rpc.request(
       'regen.group.v1alpha1.Msg',
       'CreateGroupAccount',
@@ -2120,9 +2127,10 @@ export class MsgClientImpl implements Msg {
   }
 
   UpdateGroupAccountAdmin(
-    request: MsgUpdateGroupAccountAdmin,
+    request: DeepPartial<MsgUpdateGroupAccountAdmin>,
   ): Promise<MsgUpdateGroupAccountAdminResponse> {
-    const data = MsgUpdateGroupAccountAdmin.encode(request).finish();
+    const fromPartial = MsgUpdateGroupAccountAdmin.fromPartial(request);
+    const data = MsgUpdateGroupAccountAdmin.encode(fromPartial).finish();
     const promise = this.rpc.request(
       'regen.group.v1alpha1.Msg',
       'UpdateGroupAccountAdmin',
@@ -2134,9 +2142,14 @@ export class MsgClientImpl implements Msg {
   }
 
   UpdateGroupAccountDecisionPolicy(
-    request: MsgUpdateGroupAccountDecisionPolicy,
+    request: DeepPartial<MsgUpdateGroupAccountDecisionPolicy>,
   ): Promise<MsgUpdateGroupAccountDecisionPolicyResponse> {
-    const data = MsgUpdateGroupAccountDecisionPolicy.encode(request).finish();
+    const fromPartial = MsgUpdateGroupAccountDecisionPolicy.fromPartial(
+      request,
+    );
+    const data = MsgUpdateGroupAccountDecisionPolicy.encode(
+      fromPartial,
+    ).finish();
     const promise = this.rpc.request(
       'regen.group.v1alpha1.Msg',
       'UpdateGroupAccountDecisionPolicy',
@@ -2148,9 +2161,10 @@ export class MsgClientImpl implements Msg {
   }
 
   UpdateGroupAccountMetadata(
-    request: MsgUpdateGroupAccountMetadata,
+    request: DeepPartial<MsgUpdateGroupAccountMetadata>,
   ): Promise<MsgUpdateGroupAccountMetadataResponse> {
-    const data = MsgUpdateGroupAccountMetadata.encode(request).finish();
+    const fromPartial = MsgUpdateGroupAccountMetadata.fromPartial(request);
+    const data = MsgUpdateGroupAccountMetadata.encode(fromPartial).finish();
     const promise = this.rpc.request(
       'regen.group.v1alpha1.Msg',
       'UpdateGroupAccountMetadata',
@@ -2162,9 +2176,10 @@ export class MsgClientImpl implements Msg {
   }
 
   CreateProposal(
-    request: MsgCreateProposal,
+    request: DeepPartial<MsgCreateProposal>,
   ): Promise<MsgCreateProposalResponse> {
-    const data = MsgCreateProposal.encode(request).finish();
+    const fromPartial = MsgCreateProposal.fromPartial(request);
+    const data = MsgCreateProposal.encode(fromPartial).finish();
     const promise = this.rpc.request(
       'regen.group.v1alpha1.Msg',
       'CreateProposal',
@@ -2175,14 +2190,16 @@ export class MsgClientImpl implements Msg {
     );
   }
 
-  Vote(request: MsgVote): Promise<MsgVoteResponse> {
-    const data = MsgVote.encode(request).finish();
+  Vote(request: DeepPartial<MsgVote>): Promise<MsgVoteResponse> {
+    const fromPartial = MsgVote.fromPartial(request);
+    const data = MsgVote.encode(fromPartial).finish();
     const promise = this.rpc.request('regen.group.v1alpha1.Msg', 'Vote', data);
     return promise.then(data => MsgVoteResponse.decode(new _m0.Reader(data)));
   }
 
-  Exec(request: MsgExec): Promise<MsgExecResponse> {
-    const data = MsgExec.encode(request).finish();
+  Exec(request: DeepPartial<MsgExec>): Promise<MsgExecResponse> {
+    const fromPartial = MsgExec.fromPartial(request);
+    const data = MsgExec.encode(fromPartial).finish();
     const promise = this.rpc.request('regen.group.v1alpha1.Msg', 'Exec', data);
     return promise.then(data => MsgExecResponse.decode(new _m0.Reader(data)));
   }

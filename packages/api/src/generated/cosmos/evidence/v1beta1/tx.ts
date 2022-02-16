@@ -194,9 +194,10 @@ export class MsgClientImpl implements Msg {
     this.SubmitEvidence = this.SubmitEvidence.bind(this);
   }
   SubmitEvidence(
-    request: MsgSubmitEvidence,
+    request: DeepPartial<MsgSubmitEvidence>,
   ): Promise<MsgSubmitEvidenceResponse> {
-    const data = MsgSubmitEvidence.encode(request).finish();
+    const fromPartial = MsgSubmitEvidence.fromPartial(request);
+    const data = MsgSubmitEvidence.encode(fromPartial).finish();
     const promise = this.rpc.request(
       'cosmos.evidence.v1beta1.Msg',
       'SubmitEvidence',

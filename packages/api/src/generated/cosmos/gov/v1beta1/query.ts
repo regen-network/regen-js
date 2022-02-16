@@ -1521,8 +1521,11 @@ export class QueryClientImpl implements Query {
     this.Deposits = this.Deposits.bind(this);
     this.TallyResult = this.TallyResult.bind(this);
   }
-  Proposal(request: QueryProposalRequest): Promise<QueryProposalResponse> {
-    const data = QueryProposalRequest.encode(request).finish();
+  Proposal(
+    request: DeepPartial<QueryProposalRequest>,
+  ): Promise<QueryProposalResponse> {
+    const fromPartial = QueryProposalRequest.fromPartial(request);
+    const data = QueryProposalRequest.encode(fromPartial).finish();
     const promise = this.rpc.request(
       'cosmos.gov.v1beta1.Query',
       'Proposal',
@@ -1533,8 +1536,11 @@ export class QueryClientImpl implements Query {
     );
   }
 
-  Proposals(request: QueryProposalsRequest): Promise<QueryProposalsResponse> {
-    const data = QueryProposalsRequest.encode(request).finish();
+  Proposals(
+    request: DeepPartial<QueryProposalsRequest>,
+  ): Promise<QueryProposalsResponse> {
+    const fromPartial = QueryProposalsRequest.fromPartial(request);
+    const data = QueryProposalsRequest.encode(fromPartial).finish();
     const promise = this.rpc.request(
       'cosmos.gov.v1beta1.Query',
       'Proposals',
@@ -1545,22 +1551,27 @@ export class QueryClientImpl implements Query {
     );
   }
 
-  Vote(request: QueryVoteRequest): Promise<QueryVoteResponse> {
-    const data = QueryVoteRequest.encode(request).finish();
+  Vote(request: DeepPartial<QueryVoteRequest>): Promise<QueryVoteResponse> {
+    const fromPartial = QueryVoteRequest.fromPartial(request);
+    const data = QueryVoteRequest.encode(fromPartial).finish();
     const promise = this.rpc.request('cosmos.gov.v1beta1.Query', 'Vote', data);
     return promise.then(data => QueryVoteResponse.decode(new _m0.Reader(data)));
   }
 
-  Votes(request: QueryVotesRequest): Promise<QueryVotesResponse> {
-    const data = QueryVotesRequest.encode(request).finish();
+  Votes(request: DeepPartial<QueryVotesRequest>): Promise<QueryVotesResponse> {
+    const fromPartial = QueryVotesRequest.fromPartial(request);
+    const data = QueryVotesRequest.encode(fromPartial).finish();
     const promise = this.rpc.request('cosmos.gov.v1beta1.Query', 'Votes', data);
     return promise.then(data =>
       QueryVotesResponse.decode(new _m0.Reader(data)),
     );
   }
 
-  Params(request: QueryParamsRequest): Promise<QueryParamsResponse> {
-    const data = QueryParamsRequest.encode(request).finish();
+  Params(
+    request: DeepPartial<QueryParamsRequest>,
+  ): Promise<QueryParamsResponse> {
+    const fromPartial = QueryParamsRequest.fromPartial(request);
+    const data = QueryParamsRequest.encode(fromPartial).finish();
     const promise = this.rpc.request(
       'cosmos.gov.v1beta1.Query',
       'Params',
@@ -1571,8 +1582,11 @@ export class QueryClientImpl implements Query {
     );
   }
 
-  Deposit(request: QueryDepositRequest): Promise<QueryDepositResponse> {
-    const data = QueryDepositRequest.encode(request).finish();
+  Deposit(
+    request: DeepPartial<QueryDepositRequest>,
+  ): Promise<QueryDepositResponse> {
+    const fromPartial = QueryDepositRequest.fromPartial(request);
+    const data = QueryDepositRequest.encode(fromPartial).finish();
     const promise = this.rpc.request(
       'cosmos.gov.v1beta1.Query',
       'Deposit',
@@ -1583,8 +1597,11 @@ export class QueryClientImpl implements Query {
     );
   }
 
-  Deposits(request: QueryDepositsRequest): Promise<QueryDepositsResponse> {
-    const data = QueryDepositsRequest.encode(request).finish();
+  Deposits(
+    request: DeepPartial<QueryDepositsRequest>,
+  ): Promise<QueryDepositsResponse> {
+    const fromPartial = QueryDepositsRequest.fromPartial(request);
+    const data = QueryDepositsRequest.encode(fromPartial).finish();
     const promise = this.rpc.request(
       'cosmos.gov.v1beta1.Query',
       'Deposits',
@@ -1596,9 +1613,10 @@ export class QueryClientImpl implements Query {
   }
 
   TallyResult(
-    request: QueryTallyResultRequest,
+    request: DeepPartial<QueryTallyResultRequest>,
   ): Promise<QueryTallyResultResponse> {
-    const data = QueryTallyResultRequest.encode(request).finish();
+    const fromPartial = QueryTallyResultRequest.fromPartial(request);
+    const data = QueryTallyResultRequest.encode(fromPartial).finish();
     const promise = this.rpc.request(
       'cosmos.gov.v1beta1.Query',
       'TallyResult',

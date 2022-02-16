@@ -1230,8 +1230,11 @@ export class QueryClientImpl implements Query {
     this.DenomMetadata = this.DenomMetadata.bind(this);
     this.DenomsMetadata = this.DenomsMetadata.bind(this);
   }
-  Balance(request: QueryBalanceRequest): Promise<QueryBalanceResponse> {
-    const data = QueryBalanceRequest.encode(request).finish();
+  Balance(
+    request: DeepPartial<QueryBalanceRequest>,
+  ): Promise<QueryBalanceResponse> {
+    const fromPartial = QueryBalanceRequest.fromPartial(request);
+    const data = QueryBalanceRequest.encode(fromPartial).finish();
     const promise = this.rpc.request(
       'cosmos.bank.v1beta1.Query',
       'Balance',
@@ -1243,9 +1246,10 @@ export class QueryClientImpl implements Query {
   }
 
   AllBalances(
-    request: QueryAllBalancesRequest,
+    request: DeepPartial<QueryAllBalancesRequest>,
   ): Promise<QueryAllBalancesResponse> {
-    const data = QueryAllBalancesRequest.encode(request).finish();
+    const fromPartial = QueryAllBalancesRequest.fromPartial(request);
+    const data = QueryAllBalancesRequest.encode(fromPartial).finish();
     const promise = this.rpc.request(
       'cosmos.bank.v1beta1.Query',
       'AllBalances',
@@ -1257,9 +1261,10 @@ export class QueryClientImpl implements Query {
   }
 
   TotalSupply(
-    request: QueryTotalSupplyRequest,
+    request: DeepPartial<QueryTotalSupplyRequest>,
   ): Promise<QueryTotalSupplyResponse> {
-    const data = QueryTotalSupplyRequest.encode(request).finish();
+    const fromPartial = QueryTotalSupplyRequest.fromPartial(request);
+    const data = QueryTotalSupplyRequest.encode(fromPartial).finish();
     const promise = this.rpc.request(
       'cosmos.bank.v1beta1.Query',
       'TotalSupply',
@@ -1270,8 +1275,11 @@ export class QueryClientImpl implements Query {
     );
   }
 
-  SupplyOf(request: QuerySupplyOfRequest): Promise<QuerySupplyOfResponse> {
-    const data = QuerySupplyOfRequest.encode(request).finish();
+  SupplyOf(
+    request: DeepPartial<QuerySupplyOfRequest>,
+  ): Promise<QuerySupplyOfResponse> {
+    const fromPartial = QuerySupplyOfRequest.fromPartial(request);
+    const data = QuerySupplyOfRequest.encode(fromPartial).finish();
     const promise = this.rpc.request(
       'cosmos.bank.v1beta1.Query',
       'SupplyOf',
@@ -1282,8 +1290,11 @@ export class QueryClientImpl implements Query {
     );
   }
 
-  Params(request: QueryParamsRequest): Promise<QueryParamsResponse> {
-    const data = QueryParamsRequest.encode(request).finish();
+  Params(
+    request: DeepPartial<QueryParamsRequest>,
+  ): Promise<QueryParamsResponse> {
+    const fromPartial = QueryParamsRequest.fromPartial(request);
+    const data = QueryParamsRequest.encode(fromPartial).finish();
     const promise = this.rpc.request(
       'cosmos.bank.v1beta1.Query',
       'Params',
@@ -1295,9 +1306,10 @@ export class QueryClientImpl implements Query {
   }
 
   DenomMetadata(
-    request: QueryDenomMetadataRequest,
+    request: DeepPartial<QueryDenomMetadataRequest>,
   ): Promise<QueryDenomMetadataResponse> {
-    const data = QueryDenomMetadataRequest.encode(request).finish();
+    const fromPartial = QueryDenomMetadataRequest.fromPartial(request);
+    const data = QueryDenomMetadataRequest.encode(fromPartial).finish();
     const promise = this.rpc.request(
       'cosmos.bank.v1beta1.Query',
       'DenomMetadata',
@@ -1309,9 +1321,10 @@ export class QueryClientImpl implements Query {
   }
 
   DenomsMetadata(
-    request: QueryDenomsMetadataRequest,
+    request: DeepPartial<QueryDenomsMetadataRequest>,
   ): Promise<QueryDenomsMetadataResponse> {
-    const data = QueryDenomsMetadataRequest.encode(request).finish();
+    const fromPartial = QueryDenomsMetadataRequest.fromPartial(request);
+    const data = QueryDenomsMetadataRequest.encode(fromPartial).finish();
     const promise = this.rpc.request(
       'cosmos.bank.v1beta1.Query',
       'DenomsMetadata',

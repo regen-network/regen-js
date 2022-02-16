@@ -1645,8 +1645,11 @@ export class QueryClientImpl implements Query {
     this.DelegatorWithdrawAddress = this.DelegatorWithdrawAddress.bind(this);
     this.CommunityPool = this.CommunityPool.bind(this);
   }
-  Params(request: QueryParamsRequest): Promise<QueryParamsResponse> {
-    const data = QueryParamsRequest.encode(request).finish();
+  Params(
+    request: DeepPartial<QueryParamsRequest>,
+  ): Promise<QueryParamsResponse> {
+    const fromPartial = QueryParamsRequest.fromPartial(request);
+    const data = QueryParamsRequest.encode(fromPartial).finish();
     const promise = this.rpc.request(
       'cosmos.distribution.v1beta1.Query',
       'Params',
@@ -1658,10 +1661,13 @@ export class QueryClientImpl implements Query {
   }
 
   ValidatorOutstandingRewards(
-    request: QueryValidatorOutstandingRewardsRequest,
+    request: DeepPartial<QueryValidatorOutstandingRewardsRequest>,
   ): Promise<QueryValidatorOutstandingRewardsResponse> {
-    const data = QueryValidatorOutstandingRewardsRequest.encode(
+    const fromPartial = QueryValidatorOutstandingRewardsRequest.fromPartial(
       request,
+    );
+    const data = QueryValidatorOutstandingRewardsRequest.encode(
+      fromPartial,
     ).finish();
     const promise = this.rpc.request(
       'cosmos.distribution.v1beta1.Query',
@@ -1674,9 +1680,10 @@ export class QueryClientImpl implements Query {
   }
 
   ValidatorCommission(
-    request: QueryValidatorCommissionRequest,
+    request: DeepPartial<QueryValidatorCommissionRequest>,
   ): Promise<QueryValidatorCommissionResponse> {
-    const data = QueryValidatorCommissionRequest.encode(request).finish();
+    const fromPartial = QueryValidatorCommissionRequest.fromPartial(request);
+    const data = QueryValidatorCommissionRequest.encode(fromPartial).finish();
     const promise = this.rpc.request(
       'cosmos.distribution.v1beta1.Query',
       'ValidatorCommission',
@@ -1688,9 +1695,10 @@ export class QueryClientImpl implements Query {
   }
 
   ValidatorSlashes(
-    request: QueryValidatorSlashesRequest,
+    request: DeepPartial<QueryValidatorSlashesRequest>,
   ): Promise<QueryValidatorSlashesResponse> {
-    const data = QueryValidatorSlashesRequest.encode(request).finish();
+    const fromPartial = QueryValidatorSlashesRequest.fromPartial(request);
+    const data = QueryValidatorSlashesRequest.encode(fromPartial).finish();
     const promise = this.rpc.request(
       'cosmos.distribution.v1beta1.Query',
       'ValidatorSlashes',
@@ -1702,9 +1710,10 @@ export class QueryClientImpl implements Query {
   }
 
   DelegationRewards(
-    request: QueryDelegationRewardsRequest,
+    request: DeepPartial<QueryDelegationRewardsRequest>,
   ): Promise<QueryDelegationRewardsResponse> {
-    const data = QueryDelegationRewardsRequest.encode(request).finish();
+    const fromPartial = QueryDelegationRewardsRequest.fromPartial(request);
+    const data = QueryDelegationRewardsRequest.encode(fromPartial).finish();
     const promise = this.rpc.request(
       'cosmos.distribution.v1beta1.Query',
       'DelegationRewards',
@@ -1716,9 +1725,12 @@ export class QueryClientImpl implements Query {
   }
 
   DelegationTotalRewards(
-    request: QueryDelegationTotalRewardsRequest,
+    request: DeepPartial<QueryDelegationTotalRewardsRequest>,
   ): Promise<QueryDelegationTotalRewardsResponse> {
-    const data = QueryDelegationTotalRewardsRequest.encode(request).finish();
+    const fromPartial = QueryDelegationTotalRewardsRequest.fromPartial(request);
+    const data = QueryDelegationTotalRewardsRequest.encode(
+      fromPartial,
+    ).finish();
     const promise = this.rpc.request(
       'cosmos.distribution.v1beta1.Query',
       'DelegationTotalRewards',
@@ -1730,9 +1742,10 @@ export class QueryClientImpl implements Query {
   }
 
   DelegatorValidators(
-    request: QueryDelegatorValidatorsRequest,
+    request: DeepPartial<QueryDelegatorValidatorsRequest>,
   ): Promise<QueryDelegatorValidatorsResponse> {
-    const data = QueryDelegatorValidatorsRequest.encode(request).finish();
+    const fromPartial = QueryDelegatorValidatorsRequest.fromPartial(request);
+    const data = QueryDelegatorValidatorsRequest.encode(fromPartial).finish();
     const promise = this.rpc.request(
       'cosmos.distribution.v1beta1.Query',
       'DelegatorValidators',
@@ -1744,9 +1757,14 @@ export class QueryClientImpl implements Query {
   }
 
   DelegatorWithdrawAddress(
-    request: QueryDelegatorWithdrawAddressRequest,
+    request: DeepPartial<QueryDelegatorWithdrawAddressRequest>,
   ): Promise<QueryDelegatorWithdrawAddressResponse> {
-    const data = QueryDelegatorWithdrawAddressRequest.encode(request).finish();
+    const fromPartial = QueryDelegatorWithdrawAddressRequest.fromPartial(
+      request,
+    );
+    const data = QueryDelegatorWithdrawAddressRequest.encode(
+      fromPartial,
+    ).finish();
     const promise = this.rpc.request(
       'cosmos.distribution.v1beta1.Query',
       'DelegatorWithdrawAddress',
@@ -1758,9 +1776,10 @@ export class QueryClientImpl implements Query {
   }
 
   CommunityPool(
-    request: QueryCommunityPoolRequest,
+    request: DeepPartial<QueryCommunityPoolRequest>,
   ): Promise<QueryCommunityPoolResponse> {
-    const data = QueryCommunityPoolRequest.encode(request).finish();
+    const fromPartial = QueryCommunityPoolRequest.fromPartial(request);
+    const data = QueryCommunityPoolRequest.encode(fromPartial).finish();
     const promise = this.rpc.request(
       'cosmos.distribution.v1beta1.Query',
       'CommunityPool',

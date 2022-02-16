@@ -689,9 +689,10 @@ export class QueryClientImpl implements Query {
     this.ModuleVersions = this.ModuleVersions.bind(this);
   }
   CurrentPlan(
-    request: QueryCurrentPlanRequest,
+    request: DeepPartial<QueryCurrentPlanRequest>,
   ): Promise<QueryCurrentPlanResponse> {
-    const data = QueryCurrentPlanRequest.encode(request).finish();
+    const fromPartial = QueryCurrentPlanRequest.fromPartial(request);
+    const data = QueryCurrentPlanRequest.encode(fromPartial).finish();
     const promise = this.rpc.request(
       'cosmos.upgrade.v1beta1.Query',
       'CurrentPlan',
@@ -703,9 +704,10 @@ export class QueryClientImpl implements Query {
   }
 
   AppliedPlan(
-    request: QueryAppliedPlanRequest,
+    request: DeepPartial<QueryAppliedPlanRequest>,
   ): Promise<QueryAppliedPlanResponse> {
-    const data = QueryAppliedPlanRequest.encode(request).finish();
+    const fromPartial = QueryAppliedPlanRequest.fromPartial(request);
+    const data = QueryAppliedPlanRequest.encode(fromPartial).finish();
     const promise = this.rpc.request(
       'cosmos.upgrade.v1beta1.Query',
       'AppliedPlan',
@@ -717,9 +719,12 @@ export class QueryClientImpl implements Query {
   }
 
   UpgradedConsensusState(
-    request: QueryUpgradedConsensusStateRequest,
+    request: DeepPartial<QueryUpgradedConsensusStateRequest>,
   ): Promise<QueryUpgradedConsensusStateResponse> {
-    const data = QueryUpgradedConsensusStateRequest.encode(request).finish();
+    const fromPartial = QueryUpgradedConsensusStateRequest.fromPartial(request);
+    const data = QueryUpgradedConsensusStateRequest.encode(
+      fromPartial,
+    ).finish();
     const promise = this.rpc.request(
       'cosmos.upgrade.v1beta1.Query',
       'UpgradedConsensusState',
@@ -731,9 +736,10 @@ export class QueryClientImpl implements Query {
   }
 
   ModuleVersions(
-    request: QueryModuleVersionsRequest,
+    request: DeepPartial<QueryModuleVersionsRequest>,
   ): Promise<QueryModuleVersionsResponse> {
-    const data = QueryModuleVersionsRequest.encode(request).finish();
+    const fromPartial = QueryModuleVersionsRequest.fromPartial(request);
+    const data = QueryModuleVersionsRequest.encode(fromPartial).finish();
     const promise = this.rpc.request(
       'cosmos.upgrade.v1beta1.Query',
       'ModuleVersions',

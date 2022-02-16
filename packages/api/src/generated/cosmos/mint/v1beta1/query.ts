@@ -445,8 +445,11 @@ export class QueryClientImpl implements Query {
     this.Inflation = this.Inflation.bind(this);
     this.AnnualProvisions = this.AnnualProvisions.bind(this);
   }
-  Params(request: QueryParamsRequest): Promise<QueryParamsResponse> {
-    const data = QueryParamsRequest.encode(request).finish();
+  Params(
+    request: DeepPartial<QueryParamsRequest>,
+  ): Promise<QueryParamsResponse> {
+    const fromPartial = QueryParamsRequest.fromPartial(request);
+    const data = QueryParamsRequest.encode(fromPartial).finish();
     const promise = this.rpc.request(
       'cosmos.mint.v1beta1.Query',
       'Params',
@@ -457,8 +460,11 @@ export class QueryClientImpl implements Query {
     );
   }
 
-  Inflation(request: QueryInflationRequest): Promise<QueryInflationResponse> {
-    const data = QueryInflationRequest.encode(request).finish();
+  Inflation(
+    request: DeepPartial<QueryInflationRequest>,
+  ): Promise<QueryInflationResponse> {
+    const fromPartial = QueryInflationRequest.fromPartial(request);
+    const data = QueryInflationRequest.encode(fromPartial).finish();
     const promise = this.rpc.request(
       'cosmos.mint.v1beta1.Query',
       'Inflation',
@@ -470,9 +476,10 @@ export class QueryClientImpl implements Query {
   }
 
   AnnualProvisions(
-    request: QueryAnnualProvisionsRequest,
+    request: DeepPartial<QueryAnnualProvisionsRequest>,
   ): Promise<QueryAnnualProvisionsResponse> {
-    const data = QueryAnnualProvisionsRequest.encode(request).finish();
+    const fromPartial = QueryAnnualProvisionsRequest.fromPartial(request);
+    const data = QueryAnnualProvisionsRequest.encode(fromPartial).finish();
     const promise = this.rpc.request(
       'cosmos.mint.v1beta1.Query',
       'AnnualProvisions',

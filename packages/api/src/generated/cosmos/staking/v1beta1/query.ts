@@ -2746,9 +2746,10 @@ export class QueryClientImpl implements Query {
     this.Params = this.Params.bind(this);
   }
   Validators(
-    request: QueryValidatorsRequest,
+    request: DeepPartial<QueryValidatorsRequest>,
   ): Promise<QueryValidatorsResponse> {
-    const data = QueryValidatorsRequest.encode(request).finish();
+    const fromPartial = QueryValidatorsRequest.fromPartial(request);
+    const data = QueryValidatorsRequest.encode(fromPartial).finish();
     const promise = this.rpc.request(
       'cosmos.staking.v1beta1.Query',
       'Validators',
@@ -2759,8 +2760,11 @@ export class QueryClientImpl implements Query {
     );
   }
 
-  Validator(request: QueryValidatorRequest): Promise<QueryValidatorResponse> {
-    const data = QueryValidatorRequest.encode(request).finish();
+  Validator(
+    request: DeepPartial<QueryValidatorRequest>,
+  ): Promise<QueryValidatorResponse> {
+    const fromPartial = QueryValidatorRequest.fromPartial(request);
+    const data = QueryValidatorRequest.encode(fromPartial).finish();
     const promise = this.rpc.request(
       'cosmos.staking.v1beta1.Query',
       'Validator',
@@ -2772,9 +2776,10 @@ export class QueryClientImpl implements Query {
   }
 
   ValidatorDelegations(
-    request: QueryValidatorDelegationsRequest,
+    request: DeepPartial<QueryValidatorDelegationsRequest>,
   ): Promise<QueryValidatorDelegationsResponse> {
-    const data = QueryValidatorDelegationsRequest.encode(request).finish();
+    const fromPartial = QueryValidatorDelegationsRequest.fromPartial(request);
+    const data = QueryValidatorDelegationsRequest.encode(fromPartial).finish();
     const promise = this.rpc.request(
       'cosmos.staking.v1beta1.Query',
       'ValidatorDelegations',
@@ -2786,10 +2791,13 @@ export class QueryClientImpl implements Query {
   }
 
   ValidatorUnbondingDelegations(
-    request: QueryValidatorUnbondingDelegationsRequest,
+    request: DeepPartial<QueryValidatorUnbondingDelegationsRequest>,
   ): Promise<QueryValidatorUnbondingDelegationsResponse> {
-    const data = QueryValidatorUnbondingDelegationsRequest.encode(
+    const fromPartial = QueryValidatorUnbondingDelegationsRequest.fromPartial(
       request,
+    );
+    const data = QueryValidatorUnbondingDelegationsRequest.encode(
+      fromPartial,
     ).finish();
     const promise = this.rpc.request(
       'cosmos.staking.v1beta1.Query',
@@ -2802,9 +2810,10 @@ export class QueryClientImpl implements Query {
   }
 
   Delegation(
-    request: QueryDelegationRequest,
+    request: DeepPartial<QueryDelegationRequest>,
   ): Promise<QueryDelegationResponse> {
-    const data = QueryDelegationRequest.encode(request).finish();
+    const fromPartial = QueryDelegationRequest.fromPartial(request);
+    const data = QueryDelegationRequest.encode(fromPartial).finish();
     const promise = this.rpc.request(
       'cosmos.staking.v1beta1.Query',
       'Delegation',
@@ -2816,9 +2825,10 @@ export class QueryClientImpl implements Query {
   }
 
   UnbondingDelegation(
-    request: QueryUnbondingDelegationRequest,
+    request: DeepPartial<QueryUnbondingDelegationRequest>,
   ): Promise<QueryUnbondingDelegationResponse> {
-    const data = QueryUnbondingDelegationRequest.encode(request).finish();
+    const fromPartial = QueryUnbondingDelegationRequest.fromPartial(request);
+    const data = QueryUnbondingDelegationRequest.encode(fromPartial).finish();
     const promise = this.rpc.request(
       'cosmos.staking.v1beta1.Query',
       'UnbondingDelegation',
@@ -2830,9 +2840,10 @@ export class QueryClientImpl implements Query {
   }
 
   DelegatorDelegations(
-    request: QueryDelegatorDelegationsRequest,
+    request: DeepPartial<QueryDelegatorDelegationsRequest>,
   ): Promise<QueryDelegatorDelegationsResponse> {
-    const data = QueryDelegatorDelegationsRequest.encode(request).finish();
+    const fromPartial = QueryDelegatorDelegationsRequest.fromPartial(request);
+    const data = QueryDelegatorDelegationsRequest.encode(fromPartial).finish();
     const promise = this.rpc.request(
       'cosmos.staking.v1beta1.Query',
       'DelegatorDelegations',
@@ -2844,10 +2855,13 @@ export class QueryClientImpl implements Query {
   }
 
   DelegatorUnbondingDelegations(
-    request: QueryDelegatorUnbondingDelegationsRequest,
+    request: DeepPartial<QueryDelegatorUnbondingDelegationsRequest>,
   ): Promise<QueryDelegatorUnbondingDelegationsResponse> {
-    const data = QueryDelegatorUnbondingDelegationsRequest.encode(
+    const fromPartial = QueryDelegatorUnbondingDelegationsRequest.fromPartial(
       request,
+    );
+    const data = QueryDelegatorUnbondingDelegationsRequest.encode(
+      fromPartial,
     ).finish();
     const promise = this.rpc.request(
       'cosmos.staking.v1beta1.Query',
@@ -2860,9 +2874,10 @@ export class QueryClientImpl implements Query {
   }
 
   Redelegations(
-    request: QueryRedelegationsRequest,
+    request: DeepPartial<QueryRedelegationsRequest>,
   ): Promise<QueryRedelegationsResponse> {
-    const data = QueryRedelegationsRequest.encode(request).finish();
+    const fromPartial = QueryRedelegationsRequest.fromPartial(request);
+    const data = QueryRedelegationsRequest.encode(fromPartial).finish();
     const promise = this.rpc.request(
       'cosmos.staking.v1beta1.Query',
       'Redelegations',
@@ -2874,9 +2889,10 @@ export class QueryClientImpl implements Query {
   }
 
   DelegatorValidators(
-    request: QueryDelegatorValidatorsRequest,
+    request: DeepPartial<QueryDelegatorValidatorsRequest>,
   ): Promise<QueryDelegatorValidatorsResponse> {
-    const data = QueryDelegatorValidatorsRequest.encode(request).finish();
+    const fromPartial = QueryDelegatorValidatorsRequest.fromPartial(request);
+    const data = QueryDelegatorValidatorsRequest.encode(fromPartial).finish();
     const promise = this.rpc.request(
       'cosmos.staking.v1beta1.Query',
       'DelegatorValidators',
@@ -2888,9 +2904,10 @@ export class QueryClientImpl implements Query {
   }
 
   DelegatorValidator(
-    request: QueryDelegatorValidatorRequest,
+    request: DeepPartial<QueryDelegatorValidatorRequest>,
   ): Promise<QueryDelegatorValidatorResponse> {
-    const data = QueryDelegatorValidatorRequest.encode(request).finish();
+    const fromPartial = QueryDelegatorValidatorRequest.fromPartial(request);
+    const data = QueryDelegatorValidatorRequest.encode(fromPartial).finish();
     const promise = this.rpc.request(
       'cosmos.staking.v1beta1.Query',
       'DelegatorValidator',
@@ -2902,9 +2919,10 @@ export class QueryClientImpl implements Query {
   }
 
   HistoricalInfo(
-    request: QueryHistoricalInfoRequest,
+    request: DeepPartial<QueryHistoricalInfoRequest>,
   ): Promise<QueryHistoricalInfoResponse> {
-    const data = QueryHistoricalInfoRequest.encode(request).finish();
+    const fromPartial = QueryHistoricalInfoRequest.fromPartial(request);
+    const data = QueryHistoricalInfoRequest.encode(fromPartial).finish();
     const promise = this.rpc.request(
       'cosmos.staking.v1beta1.Query',
       'HistoricalInfo',
@@ -2915,8 +2933,9 @@ export class QueryClientImpl implements Query {
     );
   }
 
-  Pool(request: QueryPoolRequest): Promise<QueryPoolResponse> {
-    const data = QueryPoolRequest.encode(request).finish();
+  Pool(request: DeepPartial<QueryPoolRequest>): Promise<QueryPoolResponse> {
+    const fromPartial = QueryPoolRequest.fromPartial(request);
+    const data = QueryPoolRequest.encode(fromPartial).finish();
     const promise = this.rpc.request(
       'cosmos.staking.v1beta1.Query',
       'Pool',
@@ -2925,8 +2944,11 @@ export class QueryClientImpl implements Query {
     return promise.then(data => QueryPoolResponse.decode(new _m0.Reader(data)));
   }
 
-  Params(request: QueryParamsRequest): Promise<QueryParamsResponse> {
-    const data = QueryParamsRequest.encode(request).finish();
+  Params(
+    request: DeepPartial<QueryParamsRequest>,
+  ): Promise<QueryParamsResponse> {
+    const fromPartial = QueryParamsRequest.fromPartial(request);
+    const data = QueryParamsRequest.encode(fromPartial).finish();
     const promise = this.rpc.request(
       'cosmos.staking.v1beta1.Query',
       'Params',

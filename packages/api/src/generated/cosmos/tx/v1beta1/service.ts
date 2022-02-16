@@ -897,8 +897,9 @@ export class ServiceClientImpl implements Service {
     this.BroadcastTx = this.BroadcastTx.bind(this);
     this.GetTxsEvent = this.GetTxsEvent.bind(this);
   }
-  Simulate(request: SimulateRequest): Promise<SimulateResponse> {
-    const data = SimulateRequest.encode(request).finish();
+  Simulate(request: DeepPartial<SimulateRequest>): Promise<SimulateResponse> {
+    const fromPartial = SimulateRequest.fromPartial(request);
+    const data = SimulateRequest.encode(fromPartial).finish();
     const promise = this.rpc.request(
       'cosmos.tx.v1beta1.Service',
       'Simulate',
@@ -907,8 +908,9 @@ export class ServiceClientImpl implements Service {
     return promise.then(data => SimulateResponse.decode(new _m0.Reader(data)));
   }
 
-  GetTx(request: GetTxRequest): Promise<GetTxResponse> {
-    const data = GetTxRequest.encode(request).finish();
+  GetTx(request: DeepPartial<GetTxRequest>): Promise<GetTxResponse> {
+    const fromPartial = GetTxRequest.fromPartial(request);
+    const data = GetTxRequest.encode(fromPartial).finish();
     const promise = this.rpc.request(
       'cosmos.tx.v1beta1.Service',
       'GetTx',
@@ -917,8 +919,11 @@ export class ServiceClientImpl implements Service {
     return promise.then(data => GetTxResponse.decode(new _m0.Reader(data)));
   }
 
-  BroadcastTx(request: BroadcastTxRequest): Promise<BroadcastTxResponse> {
-    const data = BroadcastTxRequest.encode(request).finish();
+  BroadcastTx(
+    request: DeepPartial<BroadcastTxRequest>,
+  ): Promise<BroadcastTxResponse> {
+    const fromPartial = BroadcastTxRequest.fromPartial(request);
+    const data = BroadcastTxRequest.encode(fromPartial).finish();
     const promise = this.rpc.request(
       'cosmos.tx.v1beta1.Service',
       'BroadcastTx',
@@ -929,8 +934,11 @@ export class ServiceClientImpl implements Service {
     );
   }
 
-  GetTxsEvent(request: GetTxsEventRequest): Promise<GetTxsEventResponse> {
-    const data = GetTxsEventRequest.encode(request).finish();
+  GetTxsEvent(
+    request: DeepPartial<GetTxsEventRequest>,
+  ): Promise<GetTxsEventResponse> {
+    const fromPartial = GetTxsEventRequest.fromPartial(request);
+    const data = GetTxsEventRequest.encode(fromPartial).finish();
     const promise = this.rpc.request(
       'cosmos.tx.v1beta1.Service',
       'GetTxsEvent',

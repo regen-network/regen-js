@@ -486,8 +486,11 @@ export class QueryClientImpl implements Query {
     this.Account = this.Account.bind(this);
     this.Params = this.Params.bind(this);
   }
-  Accounts(request: QueryAccountsRequest): Promise<QueryAccountsResponse> {
-    const data = QueryAccountsRequest.encode(request).finish();
+  Accounts(
+    request: DeepPartial<QueryAccountsRequest>,
+  ): Promise<QueryAccountsResponse> {
+    const fromPartial = QueryAccountsRequest.fromPartial(request);
+    const data = QueryAccountsRequest.encode(fromPartial).finish();
     const promise = this.rpc.request(
       'cosmos.auth.v1beta1.Query',
       'Accounts',
@@ -498,8 +501,11 @@ export class QueryClientImpl implements Query {
     );
   }
 
-  Account(request: QueryAccountRequest): Promise<QueryAccountResponse> {
-    const data = QueryAccountRequest.encode(request).finish();
+  Account(
+    request: DeepPartial<QueryAccountRequest>,
+  ): Promise<QueryAccountResponse> {
+    const fromPartial = QueryAccountRequest.fromPartial(request);
+    const data = QueryAccountRequest.encode(fromPartial).finish();
     const promise = this.rpc.request(
       'cosmos.auth.v1beta1.Query',
       'Account',
@@ -510,8 +516,11 @@ export class QueryClientImpl implements Query {
     );
   }
 
-  Params(request: QueryParamsRequest): Promise<QueryParamsResponse> {
-    const data = QueryParamsRequest.encode(request).finish();
+  Params(
+    request: DeepPartial<QueryParamsRequest>,
+  ): Promise<QueryParamsResponse> {
+    const fromPartial = QueryParamsRequest.fromPartial(request);
+    const data = QueryParamsRequest.encode(fromPartial).finish();
     const promise = this.rpc.request(
       'cosmos.auth.v1beta1.Query',
       'Params',

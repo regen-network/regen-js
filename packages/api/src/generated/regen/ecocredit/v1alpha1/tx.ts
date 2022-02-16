@@ -1915,8 +1915,11 @@ export class MsgClientImpl implements Msg {
     this.UpdateClassIssuers = this.UpdateClassIssuers.bind(this);
     this.UpdateClassMetadata = this.UpdateClassMetadata.bind(this);
   }
-  CreateClass(request: MsgCreateClass): Promise<MsgCreateClassResponse> {
-    const data = MsgCreateClass.encode(request).finish();
+  CreateClass(
+    request: DeepPartial<MsgCreateClass>,
+  ): Promise<MsgCreateClassResponse> {
+    const fromPartial = MsgCreateClass.fromPartial(request);
+    const data = MsgCreateClass.encode(fromPartial).finish();
     const promise = this.rpc.request(
       'regen.ecocredit.v1alpha1.Msg',
       'CreateClass',
@@ -1927,8 +1930,11 @@ export class MsgClientImpl implements Msg {
     );
   }
 
-  CreateBatch(request: MsgCreateBatch): Promise<MsgCreateBatchResponse> {
-    const data = MsgCreateBatch.encode(request).finish();
+  CreateBatch(
+    request: DeepPartial<MsgCreateBatch>,
+  ): Promise<MsgCreateBatchResponse> {
+    const fromPartial = MsgCreateBatch.fromPartial(request);
+    const data = MsgCreateBatch.encode(fromPartial).finish();
     const promise = this.rpc.request(
       'regen.ecocredit.v1alpha1.Msg',
       'CreateBatch',
@@ -1939,8 +1945,9 @@ export class MsgClientImpl implements Msg {
     );
   }
 
-  Send(request: MsgSend): Promise<MsgSendResponse> {
-    const data = MsgSend.encode(request).finish();
+  Send(request: DeepPartial<MsgSend>): Promise<MsgSendResponse> {
+    const fromPartial = MsgSend.fromPartial(request);
+    const data = MsgSend.encode(fromPartial).finish();
     const promise = this.rpc.request(
       'regen.ecocredit.v1alpha1.Msg',
       'Send',
@@ -1949,8 +1956,9 @@ export class MsgClientImpl implements Msg {
     return promise.then(data => MsgSendResponse.decode(new _m0.Reader(data)));
   }
 
-  Retire(request: MsgRetire): Promise<MsgRetireResponse> {
-    const data = MsgRetire.encode(request).finish();
+  Retire(request: DeepPartial<MsgRetire>): Promise<MsgRetireResponse> {
+    const fromPartial = MsgRetire.fromPartial(request);
+    const data = MsgRetire.encode(fromPartial).finish();
     const promise = this.rpc.request(
       'regen.ecocredit.v1alpha1.Msg',
       'Retire',
@@ -1959,8 +1967,9 @@ export class MsgClientImpl implements Msg {
     return promise.then(data => MsgRetireResponse.decode(new _m0.Reader(data)));
   }
 
-  Cancel(request: MsgCancel): Promise<MsgCancelResponse> {
-    const data = MsgCancel.encode(request).finish();
+  Cancel(request: DeepPartial<MsgCancel>): Promise<MsgCancelResponse> {
+    const fromPartial = MsgCancel.fromPartial(request);
+    const data = MsgCancel.encode(fromPartial).finish();
     const promise = this.rpc.request(
       'regen.ecocredit.v1alpha1.Msg',
       'Cancel',
@@ -1970,9 +1979,10 @@ export class MsgClientImpl implements Msg {
   }
 
   UpdateClassAdmin(
-    request: MsgUpdateClassAdmin,
+    request: DeepPartial<MsgUpdateClassAdmin>,
   ): Promise<MsgUpdateClassAdminResponse> {
-    const data = MsgUpdateClassAdmin.encode(request).finish();
+    const fromPartial = MsgUpdateClassAdmin.fromPartial(request);
+    const data = MsgUpdateClassAdmin.encode(fromPartial).finish();
     const promise = this.rpc.request(
       'regen.ecocredit.v1alpha1.Msg',
       'UpdateClassAdmin',
@@ -1984,9 +1994,10 @@ export class MsgClientImpl implements Msg {
   }
 
   UpdateClassIssuers(
-    request: MsgUpdateClassIssuers,
+    request: DeepPartial<MsgUpdateClassIssuers>,
   ): Promise<MsgUpdateClassIssuersResponse> {
-    const data = MsgUpdateClassIssuers.encode(request).finish();
+    const fromPartial = MsgUpdateClassIssuers.fromPartial(request);
+    const data = MsgUpdateClassIssuers.encode(fromPartial).finish();
     const promise = this.rpc.request(
       'regen.ecocredit.v1alpha1.Msg',
       'UpdateClassIssuers',
@@ -1998,9 +2009,10 @@ export class MsgClientImpl implements Msg {
   }
 
   UpdateClassMetadata(
-    request: MsgUpdateClassMetadata,
+    request: DeepPartial<MsgUpdateClassMetadata>,
   ): Promise<MsgUpdateClassMetadataResponse> {
-    const data = MsgUpdateClassMetadata.encode(request).finish();
+    const fromPartial = MsgUpdateClassMetadata.fromPartial(request);
+    const data = MsgUpdateClassMetadata.encode(fromPartial).finish();
     const promise = this.rpc.request(
       'regen.ecocredit.v1alpha1.Msg',
       'UpdateClassMetadata',

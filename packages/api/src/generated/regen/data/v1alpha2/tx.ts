@@ -394,8 +394,11 @@ export class MsgClientImpl implements Msg {
     this.AnchorData = this.AnchorData.bind(this);
     this.SignData = this.SignData.bind(this);
   }
-  AnchorData(request: MsgAnchorData): Promise<MsgAnchorDataResponse> {
-    const data = MsgAnchorData.encode(request).finish();
+  AnchorData(
+    request: DeepPartial<MsgAnchorData>,
+  ): Promise<MsgAnchorDataResponse> {
+    const fromPartial = MsgAnchorData.fromPartial(request);
+    const data = MsgAnchorData.encode(fromPartial).finish();
     const promise = this.rpc.request(
       'regen.data.v1alpha2.Msg',
       'AnchorData',
@@ -406,8 +409,9 @@ export class MsgClientImpl implements Msg {
     );
   }
 
-  SignData(request: MsgSignData): Promise<MsgSignDataResponse> {
-    const data = MsgSignData.encode(request).finish();
+  SignData(request: DeepPartial<MsgSignData>): Promise<MsgSignDataResponse> {
+    const fromPartial = MsgSignData.fromPartial(request);
+    const data = MsgSignData.encode(fromPartial).finish();
     const promise = this.rpc.request(
       'regen.data.v1alpha2.Msg',
       'SignData',

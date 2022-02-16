@@ -339,9 +339,10 @@ export class MsgClientImpl implements Msg {
     this.RevokeAllowance = this.RevokeAllowance.bind(this);
   }
   GrantAllowance(
-    request: MsgGrantAllowance,
+    request: DeepPartial<MsgGrantAllowance>,
   ): Promise<MsgGrantAllowanceResponse> {
-    const data = MsgGrantAllowance.encode(request).finish();
+    const fromPartial = MsgGrantAllowance.fromPartial(request);
+    const data = MsgGrantAllowance.encode(fromPartial).finish();
     const promise = this.rpc.request(
       'cosmos.feegrant.v1beta1.Msg',
       'GrantAllowance',
@@ -353,9 +354,10 @@ export class MsgClientImpl implements Msg {
   }
 
   RevokeAllowance(
-    request: MsgRevokeAllowance,
+    request: DeepPartial<MsgRevokeAllowance>,
   ): Promise<MsgRevokeAllowanceResponse> {
-    const data = MsgRevokeAllowance.encode(request).finish();
+    const fromPartial = MsgRevokeAllowance.fromPartial(request);
+    const data = MsgRevokeAllowance.encode(fromPartial).finish();
     const promise = this.rpc.request(
       'cosmos.feegrant.v1beta1.Msg',
       'RevokeAllowance',

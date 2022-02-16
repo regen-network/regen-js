@@ -496,20 +496,23 @@ export class MsgClientImpl implements Msg {
     this.Exec = this.Exec.bind(this);
     this.Revoke = this.Revoke.bind(this);
   }
-  Grant(request: MsgGrant): Promise<MsgGrantResponse> {
-    const data = MsgGrant.encode(request).finish();
+  Grant(request: DeepPartial<MsgGrant>): Promise<MsgGrantResponse> {
+    const fromPartial = MsgGrant.fromPartial(request);
+    const data = MsgGrant.encode(fromPartial).finish();
     const promise = this.rpc.request('cosmos.authz.v1beta1.Msg', 'Grant', data);
     return promise.then(data => MsgGrantResponse.decode(new _m0.Reader(data)));
   }
 
-  Exec(request: MsgExec): Promise<MsgExecResponse> {
-    const data = MsgExec.encode(request).finish();
+  Exec(request: DeepPartial<MsgExec>): Promise<MsgExecResponse> {
+    const fromPartial = MsgExec.fromPartial(request);
+    const data = MsgExec.encode(fromPartial).finish();
     const promise = this.rpc.request('cosmos.authz.v1beta1.Msg', 'Exec', data);
     return promise.then(data => MsgExecResponse.decode(new _m0.Reader(data)));
   }
 
-  Revoke(request: MsgRevoke): Promise<MsgRevokeResponse> {
-    const data = MsgRevoke.encode(request).finish();
+  Revoke(request: DeepPartial<MsgRevoke>): Promise<MsgRevokeResponse> {
+    const fromPartial = MsgRevoke.fromPartial(request);
+    const data = MsgRevoke.encode(fromPartial).finish();
     const promise = this.rpc.request(
       'cosmos.authz.v1beta1.Msg',
       'Revoke',

@@ -1341,8 +1341,11 @@ export class QueryClientImpl implements Query {
     this.CreditTypes = this.CreditTypes.bind(this);
     this.Params = this.Params.bind(this);
   }
-  Classes(request: QueryClassesRequest): Promise<QueryClassesResponse> {
-    const data = QueryClassesRequest.encode(request).finish();
+  Classes(
+    request: DeepPartial<QueryClassesRequest>,
+  ): Promise<QueryClassesResponse> {
+    const fromPartial = QueryClassesRequest.fromPartial(request);
+    const data = QueryClassesRequest.encode(fromPartial).finish();
     const promise = this.rpc.request(
       'regen.ecocredit.v1alpha1.Query',
       'Classes',
@@ -1353,8 +1356,11 @@ export class QueryClientImpl implements Query {
     );
   }
 
-  ClassInfo(request: QueryClassInfoRequest): Promise<QueryClassInfoResponse> {
-    const data = QueryClassInfoRequest.encode(request).finish();
+  ClassInfo(
+    request: DeepPartial<QueryClassInfoRequest>,
+  ): Promise<QueryClassInfoResponse> {
+    const fromPartial = QueryClassInfoRequest.fromPartial(request);
+    const data = QueryClassInfoRequest.encode(fromPartial).finish();
     const promise = this.rpc.request(
       'regen.ecocredit.v1alpha1.Query',
       'ClassInfo',
@@ -1365,8 +1371,11 @@ export class QueryClientImpl implements Query {
     );
   }
 
-  Batches(request: QueryBatchesRequest): Promise<QueryBatchesResponse> {
-    const data = QueryBatchesRequest.encode(request).finish();
+  Batches(
+    request: DeepPartial<QueryBatchesRequest>,
+  ): Promise<QueryBatchesResponse> {
+    const fromPartial = QueryBatchesRequest.fromPartial(request);
+    const data = QueryBatchesRequest.encode(fromPartial).finish();
     const promise = this.rpc.request(
       'regen.ecocredit.v1alpha1.Query',
       'Batches',
@@ -1377,8 +1386,11 @@ export class QueryClientImpl implements Query {
     );
   }
 
-  BatchInfo(request: QueryBatchInfoRequest): Promise<QueryBatchInfoResponse> {
-    const data = QueryBatchInfoRequest.encode(request).finish();
+  BatchInfo(
+    request: DeepPartial<QueryBatchInfoRequest>,
+  ): Promise<QueryBatchInfoResponse> {
+    const fromPartial = QueryBatchInfoRequest.fromPartial(request);
+    const data = QueryBatchInfoRequest.encode(fromPartial).finish();
     const promise = this.rpc.request(
       'regen.ecocredit.v1alpha1.Query',
       'BatchInfo',
@@ -1389,8 +1401,11 @@ export class QueryClientImpl implements Query {
     );
   }
 
-  Balance(request: QueryBalanceRequest): Promise<QueryBalanceResponse> {
-    const data = QueryBalanceRequest.encode(request).finish();
+  Balance(
+    request: DeepPartial<QueryBalanceRequest>,
+  ): Promise<QueryBalanceResponse> {
+    const fromPartial = QueryBalanceRequest.fromPartial(request);
+    const data = QueryBalanceRequest.encode(fromPartial).finish();
     const promise = this.rpc.request(
       'regen.ecocredit.v1alpha1.Query',
       'Balance',
@@ -1401,8 +1416,11 @@ export class QueryClientImpl implements Query {
     );
   }
 
-  Supply(request: QuerySupplyRequest): Promise<QuerySupplyResponse> {
-    const data = QuerySupplyRequest.encode(request).finish();
+  Supply(
+    request: DeepPartial<QuerySupplyRequest>,
+  ): Promise<QuerySupplyResponse> {
+    const fromPartial = QuerySupplyRequest.fromPartial(request);
+    const data = QuerySupplyRequest.encode(fromPartial).finish();
     const promise = this.rpc.request(
       'regen.ecocredit.v1alpha1.Query',
       'Supply',
@@ -1414,9 +1432,10 @@ export class QueryClientImpl implements Query {
   }
 
   CreditTypes(
-    request: QueryCreditTypesRequest,
+    request: DeepPartial<QueryCreditTypesRequest>,
   ): Promise<QueryCreditTypesResponse> {
-    const data = QueryCreditTypesRequest.encode(request).finish();
+    const fromPartial = QueryCreditTypesRequest.fromPartial(request);
+    const data = QueryCreditTypesRequest.encode(fromPartial).finish();
     const promise = this.rpc.request(
       'regen.ecocredit.v1alpha1.Query',
       'CreditTypes',
@@ -1427,8 +1446,11 @@ export class QueryClientImpl implements Query {
     );
   }
 
-  Params(request: QueryParamsRequest): Promise<QueryParamsResponse> {
-    const data = QueryParamsRequest.encode(request).finish();
+  Params(
+    request: DeepPartial<QueryParamsRequest>,
+  ): Promise<QueryParamsResponse> {
+    const fromPartial = QueryParamsRequest.fromPartial(request);
+    const data = QueryParamsRequest.encode(fromPartial).finish();
     const promise = this.rpc.request(
       'regen.ecocredit.v1alpha1.Query',
       'Params',

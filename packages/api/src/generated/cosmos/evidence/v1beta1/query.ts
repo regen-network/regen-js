@@ -378,8 +378,11 @@ export class QueryClientImpl implements Query {
     this.Evidence = this.Evidence.bind(this);
     this.AllEvidence = this.AllEvidence.bind(this);
   }
-  Evidence(request: QueryEvidenceRequest): Promise<QueryEvidenceResponse> {
-    const data = QueryEvidenceRequest.encode(request).finish();
+  Evidence(
+    request: DeepPartial<QueryEvidenceRequest>,
+  ): Promise<QueryEvidenceResponse> {
+    const fromPartial = QueryEvidenceRequest.fromPartial(request);
+    const data = QueryEvidenceRequest.encode(fromPartial).finish();
     const promise = this.rpc.request(
       'cosmos.evidence.v1beta1.Query',
       'Evidence',
@@ -391,9 +394,10 @@ export class QueryClientImpl implements Query {
   }
 
   AllEvidence(
-    request: QueryAllEvidenceRequest,
+    request: DeepPartial<QueryAllEvidenceRequest>,
   ): Promise<QueryAllEvidenceResponse> {
-    const data = QueryAllEvidenceRequest.encode(request).finish();
+    const fromPartial = QueryAllEvidenceRequest.fromPartial(request);
+    const data = QueryAllEvidenceRequest.encode(fromPartial).finish();
     const promise = this.rpc.request(
       'cosmos.evidence.v1beta1.Query',
       'AllEvidence',

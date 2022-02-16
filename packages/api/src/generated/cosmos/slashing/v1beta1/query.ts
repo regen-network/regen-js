@@ -528,8 +528,11 @@ export class QueryClientImpl implements Query {
     this.SigningInfo = this.SigningInfo.bind(this);
     this.SigningInfos = this.SigningInfos.bind(this);
   }
-  Params(request: QueryParamsRequest): Promise<QueryParamsResponse> {
-    const data = QueryParamsRequest.encode(request).finish();
+  Params(
+    request: DeepPartial<QueryParamsRequest>,
+  ): Promise<QueryParamsResponse> {
+    const fromPartial = QueryParamsRequest.fromPartial(request);
+    const data = QueryParamsRequest.encode(fromPartial).finish();
     const promise = this.rpc.request(
       'cosmos.slashing.v1beta1.Query',
       'Params',
@@ -541,9 +544,10 @@ export class QueryClientImpl implements Query {
   }
 
   SigningInfo(
-    request: QuerySigningInfoRequest,
+    request: DeepPartial<QuerySigningInfoRequest>,
   ): Promise<QuerySigningInfoResponse> {
-    const data = QuerySigningInfoRequest.encode(request).finish();
+    const fromPartial = QuerySigningInfoRequest.fromPartial(request);
+    const data = QuerySigningInfoRequest.encode(fromPartial).finish();
     const promise = this.rpc.request(
       'cosmos.slashing.v1beta1.Query',
       'SigningInfo',
@@ -555,9 +559,10 @@ export class QueryClientImpl implements Query {
   }
 
   SigningInfos(
-    request: QuerySigningInfosRequest,
+    request: DeepPartial<QuerySigningInfosRequest>,
   ): Promise<QuerySigningInfosResponse> {
-    const data = QuerySigningInfosRequest.encode(request).finish();
+    const fromPartial = QuerySigningInfosRequest.fromPartial(request);
+    const data = QuerySigningInfosRequest.encode(fromPartial).finish();
     const promise = this.rpc.request(
       'cosmos.slashing.v1beta1.Query',
       'SigningInfos',

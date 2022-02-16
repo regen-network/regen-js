@@ -654,9 +654,10 @@ export class MsgClientImpl implements Msg {
     this.FundCommunityPool = this.FundCommunityPool.bind(this);
   }
   SetWithdrawAddress(
-    request: MsgSetWithdrawAddress,
+    request: DeepPartial<MsgSetWithdrawAddress>,
   ): Promise<MsgSetWithdrawAddressResponse> {
-    const data = MsgSetWithdrawAddress.encode(request).finish();
+    const fromPartial = MsgSetWithdrawAddress.fromPartial(request);
+    const data = MsgSetWithdrawAddress.encode(fromPartial).finish();
     const promise = this.rpc.request(
       'cosmos.distribution.v1beta1.Msg',
       'SetWithdrawAddress',
@@ -668,9 +669,10 @@ export class MsgClientImpl implements Msg {
   }
 
   WithdrawDelegatorReward(
-    request: MsgWithdrawDelegatorReward,
+    request: DeepPartial<MsgWithdrawDelegatorReward>,
   ): Promise<MsgWithdrawDelegatorRewardResponse> {
-    const data = MsgWithdrawDelegatorReward.encode(request).finish();
+    const fromPartial = MsgWithdrawDelegatorReward.fromPartial(request);
+    const data = MsgWithdrawDelegatorReward.encode(fromPartial).finish();
     const promise = this.rpc.request(
       'cosmos.distribution.v1beta1.Msg',
       'WithdrawDelegatorReward',
@@ -682,9 +684,10 @@ export class MsgClientImpl implements Msg {
   }
 
   WithdrawValidatorCommission(
-    request: MsgWithdrawValidatorCommission,
+    request: DeepPartial<MsgWithdrawValidatorCommission>,
   ): Promise<MsgWithdrawValidatorCommissionResponse> {
-    const data = MsgWithdrawValidatorCommission.encode(request).finish();
+    const fromPartial = MsgWithdrawValidatorCommission.fromPartial(request);
+    const data = MsgWithdrawValidatorCommission.encode(fromPartial).finish();
     const promise = this.rpc.request(
       'cosmos.distribution.v1beta1.Msg',
       'WithdrawValidatorCommission',
@@ -696,9 +699,10 @@ export class MsgClientImpl implements Msg {
   }
 
   FundCommunityPool(
-    request: MsgFundCommunityPool,
+    request: DeepPartial<MsgFundCommunityPool>,
   ): Promise<MsgFundCommunityPoolResponse> {
-    const data = MsgFundCommunityPool.encode(request).finish();
+    const fromPartial = MsgFundCommunityPool.fromPartial(request);
+    const data = MsgFundCommunityPool.encode(fromPartial).finish();
     const promise = this.rpc.request(
       'cosmos.distribution.v1beta1.Msg',
       'FundCommunityPool',

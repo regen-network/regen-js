@@ -319,14 +319,16 @@ export class MsgClientImpl implements Msg {
     this.Send = this.Send.bind(this);
     this.MultiSend = this.MultiSend.bind(this);
   }
-  Send(request: MsgSend): Promise<MsgSendResponse> {
-    const data = MsgSend.encode(request).finish();
+  Send(request: DeepPartial<MsgSend>): Promise<MsgSendResponse> {
+    const fromPartial = MsgSend.fromPartial(request);
+    const data = MsgSend.encode(fromPartial).finish();
     const promise = this.rpc.request('cosmos.bank.v1beta1.Msg', 'Send', data);
     return promise.then(data => MsgSendResponse.decode(new _m0.Reader(data)));
   }
 
-  MultiSend(request: MsgMultiSend): Promise<MsgMultiSendResponse> {
-    const data = MsgMultiSend.encode(request).finish();
+  MultiSend(request: DeepPartial<MsgMultiSend>): Promise<MsgMultiSendResponse> {
+    const fromPartial = MsgMultiSend.fromPartial(request);
+    const data = MsgMultiSend.encode(fromPartial).finish();
     const promise = this.rpc.request(
       'cosmos.bank.v1beta1.Msg',
       'MultiSend',

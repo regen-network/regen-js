@@ -1015,9 +1015,10 @@ export class MsgClientImpl implements Msg {
     this.Undelegate = this.Undelegate.bind(this);
   }
   CreateValidator(
-    request: MsgCreateValidator,
+    request: DeepPartial<MsgCreateValidator>,
   ): Promise<MsgCreateValidatorResponse> {
-    const data = MsgCreateValidator.encode(request).finish();
+    const fromPartial = MsgCreateValidator.fromPartial(request);
+    const data = MsgCreateValidator.encode(fromPartial).finish();
     const promise = this.rpc.request(
       'cosmos.staking.v1beta1.Msg',
       'CreateValidator',
@@ -1028,8 +1029,11 @@ export class MsgClientImpl implements Msg {
     );
   }
 
-  EditValidator(request: MsgEditValidator): Promise<MsgEditValidatorResponse> {
-    const data = MsgEditValidator.encode(request).finish();
+  EditValidator(
+    request: DeepPartial<MsgEditValidator>,
+  ): Promise<MsgEditValidatorResponse> {
+    const fromPartial = MsgEditValidator.fromPartial(request);
+    const data = MsgEditValidator.encode(fromPartial).finish();
     const promise = this.rpc.request(
       'cosmos.staking.v1beta1.Msg',
       'EditValidator',
@@ -1040,8 +1044,9 @@ export class MsgClientImpl implements Msg {
     );
   }
 
-  Delegate(request: MsgDelegate): Promise<MsgDelegateResponse> {
-    const data = MsgDelegate.encode(request).finish();
+  Delegate(request: DeepPartial<MsgDelegate>): Promise<MsgDelegateResponse> {
+    const fromPartial = MsgDelegate.fromPartial(request);
+    const data = MsgDelegate.encode(fromPartial).finish();
     const promise = this.rpc.request(
       'cosmos.staking.v1beta1.Msg',
       'Delegate',
@@ -1053,9 +1058,10 @@ export class MsgClientImpl implements Msg {
   }
 
   BeginRedelegate(
-    request: MsgBeginRedelegate,
+    request: DeepPartial<MsgBeginRedelegate>,
   ): Promise<MsgBeginRedelegateResponse> {
-    const data = MsgBeginRedelegate.encode(request).finish();
+    const fromPartial = MsgBeginRedelegate.fromPartial(request);
+    const data = MsgBeginRedelegate.encode(fromPartial).finish();
     const promise = this.rpc.request(
       'cosmos.staking.v1beta1.Msg',
       'BeginRedelegate',
@@ -1066,8 +1072,11 @@ export class MsgClientImpl implements Msg {
     );
   }
 
-  Undelegate(request: MsgUndelegate): Promise<MsgUndelegateResponse> {
-    const data = MsgUndelegate.encode(request).finish();
+  Undelegate(
+    request: DeepPartial<MsgUndelegate>,
+  ): Promise<MsgUndelegateResponse> {
+    const fromPartial = MsgUndelegate.fromPartial(request);
+    const data = MsgUndelegate.encode(fromPartial).finish();
     const promise = this.rpc.request(
       'cosmos.staking.v1beta1.Msg',
       'Undelegate',

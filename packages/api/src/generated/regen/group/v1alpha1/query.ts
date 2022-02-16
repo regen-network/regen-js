@@ -2151,8 +2151,11 @@ export class QueryClientImpl implements Query {
     this.VotesByProposal = this.VotesByProposal.bind(this);
     this.VotesByVoter = this.VotesByVoter.bind(this);
   }
-  GroupInfo(request: QueryGroupInfoRequest): Promise<QueryGroupInfoResponse> {
-    const data = QueryGroupInfoRequest.encode(request).finish();
+  GroupInfo(
+    request: DeepPartial<QueryGroupInfoRequest>,
+  ): Promise<QueryGroupInfoResponse> {
+    const fromPartial = QueryGroupInfoRequest.fromPartial(request);
+    const data = QueryGroupInfoRequest.encode(fromPartial).finish();
     const promise = this.rpc.request(
       'regen.group.v1alpha1.Query',
       'GroupInfo',
@@ -2164,9 +2167,10 @@ export class QueryClientImpl implements Query {
   }
 
   GroupAccountInfo(
-    request: QueryGroupAccountInfoRequest,
+    request: DeepPartial<QueryGroupAccountInfoRequest>,
   ): Promise<QueryGroupAccountInfoResponse> {
-    const data = QueryGroupAccountInfoRequest.encode(request).finish();
+    const fromPartial = QueryGroupAccountInfoRequest.fromPartial(request);
+    const data = QueryGroupAccountInfoRequest.encode(fromPartial).finish();
     const promise = this.rpc.request(
       'regen.group.v1alpha1.Query',
       'GroupAccountInfo',
@@ -2178,9 +2182,10 @@ export class QueryClientImpl implements Query {
   }
 
   GroupMembers(
-    request: QueryGroupMembersRequest,
+    request: DeepPartial<QueryGroupMembersRequest>,
   ): Promise<QueryGroupMembersResponse> {
-    const data = QueryGroupMembersRequest.encode(request).finish();
+    const fromPartial = QueryGroupMembersRequest.fromPartial(request);
+    const data = QueryGroupMembersRequest.encode(fromPartial).finish();
     const promise = this.rpc.request(
       'regen.group.v1alpha1.Query',
       'GroupMembers',
@@ -2192,9 +2197,10 @@ export class QueryClientImpl implements Query {
   }
 
   GroupsByAdmin(
-    request: QueryGroupsByAdminRequest,
+    request: DeepPartial<QueryGroupsByAdminRequest>,
   ): Promise<QueryGroupsByAdminResponse> {
-    const data = QueryGroupsByAdminRequest.encode(request).finish();
+    const fromPartial = QueryGroupsByAdminRequest.fromPartial(request);
+    const data = QueryGroupsByAdminRequest.encode(fromPartial).finish();
     const promise = this.rpc.request(
       'regen.group.v1alpha1.Query',
       'GroupsByAdmin',
@@ -2206,9 +2212,10 @@ export class QueryClientImpl implements Query {
   }
 
   GroupAccountsByGroup(
-    request: QueryGroupAccountsByGroupRequest,
+    request: DeepPartial<QueryGroupAccountsByGroupRequest>,
   ): Promise<QueryGroupAccountsByGroupResponse> {
-    const data = QueryGroupAccountsByGroupRequest.encode(request).finish();
+    const fromPartial = QueryGroupAccountsByGroupRequest.fromPartial(request);
+    const data = QueryGroupAccountsByGroupRequest.encode(fromPartial).finish();
     const promise = this.rpc.request(
       'regen.group.v1alpha1.Query',
       'GroupAccountsByGroup',
@@ -2220,9 +2227,10 @@ export class QueryClientImpl implements Query {
   }
 
   GroupAccountsByAdmin(
-    request: QueryGroupAccountsByAdminRequest,
+    request: DeepPartial<QueryGroupAccountsByAdminRequest>,
   ): Promise<QueryGroupAccountsByAdminResponse> {
-    const data = QueryGroupAccountsByAdminRequest.encode(request).finish();
+    const fromPartial = QueryGroupAccountsByAdminRequest.fromPartial(request);
+    const data = QueryGroupAccountsByAdminRequest.encode(fromPartial).finish();
     const promise = this.rpc.request(
       'regen.group.v1alpha1.Query',
       'GroupAccountsByAdmin',
@@ -2233,8 +2241,11 @@ export class QueryClientImpl implements Query {
     );
   }
 
-  Proposal(request: QueryProposalRequest): Promise<QueryProposalResponse> {
-    const data = QueryProposalRequest.encode(request).finish();
+  Proposal(
+    request: DeepPartial<QueryProposalRequest>,
+  ): Promise<QueryProposalResponse> {
+    const fromPartial = QueryProposalRequest.fromPartial(request);
+    const data = QueryProposalRequest.encode(fromPartial).finish();
     const promise = this.rpc.request(
       'regen.group.v1alpha1.Query',
       'Proposal',
@@ -2246,9 +2257,14 @@ export class QueryClientImpl implements Query {
   }
 
   ProposalsByGroupAccount(
-    request: QueryProposalsByGroupAccountRequest,
+    request: DeepPartial<QueryProposalsByGroupAccountRequest>,
   ): Promise<QueryProposalsByGroupAccountResponse> {
-    const data = QueryProposalsByGroupAccountRequest.encode(request).finish();
+    const fromPartial = QueryProposalsByGroupAccountRequest.fromPartial(
+      request,
+    );
+    const data = QueryProposalsByGroupAccountRequest.encode(
+      fromPartial,
+    ).finish();
     const promise = this.rpc.request(
       'regen.group.v1alpha1.Query',
       'ProposalsByGroupAccount',
@@ -2260,9 +2276,10 @@ export class QueryClientImpl implements Query {
   }
 
   VoteByProposalVoter(
-    request: QueryVoteByProposalVoterRequest,
+    request: DeepPartial<QueryVoteByProposalVoterRequest>,
   ): Promise<QueryVoteByProposalVoterResponse> {
-    const data = QueryVoteByProposalVoterRequest.encode(request).finish();
+    const fromPartial = QueryVoteByProposalVoterRequest.fromPartial(request);
+    const data = QueryVoteByProposalVoterRequest.encode(fromPartial).finish();
     const promise = this.rpc.request(
       'regen.group.v1alpha1.Query',
       'VoteByProposalVoter',
@@ -2274,9 +2291,10 @@ export class QueryClientImpl implements Query {
   }
 
   VotesByProposal(
-    request: QueryVotesByProposalRequest,
+    request: DeepPartial<QueryVotesByProposalRequest>,
   ): Promise<QueryVotesByProposalResponse> {
-    const data = QueryVotesByProposalRequest.encode(request).finish();
+    const fromPartial = QueryVotesByProposalRequest.fromPartial(request);
+    const data = QueryVotesByProposalRequest.encode(fromPartial).finish();
     const promise = this.rpc.request(
       'regen.group.v1alpha1.Query',
       'VotesByProposal',
@@ -2288,9 +2306,10 @@ export class QueryClientImpl implements Query {
   }
 
   VotesByVoter(
-    request: QueryVotesByVoterRequest,
+    request: DeepPartial<QueryVotesByVoterRequest>,
   ): Promise<QueryVotesByVoterResponse> {
-    const data = QueryVotesByVoterRequest.encode(request).finish();
+    const fromPartial = QueryVotesByVoterRequest.fromPartial(request);
+    const data = QueryVotesByVoterRequest.encode(fromPartial).finish();
     const promise = this.rpc.request(
       'regen.group.v1alpha1.Query',
       'VotesByVoter',

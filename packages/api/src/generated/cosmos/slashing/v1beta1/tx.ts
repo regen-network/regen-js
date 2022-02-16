@@ -144,8 +144,9 @@ export class MsgClientImpl implements Msg {
     this.rpc = rpc;
     this.Unjail = this.Unjail.bind(this);
   }
-  Unjail(request: MsgUnjail): Promise<MsgUnjailResponse> {
-    const data = MsgUnjail.encode(request).finish();
+  Unjail(request: DeepPartial<MsgUnjail>): Promise<MsgUnjailResponse> {
+    const fromPartial = MsgUnjail.fromPartial(request);
+    const data = MsgUnjail.encode(fromPartial).finish();
     const promise = this.rpc.request(
       'cosmos.slashing.v1beta1.Msg',
       'Unjail',

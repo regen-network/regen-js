@@ -342,9 +342,10 @@ export class ReflectionServiceClientImpl implements ReflectionService {
     this.ListImplementations = this.ListImplementations.bind(this);
   }
   ListAllInterfaces(
-    request: ListAllInterfacesRequest,
+    request: DeepPartial<ListAllInterfacesRequest>,
   ): Promise<ListAllInterfacesResponse> {
-    const data = ListAllInterfacesRequest.encode(request).finish();
+    const fromPartial = ListAllInterfacesRequest.fromPartial(request);
+    const data = ListAllInterfacesRequest.encode(fromPartial).finish();
     const promise = this.rpc.request(
       'cosmos.base.reflection.v1beta1.ReflectionService',
       'ListAllInterfaces',
@@ -356,9 +357,10 @@ export class ReflectionServiceClientImpl implements ReflectionService {
   }
 
   ListImplementations(
-    request: ListImplementationsRequest,
+    request: DeepPartial<ListImplementationsRequest>,
   ): Promise<ListImplementationsResponse> {
-    const data = ListImplementationsRequest.encode(request).finish();
+    const fromPartial = ListImplementationsRequest.fromPartial(request);
+    const data = ListImplementationsRequest.encode(fromPartial).finish();
     const promise = this.rpc.request(
       'cosmos.base.reflection.v1beta1.ReflectionService',
       'ListImplementations',

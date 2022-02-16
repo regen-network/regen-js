@@ -697,9 +697,10 @@ export class MsgClientImpl implements Msg {
     this.Deposit = this.Deposit.bind(this);
   }
   SubmitProposal(
-    request: MsgSubmitProposal,
+    request: DeepPartial<MsgSubmitProposal>,
   ): Promise<MsgSubmitProposalResponse> {
-    const data = MsgSubmitProposal.encode(request).finish();
+    const fromPartial = MsgSubmitProposal.fromPartial(request);
+    const data = MsgSubmitProposal.encode(fromPartial).finish();
     const promise = this.rpc.request(
       'cosmos.gov.v1beta1.Msg',
       'SubmitProposal',
@@ -710,14 +711,18 @@ export class MsgClientImpl implements Msg {
     );
   }
 
-  Vote(request: MsgVote): Promise<MsgVoteResponse> {
-    const data = MsgVote.encode(request).finish();
+  Vote(request: DeepPartial<MsgVote>): Promise<MsgVoteResponse> {
+    const fromPartial = MsgVote.fromPartial(request);
+    const data = MsgVote.encode(fromPartial).finish();
     const promise = this.rpc.request('cosmos.gov.v1beta1.Msg', 'Vote', data);
     return promise.then(data => MsgVoteResponse.decode(new _m0.Reader(data)));
   }
 
-  VoteWeighted(request: MsgVoteWeighted): Promise<MsgVoteWeightedResponse> {
-    const data = MsgVoteWeighted.encode(request).finish();
+  VoteWeighted(
+    request: DeepPartial<MsgVoteWeighted>,
+  ): Promise<MsgVoteWeightedResponse> {
+    const fromPartial = MsgVoteWeighted.fromPartial(request);
+    const data = MsgVoteWeighted.encode(fromPartial).finish();
     const promise = this.rpc.request(
       'cosmos.gov.v1beta1.Msg',
       'VoteWeighted',
@@ -728,8 +733,9 @@ export class MsgClientImpl implements Msg {
     );
   }
 
-  Deposit(request: MsgDeposit): Promise<MsgDepositResponse> {
-    const data = MsgDeposit.encode(request).finish();
+  Deposit(request: DeepPartial<MsgDeposit>): Promise<MsgDepositResponse> {
+    const fromPartial = MsgDeposit.fromPartial(request);
+    const data = MsgDeposit.encode(fromPartial).finish();
     const promise = this.rpc.request('cosmos.gov.v1beta1.Msg', 'Deposit', data);
     return promise.then(data =>
       MsgDepositResponse.decode(new _m0.Reader(data)),

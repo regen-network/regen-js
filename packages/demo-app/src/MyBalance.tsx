@@ -1,10 +1,7 @@
 import { RegenApi } from '@regen-network/api';
-import {
-  QueryAllBalancesResponse,
-  QueryAllBalancesRequest,
-} from '@regen-network/api/lib/generated/cosmos/bank/v1beta1/query';
+import { QueryAllBalancesResponse } from '@regen-network/api/lib/generated/cosmos/bank/v1beta1/query';
 import { QueryClientImpl } from '@regen-network/api/lib/generated/cosmos/bank/v1beta1/query';
-import { MsgSend } from '@regen-network/api/lib/generated/cosmos/bank/v1beta1/tx';
+import { MsgSend } from '@regen-network/api/lib/generated/regen/ecocredit/v1alpha1/tx';
 import React, { useEffect, useState } from 'react';
 import { DirectSecp256k1HdWallet } from '@cosmjs/proto-signing';
 
@@ -48,43 +45,43 @@ export function MyBalance(props: MyBalanceProps): React.ReactElement {
     //   ],
     // });
 
-    // const msg = MsgSend.fromPartial({
-    //   sender: fromAddress,
-    //   recipient: 'regen1rhvx7kpxtd0em0t2u87xu5a3xc9gs7evvr5v29',
-    //   credits: [
-    //     {
-    //       batchDenom: 'C01-20180101-20200101-001',
-    //       tradableAmount: '1000',
-    //       retiredAmount: '10',
-    //       retirementLocation: 'US',
-    //     },
-    //     {
-    //       batchDenom: 'C01-20190101-20210101-002',
-    //       tradableAmount: '999',
-    //       retiredAmount: '20',
-    //       retirementLocation: 'FR',
-    //     },
-    //   ],
-    // });
+    const msg = MsgSend.fromPartial({
+      sender: fromAddress,
+      recipient: 'regen1rhvx7kpxtd0em0t2u87xu5a3xc9gs7evvr5v29',
+      credits: [
+        {
+          batchDenom: 'C01-20180101-20200101-001',
+          tradableAmount: '100',
+          retiredAmount: '5',
+          retirementLocation: 'US',
+        },
+        {
+          batchDenom: 'C01-20190101-20210101-002',
+          tradableAmount: '101',
+          retiredAmount: '10',
+          retirementLocation: 'FR',
+        },
+      ],
+    });
 
-    // const fee = {
-    //   amount: [
-    //     {
-    //       denom: 'uregen',
-    //       amount: '5000', //TODO: what should fee and gas be?
-    //     },
-    //   ],
-    //   gas: '200000',
-    // };
-    // const txBytes = await api.msgClient?.sign(fromAddress, msg, fee, '');
-    // // eslint-disable-next-line
-    // console.log('txBytes', txBytes);
+    const fee = {
+      amount: [
+        {
+          denom: 'uregen',
+          amount: '5000', //TODO: what should fee and gas be?
+        },
+      ],
+      gas: '200000',
+    };
+    const txBytes = await api.msgClient?.sign(fromAddress, msg, fee, '');
+    // eslint-disable-next-line
+    console.log('txBytes', txBytes);
 
-    // if (txBytes) {
-    //   const hash = await api.msgClient?.broadcast(txBytes);
-    //   // eslint-disable-next-line
-    //   console.log('hash', hash);
-    // }
+    if (txBytes) {
+      const hash = await api.msgClient?.broadcast(txBytes);
+      // eslint-disable-next-line
+      console.log('hash', hash);
+    }
 
     return;
   };

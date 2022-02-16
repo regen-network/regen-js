@@ -395,9 +395,10 @@ export class MsgClientImpl implements Msg {
     );
   }
   CreateVestingAccount(
-    request: MsgCreateVestingAccount,
+    request: DeepPartial<MsgCreateVestingAccount>,
   ): Promise<MsgCreateVestingAccountResponse> {
-    const data = MsgCreateVestingAccount.encode(request).finish();
+    const fromPartial = MsgCreateVestingAccount.fromPartial(request);
+    const data = MsgCreateVestingAccount.encode(fromPartial).finish();
     const promise = this.rpc.request(
       'cosmos.vesting.v1beta1.Msg',
       'CreateVestingAccount',
@@ -409,9 +410,10 @@ export class MsgClientImpl implements Msg {
   }
 
   CreatePermanentLockedAccount(
-    request: MsgCreatePermanentLockedAccount,
+    request: DeepPartial<MsgCreatePermanentLockedAccount>,
   ): Promise<MsgCreatePermanentLockedAccountResponse> {
-    const data = MsgCreatePermanentLockedAccount.encode(request).finish();
+    const fromPartial = MsgCreatePermanentLockedAccount.fromPartial(request);
+    const data = MsgCreatePermanentLockedAccount.encode(fromPartial).finish();
     const promise = this.rpc.request(
       'cosmos.vesting.v1beta1.Msg',
       'CreatePermanentLockedAccount',

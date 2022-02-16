@@ -233,8 +233,11 @@ export class QueryClientImpl implements Query {
     this.rpc = rpc;
     this.Grants = this.Grants.bind(this);
   }
-  Grants(request: QueryGrantsRequest): Promise<QueryGrantsResponse> {
-    const data = QueryGrantsRequest.encode(request).finish();
+  Grants(
+    request: DeepPartial<QueryGrantsRequest>,
+  ): Promise<QueryGrantsResponse> {
+    const fromPartial = QueryGrantsRequest.fromPartial(request);
+    const data = QueryGrantsRequest.encode(fromPartial).finish();
     const promise = this.rpc.request(
       'cosmos.authz.v1beta1.Query',
       'Grants',

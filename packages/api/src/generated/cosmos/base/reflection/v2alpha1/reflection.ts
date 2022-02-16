@@ -2307,9 +2307,10 @@ export class ReflectionServiceClientImpl implements ReflectionService {
     this.GetTxDescriptor = this.GetTxDescriptor.bind(this);
   }
   GetAuthnDescriptor(
-    request: GetAuthnDescriptorRequest,
+    request: DeepPartial<GetAuthnDescriptorRequest>,
   ): Promise<GetAuthnDescriptorResponse> {
-    const data = GetAuthnDescriptorRequest.encode(request).finish();
+    const fromPartial = GetAuthnDescriptorRequest.fromPartial(request);
+    const data = GetAuthnDescriptorRequest.encode(fromPartial).finish();
     const promise = this.rpc.request(
       'cosmos.base.reflection.v2alpha1.ReflectionService',
       'GetAuthnDescriptor',
@@ -2321,9 +2322,10 @@ export class ReflectionServiceClientImpl implements ReflectionService {
   }
 
   GetChainDescriptor(
-    request: GetChainDescriptorRequest,
+    request: DeepPartial<GetChainDescriptorRequest>,
   ): Promise<GetChainDescriptorResponse> {
-    const data = GetChainDescriptorRequest.encode(request).finish();
+    const fromPartial = GetChainDescriptorRequest.fromPartial(request);
+    const data = GetChainDescriptorRequest.encode(fromPartial).finish();
     const promise = this.rpc.request(
       'cosmos.base.reflection.v2alpha1.ReflectionService',
       'GetChainDescriptor',
@@ -2335,9 +2337,10 @@ export class ReflectionServiceClientImpl implements ReflectionService {
   }
 
   GetCodecDescriptor(
-    request: GetCodecDescriptorRequest,
+    request: DeepPartial<GetCodecDescriptorRequest>,
   ): Promise<GetCodecDescriptorResponse> {
-    const data = GetCodecDescriptorRequest.encode(request).finish();
+    const fromPartial = GetCodecDescriptorRequest.fromPartial(request);
+    const data = GetCodecDescriptorRequest.encode(fromPartial).finish();
     const promise = this.rpc.request(
       'cosmos.base.reflection.v2alpha1.ReflectionService',
       'GetCodecDescriptor',
@@ -2349,9 +2352,10 @@ export class ReflectionServiceClientImpl implements ReflectionService {
   }
 
   GetConfigurationDescriptor(
-    request: GetConfigurationDescriptorRequest,
+    request: DeepPartial<GetConfigurationDescriptorRequest>,
   ): Promise<GetConfigurationDescriptorResponse> {
-    const data = GetConfigurationDescriptorRequest.encode(request).finish();
+    const fromPartial = GetConfigurationDescriptorRequest.fromPartial(request);
+    const data = GetConfigurationDescriptorRequest.encode(fromPartial).finish();
     const promise = this.rpc.request(
       'cosmos.base.reflection.v2alpha1.ReflectionService',
       'GetConfigurationDescriptor',
@@ -2363,9 +2367,10 @@ export class ReflectionServiceClientImpl implements ReflectionService {
   }
 
   GetQueryServicesDescriptor(
-    request: GetQueryServicesDescriptorRequest,
+    request: DeepPartial<GetQueryServicesDescriptorRequest>,
   ): Promise<GetQueryServicesDescriptorResponse> {
-    const data = GetQueryServicesDescriptorRequest.encode(request).finish();
+    const fromPartial = GetQueryServicesDescriptorRequest.fromPartial(request);
+    const data = GetQueryServicesDescriptorRequest.encode(fromPartial).finish();
     const promise = this.rpc.request(
       'cosmos.base.reflection.v2alpha1.ReflectionService',
       'GetQueryServicesDescriptor',
@@ -2377,9 +2382,10 @@ export class ReflectionServiceClientImpl implements ReflectionService {
   }
 
   GetTxDescriptor(
-    request: GetTxDescriptorRequest,
+    request: DeepPartial<GetTxDescriptorRequest>,
   ): Promise<GetTxDescriptorResponse> {
-    const data = GetTxDescriptorRequest.encode(request).finish();
+    const fromPartial = GetTxDescriptorRequest.fromPartial(request);
+    const data = GetTxDescriptorRequest.encode(fromPartial).finish();
     const promise = this.rpc.request(
       'cosmos.base.reflection.v2alpha1.ReflectionService',
       'GetTxDescriptor',
