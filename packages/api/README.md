@@ -22,30 +22,52 @@ The library exposes one main TypeScript class: the `RegenApi` class. Here is an 
 ```ts
 import { RegenApi } from '@regen-network/api';
 import { QueryClientImpl } from '@regen-network/api/lib/generated/cosmos/bank/v1beta1/query';
+import { MsgSend } from '@regen-network/api/lib/generated/cosmos/bank/v1beta1/tx';
 
 // Create a new instance of the RegenApi class.
 const api = RegenApi.connect({
-	// RegenApi supports multiple client connections to interact with a node:
-	// - via the Tendermint RPC
+	// RegenApi only supports using the Tendermint RPC to interact with a node for now.
+	// But it may support other client connections in the future:
 	// - via gRPC
 	// - via gRPC-web
 	// - via REST and gRPC-gateway
 	connection: {
-		// Here, we are using the Tendermint RPC client connection.
 		type: 'tendermint',
-		url: 'http://devnet.regen.network:26657',
+		endpoint: 'http://redwood.regen.network:26657',
+		signer, // OfflineSigner from @cosmjs/proto-signing
 	},
 });
 
 // Create a client for the x/bank module.
 const bankClient = new QueryClientImpl(api.queryClient);
-// Fetch the balance of an address.
-const myAddress = 'regen:1j9...';
+
+// Fetch the balance of the signer address.
+const [firstAccount] = await signer.getAccounts();
+const myAddress = firstAccount.address;
+
 const balances = await bankClient.AllBalances({
 	address: myAddress,
 });
 
 console.log(balances); // Prints `{"balances":[{"denom":"utree","amount":"10000000000"}],"pagination":{"total":1}}`
+
+// Sign and broadcast a transaction with some x/bank MsgSend.
+const msg = MsgSend.fromPartial({
+  fromAddress: myAddress,
+  toAddress: 'regen:1j9...',
+  amount: [{ amount: '1000000', denom: 'uregen' }],
+});
+const fee = { ... }; // StdFee from @cosmjs/stargate
+
+const txBytes = await api.msgClient?.sign(
+	myAddress,
+	[msg],
+	fee,
+	'some memo',
+);
+if (txBytes) {
+	const hash = await api.msgClient?.broadcast(txBytes);
+}
 ```
 
 <details>
@@ -80,18 +102,3 @@ The list of all available methods to call can be found in:
 
 Alternatively, you can just explore the [`./src/generated/` folder](./src/generated), all methods are commented in the code.
 
-## Differences with CosmJS
-
-The main difference with [CosmJS](https://github.com/cosmos/cosmjs) is that RegenJS is 100%-generated TS client, while CosmJS recommends manually decorating your own TS classes. For this code generation, RegenJS uses [`ts-proto`](https://github.com/stephenh/ts-proto). However, the generated types create imcompatibilities with CosmJS (which uses [protobufjs](https://github.com/protobufjs/protobuf.js)).
-
-Regen's team goal is not to divide the JS/TS community in the Cosmos ecosystem. We are currently actively talking with the CosmJS team to discuss to use the same foundation, based on `ts-proto`. The progress can be followed [here](https://github.com/cosmos/cosmjs/issues/586).
-
-Other than that, RegenJS actually plans to use multiple components of CosmJS under the hood: the Tendermint client, the `proto-signing` package...
-
-## Long-term Roadmap
-
-- Create a "JS Client generator": you input some proto files, the generator outputs a fully-functional TS client.
-- Make it compatible with CosmJS.
-
-
-```
