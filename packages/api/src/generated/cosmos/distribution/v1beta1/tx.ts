@@ -293,7 +293,8 @@ function createBaseMsgWithdrawDelegatorRewardResponse(): MsgWithdrawDelegatorRew
 }
 
 export const MsgWithdrawDelegatorRewardResponse = {
-  $type: 'cosmos.distribution.v1beta1.MsgWithdrawDelegatorRewardResponse' as const,
+  $type:
+    'cosmos.distribution.v1beta1.MsgWithdrawDelegatorRewardResponse' as const,
 
   encode(
     _: MsgWithdrawDelegatorRewardResponse,
@@ -332,7 +333,7 @@ export const MsgWithdrawDelegatorRewardResponse = {
   },
 
   fromPartial<
-    I extends Exact<DeepPartial<MsgWithdrawDelegatorRewardResponse>, I>
+    I extends Exact<DeepPartial<MsgWithdrawDelegatorRewardResponse>, I>,
   >(_: I): MsgWithdrawDelegatorRewardResponse {
     const message = createBaseMsgWithdrawDelegatorRewardResponse();
     return message;
@@ -422,7 +423,8 @@ function createBaseMsgWithdrawValidatorCommissionResponse(): MsgWithdrawValidato
 }
 
 export const MsgWithdrawValidatorCommissionResponse = {
-  $type: 'cosmos.distribution.v1beta1.MsgWithdrawValidatorCommissionResponse' as const,
+  $type:
+    'cosmos.distribution.v1beta1.MsgWithdrawValidatorCommissionResponse' as const,
 
   encode(
     _: MsgWithdrawValidatorCommissionResponse,
@@ -461,7 +463,7 @@ export const MsgWithdrawValidatorCommissionResponse = {
   },
 
   fromPartial<
-    I extends Exact<DeepPartial<MsgWithdrawValidatorCommissionResponse>, I>
+    I extends Exact<DeepPartial<MsgWithdrawValidatorCommissionResponse>, I>,
   >(_: I): MsgWithdrawValidatorCommissionResponse {
     const message = createBaseMsgWithdrawValidatorCommissionResponse();
     return message;
@@ -648,9 +650,8 @@ export class MsgClientImpl implements Msg {
     this.rpc = rpc;
     this.SetWithdrawAddress = this.SetWithdrawAddress.bind(this);
     this.WithdrawDelegatorReward = this.WithdrawDelegatorReward.bind(this);
-    this.WithdrawValidatorCommission = this.WithdrawValidatorCommission.bind(
-      this,
-    );
+    this.WithdrawValidatorCommission =
+      this.WithdrawValidatorCommission.bind(this);
     this.FundCommunityPool = this.FundCommunityPool.bind(this);
   }
   SetWithdrawAddress(
@@ -746,9 +747,10 @@ export type DeepPartial<T> = T extends Builtin
 type KeysOfUnion<T> = T extends T ? keyof T : never;
 export type Exact<P, I extends P> = P extends Builtin
   ? P
-  : P &
-      { [K in keyof P]: Exact<P[K], I[K]> } &
-      Record<Exclude<keyof I, KeysOfUnion<P> | '$type'>, never>;
+  : P & { [K in keyof P]: Exact<P[K], I[K]> } & Record<
+        Exclude<keyof I, KeysOfUnion<P> | '$type'>,
+        never
+      >;
 
 if (_m0.util.Long !== Long) {
   _m0.util.Long = Long as any;

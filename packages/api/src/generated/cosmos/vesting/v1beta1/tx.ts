@@ -316,7 +316,8 @@ function createBaseMsgCreatePermanentLockedAccountResponse(): MsgCreatePermanent
 }
 
 export const MsgCreatePermanentLockedAccountResponse = {
-  $type: 'cosmos.vesting.v1beta1.MsgCreatePermanentLockedAccountResponse' as const,
+  $type:
+    'cosmos.vesting.v1beta1.MsgCreatePermanentLockedAccountResponse' as const,
 
   encode(
     _: MsgCreatePermanentLockedAccountResponse,
@@ -355,7 +356,7 @@ export const MsgCreatePermanentLockedAccountResponse = {
   },
 
   fromPartial<
-    I extends Exact<DeepPartial<MsgCreatePermanentLockedAccountResponse>, I>
+    I extends Exact<DeepPartial<MsgCreatePermanentLockedAccountResponse>, I>,
   >(_: I): MsgCreatePermanentLockedAccountResponse {
     const message = createBaseMsgCreatePermanentLockedAccountResponse();
     return message;
@@ -390,9 +391,8 @@ export class MsgClientImpl implements Msg {
   constructor(rpc: Rpc) {
     this.rpc = rpc;
     this.CreateVestingAccount = this.CreateVestingAccount.bind(this);
-    this.CreatePermanentLockedAccount = this.CreatePermanentLockedAccount.bind(
-      this,
-    );
+    this.CreatePermanentLockedAccount =
+      this.CreatePermanentLockedAccount.bind(this);
   }
   CreateVestingAccount(
     request: DeepPartial<MsgCreateVestingAccount>,
@@ -457,9 +457,10 @@ export type DeepPartial<T> = T extends Builtin
 type KeysOfUnion<T> = T extends T ? keyof T : never;
 export type Exact<P, I extends P> = P extends Builtin
   ? P
-  : P &
-      { [K in keyof P]: Exact<P[K], I[K]> } &
-      Record<Exclude<keyof I, KeysOfUnion<P> | '$type'>, never>;
+  : P & { [K in keyof P]: Exact<P[K], I[K]> } & Record<
+        Exclude<keyof I, KeysOfUnion<P> | '$type'>,
+        never
+      >;
 
 if (_m0.util.Long !== Long) {
   _m0.util.Long = Long as any;

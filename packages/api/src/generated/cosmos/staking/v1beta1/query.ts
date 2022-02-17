@@ -689,7 +689,7 @@ export const QueryValidatorDelegationsRequest = {
   },
 
   fromPartial<
-    I extends Exact<DeepPartial<QueryValidatorDelegationsRequest>, I>
+    I extends Exact<DeepPartial<QueryValidatorDelegationsRequest>, I>,
   >(object: I): QueryValidatorDelegationsRequest {
     const message = createBaseQueryValidatorDelegationsRequest();
     message.validatorAddr = object.validatorAddr ?? '';
@@ -790,7 +790,7 @@ export const QueryValidatorDelegationsResponse = {
   },
 
   fromPartial<
-    I extends Exact<DeepPartial<QueryValidatorDelegationsResponse>, I>
+    I extends Exact<DeepPartial<QueryValidatorDelegationsResponse>, I>,
   >(object: I): QueryValidatorDelegationsResponse {
     const message = createBaseQueryValidatorDelegationsResponse();
     message.delegationResponses =
@@ -818,7 +818,8 @@ function createBaseQueryValidatorUnbondingDelegationsRequest(): QueryValidatorUn
 }
 
 export const QueryValidatorUnbondingDelegationsRequest = {
-  $type: 'cosmos.staking.v1beta1.QueryValidatorUnbondingDelegationsRequest' as const,
+  $type:
+    'cosmos.staking.v1beta1.QueryValidatorUnbondingDelegationsRequest' as const,
 
   encode(
     message: QueryValidatorUnbondingDelegationsRequest,
@@ -881,7 +882,7 @@ export const QueryValidatorUnbondingDelegationsRequest = {
   },
 
   fromPartial<
-    I extends Exact<DeepPartial<QueryValidatorUnbondingDelegationsRequest>, I>
+    I extends Exact<DeepPartial<QueryValidatorUnbondingDelegationsRequest>, I>,
   >(object: I): QueryValidatorUnbondingDelegationsRequest {
     const message = createBaseQueryValidatorUnbondingDelegationsRequest();
     message.validatorAddr = object.validatorAddr ?? '';
@@ -907,7 +908,8 @@ function createBaseQueryValidatorUnbondingDelegationsResponse(): QueryValidatorU
 }
 
 export const QueryValidatorUnbondingDelegationsResponse = {
-  $type: 'cosmos.staking.v1beta1.QueryValidatorUnbondingDelegationsResponse' as const,
+  $type:
+    'cosmos.staking.v1beta1.QueryValidatorUnbondingDelegationsResponse' as const,
 
   encode(
     message: QueryValidatorUnbondingDelegationsResponse,
@@ -982,7 +984,7 @@ export const QueryValidatorUnbondingDelegationsResponse = {
   },
 
   fromPartial<
-    I extends Exact<DeepPartial<QueryValidatorUnbondingDelegationsResponse>, I>
+    I extends Exact<DeepPartial<QueryValidatorUnbondingDelegationsResponse>, I>,
   >(object: I): QueryValidatorUnbondingDelegationsResponse {
     const message = createBaseQueryValidatorUnbondingDelegationsResponse();
     message.unbondingResponses =
@@ -1309,7 +1311,7 @@ export const QueryUnbondingDelegationResponse = {
   },
 
   fromPartial<
-    I extends Exact<DeepPartial<QueryUnbondingDelegationResponse>, I>
+    I extends Exact<DeepPartial<QueryUnbondingDelegationResponse>, I>,
   >(object: I): QueryUnbondingDelegationResponse {
     const message = createBaseQueryUnbondingDelegationResponse();
     message.unbond =
@@ -1397,7 +1399,7 @@ export const QueryDelegatorDelegationsRequest = {
   },
 
   fromPartial<
-    I extends Exact<DeepPartial<QueryDelegatorDelegationsRequest>, I>
+    I extends Exact<DeepPartial<QueryDelegatorDelegationsRequest>, I>,
   >(object: I): QueryDelegatorDelegationsRequest {
     const message = createBaseQueryDelegatorDelegationsRequest();
     message.delegatorAddr = object.delegatorAddr ?? '';
@@ -1498,7 +1500,7 @@ export const QueryDelegatorDelegationsResponse = {
   },
 
   fromPartial<
-    I extends Exact<DeepPartial<QueryDelegatorDelegationsResponse>, I>
+    I extends Exact<DeepPartial<QueryDelegatorDelegationsResponse>, I>,
   >(object: I): QueryDelegatorDelegationsResponse {
     const message = createBaseQueryDelegatorDelegationsResponse();
     message.delegationResponses =
@@ -1526,7 +1528,8 @@ function createBaseQueryDelegatorUnbondingDelegationsRequest(): QueryDelegatorUn
 }
 
 export const QueryDelegatorUnbondingDelegationsRequest = {
-  $type: 'cosmos.staking.v1beta1.QueryDelegatorUnbondingDelegationsRequest' as const,
+  $type:
+    'cosmos.staking.v1beta1.QueryDelegatorUnbondingDelegationsRequest' as const,
 
   encode(
     message: QueryDelegatorUnbondingDelegationsRequest,
@@ -1589,7 +1592,7 @@ export const QueryDelegatorUnbondingDelegationsRequest = {
   },
 
   fromPartial<
-    I extends Exact<DeepPartial<QueryDelegatorUnbondingDelegationsRequest>, I>
+    I extends Exact<DeepPartial<QueryDelegatorUnbondingDelegationsRequest>, I>,
   >(object: I): QueryDelegatorUnbondingDelegationsRequest {
     const message = createBaseQueryDelegatorUnbondingDelegationsRequest();
     message.delegatorAddr = object.delegatorAddr ?? '';
@@ -1615,7 +1618,8 @@ function createBaseQueryDelegatorUnbondingDelegationsResponse(): QueryDelegatorU
 }
 
 export const QueryDelegatorUnbondingDelegationsResponse = {
-  $type: 'cosmos.staking.v1beta1.QueryDelegatorUnbondingDelegationsResponse' as const,
+  $type:
+    'cosmos.staking.v1beta1.QueryDelegatorUnbondingDelegationsResponse' as const,
 
   encode(
     message: QueryDelegatorUnbondingDelegationsResponse,
@@ -1690,7 +1694,7 @@ export const QueryDelegatorUnbondingDelegationsResponse = {
   },
 
   fromPartial<
-    I extends Exact<DeepPartial<QueryDelegatorUnbondingDelegationsResponse>, I>
+    I extends Exact<DeepPartial<QueryDelegatorUnbondingDelegationsResponse>, I>,
   >(object: I): QueryDelegatorUnbondingDelegationsResponse {
     const message = createBaseQueryDelegatorUnbondingDelegationsResponse();
     message.unbondingResponses =
@@ -2097,7 +2101,7 @@ export const QueryDelegatorValidatorsResponse = {
   },
 
   fromPartial<
-    I extends Exact<DeepPartial<QueryDelegatorValidatorsResponse>, I>
+    I extends Exact<DeepPartial<QueryDelegatorValidatorsResponse>, I>,
   >(object: I): QueryDelegatorValidatorsResponse {
     const message = createBaseQueryDelegatorValidatorsResponse();
     message.validators =
@@ -2729,15 +2733,13 @@ export class QueryClientImpl implements Query {
     this.Validators = this.Validators.bind(this);
     this.Validator = this.Validator.bind(this);
     this.ValidatorDelegations = this.ValidatorDelegations.bind(this);
-    this.ValidatorUnbondingDelegations = this.ValidatorUnbondingDelegations.bind(
-      this,
-    );
+    this.ValidatorUnbondingDelegations =
+      this.ValidatorUnbondingDelegations.bind(this);
     this.Delegation = this.Delegation.bind(this);
     this.UnbondingDelegation = this.UnbondingDelegation.bind(this);
     this.DelegatorDelegations = this.DelegatorDelegations.bind(this);
-    this.DelegatorUnbondingDelegations = this.DelegatorUnbondingDelegations.bind(
-      this,
-    );
+    this.DelegatorUnbondingDelegations =
+      this.DelegatorUnbondingDelegations.bind(this);
     this.Redelegations = this.Redelegations.bind(this);
     this.DelegatorValidators = this.DelegatorValidators.bind(this);
     this.DelegatorValidator = this.DelegatorValidator.bind(this);
@@ -2793,12 +2795,10 @@ export class QueryClientImpl implements Query {
   ValidatorUnbondingDelegations(
     request: DeepPartial<QueryValidatorUnbondingDelegationsRequest>,
   ): Promise<QueryValidatorUnbondingDelegationsResponse> {
-    const fromPartial = QueryValidatorUnbondingDelegationsRequest.fromPartial(
-      request,
-    );
-    const data = QueryValidatorUnbondingDelegationsRequest.encode(
-      fromPartial,
-    ).finish();
+    const fromPartial =
+      QueryValidatorUnbondingDelegationsRequest.fromPartial(request);
+    const data =
+      QueryValidatorUnbondingDelegationsRequest.encode(fromPartial).finish();
     const promise = this.rpc.request(
       'cosmos.staking.v1beta1.Query',
       'ValidatorUnbondingDelegations',
@@ -2857,12 +2857,10 @@ export class QueryClientImpl implements Query {
   DelegatorUnbondingDelegations(
     request: DeepPartial<QueryDelegatorUnbondingDelegationsRequest>,
   ): Promise<QueryDelegatorUnbondingDelegationsResponse> {
-    const fromPartial = QueryDelegatorUnbondingDelegationsRequest.fromPartial(
-      request,
-    );
-    const data = QueryDelegatorUnbondingDelegationsRequest.encode(
-      fromPartial,
-    ).finish();
+    const fromPartial =
+      QueryDelegatorUnbondingDelegationsRequest.fromPartial(request);
+    const data =
+      QueryDelegatorUnbondingDelegationsRequest.encode(fromPartial).finish();
     const promise = this.rpc.request(
       'cosmos.staking.v1beta1.Query',
       'DelegatorUnbondingDelegations',
@@ -2992,9 +2990,10 @@ export type DeepPartial<T> = T extends Builtin
 type KeysOfUnion<T> = T extends T ? keyof T : never;
 export type Exact<P, I extends P> = P extends Builtin
   ? P
-  : P &
-      { [K in keyof P]: Exact<P[K], I[K]> } &
-      Record<Exclude<keyof I, KeysOfUnion<P> | '$type'>, never>;
+  : P & { [K in keyof P]: Exact<P[K], I[K]> } & Record<
+        Exclude<keyof I, KeysOfUnion<P> | '$type'>,
+        never
+      >;
 
 if (_m0.util.Long !== Long) {
   _m0.util.Long = Long as any;

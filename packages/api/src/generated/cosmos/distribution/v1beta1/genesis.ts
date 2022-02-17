@@ -211,7 +211,8 @@ function createBaseValidatorOutstandingRewardsRecord(): ValidatorOutstandingRewa
 }
 
 export const ValidatorOutstandingRewardsRecord = {
-  $type: 'cosmos.distribution.v1beta1.ValidatorOutstandingRewardsRecord' as const,
+  $type:
+    'cosmos.distribution.v1beta1.ValidatorOutstandingRewardsRecord' as const,
 
   encode(
     message: ValidatorOutstandingRewardsRecord,
@@ -279,7 +280,7 @@ export const ValidatorOutstandingRewardsRecord = {
   },
 
   fromPartial<
-    I extends Exact<DeepPartial<ValidatorOutstandingRewardsRecord>, I>
+    I extends Exact<DeepPartial<ValidatorOutstandingRewardsRecord>, I>,
   >(object: I): ValidatorOutstandingRewardsRecord {
     const message = createBaseValidatorOutstandingRewardsRecord();
     message.validatorAddress = object.validatorAddress ?? '';
@@ -303,7 +304,8 @@ function createBaseValidatorAccumulatedCommissionRecord(): ValidatorAccumulatedC
 }
 
 export const ValidatorAccumulatedCommissionRecord = {
-  $type: 'cosmos.distribution.v1beta1.ValidatorAccumulatedCommissionRecord' as const,
+  $type:
+    'cosmos.distribution.v1beta1.ValidatorAccumulatedCommissionRecord' as const,
 
   encode(
     message: ValidatorAccumulatedCommissionRecord,
@@ -372,7 +374,7 @@ export const ValidatorAccumulatedCommissionRecord = {
   },
 
   fromPartial<
-    I extends Exact<DeepPartial<ValidatorAccumulatedCommissionRecord>, I>
+    I extends Exact<DeepPartial<ValidatorAccumulatedCommissionRecord>, I>,
   >(object: I): ValidatorAccumulatedCommissionRecord {
     const message = createBaseValidatorAccumulatedCommissionRecord();
     message.validatorAddress = object.validatorAddress ?? '';
@@ -399,7 +401,8 @@ function createBaseValidatorHistoricalRewardsRecord(): ValidatorHistoricalReward
 }
 
 export const ValidatorHistoricalRewardsRecord = {
-  $type: 'cosmos.distribution.v1beta1.ValidatorHistoricalRewardsRecord' as const,
+  $type:
+    'cosmos.distribution.v1beta1.ValidatorHistoricalRewardsRecord' as const,
 
   encode(
     message: ValidatorHistoricalRewardsRecord,
@@ -479,7 +482,7 @@ export const ValidatorHistoricalRewardsRecord = {
   },
 
   fromPartial<
-    I extends Exact<DeepPartial<ValidatorHistoricalRewardsRecord>, I>
+    I extends Exact<DeepPartial<ValidatorHistoricalRewardsRecord>, I>,
   >(object: I): ValidatorHistoricalRewardsRecord {
     const message = createBaseValidatorHistoricalRewardsRecord();
     message.validatorAddress = object.validatorAddress ?? '';
@@ -1038,9 +1041,10 @@ export const GenesisState = {
       obj.outstandingRewards = [];
     }
     if (message.validatorAccumulatedCommissions) {
-      obj.validatorAccumulatedCommissions = message.validatorAccumulatedCommissions.map(
-        e => (e ? ValidatorAccumulatedCommissionRecord.toJSON(e) : undefined),
-      );
+      obj.validatorAccumulatedCommissions =
+        message.validatorAccumulatedCommissions.map(e =>
+          e ? ValidatorAccumulatedCommissionRecord.toJSON(e) : undefined,
+        );
     } else {
       obj.validatorAccumulatedCommissions = [];
     }
@@ -1146,9 +1150,10 @@ export type DeepPartial<T> = T extends Builtin
 type KeysOfUnion<T> = T extends T ? keyof T : never;
 export type Exact<P, I extends P> = P extends Builtin
   ? P
-  : P &
-      { [K in keyof P]: Exact<P[K], I[K]> } &
-      Record<Exclude<keyof I, KeysOfUnion<P> | '$type'>, never>;
+  : P & { [K in keyof P]: Exact<P[K], I[K]> } & Record<
+        Exclude<keyof I, KeysOfUnion<P> | '$type'>,
+        never
+      >;
 
 if (_m0.util.Long !== Long) {
   _m0.util.Long = Long as any;

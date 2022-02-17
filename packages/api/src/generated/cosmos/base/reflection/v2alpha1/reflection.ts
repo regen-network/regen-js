@@ -922,7 +922,8 @@ function createBaseInterfaceImplementerDescriptor(): InterfaceImplementerDescrip
 }
 
 export const InterfaceImplementerDescriptor = {
-  $type: 'cosmos.base.reflection.v2alpha1.InterfaceImplementerDescriptor' as const,
+  $type:
+    'cosmos.base.reflection.v2alpha1.InterfaceImplementerDescriptor' as const,
 
   encode(
     message: InterfaceImplementerDescriptor,
@@ -1001,7 +1002,8 @@ function createBaseInterfaceAcceptingMessageDescriptor(): InterfaceAcceptingMess
 }
 
 export const InterfaceAcceptingMessageDescriptor = {
-  $type: 'cosmos.base.reflection.v2alpha1.InterfaceAcceptingMessageDescriptor' as const,
+  $type:
+    'cosmos.base.reflection.v2alpha1.InterfaceAcceptingMessageDescriptor' as const,
 
   encode(
     message: InterfaceAcceptingMessageDescriptor,
@@ -1062,7 +1064,7 @@ export const InterfaceAcceptingMessageDescriptor = {
   },
 
   fromPartial<
-    I extends Exact<DeepPartial<InterfaceAcceptingMessageDescriptor>, I>
+    I extends Exact<DeepPartial<InterfaceAcceptingMessageDescriptor>, I>,
   >(object: I): InterfaceAcceptingMessageDescriptor {
     const message = createBaseInterfaceAcceptingMessageDescriptor();
     message.fullname = object.fullname ?? '';
@@ -1611,7 +1613,8 @@ function createBaseGetConfigurationDescriptorRequest(): GetConfigurationDescript
 }
 
 export const GetConfigurationDescriptorRequest = {
-  $type: 'cosmos.base.reflection.v2alpha1.GetConfigurationDescriptorRequest' as const,
+  $type:
+    'cosmos.base.reflection.v2alpha1.GetConfigurationDescriptorRequest' as const,
 
   encode(
     _: GetConfigurationDescriptorRequest,
@@ -1650,7 +1653,7 @@ export const GetConfigurationDescriptorRequest = {
   },
 
   fromPartial<
-    I extends Exact<DeepPartial<GetConfigurationDescriptorRequest>, I>
+    I extends Exact<DeepPartial<GetConfigurationDescriptorRequest>, I>,
   >(_: I): GetConfigurationDescriptorRequest {
     const message = createBaseGetConfigurationDescriptorRequest();
     return message;
@@ -1670,7 +1673,8 @@ function createBaseGetConfigurationDescriptorResponse(): GetConfigurationDescrip
 }
 
 export const GetConfigurationDescriptorResponse = {
-  $type: 'cosmos.base.reflection.v2alpha1.GetConfigurationDescriptorResponse' as const,
+  $type:
+    'cosmos.base.reflection.v2alpha1.GetConfigurationDescriptorResponse' as const,
 
   encode(
     message: GetConfigurationDescriptorResponse,
@@ -1728,7 +1732,7 @@ export const GetConfigurationDescriptorResponse = {
   },
 
   fromPartial<
-    I extends Exact<DeepPartial<GetConfigurationDescriptorResponse>, I>
+    I extends Exact<DeepPartial<GetConfigurationDescriptorResponse>, I>,
   >(object: I): GetConfigurationDescriptorResponse {
     const message = createBaseGetConfigurationDescriptorResponse();
     message.config =
@@ -1751,7 +1755,8 @@ function createBaseGetQueryServicesDescriptorRequest(): GetQueryServicesDescript
 }
 
 export const GetQueryServicesDescriptorRequest = {
-  $type: 'cosmos.base.reflection.v2alpha1.GetQueryServicesDescriptorRequest' as const,
+  $type:
+    'cosmos.base.reflection.v2alpha1.GetQueryServicesDescriptorRequest' as const,
 
   encode(
     _: GetQueryServicesDescriptorRequest,
@@ -1790,7 +1795,7 @@ export const GetQueryServicesDescriptorRequest = {
   },
 
   fromPartial<
-    I extends Exact<DeepPartial<GetQueryServicesDescriptorRequest>, I>
+    I extends Exact<DeepPartial<GetQueryServicesDescriptorRequest>, I>,
   >(_: I): GetQueryServicesDescriptorRequest {
     const message = createBaseGetQueryServicesDescriptorRequest();
     return message;
@@ -1810,7 +1815,8 @@ function createBaseGetQueryServicesDescriptorResponse(): GetQueryServicesDescrip
 }
 
 export const GetQueryServicesDescriptorResponse = {
-  $type: 'cosmos.base.reflection.v2alpha1.GetQueryServicesDescriptorResponse' as const,
+  $type:
+    'cosmos.base.reflection.v2alpha1.GetQueryServicesDescriptorResponse' as const,
 
   encode(
     message: GetQueryServicesDescriptorResponse,
@@ -1868,7 +1874,7 @@ export const GetQueryServicesDescriptorResponse = {
   },
 
   fromPartial<
-    I extends Exact<DeepPartial<GetQueryServicesDescriptorResponse>, I>
+    I extends Exact<DeepPartial<GetQueryServicesDescriptorResponse>, I>,
   >(object: I): GetQueryServicesDescriptorResponse {
     const message = createBaseGetQueryServicesDescriptorResponse();
     message.queries =
@@ -2298,12 +2304,10 @@ export class ReflectionServiceClientImpl implements ReflectionService {
     this.GetAuthnDescriptor = this.GetAuthnDescriptor.bind(this);
     this.GetChainDescriptor = this.GetChainDescriptor.bind(this);
     this.GetCodecDescriptor = this.GetCodecDescriptor.bind(this);
-    this.GetConfigurationDescriptor = this.GetConfigurationDescriptor.bind(
-      this,
-    );
-    this.GetQueryServicesDescriptor = this.GetQueryServicesDescriptor.bind(
-      this,
-    );
+    this.GetConfigurationDescriptor =
+      this.GetConfigurationDescriptor.bind(this);
+    this.GetQueryServicesDescriptor =
+      this.GetQueryServicesDescriptor.bind(this);
     this.GetTxDescriptor = this.GetTxDescriptor.bind(this);
   }
   GetAuthnDescriptor(
@@ -2429,9 +2433,10 @@ export type DeepPartial<T> = T extends Builtin
 type KeysOfUnion<T> = T extends T ? keyof T : never;
 export type Exact<P, I extends P> = P extends Builtin
   ? P
-  : P &
-      { [K in keyof P]: Exact<P[K], I[K]> } &
-      Record<Exclude<keyof I, KeysOfUnion<P> | '$type'>, never>;
+  : P & { [K in keyof P]: Exact<P[K], I[K]> } & Record<
+        Exclude<keyof I, KeysOfUnion<P> | '$type'>,
+        never
+      >;
 
 if (_m0.util.Long !== Long) {
   _m0.util.Long = Long as any;

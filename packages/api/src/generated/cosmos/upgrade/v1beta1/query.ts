@@ -411,7 +411,7 @@ export const QueryUpgradedConsensusStateRequest = {
   },
 
   fromPartial<
-    I extends Exact<DeepPartial<QueryUpgradedConsensusStateRequest>, I>
+    I extends Exact<DeepPartial<QueryUpgradedConsensusStateRequest>, I>,
   >(object: I): QueryUpgradedConsensusStateRequest {
     const message = createBaseQueryUpgradedConsensusStateRequest();
     message.lastHeight =
@@ -489,7 +489,7 @@ export const QueryUpgradedConsensusStateResponse = {
   },
 
   fromPartial<
-    I extends Exact<DeepPartial<QueryUpgradedConsensusStateResponse>, I>
+    I extends Exact<DeepPartial<QueryUpgradedConsensusStateResponse>, I>,
   >(object: I): QueryUpgradedConsensusStateResponse {
     const message = createBaseQueryUpgradedConsensusStateResponse();
     message.upgradedConsensusState =
@@ -722,9 +722,8 @@ export class QueryClientImpl implements Query {
     request: DeepPartial<QueryUpgradedConsensusStateRequest>,
   ): Promise<QueryUpgradedConsensusStateResponse> {
     const fromPartial = QueryUpgradedConsensusStateRequest.fromPartial(request);
-    const data = QueryUpgradedConsensusStateRequest.encode(
-      fromPartial,
-    ).finish();
+    const data =
+      QueryUpgradedConsensusStateRequest.encode(fromPartial).finish();
     const promise = this.rpc.request(
       'cosmos.upgrade.v1beta1.Query',
       'UpgradedConsensusState',
@@ -817,9 +816,10 @@ export type DeepPartial<T> = T extends Builtin
 type KeysOfUnion<T> = T extends T ? keyof T : never;
 export type Exact<P, I extends P> = P extends Builtin
   ? P
-  : P &
-      { [K in keyof P]: Exact<P[K], I[K]> } &
-      Record<Exclude<keyof I, KeysOfUnion<P> | '$type'>, never>;
+  : P & { [K in keyof P]: Exact<P[K], I[K]> } & Record<
+        Exclude<keyof I, KeysOfUnion<P> | '$type'>,
+        never
+      >;
 
 if (_m0.util.Long !== Long) {
   _m0.util.Long = Long as any;

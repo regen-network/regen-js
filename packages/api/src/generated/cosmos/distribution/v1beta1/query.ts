@@ -323,7 +323,8 @@ function createBaseQueryValidatorOutstandingRewardsRequest(): QueryValidatorOuts
 }
 
 export const QueryValidatorOutstandingRewardsRequest = {
-  $type: 'cosmos.distribution.v1beta1.QueryValidatorOutstandingRewardsRequest' as const,
+  $type:
+    'cosmos.distribution.v1beta1.QueryValidatorOutstandingRewardsRequest' as const,
 
   encode(
     message: QueryValidatorOutstandingRewardsRequest,
@@ -373,7 +374,7 @@ export const QueryValidatorOutstandingRewardsRequest = {
   },
 
   fromPartial<
-    I extends Exact<DeepPartial<QueryValidatorOutstandingRewardsRequest>, I>
+    I extends Exact<DeepPartial<QueryValidatorOutstandingRewardsRequest>, I>,
   >(object: I): QueryValidatorOutstandingRewardsRequest {
     const message = createBaseQueryValidatorOutstandingRewardsRequest();
     message.validatorAddress = object.validatorAddress ?? '';
@@ -395,7 +396,8 @@ function createBaseQueryValidatorOutstandingRewardsResponse(): QueryValidatorOut
 }
 
 export const QueryValidatorOutstandingRewardsResponse = {
-  $type: 'cosmos.distribution.v1beta1.QueryValidatorOutstandingRewardsResponse' as const,
+  $type:
+    'cosmos.distribution.v1beta1.QueryValidatorOutstandingRewardsResponse' as const,
 
   encode(
     message: QueryValidatorOutstandingRewardsResponse,
@@ -453,7 +455,7 @@ export const QueryValidatorOutstandingRewardsResponse = {
   },
 
   fromPartial<
-    I extends Exact<DeepPartial<QueryValidatorOutstandingRewardsResponse>, I>
+    I extends Exact<DeepPartial<QueryValidatorOutstandingRewardsResponse>, I>,
   >(object: I): QueryValidatorOutstandingRewardsResponse {
     const message = createBaseQueryValidatorOutstandingRewardsResponse();
     message.rewards =
@@ -548,7 +550,8 @@ function createBaseQueryValidatorCommissionResponse(): QueryValidatorCommissionR
 }
 
 export const QueryValidatorCommissionResponse = {
-  $type: 'cosmos.distribution.v1beta1.QueryValidatorCommissionResponse' as const,
+  $type:
+    'cosmos.distribution.v1beta1.QueryValidatorCommissionResponse' as const,
 
   encode(
     message: QueryValidatorCommissionResponse,
@@ -606,7 +609,7 @@ export const QueryValidatorCommissionResponse = {
   },
 
   fromPartial<
-    I extends Exact<DeepPartial<QueryValidatorCommissionResponse>, I>
+    I extends Exact<DeepPartial<QueryValidatorCommissionResponse>, I>,
   >(object: I): QueryValidatorCommissionResponse {
     const message = createBaseQueryValidatorCommissionResponse();
     message.commission =
@@ -1011,7 +1014,8 @@ function createBaseQueryDelegationTotalRewardsRequest(): QueryDelegationTotalRew
 }
 
 export const QueryDelegationTotalRewardsRequest = {
-  $type: 'cosmos.distribution.v1beta1.QueryDelegationTotalRewardsRequest' as const,
+  $type:
+    'cosmos.distribution.v1beta1.QueryDelegationTotalRewardsRequest' as const,
 
   encode(
     message: QueryDelegationTotalRewardsRequest,
@@ -1061,7 +1065,7 @@ export const QueryDelegationTotalRewardsRequest = {
   },
 
   fromPartial<
-    I extends Exact<DeepPartial<QueryDelegationTotalRewardsRequest>, I>
+    I extends Exact<DeepPartial<QueryDelegationTotalRewardsRequest>, I>,
   >(object: I): QueryDelegationTotalRewardsRequest {
     const message = createBaseQueryDelegationTotalRewardsRequest();
     message.delegatorAddress = object.delegatorAddress ?? '';
@@ -1083,7 +1087,8 @@ function createBaseQueryDelegationTotalRewardsResponse(): QueryDelegationTotalRe
 }
 
 export const QueryDelegationTotalRewardsResponse = {
-  $type: 'cosmos.distribution.v1beta1.QueryDelegationTotalRewardsResponse' as const,
+  $type:
+    'cosmos.distribution.v1beta1.QueryDelegationTotalRewardsResponse' as const,
 
   encode(
     message: QueryDelegationTotalRewardsResponse,
@@ -1154,7 +1159,7 @@ export const QueryDelegationTotalRewardsResponse = {
   },
 
   fromPartial<
-    I extends Exact<DeepPartial<QueryDelegationTotalRewardsResponse>, I>
+    I extends Exact<DeepPartial<QueryDelegationTotalRewardsResponse>, I>,
   >(object: I): QueryDelegationTotalRewardsResponse {
     const message = createBaseQueryDelegationTotalRewardsResponse();
     message.rewards =
@@ -1248,7 +1253,8 @@ function createBaseQueryDelegatorValidatorsResponse(): QueryDelegatorValidatorsR
 }
 
 export const QueryDelegatorValidatorsResponse = {
-  $type: 'cosmos.distribution.v1beta1.QueryDelegatorValidatorsResponse' as const,
+  $type:
+    'cosmos.distribution.v1beta1.QueryDelegatorValidatorsResponse' as const,
 
   encode(
     message: QueryDelegatorValidatorsResponse,
@@ -1301,7 +1307,7 @@ export const QueryDelegatorValidatorsResponse = {
   },
 
   fromPartial<
-    I extends Exact<DeepPartial<QueryDelegatorValidatorsResponse>, I>
+    I extends Exact<DeepPartial<QueryDelegatorValidatorsResponse>, I>,
   >(object: I): QueryDelegatorValidatorsResponse {
     const message = createBaseQueryDelegatorValidatorsResponse();
     message.validators = object.validators?.map(e => e) || [];
@@ -1322,7 +1328,8 @@ function createBaseQueryDelegatorWithdrawAddressRequest(): QueryDelegatorWithdra
 }
 
 export const QueryDelegatorWithdrawAddressRequest = {
-  $type: 'cosmos.distribution.v1beta1.QueryDelegatorWithdrawAddressRequest' as const,
+  $type:
+    'cosmos.distribution.v1beta1.QueryDelegatorWithdrawAddressRequest' as const,
 
   encode(
     message: QueryDelegatorWithdrawAddressRequest,
@@ -1372,7 +1379,7 @@ export const QueryDelegatorWithdrawAddressRequest = {
   },
 
   fromPartial<
-    I extends Exact<DeepPartial<QueryDelegatorWithdrawAddressRequest>, I>
+    I extends Exact<DeepPartial<QueryDelegatorWithdrawAddressRequest>, I>,
   >(object: I): QueryDelegatorWithdrawAddressRequest {
     const message = createBaseQueryDelegatorWithdrawAddressRequest();
     message.delegatorAddress = object.delegatorAddress ?? '';
@@ -1393,7 +1400,8 @@ function createBaseQueryDelegatorWithdrawAddressResponse(): QueryDelegatorWithdr
 }
 
 export const QueryDelegatorWithdrawAddressResponse = {
-  $type: 'cosmos.distribution.v1beta1.QueryDelegatorWithdrawAddressResponse' as const,
+  $type:
+    'cosmos.distribution.v1beta1.QueryDelegatorWithdrawAddressResponse' as const,
 
   encode(
     message: QueryDelegatorWithdrawAddressResponse,
@@ -1443,7 +1451,7 @@ export const QueryDelegatorWithdrawAddressResponse = {
   },
 
   fromPartial<
-    I extends Exact<DeepPartial<QueryDelegatorWithdrawAddressResponse>, I>
+    I extends Exact<DeepPartial<QueryDelegatorWithdrawAddressResponse>, I>,
   >(object: I): QueryDelegatorWithdrawAddressResponse {
     const message = createBaseQueryDelegatorWithdrawAddressResponse();
     message.withdrawAddress = object.withdrawAddress ?? '';
@@ -1634,9 +1642,8 @@ export class QueryClientImpl implements Query {
   constructor(rpc: Rpc) {
     this.rpc = rpc;
     this.Params = this.Params.bind(this);
-    this.ValidatorOutstandingRewards = this.ValidatorOutstandingRewards.bind(
-      this,
-    );
+    this.ValidatorOutstandingRewards =
+      this.ValidatorOutstandingRewards.bind(this);
     this.ValidatorCommission = this.ValidatorCommission.bind(this);
     this.ValidatorSlashes = this.ValidatorSlashes.bind(this);
     this.DelegationRewards = this.DelegationRewards.bind(this);
@@ -1663,12 +1670,10 @@ export class QueryClientImpl implements Query {
   ValidatorOutstandingRewards(
     request: DeepPartial<QueryValidatorOutstandingRewardsRequest>,
   ): Promise<QueryValidatorOutstandingRewardsResponse> {
-    const fromPartial = QueryValidatorOutstandingRewardsRequest.fromPartial(
-      request,
-    );
-    const data = QueryValidatorOutstandingRewardsRequest.encode(
-      fromPartial,
-    ).finish();
+    const fromPartial =
+      QueryValidatorOutstandingRewardsRequest.fromPartial(request);
+    const data =
+      QueryValidatorOutstandingRewardsRequest.encode(fromPartial).finish();
     const promise = this.rpc.request(
       'cosmos.distribution.v1beta1.Query',
       'ValidatorOutstandingRewards',
@@ -1728,9 +1733,8 @@ export class QueryClientImpl implements Query {
     request: DeepPartial<QueryDelegationTotalRewardsRequest>,
   ): Promise<QueryDelegationTotalRewardsResponse> {
     const fromPartial = QueryDelegationTotalRewardsRequest.fromPartial(request);
-    const data = QueryDelegationTotalRewardsRequest.encode(
-      fromPartial,
-    ).finish();
+    const data =
+      QueryDelegationTotalRewardsRequest.encode(fromPartial).finish();
     const promise = this.rpc.request(
       'cosmos.distribution.v1beta1.Query',
       'DelegationTotalRewards',
@@ -1759,12 +1763,10 @@ export class QueryClientImpl implements Query {
   DelegatorWithdrawAddress(
     request: DeepPartial<QueryDelegatorWithdrawAddressRequest>,
   ): Promise<QueryDelegatorWithdrawAddressResponse> {
-    const fromPartial = QueryDelegatorWithdrawAddressRequest.fromPartial(
-      request,
-    );
-    const data = QueryDelegatorWithdrawAddressRequest.encode(
-      fromPartial,
-    ).finish();
+    const fromPartial =
+      QueryDelegatorWithdrawAddressRequest.fromPartial(request);
+    const data =
+      QueryDelegatorWithdrawAddressRequest.encode(fromPartial).finish();
     const promise = this.rpc.request(
       'cosmos.distribution.v1beta1.Query',
       'DelegatorWithdrawAddress',
@@ -1823,9 +1825,10 @@ export type DeepPartial<T> = T extends Builtin
 type KeysOfUnion<T> = T extends T ? keyof T : never;
 export type Exact<P, I extends P> = P extends Builtin
   ? P
-  : P &
-      { [K in keyof P]: Exact<P[K], I[K]> } &
-      Record<Exclude<keyof I, KeysOfUnion<P> | '$type'>, never>;
+  : P & { [K in keyof P]: Exact<P[K], I[K]> } & Record<
+        Exclude<keyof I, KeysOfUnion<P> | '$type'>,
+        never
+      >;
 
 if (_m0.util.Long !== Long) {
   _m0.util.Long = Long as any;

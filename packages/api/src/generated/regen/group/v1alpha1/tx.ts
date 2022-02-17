@@ -1190,7 +1190,7 @@ export const MsgUpdateGroupAccountAdminResponse = {
   },
 
   fromPartial<
-    I extends Exact<DeepPartial<MsgUpdateGroupAccountAdminResponse>, I>
+    I extends Exact<DeepPartial<MsgUpdateGroupAccountAdminResponse>, I>,
   >(_: I): MsgUpdateGroupAccountAdminResponse {
     const message = createBaseMsgUpdateGroupAccountAdminResponse();
     return message;
@@ -1280,7 +1280,7 @@ export const MsgUpdateGroupAccountDecisionPolicy = {
   },
 
   fromPartial<
-    I extends Exact<DeepPartial<MsgUpdateGroupAccountDecisionPolicy>, I>
+    I extends Exact<DeepPartial<MsgUpdateGroupAccountDecisionPolicy>, I>,
   >(object: I): MsgUpdateGroupAccountDecisionPolicy {
     const message = createBaseMsgUpdateGroupAccountDecisionPolicy();
     message.admin = object.admin ?? '';
@@ -1305,7 +1305,8 @@ function createBaseMsgUpdateGroupAccountDecisionPolicyResponse(): MsgUpdateGroup
 }
 
 export const MsgUpdateGroupAccountDecisionPolicyResponse = {
-  $type: 'regen.group.v1alpha1.MsgUpdateGroupAccountDecisionPolicyResponse' as const,
+  $type:
+    'regen.group.v1alpha1.MsgUpdateGroupAccountDecisionPolicyResponse' as const,
 
   encode(
     _: MsgUpdateGroupAccountDecisionPolicyResponse,
@@ -1344,7 +1345,10 @@ export const MsgUpdateGroupAccountDecisionPolicyResponse = {
   },
 
   fromPartial<
-    I extends Exact<DeepPartial<MsgUpdateGroupAccountDecisionPolicyResponse>, I>
+    I extends Exact<
+      DeepPartial<MsgUpdateGroupAccountDecisionPolicyResponse>,
+      I
+    >,
   >(_: I): MsgUpdateGroupAccountDecisionPolicyResponse {
     const message = createBaseMsgUpdateGroupAccountDecisionPolicyResponse();
     return message;
@@ -1495,7 +1499,7 @@ export const MsgUpdateGroupAccountMetadataResponse = {
   },
 
   fromPartial<
-    I extends Exact<DeepPartial<MsgUpdateGroupAccountMetadataResponse>, I>
+    I extends Exact<DeepPartial<MsgUpdateGroupAccountMetadataResponse>, I>,
   >(_: I): MsgUpdateGroupAccountMetadataResponse {
     const message = createBaseMsgUpdateGroupAccountMetadataResponse();
     return message;
@@ -2041,12 +2045,10 @@ export class MsgClientImpl implements Msg {
     this.UpdateGroupMetadata = this.UpdateGroupMetadata.bind(this);
     this.CreateGroupAccount = this.CreateGroupAccount.bind(this);
     this.UpdateGroupAccountAdmin = this.UpdateGroupAccountAdmin.bind(this);
-    this.UpdateGroupAccountDecisionPolicy = this.UpdateGroupAccountDecisionPolicy.bind(
-      this,
-    );
-    this.UpdateGroupAccountMetadata = this.UpdateGroupAccountMetadata.bind(
-      this,
-    );
+    this.UpdateGroupAccountDecisionPolicy =
+      this.UpdateGroupAccountDecisionPolicy.bind(this);
+    this.UpdateGroupAccountMetadata =
+      this.UpdateGroupAccountMetadata.bind(this);
     this.CreateProposal = this.CreateProposal.bind(this);
     this.Vote = this.Vote.bind(this);
     this.Exec = this.Exec.bind(this);
@@ -2144,12 +2146,10 @@ export class MsgClientImpl implements Msg {
   UpdateGroupAccountDecisionPolicy(
     request: DeepPartial<MsgUpdateGroupAccountDecisionPolicy>,
   ): Promise<MsgUpdateGroupAccountDecisionPolicyResponse> {
-    const fromPartial = MsgUpdateGroupAccountDecisionPolicy.fromPartial(
-      request,
-    );
-    const data = MsgUpdateGroupAccountDecisionPolicy.encode(
-      fromPartial,
-    ).finish();
+    const fromPartial =
+      MsgUpdateGroupAccountDecisionPolicy.fromPartial(request);
+    const data =
+      MsgUpdateGroupAccountDecisionPolicy.encode(fromPartial).finish();
     const promise = this.rpc.request(
       'regen.group.v1alpha1.Msg',
       'UpdateGroupAccountDecisionPolicy',
@@ -2271,9 +2271,10 @@ export type DeepPartial<T> = T extends Builtin
 type KeysOfUnion<T> = T extends T ? keyof T : never;
 export type Exact<P, I extends P> = P extends Builtin
   ? P
-  : P &
-      { [K in keyof P]: Exact<P[K], I[K]> } &
-      Record<Exclude<keyof I, KeysOfUnion<P> | '$type'>, never>;
+  : P & { [K in keyof P]: Exact<P[K], I[K]> } & Record<
+        Exclude<keyof I, KeysOfUnion<P> | '$type'>,
+        never
+      >;
 
 if (_m0.util.Long !== Long) {
   _m0.util.Long = Long as any;
