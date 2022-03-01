@@ -1,155 +1,219 @@
 /* eslint-disable */
-import { Writer, Reader } from 'protobufjs/minimal';
+import { messageTypeRegistry } from '../../../typeRegistry';
+import Long from 'long';
+import _m0 from 'protobufjs/minimal';
 
+export const protobufPackage = 'cosmos.crypto.ed25519';
 
 /**
- *  PubKey defines a ed25519 public key
- *  Key is the compressed form of the pubkey. The first byte depends is a 0x02 byte
- *  if the y-coordinate is the lexicographically largest of the two associated with
- *  the x-coordinate. Otherwise the first byte is a 0x03.
- *  This prefix is followed with the x-coordinate.
+ * PubKey is an ed25519 public key for handling Tendermint keys in SDK.
+ * It's needed for Any serialization and SDK compatibility.
+ * It must not be used in a non Tendermint key context because it doesn't implement
+ * ADR-28. Nevertheless, you will like to use ed25519 in app user level
+ * then you must create a new proto message and follow ADR-28 for Address construction.
  */
 export interface PubKey {
+  $type: 'cosmos.crypto.ed25519.PubKey';
   key: Uint8Array;
 }
 
 /**
- *  PrivKey defines a ed25519 private key.
+ * Deprecated: PrivKey defines a ed25519 private key.
+ * NOTE: ed25519 keys must not be used in SDK apps except in a tendermint validator context.
  */
 export interface PrivKey {
+  $type: 'cosmos.crypto.ed25519.PrivKey';
   key: Uint8Array;
 }
 
-const basePubKey: object = {
-};
-
-const basePrivKey: object = {
-};
-
-export const protobufPackage = 'cosmos.crypto.ed25519'
-
-export const PubKey = {
-  encode(message: PubKey, writer: Writer = Writer.create()): Writer {
-    writer.uint32(10).bytes(message.key);
-    return writer;
-  },
-  decode(input: Uint8Array | Reader, length?: number): PubKey {
-    const reader = input instanceof Uint8Array ? new Reader(input) : input;
-    let end = length === undefined ? reader.len : reader.pos + length;
-    const message = { ...basePubKey } as PubKey;
-    while (reader.pos < end) {
-      const tag = reader.uint32();
-      switch (tag >>> 3) {
-        case 1:
-          message.key = reader.bytes();
-          break;
-        default:
-          reader.skipType(tag & 7);
-          break;
-      }
-    }
-    return message;
-  },
-  fromJSON(object: any): PubKey {
-    const message = { ...basePubKey } as PubKey;
-    if (object.key !== undefined && object.key !== null) {
-      message.key = bytesFromBase64(object.key);
-    }
-    return message;
-  },
-  fromPartial(object: DeepPartial<PubKey>): PubKey {
-    const message = { ...basePubKey } as PubKey;
-    if (object.key !== undefined && object.key !== null) {
-      message.key = object.key;
-    } else {
-      message.key = new Uint8Array();
-    }
-    return message;
-  },
-  toJSON(message: PubKey): unknown {
-    const obj: any = {};
-    message.key !== undefined && (obj.key = base64FromBytes(message.key !== undefined ? message.key : new Uint8Array()));
-    return obj;
-  },
-};
-
-export const PrivKey = {
-  encode(message: PrivKey, writer: Writer = Writer.create()): Writer {
-    writer.uint32(10).bytes(message.key);
-    return writer;
-  },
-  decode(input: Uint8Array | Reader, length?: number): PrivKey {
-    const reader = input instanceof Uint8Array ? new Reader(input) : input;
-    let end = length === undefined ? reader.len : reader.pos + length;
-    const message = { ...basePrivKey } as PrivKey;
-    while (reader.pos < end) {
-      const tag = reader.uint32();
-      switch (tag >>> 3) {
-        case 1:
-          message.key = reader.bytes();
-          break;
-        default:
-          reader.skipType(tag & 7);
-          break;
-      }
-    }
-    return message;
-  },
-  fromJSON(object: any): PrivKey {
-    const message = { ...basePrivKey } as PrivKey;
-    if (object.key !== undefined && object.key !== null) {
-      message.key = bytesFromBase64(object.key);
-    }
-    return message;
-  },
-  fromPartial(object: DeepPartial<PrivKey>): PrivKey {
-    const message = { ...basePrivKey } as PrivKey;
-    if (object.key !== undefined && object.key !== null) {
-      message.key = object.key;
-    } else {
-      message.key = new Uint8Array();
-    }
-    return message;
-  },
-  toJSON(message: PrivKey): unknown {
-    const obj: any = {};
-    message.key !== undefined && (obj.key = base64FromBytes(message.key !== undefined ? message.key : new Uint8Array()));
-    return obj;
-  },
-};
-
-interface WindowBase64 {
-  atob(b64: string): string;
-  btoa(bin: string): string;
+function createBasePubKey(): PubKey {
+  return { $type: 'cosmos.crypto.ed25519.PubKey', key: new Uint8Array() };
 }
 
-const windowBase64 = (globalThis as unknown as WindowBase64);
-const atob = windowBase64.atob || ((b64: string) => Buffer.from(b64, 'base64').toString('binary'));
-const btoa = windowBase64.btoa || ((bin: string) => Buffer.from(bin, 'binary').toString('base64'));
+export const PubKey = {
+  $type: 'cosmos.crypto.ed25519.PubKey' as const,
 
+  encode(
+    message: PubKey,
+    writer: _m0.Writer = _m0.Writer.create(),
+  ): _m0.Writer {
+    if (message.key.length !== 0) {
+      writer.uint32(10).bytes(message.key);
+    }
+    return writer;
+  },
+
+  decode(input: _m0.Reader | Uint8Array, length?: number): PubKey {
+    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+    let end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBasePubKey();
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+        case 1:
+          message.key = reader.bytes();
+          break;
+        default:
+          reader.skipType(tag & 7);
+          break;
+      }
+    }
+    return message;
+  },
+
+  fromJSON(object: any): PubKey {
+    return {
+      $type: PubKey.$type,
+      key: isSet(object.key) ? bytesFromBase64(object.key) : new Uint8Array(),
+    };
+  },
+
+  toJSON(message: PubKey): unknown {
+    const obj: any = {};
+    message.key !== undefined &&
+      (obj.key = base64FromBytes(
+        message.key !== undefined ? message.key : new Uint8Array(),
+      ));
+    return obj;
+  },
+
+  fromPartial<I extends Exact<DeepPartial<PubKey>, I>>(object: I): PubKey {
+    const message = createBasePubKey();
+    message.key = object.key ?? new Uint8Array();
+    return message;
+  },
+};
+
+messageTypeRegistry.set(PubKey.$type, PubKey);
+
+function createBasePrivKey(): PrivKey {
+  return { $type: 'cosmos.crypto.ed25519.PrivKey', key: new Uint8Array() };
+}
+
+export const PrivKey = {
+  $type: 'cosmos.crypto.ed25519.PrivKey' as const,
+
+  encode(
+    message: PrivKey,
+    writer: _m0.Writer = _m0.Writer.create(),
+  ): _m0.Writer {
+    if (message.key.length !== 0) {
+      writer.uint32(10).bytes(message.key);
+    }
+    return writer;
+  },
+
+  decode(input: _m0.Reader | Uint8Array, length?: number): PrivKey {
+    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+    let end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBasePrivKey();
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+        case 1:
+          message.key = reader.bytes();
+          break;
+        default:
+          reader.skipType(tag & 7);
+          break;
+      }
+    }
+    return message;
+  },
+
+  fromJSON(object: any): PrivKey {
+    return {
+      $type: PrivKey.$type,
+      key: isSet(object.key) ? bytesFromBase64(object.key) : new Uint8Array(),
+    };
+  },
+
+  toJSON(message: PrivKey): unknown {
+    const obj: any = {};
+    message.key !== undefined &&
+      (obj.key = base64FromBytes(
+        message.key !== undefined ? message.key : new Uint8Array(),
+      ));
+    return obj;
+  },
+
+  fromPartial<I extends Exact<DeepPartial<PrivKey>, I>>(object: I): PrivKey {
+    const message = createBasePrivKey();
+    message.key = object.key ?? new Uint8Array();
+    return message;
+  },
+};
+
+messageTypeRegistry.set(PrivKey.$type, PrivKey);
+
+declare var self: any | undefined;
+declare var window: any | undefined;
+declare var global: any | undefined;
+var globalThis: any = (() => {
+  if (typeof globalThis !== 'undefined') return globalThis;
+  if (typeof self !== 'undefined') return self;
+  if (typeof window !== 'undefined') return window;
+  if (typeof global !== 'undefined') return global;
+  throw 'Unable to locate global object';
+})();
+
+const atob: (b64: string) => string =
+  globalThis.atob ||
+  (b64 => globalThis.Buffer.from(b64, 'base64').toString('binary'));
 function bytesFromBase64(b64: string): Uint8Array {
   const bin = atob(b64);
   const arr = new Uint8Array(bin.length);
   for (let i = 0; i < bin.length; ++i) {
-      arr[i] = bin.charCodeAt(i);
+    arr[i] = bin.charCodeAt(i);
   }
   return arr;
 }
 
+const btoa: (bin: string) => string =
+  globalThis.btoa ||
+  (bin => globalThis.Buffer.from(bin, 'binary').toString('base64'));
 function base64FromBytes(arr: Uint8Array): string {
   const bin: string[] = [];
-  for (let i = 0; i < arr.byteLength; ++i) {
-    bin.push(String.fromCharCode(arr[i]));
+  for (const byte of arr) {
+    bin.push(String.fromCharCode(byte));
   }
   return btoa(bin.join(''));
 }
-type Builtin = Date | Function | Uint8Array | string | number | undefined;
+
+type Builtin =
+  | Date
+  | Function
+  | Uint8Array
+  | string
+  | number
+  | boolean
+  | undefined;
+
 export type DeepPartial<T> = T extends Builtin
   ? T
+  : T extends Long
+  ? string | number | Long
   : T extends Array<infer U>
   ? Array<DeepPartial<U>>
   : T extends ReadonlyArray<infer U>
   ? ReadonlyArray<DeepPartial<U>>
   : T extends {}
-  ? { [K in keyof T]?: DeepPartial<T[K]> }
+  ? { [K in Exclude<keyof T, '$type'>]?: DeepPartial<T[K]> }
   : Partial<T>;
+
+type KeysOfUnion<T> = T extends T ? keyof T : never;
+export type Exact<P, I extends P> = P extends Builtin
+  ? P
+  : P & { [K in keyof P]: Exact<P[K], I[K]> } & Record<
+        Exclude<keyof I, KeysOfUnion<P> | '$type'>,
+        never
+      >;
+
+if (_m0.util.Long !== Long) {
+  _m0.util.Long = Long as any;
+  _m0.configure();
+}
+
+function isSet(value: any): boolean {
+  return value !== null && value !== undefined;
+}

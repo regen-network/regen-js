@@ -1,34 +1,38 @@
 /* eslint-disable */
-import { Writer, Reader } from 'protobufjs/minimal';
+import { messageTypeRegistry } from '../../../typeRegistry';
+import Long from 'long';
+import _m0 from 'protobufjs/minimal';
 
+export const protobufPackage = 'cosmos.genutil.v1beta1';
 
-/**
- *  GenesisState defines the raw genesis transaction in JSON.
- */
+/** GenesisState defines the raw genesis transaction in JSON. */
 export interface GenesisState {
-  /**
-   *  gen_txs defines the genesis transactions.
-   */
+  $type: 'cosmos.genutil.v1beta1.GenesisState';
+  /** gen_txs defines the genesis transactions. */
   genTxs: Uint8Array[];
 }
 
-const baseGenesisState: object = {
-};
-
-export const protobufPackage = 'cosmos.genutil.v1beta1'
+function createBaseGenesisState(): GenesisState {
+  return { $type: 'cosmos.genutil.v1beta1.GenesisState', genTxs: [] };
+}
 
 export const GenesisState = {
-  encode(message: GenesisState, writer: Writer = Writer.create()): Writer {
+  $type: 'cosmos.genutil.v1beta1.GenesisState' as const,
+
+  encode(
+    message: GenesisState,
+    writer: _m0.Writer = _m0.Writer.create(),
+  ): _m0.Writer {
     for (const v of message.genTxs) {
       writer.uint32(10).bytes(v!);
     }
     return writer;
   },
-  decode(input: Uint8Array | Reader, length?: number): GenesisState {
-    const reader = input instanceof Uint8Array ? new Reader(input) : input;
+
+  decode(input: _m0.Reader | Uint8Array, length?: number): GenesisState {
+    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
-    const message = { ...baseGenesisState } as GenesisState;
-    message.genTxs = [];
+    const message = createBaseGenesisState();
     while (reader.pos < end) {
       const tag = reader.uint32();
       switch (tag >>> 3) {
@@ -42,69 +46,103 @@ export const GenesisState = {
     }
     return message;
   },
+
   fromJSON(object: any): GenesisState {
-    const message = { ...baseGenesisState } as GenesisState;
-    message.genTxs = [];
-    if (object.genTxs !== undefined && object.genTxs !== null) {
-      for (const e of object.genTxs) {
-        message.genTxs.push(bytesFromBase64(e));
-      }
-    }
-    return message;
+    return {
+      $type: GenesisState.$type,
+      genTxs: Array.isArray(object?.genTxs)
+        ? object.genTxs.map((e: any) => bytesFromBase64(e))
+        : [],
+    };
   },
-  fromPartial(object: DeepPartial<GenesisState>): GenesisState {
-    const message = { ...baseGenesisState } as GenesisState;
-    message.genTxs = [];
-    if (object.genTxs !== undefined && object.genTxs !== null) {
-      for (const e of object.genTxs) {
-        message.genTxs.push(e);
-      }
-    }
-    return message;
-  },
+
   toJSON(message: GenesisState): unknown {
     const obj: any = {};
     if (message.genTxs) {
-      obj.genTxs = message.genTxs.map(e => base64FromBytes(e !== undefined ? e : new Uint8Array()));
+      obj.genTxs = message.genTxs.map(e =>
+        base64FromBytes(e !== undefined ? e : new Uint8Array()),
+      );
     } else {
       obj.genTxs = [];
     }
     return obj;
   },
+
+  fromPartial<I extends Exact<DeepPartial<GenesisState>, I>>(
+    object: I,
+  ): GenesisState {
+    const message = createBaseGenesisState();
+    message.genTxs = object.genTxs?.map(e => e) || [];
+    return message;
+  },
 };
 
-interface WindowBase64 {
-  atob(b64: string): string;
-  btoa(bin: string): string;
-}
+messageTypeRegistry.set(GenesisState.$type, GenesisState);
 
-const windowBase64 = (globalThis as unknown as WindowBase64);
-const atob = windowBase64.atob || ((b64: string) => Buffer.from(b64, 'base64').toString('binary'));
-const btoa = windowBase64.btoa || ((bin: string) => Buffer.from(bin, 'binary').toString('base64'));
+declare var self: any | undefined;
+declare var window: any | undefined;
+declare var global: any | undefined;
+var globalThis: any = (() => {
+  if (typeof globalThis !== 'undefined') return globalThis;
+  if (typeof self !== 'undefined') return self;
+  if (typeof window !== 'undefined') return window;
+  if (typeof global !== 'undefined') return global;
+  throw 'Unable to locate global object';
+})();
 
+const atob: (b64: string) => string =
+  globalThis.atob ||
+  (b64 => globalThis.Buffer.from(b64, 'base64').toString('binary'));
 function bytesFromBase64(b64: string): Uint8Array {
   const bin = atob(b64);
   const arr = new Uint8Array(bin.length);
   for (let i = 0; i < bin.length; ++i) {
-      arr[i] = bin.charCodeAt(i);
+    arr[i] = bin.charCodeAt(i);
   }
   return arr;
 }
 
+const btoa: (bin: string) => string =
+  globalThis.btoa ||
+  (bin => globalThis.Buffer.from(bin, 'binary').toString('base64'));
 function base64FromBytes(arr: Uint8Array): string {
   const bin: string[] = [];
-  for (let i = 0; i < arr.byteLength; ++i) {
-    bin.push(String.fromCharCode(arr[i]));
+  for (const byte of arr) {
+    bin.push(String.fromCharCode(byte));
   }
   return btoa(bin.join(''));
 }
-type Builtin = Date | Function | Uint8Array | string | number | undefined;
+
+type Builtin =
+  | Date
+  | Function
+  | Uint8Array
+  | string
+  | number
+  | boolean
+  | undefined;
+
 export type DeepPartial<T> = T extends Builtin
   ? T
+  : T extends Long
+  ? string | number | Long
   : T extends Array<infer U>
   ? Array<DeepPartial<U>>
   : T extends ReadonlyArray<infer U>
   ? ReadonlyArray<DeepPartial<U>>
   : T extends {}
-  ? { [K in keyof T]?: DeepPartial<T[K]> }
+  ? { [K in Exclude<keyof T, '$type'>]?: DeepPartial<T[K]> }
   : Partial<T>;
+
+type KeysOfUnion<T> = T extends T ? keyof T : never;
+export type Exact<P, I extends P> = P extends Builtin
+  ? P
+  : P & { [K in keyof P]: Exact<P[K], I[K]> } & Record<
+        Exclude<keyof I, KeysOfUnion<P> | '$type'>,
+        never
+      >;
+
+if (_m0.util.Long !== Long) {
+  _m0.util.Long = Long as any;
+  _m0.configure();
+}

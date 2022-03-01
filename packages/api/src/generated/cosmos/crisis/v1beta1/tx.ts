@@ -1,78 +1,55 @@
 /* eslint-disable */
-import { Reader, Writer } from 'protobufjs/minimal';
+import { messageTypeRegistry } from '../../../typeRegistry';
+import Long from 'long';
+import _m0 from 'protobufjs/minimal';
 
+export const protobufPackage = 'cosmos.crisis.v1beta1';
 
-/**
- *  MsgVerifyInvariant represents a message to verify a particular invariance.
- */
+/** MsgVerifyInvariant represents a message to verify a particular invariance. */
 export interface MsgVerifyInvariant {
+  $type: 'cosmos.crisis.v1beta1.MsgVerifyInvariant';
   sender: string;
   invariantModuleName: string;
   invariantRoute: string;
 }
 
-/**
- *  MsgVerifyInvariantResponse defines the Msg/VerifyInvariant response type.
- */
+/** MsgVerifyInvariantResponse defines the Msg/VerifyInvariant response type. */
 export interface MsgVerifyInvariantResponse {
+  $type: 'cosmos.crisis.v1beta1.MsgVerifyInvariantResponse';
 }
 
-const baseMsgVerifyInvariant: object = {
-  sender: "",
-  invariantModuleName: "",
-  invariantRoute: "",
-};
-
-const baseMsgVerifyInvariantResponse: object = {
-};
-
-/**
- *  Msg defines the bank Msg service.
- */
-export interface Msg {
-
-  /**
-   *  VerifyInvariant defines a method to verify a particular invariance.
-   */
-  VerifyInvariant(request: MsgVerifyInvariant): Promise<MsgVerifyInvariantResponse>;
-
+function createBaseMsgVerifyInvariant(): MsgVerifyInvariant {
+  return {
+    $type: 'cosmos.crisis.v1beta1.MsgVerifyInvariant',
+    sender: '',
+    invariantModuleName: '',
+    invariantRoute: '',
+  };
 }
-
-export class MsgClientImpl implements Msg {
-
-  private readonly rpc: Rpc;
-
-  constructor(rpc: Rpc) {
-    this.rpc = rpc;
-  }
-
-  VerifyInvariant(request: MsgVerifyInvariant): Promise<MsgVerifyInvariantResponse> {
-    const data = MsgVerifyInvariant.encode(request).finish();
-    const promise = this.rpc.request("cosmos.crisis.v1beta1.Msg", "VerifyInvariant", data);
-    return promise.then(data => MsgVerifyInvariantResponse.decode(new Reader(data)));
-  }
-
-}
-
-interface Rpc {
-
-  request(service: string, method: string, data: Uint8Array): Promise<Uint8Array>;
-
-}
-
-export const protobufPackage = 'cosmos.crisis.v1beta1'
 
 export const MsgVerifyInvariant = {
-  encode(message: MsgVerifyInvariant, writer: Writer = Writer.create()): Writer {
-    writer.uint32(10).string(message.sender);
-    writer.uint32(18).string(message.invariantModuleName);
-    writer.uint32(26).string(message.invariantRoute);
+  $type: 'cosmos.crisis.v1beta1.MsgVerifyInvariant' as const,
+
+  encode(
+    message: MsgVerifyInvariant,
+    writer: _m0.Writer = _m0.Writer.create(),
+  ): _m0.Writer {
+    if (message.sender !== '') {
+      writer.uint32(10).string(message.sender);
+    }
+    if (message.invariantModuleName !== '') {
+      writer.uint32(18).string(message.invariantModuleName);
+    }
+    if (message.invariantRoute !== '') {
+      writer.uint32(26).string(message.invariantRoute);
+    }
     return writer;
   },
-  decode(input: Uint8Array | Reader, length?: number): MsgVerifyInvariant {
-    const reader = input instanceof Uint8Array ? new Reader(input) : input;
+
+  decode(input: _m0.Reader | Uint8Array, length?: number): MsgVerifyInvariant {
+    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
-    const message = { ...baseMsgVerifyInvariant } as MsgVerifyInvariant;
+    const message = createBaseMsgVerifyInvariant();
     while (reader.pos < end) {
       const tag = reader.uint32();
       switch (tag >>> 3) {
@@ -92,61 +69,64 @@ export const MsgVerifyInvariant = {
     }
     return message;
   },
+
   fromJSON(object: any): MsgVerifyInvariant {
-    const message = { ...baseMsgVerifyInvariant } as MsgVerifyInvariant;
-    if (object.sender !== undefined && object.sender !== null) {
-      message.sender = String(object.sender);
-    } else {
-      message.sender = "";
-    }
-    if (object.invariantModuleName !== undefined && object.invariantModuleName !== null) {
-      message.invariantModuleName = String(object.invariantModuleName);
-    } else {
-      message.invariantModuleName = "";
-    }
-    if (object.invariantRoute !== undefined && object.invariantRoute !== null) {
-      message.invariantRoute = String(object.invariantRoute);
-    } else {
-      message.invariantRoute = "";
-    }
-    return message;
+    return {
+      $type: MsgVerifyInvariant.$type,
+      sender: isSet(object.sender) ? String(object.sender) : '',
+      invariantModuleName: isSet(object.invariantModuleName)
+        ? String(object.invariantModuleName)
+        : '',
+      invariantRoute: isSet(object.invariantRoute)
+        ? String(object.invariantRoute)
+        : '',
+    };
   },
-  fromPartial(object: DeepPartial<MsgVerifyInvariant>): MsgVerifyInvariant {
-    const message = { ...baseMsgVerifyInvariant } as MsgVerifyInvariant;
-    if (object.sender !== undefined && object.sender !== null) {
-      message.sender = object.sender;
-    } else {
-      message.sender = "";
-    }
-    if (object.invariantModuleName !== undefined && object.invariantModuleName !== null) {
-      message.invariantModuleName = object.invariantModuleName;
-    } else {
-      message.invariantModuleName = "";
-    }
-    if (object.invariantRoute !== undefined && object.invariantRoute !== null) {
-      message.invariantRoute = object.invariantRoute;
-    } else {
-      message.invariantRoute = "";
-    }
-    return message;
-  },
+
   toJSON(message: MsgVerifyInvariant): unknown {
     const obj: any = {};
     message.sender !== undefined && (obj.sender = message.sender);
-    message.invariantModuleName !== undefined && (obj.invariantModuleName = message.invariantModuleName);
-    message.invariantRoute !== undefined && (obj.invariantRoute = message.invariantRoute);
+    message.invariantModuleName !== undefined &&
+      (obj.invariantModuleName = message.invariantModuleName);
+    message.invariantRoute !== undefined &&
+      (obj.invariantRoute = message.invariantRoute);
     return obj;
+  },
+
+  fromPartial<I extends Exact<DeepPartial<MsgVerifyInvariant>, I>>(
+    object: I,
+  ): MsgVerifyInvariant {
+    const message = createBaseMsgVerifyInvariant();
+    message.sender = object.sender ?? '';
+    message.invariantModuleName = object.invariantModuleName ?? '';
+    message.invariantRoute = object.invariantRoute ?? '';
+    return message;
   },
 };
 
+messageTypeRegistry.set(MsgVerifyInvariant.$type, MsgVerifyInvariant);
+
+function createBaseMsgVerifyInvariantResponse(): MsgVerifyInvariantResponse {
+  return { $type: 'cosmos.crisis.v1beta1.MsgVerifyInvariantResponse' };
+}
+
 export const MsgVerifyInvariantResponse = {
-  encode(_: MsgVerifyInvariantResponse, writer: Writer = Writer.create()): Writer {
+  $type: 'cosmos.crisis.v1beta1.MsgVerifyInvariantResponse' as const,
+
+  encode(
+    _: MsgVerifyInvariantResponse,
+    writer: _m0.Writer = _m0.Writer.create(),
+  ): _m0.Writer {
     return writer;
   },
-  decode(input: Uint8Array | Reader, length?: number): MsgVerifyInvariantResponse {
-    const reader = input instanceof Uint8Array ? new Reader(input) : input;
+
+  decode(
+    input: _m0.Reader | Uint8Array,
+    length?: number,
+  ): MsgVerifyInvariantResponse {
+    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
-    const message = { ...baseMsgVerifyInvariantResponse } as MsgVerifyInvariantResponse;
+    const message = createBaseMsgVerifyInvariantResponse();
     while (reader.pos < end) {
       const tag = reader.uint32();
       switch (tag >>> 3) {
@@ -157,27 +137,103 @@ export const MsgVerifyInvariantResponse = {
     }
     return message;
   },
+
   fromJSON(_: any): MsgVerifyInvariantResponse {
-    const message = { ...baseMsgVerifyInvariantResponse } as MsgVerifyInvariantResponse;
-    return message;
+    return {
+      $type: MsgVerifyInvariantResponse.$type,
+    };
   },
-  fromPartial(_: DeepPartial<MsgVerifyInvariantResponse>): MsgVerifyInvariantResponse {
-    const message = { ...baseMsgVerifyInvariantResponse } as MsgVerifyInvariantResponse;
-    return message;
-  },
+
   toJSON(_: MsgVerifyInvariantResponse): unknown {
     const obj: any = {};
     return obj;
   },
+
+  fromPartial<I extends Exact<DeepPartial<MsgVerifyInvariantResponse>, I>>(
+    _: I,
+  ): MsgVerifyInvariantResponse {
+    const message = createBaseMsgVerifyInvariantResponse();
+    return message;
+  },
 };
 
-type Builtin = Date | Function | Uint8Array | string | number | undefined;
+messageTypeRegistry.set(
+  MsgVerifyInvariantResponse.$type,
+  MsgVerifyInvariantResponse,
+);
+
+/** Msg defines the bank Msg service. */
+export interface Msg {
+  /** VerifyInvariant defines a method to verify a particular invariance. */
+  VerifyInvariant(
+    request: DeepPartial<MsgVerifyInvariant>,
+  ): Promise<MsgVerifyInvariantResponse>;
+}
+
+export class MsgClientImpl implements Msg {
+  private readonly rpc: Rpc;
+  constructor(rpc: Rpc) {
+    this.rpc = rpc;
+    this.VerifyInvariant = this.VerifyInvariant.bind(this);
+  }
+  VerifyInvariant(
+    request: DeepPartial<MsgVerifyInvariant>,
+  ): Promise<MsgVerifyInvariantResponse> {
+    const fromPartial = MsgVerifyInvariant.fromPartial(request);
+    const data = MsgVerifyInvariant.encode(fromPartial).finish();
+    const promise = this.rpc.request(
+      'cosmos.crisis.v1beta1.Msg',
+      'VerifyInvariant',
+      data,
+    );
+    return promise.then(data =>
+      MsgVerifyInvariantResponse.decode(new _m0.Reader(data)),
+    );
+  }
+}
+
+interface Rpc {
+  request(
+    service: string,
+    method: string,
+    data: Uint8Array,
+  ): Promise<Uint8Array>;
+}
+
+type Builtin =
+  | Date
+  | Function
+  | Uint8Array
+  | string
+  | number
+  | boolean
+  | undefined;
+
 export type DeepPartial<T> = T extends Builtin
   ? T
+  : T extends Long
+  ? string | number | Long
   : T extends Array<infer U>
   ? Array<DeepPartial<U>>
   : T extends ReadonlyArray<infer U>
   ? ReadonlyArray<DeepPartial<U>>
   : T extends {}
-  ? { [K in keyof T]?: DeepPartial<T[K]> }
+  ? { [K in Exclude<keyof T, '$type'>]?: DeepPartial<T[K]> }
   : Partial<T>;
+
+type KeysOfUnion<T> = T extends T ? keyof T : never;
+export type Exact<P, I extends P> = P extends Builtin
+  ? P
+  : P & { [K in keyof P]: Exact<P[K], I[K]> } & Record<
+        Exclude<keyof I, KeysOfUnion<P> | '$type'>,
+        never
+      >;
+
+if (_m0.util.Long !== Long) {
+  _m0.util.Long = Long as any;
+  _m0.configure();
+}
+
+function isSet(value: any): boolean {
+  return value !== null && value !== undefined;
+}

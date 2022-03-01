@@ -2462,6 +2462,18 @@
   resolved "https://registry.yarnpkg.com/@protobufjs/utf8/-/utf8-1.1.0.tgz#a777360b5b39a1a2e5106f8e858f2fd2d060c570"
   integrity sha1-p3c2C1s5oaLlEG+OhY8v0tBgxXA=
 
+"@regen-network/ts-proto@1.105.2-1":
+  version "1.105.2-1"
+  resolved "https://registry.yarnpkg.com/@regen-network/ts-proto/-/ts-proto-1.105.2-1.tgz#bc7c0eeb7320906eb883a86256421ed0d33d58d9"
+  integrity sha512-1VjxXPmnBqg5nAuv+oqcPnlIu+qPPkh6h+qnJYOms2T68O8gYI0vcRxfRuUtxdY8lXW+fS07MW55UWxrvL2Eyg==
+  dependencies:
+    "@types/object-hash" "^1.3.0"
+    dataloader "^1.4.0"
+    object-hash "^1.3.1"
+    protobufjs "^6.8.8"
+    ts-poet "^4.5.0"
+    ts-proto-descriptors "1.6.0"
+
 "@rollup/plugin-node-resolve@^7.1.1":
   version "7.1.3"
   resolved "https://registry.yarnpkg.com/@rollup/plugin-node-resolve/-/plugin-node-resolve-7.1.3.tgz#80de384edfbd7bfc9101164910f86078151a3eca"
@@ -13673,25 +13685,13 @@ ts-poet@^4.5.0:
     lodash "^4.17.15"
     prettier "^2.5.1"
 
-ts-proto-descriptors@1.3.1:
-  version "1.3.1"
-  resolved "https://registry.yarnpkg.com/ts-proto-descriptors/-/ts-proto-descriptors-1.3.1.tgz#760ebaaa19475b03662f7b358ffea45b9c5348f5"
-  integrity sha512-Cybb3fqceMwA6JzHdC32dIo8eVGVmXrM6TWhdk1XQVVHT/6OQqk0ioyX1dIdu3rCIBhRmWUhUE4HsyK+olmgMw==
+ts-proto-descriptors@1.6.0:
+  version "1.6.0"
+  resolved "https://registry.yarnpkg.com/ts-proto-descriptors/-/ts-proto-descriptors-1.6.0.tgz#ca6eafc882495a2e920da5b981d7b181b4e49c38"
+  integrity sha512-Vrhue2Ti99us/o76mGy28nF3W/Uanl1/8detyJw2yyRwiBC5yxy+hEZqQ/ZX2PbZ1vyCpJ51A9L4PnCCnkBMTQ==
   dependencies:
     long "^4.0.0"
     protobufjs "^6.8.8"
-
-ts-proto@^1.92:
-  version "1.102.2"
-  resolved "https://registry.yarnpkg.com/ts-proto/-/ts-proto-1.102.2.tgz#738395d2010320ff6364c6a2737d79ea0404a551"
-  integrity sha512-GSgfpjRUQQIDVkWzHO0CfruhCMYQgKnyvtOIj0TbaySFdnIRr2uUeS9GZNBKeyW3T9fK0lDE/uYnXQXpZHml4A==
-  dependencies:
-    "@types/object-hash" "^1.3.0"
-    dataloader "^1.4.0"
-    object-hash "^1.3.1"
-    protobufjs "^6.8.8"
-    ts-poet "^4.5.0"
-    ts-proto-descriptors "1.3.1"
 
 tsconfig-paths@^3.12.0:
   version "3.12.0"
