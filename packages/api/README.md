@@ -66,7 +66,7 @@ const txBytes = await api.msgClient?.sign(
 	'some memo',
 );
 if (txBytes) {
-	const hash = await api.msgClient?.broadcast(txBytes);
+	const deliverTxRes = await api.msgClient?.broadcast(txBytes);
 }
 ```
 

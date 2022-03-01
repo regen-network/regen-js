@@ -1,4 +1,5 @@
 import { DirectSecp256k1HdWallet } from '@cosmjs/proto-signing';
+import { DeliverTxResponse } from '@cosmjs/stargate';
 import { RegenApi } from '../src/api';
 import { QueryClientImpl } from '../src/generated/cosmos/bank/v1beta1/query';
 import { MsgSend } from '../src/generated/cosmos/bank/v1beta1/tx';
@@ -82,7 +83,7 @@ describe('RegenApi with tendermint connection', () => {
     });
     it('should return a tx hash when sending tokens', async () => {
       jest.setTimeout(10000);
-      let txHash: string | undefined;
+      let txRes: DeliverTxResponse | undefined;
       const signingClient = api.msgClient;
 
       const signedTxBytes = await api.msgClient?.sign(
@@ -93,8 +94,8 @@ describe('RegenApi with tendermint connection', () => {
       );
       expect(signedTxBytes).toBeTruthy();
       if (signedTxBytes) {
-        txHash = await signingClient?.broadcast(signedTxBytes);
-        expect(txHash).toBeTruthy();
+        txRes = await signingClient?.broadcast(signedTxBytes);
+        expect(txRes).toBeTruthy();
       }
     });
   });

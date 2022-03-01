@@ -1,5 +1,9 @@
 import { TxRaw } from 'cosmjs-types/cosmos/tx/v1beta1/tx';
-import { defaultRegistryTypes, StdFee } from '@cosmjs/stargate';
+import {
+  defaultRegistryTypes,
+  StdFee,
+  DeliverTxResponse,
+} from '@cosmjs/stargate';
 import { Registry, GeneratedType, EncodeObject } from '@cosmjs/proto-signing';
 
 import { SigningConnectionOptions } from '../api';
@@ -13,7 +17,7 @@ export interface MessageClient {
     fee: StdFee,
     memo: string,
   ) => Promise<Uint8Array>;
-  readonly broadcast: (signedTxBytes: Uint8Array) => Promise<string>;
+  readonly broadcast: (signedTxBytes: Uint8Array) => Promise<DeliverTxResponse>;
 }
 
 export async function setupTxExtension(
@@ -58,13 +62,15 @@ export async function setupTxExtension(
   };
 
   /**
-   * Broadcast a signed transaction and wait for transaction hash
+   * Broadcast a signed transaction and wait for the deliver tx response
    */
-  const broadcast = async (signedTxBytes: Uint8Array): Promise<string> => {
+  const broadcast = async (
+    signedTxBytes: Uint8Array,
+  ): Promise<DeliverTxResponse> => {
     try {
       const result = await signingClient.broadcastTx(signedTxBytes);
 
-      return result.transactionHash;
+      return result;
     } catch (err) {
       return Promise.reject(err);
     }
