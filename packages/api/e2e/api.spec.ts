@@ -6,7 +6,7 @@ import { MsgSend } from '../src/generated/cosmos/bank/v1beta1/tx';
 import { ServiceClientImpl } from '../src/generated/cosmos/tx/v1beta1/service';
 
 const TEST_ADDRESS = 'regen1df675r9vnf7pdedn4sf26svdsem3ugavgxmy46';
-const REDWOOD_NODE_TM_URL = 'http://209.182.218.23:26657';
+const REDWOOD_NODE_TM_URL = 'http://redwood.regen.network:26657/';
 const TEST_FEE = {
   amount: [
     {
