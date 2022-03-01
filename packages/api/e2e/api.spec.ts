@@ -16,7 +16,7 @@ const TEST_FEE = {
   ],
   gas: '200000',
 };
-const TEST_MEMO = 'memo';
+const TEST_MEMO = `regen-js v${process.env.npm_package_version} tests`;
 // This test msg just sends tokens to the same address
 const TEST_MSG = MsgSend.fromPartial({
   fromAddress: TEST_ADDRESS,
