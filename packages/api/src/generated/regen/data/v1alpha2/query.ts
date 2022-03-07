@@ -3,24 +3,28 @@ import { messageTypeRegistry } from '../../../typeRegistry';
 import Long from 'long';
 import _m0 from 'protobufjs/minimal';
 import {
+  ContentHash,
+  Content,
+  SignerEntry,
+} from '../../../regen/data/v1alpha2/types';
+import {
   PageRequest,
   PageResponse,
 } from '../../../cosmos/base/query/v1beta1/pagination';
-import { ContentHash } from '../../../regen/data/v1alpha2/types';
 import { Timestamp } from '../../../google/protobuf/timestamp';
 
 export const protobufPackage = 'regen.data.v1alpha2';
 
 /** QueryByContentHashRequest is the Query/ByContentHash request type. */
-export interface QueryByIRIRequest {
-  $type: 'regen.data.v1alpha2.QueryByIRIRequest';
+export interface QueryByHashRequest {
+  $type: 'regen.data.v1alpha2.QueryByHashRequest';
   /** hash is the hash-based identifier for the anchored content. */
-  iri: string;
+  hash?: ContentHash;
 }
 
 /** QueryByContentHashResponse is the Query/ByContentHash response type. */
-export interface QueryByIRIResponse {
-  $type: 'regen.data.v1alpha2.QueryByIRIResponse';
+export interface QueryByHashResponse {
+  $type: 'regen.data.v1alpha2.QueryByHashResponse';
   /** entry is the ContentEntry */
   entry?: ContentEntry;
 }
@@ -52,52 +56,38 @@ export interface ContentEntry {
   iri: string;
   /** timestamp is the anchor Timestamp */
   timestamp?: Date;
+  /** signers are the signers, if any */
+  signers: SignerEntry[];
+  /** content is the actual content if stored on-chain */
+  content?: Content;
 }
 
-/** QuerySignersRequest is the Query/Signers request type. */
-export interface QuerySignersRequest {
-  $type: 'regen.data.v1alpha2.QuerySignersRequest';
-  /** iri is the content IRI */
-  iri: string;
-  /** pagination is the PageRequest to use for pagination. */
-  pagination?: PageRequest;
+function createBaseQueryByHashRequest(): QueryByHashRequest {
+  return { $type: 'regen.data.v1alpha2.QueryByHashRequest', hash: undefined };
 }
 
-/** QuerySignersResponse is the Query/QuerySigners response type. */
-export interface QuerySignersResponse {
-  $type: 'regen.data.v1alpha2.QuerySignersResponse';
-  /** signers are the addresses of the signers. */
-  signers: string[];
-  /** pagination is the pagination PageResponse. */
-  pagination?: PageResponse;
-}
-
-function createBaseQueryByIRIRequest(): QueryByIRIRequest {
-  return { $type: 'regen.data.v1alpha2.QueryByIRIRequest', iri: '' };
-}
-
-export const QueryByIRIRequest = {
-  $type: 'regen.data.v1alpha2.QueryByIRIRequest' as const,
+export const QueryByHashRequest = {
+  $type: 'regen.data.v1alpha2.QueryByHashRequest' as const,
 
   encode(
-    message: QueryByIRIRequest,
+    message: QueryByHashRequest,
     writer: _m0.Writer = _m0.Writer.create(),
   ): _m0.Writer {
-    if (message.iri !== '') {
-      writer.uint32(10).string(message.iri);
+    if (message.hash !== undefined) {
+      ContentHash.encode(message.hash, writer.uint32(10).fork()).ldelim();
     }
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array, length?: number): QueryByIRIRequest {
+  decode(input: _m0.Reader | Uint8Array, length?: number): QueryByHashRequest {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
-    const message = createBaseQueryByIRIRequest();
+    const message = createBaseQueryByHashRequest();
     while (reader.pos < end) {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          message.iri = reader.string();
+          message.hash = ContentHash.decode(reader, reader.uint32());
           break;
         default:
           reader.skipType(tag & 7);
@@ -107,39 +97,43 @@ export const QueryByIRIRequest = {
     return message;
   },
 
-  fromJSON(object: any): QueryByIRIRequest {
+  fromJSON(object: any): QueryByHashRequest {
     return {
-      $type: QueryByIRIRequest.$type,
-      iri: isSet(object.iri) ? String(object.iri) : '',
+      $type: QueryByHashRequest.$type,
+      hash: isSet(object.hash) ? ContentHash.fromJSON(object.hash) : undefined,
     };
   },
 
-  toJSON(message: QueryByIRIRequest): unknown {
+  toJSON(message: QueryByHashRequest): unknown {
     const obj: any = {};
-    message.iri !== undefined && (obj.iri = message.iri);
+    message.hash !== undefined &&
+      (obj.hash = message.hash ? ContentHash.toJSON(message.hash) : undefined);
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<QueryByIRIRequest>, I>>(
+  fromPartial<I extends Exact<DeepPartial<QueryByHashRequest>, I>>(
     object: I,
-  ): QueryByIRIRequest {
-    const message = createBaseQueryByIRIRequest();
-    message.iri = object.iri ?? '';
+  ): QueryByHashRequest {
+    const message = createBaseQueryByHashRequest();
+    message.hash =
+      object.hash !== undefined && object.hash !== null
+        ? ContentHash.fromPartial(object.hash)
+        : undefined;
     return message;
   },
 };
 
-messageTypeRegistry.set(QueryByIRIRequest.$type, QueryByIRIRequest);
+messageTypeRegistry.set(QueryByHashRequest.$type, QueryByHashRequest);
 
-function createBaseQueryByIRIResponse(): QueryByIRIResponse {
-  return { $type: 'regen.data.v1alpha2.QueryByIRIResponse', entry: undefined };
+function createBaseQueryByHashResponse(): QueryByHashResponse {
+  return { $type: 'regen.data.v1alpha2.QueryByHashResponse', entry: undefined };
 }
 
-export const QueryByIRIResponse = {
-  $type: 'regen.data.v1alpha2.QueryByIRIResponse' as const,
+export const QueryByHashResponse = {
+  $type: 'regen.data.v1alpha2.QueryByHashResponse' as const,
 
   encode(
-    message: QueryByIRIResponse,
+    message: QueryByHashResponse,
     writer: _m0.Writer = _m0.Writer.create(),
   ): _m0.Writer {
     if (message.entry !== undefined) {
@@ -148,10 +142,10 @@ export const QueryByIRIResponse = {
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array, length?: number): QueryByIRIResponse {
+  decode(input: _m0.Reader | Uint8Array, length?: number): QueryByHashResponse {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
-    const message = createBaseQueryByIRIResponse();
+    const message = createBaseQueryByHashResponse();
     while (reader.pos < end) {
       const tag = reader.uint32();
       switch (tag >>> 3) {
@@ -166,16 +160,16 @@ export const QueryByIRIResponse = {
     return message;
   },
 
-  fromJSON(object: any): QueryByIRIResponse {
+  fromJSON(object: any): QueryByHashResponse {
     return {
-      $type: QueryByIRIResponse.$type,
+      $type: QueryByHashResponse.$type,
       entry: isSet(object.entry)
         ? ContentEntry.fromJSON(object.entry)
         : undefined,
     };
   },
 
-  toJSON(message: QueryByIRIResponse): unknown {
+  toJSON(message: QueryByHashResponse): unknown {
     const obj: any = {};
     message.entry !== undefined &&
       (obj.entry = message.entry
@@ -184,10 +178,10 @@ export const QueryByIRIResponse = {
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<QueryByIRIResponse>, I>>(
+  fromPartial<I extends Exact<DeepPartial<QueryByHashResponse>, I>>(
     object: I,
-  ): QueryByIRIResponse {
-    const message = createBaseQueryByIRIResponse();
+  ): QueryByHashResponse {
+    const message = createBaseQueryByHashResponse();
     message.entry =
       object.entry !== undefined && object.entry !== null
         ? ContentEntry.fromPartial(object.entry)
@@ -196,7 +190,7 @@ export const QueryByIRIResponse = {
   },
 };
 
-messageTypeRegistry.set(QueryByIRIResponse.$type, QueryByIRIResponse);
+messageTypeRegistry.set(QueryByHashResponse.$type, QueryByHashResponse);
 
 function createBaseQueryBySignerRequest(): QueryBySignerRequest {
   return {
@@ -382,6 +376,8 @@ function createBaseContentEntry(): ContentEntry {
     hash: undefined,
     iri: '',
     timestamp: undefined,
+    signers: [],
+    content: undefined,
   };
 }
 
@@ -404,6 +400,12 @@ export const ContentEntry = {
         writer.uint32(26).fork(),
       ).ldelim();
     }
+    for (const v of message.signers) {
+      SignerEntry.encode(v!, writer.uint32(34).fork()).ldelim();
+    }
+    if (message.content !== undefined) {
+      Content.encode(message.content, writer.uint32(42).fork()).ldelim();
+    }
     return writer;
   },
 
@@ -425,6 +427,12 @@ export const ContentEntry = {
             Timestamp.decode(reader, reader.uint32()),
           );
           break;
+        case 4:
+          message.signers.push(SignerEntry.decode(reader, reader.uint32()));
+          break;
+        case 5:
+          message.content = Content.decode(reader, reader.uint32());
+          break;
         default:
           reader.skipType(tag & 7);
           break;
@@ -441,6 +449,12 @@ export const ContentEntry = {
       timestamp: isSet(object.timestamp)
         ? fromJsonTimestamp(object.timestamp)
         : undefined,
+      signers: Array.isArray(object?.signers)
+        ? object.signers.map((e: any) => SignerEntry.fromJSON(e))
+        : [],
+      content: isSet(object.content)
+        ? Content.fromJSON(object.content)
+        : undefined,
     };
   },
 
@@ -451,6 +465,17 @@ export const ContentEntry = {
     message.iri !== undefined && (obj.iri = message.iri);
     message.timestamp !== undefined &&
       (obj.timestamp = message.timestamp.toISOString());
+    if (message.signers) {
+      obj.signers = message.signers.map(e =>
+        e ? SignerEntry.toJSON(e) : undefined,
+      );
+    } else {
+      obj.signers = [];
+    }
+    message.content !== undefined &&
+      (obj.content = message.content
+        ? Content.toJSON(message.content)
+        : undefined);
     return obj;
   },
 
@@ -464,216 +489,49 @@ export const ContentEntry = {
         : undefined;
     message.iri = object.iri ?? '';
     message.timestamp = object.timestamp ?? undefined;
+    message.signers =
+      object.signers?.map(e => SignerEntry.fromPartial(e)) || [];
+    message.content =
+      object.content !== undefined && object.content !== null
+        ? Content.fromPartial(object.content)
+        : undefined;
     return message;
   },
 };
 
 messageTypeRegistry.set(ContentEntry.$type, ContentEntry);
 
-function createBaseQuerySignersRequest(): QuerySignersRequest {
-  return {
-    $type: 'regen.data.v1alpha2.QuerySignersRequest',
-    iri: '',
-    pagination: undefined,
-  };
-}
-
-export const QuerySignersRequest = {
-  $type: 'regen.data.v1alpha2.QuerySignersRequest' as const,
-
-  encode(
-    message: QuerySignersRequest,
-    writer: _m0.Writer = _m0.Writer.create(),
-  ): _m0.Writer {
-    if (message.iri !== '') {
-      writer.uint32(10).string(message.iri);
-    }
-    if (message.pagination !== undefined) {
-      PageRequest.encode(message.pagination, writer.uint32(18).fork()).ldelim();
-    }
-    return writer;
-  },
-
-  decode(input: _m0.Reader | Uint8Array, length?: number): QuerySignersRequest {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
-    let end = length === undefined ? reader.len : reader.pos + length;
-    const message = createBaseQuerySignersRequest();
-    while (reader.pos < end) {
-      const tag = reader.uint32();
-      switch (tag >>> 3) {
-        case 1:
-          message.iri = reader.string();
-          break;
-        case 2:
-          message.pagination = PageRequest.decode(reader, reader.uint32());
-          break;
-        default:
-          reader.skipType(tag & 7);
-          break;
-      }
-    }
-    return message;
-  },
-
-  fromJSON(object: any): QuerySignersRequest {
-    return {
-      $type: QuerySignersRequest.$type,
-      iri: isSet(object.iri) ? String(object.iri) : '',
-      pagination: isSet(object.pagination)
-        ? PageRequest.fromJSON(object.pagination)
-        : undefined,
-    };
-  },
-
-  toJSON(message: QuerySignersRequest): unknown {
-    const obj: any = {};
-    message.iri !== undefined && (obj.iri = message.iri);
-    message.pagination !== undefined &&
-      (obj.pagination = message.pagination
-        ? PageRequest.toJSON(message.pagination)
-        : undefined);
-    return obj;
-  },
-
-  fromPartial<I extends Exact<DeepPartial<QuerySignersRequest>, I>>(
-    object: I,
-  ): QuerySignersRequest {
-    const message = createBaseQuerySignersRequest();
-    message.iri = object.iri ?? '';
-    message.pagination =
-      object.pagination !== undefined && object.pagination !== null
-        ? PageRequest.fromPartial(object.pagination)
-        : undefined;
-    return message;
-  },
-};
-
-messageTypeRegistry.set(QuerySignersRequest.$type, QuerySignersRequest);
-
-function createBaseQuerySignersResponse(): QuerySignersResponse {
-  return {
-    $type: 'regen.data.v1alpha2.QuerySignersResponse',
-    signers: [],
-    pagination: undefined,
-  };
-}
-
-export const QuerySignersResponse = {
-  $type: 'regen.data.v1alpha2.QuerySignersResponse' as const,
-
-  encode(
-    message: QuerySignersResponse,
-    writer: _m0.Writer = _m0.Writer.create(),
-  ): _m0.Writer {
-    for (const v of message.signers) {
-      writer.uint32(10).string(v!);
-    }
-    if (message.pagination !== undefined) {
-      PageResponse.encode(
-        message.pagination,
-        writer.uint32(18).fork(),
-      ).ldelim();
-    }
-    return writer;
-  },
-
-  decode(
-    input: _m0.Reader | Uint8Array,
-    length?: number,
-  ): QuerySignersResponse {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
-    let end = length === undefined ? reader.len : reader.pos + length;
-    const message = createBaseQuerySignersResponse();
-    while (reader.pos < end) {
-      const tag = reader.uint32();
-      switch (tag >>> 3) {
-        case 1:
-          message.signers.push(reader.string());
-          break;
-        case 2:
-          message.pagination = PageResponse.decode(reader, reader.uint32());
-          break;
-        default:
-          reader.skipType(tag & 7);
-          break;
-      }
-    }
-    return message;
-  },
-
-  fromJSON(object: any): QuerySignersResponse {
-    return {
-      $type: QuerySignersResponse.$type,
-      signers: Array.isArray(object?.signers)
-        ? object.signers.map((e: any) => String(e))
-        : [],
-      pagination: isSet(object.pagination)
-        ? PageResponse.fromJSON(object.pagination)
-        : undefined,
-    };
-  },
-
-  toJSON(message: QuerySignersResponse): unknown {
-    const obj: any = {};
-    if (message.signers) {
-      obj.signers = message.signers.map(e => e);
-    } else {
-      obj.signers = [];
-    }
-    message.pagination !== undefined &&
-      (obj.pagination = message.pagination
-        ? PageResponse.toJSON(message.pagination)
-        : undefined);
-    return obj;
-  },
-
-  fromPartial<I extends Exact<DeepPartial<QuerySignersResponse>, I>>(
-    object: I,
-  ): QuerySignersResponse {
-    const message = createBaseQuerySignersResponse();
-    message.signers = object.signers?.map(e => e) || [];
-    message.pagination =
-      object.pagination !== undefined && object.pagination !== null
-        ? PageResponse.fromPartial(object.pagination)
-        : undefined;
-    return message;
-  },
-};
-
-messageTypeRegistry.set(QuerySignersResponse.$type, QuerySignersResponse);
-
 /** Query is the regen.data.v1alpha2 Query service */
 export interface Query {
   /** ByHash queries data based on its ContentHash. */
-  ByIRI(request: DeepPartial<QueryByIRIRequest>): Promise<QueryByIRIResponse>;
+  ByHash(
+    request: DeepPartial<QueryByHashRequest>,
+  ): Promise<QueryByHashResponse>;
   /** BySigner queries data based on signers. */
   BySigner(
     request: DeepPartial<QueryBySignerRequest>,
   ): Promise<QueryBySignerResponse>;
-  /** Signers queries signers based on IRI. */
-  Signers(
-    request: DeepPartial<QuerySignersRequest>,
-  ): Promise<QuerySignersResponse>;
 }
 
 export class QueryClientImpl implements Query {
   private readonly rpc: Rpc;
   constructor(rpc: Rpc) {
     this.rpc = rpc;
-    this.ByIRI = this.ByIRI.bind(this);
+    this.ByHash = this.ByHash.bind(this);
     this.BySigner = this.BySigner.bind(this);
-    this.Signers = this.Signers.bind(this);
   }
-  ByIRI(request: DeepPartial<QueryByIRIRequest>): Promise<QueryByIRIResponse> {
-    const fromPartial = QueryByIRIRequest.fromPartial(request);
-    const data = QueryByIRIRequest.encode(fromPartial).finish();
+  ByHash(
+    request: DeepPartial<QueryByHashRequest>,
+  ): Promise<QueryByHashResponse> {
+    const fromPartial = QueryByHashRequest.fromPartial(request);
+    const data = QueryByHashRequest.encode(fromPartial).finish();
     const promise = this.rpc.request(
       'regen.data.v1alpha2.Query',
-      'ByIRI',
+      'ByHash',
       data,
     );
     return promise.then(data =>
-      QueryByIRIResponse.decode(new _m0.Reader(data)),
+      QueryByHashResponse.decode(new _m0.Reader(data)),
     );
   }
 
@@ -689,21 +547,6 @@ export class QueryClientImpl implements Query {
     );
     return promise.then(data =>
       QueryBySignerResponse.decode(new _m0.Reader(data)),
-    );
-  }
-
-  Signers(
-    request: DeepPartial<QuerySignersRequest>,
-  ): Promise<QuerySignersResponse> {
-    const fromPartial = QuerySignersRequest.fromPartial(request);
-    const data = QuerySignersRequest.encode(fromPartial).finish();
-    const promise = this.rpc.request(
-      'regen.data.v1alpha2.Query',
-      'Signers',
-      data,
-    );
-    return promise.then(data =>
-      QuerySignersResponse.decode(new _m0.Reader(data)),
     );
   }
 }

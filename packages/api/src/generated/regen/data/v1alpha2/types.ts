@@ -297,6 +297,13 @@ export interface ContentHash_Graph {
   merkleTree: GraphMerkleTree;
 }
 
+/** Content is a wrapper for content stored on-chain */
+export interface Content {
+  $type: 'regen.data.v1alpha2.Content';
+  /** raw_data is the oneof field for raw data */
+  rawData: Uint8Array | undefined;
+}
+
 /** SignerEntry is a signer entry wrapping a signer address and timestamp */
 export interface SignerEntry {
   $type: 'regen.data.v1alpha2.SignerEntry';
@@ -595,6 +602,69 @@ export const ContentHash_Graph = {
 };
 
 messageTypeRegistry.set(ContentHash_Graph.$type, ContentHash_Graph);
+
+function createBaseContent(): Content {
+  return { $type: 'regen.data.v1alpha2.Content', rawData: undefined };
+}
+
+export const Content = {
+  $type: 'regen.data.v1alpha2.Content' as const,
+
+  encode(
+    message: Content,
+    writer: _m0.Writer = _m0.Writer.create(),
+  ): _m0.Writer {
+    if (message.rawData !== undefined) {
+      writer.uint32(10).bytes(message.rawData);
+    }
+    return writer;
+  },
+
+  decode(input: _m0.Reader | Uint8Array, length?: number): Content {
+    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+    let end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseContent();
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+        case 1:
+          message.rawData = reader.bytes();
+          break;
+        default:
+          reader.skipType(tag & 7);
+          break;
+      }
+    }
+    return message;
+  },
+
+  fromJSON(object: any): Content {
+    return {
+      $type: Content.$type,
+      rawData: isSet(object.rawData)
+        ? bytesFromBase64(object.rawData)
+        : undefined,
+    };
+  },
+
+  toJSON(message: Content): unknown {
+    const obj: any = {};
+    message.rawData !== undefined &&
+      (obj.rawData =
+        message.rawData !== undefined
+          ? base64FromBytes(message.rawData)
+          : undefined);
+    return obj;
+  },
+
+  fromPartial<I extends Exact<DeepPartial<Content>, I>>(object: I): Content {
+    const message = createBaseContent();
+    message.rawData = object.rawData ?? undefined;
+    return message;
+  },
+};
+
+messageTypeRegistry.set(Content.$type, Content);
 
 function createBaseSignerEntry(): SignerEntry {
   return {

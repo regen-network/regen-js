@@ -2,7 +2,11 @@
 import { messageTypeRegistry } from '../../../typeRegistry';
 import Long from 'long';
 import _m0 from 'protobufjs/minimal';
-import { ContentHash, SignerEntry } from '../../../regen/data/v1alpha2/types';
+import {
+  ContentHash,
+  Content,
+  SignerEntry,
+} from '../../../regen/data/v1alpha2/types';
 import { Timestamp } from '../../../google/protobuf/timestamp';
 
 export const protobufPackage = 'regen.data.v1alpha2';
@@ -23,6 +27,8 @@ export interface GenesisContentEntry {
   timestamp?: Date;
   /** signers are the signers, if any */
   signers: SignerEntry[];
+  /** content is the actual content if stored on-chain */
+  content?: Content;
 }
 
 function createBaseGenesisState(): GenesisState {
@@ -101,6 +107,7 @@ function createBaseGenesisContentEntry(): GenesisContentEntry {
     hash: undefined,
     timestamp: undefined,
     signers: [],
+    content: undefined,
   };
 }
 
@@ -123,6 +130,9 @@ export const GenesisContentEntry = {
     for (const v of message.signers) {
       SignerEntry.encode(v!, writer.uint32(26).fork()).ldelim();
     }
+    if (message.content !== undefined) {
+      Content.encode(message.content, writer.uint32(34).fork()).ldelim();
+    }
     return writer;
   },
 
@@ -144,6 +154,9 @@ export const GenesisContentEntry = {
         case 3:
           message.signers.push(SignerEntry.decode(reader, reader.uint32()));
           break;
+        case 4:
+          message.content = Content.decode(reader, reader.uint32());
+          break;
         default:
           reader.skipType(tag & 7);
           break;
@@ -162,6 +175,9 @@ export const GenesisContentEntry = {
       signers: Array.isArray(object?.signers)
         ? object.signers.map((e: any) => SignerEntry.fromJSON(e))
         : [],
+      content: isSet(object.content)
+        ? Content.fromJSON(object.content)
+        : undefined,
     };
   },
 
@@ -178,6 +194,10 @@ export const GenesisContentEntry = {
     } else {
       obj.signers = [];
     }
+    message.content !== undefined &&
+      (obj.content = message.content
+        ? Content.toJSON(message.content)
+        : undefined);
     return obj;
   },
 
@@ -192,6 +212,10 @@ export const GenesisContentEntry = {
     message.timestamp = object.timestamp ?? undefined;
     message.signers =
       object.signers?.map(e => SignerEntry.fromPartial(e)) || [];
+    message.content =
+      object.content !== undefined && object.content !== null
+        ? Content.fromPartial(object.content)
+        : undefined;
     return message;
   },
 };
