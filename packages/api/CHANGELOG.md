@@ -3,6 +3,16 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.2.1](https://github.com/regen-network/regen-js/compare/v0.2.0...v0.2.1) (2022-03-08)
+
+
+### Features
+
+* **api:** Regenerate from regen v3.0.0 proto files 
+
+
+
+
 
 #  [0.2.0](https://github.com/regen-network/regen-js/compare/v0.1.2...v0.2.0) (2022-03-01)
 
