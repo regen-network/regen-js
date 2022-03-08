@@ -43,19 +43,20 @@ export interface EventCreateBatch {
 }
 
 /**
- * EventReceive is an event emitted when credits are received either upon
- * creation of a new batch or upon transfer. Each batch_denom created or
- * transferred will result in a separate EventReceive for easy indexing.
+ * EventReceive is an event emitted when credits are received either via
+ * creation of a new batch, transfer of credits, or taking credits from a
+ * basket. Each batch_denom created, transferred or taken from a basket will
+ * result in a separate EventReceive for easy indexing.
  */
 export interface EventReceive {
   $type: 'regen.ecocredit.v1alpha1.EventReceive';
   /**
    * sender is the sender of the credits in the case that this event is the
    * result of a transfer. It will not be set when credits are received at
-   * initial issuance.
+   * initial issuance or taken from a basket.
    */
   sender: string;
-  /** recipient is the recipient of the credits */
+  /** recipient is the recipient of the credits. */
   recipient: string;
   /** batch_denom is the unique ID of credit batch. */
   batchDenom: string;
@@ -63,6 +64,13 @@ export interface EventReceive {
   tradableAmount: string;
   /** retired_amount is the decimal number of retired credits received. */
   retiredAmount: string;
+  /**
+   * basket_denom is the denom of the basket. when the basket_denom field is
+   * set, it indicates that this event was triggered by the transfer of credits
+   * from a basket. It will not be set if the credits were sent by a user, or by
+   * initial issuance.
+   */
+  basketDenom: string;
 }
 
 /**
@@ -316,6 +324,7 @@ function createBaseEventReceive(): EventReceive {
     batchDenom: '',
     tradableAmount: '',
     retiredAmount: '',
+    basketDenom: '',
   };
 }
 
@@ -340,6 +349,9 @@ export const EventReceive = {
     }
     if (message.retiredAmount !== '') {
       writer.uint32(42).string(message.retiredAmount);
+    }
+    if (message.basketDenom !== '') {
+      writer.uint32(50).string(message.basketDenom);
     }
     return writer;
   },
@@ -366,6 +378,9 @@ export const EventReceive = {
         case 5:
           message.retiredAmount = reader.string();
           break;
+        case 6:
+          message.basketDenom = reader.string();
+          break;
         default:
           reader.skipType(tag & 7);
           break;
@@ -386,6 +401,7 @@ export const EventReceive = {
       retiredAmount: isSet(object.retiredAmount)
         ? String(object.retiredAmount)
         : '',
+      basketDenom: isSet(object.basketDenom) ? String(object.basketDenom) : '',
     };
   },
 
@@ -398,6 +414,8 @@ export const EventReceive = {
       (obj.tradableAmount = message.tradableAmount);
     message.retiredAmount !== undefined &&
       (obj.retiredAmount = message.retiredAmount);
+    message.basketDenom !== undefined &&
+      (obj.basketDenom = message.basketDenom);
     return obj;
   },
 
@@ -410,6 +428,7 @@ export const EventReceive = {
     message.batchDenom = object.batchDenom ?? '';
     message.tradableAmount = object.tradableAmount ?? '';
     message.retiredAmount = object.retiredAmount ?? '';
+    message.basketDenom = object.basketDenom ?? '';
     return message;
   },
 };

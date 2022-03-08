@@ -23,4 +23,8 @@ message GenesisContentEntry {
 
     // signers are the signers, if any
     repeated SignerEntry signers = 3;
+
+    // content is the actual content if stored on-chain
+    Content content = 4;
+
 }

@@ -18,7 +18,10 @@ export interface ClassInfo {
   issuers: string[];
   /** metadata is any arbitrary metadata to attached to the credit class. */
   metadata: Uint8Array;
-  /** credit_type describes the type of credit (e.g. carbon, biodiversity), as well as unit and precision. */
+  /**
+   * credit_type describes the type of credit (e.g. carbon, biodiversity), as
+   * well as unit and precision.
+   */
   creditType?: CreditType;
   /** The number of batches issued in this credit class. */
   numBatches: Long;
@@ -87,6 +90,8 @@ export interface Params {
   allowlistEnabled: boolean;
   /** credit_types is a list of definitions for credit types */
   creditTypes: CreditType[];
+  /** basket_creation_fee is the fee to create a new basket denom. */
+  basketCreationFee: Coin[];
 }
 
 /**
@@ -434,6 +439,7 @@ function createBaseParams(): Params {
     allowedClassCreators: [],
     allowlistEnabled: false,
     creditTypes: [],
+    basketCreationFee: [],
   };
 }
 
@@ -455,6 +461,9 @@ export const Params = {
     }
     for (const v of message.creditTypes) {
       CreditType.encode(v!, writer.uint32(34).fork()).ldelim();
+    }
+    for (const v of message.basketCreationFee) {
+      Coin.encode(v!, writer.uint32(42).fork()).ldelim();
     }
     return writer;
   },
@@ -478,6 +487,9 @@ export const Params = {
         case 4:
           message.creditTypes.push(CreditType.decode(reader, reader.uint32()));
           break;
+        case 5:
+          message.basketCreationFee.push(Coin.decode(reader, reader.uint32()));
+          break;
         default:
           reader.skipType(tag & 7);
           break;
@@ -500,6 +512,9 @@ export const Params = {
         : false,
       creditTypes: Array.isArray(object?.creditTypes)
         ? object.creditTypes.map((e: any) => CreditType.fromJSON(e))
+        : [],
+      basketCreationFee: Array.isArray(object?.basketCreationFee)
+        ? object.basketCreationFee.map((e: any) => Coin.fromJSON(e))
         : [],
     };
   },
@@ -527,6 +542,13 @@ export const Params = {
     } else {
       obj.creditTypes = [];
     }
+    if (message.basketCreationFee) {
+      obj.basketCreationFee = message.basketCreationFee.map(e =>
+        e ? Coin.toJSON(e) : undefined,
+      );
+    } else {
+      obj.basketCreationFee = [];
+    }
     return obj;
   },
 
@@ -539,6 +561,8 @@ export const Params = {
     message.allowlistEnabled = object.allowlistEnabled ?? false;
     message.creditTypes =
       object.creditTypes?.map(e => CreditType.fromPartial(e)) || [];
+    message.basketCreationFee =
+      object.basketCreationFee?.map(e => Coin.fromPartial(e)) || [];
     return message;
   },
 };

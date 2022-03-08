@@ -5,6 +5,7 @@ import _m0 from 'protobufjs/minimal';
 import {
   ContentHash,
   ContentHash_Graph,
+  ContentHash_Raw,
 } from '../../../regen/data/v1alpha2/types';
 import { Timestamp } from '../../../google/protobuf/timestamp';
 
@@ -28,8 +29,6 @@ export interface MsgAnchorDataResponse {
   $type: 'regen.data.v1alpha2.MsgAnchorDataResponse';
   /** timestamp is the timestamp of the block at which the data was anchored. */
   timestamp?: Date;
-  /** iri is the IRI of the data that was anchored. */
-  iri: string;
 }
 
 /** MsgSignData is the Msg/SignData request type. */
@@ -52,6 +51,26 @@ export interface MsgSignData {
 /** MsgSignDataResponse is the Msg/SignData response type. */
 export interface MsgSignDataResponse {
   $type: 'regen.data.v1alpha2.MsgSignDataResponse';
+}
+
+/** MsgStoreRawData is the Msg/StoreRawData request type. */
+export interface MsgStoreRawData {
+  $type: 'regen.data.v1alpha2.MsgStoreRawData';
+  /**
+   * sender is the address of the sender of the transaction.
+   * The sender in StoreData is not attesting to the veracity of the underlying
+   * data. They can simply be a intermediary providing services.
+   */
+  sender: string;
+  /** content_hash is the hash-based identifier for the anchored content. */
+  contentHash?: ContentHash_Raw;
+  /** content is the content of the raw data corresponding to the provided content hash. */
+  content: Uint8Array;
+}
+
+/** MsgStoreRawData is the Msg/StoreRawData response type. */
+export interface MsgStoreRawDataResponse {
+  $type: 'regen.data.v1alpha2.MsgStoreRawDataResponse';
 }
 
 function createBaseMsgAnchorData(): MsgAnchorData {
@@ -134,7 +153,6 @@ function createBaseMsgAnchorDataResponse(): MsgAnchorDataResponse {
   return {
     $type: 'regen.data.v1alpha2.MsgAnchorDataResponse',
     timestamp: undefined,
-    iri: '',
   };
 }
 
@@ -150,9 +168,6 @@ export const MsgAnchorDataResponse = {
         toTimestamp(message.timestamp),
         writer.uint32(10).fork(),
       ).ldelim();
-    }
-    if (message.iri !== '') {
-      writer.uint32(18).string(message.iri);
     }
     return writer;
   },
@@ -172,9 +187,6 @@ export const MsgAnchorDataResponse = {
             Timestamp.decode(reader, reader.uint32()),
           );
           break;
-        case 2:
-          message.iri = reader.string();
-          break;
         default:
           reader.skipType(tag & 7);
           break;
@@ -189,7 +201,6 @@ export const MsgAnchorDataResponse = {
       timestamp: isSet(object.timestamp)
         ? fromJsonTimestamp(object.timestamp)
         : undefined,
-      iri: isSet(object.iri) ? String(object.iri) : '',
     };
   },
 
@@ -197,7 +208,6 @@ export const MsgAnchorDataResponse = {
     const obj: any = {};
     message.timestamp !== undefined &&
       (obj.timestamp = message.timestamp.toISOString());
-    message.iri !== undefined && (obj.iri = message.iri);
     return obj;
   },
 
@@ -206,7 +216,6 @@ export const MsgAnchorDataResponse = {
   ): MsgAnchorDataResponse {
     const message = createBaseMsgAnchorDataResponse();
     message.timestamp = object.timestamp ?? undefined;
-    message.iri = object.iri ?? '';
     return message;
   },
 };
@@ -349,6 +358,157 @@ export const MsgSignDataResponse = {
 
 messageTypeRegistry.set(MsgSignDataResponse.$type, MsgSignDataResponse);
 
+function createBaseMsgStoreRawData(): MsgStoreRawData {
+  return {
+    $type: 'regen.data.v1alpha2.MsgStoreRawData',
+    sender: '',
+    contentHash: undefined,
+    content: new Uint8Array(),
+  };
+}
+
+export const MsgStoreRawData = {
+  $type: 'regen.data.v1alpha2.MsgStoreRawData' as const,
+
+  encode(
+    message: MsgStoreRawData,
+    writer: _m0.Writer = _m0.Writer.create(),
+  ): _m0.Writer {
+    if (message.sender !== '') {
+      writer.uint32(10).string(message.sender);
+    }
+    if (message.contentHash !== undefined) {
+      ContentHash_Raw.encode(
+        message.contentHash,
+        writer.uint32(18).fork(),
+      ).ldelim();
+    }
+    if (message.content.length !== 0) {
+      writer.uint32(26).bytes(message.content);
+    }
+    return writer;
+  },
+
+  decode(input: _m0.Reader | Uint8Array, length?: number): MsgStoreRawData {
+    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+    let end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseMsgStoreRawData();
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+        case 1:
+          message.sender = reader.string();
+          break;
+        case 2:
+          message.contentHash = ContentHash_Raw.decode(reader, reader.uint32());
+          break;
+        case 3:
+          message.content = reader.bytes();
+          break;
+        default:
+          reader.skipType(tag & 7);
+          break;
+      }
+    }
+    return message;
+  },
+
+  fromJSON(object: any): MsgStoreRawData {
+    return {
+      $type: MsgStoreRawData.$type,
+      sender: isSet(object.sender) ? String(object.sender) : '',
+      contentHash: isSet(object.contentHash)
+        ? ContentHash_Raw.fromJSON(object.contentHash)
+        : undefined,
+      content: isSet(object.content)
+        ? bytesFromBase64(object.content)
+        : new Uint8Array(),
+    };
+  },
+
+  toJSON(message: MsgStoreRawData): unknown {
+    const obj: any = {};
+    message.sender !== undefined && (obj.sender = message.sender);
+    message.contentHash !== undefined &&
+      (obj.contentHash = message.contentHash
+        ? ContentHash_Raw.toJSON(message.contentHash)
+        : undefined);
+    message.content !== undefined &&
+      (obj.content = base64FromBytes(
+        message.content !== undefined ? message.content : new Uint8Array(),
+      ));
+    return obj;
+  },
+
+  fromPartial<I extends Exact<DeepPartial<MsgStoreRawData>, I>>(
+    object: I,
+  ): MsgStoreRawData {
+    const message = createBaseMsgStoreRawData();
+    message.sender = object.sender ?? '';
+    message.contentHash =
+      object.contentHash !== undefined && object.contentHash !== null
+        ? ContentHash_Raw.fromPartial(object.contentHash)
+        : undefined;
+    message.content = object.content ?? new Uint8Array();
+    return message;
+  },
+};
+
+messageTypeRegistry.set(MsgStoreRawData.$type, MsgStoreRawData);
+
+function createBaseMsgStoreRawDataResponse(): MsgStoreRawDataResponse {
+  return { $type: 'regen.data.v1alpha2.MsgStoreRawDataResponse' };
+}
+
+export const MsgStoreRawDataResponse = {
+  $type: 'regen.data.v1alpha2.MsgStoreRawDataResponse' as const,
+
+  encode(
+    _: MsgStoreRawDataResponse,
+    writer: _m0.Writer = _m0.Writer.create(),
+  ): _m0.Writer {
+    return writer;
+  },
+
+  decode(
+    input: _m0.Reader | Uint8Array,
+    length?: number,
+  ): MsgStoreRawDataResponse {
+    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+    let end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseMsgStoreRawDataResponse();
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+        default:
+          reader.skipType(tag & 7);
+          break;
+      }
+    }
+    return message;
+  },
+
+  fromJSON(_: any): MsgStoreRawDataResponse {
+    return {
+      $type: MsgStoreRawDataResponse.$type,
+    };
+  },
+
+  toJSON(_: MsgStoreRawDataResponse): unknown {
+    const obj: any = {};
+    return obj;
+  },
+
+  fromPartial<I extends Exact<DeepPartial<MsgStoreRawDataResponse>, I>>(
+    _: I,
+  ): MsgStoreRawDataResponse {
+    const message = createBaseMsgStoreRawDataResponse();
+    return message;
+  },
+};
+
+messageTypeRegistry.set(MsgStoreRawDataResponse.$type, MsgStoreRawDataResponse);
+
 /** Msg is the regen.data.v1alpha1 Msg service */
 export interface Msg {
   /**
@@ -385,6 +545,19 @@ export interface Msg {
    * signers and those signers will be appended to the list of signers.
    */
   SignData(request: DeepPartial<MsgSignData>): Promise<MsgSignDataResponse>;
+  /**
+   * StoreRawData stores a piece of raw data corresponding to an ContentHash.Raw on the blockchain.
+   *
+   * StoreRawData implicitly calls AnchorData if the data was not already anchored.
+   *
+   * The sender in StoreRawData is not attesting to the veracity of the underlying
+   * data. They can simply be a intermediary providing storage services.
+   * SignData should be used to create a digital signature attesting to the
+   * veracity of some piece of data.
+   */
+  StoreRawData(
+    request: DeepPartial<MsgStoreRawData>,
+  ): Promise<MsgStoreRawDataResponse>;
 }
 
 export class MsgClientImpl implements Msg {
@@ -393,6 +566,7 @@ export class MsgClientImpl implements Msg {
     this.rpc = rpc;
     this.AnchorData = this.AnchorData.bind(this);
     this.SignData = this.SignData.bind(this);
+    this.StoreRawData = this.StoreRawData.bind(this);
   }
   AnchorData(
     request: DeepPartial<MsgAnchorData>,
@@ -421,6 +595,21 @@ export class MsgClientImpl implements Msg {
       MsgSignDataResponse.decode(new _m0.Reader(data)),
     );
   }
+
+  StoreRawData(
+    request: DeepPartial<MsgStoreRawData>,
+  ): Promise<MsgStoreRawDataResponse> {
+    const fromPartial = MsgStoreRawData.fromPartial(request);
+    const data = MsgStoreRawData.encode(fromPartial).finish();
+    const promise = this.rpc.request(
+      'regen.data.v1alpha2.Msg',
+      'StoreRawData',
+      data,
+    );
+    return promise.then(data =>
+      MsgStoreRawDataResponse.decode(new _m0.Reader(data)),
+    );
+  }
 }
 
 interface Rpc {
@@ -429,6 +618,40 @@ interface Rpc {
     method: string,
     data: Uint8Array,
   ): Promise<Uint8Array>;
+}
+
+declare var self: any | undefined;
+declare var window: any | undefined;
+declare var global: any | undefined;
+var globalThis: any = (() => {
+  if (typeof globalThis !== 'undefined') return globalThis;
+  if (typeof self !== 'undefined') return self;
+  if (typeof window !== 'undefined') return window;
+  if (typeof global !== 'undefined') return global;
+  throw 'Unable to locate global object';
+})();
+
+const atob: (b64: string) => string =
+  globalThis.atob ||
+  (b64 => globalThis.Buffer.from(b64, 'base64').toString('binary'));
+function bytesFromBase64(b64: string): Uint8Array {
+  const bin = atob(b64);
+  const arr = new Uint8Array(bin.length);
+  for (let i = 0; i < bin.length; ++i) {
+    arr[i] = bin.charCodeAt(i);
+  }
+  return arr;
+}
+
+const btoa: (bin: string) => string =
+  globalThis.btoa ||
+  (bin => globalThis.Buffer.from(bin, 'binary').toString('base64'));
+function base64FromBytes(arr: Uint8Array): string {
+  const bin: string[] = [];
+  for (const byte of arr) {
+    bin.push(String.fromCharCode(byte));
+  }
+  return btoa(bin.join(''));
 }
 
 type Builtin =

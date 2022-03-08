@@ -1,0 +1,82 @@
+syntax = "proto3";
+
+package regen.ecocredit.basket.v1;
+
+option go_package = "github.com/regen-network/regen-ledger/x/ecocredit/basket";
+
+import "google/protobuf/timestamp.proto";
+import "google/protobuf/duration.proto";
+
+// BasketCredit represents the information for a credit batch inside a basket.
+message BasketCredit {
+
+  // batch_denom is the unique ID of the credit batch.
+  string batch_denom = 1;
+
+  // amount is the number of credits being put into or taken out of the basket.
+  // Decimal values are acceptable within the precision of the corresponding
+  //  credit type for this batch.
+  string amount = 2;
+}
+
+// DateCriteria represents the information for credit acceptance in a basket.
+// At most, only one of the values should be set.
+// NOTE: gogo proto `oneof` is not compatible with Amino signing, hence we directly define
+// both `start_date_window` and `min_start_date`. In the future, with pulsar, this should change
+// and we should use `oneof`.
+message DateCriteria {
+  // min_start_date (optional) is the earliest start date for batches of credits allowed
+  // into the basket.
+  // At most only one of `start_date_window` and `min_start_date` can be set.
+  google.protobuf.Timestamp min_start_date = 1;
+
+  // start_date_window (optional) is a duration of time measured into the past which sets
+  // a cutoff for batch start dates when adding new credits to the basket.
+  // Based on the current block timestamp, credits whose start date is before
+  // `block_timestamp - batch_date_window` will not be allowed into the basket.
+  // At most only one of `start_date_window` and `min_start_date` can be set.
+  google.protobuf.Duration start_date_window = 2;
+}
+
+// Basket represents a basket in state.
+message Basket {
+  // id is the uint64 ID of the basket. It is used internally for reducing
+  // storage space.
+  uint64 id = 1;
+
+  // basket_denom is the basket bank denom.
+  string basket_denom = 2;
+
+  // name is the unique name of the basket specified in MsgCreate. Basket
+  // names must be unique across all credit types and choices of exponent
+  // above and beyond the uniqueness constraint on basket_denom.
+  string name = 3;
+
+  // disable_auto_retire indicates whether or not the credits will be retired upon withdraw from the basket.
+  bool disable_auto_retire = 4;
+
+  // credit_type_abbrev is the abbreviation of the credit type this basket is able to hold.
+  string credit_type_abbrev = 5;
+
+  // date_criteria is the date criteria for batches admitted to the basket.
+  DateCriteria date_criteria = 6;
+
+  // exponent is the exponent for converting credits to/from basket tokens.
+  uint32 exponent = 7;
+}
+
+// BasketBalance stores the amount of credits from a batch in a basket
+message BasketBalance {
+  // basket_id is the ID of the basket
+  uint64 basket_id = 1;
+
+  // batch_denom is the denom of the credit batch
+  string batch_denom = 2;
+
+  // balance is the amount of ecocredits held in the basket
+  string balance = 3;
+
+  // batch_start_date is the start date of the batch. This field is used
+  // to create an index which is used to remove the oldest credits first.
+  google.protobuf.Timestamp batch_start_date = 4;
+}
