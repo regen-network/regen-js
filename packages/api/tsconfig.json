@@ -2,8 +2,7 @@
 	"compilerOptions": {
 		"declaration": true,
 		"esModuleInterop": true,
-		"outDir": "lib",
-		"downlevelIteration": true
+		"outDir": "lib"
 	},
 	"extends": "../../tsconfig",
 	"include": ["src"]
