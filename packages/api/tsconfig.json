@@ -1,8 +1,9 @@
 {
 	"compilerOptions": {
 		"declaration": true,
-		"esModuleInterop": true, // Somehow protobuf.js doesn't work when this is set to true.
-		"outDir": "lib"
+		"esModuleInterop": true,
+		"outDir": "lib",
+		"downlevelIteration": true
 	},
 	"extends": "../../tsconfig",
 	"include": ["src"]
