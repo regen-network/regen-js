@@ -16,6 +16,8 @@
     "resolveJsonModule": true,
     "isolatedModules": true,
     "noEmit": true,
+    "target": "es6",
+    "sourceMap": true,
   },
   "extends": "../../tsconfig",
   "include": [
