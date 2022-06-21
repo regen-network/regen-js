@@ -259,16 +259,19 @@ export function digestAlgorithmToJSON(object: DigestAlgorithm): string {
 export interface ContentHash {
   $type: 'regen.data.v1alpha2.ContentHash';
   /**
-   * Raw specifies "raw" data which does not specify a deterministic, canonical encoding.
-   * Users of these hashes MUST maintain a copy of the hashed data which is preserved bit by bit.
-   * All other content encodings specify a deterministic, canonical encoding allowing implementations to
-   * choose from a variety of alternative formats for transport and encoding while maintaining the guarantee
-   * that the canonical hash will not change. The media type for "raw" data is defined by the MediaType enum.
+   * Raw specifies "raw" data which does not specify a deterministic,
+   * canonical encoding. Users of these hashes MUST maintain a copy of the
+   * hashed data which is preserved bit by bit. All other content encodings
+   * specify a deterministic, canonical encoding allowing implementations to
+   * choose from a variety of alternative formats for transport and encoding
+   * while maintaining the guarantee that the canonical hash will not change.
+   * The media type for "raw" data is defined by the MediaType enum.
    */
   raw?: ContentHash_Raw | undefined;
   /**
    * Graph specifies graph data that conforms to the RDF data model.
-   * The canonicalization algorithm used for an RDF graph is specified by GraphCanonicalizationAlgorithm.
+   * The canonicalization algorithm used for an RDF graph is specified by
+   * GraphCanonicalizationAlgorithm.
    */
   graph?: ContentHash_Graph | undefined;
 }
@@ -276,7 +279,10 @@ export interface ContentHash {
 /** Raw is the content hash type used for raw data */
 export interface ContentHash_Raw {
   $type: 'regen.data.v1alpha2.ContentHash.Raw';
-  /** hash represents the hash of the data based on the specified digest_algorithm */
+  /**
+   * hash represents the hash of the data based on the specified
+   * digest_algorithm
+   */
   hash: Uint8Array;
   /** digest_algorithm represents the hash digest algorithm. */
   digestAlgorithm: DigestAlgorithm;
@@ -287,11 +293,17 @@ export interface ContentHash_Raw {
 /** Graph is the content hash type used for RDF graph data */
 export interface ContentHash_Graph {
   $type: 'regen.data.v1alpha2.ContentHash.Graph';
-  /** hash represents the hash of the data based on the specified digest_algorithm */
+  /**
+   * hash represents the hash of the data based on the specified
+   * digest_algorithm
+   */
   hash: Uint8Array;
   /** digest_algorithm represents the hash digest algorithm. */
   digestAlgorithm: DigestAlgorithm;
-  /** graph_canonicalization_algorithm represents the RDF graph canonicalization algorithm. */
+  /**
+   * graph_canonicalization_algorithm represents the RDF graph
+   * canonicalization algorithm.
+   */
   canonicalizationAlgorithm: GraphCanonicalizationAlgorithm;
   /** merkle_tree is the merkle tree type used for the graph hash, if any */
   merkleTree: GraphMerkleTree;

@@ -155,12 +155,18 @@ export interface MsgUpdateGroupAccountAdmin {
   newAdmin: string;
 }
 
-/** MsgUpdateGroupAccountAdminResponse is the Msg/UpdateGroupAccountAdmin response type. */
+/**
+ * MsgUpdateGroupAccountAdminResponse is the Msg/UpdateGroupAccountAdmin
+ * response type.
+ */
 export interface MsgUpdateGroupAccountAdminResponse {
   $type: 'regen.group.v1alpha1.MsgUpdateGroupAccountAdminResponse';
 }
 
-/** MsgUpdateGroupAccountDecisionPolicy is the Msg/UpdateGroupAccountDecisionPolicy request type. */
+/**
+ * MsgUpdateGroupAccountDecisionPolicy is the
+ * Msg/UpdateGroupAccountDecisionPolicy request type.
+ */
 export interface MsgUpdateGroupAccountDecisionPolicy {
   $type: 'regen.group.v1alpha1.MsgUpdateGroupAccountDecisionPolicy';
   /** admin is the account address of the group admin. */
@@ -171,12 +177,18 @@ export interface MsgUpdateGroupAccountDecisionPolicy {
   decisionPolicy?: Any;
 }
 
-/** MsgUpdateGroupAccountDecisionPolicyResponse is the Msg/UpdateGroupAccountDecisionPolicy response type. */
+/**
+ * MsgUpdateGroupAccountDecisionPolicyResponse is the
+ * Msg/UpdateGroupAccountDecisionPolicy response type.
+ */
 export interface MsgUpdateGroupAccountDecisionPolicyResponse {
   $type: 'regen.group.v1alpha1.MsgUpdateGroupAccountDecisionPolicyResponse';
 }
 
-/** MsgUpdateGroupAccountMetadata is the Msg/UpdateGroupAccountMetadata request type. */
+/**
+ * MsgUpdateGroupAccountMetadata is the Msg/UpdateGroupAccountMetadata request
+ * type.
+ */
 export interface MsgUpdateGroupAccountMetadata {
   $type: 'regen.group.v1alpha1.MsgUpdateGroupAccountMetadata';
   /** admin is the account address of the group admin. */
@@ -187,7 +199,10 @@ export interface MsgUpdateGroupAccountMetadata {
   metadata: Uint8Array;
 }
 
-/** MsgUpdateGroupAccountMetadataResponse is the Msg/UpdateGroupAccountMetadata response type. */
+/**
+ * MsgUpdateGroupAccountMetadataResponse is the Msg/UpdateGroupAccountMetadata
+ * response type.
+ */
 export interface MsgUpdateGroupAccountMetadataResponse {
   $type: 'regen.group.v1alpha1.MsgUpdateGroupAccountMetadataResponse';
 }
@@ -1993,19 +2008,31 @@ messageTypeRegistry.set(MsgExecResponse.$type, MsgExecResponse);
 
 /** Msg is the regen.group.v1alpha1 Msg service. */
 export interface Msg {
-  /** CreateGroup creates a new group with an admin account address, a list of members and some optional metadata. */
+  /**
+   * CreateGroup creates a new group with an admin account address, a list of
+   * members and some optional metadata.
+   */
   CreateGroup(
     request: DeepPartial<MsgCreateGroup>,
   ): Promise<MsgCreateGroupResponse>;
-  /** UpdateGroupMembers updates the group members with given group id and admin address. */
+  /**
+   * UpdateGroupMembers updates the group members with given group id and admin
+   * address.
+   */
   UpdateGroupMembers(
     request: DeepPartial<MsgUpdateGroupMembers>,
   ): Promise<MsgUpdateGroupMembersResponse>;
-  /** UpdateGroupAdmin updates the group admin with given group id and previous admin address. */
+  /**
+   * UpdateGroupAdmin updates the group admin with given group id and previous
+   * admin address.
+   */
   UpdateGroupAdmin(
     request: DeepPartial<MsgUpdateGroupAdmin>,
   ): Promise<MsgUpdateGroupAdminResponse>;
-  /** UpdateGroupMetadata updates the group metadata with given group id and admin address. */
+  /**
+   * UpdateGroupMetadata updates the group metadata with given group id and
+   * admin address.
+   */
   UpdateGroupMetadata(
     request: DeepPartial<MsgUpdateGroupMetadata>,
   ): Promise<MsgUpdateGroupMetadataResponse>;
@@ -2017,7 +2044,10 @@ export interface Msg {
   UpdateGroupAccountAdmin(
     request: DeepPartial<MsgUpdateGroupAccountAdmin>,
   ): Promise<MsgUpdateGroupAccountAdminResponse>;
-  /** UpdateGroupAccountDecisionPolicy allows a group account decision policy to be updated. */
+  /**
+   * UpdateGroupAccountDecisionPolicy allows a group account decision policy to
+   * be updated.
+   */
   UpdateGroupAccountDecisionPolicy(
     request: DeepPartial<MsgUpdateGroupAccountDecisionPolicy>,
   ): Promise<MsgUpdateGroupAccountDecisionPolicyResponse>;

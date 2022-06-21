@@ -80,7 +80,10 @@ export interface QueryGroupsByAdminResponse {
   pagination?: PageResponse;
 }
 
-/** QueryGroupAccountsByGroupRequest is the Query/GroupAccountsByGroup request type. */
+/**
+ * QueryGroupAccountsByGroupRequest is the Query/GroupAccountsByGroup request
+ * type.
+ */
 export interface QueryGroupAccountsByGroupRequest {
   $type: 'regen.group.v1alpha1.QueryGroupAccountsByGroupRequest';
   /** group_id is the unique ID of the group account's group. */
@@ -89,16 +92,25 @@ export interface QueryGroupAccountsByGroupRequest {
   pagination?: PageRequest;
 }
 
-/** QueryGroupAccountsByGroupResponse is the Query/GroupAccountsByGroup response type. */
+/**
+ * QueryGroupAccountsByGroupResponse is the Query/GroupAccountsByGroup response
+ * type.
+ */
 export interface QueryGroupAccountsByGroupResponse {
   $type: 'regen.group.v1alpha1.QueryGroupAccountsByGroupResponse';
-  /** group_accounts are the group accounts info associated with the provided group. */
+  /**
+   * group_accounts are the group accounts info associated with the provided
+   * group.
+   */
   groupAccounts: GroupAccountInfo[];
   /** pagination defines the pagination in the response. */
   pagination?: PageResponse;
 }
 
-/** QueryGroupAccountsByAdminRequest is the Query/GroupAccountsByAdmin request type. */
+/**
+ * QueryGroupAccountsByAdminRequest is the Query/GroupAccountsByAdmin request
+ * type.
+ */
 export interface QueryGroupAccountsByAdminRequest {
   $type: 'regen.group.v1alpha1.QueryGroupAccountsByAdminRequest';
   /** admin is the admin address of the group account. */
@@ -107,7 +119,10 @@ export interface QueryGroupAccountsByAdminRequest {
   pagination?: PageRequest;
 }
 
-/** QueryGroupAccountsByAdminResponse is the Query/GroupAccountsByAdmin response type. */
+/**
+ * QueryGroupAccountsByAdminResponse is the Query/GroupAccountsByAdmin response
+ * type.
+ */
 export interface QueryGroupAccountsByAdminResponse {
   $type: 'regen.group.v1alpha1.QueryGroupAccountsByAdminResponse';
   /** group_accounts are the group accounts info with provided admin. */
@@ -130,7 +145,10 @@ export interface QueryProposalResponse {
   proposal?: Proposal;
 }
 
-/** QueryProposalsByGroupAccountRequest is the Query/ProposalByGroupAccount request type. */
+/**
+ * QueryProposalsByGroupAccountRequest is the Query/ProposalByGroupAccount
+ * request type.
+ */
 export interface QueryProposalsByGroupAccountRequest {
   $type: 'regen.group.v1alpha1.QueryProposalsByGroupAccountRequest';
   /** address is the group account address related to proposals. */
@@ -139,7 +157,10 @@ export interface QueryProposalsByGroupAccountRequest {
   pagination?: PageRequest;
 }
 
-/** QueryProposalsByGroupAccountResponse is the Query/ProposalByGroupAccount response type. */
+/**
+ * QueryProposalsByGroupAccountResponse is the Query/ProposalByGroupAccount
+ * response type.
+ */
 export interface QueryProposalsByGroupAccountResponse {
   $type: 'regen.group.v1alpha1.QueryProposalsByGroupAccountResponse';
   /** proposals are the proposals with given group account. */
@@ -148,7 +169,10 @@ export interface QueryProposalsByGroupAccountResponse {
   pagination?: PageResponse;
 }
 
-/** QueryVoteByProposalVoterResponse is the Query/VoteByProposalVoter request type. */
+/**
+ * QueryVoteByProposalVoterResponse is the Query/VoteByProposalVoter request
+ * type.
+ */
 export interface QueryVoteByProposalVoterRequest {
   $type: 'regen.group.v1alpha1.QueryVoteByProposalVoterRequest';
   /** proposal_id is the unique ID of a proposal. */
@@ -157,7 +181,10 @@ export interface QueryVoteByProposalVoterRequest {
   voter: string;
 }
 
-/** QueryVoteByProposalVoterResponse is the Query/VoteByProposalVoter response type. */
+/**
+ * QueryVoteByProposalVoterResponse is the Query/VoteByProposalVoter response
+ * type.
+ */
 export interface QueryVoteByProposalVoterResponse {
   $type: 'regen.group.v1alpha1.QueryVoteByProposalVoterResponse';
   /** vote is the vote with given proposal_id and voter. */

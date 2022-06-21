@@ -14,13 +14,17 @@ export interface EventCreate {
   /**
    * curator is the address of the basket curator who is able to change certain
    * basket settings.
+   * Deprecated: This field is still populated and will be removed in the
+   * next version.
+   *
+   * @deprecated
    */
   curator: string;
 }
 
 /**
- * EventPut is an event emitted when credits are put into a basket in return
- * for basket tokens.
+ * EventPut is an event emitted when credits are put into a basket in return for
+ * basket tokens.
  */
 export interface EventPut {
   $type: 'regen.ecocredit.basket.v1.EventPut';
@@ -28,9 +32,21 @@ export interface EventPut {
   owner: string;
   /** basket_denom is the basket bank denom that the credits were added to. */
   basketDenom: string;
-  /** credits are the credits that were added to the basket. */
+  /**
+   * credits are the credits that were added to the basket.
+   * Deprecated: This field is still populated and will be removed in the
+   * next version.
+   *
+   * @deprecated
+   */
   credits: BasketCredit[];
-  /** amount is the integer number of basket tokens converted from credits. */
+  /**
+   * amount is the integer number of basket tokens converted from credits.
+   * Deprecated: This field is still populated and will be removed in the
+   * next version.
+   *
+   * @deprecated
+   */
   amount: string;
 }
 
@@ -44,9 +60,21 @@ export interface EventTake {
   owner: string;
   /** basket_denom is the basket bank denom that credits were taken from. */
   basketDenom: string;
-  /** credits are the credits that were taken from the basket. */
+  /**
+   * credits are the credits that were taken from the basket.
+   * Deprecated: This field is still populated and will be removed in the
+   * next version.
+   *
+   * @deprecated
+   */
   credits: BasketCredit[];
-  /** amount is the integer number of basket tokens converted to credits. */
+  /**
+   * amount is the integer number of basket tokens converted to credits.
+   * Deprecated: This field is still populated and will be removed in the
+   * next version.
+   *
+   * @deprecated
+   */
   amount: string;
 }
 

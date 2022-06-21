@@ -15,7 +15,10 @@ export interface MsgCreateClass {
   issuers: string[];
   /** metadata is any arbitrary metadata to attached to the credit class. */
   metadata: Uint8Array;
-  /** credit_type_name describes the type of credit (e.g. "carbon", "biodiversity"). */
+  /**
+   * credit_type_name describes the type of credit (e.g. "carbon",
+   * "biodiversity").
+   */
   creditTypeName: string;
 }
 
@@ -244,7 +247,10 @@ export interface MsgUpdateClassMetadata {
   admin: string;
   /** class_id is the unique ID of the credit class. */
   classId: string;
-  /** metadata is the updated arbitrary metadata to be attached to the credit class. */
+  /**
+   * metadata is the updated arbitrary metadata to be attached to the credit
+   * class.
+   */
   metadata: Uint8Array;
 }
 

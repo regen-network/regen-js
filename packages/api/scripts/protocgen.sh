@@ -11,7 +11,7 @@ for dir in $PROTO_DIRS; do
     -I "proto" \
     -I "third_party/proto" \
     --plugin=${TS_PROTO_BIN} \
-    --ts_proto_opt="esModuleInterop=true,forceLong=long,useOptionals=true,outputTypeRegistry=true" \
+    --ts_proto_opt="esModuleInterop=true,forceLong=long,useOptionals=messages,outputTypeRegistry=true" \
     --ts_proto_out=src/generated \
     $(find "${dir}" -maxdepth 1 -name '*.proto')
 done

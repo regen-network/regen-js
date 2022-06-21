@@ -10,7 +10,7 @@ import { Coin } from '../../../../cosmos/base/v1beta1/coin';
 
 export const protobufPackage = 'regen.ecocredit.basket.v1';
 
-/** MsgCreate is the Msg/Create request type. */
+/** MsgCreateBasket is the Msg/CreateBasket request type. */
 export interface MsgCreate {
   $type: 'regen.ecocredit.basket.v1.MsgCreate';
   /**
@@ -23,9 +23,9 @@ export interface MsgCreate {
    * basket token. It can be between 3-8 alphanumeric characters, with the
    * first character being alphabetic.
    *
-   * The bank denom will be formed from name, credit type and exponent and be
-   * of the form `eco.<prefix><credit_type_abbrev>.<name>` where prefix
-   * is derived from exponent.
+   * The bank denom will be formed from name and credit type with the format
+   * `eco.<prefix><credit_type_abbrev>.<name>` where prefix is the prefix of
+   * a standard SI unit derived from credit type precision.
    */
   name: string;
   /**
@@ -34,30 +34,12 @@ export interface MsgCreate {
    */
   description: string;
   /**
-   * exponent is the exponent that will be used for converting credits to basket
-   * tokens and for bank denom metadata. It also limits the precision of
-   * credit amounts when putting credits into a basket. An exponent of 6 will
-   * mean that 10^6 units of a basket token will be issued for 1.0 credits and that
-   * this should be displayed as one unit in user interfaces. It also means
-   * that the maximum precision of credit amounts is 6 decimal places so that
-   * the need to round is eliminated. The exponent must be >= the precision of
-   * the credit type at the time the basket is created and be of one of the
-   * following values 0, 1, 2, 3, 6, 9, 12, 15, 18, 21, or 24 which correspond
-   * to the exponents which have an official SI prefix.
+   * Deprecated (Since Revision 1): This field is no longer used and will be
+   * removed in the next version. The value of credit type precision is always
+   * used as the exponent when determining the prefix for basket denom, defining
+   * bank denom metadata, and converting credits to/from basket tokens.
    *
-   * The exponent will be used to form the prefix part of the bank denom
-   * and will be mapped as follows:
-   *   0 - no prefix
-   *   1 - d (deci)
-   *   2 - c (centi)
-   *   3 - m (milli)
-   *   6 - u (micro)
-   *   9 - n (nano)
-   *   12 - p (pico)
-   *   15 - f (femto)
-   *   18 - a (atto)
-   *   21 - z (zepto)
-   *   24 - y (yocto)
+   * @deprecated
    */
   exponent: number;
   /**
@@ -81,23 +63,29 @@ export interface MsgCreate {
    */
   dateCriteria?: DateCriteria;
   /**
-   * fee is the fee that the curator will pay to create the basket. It must be
-   * >= the required Params.basket_creation_fee. We include the fee explicitly
-   * here so that the curator explicitly acknowledges paying this fee and
-   * is not surprised to learn that the paid a big fee and didn't know
-   * beforehand.
+   * fee is the basket creation fee. A fee is not required if the list of fees
+   * in Params.basket_fee is empty. The provided fee must be one of the fees
+   * listed in Params.basket_fee. The provided amount can be greater than
+   * or equal to the listed amount but the basket creator will only be charged
+   * the listed amount (i.e. the minimum amount).
+   *
+   * Note (Since Revision 1): Although this field supports a list of fees, the
+   * basket creator must provide no more than one fee (i.e. one Coin in a list
+   * of Coins). Providing more than one fee will fail basic message validation.
+   * This field will be updated to a single fee rather than a list of fees in
+   * the next version to reflect these requirements.
    */
   fee: Coin[];
 }
 
-/** MsgCreateResponse is the Msg/Create response type. */
+/** MsgCreateBasketResponse is the Msg/CreateBasket response type. */
 export interface MsgCreateResponse {
   $type: 'regen.ecocredit.basket.v1.MsgCreateResponse';
   /** basket_denom is the unique denomination ID of the newly created basket. */
   basketDenom: string;
 }
 
-/** MsgPut is the Msg/Put request type. */
+/** MsgAddToBasket is the Msg/AddToBasket request type. */
 export interface MsgPut {
   $type: 'regen.ecocredit.basket.v1.MsgPut';
   /** owner is the owner of credits being put into the basket. */
@@ -113,14 +101,14 @@ export interface MsgPut {
   credits: BasketCredit[];
 }
 
-/** MsgPutResponse is the Msg/Put response type. */
+/** MsgAddToBasketResponse is the Msg/AddToBasket response type. */
 export interface MsgPutResponse {
   $type: 'regen.ecocredit.basket.v1.MsgPutResponse';
   /** amount_received is the integer amount of basket tokens received. */
   amountReceived: string;
 }
 
-/** MsgTake is the Msg/Take request type. */
+/** MsgTakeFromBasket is the Msg/TakeFromBasket request type. */
 export interface MsgTake {
   $type: 'regen.ecocredit.basket.v1.MsgTake';
   /** owner is the owner of the basket tokens. */
@@ -130,10 +118,10 @@ export interface MsgTake {
   /** amount is the integer number of basket tokens to convert into credits. */
   amount: string;
   /**
-   * retirement_location is the optional retirement location for the credits
-   * which will be used only if retire_on_take is true for this basket.
+   * retirement_jurisdiction is the optional retirement jurisdiction for the
+   * credits which will be used only if retire_on_take is true for this basket.
    */
-  retirementLocation: string;
+  retirementJurisdiction: string;
   /**
    * retire_on_take is a boolean that dictates whether the ecocredits
    * received in exchange for the basket tokens will be received as
@@ -142,7 +130,7 @@ export interface MsgTake {
   retireOnTake: boolean;
 }
 
-/** MsgTakeResponse is the Msg/Take response type. */
+/** MsgTakeFromBasketResponse is the Msg/TakeFromBasket response type. */
 export interface MsgTakeResponse {
   $type: 'regen.ecocredit.basket.v1.MsgTakeResponse';
   /** credits are the credits taken out of the basket. */
@@ -546,7 +534,7 @@ function createBaseMsgTake(): MsgTake {
     owner: '',
     basketDenom: '',
     amount: '',
-    retirementLocation: '',
+    retirementJurisdiction: '',
     retireOnTake: false,
   };
 }
@@ -567,8 +555,8 @@ export const MsgTake = {
     if (message.amount !== '') {
       writer.uint32(26).string(message.amount);
     }
-    if (message.retirementLocation !== '') {
-      writer.uint32(34).string(message.retirementLocation);
+    if (message.retirementJurisdiction !== '') {
+      writer.uint32(34).string(message.retirementJurisdiction);
     }
     if (message.retireOnTake === true) {
       writer.uint32(40).bool(message.retireOnTake);
@@ -593,7 +581,7 @@ export const MsgTake = {
           message.amount = reader.string();
           break;
         case 4:
-          message.retirementLocation = reader.string();
+          message.retirementJurisdiction = reader.string();
           break;
         case 5:
           message.retireOnTake = reader.bool();
@@ -612,8 +600,8 @@ export const MsgTake = {
       owner: isSet(object.owner) ? String(object.owner) : '',
       basketDenom: isSet(object.basketDenom) ? String(object.basketDenom) : '',
       amount: isSet(object.amount) ? String(object.amount) : '',
-      retirementLocation: isSet(object.retirementLocation)
-        ? String(object.retirementLocation)
+      retirementJurisdiction: isSet(object.retirementJurisdiction)
+        ? String(object.retirementJurisdiction)
         : '',
       retireOnTake: isSet(object.retireOnTake)
         ? Boolean(object.retireOnTake)
@@ -627,8 +615,8 @@ export const MsgTake = {
     message.basketDenom !== undefined &&
       (obj.basketDenom = message.basketDenom);
     message.amount !== undefined && (obj.amount = message.amount);
-    message.retirementLocation !== undefined &&
-      (obj.retirementLocation = message.retirementLocation);
+    message.retirementJurisdiction !== undefined &&
+      (obj.retirementJurisdiction = message.retirementJurisdiction);
     message.retireOnTake !== undefined &&
       (obj.retireOnTake = message.retireOnTake);
     return obj;
@@ -639,7 +627,7 @@ export const MsgTake = {
     message.owner = object.owner ?? '';
     message.basketDenom = object.basketDenom ?? '';
     message.amount = object.amount ?? '';
-    message.retirementLocation = object.retirementLocation ?? '';
+    message.retirementJurisdiction = object.retirementJurisdiction ?? '';
     message.retireOnTake = object.retireOnTake ?? false;
     return message;
   },
@@ -715,7 +703,7 @@ export const MsgTakeResponse = {
 
 messageTypeRegistry.set(MsgTakeResponse.$type, MsgTakeResponse);
 
-/** Msg is the regen.ecocredit.basket.v1beta1 Msg service. */
+/** Msg is the regen.ecocredit.basket.v1 Msg service. */
 export interface Msg {
   /** Create creates a bank denom which wraps credits. */
   Create(request: DeepPartial<MsgCreate>): Promise<MsgCreateResponse>;
