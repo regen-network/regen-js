@@ -97,8 +97,18 @@ Feel free to comment on [issue #2](https://github.com/regen-network/regen-js/iss
 
 The list of all available methods to call can be found in:
 
--   [Regen Ledger Docs](https://docs.regen.network/getting-started.html) for Regen-specific modules (`x/data`, `x/ecocredit`)
+-   [Regen Ledger Docs](https://docs.regen.network) for Regen-specific modules (`x/data`, `x/ecocredit`)
 -   [Cosmos SDK Docs](https://docs.cosmos.network/master) for all other modules (`x/bank`, `x/staking`...)
 
 Alternatively, you can just explore the [`./src/generated/` folder](./src/generated), all methods are commented in the code.
 
+## TypeScript protobuf generation
+
+For now, we update the source proto files manually in the `proto` folder.
+
+To generate corresponding TypeScript types, use the following command:
+```sh
+yarn gen
+```
+
+In the near future, we'll want to automate this using [Buf Schema Registry](https://buf.build/explore) (https://github.com/regen-network/regen-js/issues/29).
