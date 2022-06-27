@@ -43,7 +43,8 @@ export interface MsgSignData {
   signers: string[];
   /**
    * hash is the hash-based identifier for the anchored content. Only RDF graph
-   * data can be signed as its data model is intended to specifically convey semantic meaning.
+   * data can be signed as its data model is intended to specifically convey
+   * semantic meaning.
    */
   hash?: ContentHash_Graph;
 }
@@ -64,7 +65,10 @@ export interface MsgStoreRawData {
   sender: string;
   /** content_hash is the hash-based identifier for the anchored content. */
   contentHash?: ContentHash_Raw;
-  /** content is the content of the raw data corresponding to the provided content hash. */
+  /**
+   * content is the content of the raw data corresponding to the provided
+   * content hash.
+   */
   content: Uint8Array;
 }
 
@@ -541,19 +545,22 @@ export interface Msg {
    *
    * SignData implicitly calls AnchorData if the data was not already anchored.
    *
-   * SignData can be called multiple times for the same content hash with different
-   * signers and those signers will be appended to the list of signers.
+   * SignData can be called multiple times for the same content hash with
+   * different signers and those signers will be appended to the list of
+   * signers.
    */
   SignData(request: DeepPartial<MsgSignData>): Promise<MsgSignDataResponse>;
   /**
-   * StoreRawData stores a piece of raw data corresponding to an ContentHash.Raw on the blockchain.
+   * StoreRawData stores a piece of raw data corresponding to an ContentHash.Raw
+   * on the blockchain.
    *
-   * StoreRawData implicitly calls AnchorData if the data was not already anchored.
+   * StoreRawData implicitly calls AnchorData if the data was not already
+   * anchored.
    *
-   * The sender in StoreRawData is not attesting to the veracity of the underlying
-   * data. They can simply be a intermediary providing storage services.
-   * SignData should be used to create a digital signature attesting to the
-   * veracity of some piece of data.
+   * The sender in StoreRawData is not attesting to the veracity of the
+   * underlying data. They can simply be a intermediary providing storage
+   * services. SignData should be used to create a digital signature attesting
+   * to the veracity of some piece of data.
    */
   StoreRawData(
     request: DeepPartial<MsgStoreRawData>,

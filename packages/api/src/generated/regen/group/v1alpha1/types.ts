@@ -88,11 +88,14 @@ export interface Members {
 /** ThresholdDecisionPolicy implements the DecisionPolicy interface */
 export interface ThresholdDecisionPolicy {
   $type: 'regen.group.v1alpha1.ThresholdDecisionPolicy';
-  /** threshold is the minimum weighted sum of yes votes that must be met or exceeded for a proposal to succeed. */
+  /**
+   * threshold is the minimum weighted sum of yes votes that must be met or
+   * exceeded for a proposal to succeed.
+   */
   threshold: string;
   /**
-   * timeout is the duration from submission of a proposal to the end of voting period
-   * Within this times votes and exec messages can be submitted.
+   * timeout is the duration from submission of a proposal to the end of voting
+   * period Within this times votes and exec messages can be submitted.
    */
   timeout?: Duration;
 }
@@ -126,7 +129,10 @@ export interface GroupMember {
   member?: Member;
 }
 
-/** GroupAccountInfo represents the high-level on-chain information for a group account. */
+/**
+ * GroupAccountInfo represents the high-level on-chain information for a group
+ * account.
+ */
 export interface GroupAccountInfo {
   $type: 'regen.group.v1alpha1.GroupAccountInfo';
   /** address is the group account address. */
@@ -138,8 +144,8 @@ export interface GroupAccountInfo {
   /** metadata is any arbitrary metadata to attached to the group account. */
   metadata: Uint8Array;
   /**
-   * version is used to track changes to a group's GroupAccountInfo structure that
-   * would create a different result on a running proposal.
+   * version is used to track changes to a group's GroupAccountInfo structure
+   * that would create a different result on a running proposal.
    */
   version: Long;
   /** decision_policy specifies the group account's decision policy. */
@@ -152,10 +158,10 @@ export interface GroupAccountInfo {
 }
 
 /**
- * Proposal defines a group proposal. Any member of a group can submit a proposal
- * for a group account to decide upon.
- * A proposal consists of a set of `sdk.Msg`s that will be executed if the proposal
- * passes as well as some optional metadata associated with the proposal.
+ * Proposal defines a group proposal. Any member of a group can submit a
+ * proposal for a group account to decide upon. A proposal consists of a set of
+ * `sdk.Msg`s that will be executed if the proposal passes as well as some
+ * optional metadata associated with the proposal.
  */
 export interface Proposal {
   $type: 'regen.group.v1alpha1.Proposal';
@@ -170,31 +176,42 @@ export interface Proposal {
   /** submitted_at is a timestamp specifying when a proposal was submitted. */
   submittedAt?: Date;
   /**
-   * group_version tracks the version of the group that this proposal corresponds to.
-   * When group membership is changed, existing proposals from previous group versions will become invalid.
+   * group_version tracks the version of the group that this proposal
+   * corresponds to. When group membership is changed, existing proposals from
+   * previous group versions will become invalid.
    */
   groupVersion: Long;
   /**
-   * group_account_version tracks the version of the group account that this proposal corresponds to.
-   * When a decision policy is changed, existing proposals from previous policy versions will become invalid.
+   * group_account_version tracks the version of the group account that this
+   * proposal corresponds to. When a decision policy is changed, existing
+   * proposals from previous policy versions will become invalid.
    */
   groupAccountVersion: Long;
-  /** Status represents the high level position in the life cycle of the proposal. Initial value is Submitted. */
+  /**
+   * Status represents the high level position in the life cycle of the
+   * proposal. Initial value is Submitted.
+   */
   status: Proposal_Status;
   /**
-   * result is the final result based on the votes and election rule. Initial value is unfinalized.
-   * The result is persisted so that clients can always rely on this state and not have to replicate the logic.
+   * result is the final result based on the votes and election rule. Initial
+   * value is unfinalized. The result is persisted so that clients can always
+   * rely on this state and not have to replicate the logic.
    */
   result: Proposal_Result;
   /** vote_state contains the sums of all weighted votes for this proposal. */
   voteState?: Tally;
   /**
-   * timeout is the timestamp of the block where the proposal execution times out. Header times of the votes and execution messages
-   * must be before this end time to be included in the election. After the timeout timestamp the proposal can not be
-   * executed anymore and should be considered pending delete.
+   * timeout is the timestamp of the block where the proposal execution times
+   * out. Header times of the votes and execution messages must be before this
+   * end time to be included in the election. After the timeout timestamp the
+   * proposal can not be executed anymore and should be considered pending
+   * delete.
    */
   timeout?: Date;
-  /** executor_result is the final result based on the votes and election rule. Initial value is NotRun. */
+  /**
+   * executor_result is the final result based on the votes and election rule.
+   * Initial value is NotRun.
+   */
   executorResult: Proposal_ExecutorResult;
   /** msgs is a list of Msgs that will be executed if the proposal passes. */
   msgs: Any[];
@@ -208,7 +225,10 @@ export enum Proposal_Status {
   STATUS_SUBMITTED = 1,
   /** STATUS_CLOSED - Final status of a proposal when the final tally was executed. */
   STATUS_CLOSED = 2,
-  /** STATUS_ABORTED - Final status of a proposal when the group was modified before the final tally. */
+  /**
+   * STATUS_ABORTED - Final status of a proposal when the group was modified before the final
+   * tally.
+   */
   STATUS_ABORTED = 3,
   UNRECOGNIZED = -1,
 }

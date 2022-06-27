@@ -5,11 +5,12 @@ import _m0 from 'protobufjs/minimal';
 import {
   Basket,
   BasketBalance,
-} from '../../../../regen/ecocredit/basket/v1/types';
+} from '../../../../regen/ecocredit/basket/v1/state';
 import {
   PageRequest,
   PageResponse,
 } from '../../../../cosmos/base/query/v1beta1/pagination';
+import { DateCriteria } from '../../../../regen/ecocredit/basket/v1/types';
 
 export const protobufPackage = 'regen.ecocredit.basket.v1';
 
@@ -23,10 +24,18 @@ export interface QueryBasketRequest {
 /** QueryBasketResponse is the Query/Basket response type. */
 export interface QueryBasketResponse {
   $type: 'regen.ecocredit.basket.v1.QueryBasketResponse';
-  /** basket is the queried basket. */
+  /**
+   * basket is the queried basket.
+   * Deprecated: This field is still populated and will be removed in the
+   * next version. Use basket_info instead.
+   *
+   * @deprecated
+   */
   basket?: Basket;
   /** classes are the credit classes that can be deposited in the basket. */
   classes: string[];
+  /** basket_info is the queried basket. */
+  basketInfo?: BasketInfo;
 }
 
 /** QueryBasketsRequest is the Query/Baskets request type. */
@@ -39,10 +48,18 @@ export interface QueryBasketsRequest {
 /** QueryBasketsResponse is the Query/Baskets response type. */
 export interface QueryBasketsResponse {
   $type: 'regen.ecocredit.basket.v1.QueryBasketsResponse';
-  /** baskets are the fetched baskets. */
+  /**
+   * baskets are the fetched baskets.
+   * Deprecated: This field is still populated and will be removed in the
+   * next version. Use baskets_info instead.
+   *
+   * @deprecated
+   */
   baskets: Basket[];
   /** pagination defines the pagination in the response. */
   pagination?: PageResponse;
+  /** baskets_info are the fetched baskets. */
+  basketsInfo: BasketInfo[];
 }
 
 /** QueryBasketBalancesRequest is the Query/BasketBalances request type. */
@@ -57,10 +74,18 @@ export interface QueryBasketBalancesRequest {
 /** QueryBasketBalancesResponse is the Query/BasketBalances response type. */
 export interface QueryBasketBalancesResponse {
   $type: 'regen.ecocredit.basket.v1.QueryBasketBalancesResponse';
-  /** balances is a list of credit balances in the basket. */
+  /**
+   * balances is a list of credit balances in the basket.
+   * Deprecated: This field is still populated and will be removed in the
+   * next version. Use balances_info instead.
+   *
+   * @deprecated
+   */
   balances: BasketBalance[];
   /** pagination defines the pagination in the response. */
   pagination?: PageResponse;
+  /** balances_info is a list of credit balances in the basket. */
+  balancesInfo: BasketBalanceInfo[];
 }
 
 /** QueryBasketBalanceRequest is the Query/BasketBalance request type. */
@@ -76,6 +101,47 @@ export interface QueryBasketBalanceRequest {
 export interface QueryBasketBalanceResponse {
   $type: 'regen.ecocredit.basket.v1.QueryBasketBalanceResponse';
   /** balance is the amount of the queried credit batch in the basket. */
+  balance: string;
+}
+
+/** BasketInfo is the human-readable basket information. */
+export interface BasketInfo {
+  $type: 'regen.ecocredit.basket.v1.BasketInfo';
+  /** basket_denom is the basket bank denom. */
+  basketDenom: string;
+  /**
+   * name is the unique name of the basket specified in MsgCreate. Basket
+   * names must be unique across all credit types and choices of exponent
+   * above and beyond the uniqueness constraint on basket_denom.
+   */
+  name: string;
+  /**
+   * disable_auto_retire indicates whether or not the credits will be retired
+   * upon withdraw from the basket.
+   */
+  disableAutoRetire: boolean;
+  /**
+   * credit_type_abbrev is the abbreviation of the credit type this basket is
+   * able to hold.
+   */
+  creditTypeAbbrev: string;
+  /** date_criteria is the date criteria for batches admitted to the basket. */
+  dateCriteria?: DateCriteria;
+  /** exponent is the exponent for converting credits to/from basket tokens. */
+  exponent: number;
+  /**
+   * curator is the address of the basket curator who is able to change certain
+   * basket settings.
+   */
+  curator: string;
+}
+
+/** BasketBalanceInfo is the human-readable basket balance information. */
+export interface BasketBalanceInfo {
+  $type: 'regen.ecocredit.basket.v1.BasketBalanceInfo';
+  /** batch_denom is the denom of the credit batch */
+  batchDenom: string;
+  /** balance is the amount of ecocredits held in the basket */
   balance: string;
 }
 
@@ -147,6 +213,7 @@ function createBaseQueryBasketResponse(): QueryBasketResponse {
     $type: 'regen.ecocredit.basket.v1.QueryBasketResponse',
     basket: undefined,
     classes: [],
+    basketInfo: undefined,
   };
 }
 
@@ -162,6 +229,9 @@ export const QueryBasketResponse = {
     }
     for (const v of message.classes) {
       writer.uint32(18).string(v!);
+    }
+    if (message.basketInfo !== undefined) {
+      BasketInfo.encode(message.basketInfo, writer.uint32(26).fork()).ldelim();
     }
     return writer;
   },
@@ -179,6 +249,9 @@ export const QueryBasketResponse = {
         case 2:
           message.classes.push(reader.string());
           break;
+        case 3:
+          message.basketInfo = BasketInfo.decode(reader, reader.uint32());
+          break;
         default:
           reader.skipType(tag & 7);
           break;
@@ -194,6 +267,9 @@ export const QueryBasketResponse = {
       classes: Array.isArray(object?.classes)
         ? object.classes.map((e: any) => String(e))
         : [],
+      basketInfo: isSet(object.basketInfo)
+        ? BasketInfo.fromJSON(object.basketInfo)
+        : undefined,
     };
   },
 
@@ -206,6 +282,10 @@ export const QueryBasketResponse = {
     } else {
       obj.classes = [];
     }
+    message.basketInfo !== undefined &&
+      (obj.basketInfo = message.basketInfo
+        ? BasketInfo.toJSON(message.basketInfo)
+        : undefined);
     return obj;
   },
 
@@ -218,6 +298,10 @@ export const QueryBasketResponse = {
         ? Basket.fromPartial(object.basket)
         : undefined;
     message.classes = object.classes?.map(e => e) || [];
+    message.basketInfo =
+      object.basketInfo !== undefined && object.basketInfo !== null
+        ? BasketInfo.fromPartial(object.basketInfo)
+        : undefined;
     return message;
   },
 };
@@ -299,6 +383,7 @@ function createBaseQueryBasketsResponse(): QueryBasketsResponse {
     $type: 'regen.ecocredit.basket.v1.QueryBasketsResponse',
     baskets: [],
     pagination: undefined,
+    basketsInfo: [],
   };
 }
 
@@ -317,6 +402,9 @@ export const QueryBasketsResponse = {
         message.pagination,
         writer.uint32(18).fork(),
       ).ldelim();
+    }
+    for (const v of message.basketsInfo) {
+      BasketInfo.encode(v!, writer.uint32(26).fork()).ldelim();
     }
     return writer;
   },
@@ -337,6 +425,9 @@ export const QueryBasketsResponse = {
         case 2:
           message.pagination = PageResponse.decode(reader, reader.uint32());
           break;
+        case 3:
+          message.basketsInfo.push(BasketInfo.decode(reader, reader.uint32()));
+          break;
         default:
           reader.skipType(tag & 7);
           break;
@@ -354,6 +445,9 @@ export const QueryBasketsResponse = {
       pagination: isSet(object.pagination)
         ? PageResponse.fromJSON(object.pagination)
         : undefined,
+      basketsInfo: Array.isArray(object?.basketsInfo)
+        ? object.basketsInfo.map((e: any) => BasketInfo.fromJSON(e))
+        : [],
     };
   },
 
@@ -370,6 +464,13 @@ export const QueryBasketsResponse = {
       (obj.pagination = message.pagination
         ? PageResponse.toJSON(message.pagination)
         : undefined);
+    if (message.basketsInfo) {
+      obj.basketsInfo = message.basketsInfo.map(e =>
+        e ? BasketInfo.toJSON(e) : undefined,
+      );
+    } else {
+      obj.basketsInfo = [];
+    }
     return obj;
   },
 
@@ -382,6 +483,8 @@ export const QueryBasketsResponse = {
       object.pagination !== undefined && object.pagination !== null
         ? PageResponse.fromPartial(object.pagination)
         : undefined;
+    message.basketsInfo =
+      object.basketsInfo?.map(e => BasketInfo.fromPartial(e)) || [];
     return message;
   },
 };
@@ -480,6 +583,7 @@ function createBaseQueryBasketBalancesResponse(): QueryBasketBalancesResponse {
     $type: 'regen.ecocredit.basket.v1.QueryBasketBalancesResponse',
     balances: [],
     pagination: undefined,
+    balancesInfo: [],
   };
 }
 
@@ -498,6 +602,9 @@ export const QueryBasketBalancesResponse = {
         message.pagination,
         writer.uint32(18).fork(),
       ).ldelim();
+    }
+    for (const v of message.balancesInfo) {
+      BasketBalanceInfo.encode(v!, writer.uint32(26).fork()).ldelim();
     }
     return writer;
   },
@@ -518,6 +625,11 @@ export const QueryBasketBalancesResponse = {
         case 2:
           message.pagination = PageResponse.decode(reader, reader.uint32());
           break;
+        case 3:
+          message.balancesInfo.push(
+            BasketBalanceInfo.decode(reader, reader.uint32()),
+          );
+          break;
         default:
           reader.skipType(tag & 7);
           break;
@@ -535,6 +647,9 @@ export const QueryBasketBalancesResponse = {
       pagination: isSet(object.pagination)
         ? PageResponse.fromJSON(object.pagination)
         : undefined,
+      balancesInfo: Array.isArray(object?.balancesInfo)
+        ? object.balancesInfo.map((e: any) => BasketBalanceInfo.fromJSON(e))
+        : [],
     };
   },
 
@@ -551,6 +666,13 @@ export const QueryBasketBalancesResponse = {
       (obj.pagination = message.pagination
         ? PageResponse.toJSON(message.pagination)
         : undefined);
+    if (message.balancesInfo) {
+      obj.balancesInfo = message.balancesInfo.map(e =>
+        e ? BasketBalanceInfo.toJSON(e) : undefined,
+      );
+    } else {
+      obj.balancesInfo = [];
+    }
     return obj;
   },
 
@@ -564,6 +686,8 @@ export const QueryBasketBalancesResponse = {
       object.pagination !== undefined && object.pagination !== null
         ? PageResponse.fromPartial(object.pagination)
         : undefined;
+    message.balancesInfo =
+      object.balancesInfo?.map(e => BasketBalanceInfo.fromPartial(e)) || [];
     return message;
   },
 };
@@ -720,7 +844,220 @@ messageTypeRegistry.set(
   QueryBasketBalanceResponse,
 );
 
-/** Msg is the regen.ecocredit.basket.v1beta1 Query service. */
+function createBaseBasketInfo(): BasketInfo {
+  return {
+    $type: 'regen.ecocredit.basket.v1.BasketInfo',
+    basketDenom: '',
+    name: '',
+    disableAutoRetire: false,
+    creditTypeAbbrev: '',
+    dateCriteria: undefined,
+    exponent: 0,
+    curator: '',
+  };
+}
+
+export const BasketInfo = {
+  $type: 'regen.ecocredit.basket.v1.BasketInfo' as const,
+
+  encode(
+    message: BasketInfo,
+    writer: _m0.Writer = _m0.Writer.create(),
+  ): _m0.Writer {
+    if (message.basketDenom !== '') {
+      writer.uint32(10).string(message.basketDenom);
+    }
+    if (message.name !== '') {
+      writer.uint32(18).string(message.name);
+    }
+    if (message.disableAutoRetire === true) {
+      writer.uint32(24).bool(message.disableAutoRetire);
+    }
+    if (message.creditTypeAbbrev !== '') {
+      writer.uint32(34).string(message.creditTypeAbbrev);
+    }
+    if (message.dateCriteria !== undefined) {
+      DateCriteria.encode(
+        message.dateCriteria,
+        writer.uint32(42).fork(),
+      ).ldelim();
+    }
+    if (message.exponent !== 0) {
+      writer.uint32(48).uint32(message.exponent);
+    }
+    if (message.curator !== '') {
+      writer.uint32(58).string(message.curator);
+    }
+    return writer;
+  },
+
+  decode(input: _m0.Reader | Uint8Array, length?: number): BasketInfo {
+    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+    let end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseBasketInfo();
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+        case 1:
+          message.basketDenom = reader.string();
+          break;
+        case 2:
+          message.name = reader.string();
+          break;
+        case 3:
+          message.disableAutoRetire = reader.bool();
+          break;
+        case 4:
+          message.creditTypeAbbrev = reader.string();
+          break;
+        case 5:
+          message.dateCriteria = DateCriteria.decode(reader, reader.uint32());
+          break;
+        case 6:
+          message.exponent = reader.uint32();
+          break;
+        case 7:
+          message.curator = reader.string();
+          break;
+        default:
+          reader.skipType(tag & 7);
+          break;
+      }
+    }
+    return message;
+  },
+
+  fromJSON(object: any): BasketInfo {
+    return {
+      $type: BasketInfo.$type,
+      basketDenom: isSet(object.basketDenom) ? String(object.basketDenom) : '',
+      name: isSet(object.name) ? String(object.name) : '',
+      disableAutoRetire: isSet(object.disableAutoRetire)
+        ? Boolean(object.disableAutoRetire)
+        : false,
+      creditTypeAbbrev: isSet(object.creditTypeAbbrev)
+        ? String(object.creditTypeAbbrev)
+        : '',
+      dateCriteria: isSet(object.dateCriteria)
+        ? DateCriteria.fromJSON(object.dateCriteria)
+        : undefined,
+      exponent: isSet(object.exponent) ? Number(object.exponent) : 0,
+      curator: isSet(object.curator) ? String(object.curator) : '',
+    };
+  },
+
+  toJSON(message: BasketInfo): unknown {
+    const obj: any = {};
+    message.basketDenom !== undefined &&
+      (obj.basketDenom = message.basketDenom);
+    message.name !== undefined && (obj.name = message.name);
+    message.disableAutoRetire !== undefined &&
+      (obj.disableAutoRetire = message.disableAutoRetire);
+    message.creditTypeAbbrev !== undefined &&
+      (obj.creditTypeAbbrev = message.creditTypeAbbrev);
+    message.dateCriteria !== undefined &&
+      (obj.dateCriteria = message.dateCriteria
+        ? DateCriteria.toJSON(message.dateCriteria)
+        : undefined);
+    message.exponent !== undefined &&
+      (obj.exponent = Math.round(message.exponent));
+    message.curator !== undefined && (obj.curator = message.curator);
+    return obj;
+  },
+
+  fromPartial<I extends Exact<DeepPartial<BasketInfo>, I>>(
+    object: I,
+  ): BasketInfo {
+    const message = createBaseBasketInfo();
+    message.basketDenom = object.basketDenom ?? '';
+    message.name = object.name ?? '';
+    message.disableAutoRetire = object.disableAutoRetire ?? false;
+    message.creditTypeAbbrev = object.creditTypeAbbrev ?? '';
+    message.dateCriteria =
+      object.dateCriteria !== undefined && object.dateCriteria !== null
+        ? DateCriteria.fromPartial(object.dateCriteria)
+        : undefined;
+    message.exponent = object.exponent ?? 0;
+    message.curator = object.curator ?? '';
+    return message;
+  },
+};
+
+messageTypeRegistry.set(BasketInfo.$type, BasketInfo);
+
+function createBaseBasketBalanceInfo(): BasketBalanceInfo {
+  return {
+    $type: 'regen.ecocredit.basket.v1.BasketBalanceInfo',
+    batchDenom: '',
+    balance: '',
+  };
+}
+
+export const BasketBalanceInfo = {
+  $type: 'regen.ecocredit.basket.v1.BasketBalanceInfo' as const,
+
+  encode(
+    message: BasketBalanceInfo,
+    writer: _m0.Writer = _m0.Writer.create(),
+  ): _m0.Writer {
+    if (message.batchDenom !== '') {
+      writer.uint32(10).string(message.batchDenom);
+    }
+    if (message.balance !== '') {
+      writer.uint32(18).string(message.balance);
+    }
+    return writer;
+  },
+
+  decode(input: _m0.Reader | Uint8Array, length?: number): BasketBalanceInfo {
+    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+    let end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseBasketBalanceInfo();
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+        case 1:
+          message.batchDenom = reader.string();
+          break;
+        case 2:
+          message.balance = reader.string();
+          break;
+        default:
+          reader.skipType(tag & 7);
+          break;
+      }
+    }
+    return message;
+  },
+
+  fromJSON(object: any): BasketBalanceInfo {
+    return {
+      $type: BasketBalanceInfo.$type,
+      batchDenom: isSet(object.batchDenom) ? String(object.batchDenom) : '',
+      balance: isSet(object.balance) ? String(object.balance) : '',
+    };
+  },
+
+  toJSON(message: BasketBalanceInfo): unknown {
+    const obj: any = {};
+    message.batchDenom !== undefined && (obj.batchDenom = message.batchDenom);
+    message.balance !== undefined && (obj.balance = message.balance);
+    return obj;
+  },
+
+  fromPartial<I extends Exact<DeepPartial<BasketBalanceInfo>, I>>(
+    object: I,
+  ): BasketBalanceInfo {
+    const message = createBaseBasketBalanceInfo();
+    message.batchDenom = object.batchDenom ?? '';
+    message.balance = object.balance ?? '';
+    return message;
+  },
+};
+
+messageTypeRegistry.set(BasketBalanceInfo.$type, BasketBalanceInfo);
+
+/** Msg is the regen.ecocredit.basket.v1 Query service. */
 export interface Query {
   /** Basket queries one basket by denom. */
   Basket(

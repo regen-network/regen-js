@@ -45,7 +45,7 @@ export interface EventCreateBatch {
 /**
  * EventReceive is an event emitted when credits are received either via
  * creation of a new batch, transfer of credits, or taking credits from a
- * basket. Each batch_denom created, transferred or taken from a basket will
+ * basket. Each batch_denom created, transferred or taken from a baset will
  * result in a separate EventReceive for easy indexing.
  */
 export interface EventReceive {
