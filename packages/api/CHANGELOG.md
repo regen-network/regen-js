@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.3.0](https://github.com/regen-network/regen-js/compare/v0.2.2...v0.3.0) (2022-06-27)
+
+
+### Features
+
+* Update and gen proto for regen-ledger v4.0 upgrade ([#37](https://github.com/regen-network/regen-js/issues/37)) ([0d0abff](https://github.com/regen-network/regen-js/commit/0d0abffae1f8943d2ece63ea7f3c1a8c5df97837))
+
+
+
+
+
 ## [0.2.2](https://github.com/regen-network/regen-js/compare/v0.2.1...v0.2.2) (2022-03-14)
 
 
