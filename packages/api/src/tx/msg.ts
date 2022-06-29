@@ -3,12 +3,23 @@ import {
   defaultRegistryTypes,
   StdFee,
   DeliverTxResponse,
+  AminoTypes,
+  createAuthzAminoConverters,
+  createBankAminoConverters,
+  createDistributionAminoConverters,
+  createFreegrantAminoConverters,
+  createGovAminoConverters,
+  createIbcAminoConverters,
+  createStakingAminoConverters,
+  // createVestingAminoConverters,
+  AminoConverters,
 } from '@cosmjs/stargate';
 import { Registry, GeneratedType, EncodeObject } from '@cosmjs/proto-signing';
 
 import { SigningConnectionOptions } from '../api';
 import { messageTypeRegistry } from '../generated/typeRegistry';
 import { createStargateSigningClient } from './stargate-signing';
+import { createEcocreditAminoConverters } from './modules';
 
 export interface MessageClient {
   readonly sign: (
@@ -20,6 +31,20 @@ export interface MessageClient {
   readonly broadcast: (signedTxBytes: Uint8Array) => Promise<DeliverTxResponse>;
 }
 
+function createDefaultTypes(): AminoConverters {
+  return {
+    ...createAuthzAminoConverters(),
+    ...createBankAminoConverters(),
+    ...createDistributionAminoConverters(),
+    ...createGovAminoConverters(),
+    ...createStakingAminoConverters('regen'),
+    ...createIbcAminoConverters(),
+    ...createFreegrantAminoConverters(),
+    ...createEcocreditAminoConverters(),
+    // ...createVestingAminoConverters(),
+  };
+}
+
 export async function setupTxExtension(
   connection: SigningConnectionOptions,
 ): Promise<MessageClient> {
@@ -28,11 +53,12 @@ export async function setupTxExtension(
     customRegistry.push([`/${key}`, value]);
   });
   const registry = new Registry([...defaultRegistryTypes, ...customRegistry]);
+  const aminoTypes = new AminoTypes(createDefaultTypes());
 
   const signingClient = await createStargateSigningClient(
     connection.endpoint,
     connection.signer,
-    { ...connection.clientOptions, registry },
+    { ...connection.clientOptions, registry, aminoTypes },
   );
 
   /**
