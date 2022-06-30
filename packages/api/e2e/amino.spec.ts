@@ -55,7 +55,6 @@ describe('RegenApi with tendermint connection', () => {
         TEST_FEE,
         TEST_MEMO,
       );
-      console.log('LOG', signedTxBytes);
 
       expect(signedTxBytes).toBeTruthy();
       if (signedTxBytes) {
