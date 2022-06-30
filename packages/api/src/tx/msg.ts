@@ -11,7 +11,6 @@ import {
   createGovAminoConverters,
   createIbcAminoConverters,
   createStakingAminoConverters,
-  // createVestingAminoConverters,
   AminoConverters,
 } from '@cosmjs/stargate';
 import { Registry, GeneratedType, EncodeObject } from '@cosmjs/proto-signing';
@@ -41,7 +40,6 @@ function createDefaultTypes(): AminoConverters {
     ...createIbcAminoConverters(),
     ...createFreegrantAminoConverters(),
     ...createEcocreditAminoConverters(),
-    // ...createVestingAminoConverters(),
   };
 }
 

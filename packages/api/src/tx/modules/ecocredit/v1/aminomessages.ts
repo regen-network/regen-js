@@ -1,17 +1,10 @@
 import { AminoConverters } from '@cosmjs/stargate';
-import { AminoMsg } from '@cosmjs/amino';
-import {
-  assert,
-  assertDefinedAndNotNull,
-  isNonNullObject,
-} from '@cosmjs/utils';
-
-import { Any } from 'cosmjs-types/google/protobuf/any';
-import Long from 'long';
+import { AminoMsg, Coin as AminoCoin } from '@cosmjs/amino';
 
 import { MsgCreateClass } from '../../../../generated/regen/ecocredit/v1/tx';
 import { Coin } from '../../../../generated/cosmos/base/v1beta1/coin';
 
+// Ref: https://github.com/regen-network/regen-ledger/blob/v4.0.0-beta1/x/ecocredit/core/codec.go#L16
 const msgCreateClassAminoType = 'regen.core/MsgCreateClass';
 
 export interface AminoMsgCreateClass extends AminoMsg {
@@ -21,7 +14,7 @@ export interface AminoMsgCreateClass extends AminoMsg {
     readonly issuers: string[];
     readonly metadata: string;
     readonly credit_type_abbrev: string;
-    readonly fee?: Coin;
+    readonly fee?: AminoCoin;
   };
 }
 
@@ -47,7 +40,7 @@ export function createEcocreditAminoConverters(): AminoConverters {
           issuers,
           metadata,
           credit_type_abbrev: creditTypeAbbrev,
-          fee,
+          fee: fee && { amount: fee.amount, denom: fee.denom },
         };
       },
       fromAmino: ({
@@ -56,14 +49,13 @@ export function createEcocreditAminoConverters(): AminoConverters {
         metadata,
         credit_type_abbrev,
         fee,
-      }: AminoMsgCreateClass['value']): MsgCreateClass => {
+      }: AminoMsgCreateClass['value']): Partial<MsgCreateClass> => {
         return {
           admin,
           issuers,
           metadata,
           creditTypeAbbrev: credit_type_abbrev,
           fee: fee && Coin.fromPartial(fee),
-          $type: MsgCreateClass.$type,
         };
       },
     },
