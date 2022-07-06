@@ -18,6 +18,7 @@ changes.
 
 ## Get Started
 
+### Install and build
 ```bash
 # Clone the repo.
 git clone https://github.com/regen-network/regen-js
@@ -31,6 +32,7 @@ yarn install
 yarn build:api
 ```
 
+### Starting the demo app
 Then, to run the React app, just run the following command:
 
 ```bash
@@ -44,6 +46,19 @@ The app should be running on http://localhost:3000.
 > run again `yarn build:api`, to let the other packages in the monorepo be
 > aware of your latest changes. You can also add to `--watch` flag on this
 > command to build on file change.
+
+### Running the tests:
+
+```
+yarn test
+```
+
+> Pro tip 💡: if want to run the api tests with a debugger use this command
+> (and then access your debugging tool, i.e. chrome://inspect):
+
+```
+node --inspect-brk node_modules/.bin/jest -c packages/api/jest.config.js --runInBand
+```
 
 ## Packages
 
