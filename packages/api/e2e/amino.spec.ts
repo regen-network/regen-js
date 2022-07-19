@@ -1,7 +1,10 @@
 import { Secp256k1HdWallet } from '@cosmjs/amino';
 import { DeliverTxResponse } from '@cosmjs/stargate';
 import { RegenApi } from '../src/api';
-import { MsgCreateClass } from '../src/generated/regen/ecocredit/v1/tx';
+import {
+  MsgCreateClass,
+  MsgSend,
+} from '../src/generated/regen/ecocredit/v1/tx';
 
 const TEST_ADDRESS = 'regen1m6d7al7yrgwv6j6sczt382x33yhxrtrxz2q09z';
 const V4_NODE_TM_URL = 'http://194.37.81.19:26657/';
@@ -15,7 +18,7 @@ const TEST_FEE = {
   gas: '200000',
 };
 const TEST_MEMO = `regen-js v${process.env.npm_package_version} tests`;
-const TEST_MSG = MsgCreateClass.fromPartial({
+const TEST_MSG_CREATE_CLASS = MsgCreateClass.fromPartial({
   admin: TEST_ADDRESS,
   creditTypeAbbrev: 'C',
   issuers: [TEST_ADDRESS],
@@ -24,6 +27,13 @@ const TEST_MSG = MsgCreateClass.fromPartial({
     denom: 'uregen',
     amount: '20000000',
   },
+});
+const TEST_MSG_SEND = MsgSend.fromPartial({
+  sender: TEST_ADDRESS,
+  recipient: TEST_ADDRESS,
+  credits: [
+    { batchDenom: 'C02-001-19930101-20031031-001', tradableAmount: '1' },
+  ],
 });
 
 const connect = async (): Promise<RegenApi> => {
@@ -51,7 +61,7 @@ describe('RegenApi with tendermint connection', () => {
 
       const signedTxBytes = await msgClient?.sign(
         TEST_ADDRESS,
-        [TEST_MSG],
+        [TEST_MSG_SEND],
         TEST_FEE,
         TEST_MEMO,
       );
