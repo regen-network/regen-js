@@ -38,6 +38,10 @@ export function isAminoMsgCreateClass(
   return msg.type === msgCreateClassAminoType;
 }
 
+export function isAminoMsgSend(msg: AminoMsg): msg is AminoMsgSend {
+  return msg.type === msgSendAminoType;
+}
+
 export function createEcocreditAminoConverters(): AminoConverters {
   return {
     '/regen.ecocredit.v1.MsgCreateClass': {
