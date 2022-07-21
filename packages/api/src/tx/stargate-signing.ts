@@ -1,8 +1,11 @@
+import { OfflineSigner } from '@cosmjs/proto-signing';
+
+import { DirectSecp256k1HdWallet, Registry } from '@cosmjs/proto-signing';
 import {
+  defaultRegistryTypes as defaultStargateTypes,
   SigningStargateClient,
   SigningStargateClientOptions,
 } from '@cosmjs/stargate';
-import { OfflineSigner } from '@cosmjs/proto-signing';
 
 /**
  * createStargateSigningClient returns a SigningStargateClient

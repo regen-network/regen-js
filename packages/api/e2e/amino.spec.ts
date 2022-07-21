@@ -1,10 +1,8 @@
-import { Secp256k1HdWallet } from '@cosmjs/amino';
+// import { Secp256k1HdWallet } from '@cosmjs/amino';
+import { DirectSecp256k1HdWallet } from '@cosmjs/proto-signing';
 import { DeliverTxResponse } from '@cosmjs/stargate';
 import { RegenApi } from '../src/api';
-import {
-  MsgCreateClass,
-  MsgSend,
-} from '../src/generated/regen/ecocredit/v1/tx';
+import { MsgSend } from '../src/generated/regen/ecocredit/v1/tx';
 
 const TEST_ADDRESS = 'regen1m6d7al7yrgwv6j6sczt382x33yhxrtrxz2q09z';
 const V4_NODE_TM_URL = 'http://194.37.81.19:26657/';
@@ -18,16 +16,6 @@ const TEST_FEE = {
   gas: '200000',
 };
 const TEST_MEMO = `regen-js v${process.env.npm_package_version} tests`;
-const TEST_MSG_CREATE_CLASS = MsgCreateClass.fromPartial({
-  admin: TEST_ADDRESS,
-  creditTypeAbbrev: 'C',
-  issuers: [TEST_ADDRESS],
-  metadata: 'some metadata',
-  fee: {
-    denom: 'uregen',
-    amount: '20000000',
-  },
-});
 const TEST_MSG_SEND = MsgSend.fromPartial({
   sender: TEST_ADDRESS,
   recipient: TEST_ADDRESS,
@@ -39,9 +27,12 @@ const TEST_MSG_SEND = MsgSend.fromPartial({
 const connect = async (): Promise<RegenApi> => {
   const mnemonic =
     'present weekend loan ladder cherry ill since ancient harsh smart enrich visa';
-  const signer = await Secp256k1HdWallet.fromMnemonic(mnemonic, {
-    prefix: 'regen',
-  });
+
+  // Inside an async function...
+  const signer = await DirectSecp256k1HdWallet.fromMnemonic(
+    mnemonic,
+    { prefix: 'regen' }, // Replace with your own Bech32 address prefix
+  );
 
   return RegenApi.connect({
     connection: {
