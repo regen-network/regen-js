@@ -27,11 +27,9 @@ const connect = async (): Promise<RegenApi> => {
   const mnemonic =
     'present weekend loan ladder cherry ill since ancient harsh smart enrich visa';
 
-  // Inside an async function...
-  const signer = await DirectSecp256k1HdWallet.fromMnemonic(
-    mnemonic,
-    { prefix: 'regen' }, // Replace with your own Bech32 address prefix
-  );
+  const signer = await DirectSecp256k1HdWallet.fromMnemonic(mnemonic, {
+    prefix: 'regen',
+  });
 
   return RegenApi.connect({
     connection: {
