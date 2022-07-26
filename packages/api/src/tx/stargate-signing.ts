@@ -1,8 +1,8 @@
+import { OfflineSigner } from '@cosmjs/proto-signing';
 import {
   SigningStargateClient,
   SigningStargateClientOptions,
 } from '@cosmjs/stargate';
-import { OfflineSigner } from '@cosmjs/proto-signing';
 
 /**
  * createStargateSigningClient returns a SigningStargateClient
