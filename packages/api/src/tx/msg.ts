@@ -19,6 +19,7 @@ import { SigningConnectionOptions } from '../api';
 import { messageTypeRegistry } from '../generated/typeRegistry';
 import { createStargateSigningClient } from './stargate-signing';
 import { createEcocreditAminoConverters } from './modules';
+import { MsgSend } from '../generated/regen/ecocredit/v1/tx';
 
 export interface MessageClient {
   readonly sign: (
@@ -46,7 +47,9 @@ function createDefaultTypes(): AminoConverters {
 export async function setupTxExtension(
   connection: SigningConnectionOptions,
 ): Promise<MessageClient> {
-  const customRegistry: Array<[string, GeneratedType]> = [];
+  const customRegistry: Array<[string, GeneratedType]> = [
+    ['regen.ecocredit.v1.MsgSend', MsgSend],
+  ];
   messageTypeRegistry.forEach((value, key) => {
     customRegistry.push([`/${key}`, value]);
   });

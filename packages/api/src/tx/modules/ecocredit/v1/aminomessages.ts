@@ -23,12 +23,20 @@ export interface AminoMsgCreateClass extends AminoMsg {
   };
 }
 
+interface AminoMsgSend_SendCredits {
+  $type: 'regen.ecocredit.v1.MsgSend.SendCredits';
+  batch_denom: string;
+  tradable_amount: string;
+  retired_amount: string;
+  retirement_jurisdiction: string;
+}
+
 export interface AminoMsgSend extends AminoMsg {
   readonly type: typeof msgSendAminoType;
   readonly value: {
     readonly sender: string;
     readonly recipient: string;
-    readonly credits: MsgSend_SendCredits[];
+    readonly credits: AminoMsgSend_SendCredits[];
   };
 }
 
@@ -87,7 +95,15 @@ export function createEcocreditAminoConverters(): AminoConverters {
         return {
           sender,
           recipient,
-          credits,
+          credits: credits.map(credit => {
+            return {
+              $type: credit.$type,
+              batch_denom: credit.batchDenom,
+              tradable_amount: credit.tradableAmount,
+              retired_amount: credit.retiredAmount,
+              retirement_jurisdiction: credit.retirementJurisdiction,
+            };
+          }),
         };
       },
       fromAmino: ({
@@ -98,7 +114,15 @@ export function createEcocreditAminoConverters(): AminoConverters {
         return {
           sender,
           recipient,
-          credits,
+          credits: credits.map(credit => {
+            return {
+              $type: credit.$type,
+              batchDenom: credit.batch_denom,
+              tradableAmount: credit.tradable_amount,
+              retiredAmount: credit.retired_amount,
+              retirementJurisdiction: credit.retirement_jurisdiction,
+            };
+          }),
         };
       },
     },

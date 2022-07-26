@@ -19,7 +19,7 @@ const TEST_MSG_SEND = MsgSend.fromPartial({
   sender: TEST_ADDRESS,
   recipient: TEST_ADDRESS,
   credits: [
-    { batchDenom: 'C02-001-19930101-20031031-001', tradableAmount: '1' },
+    { batchDenom: 'C02-001-19930101-20031031-001', tradableAmount: '0.01' },
   ],
 });
 
