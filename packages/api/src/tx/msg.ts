@@ -97,7 +97,6 @@ export async function setupTxExtension(
   ): Promise<DeliverTxResponse> => {
     try {
       const result = await signingClient.broadcastTx(signedTxBytes);
-
       return result;
     } catch (err) {
       return Promise.reject(err);

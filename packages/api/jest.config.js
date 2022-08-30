@@ -3,4 +3,5 @@ module.exports = {
   testEnvironment: 'node',
   testPathIgnorePatterns: ['/node_modules/', '/lib/'],
   testTimeout: 10000,
+  verbose: true,
 };
