@@ -6,7 +6,6 @@ import { MsgSend } from '../src/generated/regen/ecocredit/v1/tx';
 import { makeSignDoc, StdFee } from '@cosmjs/amino/build/signdoc';
 import { Secp256k1HdWallet } from '@cosmjs/amino/build/secp256k1hdwallet';
 import { serializeSignDoc } from '@cosmjs/amino/build/signdoc';
-import { decodeSignature } from '@cosmjs/amino/build/signature';
 
 const TEST_ADDRESS = 'regen1m0qh5y4ejkz3l5n6jlrntxcqx9r0x9xjv4vpcp';
 const REDWOOD_NODE_TM_URL = 'http://redwood.regen.network:26657/';
@@ -96,35 +95,9 @@ describe('RegenApi with tendermint connection', () => {
       let txRes: DeliverTxResponse | undefined;
       const api = await connect();
       const msgClient = api.msgClient;
-      const mnemonic =
-        'time dice choose cabbage suit panic silly cattle picture auto grab hole'; //regen1m0qh5y4ejkz3l5n6jlrntxcqx9r0x9xjv4vpcp
 
-      const signer = await Secp256k1HdWallet.fromMnemonic(mnemonic, {
-        prefix: 'regen',
-      });
-
-      const signDoc = makeSignDoc(
-        [{ type: MsgSend.$type, value: TEST_MSG_SEND }],
-        TEST_FEE,
-        'regen-redwood-1',
-        TEST_MEMO,
-        96,
-        2, //regen q auth account regen1m0qh5y4ejkz3l5n6jlrntxcqx9r0x9xjv4vpcp
-      );
-
-      const { signature, signed } = await signer?.signAmino(
-        TEST_ADDRESS,
-        signDoc,
-      );
-
-      const signedTxBytes = decodeSignature(signature).signature;
-      // const signedTxBytes = await msgClient?.sign(
-      //   TEST_ADDRESS,
-      //   [TEST_MSG_SEND],
-      //   TEST_FEE,
-      //   TEST_MEMO,
-      // );
-
+      const signedTxBytes = await msgClient?.sign(TEST_ADDRESS,[TEST_MSG_SEND],TEST_FEE,TEST_MEMO)
+      
       expect(signedTxBytes).toBeTruthy();
       if (signedTxBytes) {
         // console.log('signedTxBytes', signedTxBytes);
