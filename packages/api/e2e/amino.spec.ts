@@ -1,17 +1,16 @@
-import { DirectSecp256k1HdWallet } from '@cosmjs/proto-signing';
-import { HdPath, Slip10RawIndex } from '@cosmjs/crypto/build/slip10';
+import { Secp256k1, Secp256k1Signature, sha256 } from '@cosmjs/crypto';
 import { DeliverTxResponse } from '@cosmjs/stargate';
-import { fromBase64, fromHex, toBase64 } from '@cosmjs/encoding';
+import { fromBase64 } from '@cosmjs/encoding';
 import { RegenApi } from '../src/api';
 import { MsgSend } from '../src/generated/regen/ecocredit/v1/tx';
-import { Secp256k1Wallet } from '@cosmjs/amino/build/secp256k1wallet';
-import { makeSignDoc } from '@cosmjs/amino/build/signdoc';
+import { makeSignDoc, StdFee } from '@cosmjs/amino/build/signdoc';
 import { Secp256k1HdWallet } from '@cosmjs/amino/build/secp256k1hdwallet';
-// const TEST_ADDRESS = 'regen1f8q9cydxz32ct64hr3aqtt5nsvruggnymvcdxm';
-const TEST_ADDRESS = 'regen1m6d7al7yrgwv6j6sczt382x33yhxrtrxz2q09z';
-// const V4_NODE_TM_URL = 'http://194.37.81.19:26657/';
+import { serializeSignDoc } from '@cosmjs/amino/build/signdoc';
+import { decodeSignature } from '@cosmjs/amino/build/signature';
+
+const TEST_ADDRESS = 'regen1m0qh5y4ejkz3l5n6jlrntxcqx9r0x9xjv4vpcp';
 const REDWOOD_NODE_TM_URL = 'http://redwood.regen.network:26657/';
-const TEST_FEE = {
+const TEST_FEE: StdFee = {
   amount: [
     {
       denom: 'uregen',
@@ -25,33 +24,27 @@ const TEST_MSG_SEND = MsgSend.fromPartial({
   sender: TEST_ADDRESS,
   recipient: TEST_ADDRESS,
   credits: [
-    // { batchDenom: 'C02-001-19930101-20031031-001', tradableAmount: '0.01' },
     { batchDenom: 'C01-001-20170606-20210601-007', tradableAmount: '0.01' },
   ],
 });
 
 const connect = async (): Promise<RegenApi> => {
   const mnemonic =
-    'present weekend loan ladder cherry ill since ancient harsh smart enrich visa';
+    'time dice choose cabbage suit panic silly cattle picture auto grab hole'; //regen1m0qh5y4ejkz3l5n6jlrntxcqx9r0x9xjv4vpcp
 
-  // const signerM = await DirectSecp256k1HdWallet. .fromMnemonic(mnemonic, {
-  //   prefix: 'regen',
-  //   bip39Password: 'test',
-  // });
-
-  // const accounts = await signerM.getAccounts();
-  // console.log('accounts', accounts[0]);
-  // const defaultPrivkey = fromHex(
-  //   'b8c462d2bb0c1a92edf44f735021f16c270f28ee2c3d1cb49943a5e70a3c763e',
-  // );
-  // const defaultAddress = 'regen1m6d7al7yrgwv6j6sczt382x33yhxrtrxz2q09z';
-  // const defaultPubkey = fromHex(
-  //   '03f146c27639179e5b67b8646108f48e1a78b146c74939e34afaa5414ad5c93f8a',
-  // );
-
+  // Amino signer throws auth error:
   const signer = await Secp256k1HdWallet.fromMnemonic(mnemonic, {
     prefix: 'regen',
   });
+
+  const accounts = await signer.getAccounts();
+
+  console.log('accounts', accounts);
+
+  // proto signer works:
+  // const signer = await DirectSecp256k1HdWallet.fromMnemonic(mnemonic, {
+  //   prefix: 'regen',
+  // });
 
   return RegenApi.connect({
     connection: {
@@ -64,42 +57,77 @@ const connect = async (): Promise<RegenApi> => {
 
 describe('RegenApi with tendermint connection', () => {
   describe('Signing and broadcasting txs', () => {
+    it('should create a valid signature using legacy amino sign mode', async () => {
+      let txRes: DeliverTxResponse | undefined;
+      const api = await connect();
+      const msgClient = api.msgClient;
+      const mnemonic =
+        'time dice choose cabbage suit panic silly cattle picture auto grab hole'; //regen1m0qh5y4ejkz3l5n6jlrntxcqx9r0x9xjv4vpcp
+
+      // Amino signer throws auth error:
+      const signer = await Secp256k1HdWallet.fromMnemonic(mnemonic, {
+        prefix: 'regen',
+      });
+      const accounts = await signer.getAccounts();
+      const pubkey = accounts[0].pubkey;
+
+      const signDoc = makeSignDoc(
+        [{ type: MsgSend.$type, value: TEST_MSG_SEND }],
+        TEST_FEE,
+        'regen-redwood-1',
+        TEST_MEMO,
+        96,
+        2,
+      );
+
+      const { signature, signed } = await signer?.signAmino(
+        TEST_ADDRESS,
+        signDoc,
+      );
+
+      const valid = await Secp256k1.verifySignature(
+        Secp256k1Signature.fromFixedLength(fromBase64(signature.signature)),
+        sha256(serializeSignDoc(signed)),
+        pubkey,
+      );
+      expect(valid).toEqual(true);
+    });
     it('should sign and broadcast using legacy amino sign mode', async () => {
       let txRes: DeliverTxResponse | undefined;
       const api = await connect();
       const msgClient = api.msgClient;
+      const mnemonic =
+        'time dice choose cabbage suit panic silly cattle picture auto grab hole'; //regen1m0qh5y4ejkz3l5n6jlrntxcqx9r0x9xjv4vpcp
 
-      //   export interface StdSignDoc {
-      //     readonly chain_id: string;
-      //     readonly account_number: string;
-      //     readonly sequence: string;
-      //     readonly fee: StdFee;
-      //     readonly msgs: readonly AminoMsg[];
-      //     readonly memo: string;
-      // }
+      const signer = await Secp256k1HdWallet.fromMnemonic(mnemonic, {
+        prefix: 'regen',
+      });
 
-      // const signDoc = makeSignDoc(
-      //   [{ type: MsgSend.$type, value: TEST_MSG_SEND }],
-      //   TEST_FEE,
-      //   'regen-redwood-1',
-      //   TEST_MEMO,
-      //   TEST_ADDRESS,
-      //   '',
-      // );
-
-      // const response = await signer?.signAmino(TEST_ADDRESS, signDoc);
-      // const signedTxBytes = fromBase64(response.signature.signature);
-      const signedTxBytes = await msgClient?.sign(
-        TEST_ADDRESS,
-        [TEST_MSG_SEND],
+      const signDoc = makeSignDoc(
+        [{ type: MsgSend.$type, value: TEST_MSG_SEND }],
         TEST_FEE,
+        'regen-redwood-1',
         TEST_MEMO,
+        96,
+        2, //regen q auth account regen1m0qh5y4ejkz3l5n6jlrntxcqx9r0x9xjv4vpcp
       );
-      console.log('signedTxBytes', signedTxBytes);
-      // console.log('signedTxBytes', signedTxBytes);
+
+      const { signature, signed } = await signer?.signAmino(
+        TEST_ADDRESS,
+        signDoc,
+      );
+
+      const signedTxBytes = decodeSignature(signature).signature;
+      // const signedTxBytes = await msgClient?.sign(
+      //   TEST_ADDRESS,
+      //   [TEST_MSG_SEND],
+      //   TEST_FEE,
+      //   TEST_MEMO,
+      // );
 
       expect(signedTxBytes).toBeTruthy();
       if (signedTxBytes) {
+        // console.log('signedTxBytes', signedTxBytes);
         txRes = await msgClient?.broadcast(signedTxBytes);
         console.log('txRes', txRes);
         expect(txRes).toBeTruthy();

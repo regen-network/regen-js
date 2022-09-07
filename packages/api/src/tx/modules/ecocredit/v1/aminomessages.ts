@@ -92,6 +92,12 @@ export function createEcocreditAminoConverters(): AminoConverters {
         recipient,
         credits,
       }: MsgSend): AminoMsgSend['value'] => {
+        console.log(
+          'toAmino sender,recipient,credits,',
+          sender,
+          recipient,
+          credits,
+        );
         return {
           sender,
           recipient,
