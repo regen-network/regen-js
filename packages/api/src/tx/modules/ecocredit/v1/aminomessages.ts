@@ -2,16 +2,41 @@ import { AminoConverters } from '@cosmjs/stargate';
 import { AminoMsg, Coin as AminoCoin } from '@cosmjs/amino';
 
 import {
+  MsgCancel,
   MsgCreateClass,
   MsgSend,
   MsgSend_SendCredits,
 } from '../../../../generated/regen/ecocredit/v1/tx';
 import { Coin } from '../../../../generated/cosmos/base/v1beta1/coin';
+import { Credits } from '../../../../generated/regen/ecocredit/v1/types';
 
 // Ref: https://github.com/regen-network/regen-ledger/blob/v4.0.0-beta1/x/ecocredit/core/codec.go#L16
+const msgCancelAminoType = 'regen.core/MsgCancel';
 const msgCreateClassAminoType = 'regen.core/MsgCreateClass';
 const msgSendAminoType = 'regen.core/MsgSend';
 
+interface AminoMsgSend_SendCredits {
+  $type: MsgSend_SendCredits['$type'];
+  batch_denom: string;
+  tradable_amount: string;
+  retired_amount: string;
+  retirement_jurisdiction: string;
+}
+
+interface AminoCredits {
+  $type: Credits['$type'];
+  batch_denom: string;
+  amount: string;
+}
+
+export interface AminoMsgCancel extends AminoMsg {
+  readonly type: typeof msgSendAminoType;
+  readonly value: {
+    owner: string;
+    credits: AminoCredits[];
+    reason: string;
+  };
+}
 export interface AminoMsgCreateClass extends AminoMsg {
   readonly type: typeof msgCreateClassAminoType;
   readonly value: {
@@ -21,14 +46,6 @@ export interface AminoMsgCreateClass extends AminoMsg {
     readonly credit_type_abbrev: string;
     readonly fee?: AminoCoin;
   };
-}
-
-interface AminoMsgSend_SendCredits {
-  $type: 'regen.ecocredit.v1.MsgSend.SendCredits';
-  batch_denom: string;
-  tradable_amount: string;
-  retired_amount: string;
-  retirement_jurisdiction: string;
 }
 
 export interface AminoMsgSend extends AminoMsg {
@@ -52,6 +69,43 @@ export function isAminoMsgSend(msg: AminoMsg): msg is AminoMsgSend {
 
 export function createEcocreditAminoConverters(): AminoConverters {
   return {
+    '/regen.ecocredit.v1.MsgCancel': {
+      aminoType: msgCancelAminoType,
+      toAmino: ({
+        owner,
+        credits,
+        reason,
+      }: MsgCancel): AminoMsgCancel['value'] => {
+        return {
+          owner,
+          credits: credits.map(credit => {
+            return {
+              $type: credit.$type,
+              batch_denom: credit.batchDenom,
+              amount: credit.amount,
+            };
+          }),
+          reason,
+        };
+      },
+      fromAmino: ({
+        owner,
+        credits,
+        reason,
+      }: AminoMsgCancel['value']): Partial<MsgCancel> => {
+        return {
+          owner,
+          credits: credits.map(credit => {
+            return {
+              $type: credit.$type,
+              batchDenom: credit.batch_denom,
+              amount: credit.amount,
+            };
+          }),
+          reason,
+        };
+      },
+    },
     '/regen.ecocredit.v1.MsgCreateClass': {
       aminoType: msgCreateClassAminoType,
       toAmino: ({
@@ -92,12 +146,6 @@ export function createEcocreditAminoConverters(): AminoConverters {
         recipient,
         credits,
       }: MsgSend): AminoMsgSend['value'] => {
-        console.log(
-          'toAmino sender,recipient,credits,',
-          sender,
-          recipient,
-          credits,
-        );
         return {
           sender,
           recipient,
