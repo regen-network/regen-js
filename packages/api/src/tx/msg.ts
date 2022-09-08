@@ -19,7 +19,7 @@ import { SigningConnectionOptions } from '../api';
 import { messageTypeRegistry } from '../generated/typeRegistry';
 import { createStargateSigningClient } from './stargate-signing';
 import { createEcocreditAminoConverters } from './modules';
-import { MsgCreateClass, MsgSend } from '../generated/regen/ecocredit/v1/tx';
+import { MsgCancel, MsgCreateClass, MsgSend } from '../generated/regen/ecocredit/v1/tx';
 
 export interface MessageClient {
   readonly sign: (
@@ -48,13 +48,14 @@ export async function setupTxExtension(
   connection: SigningConnectionOptions,
 ): Promise<MessageClient> {
   const customRegistry: Array<[string, GeneratedType]> = [
+    [MsgCancel.$type, MsgCancel],
     [MsgCreateClass.$type, MsgCreateClass],
     [MsgSend.$type, MsgSend],
   ];
-  messageTypeRegistry.forEach((value, key) => {
-    customRegistry.push([`/${key}`, value]);
+  const registry = new Registry([...defaultRegistryTypes]);
+  customRegistry.forEach(([key, value]) => {
+    registry.register(`/${key}`, value);
   });
-  const registry = new Registry([...defaultRegistryTypes, ...customRegistry]);
   const aminoTypes = new AminoTypes(createDefaultTypes());
 
   const signingClient = await createStargateSigningClient(

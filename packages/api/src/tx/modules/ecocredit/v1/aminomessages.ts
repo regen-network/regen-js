@@ -9,6 +9,7 @@ import {
 } from '../../../../generated/regen/ecocredit/v1/tx';
 import { Coin } from '../../../../generated/cosmos/base/v1beta1/coin';
 import { Credits } from '../../../../generated/regen/ecocredit/v1/types';
+import { MsgCancel_CancelCredits } from '../../../../generated/regen/ecocredit/v1alpha1/tx';
 
 // Ref: https://github.com/regen-network/regen-ledger/blob/v4.0.0-beta1/x/ecocredit/core/codec.go#L16
 const msgCancelAminoType = 'regen.core/MsgCancel';
@@ -23,8 +24,8 @@ interface AminoMsgSend_SendCredits {
   retirement_jurisdiction: string;
 }
 
-interface AminoCredits {
-  $type: Credits['$type'];
+interface AminoMsgCancel_CancelCredits {
+  $type: MsgCancel_CancelCredits['$type'];
   batch_denom: string;
   amount: string;
 }
@@ -33,7 +34,7 @@ export interface AminoMsgCancel extends AminoMsg {
   readonly type: typeof msgSendAminoType;
   readonly value: {
     owner: string;
-    credits: AminoCredits[];
+    credits: AminoMsgCancel_CancelCredits[];
     reason: string;
   };
 }
