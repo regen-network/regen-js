@@ -151,7 +151,7 @@ export function createEcocreditAminoConverters(): AminoConverters {
           credits: credits.map(credit => {
             return {
               batch_denom: credit.batchDenom,
-              tradable_amount: credit.tradableAmount,
+              tradable_amount: credit?.tradableAmount || undefined,
               retired_amount: credit?.retiredAmount || undefined,
               retirement_jurisdiction: credit?.retiredAmount || undefined,
             };

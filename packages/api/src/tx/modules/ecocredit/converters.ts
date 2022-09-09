@@ -1,20 +1,20 @@
 import { AminoConverters } from '@cosmjs/stargate';
-import { createTypeUrl } from './basket/v1/create_amino';
-import { putConverter, putTypeUrl } from './basket/v1/put_amino';
-import { takeConverter, takeTypeUrl } from './basket/v1/take_amino';
-import {
-  buyDirectConverter,
-  buyDirectTypeUrl,
-} from './marketplace/v1/buy_direct_amino';
-import {
-  cancelSellOrderConverter,
-  cancelSellOrderTypeUrl,
-} from './marketplace/v1/cancel_sell_order_amino';
-import { sellConverter, sellTypeUrl } from './marketplace/v1/sell_amino';
-import {
-  updateSellOrderConverter,
-  updateSellOrdersTypeUrl,
-} from './marketplace/v1/update_sell_orders';
+// import { createTypeUrl } from './basket/v1/create_amino';
+// import { putConverter, putTypeUrl } from './basket/v1/put_amino';
+// import { takeConverter, takeTypeUrl } from './basket/v1/take_amino';
+// import {
+//   buyDirectConverter,
+//   buyDirectTypeUrl,
+// } from './marketplace/v1/buy_direct_amino';
+// import {
+//   cancelSellOrderConverter,
+//   cancelSellOrderTypeUrl,
+// } from './marketplace/v1/cancel_sell_order_amino';
+// import { sellConverter, sellTypeUrl } from './marketplace/v1/sell_amino';
+// import {
+//   updateSellOrderConverter,
+//   updateSellOrdersTypeUrl,
+// } from './marketplace/v1/update_sell_orders';
 import {
   createBatchConverter,
   createBatchTypeUrl,
@@ -58,31 +58,31 @@ import {
 
 export function createEcocreditAminoConverters(): AminoConverters {
   return {
-    // // core module
-    // [createBatchTypeUrl]: createBatchConverter,
-    // [createClassTypeUrl]: createClassConverter,
-    // [createProjectTypeUrl]: createProjectConverter,
-    // [mintBatchCreditsTypeUrl]: mintBatchCreditsConverter,
-    // [cancelTypeUrl]: cancelConverter,
-    // [retireTypeUrl]: retireAminoConverter,
-    // [sealBatchTypeUrl]: sealBatchConverter,
-    // [sendTypeUrl]: ecocreditSendConverter,
-    // [updateClassAdminTypeUrl]: updateClassAdminConverter,
-    // [updateClassIssuersTypeUrl]: updateClassIssuersConverter,
-    // [updateClassMetadataTypeUrl]: updateClassMetadataConverter,
-    // [updateProjectAdminTypeUrl]: updateProjectAdminConverter,
-    // [updateProjectMetadataTypeUrl]: updateProjectMetadataConverter,
+    // core module
+    [createBatchTypeUrl]: createBatchConverter(),
+    [createClassTypeUrl]: createClassConverter(),
+    [createProjectTypeUrl]: createProjectConverter(),
+    [mintBatchCreditsTypeUrl]: mintBatchCreditsConverter(),
+    [cancelTypeUrl]: cancelConverter(),
+    [retireTypeUrl]: retireAminoConverter(),
+    [sealBatchTypeUrl]: sealBatchConverter(),
+    [sendTypeUrl]: ecocreditSendConverter(),
+    [updateClassAdminTypeUrl]: updateClassAdminConverter(),
+    [updateClassIssuersTypeUrl]: updateClassIssuersConverter(),
+    [updateClassMetadataTypeUrl]: updateClassMetadataConverter(),
+    [updateProjectAdminTypeUrl]: updateProjectAdminConverter(),
+    [updateProjectMetadataTypeUrl]: updateProjectMetadataConverter(),
 
     // // basket module
-    // [createTypeUrl]: takeConverter,
-    // [putTypeUrl]: putConverter,
-    // [takeTypeUrl]: takeConverter,
+    // [createTypeUrl]: takeConverter(),
+    // [putTypeUrl]: putConverter(),
+    // [takeTypeUrl]: takeConverter(),
 
     // // marketplace module
-    // [buyDirectTypeUrl]: buyDirectConverter,
-    // [cancelTypeUrl]: cancelConverter,
-    // [cancelSellOrderTypeUrl]: cancelSellOrderConverter,
-    // [sellTypeUrl]: sellConverter,
-    // [updateSellOrdersTypeUrl]: updateSellOrderConverter,
+    // [buyDirectTypeUrl]: buyDirectConverter(),
+    // [cancelTypeUrl]: cancelConverter(),
+    // [cancelSellOrderTypeUrl]: cancelSellOrderConverter(),
+    // [sellTypeUrl]: sellConverter(),
+    // [updateSellOrdersTypeUrl]: updateSellOrderConverter(),
   };
 }
