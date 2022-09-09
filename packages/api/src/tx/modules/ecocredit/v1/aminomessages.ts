@@ -16,15 +16,15 @@ const msgCreateClassAminoType = 'regen.core/MsgCreateClass';
 const msgSendAminoType = 'regen.core/MsgSend';
 
 interface AminoMsgSend_SendCredits {
-  $type: MsgSend_SendCredits['$type'];
+  // $type: MsgSend_SendCredits['$type'];
   batch_denom: string;
-  tradable_amount: string;
-  retired_amount: string;
-  retirement_jurisdiction: string;
+  tradable_amount?: string;
+  retired_amount?: string;
+  retirement_jurisdiction?: string;
 }
 
 interface AminoMsgCancel_CancelCredits {
-  $type: Credits['$type'];
+  // $type: Credits['$type'];
   batch_denom: string;
   amount: string;
 }
@@ -50,11 +50,11 @@ export interface AminoMsgCreateClass extends AminoMsg {
 
 export interface AminoMsgSend extends AminoMsg {
   readonly type: typeof msgSendAminoType;
-  readonly value: {
+  readonly value: Partial<{
     readonly sender: string;
     readonly recipient: string;
     readonly credits: AminoMsgSend_SendCredits[];
-  };
+  }>;
 }
 
 export function isAminoMsgCreateClass(
@@ -80,7 +80,7 @@ export function createEcocreditAminoConverters(): AminoConverters {
           owner,
           credits: credits.map(credit => {
             return {
-              $type: credit.$type,
+              // $type: credit.$type,
               batch_denom: credit.batchDenom,
               amount: credit.amount,
             };
@@ -97,7 +97,7 @@ export function createEcocreditAminoConverters(): AminoConverters {
           owner,
           credits: credits.map(credit => {
             return {
-              $type: credit.$type,
+              $type: Credits['$type'],
               batchDenom: credit.batch_denom,
               amount: credit.amount,
             };
@@ -151,11 +151,10 @@ export function createEcocreditAminoConverters(): AminoConverters {
           recipient,
           credits: credits.map(credit => {
             return {
-              $type: credit.$type,
               batch_denom: credit.batchDenom,
               tradable_amount: credit.tradableAmount,
-              retired_amount: credit.retiredAmount,
-              retirement_jurisdiction: credit.retirementJurisdiction,
+              retired_amount: credit?.retiredAmount || undefined,
+              retirement_jurisdiction: credit?.retiredAmount || undefined,
             };
           }),
         };
@@ -168,13 +167,13 @@ export function createEcocreditAminoConverters(): AminoConverters {
         return {
           sender,
           recipient,
-          credits: credits.map(credit => {
+          credits: credits?.map(credit => {
             return {
-              $type: credit.$type,
+              $type: MsgSend_SendCredits['$type'],
               batchDenom: credit.batch_denom,
-              tradableAmount: credit.tradable_amount,
-              retiredAmount: credit.retired_amount,
-              retirementJurisdiction: credit.retirement_jurisdiction,
+              tradableAmount: credit.tradable_amount || '',
+              retiredAmount: credit.retired_amount || '',
+              retirementJurisdiction: credit.retirement_jurisdiction || '',
             };
           }),
         };

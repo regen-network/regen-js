@@ -4,13 +4,6 @@ import {
   StdFee,
   DeliverTxResponse,
   AminoTypes,
-  createAuthzAminoConverters,
-  createBankAminoConverters,
-  createDistributionAminoConverters,
-  createFreegrantAminoConverters,
-  createGovAminoConverters,
-  createIbcAminoConverters,
-  createStakingAminoConverters,
   AminoConverters,
 } from '@cosmjs/stargate';
 import { Registry, GeneratedType, EncodeObject } from '@cosmjs/proto-signing';
@@ -19,7 +12,11 @@ import { SigningConnectionOptions } from '../api';
 import { messageTypeRegistry } from '../generated/typeRegistry';
 import { createStargateSigningClient } from './stargate-signing';
 import { createEcocreditAminoConverters } from './modules';
-import { MsgCancel, MsgCreateClass, MsgSend } from '../generated/regen/ecocredit/v1/tx';
+import {
+  MsgCancel,
+  MsgCreateClass,
+  MsgSend,
+} from '../generated/regen/ecocredit/v1/tx';
 
 export interface MessageClient {
   readonly sign: (
@@ -33,13 +30,6 @@ export interface MessageClient {
 
 function createDefaultTypes(): AminoConverters {
   return {
-    ...createAuthzAminoConverters(),
-    ...createBankAminoConverters(),
-    ...createDistributionAminoConverters(),
-    ...createGovAminoConverters(),
-    ...createStakingAminoConverters('regen'),
-    ...createIbcAminoConverters(),
-    ...createFreegrantAminoConverters(),
     ...createEcocreditAminoConverters(),
   };
 }

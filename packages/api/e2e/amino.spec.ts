@@ -1,11 +1,8 @@
-import { Secp256k1, Secp256k1Signature, sha256 } from '@cosmjs/crypto';
 import { DeliverTxResponse } from '@cosmjs/stargate';
-import { fromBase64 } from '@cosmjs/encoding';
 import { RegenApi } from '../src/api';
 import { MsgSend } from '../src/generated/regen/ecocredit/v1/tx';
-import { makeSignDoc, StdFee } from '@cosmjs/amino/build/signdoc';
+import { StdFee } from '@cosmjs/amino/build/signdoc';
 import { Secp256k1HdWallet } from '@cosmjs/amino/build/secp256k1hdwallet';
-import { serializeSignDoc } from '@cosmjs/amino/build/signdoc';
 
 const TEST_ADDRESS = 'regen1m0qh5y4ejkz3l5n6jlrntxcqx9r0x9xjv4vpcp';
 const REDWOOD_NODE_TM_URL = 'http://redwood.regen.network:26657/';
