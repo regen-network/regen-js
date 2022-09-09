@@ -4,6 +4,8 @@ import { MsgSend, MsgSend_SendCredits } from '../../../../generated/regen/ecocre
 
 const msgSendAminoType = 'regen.core/MsgSend';
 
+export const sendTypeUrl = "/" + MsgSend.$type;
+
 interface AminoMsgSend_SendCredits {
     $type: MsgSend_SendCredits['$type'];
     batch_denom: string;
@@ -27,7 +29,7 @@ export function isAminoMsgSend(msg: AminoMsg): msg is AminoMsgSend {
     return msg.type === msgSendAminoType;
 }
 
-let sendConverter: AminoConverter = {
+export let sendConverter: AminoConverter = {
     aminoType: msgSendAminoType,
     toAmino: ({
         sender,

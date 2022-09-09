@@ -5,6 +5,8 @@ import { Credits } from '../../../../generated/regen/ecocredit/v1/types';
 
 const msgCancelAminoType = 'regen.core/MsgCancel';
 
+export const cancelTypeUrl = "/" + MsgCancel.$type;
+
 export interface AminoCredits {
     $type: Credits['$type'];
     batch_denom: string;
@@ -24,7 +26,7 @@ export function isAminoMsgSend(msg: AminoMsg): msg is AminoMsgCancel {
     return msg.type === msgCancelAminoType;
 }
 
-let cancelConverter: AminoConverter = {
+export let cancelConverter: AminoConverter = {
     aminoType: '/regen.ecocredit.v1.MsgCancel',
     toAmino: ({ owner, credits, reason }: MsgCancel): AminoMsgCancel['value'] => {
         return {

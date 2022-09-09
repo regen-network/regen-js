@@ -4,6 +4,8 @@ import { MsgCreateProject } from '../../../../generated/regen/ecocredit/v1/tx';
 
 const msgCreateProjectAminoType = 'regen.core/MsgCreateProject';
 
+export const createProjectTypeUrl = "/" + MsgCreateProject.$type;
+
 export interface AminoMsgCreateProject extends AminoMsg {
     readonly type: typeof  msgCreateProjectAminoType;
     readonly value: {
@@ -21,7 +23,7 @@ export interface AminoMsgCreateProject extends AminoMsg {
     return msg.type === msgCreateProjectAminoType;
   }
 
-let createProjectConverter: AminoConverter = {
+export let createProjectConverter: AminoConverter = {
     aminoType: msgCreateProjectAminoType,
     toAmino: ({admin, classId, metadata, jurisdiction, referenceId}: MsgCreateProject): AminoMsgCreateProject['value'] => {
         return {

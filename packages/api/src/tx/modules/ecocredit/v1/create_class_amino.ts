@@ -5,6 +5,8 @@ import { Coin } from '../../../../generated/cosmos/base/v1beta1/coin';
 
 const msgCreateClassAminoType = 'regen.core/MsgCreateClass';
 
+export const createClassTypeUrl = "/" + MsgCreateClass.$type;
+
 export interface AminoMsgCreateClass extends AminoMsg {
     readonly type: typeof msgCreateClassAminoType;
     readonly value: {
@@ -22,7 +24,7 @@ export function isAminoMsgCreateClass(
     return msg.type === msgCreateClassAminoType;
 }
 
-let createClassConverter: AminoConverter = {
+export let createClassConverter: AminoConverter = {
     aminoType: msgCreateClassAminoType,
     toAmino: ({
         admin,

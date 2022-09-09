@@ -4,6 +4,7 @@ import { MsgBuyDirect, MsgBuyDirect_Order } from "../../../../../generated/regen
 
 const msgBuyDirectAmnioType = 'regen.marketplace/MsgBuyDirect';
 
+export const buyDirectTypeUrl = "/" + MsgBuyDirect.$type;
 
 interface AminoBuyDirect_Order {
     $type: MsgBuyDirect_Order['$type'];
@@ -26,7 +27,7 @@ export function isAminoMsgBuyDirect(msg: AminoMsg): msg is AminoMsgBuyDirect {
     return msg.type === msgBuyDirectAmnioType;
 }
 
-let buyDirectConverter: AminoConverter = {
+export let buyDirectConverter: AminoConverter = {
     aminoType: msgBuyDirectAmnioType,
     toAmino: ({buyer, orders}: MsgBuyDirect): AminoMsgBuyDirect['value'] => {
         return {

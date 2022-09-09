@@ -7,6 +7,8 @@ import { DateCriteria } from "../../../../../generated/regen/ecocredit/basket/v1
 
 const msgCreateAminoType = 'regen.basket/MsgCreate';
 
+export const createTypeUrl = "/" + MsgCreate.$type;
+
 export interface AminoDateCriteria {
     $type: DateCriteria['$type'];
     min_start_date?: Date;
@@ -33,7 +35,7 @@ export function isAminoMsgCreate(msg: AminoMsg): msg is AminoMsgCreate {
     return msg.type === msgCreateAminoType;
 }
 
-let createConverter: AminoConverter = {
+export let createConverter: AminoConverter = {
     aminoType: msgCreateAminoType,
     toAmino: ({curator, name, description, exponent, disableAutoRetire, creditTypeAbbrev, allowedClasses, dateCriteria, fee}: MsgCreate): AminoMsgCreate['value'] => {
         return {

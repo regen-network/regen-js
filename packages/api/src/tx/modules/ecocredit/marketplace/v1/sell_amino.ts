@@ -5,6 +5,8 @@ import { MsgSell, MsgSell_Order } from "../../../../../generated/regen/ecocredit
 
 const msgSellAminoType = 'regen.marketplace/MsgSell';
 
+export const sellTypeUrl = "/" + MsgSell.$type;
+
 interface AminoSell_Order {
     $type: MsgSell_Order['$type'];
     batch_denom: string;
@@ -26,7 +28,7 @@ export function isAminoMsgSell(msg: AminoMsg): msg is AminoMsgSell {
     return msg.type === msgSellAminoType;
 }
 
-let sellConverter: AminoConverter = {
+export let sellConverter: AminoConverter = {
     aminoType: msgSellAminoType,
     toAmino: ({seller, orders}: MsgSell): AminoMsgSell['value'] => {
         return {

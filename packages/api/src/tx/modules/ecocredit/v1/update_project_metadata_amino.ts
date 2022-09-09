@@ -4,6 +4,8 @@ import { MsgUpdateProjectMetadata } from "../../../../generated/regen/ecocredit/
 
 const msgUpdateProjectMetadataAminoType = 'regen.core/MsgUpdateProjectMetadata';
 
+export const updateProjectMetadataTypeUrl = "/" + MsgUpdateProjectMetadata.$type;
+
 export interface AminoMsgUpdateProjectMetadata extends AminoMsg {
     readonly type: typeof msgUpdateProjectMetadataAminoType;
     readonly value: {
@@ -17,7 +19,7 @@ export function isAminoMsgUpdateProjectMetadata(msg: AminoMsg): msg is AminoMsgU
     return msg.type === msgUpdateProjectMetadataAminoType;
 }
 
-let updateProjectMetadata: AminoConverter = {
+export let updateProjectMetadataConverter: AminoConverter = {
     aminoType: msgUpdateProjectMetadataAminoType,
     toAmino: ({admin, projectId, newMetadata}: MsgUpdateProjectMetadata): AminoMsgUpdateProjectMetadata['value'] => {
         return {

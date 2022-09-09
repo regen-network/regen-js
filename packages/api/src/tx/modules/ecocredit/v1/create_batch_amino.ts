@@ -5,6 +5,8 @@ import { BatchIssuance, OriginTx } from "../../../../generated/regen/ecocredit/v
 
 const msgCreateBatchAminoType = 'regen.core/MsgCreateBatch';
 
+export const createBatchTypeUrl = "/" + MsgCreateBatch.$type
+
 export interface AminoBatchIssuance {
     $type: BatchIssuance['$type'];
     recipient: string;
@@ -39,7 +41,7 @@ export function isAminoMsgCreateBatch(
     return msg.type === msgCreateBatchAminoType;
   }
 
-let createBatchConverter: AminoConverter = {
+export let createBatchConverter: AminoConverter = {
     aminoType: msgCreateBatchAminoType,
     toAmino: ({issuer, projectId, issuance, metadata, startDate, endDate, open, originTx}: MsgCreateBatch): AminoMsgCreateBatch['value'] => {
         return {

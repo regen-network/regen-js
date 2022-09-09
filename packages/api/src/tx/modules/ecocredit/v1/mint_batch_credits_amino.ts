@@ -6,6 +6,8 @@ import { AminoBatchIssuance, AminoOriginTx } from "./create_batch_amino";
 
 const msgMintBatchCreditsAminoType = 'regen.core/MsgMintBatchCredits'
 
+export const mintBatchCreditsTypeUrl = "/" + MsgMintBatchCredits.$type
+
 export interface AminoMsgMintBatchCredits extends AminoMsg {
     readonly type: typeof msgMintBatchCreditsAminoType;
     readonly value: {
@@ -22,7 +24,7 @@ export function isAminoMsgMintBatchCredits(
     return msg.type === msgMintBatchCreditsAminoType;
 }
 
-let mintBatchCreditsConverter: AminoConverter = {
+export let mintBatchCreditsConverter: AminoConverter = {
     aminoType: msgMintBatchCreditsAminoType,
     toAmino: ({issuer, batchDenom, issuance, originTx}: MsgMintBatchCredits): AminoMsgMintBatchCredits['value'] => {
         return {

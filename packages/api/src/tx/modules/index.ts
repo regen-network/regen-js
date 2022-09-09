@@ -1,1 +1,1 @@
-export { createEcocreditAminoConverters } from './ecocredit/v1/aminomessages';
+export { createEcocreditAminoConverters } from './ecocredit/converters';

@@ -4,6 +4,8 @@ import { MsgUpdateClassIssuers } from "../../../../generated/regen/ecocredit/v1/
 
 const msgUpdateClassIssuersAminoType = 'regen.core/MsgUpdateClassIssuers';
 
+export const updateClassIssuersTypeUrl = "/" + MsgUpdateClassIssuers.$type;
+
 export interface AminoMsgUpdateClassIssuers extends AminoMsg {
     readonly type: typeof msgUpdateClassIssuersAminoType;
     readonly value: {
@@ -18,7 +20,7 @@ export function isAminoMsgUpdateClassIssuers(msg: AminoMsg): msg is AminoMsgUpda
     return msg.type === msgUpdateClassIssuersAminoType;
 }
 
-let updateClassIssuersConverter: AminoConverter = {
+export let updateClassIssuersConverter: AminoConverter = {
     aminoType: msgUpdateClassIssuersAminoType,
     toAmino: ({admin, classId, addIssuers, removeIssuers}: MsgUpdateClassIssuers): AminoMsgUpdateClassIssuers['value'] => {
         return {

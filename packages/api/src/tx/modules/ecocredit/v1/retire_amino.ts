@@ -1,9 +1,11 @@
 import { AminoMsg } from "@cosmjs/amino";
 import { AminoConverter } from "@cosmjs/stargate";
 import { MsgRetire } from "../../../../generated/regen/ecocredit/v1/tx";
-import { AminoCredits } from "./aminomessages";
+import { AminoCredits } from "./msg_cancel";
 
 const msgRetireAminoType = 'regen.core/MsgRetire';
+
+export const retireTypeUrl = "/" + MsgRetire.$type;
 
 export interface AminoMsgRetire extends AminoMsg {
     readonly type: typeof msgRetireAminoType;
@@ -18,7 +20,7 @@ export function isAminoMsgRetire(msg: AminoMsg): msg is AminoMsgRetire {
     return msg.type === msgRetireAminoType;
 }
 
-let retireAminoConverter: AminoConverter = {
+export let retireAminoConverter: AminoConverter = {
     aminoType: msgRetireAminoType,
     toAmino: ({owner, credits, jurisdiction}: MsgRetire): AminoMsgRetire['value'] => {
         return {
