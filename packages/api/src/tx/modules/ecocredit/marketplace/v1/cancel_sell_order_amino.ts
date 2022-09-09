@@ -4,6 +4,8 @@ import { MsgCancelSellOrder } from "../../../../../generated/regen/ecocredit/mar
 
 const msgCancelSellOrderAminoType = 'regen.marketplace/MsgCancelSellOrder';
 
+export const cancelSellOrderTypeUrl = "/" + MsgCancelSellOrder.$type;
+
 export interface AminoMsgCancelSellOrder extends AminoMsg {
     readonly type: typeof msgCancelSellOrderAminoType;
     readonly value: {
@@ -16,7 +18,7 @@ export function isAminoMsgCancelSellOrder(msg: AminoMsg): msg is AminoMsgCancelS
     return msg.type === msgCancelSellOrderAminoType;
 }
 
-let cancelSellOrderConverter: AminoConverter = {
+export let cancelSellOrderConverter: AminoConverter = {
     aminoType: msgCancelSellOrderAminoType,
     toAmino: ({seller, sellOrderId}: MsgCancelSellOrder): AminoMsgCancelSellOrder['value'] => {
         return {

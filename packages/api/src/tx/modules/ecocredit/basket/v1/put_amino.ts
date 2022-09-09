@@ -5,6 +5,7 @@ import { BasketCredit } from "../../../../../generated/regen/ecocredit/basket/v1
 
 const msgPutAminoType = 'regen.basket/MsgPut';
 
+export const putTypeUrl = "/" + MsgPut.$type;
 
 export interface AminoBasketCredit {
     $type: BasketCredit['$type'];
@@ -25,7 +26,7 @@ export function isAminoMsgPut(msg: AminoMsg): msg is AminoMsgPut {
     return msg.type === msgPutAminoType;
 }
 
-let putConverter: AminoConverter = {
+export let putConverter: AminoConverter = {
     aminoType: msgPutAminoType,
     toAmino: ({owner, basketDenom, credits}: MsgPut): AminoMsgPut['value'] => {
         return {

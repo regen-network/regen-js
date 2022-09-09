@@ -4,6 +4,8 @@ import { MsgUpdateProjectMetadata } from '../../../../generated/regen/ecocredit/
 
 const msgUpdateProjectMetadataAminoType = 'regen.core/MsgUpdateProjectMetadata';
 
+export const updateProjectMetadataTypeUrl = "/" + MsgUpdateProjectMetadata.$type;
+
 export interface AminoMsgUpdateProjectMetadata extends AminoMsg {
   readonly type: typeof msgUpdateProjectMetadataAminoType;
   readonly value: {

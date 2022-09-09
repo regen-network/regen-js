@@ -4,6 +4,8 @@ import { MsgSealBatch } from '../../../../generated/regen/ecocredit/v1/tx';
 
 const msgSealBatchAminoType = 'regen.core/MsgSealBatch';
 
+export const sealBatchTypeUrl = "/" + MsgSealBatch.$type;
+
 export interface AminoMsgSealBatch extends AminoMsg {
   readonly type: typeof msgSealBatchAminoType;
   readonly value: {

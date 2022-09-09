@@ -5,6 +5,8 @@ import { AminoCredits } from './aminomessages';
 
 const msgRetireAminoType = 'regen.core/MsgRetire';
 
+export const retireTypeUrl = "/" + MsgRetire.$type;
+
 export interface AminoMsgRetire extends AminoMsg {
   readonly type: typeof msgRetireAminoType;
   readonly value: {

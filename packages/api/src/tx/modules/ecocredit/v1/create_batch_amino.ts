@@ -8,6 +8,8 @@ import {
 
 const msgCreateBatchAminoType = 'regen.core/MsgCreateBatch';
 
+export const createBatchTypeUrl = "/" + MsgCreateBatch.$type
+
 export interface AminoBatchIssuance {
   $type: BatchIssuance['$type'];
   recipient: string;

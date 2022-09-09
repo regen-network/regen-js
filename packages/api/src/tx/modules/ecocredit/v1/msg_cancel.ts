@@ -5,6 +5,8 @@ import { Credits } from '../../../../generated/regen/ecocredit/v1/types';
 
 const msgCancelAminoType = 'regen.core/MsgCancel';
 
+export const cancelTypeUrl = "/" + MsgCancel.$type;
+
 export interface AminoCredits {
   $type: Credits['$type'];
   batch_denom: string;

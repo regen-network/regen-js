@@ -4,6 +4,8 @@ import { MsgCreateProject } from '../../../../generated/regen/ecocredit/v1/tx';
 
 const msgCreateProjectAminoType = 'regen.core/MsgCreateProject';
 
+export const createProjectTypeUrl = "/" + MsgCreateProject.$type;
+
 export interface AminoMsgCreateProject extends AminoMsg {
   readonly type: typeof msgCreateProjectAminoType;
   readonly value: {

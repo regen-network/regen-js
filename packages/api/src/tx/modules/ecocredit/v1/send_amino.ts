@@ -7,6 +7,8 @@ import {
 
 const msgSendAminoType = 'regen.core/MsgSend';
 
+export const sendTypeUrl = "/" + MsgSend.$type;
+
 interface AminoMsgSend_SendCredits {
   $type: MsgSend_SendCredits['$type'];
   batch_denom: string;

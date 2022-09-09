@@ -4,6 +4,8 @@ import { MsgTake } from "../../../../../generated/regen/ecocredit/basket/v1/tx";
 
 const msgTakeAminoType = 'regen.basket/MsgTake';
 
+export const takeTypeUrl = "/" + MsgTake.$type;
+
 export interface AminoMsgTake extends AminoMsg {
     readonly type: typeof msgTakeAminoType;
     readonly value: {
@@ -20,7 +22,7 @@ export function isAminoMsgTake(msg: AminoMsg): msg is AminoMsgTake {
     return msg.type === msgTakeAminoType;
 }
 
-let takeConverter: AminoConverter = {
+export let takeConverter: AminoConverter = {
     aminoType: msgTakeAminoType,
     toAmino: ({owner, basketDenom, amount, retireOnTake, retirementJurisdiction}: MsgTake): AminoMsgTake['value'] => {
         return {

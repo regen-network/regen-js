@@ -4,6 +4,7 @@ import { MsgUpdateSellOrders, MsgUpdateSellOrders_Update } from "../../../../../
 
 const msgUpdateSellOrdersAminoType = 'regen.marketplace/MsgUpdateSellOrders';
 
+export const updateSellOrdersTypeUrl = "/" + MsgUpdateSellOrders.$type;
 
 interface AminoMsgUpdateSellOrders_Update {
     $type: MsgUpdateSellOrders_Update['$type'];
@@ -26,7 +27,7 @@ export function isAminoMsgUpdateSellOrders(msg: AminoMsg): msg is AminoMsgUpdate
     return msg.type === msgUpdateSellOrdersAminoType;
 }
 
-let updateSellOrderConverter: AminoConverter = {
+export let updateSellOrderConverter: AminoConverter = {
     aminoType: msgUpdateSellOrdersAminoType,
     toAmino: ({seller, updates}: MsgUpdateSellOrders): AminoMsgUpdateSellOrders['value'] => {
         return {
