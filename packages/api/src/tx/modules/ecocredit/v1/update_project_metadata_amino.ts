@@ -4,7 +4,8 @@ import { MsgUpdateProjectMetadata } from '../../../../generated/regen/ecocredit/
 
 const msgUpdateProjectMetadataAminoType = 'regen.core/MsgUpdateProjectMetadata';
 
-export const updateProjectMetadataTypeUrl = "/" + MsgUpdateProjectMetadata.$type;
+export const updateProjectMetadataTypeUrl =
+  '/' + MsgUpdateProjectMetadata.$type;
 
 export interface AminoMsgUpdateProjectMetadata extends AminoMsg {
   readonly type: typeof msgUpdateProjectMetadataAminoType;
@@ -21,28 +22,30 @@ export function isAminoMsgUpdateProjectMetadata(
   return msg.type === msgUpdateProjectMetadataAminoType;
 }
 
-let updateProjectMetadata: AminoConverter = {
-  aminoType: msgUpdateProjectMetadataAminoType,
-  toAmino: ({
-    admin,
-    projectId,
-    newMetadata,
-  }: MsgUpdateProjectMetadata): AminoMsgUpdateProjectMetadata['value'] => {
-    return {
+export function updateProjectMetadataConverter(): AminoConverter {
+  return {
+    aminoType: msgUpdateProjectMetadataAminoType,
+    toAmino: ({
       admin,
-      project_id: projectId,
-      new_metadata: newMetadata,
-    };
-  },
-  fromAmino: ({
-    admin,
-    project_id,
-    new_metadata,
-  }: AminoMsgUpdateProjectMetadata['value']): Partial<MsgUpdateProjectMetadata> => {
-    return {
+      projectId,
+      newMetadata,
+    }: MsgUpdateProjectMetadata): AminoMsgUpdateProjectMetadata['value'] => {
+      return {
+        admin,
+        project_id: projectId,
+        new_metadata: newMetadata,
+      };
+    },
+    fromAmino: ({
       admin,
-      projectId: project_id,
-      newMetadata: new_metadata,
-    };
-  },
-};
+      project_id,
+      new_metadata,
+    }: AminoMsgUpdateProjectMetadata['value']): Partial<MsgUpdateProjectMetadata> => {
+      return {
+        admin,
+        projectId: project_id,
+        newMetadata: new_metadata,
+      };
+    },
+  };
+}

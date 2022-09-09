@@ -5,7 +5,7 @@ import { Credits } from '../../../../generated/regen/ecocredit/v1/types';
 
 const msgCancelAminoType = 'regen.core/MsgCancel';
 
-export const cancelTypeUrl = "/" + MsgCancel.$type;
+export const cancelTypeUrl = '/' + MsgCancel.$type;
 
 export interface AminoCredits {
   $type: Credits['$type'];
@@ -26,36 +26,42 @@ export function isAminoMsgSend(msg: AminoMsg): msg is AminoMsgCancel {
   return msg.type === msgCancelAminoType;
 }
 
-let cancelConverter: AminoConverter = {
-  aminoType: '/regen.ecocredit.v1.MsgCancel',
-  toAmino: ({ owner, credits, reason }: MsgCancel): AminoMsgCancel['value'] => {
-    return {
+export function cancelConverter(): AminoConverter {
+  return {
+    aminoType: '/regen.ecocredit.v1.MsgCancel',
+    toAmino: ({
       owner,
-      credits: credits.map(credit => {
-        return {
-          $type: credit.$type,
-          batch_denom: credit.batchDenom,
-          amount: credit.amount,
-        };
-      }),
+      credits,
       reason,
-    };
-  },
-  fromAmino: ({
-    owner,
-    credits,
-    reason,
-  }: AminoMsgCancel['value']): Partial<MsgCancel> => {
-    return {
+    }: MsgCancel): AminoMsgCancel['value'] => {
+      return {
+        owner,
+        credits: credits.map(credit => {
+          return {
+            $type: credit.$type,
+            batch_denom: credit.batchDenom,
+            amount: credit.amount,
+          };
+        }),
+        reason,
+      };
+    },
+    fromAmino: ({
       owner,
-      credits: credits.map(credit => {
-        return {
-          $type: credit.$type,
-          batchDenom: credit.batch_denom,
-          amount: credit.amount,
-        };
-      }),
+      credits,
       reason,
-    };
-  },
-};
+    }: AminoMsgCancel['value']): Partial<MsgCancel> => {
+      return {
+        owner,
+        credits: credits.map(credit => {
+          return {
+            $type: credit.$type,
+            batchDenom: credit.batch_denom,
+            amount: credit.amount,
+          };
+        }),
+        reason,
+      };
+    },
+  };
+}

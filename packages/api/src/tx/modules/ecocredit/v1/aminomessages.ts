@@ -16,7 +16,6 @@ const msgCreateClassAminoType = 'regen.core/MsgCreateClass';
 const msgSendAminoType = 'regen.core/MsgSend';
 
 interface AminoMsgSend_SendCredits {
-  // $type: MsgSend_SendCredits['$type'];
   batch_denom: string;
   tradable_amount?: string;
   retired_amount?: string;
@@ -24,7 +23,6 @@ interface AminoMsgSend_SendCredits {
 }
 
 interface AminoMsgCancel_CancelCredits {
-  // $type: Credits['$type'];
   batch_denom: string;
   amount: string;
 }
@@ -37,6 +35,7 @@ export interface AminoMsgCancel extends AminoMsg {
     reason: string;
   };
 }
+
 export interface AminoMsgCreateClass extends AminoMsg {
   readonly type: typeof msgCreateClassAminoType;
   readonly value: {
@@ -80,7 +79,7 @@ export function createEcocreditAminoConverters(): AminoConverters {
           owner,
           credits: credits.map(credit => {
             return {
-              // $type: credit.$type,
+              $type: credit.$type,
               batch_denom: credit.batchDenom,
               amount: credit.amount,
             };

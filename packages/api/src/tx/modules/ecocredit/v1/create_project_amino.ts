@@ -4,7 +4,7 @@ import { MsgCreateProject } from '../../../../generated/regen/ecocredit/v1/tx';
 
 const msgCreateProjectAminoType = 'regen.core/MsgCreateProject';
 
-export const createProjectTypeUrl = "/" + MsgCreateProject.$type;
+export const createProjectTypeUrl = '/' + MsgCreateProject.$type;
 
 export interface AminoMsgCreateProject extends AminoMsg {
   readonly type: typeof msgCreateProjectAminoType;
@@ -23,36 +23,38 @@ export function isAminoMsgCreateProject(
   return msg.type === msgCreateProjectAminoType;
 }
 
-let createProjectConverter: AminoConverter = {
-  aminoType: msgCreateProjectAminoType,
-  toAmino: ({
-    admin,
-    classId,
-    metadata,
-    jurisdiction,
-    referenceId,
-  }: MsgCreateProject): AminoMsgCreateProject['value'] => {
-    return {
-      admin: admin,
-      class_id: classId,
-      metadata: metadata,
-      jurisdiction: jurisdiction,
-      reference_id: referenceId,
-    };
-  },
-  fromAmino: ({
-    admin,
-    class_id,
-    metadata,
-    jurisdiction,
-    reference_id,
-  }: AminoMsgCreateProject['value']): Partial<MsgCreateProject> => {
-    return {
+export function createProjectConverter(): AminoConverter {
+  return {
+    aminoType: msgCreateProjectAminoType,
+    toAmino: ({
       admin,
-      classId: class_id,
+      classId,
       metadata,
       jurisdiction,
-      referenceId: reference_id,
-    };
-  },
-};
+      referenceId,
+    }: MsgCreateProject): AminoMsgCreateProject['value'] => {
+      return {
+        admin: admin,
+        class_id: classId,
+        metadata: metadata,
+        jurisdiction: jurisdiction,
+        reference_id: referenceId,
+      };
+    },
+    fromAmino: ({
+      admin,
+      class_id,
+      metadata,
+      jurisdiction,
+      reference_id,
+    }: AminoMsgCreateProject['value']): Partial<MsgCreateProject> => {
+      return {
+        admin,
+        classId: class_id,
+        metadata,
+        jurisdiction,
+        referenceId: reference_id,
+      };
+    },
+  };
+}

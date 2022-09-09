@@ -4,7 +4,7 @@ import { MsgUpdateClassAdmin } from '../../../../generated/regen/ecocredit/v1/tx
 
 const msgUpdateClassAdminAminoType = 'regen.core/MsgUpdateClassAdmin';
 
-export const updateClassAdminTypeUrl = "/" + MsgUpdateClassAdmin.$type;
+export const updateClassAdminTypeUrl = '/' + MsgUpdateClassAdmin.$type;
 
 export interface AminoMsgUpdateClassAdmin extends AminoMsg {
   readonly type: typeof msgUpdateClassAdminAminoType;
@@ -21,28 +21,30 @@ export function isAminoMsgUpdateClassAdmin(
   return msg.type === msgUpdateClassAdminAminoType;
 }
 
-let updateClassAdminConverter: AminoConverter = {
-  aminoType: msgUpdateClassAdminAminoType,
-  toAmino: ({
-    admin,
-    classId,
-    newAdmin,
-  }: MsgUpdateClassAdmin): AminoMsgUpdateClassAdmin['value'] => {
-    return {
+export function updateClassAdminConverter(): AminoConverter {
+  return {
+    aminoType: msgUpdateClassAdminAminoType,
+    toAmino: ({
       admin,
-      class_id: classId,
-      new_admin: newAdmin,
-    };
-  },
-  fromAmino: ({
-    admin,
-    class_id,
-    new_admin,
-  }: AminoMsgUpdateClassAdmin['value']): Partial<MsgUpdateClassAdmin> => {
-    return {
+      classId,
+      newAdmin,
+    }: MsgUpdateClassAdmin): AminoMsgUpdateClassAdmin['value'] => {
+      return {
+        admin,
+        class_id: classId,
+        new_admin: newAdmin,
+      };
+    },
+    fromAmino: ({
       admin,
-      classId: class_id,
-      newAdmin: new_admin,
-    };
-  },
-};
+      class_id,
+      new_admin,
+    }: AminoMsgUpdateClassAdmin['value']): Partial<MsgUpdateClassAdmin> => {
+      return {
+        admin,
+        classId: class_id,
+        newAdmin: new_admin,
+      };
+    },
+  };
+}

@@ -4,7 +4,7 @@ import { MsgUpdateClassMetadata } from '../../../../generated/regen/ecocredit/v1
 
 const msgUpdateClassMetadataAminoType = 'regen.core/MsgUpdateClassMetadata';
 
-export const updateClassMetadataTypeUrl = "/" + MsgUpdateClassMetadata.$type;
+export const updateClassMetadataTypeUrl = '/' + MsgUpdateClassMetadata.$type;
 
 export interface AminoMsgUpdateClassMetadata extends AminoMsg {
   readonly type: typeof msgUpdateClassMetadataAminoType;
@@ -21,28 +21,30 @@ export function isAminoMsgUpdateClassMetadata(
   return msg.type === msgUpdateClassMetadataAminoType;
 }
 
-let updateClassMetadataConverter: AminoConverter = {
-  aminoType: msgUpdateClassMetadataAminoType,
-  toAmino: ({
-    admin,
-    classId,
-    newMetadata,
-  }: MsgUpdateClassMetadata): AminoMsgUpdateClassMetadata['value'] => {
-    return {
+export function updateClassMetadataConverter(): AminoConverter {
+  return {
+    aminoType: msgUpdateClassMetadataAminoType,
+    toAmino: ({
       admin,
-      class_id: classId,
-      new_metadata: newMetadata,
-    };
-  },
-  fromAmino: ({
-    admin,
-    class_id,
-    new_metadata,
-  }: AminoMsgUpdateClassMetadata['value']): Partial<MsgUpdateClassMetadata> => {
-    return {
+      classId,
+      newMetadata,
+    }: MsgUpdateClassMetadata): AminoMsgUpdateClassMetadata['value'] => {
+      return {
+        admin,
+        class_id: classId,
+        new_metadata: newMetadata,
+      };
+    },
+    fromAmino: ({
       admin,
-      classId: class_id,
-      newMetadata: new_metadata,
-    };
-  },
-};
+      class_id,
+      new_metadata,
+    }: AminoMsgUpdateClassMetadata['value']): Partial<MsgUpdateClassMetadata> => {
+      return {
+        admin,
+        classId: class_id,
+        newMetadata: new_metadata,
+      };
+    },
+  };
+}

@@ -4,7 +4,7 @@ import { MsgSealBatch } from '../../../../generated/regen/ecocredit/v1/tx';
 
 const msgSealBatchAminoType = 'regen.core/MsgSealBatch';
 
-export const sealBatchTypeUrl = "/" + MsgSealBatch.$type;
+export const sealBatchTypeUrl = '/' + MsgSealBatch.$type;
 
 export interface AminoMsgSealBatch extends AminoMsg {
   readonly type: typeof msgSealBatchAminoType;
@@ -18,24 +18,26 @@ export function isAminoMsgSealBatch(msg: AminoMsg): msg is AminoMsgSealBatch {
   return msg.type === msgSealBatchAminoType;
 }
 
-let sealBatchConverter: AminoConverter = {
-  aminoType: msgSealBatchAminoType,
-  toAmino: ({
-    issuer,
-    batchDenom,
-  }: MsgSealBatch): AminoMsgSealBatch['value'] => {
-    return {
+export function sealBatchConverter(): AminoConverter {
+  return {
+    aminoType: msgSealBatchAminoType,
+    toAmino: ({
       issuer,
-      batch_denom: batchDenom,
-    };
-  },
-  fromAmino: ({
-    issuer,
-    batch_denom,
-  }: AminoMsgSealBatch['value']): Partial<MsgSealBatch> => {
-    return {
+      batchDenom,
+    }: MsgSealBatch): AminoMsgSealBatch['value'] => {
+      return {
+        issuer,
+        batch_denom: batchDenom,
+      };
+    },
+    fromAmino: ({
       issuer,
-      batchDenom: batch_denom,
-    };
-  },
-};
+      batch_denom,
+    }: AminoMsgSealBatch['value']): Partial<MsgSealBatch> => {
+      return {
+        issuer,
+        batchDenom: batch_denom,
+      };
+    },
+  };
+}

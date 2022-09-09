@@ -5,7 +5,7 @@ import { Coin } from '../../../../generated/cosmos/base/v1beta1/coin';
 
 const msgCreateClassAminoType = 'regen.core/MsgCreateClass';
 
-export const createClassTypeUrl = "/" + MsgCreateClass.$type;
+export const createClassTypeUrl = '/' + MsgCreateClass.$type;
 
 export interface AminoMsgCreateClass extends AminoMsg {
   readonly type: typeof msgCreateClassAminoType;
@@ -24,36 +24,38 @@ export function isAminoMsgCreateClass(
   return msg.type === msgCreateClassAminoType;
 }
 
-let createClassConverter: AminoConverter = {
-  aminoType: msgCreateClassAminoType,
-  toAmino: ({
-    admin,
-    issuers,
-    metadata,
-    creditTypeAbbrev,
-    fee,
-  }: MsgCreateClass): AminoMsgCreateClass['value'] => {
-    return {
+export function createClassConverter(): AminoConverter {
+  return {
+    aminoType: msgCreateClassAminoType,
+    toAmino: ({
       admin,
       issuers,
       metadata,
-      credit_type_abbrev: creditTypeAbbrev,
-      fee: fee && { amount: fee.amount, denom: fee.denom },
-    };
-  },
-  fromAmino: ({
-    admin,
-    issuers,
-    metadata,
-    credit_type_abbrev,
-    fee,
-  }: AminoMsgCreateClass['value']): Partial<MsgCreateClass> => {
-    return {
+      creditTypeAbbrev,
+      fee,
+    }: MsgCreateClass): AminoMsgCreateClass['value'] => {
+      return {
+        admin,
+        issuers,
+        metadata,
+        credit_type_abbrev: creditTypeAbbrev,
+        fee: fee && { amount: fee.amount, denom: fee.denom },
+      };
+    },
+    fromAmino: ({
       admin,
       issuers,
       metadata,
-      creditTypeAbbrev: credit_type_abbrev,
-      fee: fee && Coin.fromPartial(fee),
-    };
-  },
-};
+      credit_type_abbrev,
+      fee,
+    }: AminoMsgCreateClass['value']): Partial<MsgCreateClass> => {
+      return {
+        admin,
+        issuers,
+        metadata,
+        creditTypeAbbrev: credit_type_abbrev,
+        fee: fee && Coin.fromPartial(fee),
+      };
+    },
+  };
+}

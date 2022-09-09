@@ -8,7 +8,7 @@ import {
 
 const msgCreateBatchAminoType = 'regen.core/MsgCreateBatch';
 
-export const createBatchTypeUrl = "/" + MsgCreateBatch.$type
+export const createBatchTypeUrl = '/' + MsgCreateBatch.$type;
 
 export interface AminoBatchIssuance {
   $type: BatchIssuance['$type'];
@@ -44,68 +44,70 @@ export function isAminoMsgCreateBatch(
   return msg.type === msgCreateBatchAminoType;
 }
 
-let createBatchConverter: AminoConverter = {
-  aminoType: msgCreateBatchAminoType,
-  toAmino: ({
-    issuer,
-    projectId,
-    issuance,
-    metadata,
-    startDate,
-    endDate,
-    open,
-    originTx,
-  }: MsgCreateBatch): AminoMsgCreateBatch['value'] => {
-    return {
+export function createBatchConverter(): AminoConverter {
+  return {
+    aminoType: msgCreateBatchAminoType,
+    toAmino: ({
       issuer,
-      project_id: projectId,
-      issuance: issuance.map(i => {
-        return {
-          $type: i.$type,
-          recipient: i.recipient,
-          tradable_amount: i.tradableAmount,
-          retired_amount: i.retiredAmount,
-          retirement_jurisdiction: i.retirementJurisdiction,
-        };
-      }),
+      projectId,
+      issuance,
       metadata,
-      start_date: startDate,
-      end_date: endDate,
+      startDate,
+      endDate,
       open,
-      origin_tx: originTx && {
-        $type: originTx?.$type,
-        id: originTx?.id,
-        source: originTx?.source,
-      },
-    };
-  },
-  fromAmino: ({
-    issuer,
-    project_id,
-    issuance,
-    metadata,
-    start_date,
-    end_date,
-    open,
-    origin_tx,
-  }: AminoMsgCreateBatch['value']): Partial<MsgCreateBatch> => {
-    return {
+      originTx,
+    }: MsgCreateBatch): AminoMsgCreateBatch['value'] => {
+      return {
+        issuer,
+        project_id: projectId,
+        issuance: issuance.map(i => {
+          return {
+            $type: i.$type,
+            recipient: i.recipient,
+            tradable_amount: i.tradableAmount,
+            retired_amount: i.retiredAmount,
+            retirement_jurisdiction: i.retirementJurisdiction,
+          };
+        }),
+        metadata,
+        start_date: startDate,
+        end_date: endDate,
+        open,
+        origin_tx: originTx && {
+          $type: originTx?.$type,
+          id: originTx?.id,
+          source: originTx?.source,
+        },
+      };
+    },
+    fromAmino: ({
       issuer,
-      projectId: project_id,
-      issuance: issuance.map(i => {
-        return {
-          $type: i.$type,
-          recipient: i.recipient,
-          tradableAmount: i.tradable_amount,
-          retiredAmount: i.retired_amount,
-          retirementJurisdiction: i.retirement_jurisdiction,
-        };
-      }),
+      project_id,
+      issuance,
       metadata,
-      startDate: start_date,
-      endDate: end_date,
+      start_date,
+      end_date,
       open,
-      originTx: origin_tx,
-    };
-  },
-};
+      origin_tx,
+    }: AminoMsgCreateBatch['value']): Partial<MsgCreateBatch> => {
+      return {
+        issuer,
+        projectId: project_id,
+        issuance: issuance.map(i => {
+          return {
+            $type: i.$type,
+            recipient: i.recipient,
+            tradableAmount: i.tradable_amount,
+            retiredAmount: i.retired_amount,
+            retirementJurisdiction: i.retirement_jurisdiction,
+          };
+        }),
+        metadata,
+        startDate: start_date,
+        endDate: end_date,
+        open,
+        originTx: origin_tx,
+      };
+    },
+  };
+}

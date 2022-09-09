@@ -4,7 +4,7 @@ import { MsgUpdateProjectAdmin } from '../../../../generated/regen/ecocredit/v1/
 
 const msgUpdateProjectAdminAminoType = 'regen.core/MsgUpdateProjectAdmin';
 
-export const updateProjectAdminTypeUrl = "/" + MsgUpdateProjectAdmin.$type;
+export const updateProjectAdminTypeUrl = '/' + MsgUpdateProjectAdmin.$type;
 
 export interface AminoMsgUpdateProjectAdmin extends AminoMsg {
   readonly type: typeof msgUpdateProjectAdminAminoType;
@@ -21,28 +21,30 @@ export function isAminoMsgUpdateProjectAdmin(
   return msg.type === msgUpdateProjectAdminAminoType;
 }
 
-let updateProjectAdminConverter: AminoConverter = {
-  aminoType: msgUpdateProjectAdminAminoType,
-  toAmino: ({
-    admin,
-    projectId,
-    newAdmin,
-  }: MsgUpdateProjectAdmin): AminoMsgUpdateProjectAdmin['value'] => {
-    return {
+export function updateProjectAdminConverter(): AminoConverter {
+  return {
+    aminoType: msgUpdateProjectAdminAminoType,
+    toAmino: ({
       admin,
-      project_id: projectId,
-      new_admin: newAdmin,
-    };
-  },
-  fromAmino: ({
-    admin,
-    project_id,
-    new_admin,
-  }: AminoMsgUpdateProjectAdmin['value']): Partial<MsgUpdateProjectAdmin> => {
-    return {
+      projectId,
+      newAdmin,
+    }: MsgUpdateProjectAdmin): AminoMsgUpdateProjectAdmin['value'] => {
+      return {
+        admin,
+        project_id: projectId,
+        new_admin: newAdmin,
+      };
+    },
+    fromAmino: ({
       admin,
-      projectId: project_id,
-      newAdmin: new_admin,
-    };
-  },
-};
+      project_id,
+      new_admin,
+    }: AminoMsgUpdateProjectAdmin['value']): Partial<MsgUpdateProjectAdmin> => {
+      return {
+        admin,
+        projectId: project_id,
+        newAdmin: new_admin,
+      };
+    },
+  };
+}
