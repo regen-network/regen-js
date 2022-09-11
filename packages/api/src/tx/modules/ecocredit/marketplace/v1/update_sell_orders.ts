@@ -32,46 +32,48 @@ export function isAminoMsgUpdateSellOrders(
   return msg.type === msgUpdateSellOrdersAminoType;
 }
 
-export let updateSellOrderConverter: AminoConverter = {
-  aminoType: msgUpdateSellOrdersAminoType,
-  toAmino: ({
-    seller,
-    updates,
-  }: MsgUpdateSellOrders): AminoMsgUpdateSellOrders['value'] => {
-    return {
+export function updateSellOrderConverter(): AminoConverter {
+  return {
+    aminoType: msgUpdateSellOrdersAminoType,
+    toAmino: ({
       seller,
-      updates: updates.map(u => {
-        return {
-          $type: u.$type,
-          sell_order_id: u.sellOrderId,
-          new_quantity: u.newQuantity,
-          new_ask_price: u.newAskPrice,
-          disable_auto_retire: u.disableAutoRetire,
-          new_expiration: u.newExpiration,
-        };
-      }),
-    };
-  },
-  fromAmino: ({
-    seller,
-    updates,
-  }: AminoMsgUpdateSellOrders['value']): Partial<MsgUpdateSellOrders> => {
-    return {
+      updates,
+    }: MsgUpdateSellOrders): AminoMsgUpdateSellOrders['value'] => {
+      return {
+        seller,
+        updates: updates.map(u => {
+          return {
+            $type: u.$type,
+            sell_order_id: u.sellOrderId,
+            new_quantity: u.newQuantity,
+            new_ask_price: u.newAskPrice,
+            disable_auto_retire: u.disableAutoRetire,
+            new_expiration: u.newExpiration,
+          };
+        }),
+      };
+    },
+    fromAmino: ({
       seller,
-      updates: updates.map(u => {
-        return {
-          $type: u.$type,
-          sellOrderId: u.sell_order_id,
-          newQuantity: u.new_quantity,
-          newAskPrice: u.new_ask_price && {
-            $type: 'cosmos.base.v1beta1.Coin',
-            amount: u.new_ask_price.amount,
-            denom: u.new_ask_price.denom,
-          },
-          disableAutoRetire: u.disable_auto_retire,
-          newExpiration: u.new_expiration,
-        };
-      }),
-    };
-  },
-};
+      updates,
+    }: AminoMsgUpdateSellOrders['value']): Partial<MsgUpdateSellOrders> => {
+      return {
+        seller,
+        updates: updates.map(u => {
+          return {
+            $type: u.$type,
+            sellOrderId: u.sell_order_id,
+            newQuantity: u.new_quantity,
+            newAskPrice: u.new_ask_price && {
+              $type: 'cosmos.base.v1beta1.Coin',
+              amount: u.new_ask_price.amount,
+              denom: u.new_ask_price.denom,
+            },
+            disableAutoRetire: u.disable_auto_retire,
+            newExpiration: u.new_expiration,
+          };
+        }),
+      };
+    },
+  };
+}

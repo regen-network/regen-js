@@ -22,37 +22,39 @@ export function isAminoMsgTake(msg: AminoMsg): msg is AminoMsgTake {
   return msg.type === msgTakeAminoType;
 }
 
-export let takeConverter: AminoConverter = {
-  aminoType: msgTakeAminoType,
-  toAmino: ({
-    owner,
-    basketDenom,
-    amount,
-    retireOnTake,
-    retirementJurisdiction,
-  }: MsgTake): AminoMsgTake['value'] => {
-    return {
+export function takeConverter(): AminoConverter {
+  return {
+    aminoType: msgTakeAminoType,
+    toAmino: ({
       owner,
-      basket_denom: basketDenom,
+      basketDenom,
       amount,
-      retire_on_take: retireOnTake,
-      retirement_jurisdiction: retirementJurisdiction,
-      retirement_location: retirementJurisdiction,
-    };
-  },
-  fromAmino: ({
-    owner,
-    basket_denom,
-    amount,
-    retire_on_take,
-    retirement_jurisdiction,
-  }: AminoMsgTake['value']): Partial<MsgTake> => {
-    return {
+      retireOnTake,
+      retirementJurisdiction,
+    }: MsgTake): AminoMsgTake['value'] => {
+      return {
+        owner,
+        basket_denom: basketDenom,
+        amount,
+        retire_on_take: retireOnTake,
+        retirement_jurisdiction: retirementJurisdiction,
+        retirement_location: retirementJurisdiction,
+      };
+    },
+    fromAmino: ({
       owner,
-      basketDenom: basket_denom,
+      basket_denom,
       amount,
-      retireOnTake: retire_on_take,
-      retirementJurisdiction: retirement_jurisdiction,
-    };
-  },
-};
+      retire_on_take,
+      retirement_jurisdiction,
+    }: AminoMsgTake['value']): Partial<MsgTake> => {
+      return {
+        owner,
+        basketDenom: basket_denom,
+        amount,
+        retireOnTake: retire_on_take,
+        retirementJurisdiction: retirement_jurisdiction,
+      };
+    },
+  };
+}
