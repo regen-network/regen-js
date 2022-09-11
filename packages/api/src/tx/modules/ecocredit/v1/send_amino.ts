@@ -19,6 +19,7 @@ interface AminoMsgSend_SendCredits {
 export interface AminoMsgSend extends AminoMsg {
   readonly type: typeof msgSendAminoType;
   readonly value: {
+    // readonly $type: string; TODO: we will leave these off until nested types cna be supported
     readonly sender: string;
     readonly recipient: string;
     readonly credits: AminoMsgSend_SendCredits[];
