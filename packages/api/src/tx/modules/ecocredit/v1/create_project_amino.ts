@@ -1,4 +1,4 @@
-import { AminoMsg, Coin as AminoCoin } from '@cosmjs/amino';
+import { AminoMsg } from '@cosmjs/amino';
 import { AminoConverter } from '@cosmjs/stargate';
 import { MsgCreateProject } from '../../../../generated/regen/ecocredit/v1/tx';
 
