@@ -58,7 +58,7 @@ export function buyDirectConverter(): AminoConverter {
             sellOrderId: b.sell_order_id,
             quantity: b.quantity,
             bidPrice: b.bid_price && {
-              $type: AminoCoin.$type,
+              $type: 'cosmos.base.v1beta1.Coin',
               amount: b.bid_price.amount,
               denom: b.bid_price.denom,
             },
