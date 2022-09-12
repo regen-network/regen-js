@@ -53,7 +53,7 @@ const marketplaceRegistry: Array<[string, GeneratedType]> = [
   [MsgCancelSellOrder.$type, MsgCancelSellOrder],
 ];
 
-export const customRegistry = [
+export const regenRegistry = [
   ...ecocreditRegistry,
   ...basketRegistry,
   ...marketplaceRegistry,

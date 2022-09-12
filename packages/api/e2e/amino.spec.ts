@@ -24,6 +24,7 @@ const connect = async (): Promise<RegenApi> => {
   const mnemonic =
     'time dice choose cabbage suit panic silly cattle picture auto grab hole';
 
+  // This is an Amino signer
   const signer = await Secp256k1HdWallet.fromMnemonic(mnemonic, {
     prefix: 'regen',
   });
@@ -72,7 +73,7 @@ describe('RegenApi with tendermint connection', () => {
       let txRes: DeliverTxResponse | undefined;
       const api = await connect();
       const msgClient = api.msgClient;
-      const TEST_MSG_SEND = MsgCreateClass.fromPartial({
+      const TEST_MSG_CREATE_CLASS = MsgCreateClass.fromPartial({
         admin: TEST_ADDRESS,
         issuers: [TEST_ADDRESS],
         metadata: 'unit test metadata',
@@ -85,7 +86,7 @@ describe('RegenApi with tendermint connection', () => {
 
       const signedTxBytes = await msgClient?.sign(
         TEST_ADDRESS,
-        [TEST_MSG_SEND],
+        [TEST_MSG_CREATE_CLASS],
         TEST_FEE,
         TEST_MEMO,
       );
