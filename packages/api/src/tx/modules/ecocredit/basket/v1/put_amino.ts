@@ -8,7 +8,6 @@ const msgPutAminoType = 'regen.basket/MsgPut';
 export const putTypeUrl = '/' + MsgPut.$type;
 
 export interface AminoBasketCredit {
-  $type: BasketCredit['$type'];
   batch_denom: string;
   amount: string;
 }
@@ -39,7 +38,6 @@ export function putConverter(): AminoConverter {
         basket_denom: basketDenom,
         credits: credits.map(c => {
           return {
-            $type: c.$type,
             batch_denom: c.batchDenom,
             amount: c.amount,
           };
@@ -56,7 +54,7 @@ export function putConverter(): AminoConverter {
         basketDenom: basket_denom,
         credits: credits.map(c => {
           return {
-            $type: c.$type,
+            $type: BasketCredit.$type,
             batchDenom: c.batch_denom,
             amount: c.amount,
           };

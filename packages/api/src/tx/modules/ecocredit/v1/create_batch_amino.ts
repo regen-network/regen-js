@@ -11,7 +11,6 @@ const msgCreateBatchAminoType = 'regen.core/MsgCreateBatch';
 export const createBatchTypeUrl = '/' + MsgCreateBatch.$type;
 
 export interface AminoBatchIssuance {
-  $type: BatchIssuance['$type'];
   recipient: string;
   tradable_amount: string;
   retired_amount: string;
@@ -19,7 +18,6 @@ export interface AminoBatchIssuance {
 }
 
 export interface AminoOriginTx {
-  $type: OriginTx['$type'];
   id: string;
   source: string;
 }
@@ -62,7 +60,7 @@ export function createBatchConverter(): AminoConverter {
         project_id: projectId,
         issuance: issuance.map(i => {
           return {
-            $type: i.$type,
+            $type: BatchIssuance.$type,
             recipient: i.recipient,
             tradable_amount: i.tradableAmount,
             retired_amount: i.retiredAmount,
@@ -74,7 +72,6 @@ export function createBatchConverter(): AminoConverter {
         end_date: endDate,
         open,
         origin_tx: originTx && {
-          $type: originTx?.$type,
           id: originTx?.id,
           source: originTx?.source,
         },
@@ -95,7 +92,7 @@ export function createBatchConverter(): AminoConverter {
         projectId: project_id,
         issuance: issuance.map(i => {
           return {
-            $type: i.$type,
+            $type: BatchIssuance.$type,
             recipient: i.recipient,
             tradableAmount: i.tradable_amount,
             retiredAmount: i.retired_amount,
@@ -106,7 +103,11 @@ export function createBatchConverter(): AminoConverter {
         startDate: start_date,
         endDate: end_date,
         open,
-        originTx: origin_tx,
+        originTx: origin_tx && {
+          $type: OriginTx.$type,
+          id: origin_tx?.id,
+          source: origin_tx?.source,
+        },
       };
     },
   };

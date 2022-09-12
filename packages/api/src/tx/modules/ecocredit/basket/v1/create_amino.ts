@@ -9,7 +9,6 @@ const msgCreateAminoType = 'regen.basket/MsgCreate';
 export const createTypeUrl = '/' + MsgCreate.$type;
 
 export interface AminoDateCriteria {
-  $type: DateCriteria['$type'];
   min_start_date?: Date;
   start_date_window?: Duration;
   years_in_the_past: number;
@@ -57,7 +56,6 @@ export function createBasketConverter(): AminoConverter {
         credit_type_abbrev: creditTypeAbbrev,
         allowed_classes: allowedClasses,
         date_criteria: dateCriteria && {
-          $type: dateCriteria?.$type,
           min_start_date: dateCriteria?.minStartDate,
           start_date_window: dateCriteria?.startDateWindow,
           years_in_the_past: dateCriteria?.yearsInThePast,
@@ -85,7 +83,7 @@ export function createBasketConverter(): AminoConverter {
         creditTypeAbbrev: credit_type_abbrev,
         allowedClasses: allowed_classes,
         dateCriteria: date_criteria && {
-          $type: date_criteria.$type,
+          $type: DateCriteria.$type,
           minStartDate: date_criteria.min_start_date,
           startDateWindow: date_criteria.start_date_window,
           yearsInThePast: date_criteria.years_in_the_past,
