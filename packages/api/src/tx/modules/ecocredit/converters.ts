@@ -1,7 +1,7 @@
 import { AminoConverters } from '@cosmjs/stargate';
-import { createTypeUrl } from './basket/v1/create_amino';
 import { putConverter, putTypeUrl } from './basket/v1/put_amino';
 import { takeConverter, takeTypeUrl } from './basket/v1/take_amino';
+import { createBasketConverter, createTypeUrl } from './basket/v1/create_amino';
 import {
   buyDirectConverter,
   buyDirectTypeUrl,
@@ -74,7 +74,7 @@ export function createEcocreditAminoConverters(): AminoConverters {
     [updateProjectMetadataTypeUrl]: updateProjectMetadataConverter(),
 
     // // basket module
-    [createTypeUrl]: takeConverter(),
+    [createTypeUrl]: createBasketConverter(),
     [putTypeUrl]: putConverter(),
     [takeTypeUrl]: takeConverter(),
 

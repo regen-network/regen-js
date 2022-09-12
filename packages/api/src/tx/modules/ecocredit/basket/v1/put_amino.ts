@@ -52,11 +52,11 @@ export function putConverter(): AminoConverter {
       return {
         owner,
         basketDenom: basket_denom,
-        credits: credits.map(c => {
+        credits: credits.map(credit => {
           return {
             $type: BasketCredit.$type,
-            batchDenom: c.batch_denom,
-            amount: c.amount,
+            batchDenom: credit.batch_denom,
+            amount: credit.amount,
           };
         }),
       };

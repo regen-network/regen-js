@@ -9,7 +9,7 @@ import {
 import { Registry, EncodeObject } from '@cosmjs/proto-signing';
 
 import { SigningConnectionOptions } from '../api';
-import { regenRegistry } from './regenMessageTypeRegistry';
+import { regenRegistry } from './regen-message-type-registry';
 import { createStargateSigningClient } from './stargate-signing';
 import { createEcocreditAminoConverters } from './modules';
 

@@ -20,8 +20,8 @@ export interface AminoMsgCreate extends AminoMsg {
     readonly curator: string;
     readonly name: string;
     readonly description: string;
-    readonly exponent: number;
-    readonly disable_auto_retire: boolean;
+    readonly exponent?: number;
+    readonly disable_auto_retire?: boolean;
     readonly credit_type_abbrev: string;
     readonly allowed_classes: string[];
     readonly date_criteria?: AminoDateCriteria;
@@ -51,8 +51,8 @@ export function createBasketConverter(): AminoConverter {
         curator,
         name,
         description,
-        exponent,
-        disable_auto_retire: disableAutoRetire,
+        exponent: exponent || undefined,
+        disable_auto_retire: Boolean(disableAutoRetire),
         credit_type_abbrev: creditTypeAbbrev,
         allowed_classes: allowedClasses,
         date_criteria: dateCriteria && {
@@ -60,7 +60,14 @@ export function createBasketConverter(): AminoConverter {
           start_date_window: dateCriteria?.startDateWindow,
           years_in_the_past: dateCriteria?.yearsInThePast,
         },
-        fee: fee,
+        fee:
+          fee &&
+          fee.map(f => {
+            return {
+              amount: f.amount,
+              denom: f.denom,
+            };
+          }),
       };
     },
     fromAmino: ({
