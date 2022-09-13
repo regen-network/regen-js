@@ -9,8 +9,8 @@ export const cancelSellOrderTypeUrl = '/' + MsgCancelSellOrder.$type;
 export interface AminoMsgCancelSellOrder extends AminoMsg {
   readonly type: typeof msgCancelSellOrderAminoType;
   readonly value: {
-    readonly seller: string;
-    readonly sell_order_id: Long;
+    readonly seller?: string;
+    readonly sell_order_id?: Long;
   };
 }
 
@@ -28,8 +28,8 @@ export function cancelSellOrderConverter(): AminoConverter {
       sellOrderId,
     }: MsgCancelSellOrder): AminoMsgCancelSellOrder['value'] => {
       return {
-        seller,
-        sell_order_id: sellOrderId,
+        seller: seller || undefined,
+        sell_order_id: sellOrderId || undefined,
       };
     },
     fromAmino: ({

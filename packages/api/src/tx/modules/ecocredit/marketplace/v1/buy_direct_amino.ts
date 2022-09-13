@@ -1,9 +1,10 @@
-import { AminoMsg, Coin as AminoCoin } from '@cosmjs/amino';
+import { AminoMsg } from '@cosmjs/amino';
 import { AminoConverter } from '@cosmjs/stargate';
 import {
   MsgBuyDirect,
   MsgBuyDirect_Order,
 } from '../../../../../generated/regen/ecocredit/marketplace/v1/tx';
+import { AminoCoin } from './sell_amino';
 
 const msgBuyDirectAmnioType = 'regen.marketplace/MsgBuyDirect';
 
@@ -11,10 +12,10 @@ export const buyDirectTypeUrl = '/' + MsgBuyDirect.$type;
 
 interface AminoBuyDirect_Order {
   sell_order_id: Long;
-  quantity: string;
+  quantity?: string;
   bid_price?: AminoCoin;
-  disable_auto_retire: boolean;
-  retirement_jurisdiction: string;
+  disable_auto_retire?: boolean;
+  retirement_jurisdiction?: string;
 }
 
 export interface AminoMsgBuyDirect extends AminoMsg {
@@ -37,11 +38,14 @@ export function buyDirectConverter(): AminoConverter {
         buyer,
         orders: orders.map(b => {
           return {
-            sell_order_id: b.sellOrderId,
-            quantity: b.quantity,
-            bid_price: b.bidPrice,
-            disable_auto_retire: b.disableAutoRetire,
-            retirement_jurisdiction: b.retirementJurisdiction,
+            sell_order_id: b.sellOrderId || undefined,
+            quantity: b.quantity || undefined,
+            bid_price: {
+              denom: b.bidPrice?.denom || undefined,
+              amount: b.bidPrice?.amount || undefined,
+            },
+            disable_auto_retire: b.disableAutoRetire || undefined,
+            retirement_jurisdiction: b.retirementJurisdiction || undefined,
           };
         }),
       };
@@ -56,14 +60,14 @@ export function buyDirectConverter(): AminoConverter {
           return {
             $type: MsgBuyDirect_Order.$type,
             sellOrderId: b.sell_order_id,
-            quantity: b.quantity,
+            quantity: b.quantity || '0',
             bidPrice: b.bid_price && {
               $type: 'cosmos.base.v1beta1.Coin',
-              amount: b.bid_price.amount,
-              denom: b.bid_price.denom,
+              amount: b.bid_price?.amount || '0',
+              denom: b.bid_price?.denom || '',
             },
-            disableAutoRetire: b.disable_auto_retire,
-            retirementJurisdiction: b.retirement_jurisdiction,
+            disableAutoRetire: Boolean(b.disable_auto_retire),
+            retirementJurisdiction: b.retirement_jurisdiction || '',
           };
         }),
       };
