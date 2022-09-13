@@ -14,8 +14,9 @@ export interface EventCreate {
   /**
    * curator is the address of the basket curator who is able to change certain
    * basket settings.
-   * Deprecated: This field is still populated and will be removed in the
-   * next version.
+   *
+   * Deprecated (Since Revision 1): This field is still populated and will be
+   * removed in the next version.
    *
    * @deprecated
    */
@@ -34,16 +35,18 @@ export interface EventPut {
   basketDenom: string;
   /**
    * credits are the credits that were added to the basket.
-   * Deprecated: This field is still populated and will be removed in the
-   * next version.
+   *
+   * Deprecated (Since Revision 1): This field is still populated and will be
+   * removed in the next version.
    *
    * @deprecated
    */
   credits: BasketCredit[];
   /**
    * amount is the integer number of basket tokens converted from credits.
-   * Deprecated: This field is still populated and will be removed in the
-   * next version.
+   *
+   * Deprecated (Since Revision 1): This field is still populated and will be
+   * removed in the next version.
    *
    * @deprecated
    */
@@ -62,16 +65,18 @@ export interface EventTake {
   basketDenom: string;
   /**
    * credits are the credits that were taken from the basket.
-   * Deprecated: This field is still populated and will be removed in the
-   * next version.
+   *
+   * Deprecated (Since Revision 1): This field is still populated and will be
+   * removed in the next version.
    *
    * @deprecated
    */
   credits: BasketCredit[];
   /**
    * amount is the integer number of basket tokens converted to credits.
-   * Deprecated: This field is still populated and will be removed in the
-   * next version.
+   *
+   * Deprecated (Since Revision 1): This field is still populated and will be
+   * removed in the next version.
    *
    * @deprecated
    */

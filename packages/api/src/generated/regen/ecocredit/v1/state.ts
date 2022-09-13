@@ -247,11 +247,21 @@ export interface BatchSupply {
 }
 
 /**
- * BatchOriginTx indexes the transaction ID from batch mint operations in order
- * to prevent double minting errors.
+ * OriginTxIndex indexes the transaction ID and source from the OriginTx
+ * included in Msg/CreateBatch and Msg/MintBatchCredits to prevent double
+ * minting errors. The index is scoped to a credit class (it includes the
+ * class_key) to prevent malicious credit class issuers from blocking any
+ * bridge operations taking place within another credit class.
  */
-export interface BatchOriginTx {
-  $type: 'regen.ecocredit.v1.BatchOriginTx';
+export interface OriginTxIndex {
+  $type: 'regen.ecocredit.v1.OriginTxIndex';
+  /**
+   * class_key is the table row identifier of the credit class within which the
+   * credits were issued or minted. The class_key is included within the index
+   * to prevent malicious credit class issuers from blocking bridge operations
+   * taking place within another credit class.
+   */
+  classKey: Long;
   /**
    * id is the transaction ID of an originating transaction or operation
    * based on a type (i.e. transaction ID, serial number).
@@ -262,10 +272,34 @@ export interface BatchOriginTx {
    * the mint process (e.g. polygon, ethereum, verra).
    */
   source: string;
-  /** note is a reference note for accounting that is passed to an event. */
-  note: string;
-  /** batch_denom is the denom of the credit batch. */
-  batchDenom: string;
+}
+
+/**
+ * BatchContract stores the contract address from which credits were bridged
+ * when credits are bridged from a contract-based chain, therefore ensuring
+ * that each credit batch corresponds to a single contract and credits that
+ * have been bridged will always be bridged back to the original contract.
+ */
+export interface BatchContract {
+  $type: 'regen.ecocredit.v1.BatchContract';
+  /**
+   * batch_key is the table row identifier of the credit batch used internally
+   * for efficient lookups. This links an external contract to a credit batch.
+   */
+  batchKey: Long;
+  /**
+   * class_key is the table row identifier of the credit class within which the
+   * credit batch exists. A contract is unique within the scope of a credit class
+   * to prevent malicious credit class issuers from blocking bridge operations
+   * taking place within another credit class.
+   */
+  classKey: Long;
+  /**
+   * contract is the address of the contract on the source chain that was
+   * executed when creating the transaction. This address will be used when
+   * sending credits back to the source chain.
+   */
+  contract: string;
 }
 
 function createBaseCreditType(): CreditType {
@@ -1349,56 +1383,49 @@ export const BatchSupply = {
 
 messageTypeRegistry.set(BatchSupply.$type, BatchSupply);
 
-function createBaseBatchOriginTx(): BatchOriginTx {
+function createBaseOriginTxIndex(): OriginTxIndex {
   return {
-    $type: 'regen.ecocredit.v1.BatchOriginTx',
+    $type: 'regen.ecocredit.v1.OriginTxIndex',
+    classKey: Long.UZERO,
     id: '',
     source: '',
-    note: '',
-    batchDenom: '',
   };
 }
 
-export const BatchOriginTx = {
-  $type: 'regen.ecocredit.v1.BatchOriginTx' as const,
+export const OriginTxIndex = {
+  $type: 'regen.ecocredit.v1.OriginTxIndex' as const,
 
   encode(
-    message: BatchOriginTx,
+    message: OriginTxIndex,
     writer: _m0.Writer = _m0.Writer.create(),
   ): _m0.Writer {
+    if (!message.classKey.isZero()) {
+      writer.uint32(8).uint64(message.classKey);
+    }
     if (message.id !== '') {
-      writer.uint32(10).string(message.id);
+      writer.uint32(18).string(message.id);
     }
     if (message.source !== '') {
-      writer.uint32(18).string(message.source);
-    }
-    if (message.note !== '') {
-      writer.uint32(26).string(message.note);
-    }
-    if (message.batchDenom !== '') {
-      writer.uint32(34).string(message.batchDenom);
+      writer.uint32(26).string(message.source);
     }
     return writer;
   },
 
-  decode(input: _m0.Reader | Uint8Array, length?: number): BatchOriginTx {
+  decode(input: _m0.Reader | Uint8Array, length?: number): OriginTxIndex {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
-    const message = createBaseBatchOriginTx();
+    const message = createBaseOriginTxIndex();
     while (reader.pos < end) {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          message.id = reader.string();
+          message.classKey = reader.uint64() as Long;
           break;
         case 2:
-          message.source = reader.string();
+          message.id = reader.string();
           break;
         case 3:
-          message.note = reader.string();
-          break;
-        case 4:
-          message.batchDenom = reader.string();
+          message.source = reader.string();
           break;
         default:
           reader.skipType(tag & 7);
@@ -1408,38 +1435,135 @@ export const BatchOriginTx = {
     return message;
   },
 
-  fromJSON(object: any): BatchOriginTx {
+  fromJSON(object: any): OriginTxIndex {
     return {
-      $type: BatchOriginTx.$type,
+      $type: OriginTxIndex.$type,
+      classKey: isSet(object.classKey)
+        ? Long.fromString(object.classKey)
+        : Long.UZERO,
       id: isSet(object.id) ? String(object.id) : '',
       source: isSet(object.source) ? String(object.source) : '',
-      note: isSet(object.note) ? String(object.note) : '',
-      batchDenom: isSet(object.batchDenom) ? String(object.batchDenom) : '',
     };
   },
 
-  toJSON(message: BatchOriginTx): unknown {
+  toJSON(message: OriginTxIndex): unknown {
     const obj: any = {};
+    message.classKey !== undefined &&
+      (obj.classKey = (message.classKey || Long.UZERO).toString());
     message.id !== undefined && (obj.id = message.id);
     message.source !== undefined && (obj.source = message.source);
-    message.note !== undefined && (obj.note = message.note);
-    message.batchDenom !== undefined && (obj.batchDenom = message.batchDenom);
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<BatchOriginTx>, I>>(
+  fromPartial<I extends Exact<DeepPartial<OriginTxIndex>, I>>(
     object: I,
-  ): BatchOriginTx {
-    const message = createBaseBatchOriginTx();
+  ): OriginTxIndex {
+    const message = createBaseOriginTxIndex();
+    message.classKey =
+      object.classKey !== undefined && object.classKey !== null
+        ? Long.fromValue(object.classKey)
+        : Long.UZERO;
     message.id = object.id ?? '';
     message.source = object.source ?? '';
-    message.note = object.note ?? '';
-    message.batchDenom = object.batchDenom ?? '';
     return message;
   },
 };
 
-messageTypeRegistry.set(BatchOriginTx.$type, BatchOriginTx);
+messageTypeRegistry.set(OriginTxIndex.$type, OriginTxIndex);
+
+function createBaseBatchContract(): BatchContract {
+  return {
+    $type: 'regen.ecocredit.v1.BatchContract',
+    batchKey: Long.UZERO,
+    classKey: Long.UZERO,
+    contract: '',
+  };
+}
+
+export const BatchContract = {
+  $type: 'regen.ecocredit.v1.BatchContract' as const,
+
+  encode(
+    message: BatchContract,
+    writer: _m0.Writer = _m0.Writer.create(),
+  ): _m0.Writer {
+    if (!message.batchKey.isZero()) {
+      writer.uint32(8).uint64(message.batchKey);
+    }
+    if (!message.classKey.isZero()) {
+      writer.uint32(16).uint64(message.classKey);
+    }
+    if (message.contract !== '') {
+      writer.uint32(26).string(message.contract);
+    }
+    return writer;
+  },
+
+  decode(input: _m0.Reader | Uint8Array, length?: number): BatchContract {
+    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+    let end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseBatchContract();
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+        case 1:
+          message.batchKey = reader.uint64() as Long;
+          break;
+        case 2:
+          message.classKey = reader.uint64() as Long;
+          break;
+        case 3:
+          message.contract = reader.string();
+          break;
+        default:
+          reader.skipType(tag & 7);
+          break;
+      }
+    }
+    return message;
+  },
+
+  fromJSON(object: any): BatchContract {
+    return {
+      $type: BatchContract.$type,
+      batchKey: isSet(object.batchKey)
+        ? Long.fromString(object.batchKey)
+        : Long.UZERO,
+      classKey: isSet(object.classKey)
+        ? Long.fromString(object.classKey)
+        : Long.UZERO,
+      contract: isSet(object.contract) ? String(object.contract) : '',
+    };
+  },
+
+  toJSON(message: BatchContract): unknown {
+    const obj: any = {};
+    message.batchKey !== undefined &&
+      (obj.batchKey = (message.batchKey || Long.UZERO).toString());
+    message.classKey !== undefined &&
+      (obj.classKey = (message.classKey || Long.UZERO).toString());
+    message.contract !== undefined && (obj.contract = message.contract);
+    return obj;
+  },
+
+  fromPartial<I extends Exact<DeepPartial<BatchContract>, I>>(
+    object: I,
+  ): BatchContract {
+    const message = createBaseBatchContract();
+    message.batchKey =
+      object.batchKey !== undefined && object.batchKey !== null
+        ? Long.fromValue(object.batchKey)
+        : Long.UZERO;
+    message.classKey =
+      object.classKey !== undefined && object.classKey !== null
+        ? Long.fromValue(object.classKey)
+        : Long.UZERO;
+    message.contract = object.contract ?? '';
+    return message;
+  },
+};
+
+messageTypeRegistry.set(BatchContract.$type, BatchContract);
 
 declare var self: any | undefined;
 declare var window: any | undefined;
