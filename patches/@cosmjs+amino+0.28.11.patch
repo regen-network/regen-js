@@ -1,8 +1,8 @@
 diff --git a/node_modules/@cosmjs/amino/build/signdoc.js b/node_modules/@cosmjs/amino/build/signdoc.js
-index cbd1369..cdc08e5 100644
+index cbd1369..547f655 100644
 --- a/node_modules/@cosmjs/amino/build/signdoc.js
 +++ b/node_modules/@cosmjs/amino/build/signdoc.js
-@@ -37,7 +37,23 @@ function makeSignDoc(msgs, fee, chainId, memo, accountNumber, sequence) {
+@@ -37,7 +37,22 @@ function makeSignDoc(msgs, fee, chainId, memo, accountNumber, sequence) {
  }
  exports.makeSignDoc = makeSignDoc;
  function serializeSignDoc(signDoc) {
@@ -14,7 +14,6 @@ index cbd1369..cdc08e5 100644
 +      // until regen ledger upgrades with the fix in v5.0
 +      // ref: https://github.com/regen-network/regen-ledger/pull/1480
 +
-+      console.log("Writing out AMINO MSG:", aminoMsg.value)
 +      return aminoMsg.value
 +    } else {
 +      return aminoMsg
