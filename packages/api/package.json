@@ -12,12 +12,15 @@
 	"dependencies": {
 		"@cosmjs/proto-signing": "0.28.11",
 		"@cosmjs/stargate": "0.28.11",
-		"@cosmjs/tendermint-rpc": "0.28.11"
+		"@cosmjs/tendermint-rpc": "0.28.11",
+		"patch-package": "^6.4.7",
+		"postinstall-postinstall": "^2.1.0"
 	},
 	"scripts": {
 		"build": "rimraf lib && tsc",
 		"gen": "rimraf src/generated && mkdir src/generated && ./scripts/protocgen.sh",
-		"test": "jest"
+		"test": "jest",
+		"postinstall": "patch-package"
 	},
 	"devDependencies": {
 		"@regen-network/ts-proto": "1.105.2-1",
