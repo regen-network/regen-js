@@ -11,7 +11,7 @@ export const createTypeUrl = '/' + MsgCreate.$type;
 export interface AminoDateCriteria {
   min_start_date?: Date;
   start_date_window?: Duration;
-  years_in_the_past?: number;
+  years_in_the_past??: number;
 }
 
 export interface AminoMsgCreate extends AminoMsg {
