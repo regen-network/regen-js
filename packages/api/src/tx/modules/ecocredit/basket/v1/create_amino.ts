@@ -11,7 +11,7 @@ export const createTypeUrl = '/' + MsgCreate.$type;
 export interface AminoDateCriteria {
   min_start_date?: Date;
   start_date_window?: Duration;
-  years_in_the_past: number;
+  years_in_the_past?: number;
 }
 
 export interface AminoMsgCreate extends AminoMsg {
@@ -52,13 +52,13 @@ export function createBasketConverter(): AminoConverter {
         name,
         description,
         exponent: exponent || undefined,
-        disable_auto_retire: Boolean(disableAutoRetire),
+        disable_auto_retire: disableAutoRetire || undefined,
         credit_type_abbrev: creditTypeAbbrev,
         allowed_classes: allowedClasses,
-        date_criteria: dateCriteria && {
-          min_start_date: dateCriteria?.minStartDate,
-          start_date_window: dateCriteria?.startDateWindow,
-          years_in_the_past: dateCriteria?.yearsInThePast,
+        date_criteria: {
+          min_start_date: dateCriteria?.minStartDate || undefined,
+          start_date_window: dateCriteria?.startDateWindow || undefined,
+          years_in_the_past: dateCriteria?.yearsInThePast || undefined,
         },
         fee:
           fee &&
@@ -89,11 +89,11 @@ export function createBasketConverter(): AminoConverter {
         disableAutoRetire: disable_auto_retire,
         creditTypeAbbrev: credit_type_abbrev,
         allowedClasses: allowed_classes,
-        dateCriteria: date_criteria && {
+        dateCriteria: {
           $type: DateCriteria.$type,
-          minStartDate: date_criteria.min_start_date,
-          startDateWindow: date_criteria.start_date_window,
-          yearsInThePast: date_criteria.years_in_the_past,
+          minStartDate: date_criteria?.min_start_date,
+          startDateWindow: date_criteria?.start_date_window,
+          yearsInThePast: date_criteria?.years_in_the_past || 0,
         },
         fee: fee.map(f => {
           return {

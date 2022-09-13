@@ -6,7 +6,12 @@ import {
 } from '../src/generated/regen/ecocredit/v1/tx';
 import { StdFee } from '@cosmjs/amino/build/signdoc';
 import { Secp256k1HdWallet } from '@cosmjs/amino/build/secp256k1hdwallet';
-import { MsgCreate } from '../src/generated/regen/ecocredit/basket/v1/tx';
+import {
+  MsgCreate,
+  MsgPut,
+  MsgTake,
+} from '../src/generated/regen/ecocredit/basket/v1/tx';
+import { BasketCredit } from '../src/generated/regen/ecocredit/basket/v1/types';
 
 const TEST_ADDRESS = 'regen1m0qh5y4ejkz3l5n6jlrntxcqx9r0x9xjv4vpcp';
 const REDWOOD_NODE_TM_URL = 'http://redwood.regen.network:26657/';
@@ -20,6 +25,7 @@ const TEST_FEE: StdFee = {
   gas: '200000',
 };
 const TEST_MEMO = `regen-js v${process.env.npm_package_version} tests`;
+const TEST_BATCH_DENOM = 'C01-001-20170606-20210601-007';
 
 const connect = async (): Promise<RegenApi> => {
   const mnemonic =
@@ -49,7 +55,7 @@ describe('RegenApi with tendermint connection', () => {
         recipient: TEST_ADDRESS,
         credits: [
           {
-            batchDenom: 'C01-001-20170606-20210601-007',
+            batchDenom: TEST_BATCH_DENOM,
             tradableAmount: '0.01',
           },
         ],
@@ -98,16 +104,17 @@ describe('RegenApi with tendermint connection', () => {
       }
     });
   });
-  describe('Signing and broadcasting Basket txs', () => {
-    it('should sign and broadcast MsgCreate using legacy amino sign mode', async () => {
+  describe('Signing and broadcasting Basket txs using legacy amino sign mode', () => {
+    it('should sign and broadcast MsgCreate', async () => {
       let txRes: DeliverTxResponse | undefined;
       const { msgClient } = await connect();
+      const basketName = 'TEST' + (Date.now() % 1000);
       const TEST_MSG_CREATE = MsgCreate.fromPartial({
         curator: TEST_ADDRESS,
-        name: 'TEST',
+        name: basketName,
         description: 'test description',
         exponent: 7,
-        disableAutoRetire: false, // fails if false or undefined
+        disableAutoRetire: false,
         creditTypeAbbrev: 'C',
         allowedClasses: ['C14', 'C13'],
         dateCriteria: undefined,
@@ -122,6 +129,54 @@ describe('RegenApi with tendermint connection', () => {
       const signedTxBytes = await msgClient?.sign(
         TEST_ADDRESS,
         [TEST_MSG_CREATE],
+        TEST_FEE,
+        TEST_MEMO,
+      );
+
+      expect(signedTxBytes).toBeTruthy();
+      if (signedTxBytes) {
+        txRes = await msgClient?.broadcast(signedTxBytes);
+        expect(txRes).toBeTruthy();
+        expect(txRes?.code).toBe(0);
+      }
+    });
+    it('should sign and broadcast MsgPut', async () => {
+      let txRes: DeliverTxResponse | undefined;
+      const { msgClient } = await connect();
+      const TEST_MSG_PUT = MsgPut.fromPartial({
+        owner: TEST_ADDRESS,
+        basketDenom: 'eco.uC.NCT',
+        credits: [{ batchDenom: TEST_BATCH_DENOM, amount: '1' }],
+      });
+
+      const signedTxBytes = await msgClient?.sign(
+        TEST_ADDRESS,
+        [TEST_MSG_PUT],
+        TEST_FEE,
+        TEST_MEMO,
+      );
+
+      expect(signedTxBytes).toBeTruthy();
+      if (signedTxBytes) {
+        txRes = await msgClient?.broadcast(signedTxBytes);
+        expect(txRes).toBeTruthy();
+        expect(txRes?.code).toBe(0);
+      }
+    });
+    it('should sign and broadcast MsgTake', async () => {
+      let txRes: DeliverTxResponse | undefined;
+      const { msgClient } = await connect();
+      const TEST_MSG_TAKE = MsgTake.fromPartial({
+        owner: TEST_ADDRESS,
+        basketDenom: 'eco.uC.NCT',
+        amount: '1000000',
+        retirementJurisdiction: 'US-CO 98765',
+        retireOnTake: true,
+      });
+
+      const signedTxBytes = await msgClient?.sign(
+        TEST_ADDRESS,
+        [TEST_MSG_TAKE],
         TEST_FEE,
         TEST_MEMO,
       );

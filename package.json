@@ -16,7 +16,8 @@
 		"lerna:deploy": "yarn build && lerna version --conventional-commits && lerna publish from-git",
 		"lint": "tsc --noEmit && eslint --ext js,ts,tsx .",
 		"start": "yarn workspace @regen-network/demo-app start",
-		"test": "lerna run test"
+		"test": "lerna run test",
+		"postinstall": "patch-package"
 	},
 	"devDependencies": {
 		"@types/jest": "27.0.3",
@@ -28,5 +29,9 @@
 		"prettier": "2.4.1",
 		"ts-jest": "^26.4.4",
 		"typescript": "^4.0.5"
+	},
+	"dependencies": {
+		"patch-package": "^6.4.7",
+		"postinstall-postinstall": "^2.1.0"
 	}
 }

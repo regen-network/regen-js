@@ -12,9 +12,8 @@ export interface AminoMsgTake extends AminoMsg {
     readonly owner: string;
     readonly basket_denom: string;
     readonly amount: string;
-    readonly retirement_location: string;
-    readonly retire_on_take: boolean;
-    readonly retirement_jurisdiction: string;
+    readonly retire_on_take?: boolean;
+    readonly retirement_jurisdiction?: string;
   };
 }
 
@@ -36,9 +35,8 @@ export function takeConverter(): AminoConverter {
         owner,
         basket_denom: basketDenom,
         amount,
-        retire_on_take: retireOnTake,
-        retirement_jurisdiction: retirementJurisdiction,
-        retirement_location: retirementJurisdiction,
+        retire_on_take: retireOnTake || undefined,
+        retirement_jurisdiction: retirementJurisdiction || undefined,
       };
     },
     fromAmino: ({
