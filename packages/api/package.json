@@ -10,9 +10,10 @@
 	},
 	"repository": "https://github.com/regen-network/regen-js",
 	"dependencies": {
-		"@cosmjs/stargate": "0.28.11",
 		"@cosmjs/proto-signing": "0.28.11",
-		"@cosmjs/tendermint-rpc": "0.28.11"
+		"@cosmjs/stargate": "0.28.11",
+		"@cosmjs/tendermint-rpc": "0.28.11",
+		"ethers": "^5.7.0"
 	},
 	"scripts": {
 		"build": "rimraf lib && tsc",

@@ -15,6 +15,8 @@ import {
   MsgTake,
 } from '../src/generated/regen/ecocredit/basket/v1/tx';
 import { BasketCredit } from '../src/generated/regen/ecocredit/basket/v1/types';
+import * as crypto from 'crypto';
+import * as ethers from "ethers";
 
 const TEST_ADDRESS = 'regen1m0qh5y4ejkz3l5n6jlrntxcqx9r0x9xjv4vpcp';
 const REDWOOD_NODE_TM_URL = 'http://redwood.regen.network:26657/';
@@ -53,7 +55,7 @@ describe('RegenApi with tendermint connection', () => {
 
   // CORE MESSAGES
   describe('Signing and broadcasting Ecocredit txs', () => {
-    xit('should sign and broadcast MsgSend using legacy amino sign mode', async () => {
+    it('should sign and broadcast MsgSend using legacy amino sign mode', async () => {
       let txRes: DeliverTxResponse | undefined;
       const { msgClient } = await connect();
       const TEST_MSG_SEND = MsgSend.fromPartial({
@@ -81,7 +83,7 @@ describe('RegenApi with tendermint connection', () => {
         expect(txRes?.code).toBe(0);
       }
     });
-    xit('should sign and broadcast MsgCreateClass using legacy amino sign mode', async () => {
+    it('should sign and broadcast MsgCreateClass using legacy amino sign mode', async () => {
       let txRes: DeliverTxResponse | undefined;
       const { msgClient } = await connect();
       const TEST_MSG_CREATE_CLASS = MsgCreateClass.fromPartial({
@@ -109,7 +111,7 @@ describe('RegenApi with tendermint connection', () => {
         expect(txRes?.code).toBe(0);
       }
     });
-    xit('should sign and broadcast MsgCreateProject using legacy amino sign mode', async () => {
+    it('should sign and broadcast MsgCreateProject using legacy amino sign mode', async () => {
       let txRes: DeliverTxResponse | undefined;
       const { msgClient } = await connect();
       const TEST_MSG_CREATE_PROJECT = MsgCreateProject.fromPartial({
@@ -132,11 +134,11 @@ describe('RegenApi with tendermint connection', () => {
         expect(txRes?.code).toBe(0);
       }
     });
-    xit('should sign and broadcast MsgCreateBatch using legacy amino sign mode', async () => {
+    it('should sign and broadcast MsgCreateBatch using legacy amino sign mode', async () => {
       let txRes: DeliverTxResponse | undefined;
       const { msgClient } = await connect();
 
-      let startDate: Date = new Date("2019-01-16"); 
+      let startDate: Date = new Date("2019-01-16");
       let endDate: Date = new Date("2020-01-16");
 
       const TEST_MSG_CREATE_BATCH = MsgCreateBatch.fromPartial({
@@ -155,9 +157,9 @@ describe('RegenApi with tendermint connection', () => {
         metadata: "foobar",
         open: true,
         originTx: {
-          id: "0x20a6cb27f64ca12d2afe4e1da4fd5fea1e1e7700980080e9f9e48ddd2fa37dc8",
+          id: makeEthTxHash(),
           source: "polygon",
-          contract: "0x8c2bf3a4504888b0de9688aeccf38a905dcec940",
+          contract: makeEthContract(),
           note: "bridged from another chain",
         },
       });
@@ -288,10 +290,31 @@ describe('RegenApi with tendermint connection', () => {
       expect(signedTxBytes).toBeTruthy();
       if (signedTxBytes) {
         txRes = await msgClient?.broadcast(signedTxBytes);
-        console.log('txRes', txRes);
         expect(txRes).toBeTruthy();
         expect(txRes?.code).toBe(0);
       }
     });
   });
 });
+
+function makeEthTxHash() {
+  return "0x" + genRandomStr(64);
+}
+
+function makeEthContract() {
+  let key = crypto.randomBytes(32).toString('hex');
+  let id = "0x" + key;
+  var wallet = new ethers.Wallet(id);
+  return wallet.address;
+}
+
+function genRandomStr(length: Number): string {
+  var result = '';
+  var characters = 'abcdefghijklmnopqrstuvwxyz0123456789';
+  var charactersLength = characters.length;
+  for (var i = 0; i < length; i++) {
+    result += characters.charAt(Math.floor(Math.random() *
+      charactersLength));
+  }
+  return result;
+}

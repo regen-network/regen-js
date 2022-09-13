@@ -2,6 +2,7 @@ import { AminoMsg } from '@cosmjs/amino';
 import { AminoConverter } from '@cosmjs/stargate';
 import { MsgCreateBatch } from '../../../../generated/regen/ecocredit/v1/tx';
 import { BatchIssuance, OriginTx } from '../../../../generated/regen/ecocredit/v1/types';
+import { AminoDate } from '../../../converter-utils';
 
 const msgCreateBatchAminoType = 'regen.core/MsgCreateBatch';
 
@@ -28,8 +29,8 @@ export interface AminoMsgCreateBatch extends AminoMsg {
     readonly project_id: string;
     readonly issuance: AminoBatchIssuance[];
     readonly metadata: string;
-    readonly start_date?: Date;
-    readonly end_date?: Date;
+    readonly start_date?: string;
+    readonly end_date?: string;
     readonly open: boolean;
     readonly origin_tx?: AminoOriginTx;
   };
@@ -66,8 +67,8 @@ export function createBatchConverter(): AminoConverter {
           }
         }),
         metadata,
-        start_date: startDate || undefined,
-        end_date: endDate || undefined,
+        start_date: AminoDate(startDate),
+        end_date: AminoDate(endDate),
         open,
         origin_tx: {
           id: originTx?.id || undefined,
@@ -87,7 +88,9 @@ export function createBatchConverter(): AminoConverter {
       open,
       origin_tx,
     }: AminoMsgCreateBatch['value']): Partial<MsgCreateBatch> => {
-      return {
+      let start: Date = start_date === undefined ? new Date() : new Date(start_date);
+      let end: Date = end_date === undefined ? new Date() : new Date(end_date);
+      return  {
         issuer,
         projectId: project_id,
         issuance: issuance.map(i => {
@@ -100,8 +103,8 @@ export function createBatchConverter(): AminoConverter {
           }
         }),
         metadata,
-        startDate: start_date || undefined,
-        endDate: end_date || undefined,
+        startDate: start,
+        endDate: end,
         open,
         originTx: origin_tx && {
           $type: OriginTx.$type,

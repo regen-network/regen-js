@@ -17,7 +17,7 @@ export interface AminoMsgMintBatchCredits extends AminoMsg {
     readonly issuer: string;
     readonly batch_denom: string;
     readonly issuance: AminoBatchIssuance[];
-    readonly origin_tx: AminoOriginTx | undefined;
+    readonly origin_tx?: AminoOriginTx;
   };
 }
 
@@ -65,7 +65,7 @@ export function mintBatchCreditsConverter(): AminoConverter {
         issuance: issuance.map(i => {
           return {
             $type: BatchIssuance.$type,
-            recipient: i.recipient,
+            recipient: i.recipient || '',
             tradableAmount: i.tradable_amount || '',
             retiredAmount: i.retired_amount || '',
             retirementJurisdiction: i.retirement_jurisdiction || '',
@@ -75,6 +75,8 @@ export function mintBatchCreditsConverter(): AminoConverter {
           $type: OriginTx.$type,
           id: origin_tx.id || '',
           source: origin_tx.source || '',
+          contract: origin_tx.contract || '',
+          note: origin_tx.note || '',
         },
       };
     },
