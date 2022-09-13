@@ -14,7 +14,7 @@ interface AminoSell_Order {
   quantity: string;
   ask_price?: AminoCoin;
   disable_auto_retire?: boolean;
-  expiration?: Date;
+  expiration?: string;
 }
 
 export interface AminoCoin {
@@ -49,7 +49,9 @@ export function sellConverter(): AminoConverter {
               denom: o.askPrice?.denom || undefined,
             },
             disable_auto_retire: o?.disableAutoRetire || undefined,
-            expiration: o.expiration || undefined,
+            expiration: o.expiration
+              ? o.expiration.toISOString().split('.')[0] + 'Z'
+              : undefined,
           };
         }),
       };
@@ -71,7 +73,7 @@ export function sellConverter(): AminoConverter {
               denom: o.ask_price.denom || '',
             },
             disableAutoRetire: Boolean(o.disable_auto_retire),
-            expiration: o.expiration,
+            expiration: o.expiration ? new Date(o.expiration) : undefined,
           };
         }),
       };

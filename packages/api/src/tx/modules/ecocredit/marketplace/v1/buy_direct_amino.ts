@@ -4,14 +4,16 @@ import {
   MsgBuyDirect,
   MsgBuyDirect_Order,
 } from '../../../../../generated/regen/ecocredit/marketplace/v1/tx';
+import { omitDefault } from '../../../../converter-utils';
 import { AminoCoin } from './sell_amino';
+import { longify } from '@cosmjs/stargate/build/queryclient';
 
 const msgBuyDirectAmnioType = 'regen.marketplace/MsgBuyDirect';
 
 export const buyDirectTypeUrl = '/' + MsgBuyDirect.$type;
 
 interface AminoBuyDirect_Order {
-  sell_order_id: Long;
+  sell_order_id?: string;
   quantity?: string;
   bid_price?: AminoCoin;
   disable_auto_retire?: boolean;
@@ -38,14 +40,14 @@ export function buyDirectConverter(): AminoConverter {
         buyer,
         orders: orders.map(b => {
           return {
-            sell_order_id: b.sellOrderId || undefined,
-            quantity: b.quantity || undefined,
+            sell_order_id: omitDefault(b.sellOrderId)?.toString(),
+            quantity: omitDefault(b.quantity),
             bid_price: {
-              denom: b.bidPrice?.denom || undefined,
-              amount: b.bidPrice?.amount || undefined,
+              denom: omitDefault(b.bidPrice?.denom),
+              amount: omitDefault(b.bidPrice?.amount),
             },
-            disable_auto_retire: b.disableAutoRetire || undefined,
-            retirement_jurisdiction: b.retirementJurisdiction || undefined,
+            disable_auto_retire: omitDefault(b.disableAutoRetire),
+            retirement_jurisdiction: omitDefault(b.retirementJurisdiction),
           };
         }),
       };
@@ -59,7 +61,7 @@ export function buyDirectConverter(): AminoConverter {
         orders: orders.map(b => {
           return {
             $type: MsgBuyDirect_Order.$type,
-            sellOrderId: b.sell_order_id,
+            sellOrderId: longify(b.sell_order_id || 0),
             quantity: b.quantity || '0',
             bidPrice: b.bid_price && {
               $type: 'cosmos.base.v1beta1.Coin',

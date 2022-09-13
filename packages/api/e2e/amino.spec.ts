@@ -32,6 +32,7 @@ const TEST_FEE: StdFee = {
 };
 const TEST_MEMO = `regen-js v${process.env.npm_package_version} tests`;
 const TEST_BATCH_DENOM = 'C01-001-20170606-20210601-007';
+let testSellOrderId = 50;
 
 const connect = async (): Promise<RegenApi> => {
   const mnemonic =
@@ -203,13 +204,13 @@ describe('Signing and broadcasting Marketplace txs using legacy amino sign mode'
     const { msgClient } = await connect();
     const sellOrder = {
       batchDenom: TEST_BATCH_DENOM,
-      quantity: '50',
+      quantity: '1',
       askPrice: {
         denom: 'uregen',
         amount: '1000000',
       },
       disableAutoRetire: false,
-      expiration: undefined,
+      expiration: new Date('October 31, 2099'),
     };
     const TEST_MSG_SELL = MsgSell.fromPartial({
       seller: TEST_ADDRESS,
@@ -226,18 +227,20 @@ describe('Signing and broadcasting Marketplace txs using legacy amino sign mode'
     expect(signedTxBytes).toBeTruthy();
     if (signedTxBytes) {
       txRes = await msgClient?.broadcast(signedTxBytes);
-      console.log('txRes', txRes);
+      console.log('txRes', txRes); // You will need to read this to get a sell order ID for the MsgCancelSellOrder test
       expect(txRes).toBeTruthy();
       expect(txRes?.code).toBe(0);
     }
   });
-  it('should sign and broadcast MsgCancelSellOrder', async () => {
+  xit('should sign and broadcast MsgCancelSellOrder', async () => {
+    // If sell order 50 doesn't work, run the MsgSell test to get a new sellOrderId to cancel
     let txRes: DeliverTxResponse | undefined;
     const { msgClient } = await connect();
+    console.log('testSellOrderId', testSellOrderId);
 
     const TEST_MSG_CANCEL = MsgCancelSellOrder.fromPartial({
       seller: TEST_ADDRESS,
-      sellOrderId: Long.fromValue(48),
+      sellOrderId: Long.fromValue(52), // If this id doesn't work, run the MsgSell test to get a new sellOrderId to cancel
     });
 
     const signedTxBytes = await msgClient?.sign(
@@ -250,12 +253,11 @@ describe('Signing and broadcasting Marketplace txs using legacy amino sign mode'
     expect(signedTxBytes).toBeTruthy();
     if (signedTxBytes) {
       txRes = await msgClient?.broadcast(signedTxBytes);
-      console.log('txRes', txRes);
       expect(txRes).toBeTruthy();
       expect(txRes?.code).toBe(0);
     }
   });
-  xit('should sign and broadcast MsgBuyDirect', async () => {
+  it('should sign and broadcast MsgBuyDirect', async () => {
     let txRes: DeliverTxResponse | undefined;
     const connectBuyer = async (): Promise<RegenApi> => {
       // regen13hu59094gzfcpxl58fcz294p5g5956utwlpqll
@@ -275,7 +277,6 @@ describe('Signing and broadcasting Marketplace txs using legacy amino sign mode'
 
       // console.log('newAccount', newAccount);
 
-      // This is an Amino signer
       const buyerSigner = await Secp256k1HdWallet.fromMnemonic(mnemonic, {
         prefix: 'regen',
       });
@@ -294,7 +295,7 @@ describe('Signing and broadcasting Marketplace txs using legacy amino sign mode'
       buyer: TEST_BUYER_ADDRESS,
       orders: [
         {
-          sellOrderId: Long.fromValue(45), //Long
+          sellOrderId: '53',
           quantity: '1',
           bidPrice: { denom: 'uregen', amount: '1000000' },
           disableAutoRetire: false,
