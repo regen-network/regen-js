@@ -102,9 +102,10 @@ describe('RegenApi with tendermint connection', () => {
     it('should sign and broadcast MsgCreate using legacy amino sign mode', async () => {
       let txRes: DeliverTxResponse | undefined;
       const { msgClient } = await connect();
+      const basketName = "TEST" + (Date.now() % 1000);
       const TEST_MSG_CREATE = MsgCreate.fromPartial({
         curator: TEST_ADDRESS,
-        name: 'TEST',
+        name: basketName,
         description: 'test description',
         exponent: 7,
         disableAutoRetire: false, // fails if false or undefined
