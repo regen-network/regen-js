@@ -4,9 +4,9 @@ import {
   MsgBuyDirect,
   MsgBuyDirect_Order,
 } from '../../../../../generated/regen/ecocredit/marketplace/v1/tx';
-import { omitDefault } from '../../../../converter-utils';
 import { AminoCoin } from './sell_amino';
 import { longify } from '@cosmjs/stargate/build/queryclient';
+import { omitDefault } from '../../converter-utils';
 
 const msgBuyDirectAmnioType = 'regen.marketplace/MsgBuyDirect';
 

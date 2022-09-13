@@ -2,7 +2,6 @@ import { AminoMsg } from '@cosmjs/amino';
 import { AminoConverter } from '@cosmjs/stargate';
 import { longify } from '@cosmjs/stargate/build/queryclient';
 import { MsgCancelSellOrder } from '../../../../../generated/regen/ecocredit/marketplace/v1/tx';
-import { omitDefault } from '../../../../converter-utils';
 
 const msgCancelSellOrderAminoType = 'regen.marketplace/MsgCancelSellOrder';
 
