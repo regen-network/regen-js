@@ -88,8 +88,8 @@ export function createBatchConverter(): AminoConverter {
       open,
       origin_tx,
     }: AminoMsgCreateBatch['value']): Partial<MsgCreateBatch> => {
-      const start: Date = start_date === undefined ? new Date() : new Date(start_date);
-      const end: Date = end_date === undefined ? new Date() : new Date(end_date);
+      const start: Date | undefined = start_date === undefined ? undefined : new Date(start_date);
+      const end: Date | undefined  = end_date === undefined ? undefined : new Date(end_date);
       return {
         issuer,
         projectId: project_id,
