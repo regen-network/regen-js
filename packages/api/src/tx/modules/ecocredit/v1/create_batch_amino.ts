@@ -2,7 +2,7 @@ import { AminoMsg } from '@cosmjs/amino';
 import { AminoConverter } from '@cosmjs/stargate';
 import { MsgCreateBatch } from '../../../../generated/regen/ecocredit/v1/tx';
 import { BatchIssuance, OriginTx } from '../../../../generated/regen/ecocredit/v1/types';
-import { AminoDate } from '../../../converter-utils';
+import { AminoDate } from '../converter-utils';
 
 const msgCreateBatchAminoType = 'regen.core/MsgCreateBatch';
 
