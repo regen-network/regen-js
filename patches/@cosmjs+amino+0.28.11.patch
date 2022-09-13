@@ -1,0 +1,28 @@
+diff --git a/node_modules/@cosmjs/amino/build/signdoc.js b/node_modules/@cosmjs/amino/build/signdoc.js
+index cbd1369..7a1d5e9 100644
+--- a/node_modules/@cosmjs/amino/build/signdoc.js
++++ b/node_modules/@cosmjs/amino/build/signdoc.js
+@@ -37,7 +37,22 @@ function makeSignDoc(msgs, fee, chainId, memo, accountNumber, sequence) {
+ }
+ exports.makeSignDoc = makeSignDoc;
+ function serializeSignDoc(signDoc) {
+-    return (0, encoding_1.toUtf8)(sortedJsonStringify(signDoc));
++  const fixedMsgs = signDoc.msgs.map((aminoMsg) => {
++    if (aminoMsg.type.startsWith("regen")) {
++      // regen ledger incorrectly implements amino signing.
++      // this short term workaround makes cosmjs compatible with regen-ledger v4.0
++      // until regen ledger upgrades with the fix in v5.0
++      // ref: https://github.com/regen-network/regen-ledger/pull/1480
++
++      return aminoMsg.value
++    } else {
++      return aminoMsg
++    }
++  })
++
++  var fixedSignDoc = {...signDoc, msgs: fixedMsgs};
++
++  return (0, encoding_1.toUtf8(sortedJsonStringify(fixedSignDoc));
+ }
+ exports.serializeSignDoc = serializeSignDoc;
+ //# sourceMappingURL=signdoc.js.map
