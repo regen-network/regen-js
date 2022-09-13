@@ -4,6 +4,7 @@ import {
   MsgCreateBatch,
   MsgCreateClass,
   MsgCreateProject,
+  MsgRetire,
   MsgSend,
 } from '../src/generated/regen/ecocredit/v1/tx';
 import { StdFee } from '@cosmjs/amino/build/signdoc';
@@ -131,7 +132,7 @@ describe('RegenApi with tendermint connection', () => {
         expect(txRes?.code).toBe(0);
       }
     });
-    it('should sign and broadcast MsgCreateBatch using legacy amino sign mode', async () => {
+    xit('should sign and broadcast MsgCreateBatch using legacy amino sign mode', async () => {
       let txRes: DeliverTxResponse | undefined;
       const { msgClient } = await connect();
 
@@ -144,8 +145,8 @@ describe('RegenApi with tendermint connection', () => {
         issuance: [
           {
             recipient: TEST_ADDRESS,
-            tradableAmount: "50",
-            retiredAmount: "50",
+            tradableAmount: "1.503",
+            retiredAmount: "1.503",
             retirementJurisdiction: "US-OR",
           },
         ],
@@ -153,12 +154,46 @@ describe('RegenApi with tendermint connection', () => {
         endDate: endDate,
         metadata: "foobar",
         open: true,
-        note: "hello",
+        originTx: {
+          id: "0x20a6cb27f64ca12d2afe4e1da4fd5fea1e1e7700980080e9f9e48ddd2fa37dc8",
+          source: "polygon",
+          contract: "0x8c2bf3a4504888b0de9688aeccf38a905dcec940",
+          note: "bridged from another chain",
+        },
       });
 
       const signedTxBytes = await msgClient?.sign(
         TEST_ADDRESS,
         [TEST_MSG_CREATE_BATCH],
+        TEST_FEE,
+        TEST_MEMO,
+      );
+
+      expect(signedTxBytes).toBeTruthy();
+      if (signedTxBytes) {
+        txRes = await msgClient?.broadcast(signedTxBytes);
+        expect(txRes).toBeTruthy();
+        expect(txRes?.code).toBe(0);
+      }
+    });
+    it('should sign and broadcast MsgRetire using legacy amino sign mode', async () => {
+      let txRes: DeliverTxResponse | undefined;
+      const { msgClient } = await connect();
+
+      const TEST_MSG_RETIRE = MsgRetire.fromPartial({
+        owner: TEST_ADDRESS,
+        credits: [
+          {
+            batchDenom: TEST_BATCH_DENOM,
+            amount: "0.000001",
+          }
+        ],
+        jurisdiction: "US-OR",
+      });
+
+      const signedTxBytes = await msgClient?.sign(
+        TEST_ADDRESS,
+        [TEST_MSG_RETIRE],
         TEST_FEE,
         TEST_MEMO,
       );

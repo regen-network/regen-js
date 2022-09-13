@@ -1,17 +1,14 @@
 import { AminoMsg } from '@cosmjs/amino';
 import { AminoConverter } from '@cosmjs/stargate';
 import { MsgCreateBatch } from '../../../../generated/regen/ecocredit/v1/tx';
-import {
-  BatchIssuance,
-  OriginTx,
-} from '../../../../generated/regen/ecocredit/v1/types';
+import { BatchIssuance, OriginTx } from '../../../../generated/regen/ecocredit/v1/types';
 
 const msgCreateBatchAminoType = 'regen.core/MsgCreateBatch';
 
-export const createBatchTypeUrl = '/' + MsgCreateBatch.$type;
+export const createBatchTypeUrl = '/' + MsgCreateBatch.$type
 
 export interface AminoBatchIssuance {
-  recipient: string;
+  recipient?: string;
   tradable_amount?: string;
   retired_amount?: string;
   retirement_jurisdiction?: string;
@@ -20,6 +17,8 @@ export interface AminoBatchIssuance {
 export interface AminoOriginTx {
   id?: string;
   source?: string;
+  contract?: string;
+  note?: string;
 }
 
 export interface AminoMsgCreateBatch extends AminoMsg {
@@ -33,7 +32,6 @@ export interface AminoMsgCreateBatch extends AminoMsg {
     readonly end_date?: Date;
     readonly open: boolean;
     readonly origin_tx?: AminoOriginTx;
-    readonly note: string;
   };
 }
 
@@ -55,25 +53,28 @@ export function createBatchConverter(): AminoConverter {
       endDate,
       open,
       originTx,
-      note,
     }: MsgCreateBatch): AminoMsgCreateBatch['value'] => {
       return {
         issuer,
         project_id: projectId,
         issuance: issuance.map(i => {
           return {
-            recipient: i.recipient,
+            recipient: i.recipient || undefined,
             tradable_amount: i.tradableAmount || undefined,
             retired_amount: i.retiredAmount || undefined,
             retirement_jurisdiction: i.retirementJurisdiction || undefined,
-          };
+          }
         }),
         metadata,
-        start_date: startDate,
-        end_date: endDate,
+        start_date: startDate || undefined,
+        end_date: endDate || undefined,
         open,
-        origin_tx: undefined,
-        note,
+        origin_tx: {
+          id: originTx?.id || undefined,
+          source: originTx?.source || undefined,
+          contract: originTx?.contract || undefined,
+          note: originTx?.note || undefined,
+        },
       };
     },
     fromAmino: ({
@@ -85,7 +86,6 @@ export function createBatchConverter(): AminoConverter {
       end_date,
       open,
       origin_tx,
-      note,
     }: AminoMsgCreateBatch['value']): Partial<MsgCreateBatch> => {
       return {
         issuer,
@@ -93,18 +93,23 @@ export function createBatchConverter(): AminoConverter {
         issuance: issuance.map(i => {
           return {
             $type: BatchIssuance.$type,
-            recipient: i.recipient,
+            recipient: i.recipient || '',
             tradableAmount: i.tradable_amount || '',
             retiredAmount: i.retired_amount || '',
             retirementJurisdiction: i.retirement_jurisdiction || '',
-          };
-        }) || undefined,
+          }
+        }),
         metadata,
-        startDate: start_date,
-        endDate: end_date,
+        startDate: start_date || undefined,
+        endDate: end_date || undefined,
         open,
-        originTx: undefined,
-        note,
+        originTx: origin_tx && {
+          $type: OriginTx.$type,
+          id: origin_tx.id || '',
+          source: origin_tx.source || '',
+          contract: origin_tx.contract || '',
+          note: origin_tx.note || '',
+        },
       };
     },
   };

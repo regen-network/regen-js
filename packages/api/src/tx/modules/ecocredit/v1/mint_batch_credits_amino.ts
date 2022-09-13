@@ -66,15 +66,15 @@ export function mintBatchCreditsConverter(): AminoConverter {
           return {
             $type: BatchIssuance.$type,
             recipient: i.recipient,
-            tradableAmount: i.tradable_amount,
-            retiredAmount: i.retired_amount,
-            retirementJurisdiction: i.retirement_jurisdiction,
+            tradableAmount: i.tradable_amount || '',
+            retiredAmount: i.retired_amount || '',
+            retirementJurisdiction: i.retirement_jurisdiction || '',
           };
         }),
         originTx: origin_tx && {
           $type: OriginTx.$type,
-          id: origin_tx?.id,
-          source: origin_tx?.source,
+          id: origin_tx.id || '',
+          source: origin_tx.source || '',
         },
       };
     },
