@@ -46,7 +46,7 @@ export function ecocreditSendConverter(): AminoConverter {
             batch_denom: credit.batchDenom,
             tradable_amount: credit?.tradableAmount || undefined,
             retired_amount: credit?.retiredAmount || undefined,
-            retirement_jurisdiction: credit?.retiredAmount || undefined,
+            retirement_jurisdiction: credit?.retirementJurisdiction || undefined,
           };
         }),
       };

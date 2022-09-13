@@ -43,7 +43,7 @@ const connect = async (): Promise<RegenApi> => {
 
 let api: RegenApi;
 
-describe('RegenApi with tendermint connection', () => {
+xdescribe('RegenApi with tendermint connection', () => {
   beforeAll(async () => {
     api = await connect();
   });
