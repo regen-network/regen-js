@@ -11,7 +11,7 @@ import {
   MsgPut,
   MsgTake,
 } from '../src/generated/regen/ecocredit/basket/v1/tx';
-import { BasketCredit } from '../src/generated/regen/ecocredit/basket/v1/types';
+import { MessageClient } from '../src/tx/msg';
 
 const TEST_ADDRESS = 'regen1m0qh5y4ejkz3l5n6jlrntxcqx9r0x9xjv4vpcp';
 const REDWOOD_NODE_TM_URL = 'http://redwood.regen.network:26657/';
@@ -63,7 +63,7 @@ const runAminoTest = async (msgClient: MessageClient | undefined, testMsg: any) 
 }
 
 describe('RegenApi with tendermint connection', () => {
-  xdescribe('Signing and broadcasting Ecocredit txs', () => {
+  describe('Signing and broadcasting Ecocredit txs', () => {
     it('should sign and broadcast MsgSend using legacy amino sign mode', async () => {
       let txRes: DeliverTxResponse | undefined;
       const { msgClient } = await connect();
