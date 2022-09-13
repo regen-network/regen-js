@@ -10,8 +10,8 @@
 	},
 	"repository": "https://github.com/regen-network/regen-js",
 	"dependencies": {
-		"@cosmjs/stargate": "0.28.11",
 		"@cosmjs/proto-signing": "0.28.11",
+		"@cosmjs/stargate": "0.28.11",
 		"@cosmjs/tendermint-rpc": "0.28.11"
 	},
 	"scripts": {
@@ -20,6 +20,7 @@
 		"test": "jest"
 	},
 	"devDependencies": {
-		"@regen-network/ts-proto": "1.105.2-1"
+		"@regen-network/ts-proto": "1.105.2-1",
+		"ethers": "^5.7.0"
 	}
 }

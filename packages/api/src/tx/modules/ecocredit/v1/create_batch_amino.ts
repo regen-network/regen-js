@@ -1,25 +1,25 @@
 import { AminoMsg } from '@cosmjs/amino';
 import { AminoConverter } from '@cosmjs/stargate';
 import { MsgCreateBatch } from '../../../../generated/regen/ecocredit/v1/tx';
-import {
-  BatchIssuance,
-  OriginTx,
-} from '../../../../generated/regen/ecocredit/v1/types';
+import { BatchIssuance, OriginTx } from '../../../../generated/regen/ecocredit/v1/types';
+import { AminoDate } from '../converter-utils';
 
 const msgCreateBatchAminoType = 'regen.core/MsgCreateBatch';
 
-export const createBatchTypeUrl = '/' + MsgCreateBatch.$type;
+export const createBatchTypeUrl = '/' + MsgCreateBatch.$type
 
 export interface AminoBatchIssuance {
-  recipient: string;
-  tradable_amount: string;
-  retired_amount: string;
-  retirement_jurisdiction: string;
+  recipient?: string;
+  tradable_amount?: string;
+  retired_amount?: string;
+  retirement_jurisdiction?: string;
 }
 
 export interface AminoOriginTx {
-  id: string;
-  source: string;
+  id?: string;
+  source?: string;
+  contract?: string;
+  note?: string;
 }
 
 export interface AminoMsgCreateBatch extends AminoMsg {
@@ -29,10 +29,10 @@ export interface AminoMsgCreateBatch extends AminoMsg {
     readonly project_id: string;
     readonly issuance: AminoBatchIssuance[];
     readonly metadata: string;
-    readonly start_date: Date | undefined;
-    readonly end_date: Date | undefined;
+    readonly start_date?: string;
+    readonly end_date?: string;
     readonly open: boolean;
-    readonly origin_tx: AminoOriginTx | undefined;
+    readonly origin_tx?: AminoOriginTx;
   };
 }
 
@@ -60,20 +60,21 @@ export function createBatchConverter(): AminoConverter {
         project_id: projectId,
         issuance: issuance.map(i => {
           return {
-            $type: BatchIssuance.$type,
-            recipient: i.recipient,
-            tradable_amount: i.tradableAmount,
-            retired_amount: i.retiredAmount,
-            retirement_jurisdiction: i.retirementJurisdiction,
-          };
+            recipient: i.recipient || undefined,
+            tradable_amount: i.tradableAmount || undefined,
+            retired_amount: i.retiredAmount || undefined,
+            retirement_jurisdiction: i.retirementJurisdiction || undefined,
+          }
         }),
         metadata,
-        start_date: startDate,
-        end_date: endDate,
+        start_date: AminoDate(startDate) || undefined,
+        end_date: AminoDate(endDate) || undefined,
         open,
-        origin_tx: originTx && {
-          id: originTx?.id,
-          source: originTx?.source,
+        origin_tx: {
+          id: originTx?.id || undefined,
+          source: originTx?.source || undefined,
+          contract: originTx?.contract || undefined,
+          note: originTx?.note || undefined,
         },
       };
     },
@@ -87,26 +88,30 @@ export function createBatchConverter(): AminoConverter {
       open,
       origin_tx,
     }: AminoMsgCreateBatch['value']): Partial<MsgCreateBatch> => {
+      const start: Date | undefined = start_date === undefined ? undefined : new Date(start_date);
+      const end: Date | undefined  = end_date === undefined ? undefined : new Date(end_date);
       return {
         issuer,
         projectId: project_id,
         issuance: issuance.map(i => {
           return {
             $type: BatchIssuance.$type,
-            recipient: i.recipient,
-            tradableAmount: i.tradable_amount,
-            retiredAmount: i.retired_amount,
-            retirementJurisdiction: i.retirement_jurisdiction,
-          };
+            recipient: i.recipient || '',
+            tradableAmount: i.tradable_amount || '',
+            retiredAmount: i.retired_amount || '',
+            retirementJurisdiction: i.retirement_jurisdiction || '',
+          }
         }),
         metadata,
-        startDate: start_date,
-        endDate: end_date,
+        startDate: start,
+        endDate: end,
         open,
         originTx: origin_tx && {
           $type: OriginTx.$type,
-          id: origin_tx?.id,
-          source: origin_tx?.source,
+          id: origin_tx.id || '',
+          source: origin_tx.source || '',
+          contract: origin_tx.contract || '',
+          note: origin_tx.note || '',
         },
       };
     },

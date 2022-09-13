@@ -9,11 +9,11 @@ export const createProjectTypeUrl = '/' + MsgCreateProject.$type;
 export interface AminoMsgCreateProject extends AminoMsg {
   readonly type: typeof msgCreateProjectAminoType;
   readonly value: {
-    readonly admin: string;
-    readonly class_id: string;
-    readonly metadata: string;
-    readonly jurisdiction: string;
-    readonly reference_id: string;
+    readonly admin?: string;
+    readonly class_id?: string;
+    readonly metadata?: string;
+    readonly jurisdiction?: string;
+    readonly reference_id?: string;
   };
 }
 
@@ -34,11 +34,11 @@ export function createProjectConverter(): AminoConverter {
       referenceId,
     }: MsgCreateProject): AminoMsgCreateProject['value'] => {
       return {
-        admin: admin,
-        class_id: classId,
-        metadata: metadata,
-        jurisdiction: jurisdiction,
-        reference_id: referenceId,
+        admin: admin || undefined,
+        class_id: classId || undefined,
+        metadata: metadata || undefined,
+        jurisdiction: jurisdiction || undefined,
+        reference_id: referenceId || undefined,
       };
     },
     fromAmino: ({
