@@ -147,12 +147,6 @@ export interface MsgCreateBatch {
    * chain or registry as a result of a bridge operation.
    */
   originTx?: OriginTx;
-  /**
-   * note is a reference note for accounting that should only be set when
-   * bridging assets from another chain or registry as a result of a bridge
-   * operation and will be stored in state as a field of BatchOriginTx.
-   */
-  note: string;
 }
 
 /** MsgCreateBatchResponse is the Msg/CreateBatch response type. */
@@ -183,12 +177,6 @@ export interface MsgMintBatchCredits {
    * the minting of credits.
    */
   originTx?: OriginTx;
-  /**
-   * note is a reference note for accounting that should only be set when
-   * bridging assets from another chain or registry as a result of a bridge
-   * operation and will be stored in state as a field of BatchOriginTx.
-   */
-  note: string;
 }
 
 /** MsgMintBatchCreditsResponse is the Msg/MintBatchCredits response type. */
@@ -425,8 +413,6 @@ export interface MsgBridge {
   target: string;
   /** recipient is the address of the account receiving the bridged credits. */
   recipient: string;
-  /** recipient is the address of the contract handling the bridged credits. */
-  contract: string;
   /** credits specifies a credit batch and the number of credits being bridged. */
   credits: Credits[];
 }
@@ -441,22 +427,20 @@ export interface MsgBridgeReceive {
   $type: 'regen.ecocredit.v1.MsgBridgeReceive';
   /** issuer is the account address of the service bridging the credits. */
   issuer: string;
-  /** batch defines the credit batch information for the bridged credits. */
-  batch?: MsgBridgeReceive_Batch;
-  /** project defines the project information for the bridged credits. */
-  project?: MsgBridgeReceive_Project;
   /**
    * class_id is the unique identifier of the credit class within which the
    * project and credit batch already exist or will be created.
    */
   classId: string;
+  /** project defines the project information for the bridged credits. */
+  project?: MsgBridgeReceive_Project;
+  /** batch defines the credit batch information for the bridged credits. */
+  batch?: MsgBridgeReceive_Batch;
   /**
    * origin_tx is a reference to a transaction which caused the transfer from
    * another chain or registry.
    */
   originTx?: OriginTx;
-  /** note is an arbitrary note to include in the origin tx. */
-  note: string;
 }
 
 /**
@@ -876,7 +860,6 @@ function createBaseMsgCreateBatch(): MsgCreateBatch {
     endDate: undefined,
     open: false,
     originTx: undefined,
-    note: '',
   };
 }
 
@@ -917,9 +900,6 @@ export const MsgCreateBatch = {
     if (message.originTx !== undefined) {
       OriginTx.encode(message.originTx, writer.uint32(66).fork()).ldelim();
     }
-    if (message.note !== '') {
-      writer.uint32(74).string(message.note);
-    }
     return writer;
   },
 
@@ -958,9 +938,6 @@ export const MsgCreateBatch = {
         case 8:
           message.originTx = OriginTx.decode(reader, reader.uint32());
           break;
-        case 9:
-          message.note = reader.string();
-          break;
         default:
           reader.skipType(tag & 7);
           break;
@@ -988,7 +965,6 @@ export const MsgCreateBatch = {
       originTx: isSet(object.originTx)
         ? OriginTx.fromJSON(object.originTx)
         : undefined,
-      note: isSet(object.note) ? String(object.note) : '',
     };
   },
 
@@ -1013,7 +989,6 @@ export const MsgCreateBatch = {
       (obj.originTx = message.originTx
         ? OriginTx.toJSON(message.originTx)
         : undefined);
-    message.note !== undefined && (obj.note = message.note);
     return obj;
   },
 
@@ -1033,7 +1008,6 @@ export const MsgCreateBatch = {
       object.originTx !== undefined && object.originTx !== null
         ? OriginTx.fromPartial(object.originTx)
         : undefined;
-    message.note = object.note ?? '';
     return message;
   },
 };
@@ -1109,7 +1083,6 @@ function createBaseMsgMintBatchCredits(): MsgMintBatchCredits {
     batchDenom: '',
     issuance: [],
     originTx: undefined,
-    note: '',
   };
 }
 
@@ -1131,9 +1104,6 @@ export const MsgMintBatchCredits = {
     }
     if (message.originTx !== undefined) {
       OriginTx.encode(message.originTx, writer.uint32(34).fork()).ldelim();
-    }
-    if (message.note !== '') {
-      writer.uint32(42).string(message.note);
     }
     return writer;
   },
@@ -1157,9 +1127,6 @@ export const MsgMintBatchCredits = {
         case 4:
           message.originTx = OriginTx.decode(reader, reader.uint32());
           break;
-        case 5:
-          message.note = reader.string();
-          break;
         default:
           reader.skipType(tag & 7);
           break;
@@ -1179,7 +1146,6 @@ export const MsgMintBatchCredits = {
       originTx: isSet(object.originTx)
         ? OriginTx.fromJSON(object.originTx)
         : undefined,
-      note: isSet(object.note) ? String(object.note) : '',
     };
   },
 
@@ -1198,7 +1164,6 @@ export const MsgMintBatchCredits = {
       (obj.originTx = message.originTx
         ? OriginTx.toJSON(message.originTx)
         : undefined);
-    message.note !== undefined && (obj.note = message.note);
     return obj;
   },
 
@@ -1214,7 +1179,6 @@ export const MsgMintBatchCredits = {
       object.originTx !== undefined && object.originTx !== null
         ? OriginTx.fromPartial(object.originTx)
         : undefined;
-    message.note = object.note ?? '';
     return message;
   },
 };
@@ -2662,7 +2626,6 @@ function createBaseMsgBridge(): MsgBridge {
     owner: '',
     target: '',
     recipient: '',
-    contract: '',
     credits: [],
   };
 }
@@ -2683,11 +2646,8 @@ export const MsgBridge = {
     if (message.recipient !== '') {
       writer.uint32(26).string(message.recipient);
     }
-    if (message.contract !== '') {
-      writer.uint32(34).string(message.contract);
-    }
     for (const v of message.credits) {
-      Credits.encode(v!, writer.uint32(42).fork()).ldelim();
+      Credits.encode(v!, writer.uint32(34).fork()).ldelim();
     }
     return writer;
   },
@@ -2709,9 +2669,6 @@ export const MsgBridge = {
           message.recipient = reader.string();
           break;
         case 4:
-          message.contract = reader.string();
-          break;
-        case 5:
           message.credits.push(Credits.decode(reader, reader.uint32()));
           break;
         default:
@@ -2728,7 +2685,6 @@ export const MsgBridge = {
       owner: isSet(object.owner) ? String(object.owner) : '',
       target: isSet(object.target) ? String(object.target) : '',
       recipient: isSet(object.recipient) ? String(object.recipient) : '',
-      contract: isSet(object.contract) ? String(object.contract) : '',
       credits: Array.isArray(object?.credits)
         ? object.credits.map((e: any) => Credits.fromJSON(e))
         : [],
@@ -2740,7 +2696,6 @@ export const MsgBridge = {
     message.owner !== undefined && (obj.owner = message.owner);
     message.target !== undefined && (obj.target = message.target);
     message.recipient !== undefined && (obj.recipient = message.recipient);
-    message.contract !== undefined && (obj.contract = message.contract);
     if (message.credits) {
       obj.credits = message.credits.map(e =>
         e ? Credits.toJSON(e) : undefined,
@@ -2758,7 +2713,6 @@ export const MsgBridge = {
     message.owner = object.owner ?? '';
     message.target = object.target ?? '';
     message.recipient = object.recipient ?? '';
-    message.contract = object.contract ?? '';
     message.credits = object.credits?.map(e => Credits.fromPartial(e)) || [];
     return message;
   },
@@ -2820,11 +2774,10 @@ function createBaseMsgBridgeReceive(): MsgBridgeReceive {
   return {
     $type: 'regen.ecocredit.v1.MsgBridgeReceive',
     issuer: '',
-    batch: undefined,
-    project: undefined,
     classId: '',
+    project: undefined,
+    batch: undefined,
     originTx: undefined,
-    note: '',
   };
 }
 
@@ -2838,11 +2791,8 @@ export const MsgBridgeReceive = {
     if (message.issuer !== '') {
       writer.uint32(10).string(message.issuer);
     }
-    if (message.batch !== undefined) {
-      MsgBridgeReceive_Batch.encode(
-        message.batch,
-        writer.uint32(18).fork(),
-      ).ldelim();
+    if (message.classId !== '') {
+      writer.uint32(18).string(message.classId);
     }
     if (message.project !== undefined) {
       MsgBridgeReceive_Project.encode(
@@ -2850,14 +2800,14 @@ export const MsgBridgeReceive = {
         writer.uint32(26).fork(),
       ).ldelim();
     }
-    if (message.classId !== '') {
-      writer.uint32(34).string(message.classId);
+    if (message.batch !== undefined) {
+      MsgBridgeReceive_Batch.encode(
+        message.batch,
+        writer.uint32(34).fork(),
+      ).ldelim();
     }
     if (message.originTx !== undefined) {
       OriginTx.encode(message.originTx, writer.uint32(42).fork()).ldelim();
-    }
-    if (message.note !== '') {
-      writer.uint32(50).string(message.note);
     }
     return writer;
   },
@@ -2873,10 +2823,7 @@ export const MsgBridgeReceive = {
           message.issuer = reader.string();
           break;
         case 2:
-          message.batch = MsgBridgeReceive_Batch.decode(
-            reader,
-            reader.uint32(),
-          );
+          message.classId = reader.string();
           break;
         case 3:
           message.project = MsgBridgeReceive_Project.decode(
@@ -2885,13 +2832,13 @@ export const MsgBridgeReceive = {
           );
           break;
         case 4:
-          message.classId = reader.string();
+          message.batch = MsgBridgeReceive_Batch.decode(
+            reader,
+            reader.uint32(),
+          );
           break;
         case 5:
           message.originTx = OriginTx.decode(reader, reader.uint32());
-          break;
-        case 6:
-          message.note = reader.string();
           break;
         default:
           reader.skipType(tag & 7);
@@ -2905,37 +2852,35 @@ export const MsgBridgeReceive = {
     return {
       $type: MsgBridgeReceive.$type,
       issuer: isSet(object.issuer) ? String(object.issuer) : '',
-      batch: isSet(object.batch)
-        ? MsgBridgeReceive_Batch.fromJSON(object.batch)
-        : undefined,
+      classId: isSet(object.classId) ? String(object.classId) : '',
       project: isSet(object.project)
         ? MsgBridgeReceive_Project.fromJSON(object.project)
         : undefined,
-      classId: isSet(object.classId) ? String(object.classId) : '',
+      batch: isSet(object.batch)
+        ? MsgBridgeReceive_Batch.fromJSON(object.batch)
+        : undefined,
       originTx: isSet(object.originTx)
         ? OriginTx.fromJSON(object.originTx)
         : undefined,
-      note: isSet(object.note) ? String(object.note) : '',
     };
   },
 
   toJSON(message: MsgBridgeReceive): unknown {
     const obj: any = {};
     message.issuer !== undefined && (obj.issuer = message.issuer);
-    message.batch !== undefined &&
-      (obj.batch = message.batch
-        ? MsgBridgeReceive_Batch.toJSON(message.batch)
-        : undefined);
+    message.classId !== undefined && (obj.classId = message.classId);
     message.project !== undefined &&
       (obj.project = message.project
         ? MsgBridgeReceive_Project.toJSON(message.project)
         : undefined);
-    message.classId !== undefined && (obj.classId = message.classId);
+    message.batch !== undefined &&
+      (obj.batch = message.batch
+        ? MsgBridgeReceive_Batch.toJSON(message.batch)
+        : undefined);
     message.originTx !== undefined &&
       (obj.originTx = message.originTx
         ? OriginTx.toJSON(message.originTx)
         : undefined);
-    message.note !== undefined && (obj.note = message.note);
     return obj;
   },
 
@@ -2944,20 +2889,19 @@ export const MsgBridgeReceive = {
   ): MsgBridgeReceive {
     const message = createBaseMsgBridgeReceive();
     message.issuer = object.issuer ?? '';
-    message.batch =
-      object.batch !== undefined && object.batch !== null
-        ? MsgBridgeReceive_Batch.fromPartial(object.batch)
-        : undefined;
+    message.classId = object.classId ?? '';
     message.project =
       object.project !== undefined && object.project !== null
         ? MsgBridgeReceive_Project.fromPartial(object.project)
         : undefined;
-    message.classId = object.classId ?? '';
+    message.batch =
+      object.batch !== undefined && object.batch !== null
+        ? MsgBridgeReceive_Batch.fromPartial(object.batch)
+        : undefined;
     message.originTx =
       object.originTx !== undefined && object.originTx !== null
         ? OriginTx.fromPartial(object.originTx)
         : undefined;
-    message.note = object.note ?? '';
     return message;
   },
 };
@@ -3369,13 +3313,19 @@ export interface Msg {
     request: DeepPartial<MsgUpdateProjectMetadata>,
   ): Promise<MsgUpdateProjectMetadataResponse>;
   /**
-   * Bridge cancels a specified amount of tradable credits and emits a special
-   * bridge event handled by an external bridge service.
+   * Bridge processes credits being sent back to the source chain. When credits
+   * are sent back to the source chain, the credits are cancelled and an event
+   * is emitted to be handled by an external bridge service.
    */
   Bridge(request: DeepPartial<MsgBridge>): Promise<MsgBridgeResponse>;
   /**
-   * BridgeReceive processes credits being sent from an external registry or network to
-   * Regen Ledger.
+   * BridgeReceive processes credits being sent from another chain. When the
+   * credits are sent from the same vintage as an existing credit batch within
+   * the scope of the provided credit class, the credits will be minted to the
+   * existing credit batch, otherwise the credits will be issued in a new credit
+   * batch. The new credit batch will be created under an existing project if a
+   * project with a matching reference id already exists within the scope of the
+   * credit class, otherwise a new project will be created.
    */
   BridgeReceive(
     request: DeepPartial<MsgBridgeReceive>,

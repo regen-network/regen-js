@@ -205,7 +205,7 @@ export interface EventAddCreditType {
   abbreviation: string;
 }
 
-/** EventBridge is emitted emitted when credits are bridged to another chain. */
+/** EventBridge is emitted when credits are bridged to another chain. */
 export interface EventBridge {
   $type: 'regen.ecocredit.v1.EventBridge';
   /** target is the target chain. */
@@ -214,6 +214,23 @@ export interface EventBridge {
   recipient: string;
   /** contract is the contract address. */
   contract: string;
+  /** amount is the amount of credits. */
+  amount: string;
+}
+
+/** EventBridgeReceive is emitted when credits are bridged from another chain. */
+export interface EventBridgeReceive {
+  $type: 'regen.ecocredit.v1.EventBridgeReceive';
+  /**
+   * project_id is the unique identifier of the project that was either created
+   * or the existing project within which the credit batch exists.
+   */
+  projectId: string;
+  /**
+   * batch_denom is the unique identifier of the credit batch either created
+   * or within which the credits were dynamically minted.
+   */
+  batchDenom: string;
 }
 
 function createBaseEventCreateClass(): EventCreateClass {
@@ -1326,6 +1343,7 @@ function createBaseEventBridge(): EventBridge {
     target: '',
     recipient: '',
     contract: '',
+    amount: '',
   };
 }
 
@@ -1344,6 +1362,9 @@ export const EventBridge = {
     }
     if (message.contract !== '') {
       writer.uint32(26).string(message.contract);
+    }
+    if (message.amount !== '') {
+      writer.uint32(34).string(message.amount);
     }
     return writer;
   },
@@ -1364,6 +1385,9 @@ export const EventBridge = {
         case 3:
           message.contract = reader.string();
           break;
+        case 4:
+          message.amount = reader.string();
+          break;
         default:
           reader.skipType(tag & 7);
           break;
@@ -1378,6 +1402,7 @@ export const EventBridge = {
       target: isSet(object.target) ? String(object.target) : '',
       recipient: isSet(object.recipient) ? String(object.recipient) : '',
       contract: isSet(object.contract) ? String(object.contract) : '',
+      amount: isSet(object.amount) ? String(object.amount) : '',
     };
   },
 
@@ -1386,6 +1411,7 @@ export const EventBridge = {
     message.target !== undefined && (obj.target = message.target);
     message.recipient !== undefined && (obj.recipient = message.recipient);
     message.contract !== undefined && (obj.contract = message.contract);
+    message.amount !== undefined && (obj.amount = message.amount);
     return obj;
   },
 
@@ -1396,11 +1422,84 @@ export const EventBridge = {
     message.target = object.target ?? '';
     message.recipient = object.recipient ?? '';
     message.contract = object.contract ?? '';
+    message.amount = object.amount ?? '';
     return message;
   },
 };
 
 messageTypeRegistry.set(EventBridge.$type, EventBridge);
+
+function createBaseEventBridgeReceive(): EventBridgeReceive {
+  return {
+    $type: 'regen.ecocredit.v1.EventBridgeReceive',
+    projectId: '',
+    batchDenom: '',
+  };
+}
+
+export const EventBridgeReceive = {
+  $type: 'regen.ecocredit.v1.EventBridgeReceive' as const,
+
+  encode(
+    message: EventBridgeReceive,
+    writer: _m0.Writer = _m0.Writer.create(),
+  ): _m0.Writer {
+    if (message.projectId !== '') {
+      writer.uint32(10).string(message.projectId);
+    }
+    if (message.batchDenom !== '') {
+      writer.uint32(18).string(message.batchDenom);
+    }
+    return writer;
+  },
+
+  decode(input: _m0.Reader | Uint8Array, length?: number): EventBridgeReceive {
+    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+    let end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseEventBridgeReceive();
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+        case 1:
+          message.projectId = reader.string();
+          break;
+        case 2:
+          message.batchDenom = reader.string();
+          break;
+        default:
+          reader.skipType(tag & 7);
+          break;
+      }
+    }
+    return message;
+  },
+
+  fromJSON(object: any): EventBridgeReceive {
+    return {
+      $type: EventBridgeReceive.$type,
+      projectId: isSet(object.projectId) ? String(object.projectId) : '',
+      batchDenom: isSet(object.batchDenom) ? String(object.batchDenom) : '',
+    };
+  },
+
+  toJSON(message: EventBridgeReceive): unknown {
+    const obj: any = {};
+    message.projectId !== undefined && (obj.projectId = message.projectId);
+    message.batchDenom !== undefined && (obj.batchDenom = message.batchDenom);
+    return obj;
+  },
+
+  fromPartial<I extends Exact<DeepPartial<EventBridgeReceive>, I>>(
+    object: I,
+  ): EventBridgeReceive {
+    const message = createBaseEventBridgeReceive();
+    message.projectId = object.projectId ?? '';
+    message.batchDenom = object.batchDenom ?? '';
+    return message;
+  },
+};
+
+messageTypeRegistry.set(EventBridgeReceive.$type, EventBridgeReceive);
 
 type Builtin =
   | Date
