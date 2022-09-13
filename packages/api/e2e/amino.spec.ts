@@ -63,7 +63,7 @@ const runAminoTest = async (msgClient: MessageClient | undefined, testMsg: any) 
 }
 
 describe('RegenApi with tendermint connection', () => {
-  describe('Signing and broadcasting Ecocredit txs', () => {
+  xdescribe('Signing and broadcasting Ecocredit txs', () => {
     it('should sign and broadcast MsgSend using legacy amino sign mode', async () => {
       let txRes: DeliverTxResponse | undefined;
       const { msgClient } = await connect();
