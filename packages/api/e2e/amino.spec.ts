@@ -1,7 +1,10 @@
 import { DeliverTxResponse } from '@cosmjs/stargate';
 import { RegenApi } from '../src/api';
 import {
+  MsgCreateBatch,
   MsgCreateClass,
+  MsgCreateProject,
+  MsgRetire,
   MsgSend,
 } from '../src/generated/regen/ecocredit/v1/tx';
 import { StdFee } from '@cosmjs/amino/build/signdoc';
@@ -17,6 +20,8 @@ import {
   MsgCancelSellOrder,
 } from '../src/generated/regen/ecocredit/marketplace/v1/tx';
 import Long from 'long';
+import * as crypto from 'crypto';
+import * as ethers from 'ethers';
 import { MessageClient } from '../src/tx/msg';
 
 const TEST_ADDRESS = 'regen1m0qh5y4ejkz3l5n6jlrntxcqx9r0x9xjv4vpcp';
@@ -33,6 +38,7 @@ const TEST_FEE: StdFee = {
 };
 const TEST_MEMO = `regen-js v${process.env.npm_package_version} tests`;
 const TEST_BATCH_DENOM = 'C01-001-20170606-20210601-007';
+const TEST_CLASS_ID = 'C22';
 
 const connect = async (): Promise<RegenApi> => {
   const mnemonic =
@@ -74,7 +80,8 @@ const runAminoTest = async (
 };
 
 describe('RegenApi with tendermint connection', () => {
-  xdescribe('Signing and broadcasting Ecocredit txs using legacy amino sign mode', () => {
+  // CORE MESSAGES
+  describe('Signing and broadcasting Ecocredit txs using legacy amino sign mode', () => {
     it('should sign and broadcast MsgSend', async () => {
       const { msgClient } = await connect();
 
@@ -89,7 +96,7 @@ describe('RegenApi with tendermint connection', () => {
         ],
       });
 
-      runAminoTest(msgClient, TEST_MSG_SEND);
+      await runAminoTest(msgClient, TEST_MSG_SEND);
     });
     xit('should sign and broadcast MsgCreateClass', async () => {
       const { msgClient } = await connect();
@@ -105,7 +112,67 @@ describe('RegenApi with tendermint connection', () => {
         },
       });
 
-      runAminoTest(msgClient, TEST_MSG_CREATE_CLASS);
+      await runAminoTest(msgClient, TEST_MSG_CREATE_CLASS);
+    });
+    it('should sign and broadcast MsgCreateProject using legacy amino sign mode', async () => {
+      let txRes: DeliverTxResponse | undefined;
+      const { msgClient } = await connect();
+      const TEST_MSG_CREATE_PROJECT = MsgCreateProject.fromPartial({
+        admin: TEST_ADDRESS,
+        classId: TEST_CLASS_ID,
+        jurisdiction: 'US-OR',
+      });
+
+      await runAminoTest(msgClient, TEST_MSG_CREATE_PROJECT);
+    });
+    it('should sign and broadcast MsgCreateBatch using legacy amino sign mode', async () => {
+      let txRes: DeliverTxResponse | undefined;
+      const { msgClient } = await connect();
+
+      let startDate: Date = new Date('2019-01-16');
+      let endDate: Date = new Date('2020-01-16');
+
+      const TEST_MSG_CREATE_BATCH = MsgCreateBatch.fromPartial({
+        issuer: TEST_ADDRESS,
+        projectId: 'C22-001',
+        issuance: [
+          {
+            recipient: TEST_ADDRESS,
+            tradableAmount: '1.503',
+            retiredAmount: '1.503',
+            retirementJurisdiction: 'US-OR',
+          },
+        ],
+        startDate: startDate,
+        endDate: endDate,
+        metadata: 'foobar',
+        open: true,
+        originTx: {
+          id: makeEthTxHash(),
+          source: 'polygon',
+          contract: makeEthContract(),
+          note: 'bridged from another chain',
+        },
+      });
+
+      await runAminoTest(msgClient, TEST_MSG_CREATE_BATCH);
+    });
+    it('should sign and broadcast MsgRetire using legacy amino sign mode', async () => {
+      let txRes: DeliverTxResponse | undefined;
+      const { msgClient } = await connect();
+
+      const TEST_MSG_RETIRE = MsgRetire.fromPartial({
+        owner: TEST_ADDRESS,
+        credits: [
+          {
+            batchDenom: TEST_BATCH_DENOM,
+            amount: '0.000001',
+          },
+        ],
+        jurisdiction: 'US-OR',
+      });
+
+      await runAminoTest(msgClient, TEST_MSG_RETIRE);
     });
   });
   describe('Signing and broadcasting Basket txs using legacy amino sign mode', () => {
@@ -130,7 +197,7 @@ describe('RegenApi with tendermint connection', () => {
         ],
       });
 
-      runAminoTest(msgClient, TEST_BASKET_MSG_CREATE);
+      await runAminoTest(msgClient, TEST_BASKET_MSG_CREATE);
     });
     xit('should sign and broadcast MsgPut', async () => {
       const { msgClient } = await connect();
@@ -141,7 +208,7 @@ describe('RegenApi with tendermint connection', () => {
         credits: [{ batchDenom: TEST_BATCH_DENOM, amount: '1' }],
       });
 
-      runAminoTest(msgClient, TEST_BASKET_MSG_PUT);
+      await runAminoTest(msgClient, TEST_BASKET_MSG_PUT);
     });
     xit('should sign and broadcast MsgTake', async () => {
       const { msgClient } = await connect();
@@ -153,7 +220,7 @@ describe('RegenApi with tendermint connection', () => {
         retireOnTake: true,
       });
 
-      runAminoTest(msgClient, TEST_BASKET_MSG_TAKE);
+      await runAminoTest(msgClient, TEST_BASKET_MSG_TAKE);
     });
   });
 });
@@ -175,7 +242,7 @@ describe('Signing and broadcasting Marketplace txs using legacy amino sign mode'
       orders: [sellOrder],
     });
 
-    runAminoTest(msgClient, TEST_MSG_SELL);
+    await runAminoTest(msgClient, TEST_MSG_SELL);
   });
   xit('should sign and broadcast MsgCancelSellOrder', async () => {
     // This test passes, but it needs a real sellOrderId generated by the same address.
@@ -187,7 +254,7 @@ describe('Signing and broadcasting Marketplace txs using legacy amino sign mode'
       sellOrderId: Long.fromValue(52), // If this id doesn't work, run the MsgSell test to get a new sellOrderId to cancel
     });
 
-    runAminoTest(msgClient, TEST_MSG_CANCEL);
+    await runAminoTest(msgClient, TEST_MSG_CANCEL);
   });
   it('should sign and broadcast MsgBuyDirect', async () => {
     const connectBuyer = async (): Promise<RegenApi> => {
@@ -229,19 +296,27 @@ describe('Signing and broadcasting Marketplace txs using legacy amino sign mode'
       ],
     });
 
-    const signedTxBytes = await msgClient?.sign(
-      TEST_ADDRESS,
-      [TEST_MSG_BUY],
-      TEST_FEE,
-      TEST_MEMO,
-    );
-
-    expect(signedTxBytes).toBeTruthy();
-    if (signedTxBytes) {
-      let txRes = await msgClient?.broadcast(signedTxBytes);
-      console.log('txRes');
-      expect(txRes).toBeTruthy();
-      expect(txRes?.code).toBe(0);
-    }
+    await runAminoTest(msgClient, TEST_MSG_BUY);
   });
 });
+
+function makeEthTxHash(): string {
+  return '0x' + genRandomStr(64);
+}
+
+function makeEthContract(): string {
+  let key = crypto.randomBytes(32).toString('hex');
+  let id = '0x' + key;
+  var wallet = new ethers.Wallet(id);
+  return wallet.address;
+}
+
+function genRandomStr(length: Number): string {
+  var result = '';
+  var characters = 'abcdefghijklmnopqrstuvwxyz0123456789';
+  var charactersLength = characters.length;
+  for (var i = 0; i < length; i++) {
+    result += characters.charAt(Math.floor(Math.random() * charactersLength));
+  }
+  return result;
+}

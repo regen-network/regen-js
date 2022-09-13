@@ -8,7 +8,7 @@ const msgRetireAminoType = 'regen.core/MsgRetire';
 export const retireTypeUrl = '/' + MsgRetire.$type;
 
 interface AminoRetireCredits {
-  batch_denom: string;
+  batch_denom?: string;
   amount?: string;
   retirement_jurisdiction?: string;
 }
@@ -55,7 +55,7 @@ export function retireAminoConverter(): AminoConverter {
         credits: credits.map(credit => {
           return {
             $type: Credits.$type,
-            batchDenom: credit.batch_denom,
+            batchDenom: credit.batch_denom || '',
             amount: credit?.amount || '',
           };
         }),
