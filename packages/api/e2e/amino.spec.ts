@@ -79,19 +79,7 @@ describe('RegenApi with tendermint connection', () => {
         ],
       });
 
-      const signedTxBytes = await msgClient?.sign(
-        TEST_ADDRESS,
-        [TEST_MSG_SEND],
-        TEST_FEE,
-        TEST_MEMO,
-      );
-
-      expect(signedTxBytes).toBeTruthy();
-      if (signedTxBytes) {
-        txRes = await msgClient?.broadcast(signedTxBytes);
-        expect(txRes).toBeTruthy();
-        expect(txRes?.code).toBe(0);
-      }
+      runAminoTest(msgClient, TEST_MSG_SEND);
     });
     it('should sign and broadcast MsgCreateClass using legacy amino sign mode', async () => {
       const { msgClient } = await connect();
