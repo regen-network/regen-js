@@ -26,15 +26,21 @@ export interface QueryBasketResponse {
   $type: 'regen.ecocredit.basket.v1.QueryBasketResponse';
   /**
    * basket is the queried basket.
-   * Deprecated: This field is still populated and will be removed in the
-   * next version. Use basket_info instead.
+   *
+   * Deprecated (Since Revision 1): This field is still populated using Basket
+   * but will be updated to use BasketInfo in the next version. In the meantime
+   * basket_info is available using BasketInfo.
    *
    * @deprecated
    */
   basket?: Basket;
   /** classes are the credit classes that can be deposited in the basket. */
   classes: string[];
-  /** basket_info is the queried basket. */
+  /**
+   * basket_info is the queried basket.
+   *
+   * Since Revision 1
+   */
   basketInfo?: BasketInfo;
 }
 
@@ -50,15 +56,21 @@ export interface QueryBasketsResponse {
   $type: 'regen.ecocredit.basket.v1.QueryBasketsResponse';
   /**
    * baskets are the fetched baskets.
-   * Deprecated: This field is still populated and will be removed in the
-   * next version. Use baskets_info instead.
+   *
+   * Deprecated (Since Revision 1): This field is still populated using Basket
+   * but will be updated to use BasketInfo in the next version. In the meantime
+   * baskets_info is available using BasketInfo.
    *
    * @deprecated
    */
   baskets: Basket[];
   /** pagination defines the pagination in the response. */
   pagination?: PageResponse;
-  /** baskets_info are the fetched baskets. */
+  /**
+   * baskets_info are the fetched baskets.
+   *
+   * Since Revision 1
+   */
   basketsInfo: BasketInfo[];
 }
 
@@ -76,15 +88,21 @@ export interface QueryBasketBalancesResponse {
   $type: 'regen.ecocredit.basket.v1.QueryBasketBalancesResponse';
   /**
    * balances is a list of credit balances in the basket.
-   * Deprecated: This field is still populated and will be removed in the
-   * next version. Use balances_info instead.
+   *
+   * Deprecated (Since Revision 1): This field is still populated using
+   * BasketBalance but will be updated to use BasketBalanceInfo in the next
+   * version. In the meantime baskets_info is available using BasketBalanceInfo.
    *
    * @deprecated
    */
   balances: BasketBalance[];
   /** pagination defines the pagination in the response. */
   pagination?: PageResponse;
-  /** balances_info is a list of credit balances in the basket. */
+  /**
+   * balances_info is a list of credit balances in the basket.
+   *
+   * Since Revision 1
+   */
   balancesInfo: BasketBalanceInfo[];
 }
 

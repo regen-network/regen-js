@@ -23,9 +23,6 @@ export interface BasketCredit {
 /**
  * DateCriteria represents the information for credit acceptance in a basket.
  * At most, only one of the values should be set.
- * NOTE: gogo proto `oneof` is not compatible with Amino signing, hence we
- * directly define both `start_date_window` and `min_start_date`. In the future,
- * with pulsar, this should change and we should use `oneof`.
  */
 export interface DateCriteria {
   $type: 'regen.ecocredit.basket.v1.DateCriteria';
