@@ -11,7 +11,7 @@ import {
   MsgPut,
   MsgTake,
 } from '../src/generated/regen/ecocredit/basket/v1/tx';
-import { BasketCredit } from '../src/generated/regen/ecocredit/basket/v1/types';
+import { MessageClient } from '../src/tx/msg';
 
 const TEST_ADDRESS = 'regen1m0qh5y4ejkz3l5n6jlrntxcqx9r0x9xjv4vpcp';
 const REDWOOD_NODE_TM_URL = 'http://redwood.regen.network:26657/';
@@ -45,11 +45,29 @@ const connect = async (): Promise<RegenApi> => {
   });
 };
 
+const runAminoTest = async (msgClient: MessageClient | undefined, testMsg: any) => {
+  let txRes: DeliverTxResponse | undefined;
+  const signedTxBytes = await msgClient?.sign(
+    TEST_ADDRESS,
+    [testMsg],
+    TEST_FEE,
+    TEST_MEMO,
+  );
+
+  expect(signedTxBytes).toBeTruthy();
+  if (signedTxBytes) {
+    txRes = await msgClient?.broadcast(signedTxBytes);
+    expect(txRes).toBeTruthy();
+    expect(txRes?.code).toBe(0);
+  }
+}
+
 describe('RegenApi with tendermint connection', () => {
   xdescribe('Signing and broadcasting Ecocredit txs', () => {
     it('should sign and broadcast MsgSend using legacy amino sign mode', async () => {
       let txRes: DeliverTxResponse | undefined;
       const { msgClient } = await connect();
+
       const TEST_MSG_SEND = MsgSend.fromPartial({
         sender: TEST_ADDRESS,
         recipient: TEST_ADDRESS,
@@ -61,23 +79,11 @@ describe('RegenApi with tendermint connection', () => {
         ],
       });
 
-      const signedTxBytes = await msgClient?.sign(
-        TEST_ADDRESS,
-        [TEST_MSG_SEND],
-        TEST_FEE,
-        TEST_MEMO,
-      );
-
-      expect(signedTxBytes).toBeTruthy();
-      if (signedTxBytes) {
-        txRes = await msgClient?.broadcast(signedTxBytes);
-        expect(txRes).toBeTruthy();
-        expect(txRes?.code).toBe(0);
-      }
+      runAminoTest(msgClient, TEST_MSG_SEND);
     });
     it('should sign and broadcast MsgCreateClass using legacy amino sign mode', async () => {
-      let txRes: DeliverTxResponse | undefined;
       const { msgClient } = await connect();
+
       const TEST_MSG_CREATE_CLASS = MsgCreateClass.fromPartial({
         admin: TEST_ADDRESS,
         issuers: [TEST_ADDRESS],
@@ -89,27 +95,15 @@ describe('RegenApi with tendermint connection', () => {
         },
       });
 
-      const signedTxBytes = await msgClient?.sign(
-        TEST_ADDRESS,
-        [TEST_MSG_CREATE_CLASS],
-        TEST_FEE,
-        TEST_MEMO,
-      );
-
-      expect(signedTxBytes).toBeTruthy();
-      if (signedTxBytes) {
-        txRes = await msgClient?.broadcast(signedTxBytes);
-        expect(txRes).toBeTruthy();
-        expect(txRes?.code).toBe(0);
-      }
+      runAminoTest(msgClient, TEST_MSG_CREATE_CLASS);
     });
   });
   describe('Signing and broadcasting Basket txs using legacy amino sign mode', () => {
-    it('should sign and broadcast MsgCreate', async () => {
-      let txRes: DeliverTxResponse | undefined;
+    xit('should sign and broadcast MsgCreate', async () => {
       const { msgClient } = await connect();
+
       const basketName = 'TEST' + (Date.now() % 1000);
-      const TEST_MSG_CREATE = MsgCreate.fromPartial({
+      const TEST_BASKET_MSG_CREATE = MsgCreate.fromPartial({
         curator: TEST_ADDRESS,
         name: basketName,
         description: 'test description',
@@ -126,47 +120,23 @@ describe('RegenApi with tendermint connection', () => {
         ],
       });
 
-      const signedTxBytes = await msgClient?.sign(
-        TEST_ADDRESS,
-        [TEST_MSG_CREATE],
-        TEST_FEE,
-        TEST_MEMO,
-      );
+      runAminoTest(msgClient, TEST_BASKET_MSG_CREATE);
 
-      expect(signedTxBytes).toBeTruthy();
-      if (signedTxBytes) {
-        txRes = await msgClient?.broadcast(signedTxBytes);
-        expect(txRes).toBeTruthy();
-        expect(txRes?.code).toBe(0);
-      }
     });
-    it('should sign and broadcast MsgPut', async () => {
-      let txRes: DeliverTxResponse | undefined;
+    xit('should sign and broadcast MsgPut', async () => {
       const { msgClient } = await connect();
-      const TEST_MSG_PUT = MsgPut.fromPartial({
+
+      const TEST_BASKET_MSG_PUT = MsgPut.fromPartial({
         owner: TEST_ADDRESS,
         basketDenom: 'eco.uC.NCT',
         credits: [{ batchDenom: TEST_BATCH_DENOM, amount: '1' }],
       });
 
-      const signedTxBytes = await msgClient?.sign(
-        TEST_ADDRESS,
-        [TEST_MSG_PUT],
-        TEST_FEE,
-        TEST_MEMO,
-      );
-
-      expect(signedTxBytes).toBeTruthy();
-      if (signedTxBytes) {
-        txRes = await msgClient?.broadcast(signedTxBytes);
-        expect(txRes).toBeTruthy();
-        expect(txRes?.code).toBe(0);
-      }
+      runAminoTest(msgClient, TEST_BASKET_MSG_PUT);
     });
     it('should sign and broadcast MsgTake', async () => {
-      let txRes: DeliverTxResponse | undefined;
       const { msgClient } = await connect();
-      const TEST_MSG_TAKE = MsgTake.fromPartial({
+      const TEST_BASKET_MSG_TAKE = MsgTake.fromPartial({
         owner: TEST_ADDRESS,
         basketDenom: 'eco.uC.NCT',
         amount: '1000000',
@@ -174,20 +144,7 @@ describe('RegenApi with tendermint connection', () => {
         retireOnTake: true,
       });
 
-      const signedTxBytes = await msgClient?.sign(
-        TEST_ADDRESS,
-        [TEST_MSG_TAKE],
-        TEST_FEE,
-        TEST_MEMO,
-      );
-
-      expect(signedTxBytes).toBeTruthy();
-      if (signedTxBytes) {
-        txRes = await msgClient?.broadcast(signedTxBytes);
-        console.log('txRes', txRes);
-        expect(txRes).toBeTruthy();
-        expect(txRes?.code).toBe(0);
-      }
+      runAminoTest(msgClient, TEST_BASKET_MSG_TAKE);
     });
   });
 });
