@@ -148,7 +148,7 @@ describe('RegenApi with tendermint connection', () => {
     });
     it('should sign and broadcast MsgTake', async () => {
       const { msgClient } = await connect();
-      const TEST_MSG_TAKE = MsgTake.fromPartial({
+      const TEST_BASKET_MSG_TAKE = MsgTake.fromPartial({
         owner: TEST_ADDRESS,
         basketDenom: 'eco.uC.NCT',
         amount: '1000000',
@@ -156,20 +156,7 @@ describe('RegenApi with tendermint connection', () => {
         retireOnTake: true,
       });
 
-      const signedTxBytes = await msgClient?.sign(
-        TEST_ADDRESS,
-        [TEST_MSG_TAKE],
-        TEST_FEE,
-        TEST_MEMO,
-      );
-
-      expect(signedTxBytes).toBeTruthy();
-      if (signedTxBytes) {
-        txRes = await msgClient?.broadcast(signedTxBytes);
-        console.log('txRes', txRes);
-        expect(txRes).toBeTruthy();
-        expect(txRes?.code).toBe(0);
-      }
+      runAminoTest(msgClient, TEST_BASKET_MSG_TAKE);
     });
   });
 });
