@@ -17,6 +17,7 @@ import {
   MsgCancelSellOrder,
 } from '../src/generated/regen/ecocredit/marketplace/v1/tx';
 import Long from 'long';
+import { MessageClient } from '../src/tx/msg';
 
 const TEST_ADDRESS = 'regen1m0qh5y4ejkz3l5n6jlrntxcqx9r0x9xjv4vpcp';
 const TEST_BUYER_ADDRESS = 'regen13hu59094gzfcpxl58fcz294p5g5956utwlpqll';
@@ -32,7 +33,6 @@ const TEST_FEE: StdFee = {
 };
 const TEST_MEMO = `regen-js v${process.env.npm_package_version} tests`;
 const TEST_BATCH_DENOM = 'C01-001-20170606-20210601-007';
-let testSellOrderId = 50;
 
 const connect = async (): Promise<RegenApi> => {
   const mnemonic =
@@ -52,11 +52,32 @@ const connect = async (): Promise<RegenApi> => {
   });
 };
 
+const runAminoTest = async (
+  msgClient: MessageClient | undefined,
+  testMsg: any,
+): Promise<void> => {
+  let txRes: DeliverTxResponse | undefined;
+  const signedTxBytes = await msgClient?.sign(
+    TEST_ADDRESS,
+    [testMsg],
+    TEST_FEE,
+    TEST_MEMO,
+  );
+
+  expect(signedTxBytes).toBeTruthy();
+  if (signedTxBytes) {
+    txRes = await msgClient?.broadcast(signedTxBytes);
+    console.log('txRes');
+    expect(txRes).toBeTruthy();
+    expect(txRes?.code).toBe(0);
+  }
+};
+
 describe('RegenApi with tendermint connection', () => {
   xdescribe('Signing and broadcasting Ecocredit txs using legacy amino sign mode', () => {
     it('should sign and broadcast MsgSend', async () => {
-      let txRes: DeliverTxResponse | undefined;
       const { msgClient } = await connect();
+
       const TEST_MSG_SEND = MsgSend.fromPartial({
         sender: TEST_ADDRESS,
         recipient: TEST_ADDRESS,
@@ -68,23 +89,11 @@ describe('RegenApi with tendermint connection', () => {
         ],
       });
 
-      const signedTxBytes = await msgClient?.sign(
-        TEST_ADDRESS,
-        [TEST_MSG_SEND],
-        TEST_FEE,
-        TEST_MEMO,
-      );
-
-      expect(signedTxBytes).toBeTruthy();
-      if (signedTxBytes) {
-        txRes = await msgClient?.broadcast(signedTxBytes);
-        expect(txRes).toBeTruthy();
-        expect(txRes?.code).toBe(0);
-      }
+      runAminoTest(msgClient, TEST_MSG_SEND);
     });
-    it('should sign and broadcast MsgCreateClass', async () => {
-      let txRes: DeliverTxResponse | undefined;
+    xit('should sign and broadcast MsgCreateClass', async () => {
       const { msgClient } = await connect();
+
       const TEST_MSG_CREATE_CLASS = MsgCreateClass.fromPartial({
         admin: TEST_ADDRESS,
         issuers: [TEST_ADDRESS],
@@ -96,27 +105,15 @@ describe('RegenApi with tendermint connection', () => {
         },
       });
 
-      const signedTxBytes = await msgClient?.sign(
-        TEST_ADDRESS,
-        [TEST_MSG_CREATE_CLASS],
-        TEST_FEE,
-        TEST_MEMO,
-      );
-
-      expect(signedTxBytes).toBeTruthy();
-      if (signedTxBytes) {
-        txRes = await msgClient?.broadcast(signedTxBytes);
-        expect(txRes).toBeTruthy();
-        expect(txRes?.code).toBe(0);
-      }
+      runAminoTest(msgClient, TEST_MSG_CREATE_CLASS);
     });
   });
-  xdescribe('Signing and broadcasting Basket txs using legacy amino sign mode', () => {
-    it('should sign and broadcast MsgCreate', async () => {
-      let txRes: DeliverTxResponse | undefined;
+  describe('Signing and broadcasting Basket txs using legacy amino sign mode', () => {
+    xit('should sign and broadcast MsgCreate', async () => {
       const { msgClient } = await connect();
+
       const basketName = 'TEST' + (Date.now() % 1000);
-      const TEST_MSG_CREATE = MsgCreate.fromPartial({
+      const TEST_BASKET_MSG_CREATE = MsgCreate.fromPartial({
         curator: TEST_ADDRESS,
         name: basketName,
         description: 'test description',
@@ -133,47 +130,22 @@ describe('RegenApi with tendermint connection', () => {
         ],
       });
 
-      const signedTxBytes = await msgClient?.sign(
-        TEST_ADDRESS,
-        [TEST_MSG_CREATE],
-        TEST_FEE,
-        TEST_MEMO,
-      );
-
-      expect(signedTxBytes).toBeTruthy();
-      if (signedTxBytes) {
-        txRes = await msgClient?.broadcast(signedTxBytes);
-        expect(txRes).toBeTruthy();
-        expect(txRes?.code).toBe(0);
-      }
+      runAminoTest(msgClient, TEST_BASKET_MSG_CREATE);
     });
-    it('should sign and broadcast MsgPut', async () => {
-      let txRes: DeliverTxResponse | undefined;
+    xit('should sign and broadcast MsgPut', async () => {
       const { msgClient } = await connect();
-      const TEST_MSG_PUT = MsgPut.fromPartial({
+
+      const TEST_BASKET_MSG_PUT = MsgPut.fromPartial({
         owner: TEST_ADDRESS,
         basketDenom: 'eco.uC.NCT',
         credits: [{ batchDenom: TEST_BATCH_DENOM, amount: '1' }],
       });
 
-      const signedTxBytes = await msgClient?.sign(
-        TEST_ADDRESS,
-        [TEST_MSG_PUT],
-        TEST_FEE,
-        TEST_MEMO,
-      );
-
-      expect(signedTxBytes).toBeTruthy();
-      if (signedTxBytes) {
-        txRes = await msgClient?.broadcast(signedTxBytes);
-        expect(txRes).toBeTruthy();
-        expect(txRes?.code).toBe(0);
-      }
+      runAminoTest(msgClient, TEST_BASKET_MSG_PUT);
     });
-    it('should sign and broadcast MsgTake', async () => {
-      let txRes: DeliverTxResponse | undefined;
+    xit('should sign and broadcast MsgTake', async () => {
       const { msgClient } = await connect();
-      const TEST_MSG_TAKE = MsgTake.fromPartial({
+      const TEST_BASKET_MSG_TAKE = MsgTake.fromPartial({
         owner: TEST_ADDRESS,
         basketDenom: 'eco.uC.NCT',
         amount: '1000000',
@@ -181,26 +153,12 @@ describe('RegenApi with tendermint connection', () => {
         retireOnTake: true,
       });
 
-      const signedTxBytes = await msgClient?.sign(
-        TEST_ADDRESS,
-        [TEST_MSG_TAKE],
-        TEST_FEE,
-        TEST_MEMO,
-      );
-
-      expect(signedTxBytes).toBeTruthy();
-      if (signedTxBytes) {
-        txRes = await msgClient?.broadcast(signedTxBytes);
-        console.log('txRes', txRes);
-        expect(txRes).toBeTruthy();
-        expect(txRes?.code).toBe(0);
-      }
+      runAminoTest(msgClient, TEST_BASKET_MSG_TAKE);
     });
   });
 });
 describe('Signing and broadcasting Marketplace txs using legacy amino sign mode', () => {
   xit('should sign and broadcast MsgSell', async () => {
-    let txRes: DeliverTxResponse | undefined;
     const { msgClient } = await connect();
     const sellOrder = {
       batchDenom: TEST_BATCH_DENOM,
@@ -217,64 +175,31 @@ describe('Signing and broadcasting Marketplace txs using legacy amino sign mode'
       orders: [sellOrder],
     });
 
-    const signedTxBytes = await msgClient?.sign(
-      TEST_ADDRESS,
-      [TEST_MSG_SELL],
-      TEST_FEE,
-      TEST_MEMO,
-    );
-
-    expect(signedTxBytes).toBeTruthy();
-    if (signedTxBytes) {
-      txRes = await msgClient?.broadcast(signedTxBytes);
-      console.log('txRes', txRes); // You will need to read this to get a sell order ID for the MsgCancelSellOrder test
-      expect(txRes).toBeTruthy();
-      expect(txRes?.code).toBe(0);
-    }
+    runAminoTest(msgClient, TEST_MSG_SELL);
   });
   xit('should sign and broadcast MsgCancelSellOrder', async () => {
-    // If sell order 50 doesn't work, run the MsgSell test to get a new sellOrderId to cancel
-    let txRes: DeliverTxResponse | undefined;
+    // This test passes, but it needs a real sellOrderId generated by the same address.
+    // If sell order 50 doesn't work, run the MsgSell test to get a new sellOrderId to cancel.
     const { msgClient } = await connect();
-    console.log('testSellOrderId', testSellOrderId);
 
     const TEST_MSG_CANCEL = MsgCancelSellOrder.fromPartial({
       seller: TEST_ADDRESS,
       sellOrderId: Long.fromValue(52), // If this id doesn't work, run the MsgSell test to get a new sellOrderId to cancel
     });
 
-    const signedTxBytes = await msgClient?.sign(
-      TEST_ADDRESS,
-      [TEST_MSG_CANCEL],
-      TEST_FEE,
-      TEST_MEMO,
-    );
-
-    expect(signedTxBytes).toBeTruthy();
-    if (signedTxBytes) {
-      txRes = await msgClient?.broadcast(signedTxBytes);
-      expect(txRes).toBeTruthy();
-      expect(txRes?.code).toBe(0);
-    }
+    runAminoTest(msgClient, TEST_MSG_CANCEL);
   });
   it('should sign and broadcast MsgBuyDirect', async () => {
-    let txRes: DeliverTxResponse | undefined;
     const connectBuyer = async (): Promise<RegenApi> => {
       // regen13hu59094gzfcpxl58fcz294p5g5956utwlpqll
       const mnemonic =
         'seminar throw sorry nerve outer lottery stuff blush couple medal wire pink';
 
-      // regen18f3qh9few8gr5zhf9v4vz93963ur4tsz6zhd4m
-      // const mnemonic =
-      //   'stomach drum drill thrive family outer urge whisper error picture view maximum';
-
       // const newAccount = await Secp256k1HdWallet.generate(12, {
       //   prefix: 'regen',
       // });
       // const accounts = await newAccount.getAccounts();
-
       // console.log('accounts', accounts);
-
       // console.log('newAccount', newAccount);
 
       const buyerSigner = await Secp256k1HdWallet.fromMnemonic(mnemonic, {
@@ -289,7 +214,7 @@ describe('Signing and broadcasting Marketplace txs using legacy amino sign mode'
         },
       });
     };
-    const api = await connectBuyer(); // TODO - Error: Failed to retrieve account from signer
+    const { msgClient } = await connectBuyer(); // TODO - Error: Failed to retrieve account from signer
 
     const TEST_MSG_BUY = MsgBuyDirect.fromPartial({
       buyer: TEST_BUYER_ADDRESS,
@@ -304,7 +229,7 @@ describe('Signing and broadcasting Marketplace txs using legacy amino sign mode'
       ],
     });
 
-    const signedTxBytes = await api?.msgClient?.sign(
+    const signedTxBytes = await msgClient?.sign(
       TEST_ADDRESS,
       [TEST_MSG_BUY],
       TEST_FEE,
@@ -313,8 +238,8 @@ describe('Signing and broadcasting Marketplace txs using legacy amino sign mode'
 
     expect(signedTxBytes).toBeTruthy();
     if (signedTxBytes) {
-      txRes = await api?.msgClient?.broadcast(signedTxBytes);
-      console.log('txRes', txRes);
+      let txRes = await msgClient?.broadcast(signedTxBytes);
+      console.log('txRes');
       expect(txRes).toBeTruthy();
       expect(txRes?.code).toBe(0);
     }
