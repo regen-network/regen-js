@@ -19,8 +19,8 @@ export function omitDefault<
     return input.isZero() ? undefined : input;
   }
 
-  if (!input) {
-    return undefined;
+  if (typeof input === 'boolean') {
+    return input ? input : undefined;
   }
 
   throw new Error(`Got unsupported type '${typeof input}'`);
