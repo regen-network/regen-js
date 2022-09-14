@@ -1,5 +1,6 @@
 import { AminoMsg } from '@cosmjs/amino';
 import { AminoConverter } from '@cosmjs/stargate';
+import { longify } from '@cosmjs/stargate/build/queryclient';
 import { MsgCancelSellOrder } from '../../../../../generated/regen/ecocredit/marketplace/v1/tx';
 
 const msgCancelSellOrderAminoType = 'regen.marketplace/MsgCancelSellOrder';
@@ -10,7 +11,7 @@ export interface AminoMsgCancelSellOrder extends AminoMsg {
   readonly type: typeof msgCancelSellOrderAminoType;
   readonly value: {
     readonly seller: string;
-    readonly sell_order_id: Long;
+    readonly sell_order_id: string;
   };
 }
 
@@ -29,7 +30,7 @@ export function cancelSellOrderConverter(): AminoConverter {
     }: MsgCancelSellOrder): AminoMsgCancelSellOrder['value'] => {
       return {
         seller,
-        sell_order_id: sellOrderId,
+        sell_order_id: sellOrderId.toString(),
       };
     },
     fromAmino: ({
@@ -38,7 +39,7 @@ export function cancelSellOrderConverter(): AminoConverter {
     }: AminoMsgCancelSellOrder['value']): Partial<MsgCancelSellOrder> => {
       return {
         seller,
-        sellOrderId: sell_order_id,
+        sellOrderId: longify(sell_order_id || 0),
       };
     },
   };

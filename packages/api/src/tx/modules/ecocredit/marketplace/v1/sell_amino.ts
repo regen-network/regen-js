@@ -1,9 +1,10 @@
-import { AminoMsg, Coin as AminoCoin } from '@cosmjs/amino';
+import { AminoMsg } from '@cosmjs/amino';
 import { AminoConverter } from '@cosmjs/stargate';
 import {
   MsgSell,
   MsgSell_Order,
 } from '../../../../../generated/regen/ecocredit/marketplace/v1/tx';
+import { AminoDate } from '../../converter-utils';
 
 const msgSellAminoType = 'regen.marketplace/MsgSell';
 
@@ -13,8 +14,13 @@ interface AminoSell_Order {
   batch_denom: string;
   quantity: string;
   ask_price?: AminoCoin;
-  disable_auto_retire: boolean;
-  expiration?: Date;
+  disable_auto_retire?: boolean;
+  expiration?: string;
+}
+
+export interface AminoCoin {
+  amount?: string;
+  denom?: string;
 }
 
 export interface AminoMsgSell extends AminoMsg {
@@ -39,9 +45,12 @@ export function sellConverter(): AminoConverter {
           return {
             batch_denom: o.batchDenom,
             quantity: o.quantity,
-            ask_price: o.askPrice,
-            disable_auto_retire: o.disableAutoRetire,
-            expiration: o.expiration,
+            ask_price: {
+              amount: o.askPrice?.amount || undefined,
+              denom: o.askPrice?.denom || undefined,
+            },
+            disable_auto_retire: o?.disableAutoRetire || undefined,
+            expiration: AminoDate(o.expiration) || undefined,
           };
         }),
       };
@@ -59,11 +68,11 @@ export function sellConverter(): AminoConverter {
             quantity: o.quantity,
             askPrice: o.ask_price && {
               $type: 'cosmos.base.v1beta1.Coin',
-              amount: o.ask_price.amount,
-              denom: o.ask_price.denom,
+              amount: o.ask_price.amount || '0',
+              denom: o.ask_price.denom || '',
             },
-            disableAutoRetire: o.disable_auto_retire,
-            expiration: o.expiration,
+            disableAutoRetire: Boolean(o.disable_auto_retire),
+            expiration: o.expiration ? new Date(o.expiration) : undefined,
           };
         }),
       };

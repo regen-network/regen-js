@@ -1,12 +1,15 @@
 import { AminoMsg } from '@cosmjs/amino';
 import { AminoConverter } from '@cosmjs/stargate';
 import { MsgCreateBatch } from '../../../../generated/regen/ecocredit/v1/tx';
-import { BatchIssuance, OriginTx } from '../../../../generated/regen/ecocredit/v1/types';
+import {
+  BatchIssuance,
+  OriginTx,
+} from '../../../../generated/regen/ecocredit/v1/types';
 import { AminoDate } from '../converter-utils';
 
 const msgCreateBatchAminoType = 'regen.core/MsgCreateBatch';
 
-export const createBatchTypeUrl = '/' + MsgCreateBatch.$type
+export const createBatchTypeUrl = '/' + MsgCreateBatch.$type;
 
 export interface AminoBatchIssuance {
   recipient?: string;
@@ -64,18 +67,21 @@ export function createBatchConverter(): AminoConverter {
             tradable_amount: i.tradableAmount || undefined,
             retired_amount: i.retiredAmount || undefined,
             retirement_jurisdiction: i.retirementJurisdiction || undefined,
-          }
+          };
         }),
         metadata,
         start_date: AminoDate(startDate) || undefined,
         end_date: AminoDate(endDate) || undefined,
         open: open || undefined,
-        origin_tx: originTx === undefined ? undefined :  {
-          id: originTx?.id || undefined,
-          source: originTx?.source || undefined,
-          contract: originTx?.contract || undefined,
-          note: originTx?.note || undefined,
-        },
+        origin_tx:
+          originTx === undefined
+            ? undefined
+            : {
+                id: originTx?.id || undefined,
+                source: originTx?.source || undefined,
+                contract: originTx?.contract || undefined,
+                note: originTx?.note || undefined,
+              },
       };
     },
     fromAmino: ({
@@ -88,8 +94,10 @@ export function createBatchConverter(): AminoConverter {
       open,
       origin_tx,
     }: AminoMsgCreateBatch['value']): Partial<MsgCreateBatch> => {
-      const start: Date | undefined = start_date === undefined ? undefined : new Date(start_date);
-      const end: Date | undefined  = end_date === undefined ? undefined : new Date(end_date);
+      const start: Date | undefined =
+        start_date === undefined ? undefined : new Date(start_date);
+      const end: Date | undefined =
+        end_date === undefined ? undefined : new Date(end_date);
       return {
         issuer,
         projectId: project_id,
@@ -100,19 +108,22 @@ export function createBatchConverter(): AminoConverter {
             tradableAmount: i.tradable_amount || '',
             retiredAmount: i.retired_amount || '',
             retirementJurisdiction: i.retirement_jurisdiction || '',
-          }
+          };
         }),
         metadata,
         startDate: start,
         endDate: end,
         open,
-        originTx: origin_tx === undefined ? undefined : {
-          $type: OriginTx.$type,
-          id: origin_tx.id || '',
-          source: origin_tx.source || '',
-          contract: origin_tx.contract || '',
-          note: origin_tx.note || '',
-        },
+        originTx:
+          origin_tx === undefined
+            ? undefined
+            : {
+                $type: OriginTx.$type,
+                id: origin_tx.id || '',
+                source: origin_tx.source || '',
+                contract: origin_tx.contract || '',
+                note: origin_tx.note || '',
+              },
       };
     },
   };
