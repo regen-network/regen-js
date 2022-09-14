@@ -118,12 +118,12 @@ export function createBatchConverter(): AminoConverter {
           origin_tx === undefined
             ? undefined
             : {
-                $type: OriginTx.$type,
-                id: origin_tx.id || '',
-                source: origin_tx.source || '',
-                contract: origin_tx.contract || '',
-                note: origin_tx.note || '',
-              },
+              $type: OriginTx.$type,
+              id: origin_tx.id || '',
+              source: origin_tx.source || '',
+              contract: origin_tx.contract || '',
+              note: origin_tx.note || '',
+            },
       };
     },
   };
