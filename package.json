@@ -31,6 +31,5 @@
 	},
 	"resolutions": {
 		"@cosmjs/amino@0.28.13": "npm:@regen-network/cosmjs-amino@0.28.13-regen-4"
-	},
-	"packageManager": "yarn@3.2.3"
+	}
 }
