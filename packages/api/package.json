@@ -21,7 +21,10 @@
 	},
 	"devDependencies": {
 		"@regen-network/ts-proto": "1.105.2-1",
-		"ethers": "^5.7.0"
+		"ethers": "^5.7.0",
+		"jest": "26.6.0",
+		"rimraf": "^3.0.2",
+		"ts-jest": "^29.0.1"
 	},
 	"resolutions": {
 		"@cosmjs/amino@0.28.13": "npm:@regen-network/cosmjs-amino@0.28.13-regen-4"
