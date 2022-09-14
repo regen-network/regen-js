@@ -46,7 +46,7 @@ export function buyDirectConverter(): AminoConverter {
               denom: omitDefault(b.bidPrice?.denom),
               amount: omitDefault(b.bidPrice?.amount),
             },
-            disable_auto_retire: b.disableAutoRetire || undefined,
+            disable_auto_retire: omitDefault(b.disableAutoRetire),
             retirement_jurisdiction: omitDefault(b.retirementJurisdiction),
           };
         }),
