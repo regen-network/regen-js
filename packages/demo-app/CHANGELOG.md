@@ -29,6 +29,12 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 
 # [0.4.0-alpha1.0](https://github.com/regen-network/regen-js/compare/v0.3.0...v0.4.0-alpha1.0) (2022-09-13)
 
+
+
+
+
+# [0.3.1](https://github.com/regen-network/regen-js/compare/v0.3.0...v0.3.1) (2022-09-12)
+
 **Note:** Version bump only for package @regen-network/demo-app
 
 

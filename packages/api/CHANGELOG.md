@@ -29,7 +29,6 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 
 # [0.4.0-alpha1.0](https://github.com/regen-network/regen-js/compare/v0.3.0...v0.4.0-alpha1.0) (2022-09-13)
 
-
 ### Features
 
 * add transfer ibc proto ([#40](https://github.com/regen-network/regen-js/issues/40)) ([61c6cd2](https://github.com/regen-network/regen-js/commit/61c6cd2d4b3903da8bbb5d771dd815bdeb1c1000))
@@ -42,6 +41,11 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 
 
 
+
+
+# [0.3.1](https://github.com/regen-network/regen-js/compare/v0.3.0...v0.3.1) (2022-09-12)
+
+* Feat: add transfer ibc proto ([61c6cd2](https://github.com/regen-network/regen-js/commit/61c6cd2d4b3903da8bbb5d771dd815bdeb1c1000))
 
 
 # [0.3.0](https://github.com/regen-network/regen-js/compare/v0.2.2...v0.3.0) (2022-06-27)
