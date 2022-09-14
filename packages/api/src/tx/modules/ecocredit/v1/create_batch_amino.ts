@@ -31,7 +31,7 @@ export interface AminoMsgCreateBatch extends AminoMsg {
     readonly metadata: string;
     readonly start_date?: string;
     readonly end_date?: string;
-    readonly open: boolean;
+    readonly open?: boolean;
     readonly origin_tx?: AminoOriginTx;
   };
 }
@@ -69,8 +69,8 @@ export function createBatchConverter(): AminoConverter {
         metadata,
         start_date: AminoDate(startDate) || undefined,
         end_date: AminoDate(endDate) || undefined,
-        open,
-        origin_tx: {
+        open: open || undefined,
+        origin_tx: originTx === undefined ? undefined :  {
           id: originTx?.id || undefined,
           source: originTx?.source || undefined,
           contract: originTx?.contract || undefined,
@@ -106,7 +106,7 @@ export function createBatchConverter(): AminoConverter {
         startDate: start,
         endDate: end,
         open,
-        originTx: origin_tx && {
+        originTx: origin_tx === undefined ? undefined : {
           $type: OriginTx.$type,
           id: origin_tx.id || '',
           source: origin_tx.source || '',
