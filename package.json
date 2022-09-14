@@ -16,8 +16,7 @@
 		"lerna:deploy": "yarn build && lerna version --conventional-commits && lerna publish from-git",
 		"lint": "tsc --noEmit && eslint --ext js,ts,tsx .",
 		"start": "yarn workspace @regen-network/demo-app start",
-		"test": "lerna run test",
-		"postinstall": "patch-package"
+		"test": "lerna run test"
 	},
 	"devDependencies": {
 		"@types/jest": "27.0.3",
@@ -30,8 +29,7 @@
 		"ts-jest": "^26.4.4",
 		"typescript": "^4.0.5"
 	},
-	"dependencies": {
-		"patch-package": "^6.4.7",
-		"postinstall-postinstall": "^2.1.0"
+	"resolutions": {
+		"@cosmjs/amino@0.28.13": "npm:@regen-network/cosmjs-amino@0.28.13-regen-4"
 	}
 }

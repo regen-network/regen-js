@@ -3,6 +3,47 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.4.0-alpha1.3](https://github.com/regen-network/regen-js/compare/v0.4.0-alpha1.2...v0.4.0-alpha1.3) (2022-09-14)
+
+**Note:** Version bump only for package @regen-network/api
+
+
+
+
+
+# [0.4.0-alpha1.2](https://github.com/regen-network/regen-js/compare/v0.4.0-alpha1.1...v0.4.0-alpha1.2) (2022-09-14)
+
+**Note:** Version bump only for package @regen-network/api
+
+
+
+
+
+# [0.4.0-alpha1.1](https://github.com/regen-network/regen-js/compare/v0.4.0-alpha1.0...v0.4.0-alpha1.1) (2022-09-13)
+
+**Note:** Version bump only for package @regen-network/api
+
+
+
+
+
+# [0.4.0-alpha1.0](https://github.com/regen-network/regen-js/compare/v0.3.0...v0.4.0-alpha1.0) (2022-09-13)
+
+
+### Features
+
+* add transfer ibc proto ([#40](https://github.com/regen-network/regen-js/issues/40)) ([61c6cd2](https://github.com/regen-network/regen-js/commit/61c6cd2d4b3903da8bbb5d771dd815bdeb1c1000))
+* AminoMsgSend_SendCredits ([1c0c100](https://github.com/regen-network/regen-js/commit/1c0c100f580b306dd129b8c020535bae4de1bbd7))
+* customMessageTypeRegistry ([0851010](https://github.com/regen-network/regen-js/commit/085101084fce458c0ed41d6d780b164f3cd529cd))
+* customMessageTypeRegistry ([315e426](https://github.com/regen-network/regen-js/commit/315e426cbb9d754b30686675d75291b30df04108))
+* ecocredit amino converters ([80ada8f](https://github.com/regen-network/regen-js/commit/80ada8f735699fe377979d6a78f66982f9291272))
+* export all converters ([f0b8d60](https://github.com/regen-network/regen-js/commit/f0b8d608e6c6d62ebea94be27bc52eedf51c25ec))
+* if field is falsey, return undefined in toAmino, omit nested (s) ([2c8f270](https://github.com/regen-network/regen-js/commit/2c8f270a54ea171a28ae5d85b66372898d16ea3a))
+
+
+
+
+
 # [0.3.0](https://github.com/regen-network/regen-js/compare/v0.2.2...v0.3.0) (2022-06-27)
 
 
