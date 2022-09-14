@@ -73,7 +73,6 @@ const runAminoTest = async (
   expect(signedTxBytes).toBeTruthy();
   if (signedTxBytes) {
     txRes = await msgClient?.broadcast(signedTxBytes);
-    console.log('txRes');
     expect(txRes).toBeTruthy();
     expect(txRes?.code).toBe(0);
   }
@@ -253,10 +252,9 @@ describe('Signing and broadcasting Marketplace txs using legacy amino sign mode'
 
     await runAminoTest(msgClient, TEST_MSG_CANCEL);
   });
-  // Failing due to unsuccessful address generation?
   it('should sign and broadcast MsgBuyDirect', async () => {
     const connectBuyer = async (): Promise<RegenApi> => {
-      // regen13hu59094gzfcpxl58fcz294p5g5956utwlpqll
+      // TEST_BUYER_ADDRESS mnemonic
       const mnemonic =
         'seminar throw sorry nerve outer lottery stuff blush couple medal wire pink';
 
