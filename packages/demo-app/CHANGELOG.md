@@ -3,6 +3,14 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.4.0-alpha1.3](https://github.com/regen-network/regen-js/compare/v0.4.0-alpha1.2...v0.4.0-alpha1.3) (2022-09-14)
+
+**Note:** Version bump only for package @regen-network/demo-app
+
+
+
+
+
 # [0.4.0-alpha1.2](https://github.com/regen-network/regen-js/compare/v0.4.0-alpha1.1...v0.4.0-alpha1.2) (2022-09-14)
 
 **Note:** Version bump only for package @regen-network/demo-app

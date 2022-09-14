@@ -1,6 +1,6 @@
 {
 	"name": "@regen-network/api",
-	"version": "0.4.0-alpha1.2",
+	"version": "0.4.0-alpha1.3",
 	"author": "admin@regen.network",
 	"description": "A client library for the Regen Ledger",
 	"license": "Apache-2.0",
