@@ -56,6 +56,28 @@ import {
   updateProjectMetadataTypeUrl,
 } from './v1/update_project_metadata_amino';
 
+/**
+ * Note: 0.4.0-alpha1.3 supports amino signing for the following message types only.
+ * Although converters exist for other MsgTypes, thes are the only ones that have
+ * been adequately tested for this release:
+
+    Ecocredit module:
+      MsgSend
+      MsgCreateClass
+      MsgCreateProject
+      MsgCreateBatch
+      MsgRetire
+    Marketplace:
+      MsgBuyDirect
+      MsgCancelSellOrder
+      MsgSell
+    Basket:
+      MsgCreate
+      MsgPut
+      MsgTake
+ *
+ */
+
 export function createEcocreditAminoConverters(): AminoConverters {
   return {
     // core module
