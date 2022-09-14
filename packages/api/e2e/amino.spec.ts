@@ -1,6 +1,7 @@
 import { DeliverTxResponse } from '@cosmjs/stargate';
 import { RegenApi } from '../src/api';
 import {
+  MsgCancel,
   MsgCreateBatch,
   MsgCreateClass,
   MsgCreateProject,
@@ -108,6 +109,25 @@ describe('RegenApi with tendermint connection', () => {
 
       await runAminoTest(msgClient, TEST_MSG_SEND);
     });
+    it('should sign and broadcast MsgSend with retired and tradable credits using legacy amino sign mode', async () => {
+      let txRes: DeliverTxResponse | undefined;
+      const { msgClient } = await connect();
+
+      const TEST_MSG_SEND = MsgSend.fromPartial({
+        sender: TEST_ADDRESS,
+        recipient: TEST_ADDRESS,
+        credits: [
+          {
+            batchDenom: TEST_BATCH_DENOM,
+            tradableAmount: MIN_CREDIT_AMOUNT,
+            retiredAmount: MIN_CREDIT_AMOUNT,
+            retirementJurisdiction: 'US-WA',
+          },
+        ],
+      });
+
+      await runAminoTest(msgClient, TEST_MSG_SEND);
+    });
     it('should sign and broadcast MsgCreateClass using legacy amino sign mode', async () => {
       const { msgClient } = await connect();
 
@@ -132,6 +152,18 @@ describe('RegenApi with tendermint connection', () => {
         classId: TEST_CLASS_ID,
         jurisdiction: 'US-OR',
         referenceId: genRandomStr(10),
+      });
+
+      await runAminoTest(msgClient, TEST_MSG_CREATE_PROJECT);
+    });
+    it('should sign and broadcast MsgCreateProject with no reference id using legacy amino sign mode', async () => {
+      let txRes: DeliverTxResponse | undefined;
+      const { msgClient } = await connect();
+      const TEST_MSG_CREATE_PROJECT = MsgCreateProject.fromPartial({
+        admin: TEST_ADDRESS,
+        classId: TEST_CLASS_ID,
+        jurisdiction: 'US-OR',
+        metadata: "foo",
       });
 
       await runAminoTest(msgClient, TEST_MSG_CREATE_PROJECT);
@@ -168,6 +200,30 @@ describe('RegenApi with tendermint connection', () => {
 
       await runAminoTest(msgClient, TEST_MSG_CREATE_BATCH);
     });
+    it('should sign and broadcast MsgCreateBatch with default values using legacy amino sign mode', async () => {
+      let txRes: DeliverTxResponse | undefined;
+      const { msgClient } = await connect();
+
+      let startDate: Date = new Date("2019-01-16");
+      let endDate: Date = new Date("2020-01-16");
+
+      const TEST_MSG_CREATE_BATCH = MsgCreateBatch.fromPartial({
+        issuer: TEST_ADDRESS,
+        projectId: "C22-001",
+        issuance: [
+          {
+            recipient: TEST_ADDRESS,
+            tradableAmount: "1.503",
+          },
+        ],
+        startDate: startDate,
+        endDate: endDate,
+        metadata: "foobar",
+        open: false,
+      });
+
+      await runAminoTest(msgClient, TEST_MSG_CREATE_BATCH);
+    });
     it('should sign and broadcast MsgRetire using legacy amino sign mode', async () => {
       let txRes: DeliverTxResponse | undefined;
       const { msgClient } = await connect();
@@ -184,6 +240,23 @@ describe('RegenApi with tendermint connection', () => {
       });
 
       await runAminoTest(msgClient, TEST_MSG_RETIRE);
+    });
+    it('should sign and broadcast MsgCancel using legacy amino sign mode', async () => {
+      let txRes: DeliverTxResponse | undefined;
+      const { msgClient } = await connect();
+
+      const TEST_MSG_CANCEL = MsgCancel.fromPartial({
+        owner: TEST_ADDRESS,
+        credits: [
+          {
+            batchDenom: TEST_BATCH_DENOM,
+            amount: MIN_CREDIT_AMOUNT,
+          }
+        ],
+        reason: "nope",
+      });
+
+      await runAminoTest(msgClient, TEST_MSG_CANCEL);
     });
   });
   describe('Signing and broadcasting Basket txs using legacy amino sign mode', () => {

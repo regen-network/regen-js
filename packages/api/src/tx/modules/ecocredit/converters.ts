@@ -59,11 +59,11 @@ import {
 export function createEcocreditAminoConverters(): AminoConverters {
   return {
     // core module
+    [cancelTypeUrl]: cancelConverter(),
     [createBatchTypeUrl]: createBatchConverter(),
     [createClassTypeUrl]: createClassConverter(),
     [createProjectTypeUrl]: createProjectConverter(),
     [mintBatchCreditsTypeUrl]: mintBatchCreditsConverter(),
-    [cancelTypeUrl]: cancelConverter(),
     [retireTypeUrl]: retireAminoConverter(),
     [sealBatchTypeUrl]: sealBatchConverter(),
     [sendTypeUrl]: ecocreditSendConverter(),
@@ -80,7 +80,6 @@ export function createEcocreditAminoConverters(): AminoConverters {
 
     // // marketplace module
     [buyDirectTypeUrl]: buyDirectConverter(),
-    [cancelTypeUrl]: cancelConverter(),
     [cancelSellOrderTypeUrl]: cancelSellOrderConverter(),
     [sellTypeUrl]: sellConverter(),
     [updateSellOrdersTypeUrl]: updateSellOrderConverter(),
