@@ -24,7 +24,7 @@
 		"ethers": "^5.7.0",
 		"jest": "26.6.0",
 		"rimraf": "^3.0.2",
-		"ts-jest": "^29.0.1"
+		"ts-jest": "^26.4.4"
 	},
 	"resolutions": {
 		"@cosmjs/amino@0.28.13": "npm:@regen-network/cosmjs-amino@0.28.13-regen-4"
