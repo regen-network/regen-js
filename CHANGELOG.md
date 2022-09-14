@@ -3,6 +3,28 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+### Features
+
+This version adds support for amino signing for the following message types only:
+
+**Ecocredit module**
+- MsgSend
+- MsgCreateClass
+- MsgCreateProject
+- MsgCreateBatch
+- MsgRetire
+
+**Marketplace**
+- MsgBuyDirect
+- MsgCancelSellOrder
+- MsgSell
+
+**Basket**
+- MsgCreate
+- MsgPut
+- MsgTake
+
+
 # [0.4.0-alpha1.3](https://github.com/regen-network/regen-js/compare/v0.4.0-alpha1.2...v0.4.0-alpha1.3) (2022-09-14)
 
 **Note:** Version bump only for package regen-js
