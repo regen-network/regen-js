@@ -3867,7 +3867,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@regen-network/api@^0.4.0-alpha1.0, @regen-network/api@workspace:packages/api":
+"@regen-network/api@^0.4.0-alpha1.1, @regen-network/api@workspace:packages/api":
   version: 0.0.0-use.local
   resolution: "@regen-network/api@workspace:packages/api"
   dependencies:
@@ -3883,7 +3883,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@regen-network/demo-app@workspace:packages/demo-app"
   dependencies:
-    "@regen-network/api": ^0.4.0-alpha1.0
+    "@regen-network/api": ^0.4.0-alpha1.1
     "@testing-library/jest-dom": ^5.11.8
     "@testing-library/react": ^11.2.2
     "@testing-library/user-event": ^12.6.0
