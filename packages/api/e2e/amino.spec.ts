@@ -32,6 +32,7 @@ const TEST_FEE: StdFee = {
 const TEST_MEMO = `regen-js v${process.env.npm_package_version} tests`;
 const TEST_BATCH_DENOM = 'C01-001-20170606-20210601-007';
 const TEST_CLASS_ID = 'C22';
+const MIN_CREDIT_AMOUNT = '0.000001';
 
 const connect = async (): Promise<RegenApi> => {
   const mnemonic =
@@ -72,7 +73,7 @@ describe('RegenApi with tendermint connection', () => {
 
   // CORE MESSAGES
   describe('Signing and broadcasting Ecocredit txs', () => {
-    it('should sign and broadcast MsgSend using legacy amino sign mode', async () => {
+    it('should sign and broadcast MsgSend with tradable credits using legacy amino sign mode', async () => {
       let txRes: DeliverTxResponse | undefined;
       const { msgClient } = await connect();
 
@@ -82,7 +83,25 @@ describe('RegenApi with tendermint connection', () => {
         credits: [
           {
             batchDenom: TEST_BATCH_DENOM,
-            tradableAmount: '0.01',
+            tradableAmount: MIN_CREDIT_AMOUNT,
+          },
+        ],
+      });
+
+      await runAminoTest(msgClient, TEST_MSG_SEND);
+    });
+    it('should sign and broadcast MsgSend with retired credits using legacy amino sign mode', async () => {
+      let txRes: DeliverTxResponse | undefined;
+      const { msgClient } = await connect();
+
+      const TEST_MSG_SEND = MsgSend.fromPartial({
+        sender: TEST_ADDRESS,
+        recipient: TEST_ADDRESS,
+        credits: [
+          {
+            batchDenom: TEST_BATCH_DENOM,
+            retiredAmount: MIN_CREDIT_AMOUNT,
+            retirementJurisdiction: 'US-WA',
           },
         ],
       });
@@ -112,6 +131,7 @@ describe('RegenApi with tendermint connection', () => {
         admin: TEST_ADDRESS,
         classId: TEST_CLASS_ID,
         jurisdiction: 'US-OR',
+        referenceId: genRandomStr(10),
       });
 
       await runAminoTest(msgClient, TEST_MSG_CREATE_PROJECT);
