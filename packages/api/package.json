@@ -24,6 +24,6 @@
 		"ethers": "^5.7.0"
 	},
 	"resolutions": {
-		"@cosmjs/amino@0.28.13": "patch:@cosmjs/amino@npm%3A0.28.13#./.yarn/patches/@cosmjs-amino-npm-0.28.13-69d9e45801.patch"
+		"@cosmjs/amino@0.28.13": "npm:@regen-network/cosmjs-amino@0.28.13-regen-4"
 	}
 }
