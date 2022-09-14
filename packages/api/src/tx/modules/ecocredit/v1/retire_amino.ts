@@ -2,22 +2,18 @@ import { AminoMsg } from '@cosmjs/amino';
 import { AminoConverter } from '@cosmjs/stargate';
 import { MsgRetire } from '../../../../generated/regen/ecocredit/v1/tx';
 import { Credits } from '../../../../generated/regen/ecocredit/v1/types';
+import { AminoCredits } from './msg_cancel';
 
 const msgRetireAminoType = 'regen.core/MsgRetire';
 
 export const retireTypeUrl = '/' + MsgRetire.$type;
 
-interface AminoRetireCredits {
-  batch_denom?: string;
-  amount?: string;
-  retirement_jurisdiction?: string;
-}
 
 export interface AminoMsgRetire extends AminoMsg {
   readonly type: typeof msgRetireAminoType;
   readonly value: {
     readonly owner: string;
-    readonly credits: AminoRetireCredits[];
+    readonly credits: AminoCredits[];
     readonly jurisdiction: string;
   };
 }

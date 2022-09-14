@@ -15,19 +15,19 @@ export interface AminoCredits {
 export interface AminoMsgCancel extends AminoMsg {
   readonly type: typeof msgCancelAminoType;
   readonly value: {
-    owner: string;
-    credits: AminoCredits[];
-    reason: string;
+    readonly owner: string;
+    readonly credits: AminoCredits[];
+    readonly reason: string;
   };
 }
 
-export function isAminoMsgSend(msg: AminoMsg): msg is AminoMsgCancel {
+export function isAminoMsgCancel(msg: AminoMsg): msg is AminoMsgCancel {
   return msg.type === msgCancelAminoType;
 }
 
 export function cancelConverter(): AminoConverter {
   return {
-    aminoType: '/regen.ecocredit.v1.MsgCancel',
+    aminoType: msgCancelAminoType,
     toAmino: ({
       owner,
       credits,
