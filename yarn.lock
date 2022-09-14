@@ -3864,6 +3864,7 @@ __metadata:
     "@cosmjs/tendermint-rpc": 0.28.13
     "@regen-network/ts-proto": 1.105.2-1
     ethers: ^5.7.0
+    rimraf: ^3.0.2
   languageName: unknown
   linkType: soft
 
