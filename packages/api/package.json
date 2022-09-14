@@ -10,9 +10,9 @@
 	},
 	"repository": "https://github.com/regen-network/regen-js",
 	"dependencies": {
-		"@cosmjs/proto-signing": "0.28.11",
-		"@cosmjs/stargate": "0.28.11",
-		"@cosmjs/tendermint-rpc": "0.28.11"
+		"@cosmjs/proto-signing": "0.28.13",
+		"@cosmjs/stargate": "0.28.13",
+		"@cosmjs/tendermint-rpc": "0.28.13"
 	},
 	"scripts": {
 		"build": "rimraf lib && tsc",
@@ -22,5 +22,8 @@
 	"devDependencies": {
 		"@regen-network/ts-proto": "1.105.2-1",
 		"ethers": "^5.7.0"
+	},
+	"resolutions": {
+		"@cosmjs/amino@0.28.13": "patch:@cosmjs/amino@npm%3A0.28.13#./.yarn/patches/@cosmjs-amino-npm-0.28.13-69d9e45801.patch"
 	}
 }

@@ -24,10 +24,13 @@ node_modules/
 .DS_Store
 
 # Yarn
-yarn-error.log
-.pnp/
-.pnp.js
-.yarn-integrity
+.yarn/*
+!.yarn/patches
+!.yarn/releases
+!.yarn/plugins
+!.yarn/sdks
+!.yarn/versions
+.pnp.*
 
 # Secrets
 .env.local
