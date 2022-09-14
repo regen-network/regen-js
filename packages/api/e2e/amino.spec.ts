@@ -85,7 +85,7 @@ const runAminoTest = async (
   }
 };
 
-describe('RegenApi with tendermint connection', () => {
+describe('RegenApi with tendermint connection - Amino Tests', () => {
   // CORE MESSAGES
   xdescribe('Signing and broadcasting Ecocredit txs', () => {
     it('should sign and broadcast MsgSend with tradable credits using legacy amino sign mode', async () => {
@@ -264,7 +264,7 @@ describe('RegenApi with tendermint connection', () => {
       await runAminoTest(msgClient, TEST_MSG_CANCEL);
     });
   });
-  describe('Signing and broadcasting Basket txs using legacy amino sign mode', () => {
+  xdescribe('Signing and broadcasting Basket txs using legacy amino sign mode', () => {
     xit('should sign and broadcast MsgCreate', async () => {
       const { msgClient } = await connect();
 
@@ -312,7 +312,7 @@ describe('RegenApi with tendermint connection', () => {
       await runAminoTest(msgClient, TEST_BASKET_MSG_TAKE);
     });
   });
-  describe('Signing and broadcasting Marketplace txs using legacy amino sign mode', () => {
+  xdescribe('Signing and broadcasting Marketplace txs using legacy amino sign mode', () => {
     it('should sign and broadcast MsgSell', async () => {
       const { msgClient } = await connect();
       const sellOrder = {
