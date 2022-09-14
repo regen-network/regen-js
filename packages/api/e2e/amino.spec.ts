@@ -81,7 +81,7 @@ const runAminoTest = async (
 
 describe('RegenApi with tendermint connection', () => {
   // CORE MESSAGES
-  describe('Signing and broadcasting Ecocredit txs using legacy amino sign mode', () => {
+  xdescribe('Signing and broadcasting Ecocredit txs using legacy amino sign mode', () => {
     it('should sign and broadcast MsgSend', async () => {
       const { msgClient } = await connect();
 
@@ -253,20 +253,12 @@ describe('Signing and broadcasting Marketplace txs using legacy amino sign mode'
 
     await runAminoTest(msgClient, TEST_MSG_CANCEL);
   });
-  // Failing due to unsuccessful address generation? 
-  xit('should sign and broadcast MsgBuyDirect', async () => {
+  // Failing due to unsuccessful address generation?
+  it('should sign and broadcast MsgBuyDirect', async () => {
     const connectBuyer = async (): Promise<RegenApi> => {
       // regen13hu59094gzfcpxl58fcz294p5g5956utwlpqll
       const mnemonic =
         'seminar throw sorry nerve outer lottery stuff blush couple medal wire pink';
-
-      // code for generating an address and capturing the mnemonic:
-      // const newAccount = await Secp256k1HdWallet.generate(12, {
-      //   prefix: 'regen',
-      // });
-      // const accounts = await newAccount.getAccounts();
-      // console.log('accounts', accounts);
-      // console.log('newAccount', newAccount);
 
       const buyerSigner = await Secp256k1HdWallet.fromMnemonic(mnemonic, {
         prefix: 'regen',
@@ -280,14 +272,14 @@ describe('Signing and broadcasting Marketplace txs using legacy amino sign mode'
         },
       });
     };
-    const { msgClient } = await connectBuyer(); // TODO - Error: Failed to retrieve account from signer
+    const { msgClient } = await connectBuyer();
 
     const TEST_MSG_BUY = MsgBuyDirect.fromPartial({
       buyer: TEST_BUYER_ADDRESS,
       orders: [
         {
-          sellOrderId: '53',
-          quantity: '1',
+          sellOrderId: '50',
+          quantity: '.01',
           bidPrice: { denom: 'uregen', amount: '1000000' },
           disableAutoRetire: false,
           retirementJurisdiction: 'US',
@@ -295,7 +287,20 @@ describe('Signing and broadcasting Marketplace txs using legacy amino sign mode'
       ],
     });
 
-    await runAminoTest(msgClient, TEST_MSG_BUY);
+    let txRes: DeliverTxResponse | undefined;
+    const signedTxBytes = await msgClient?.sign(
+      TEST_BUYER_ADDRESS,
+      [TEST_MSG_BUY],
+      TEST_FEE,
+      TEST_MEMO,
+    );
+
+    expect(signedTxBytes).toBeTruthy();
+    if (signedTxBytes) {
+      txRes = await msgClient?.broadcast(signedTxBytes);
+      expect(txRes).toBeTruthy();
+      expect(txRes?.code).toBe(0);
+    }
   });
 });
 
