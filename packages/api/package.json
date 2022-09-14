@@ -21,7 +21,6 @@
 	},
 	"devDependencies": {
 		"@regen-network/ts-proto": "1.105.2-1",
-		"eslint": "^8.23.1",
 		"ethers": "^5.7.0",
 		"jest": "^29.0.3",
 		"rimraf": "^3.0.2",
