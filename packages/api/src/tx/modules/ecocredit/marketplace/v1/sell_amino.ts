@@ -4,6 +4,7 @@ import {
   MsgSell,
   MsgSell_Order,
 } from '../../../../../generated/regen/ecocredit/marketplace/v1/tx';
+import { AminoDate } from '../../converter-utils';
 
 const msgSellAminoType = 'regen.marketplace/MsgSell';
 
@@ -49,9 +50,7 @@ export function sellConverter(): AminoConverter {
               denom: o.askPrice?.denom || undefined,
             },
             disable_auto_retire: o?.disableAutoRetire || undefined,
-            expiration: o.expiration
-              ? o.expiration.toISOString().split('.')[0] + 'Z'
-              : undefined,
+            expiration: AminoDate(o.expiration) || undefined,
           };
         }),
       };

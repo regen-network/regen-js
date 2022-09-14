@@ -84,7 +84,6 @@ describe('RegenApi with tendermint connection', () => {
   // CORE MESSAGES
   describe('Signing and broadcasting Ecocredit txs', () => {
     it('should sign and broadcast MsgSend with tradable credits using legacy amino sign mode', async () => {
-      let txRes: DeliverTxResponse | undefined;
       const { msgClient } = await connect();
 
       const TEST_MSG_SEND = MsgSend.fromPartial({
@@ -101,7 +100,6 @@ describe('RegenApi with tendermint connection', () => {
       await runAminoTest(msgClient, TEST_MSG_SEND);
     });
     it('should sign and broadcast MsgSend with retired credits using legacy amino sign mode', async () => {
-      let txRes: DeliverTxResponse | undefined;
       const { msgClient } = await connect();
 
       const TEST_MSG_SEND = MsgSend.fromPartial({
@@ -119,7 +117,6 @@ describe('RegenApi with tendermint connection', () => {
       await runAminoTest(msgClient, TEST_MSG_SEND);
     });
     it('should sign and broadcast MsgSend with retired and tradable credits using legacy amino sign mode', async () => {
-      let txRes: DeliverTxResponse | undefined;
       const { msgClient } = await connect();
 
       const TEST_MSG_SEND = MsgSend.fromPartial({
@@ -165,7 +162,6 @@ describe('RegenApi with tendermint connection', () => {
       await runAminoTest(msgClient, TEST_MSG_CREATE_PROJECT);
     });
     it('should sign and broadcast MsgCreateProject with no reference id using legacy amino sign mode', async () => {
-      let txRes: DeliverTxResponse | undefined;
       const { msgClient } = await connect();
       const TEST_MSG_CREATE_PROJECT = MsgCreateProject.fromPartial({
         admin: TEST_ADDRESS,
@@ -208,7 +204,6 @@ describe('RegenApi with tendermint connection', () => {
       await runAminoTest(msgClient, TEST_MSG_CREATE_BATCH);
     });
     it('should sign and broadcast MsgCreateBatch with default values using legacy amino sign mode', async () => {
-      let txRes: DeliverTxResponse | undefined;
       const { msgClient } = await connect();
 
       let startDate: Date = new Date('2019-01-16');
@@ -248,7 +243,6 @@ describe('RegenApi with tendermint connection', () => {
       await runAminoTest(msgClient, TEST_MSG_RETIRE);
     });
     it('should sign and broadcast MsgCancel using legacy amino sign mode', async () => {
-      let txRes: DeliverTxResponse | undefined;
       const { msgClient } = await connect();
 
       const TEST_MSG_CANCEL = MsgCancel.fromPartial({
@@ -315,7 +309,7 @@ describe('RegenApi with tendermint connection', () => {
   });
 });
 describe('Signing and broadcasting Marketplace txs using legacy amino sign mode', () => {
-  xit('should sign and broadcast MsgSell', async () => {
+  it('should sign and broadcast MsgSell', async () => {
     const { msgClient } = await connect();
     const sellOrder = {
       batchDenom: TEST_BATCH_DENOM,
