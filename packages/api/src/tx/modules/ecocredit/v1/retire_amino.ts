@@ -33,6 +33,7 @@ export function retireAminoConverter(): AminoConverter {
         owner,
         credits: credits.map(credit => {
           return {
+            $type: credit.$type,
             batch_denom: credit.batchDenom,
             amount: credit.amount,
           };

@@ -8,6 +8,7 @@ const msgCancelAminoType = 'regen.core/MsgCancel';
 export const cancelTypeUrl = '/' + MsgCancel.$type;
 
 export interface AminoCredits {
+  $type: Credits['$type'];
   batch_denom: string;
   amount: string;
 }
@@ -37,6 +38,7 @@ export function cancelConverter(): AminoConverter {
         owner,
         credits: credits.map(credit => {
           return {
+            $type: credit.$type,
             batch_denom: credit.batchDenom,
             amount: credit.amount,
           };
@@ -53,7 +55,7 @@ export function cancelConverter(): AminoConverter {
         owner,
         credits: credits.map(credit => {
           return {
-            $type: Credits.$type,
+            $type: credit.$type,
             batchDenom: credit.batch_denom,
             amount: credit.amount,
           };

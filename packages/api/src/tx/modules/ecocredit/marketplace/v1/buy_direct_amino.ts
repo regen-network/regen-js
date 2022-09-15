@@ -13,6 +13,7 @@ const msgBuyDirectAmnioType = 'regen.marketplace/MsgBuyDirect';
 export const buyDirectTypeUrl = '/' + MsgBuyDirect.$type;
 
 interface AminoBuyDirect_Order {
+  $type: MsgBuyDirect_Order['$type'];
   sell_order_id?: string;
   quantity?: string;
   bid_price?: AminoCoin;
@@ -40,6 +41,7 @@ export function buyDirectConverter(): AminoConverter {
         buyer,
         orders: orders.map(b => {
           return {
+            $type: b.$type,
             sell_order_id: omitDefault(b.sellOrderId)?.toString(),
             quantity: omitDefault(b.quantity),
             bid_price: {
@@ -60,7 +62,7 @@ export function buyDirectConverter(): AminoConverter {
         buyer,
         orders: orders.map(b => {
           return {
-            $type: MsgBuyDirect_Order.$type,
+            $type: b.$type,
             sellOrderId: longify(b.sell_order_id || 0),
             quantity: b.quantity || '0',
             bidPrice: b.bid_price && {
