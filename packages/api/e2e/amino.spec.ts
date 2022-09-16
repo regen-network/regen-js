@@ -10,6 +10,8 @@ import {
 } from '../src/generated/regen/ecocredit/v1/tx';
 import { StdFee } from '@cosmjs/amino/build/signdoc';
 import { Secp256k1HdWallet } from '@cosmjs/amino/build/secp256k1hdwallet';
+import { DirectSecp256k1HdWallet } from '@cosmjs/proto-signing';
+
 import {
   MsgCreate,
   MsgPut,
@@ -27,14 +29,18 @@ import {
   makeEthContract,
   makeEthTxHash,
 } from './amino-spec-helpers';
+import { MsgSend as BankMsgSend } from '../src/generated/cosmos/bank/v1beta1/tx';
 
 const TEST_ADDRESS = 'regen1m0qh5y4ejkz3l5n6jlrntxcqx9r0x9xjv4vpcp';
 const TEST_BUYER_ADDRESS = 'regen13hu59094gzfcpxl58fcz294p5g5956utwlpqll';
-const REDWOOD_NODE_TM_URL = 'http://redwood.regen.network:26657/';
+
+const NODE_URL =
+  process.env['NODE_URL'] || 'http://redwood.regen.network:26657/';
+
 const TEST_FEE: StdFee = {
   amount: [
     {
-      denom: 'uregen',
+      denom: 'stake',
       amount: '5000',
     },
   ],
@@ -57,10 +63,54 @@ const connect = async (): Promise<RegenApi> => {
   return RegenApi.connect({
     connection: {
       type: 'tendermint',
-      endpoint: REDWOOD_NODE_TM_URL,
+      endpoint: NODE_URL,
       signer,
     },
   });
+};
+
+const fundWallets = async (
+  wallets: string[],
+): Promise<DeliverTxResponse | undefined> => {
+  let txRes: DeliverTxResponse | undefined;
+  const mnemonic = process.env['FAUCET_MNEMONIC'] || '';
+
+  const signer = await DirectSecp256k1HdWallet.fromMnemonic(mnemonic, {
+    prefix: 'regen',
+  });
+  const faucetAccount = await signer.getAccounts();
+  const faucetAddress = faucetAccount[0].address;
+
+  const faucetApi = await RegenApi.connect({
+    connection: {
+      type: 'tendermint',
+      endpoint: NODE_URL,
+      signer,
+    },
+  });
+  const signingClient = faucetApi.msgClient;
+
+  const messages = wallets.map(walletAddress => {
+    return BankMsgSend.fromPartial({
+      fromAddress: faucetAddress,
+      toAddress: walletAddress,
+      amount: [{ amount: '1000000', denom: 'stake' }],
+    });
+  });
+
+  const signedTxBytes = await faucetApi.msgClient?.sign(
+    faucetAddress,
+    messages,
+    TEST_FEE,
+    TEST_MEMO,
+  );
+
+  expect(signedTxBytes).toBeTruthy();
+  if (signedTxBytes) {
+    txRes = await signingClient?.broadcast(signedTxBytes);
+    expect(txRes).toBeTruthy();
+  }
+  return txRes;
 };
 
 const runAminoTest = async (
@@ -86,8 +136,104 @@ const runAminoTest = async (
 };
 
 describe('RegenApi with tendermint connection - Amino Tests', () => {
-  // CORE MESSAGES
-  xdescribe('Signing and broadcasting Ecocredit txs', () => {
+  it('should successfully fund test accounts', async () => {
+    await fundWallets([TEST_ADDRESS, TEST_BUYER_ADDRESS]);
+  });
+  describe('Signing and broadcasting ecocredit administration & issuance', () => {
+    it('should sign and broadcast MsgCreateClass', async () => {
+      const { msgClient } = await connect();
+
+      const TEST_MSG_CREATE_CLASS = MsgCreateClass.fromPartial({
+        admin: TEST_ADDRESS,
+        issuers: [TEST_ADDRESS],
+        metadata: 'unit test metadata',
+        creditTypeAbbrev: 'C',
+        fee: {
+          denom: 'stake',
+          amount: '20000000',
+        },
+      });
+
+      await runAminoTest(msgClient, TEST_MSG_CREATE_CLASS);
+    });
+    xit('should sign and broadcast MsgCreateProject using legacy amino sign mode', async () => {
+      const { msgClient } = await connect();
+      const TEST_MSG_CREATE_PROJECT = MsgCreateProject.fromPartial({
+        admin: TEST_ADDRESS,
+        classId: TEST_CLASS_ID,
+        jurisdiction: 'US-OR',
+        referenceId: genRandomStr(10),
+      });
+
+      await runAminoTest(msgClient, TEST_MSG_CREATE_PROJECT);
+    });
+    xit('should sign and broadcast MsgCreateProject with no reference id using legacy amino sign mode', async () => {
+      const { msgClient } = await connect();
+      const TEST_MSG_CREATE_PROJECT = MsgCreateProject.fromPartial({
+        admin: TEST_ADDRESS,
+        classId: TEST_CLASS_ID,
+        jurisdiction: 'US-OR',
+        metadata: 'foo',
+      });
+
+      await runAminoTest(msgClient, TEST_MSG_CREATE_PROJECT);
+    });
+    xit('should sign and broadcast MsgCreateBatch using legacy amino sign mode', async () => {
+      const { msgClient } = await connect();
+
+      let startDate: Date = new Date('2019-01-16');
+      let endDate: Date = new Date('2020-01-16');
+
+      const TEST_MSG_CREATE_BATCH = MsgCreateBatch.fromPartial({
+        issuer: TEST_ADDRESS,
+        projectId: 'C22-001',
+        issuance: [
+          {
+            recipient: TEST_ADDRESS,
+            tradableAmount: '1.503',
+            retiredAmount: '1.503',
+            retirementJurisdiction: 'US-OR',
+          },
+        ],
+        startDate: startDate,
+        endDate: endDate,
+        metadata: 'foobar',
+        open: true,
+        originTx: {
+          id: makeEthTxHash(),
+          source: 'polygon',
+          contract: makeEthContract(),
+          note: 'bridged from another chain',
+        },
+      });
+
+      await runAminoTest(msgClient, TEST_MSG_CREATE_BATCH);
+    });
+    xit('should sign and broadcast MsgCreateBatch with default values using legacy amino sign mode', async () => {
+      const { msgClient } = await connect();
+
+      let startDate: Date = new Date('2019-01-16');
+      let endDate: Date = new Date('2020-01-16');
+
+      const TEST_MSG_CREATE_BATCH = MsgCreateBatch.fromPartial({
+        issuer: TEST_ADDRESS,
+        projectId: 'C22-001',
+        issuance: [
+          {
+            recipient: TEST_ADDRESS,
+            tradableAmount: '1.503',
+          },
+        ],
+        startDate: startDate,
+        endDate: endDate,
+        metadata: 'foobar',
+        open: false,
+      });
+
+      await runAminoTest(msgClient, TEST_MSG_CREATE_BATCH);
+    });
+  });
+  xdescribe('Signing and broadcasting Ecocredit transfer & reture txs', () => {
     it('should sign and broadcast MsgSend with tradable credits using legacy amino sign mode', async () => {
       const { msgClient } = await connect();
 
@@ -139,98 +285,7 @@ describe('RegenApi with tendermint connection - Amino Tests', () => {
 
       await runAminoTest(msgClient, TEST_MSG_SEND);
     });
-    xit('should sign and broadcast MsgCreateClass', async () => {
-      const { msgClient } = await connect();
 
-      const TEST_MSG_CREATE_CLASS = MsgCreateClass.fromPartial({
-        admin: TEST_ADDRESS,
-        issuers: [TEST_ADDRESS],
-        metadata: 'unit test metadata',
-        creditTypeAbbrev: 'C',
-        fee: {
-          denom: 'uregen',
-          amount: '20000000',
-        },
-      });
-
-      await runAminoTest(msgClient, TEST_MSG_CREATE_CLASS);
-    });
-    it('should sign and broadcast MsgCreateProject using legacy amino sign mode', async () => {
-      const { msgClient } = await connect();
-      const TEST_MSG_CREATE_PROJECT = MsgCreateProject.fromPartial({
-        admin: TEST_ADDRESS,
-        classId: TEST_CLASS_ID,
-        jurisdiction: 'US-OR',
-        referenceId: genRandomStr(10),
-      });
-
-      await runAminoTest(msgClient, TEST_MSG_CREATE_PROJECT);
-    });
-    it('should sign and broadcast MsgCreateProject with no reference id using legacy amino sign mode', async () => {
-      const { msgClient } = await connect();
-      const TEST_MSG_CREATE_PROJECT = MsgCreateProject.fromPartial({
-        admin: TEST_ADDRESS,
-        classId: TEST_CLASS_ID,
-        jurisdiction: 'US-OR',
-        metadata: 'foo',
-      });
-
-      await runAminoTest(msgClient, TEST_MSG_CREATE_PROJECT);
-    });
-    it('should sign and broadcast MsgCreateBatch using legacy amino sign mode', async () => {
-      const { msgClient } = await connect();
-
-      let startDate: Date = new Date('2019-01-16');
-      let endDate: Date = new Date('2020-01-16');
-
-      const TEST_MSG_CREATE_BATCH = MsgCreateBatch.fromPartial({
-        issuer: TEST_ADDRESS,
-        projectId: 'C22-001',
-        issuance: [
-          {
-            recipient: TEST_ADDRESS,
-            tradableAmount: '1.503',
-            retiredAmount: '1.503',
-            retirementJurisdiction: 'US-OR',
-          },
-        ],
-        startDate: startDate,
-        endDate: endDate,
-        metadata: 'foobar',
-        open: true,
-        originTx: {
-          id: makeEthTxHash(),
-          source: 'polygon',
-          contract: makeEthContract(),
-          note: 'bridged from another chain',
-        },
-      });
-
-      await runAminoTest(msgClient, TEST_MSG_CREATE_BATCH);
-    });
-    it('should sign and broadcast MsgCreateBatch with default values using legacy amino sign mode', async () => {
-      const { msgClient } = await connect();
-
-      let startDate: Date = new Date('2019-01-16');
-      let endDate: Date = new Date('2020-01-16');
-
-      const TEST_MSG_CREATE_BATCH = MsgCreateBatch.fromPartial({
-        issuer: TEST_ADDRESS,
-        projectId: 'C22-001',
-        issuance: [
-          {
-            recipient: TEST_ADDRESS,
-            tradableAmount: '1.503',
-          },
-        ],
-        startDate: startDate,
-        endDate: endDate,
-        metadata: 'foobar',
-        open: false,
-      });
-
-      await runAminoTest(msgClient, TEST_MSG_CREATE_BATCH);
-    });
     it('should sign and broadcast MsgRetire using legacy amino sign mode', async () => {
       const { msgClient } = await connect();
 
@@ -375,7 +430,7 @@ describe('RegenApi with tendermint connection - Amino Tests', () => {
         return RegenApi.connect({
           connection: {
             type: 'tendermint',
-            endpoint: REDWOOD_NODE_TM_URL,
+            endpoint: NODE_URL,
             signer: buyerSigner,
           },
         });
@@ -410,7 +465,7 @@ describe('RegenApi with tendermint connection - Amino Tests', () => {
         return RegenApi.connect({
           connection: {
             type: 'tendermint',
-            endpoint: REDWOOD_NODE_TM_URL,
+            endpoint: NODE_URL,
             signer: buyerSigner,
           },
         });

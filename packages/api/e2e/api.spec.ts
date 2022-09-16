@@ -1,16 +1,18 @@
 import { DirectSecp256k1HdWallet } from '@cosmjs/proto-signing';
 import { DeliverTxResponse } from '@cosmjs/stargate';
+import { resolveConfig } from 'prettier';
 import { RegenApi } from '../src/api';
 import { QueryClientImpl } from '../src/generated/cosmos/bank/v1beta1/query';
 import { MsgSend } from '../src/generated/cosmos/bank/v1beta1/tx';
 import { ServiceClientImpl } from '../src/generated/cosmos/tx/v1beta1/service';
 
 const TEST_ADDRESS = 'regen1df675r9vnf7pdedn4sf26svdsem3ugavgxmy46';
-const REDWOOD_NODE_TM_URL = 'http://redwood.regen.network:26657/';
+const NODE_URL =
+  process.env['NODE_URL'] || 'http://redwood.regen.network:26657/';
 const TEST_FEE = {
   amount: [
     {
-      denom: 'uregen',
+      denom: 'stake',
       amount: '5000',
     },
   ],
@@ -35,10 +37,54 @@ const connect = async (): Promise<RegenApi> => {
   return RegenApi.connect({
     connection: {
       type: 'tendermint',
-      endpoint: REDWOOD_NODE_TM_URL,
+      endpoint: NODE_URL,
       signer,
     },
   });
+};
+
+const fundWallets = async (
+  wallets: string[],
+): Promise<DeliverTxResponse | undefined> => {
+  let txRes: DeliverTxResponse | undefined;
+  const mnemonic = process.env['FAUCET_MNEMONIC'] || '';
+
+  const signer = await DirectSecp256k1HdWallet.fromMnemonic(mnemonic, {
+    prefix: 'regen',
+  });
+  const faucetAccount = await signer.getAccounts();
+  const faucetAddress = faucetAccount[0].address;
+
+  const faucetApi = await RegenApi.connect({
+    connection: {
+      type: 'tendermint',
+      endpoint: NODE_URL,
+      signer,
+    },
+  });
+  const signingClient = faucetApi.msgClient;
+
+  const messages = wallets.map(walletAddress => {
+    return MsgSend.fromPartial({
+      fromAddress: faucetAddress,
+      toAddress: walletAddress,
+      amount: [{ amount: '1000000', denom: 'stake' }],
+    });
+  });
+
+  const signedTxBytes = await faucetApi.msgClient?.sign(
+    faucetAddress,
+    messages,
+    TEST_FEE,
+    TEST_MEMO,
+  );
+
+  expect(signedTxBytes).toBeTruthy();
+  if (signedTxBytes) {
+    txRes = await signingClient?.broadcast(signedTxBytes);
+    expect(txRes).toBeTruthy();
+  }
+  return txRes;
 };
 
 let api: RegenApi;
@@ -47,30 +93,10 @@ describe('RegenApi with tendermint connection', () => {
   beforeAll(async () => {
     api = await connect();
   });
-  describe('Querying', () => {
-    it('should fetch balances using tendermint query client', async () => {
-      const bankClient = new QueryClientImpl(api.queryClient);
-
-      const res = await bankClient.AllBalances({
-        address: TEST_ADDRESS,
-      });
-      expect(res.balances.length).toBeGreaterThanOrEqual(1);
+  xdescribe('Signing and broadcasting txs', () => {
+    it('should fund the test account with an initial regen balance', async () => {
+      await fundWallets([TEST_ADDRESS]);
     });
-
-    it('should fetch a tx using tendermint service client', async () => {
-      const redwoodTxHash =
-        'F6A31AB068F49C5719ECB3793E0C3C4412EDD1F0C3D3C954EE0D9B1C81A0BEC8';
-      const serviceClient = new ServiceClientImpl(api.queryClient);
-
-      const res = await serviceClient.GetTx({
-        hash: redwoodTxHash,
-      });
-      expect(res.txResponse).toBeTruthy();
-      expect(res.txResponse?.data).toBeTruthy();
-      expect(res.txResponse?.txhash).toEqual(redwoodTxHash);
-    });
-  });
-  describe('Signing and broadcasting txs', () => {
     it('should get data back with a signing client - signed transaction', async () => {
       const signedTxBytes = await api.msgClient?.sign(
         TEST_ADDRESS,
@@ -97,6 +123,29 @@ describe('RegenApi with tendermint connection', () => {
         txRes = await signingClient?.broadcast(signedTxBytes);
         expect(txRes).toBeTruthy();
       }
+    });
+  });
+  describe('Querying', () => {
+    it('should fetch balances using tendermint query client', async () => {
+      const bankClient = new QueryClientImpl(api.queryClient);
+
+      const res = await bankClient.AllBalances({
+        address: TEST_ADDRESS,
+      });
+      expect(res.balances.length).toBeGreaterThanOrEqual(1);
+    });
+
+    xit('should fetch a tx using tendermint service client', async () => {
+      const redwoodTxHash =
+        'F6A31AB068F49C5719ECB3793E0C3C4412EDD1F0C3D3C954EE0D9B1C81A0BEC8';
+      const serviceClient = new ServiceClientImpl(api.queryClient);
+
+      const res = await serviceClient.GetTx({
+        hash: redwoodTxHash,
+      });
+      expect(res.txResponse).toBeTruthy();
+      expect(res.txResponse?.data).toBeTruthy();
+      expect(res.txResponse?.txhash).toEqual(redwoodTxHash);
     });
   });
 });
