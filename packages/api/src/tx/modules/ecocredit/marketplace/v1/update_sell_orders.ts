@@ -10,7 +10,6 @@ const msgUpdateSellOrdersAminoType = 'regen.marketplace/MsgUpdateSellOrders';
 export const updateSellOrdersTypeUrl = '/' + MsgUpdateSellOrders.$type;
 
 interface AminoMsgUpdateSellOrders_Update {
-  $type: MsgUpdateSellOrders_Update['$type'];
   sell_order_id: Long;
   new_quantity: string;
   new_ask_price?: AminoCoin;
@@ -43,7 +42,6 @@ export function updateSellOrderConverter(): AminoConverter {
         seller,
         updates: updates.map(u => {
           return {
-            $type: u.$type,
             sell_order_id: u.sellOrderId,
             new_quantity: u.newQuantity,
             new_ask_price: u.newAskPrice,
@@ -61,7 +59,7 @@ export function updateSellOrderConverter(): AminoConverter {
         seller,
         updates: updates.map(u => {
           return {
-            $type: u.$type,
+            $type: MsgUpdateSellOrders_Update.$type,
             sellOrderId: u.sell_order_id,
             newQuantity: u.new_quantity,
             newAskPrice: u.new_ask_price && {

@@ -12,7 +12,6 @@ const msgCreateBatchAminoType = 'regen.core/MsgCreateBatch';
 export const createBatchTypeUrl = '/' + MsgCreateBatch.$type;
 
 export interface AminoBatchIssuance {
-  $type: BatchIssuance['$type'];
   recipient?: string;
   tradable_amount?: string;
   retired_amount?: string;
@@ -20,7 +19,6 @@ export interface AminoBatchIssuance {
 }
 
 export interface AminoOriginTx {
-  $type: OriginTx['$type'];
   id?: string;
   source?: string;
   contract?: string;
@@ -65,7 +63,6 @@ export function createBatchConverter(): AminoConverter {
         project_id: projectId,
         issuance: issuance.map(i => {
           return {
-            $type: i.$type,
             recipient: i.recipient || undefined,
             tradable_amount: i.tradableAmount || undefined,
             retired_amount: i.retiredAmount || undefined,
@@ -80,8 +77,6 @@ export function createBatchConverter(): AminoConverter {
           originTx === undefined
             ? undefined
             : {
-                // we should double check this edge case
-                $type: originTx.$type,
                 id: originTx?.id || undefined,
                 source: originTx?.source || undefined,
                 contract: originTx?.contract || undefined,
@@ -108,7 +103,7 @@ export function createBatchConverter(): AminoConverter {
         projectId: project_id,
         issuance: issuance.map(i => {
           return {
-            $type: i.$type,
+            $type: BatchIssuance.$type,
             recipient: i.recipient || '',
             tradableAmount: i.tradable_amount || '',
             retiredAmount: i.retired_amount || '',
@@ -123,7 +118,7 @@ export function createBatchConverter(): AminoConverter {
           origin_tx === undefined
             ? undefined
             : {
-                $type: origin_tx.$type,
+                $type: OriginTx.$type,
                 id: origin_tx.id || '',
                 source: origin_tx.source || '',
                 contract: origin_tx.contract || '',

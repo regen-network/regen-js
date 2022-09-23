@@ -11,7 +11,6 @@ const msgSellAminoType = 'regen.marketplace/MsgSell';
 export const sellTypeUrl = '/' + MsgSell.$type;
 
 interface AminoSell_Order {
-  $type: MsgSell_Order['$type'];
   batch_denom: string;
   quantity: string;
   ask_price?: AminoCoin;
@@ -44,7 +43,6 @@ export function sellConverter(): AminoConverter {
         seller,
         orders: orders.map(o => {
           return {
-            $type: o.$type,
             batch_denom: o.batchDenom,
             quantity: o.quantity,
             ask_price: {
@@ -65,7 +63,7 @@ export function sellConverter(): AminoConverter {
         seller,
         orders: orders.map(o => {
           return {
-            $type: o.$type,
+            $type: MsgSell_Order.$type,
             batchDenom: o.batch_denom,
             quantity: o.quantity,
             askPrice: o.ask_price && {

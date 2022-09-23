@@ -9,7 +9,6 @@ const msgCreateAminoType = 'regen.basket/MsgCreate';
 export const createTypeUrl = '/' + MsgCreate.$type;
 
 export interface AminoDateCriteria {
-  $type: DateCriteria['$type'];
   min_start_date?: Date;
   start_date_window?: Duration;
   years_in_the_past?: number;
@@ -56,15 +55,11 @@ export function createBasketConverter(): AminoConverter {
         disable_auto_retire: disableAutoRetire || undefined,
         credit_type_abbrev: creditTypeAbbrev,
         allowed_classes: allowedClasses,
-        date_criteria:
-          dateCriteria === undefined
-            ? undefined
-            : {
-                $type: dateCriteria.$type,
-                min_start_date: dateCriteria?.minStartDate || undefined,
-                start_date_window: dateCriteria?.startDateWindow || undefined,
-                years_in_the_past: dateCriteria?.yearsInThePast || undefined,
-              },
+        date_criteria: {
+          min_start_date: dateCriteria?.minStartDate || undefined,
+          start_date_window: dateCriteria?.startDateWindow || undefined,
+          years_in_the_past: dateCriteria?.yearsInThePast || undefined,
+        },
         fee:
           fee &&
           fee.map(f => {
@@ -94,15 +89,12 @@ export function createBasketConverter(): AminoConverter {
         disableAutoRetire: disable_auto_retire,
         creditTypeAbbrev: credit_type_abbrev,
         allowedClasses: allowed_classes,
-        dateCriteria:
-          date_criteria === undefined
-            ? undefined
-            : {
-                $type: date_criteria.$type,
-                minStartDate: date_criteria?.min_start_date,
-                startDateWindow: date_criteria?.start_date_window,
-                yearsInThePast: date_criteria?.years_in_the_past || 0,
-              },
+        dateCriteria: {
+          $type: DateCriteria.$type,
+          minStartDate: date_criteria?.min_start_date,
+          startDateWindow: date_criteria?.start_date_window,
+          yearsInThePast: date_criteria?.years_in_the_past || 0,
+        },
         fee: fee.map(f => {
           return {
             $type: 'cosmos.base.v1beta1.Coin',

@@ -19,7 +19,7 @@ interface AminoMsgSend_SendCredits {
 export interface AminoMsgSend extends AminoMsg {
   readonly type: typeof msgSendAminoType;
   readonly value: {
-    // readonly $type: string; TODO: we will leave these off until nested types cna be supported
+    // readonly $type: string; TODO: we will leave these off until nested types can be supported
     readonly sender: string;
     readonly recipient: string;
     readonly credits: AminoMsgSend_SendCredits[];
@@ -62,7 +62,7 @@ export function ecocreditSendConverter(): AminoConverter {
         recipient,
         credits: credits?.map(credit => {
           return {
-            $type: MsgSend_SendCredits['$type'],
+            $type: MsgSend_SendCredits.$type,
             batchDenom: credit.batch_denom,
             tradableAmount: credit.tradable_amount || '',
             retiredAmount: credit.retired_amount || '',

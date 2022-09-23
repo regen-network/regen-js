@@ -1,6 +1,10 @@
 import { AminoMsg } from '@cosmjs/amino';
 import { AminoConverter } from '@cosmjs/stargate';
 import { MsgMintBatchCredits } from '../../../../generated/regen/ecocredit/v1/tx';
+import {
+  BatchIssuance,
+  OriginTx,
+} from '../../../../generated/regen/ecocredit/v1/types';
 import { AminoBatchIssuance, AminoOriginTx } from './create_batch_amino';
 
 const msgMintBatchCreditsAminoType = 'regen.core/MsgMintBatchCredits';
@@ -37,7 +41,6 @@ export function mintBatchCreditsConverter(): AminoConverter {
         batch_denom: batchDenom,
         issuance: issuance.map(i => {
           return {
-            $type: i.$type,
             recipient: i.recipient,
             tradable_amount: i.tradableAmount,
             retired_amount: i.retiredAmount,
@@ -45,7 +48,6 @@ export function mintBatchCreditsConverter(): AminoConverter {
           };
         }),
         origin_tx: originTx && {
-          $type: originTx?.$type,
           id: originTx?.id,
           source: originTx?.source,
         },
@@ -62,7 +64,7 @@ export function mintBatchCreditsConverter(): AminoConverter {
         batchDenom: batch_denom,
         issuance: issuance.map(i => {
           return {
-            $type: i.$type,
+            $type: BatchIssuance.$type,
             recipient: i.recipient || '',
             tradableAmount: i.tradable_amount || '',
             retiredAmount: i.retired_amount || '',
@@ -70,7 +72,7 @@ export function mintBatchCreditsConverter(): AminoConverter {
           };
         }),
         originTx: origin_tx && {
-          $type: origin_tx.$type,
+          $type: OriginTx.$type,
           id: origin_tx.id || '',
           source: origin_tx.source || '',
           contract: origin_tx.contract || '',
