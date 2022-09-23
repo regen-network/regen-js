@@ -126,7 +126,7 @@ describe('RegenApi with tendermint connection', () => {
     });
   });
   describe('Querying', () => {
-    it('should fetch balances using tendermint query client', async () => {
+    xit('should fetch balances using tendermint query client', async () => {
       const bankClient = new QueryClientImpl(api.queryClient);
 
       const res = await bankClient.AllBalances({

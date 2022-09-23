@@ -94,7 +94,7 @@ const fundWallets = async (
     return BankMsgSend.fromPartial({
       fromAddress: faucetAddress,
       toAddress: walletAddress,
-      amount: [{ amount: '1000000', denom: 'stake' }],
+      amount: [{ amount: '30000000', denom: 'stake' }],
     });
   });
 
@@ -131,6 +131,7 @@ const runAminoTest = async (
   if (signedTxBytes) {
     txRes = await msgClient?.broadcast(signedTxBytes);
     expect(txRes).toBeTruthy();
+    console.log(txRes);
     expect(txRes?.code).toBe(0);
   }
 };
