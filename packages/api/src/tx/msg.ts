@@ -6,12 +6,13 @@ import {
   AminoTypes,
   AminoConverters,
 } from '@cosmjs/stargate';
-import { Registry, EncodeObject } from '@cosmjs/proto-signing';
+import { Registry, EncodeObject, GeneratedType } from '@cosmjs/proto-signing';
 
 import { SigningConnectionOptions } from '../api';
 import { regenRegistry } from './regen-message-type-registry';
 import { createStargateSigningClient } from './stargate-signing';
 import { createEcocreditAminoConverters } from './modules';
+import { messageTypeRegistry } from '../generated/typeRegistry';
 
 export interface MessageClient {
   readonly sign: (
@@ -32,10 +33,15 @@ function createDefaultTypes(): AminoConverters {
 export async function setupTxExtension(
   connection: SigningConnectionOptions,
 ): Promise<MessageClient> {
-  const registry = new Registry([...defaultRegistryTypes]);
-  regenRegistry.forEach(([key, value]) => {
-    registry.register(`/${key}`, value);
+  const customRegistry: Array<[string, GeneratedType]> = [];
+  messageTypeRegistry.forEach((value, key) => {
+    customRegistry.push([`/${key}`, value]);
   });
+  regenRegistry.forEach(([key, value]) => {
+    customRegistry.push([`/${key}`, value]);
+  });
+
+  const registry = new Registry([...defaultRegistryTypes, ...customRegistry]);
   const aminoTypes = new AminoTypes(createDefaultTypes());
 
   const signingClient = await createStargateSigningClient(
