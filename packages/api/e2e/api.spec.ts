@@ -32,7 +32,7 @@ let api: RegenApi;
 let signerAddress: string;
 let testTxHash: string | undefined;
 
-// TODO: disabling tests to pass CI. Issue regen-network/regen-js/59 will make it possible to enable these for CI
+// TODO: disabling tests to pass CI. Issue regen-network/regen-js/issues/59 will make it possible to enable these for CI
 xdescribe('RegenApi with tendermint connection', () => {
   beforeAll(async () => {
     const mnemonic = // mnemonic for signerAddress
