@@ -4,4 +4,5 @@ module.exports = {
   testPathIgnorePatterns: ['/node_modules/', '/lib/'],
   testTimeout: 10000,
   verbose: true,
+  setupFilesAfterEnv: ['jest-expect-message'],
 };
