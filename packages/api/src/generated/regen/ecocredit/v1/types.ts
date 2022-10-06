@@ -95,6 +95,19 @@ export interface OriginTx {
    * mint process (e.g. polygon, ethereum, verra).
    */
   source: string;
+  /**
+   * contract is the address of the contract on the source chain that was
+   * executed when creating the transaction. This address will be stored in
+   * state separately from the origin tx and on a per credit batch basis to be
+   * used when sending credits back to the source chain. This field can be left
+   * blank if credits are bridged from a non-contract-based source.
+   */
+  contract: string;
+  /**
+   * note is a reference note for accounting that will be included in an event
+   * emitted from either Msg/CreateBatch or Msg/MintBatchCredits.
+   */
+  note: string;
 }
 
 /** CreditTypeProposal is a gov Content type for adding a credit type. */
@@ -396,7 +409,13 @@ export const BatchIssuance = {
 messageTypeRegistry.set(BatchIssuance.$type, BatchIssuance);
 
 function createBaseOriginTx(): OriginTx {
-  return { $type: 'regen.ecocredit.v1.OriginTx', id: '', source: '' };
+  return {
+    $type: 'regen.ecocredit.v1.OriginTx',
+    id: '',
+    source: '',
+    contract: '',
+    note: '',
+  };
 }
 
 export const OriginTx = {
@@ -411,6 +430,12 @@ export const OriginTx = {
     }
     if (message.source !== '') {
       writer.uint32(18).string(message.source);
+    }
+    if (message.contract !== '') {
+      writer.uint32(26).string(message.contract);
+    }
+    if (message.note !== '') {
+      writer.uint32(34).string(message.note);
     }
     return writer;
   },
@@ -428,6 +453,12 @@ export const OriginTx = {
         case 2:
           message.source = reader.string();
           break;
+        case 3:
+          message.contract = reader.string();
+          break;
+        case 4:
+          message.note = reader.string();
+          break;
         default:
           reader.skipType(tag & 7);
           break;
@@ -441,6 +472,8 @@ export const OriginTx = {
       $type: OriginTx.$type,
       id: isSet(object.id) ? String(object.id) : '',
       source: isSet(object.source) ? String(object.source) : '',
+      contract: isSet(object.contract) ? String(object.contract) : '',
+      note: isSet(object.note) ? String(object.note) : '',
     };
   },
 
@@ -448,6 +481,8 @@ export const OriginTx = {
     const obj: any = {};
     message.id !== undefined && (obj.id = message.id);
     message.source !== undefined && (obj.source = message.source);
+    message.contract !== undefined && (obj.contract = message.contract);
+    message.note !== undefined && (obj.note = message.note);
     return obj;
   },
 
@@ -455,6 +490,8 @@ export const OriginTx = {
     const message = createBaseOriginTx();
     message.id = object.id ?? '';
     message.source = object.source ?? '';
+    message.contract = object.contract ?? '';
+    message.note = object.note ?? '';
     return message;
   },
 };

@@ -7,8 +7,8 @@ import {
   PageResponse,
 } from '../../../cosmos/base/query/v1beta1/pagination';
 import { Params } from '../../../regen/ecocredit/v1/types';
-import { Timestamp } from '../../../google/protobuf/timestamp';
 import { CreditType } from '../../../regen/ecocredit/v1/state';
+import { Timestamp } from '../../../google/protobuf/timestamp';
 
 export const protobufPackage = 'regen.ecocredit.v1';
 
@@ -300,15 +300,15 @@ export interface QuerySupplyRequest {
 export interface QuerySupplyResponse {
   $type: 'regen.ecocredit.v1.QuerySupplyResponse';
   /**
-   * tradable_supply is the decimal number of tradable credits in the batch
+   * tradable_amount is the decimal number of tradable credits in the batch
    * supply.
    */
-  tradableSupply: string;
+  tradableAmount: string;
   /**
-   * retired_supply is the decimal number of retired credits in the batch
+   * retired_amount is the decimal number of retired credits in the batch
    * supply.
    */
-  retiredSupply: string;
+  retiredAmount: string;
   /**
    * cancelled_amount is the decimal number of cancelled credits in the batch
    * supply.
@@ -338,6 +338,20 @@ export interface QueryParamsResponse {
   $type: 'regen.ecocredit.v1.QueryParamsResponse';
   /** params defines the parameters of the ecocredit module. */
   params?: Params;
+}
+
+/** QueryCreditTypeRequest is the Query/CreditType request type */
+export interface QueryCreditTypeRequest {
+  $type: 'regen.ecocredit.v1.QueryCreditTypeRequest';
+  /** abbreviation is the abbreviation of the credit type. */
+  abbreviation: string;
+}
+
+/** QueryCreditTypeResponse is the Query/CreditType response type */
+export interface QueryCreditTypeResponse {
+  $type: 'regen.ecocredit.v1.QueryCreditTypeResponse';
+  /** credit_type is the fetched credit type. */
+  creditType?: CreditType;
 }
 
 /** ClassInfo is the human-readable credit class information. */
@@ -3166,8 +3180,8 @@ messageTypeRegistry.set(QuerySupplyRequest.$type, QuerySupplyRequest);
 function createBaseQuerySupplyResponse(): QuerySupplyResponse {
   return {
     $type: 'regen.ecocredit.v1.QuerySupplyResponse',
-    tradableSupply: '',
-    retiredSupply: '',
+    tradableAmount: '',
+    retiredAmount: '',
     cancelledAmount: '',
   };
 }
@@ -3179,11 +3193,11 @@ export const QuerySupplyResponse = {
     message: QuerySupplyResponse,
     writer: _m0.Writer = _m0.Writer.create(),
   ): _m0.Writer {
-    if (message.tradableSupply !== '') {
-      writer.uint32(10).string(message.tradableSupply);
+    if (message.tradableAmount !== '') {
+      writer.uint32(10).string(message.tradableAmount);
     }
-    if (message.retiredSupply !== '') {
-      writer.uint32(18).string(message.retiredSupply);
+    if (message.retiredAmount !== '') {
+      writer.uint32(18).string(message.retiredAmount);
     }
     if (message.cancelledAmount !== '') {
       writer.uint32(26).string(message.cancelledAmount);
@@ -3199,10 +3213,10 @@ export const QuerySupplyResponse = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          message.tradableSupply = reader.string();
+          message.tradableAmount = reader.string();
           break;
         case 2:
-          message.retiredSupply = reader.string();
+          message.retiredAmount = reader.string();
           break;
         case 3:
           message.cancelledAmount = reader.string();
@@ -3218,11 +3232,11 @@ export const QuerySupplyResponse = {
   fromJSON(object: any): QuerySupplyResponse {
     return {
       $type: QuerySupplyResponse.$type,
-      tradableSupply: isSet(object.tradableSupply)
-        ? String(object.tradableSupply)
+      tradableAmount: isSet(object.tradableAmount)
+        ? String(object.tradableAmount)
         : '',
-      retiredSupply: isSet(object.retiredSupply)
-        ? String(object.retiredSupply)
+      retiredAmount: isSet(object.retiredAmount)
+        ? String(object.retiredAmount)
         : '',
       cancelledAmount: isSet(object.cancelledAmount)
         ? String(object.cancelledAmount)
@@ -3232,10 +3246,10 @@ export const QuerySupplyResponse = {
 
   toJSON(message: QuerySupplyResponse): unknown {
     const obj: any = {};
-    message.tradableSupply !== undefined &&
-      (obj.tradableSupply = message.tradableSupply);
-    message.retiredSupply !== undefined &&
-      (obj.retiredSupply = message.retiredSupply);
+    message.tradableAmount !== undefined &&
+      (obj.tradableAmount = message.tradableAmount);
+    message.retiredAmount !== undefined &&
+      (obj.retiredAmount = message.retiredAmount);
     message.cancelledAmount !== undefined &&
       (obj.cancelledAmount = message.cancelledAmount);
     return obj;
@@ -3245,8 +3259,8 @@ export const QuerySupplyResponse = {
     object: I,
   ): QuerySupplyResponse {
     const message = createBaseQuerySupplyResponse();
-    message.tradableSupply = object.tradableSupply ?? '';
-    message.retiredSupply = object.retiredSupply ?? '';
+    message.tradableAmount = object.tradableAmount ?? '';
+    message.retiredAmount = object.retiredAmount ?? '';
     message.cancelledAmount = object.cancelledAmount ?? '';
     return message;
   },
@@ -3496,6 +3510,147 @@ export const QueryParamsResponse = {
 };
 
 messageTypeRegistry.set(QueryParamsResponse.$type, QueryParamsResponse);
+
+function createBaseQueryCreditTypeRequest(): QueryCreditTypeRequest {
+  return {
+    $type: 'regen.ecocredit.v1.QueryCreditTypeRequest',
+    abbreviation: '',
+  };
+}
+
+export const QueryCreditTypeRequest = {
+  $type: 'regen.ecocredit.v1.QueryCreditTypeRequest' as const,
+
+  encode(
+    message: QueryCreditTypeRequest,
+    writer: _m0.Writer = _m0.Writer.create(),
+  ): _m0.Writer {
+    if (message.abbreviation !== '') {
+      writer.uint32(10).string(message.abbreviation);
+    }
+    return writer;
+  },
+
+  decode(
+    input: _m0.Reader | Uint8Array,
+    length?: number,
+  ): QueryCreditTypeRequest {
+    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+    let end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseQueryCreditTypeRequest();
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+        case 1:
+          message.abbreviation = reader.string();
+          break;
+        default:
+          reader.skipType(tag & 7);
+          break;
+      }
+    }
+    return message;
+  },
+
+  fromJSON(object: any): QueryCreditTypeRequest {
+    return {
+      $type: QueryCreditTypeRequest.$type,
+      abbreviation: isSet(object.abbreviation)
+        ? String(object.abbreviation)
+        : '',
+    };
+  },
+
+  toJSON(message: QueryCreditTypeRequest): unknown {
+    const obj: any = {};
+    message.abbreviation !== undefined &&
+      (obj.abbreviation = message.abbreviation);
+    return obj;
+  },
+
+  fromPartial<I extends Exact<DeepPartial<QueryCreditTypeRequest>, I>>(
+    object: I,
+  ): QueryCreditTypeRequest {
+    const message = createBaseQueryCreditTypeRequest();
+    message.abbreviation = object.abbreviation ?? '';
+    return message;
+  },
+};
+
+messageTypeRegistry.set(QueryCreditTypeRequest.$type, QueryCreditTypeRequest);
+
+function createBaseQueryCreditTypeResponse(): QueryCreditTypeResponse {
+  return {
+    $type: 'regen.ecocredit.v1.QueryCreditTypeResponse',
+    creditType: undefined,
+  };
+}
+
+export const QueryCreditTypeResponse = {
+  $type: 'regen.ecocredit.v1.QueryCreditTypeResponse' as const,
+
+  encode(
+    message: QueryCreditTypeResponse,
+    writer: _m0.Writer = _m0.Writer.create(),
+  ): _m0.Writer {
+    if (message.creditType !== undefined) {
+      CreditType.encode(message.creditType, writer.uint32(10).fork()).ldelim();
+    }
+    return writer;
+  },
+
+  decode(
+    input: _m0.Reader | Uint8Array,
+    length?: number,
+  ): QueryCreditTypeResponse {
+    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+    let end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseQueryCreditTypeResponse();
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+        case 1:
+          message.creditType = CreditType.decode(reader, reader.uint32());
+          break;
+        default:
+          reader.skipType(tag & 7);
+          break;
+      }
+    }
+    return message;
+  },
+
+  fromJSON(object: any): QueryCreditTypeResponse {
+    return {
+      $type: QueryCreditTypeResponse.$type,
+      creditType: isSet(object.creditType)
+        ? CreditType.fromJSON(object.creditType)
+        : undefined,
+    };
+  },
+
+  toJSON(message: QueryCreditTypeResponse): unknown {
+    const obj: any = {};
+    message.creditType !== undefined &&
+      (obj.creditType = message.creditType
+        ? CreditType.toJSON(message.creditType)
+        : undefined);
+    return obj;
+  },
+
+  fromPartial<I extends Exact<DeepPartial<QueryCreditTypeResponse>, I>>(
+    object: I,
+  ): QueryCreditTypeResponse {
+    const message = createBaseQueryCreditTypeResponse();
+    message.creditType =
+      object.creditType !== undefined && object.creditType !== null
+        ? CreditType.fromPartial(object.creditType)
+        : undefined;
+    return message;
+  },
+};
+
+messageTypeRegistry.set(QueryCreditTypeResponse.$type, QueryCreditTypeResponse);
 
 function createBaseClassInfo(): ClassInfo {
   return {
@@ -4067,6 +4222,10 @@ export interface Query {
   Params(
     request: DeepPartial<QueryParamsRequest>,
   ): Promise<QueryParamsResponse>;
+  /** CreditType queries credit type information by abbreviation. */
+  CreditType(
+    request: DeepPartial<QueryCreditTypeRequest>,
+  ): Promise<QueryCreditTypeResponse>;
 }
 
 export class QueryClientImpl implements Query {
@@ -4092,6 +4251,7 @@ export class QueryClientImpl implements Query {
     this.Supply = this.Supply.bind(this);
     this.CreditTypes = this.CreditTypes.bind(this);
     this.Params = this.Params.bind(this);
+    this.CreditType = this.CreditType.bind(this);
   }
   Classes(
     request: DeepPartial<QueryClassesRequest>,
@@ -4363,6 +4523,21 @@ export class QueryClientImpl implements Query {
     );
     return promise.then(data =>
       QueryParamsResponse.decode(new _m0.Reader(data)),
+    );
+  }
+
+  CreditType(
+    request: DeepPartial<QueryCreditTypeRequest>,
+  ): Promise<QueryCreditTypeResponse> {
+    const fromPartial = QueryCreditTypeRequest.fromPartial(request);
+    const data = QueryCreditTypeRequest.encode(fromPartial).finish();
+    const promise = this.rpc.request(
+      'regen.ecocredit.v1.Query',
+      'CreditType',
+      data,
+    );
+    return promise.then(data =>
+      QueryCreditTypeResponse.decode(new _m0.Reader(data)),
     );
   }
 }

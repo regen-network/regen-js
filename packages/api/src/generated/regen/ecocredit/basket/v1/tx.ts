@@ -118,16 +118,29 @@ export interface MsgTake {
   /** amount is the integer number of basket tokens to convert into credits. */
   amount: string;
   /**
-   * retirement_jurisdiction is the optional retirement jurisdiction for the
+   * retirement_location is the optional retirement jurisdiction for the
    * credits which will be used only if retire_on_take is true for this basket.
+   *
+   * Deprecated (Since Revision 1): This field will be removed in the next
+   * version in favor of retirement_jurisdiction. Only one of these need to be
+   * set and retirement_jurisdiction will be used if both are set.
+   *
+   * @deprecated
    */
-  retirementJurisdiction: string;
+  retirementLocation: string;
   /**
    * retire_on_take is a boolean that dictates whether the ecocredits
    * received in exchange for the basket tokens will be received as
    * retired or tradable credits.
    */
   retireOnTake: boolean;
+  /**
+   * retirement_jurisdiction is the optional retirement jurisdiction for the
+   * credits which will be used only if retire_on_take is true for this basket.
+   *
+   * Since Revision 1
+   */
+  retirementJurisdiction: string;
 }
 
 /** MsgTakeFromBasketResponse is the Msg/TakeFromBasket response type. */
@@ -534,8 +547,9 @@ function createBaseMsgTake(): MsgTake {
     owner: '',
     basketDenom: '',
     amount: '',
-    retirementJurisdiction: '',
+    retirementLocation: '',
     retireOnTake: false,
+    retirementJurisdiction: '',
   };
 }
 
@@ -555,11 +569,14 @@ export const MsgTake = {
     if (message.amount !== '') {
       writer.uint32(26).string(message.amount);
     }
-    if (message.retirementJurisdiction !== '') {
-      writer.uint32(34).string(message.retirementJurisdiction);
+    if (message.retirementLocation !== '') {
+      writer.uint32(34).string(message.retirementLocation);
     }
     if (message.retireOnTake === true) {
       writer.uint32(40).bool(message.retireOnTake);
+    }
+    if (message.retirementJurisdiction !== '') {
+      writer.uint32(50).string(message.retirementJurisdiction);
     }
     return writer;
   },
@@ -581,10 +598,13 @@ export const MsgTake = {
           message.amount = reader.string();
           break;
         case 4:
-          message.retirementJurisdiction = reader.string();
+          message.retirementLocation = reader.string();
           break;
         case 5:
           message.retireOnTake = reader.bool();
+          break;
+        case 6:
+          message.retirementJurisdiction = reader.string();
           break;
         default:
           reader.skipType(tag & 7);
@@ -600,12 +620,15 @@ export const MsgTake = {
       owner: isSet(object.owner) ? String(object.owner) : '',
       basketDenom: isSet(object.basketDenom) ? String(object.basketDenom) : '',
       amount: isSet(object.amount) ? String(object.amount) : '',
-      retirementJurisdiction: isSet(object.retirementJurisdiction)
-        ? String(object.retirementJurisdiction)
+      retirementLocation: isSet(object.retirementLocation)
+        ? String(object.retirementLocation)
         : '',
       retireOnTake: isSet(object.retireOnTake)
         ? Boolean(object.retireOnTake)
         : false,
+      retirementJurisdiction: isSet(object.retirementJurisdiction)
+        ? String(object.retirementJurisdiction)
+        : '',
     };
   },
 
@@ -615,10 +638,12 @@ export const MsgTake = {
     message.basketDenom !== undefined &&
       (obj.basketDenom = message.basketDenom);
     message.amount !== undefined && (obj.amount = message.amount);
-    message.retirementJurisdiction !== undefined &&
-      (obj.retirementJurisdiction = message.retirementJurisdiction);
+    message.retirementLocation !== undefined &&
+      (obj.retirementLocation = message.retirementLocation);
     message.retireOnTake !== undefined &&
       (obj.retireOnTake = message.retireOnTake);
+    message.retirementJurisdiction !== undefined &&
+      (obj.retirementJurisdiction = message.retirementJurisdiction);
     return obj;
   },
 
@@ -627,8 +652,9 @@ export const MsgTake = {
     message.owner = object.owner ?? '';
     message.basketDenom = object.basketDenom ?? '';
     message.amount = object.amount ?? '';
-    message.retirementJurisdiction = object.retirementJurisdiction ?? '';
+    message.retirementLocation = object.retirementLocation ?? '';
     message.retireOnTake = object.retireOnTake ?? false;
+    message.retirementJurisdiction = object.retirementJurisdiction ?? '';
     return message;
   },
 };
