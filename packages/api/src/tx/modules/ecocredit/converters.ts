@@ -2,7 +2,6 @@ import { AminoConverters } from '@cosmjs/stargate';
 import { putConverter, putTypeUrl } from './basket/v1/put_amino';
 import { takeConverter, takeTypeUrl } from './basket/v1/take_amino';
 import { createBasketConverter, createTypeUrl } from './basket/v1/create_amino';
-import { bridgeConverter, bridgeTypeUrl } from './v1/bridge_amino';
 import {
   buyDirectConverter,
   buyDirectTypeUrl,
@@ -16,6 +15,7 @@ import {
   updateSellOrderConverter,
   updateSellOrdersTypeUrl,
 } from './marketplace/v1/update_sell_orders';
+import { bridgeConverter, bridgeTypeUrl } from './v1/bridge_amino';
 import {
   createBatchConverter,
   createBatchTypeUrl,
@@ -68,6 +68,7 @@ import {
       MsgCreateProject
       MsgCreateBatch
       MsgRetire
+      MsgBridge
     Marketplace:
       MsgBuyDirect
       MsgCancelSellOrder
