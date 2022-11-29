@@ -25,7 +25,7 @@ import {
 } from '../generated/regen/ecocredit/marketplace/v1/tx';
 import { GeneratedType } from '@cosmjs/proto-signing';
 
-const ecocreditRegistry: Array<[string, GeneratedType]> = [
+const ecocreditRegistry: ReadonlyArray<[string, GeneratedType]> = [
   [MsgCancel.$type, MsgCancel],
   [MsgCreateClass.$type, MsgCreateClass],
   [MsgSend.$type, MsgSend],
@@ -40,13 +40,13 @@ const ecocreditRegistry: Array<[string, GeneratedType]> = [
   [MsgUpdateProjectAdmin.$type, MsgUpdateProjectAdmin],
 ];
 
-const basketRegistry: Array<[string, GeneratedType]> = [
+const basketRegistry: ReadonlyArray<[string, GeneratedType]> = [
   [MsgCreate.$type, MsgCreate],
   [MsgPut.$type, MsgPut],
   [MsgTake.$type, MsgTake],
 ];
 
-const marketplaceRegistry: Array<[string, GeneratedType]> = [
+const marketplaceRegistry: ReadonlyArray<[string, GeneratedType]> = [
   [MsgBuyDirect.$type, MsgBuyDirect],
   [MsgSell.$type, MsgSell],
   [MsgUpdateSellOrders.$type, MsgUpdateSellOrders],
@@ -58,3 +58,5 @@ export const regenRegistry = [
   ...basketRegistry,
   ...marketplaceRegistry,
 ];
+
+export const regenTypeRegistry = new Map<string, GeneratedType>(regenRegistry);
