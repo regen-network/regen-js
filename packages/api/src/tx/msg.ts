@@ -9,7 +9,7 @@ import {
 import { Registry, EncodeObject, GeneratedType } from '@cosmjs/proto-signing';
 
 import { SigningConnectionOptions } from '../api';
-import { regenRegistry } from './regen-message-type-registry';
+import { regenTypeRegistry } from './regen-message-type-registry';
 import { createStargateSigningClient } from './stargate-signing';
 import { createEcocreditAminoConverters } from './modules';
 import { messageTypeRegistry } from '../generated/typeRegistry';
@@ -37,7 +37,7 @@ export async function setupTxExtension(
   messageTypeRegistry.forEach((value, key) => {
     customRegistry.push([`/${key}`, value]);
   });
-  regenRegistry.forEach(([key, value]) => {
+  regenTypeRegistry.forEach(([key, value]) => {
     customRegistry.push([`/${key}`, value]);
   });
 

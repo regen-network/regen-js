@@ -53,10 +53,8 @@ const marketplaceRegistry: ReadonlyArray<[string, GeneratedType]> = [
   [MsgCancelSellOrder.$type, MsgCancelSellOrder],
 ];
 
-export const regenRegistry = [
+export const regenTypeRegistry = [
   ...ecocreditRegistry,
   ...basketRegistry,
   ...marketplaceRegistry,
 ];
-
-export const regenTypeRegistry = new Map<string, GeneratedType>(regenRegistry);
