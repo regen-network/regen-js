@@ -15,6 +15,7 @@ import {
   updateSellOrderConverter,
   updateSellOrdersTypeUrl,
 } from './marketplace/v1/update_sell_orders';
+import { bridgeConverter, bridgeTypeUrl } from './v1/bridge_amino';
 import {
   createBatchConverter,
   createBatchTypeUrl,
@@ -67,6 +68,7 @@ import {
       MsgCreateProject
       MsgCreateBatch
       MsgRetire
+      MsgBridge
     Marketplace:
       MsgBuyDirect
       MsgCancelSellOrder
@@ -81,6 +83,7 @@ import {
 export function createEcocreditAminoConverters(): AminoConverters {
   return {
     // core module
+    [bridgeTypeUrl]: bridgeConverter(),
     [cancelTypeUrl]: cancelConverter(),
     [createBatchTypeUrl]: createBatchConverter(),
     [createClassTypeUrl]: createClassConverter(),

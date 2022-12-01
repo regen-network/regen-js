@@ -7,6 +7,7 @@ import {
   MsgCreateProject,
   MsgRetire,
   MsgSend,
+  MsgBridge,
 } from '../src/generated/regen/ecocredit/v1/tx';
 import { StdFee } from '@cosmjs/amino/build/signdoc';
 import { Secp256k1HdWallet } from '@cosmjs/amino/build/secp256k1hdwallet';
@@ -263,6 +264,24 @@ xdescribe('RegenApi with tendermint connection - Amino Tests', () => {
       });
 
       await runAminoTest(msgClient, TEST_MSG_CANCEL);
+    });
+    it('should sign and broadcast MsgBridge using legacy amino sign mode', async () => {
+      const { msgClient } = await connect();
+      const TEST_BRIDGE_BATCH_DENOM = 'C02-001-20200101-20210101-001';
+
+      const TEST_MSG_BRIDGE = MsgBridge.fromPartial({
+        owner: TEST_ADDRESS,
+        recipient: makeEthContract(),
+        target: 'polygon',
+        credits: [
+          {
+            batchDenom: TEST_BRIDGE_BATCH_DENOM,
+            amount: MIN_CREDIT_AMOUNT,
+          },
+        ],
+      });
+
+      await runAminoTest(msgClient, TEST_MSG_BRIDGE);
     });
   });
   describe('Signing and broadcasting Basket txs using legacy amino sign mode', () => {
