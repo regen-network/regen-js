@@ -5,7 +5,7 @@ import {
   MsgSend_SendCredits,
 } from '../../../../generated/regen/ecocredit/v1/tx';
 
-const msgSendAminoType = 'regen.core/MsgSend';
+const msgSendAminoType = 'regen/MsgSend';
 
 export const sendTypeUrl = '/' + MsgSend.$type;
 

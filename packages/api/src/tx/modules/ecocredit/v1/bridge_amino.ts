@@ -4,7 +4,7 @@ import { MsgBridge } from '../../../../generated/regen/ecocredit/v1/tx';
 import { Credits } from '../../../../generated/regen/ecocredit/v1/types';
 import { AminoCredits } from './msg_cancel';
 
-const msgBridgeAminoType = 'regen.core/MsgBridge';
+const msgBridgeAminoType = 'regen/MsgBridge';
 
 export const bridgeTypeUrl = '/' + MsgBridge.$type;
 

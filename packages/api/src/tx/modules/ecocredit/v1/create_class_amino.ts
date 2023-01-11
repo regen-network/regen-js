@@ -3,7 +3,7 @@ import { AminoConverter } from '@cosmjs/stargate';
 import { MsgCreateClass } from '../../../../generated/regen/ecocredit/v1/tx';
 import { Coin } from '../../../../generated/cosmos/base/v1beta1/coin';
 
-const msgCreateClassAminoType = 'regen.core/MsgCreateClass';
+const msgCreateClassAminoType = 'regen/MsgCreateClass';
 
 export const createClassTypeUrl = '/' + MsgCreateClass.$type;
 

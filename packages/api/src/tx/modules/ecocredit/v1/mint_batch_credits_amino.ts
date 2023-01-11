@@ -7,7 +7,7 @@ import {
 } from '../../../../generated/regen/ecocredit/v1/types';
 import { AminoBatchIssuance, AminoOriginTx } from './create_batch_amino';
 
-const msgMintBatchCreditsAminoType = 'regen.core/MsgMintBatchCredits';
+const msgMintBatchCreditsAminoType = 'regen/MsgMintBatchCredits';
 
 export const mintBatchCreditsTypeUrl = '/' + MsgMintBatchCredits.$type;
 

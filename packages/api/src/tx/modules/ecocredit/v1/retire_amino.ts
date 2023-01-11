@@ -4,7 +4,7 @@ import { MsgRetire } from '../../../../generated/regen/ecocredit/v1/tx';
 import { Credits } from '../../../../generated/regen/ecocredit/v1/types';
 import { AminoCredits } from './msg_cancel';
 
-const msgRetireAminoType = 'regen.core/MsgRetire';
+const msgRetireAminoType = 'regen/MsgRetire';
 
 export const retireTypeUrl = '/' + MsgRetire.$type;
 

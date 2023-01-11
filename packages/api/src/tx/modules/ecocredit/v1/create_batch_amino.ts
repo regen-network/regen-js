@@ -7,7 +7,7 @@ import {
 } from '../../../../generated/regen/ecocredit/v1/types';
 import { AminoDate } from '../converter-utils';
 
-const msgCreateBatchAminoType = 'regen.core/MsgCreateBatch';
+const msgCreateBatchAminoType = 'regen/MsgCreateBatch';
 
 export const createBatchTypeUrl = '/' + MsgCreateBatch.$type;
 
