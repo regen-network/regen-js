@@ -2,7 +2,7 @@ import { AminoMsg } from '@cosmjs/amino';
 import { AminoConverter } from '@cosmjs/stargate';
 import { MsgUpdateProjectMetadata } from '../../../../generated/regen/ecocredit/v1/tx';
 
-const msgUpdateProjectMetadataAminoType = 'regen.core/MsgUpdateProjectMetadata';
+const msgUpdateProjectMetadataAminoType = 'regen/MsgUpdateProjectMetadata';
 
 export const updateProjectMetadataTypeUrl =
   '/' + MsgUpdateProjectMetadata.$type;

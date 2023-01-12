@@ -2,7 +2,7 @@ import { AminoMsg } from '@cosmjs/amino';
 import { AminoConverter } from '@cosmjs/stargate';
 import { MsgCreateProject } from '../../../../generated/regen/ecocredit/v1/tx';
 
-const msgCreateProjectAminoType = 'regen.core/MsgCreateProject';
+const msgCreateProjectAminoType = 'regen/MsgCreateProject';
 
 export const createProjectTypeUrl = '/' + MsgCreateProject.$type;
 

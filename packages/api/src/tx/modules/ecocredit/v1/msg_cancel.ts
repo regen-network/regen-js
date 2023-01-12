@@ -3,7 +3,7 @@ import { AminoConverter } from '@cosmjs/stargate';
 import { MsgCancel } from '../../../../generated/regen/ecocredit/v1/tx';
 import { Credits } from '../../../../generated/regen/ecocredit/v1/types';
 
-const msgCancelAminoType = 'regen.core/MsgCancel';
+const msgCancelAminoType = 'regen/MsgCancel';
 
 export const cancelTypeUrl = '/' + MsgCancel.$type;
 

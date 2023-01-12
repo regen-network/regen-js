@@ -2,7 +2,7 @@ import { AminoMsg } from '@cosmjs/amino';
 import { AminoConverter } from '@cosmjs/stargate';
 import { MsgSealBatch } from '../../../../generated/regen/ecocredit/v1/tx';
 
-const msgSealBatchAminoType = 'regen.core/MsgSealBatch';
+const msgSealBatchAminoType = 'regen/MsgSealBatch';
 
 export const sealBatchTypeUrl = '/' + MsgSealBatch.$type;
 
