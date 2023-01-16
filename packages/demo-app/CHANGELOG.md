@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.5.0](https://github.com/regen-network/regen-js/compare/v0.3.0...v0.5.0) (2023-01-16)
+
+
+### Features
+
+* Add amino signing support to regen-ledger msgs ([#38](https://github.com/regen-network/regen-js/issues/38)) ([84d6b5a](https://github.com/regen-network/regen-js/commit/84d6b5a7b344f893d80ba54b99067677cfdb36ef)), closes [#39](https://github.com/regen-network/regen-js/issues/39) [#43](https://github.com/regen-network/regen-js/issues/43) [#44](https://github.com/regen-network/regen-js/issues/44) [#45](https://github.com/regen-network/regen-js/issues/45) [#46](https://github.com/regen-network/regen-js/issues/46) [#48](https://github.com/regen-network/regen-js/issues/48) [#50](https://github.com/regen-network/regen-js/issues/50) [#49](https://github.com/regen-network/regen-js/issues/49) [#47](https://github.com/regen-network/regen-js/issues/47) [#53](https://github.com/regen-network/regen-js/issues/53) [#52](https://github.com/regen-network/regen-js/issues/52) [#54](https://github.com/regen-network/regen-js/issues/54) [#55](https://github.com/regen-network/regen-js/issues/55) [#56](https://github.com/regen-network/regen-js/issues/56)
+
+
+
+
+
 # [0.4.0](https://github.com/regen-network/regen-js/compare/v0.4.0-alpha1.5...v0.4.0) (2022-10-05)
 
 **Note:** Version bump only for package @regen-network/demo-app
