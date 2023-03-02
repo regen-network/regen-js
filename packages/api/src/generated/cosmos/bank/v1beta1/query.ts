@@ -2,12 +2,9 @@
 import { messageTypeRegistry } from '../../../typeRegistry';
 import Long from 'long';
 import _m0 from 'protobufjs/minimal';
-import { Coin } from '../../../cosmos/base/v1beta1/coin';
-import {
-  PageRequest,
-  PageResponse,
-} from '../../../cosmos/base/query/v1beta1/pagination';
-import { Params, Metadata } from '../../../cosmos/bank/v1beta1/bank';
+import { Coin } from '../../base/v1beta1/coin';
+import { PageRequest, PageResponse } from '../../base/query/v1beta1/pagination';
+import { Params, Metadata } from './bank';
 
 export const protobufPackage = 'cosmos.bank.v1beta1';
 
@@ -49,12 +46,44 @@ export interface QueryAllBalancesResponse {
 }
 
 /**
+ * QuerySpendableBalancesRequest defines the gRPC request structure for querying
+ * an account's spendable balances.
+ *
+ * Since: cosmos-sdk 0.46
+ */
+export interface QuerySpendableBalancesRequest {
+  $type: 'cosmos.bank.v1beta1.QuerySpendableBalancesRequest';
+  /** address is the address to query spendable balances for. */
+  address: string;
+  /** pagination defines an optional pagination for the request. */
+  pagination?: PageRequest;
+}
+
+/**
+ * QuerySpendableBalancesResponse defines the gRPC response structure for querying
+ * an account's spendable balances.
+ *
+ * Since: cosmos-sdk 0.46
+ */
+export interface QuerySpendableBalancesResponse {
+  $type: 'cosmos.bank.v1beta1.QuerySpendableBalancesResponse';
+  /** balances is the spendable balances of all the coins. */
+  balances: Coin[];
+  /** pagination defines the pagination in the response. */
+  pagination?: PageResponse;
+}
+
+/**
  * QueryTotalSupplyRequest is the request type for the Query/TotalSupply RPC
  * method.
  */
 export interface QueryTotalSupplyRequest {
   $type: 'cosmos.bank.v1beta1.QueryTotalSupplyRequest';
-  /** pagination defines an optional pagination for the request. */
+  /**
+   * pagination defines an optional pagination for the request.
+   *
+   * Since: cosmos-sdk 0.43
+   */
   pagination?: PageRequest;
 }
 
@@ -66,7 +95,11 @@ export interface QueryTotalSupplyResponse {
   $type: 'cosmos.bank.v1beta1.QueryTotalSupplyResponse';
   /** supply is the supply of the coins */
   supply: Coin[];
-  /** pagination defines the pagination in the response. */
+  /**
+   * pagination defines the pagination in the response.
+   *
+   * Since: cosmos-sdk 0.43
+   */
   pagination?: PageResponse;
 }
 
@@ -129,6 +162,46 @@ export interface QueryDenomMetadataResponse {
   $type: 'cosmos.bank.v1beta1.QueryDenomMetadataResponse';
   /** metadata describes and provides all the client information for the requested token. */
   metadata?: Metadata;
+}
+
+/**
+ * QueryDenomOwnersRequest defines the request type for the DenomOwners RPC query,
+ * which queries for a paginated set of all account holders of a particular
+ * denomination.
+ */
+export interface QueryDenomOwnersRequest {
+  $type: 'cosmos.bank.v1beta1.QueryDenomOwnersRequest';
+  /** denom defines the coin denomination to query all account holders for. */
+  denom: string;
+  /** pagination defines an optional pagination for the request. */
+  pagination?: PageRequest;
+}
+
+/**
+ * DenomOwner defines structure representing an account that owns or holds a
+ * particular denominated token. It contains the account address and account
+ * balance of the denominated token.
+ *
+ * Since: cosmos-sdk 0.46
+ */
+export interface DenomOwner {
+  $type: 'cosmos.bank.v1beta1.DenomOwner';
+  /** address defines the address that owns a particular denomination. */
+  address: string;
+  /** balance is the balance of the denominated coin for an account. */
+  balance?: Coin;
+}
+
+/**
+ * QueryDenomOwnersResponse defines the RPC response of a DenomOwners RPC query.
+ *
+ * Since: cosmos-sdk 0.46
+ */
+export interface QueryDenomOwnersResponse {
+  $type: 'cosmos.bank.v1beta1.QueryDenomOwnersResponse';
+  denomOwners: DenomOwner[];
+  /** pagination defines the pagination in the response. */
+  pagination?: PageResponse;
 }
 
 function createBaseQueryBalanceRequest(): QueryBalanceRequest {
@@ -454,6 +527,189 @@ export const QueryAllBalancesResponse = {
 messageTypeRegistry.set(
   QueryAllBalancesResponse.$type,
   QueryAllBalancesResponse,
+);
+
+function createBaseQuerySpendableBalancesRequest(): QuerySpendableBalancesRequest {
+  return {
+    $type: 'cosmos.bank.v1beta1.QuerySpendableBalancesRequest',
+    address: '',
+    pagination: undefined,
+  };
+}
+
+export const QuerySpendableBalancesRequest = {
+  $type: 'cosmos.bank.v1beta1.QuerySpendableBalancesRequest' as const,
+
+  encode(
+    message: QuerySpendableBalancesRequest,
+    writer: _m0.Writer = _m0.Writer.create(),
+  ): _m0.Writer {
+    if (message.address !== '') {
+      writer.uint32(10).string(message.address);
+    }
+    if (message.pagination !== undefined) {
+      PageRequest.encode(message.pagination, writer.uint32(18).fork()).ldelim();
+    }
+    return writer;
+  },
+
+  decode(
+    input: _m0.Reader | Uint8Array,
+    length?: number,
+  ): QuerySpendableBalancesRequest {
+    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+    let end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseQuerySpendableBalancesRequest();
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+        case 1:
+          message.address = reader.string();
+          break;
+        case 2:
+          message.pagination = PageRequest.decode(reader, reader.uint32());
+          break;
+        default:
+          reader.skipType(tag & 7);
+          break;
+      }
+    }
+    return message;
+  },
+
+  fromJSON(object: any): QuerySpendableBalancesRequest {
+    return {
+      $type: QuerySpendableBalancesRequest.$type,
+      address: isSet(object.address) ? String(object.address) : '',
+      pagination: isSet(object.pagination)
+        ? PageRequest.fromJSON(object.pagination)
+        : undefined,
+    };
+  },
+
+  toJSON(message: QuerySpendableBalancesRequest): unknown {
+    const obj: any = {};
+    message.address !== undefined && (obj.address = message.address);
+    message.pagination !== undefined &&
+      (obj.pagination = message.pagination
+        ? PageRequest.toJSON(message.pagination)
+        : undefined);
+    return obj;
+  },
+
+  fromPartial<I extends Exact<DeepPartial<QuerySpendableBalancesRequest>, I>>(
+    object: I,
+  ): QuerySpendableBalancesRequest {
+    const message = createBaseQuerySpendableBalancesRequest();
+    message.address = object.address ?? '';
+    message.pagination =
+      object.pagination !== undefined && object.pagination !== null
+        ? PageRequest.fromPartial(object.pagination)
+        : undefined;
+    return message;
+  },
+};
+
+messageTypeRegistry.set(
+  QuerySpendableBalancesRequest.$type,
+  QuerySpendableBalancesRequest,
+);
+
+function createBaseQuerySpendableBalancesResponse(): QuerySpendableBalancesResponse {
+  return {
+    $type: 'cosmos.bank.v1beta1.QuerySpendableBalancesResponse',
+    balances: [],
+    pagination: undefined,
+  };
+}
+
+export const QuerySpendableBalancesResponse = {
+  $type: 'cosmos.bank.v1beta1.QuerySpendableBalancesResponse' as const,
+
+  encode(
+    message: QuerySpendableBalancesResponse,
+    writer: _m0.Writer = _m0.Writer.create(),
+  ): _m0.Writer {
+    for (const v of message.balances) {
+      Coin.encode(v!, writer.uint32(10).fork()).ldelim();
+    }
+    if (message.pagination !== undefined) {
+      PageResponse.encode(
+        message.pagination,
+        writer.uint32(18).fork(),
+      ).ldelim();
+    }
+    return writer;
+  },
+
+  decode(
+    input: _m0.Reader | Uint8Array,
+    length?: number,
+  ): QuerySpendableBalancesResponse {
+    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+    let end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseQuerySpendableBalancesResponse();
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+        case 1:
+          message.balances.push(Coin.decode(reader, reader.uint32()));
+          break;
+        case 2:
+          message.pagination = PageResponse.decode(reader, reader.uint32());
+          break;
+        default:
+          reader.skipType(tag & 7);
+          break;
+      }
+    }
+    return message;
+  },
+
+  fromJSON(object: any): QuerySpendableBalancesResponse {
+    return {
+      $type: QuerySpendableBalancesResponse.$type,
+      balances: Array.isArray(object?.balances)
+        ? object.balances.map((e: any) => Coin.fromJSON(e))
+        : [],
+      pagination: isSet(object.pagination)
+        ? PageResponse.fromJSON(object.pagination)
+        : undefined,
+    };
+  },
+
+  toJSON(message: QuerySpendableBalancesResponse): unknown {
+    const obj: any = {};
+    if (message.balances) {
+      obj.balances = message.balances.map(e =>
+        e ? Coin.toJSON(e) : undefined,
+      );
+    } else {
+      obj.balances = [];
+    }
+    message.pagination !== undefined &&
+      (obj.pagination = message.pagination
+        ? PageResponse.toJSON(message.pagination)
+        : undefined);
+    return obj;
+  },
+
+  fromPartial<I extends Exact<DeepPartial<QuerySpendableBalancesResponse>, I>>(
+    object: I,
+  ): QuerySpendableBalancesResponse {
+    const message = createBaseQuerySpendableBalancesResponse();
+    message.balances = object.balances?.map(e => Coin.fromPartial(e)) || [];
+    message.pagination =
+      object.pagination !== undefined && object.pagination !== null
+        ? PageResponse.fromPartial(object.pagination)
+        : undefined;
+    return message;
+  },
+};
+
+messageTypeRegistry.set(
+  QuerySpendableBalancesResponse.$type,
+  QuerySpendableBalancesResponse,
 );
 
 function createBaseQueryTotalSupplyRequest(): QueryTotalSupplyRequest {
@@ -1186,6 +1442,267 @@ messageTypeRegistry.set(
   QueryDenomMetadataResponse,
 );
 
+function createBaseQueryDenomOwnersRequest(): QueryDenomOwnersRequest {
+  return {
+    $type: 'cosmos.bank.v1beta1.QueryDenomOwnersRequest',
+    denom: '',
+    pagination: undefined,
+  };
+}
+
+export const QueryDenomOwnersRequest = {
+  $type: 'cosmos.bank.v1beta1.QueryDenomOwnersRequest' as const,
+
+  encode(
+    message: QueryDenomOwnersRequest,
+    writer: _m0.Writer = _m0.Writer.create(),
+  ): _m0.Writer {
+    if (message.denom !== '') {
+      writer.uint32(10).string(message.denom);
+    }
+    if (message.pagination !== undefined) {
+      PageRequest.encode(message.pagination, writer.uint32(18).fork()).ldelim();
+    }
+    return writer;
+  },
+
+  decode(
+    input: _m0.Reader | Uint8Array,
+    length?: number,
+  ): QueryDenomOwnersRequest {
+    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+    let end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseQueryDenomOwnersRequest();
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+        case 1:
+          message.denom = reader.string();
+          break;
+        case 2:
+          message.pagination = PageRequest.decode(reader, reader.uint32());
+          break;
+        default:
+          reader.skipType(tag & 7);
+          break;
+      }
+    }
+    return message;
+  },
+
+  fromJSON(object: any): QueryDenomOwnersRequest {
+    return {
+      $type: QueryDenomOwnersRequest.$type,
+      denom: isSet(object.denom) ? String(object.denom) : '',
+      pagination: isSet(object.pagination)
+        ? PageRequest.fromJSON(object.pagination)
+        : undefined,
+    };
+  },
+
+  toJSON(message: QueryDenomOwnersRequest): unknown {
+    const obj: any = {};
+    message.denom !== undefined && (obj.denom = message.denom);
+    message.pagination !== undefined &&
+      (obj.pagination = message.pagination
+        ? PageRequest.toJSON(message.pagination)
+        : undefined);
+    return obj;
+  },
+
+  fromPartial<I extends Exact<DeepPartial<QueryDenomOwnersRequest>, I>>(
+    object: I,
+  ): QueryDenomOwnersRequest {
+    const message = createBaseQueryDenomOwnersRequest();
+    message.denom = object.denom ?? '';
+    message.pagination =
+      object.pagination !== undefined && object.pagination !== null
+        ? PageRequest.fromPartial(object.pagination)
+        : undefined;
+    return message;
+  },
+};
+
+messageTypeRegistry.set(QueryDenomOwnersRequest.$type, QueryDenomOwnersRequest);
+
+function createBaseDenomOwner(): DenomOwner {
+  return {
+    $type: 'cosmos.bank.v1beta1.DenomOwner',
+    address: '',
+    balance: undefined,
+  };
+}
+
+export const DenomOwner = {
+  $type: 'cosmos.bank.v1beta1.DenomOwner' as const,
+
+  encode(
+    message: DenomOwner,
+    writer: _m0.Writer = _m0.Writer.create(),
+  ): _m0.Writer {
+    if (message.address !== '') {
+      writer.uint32(10).string(message.address);
+    }
+    if (message.balance !== undefined) {
+      Coin.encode(message.balance, writer.uint32(18).fork()).ldelim();
+    }
+    return writer;
+  },
+
+  decode(input: _m0.Reader | Uint8Array, length?: number): DenomOwner {
+    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+    let end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseDenomOwner();
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+        case 1:
+          message.address = reader.string();
+          break;
+        case 2:
+          message.balance = Coin.decode(reader, reader.uint32());
+          break;
+        default:
+          reader.skipType(tag & 7);
+          break;
+      }
+    }
+    return message;
+  },
+
+  fromJSON(object: any): DenomOwner {
+    return {
+      $type: DenomOwner.$type,
+      address: isSet(object.address) ? String(object.address) : '',
+      balance: isSet(object.balance)
+        ? Coin.fromJSON(object.balance)
+        : undefined,
+    };
+  },
+
+  toJSON(message: DenomOwner): unknown {
+    const obj: any = {};
+    message.address !== undefined && (obj.address = message.address);
+    message.balance !== undefined &&
+      (obj.balance = message.balance
+        ? Coin.toJSON(message.balance)
+        : undefined);
+    return obj;
+  },
+
+  fromPartial<I extends Exact<DeepPartial<DenomOwner>, I>>(
+    object: I,
+  ): DenomOwner {
+    const message = createBaseDenomOwner();
+    message.address = object.address ?? '';
+    message.balance =
+      object.balance !== undefined && object.balance !== null
+        ? Coin.fromPartial(object.balance)
+        : undefined;
+    return message;
+  },
+};
+
+messageTypeRegistry.set(DenomOwner.$type, DenomOwner);
+
+function createBaseQueryDenomOwnersResponse(): QueryDenomOwnersResponse {
+  return {
+    $type: 'cosmos.bank.v1beta1.QueryDenomOwnersResponse',
+    denomOwners: [],
+    pagination: undefined,
+  };
+}
+
+export const QueryDenomOwnersResponse = {
+  $type: 'cosmos.bank.v1beta1.QueryDenomOwnersResponse' as const,
+
+  encode(
+    message: QueryDenomOwnersResponse,
+    writer: _m0.Writer = _m0.Writer.create(),
+  ): _m0.Writer {
+    for (const v of message.denomOwners) {
+      DenomOwner.encode(v!, writer.uint32(10).fork()).ldelim();
+    }
+    if (message.pagination !== undefined) {
+      PageResponse.encode(
+        message.pagination,
+        writer.uint32(18).fork(),
+      ).ldelim();
+    }
+    return writer;
+  },
+
+  decode(
+    input: _m0.Reader | Uint8Array,
+    length?: number,
+  ): QueryDenomOwnersResponse {
+    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+    let end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseQueryDenomOwnersResponse();
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+        case 1:
+          message.denomOwners.push(DenomOwner.decode(reader, reader.uint32()));
+          break;
+        case 2:
+          message.pagination = PageResponse.decode(reader, reader.uint32());
+          break;
+        default:
+          reader.skipType(tag & 7);
+          break;
+      }
+    }
+    return message;
+  },
+
+  fromJSON(object: any): QueryDenomOwnersResponse {
+    return {
+      $type: QueryDenomOwnersResponse.$type,
+      denomOwners: Array.isArray(object?.denomOwners)
+        ? object.denomOwners.map((e: any) => DenomOwner.fromJSON(e))
+        : [],
+      pagination: isSet(object.pagination)
+        ? PageResponse.fromJSON(object.pagination)
+        : undefined,
+    };
+  },
+
+  toJSON(message: QueryDenomOwnersResponse): unknown {
+    const obj: any = {};
+    if (message.denomOwners) {
+      obj.denomOwners = message.denomOwners.map(e =>
+        e ? DenomOwner.toJSON(e) : undefined,
+      );
+    } else {
+      obj.denomOwners = [];
+    }
+    message.pagination !== undefined &&
+      (obj.pagination = message.pagination
+        ? PageResponse.toJSON(message.pagination)
+        : undefined);
+    return obj;
+  },
+
+  fromPartial<I extends Exact<DeepPartial<QueryDenomOwnersResponse>, I>>(
+    object: I,
+  ): QueryDenomOwnersResponse {
+    const message = createBaseQueryDenomOwnersResponse();
+    message.denomOwners =
+      object.denomOwners?.map(e => DenomOwner.fromPartial(e)) || [];
+    message.pagination =
+      object.pagination !== undefined && object.pagination !== null
+        ? PageResponse.fromPartial(object.pagination)
+        : undefined;
+    return message;
+  },
+};
+
+messageTypeRegistry.set(
+  QueryDenomOwnersResponse.$type,
+  QueryDenomOwnersResponse,
+);
+
 /** Query defines the gRPC querier service. */
 export interface Query {
   /** Balance queries the balance of a single coin for a single account. */
@@ -1196,6 +1713,15 @@ export interface Query {
   AllBalances(
     request: DeepPartial<QueryAllBalancesRequest>,
   ): Promise<QueryAllBalancesResponse>;
+  /**
+   * SpendableBalances queries the spenable balance of all coins for a single
+   * account.
+   *
+   * Since: cosmos-sdk 0.46
+   */
+  SpendableBalances(
+    request: DeepPartial<QuerySpendableBalancesRequest>,
+  ): Promise<QuerySpendableBalancesResponse>;
   /** TotalSupply queries the total supply of all coins. */
   TotalSupply(
     request: DeepPartial<QueryTotalSupplyRequest>,
@@ -1212,10 +1738,22 @@ export interface Query {
   DenomMetadata(
     request: DeepPartial<QueryDenomMetadataRequest>,
   ): Promise<QueryDenomMetadataResponse>;
-  /** DenomsMetadata queries the client metadata for all registered coin denominations. */
+  /**
+   * DenomsMetadata queries the client metadata for all registered coin
+   * denominations.
+   */
   DenomsMetadata(
     request: DeepPartial<QueryDenomsMetadataRequest>,
   ): Promise<QueryDenomsMetadataResponse>;
+  /**
+   * DenomOwners queries for all account addresses that own a particular token
+   * denomination.
+   *
+   * Since: cosmos-sdk 0.46
+   */
+  DenomOwners(
+    request: DeepPartial<QueryDenomOwnersRequest>,
+  ): Promise<QueryDenomOwnersResponse>;
 }
 
 export class QueryClientImpl implements Query {
@@ -1224,11 +1762,13 @@ export class QueryClientImpl implements Query {
     this.rpc = rpc;
     this.Balance = this.Balance.bind(this);
     this.AllBalances = this.AllBalances.bind(this);
+    this.SpendableBalances = this.SpendableBalances.bind(this);
     this.TotalSupply = this.TotalSupply.bind(this);
     this.SupplyOf = this.SupplyOf.bind(this);
     this.Params = this.Params.bind(this);
     this.DenomMetadata = this.DenomMetadata.bind(this);
     this.DenomsMetadata = this.DenomsMetadata.bind(this);
+    this.DenomOwners = this.DenomOwners.bind(this);
   }
   Balance(
     request: DeepPartial<QueryBalanceRequest>,
@@ -1257,6 +1797,21 @@ export class QueryClientImpl implements Query {
     );
     return promise.then(data =>
       QueryAllBalancesResponse.decode(new _m0.Reader(data)),
+    );
+  }
+
+  SpendableBalances(
+    request: DeepPartial<QuerySpendableBalancesRequest>,
+  ): Promise<QuerySpendableBalancesResponse> {
+    const fromPartial = QuerySpendableBalancesRequest.fromPartial(request);
+    const data = QuerySpendableBalancesRequest.encode(fromPartial).finish();
+    const promise = this.rpc.request(
+      'cosmos.bank.v1beta1.Query',
+      'SpendableBalances',
+      data,
+    );
+    return promise.then(data =>
+      QuerySpendableBalancesResponse.decode(new _m0.Reader(data)),
     );
   }
 
@@ -1332,6 +1887,21 @@ export class QueryClientImpl implements Query {
     );
     return promise.then(data =>
       QueryDenomsMetadataResponse.decode(new _m0.Reader(data)),
+    );
+  }
+
+  DenomOwners(
+    request: DeepPartial<QueryDenomOwnersRequest>,
+  ): Promise<QueryDenomOwnersResponse> {
+    const fromPartial = QueryDenomOwnersRequest.fromPartial(request);
+    const data = QueryDenomOwnersRequest.encode(fromPartial).finish();
+    const promise = this.rpc.request(
+      'cosmos.bank.v1beta1.Query',
+      'DenomOwners',
+      data,
+    );
+    return promise.then(data =>
+      QueryDenomOwnersResponse.decode(new _m0.Reader(data)),
     );
   }
 }

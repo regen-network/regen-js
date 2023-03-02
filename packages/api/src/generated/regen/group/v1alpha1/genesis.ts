@@ -8,7 +8,7 @@ import {
   GroupAccountInfo,
   Proposal,
   Vote,
-} from '../../../regen/group/v1alpha1/types';
+} from './types';
 
 export const protobufPackage = 'regen.group.v1alpha1';
 

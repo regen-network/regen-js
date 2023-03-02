@@ -2,7 +2,7 @@
 import { messageTypeRegistry } from '../../../../typeRegistry';
 import Long from 'long';
 import _m0 from 'protobufjs/minimal';
-import { BasketCredit } from '../../../../regen/ecocredit/basket/v1/types';
+import { BasketCredit } from './types';
 
 export const protobufPackage = 'regen.ecocredit.basket.v1';
 
@@ -81,6 +81,17 @@ export interface EventTake {
    * @deprecated
    */
   amount: string;
+}
+
+/**
+ * EventUpdateCurator is an event emitted when the basket curator is updated.
+ *
+ * Since Revision 2
+ */
+export interface EventUpdateCurator {
+  $type: 'regen.ecocredit.basket.v1.EventUpdateCurator';
+  /** denom is the basket denom. */
+  denom: string;
 }
 
 function createBaseEventCreate(): EventCreate {
@@ -357,6 +368,65 @@ export const EventTake = {
 };
 
 messageTypeRegistry.set(EventTake.$type, EventTake);
+
+function createBaseEventUpdateCurator(): EventUpdateCurator {
+  return { $type: 'regen.ecocredit.basket.v1.EventUpdateCurator', denom: '' };
+}
+
+export const EventUpdateCurator = {
+  $type: 'regen.ecocredit.basket.v1.EventUpdateCurator' as const,
+
+  encode(
+    message: EventUpdateCurator,
+    writer: _m0.Writer = _m0.Writer.create(),
+  ): _m0.Writer {
+    if (message.denom !== '') {
+      writer.uint32(10).string(message.denom);
+    }
+    return writer;
+  },
+
+  decode(input: _m0.Reader | Uint8Array, length?: number): EventUpdateCurator {
+    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+    let end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseEventUpdateCurator();
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+        case 1:
+          message.denom = reader.string();
+          break;
+        default:
+          reader.skipType(tag & 7);
+          break;
+      }
+    }
+    return message;
+  },
+
+  fromJSON(object: any): EventUpdateCurator {
+    return {
+      $type: EventUpdateCurator.$type,
+      denom: isSet(object.denom) ? String(object.denom) : '',
+    };
+  },
+
+  toJSON(message: EventUpdateCurator): unknown {
+    const obj: any = {};
+    message.denom !== undefined && (obj.denom = message.denom);
+    return obj;
+  },
+
+  fromPartial<I extends Exact<DeepPartial<EventUpdateCurator>, I>>(
+    object: I,
+  ): EventUpdateCurator {
+    const message = createBaseEventUpdateCurator();
+    message.denom = object.denom ?? '';
+    return message;
+  },
+};
+
+messageTypeRegistry.set(EventUpdateCurator.$type, EventUpdateCurator);
 
 type Builtin =
   | Date

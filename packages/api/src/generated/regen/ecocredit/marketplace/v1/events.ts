@@ -52,6 +52,21 @@ export interface EventAllowDenom {
   denom: string;
 }
 
+/**
+ * EventRemoveAllowedDenom is an event emitted when a denom is removed from use
+ * in the marketplace.
+ *
+ * Since Revision 1
+ */
+export interface EventRemoveAllowedDenom {
+  $type: 'regen.ecocredit.marketplace.v1.EventRemoveAllowedDenom';
+  /**
+   * denom is the bank denom (e.g. ibc/GLKHDSG423SGS) removed from the list of
+   * allowed denoms for use in the marketplace.
+   */
+  denom: string;
+}
+
 function createBaseEventSell(): EventSell {
   return {
     $type: 'regen.ecocredit.marketplace.v1.EventSell',
@@ -388,6 +403,71 @@ export const EventAllowDenom = {
 };
 
 messageTypeRegistry.set(EventAllowDenom.$type, EventAllowDenom);
+
+function createBaseEventRemoveAllowedDenom(): EventRemoveAllowedDenom {
+  return {
+    $type: 'regen.ecocredit.marketplace.v1.EventRemoveAllowedDenom',
+    denom: '',
+  };
+}
+
+export const EventRemoveAllowedDenom = {
+  $type: 'regen.ecocredit.marketplace.v1.EventRemoveAllowedDenom' as const,
+
+  encode(
+    message: EventRemoveAllowedDenom,
+    writer: _m0.Writer = _m0.Writer.create(),
+  ): _m0.Writer {
+    if (message.denom !== '') {
+      writer.uint32(10).string(message.denom);
+    }
+    return writer;
+  },
+
+  decode(
+    input: _m0.Reader | Uint8Array,
+    length?: number,
+  ): EventRemoveAllowedDenom {
+    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+    let end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseEventRemoveAllowedDenom();
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+        case 1:
+          message.denom = reader.string();
+          break;
+        default:
+          reader.skipType(tag & 7);
+          break;
+      }
+    }
+    return message;
+  },
+
+  fromJSON(object: any): EventRemoveAllowedDenom {
+    return {
+      $type: EventRemoveAllowedDenom.$type,
+      denom: isSet(object.denom) ? String(object.denom) : '',
+    };
+  },
+
+  toJSON(message: EventRemoveAllowedDenom): unknown {
+    const obj: any = {};
+    message.denom !== undefined && (obj.denom = message.denom);
+    return obj;
+  },
+
+  fromPartial<I extends Exact<DeepPartial<EventRemoveAllowedDenom>, I>>(
+    object: I,
+  ): EventRemoveAllowedDenom {
+    const message = createBaseEventRemoveAllowedDenom();
+    message.denom = object.denom ?? '';
+    return message;
+  },
+};
+
+messageTypeRegistry.set(EventRemoveAllowedDenom.$type, EventRemoveAllowedDenom);
 
 type Builtin =
   | Date

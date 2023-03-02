@@ -2,15 +2,13 @@
 import { messageTypeRegistry } from '../../../../typeRegistry';
 import Long from 'long';
 import _m0 from 'protobufjs/minimal';
-import {
-  Basket,
-  BasketBalance,
-} from '../../../../regen/ecocredit/basket/v1/state';
+import { Basket, BasketBalance } from './state';
 import {
   PageRequest,
   PageResponse,
 } from '../../../../cosmos/base/query/v1beta1/pagination';
-import { DateCriteria } from '../../../../regen/ecocredit/basket/v1/types';
+import { DateCriteria } from './types';
+import { Coin } from '../../../../cosmos/base/v1beta1/coin';
 
 export const protobufPackage = 'regen.ecocredit.basket.v1';
 
@@ -161,6 +159,29 @@ export interface BasketBalanceInfo {
   batchDenom: string;
   /** balance is the amount of ecocredits held in the basket */
   balance: string;
+}
+
+/**
+ * QueryBasketFeeRequest is the Query/BasketFee request type.
+ *
+ * Since Revision 2
+ */
+export interface QueryBasketFeeRequest {
+  $type: 'regen.ecocredit.basket.v1.QueryBasketFeeRequest';
+}
+
+/**
+ * QueryBasketFeeResponse is the Query/BasketFee response type.
+ *
+ * Since Revision 2
+ */
+export interface QueryBasketFeeResponse {
+  $type: 'regen.ecocredit.basket.v1.QueryBasketFeeResponse';
+  /**
+   * fee is the basket creation fee. If not set, a basket creation fee is not
+   * required.
+   */
+  fee?: Coin;
 }
 
 function createBaseQueryBasketRequest(): QueryBasketRequest {
@@ -1075,6 +1096,128 @@ export const BasketBalanceInfo = {
 
 messageTypeRegistry.set(BasketBalanceInfo.$type, BasketBalanceInfo);
 
+function createBaseQueryBasketFeeRequest(): QueryBasketFeeRequest {
+  return { $type: 'regen.ecocredit.basket.v1.QueryBasketFeeRequest' };
+}
+
+export const QueryBasketFeeRequest = {
+  $type: 'regen.ecocredit.basket.v1.QueryBasketFeeRequest' as const,
+
+  encode(
+    _: QueryBasketFeeRequest,
+    writer: _m0.Writer = _m0.Writer.create(),
+  ): _m0.Writer {
+    return writer;
+  },
+
+  decode(
+    input: _m0.Reader | Uint8Array,
+    length?: number,
+  ): QueryBasketFeeRequest {
+    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+    let end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseQueryBasketFeeRequest();
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+        default:
+          reader.skipType(tag & 7);
+          break;
+      }
+    }
+    return message;
+  },
+
+  fromJSON(_: any): QueryBasketFeeRequest {
+    return {
+      $type: QueryBasketFeeRequest.$type,
+    };
+  },
+
+  toJSON(_: QueryBasketFeeRequest): unknown {
+    const obj: any = {};
+    return obj;
+  },
+
+  fromPartial<I extends Exact<DeepPartial<QueryBasketFeeRequest>, I>>(
+    _: I,
+  ): QueryBasketFeeRequest {
+    const message = createBaseQueryBasketFeeRequest();
+    return message;
+  },
+};
+
+messageTypeRegistry.set(QueryBasketFeeRequest.$type, QueryBasketFeeRequest);
+
+function createBaseQueryBasketFeeResponse(): QueryBasketFeeResponse {
+  return {
+    $type: 'regen.ecocredit.basket.v1.QueryBasketFeeResponse',
+    fee: undefined,
+  };
+}
+
+export const QueryBasketFeeResponse = {
+  $type: 'regen.ecocredit.basket.v1.QueryBasketFeeResponse' as const,
+
+  encode(
+    message: QueryBasketFeeResponse,
+    writer: _m0.Writer = _m0.Writer.create(),
+  ): _m0.Writer {
+    if (message.fee !== undefined) {
+      Coin.encode(message.fee, writer.uint32(10).fork()).ldelim();
+    }
+    return writer;
+  },
+
+  decode(
+    input: _m0.Reader | Uint8Array,
+    length?: number,
+  ): QueryBasketFeeResponse {
+    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+    let end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseQueryBasketFeeResponse();
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+        case 1:
+          message.fee = Coin.decode(reader, reader.uint32());
+          break;
+        default:
+          reader.skipType(tag & 7);
+          break;
+      }
+    }
+    return message;
+  },
+
+  fromJSON(object: any): QueryBasketFeeResponse {
+    return {
+      $type: QueryBasketFeeResponse.$type,
+      fee: isSet(object.fee) ? Coin.fromJSON(object.fee) : undefined,
+    };
+  },
+
+  toJSON(message: QueryBasketFeeResponse): unknown {
+    const obj: any = {};
+    message.fee !== undefined &&
+      (obj.fee = message.fee ? Coin.toJSON(message.fee) : undefined);
+    return obj;
+  },
+
+  fromPartial<I extends Exact<DeepPartial<QueryBasketFeeResponse>, I>>(
+    object: I,
+  ): QueryBasketFeeResponse {
+    const message = createBaseQueryBasketFeeResponse();
+    message.fee =
+      object.fee !== undefined && object.fee !== null
+        ? Coin.fromPartial(object.fee)
+        : undefined;
+    return message;
+  },
+};
+
+messageTypeRegistry.set(QueryBasketFeeResponse.$type, QueryBasketFeeResponse);
+
 /** Msg is the regen.ecocredit.basket.v1 Query service. */
 export interface Query {
   /** Basket queries one basket by denom. */
@@ -1093,6 +1236,15 @@ export interface Query {
   BasketBalance(
     request: DeepPartial<QueryBasketBalanceRequest>,
   ): Promise<QueryBasketBalanceResponse>;
+  /**
+   * BasketFee returns the basket creation fee. If not set, a basket creation
+   * fee is not required.
+   *
+   * Since Revision 2
+   */
+  BasketFee(
+    request: DeepPartial<QueryBasketFeeRequest>,
+  ): Promise<QueryBasketFeeResponse>;
 }
 
 export class QueryClientImpl implements Query {
@@ -1103,6 +1255,7 @@ export class QueryClientImpl implements Query {
     this.Baskets = this.Baskets.bind(this);
     this.BasketBalances = this.BasketBalances.bind(this);
     this.BasketBalance = this.BasketBalance.bind(this);
+    this.BasketFee = this.BasketFee.bind(this);
   }
   Basket(
     request: DeepPartial<QueryBasketRequest>,
@@ -1161,6 +1314,21 @@ export class QueryClientImpl implements Query {
     );
     return promise.then(data =>
       QueryBasketBalanceResponse.decode(new _m0.Reader(data)),
+    );
+  }
+
+  BasketFee(
+    request: DeepPartial<QueryBasketFeeRequest>,
+  ): Promise<QueryBasketFeeResponse> {
+    const fromPartial = QueryBasketFeeRequest.fromPartial(request);
+    const data = QueryBasketFeeRequest.encode(fromPartial).finish();
+    const promise = this.rpc.request(
+      'regen.ecocredit.basket.v1.Query',
+      'BasketFee',
+      data,
+    );
+    return promise.then(data =>
+      QueryBasketFeeResponse.decode(new _m0.Reader(data)),
     );
   }
 }

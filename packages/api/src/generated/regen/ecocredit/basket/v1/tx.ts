@@ -2,10 +2,7 @@
 import { messageTypeRegistry } from '../../../../typeRegistry';
 import Long from 'long';
 import _m0 from 'protobufjs/minimal';
-import {
-  DateCriteria,
-  BasketCredit,
-} from '../../../../regen/ecocredit/basket/v1/types';
+import { DateCriteria, BasketCredit } from './types';
 import { Coin } from '../../../../cosmos/base/v1beta1/coin';
 
 export const protobufPackage = 'regen.ecocredit.basket.v1';
@@ -63,11 +60,10 @@ export interface MsgCreate {
    */
   dateCriteria?: DateCriteria;
   /**
-   * fee is the basket creation fee. A fee is not required if the list of fees
-   * in Params.basket_fee is empty. The provided fee must be one of the fees
-   * listed in Params.basket_fee. The provided amount can be greater than
-   * or equal to the listed amount but the basket creator will only be charged
-   * the listed amount (i.e. the minimum amount).
+   * fee is the basket creation fee. A fee is not required if no fee exists
+   * in the basket fee parameter. The fee must be greater than or equal to the
+   * fee param. The curator will be charged the amount specified in the fee
+   * parameter, even if a greater amount is provided.
    *
    * Note (Since Revision 1): Although this field supports a list of fees, the
    * basket creator must provide no more than one fee (i.e. one Coin in a list
@@ -94,9 +90,7 @@ export interface MsgPut {
   basketDenom: string;
   /**
    * credits are credits to add to the basket. If they do not match the basket's
-   * admission criteria the operation will fail. If there are any "dust" credits
-   * left over when converting credits to basket tokens, these credits will
-   * not be converted to basket tokens and instead remain with the owner.
+   * admission criteria, the operation will fail.
    */
   credits: BasketCredit[];
 }
@@ -119,7 +113,7 @@ export interface MsgTake {
   amount: string;
   /**
    * retirement_location is the optional retirement jurisdiction for the
-   * credits which will be used only if retire_on_take is true for this basket.
+   * credits which will be used only if retire_on_take is true.
    *
    * Deprecated (Since Revision 1): This field will be removed in the next
    * version in favor of retirement_jurisdiction. Only one of these need to be
@@ -131,16 +125,26 @@ export interface MsgTake {
   /**
    * retire_on_take is a boolean that dictates whether the ecocredits
    * received in exchange for the basket tokens will be received as
-   * retired or tradable credits.
+   * retired or tradable credits. If the basket has disable_auto_retire set to
+   * false, retire_on_take MUST be set to true, and a retirement jurisdiction
+   * must be provided.
    */
   retireOnTake: boolean;
   /**
    * retirement_jurisdiction is the optional retirement jurisdiction for the
-   * credits which will be used only if retire_on_take is true for this basket.
+   * credits which will be used only if retire_on_take is true.
    *
    * Since Revision 1
    */
   retirementJurisdiction: string;
+  /**
+   * retirement_reason is any arbitrary string that specifies the reason for
+   * retiring credits. The reason will be included in EventRetire and is not
+   * stored in state.
+   *
+   * Since Revision 2
+   */
+  retirementReason: string;
 }
 
 /** MsgTakeFromBasketResponse is the Msg/TakeFromBasket response type. */
@@ -148,6 +152,58 @@ export interface MsgTakeResponse {
   $type: 'regen.ecocredit.basket.v1.MsgTakeResponse';
   /** credits are the credits taken out of the basket. */
   credits: BasketCredit[];
+}
+
+/**
+ * MsgUpdateBasketFee is the Msg/UpdateBasketFee request type.
+ *
+ * Since Revision 2
+ */
+export interface MsgUpdateBasketFee {
+  $type: 'regen.ecocredit.basket.v1.MsgUpdateBasketFee';
+  /** authority is the address of the governance account. */
+  authority: string;
+  /**
+   * fee is the basket creation fee. If not set, the basket creation fee will be
+   * removed and no fee will be required to create a basket.
+   */
+  fee?: Coin;
+}
+
+/**
+ * MsgUpdateBasketFeeResponse is the Msg/UpdateBasketFee response type.
+ *
+ * Since Revision 2
+ */
+export interface MsgUpdateBasketFeeResponse {
+  $type: 'regen.ecocredit.basket.v1.MsgUpdateBasketFeeResponse';
+}
+
+/**
+ * MsgUpdateCurator is the Msg/UpdateCurator request type.
+ *
+ * Since Revision 2
+ */
+export interface MsgUpdateCurator {
+  $type: 'regen.ecocredit.basket.v1.MsgUpdateCurator';
+  /** curator is the address of the basket curator. */
+  curator: string;
+  /** denom is the unique identifier of the basket. */
+  denom: string;
+  /**
+   * new_curator is the address of the account that will become the
+   * new curator of the basket.
+   */
+  newCurator: string;
+}
+
+/**
+ * MsgUpdateCuratorResponse is the Msg/UpdateCurator response type.
+ *
+ * Since Revision 2
+ */
+export interface MsgUpdateCuratorResponse {
+  $type: 'regen.ecocredit.basket.v1.MsgUpdateCuratorResponse';
 }
 
 function createBaseMsgCreate(): MsgCreate {
@@ -550,6 +606,7 @@ function createBaseMsgTake(): MsgTake {
     retirementLocation: '',
     retireOnTake: false,
     retirementJurisdiction: '',
+    retirementReason: '',
   };
 }
 
@@ -577,6 +634,9 @@ export const MsgTake = {
     }
     if (message.retirementJurisdiction !== '') {
       writer.uint32(50).string(message.retirementJurisdiction);
+    }
+    if (message.retirementReason !== '') {
+      writer.uint32(58).string(message.retirementReason);
     }
     return writer;
   },
@@ -606,6 +666,9 @@ export const MsgTake = {
         case 6:
           message.retirementJurisdiction = reader.string();
           break;
+        case 7:
+          message.retirementReason = reader.string();
+          break;
         default:
           reader.skipType(tag & 7);
           break;
@@ -629,6 +692,9 @@ export const MsgTake = {
       retirementJurisdiction: isSet(object.retirementJurisdiction)
         ? String(object.retirementJurisdiction)
         : '',
+      retirementReason: isSet(object.retirementReason)
+        ? String(object.retirementReason)
+        : '',
     };
   },
 
@@ -644,6 +710,8 @@ export const MsgTake = {
       (obj.retireOnTake = message.retireOnTake);
     message.retirementJurisdiction !== undefined &&
       (obj.retirementJurisdiction = message.retirementJurisdiction);
+    message.retirementReason !== undefined &&
+      (obj.retirementReason = message.retirementReason);
     return obj;
   },
 
@@ -655,6 +723,7 @@ export const MsgTake = {
     message.retirementLocation = object.retirementLocation ?? '';
     message.retireOnTake = object.retireOnTake ?? false;
     message.retirementJurisdiction = object.retirementJurisdiction ?? '';
+    message.retirementReason = object.retirementReason ?? '';
     return message;
   },
 };
@@ -729,17 +798,333 @@ export const MsgTakeResponse = {
 
 messageTypeRegistry.set(MsgTakeResponse.$type, MsgTakeResponse);
 
+function createBaseMsgUpdateBasketFee(): MsgUpdateBasketFee {
+  return {
+    $type: 'regen.ecocredit.basket.v1.MsgUpdateBasketFee',
+    authority: '',
+    fee: undefined,
+  };
+}
+
+export const MsgUpdateBasketFee = {
+  $type: 'regen.ecocredit.basket.v1.MsgUpdateBasketFee' as const,
+
+  encode(
+    message: MsgUpdateBasketFee,
+    writer: _m0.Writer = _m0.Writer.create(),
+  ): _m0.Writer {
+    if (message.authority !== '') {
+      writer.uint32(10).string(message.authority);
+    }
+    if (message.fee !== undefined) {
+      Coin.encode(message.fee, writer.uint32(18).fork()).ldelim();
+    }
+    return writer;
+  },
+
+  decode(input: _m0.Reader | Uint8Array, length?: number): MsgUpdateBasketFee {
+    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+    let end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseMsgUpdateBasketFee();
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+        case 1:
+          message.authority = reader.string();
+          break;
+        case 2:
+          message.fee = Coin.decode(reader, reader.uint32());
+          break;
+        default:
+          reader.skipType(tag & 7);
+          break;
+      }
+    }
+    return message;
+  },
+
+  fromJSON(object: any): MsgUpdateBasketFee {
+    return {
+      $type: MsgUpdateBasketFee.$type,
+      authority: isSet(object.authority) ? String(object.authority) : '',
+      fee: isSet(object.fee) ? Coin.fromJSON(object.fee) : undefined,
+    };
+  },
+
+  toJSON(message: MsgUpdateBasketFee): unknown {
+    const obj: any = {};
+    message.authority !== undefined && (obj.authority = message.authority);
+    message.fee !== undefined &&
+      (obj.fee = message.fee ? Coin.toJSON(message.fee) : undefined);
+    return obj;
+  },
+
+  fromPartial<I extends Exact<DeepPartial<MsgUpdateBasketFee>, I>>(
+    object: I,
+  ): MsgUpdateBasketFee {
+    const message = createBaseMsgUpdateBasketFee();
+    message.authority = object.authority ?? '';
+    message.fee =
+      object.fee !== undefined && object.fee !== null
+        ? Coin.fromPartial(object.fee)
+        : undefined;
+    return message;
+  },
+};
+
+messageTypeRegistry.set(MsgUpdateBasketFee.$type, MsgUpdateBasketFee);
+
+function createBaseMsgUpdateBasketFeeResponse(): MsgUpdateBasketFeeResponse {
+  return { $type: 'regen.ecocredit.basket.v1.MsgUpdateBasketFeeResponse' };
+}
+
+export const MsgUpdateBasketFeeResponse = {
+  $type: 'regen.ecocredit.basket.v1.MsgUpdateBasketFeeResponse' as const,
+
+  encode(
+    _: MsgUpdateBasketFeeResponse,
+    writer: _m0.Writer = _m0.Writer.create(),
+  ): _m0.Writer {
+    return writer;
+  },
+
+  decode(
+    input: _m0.Reader | Uint8Array,
+    length?: number,
+  ): MsgUpdateBasketFeeResponse {
+    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+    let end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseMsgUpdateBasketFeeResponse();
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+        default:
+          reader.skipType(tag & 7);
+          break;
+      }
+    }
+    return message;
+  },
+
+  fromJSON(_: any): MsgUpdateBasketFeeResponse {
+    return {
+      $type: MsgUpdateBasketFeeResponse.$type,
+    };
+  },
+
+  toJSON(_: MsgUpdateBasketFeeResponse): unknown {
+    const obj: any = {};
+    return obj;
+  },
+
+  fromPartial<I extends Exact<DeepPartial<MsgUpdateBasketFeeResponse>, I>>(
+    _: I,
+  ): MsgUpdateBasketFeeResponse {
+    const message = createBaseMsgUpdateBasketFeeResponse();
+    return message;
+  },
+};
+
+messageTypeRegistry.set(
+  MsgUpdateBasketFeeResponse.$type,
+  MsgUpdateBasketFeeResponse,
+);
+
+function createBaseMsgUpdateCurator(): MsgUpdateCurator {
+  return {
+    $type: 'regen.ecocredit.basket.v1.MsgUpdateCurator',
+    curator: '',
+    denom: '',
+    newCurator: '',
+  };
+}
+
+export const MsgUpdateCurator = {
+  $type: 'regen.ecocredit.basket.v1.MsgUpdateCurator' as const,
+
+  encode(
+    message: MsgUpdateCurator,
+    writer: _m0.Writer = _m0.Writer.create(),
+  ): _m0.Writer {
+    if (message.curator !== '') {
+      writer.uint32(10).string(message.curator);
+    }
+    if (message.denom !== '') {
+      writer.uint32(18).string(message.denom);
+    }
+    if (message.newCurator !== '') {
+      writer.uint32(26).string(message.newCurator);
+    }
+    return writer;
+  },
+
+  decode(input: _m0.Reader | Uint8Array, length?: number): MsgUpdateCurator {
+    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+    let end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseMsgUpdateCurator();
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+        case 1:
+          message.curator = reader.string();
+          break;
+        case 2:
+          message.denom = reader.string();
+          break;
+        case 3:
+          message.newCurator = reader.string();
+          break;
+        default:
+          reader.skipType(tag & 7);
+          break;
+      }
+    }
+    return message;
+  },
+
+  fromJSON(object: any): MsgUpdateCurator {
+    return {
+      $type: MsgUpdateCurator.$type,
+      curator: isSet(object.curator) ? String(object.curator) : '',
+      denom: isSet(object.denom) ? String(object.denom) : '',
+      newCurator: isSet(object.newCurator) ? String(object.newCurator) : '',
+    };
+  },
+
+  toJSON(message: MsgUpdateCurator): unknown {
+    const obj: any = {};
+    message.curator !== undefined && (obj.curator = message.curator);
+    message.denom !== undefined && (obj.denom = message.denom);
+    message.newCurator !== undefined && (obj.newCurator = message.newCurator);
+    return obj;
+  },
+
+  fromPartial<I extends Exact<DeepPartial<MsgUpdateCurator>, I>>(
+    object: I,
+  ): MsgUpdateCurator {
+    const message = createBaseMsgUpdateCurator();
+    message.curator = object.curator ?? '';
+    message.denom = object.denom ?? '';
+    message.newCurator = object.newCurator ?? '';
+    return message;
+  },
+};
+
+messageTypeRegistry.set(MsgUpdateCurator.$type, MsgUpdateCurator);
+
+function createBaseMsgUpdateCuratorResponse(): MsgUpdateCuratorResponse {
+  return { $type: 'regen.ecocredit.basket.v1.MsgUpdateCuratorResponse' };
+}
+
+export const MsgUpdateCuratorResponse = {
+  $type: 'regen.ecocredit.basket.v1.MsgUpdateCuratorResponse' as const,
+
+  encode(
+    _: MsgUpdateCuratorResponse,
+    writer: _m0.Writer = _m0.Writer.create(),
+  ): _m0.Writer {
+    return writer;
+  },
+
+  decode(
+    input: _m0.Reader | Uint8Array,
+    length?: number,
+  ): MsgUpdateCuratorResponse {
+    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+    let end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseMsgUpdateCuratorResponse();
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+        default:
+          reader.skipType(tag & 7);
+          break;
+      }
+    }
+    return message;
+  },
+
+  fromJSON(_: any): MsgUpdateCuratorResponse {
+    return {
+      $type: MsgUpdateCuratorResponse.$type,
+    };
+  },
+
+  toJSON(_: MsgUpdateCuratorResponse): unknown {
+    const obj: any = {};
+    return obj;
+  },
+
+  fromPartial<I extends Exact<DeepPartial<MsgUpdateCuratorResponse>, I>>(
+    _: I,
+  ): MsgUpdateCuratorResponse {
+    const message = createBaseMsgUpdateCuratorResponse();
+    return message;
+  },
+};
+
+messageTypeRegistry.set(
+  MsgUpdateCuratorResponse.$type,
+  MsgUpdateCuratorResponse,
+);
+
 /** Msg is the regen.ecocredit.basket.v1 Msg service. */
 export interface Msg {
-  /** Create creates a bank denom which wraps credits. */
+  /**
+   * Create creates a basket that can hold different types of ecocredits that
+   * meet the basket's criteria. Upon depositing ecocredits into the basket,
+   * basket tokens are minted and sent to depositor using the Cosmos SDK Bank
+   * module. This allows basket tokens to be utilized within IBC. Basket tokens
+   * are fully fungible with other basket tokens from the same basket. The
+   * basket token denom is derived from the basket name, credit type
+   * abbreviation, and credit type precision (i.e. basket name "foo", credit
+   * type exponent 6, and credit type abbreviation "C" generates the denom
+   * eco.uC.foo). Baskets can limit credit acceptance criteria based on a
+   * combination of credit type, credit classes, and credit batch start date.
+   * Credits can be taken from the basket in exchange for basket tokens. Taken
+   * credits will be immediately retired, unless disable_auto_retire is set to
+   * true. When set to true, credits may be received in either a tradable or
+   * retired state, depending on the taker's request. If the basket fee
+   * governance parameter is set, a fee of equal or greater value must be
+   * provided in the request. Only the amount specified in the fee parameter
+   * will be charged, even if a greater value fee is provided. Fees from
+   * creating a basket are burned.
+   */
   Create(request: DeepPartial<MsgCreate>): Promise<MsgCreateResponse>;
-  /** Put puts credits into a basket in return for basket tokens. */
+  /**
+   * Put deposits credits into the basket from the holder's tradable balance in
+   * exchange for basket tokens. The amount of tokens received is calculated by
+   * the following formula: sum(credits_deposited) * 10^credit_type_exponent.
+   * The credits being deposited MUST adhere to the criteria of the basket.
+   */
   Put(request: DeepPartial<MsgPut>): Promise<MsgPutResponse>;
   /**
-   * Take takes credits from a basket starting from the oldest
-   * credits first.
+   * Take exchanges basket tokens for credits from the specified basket. Credits
+   * are taken deterministically, ordered by oldest batch start date to the most
+   * recent batch start date. If the basket has disable_auto_retire set to
+   * false, both retirement_jurisdiction and retire_on_take must be set, and the
+   * taken credits will be retired immediately upon receipt. Otherwise, credits
+   * may be received as tradable or retired, based on the request.
    */
   Take(request: DeepPartial<MsgTake>): Promise<MsgTakeResponse>;
+  /**
+   * UpdateBasketFee is a governance method that allows for updating the basket
+   * creation fee. If not set, the basket creation fee will be removed and no
+   * fee will be required to create a basket.
+   *
+   * Since Revision 2
+   */
+  UpdateBasketFee(
+    request: DeepPartial<MsgUpdateBasketFee>,
+  ): Promise<MsgUpdateBasketFeeResponse>;
+  /**
+   * UpdateCurator updates basket curator.
+   *
+   * Since Revision 2
+   */
+  UpdateCurator(
+    request: DeepPartial<MsgUpdateCurator>,
+  ): Promise<MsgUpdateCuratorResponse>;
 }
 
 export class MsgClientImpl implements Msg {
@@ -749,6 +1134,8 @@ export class MsgClientImpl implements Msg {
     this.Create = this.Create.bind(this);
     this.Put = this.Put.bind(this);
     this.Take = this.Take.bind(this);
+    this.UpdateBasketFee = this.UpdateBasketFee.bind(this);
+    this.UpdateCurator = this.UpdateCurator.bind(this);
   }
   Create(request: DeepPartial<MsgCreate>): Promise<MsgCreateResponse> {
     const fromPartial = MsgCreate.fromPartial(request);
@@ -781,6 +1168,36 @@ export class MsgClientImpl implements Msg {
       data,
     );
     return promise.then(data => MsgTakeResponse.decode(new _m0.Reader(data)));
+  }
+
+  UpdateBasketFee(
+    request: DeepPartial<MsgUpdateBasketFee>,
+  ): Promise<MsgUpdateBasketFeeResponse> {
+    const fromPartial = MsgUpdateBasketFee.fromPartial(request);
+    const data = MsgUpdateBasketFee.encode(fromPartial).finish();
+    const promise = this.rpc.request(
+      'regen.ecocredit.basket.v1.Msg',
+      'UpdateBasketFee',
+      data,
+    );
+    return promise.then(data =>
+      MsgUpdateBasketFeeResponse.decode(new _m0.Reader(data)),
+    );
+  }
+
+  UpdateCurator(
+    request: DeepPartial<MsgUpdateCurator>,
+  ): Promise<MsgUpdateCuratorResponse> {
+    const fromPartial = MsgUpdateCurator.fromPartial(request);
+    const data = MsgUpdateCurator.encode(fromPartial).finish();
+    const promise = this.rpc.request(
+      'regen.ecocredit.basket.v1.Msg',
+      'UpdateCurator',
+      data,
+    );
+    return promise.then(data =>
+      MsgUpdateCuratorResponse.decode(new _m0.Reader(data)),
+    );
   }
 }
 

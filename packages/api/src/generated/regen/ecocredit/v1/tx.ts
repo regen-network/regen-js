@@ -2,15 +2,34 @@
 import { messageTypeRegistry } from '../../../typeRegistry';
 import Long from 'long';
 import _m0 from 'protobufjs/minimal';
+import { CreditType } from './state';
 import { Coin } from '../../../cosmos/base/v1beta1/coin';
-import {
-  OriginTx,
-  BatchIssuance,
-  Credits,
-} from '../../../regen/ecocredit/v1/types';
+import { OriginTx, BatchIssuance, Credits } from './types';
 import { Timestamp } from '../../../google/protobuf/timestamp';
 
 export const protobufPackage = 'regen.ecocredit.v1';
+
+/**
+ * MsgAddCreditType is the Msg/AddCreditType request type.
+ *
+ * Since Revision 2
+ */
+export interface MsgAddCreditType {
+  $type: 'regen.ecocredit.v1.MsgAddCreditType';
+  /** authority is the address of the governance account. */
+  authority: string;
+  /** credit_type defines a credit type to add to the credit types parameter. */
+  creditType?: CreditType;
+}
+
+/**
+ * MsgAddCreditTypeResponse is the Msg/AddCreditType response type.
+ *
+ * Since Revision 2
+ */
+export interface MsgAddCreditTypeResponse {
+  $type: 'regen.ecocredit.v1.MsgAddCreditTypeResponse';
+}
 
 /** MsgCreateClass is the Msg/CreateClass request type. */
 export interface MsgCreateClass {
@@ -39,10 +58,9 @@ export interface MsgCreateClass {
    */
   creditTypeAbbrev: string;
   /**
-   * fee is the credit class creation fee. The specified fee must be one of the
-   * fees listed in Params.credit_class_fee. The specified amount can be greater
-   * than or equal to the listed amount but the credit class creator will only
-   * be charged the listed amount (i.e. the minimum amount).
+   * fee is the credit class creation fee. An equal fee is required if the class
+   * creation fee parameter is set. The provided fee can be greater than the
+   * parameter, but only the amount in the parameter will be charged.
    */
   fee?: Coin;
 }
@@ -243,6 +261,14 @@ export interface MsgSend_SendCredits {
    * optional and can be added for increased precision.
    */
   retirementJurisdiction: string;
+  /**
+   * retirement_reason is any arbitrary string that specifies the reason for
+   * retiring credits. This field is only required if retired_amount is
+   * positive.
+   *
+   * Since Revision 2
+   */
+  retirementReason: string;
 }
 
 /** MsgSendResponse is the Msg/Send response type. */
@@ -267,6 +293,13 @@ export interface MsgRetire {
    * increased precision.
    */
   jurisdiction: string;
+  /**
+   * reason is any arbitrary string that specifies the reason for retiring
+   * credits.
+   *
+   * Since Revision 2
+   */
+  reason: string;
 }
 
 /** MsgRetire is the Msg/Retire response type. */
@@ -417,6 +450,35 @@ export interface MsgBridge {
   credits: Credits[];
 }
 
+/**
+ * MsgUpdateBatchMetadata is the Msg/UpdateBatchMetadata request type.
+ *
+ * Since Revision 2
+ */
+export interface MsgUpdateBatchMetadata {
+  $type: 'regen.ecocredit.v1.MsgUpdateBatchMetadata';
+  /** issuer is the address of the account that is the issuer of the batch. */
+  issuer: string;
+  /** batch_denom is the unique identifier of the batch. */
+  batchDenom: string;
+  /**
+   * new_metadata is new metadata that will replace the existing metadata. It
+   * can be any arbitrary string with a maximum length of 256 characters that
+   * includes or references the metadata to attach to the batch.
+   */
+  newMetadata: string;
+}
+
+/**
+ * MsgUpdateBatchMetadataResponse is the Msg/UpdateBatchMetadataResponse
+ * response type.
+ *
+ * Since Revision 2
+ */
+export interface MsgUpdateBatchMetadataResponse {
+  $type: 'regen.ecocredit.v1.MsgUpdateBatchMetadataResponse';
+}
+
 /** MsgBridgeResponse is the Msg/Bridge response type. */
 export interface MsgBridgeResponse {
   $type: 'regen.ecocredit.v1.MsgBridgeResponse';
@@ -497,6 +559,287 @@ export interface MsgBridgeReceiveResponse {
    */
   projectId: string;
 }
+
+/**
+ * MsgAddClassCreator is the Msg/AddClassCreator request type.
+ *
+ * Since Revision 2
+ */
+export interface MsgAddClassCreator {
+  $type: 'regen.ecocredit.v1.MsgAddClassCreator';
+  /** authority is the address of the governance account. */
+  authority: string;
+  /** creator is the address to add to the class creator list. */
+  creator: string;
+}
+
+/**
+ * MsgAddClassCreatorResponse is the Msg/AddClassCreator response type.
+ *
+ * Since Revision 2
+ */
+export interface MsgAddClassCreatorResponse {
+  $type: 'regen.ecocredit.v1.MsgAddClassCreatorResponse';
+}
+
+/**
+ * MsgSetClassCreatorAllowlist is the Msg/SetClassCreatorAllowlist request
+ * type.
+ *
+ * Since Revision 2
+ */
+export interface MsgSetClassCreatorAllowlist {
+  $type: 'regen.ecocredit.v1.MsgSetClassCreatorAllowlist';
+  /** authority is the address of the governance account. */
+  authority: string;
+  /** enabled defines the boolean value to set the allowlist on or off. */
+  enabled: boolean;
+}
+
+/**
+ * MsgSetClassCreatorAllowlistResponse is the Msg/SetClassCreatorAllowlist
+ * response type.
+ *
+ * Since Revision 2
+ */
+export interface MsgSetClassCreatorAllowlistResponse {
+  $type: 'regen.ecocredit.v1.MsgSetClassCreatorAllowlistResponse';
+}
+
+/**
+ * MsgRemoveClassCreator is the Msg/RemoveClassCreator request type.
+ *
+ * Since Revision 2
+ */
+export interface MsgRemoveClassCreator {
+  $type: 'regen.ecocredit.v1.MsgRemoveClassCreator';
+  /** authority is the address of the governance account. */
+  authority: string;
+  /** creator is the address to remove from the class creator list. */
+  creator: string;
+}
+
+/**
+ * MsgRemoveClassCreatorResponse is the Msg/RemoveClasssCreator response type.
+ *
+ * Since Revision 2
+ */
+export interface MsgRemoveClassCreatorResponse {
+  $type: 'regen.ecocredit.v1.MsgRemoveClassCreatorResponse';
+}
+
+/**
+ * MsgUpdateClassFee is the Msg/UpdateClassFee request type.
+ *
+ * Since Revision 2
+ */
+export interface MsgUpdateClassFee {
+  $type: 'regen.ecocredit.v1.MsgUpdateClassFee';
+  /** authority is the address of the governance account. */
+  authority: string;
+  /**
+   * fee is the credit class creation fee. If not set, the credit class creation
+   * fee will be removed and no fee will be required to create a credit class.
+   */
+  fee?: Coin;
+}
+
+/**
+ * MsgUpdateClassFeeResponse is the Msg/UpdateClassFee response type.
+ *
+ * Since Revision 2
+ */
+export interface MsgUpdateClassFeeResponse {
+  $type: 'regen.ecocredit.v1.MsgUpdateClassFeeResponse';
+}
+
+/**
+ * MsgAddAllowedBridgeChain is the Msg/AddAllowedBridgeChain request type.
+ *
+ * Since Revision 2
+ */
+export interface MsgAddAllowedBridgeChain {
+  $type: 'regen.ecocredit.v1.MsgAddAllowedBridgeChain';
+  /** authority is the address of the governance account. */
+  authority: string;
+  /**
+   * chain_name is the name of the chain to allow bridging of ecocredits to
+   * (i.e. polygon, ethereum, celo).
+   */
+  chainName: string;
+}
+
+/**
+ * MsgAddAllowedBridgeChainResponse is the Msg/AddAllowedBridgeChain response
+ * type.
+ *
+ * Since Revision 2
+ */
+export interface MsgAddAllowedBridgeChainResponse {
+  $type: 'regen.ecocredit.v1.MsgAddAllowedBridgeChainResponse';
+}
+
+/**
+ * MsgRemoveAllowedBridgeChain is the Msg/RemoveAllowedBridgeChain request type.
+ *
+ * Since Revision 2
+ */
+export interface MsgRemoveAllowedBridgeChain {
+  $type: 'regen.ecocredit.v1.MsgRemoveAllowedBridgeChain';
+  /** authority is the address of the governance account. */
+  authority: string;
+  /**
+   * chain_name is the name of the chain to remove from the list of allowed
+   * chains to bridge ecocredits to (i.e. polygon, ethereum, celo).
+   */
+  chainName: string;
+}
+
+/**
+ * MsgRemoveAllowedBridgeChainResponse is the Msg/RemoveAllowedBridgeChain
+ * response type.
+ *
+ * Since Revision 2
+ */
+export interface MsgRemoveAllowedBridgeChainResponse {
+  $type: 'regen.ecocredit.v1.MsgRemoveAllowedBridgeChainResponse';
+}
+
+function createBaseMsgAddCreditType(): MsgAddCreditType {
+  return {
+    $type: 'regen.ecocredit.v1.MsgAddCreditType',
+    authority: '',
+    creditType: undefined,
+  };
+}
+
+export const MsgAddCreditType = {
+  $type: 'regen.ecocredit.v1.MsgAddCreditType' as const,
+
+  encode(
+    message: MsgAddCreditType,
+    writer: _m0.Writer = _m0.Writer.create(),
+  ): _m0.Writer {
+    if (message.authority !== '') {
+      writer.uint32(10).string(message.authority);
+    }
+    if (message.creditType !== undefined) {
+      CreditType.encode(message.creditType, writer.uint32(18).fork()).ldelim();
+    }
+    return writer;
+  },
+
+  decode(input: _m0.Reader | Uint8Array, length?: number): MsgAddCreditType {
+    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+    let end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseMsgAddCreditType();
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+        case 1:
+          message.authority = reader.string();
+          break;
+        case 2:
+          message.creditType = CreditType.decode(reader, reader.uint32());
+          break;
+        default:
+          reader.skipType(tag & 7);
+          break;
+      }
+    }
+    return message;
+  },
+
+  fromJSON(object: any): MsgAddCreditType {
+    return {
+      $type: MsgAddCreditType.$type,
+      authority: isSet(object.authority) ? String(object.authority) : '',
+      creditType: isSet(object.creditType)
+        ? CreditType.fromJSON(object.creditType)
+        : undefined,
+    };
+  },
+
+  toJSON(message: MsgAddCreditType): unknown {
+    const obj: any = {};
+    message.authority !== undefined && (obj.authority = message.authority);
+    message.creditType !== undefined &&
+      (obj.creditType = message.creditType
+        ? CreditType.toJSON(message.creditType)
+        : undefined);
+    return obj;
+  },
+
+  fromPartial<I extends Exact<DeepPartial<MsgAddCreditType>, I>>(
+    object: I,
+  ): MsgAddCreditType {
+    const message = createBaseMsgAddCreditType();
+    message.authority = object.authority ?? '';
+    message.creditType =
+      object.creditType !== undefined && object.creditType !== null
+        ? CreditType.fromPartial(object.creditType)
+        : undefined;
+    return message;
+  },
+};
+
+messageTypeRegistry.set(MsgAddCreditType.$type, MsgAddCreditType);
+
+function createBaseMsgAddCreditTypeResponse(): MsgAddCreditTypeResponse {
+  return { $type: 'regen.ecocredit.v1.MsgAddCreditTypeResponse' };
+}
+
+export const MsgAddCreditTypeResponse = {
+  $type: 'regen.ecocredit.v1.MsgAddCreditTypeResponse' as const,
+
+  encode(
+    _: MsgAddCreditTypeResponse,
+    writer: _m0.Writer = _m0.Writer.create(),
+  ): _m0.Writer {
+    return writer;
+  },
+
+  decode(
+    input: _m0.Reader | Uint8Array,
+    length?: number,
+  ): MsgAddCreditTypeResponse {
+    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+    let end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseMsgAddCreditTypeResponse();
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+        default:
+          reader.skipType(tag & 7);
+          break;
+      }
+    }
+    return message;
+  },
+
+  fromJSON(_: any): MsgAddCreditTypeResponse {
+    return {
+      $type: MsgAddCreditTypeResponse.$type,
+    };
+  },
+
+  toJSON(_: MsgAddCreditTypeResponse): unknown {
+    const obj: any = {};
+    return obj;
+  },
+
+  fromPartial<I extends Exact<DeepPartial<MsgAddCreditTypeResponse>, I>>(
+    _: I,
+  ): MsgAddCreditTypeResponse {
+    const message = createBaseMsgAddCreditTypeResponse();
+    return message;
+  },
+};
+
+messageTypeRegistry.set(
+  MsgAddCreditTypeResponse.$type,
+  MsgAddCreditTypeResponse,
+);
 
 function createBaseMsgCreateClass(): MsgCreateClass {
   return {
@@ -1464,6 +1807,7 @@ function createBaseMsgSend_SendCredits(): MsgSend_SendCredits {
     tradableAmount: '',
     retiredAmount: '',
     retirementJurisdiction: '',
+    retirementReason: '',
   };
 }
 
@@ -1485,6 +1829,9 @@ export const MsgSend_SendCredits = {
     }
     if (message.retirementJurisdiction !== '') {
       writer.uint32(34).string(message.retirementJurisdiction);
+    }
+    if (message.retirementReason !== '') {
+      writer.uint32(42).string(message.retirementReason);
     }
     return writer;
   },
@@ -1508,6 +1855,9 @@ export const MsgSend_SendCredits = {
         case 4:
           message.retirementJurisdiction = reader.string();
           break;
+        case 5:
+          message.retirementReason = reader.string();
+          break;
         default:
           reader.skipType(tag & 7);
           break;
@@ -1529,6 +1879,9 @@ export const MsgSend_SendCredits = {
       retirementJurisdiction: isSet(object.retirementJurisdiction)
         ? String(object.retirementJurisdiction)
         : '',
+      retirementReason: isSet(object.retirementReason)
+        ? String(object.retirementReason)
+        : '',
     };
   },
 
@@ -1541,6 +1894,8 @@ export const MsgSend_SendCredits = {
       (obj.retiredAmount = message.retiredAmount);
     message.retirementJurisdiction !== undefined &&
       (obj.retirementJurisdiction = message.retirementJurisdiction);
+    message.retirementReason !== undefined &&
+      (obj.retirementReason = message.retirementReason);
     return obj;
   },
 
@@ -1552,6 +1907,7 @@ export const MsgSend_SendCredits = {
     message.tradableAmount = object.tradableAmount ?? '';
     message.retiredAmount = object.retiredAmount ?? '';
     message.retirementJurisdiction = object.retirementJurisdiction ?? '';
+    message.retirementReason = object.retirementReason ?? '';
     return message;
   },
 };
@@ -1614,6 +1970,7 @@ function createBaseMsgRetire(): MsgRetire {
     owner: '',
     credits: [],
     jurisdiction: '',
+    reason: '',
   };
 }
 
@@ -1632,6 +1989,9 @@ export const MsgRetire = {
     }
     if (message.jurisdiction !== '') {
       writer.uint32(26).string(message.jurisdiction);
+    }
+    if (message.reason !== '') {
+      writer.uint32(34).string(message.reason);
     }
     return writer;
   },
@@ -1652,6 +2012,9 @@ export const MsgRetire = {
         case 3:
           message.jurisdiction = reader.string();
           break;
+        case 4:
+          message.reason = reader.string();
+          break;
         default:
           reader.skipType(tag & 7);
           break;
@@ -1670,6 +2033,7 @@ export const MsgRetire = {
       jurisdiction: isSet(object.jurisdiction)
         ? String(object.jurisdiction)
         : '',
+      reason: isSet(object.reason) ? String(object.reason) : '',
     };
   },
 
@@ -1685,6 +2049,7 @@ export const MsgRetire = {
     }
     message.jurisdiction !== undefined &&
       (obj.jurisdiction = message.jurisdiction);
+    message.reason !== undefined && (obj.reason = message.reason);
     return obj;
   },
 
@@ -1695,6 +2060,7 @@ export const MsgRetire = {
     message.owner = object.owner ?? '';
     message.credits = object.credits?.map(e => Credits.fromPartial(e)) || [];
     message.jurisdiction = object.jurisdiction ?? '';
+    message.reason = object.reason ?? '';
     return message;
   },
 };
@@ -2720,6 +3086,148 @@ export const MsgBridge = {
 
 messageTypeRegistry.set(MsgBridge.$type, MsgBridge);
 
+function createBaseMsgUpdateBatchMetadata(): MsgUpdateBatchMetadata {
+  return {
+    $type: 'regen.ecocredit.v1.MsgUpdateBatchMetadata',
+    issuer: '',
+    batchDenom: '',
+    newMetadata: '',
+  };
+}
+
+export const MsgUpdateBatchMetadata = {
+  $type: 'regen.ecocredit.v1.MsgUpdateBatchMetadata' as const,
+
+  encode(
+    message: MsgUpdateBatchMetadata,
+    writer: _m0.Writer = _m0.Writer.create(),
+  ): _m0.Writer {
+    if (message.issuer !== '') {
+      writer.uint32(10).string(message.issuer);
+    }
+    if (message.batchDenom !== '') {
+      writer.uint32(18).string(message.batchDenom);
+    }
+    if (message.newMetadata !== '') {
+      writer.uint32(26).string(message.newMetadata);
+    }
+    return writer;
+  },
+
+  decode(
+    input: _m0.Reader | Uint8Array,
+    length?: number,
+  ): MsgUpdateBatchMetadata {
+    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+    let end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseMsgUpdateBatchMetadata();
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+        case 1:
+          message.issuer = reader.string();
+          break;
+        case 2:
+          message.batchDenom = reader.string();
+          break;
+        case 3:
+          message.newMetadata = reader.string();
+          break;
+        default:
+          reader.skipType(tag & 7);
+          break;
+      }
+    }
+    return message;
+  },
+
+  fromJSON(object: any): MsgUpdateBatchMetadata {
+    return {
+      $type: MsgUpdateBatchMetadata.$type,
+      issuer: isSet(object.issuer) ? String(object.issuer) : '',
+      batchDenom: isSet(object.batchDenom) ? String(object.batchDenom) : '',
+      newMetadata: isSet(object.newMetadata) ? String(object.newMetadata) : '',
+    };
+  },
+
+  toJSON(message: MsgUpdateBatchMetadata): unknown {
+    const obj: any = {};
+    message.issuer !== undefined && (obj.issuer = message.issuer);
+    message.batchDenom !== undefined && (obj.batchDenom = message.batchDenom);
+    message.newMetadata !== undefined &&
+      (obj.newMetadata = message.newMetadata);
+    return obj;
+  },
+
+  fromPartial<I extends Exact<DeepPartial<MsgUpdateBatchMetadata>, I>>(
+    object: I,
+  ): MsgUpdateBatchMetadata {
+    const message = createBaseMsgUpdateBatchMetadata();
+    message.issuer = object.issuer ?? '';
+    message.batchDenom = object.batchDenom ?? '';
+    message.newMetadata = object.newMetadata ?? '';
+    return message;
+  },
+};
+
+messageTypeRegistry.set(MsgUpdateBatchMetadata.$type, MsgUpdateBatchMetadata);
+
+function createBaseMsgUpdateBatchMetadataResponse(): MsgUpdateBatchMetadataResponse {
+  return { $type: 'regen.ecocredit.v1.MsgUpdateBatchMetadataResponse' };
+}
+
+export const MsgUpdateBatchMetadataResponse = {
+  $type: 'regen.ecocredit.v1.MsgUpdateBatchMetadataResponse' as const,
+
+  encode(
+    _: MsgUpdateBatchMetadataResponse,
+    writer: _m0.Writer = _m0.Writer.create(),
+  ): _m0.Writer {
+    return writer;
+  },
+
+  decode(
+    input: _m0.Reader | Uint8Array,
+    length?: number,
+  ): MsgUpdateBatchMetadataResponse {
+    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+    let end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseMsgUpdateBatchMetadataResponse();
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+        default:
+          reader.skipType(tag & 7);
+          break;
+      }
+    }
+    return message;
+  },
+
+  fromJSON(_: any): MsgUpdateBatchMetadataResponse {
+    return {
+      $type: MsgUpdateBatchMetadataResponse.$type,
+    };
+  },
+
+  toJSON(_: MsgUpdateBatchMetadataResponse): unknown {
+    const obj: any = {};
+    return obj;
+  },
+
+  fromPartial<I extends Exact<DeepPartial<MsgUpdateBatchMetadataResponse>, I>>(
+    _: I,
+  ): MsgUpdateBatchMetadataResponse {
+    const message = createBaseMsgUpdateBatchMetadataResponse();
+    return message;
+  },
+};
+
+messageTypeRegistry.set(
+  MsgUpdateBatchMetadataResponse.$type,
+  MsgUpdateBatchMetadataResponse,
+);
+
 function createBaseMsgBridgeResponse(): MsgBridgeResponse {
   return { $type: 'regen.ecocredit.v1.MsgBridgeResponse' };
 }
@@ -3199,14 +3707,808 @@ messageTypeRegistry.set(
   MsgBridgeReceiveResponse,
 );
 
+function createBaseMsgAddClassCreator(): MsgAddClassCreator {
+  return {
+    $type: 'regen.ecocredit.v1.MsgAddClassCreator',
+    authority: '',
+    creator: '',
+  };
+}
+
+export const MsgAddClassCreator = {
+  $type: 'regen.ecocredit.v1.MsgAddClassCreator' as const,
+
+  encode(
+    message: MsgAddClassCreator,
+    writer: _m0.Writer = _m0.Writer.create(),
+  ): _m0.Writer {
+    if (message.authority !== '') {
+      writer.uint32(10).string(message.authority);
+    }
+    if (message.creator !== '') {
+      writer.uint32(18).string(message.creator);
+    }
+    return writer;
+  },
+
+  decode(input: _m0.Reader | Uint8Array, length?: number): MsgAddClassCreator {
+    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+    let end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseMsgAddClassCreator();
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+        case 1:
+          message.authority = reader.string();
+          break;
+        case 2:
+          message.creator = reader.string();
+          break;
+        default:
+          reader.skipType(tag & 7);
+          break;
+      }
+    }
+    return message;
+  },
+
+  fromJSON(object: any): MsgAddClassCreator {
+    return {
+      $type: MsgAddClassCreator.$type,
+      authority: isSet(object.authority) ? String(object.authority) : '',
+      creator: isSet(object.creator) ? String(object.creator) : '',
+    };
+  },
+
+  toJSON(message: MsgAddClassCreator): unknown {
+    const obj: any = {};
+    message.authority !== undefined && (obj.authority = message.authority);
+    message.creator !== undefined && (obj.creator = message.creator);
+    return obj;
+  },
+
+  fromPartial<I extends Exact<DeepPartial<MsgAddClassCreator>, I>>(
+    object: I,
+  ): MsgAddClassCreator {
+    const message = createBaseMsgAddClassCreator();
+    message.authority = object.authority ?? '';
+    message.creator = object.creator ?? '';
+    return message;
+  },
+};
+
+messageTypeRegistry.set(MsgAddClassCreator.$type, MsgAddClassCreator);
+
+function createBaseMsgAddClassCreatorResponse(): MsgAddClassCreatorResponse {
+  return { $type: 'regen.ecocredit.v1.MsgAddClassCreatorResponse' };
+}
+
+export const MsgAddClassCreatorResponse = {
+  $type: 'regen.ecocredit.v1.MsgAddClassCreatorResponse' as const,
+
+  encode(
+    _: MsgAddClassCreatorResponse,
+    writer: _m0.Writer = _m0.Writer.create(),
+  ): _m0.Writer {
+    return writer;
+  },
+
+  decode(
+    input: _m0.Reader | Uint8Array,
+    length?: number,
+  ): MsgAddClassCreatorResponse {
+    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+    let end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseMsgAddClassCreatorResponse();
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+        default:
+          reader.skipType(tag & 7);
+          break;
+      }
+    }
+    return message;
+  },
+
+  fromJSON(_: any): MsgAddClassCreatorResponse {
+    return {
+      $type: MsgAddClassCreatorResponse.$type,
+    };
+  },
+
+  toJSON(_: MsgAddClassCreatorResponse): unknown {
+    const obj: any = {};
+    return obj;
+  },
+
+  fromPartial<I extends Exact<DeepPartial<MsgAddClassCreatorResponse>, I>>(
+    _: I,
+  ): MsgAddClassCreatorResponse {
+    const message = createBaseMsgAddClassCreatorResponse();
+    return message;
+  },
+};
+
+messageTypeRegistry.set(
+  MsgAddClassCreatorResponse.$type,
+  MsgAddClassCreatorResponse,
+);
+
+function createBaseMsgSetClassCreatorAllowlist(): MsgSetClassCreatorAllowlist {
+  return {
+    $type: 'regen.ecocredit.v1.MsgSetClassCreatorAllowlist',
+    authority: '',
+    enabled: false,
+  };
+}
+
+export const MsgSetClassCreatorAllowlist = {
+  $type: 'regen.ecocredit.v1.MsgSetClassCreatorAllowlist' as const,
+
+  encode(
+    message: MsgSetClassCreatorAllowlist,
+    writer: _m0.Writer = _m0.Writer.create(),
+  ): _m0.Writer {
+    if (message.authority !== '') {
+      writer.uint32(10).string(message.authority);
+    }
+    if (message.enabled === true) {
+      writer.uint32(16).bool(message.enabled);
+    }
+    return writer;
+  },
+
+  decode(
+    input: _m0.Reader | Uint8Array,
+    length?: number,
+  ): MsgSetClassCreatorAllowlist {
+    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+    let end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseMsgSetClassCreatorAllowlist();
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+        case 1:
+          message.authority = reader.string();
+          break;
+        case 2:
+          message.enabled = reader.bool();
+          break;
+        default:
+          reader.skipType(tag & 7);
+          break;
+      }
+    }
+    return message;
+  },
+
+  fromJSON(object: any): MsgSetClassCreatorAllowlist {
+    return {
+      $type: MsgSetClassCreatorAllowlist.$type,
+      authority: isSet(object.authority) ? String(object.authority) : '',
+      enabled: isSet(object.enabled) ? Boolean(object.enabled) : false,
+    };
+  },
+
+  toJSON(message: MsgSetClassCreatorAllowlist): unknown {
+    const obj: any = {};
+    message.authority !== undefined && (obj.authority = message.authority);
+    message.enabled !== undefined && (obj.enabled = message.enabled);
+    return obj;
+  },
+
+  fromPartial<I extends Exact<DeepPartial<MsgSetClassCreatorAllowlist>, I>>(
+    object: I,
+  ): MsgSetClassCreatorAllowlist {
+    const message = createBaseMsgSetClassCreatorAllowlist();
+    message.authority = object.authority ?? '';
+    message.enabled = object.enabled ?? false;
+    return message;
+  },
+};
+
+messageTypeRegistry.set(
+  MsgSetClassCreatorAllowlist.$type,
+  MsgSetClassCreatorAllowlist,
+);
+
+function createBaseMsgSetClassCreatorAllowlistResponse(): MsgSetClassCreatorAllowlistResponse {
+  return { $type: 'regen.ecocredit.v1.MsgSetClassCreatorAllowlistResponse' };
+}
+
+export const MsgSetClassCreatorAllowlistResponse = {
+  $type: 'regen.ecocredit.v1.MsgSetClassCreatorAllowlistResponse' as const,
+
+  encode(
+    _: MsgSetClassCreatorAllowlistResponse,
+    writer: _m0.Writer = _m0.Writer.create(),
+  ): _m0.Writer {
+    return writer;
+  },
+
+  decode(
+    input: _m0.Reader | Uint8Array,
+    length?: number,
+  ): MsgSetClassCreatorAllowlistResponse {
+    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+    let end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseMsgSetClassCreatorAllowlistResponse();
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+        default:
+          reader.skipType(tag & 7);
+          break;
+      }
+    }
+    return message;
+  },
+
+  fromJSON(_: any): MsgSetClassCreatorAllowlistResponse {
+    return {
+      $type: MsgSetClassCreatorAllowlistResponse.$type,
+    };
+  },
+
+  toJSON(_: MsgSetClassCreatorAllowlistResponse): unknown {
+    const obj: any = {};
+    return obj;
+  },
+
+  fromPartial<
+    I extends Exact<DeepPartial<MsgSetClassCreatorAllowlistResponse>, I>,
+  >(_: I): MsgSetClassCreatorAllowlistResponse {
+    const message = createBaseMsgSetClassCreatorAllowlistResponse();
+    return message;
+  },
+};
+
+messageTypeRegistry.set(
+  MsgSetClassCreatorAllowlistResponse.$type,
+  MsgSetClassCreatorAllowlistResponse,
+);
+
+function createBaseMsgRemoveClassCreator(): MsgRemoveClassCreator {
+  return {
+    $type: 'regen.ecocredit.v1.MsgRemoveClassCreator',
+    authority: '',
+    creator: '',
+  };
+}
+
+export const MsgRemoveClassCreator = {
+  $type: 'regen.ecocredit.v1.MsgRemoveClassCreator' as const,
+
+  encode(
+    message: MsgRemoveClassCreator,
+    writer: _m0.Writer = _m0.Writer.create(),
+  ): _m0.Writer {
+    if (message.authority !== '') {
+      writer.uint32(10).string(message.authority);
+    }
+    if (message.creator !== '') {
+      writer.uint32(18).string(message.creator);
+    }
+    return writer;
+  },
+
+  decode(
+    input: _m0.Reader | Uint8Array,
+    length?: number,
+  ): MsgRemoveClassCreator {
+    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+    let end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseMsgRemoveClassCreator();
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+        case 1:
+          message.authority = reader.string();
+          break;
+        case 2:
+          message.creator = reader.string();
+          break;
+        default:
+          reader.skipType(tag & 7);
+          break;
+      }
+    }
+    return message;
+  },
+
+  fromJSON(object: any): MsgRemoveClassCreator {
+    return {
+      $type: MsgRemoveClassCreator.$type,
+      authority: isSet(object.authority) ? String(object.authority) : '',
+      creator: isSet(object.creator) ? String(object.creator) : '',
+    };
+  },
+
+  toJSON(message: MsgRemoveClassCreator): unknown {
+    const obj: any = {};
+    message.authority !== undefined && (obj.authority = message.authority);
+    message.creator !== undefined && (obj.creator = message.creator);
+    return obj;
+  },
+
+  fromPartial<I extends Exact<DeepPartial<MsgRemoveClassCreator>, I>>(
+    object: I,
+  ): MsgRemoveClassCreator {
+    const message = createBaseMsgRemoveClassCreator();
+    message.authority = object.authority ?? '';
+    message.creator = object.creator ?? '';
+    return message;
+  },
+};
+
+messageTypeRegistry.set(MsgRemoveClassCreator.$type, MsgRemoveClassCreator);
+
+function createBaseMsgRemoveClassCreatorResponse(): MsgRemoveClassCreatorResponse {
+  return { $type: 'regen.ecocredit.v1.MsgRemoveClassCreatorResponse' };
+}
+
+export const MsgRemoveClassCreatorResponse = {
+  $type: 'regen.ecocredit.v1.MsgRemoveClassCreatorResponse' as const,
+
+  encode(
+    _: MsgRemoveClassCreatorResponse,
+    writer: _m0.Writer = _m0.Writer.create(),
+  ): _m0.Writer {
+    return writer;
+  },
+
+  decode(
+    input: _m0.Reader | Uint8Array,
+    length?: number,
+  ): MsgRemoveClassCreatorResponse {
+    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+    let end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseMsgRemoveClassCreatorResponse();
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+        default:
+          reader.skipType(tag & 7);
+          break;
+      }
+    }
+    return message;
+  },
+
+  fromJSON(_: any): MsgRemoveClassCreatorResponse {
+    return {
+      $type: MsgRemoveClassCreatorResponse.$type,
+    };
+  },
+
+  toJSON(_: MsgRemoveClassCreatorResponse): unknown {
+    const obj: any = {};
+    return obj;
+  },
+
+  fromPartial<I extends Exact<DeepPartial<MsgRemoveClassCreatorResponse>, I>>(
+    _: I,
+  ): MsgRemoveClassCreatorResponse {
+    const message = createBaseMsgRemoveClassCreatorResponse();
+    return message;
+  },
+};
+
+messageTypeRegistry.set(
+  MsgRemoveClassCreatorResponse.$type,
+  MsgRemoveClassCreatorResponse,
+);
+
+function createBaseMsgUpdateClassFee(): MsgUpdateClassFee {
+  return {
+    $type: 'regen.ecocredit.v1.MsgUpdateClassFee',
+    authority: '',
+    fee: undefined,
+  };
+}
+
+export const MsgUpdateClassFee = {
+  $type: 'regen.ecocredit.v1.MsgUpdateClassFee' as const,
+
+  encode(
+    message: MsgUpdateClassFee,
+    writer: _m0.Writer = _m0.Writer.create(),
+  ): _m0.Writer {
+    if (message.authority !== '') {
+      writer.uint32(10).string(message.authority);
+    }
+    if (message.fee !== undefined) {
+      Coin.encode(message.fee, writer.uint32(18).fork()).ldelim();
+    }
+    return writer;
+  },
+
+  decode(input: _m0.Reader | Uint8Array, length?: number): MsgUpdateClassFee {
+    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+    let end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseMsgUpdateClassFee();
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+        case 1:
+          message.authority = reader.string();
+          break;
+        case 2:
+          message.fee = Coin.decode(reader, reader.uint32());
+          break;
+        default:
+          reader.skipType(tag & 7);
+          break;
+      }
+    }
+    return message;
+  },
+
+  fromJSON(object: any): MsgUpdateClassFee {
+    return {
+      $type: MsgUpdateClassFee.$type,
+      authority: isSet(object.authority) ? String(object.authority) : '',
+      fee: isSet(object.fee) ? Coin.fromJSON(object.fee) : undefined,
+    };
+  },
+
+  toJSON(message: MsgUpdateClassFee): unknown {
+    const obj: any = {};
+    message.authority !== undefined && (obj.authority = message.authority);
+    message.fee !== undefined &&
+      (obj.fee = message.fee ? Coin.toJSON(message.fee) : undefined);
+    return obj;
+  },
+
+  fromPartial<I extends Exact<DeepPartial<MsgUpdateClassFee>, I>>(
+    object: I,
+  ): MsgUpdateClassFee {
+    const message = createBaseMsgUpdateClassFee();
+    message.authority = object.authority ?? '';
+    message.fee =
+      object.fee !== undefined && object.fee !== null
+        ? Coin.fromPartial(object.fee)
+        : undefined;
+    return message;
+  },
+};
+
+messageTypeRegistry.set(MsgUpdateClassFee.$type, MsgUpdateClassFee);
+
+function createBaseMsgUpdateClassFeeResponse(): MsgUpdateClassFeeResponse {
+  return { $type: 'regen.ecocredit.v1.MsgUpdateClassFeeResponse' };
+}
+
+export const MsgUpdateClassFeeResponse = {
+  $type: 'regen.ecocredit.v1.MsgUpdateClassFeeResponse' as const,
+
+  encode(
+    _: MsgUpdateClassFeeResponse,
+    writer: _m0.Writer = _m0.Writer.create(),
+  ): _m0.Writer {
+    return writer;
+  },
+
+  decode(
+    input: _m0.Reader | Uint8Array,
+    length?: number,
+  ): MsgUpdateClassFeeResponse {
+    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+    let end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseMsgUpdateClassFeeResponse();
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+        default:
+          reader.skipType(tag & 7);
+          break;
+      }
+    }
+    return message;
+  },
+
+  fromJSON(_: any): MsgUpdateClassFeeResponse {
+    return {
+      $type: MsgUpdateClassFeeResponse.$type,
+    };
+  },
+
+  toJSON(_: MsgUpdateClassFeeResponse): unknown {
+    const obj: any = {};
+    return obj;
+  },
+
+  fromPartial<I extends Exact<DeepPartial<MsgUpdateClassFeeResponse>, I>>(
+    _: I,
+  ): MsgUpdateClassFeeResponse {
+    const message = createBaseMsgUpdateClassFeeResponse();
+    return message;
+  },
+};
+
+messageTypeRegistry.set(
+  MsgUpdateClassFeeResponse.$type,
+  MsgUpdateClassFeeResponse,
+);
+
+function createBaseMsgAddAllowedBridgeChain(): MsgAddAllowedBridgeChain {
+  return {
+    $type: 'regen.ecocredit.v1.MsgAddAllowedBridgeChain',
+    authority: '',
+    chainName: '',
+  };
+}
+
+export const MsgAddAllowedBridgeChain = {
+  $type: 'regen.ecocredit.v1.MsgAddAllowedBridgeChain' as const,
+
+  encode(
+    message: MsgAddAllowedBridgeChain,
+    writer: _m0.Writer = _m0.Writer.create(),
+  ): _m0.Writer {
+    if (message.authority !== '') {
+      writer.uint32(10).string(message.authority);
+    }
+    if (message.chainName !== '') {
+      writer.uint32(18).string(message.chainName);
+    }
+    return writer;
+  },
+
+  decode(
+    input: _m0.Reader | Uint8Array,
+    length?: number,
+  ): MsgAddAllowedBridgeChain {
+    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+    let end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseMsgAddAllowedBridgeChain();
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+        case 1:
+          message.authority = reader.string();
+          break;
+        case 2:
+          message.chainName = reader.string();
+          break;
+        default:
+          reader.skipType(tag & 7);
+          break;
+      }
+    }
+    return message;
+  },
+
+  fromJSON(object: any): MsgAddAllowedBridgeChain {
+    return {
+      $type: MsgAddAllowedBridgeChain.$type,
+      authority: isSet(object.authority) ? String(object.authority) : '',
+      chainName: isSet(object.chainName) ? String(object.chainName) : '',
+    };
+  },
+
+  toJSON(message: MsgAddAllowedBridgeChain): unknown {
+    const obj: any = {};
+    message.authority !== undefined && (obj.authority = message.authority);
+    message.chainName !== undefined && (obj.chainName = message.chainName);
+    return obj;
+  },
+
+  fromPartial<I extends Exact<DeepPartial<MsgAddAllowedBridgeChain>, I>>(
+    object: I,
+  ): MsgAddAllowedBridgeChain {
+    const message = createBaseMsgAddAllowedBridgeChain();
+    message.authority = object.authority ?? '';
+    message.chainName = object.chainName ?? '';
+    return message;
+  },
+};
+
+messageTypeRegistry.set(
+  MsgAddAllowedBridgeChain.$type,
+  MsgAddAllowedBridgeChain,
+);
+
+function createBaseMsgAddAllowedBridgeChainResponse(): MsgAddAllowedBridgeChainResponse {
+  return { $type: 'regen.ecocredit.v1.MsgAddAllowedBridgeChainResponse' };
+}
+
+export const MsgAddAllowedBridgeChainResponse = {
+  $type: 'regen.ecocredit.v1.MsgAddAllowedBridgeChainResponse' as const,
+
+  encode(
+    _: MsgAddAllowedBridgeChainResponse,
+    writer: _m0.Writer = _m0.Writer.create(),
+  ): _m0.Writer {
+    return writer;
+  },
+
+  decode(
+    input: _m0.Reader | Uint8Array,
+    length?: number,
+  ): MsgAddAllowedBridgeChainResponse {
+    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+    let end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseMsgAddAllowedBridgeChainResponse();
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+        default:
+          reader.skipType(tag & 7);
+          break;
+      }
+    }
+    return message;
+  },
+
+  fromJSON(_: any): MsgAddAllowedBridgeChainResponse {
+    return {
+      $type: MsgAddAllowedBridgeChainResponse.$type,
+    };
+  },
+
+  toJSON(_: MsgAddAllowedBridgeChainResponse): unknown {
+    const obj: any = {};
+    return obj;
+  },
+
+  fromPartial<
+    I extends Exact<DeepPartial<MsgAddAllowedBridgeChainResponse>, I>,
+  >(_: I): MsgAddAllowedBridgeChainResponse {
+    const message = createBaseMsgAddAllowedBridgeChainResponse();
+    return message;
+  },
+};
+
+messageTypeRegistry.set(
+  MsgAddAllowedBridgeChainResponse.$type,
+  MsgAddAllowedBridgeChainResponse,
+);
+
+function createBaseMsgRemoveAllowedBridgeChain(): MsgRemoveAllowedBridgeChain {
+  return {
+    $type: 'regen.ecocredit.v1.MsgRemoveAllowedBridgeChain',
+    authority: '',
+    chainName: '',
+  };
+}
+
+export const MsgRemoveAllowedBridgeChain = {
+  $type: 'regen.ecocredit.v1.MsgRemoveAllowedBridgeChain' as const,
+
+  encode(
+    message: MsgRemoveAllowedBridgeChain,
+    writer: _m0.Writer = _m0.Writer.create(),
+  ): _m0.Writer {
+    if (message.authority !== '') {
+      writer.uint32(10).string(message.authority);
+    }
+    if (message.chainName !== '') {
+      writer.uint32(18).string(message.chainName);
+    }
+    return writer;
+  },
+
+  decode(
+    input: _m0.Reader | Uint8Array,
+    length?: number,
+  ): MsgRemoveAllowedBridgeChain {
+    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+    let end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseMsgRemoveAllowedBridgeChain();
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+        case 1:
+          message.authority = reader.string();
+          break;
+        case 2:
+          message.chainName = reader.string();
+          break;
+        default:
+          reader.skipType(tag & 7);
+          break;
+      }
+    }
+    return message;
+  },
+
+  fromJSON(object: any): MsgRemoveAllowedBridgeChain {
+    return {
+      $type: MsgRemoveAllowedBridgeChain.$type,
+      authority: isSet(object.authority) ? String(object.authority) : '',
+      chainName: isSet(object.chainName) ? String(object.chainName) : '',
+    };
+  },
+
+  toJSON(message: MsgRemoveAllowedBridgeChain): unknown {
+    const obj: any = {};
+    message.authority !== undefined && (obj.authority = message.authority);
+    message.chainName !== undefined && (obj.chainName = message.chainName);
+    return obj;
+  },
+
+  fromPartial<I extends Exact<DeepPartial<MsgRemoveAllowedBridgeChain>, I>>(
+    object: I,
+  ): MsgRemoveAllowedBridgeChain {
+    const message = createBaseMsgRemoveAllowedBridgeChain();
+    message.authority = object.authority ?? '';
+    message.chainName = object.chainName ?? '';
+    return message;
+  },
+};
+
+messageTypeRegistry.set(
+  MsgRemoveAllowedBridgeChain.$type,
+  MsgRemoveAllowedBridgeChain,
+);
+
+function createBaseMsgRemoveAllowedBridgeChainResponse(): MsgRemoveAllowedBridgeChainResponse {
+  return { $type: 'regen.ecocredit.v1.MsgRemoveAllowedBridgeChainResponse' };
+}
+
+export const MsgRemoveAllowedBridgeChainResponse = {
+  $type: 'regen.ecocredit.v1.MsgRemoveAllowedBridgeChainResponse' as const,
+
+  encode(
+    _: MsgRemoveAllowedBridgeChainResponse,
+    writer: _m0.Writer = _m0.Writer.create(),
+  ): _m0.Writer {
+    return writer;
+  },
+
+  decode(
+    input: _m0.Reader | Uint8Array,
+    length?: number,
+  ): MsgRemoveAllowedBridgeChainResponse {
+    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+    let end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseMsgRemoveAllowedBridgeChainResponse();
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+        default:
+          reader.skipType(tag & 7);
+          break;
+      }
+    }
+    return message;
+  },
+
+  fromJSON(_: any): MsgRemoveAllowedBridgeChainResponse {
+    return {
+      $type: MsgRemoveAllowedBridgeChainResponse.$type,
+    };
+  },
+
+  toJSON(_: MsgRemoveAllowedBridgeChainResponse): unknown {
+    const obj: any = {};
+    return obj;
+  },
+
+  fromPartial<
+    I extends Exact<DeepPartial<MsgRemoveAllowedBridgeChainResponse>, I>,
+  >(_: I): MsgRemoveAllowedBridgeChainResponse {
+    const message = createBaseMsgRemoveAllowedBridgeChainResponse();
+    return message;
+  },
+};
+
+messageTypeRegistry.set(
+  MsgRemoveAllowedBridgeChainResponse.$type,
+  MsgRemoveAllowedBridgeChainResponse,
+);
+
 /** Msg is the regen.ecocredit.v1 Msg service. */
 export interface Msg {
   /**
    * CreateClass creates a new credit class under the given credit type with an
-   * approved list of issuers and optional metadata. The fee denom must be one
-   * of the denoms listed in Params.credit_class_fee and greater than or equal
-   * to the fee amount but only the minimum amount is charged. The creator of
-   * the credit class becomes the admin of the credit class upon creation.
+   * approved list of issuers and optional metadata. If the class fee parameter
+   * is set, the fee field must be populated with equal value. A greater fee can
+   * be provided, however, the creator will only be charged the amount specified
+   * in the fee parameter. The creator of the credit class becomes the admin of
+   * the credit class upon creation.
    */
   CreateClass(
     request: DeepPartial<MsgCreateClass>,
@@ -3215,7 +4517,7 @@ export interface Msg {
    * CreateProject creates a new project under the given credit class with a
    * jurisdiction, optional metadata, and an optional reference ID. The creator
    * of the project must be an approved credit class issuer for the given credit
-   * class and the creator becomes the admin of the project upon creation.
+   * class. The creator becomes the admin of the project upon creation.
    */
   CreateProject(
     request: DeepPartial<MsgCreateProject>,
@@ -3313,6 +4615,15 @@ export interface Msg {
     request: DeepPartial<MsgUpdateProjectMetadata>,
   ): Promise<MsgUpdateProjectMetadataResponse>;
   /**
+   * UpdateBatchMetadata updates the batch metadata. Only an "open" batch can be
+   * updated and only the issuer of the batch can update the batch.
+   *
+   * Since Revision 2
+   */
+  UpdateBatchMetadata(
+    request: DeepPartial<MsgUpdateBatchMetadata>,
+  ): Promise<MsgUpdateBatchMetadataResponse>;
+  /**
    * Bridge processes credits being sent back to the source chain. When credits
    * are sent back to the source chain, the credits are cancelled and an event
    * is emitted to be handled by an external bridge service.
@@ -3330,6 +4641,73 @@ export interface Msg {
   BridgeReceive(
     request: DeepPartial<MsgBridgeReceive>,
   ): Promise<MsgBridgeReceiveResponse>;
+  /**
+   * AddCreditType is a governance method that allows the addition of new
+   * credit types to the network.
+   *
+   * Since Revision 2
+   */
+  AddCreditType(
+    request: DeepPartial<MsgAddCreditType>,
+  ): Promise<MsgAddCreditTypeResponse>;
+  /**
+   * SetClassCreatorAllowlist is a governance method that updates the class
+   * creator allowlist enabled setting. When enabled, only addresses listed in
+   * the allowlist can create credit classes. When disabled, any address can
+   * create credit classes.
+   *
+   * Since Revision 2
+   */
+  SetClassCreatorAllowlist(
+    request: DeepPartial<MsgSetClassCreatorAllowlist>,
+  ): Promise<MsgSetClassCreatorAllowlistResponse>;
+  /**
+   * AddClassCreator is a governance method that allows the addition of a new
+   * address to the class creation allowlist.
+   *
+   * Since Revision 2
+   */
+  AddClassCreator(
+    request: DeepPartial<MsgAddClassCreator>,
+  ): Promise<MsgAddClassCreatorResponse>;
+  /**
+   * RemoveClassCreator is a governance method that removes an
+   * address from the class creation allowlist.
+   *
+   * Since Revision 2
+   */
+  RemoveClassCreator(
+    request: DeepPartial<MsgRemoveClassCreator>,
+  ): Promise<MsgRemoveClassCreatorResponse>;
+  /**
+   * UpdateClassFee is a governance method that allows for updating the credit
+   * class creation fee. If no fee is specified in the request, the credit
+   * class creation fee will be removed and no fee will be required to create
+   * a credit class.
+   *
+   * Since Revision 2
+   */
+  UpdateClassFee(
+    request: DeepPartial<MsgUpdateClassFee>,
+  ): Promise<MsgUpdateClassFeeResponse>;
+  /**
+   * AddAllowedBridgeChain is a governance method that allows for the
+   * addition of a chain to bridge ecocredits to.
+   *
+   * Since Revision 2
+   */
+  AddAllowedBridgeChain(
+    request: DeepPartial<MsgAddAllowedBridgeChain>,
+  ): Promise<MsgAddAllowedBridgeChainResponse>;
+  /**
+   * RemoveAllowedBridgeChain is a governance method that allows for the
+   * removal of a chain to bridge ecocredits to.
+   *
+   * Since Revision 2
+   */
+  RemoveAllowedBridgeChain(
+    request: DeepPartial<MsgRemoveAllowedBridgeChain>,
+  ): Promise<MsgRemoveAllowedBridgeChainResponse>;
 }
 
 export class MsgClientImpl implements Msg {
@@ -3349,8 +4727,16 @@ export class MsgClientImpl implements Msg {
     this.UpdateClassMetadata = this.UpdateClassMetadata.bind(this);
     this.UpdateProjectAdmin = this.UpdateProjectAdmin.bind(this);
     this.UpdateProjectMetadata = this.UpdateProjectMetadata.bind(this);
+    this.UpdateBatchMetadata = this.UpdateBatchMetadata.bind(this);
     this.Bridge = this.Bridge.bind(this);
     this.BridgeReceive = this.BridgeReceive.bind(this);
+    this.AddCreditType = this.AddCreditType.bind(this);
+    this.SetClassCreatorAllowlist = this.SetClassCreatorAllowlist.bind(this);
+    this.AddClassCreator = this.AddClassCreator.bind(this);
+    this.RemoveClassCreator = this.RemoveClassCreator.bind(this);
+    this.UpdateClassFee = this.UpdateClassFee.bind(this);
+    this.AddAllowedBridgeChain = this.AddAllowedBridgeChain.bind(this);
+    this.RemoveAllowedBridgeChain = this.RemoveAllowedBridgeChain.bind(this);
   }
   CreateClass(
     request: DeepPartial<MsgCreateClass>,
@@ -3521,6 +4907,21 @@ export class MsgClientImpl implements Msg {
     );
   }
 
+  UpdateBatchMetadata(
+    request: DeepPartial<MsgUpdateBatchMetadata>,
+  ): Promise<MsgUpdateBatchMetadataResponse> {
+    const fromPartial = MsgUpdateBatchMetadata.fromPartial(request);
+    const data = MsgUpdateBatchMetadata.encode(fromPartial).finish();
+    const promise = this.rpc.request(
+      'regen.ecocredit.v1.Msg',
+      'UpdateBatchMetadata',
+      data,
+    );
+    return promise.then(data =>
+      MsgUpdateBatchMetadataResponse.decode(new _m0.Reader(data)),
+    );
+  }
+
   Bridge(request: DeepPartial<MsgBridge>): Promise<MsgBridgeResponse> {
     const fromPartial = MsgBridge.fromPartial(request);
     const data = MsgBridge.encode(fromPartial).finish();
@@ -3540,6 +4941,111 @@ export class MsgClientImpl implements Msg {
     );
     return promise.then(data =>
       MsgBridgeReceiveResponse.decode(new _m0.Reader(data)),
+    );
+  }
+
+  AddCreditType(
+    request: DeepPartial<MsgAddCreditType>,
+  ): Promise<MsgAddCreditTypeResponse> {
+    const fromPartial = MsgAddCreditType.fromPartial(request);
+    const data = MsgAddCreditType.encode(fromPartial).finish();
+    const promise = this.rpc.request(
+      'regen.ecocredit.v1.Msg',
+      'AddCreditType',
+      data,
+    );
+    return promise.then(data =>
+      MsgAddCreditTypeResponse.decode(new _m0.Reader(data)),
+    );
+  }
+
+  SetClassCreatorAllowlist(
+    request: DeepPartial<MsgSetClassCreatorAllowlist>,
+  ): Promise<MsgSetClassCreatorAllowlistResponse> {
+    const fromPartial = MsgSetClassCreatorAllowlist.fromPartial(request);
+    const data = MsgSetClassCreatorAllowlist.encode(fromPartial).finish();
+    const promise = this.rpc.request(
+      'regen.ecocredit.v1.Msg',
+      'SetClassCreatorAllowlist',
+      data,
+    );
+    return promise.then(data =>
+      MsgSetClassCreatorAllowlistResponse.decode(new _m0.Reader(data)),
+    );
+  }
+
+  AddClassCreator(
+    request: DeepPartial<MsgAddClassCreator>,
+  ): Promise<MsgAddClassCreatorResponse> {
+    const fromPartial = MsgAddClassCreator.fromPartial(request);
+    const data = MsgAddClassCreator.encode(fromPartial).finish();
+    const promise = this.rpc.request(
+      'regen.ecocredit.v1.Msg',
+      'AddClassCreator',
+      data,
+    );
+    return promise.then(data =>
+      MsgAddClassCreatorResponse.decode(new _m0.Reader(data)),
+    );
+  }
+
+  RemoveClassCreator(
+    request: DeepPartial<MsgRemoveClassCreator>,
+  ): Promise<MsgRemoveClassCreatorResponse> {
+    const fromPartial = MsgRemoveClassCreator.fromPartial(request);
+    const data = MsgRemoveClassCreator.encode(fromPartial).finish();
+    const promise = this.rpc.request(
+      'regen.ecocredit.v1.Msg',
+      'RemoveClassCreator',
+      data,
+    );
+    return promise.then(data =>
+      MsgRemoveClassCreatorResponse.decode(new _m0.Reader(data)),
+    );
+  }
+
+  UpdateClassFee(
+    request: DeepPartial<MsgUpdateClassFee>,
+  ): Promise<MsgUpdateClassFeeResponse> {
+    const fromPartial = MsgUpdateClassFee.fromPartial(request);
+    const data = MsgUpdateClassFee.encode(fromPartial).finish();
+    const promise = this.rpc.request(
+      'regen.ecocredit.v1.Msg',
+      'UpdateClassFee',
+      data,
+    );
+    return promise.then(data =>
+      MsgUpdateClassFeeResponse.decode(new _m0.Reader(data)),
+    );
+  }
+
+  AddAllowedBridgeChain(
+    request: DeepPartial<MsgAddAllowedBridgeChain>,
+  ): Promise<MsgAddAllowedBridgeChainResponse> {
+    const fromPartial = MsgAddAllowedBridgeChain.fromPartial(request);
+    const data = MsgAddAllowedBridgeChain.encode(fromPartial).finish();
+    const promise = this.rpc.request(
+      'regen.ecocredit.v1.Msg',
+      'AddAllowedBridgeChain',
+      data,
+    );
+    return promise.then(data =>
+      MsgAddAllowedBridgeChainResponse.decode(new _m0.Reader(data)),
+    );
+  }
+
+  RemoveAllowedBridgeChain(
+    request: DeepPartial<MsgRemoveAllowedBridgeChain>,
+  ): Promise<MsgRemoveAllowedBridgeChainResponse> {
+    const fromPartial = MsgRemoveAllowedBridgeChain.fromPartial(request);
+    const data = MsgRemoveAllowedBridgeChain.encode(fromPartial).finish();
+    const promise = this.rpc.request(
+      'regen.ecocredit.v1.Msg',
+      'RemoveAllowedBridgeChain',
+      data,
+    );
+    return promise.then(data =>
+      MsgRemoveAllowedBridgeChainResponse.decode(new _m0.Reader(data)),
     );
   }
 }

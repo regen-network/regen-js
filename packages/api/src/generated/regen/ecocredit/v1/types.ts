@@ -2,7 +2,7 @@
 import { messageTypeRegistry } from '../../../typeRegistry';
 import Long from 'long';
 import _m0 from 'protobufjs/minimal';
-import { CreditType } from '../../../regen/ecocredit/v1/state';
+import { CreditType } from './state';
 import { Coin } from '../../../cosmos/base/v1beta1/coin';
 
 export const protobufPackage = 'regen.ecocredit.v1';
@@ -38,6 +38,20 @@ export interface Params {
    * address can create credit classes.
    */
   allowlistEnabled: boolean;
+  /**
+   * allowed_denoms is a list of bank denoms allowed to be used in the ask price
+   * of sell orders.
+   *
+   * Since Revision 2
+   */
+  allowedDenoms: AllowedDenom[];
+  /**
+   * AllowedBridgeChains is a list of chain names that are allowed to be used in
+   * bridge operations.
+   *
+   * Since Revision 2
+   */
+  allowedBridgeChains: string[];
 }
 
 /** Credits represents a simple structure for credits. */
@@ -77,6 +91,14 @@ export interface BatchIssuance {
    * increased precision.
    */
   retirementJurisdiction: string;
+  /**
+   * retirement_reason is any arbitrary string that specifies the reason for
+   * retiring credits. The reason will be included in EventRetire and is not
+   * stored in state.
+   *
+   * Since Revision 2
+   */
+  retirementReason: string;
 }
 
 /**
@@ -110,7 +132,11 @@ export interface OriginTx {
   note: string;
 }
 
-/** CreditTypeProposal is a gov Content type for adding a credit type. */
+/**
+ * CreditTypeProposal is a gov Content type for adding a credit type.
+ * Deprecated (Since Revision 2): This message is no longer used and will be
+ * removed in the next version. See MsgAddCreditType.
+ */
 export interface CreditTypeProposal {
   $type: 'regen.ecocredit.v1.CreditTypeProposal';
   /** title is the title of the proposal. */
@@ -124,6 +150,31 @@ export interface CreditTypeProposal {
   creditType?: CreditType;
 }
 
+/**
+ * AllowedDenom represents the information for an allowed ask denom.
+ *
+ * Since Revision 2
+ *
+ * Deprecated(Since Revision 2): This type was added to support historical
+ * queries for params but will also be removed in the next version.
+ */
+export interface AllowedDenom {
+  $type: 'regen.ecocredit.v1.AllowedDenom';
+  /** denom is the bank denom to allow (ex. ibc/GLKHDSG423SGS) */
+  bankDenom: string;
+  /**
+   * display_denom is the denom to display to the user and is informational.
+   * Because the denom is likely an IBC denom, this should be chosen by
+   * governance to represent the consensus trusted name of the denom.
+   */
+  displayDenom: string;
+  /**
+   * exponent is the exponent that relates the denom to the display_denom and is
+   * informational
+   */
+  exponent: number;
+}
+
 function createBaseParams(): Params {
   return {
     $type: 'regen.ecocredit.v1.Params',
@@ -131,6 +182,8 @@ function createBaseParams(): Params {
     basketFee: [],
     allowedClassCreators: [],
     allowlistEnabled: false,
+    allowedDenoms: [],
+    allowedBridgeChains: [],
   };
 }
 
@@ -153,6 +206,12 @@ export const Params = {
     if (message.allowlistEnabled === true) {
       writer.uint32(32).bool(message.allowlistEnabled);
     }
+    for (const v of message.allowedDenoms) {
+      AllowedDenom.encode(v!, writer.uint32(42).fork()).ldelim();
+    }
+    for (const v of message.allowedBridgeChains) {
+      writer.uint32(50).string(v!);
+    }
     return writer;
   },
 
@@ -174,6 +233,14 @@ export const Params = {
           break;
         case 4:
           message.allowlistEnabled = reader.bool();
+          break;
+        case 5:
+          message.allowedDenoms.push(
+            AllowedDenom.decode(reader, reader.uint32()),
+          );
+          break;
+        case 6:
+          message.allowedBridgeChains.push(reader.string());
           break;
         default:
           reader.skipType(tag & 7);
@@ -198,6 +265,12 @@ export const Params = {
       allowlistEnabled: isSet(object.allowlistEnabled)
         ? Boolean(object.allowlistEnabled)
         : false,
+      allowedDenoms: Array.isArray(object?.allowedDenoms)
+        ? object.allowedDenoms.map((e: any) => AllowedDenom.fromJSON(e))
+        : [],
+      allowedBridgeChains: Array.isArray(object?.allowedBridgeChains)
+        ? object.allowedBridgeChains.map((e: any) => String(e))
+        : [],
     };
   },
 
@@ -224,6 +297,18 @@ export const Params = {
     }
     message.allowlistEnabled !== undefined &&
       (obj.allowlistEnabled = message.allowlistEnabled);
+    if (message.allowedDenoms) {
+      obj.allowedDenoms = message.allowedDenoms.map(e =>
+        e ? AllowedDenom.toJSON(e) : undefined,
+      );
+    } else {
+      obj.allowedDenoms = [];
+    }
+    if (message.allowedBridgeChains) {
+      obj.allowedBridgeChains = message.allowedBridgeChains.map(e => e);
+    } else {
+      obj.allowedBridgeChains = [];
+    }
     return obj;
   },
 
@@ -235,6 +320,9 @@ export const Params = {
     message.allowedClassCreators =
       object.allowedClassCreators?.map(e => e) || [];
     message.allowlistEnabled = object.allowlistEnabled ?? false;
+    message.allowedDenoms =
+      object.allowedDenoms?.map(e => AllowedDenom.fromPartial(e)) || [];
+    message.allowedBridgeChains = object.allowedBridgeChains?.map(e => e) || [];
     return message;
   },
 };
@@ -314,6 +402,7 @@ function createBaseBatchIssuance(): BatchIssuance {
     tradableAmount: '',
     retiredAmount: '',
     retirementJurisdiction: '',
+    retirementReason: '',
   };
 }
 
@@ -335,6 +424,9 @@ export const BatchIssuance = {
     }
     if (message.retirementJurisdiction !== '') {
       writer.uint32(34).string(message.retirementJurisdiction);
+    }
+    if (message.retirementReason !== '') {
+      writer.uint32(42).string(message.retirementReason);
     }
     return writer;
   },
@@ -358,6 +450,9 @@ export const BatchIssuance = {
         case 4:
           message.retirementJurisdiction = reader.string();
           break;
+        case 5:
+          message.retirementReason = reader.string();
+          break;
         default:
           reader.skipType(tag & 7);
           break;
@@ -379,6 +474,9 @@ export const BatchIssuance = {
       retirementJurisdiction: isSet(object.retirementJurisdiction)
         ? String(object.retirementJurisdiction)
         : '',
+      retirementReason: isSet(object.retirementReason)
+        ? String(object.retirementReason)
+        : '',
     };
   },
 
@@ -391,6 +489,8 @@ export const BatchIssuance = {
       (obj.retiredAmount = message.retiredAmount);
     message.retirementJurisdiction !== undefined &&
       (obj.retirementJurisdiction = message.retirementJurisdiction);
+    message.retirementReason !== undefined &&
+      (obj.retirementReason = message.retirementReason);
     return obj;
   },
 
@@ -402,6 +502,7 @@ export const BatchIssuance = {
     message.tradableAmount = object.tradableAmount ?? '';
     message.retiredAmount = object.retiredAmount ?? '';
     message.retirementJurisdiction = object.retirementJurisdiction ?? '';
+    message.retirementReason = object.retirementReason ?? '';
     return message;
   },
 };
@@ -588,6 +689,92 @@ export const CreditTypeProposal = {
 };
 
 messageTypeRegistry.set(CreditTypeProposal.$type, CreditTypeProposal);
+
+function createBaseAllowedDenom(): AllowedDenom {
+  return {
+    $type: 'regen.ecocredit.v1.AllowedDenom',
+    bankDenom: '',
+    displayDenom: '',
+    exponent: 0,
+  };
+}
+
+export const AllowedDenom = {
+  $type: 'regen.ecocredit.v1.AllowedDenom' as const,
+
+  encode(
+    message: AllowedDenom,
+    writer: _m0.Writer = _m0.Writer.create(),
+  ): _m0.Writer {
+    if (message.bankDenom !== '') {
+      writer.uint32(10).string(message.bankDenom);
+    }
+    if (message.displayDenom !== '') {
+      writer.uint32(18).string(message.displayDenom);
+    }
+    if (message.exponent !== 0) {
+      writer.uint32(24).uint32(message.exponent);
+    }
+    return writer;
+  },
+
+  decode(input: _m0.Reader | Uint8Array, length?: number): AllowedDenom {
+    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+    let end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseAllowedDenom();
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+        case 1:
+          message.bankDenom = reader.string();
+          break;
+        case 2:
+          message.displayDenom = reader.string();
+          break;
+        case 3:
+          message.exponent = reader.uint32();
+          break;
+        default:
+          reader.skipType(tag & 7);
+          break;
+      }
+    }
+    return message;
+  },
+
+  fromJSON(object: any): AllowedDenom {
+    return {
+      $type: AllowedDenom.$type,
+      bankDenom: isSet(object.bankDenom) ? String(object.bankDenom) : '',
+      displayDenom: isSet(object.displayDenom)
+        ? String(object.displayDenom)
+        : '',
+      exponent: isSet(object.exponent) ? Number(object.exponent) : 0,
+    };
+  },
+
+  toJSON(message: AllowedDenom): unknown {
+    const obj: any = {};
+    message.bankDenom !== undefined && (obj.bankDenom = message.bankDenom);
+    message.displayDenom !== undefined &&
+      (obj.displayDenom = message.displayDenom);
+    message.exponent !== undefined &&
+      (obj.exponent = Math.round(message.exponent));
+    return obj;
+  },
+
+  fromPartial<I extends Exact<DeepPartial<AllowedDenom>, I>>(
+    object: I,
+  ): AllowedDenom {
+    const message = createBaseAllowedDenom();
+    message.bankDenom = object.bankDenom ?? '';
+    message.displayDenom = object.displayDenom ?? '';
+    message.exponent = object.exponent ?? 0;
+    return message;
+  },
+};
+
+messageTypeRegistry.set(AllowedDenom.$type, AllowedDenom);
 
 type Builtin =
   | Date

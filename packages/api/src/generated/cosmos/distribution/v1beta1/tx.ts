@@ -2,7 +2,7 @@
 import { messageTypeRegistry } from '../../../typeRegistry';
 import Long from 'long';
 import _m0 from 'protobufjs/minimal';
-import { Coin } from '../../../cosmos/base/v1beta1/coin';
+import { Coin } from '../../base/v1beta1/coin';
 
 export const protobufPackage = 'cosmos.distribution.v1beta1';
 
@@ -34,6 +34,8 @@ export interface MsgWithdrawDelegatorReward {
 /** MsgWithdrawDelegatorRewardResponse defines the Msg/WithdrawDelegatorReward response type. */
 export interface MsgWithdrawDelegatorRewardResponse {
   $type: 'cosmos.distribution.v1beta1.MsgWithdrawDelegatorRewardResponse';
+  /** Since: cosmos-sdk 0.46 */
+  amount: Coin[];
 }
 
 /**
@@ -48,6 +50,8 @@ export interface MsgWithdrawValidatorCommission {
 /** MsgWithdrawValidatorCommissionResponse defines the Msg/WithdrawValidatorCommission response type. */
 export interface MsgWithdrawValidatorCommissionResponse {
   $type: 'cosmos.distribution.v1beta1.MsgWithdrawValidatorCommissionResponse';
+  /** Since: cosmos-sdk 0.46 */
+  amount: Coin[];
 }
 
 /**
@@ -289,6 +293,7 @@ messageTypeRegistry.set(
 function createBaseMsgWithdrawDelegatorRewardResponse(): MsgWithdrawDelegatorRewardResponse {
   return {
     $type: 'cosmos.distribution.v1beta1.MsgWithdrawDelegatorRewardResponse',
+    amount: [],
   };
 }
 
@@ -297,9 +302,12 @@ export const MsgWithdrawDelegatorRewardResponse = {
     'cosmos.distribution.v1beta1.MsgWithdrawDelegatorRewardResponse' as const,
 
   encode(
-    _: MsgWithdrawDelegatorRewardResponse,
+    message: MsgWithdrawDelegatorRewardResponse,
     writer: _m0.Writer = _m0.Writer.create(),
   ): _m0.Writer {
+    for (const v of message.amount) {
+      Coin.encode(v!, writer.uint32(10).fork()).ldelim();
+    }
     return writer;
   },
 
@@ -313,6 +321,9 @@ export const MsgWithdrawDelegatorRewardResponse = {
     while (reader.pos < end) {
       const tag = reader.uint32();
       switch (tag >>> 3) {
+        case 1:
+          message.amount.push(Coin.decode(reader, reader.uint32()));
+          break;
         default:
           reader.skipType(tag & 7);
           break;
@@ -321,21 +332,30 @@ export const MsgWithdrawDelegatorRewardResponse = {
     return message;
   },
 
-  fromJSON(_: any): MsgWithdrawDelegatorRewardResponse {
+  fromJSON(object: any): MsgWithdrawDelegatorRewardResponse {
     return {
       $type: MsgWithdrawDelegatorRewardResponse.$type,
+      amount: Array.isArray(object?.amount)
+        ? object.amount.map((e: any) => Coin.fromJSON(e))
+        : [],
     };
   },
 
-  toJSON(_: MsgWithdrawDelegatorRewardResponse): unknown {
+  toJSON(message: MsgWithdrawDelegatorRewardResponse): unknown {
     const obj: any = {};
+    if (message.amount) {
+      obj.amount = message.amount.map(e => (e ? Coin.toJSON(e) : undefined));
+    } else {
+      obj.amount = [];
+    }
     return obj;
   },
 
   fromPartial<
     I extends Exact<DeepPartial<MsgWithdrawDelegatorRewardResponse>, I>,
-  >(_: I): MsgWithdrawDelegatorRewardResponse {
+  >(object: I): MsgWithdrawDelegatorRewardResponse {
     const message = createBaseMsgWithdrawDelegatorRewardResponse();
+    message.amount = object.amount?.map(e => Coin.fromPartial(e)) || [];
     return message;
   },
 };
@@ -419,6 +439,7 @@ messageTypeRegistry.set(
 function createBaseMsgWithdrawValidatorCommissionResponse(): MsgWithdrawValidatorCommissionResponse {
   return {
     $type: 'cosmos.distribution.v1beta1.MsgWithdrawValidatorCommissionResponse',
+    amount: [],
   };
 }
 
@@ -427,9 +448,12 @@ export const MsgWithdrawValidatorCommissionResponse = {
     'cosmos.distribution.v1beta1.MsgWithdrawValidatorCommissionResponse' as const,
 
   encode(
-    _: MsgWithdrawValidatorCommissionResponse,
+    message: MsgWithdrawValidatorCommissionResponse,
     writer: _m0.Writer = _m0.Writer.create(),
   ): _m0.Writer {
+    for (const v of message.amount) {
+      Coin.encode(v!, writer.uint32(10).fork()).ldelim();
+    }
     return writer;
   },
 
@@ -443,6 +467,9 @@ export const MsgWithdrawValidatorCommissionResponse = {
     while (reader.pos < end) {
       const tag = reader.uint32();
       switch (tag >>> 3) {
+        case 1:
+          message.amount.push(Coin.decode(reader, reader.uint32()));
+          break;
         default:
           reader.skipType(tag & 7);
           break;
@@ -451,21 +478,30 @@ export const MsgWithdrawValidatorCommissionResponse = {
     return message;
   },
 
-  fromJSON(_: any): MsgWithdrawValidatorCommissionResponse {
+  fromJSON(object: any): MsgWithdrawValidatorCommissionResponse {
     return {
       $type: MsgWithdrawValidatorCommissionResponse.$type,
+      amount: Array.isArray(object?.amount)
+        ? object.amount.map((e: any) => Coin.fromJSON(e))
+        : [],
     };
   },
 
-  toJSON(_: MsgWithdrawValidatorCommissionResponse): unknown {
+  toJSON(message: MsgWithdrawValidatorCommissionResponse): unknown {
     const obj: any = {};
+    if (message.amount) {
+      obj.amount = message.amount.map(e => (e ? Coin.toJSON(e) : undefined));
+    } else {
+      obj.amount = [];
+    }
     return obj;
   },
 
   fromPartial<
     I extends Exact<DeepPartial<MsgWithdrawValidatorCommissionResponse>, I>,
-  >(_: I): MsgWithdrawValidatorCommissionResponse {
+  >(object: I): MsgWithdrawValidatorCommissionResponse {
     const message = createBaseMsgWithdrawValidatorCommissionResponse();
+    message.amount = object.amount?.map(e => Coin.fromPartial(e)) || [];
     return message;
   },
 };

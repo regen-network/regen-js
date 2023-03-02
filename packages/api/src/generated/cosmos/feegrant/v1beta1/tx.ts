@@ -6,6 +6,8 @@ import { Any } from '../../../google/protobuf/any';
 
 export const protobufPackage = 'cosmos.feegrant.v1beta1';
 
+/** Since: cosmos-sdk 0.43 */
+
 /**
  * MsgGrantAllowance adds permission for Grantee to spend up to Allowance
  * of fees from the account of Granter.
@@ -16,7 +18,7 @@ export interface MsgGrantAllowance {
   granter: string;
   /** grantee is the address of the user being granted an allowance of another user's funds. */
   grantee: string;
-  /** allowance can be any of basic and filtered fee allowance. */
+  /** allowance can be any of basic, periodic, allowed fee allowance. */
   allowance?: Any;
 }
 

@@ -6,8 +6,9 @@ import {
   PageRequest,
   PageResponse,
 } from '../../../cosmos/base/query/v1beta1/pagination';
-import { Params } from '../../../regen/ecocredit/v1/types';
-import { CreditType } from '../../../regen/ecocredit/v1/state';
+import { Params } from './types';
+import { CreditType } from './state';
+import { Coin } from '../../../cosmos/base/v1beta1/coin';
 import { Timestamp } from '../../../google/protobuf/timestamp';
 
 export const protobufPackage = 'regen.ecocredit.v1';
@@ -289,6 +290,62 @@ export interface QueryBalancesResponse {
   pagination?: PageResponse;
 }
 
+/**
+ * QueryBalancesByBatchRequest is the Query/BalancesByBatch request type.
+ *
+ * Since Revision 2
+ */
+export interface QueryBalancesByBatchRequest {
+  $type: 'regen.ecocredit.v1.QueryBalancesByBatchRequest';
+  /** batch_denom is the denom of the batch to query by. */
+  batchDenom: string;
+  /** pagination defines an optional pagination for the request. */
+  pagination?: PageRequest;
+}
+
+/**
+ * QueryBalancesByBatchResponse is the Query/BalancesByBatch response type.
+ *
+ * Since Revision 2
+ */
+export interface QueryBalancesByBatchResponse {
+  $type: 'regen.ecocredit.v1.QueryBalancesByBatchResponse';
+  /**
+   * balances are a list of balances from different credit batches that the
+   * account holds.
+   */
+  balances: BatchBalanceInfo[];
+  /** pagination defines the pagination in the response. */
+  pagination?: PageResponse;
+}
+
+/**
+ * QueryAllBalancesRequest is the Query/AllBalances request type.
+ *
+ * Since Revision 2
+ */
+export interface QueryAllBalancesRequest {
+  $type: 'regen.ecocredit.v1.QueryAllBalancesRequest';
+  /** pagination defines an optional pagination for the request. */
+  pagination?: PageRequest;
+}
+
+/**
+ * QueryAllBalancesResponse is the Query/AllBalances response type.
+ *
+ * Since Revision 2
+ */
+export interface QueryAllBalancesResponse {
+  $type: 'regen.ecocredit.v1.QueryAllBalancesResponse';
+  /**
+   * balances are a list of balances from different credit batches that the
+   * account holds.
+   */
+  balances: BatchBalanceInfo[];
+  /** pagination defines the pagination in the response. */
+  pagination?: PageResponse;
+}
+
 /** QuerySupplyRequest is the Query/Supply request type. */
 export interface QuerySupplyRequest {
   $type: 'regen.ecocredit.v1.QuerySupplyRequest';
@@ -450,6 +507,105 @@ export interface BatchBalanceInfo {
    * cancelled, updated with a reduced quantity, or processed.
    */
   escrowedAmount: string;
+}
+
+/**
+ * QueryClassCreatorAllowlistRequest is the Query/ClassCreatorAllowlist request
+ * type.
+ *
+ * Since Revision 2
+ */
+export interface QueryClassCreatorAllowlistRequest {
+  $type: 'regen.ecocredit.v1.QueryClassCreatorAllowlistRequest';
+}
+
+/**
+ * QueryClassCreatorAllowlistResponse is the Query/ClassCreatorAllowlist
+ * response type.
+ *
+ * Since Revision 2
+ */
+export interface QueryClassCreatorAllowlistResponse {
+  $type: 'regen.ecocredit.v1.QueryClassCreatorAllowlistResponse';
+  /**
+   * enabled determines whether or not the allowlist for creating credit classes
+   * is enabled.
+   */
+  enabled: boolean;
+}
+
+/**
+ * QueryAllowedClassCreatorsRequest is the Query/AllowedClassCreators request
+ * type.
+ *
+ * Since Revision 2
+ */
+export interface QueryAllowedClassCreatorsRequest {
+  $type: 'regen.ecocredit.v1.QueryAllowedClassCreatorsRequest';
+  /** pagination defines an optional pagination for the request. */
+  pagination?: PageRequest;
+}
+
+/**
+ * QueryAllowedClassCreatorsResponse is the Query/AllowedClassCreators response
+ * type.
+ *
+ * Since Revision 2
+ */
+export interface QueryAllowedClassCreatorsResponse {
+  $type: 'regen.ecocredit.v1.QueryAllowedClassCreatorsResponse';
+  /** class_creators is the list of allowed credit class creators. */
+  classCreators: string[];
+  /** pagination defines the pagination in the response. */
+  pagination?: PageResponse;
+}
+
+/**
+ * QueryClassFeeRequest is the Query/ClassFee request type.
+ *
+ * Since Revision 2
+ */
+export interface QueryClassFeeRequest {
+  $type: 'regen.ecocredit.v1.QueryClassFeeRequest';
+}
+
+/**
+ * QueryClassFeeResponse is the Query/ClassFee response type.
+ *
+ * Since Revision 2
+ */
+export interface QueryClassFeeResponse {
+  $type: 'regen.ecocredit.v1.QueryClassFeeResponse';
+  /**
+   * fee is the credit class creation fee. If not set, a credit class creation
+   * fee is not required.
+   */
+  fee?: Coin;
+}
+
+/**
+ * QueryAllowedBridgeChainsRequest is the Query/AllowedBridgeChains request
+ * type.
+ *
+ * Since Revision 2
+ */
+export interface QueryAllowedBridgeChainsRequest {
+  $type: 'regen.ecocredit.v1.QueryAllowedBridgeChainsRequest';
+}
+
+/**
+ * QueryAllowedBridgeChainsResponse is the Query/AllowedBridgeChains response
+ * type.
+ *
+ * Since Revision 2
+ */
+export interface QueryAllowedBridgeChainsResponse {
+  $type: 'regen.ecocredit.v1.QueryAllowedBridgeChainsResponse';
+  /**
+   * allowed_bridge_chains is a list of chains that are allowed to be used in
+   * bridge operations.
+   */
+  allowedBridgeChains: string[];
 }
 
 function createBaseQueryClassesRequest(): QueryClassesRequest {
@@ -3118,6 +3274,365 @@ export const QueryBalancesResponse = {
 
 messageTypeRegistry.set(QueryBalancesResponse.$type, QueryBalancesResponse);
 
+function createBaseQueryBalancesByBatchRequest(): QueryBalancesByBatchRequest {
+  return {
+    $type: 'regen.ecocredit.v1.QueryBalancesByBatchRequest',
+    batchDenom: '',
+    pagination: undefined,
+  };
+}
+
+export const QueryBalancesByBatchRequest = {
+  $type: 'regen.ecocredit.v1.QueryBalancesByBatchRequest' as const,
+
+  encode(
+    message: QueryBalancesByBatchRequest,
+    writer: _m0.Writer = _m0.Writer.create(),
+  ): _m0.Writer {
+    if (message.batchDenom !== '') {
+      writer.uint32(10).string(message.batchDenom);
+    }
+    if (message.pagination !== undefined) {
+      PageRequest.encode(message.pagination, writer.uint32(18).fork()).ldelim();
+    }
+    return writer;
+  },
+
+  decode(
+    input: _m0.Reader | Uint8Array,
+    length?: number,
+  ): QueryBalancesByBatchRequest {
+    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+    let end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseQueryBalancesByBatchRequest();
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+        case 1:
+          message.batchDenom = reader.string();
+          break;
+        case 2:
+          message.pagination = PageRequest.decode(reader, reader.uint32());
+          break;
+        default:
+          reader.skipType(tag & 7);
+          break;
+      }
+    }
+    return message;
+  },
+
+  fromJSON(object: any): QueryBalancesByBatchRequest {
+    return {
+      $type: QueryBalancesByBatchRequest.$type,
+      batchDenom: isSet(object.batchDenom) ? String(object.batchDenom) : '',
+      pagination: isSet(object.pagination)
+        ? PageRequest.fromJSON(object.pagination)
+        : undefined,
+    };
+  },
+
+  toJSON(message: QueryBalancesByBatchRequest): unknown {
+    const obj: any = {};
+    message.batchDenom !== undefined && (obj.batchDenom = message.batchDenom);
+    message.pagination !== undefined &&
+      (obj.pagination = message.pagination
+        ? PageRequest.toJSON(message.pagination)
+        : undefined);
+    return obj;
+  },
+
+  fromPartial<I extends Exact<DeepPartial<QueryBalancesByBatchRequest>, I>>(
+    object: I,
+  ): QueryBalancesByBatchRequest {
+    const message = createBaseQueryBalancesByBatchRequest();
+    message.batchDenom = object.batchDenom ?? '';
+    message.pagination =
+      object.pagination !== undefined && object.pagination !== null
+        ? PageRequest.fromPartial(object.pagination)
+        : undefined;
+    return message;
+  },
+};
+
+messageTypeRegistry.set(
+  QueryBalancesByBatchRequest.$type,
+  QueryBalancesByBatchRequest,
+);
+
+function createBaseQueryBalancesByBatchResponse(): QueryBalancesByBatchResponse {
+  return {
+    $type: 'regen.ecocredit.v1.QueryBalancesByBatchResponse',
+    balances: [],
+    pagination: undefined,
+  };
+}
+
+export const QueryBalancesByBatchResponse = {
+  $type: 'regen.ecocredit.v1.QueryBalancesByBatchResponse' as const,
+
+  encode(
+    message: QueryBalancesByBatchResponse,
+    writer: _m0.Writer = _m0.Writer.create(),
+  ): _m0.Writer {
+    for (const v of message.balances) {
+      BatchBalanceInfo.encode(v!, writer.uint32(10).fork()).ldelim();
+    }
+    if (message.pagination !== undefined) {
+      PageResponse.encode(
+        message.pagination,
+        writer.uint32(18).fork(),
+      ).ldelim();
+    }
+    return writer;
+  },
+
+  decode(
+    input: _m0.Reader | Uint8Array,
+    length?: number,
+  ): QueryBalancesByBatchResponse {
+    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+    let end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseQueryBalancesByBatchResponse();
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+        case 1:
+          message.balances.push(
+            BatchBalanceInfo.decode(reader, reader.uint32()),
+          );
+          break;
+        case 2:
+          message.pagination = PageResponse.decode(reader, reader.uint32());
+          break;
+        default:
+          reader.skipType(tag & 7);
+          break;
+      }
+    }
+    return message;
+  },
+
+  fromJSON(object: any): QueryBalancesByBatchResponse {
+    return {
+      $type: QueryBalancesByBatchResponse.$type,
+      balances: Array.isArray(object?.balances)
+        ? object.balances.map((e: any) => BatchBalanceInfo.fromJSON(e))
+        : [],
+      pagination: isSet(object.pagination)
+        ? PageResponse.fromJSON(object.pagination)
+        : undefined,
+    };
+  },
+
+  toJSON(message: QueryBalancesByBatchResponse): unknown {
+    const obj: any = {};
+    if (message.balances) {
+      obj.balances = message.balances.map(e =>
+        e ? BatchBalanceInfo.toJSON(e) : undefined,
+      );
+    } else {
+      obj.balances = [];
+    }
+    message.pagination !== undefined &&
+      (obj.pagination = message.pagination
+        ? PageResponse.toJSON(message.pagination)
+        : undefined);
+    return obj;
+  },
+
+  fromPartial<I extends Exact<DeepPartial<QueryBalancesByBatchResponse>, I>>(
+    object: I,
+  ): QueryBalancesByBatchResponse {
+    const message = createBaseQueryBalancesByBatchResponse();
+    message.balances =
+      object.balances?.map(e => BatchBalanceInfo.fromPartial(e)) || [];
+    message.pagination =
+      object.pagination !== undefined && object.pagination !== null
+        ? PageResponse.fromPartial(object.pagination)
+        : undefined;
+    return message;
+  },
+};
+
+messageTypeRegistry.set(
+  QueryBalancesByBatchResponse.$type,
+  QueryBalancesByBatchResponse,
+);
+
+function createBaseQueryAllBalancesRequest(): QueryAllBalancesRequest {
+  return {
+    $type: 'regen.ecocredit.v1.QueryAllBalancesRequest',
+    pagination: undefined,
+  };
+}
+
+export const QueryAllBalancesRequest = {
+  $type: 'regen.ecocredit.v1.QueryAllBalancesRequest' as const,
+
+  encode(
+    message: QueryAllBalancesRequest,
+    writer: _m0.Writer = _m0.Writer.create(),
+  ): _m0.Writer {
+    if (message.pagination !== undefined) {
+      PageRequest.encode(message.pagination, writer.uint32(10).fork()).ldelim();
+    }
+    return writer;
+  },
+
+  decode(
+    input: _m0.Reader | Uint8Array,
+    length?: number,
+  ): QueryAllBalancesRequest {
+    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+    let end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseQueryAllBalancesRequest();
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+        case 1:
+          message.pagination = PageRequest.decode(reader, reader.uint32());
+          break;
+        default:
+          reader.skipType(tag & 7);
+          break;
+      }
+    }
+    return message;
+  },
+
+  fromJSON(object: any): QueryAllBalancesRequest {
+    return {
+      $type: QueryAllBalancesRequest.$type,
+      pagination: isSet(object.pagination)
+        ? PageRequest.fromJSON(object.pagination)
+        : undefined,
+    };
+  },
+
+  toJSON(message: QueryAllBalancesRequest): unknown {
+    const obj: any = {};
+    message.pagination !== undefined &&
+      (obj.pagination = message.pagination
+        ? PageRequest.toJSON(message.pagination)
+        : undefined);
+    return obj;
+  },
+
+  fromPartial<I extends Exact<DeepPartial<QueryAllBalancesRequest>, I>>(
+    object: I,
+  ): QueryAllBalancesRequest {
+    const message = createBaseQueryAllBalancesRequest();
+    message.pagination =
+      object.pagination !== undefined && object.pagination !== null
+        ? PageRequest.fromPartial(object.pagination)
+        : undefined;
+    return message;
+  },
+};
+
+messageTypeRegistry.set(QueryAllBalancesRequest.$type, QueryAllBalancesRequest);
+
+function createBaseQueryAllBalancesResponse(): QueryAllBalancesResponse {
+  return {
+    $type: 'regen.ecocredit.v1.QueryAllBalancesResponse',
+    balances: [],
+    pagination: undefined,
+  };
+}
+
+export const QueryAllBalancesResponse = {
+  $type: 'regen.ecocredit.v1.QueryAllBalancesResponse' as const,
+
+  encode(
+    message: QueryAllBalancesResponse,
+    writer: _m0.Writer = _m0.Writer.create(),
+  ): _m0.Writer {
+    for (const v of message.balances) {
+      BatchBalanceInfo.encode(v!, writer.uint32(10).fork()).ldelim();
+    }
+    if (message.pagination !== undefined) {
+      PageResponse.encode(
+        message.pagination,
+        writer.uint32(18).fork(),
+      ).ldelim();
+    }
+    return writer;
+  },
+
+  decode(
+    input: _m0.Reader | Uint8Array,
+    length?: number,
+  ): QueryAllBalancesResponse {
+    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+    let end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseQueryAllBalancesResponse();
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+        case 1:
+          message.balances.push(
+            BatchBalanceInfo.decode(reader, reader.uint32()),
+          );
+          break;
+        case 2:
+          message.pagination = PageResponse.decode(reader, reader.uint32());
+          break;
+        default:
+          reader.skipType(tag & 7);
+          break;
+      }
+    }
+    return message;
+  },
+
+  fromJSON(object: any): QueryAllBalancesResponse {
+    return {
+      $type: QueryAllBalancesResponse.$type,
+      balances: Array.isArray(object?.balances)
+        ? object.balances.map((e: any) => BatchBalanceInfo.fromJSON(e))
+        : [],
+      pagination: isSet(object.pagination)
+        ? PageResponse.fromJSON(object.pagination)
+        : undefined,
+    };
+  },
+
+  toJSON(message: QueryAllBalancesResponse): unknown {
+    const obj: any = {};
+    if (message.balances) {
+      obj.balances = message.balances.map(e =>
+        e ? BatchBalanceInfo.toJSON(e) : undefined,
+      );
+    } else {
+      obj.balances = [];
+    }
+    message.pagination !== undefined &&
+      (obj.pagination = message.pagination
+        ? PageResponse.toJSON(message.pagination)
+        : undefined);
+    return obj;
+  },
+
+  fromPartial<I extends Exact<DeepPartial<QueryAllBalancesResponse>, I>>(
+    object: I,
+  ): QueryAllBalancesResponse {
+    const message = createBaseQueryAllBalancesResponse();
+    message.balances =
+      object.balances?.map(e => BatchBalanceInfo.fromPartial(e)) || [];
+    message.pagination =
+      object.pagination !== undefined && object.pagination !== null
+        ? PageResponse.fromPartial(object.pagination)
+        : undefined;
+    return message;
+  },
+};
+
+messageTypeRegistry.set(
+  QueryAllBalancesResponse.$type,
+  QueryAllBalancesResponse,
+);
+
 function createBaseQuerySupplyRequest(): QuerySupplyRequest {
   return { $type: 'regen.ecocredit.v1.QuerySupplyRequest', batchDenom: '' };
 }
@@ -4130,6 +4645,550 @@ export const BatchBalanceInfo = {
 
 messageTypeRegistry.set(BatchBalanceInfo.$type, BatchBalanceInfo);
 
+function createBaseQueryClassCreatorAllowlistRequest(): QueryClassCreatorAllowlistRequest {
+  return { $type: 'regen.ecocredit.v1.QueryClassCreatorAllowlistRequest' };
+}
+
+export const QueryClassCreatorAllowlistRequest = {
+  $type: 'regen.ecocredit.v1.QueryClassCreatorAllowlistRequest' as const,
+
+  encode(
+    _: QueryClassCreatorAllowlistRequest,
+    writer: _m0.Writer = _m0.Writer.create(),
+  ): _m0.Writer {
+    return writer;
+  },
+
+  decode(
+    input: _m0.Reader | Uint8Array,
+    length?: number,
+  ): QueryClassCreatorAllowlistRequest {
+    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+    let end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseQueryClassCreatorAllowlistRequest();
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+        default:
+          reader.skipType(tag & 7);
+          break;
+      }
+    }
+    return message;
+  },
+
+  fromJSON(_: any): QueryClassCreatorAllowlistRequest {
+    return {
+      $type: QueryClassCreatorAllowlistRequest.$type,
+    };
+  },
+
+  toJSON(_: QueryClassCreatorAllowlistRequest): unknown {
+    const obj: any = {};
+    return obj;
+  },
+
+  fromPartial<
+    I extends Exact<DeepPartial<QueryClassCreatorAllowlistRequest>, I>,
+  >(_: I): QueryClassCreatorAllowlistRequest {
+    const message = createBaseQueryClassCreatorAllowlistRequest();
+    return message;
+  },
+};
+
+messageTypeRegistry.set(
+  QueryClassCreatorAllowlistRequest.$type,
+  QueryClassCreatorAllowlistRequest,
+);
+
+function createBaseQueryClassCreatorAllowlistResponse(): QueryClassCreatorAllowlistResponse {
+  return {
+    $type: 'regen.ecocredit.v1.QueryClassCreatorAllowlistResponse',
+    enabled: false,
+  };
+}
+
+export const QueryClassCreatorAllowlistResponse = {
+  $type: 'regen.ecocredit.v1.QueryClassCreatorAllowlistResponse' as const,
+
+  encode(
+    message: QueryClassCreatorAllowlistResponse,
+    writer: _m0.Writer = _m0.Writer.create(),
+  ): _m0.Writer {
+    if (message.enabled === true) {
+      writer.uint32(8).bool(message.enabled);
+    }
+    return writer;
+  },
+
+  decode(
+    input: _m0.Reader | Uint8Array,
+    length?: number,
+  ): QueryClassCreatorAllowlistResponse {
+    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+    let end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseQueryClassCreatorAllowlistResponse();
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+        case 1:
+          message.enabled = reader.bool();
+          break;
+        default:
+          reader.skipType(tag & 7);
+          break;
+      }
+    }
+    return message;
+  },
+
+  fromJSON(object: any): QueryClassCreatorAllowlistResponse {
+    return {
+      $type: QueryClassCreatorAllowlistResponse.$type,
+      enabled: isSet(object.enabled) ? Boolean(object.enabled) : false,
+    };
+  },
+
+  toJSON(message: QueryClassCreatorAllowlistResponse): unknown {
+    const obj: any = {};
+    message.enabled !== undefined && (obj.enabled = message.enabled);
+    return obj;
+  },
+
+  fromPartial<
+    I extends Exact<DeepPartial<QueryClassCreatorAllowlistResponse>, I>,
+  >(object: I): QueryClassCreatorAllowlistResponse {
+    const message = createBaseQueryClassCreatorAllowlistResponse();
+    message.enabled = object.enabled ?? false;
+    return message;
+  },
+};
+
+messageTypeRegistry.set(
+  QueryClassCreatorAllowlistResponse.$type,
+  QueryClassCreatorAllowlistResponse,
+);
+
+function createBaseQueryAllowedClassCreatorsRequest(): QueryAllowedClassCreatorsRequest {
+  return {
+    $type: 'regen.ecocredit.v1.QueryAllowedClassCreatorsRequest',
+    pagination: undefined,
+  };
+}
+
+export const QueryAllowedClassCreatorsRequest = {
+  $type: 'regen.ecocredit.v1.QueryAllowedClassCreatorsRequest' as const,
+
+  encode(
+    message: QueryAllowedClassCreatorsRequest,
+    writer: _m0.Writer = _m0.Writer.create(),
+  ): _m0.Writer {
+    if (message.pagination !== undefined) {
+      PageRequest.encode(message.pagination, writer.uint32(10).fork()).ldelim();
+    }
+    return writer;
+  },
+
+  decode(
+    input: _m0.Reader | Uint8Array,
+    length?: number,
+  ): QueryAllowedClassCreatorsRequest {
+    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+    let end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseQueryAllowedClassCreatorsRequest();
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+        case 1:
+          message.pagination = PageRequest.decode(reader, reader.uint32());
+          break;
+        default:
+          reader.skipType(tag & 7);
+          break;
+      }
+    }
+    return message;
+  },
+
+  fromJSON(object: any): QueryAllowedClassCreatorsRequest {
+    return {
+      $type: QueryAllowedClassCreatorsRequest.$type,
+      pagination: isSet(object.pagination)
+        ? PageRequest.fromJSON(object.pagination)
+        : undefined,
+    };
+  },
+
+  toJSON(message: QueryAllowedClassCreatorsRequest): unknown {
+    const obj: any = {};
+    message.pagination !== undefined &&
+      (obj.pagination = message.pagination
+        ? PageRequest.toJSON(message.pagination)
+        : undefined);
+    return obj;
+  },
+
+  fromPartial<
+    I extends Exact<DeepPartial<QueryAllowedClassCreatorsRequest>, I>,
+  >(object: I): QueryAllowedClassCreatorsRequest {
+    const message = createBaseQueryAllowedClassCreatorsRequest();
+    message.pagination =
+      object.pagination !== undefined && object.pagination !== null
+        ? PageRequest.fromPartial(object.pagination)
+        : undefined;
+    return message;
+  },
+};
+
+messageTypeRegistry.set(
+  QueryAllowedClassCreatorsRequest.$type,
+  QueryAllowedClassCreatorsRequest,
+);
+
+function createBaseQueryAllowedClassCreatorsResponse(): QueryAllowedClassCreatorsResponse {
+  return {
+    $type: 'regen.ecocredit.v1.QueryAllowedClassCreatorsResponse',
+    classCreators: [],
+    pagination: undefined,
+  };
+}
+
+export const QueryAllowedClassCreatorsResponse = {
+  $type: 'regen.ecocredit.v1.QueryAllowedClassCreatorsResponse' as const,
+
+  encode(
+    message: QueryAllowedClassCreatorsResponse,
+    writer: _m0.Writer = _m0.Writer.create(),
+  ): _m0.Writer {
+    for (const v of message.classCreators) {
+      writer.uint32(10).string(v!);
+    }
+    if (message.pagination !== undefined) {
+      PageResponse.encode(
+        message.pagination,
+        writer.uint32(18).fork(),
+      ).ldelim();
+    }
+    return writer;
+  },
+
+  decode(
+    input: _m0.Reader | Uint8Array,
+    length?: number,
+  ): QueryAllowedClassCreatorsResponse {
+    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+    let end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseQueryAllowedClassCreatorsResponse();
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+        case 1:
+          message.classCreators.push(reader.string());
+          break;
+        case 2:
+          message.pagination = PageResponse.decode(reader, reader.uint32());
+          break;
+        default:
+          reader.skipType(tag & 7);
+          break;
+      }
+    }
+    return message;
+  },
+
+  fromJSON(object: any): QueryAllowedClassCreatorsResponse {
+    return {
+      $type: QueryAllowedClassCreatorsResponse.$type,
+      classCreators: Array.isArray(object?.classCreators)
+        ? object.classCreators.map((e: any) => String(e))
+        : [],
+      pagination: isSet(object.pagination)
+        ? PageResponse.fromJSON(object.pagination)
+        : undefined,
+    };
+  },
+
+  toJSON(message: QueryAllowedClassCreatorsResponse): unknown {
+    const obj: any = {};
+    if (message.classCreators) {
+      obj.classCreators = message.classCreators.map(e => e);
+    } else {
+      obj.classCreators = [];
+    }
+    message.pagination !== undefined &&
+      (obj.pagination = message.pagination
+        ? PageResponse.toJSON(message.pagination)
+        : undefined);
+    return obj;
+  },
+
+  fromPartial<
+    I extends Exact<DeepPartial<QueryAllowedClassCreatorsResponse>, I>,
+  >(object: I): QueryAllowedClassCreatorsResponse {
+    const message = createBaseQueryAllowedClassCreatorsResponse();
+    message.classCreators = object.classCreators?.map(e => e) || [];
+    message.pagination =
+      object.pagination !== undefined && object.pagination !== null
+        ? PageResponse.fromPartial(object.pagination)
+        : undefined;
+    return message;
+  },
+};
+
+messageTypeRegistry.set(
+  QueryAllowedClassCreatorsResponse.$type,
+  QueryAllowedClassCreatorsResponse,
+);
+
+function createBaseQueryClassFeeRequest(): QueryClassFeeRequest {
+  return { $type: 'regen.ecocredit.v1.QueryClassFeeRequest' };
+}
+
+export const QueryClassFeeRequest = {
+  $type: 'regen.ecocredit.v1.QueryClassFeeRequest' as const,
+
+  encode(
+    _: QueryClassFeeRequest,
+    writer: _m0.Writer = _m0.Writer.create(),
+  ): _m0.Writer {
+    return writer;
+  },
+
+  decode(
+    input: _m0.Reader | Uint8Array,
+    length?: number,
+  ): QueryClassFeeRequest {
+    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+    let end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseQueryClassFeeRequest();
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+        default:
+          reader.skipType(tag & 7);
+          break;
+      }
+    }
+    return message;
+  },
+
+  fromJSON(_: any): QueryClassFeeRequest {
+    return {
+      $type: QueryClassFeeRequest.$type,
+    };
+  },
+
+  toJSON(_: QueryClassFeeRequest): unknown {
+    const obj: any = {};
+    return obj;
+  },
+
+  fromPartial<I extends Exact<DeepPartial<QueryClassFeeRequest>, I>>(
+    _: I,
+  ): QueryClassFeeRequest {
+    const message = createBaseQueryClassFeeRequest();
+    return message;
+  },
+};
+
+messageTypeRegistry.set(QueryClassFeeRequest.$type, QueryClassFeeRequest);
+
+function createBaseQueryClassFeeResponse(): QueryClassFeeResponse {
+  return { $type: 'regen.ecocredit.v1.QueryClassFeeResponse', fee: undefined };
+}
+
+export const QueryClassFeeResponse = {
+  $type: 'regen.ecocredit.v1.QueryClassFeeResponse' as const,
+
+  encode(
+    message: QueryClassFeeResponse,
+    writer: _m0.Writer = _m0.Writer.create(),
+  ): _m0.Writer {
+    if (message.fee !== undefined) {
+      Coin.encode(message.fee, writer.uint32(10).fork()).ldelim();
+    }
+    return writer;
+  },
+
+  decode(
+    input: _m0.Reader | Uint8Array,
+    length?: number,
+  ): QueryClassFeeResponse {
+    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+    let end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseQueryClassFeeResponse();
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+        case 1:
+          message.fee = Coin.decode(reader, reader.uint32());
+          break;
+        default:
+          reader.skipType(tag & 7);
+          break;
+      }
+    }
+    return message;
+  },
+
+  fromJSON(object: any): QueryClassFeeResponse {
+    return {
+      $type: QueryClassFeeResponse.$type,
+      fee: isSet(object.fee) ? Coin.fromJSON(object.fee) : undefined,
+    };
+  },
+
+  toJSON(message: QueryClassFeeResponse): unknown {
+    const obj: any = {};
+    message.fee !== undefined &&
+      (obj.fee = message.fee ? Coin.toJSON(message.fee) : undefined);
+    return obj;
+  },
+
+  fromPartial<I extends Exact<DeepPartial<QueryClassFeeResponse>, I>>(
+    object: I,
+  ): QueryClassFeeResponse {
+    const message = createBaseQueryClassFeeResponse();
+    message.fee =
+      object.fee !== undefined && object.fee !== null
+        ? Coin.fromPartial(object.fee)
+        : undefined;
+    return message;
+  },
+};
+
+messageTypeRegistry.set(QueryClassFeeResponse.$type, QueryClassFeeResponse);
+
+function createBaseQueryAllowedBridgeChainsRequest(): QueryAllowedBridgeChainsRequest {
+  return { $type: 'regen.ecocredit.v1.QueryAllowedBridgeChainsRequest' };
+}
+
+export const QueryAllowedBridgeChainsRequest = {
+  $type: 'regen.ecocredit.v1.QueryAllowedBridgeChainsRequest' as const,
+
+  encode(
+    _: QueryAllowedBridgeChainsRequest,
+    writer: _m0.Writer = _m0.Writer.create(),
+  ): _m0.Writer {
+    return writer;
+  },
+
+  decode(
+    input: _m0.Reader | Uint8Array,
+    length?: number,
+  ): QueryAllowedBridgeChainsRequest {
+    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+    let end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseQueryAllowedBridgeChainsRequest();
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+        default:
+          reader.skipType(tag & 7);
+          break;
+      }
+    }
+    return message;
+  },
+
+  fromJSON(_: any): QueryAllowedBridgeChainsRequest {
+    return {
+      $type: QueryAllowedBridgeChainsRequest.$type,
+    };
+  },
+
+  toJSON(_: QueryAllowedBridgeChainsRequest): unknown {
+    const obj: any = {};
+    return obj;
+  },
+
+  fromPartial<I extends Exact<DeepPartial<QueryAllowedBridgeChainsRequest>, I>>(
+    _: I,
+  ): QueryAllowedBridgeChainsRequest {
+    const message = createBaseQueryAllowedBridgeChainsRequest();
+    return message;
+  },
+};
+
+messageTypeRegistry.set(
+  QueryAllowedBridgeChainsRequest.$type,
+  QueryAllowedBridgeChainsRequest,
+);
+
+function createBaseQueryAllowedBridgeChainsResponse(): QueryAllowedBridgeChainsResponse {
+  return {
+    $type: 'regen.ecocredit.v1.QueryAllowedBridgeChainsResponse',
+    allowedBridgeChains: [],
+  };
+}
+
+export const QueryAllowedBridgeChainsResponse = {
+  $type: 'regen.ecocredit.v1.QueryAllowedBridgeChainsResponse' as const,
+
+  encode(
+    message: QueryAllowedBridgeChainsResponse,
+    writer: _m0.Writer = _m0.Writer.create(),
+  ): _m0.Writer {
+    for (const v of message.allowedBridgeChains) {
+      writer.uint32(10).string(v!);
+    }
+    return writer;
+  },
+
+  decode(
+    input: _m0.Reader | Uint8Array,
+    length?: number,
+  ): QueryAllowedBridgeChainsResponse {
+    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+    let end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseQueryAllowedBridgeChainsResponse();
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+        case 1:
+          message.allowedBridgeChains.push(reader.string());
+          break;
+        default:
+          reader.skipType(tag & 7);
+          break;
+      }
+    }
+    return message;
+  },
+
+  fromJSON(object: any): QueryAllowedBridgeChainsResponse {
+    return {
+      $type: QueryAllowedBridgeChainsResponse.$type,
+      allowedBridgeChains: Array.isArray(object?.allowedBridgeChains)
+        ? object.allowedBridgeChains.map((e: any) => String(e))
+        : [],
+    };
+  },
+
+  toJSON(message: QueryAllowedBridgeChainsResponse): unknown {
+    const obj: any = {};
+    if (message.allowedBridgeChains) {
+      obj.allowedBridgeChains = message.allowedBridgeChains.map(e => e);
+    } else {
+      obj.allowedBridgeChains = [];
+    }
+    return obj;
+  },
+
+  fromPartial<
+    I extends Exact<DeepPartial<QueryAllowedBridgeChainsResponse>, I>,
+  >(object: I): QueryAllowedBridgeChainsResponse {
+    const message = createBaseQueryAllowedBridgeChainsResponse();
+    message.allowedBridgeChains = object.allowedBridgeChains?.map(e => e) || [];
+    return message;
+  },
+};
+
+messageTypeRegistry.set(
+  QueryAllowedBridgeChainsResponse.$type,
+  QueryAllowedBridgeChainsResponse,
+);
+
 /** Msg is the regen.ecocredit.v1 Query service. */
 export interface Query {
   /** Classes queries for all credit classes with pagination. */
@@ -4207,6 +5266,22 @@ export interface Query {
   Balances(
     request: DeepPartial<QueryBalancesRequest>,
   ): Promise<QueryBalancesResponse>;
+  /**
+   * BalancesByBatch queries all credit balances from a given batch.
+   *
+   * Since Revision 2
+   */
+  BalancesByBatch(
+    request: DeepPartial<QueryBalancesByBatchRequest>,
+  ): Promise<QueryBalancesByBatchResponse>;
+  /**
+   * AllBalances queries all credit balances.
+   *
+   * Since Revision 2
+   */
+  AllBalances(
+    request: DeepPartial<QueryAllBalancesRequest>,
+  ): Promise<QueryAllBalancesResponse>;
   /** Supply queries the tradable and retired supply of a credit batch. */
   Supply(
     request: DeepPartial<QuerySupplyRequest>,
@@ -4218,7 +5293,14 @@ export interface Query {
   CreditTypes(
     request: DeepPartial<QueryCreditTypesRequest>,
   ): Promise<QueryCreditTypesResponse>;
-  /** Params queries the ecocredit module parameters. */
+  /**
+   * Params queries the ecocredit module parameters.
+   *
+   * Deprecated (Since Revision 2): This rpc will be removed in the next
+   * version.
+   *
+   * @deprecated
+   */
   Params(
     request: DeepPartial<QueryParamsRequest>,
   ): Promise<QueryParamsResponse>;
@@ -4226,6 +5308,41 @@ export interface Query {
   CreditType(
     request: DeepPartial<QueryCreditTypeRequest>,
   ): Promise<QueryCreditTypeResponse>;
+  /**
+   * ClassCreatorAllowlist queries the credit class creator allowlist
+   * enabled setting.
+   *
+   * Since Revision 2
+   */
+  ClassCreatorAllowlist(
+    request: DeepPartial<QueryClassCreatorAllowlistRequest>,
+  ): Promise<QueryClassCreatorAllowlistResponse>;
+  /**
+   * AllowedClassCreators queries allowed credit class creators list.
+   *
+   * Since Revision 2
+   */
+  AllowedClassCreators(
+    request: DeepPartial<QueryAllowedClassCreatorsRequest>,
+  ): Promise<QueryAllowedClassCreatorsResponse>;
+  /**
+   * ClassFee returns the credit class creation fee. If not set, a credit class
+   * creation fee is not required.
+   *
+   * Since Revision 2
+   */
+  ClassFee(
+    request: DeepPartial<QueryClassFeeRequest>,
+  ): Promise<QueryClassFeeResponse>;
+  /**
+   * AllowedBridgeChains queries the list of chains allowed to be used in bridge
+   * operations.
+   *
+   * Since Revision 2
+   */
+  AllowedBridgeChains(
+    request: DeepPartial<QueryAllowedBridgeChainsRequest>,
+  ): Promise<QueryAllowedBridgeChainsResponse>;
 }
 
 export class QueryClientImpl implements Query {
@@ -4248,10 +5365,16 @@ export class QueryClientImpl implements Query {
     this.Batch = this.Batch.bind(this);
     this.Balance = this.Balance.bind(this);
     this.Balances = this.Balances.bind(this);
+    this.BalancesByBatch = this.BalancesByBatch.bind(this);
+    this.AllBalances = this.AllBalances.bind(this);
     this.Supply = this.Supply.bind(this);
     this.CreditTypes = this.CreditTypes.bind(this);
     this.Params = this.Params.bind(this);
     this.CreditType = this.CreditType.bind(this);
+    this.ClassCreatorAllowlist = this.ClassCreatorAllowlist.bind(this);
+    this.AllowedClassCreators = this.AllowedClassCreators.bind(this);
+    this.ClassFee = this.ClassFee.bind(this);
+    this.AllowedBridgeChains = this.AllowedBridgeChains.bind(this);
   }
   Classes(
     request: DeepPartial<QueryClassesRequest>,
@@ -4481,6 +5604,36 @@ export class QueryClientImpl implements Query {
     );
   }
 
+  BalancesByBatch(
+    request: DeepPartial<QueryBalancesByBatchRequest>,
+  ): Promise<QueryBalancesByBatchResponse> {
+    const fromPartial = QueryBalancesByBatchRequest.fromPartial(request);
+    const data = QueryBalancesByBatchRequest.encode(fromPartial).finish();
+    const promise = this.rpc.request(
+      'regen.ecocredit.v1.Query',
+      'BalancesByBatch',
+      data,
+    );
+    return promise.then(data =>
+      QueryBalancesByBatchResponse.decode(new _m0.Reader(data)),
+    );
+  }
+
+  AllBalances(
+    request: DeepPartial<QueryAllBalancesRequest>,
+  ): Promise<QueryAllBalancesResponse> {
+    const fromPartial = QueryAllBalancesRequest.fromPartial(request);
+    const data = QueryAllBalancesRequest.encode(fromPartial).finish();
+    const promise = this.rpc.request(
+      'regen.ecocredit.v1.Query',
+      'AllBalances',
+      data,
+    );
+    return promise.then(data =>
+      QueryAllBalancesResponse.decode(new _m0.Reader(data)),
+    );
+  }
+
   Supply(
     request: DeepPartial<QuerySupplyRequest>,
   ): Promise<QuerySupplyResponse> {
@@ -4538,6 +5691,66 @@ export class QueryClientImpl implements Query {
     );
     return promise.then(data =>
       QueryCreditTypeResponse.decode(new _m0.Reader(data)),
+    );
+  }
+
+  ClassCreatorAllowlist(
+    request: DeepPartial<QueryClassCreatorAllowlistRequest>,
+  ): Promise<QueryClassCreatorAllowlistResponse> {
+    const fromPartial = QueryClassCreatorAllowlistRequest.fromPartial(request);
+    const data = QueryClassCreatorAllowlistRequest.encode(fromPartial).finish();
+    const promise = this.rpc.request(
+      'regen.ecocredit.v1.Query',
+      'ClassCreatorAllowlist',
+      data,
+    );
+    return promise.then(data =>
+      QueryClassCreatorAllowlistResponse.decode(new _m0.Reader(data)),
+    );
+  }
+
+  AllowedClassCreators(
+    request: DeepPartial<QueryAllowedClassCreatorsRequest>,
+  ): Promise<QueryAllowedClassCreatorsResponse> {
+    const fromPartial = QueryAllowedClassCreatorsRequest.fromPartial(request);
+    const data = QueryAllowedClassCreatorsRequest.encode(fromPartial).finish();
+    const promise = this.rpc.request(
+      'regen.ecocredit.v1.Query',
+      'AllowedClassCreators',
+      data,
+    );
+    return promise.then(data =>
+      QueryAllowedClassCreatorsResponse.decode(new _m0.Reader(data)),
+    );
+  }
+
+  ClassFee(
+    request: DeepPartial<QueryClassFeeRequest>,
+  ): Promise<QueryClassFeeResponse> {
+    const fromPartial = QueryClassFeeRequest.fromPartial(request);
+    const data = QueryClassFeeRequest.encode(fromPartial).finish();
+    const promise = this.rpc.request(
+      'regen.ecocredit.v1.Query',
+      'ClassFee',
+      data,
+    );
+    return promise.then(data =>
+      QueryClassFeeResponse.decode(new _m0.Reader(data)),
+    );
+  }
+
+  AllowedBridgeChains(
+    request: DeepPartial<QueryAllowedBridgeChainsRequest>,
+  ): Promise<QueryAllowedBridgeChainsResponse> {
+    const fromPartial = QueryAllowedBridgeChainsRequest.fromPartial(request);
+    const data = QueryAllowedBridgeChainsRequest.encode(fromPartial).finish();
+    const promise = this.rpc.request(
+      'regen.ecocredit.v1.Query',
+      'AllowedBridgeChains',
+      data,
+    );
+    return promise.then(data =>
+      QueryAllowedBridgeChainsResponse.decode(new _m0.Reader(data)),
     );
   }
 }

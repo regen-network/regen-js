@@ -40,7 +40,11 @@ export interface PageRequest {
    * is set.
    */
   countTotal: boolean;
-  /** reverse is set to true if results are to be returned in the descending order. */
+  /**
+   * reverse is set to true if results are to be returned in the descending order.
+   *
+   * Since: cosmos-sdk 0.43
+   */
   reverse: boolean;
 }
 
@@ -57,7 +61,8 @@ export interface PageResponse {
   $type: 'cosmos.base.query.v1beta1.PageResponse';
   /**
    * next_key is the key to be passed to PageRequest.key to
-   * query the next page most efficiently
+   * query the next page most efficiently. It will be empty if
+   * there are no more results.
    */
   nextKey: Uint8Array;
   /**

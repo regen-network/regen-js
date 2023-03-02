@@ -2,7 +2,7 @@
 import { messageTypeRegistry } from '../../../typeRegistry';
 import Long from 'long';
 import _m0 from 'protobufjs/minimal';
-import { ContentHash } from '../../../regen/data/v1/types';
+import { ContentHash } from './types';
 import {
   PageRequest,
   PageResponse,

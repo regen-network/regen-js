@@ -2,12 +2,9 @@
 import { messageTypeRegistry } from '../../../typeRegistry';
 import Long from 'long';
 import _m0 from 'protobufjs/minimal';
-import {
-  Description,
-  CommissionRates,
-} from '../../../cosmos/staking/v1beta1/staking';
+import { Description, CommissionRates } from './staking';
 import { Any } from '../../../google/protobuf/any';
-import { Coin } from '../../../cosmos/base/v1beta1/coin';
+import { Coin } from '../../base/v1beta1/coin';
 import { Timestamp } from '../../../google/protobuf/timestamp';
 
 export const protobufPackage = 'cosmos.staking.v1beta1';
@@ -98,6 +95,30 @@ export interface MsgUndelegate {
 export interface MsgUndelegateResponse {
   $type: 'cosmos.staking.v1beta1.MsgUndelegateResponse';
   completionTime?: Date;
+}
+
+/**
+ * MsgCancelUnbondingDelegation defines the SDK message for performing a cancel unbonding delegation for delegator
+ *
+ * Since: cosmos-sdk 0.46
+ */
+export interface MsgCancelUnbondingDelegation {
+  $type: 'cosmos.staking.v1beta1.MsgCancelUnbondingDelegation';
+  delegatorAddress: string;
+  validatorAddress: string;
+  /** amount is always less than or equal to unbonding delegation entry balance */
+  amount?: Coin;
+  /** creation_height is the height which the unbonding took place. */
+  creationHeight: Long;
+}
+
+/**
+ * MsgCancelUnbondingDelegationResponse
+ *
+ * Since: cosmos-sdk 0.46
+ */
+export interface MsgCancelUnbondingDelegationResponse {
+  $type: 'cosmos.staking.v1beta1.MsgCancelUnbondingDelegationResponse';
 }
 
 function createBaseMsgCreateValidator(): MsgCreateValidator {
@@ -973,6 +994,178 @@ export const MsgUndelegateResponse = {
 
 messageTypeRegistry.set(MsgUndelegateResponse.$type, MsgUndelegateResponse);
 
+function createBaseMsgCancelUnbondingDelegation(): MsgCancelUnbondingDelegation {
+  return {
+    $type: 'cosmos.staking.v1beta1.MsgCancelUnbondingDelegation',
+    delegatorAddress: '',
+    validatorAddress: '',
+    amount: undefined,
+    creationHeight: Long.ZERO,
+  };
+}
+
+export const MsgCancelUnbondingDelegation = {
+  $type: 'cosmos.staking.v1beta1.MsgCancelUnbondingDelegation' as const,
+
+  encode(
+    message: MsgCancelUnbondingDelegation,
+    writer: _m0.Writer = _m0.Writer.create(),
+  ): _m0.Writer {
+    if (message.delegatorAddress !== '') {
+      writer.uint32(10).string(message.delegatorAddress);
+    }
+    if (message.validatorAddress !== '') {
+      writer.uint32(18).string(message.validatorAddress);
+    }
+    if (message.amount !== undefined) {
+      Coin.encode(message.amount, writer.uint32(26).fork()).ldelim();
+    }
+    if (!message.creationHeight.isZero()) {
+      writer.uint32(32).int64(message.creationHeight);
+    }
+    return writer;
+  },
+
+  decode(
+    input: _m0.Reader | Uint8Array,
+    length?: number,
+  ): MsgCancelUnbondingDelegation {
+    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+    let end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseMsgCancelUnbondingDelegation();
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+        case 1:
+          message.delegatorAddress = reader.string();
+          break;
+        case 2:
+          message.validatorAddress = reader.string();
+          break;
+        case 3:
+          message.amount = Coin.decode(reader, reader.uint32());
+          break;
+        case 4:
+          message.creationHeight = reader.int64() as Long;
+          break;
+        default:
+          reader.skipType(tag & 7);
+          break;
+      }
+    }
+    return message;
+  },
+
+  fromJSON(object: any): MsgCancelUnbondingDelegation {
+    return {
+      $type: MsgCancelUnbondingDelegation.$type,
+      delegatorAddress: isSet(object.delegatorAddress)
+        ? String(object.delegatorAddress)
+        : '',
+      validatorAddress: isSet(object.validatorAddress)
+        ? String(object.validatorAddress)
+        : '',
+      amount: isSet(object.amount) ? Coin.fromJSON(object.amount) : undefined,
+      creationHeight: isSet(object.creationHeight)
+        ? Long.fromString(object.creationHeight)
+        : Long.ZERO,
+    };
+  },
+
+  toJSON(message: MsgCancelUnbondingDelegation): unknown {
+    const obj: any = {};
+    message.delegatorAddress !== undefined &&
+      (obj.delegatorAddress = message.delegatorAddress);
+    message.validatorAddress !== undefined &&
+      (obj.validatorAddress = message.validatorAddress);
+    message.amount !== undefined &&
+      (obj.amount = message.amount ? Coin.toJSON(message.amount) : undefined);
+    message.creationHeight !== undefined &&
+      (obj.creationHeight = (message.creationHeight || Long.ZERO).toString());
+    return obj;
+  },
+
+  fromPartial<I extends Exact<DeepPartial<MsgCancelUnbondingDelegation>, I>>(
+    object: I,
+  ): MsgCancelUnbondingDelegation {
+    const message = createBaseMsgCancelUnbondingDelegation();
+    message.delegatorAddress = object.delegatorAddress ?? '';
+    message.validatorAddress = object.validatorAddress ?? '';
+    message.amount =
+      object.amount !== undefined && object.amount !== null
+        ? Coin.fromPartial(object.amount)
+        : undefined;
+    message.creationHeight =
+      object.creationHeight !== undefined && object.creationHeight !== null
+        ? Long.fromValue(object.creationHeight)
+        : Long.ZERO;
+    return message;
+  },
+};
+
+messageTypeRegistry.set(
+  MsgCancelUnbondingDelegation.$type,
+  MsgCancelUnbondingDelegation,
+);
+
+function createBaseMsgCancelUnbondingDelegationResponse(): MsgCancelUnbondingDelegationResponse {
+  return {
+    $type: 'cosmos.staking.v1beta1.MsgCancelUnbondingDelegationResponse',
+  };
+}
+
+export const MsgCancelUnbondingDelegationResponse = {
+  $type: 'cosmos.staking.v1beta1.MsgCancelUnbondingDelegationResponse' as const,
+
+  encode(
+    _: MsgCancelUnbondingDelegationResponse,
+    writer: _m0.Writer = _m0.Writer.create(),
+  ): _m0.Writer {
+    return writer;
+  },
+
+  decode(
+    input: _m0.Reader | Uint8Array,
+    length?: number,
+  ): MsgCancelUnbondingDelegationResponse {
+    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+    let end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseMsgCancelUnbondingDelegationResponse();
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+        default:
+          reader.skipType(tag & 7);
+          break;
+      }
+    }
+    return message;
+  },
+
+  fromJSON(_: any): MsgCancelUnbondingDelegationResponse {
+    return {
+      $type: MsgCancelUnbondingDelegationResponse.$type,
+    };
+  },
+
+  toJSON(_: MsgCancelUnbondingDelegationResponse): unknown {
+    const obj: any = {};
+    return obj;
+  },
+
+  fromPartial<
+    I extends Exact<DeepPartial<MsgCancelUnbondingDelegationResponse>, I>,
+  >(_: I): MsgCancelUnbondingDelegationResponse {
+    const message = createBaseMsgCancelUnbondingDelegationResponse();
+    return message;
+  },
+};
+
+messageTypeRegistry.set(
+  MsgCancelUnbondingDelegationResponse.$type,
+  MsgCancelUnbondingDelegationResponse,
+);
+
 /** Msg defines the staking Msg service. */
 export interface Msg {
   /** CreateValidator defines a method for creating a new validator. */
@@ -1002,6 +1195,15 @@ export interface Msg {
   Undelegate(
     request: DeepPartial<MsgUndelegate>,
   ): Promise<MsgUndelegateResponse>;
+  /**
+   * CancelUnbondingDelegation defines a method for performing canceling the unbonding delegation
+   * and delegate back to previous validator.
+   *
+   * Since: cosmos-sdk 0.46
+   */
+  CancelUnbondingDelegation(
+    request: DeepPartial<MsgCancelUnbondingDelegation>,
+  ): Promise<MsgCancelUnbondingDelegationResponse>;
 }
 
 export class MsgClientImpl implements Msg {
@@ -1013,6 +1215,7 @@ export class MsgClientImpl implements Msg {
     this.Delegate = this.Delegate.bind(this);
     this.BeginRedelegate = this.BeginRedelegate.bind(this);
     this.Undelegate = this.Undelegate.bind(this);
+    this.CancelUnbondingDelegation = this.CancelUnbondingDelegation.bind(this);
   }
   CreateValidator(
     request: DeepPartial<MsgCreateValidator>,
@@ -1084,6 +1287,21 @@ export class MsgClientImpl implements Msg {
     );
     return promise.then(data =>
       MsgUndelegateResponse.decode(new _m0.Reader(data)),
+    );
+  }
+
+  CancelUnbondingDelegation(
+    request: DeepPartial<MsgCancelUnbondingDelegation>,
+  ): Promise<MsgCancelUnbondingDelegationResponse> {
+    const fromPartial = MsgCancelUnbondingDelegation.fromPartial(request);
+    const data = MsgCancelUnbondingDelegation.encode(fromPartial).finish();
+    const promise = this.rpc.request(
+      'cosmos.staking.v1beta1.Msg',
+      'CancelUnbondingDelegation',
+      data,
+    );
+    return promise.then(data =>
+      MsgCancelUnbondingDelegationResponse.decode(new _m0.Reader(data)),
     );
   }
 }

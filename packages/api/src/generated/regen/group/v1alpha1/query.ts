@@ -8,7 +8,7 @@ import {
   Proposal,
   Vote,
   GroupMember,
-} from '../../../regen/group/v1alpha1/types';
+} from './types';
 import {
   PageRequest,
   PageResponse,

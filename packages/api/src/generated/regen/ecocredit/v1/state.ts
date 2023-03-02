@@ -2,6 +2,7 @@
 import { messageTypeRegistry } from '../../../typeRegistry';
 import Long from 'long';
 import _m0 from 'protobufjs/minimal';
+import { Coin } from '../../../cosmos/base/v1beta1/coin';
 import { Timestamp } from '../../../google/protobuf/timestamp';
 
 export const protobufPackage = 'regen.ecocredit.v1';
@@ -289,9 +290,9 @@ export interface BatchContract {
   batchKey: Long;
   /**
    * class_key is the table row identifier of the credit class within which the
-   * credit batch exists. A contract is unique within the scope of a credit class
-   * to prevent malicious credit class issuers from blocking bridge operations
-   * taking place within another credit class.
+   * credit batch exists. A contract is unique within the scope of a credit
+   * class to prevent malicious credit class issuers from blocking bridge
+   * operations taking place within another credit class.
    */
   classKey: Long;
   /**
@@ -300,6 +301,61 @@ export interface BatchContract {
    * sending credits back to the source chain.
    */
   contract: string;
+}
+
+/**
+ * ClassCreatorAllowlist determines if the credit class creator allowlist is
+ * enabled. When set to true, only the addresses in the AllowedClassCreator
+ * table may create credit classes. When set to false, any address may create
+ * credit classes. This table is controlled via governance.
+ *
+ * Since Revision 2
+ */
+export interface ClassCreatorAllowlist {
+  $type: 'regen.ecocredit.v1.ClassCreatorAllowlist';
+  /** enabled is whether or not the allow list is enabled. */
+  enabled: boolean;
+}
+
+/**
+ * AllowedClassCreator is an allowed credit class creator. This table is
+ * controlled via governance.
+ *
+ * Since Revision 2
+ */
+export interface AllowedClassCreator {
+  $type: 'regen.ecocredit.v1.AllowedClassCreator';
+  /** address is the address that is allowed to create credit classes */
+  address: Uint8Array;
+}
+
+/**
+ * ClassFee is the credit class creation fee. If not set, a credit class
+ * creation fee is not required. This table is controlled via governance.
+ *
+ * Since Revision 2
+ */
+export interface ClassFee {
+  $type: 'regen.ecocredit.v1.ClassFee';
+  /**
+   * fee is the credit class creation fee. If not set, a credit class creation
+   * fee is not required.
+   */
+  fee?: Coin;
+}
+
+/**
+ * AllowedBridgeChain is a list of chains that are allowed to be used in
+ * bridging operations. NOTE: chain_names MUST be converted to lowercase before
+ * writing to and reading from this table in order to keep entries consistent.
+ * This table is controlled via governance.
+ *
+ * Since Revision 2
+ */
+export interface AllowedBridgeChain {
+  $type: 'regen.ecocredit.v1.AllowedBridgeChain';
+  /** chain_name is the name of the chain allowed to bridge ecocredits to. */
+  chainName: string;
 }
 
 function createBaseCreditType(): CreditType {
@@ -1564,6 +1620,255 @@ export const BatchContract = {
 };
 
 messageTypeRegistry.set(BatchContract.$type, BatchContract);
+
+function createBaseClassCreatorAllowlist(): ClassCreatorAllowlist {
+  return { $type: 'regen.ecocredit.v1.ClassCreatorAllowlist', enabled: false };
+}
+
+export const ClassCreatorAllowlist = {
+  $type: 'regen.ecocredit.v1.ClassCreatorAllowlist' as const,
+
+  encode(
+    message: ClassCreatorAllowlist,
+    writer: _m0.Writer = _m0.Writer.create(),
+  ): _m0.Writer {
+    if (message.enabled === true) {
+      writer.uint32(8).bool(message.enabled);
+    }
+    return writer;
+  },
+
+  decode(
+    input: _m0.Reader | Uint8Array,
+    length?: number,
+  ): ClassCreatorAllowlist {
+    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+    let end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseClassCreatorAllowlist();
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+        case 1:
+          message.enabled = reader.bool();
+          break;
+        default:
+          reader.skipType(tag & 7);
+          break;
+      }
+    }
+    return message;
+  },
+
+  fromJSON(object: any): ClassCreatorAllowlist {
+    return {
+      $type: ClassCreatorAllowlist.$type,
+      enabled: isSet(object.enabled) ? Boolean(object.enabled) : false,
+    };
+  },
+
+  toJSON(message: ClassCreatorAllowlist): unknown {
+    const obj: any = {};
+    message.enabled !== undefined && (obj.enabled = message.enabled);
+    return obj;
+  },
+
+  fromPartial<I extends Exact<DeepPartial<ClassCreatorAllowlist>, I>>(
+    object: I,
+  ): ClassCreatorAllowlist {
+    const message = createBaseClassCreatorAllowlist();
+    message.enabled = object.enabled ?? false;
+    return message;
+  },
+};
+
+messageTypeRegistry.set(ClassCreatorAllowlist.$type, ClassCreatorAllowlist);
+
+function createBaseAllowedClassCreator(): AllowedClassCreator {
+  return {
+    $type: 'regen.ecocredit.v1.AllowedClassCreator',
+    address: new Uint8Array(),
+  };
+}
+
+export const AllowedClassCreator = {
+  $type: 'regen.ecocredit.v1.AllowedClassCreator' as const,
+
+  encode(
+    message: AllowedClassCreator,
+    writer: _m0.Writer = _m0.Writer.create(),
+  ): _m0.Writer {
+    if (message.address.length !== 0) {
+      writer.uint32(10).bytes(message.address);
+    }
+    return writer;
+  },
+
+  decode(input: _m0.Reader | Uint8Array, length?: number): AllowedClassCreator {
+    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+    let end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseAllowedClassCreator();
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+        case 1:
+          message.address = reader.bytes();
+          break;
+        default:
+          reader.skipType(tag & 7);
+          break;
+      }
+    }
+    return message;
+  },
+
+  fromJSON(object: any): AllowedClassCreator {
+    return {
+      $type: AllowedClassCreator.$type,
+      address: isSet(object.address)
+        ? bytesFromBase64(object.address)
+        : new Uint8Array(),
+    };
+  },
+
+  toJSON(message: AllowedClassCreator): unknown {
+    const obj: any = {};
+    message.address !== undefined &&
+      (obj.address = base64FromBytes(
+        message.address !== undefined ? message.address : new Uint8Array(),
+      ));
+    return obj;
+  },
+
+  fromPartial<I extends Exact<DeepPartial<AllowedClassCreator>, I>>(
+    object: I,
+  ): AllowedClassCreator {
+    const message = createBaseAllowedClassCreator();
+    message.address = object.address ?? new Uint8Array();
+    return message;
+  },
+};
+
+messageTypeRegistry.set(AllowedClassCreator.$type, AllowedClassCreator);
+
+function createBaseClassFee(): ClassFee {
+  return { $type: 'regen.ecocredit.v1.ClassFee', fee: undefined };
+}
+
+export const ClassFee = {
+  $type: 'regen.ecocredit.v1.ClassFee' as const,
+
+  encode(
+    message: ClassFee,
+    writer: _m0.Writer = _m0.Writer.create(),
+  ): _m0.Writer {
+    if (message.fee !== undefined) {
+      Coin.encode(message.fee, writer.uint32(10).fork()).ldelim();
+    }
+    return writer;
+  },
+
+  decode(input: _m0.Reader | Uint8Array, length?: number): ClassFee {
+    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+    let end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseClassFee();
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+        case 1:
+          message.fee = Coin.decode(reader, reader.uint32());
+          break;
+        default:
+          reader.skipType(tag & 7);
+          break;
+      }
+    }
+    return message;
+  },
+
+  fromJSON(object: any): ClassFee {
+    return {
+      $type: ClassFee.$type,
+      fee: isSet(object.fee) ? Coin.fromJSON(object.fee) : undefined,
+    };
+  },
+
+  toJSON(message: ClassFee): unknown {
+    const obj: any = {};
+    message.fee !== undefined &&
+      (obj.fee = message.fee ? Coin.toJSON(message.fee) : undefined);
+    return obj;
+  },
+
+  fromPartial<I extends Exact<DeepPartial<ClassFee>, I>>(object: I): ClassFee {
+    const message = createBaseClassFee();
+    message.fee =
+      object.fee !== undefined && object.fee !== null
+        ? Coin.fromPartial(object.fee)
+        : undefined;
+    return message;
+  },
+};
+
+messageTypeRegistry.set(ClassFee.$type, ClassFee);
+
+function createBaseAllowedBridgeChain(): AllowedBridgeChain {
+  return { $type: 'regen.ecocredit.v1.AllowedBridgeChain', chainName: '' };
+}
+
+export const AllowedBridgeChain = {
+  $type: 'regen.ecocredit.v1.AllowedBridgeChain' as const,
+
+  encode(
+    message: AllowedBridgeChain,
+    writer: _m0.Writer = _m0.Writer.create(),
+  ): _m0.Writer {
+    if (message.chainName !== '') {
+      writer.uint32(10).string(message.chainName);
+    }
+    return writer;
+  },
+
+  decode(input: _m0.Reader | Uint8Array, length?: number): AllowedBridgeChain {
+    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+    let end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseAllowedBridgeChain();
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+        case 1:
+          message.chainName = reader.string();
+          break;
+        default:
+          reader.skipType(tag & 7);
+          break;
+      }
+    }
+    return message;
+  },
+
+  fromJSON(object: any): AllowedBridgeChain {
+    return {
+      $type: AllowedBridgeChain.$type,
+      chainName: isSet(object.chainName) ? String(object.chainName) : '',
+    };
+  },
+
+  toJSON(message: AllowedBridgeChain): unknown {
+    const obj: any = {};
+    message.chainName !== undefined && (obj.chainName = message.chainName);
+    return obj;
+  },
+
+  fromPartial<I extends Exact<DeepPartial<AllowedBridgeChain>, I>>(
+    object: I,
+  ): AllowedBridgeChain {
+    const message = createBaseAllowedBridgeChain();
+    message.chainName = object.chainName ?? '';
+    return message;
+  },
+};
+
+messageTypeRegistry.set(AllowedBridgeChain.$type, AllowedBridgeChain);
 
 declare var self: any | undefined;
 declare var window: any | undefined;

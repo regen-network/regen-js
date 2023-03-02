@@ -10,10 +10,8 @@ export interface ModuleDescriptor {
   $type: 'cosmos.app.v1alpha1.ModuleDescriptor';
   /**
    * go_import names the package that should be imported by an app to load the
-   * module in the runtime module registry. Either go_import must be defined here
-   * or the go_package option must be defined at the file level to indicate
-   * to users where to location the module implementation. go_import takes
-   * precedence over go_package when both are defined.
+   * module in the runtime module registry. It is required to make debugging
+   * of configuration errors easier for users.
    */
   goImport: string;
   /**
@@ -49,8 +47,8 @@ export interface PackageReference {
    * present in a previous version.
    *
    * A package should indicate its revision with a source code comment
-   * above the package declaration in one of its fields containing the
-   * test "Revision N" where N is an integer revision. All packages start
+   * above the package declaration in one of its files containing the
+   * text "Revision N" where N is an integer revision. All packages start
    * at revision 0 the first time they are released in a module.
    *
    * When a new version of a module is released and items are added to existing

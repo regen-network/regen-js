@@ -2,7 +2,7 @@
 import { messageTypeRegistry } from '../../../typeRegistry';
 import Long from 'long';
 import _m0 from 'protobufjs/minimal';
-import { OriginTx } from '../../../regen/ecocredit/v1/types';
+import { OriginTx } from './types';
 
 export const protobufPackage = 'regen.ecocredit.v1';
 
@@ -125,6 +125,13 @@ export interface EventRetire {
    * alphanumeric characters.
    */
   jurisdiction: string;
+  /**
+   * reason is any arbitrary string that specifies the reason for retiring
+   * credits.
+   *
+   * Since Revision 2
+   */
+  reason: string;
 }
 
 /**
@@ -191,6 +198,18 @@ export interface EventUpdateProjectMetadata {
   projectId: string;
 }
 
+/**
+ * EventUpdateBatchMetadata is emitted when the credit batch metadata is
+ * changed.
+ *
+ * Since Revision 2
+ */
+export interface EventUpdateBatchMetadata {
+  $type: 'regen.ecocredit.v1.EventUpdateBatchMetadata';
+  /** batch_denom is the unique identifier of the batch that was updated. */
+  batchDenom: string;
+}
+
 /** EventSealBatch is emitted when a batch is sealed. */
 export interface EventSealBatch {
   $type: 'regen.ecocredit.v1.EventSealBatch';
@@ -216,6 +235,12 @@ export interface EventBridge {
   contract: string;
   /** amount is the amount of credits. */
   amount: string;
+  /**
+   * owner is the owner address.
+   *
+   * Since Revision 1
+   */
+  owner: string;
 }
 
 /** EventBridgeReceive is emitted when credits are bridged from another chain. */
@@ -717,6 +742,7 @@ function createBaseEventRetire(): EventRetire {
     batchDenom: '',
     amount: '',
     jurisdiction: '',
+    reason: '',
   };
 }
 
@@ -738,6 +764,9 @@ export const EventRetire = {
     }
     if (message.jurisdiction !== '') {
       writer.uint32(34).string(message.jurisdiction);
+    }
+    if (message.reason !== '') {
+      writer.uint32(42).string(message.reason);
     }
     return writer;
   },
@@ -761,6 +790,9 @@ export const EventRetire = {
         case 4:
           message.jurisdiction = reader.string();
           break;
+        case 5:
+          message.reason = reader.string();
+          break;
         default:
           reader.skipType(tag & 7);
           break;
@@ -778,6 +810,7 @@ export const EventRetire = {
       jurisdiction: isSet(object.jurisdiction)
         ? String(object.jurisdiction)
         : '',
+      reason: isSet(object.reason) ? String(object.reason) : '',
     };
   },
 
@@ -788,6 +821,7 @@ export const EventRetire = {
     message.amount !== undefined && (obj.amount = message.amount);
     message.jurisdiction !== undefined &&
       (obj.jurisdiction = message.jurisdiction);
+    message.reason !== undefined && (obj.reason = message.reason);
     return obj;
   },
 
@@ -799,6 +833,7 @@ export const EventRetire = {
     message.batchDenom = object.batchDenom ?? '';
     message.amount = object.amount ?? '';
     message.jurisdiction = object.jurisdiction ?? '';
+    message.reason = object.reason ?? '';
     return message;
   },
 };
@@ -1216,6 +1251,74 @@ messageTypeRegistry.set(
   EventUpdateProjectMetadata,
 );
 
+function createBaseEventUpdateBatchMetadata(): EventUpdateBatchMetadata {
+  return {
+    $type: 'regen.ecocredit.v1.EventUpdateBatchMetadata',
+    batchDenom: '',
+  };
+}
+
+export const EventUpdateBatchMetadata = {
+  $type: 'regen.ecocredit.v1.EventUpdateBatchMetadata' as const,
+
+  encode(
+    message: EventUpdateBatchMetadata,
+    writer: _m0.Writer = _m0.Writer.create(),
+  ): _m0.Writer {
+    if (message.batchDenom !== '') {
+      writer.uint32(10).string(message.batchDenom);
+    }
+    return writer;
+  },
+
+  decode(
+    input: _m0.Reader | Uint8Array,
+    length?: number,
+  ): EventUpdateBatchMetadata {
+    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+    let end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseEventUpdateBatchMetadata();
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+        case 1:
+          message.batchDenom = reader.string();
+          break;
+        default:
+          reader.skipType(tag & 7);
+          break;
+      }
+    }
+    return message;
+  },
+
+  fromJSON(object: any): EventUpdateBatchMetadata {
+    return {
+      $type: EventUpdateBatchMetadata.$type,
+      batchDenom: isSet(object.batchDenom) ? String(object.batchDenom) : '',
+    };
+  },
+
+  toJSON(message: EventUpdateBatchMetadata): unknown {
+    const obj: any = {};
+    message.batchDenom !== undefined && (obj.batchDenom = message.batchDenom);
+    return obj;
+  },
+
+  fromPartial<I extends Exact<DeepPartial<EventUpdateBatchMetadata>, I>>(
+    object: I,
+  ): EventUpdateBatchMetadata {
+    const message = createBaseEventUpdateBatchMetadata();
+    message.batchDenom = object.batchDenom ?? '';
+    return message;
+  },
+};
+
+messageTypeRegistry.set(
+  EventUpdateBatchMetadata.$type,
+  EventUpdateBatchMetadata,
+);
+
 function createBaseEventSealBatch(): EventSealBatch {
   return { $type: 'regen.ecocredit.v1.EventSealBatch', batchDenom: '' };
 }
@@ -1344,6 +1447,7 @@ function createBaseEventBridge(): EventBridge {
     recipient: '',
     contract: '',
     amount: '',
+    owner: '',
   };
 }
 
@@ -1365,6 +1469,9 @@ export const EventBridge = {
     }
     if (message.amount !== '') {
       writer.uint32(34).string(message.amount);
+    }
+    if (message.owner !== '') {
+      writer.uint32(42).string(message.owner);
     }
     return writer;
   },
@@ -1388,6 +1495,9 @@ export const EventBridge = {
         case 4:
           message.amount = reader.string();
           break;
+        case 5:
+          message.owner = reader.string();
+          break;
         default:
           reader.skipType(tag & 7);
           break;
@@ -1403,6 +1513,7 @@ export const EventBridge = {
       recipient: isSet(object.recipient) ? String(object.recipient) : '',
       contract: isSet(object.contract) ? String(object.contract) : '',
       amount: isSet(object.amount) ? String(object.amount) : '',
+      owner: isSet(object.owner) ? String(object.owner) : '',
     };
   },
 
@@ -1412,6 +1523,7 @@ export const EventBridge = {
     message.recipient !== undefined && (obj.recipient = message.recipient);
     message.contract !== undefined && (obj.contract = message.contract);
     message.amount !== undefined && (obj.amount = message.amount);
+    message.owner !== undefined && (obj.owner = message.owner);
     return obj;
   },
 
@@ -1423,6 +1535,7 @@ export const EventBridge = {
     message.recipient = object.recipient ?? '';
     message.contract = object.contract ?? '';
     message.amount = object.amount ?? '';
+    message.owner = object.owner ?? '';
     return message;
   },
 };

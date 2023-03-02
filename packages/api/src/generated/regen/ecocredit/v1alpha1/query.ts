@@ -2,12 +2,7 @@
 import { messageTypeRegistry } from '../../../typeRegistry';
 import Long from 'long';
 import _m0 from 'protobufjs/minimal';
-import {
-  Params,
-  ClassInfo,
-  BatchInfo,
-  CreditType,
-} from '../../../regen/ecocredit/v1alpha1/types';
+import { Params, ClassInfo, BatchInfo, CreditType } from './types';
 import {
   PageRequest,
   PageResponse,

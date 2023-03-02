@@ -2,13 +2,16 @@
 import { messageTypeRegistry } from '../../../../typeRegistry';
 import Long from 'long';
 import _m0 from 'protobufjs/minimal';
-import { AllowedDenom } from '../../../../regen/ecocredit/marketplace/v1/state';
+import { AllowedDenom } from './state';
 
 export const protobufPackage = 'regen.ecocredit.marketplace.v1';
 
 /**
  * AllowDenomProposal is a gov Content type for approving a denom for use in the
  * marketplace.
+ *
+ * Deprecated (Since Revision 1): This message is no longer used and will be
+ * removed in the next version. See MsgAddAllowedDenom.
  */
 export interface AllowDenomProposal {
   $type: 'regen.ecocredit.marketplace.v1.AllowDenomProposal';

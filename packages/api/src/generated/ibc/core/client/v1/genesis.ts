@@ -2,11 +2,7 @@
 import { messageTypeRegistry } from '../../../../typeRegistry';
 import Long from 'long';
 import _m0 from 'protobufjs/minimal';
-import {
-  Params,
-  IdentifiedClientState,
-  ClientConsensusStates,
-} from '../../../../ibc/core/client/v1/client';
+import { Params, IdentifiedClientState, ClientConsensusStates } from './client';
 
 export const protobufPackage = 'ibc.core.client.v1';
 

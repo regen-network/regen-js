@@ -2,7 +2,7 @@
 import { messageTypeRegistry } from '../../../typeRegistry';
 import Long from 'long';
 import _m0 from 'protobufjs/minimal';
-import { ContentHash, ContentHash_Graph } from '../../../regen/data/v1/types';
+import { ContentHash, ContentHash_Graph } from './types';
 import { Timestamp } from '../../../google/protobuf/timestamp';
 
 export const protobufPackage = 'regen.data.v1';

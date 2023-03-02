@@ -5,7 +5,7 @@ import _m0 from 'protobufjs/minimal';
 import { Any } from '../../../google/protobuf/any';
 import { Duration } from '../../../google/protobuf/duration';
 import { Timestamp } from '../../../google/protobuf/timestamp';
-import { Coin } from '../../../cosmos/base/v1beta1/coin';
+import { Coin } from '../../base/v1beta1/coin';
 
 export const protobufPackage = 'cosmos.gov.v1beta1';
 
@@ -67,7 +67,7 @@ export function voteOptionToJSON(object: VoteOption): string {
 
 /** ProposalStatus enumerates the valid statuses of a proposal. */
 export enum ProposalStatus {
-  /** PROPOSAL_STATUS_UNSPECIFIED - PROPOSAL_STATUS_UNSPECIFIED defines the default propopsal status. */
+  /** PROPOSAL_STATUS_UNSPECIFIED - PROPOSAL_STATUS_UNSPECIFIED defines the default proposal status. */
   PROPOSAL_STATUS_UNSPECIFIED = 0,
   /**
    * PROPOSAL_STATUS_DEPOSIT_PERIOD - PROPOSAL_STATUS_DEPOSIT_PERIOD defines a proposal status during the deposit
@@ -143,7 +143,11 @@ export function proposalStatusToJSON(object: ProposalStatus): string {
   }
 }
 
-/** WeightedVoteOption defines a unit of vote for vote split. */
+/**
+ * WeightedVoteOption defines a unit of vote for vote split.
+ *
+ * Since: cosmos-sdk 0.43
+ */
 export interface WeightedVoteOption {
   $type: 'cosmos.gov.v1beta1.WeightedVoteOption';
   option: VoteOption;
@@ -177,6 +181,11 @@ export interface Proposal {
   proposalId: Long;
   content?: Any;
   status: ProposalStatus;
+  /**
+   * final_tally_result is the final tally result of the proposal. When
+   * querying a proposal via gRPC, this field is not populated until the
+   * proposal's voting period has ended.
+   */
   finalTallyResult?: TallyResult;
   submitTime?: Date;
   depositEndTime?: Date;
@@ -210,6 +219,7 @@ export interface Vote {
    * @deprecated
    */
   option: VoteOption;
+  /** Since: cosmos-sdk 0.43 */
   options: WeightedVoteOption[];
 }
 

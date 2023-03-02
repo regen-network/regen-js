@@ -2,10 +2,12 @@
 import { messageTypeRegistry } from '../../../typeRegistry';
 import Long from 'long';
 import _m0 from 'protobufjs/minimal';
-import { Grant } from '../../../cosmos/authz/v1beta1/authz';
+import { Grant } from './authz';
 import { Any } from '../../../google/protobuf/any';
 
 export const protobufPackage = 'cosmos.authz.v1beta1';
+
+/** Since: cosmos-sdk 0.43 */
 
 /**
  * MsgGrant is a request type for Grant method. It declares authorization to the grantee

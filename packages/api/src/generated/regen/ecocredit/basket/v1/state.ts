@@ -2,7 +2,8 @@
 import { messageTypeRegistry } from '../../../../typeRegistry';
 import Long from 'long';
 import _m0 from 'protobufjs/minimal';
-import { DateCriteria } from '../../../../regen/ecocredit/basket/v1/types';
+import { DateCriteria } from './types';
+import { Coin } from '../../../../cosmos/base/v1beta1/coin';
 import { Timestamp } from '../../../../google/protobuf/timestamp';
 
 export const protobufPackage = 'regen.ecocredit.basket.v1';
@@ -95,6 +96,21 @@ export interface BasketBalance {
    * to create an index which is used to remove the oldest credits first.
    */
   batchStartDate?: Date;
+}
+
+/**
+ * BasketFee is the basket creation fee. If not set, a basket creation fee is
+ * not required. This table is controlled via governance.
+ *
+ * Since Revision 2
+ */
+export interface BasketFee {
+  $type: 'regen.ecocredit.basket.v1.BasketFee';
+  /**
+   * fee is the basket creation fee. If not set, a basket creation fee is not
+   * required.
+   */
+  fee?: Coin;
 }
 
 function createBaseBasket(): Basket {
@@ -438,6 +454,69 @@ export const BasketBalance = {
 };
 
 messageTypeRegistry.set(BasketBalance.$type, BasketBalance);
+
+function createBaseBasketFee(): BasketFee {
+  return { $type: 'regen.ecocredit.basket.v1.BasketFee', fee: undefined };
+}
+
+export const BasketFee = {
+  $type: 'regen.ecocredit.basket.v1.BasketFee' as const,
+
+  encode(
+    message: BasketFee,
+    writer: _m0.Writer = _m0.Writer.create(),
+  ): _m0.Writer {
+    if (message.fee !== undefined) {
+      Coin.encode(message.fee, writer.uint32(10).fork()).ldelim();
+    }
+    return writer;
+  },
+
+  decode(input: _m0.Reader | Uint8Array, length?: number): BasketFee {
+    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+    let end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseBasketFee();
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+        case 1:
+          message.fee = Coin.decode(reader, reader.uint32());
+          break;
+        default:
+          reader.skipType(tag & 7);
+          break;
+      }
+    }
+    return message;
+  },
+
+  fromJSON(object: any): BasketFee {
+    return {
+      $type: BasketFee.$type,
+      fee: isSet(object.fee) ? Coin.fromJSON(object.fee) : undefined,
+    };
+  },
+
+  toJSON(message: BasketFee): unknown {
+    const obj: any = {};
+    message.fee !== undefined &&
+      (obj.fee = message.fee ? Coin.toJSON(message.fee) : undefined);
+    return obj;
+  },
+
+  fromPartial<I extends Exact<DeepPartial<BasketFee>, I>>(
+    object: I,
+  ): BasketFee {
+    const message = createBaseBasketFee();
+    message.fee =
+      object.fee !== undefined && object.fee !== null
+        ? Coin.fromPartial(object.fee)
+        : undefined;
+    return message;
+  },
+};
+
+messageTypeRegistry.set(BasketFee.$type, BasketFee);
 
 declare var self: any | undefined;
 declare var window: any | undefined;

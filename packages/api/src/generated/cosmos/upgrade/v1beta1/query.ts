@@ -2,7 +2,7 @@
 import { messageTypeRegistry } from '../../../typeRegistry';
 import Long from 'long';
 import _m0 from 'protobufjs/minimal';
-import { Plan, ModuleVersion } from '../../../cosmos/upgrade/v1beta1/upgrade';
+import { Plan, ModuleVersion } from './upgrade';
 
 export const protobufPackage = 'cosmos.upgrade.v1beta1';
 
@@ -67,12 +67,15 @@ export interface QueryUpgradedConsensusStateRequest {
  */
 export interface QueryUpgradedConsensusStateResponse {
   $type: 'cosmos.upgrade.v1beta1.QueryUpgradedConsensusStateResponse';
+  /** Since: cosmos-sdk 0.43 */
   upgradedConsensusState: Uint8Array;
 }
 
 /**
  * QueryModuleVersionsRequest is the request type for the Query/ModuleVersions
  * RPC method.
+ *
+ * Since: cosmos-sdk 0.43
  */
 export interface QueryModuleVersionsRequest {
   $type: 'cosmos.upgrade.v1beta1.QueryModuleVersionsRequest';
@@ -87,11 +90,32 @@ export interface QueryModuleVersionsRequest {
 /**
  * QueryModuleVersionsResponse is the response type for the Query/ModuleVersions
  * RPC method.
+ *
+ * Since: cosmos-sdk 0.43
  */
 export interface QueryModuleVersionsResponse {
   $type: 'cosmos.upgrade.v1beta1.QueryModuleVersionsResponse';
   /** module_versions is a list of module names with their consensus versions. */
   moduleVersions: ModuleVersion[];
+}
+
+/**
+ * QueryAuthorityRequest is the request type for Query/Authority
+ *
+ * Since: cosmos-sdk 0.46
+ */
+export interface QueryAuthorityRequest {
+  $type: 'cosmos.upgrade.v1beta1.QueryAuthorityRequest';
+}
+
+/**
+ * QueryAuthorityResponse is the response type for Query/Authority
+ *
+ * Since: cosmos-sdk 0.46
+ */
+export interface QueryAuthorityResponse {
+  $type: 'cosmos.upgrade.v1beta1.QueryAuthorityResponse';
+  address: string;
 }
 
 function createBaseQueryCurrentPlanRequest(): QueryCurrentPlanRequest {
@@ -650,6 +674,124 @@ messageTypeRegistry.set(
   QueryModuleVersionsResponse,
 );
 
+function createBaseQueryAuthorityRequest(): QueryAuthorityRequest {
+  return { $type: 'cosmos.upgrade.v1beta1.QueryAuthorityRequest' };
+}
+
+export const QueryAuthorityRequest = {
+  $type: 'cosmos.upgrade.v1beta1.QueryAuthorityRequest' as const,
+
+  encode(
+    _: QueryAuthorityRequest,
+    writer: _m0.Writer = _m0.Writer.create(),
+  ): _m0.Writer {
+    return writer;
+  },
+
+  decode(
+    input: _m0.Reader | Uint8Array,
+    length?: number,
+  ): QueryAuthorityRequest {
+    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+    let end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseQueryAuthorityRequest();
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+        default:
+          reader.skipType(tag & 7);
+          break;
+      }
+    }
+    return message;
+  },
+
+  fromJSON(_: any): QueryAuthorityRequest {
+    return {
+      $type: QueryAuthorityRequest.$type,
+    };
+  },
+
+  toJSON(_: QueryAuthorityRequest): unknown {
+    const obj: any = {};
+    return obj;
+  },
+
+  fromPartial<I extends Exact<DeepPartial<QueryAuthorityRequest>, I>>(
+    _: I,
+  ): QueryAuthorityRequest {
+    const message = createBaseQueryAuthorityRequest();
+    return message;
+  },
+};
+
+messageTypeRegistry.set(QueryAuthorityRequest.$type, QueryAuthorityRequest);
+
+function createBaseQueryAuthorityResponse(): QueryAuthorityResponse {
+  return {
+    $type: 'cosmos.upgrade.v1beta1.QueryAuthorityResponse',
+    address: '',
+  };
+}
+
+export const QueryAuthorityResponse = {
+  $type: 'cosmos.upgrade.v1beta1.QueryAuthorityResponse' as const,
+
+  encode(
+    message: QueryAuthorityResponse,
+    writer: _m0.Writer = _m0.Writer.create(),
+  ): _m0.Writer {
+    if (message.address !== '') {
+      writer.uint32(10).string(message.address);
+    }
+    return writer;
+  },
+
+  decode(
+    input: _m0.Reader | Uint8Array,
+    length?: number,
+  ): QueryAuthorityResponse {
+    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+    let end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseQueryAuthorityResponse();
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+        case 1:
+          message.address = reader.string();
+          break;
+        default:
+          reader.skipType(tag & 7);
+          break;
+      }
+    }
+    return message;
+  },
+
+  fromJSON(object: any): QueryAuthorityResponse {
+    return {
+      $type: QueryAuthorityResponse.$type,
+      address: isSet(object.address) ? String(object.address) : '',
+    };
+  },
+
+  toJSON(message: QueryAuthorityResponse): unknown {
+    const obj: any = {};
+    message.address !== undefined && (obj.address = message.address);
+    return obj;
+  },
+
+  fromPartial<I extends Exact<DeepPartial<QueryAuthorityResponse>, I>>(
+    object: I,
+  ): QueryAuthorityResponse {
+    const message = createBaseQueryAuthorityResponse();
+    message.address = object.address ?? '';
+    return message;
+  },
+};
+
+messageTypeRegistry.set(QueryAuthorityResponse.$type, QueryAuthorityResponse);
+
 /** Query defines the gRPC upgrade querier service. */
 export interface Query {
   /** CurrentPlan queries the current upgrade plan. */
@@ -673,10 +815,22 @@ export interface Query {
   UpgradedConsensusState(
     request: DeepPartial<QueryUpgradedConsensusStateRequest>,
   ): Promise<QueryUpgradedConsensusStateResponse>;
-  /** ModuleVersions queries the list of module versions from state. */
+  /**
+   * ModuleVersions queries the list of module versions from state.
+   *
+   * Since: cosmos-sdk 0.43
+   */
   ModuleVersions(
     request: DeepPartial<QueryModuleVersionsRequest>,
   ): Promise<QueryModuleVersionsResponse>;
+  /**
+   * Returns the account with authority to conduct upgrades
+   *
+   * Since: cosmos-sdk 0.46
+   */
+  Authority(
+    request: DeepPartial<QueryAuthorityRequest>,
+  ): Promise<QueryAuthorityResponse>;
 }
 
 export class QueryClientImpl implements Query {
@@ -687,6 +841,7 @@ export class QueryClientImpl implements Query {
     this.AppliedPlan = this.AppliedPlan.bind(this);
     this.UpgradedConsensusState = this.UpgradedConsensusState.bind(this);
     this.ModuleVersions = this.ModuleVersions.bind(this);
+    this.Authority = this.Authority.bind(this);
   }
   CurrentPlan(
     request: DeepPartial<QueryCurrentPlanRequest>,
@@ -746,6 +901,21 @@ export class QueryClientImpl implements Query {
     );
     return promise.then(data =>
       QueryModuleVersionsResponse.decode(new _m0.Reader(data)),
+    );
+  }
+
+  Authority(
+    request: DeepPartial<QueryAuthorityRequest>,
+  ): Promise<QueryAuthorityResponse> {
+    const fromPartial = QueryAuthorityRequest.fromPartial(request);
+    const data = QueryAuthorityRequest.encode(fromPartial).finish();
+    const promise = this.rpc.request(
+      'cosmos.upgrade.v1beta1.Query',
+      'Authority',
+      data,
+    );
+    return promise.then(data =>
+      QueryAuthorityResponse.decode(new _m0.Reader(data)),
     );
   }
 }

@@ -2,10 +2,7 @@
 import { messageTypeRegistry } from '../../../typeRegistry';
 import Long from 'long';
 import _m0 from 'protobufjs/minimal';
-import {
-  PageRequest,
-  PageResponse,
-} from '../../../cosmos/base/query/v1beta1/pagination';
+import { PageRequest, PageResponse } from '../../base/query/v1beta1/pagination';
 import {
   Validator,
   DelegationResponse,
@@ -14,7 +11,7 @@ import {
   Pool,
   Params,
   RedelegationResponse,
-} from '../../../cosmos/staking/v1beta1/staking';
+} from './staking';
 
 export const protobufPackage = 'cosmos.staking.v1beta1';
 
@@ -46,7 +43,7 @@ export interface QueryValidatorRequest {
 /** QueryValidatorResponse is response type for the Query/Validator RPC method */
 export interface QueryValidatorResponse {
   $type: 'cosmos.staking.v1beta1.QueryValidatorResponse';
-  /** validator defines the the validator info. */
+  /** validator defines the validator info. */
   validator?: Validator;
 }
 
@@ -226,7 +223,7 @@ export interface QueryDelegatorValidatorsRequest {
  */
 export interface QueryDelegatorValidatorsResponse {
   $type: 'cosmos.staking.v1beta1.QueryDelegatorValidatorsResponse';
-  /** validators defines the the validators' info of a delegator. */
+  /** validators defines the validators' info of a delegator. */
   validators: Validator[];
   /** pagination defines the pagination in the response. */
   pagination?: PageResponse;
@@ -250,7 +247,7 @@ export interface QueryDelegatorValidatorRequest {
  */
 export interface QueryDelegatorValidatorResponse {
   $type: 'cosmos.staking.v1beta1.QueryDelegatorValidatorResponse';
-  /** validator defines the the validator info. */
+  /** validator defines the validator info. */
   validator?: Validator;
 }
 

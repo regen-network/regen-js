@@ -5,7 +5,7 @@ import _m0 from 'protobufjs/minimal';
 import { Header } from '../../../tendermint/types/types';
 import { Any } from '../../../google/protobuf/any';
 import { Duration } from '../../../google/protobuf/duration';
-import { Coin } from '../../../cosmos/base/v1beta1/coin';
+import { Coin } from '../../base/v1beta1/coin';
 import { Timestamp } from '../../../google/protobuf/timestamp';
 
 export const protobufPackage = 'cosmos.staking.v1beta1';
@@ -141,7 +141,11 @@ export interface Validator {
   unbondingTime?: Date;
   /** commission defines the commission parameters. */
   commission?: Commission;
-  /** min_self_delegation is the validator's self declared minimum self delegation. */
+  /**
+   * min_self_delegation is the validator's self declared minimum self delegation.
+   *
+   * Since: cosmos-sdk 0.46
+   */
   minSelfDelegation: string;
 }
 
@@ -271,6 +275,8 @@ export interface Params {
   historicalEntries: number;
   /** bond_denom defines the bondable coin denomination. */
   bondDenom: string;
+  /** min_commission_rate is the chain-wide minimum commission rate that a validator can charge their delegators */
+  minCommissionRate: string;
 }
 
 /**
@@ -1790,6 +1796,7 @@ function createBaseParams(): Params {
     maxEntries: 0,
     historicalEntries: 0,
     bondDenom: '',
+    minCommissionRate: '',
   };
 }
 
@@ -1814,6 +1821,9 @@ export const Params = {
     }
     if (message.bondDenom !== '') {
       writer.uint32(42).string(message.bondDenom);
+    }
+    if (message.minCommissionRate !== '') {
+      writer.uint32(50).string(message.minCommissionRate);
     }
     return writer;
   },
@@ -1840,6 +1850,9 @@ export const Params = {
         case 5:
           message.bondDenom = reader.string();
           break;
+        case 6:
+          message.minCommissionRate = reader.string();
+          break;
         default:
           reader.skipType(tag & 7);
           break;
@@ -1862,6 +1875,9 @@ export const Params = {
         ? Number(object.historicalEntries)
         : 0,
       bondDenom: isSet(object.bondDenom) ? String(object.bondDenom) : '',
+      minCommissionRate: isSet(object.minCommissionRate)
+        ? String(object.minCommissionRate)
+        : '',
     };
   },
 
@@ -1878,6 +1894,8 @@ export const Params = {
     message.historicalEntries !== undefined &&
       (obj.historicalEntries = Math.round(message.historicalEntries));
     message.bondDenom !== undefined && (obj.bondDenom = message.bondDenom);
+    message.minCommissionRate !== undefined &&
+      (obj.minCommissionRate = message.minCommissionRate);
     return obj;
   },
 
@@ -1891,6 +1909,7 @@ export const Params = {
     message.maxEntries = object.maxEntries ?? 0;
     message.historicalEntries = object.historicalEntries ?? 0;
     message.bondDenom = object.bondDenom ?? '';
+    message.minCommissionRate = object.minCommissionRate ?? '';
     return message;
   },
 };

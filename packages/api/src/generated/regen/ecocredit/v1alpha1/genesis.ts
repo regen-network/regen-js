@@ -2,12 +2,7 @@
 import { messageTypeRegistry } from '../../../typeRegistry';
 import Long from 'long';
 import _m0 from 'protobufjs/minimal';
-import {
-  Params,
-  ClassInfo,
-  BatchInfo,
-  CreditTypeSeq,
-} from '../../../regen/ecocredit/v1alpha1/types';
+import { Params, ClassInfo, BatchInfo, CreditTypeSeq } from './types';
 
 export const protobufPackage = 'regen.ecocredit.v1alpha1';
 

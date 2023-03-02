@@ -2,9 +2,9 @@
 import { messageTypeRegistry } from '../../typeRegistry';
 import Long from 'long';
 import _m0 from 'protobufjs/minimal';
-import { Proof } from '../../tendermint/crypto/proof';
-import { Consensus } from '../../tendermint/version/types';
-import { ValidatorSet } from '../../tendermint/types/validator';
+import { Proof } from '../crypto/proof';
+import { Consensus } from '../version/types';
+import { ValidatorSet } from './validator';
 import { Timestamp } from '../../google/protobuf/timestamp';
 
 export const protobufPackage = 'tendermint.types';

@@ -5,6 +5,8 @@ import _m0 from 'protobufjs/minimal';
 
 export const protobufPackage = 'cosmos.authz.v1beta1';
 
+/** Since: cosmos-sdk 0.43 */
+
 /** EventGrant is emitted on Msg/Grant */
 export interface EventGrant {
   $type: 'cosmos.authz.v1beta1.EventGrant';

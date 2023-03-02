@@ -2,8 +2,8 @@
 import { messageTypeRegistry } from '../../typeRegistry';
 import Long from 'long';
 import _m0 from 'protobufjs/minimal';
-import { Header, Data, Commit } from '../../tendermint/types/types';
-import { EvidenceList } from '../../tendermint/types/evidence';
+import { Header, Data, Commit } from './types';
+import { EvidenceList } from './evidence';
 
 export const protobufPackage = 'tendermint.types';
 

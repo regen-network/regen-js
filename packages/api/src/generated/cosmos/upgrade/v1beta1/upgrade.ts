@@ -51,6 +51,10 @@ export interface Plan {
 /**
  * SoftwareUpgradeProposal is a gov Content type for initiating a software
  * upgrade.
+ * Deprecated: This legacy proposal is deprecated in favor of Msg-based gov
+ * proposals, see MsgSoftwareUpgrade.
+ *
+ * @deprecated
  */
 export interface SoftwareUpgradeProposal {
   $type: 'cosmos.upgrade.v1beta1.SoftwareUpgradeProposal';
@@ -62,6 +66,10 @@ export interface SoftwareUpgradeProposal {
 /**
  * CancelSoftwareUpgradeProposal is a gov Content type for cancelling a software
  * upgrade.
+ * Deprecated: This legacy proposal is deprecated in favor of Msg-based gov
+ * proposals, see MsgCancelUpgrade.
+ *
+ * @deprecated
  */
 export interface CancelSoftwareUpgradeProposal {
   $type: 'cosmos.upgrade.v1beta1.CancelSoftwareUpgradeProposal';
@@ -69,7 +77,11 @@ export interface CancelSoftwareUpgradeProposal {
   description: string;
 }
 
-/** ModuleVersion specifies a module and its consensus version. */
+/**
+ * ModuleVersion specifies a module and its consensus version.
+ *
+ * Since: cosmos-sdk 0.43
+ */
 export interface ModuleVersion {
   $type: 'cosmos.upgrade.v1beta1.ModuleVersion';
   /** name of the app module */

@@ -8,8 +8,8 @@ import {
   WeightedVoteOption,
   voteOptionFromJSON,
   voteOptionToJSON,
-} from '../../../cosmos/gov/v1beta1/gov';
-import { Coin } from '../../../cosmos/base/v1beta1/coin';
+} from './gov';
+import { Coin } from '../../base/v1beta1/coin';
 
 export const protobufPackage = 'cosmos.gov.v1beta1';
 
@@ -43,7 +43,11 @@ export interface MsgVoteResponse {
   $type: 'cosmos.gov.v1beta1.MsgVoteResponse';
 }
 
-/** MsgVoteWeighted defines a message to cast a vote. */
+/**
+ * MsgVoteWeighted defines a message to cast a vote.
+ *
+ * Since: cosmos-sdk 0.43
+ */
 export interface MsgVoteWeighted {
   $type: 'cosmos.gov.v1beta1.MsgVoteWeighted';
   proposalId: Long;
@@ -51,7 +55,11 @@ export interface MsgVoteWeighted {
   options: WeightedVoteOption[];
 }
 
-/** MsgVoteWeightedResponse defines the Msg/VoteWeighted response type. */
+/**
+ * MsgVoteWeightedResponse defines the Msg/VoteWeighted response type.
+ *
+ * Since: cosmos-sdk 0.43
+ */
 export interface MsgVoteWeightedResponse {
   $type: 'cosmos.gov.v1beta1.MsgVoteWeightedResponse';
 }
@@ -679,7 +687,11 @@ export interface Msg {
   ): Promise<MsgSubmitProposalResponse>;
   /** Vote defines a method to add a vote on a specific proposal. */
   Vote(request: DeepPartial<MsgVote>): Promise<MsgVoteResponse>;
-  /** VoteWeighted defines a method to add a weighted vote on a specific proposal. */
+  /**
+   * VoteWeighted defines a method to add a weighted vote on a specific proposal.
+   *
+   * Since: cosmos-sdk 0.43
+   */
   VoteWeighted(
     request: DeepPartial<MsgVoteWeighted>,
   ): Promise<MsgVoteWeightedResponse>;

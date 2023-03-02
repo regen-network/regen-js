@@ -3,12 +3,7 @@ import { messageTypeRegistry } from '../../../typeRegistry';
 import Long from 'long';
 import _m0 from 'protobufjs/minimal';
 import { Any } from '../../../google/protobuf/any';
-import {
-  Choice,
-  Member,
-  choiceFromJSON,
-  choiceToJSON,
-} from '../../../regen/group/v1alpha1/types';
+import { Choice, Member, choiceFromJSON, choiceToJSON } from './types';
 
 export const protobufPackage = 'regen.group.v1alpha1';
 

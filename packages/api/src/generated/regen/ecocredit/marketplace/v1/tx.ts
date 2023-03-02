@@ -69,10 +69,7 @@ export interface MsgUpdateSellOrders_Update {
   $type: 'regen.ecocredit.marketplace.v1.MsgUpdateSellOrders.Update';
   /** sell_order_id is the ID of an existing sell order. */
   sellOrderId: Long;
-  /**
-   * new_quantity is the updated quantity of credits available to sell, if it
-   * is set to zero then the order is cancelled.
-   */
+  /** new_quantity is the updated quantity of credits available to sell. */
   newQuantity: string;
   /** new_ask_price is the new ask price for this sell order */
   newAskPrice?: Coin;
@@ -144,11 +141,74 @@ export interface MsgBuyDirect_Order {
    * credits which will be used only if disable_auto_retire is false.
    */
   retirementJurisdiction: string;
+  /**
+   * retirement_reason is any arbitrary string that specifies the reason for
+   * retiring credits. The reason will be included in EventRetire and is not
+   * stored in state.
+   *
+   * Since Revision 1
+   */
+  retirementReason: string;
 }
 
 /** MsgBuyDirectResponse is the Msg/BuyDirect response type. */
 export interface MsgBuyDirectResponse {
   $type: 'regen.ecocredit.marketplace.v1.MsgBuyDirectResponse';
+}
+
+/**
+ * MsgAddAllowedDenom is the Msg/AddAllowedDenom request type.
+ *
+ * Since Revision 1
+ */
+export interface MsgAddAllowedDenom {
+  $type: 'regen.ecocredit.marketplace.v1.MsgAddAllowedDenom';
+  /** authority is the address of the governance account. */
+  authority: string;
+  /** denom is the bank denom to allow (ex. ibc/GLKHDSG423SGS) */
+  bankDenom: string;
+  /**
+   * display_denom is the denom to display to the user and is informational.
+   * Because the denom is likely an IBC denom, this should be chosen by
+   * governance to represent the consensus trusted name of the denom.
+   */
+  displayDenom: string;
+  /**
+   * exponent is the exponent that relates the denom to the display_denom and is
+   * informational
+   */
+  exponent: number;
+}
+
+/**
+ * MsgAddAllowedDenomResponse is the Msg/AddAllowedDenom response type.
+ *
+ * Since Revision 1
+ */
+export interface MsgAddAllowedDenomResponse {
+  $type: 'regen.ecocredit.marketplace.v1.MsgAddAllowedDenomResponse';
+}
+
+/**
+ * MsgRemoveAllowedDenom is the Msg/RemoveAllowedDenom request type.
+ *
+ * Since Revision 1
+ */
+export interface MsgRemoveAllowedDenom {
+  $type: 'regen.ecocredit.marketplace.v1.MsgRemoveAllowedDenom';
+  /** authority is the address of the governance account. */
+  authority: string;
+  /** denom is the denom to remove (ex. ibc/GLKHDSG423SGS) */
+  denom: string;
+}
+
+/**
+ * MsgRemoveAllowedDenomResponse is the Msg/RemoveAllowedDenom response type.
+ *
+ * Since Revision 1
+ */
+export interface MsgRemoveAllowedDenomResponse {
+  $type: 'regen.ecocredit.marketplace.v1.MsgRemoveAllowedDenomResponse';
 }
 
 function createBaseMsgSell(): MsgSell {
@@ -931,6 +991,7 @@ function createBaseMsgBuyDirect_Order(): MsgBuyDirect_Order {
     bidPrice: undefined,
     disableAutoRetire: false,
     retirementJurisdiction: '',
+    retirementReason: '',
   };
 }
 
@@ -955,6 +1016,9 @@ export const MsgBuyDirect_Order = {
     }
     if (message.retirementJurisdiction !== '') {
       writer.uint32(50).string(message.retirementJurisdiction);
+    }
+    if (message.retirementReason !== '') {
+      writer.uint32(58).string(message.retirementReason);
     }
     return writer;
   },
@@ -981,6 +1045,9 @@ export const MsgBuyDirect_Order = {
         case 6:
           message.retirementJurisdiction = reader.string();
           break;
+        case 7:
+          message.retirementReason = reader.string();
+          break;
         default:
           reader.skipType(tag & 7);
           break;
@@ -1005,6 +1072,9 @@ export const MsgBuyDirect_Order = {
       retirementJurisdiction: isSet(object.retirementJurisdiction)
         ? String(object.retirementJurisdiction)
         : '',
+      retirementReason: isSet(object.retirementReason)
+        ? String(object.retirementReason)
+        : '',
     };
   },
 
@@ -1021,6 +1091,8 @@ export const MsgBuyDirect_Order = {
       (obj.disableAutoRetire = message.disableAutoRetire);
     message.retirementJurisdiction !== undefined &&
       (obj.retirementJurisdiction = message.retirementJurisdiction);
+    message.retirementReason !== undefined &&
+      (obj.retirementReason = message.retirementReason);
     return obj;
   },
 
@@ -1039,6 +1111,7 @@ export const MsgBuyDirect_Order = {
         : undefined;
     message.disableAutoRetire = object.disableAutoRetire ?? false;
     message.retirementJurisdiction = object.retirementJurisdiction ?? '';
+    message.retirementReason = object.retirementReason ?? '';
     return message;
   },
 };
@@ -1098,6 +1171,292 @@ export const MsgBuyDirectResponse = {
 
 messageTypeRegistry.set(MsgBuyDirectResponse.$type, MsgBuyDirectResponse);
 
+function createBaseMsgAddAllowedDenom(): MsgAddAllowedDenom {
+  return {
+    $type: 'regen.ecocredit.marketplace.v1.MsgAddAllowedDenom',
+    authority: '',
+    bankDenom: '',
+    displayDenom: '',
+    exponent: 0,
+  };
+}
+
+export const MsgAddAllowedDenom = {
+  $type: 'regen.ecocredit.marketplace.v1.MsgAddAllowedDenom' as const,
+
+  encode(
+    message: MsgAddAllowedDenom,
+    writer: _m0.Writer = _m0.Writer.create(),
+  ): _m0.Writer {
+    if (message.authority !== '') {
+      writer.uint32(10).string(message.authority);
+    }
+    if (message.bankDenom !== '') {
+      writer.uint32(18).string(message.bankDenom);
+    }
+    if (message.displayDenom !== '') {
+      writer.uint32(26).string(message.displayDenom);
+    }
+    if (message.exponent !== 0) {
+      writer.uint32(32).uint32(message.exponent);
+    }
+    return writer;
+  },
+
+  decode(input: _m0.Reader | Uint8Array, length?: number): MsgAddAllowedDenom {
+    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+    let end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseMsgAddAllowedDenom();
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+        case 1:
+          message.authority = reader.string();
+          break;
+        case 2:
+          message.bankDenom = reader.string();
+          break;
+        case 3:
+          message.displayDenom = reader.string();
+          break;
+        case 4:
+          message.exponent = reader.uint32();
+          break;
+        default:
+          reader.skipType(tag & 7);
+          break;
+      }
+    }
+    return message;
+  },
+
+  fromJSON(object: any): MsgAddAllowedDenom {
+    return {
+      $type: MsgAddAllowedDenom.$type,
+      authority: isSet(object.authority) ? String(object.authority) : '',
+      bankDenom: isSet(object.bankDenom) ? String(object.bankDenom) : '',
+      displayDenom: isSet(object.displayDenom)
+        ? String(object.displayDenom)
+        : '',
+      exponent: isSet(object.exponent) ? Number(object.exponent) : 0,
+    };
+  },
+
+  toJSON(message: MsgAddAllowedDenom): unknown {
+    const obj: any = {};
+    message.authority !== undefined && (obj.authority = message.authority);
+    message.bankDenom !== undefined && (obj.bankDenom = message.bankDenom);
+    message.displayDenom !== undefined &&
+      (obj.displayDenom = message.displayDenom);
+    message.exponent !== undefined &&
+      (obj.exponent = Math.round(message.exponent));
+    return obj;
+  },
+
+  fromPartial<I extends Exact<DeepPartial<MsgAddAllowedDenom>, I>>(
+    object: I,
+  ): MsgAddAllowedDenom {
+    const message = createBaseMsgAddAllowedDenom();
+    message.authority = object.authority ?? '';
+    message.bankDenom = object.bankDenom ?? '';
+    message.displayDenom = object.displayDenom ?? '';
+    message.exponent = object.exponent ?? 0;
+    return message;
+  },
+};
+
+messageTypeRegistry.set(MsgAddAllowedDenom.$type, MsgAddAllowedDenom);
+
+function createBaseMsgAddAllowedDenomResponse(): MsgAddAllowedDenomResponse {
+  return { $type: 'regen.ecocredit.marketplace.v1.MsgAddAllowedDenomResponse' };
+}
+
+export const MsgAddAllowedDenomResponse = {
+  $type: 'regen.ecocredit.marketplace.v1.MsgAddAllowedDenomResponse' as const,
+
+  encode(
+    _: MsgAddAllowedDenomResponse,
+    writer: _m0.Writer = _m0.Writer.create(),
+  ): _m0.Writer {
+    return writer;
+  },
+
+  decode(
+    input: _m0.Reader | Uint8Array,
+    length?: number,
+  ): MsgAddAllowedDenomResponse {
+    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+    let end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseMsgAddAllowedDenomResponse();
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+        default:
+          reader.skipType(tag & 7);
+          break;
+      }
+    }
+    return message;
+  },
+
+  fromJSON(_: any): MsgAddAllowedDenomResponse {
+    return {
+      $type: MsgAddAllowedDenomResponse.$type,
+    };
+  },
+
+  toJSON(_: MsgAddAllowedDenomResponse): unknown {
+    const obj: any = {};
+    return obj;
+  },
+
+  fromPartial<I extends Exact<DeepPartial<MsgAddAllowedDenomResponse>, I>>(
+    _: I,
+  ): MsgAddAllowedDenomResponse {
+    const message = createBaseMsgAddAllowedDenomResponse();
+    return message;
+  },
+};
+
+messageTypeRegistry.set(
+  MsgAddAllowedDenomResponse.$type,
+  MsgAddAllowedDenomResponse,
+);
+
+function createBaseMsgRemoveAllowedDenom(): MsgRemoveAllowedDenom {
+  return {
+    $type: 'regen.ecocredit.marketplace.v1.MsgRemoveAllowedDenom',
+    authority: '',
+    denom: '',
+  };
+}
+
+export const MsgRemoveAllowedDenom = {
+  $type: 'regen.ecocredit.marketplace.v1.MsgRemoveAllowedDenom' as const,
+
+  encode(
+    message: MsgRemoveAllowedDenom,
+    writer: _m0.Writer = _m0.Writer.create(),
+  ): _m0.Writer {
+    if (message.authority !== '') {
+      writer.uint32(10).string(message.authority);
+    }
+    if (message.denom !== '') {
+      writer.uint32(18).string(message.denom);
+    }
+    return writer;
+  },
+
+  decode(
+    input: _m0.Reader | Uint8Array,
+    length?: number,
+  ): MsgRemoveAllowedDenom {
+    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+    let end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseMsgRemoveAllowedDenom();
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+        case 1:
+          message.authority = reader.string();
+          break;
+        case 2:
+          message.denom = reader.string();
+          break;
+        default:
+          reader.skipType(tag & 7);
+          break;
+      }
+    }
+    return message;
+  },
+
+  fromJSON(object: any): MsgRemoveAllowedDenom {
+    return {
+      $type: MsgRemoveAllowedDenom.$type,
+      authority: isSet(object.authority) ? String(object.authority) : '',
+      denom: isSet(object.denom) ? String(object.denom) : '',
+    };
+  },
+
+  toJSON(message: MsgRemoveAllowedDenom): unknown {
+    const obj: any = {};
+    message.authority !== undefined && (obj.authority = message.authority);
+    message.denom !== undefined && (obj.denom = message.denom);
+    return obj;
+  },
+
+  fromPartial<I extends Exact<DeepPartial<MsgRemoveAllowedDenom>, I>>(
+    object: I,
+  ): MsgRemoveAllowedDenom {
+    const message = createBaseMsgRemoveAllowedDenom();
+    message.authority = object.authority ?? '';
+    message.denom = object.denom ?? '';
+    return message;
+  },
+};
+
+messageTypeRegistry.set(MsgRemoveAllowedDenom.$type, MsgRemoveAllowedDenom);
+
+function createBaseMsgRemoveAllowedDenomResponse(): MsgRemoveAllowedDenomResponse {
+  return {
+    $type: 'regen.ecocredit.marketplace.v1.MsgRemoveAllowedDenomResponse',
+  };
+}
+
+export const MsgRemoveAllowedDenomResponse = {
+  $type:
+    'regen.ecocredit.marketplace.v1.MsgRemoveAllowedDenomResponse' as const,
+
+  encode(
+    _: MsgRemoveAllowedDenomResponse,
+    writer: _m0.Writer = _m0.Writer.create(),
+  ): _m0.Writer {
+    return writer;
+  },
+
+  decode(
+    input: _m0.Reader | Uint8Array,
+    length?: number,
+  ): MsgRemoveAllowedDenomResponse {
+    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+    let end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseMsgRemoveAllowedDenomResponse();
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+        default:
+          reader.skipType(tag & 7);
+          break;
+      }
+    }
+    return message;
+  },
+
+  fromJSON(_: any): MsgRemoveAllowedDenomResponse {
+    return {
+      $type: MsgRemoveAllowedDenomResponse.$type,
+    };
+  },
+
+  toJSON(_: MsgRemoveAllowedDenomResponse): unknown {
+    const obj: any = {};
+    return obj;
+  },
+
+  fromPartial<I extends Exact<DeepPartial<MsgRemoveAllowedDenomResponse>, I>>(
+    _: I,
+  ): MsgRemoveAllowedDenomResponse {
+    const message = createBaseMsgRemoveAllowedDenomResponse();
+    return message;
+  },
+};
+
+messageTypeRegistry.set(
+  MsgRemoveAllowedDenomResponse.$type,
+  MsgRemoveAllowedDenomResponse,
+);
+
 /** Msg is the regen.ecocredit.marketplace.v1 Msg service. */
 export interface Msg {
   /** Sell creates new sell orders. */
@@ -1106,12 +1465,29 @@ export interface Msg {
   UpdateSellOrders(
     request: DeepPartial<MsgUpdateSellOrders>,
   ): Promise<MsgUpdateSellOrdersResponse>;
-  /** CancelSellOrder cancels a sell order and returns the funds from escrow. */
+  /** CancelSellOrder cancels a sell order and returns the credits from escrow. */
   CancelSellOrder(
     request: DeepPartial<MsgCancelSellOrder>,
   ): Promise<MsgCancelSellOrderResponse>;
   /** BuyDirect purchases credits directly from the specified sell order. */
   BuyDirect(request: DeepPartial<MsgBuyDirect>): Promise<MsgBuyDirectResponse>;
+  /**
+   * AddAllowedDenom is a governance method that allows the addition of
+   * new allowed denom.
+   *
+   * Since Revision 1
+   */
+  AddAllowedDenom(
+    request: DeepPartial<MsgAddAllowedDenom>,
+  ): Promise<MsgAddAllowedDenomResponse>;
+  /**
+   * RemoveAllowedDenom is a governance method that removes allowed denom.
+   *
+   * Since Revision 1
+   */
+  RemoveAllowedDenom(
+    request: DeepPartial<MsgRemoveAllowedDenom>,
+  ): Promise<MsgRemoveAllowedDenomResponse>;
 }
 
 export class MsgClientImpl implements Msg {
@@ -1122,6 +1498,8 @@ export class MsgClientImpl implements Msg {
     this.UpdateSellOrders = this.UpdateSellOrders.bind(this);
     this.CancelSellOrder = this.CancelSellOrder.bind(this);
     this.BuyDirect = this.BuyDirect.bind(this);
+    this.AddAllowedDenom = this.AddAllowedDenom.bind(this);
+    this.RemoveAllowedDenom = this.RemoveAllowedDenom.bind(this);
   }
   Sell(request: DeepPartial<MsgSell>): Promise<MsgSellResponse> {
     const fromPartial = MsgSell.fromPartial(request);
@@ -1174,6 +1552,36 @@ export class MsgClientImpl implements Msg {
     );
     return promise.then(data =>
       MsgBuyDirectResponse.decode(new _m0.Reader(data)),
+    );
+  }
+
+  AddAllowedDenom(
+    request: DeepPartial<MsgAddAllowedDenom>,
+  ): Promise<MsgAddAllowedDenomResponse> {
+    const fromPartial = MsgAddAllowedDenom.fromPartial(request);
+    const data = MsgAddAllowedDenom.encode(fromPartial).finish();
+    const promise = this.rpc.request(
+      'regen.ecocredit.marketplace.v1.Msg',
+      'AddAllowedDenom',
+      data,
+    );
+    return promise.then(data =>
+      MsgAddAllowedDenomResponse.decode(new _m0.Reader(data)),
+    );
+  }
+
+  RemoveAllowedDenom(
+    request: DeepPartial<MsgRemoveAllowedDenom>,
+  ): Promise<MsgRemoveAllowedDenomResponse> {
+    const fromPartial = MsgRemoveAllowedDenom.fromPartial(request);
+    const data = MsgRemoveAllowedDenom.encode(fromPartial).finish();
+    const promise = this.rpc.request(
+      'regen.ecocredit.marketplace.v1.Msg',
+      'RemoveAllowedDenom',
+      data,
+    );
+    return promise.then(data =>
+      MsgRemoveAllowedDenomResponse.decode(new _m0.Reader(data)),
     );
   }
 }

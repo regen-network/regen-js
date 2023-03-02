@@ -7,7 +7,7 @@ import {
   PageResponse,
 } from '../../../../cosmos/base/query/v1beta1/pagination';
 import { Timestamp } from '../../../../google/protobuf/timestamp';
-import { AllowedDenom } from '../../../../regen/ecocredit/marketplace/v1/state';
+import { AllowedDenom } from './state';
 
 export const protobufPackage = 'regen.ecocredit.marketplace.v1';
 

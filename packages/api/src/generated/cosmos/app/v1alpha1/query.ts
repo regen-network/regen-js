@@ -2,7 +2,7 @@
 import { messageTypeRegistry } from '../../../typeRegistry';
 import Long from 'long';
 import _m0 from 'protobufjs/minimal';
-import { Config } from '../../../cosmos/app/v1alpha1/config';
+import { Config } from './config';
 
 export const protobufPackage = 'cosmos.app.v1alpha1';
 
