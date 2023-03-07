@@ -1,14 +1,14 @@
 /* eslint-disable */
-import { messageTypeRegistry } from '../../../typeRegistry';
-import Long from 'long';
-import _m0 from 'protobufjs/minimal';
-import { Params, ClassInfo, BatchInfo, CreditTypeSeq } from './types';
+import Long from "long";
+import _m0 from "protobufjs/minimal";
+import { messageTypeRegistry } from "../../../typeRegistry";
+import { BatchInfo, ClassInfo, CreditTypeSeq, Params } from "./types";
 
-export const protobufPackage = 'regen.ecocredit.v1alpha1';
+export const protobufPackage = "regen.ecocredit.v1alpha1";
 
 /** GenesisState defines ecocredit module's genesis state. */
 export interface GenesisState {
-  $type: 'regen.ecocredit.v1alpha1.GenesisState';
+  $type: "regen.ecocredit.v1alpha1.GenesisState";
   /**
    * Params contains the updateable global parameters for use with the x/params
    * module
@@ -31,7 +31,7 @@ export interface GenesisState {
  * account address, batch_denom, and balance.
  */
 export interface Balance {
-  $type: 'regen.ecocredit.v1alpha1.Balance';
+  $type: "regen.ecocredit.v1alpha1.Balance";
   /** address is the account address of the account holding credits. */
   address: string;
   /** batch_denom is the unique ID of the credit batch. */
@@ -44,7 +44,7 @@ export interface Balance {
 
 /** Supply represents a tradable or retired supply of a credit batch. */
 export interface Supply {
-  $type: 'regen.ecocredit.v1alpha1.Supply';
+  $type: "regen.ecocredit.v1alpha1.Supply";
   /** batch_denom is the unique ID of the credit batch. */
   batchDenom: string;
   /** tradable_supply is the tradable supply of the credit batch. */
@@ -55,7 +55,7 @@ export interface Supply {
 
 function createBaseGenesisState(): GenesisState {
   return {
-    $type: 'regen.ecocredit.v1alpha1.GenesisState',
+    $type: "regen.ecocredit.v1alpha1.GenesisState",
     params: undefined,
     classInfo: [],
     batchInfo: [],
@@ -66,12 +66,9 @@ function createBaseGenesisState(): GenesisState {
 }
 
 export const GenesisState = {
-  $type: 'regen.ecocredit.v1alpha1.GenesisState' as const,
+  $type: "regen.ecocredit.v1alpha1.GenesisState" as const,
 
-  encode(
-    message: GenesisState,
-    writer: _m0.Writer = _m0.Writer.create(),
-  ): _m0.Writer {
+  encode(message: GenesisState, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.params !== undefined) {
       Params.encode(message.params, writer.uint32(10).fork()).ldelim();
     }
@@ -130,82 +127,59 @@ export const GenesisState = {
     return {
       $type: GenesisState.$type,
       params: isSet(object.params) ? Params.fromJSON(object.params) : undefined,
-      classInfo: Array.isArray(object?.classInfo)
-        ? object.classInfo.map((e: any) => ClassInfo.fromJSON(e))
-        : [],
-      batchInfo: Array.isArray(object?.batchInfo)
-        ? object.batchInfo.map((e: any) => BatchInfo.fromJSON(e))
-        : [],
-      sequences: Array.isArray(object?.sequences)
-        ? object.sequences.map((e: any) => CreditTypeSeq.fromJSON(e))
-        : [],
-      balances: Array.isArray(object?.balances)
-        ? object.balances.map((e: any) => Balance.fromJSON(e))
-        : [],
-      supplies: Array.isArray(object?.supplies)
-        ? object.supplies.map((e: any) => Supply.fromJSON(e))
-        : [],
+      classInfo: Array.isArray(object?.classInfo) ? object.classInfo.map((e: any) => ClassInfo.fromJSON(e)) : [],
+      batchInfo: Array.isArray(object?.batchInfo) ? object.batchInfo.map((e: any) => BatchInfo.fromJSON(e)) : [],
+      sequences: Array.isArray(object?.sequences) ? object.sequences.map((e: any) => CreditTypeSeq.fromJSON(e)) : [],
+      balances: Array.isArray(object?.balances) ? object.balances.map((e: any) => Balance.fromJSON(e)) : [],
+      supplies: Array.isArray(object?.supplies) ? object.supplies.map((e: any) => Supply.fromJSON(e)) : [],
     };
   },
 
   toJSON(message: GenesisState): unknown {
     const obj: any = {};
-    message.params !== undefined &&
-      (obj.params = message.params ? Params.toJSON(message.params) : undefined);
+    message.params !== undefined && (obj.params = message.params ? Params.toJSON(message.params) : undefined);
     if (message.classInfo) {
-      obj.classInfo = message.classInfo.map(e =>
-        e ? ClassInfo.toJSON(e) : undefined,
-      );
+      obj.classInfo = message.classInfo.map((e) => e ? ClassInfo.toJSON(e) : undefined);
     } else {
       obj.classInfo = [];
     }
     if (message.batchInfo) {
-      obj.batchInfo = message.batchInfo.map(e =>
-        e ? BatchInfo.toJSON(e) : undefined,
-      );
+      obj.batchInfo = message.batchInfo.map((e) => e ? BatchInfo.toJSON(e) : undefined);
     } else {
       obj.batchInfo = [];
     }
     if (message.sequences) {
-      obj.sequences = message.sequences.map(e =>
-        e ? CreditTypeSeq.toJSON(e) : undefined,
-      );
+      obj.sequences = message.sequences.map((e) => e ? CreditTypeSeq.toJSON(e) : undefined);
     } else {
       obj.sequences = [];
     }
     if (message.balances) {
-      obj.balances = message.balances.map(e =>
-        e ? Balance.toJSON(e) : undefined,
-      );
+      obj.balances = message.balances.map((e) => e ? Balance.toJSON(e) : undefined);
     } else {
       obj.balances = [];
     }
     if (message.supplies) {
-      obj.supplies = message.supplies.map(e =>
-        e ? Supply.toJSON(e) : undefined,
-      );
+      obj.supplies = message.supplies.map((e) => e ? Supply.toJSON(e) : undefined);
     } else {
       obj.supplies = [];
     }
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<GenesisState>, I>>(
-    object: I,
-  ): GenesisState {
+  create(base?: DeepPartial<GenesisState>): GenesisState {
+    return GenesisState.fromPartial(base ?? {});
+  },
+
+  fromPartial(object: DeepPartial<GenesisState>): GenesisState {
     const message = createBaseGenesisState();
-    message.params =
-      object.params !== undefined && object.params !== null
-        ? Params.fromPartial(object.params)
-        : undefined;
-    message.classInfo =
-      object.classInfo?.map(e => ClassInfo.fromPartial(e)) || [];
-    message.batchInfo =
-      object.batchInfo?.map(e => BatchInfo.fromPartial(e)) || [];
-    message.sequences =
-      object.sequences?.map(e => CreditTypeSeq.fromPartial(e)) || [];
-    message.balances = object.balances?.map(e => Balance.fromPartial(e)) || [];
-    message.supplies = object.supplies?.map(e => Supply.fromPartial(e)) || [];
+    message.params = (object.params !== undefined && object.params !== null)
+      ? Params.fromPartial(object.params)
+      : undefined;
+    message.classInfo = object.classInfo?.map((e) => ClassInfo.fromPartial(e)) || [];
+    message.batchInfo = object.batchInfo?.map((e) => BatchInfo.fromPartial(e)) || [];
+    message.sequences = object.sequences?.map((e) => CreditTypeSeq.fromPartial(e)) || [];
+    message.balances = object.balances?.map((e) => Balance.fromPartial(e)) || [];
+    message.supplies = object.supplies?.map((e) => Supply.fromPartial(e)) || [];
     return message;
   },
 };
@@ -214,31 +188,28 @@ messageTypeRegistry.set(GenesisState.$type, GenesisState);
 
 function createBaseBalance(): Balance {
   return {
-    $type: 'regen.ecocredit.v1alpha1.Balance',
-    address: '',
-    batchDenom: '',
-    tradableBalance: '',
-    retiredBalance: '',
+    $type: "regen.ecocredit.v1alpha1.Balance",
+    address: "",
+    batchDenom: "",
+    tradableBalance: "",
+    retiredBalance: "",
   };
 }
 
 export const Balance = {
-  $type: 'regen.ecocredit.v1alpha1.Balance' as const,
+  $type: "regen.ecocredit.v1alpha1.Balance" as const,
 
-  encode(
-    message: Balance,
-    writer: _m0.Writer = _m0.Writer.create(),
-  ): _m0.Writer {
-    if (message.address !== '') {
+  encode(message: Balance, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+    if (message.address !== "") {
       writer.uint32(10).string(message.address);
     }
-    if (message.batchDenom !== '') {
+    if (message.batchDenom !== "") {
       writer.uint32(18).string(message.batchDenom);
     }
-    if (message.tradableBalance !== '') {
+    if (message.tradableBalance !== "") {
       writer.uint32(26).string(message.tradableBalance);
     }
-    if (message.retiredBalance !== '') {
+    if (message.retiredBalance !== "") {
       writer.uint32(34).string(message.retiredBalance);
     }
     return writer;
@@ -274,14 +245,10 @@ export const Balance = {
   fromJSON(object: any): Balance {
     return {
       $type: Balance.$type,
-      address: isSet(object.address) ? String(object.address) : '',
-      batchDenom: isSet(object.batchDenom) ? String(object.batchDenom) : '',
-      tradableBalance: isSet(object.tradableBalance)
-        ? String(object.tradableBalance)
-        : '',
-      retiredBalance: isSet(object.retiredBalance)
-        ? String(object.retiredBalance)
-        : '',
+      address: isSet(object.address) ? String(object.address) : "",
+      batchDenom: isSet(object.batchDenom) ? String(object.batchDenom) : "",
+      tradableBalance: isSet(object.tradableBalance) ? String(object.tradableBalance) : "",
+      retiredBalance: isSet(object.retiredBalance) ? String(object.retiredBalance) : "",
     };
   },
 
@@ -289,19 +256,21 @@ export const Balance = {
     const obj: any = {};
     message.address !== undefined && (obj.address = message.address);
     message.batchDenom !== undefined && (obj.batchDenom = message.batchDenom);
-    message.tradableBalance !== undefined &&
-      (obj.tradableBalance = message.tradableBalance);
-    message.retiredBalance !== undefined &&
-      (obj.retiredBalance = message.retiredBalance);
+    message.tradableBalance !== undefined && (obj.tradableBalance = message.tradableBalance);
+    message.retiredBalance !== undefined && (obj.retiredBalance = message.retiredBalance);
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<Balance>, I>>(object: I): Balance {
+  create(base?: DeepPartial<Balance>): Balance {
+    return Balance.fromPartial(base ?? {});
+  },
+
+  fromPartial(object: DeepPartial<Balance>): Balance {
     const message = createBaseBalance();
-    message.address = object.address ?? '';
-    message.batchDenom = object.batchDenom ?? '';
-    message.tradableBalance = object.tradableBalance ?? '';
-    message.retiredBalance = object.retiredBalance ?? '';
+    message.address = object.address ?? "";
+    message.batchDenom = object.batchDenom ?? "";
+    message.tradableBalance = object.tradableBalance ?? "";
+    message.retiredBalance = object.retiredBalance ?? "";
     return message;
   },
 };
@@ -309,28 +278,20 @@ export const Balance = {
 messageTypeRegistry.set(Balance.$type, Balance);
 
 function createBaseSupply(): Supply {
-  return {
-    $type: 'regen.ecocredit.v1alpha1.Supply',
-    batchDenom: '',
-    tradableSupply: '',
-    retiredSupply: '',
-  };
+  return { $type: "regen.ecocredit.v1alpha1.Supply", batchDenom: "", tradableSupply: "", retiredSupply: "" };
 }
 
 export const Supply = {
-  $type: 'regen.ecocredit.v1alpha1.Supply' as const,
+  $type: "regen.ecocredit.v1alpha1.Supply" as const,
 
-  encode(
-    message: Supply,
-    writer: _m0.Writer = _m0.Writer.create(),
-  ): _m0.Writer {
-    if (message.batchDenom !== '') {
+  encode(message: Supply, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+    if (message.batchDenom !== "") {
       writer.uint32(10).string(message.batchDenom);
     }
-    if (message.tradableSupply !== '') {
+    if (message.tradableSupply !== "") {
       writer.uint32(18).string(message.tradableSupply);
     }
-    if (message.retiredSupply !== '') {
+    if (message.retiredSupply !== "") {
       writer.uint32(26).string(message.retiredSupply);
     }
     return writer;
@@ -363,65 +324,42 @@ export const Supply = {
   fromJSON(object: any): Supply {
     return {
       $type: Supply.$type,
-      batchDenom: isSet(object.batchDenom) ? String(object.batchDenom) : '',
-      tradableSupply: isSet(object.tradableSupply)
-        ? String(object.tradableSupply)
-        : '',
-      retiredSupply: isSet(object.retiredSupply)
-        ? String(object.retiredSupply)
-        : '',
+      batchDenom: isSet(object.batchDenom) ? String(object.batchDenom) : "",
+      tradableSupply: isSet(object.tradableSupply) ? String(object.tradableSupply) : "",
+      retiredSupply: isSet(object.retiredSupply) ? String(object.retiredSupply) : "",
     };
   },
 
   toJSON(message: Supply): unknown {
     const obj: any = {};
     message.batchDenom !== undefined && (obj.batchDenom = message.batchDenom);
-    message.tradableSupply !== undefined &&
-      (obj.tradableSupply = message.tradableSupply);
-    message.retiredSupply !== undefined &&
-      (obj.retiredSupply = message.retiredSupply);
+    message.tradableSupply !== undefined && (obj.tradableSupply = message.tradableSupply);
+    message.retiredSupply !== undefined && (obj.retiredSupply = message.retiredSupply);
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<Supply>, I>>(object: I): Supply {
+  create(base?: DeepPartial<Supply>): Supply {
+    return Supply.fromPartial(base ?? {});
+  },
+
+  fromPartial(object: DeepPartial<Supply>): Supply {
     const message = createBaseSupply();
-    message.batchDenom = object.batchDenom ?? '';
-    message.tradableSupply = object.tradableSupply ?? '';
-    message.retiredSupply = object.retiredSupply ?? '';
+    message.batchDenom = object.batchDenom ?? "";
+    message.tradableSupply = object.tradableSupply ?? "";
+    message.retiredSupply = object.retiredSupply ?? "";
     return message;
   },
 };
 
 messageTypeRegistry.set(Supply.$type, Supply);
 
-type Builtin =
-  | Date
-  | Function
-  | Uint8Array
-  | string
-  | number
-  | boolean
-  | undefined;
+type Builtin = Date | Function | Uint8Array | string | number | boolean | undefined;
 
-export type DeepPartial<T> = T extends Builtin
-  ? T
-  : T extends Long
-  ? string | number | Long
-  : T extends Array<infer U>
-  ? Array<DeepPartial<U>>
-  : T extends ReadonlyArray<infer U>
-  ? ReadonlyArray<DeepPartial<U>>
-  : T extends {}
-  ? { [K in Exclude<keyof T, '$type'>]?: DeepPartial<T[K]> }
+export type DeepPartial<T> = T extends Builtin ? T
+  : T extends Long ? string | number | Long : T extends Array<infer U> ? Array<DeepPartial<U>>
+  : T extends ReadonlyArray<infer U> ? ReadonlyArray<DeepPartial<U>>
+  : T extends {} ? { [K in Exclude<keyof T, "$type">]?: DeepPartial<T[K]> }
   : Partial<T>;
-
-type KeysOfUnion<T> = T extends T ? keyof T : never;
-export type Exact<P, I extends P> = P extends Builtin
-  ? P
-  : P & { [K in keyof P]: Exact<P[K], I[K]> } & Record<
-        Exclude<keyof I, KeysOfUnion<P> | '$type'>,
-        never
-      >;
 
 if (_m0.util.Long !== Long) {
   _m0.util.Long = Long as any;

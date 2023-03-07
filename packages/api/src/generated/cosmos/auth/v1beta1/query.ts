@@ -1,12 +1,12 @@
 /* eslint-disable */
-import { messageTypeRegistry } from '../../../typeRegistry';
-import Long from 'long';
-import _m0 from 'protobufjs/minimal';
-import { PageRequest, PageResponse } from '../../base/query/v1beta1/pagination';
-import { Any } from '../../../google/protobuf/any';
-import { Params } from './auth';
+import Long from "long";
+import _m0 from "protobufjs/minimal";
+import { Any } from "../../../google/protobuf/any";
+import { messageTypeRegistry } from "../../../typeRegistry";
+import { PageRequest, PageResponse } from "../../base/query/v1beta1/pagination";
+import { Params } from "./auth";
 
-export const protobufPackage = 'cosmos.auth.v1beta1';
+export const protobufPackage = "cosmos.auth.v1beta1";
 
 /**
  * QueryAccountsRequest is the request type for the Query/Accounts RPC method.
@@ -14,7 +14,7 @@ export const protobufPackage = 'cosmos.auth.v1beta1';
  * Since: cosmos-sdk 0.43
  */
 export interface QueryAccountsRequest {
-  $type: 'cosmos.auth.v1beta1.QueryAccountsRequest';
+  $type: "cosmos.auth.v1beta1.QueryAccountsRequest";
   /** pagination defines an optional pagination for the request. */
   pagination?: PageRequest;
 }
@@ -25,7 +25,7 @@ export interface QueryAccountsRequest {
  * Since: cosmos-sdk 0.43
  */
 export interface QueryAccountsResponse {
-  $type: 'cosmos.auth.v1beta1.QueryAccountsResponse';
+  $type: "cosmos.auth.v1beta1.QueryAccountsResponse";
   /** accounts are the existing accounts */
   accounts: Any[];
   /** pagination defines the pagination in the response. */
@@ -34,26 +34,26 @@ export interface QueryAccountsResponse {
 
 /** QueryAccountRequest is the request type for the Query/Account RPC method. */
 export interface QueryAccountRequest {
-  $type: 'cosmos.auth.v1beta1.QueryAccountRequest';
+  $type: "cosmos.auth.v1beta1.QueryAccountRequest";
   /** address defines the address to query for. */
   address: string;
 }
 
 /** QueryAccountResponse is the response type for the Query/Account RPC method. */
 export interface QueryAccountResponse {
-  $type: 'cosmos.auth.v1beta1.QueryAccountResponse';
+  $type: "cosmos.auth.v1beta1.QueryAccountResponse";
   /** account defines the account of the corresponding address. */
   account?: Any;
 }
 
 /** QueryParamsRequest is the request type for the Query/Params RPC method. */
 export interface QueryParamsRequest {
-  $type: 'cosmos.auth.v1beta1.QueryParamsRequest';
+  $type: "cosmos.auth.v1beta1.QueryParamsRequest";
 }
 
 /** QueryParamsResponse is the response type for the Query/Params RPC method. */
 export interface QueryParamsResponse {
-  $type: 'cosmos.auth.v1beta1.QueryParamsResponse';
+  $type: "cosmos.auth.v1beta1.QueryParamsResponse";
   /** params defines the parameters of the module. */
   params?: Params;
 }
@@ -64,7 +64,7 @@ export interface QueryParamsResponse {
  * Since: cosmos-sdk 0.46
  */
 export interface QueryModuleAccountsRequest {
-  $type: 'cosmos.auth.v1beta1.QueryModuleAccountsRequest';
+  $type: "cosmos.auth.v1beta1.QueryModuleAccountsRequest";
 }
 
 /**
@@ -73,19 +73,19 @@ export interface QueryModuleAccountsRequest {
  * Since: cosmos-sdk 0.46
  */
 export interface QueryModuleAccountsResponse {
-  $type: 'cosmos.auth.v1beta1.QueryModuleAccountsResponse';
+  $type: "cosmos.auth.v1beta1.QueryModuleAccountsResponse";
   accounts: Any[];
 }
 
 /** QueryModuleAccountByNameRequest is the request type for the Query/ModuleAccountByName RPC method. */
 export interface QueryModuleAccountByNameRequest {
-  $type: 'cosmos.auth.v1beta1.QueryModuleAccountByNameRequest';
+  $type: "cosmos.auth.v1beta1.QueryModuleAccountByNameRequest";
   name: string;
 }
 
 /** QueryModuleAccountByNameResponse is the response type for the Query/ModuleAccountByName RPC method. */
 export interface QueryModuleAccountByNameResponse {
-  $type: 'cosmos.auth.v1beta1.QueryModuleAccountByNameResponse';
+  $type: "cosmos.auth.v1beta1.QueryModuleAccountByNameResponse";
   account?: Any;
 }
 
@@ -95,7 +95,7 @@ export interface QueryModuleAccountByNameResponse {
  * Since: cosmos-sdk 0.46
  */
 export interface Bech32PrefixRequest {
-  $type: 'cosmos.auth.v1beta1.Bech32PrefixRequest';
+  $type: "cosmos.auth.v1beta1.Bech32PrefixRequest";
 }
 
 /**
@@ -104,7 +104,7 @@ export interface Bech32PrefixRequest {
  * Since: cosmos-sdk 0.46
  */
 export interface Bech32PrefixResponse {
-  $type: 'cosmos.auth.v1beta1.Bech32PrefixResponse';
+  $type: "cosmos.auth.v1beta1.Bech32PrefixResponse";
   bech32Prefix: string;
 }
 
@@ -114,7 +114,7 @@ export interface Bech32PrefixResponse {
  * Since: cosmos-sdk 0.46
  */
 export interface AddressBytesToStringRequest {
-  $type: 'cosmos.auth.v1beta1.AddressBytesToStringRequest';
+  $type: "cosmos.auth.v1beta1.AddressBytesToStringRequest";
   addressBytes: Uint8Array;
 }
 
@@ -124,7 +124,7 @@ export interface AddressBytesToStringRequest {
  * Since: cosmos-sdk 0.46
  */
 export interface AddressBytesToStringResponse {
-  $type: 'cosmos.auth.v1beta1.AddressBytesToStringResponse';
+  $type: "cosmos.auth.v1beta1.AddressBytesToStringResponse";
   addressString: string;
 }
 
@@ -134,7 +134,7 @@ export interface AddressBytesToStringResponse {
  * Since: cosmos-sdk 0.46
  */
 export interface AddressStringToBytesRequest {
-  $type: 'cosmos.auth.v1beta1.AddressStringToBytesRequest';
+  $type: "cosmos.auth.v1beta1.AddressStringToBytesRequest";
   addressString: string;
 }
 
@@ -144,7 +144,7 @@ export interface AddressStringToBytesRequest {
  * Since: cosmos-sdk 0.46
  */
 export interface AddressStringToBytesResponse {
-  $type: 'cosmos.auth.v1beta1.AddressStringToBytesResponse';
+  $type: "cosmos.auth.v1beta1.AddressStringToBytesResponse";
   addressBytes: Uint8Array;
 }
 
@@ -154,7 +154,7 @@ export interface AddressStringToBytesResponse {
  * Since: cosmos-sdk 0.46.2
  */
 export interface QueryAccountAddressByIDRequest {
-  $type: 'cosmos.auth.v1beta1.QueryAccountAddressByIDRequest';
+  $type: "cosmos.auth.v1beta1.QueryAccountAddressByIDRequest";
   /**
    * id is the account number of the address to be queried. This field
    * should have been an uint64 (like all account numbers), and will be
@@ -169,34 +169,25 @@ export interface QueryAccountAddressByIDRequest {
  * Since: cosmos-sdk 0.46.2
  */
 export interface QueryAccountAddressByIDResponse {
-  $type: 'cosmos.auth.v1beta1.QueryAccountAddressByIDResponse';
+  $type: "cosmos.auth.v1beta1.QueryAccountAddressByIDResponse";
   accountAddress: string;
 }
 
 function createBaseQueryAccountsRequest(): QueryAccountsRequest {
-  return {
-    $type: 'cosmos.auth.v1beta1.QueryAccountsRequest',
-    pagination: undefined,
-  };
+  return { $type: "cosmos.auth.v1beta1.QueryAccountsRequest", pagination: undefined };
 }
 
 export const QueryAccountsRequest = {
-  $type: 'cosmos.auth.v1beta1.QueryAccountsRequest' as const,
+  $type: "cosmos.auth.v1beta1.QueryAccountsRequest" as const,
 
-  encode(
-    message: QueryAccountsRequest,
-    writer: _m0.Writer = _m0.Writer.create(),
-  ): _m0.Writer {
+  encode(message: QueryAccountsRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.pagination !== undefined) {
       PageRequest.encode(message.pagination, writer.uint32(10).fork()).ldelim();
     }
     return writer;
   },
 
-  decode(
-    input: _m0.Reader | Uint8Array,
-    length?: number,
-  ): QueryAccountsRequest {
+  decode(input: _m0.Reader | Uint8Array, length?: number): QueryAccountsRequest {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryAccountsRequest();
@@ -217,29 +208,26 @@ export const QueryAccountsRequest = {
   fromJSON(object: any): QueryAccountsRequest {
     return {
       $type: QueryAccountsRequest.$type,
-      pagination: isSet(object.pagination)
-        ? PageRequest.fromJSON(object.pagination)
-        : undefined,
+      pagination: isSet(object.pagination) ? PageRequest.fromJSON(object.pagination) : undefined,
     };
   },
 
   toJSON(message: QueryAccountsRequest): unknown {
     const obj: any = {};
     message.pagination !== undefined &&
-      (obj.pagination = message.pagination
-        ? PageRequest.toJSON(message.pagination)
-        : undefined);
+      (obj.pagination = message.pagination ? PageRequest.toJSON(message.pagination) : undefined);
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<QueryAccountsRequest>, I>>(
-    object: I,
-  ): QueryAccountsRequest {
+  create(base?: DeepPartial<QueryAccountsRequest>): QueryAccountsRequest {
+    return QueryAccountsRequest.fromPartial(base ?? {});
+  },
+
+  fromPartial(object: DeepPartial<QueryAccountsRequest>): QueryAccountsRequest {
     const message = createBaseQueryAccountsRequest();
-    message.pagination =
-      object.pagination !== undefined && object.pagination !== null
-        ? PageRequest.fromPartial(object.pagination)
-        : undefined;
+    message.pagination = (object.pagination !== undefined && object.pagination !== null)
+      ? PageRequest.fromPartial(object.pagination)
+      : undefined;
     return message;
   },
 };
@@ -247,36 +235,23 @@ export const QueryAccountsRequest = {
 messageTypeRegistry.set(QueryAccountsRequest.$type, QueryAccountsRequest);
 
 function createBaseQueryAccountsResponse(): QueryAccountsResponse {
-  return {
-    $type: 'cosmos.auth.v1beta1.QueryAccountsResponse',
-    accounts: [],
-    pagination: undefined,
-  };
+  return { $type: "cosmos.auth.v1beta1.QueryAccountsResponse", accounts: [], pagination: undefined };
 }
 
 export const QueryAccountsResponse = {
-  $type: 'cosmos.auth.v1beta1.QueryAccountsResponse' as const,
+  $type: "cosmos.auth.v1beta1.QueryAccountsResponse" as const,
 
-  encode(
-    message: QueryAccountsResponse,
-    writer: _m0.Writer = _m0.Writer.create(),
-  ): _m0.Writer {
+  encode(message: QueryAccountsResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     for (const v of message.accounts) {
       Any.encode(v!, writer.uint32(10).fork()).ldelim();
     }
     if (message.pagination !== undefined) {
-      PageResponse.encode(
-        message.pagination,
-        writer.uint32(18).fork(),
-      ).ldelim();
+      PageResponse.encode(message.pagination, writer.uint32(18).fork()).ldelim();
     }
     return writer;
   },
 
-  decode(
-    input: _m0.Reader | Uint8Array,
-    length?: number,
-  ): QueryAccountsResponse {
+  decode(input: _m0.Reader | Uint8Array, length?: number): QueryAccountsResponse {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryAccountsResponse();
@@ -300,38 +275,33 @@ export const QueryAccountsResponse = {
   fromJSON(object: any): QueryAccountsResponse {
     return {
       $type: QueryAccountsResponse.$type,
-      accounts: Array.isArray(object?.accounts)
-        ? object.accounts.map((e: any) => Any.fromJSON(e))
-        : [],
-      pagination: isSet(object.pagination)
-        ? PageResponse.fromJSON(object.pagination)
-        : undefined,
+      accounts: Array.isArray(object?.accounts) ? object.accounts.map((e: any) => Any.fromJSON(e)) : [],
+      pagination: isSet(object.pagination) ? PageResponse.fromJSON(object.pagination) : undefined,
     };
   },
 
   toJSON(message: QueryAccountsResponse): unknown {
     const obj: any = {};
     if (message.accounts) {
-      obj.accounts = message.accounts.map(e => (e ? Any.toJSON(e) : undefined));
+      obj.accounts = message.accounts.map((e) => e ? Any.toJSON(e) : undefined);
     } else {
       obj.accounts = [];
     }
     message.pagination !== undefined &&
-      (obj.pagination = message.pagination
-        ? PageResponse.toJSON(message.pagination)
-        : undefined);
+      (obj.pagination = message.pagination ? PageResponse.toJSON(message.pagination) : undefined);
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<QueryAccountsResponse>, I>>(
-    object: I,
-  ): QueryAccountsResponse {
+  create(base?: DeepPartial<QueryAccountsResponse>): QueryAccountsResponse {
+    return QueryAccountsResponse.fromPartial(base ?? {});
+  },
+
+  fromPartial(object: DeepPartial<QueryAccountsResponse>): QueryAccountsResponse {
     const message = createBaseQueryAccountsResponse();
-    message.accounts = object.accounts?.map(e => Any.fromPartial(e)) || [];
-    message.pagination =
-      object.pagination !== undefined && object.pagination !== null
-        ? PageResponse.fromPartial(object.pagination)
-        : undefined;
+    message.accounts = object.accounts?.map((e) => Any.fromPartial(e)) || [];
+    message.pagination = (object.pagination !== undefined && object.pagination !== null)
+      ? PageResponse.fromPartial(object.pagination)
+      : undefined;
     return message;
   },
 };
@@ -339,17 +309,14 @@ export const QueryAccountsResponse = {
 messageTypeRegistry.set(QueryAccountsResponse.$type, QueryAccountsResponse);
 
 function createBaseQueryAccountRequest(): QueryAccountRequest {
-  return { $type: 'cosmos.auth.v1beta1.QueryAccountRequest', address: '' };
+  return { $type: "cosmos.auth.v1beta1.QueryAccountRequest", address: "" };
 }
 
 export const QueryAccountRequest = {
-  $type: 'cosmos.auth.v1beta1.QueryAccountRequest' as const,
+  $type: "cosmos.auth.v1beta1.QueryAccountRequest" as const,
 
-  encode(
-    message: QueryAccountRequest,
-    writer: _m0.Writer = _m0.Writer.create(),
-  ): _m0.Writer {
-    if (message.address !== '') {
+  encode(message: QueryAccountRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+    if (message.address !== "") {
       writer.uint32(10).string(message.address);
     }
     return writer;
@@ -374,10 +341,7 @@ export const QueryAccountRequest = {
   },
 
   fromJSON(object: any): QueryAccountRequest {
-    return {
-      $type: QueryAccountRequest.$type,
-      address: isSet(object.address) ? String(object.address) : '',
-    };
+    return { $type: QueryAccountRequest.$type, address: isSet(object.address) ? String(object.address) : "" };
   },
 
   toJSON(message: QueryAccountRequest): unknown {
@@ -386,11 +350,13 @@ export const QueryAccountRequest = {
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<QueryAccountRequest>, I>>(
-    object: I,
-  ): QueryAccountRequest {
+  create(base?: DeepPartial<QueryAccountRequest>): QueryAccountRequest {
+    return QueryAccountRequest.fromPartial(base ?? {});
+  },
+
+  fromPartial(object: DeepPartial<QueryAccountRequest>): QueryAccountRequest {
     const message = createBaseQueryAccountRequest();
-    message.address = object.address ?? '';
+    message.address = object.address ?? "";
     return message;
   },
 };
@@ -398,29 +364,20 @@ export const QueryAccountRequest = {
 messageTypeRegistry.set(QueryAccountRequest.$type, QueryAccountRequest);
 
 function createBaseQueryAccountResponse(): QueryAccountResponse {
-  return {
-    $type: 'cosmos.auth.v1beta1.QueryAccountResponse',
-    account: undefined,
-  };
+  return { $type: "cosmos.auth.v1beta1.QueryAccountResponse", account: undefined };
 }
 
 export const QueryAccountResponse = {
-  $type: 'cosmos.auth.v1beta1.QueryAccountResponse' as const,
+  $type: "cosmos.auth.v1beta1.QueryAccountResponse" as const,
 
-  encode(
-    message: QueryAccountResponse,
-    writer: _m0.Writer = _m0.Writer.create(),
-  ): _m0.Writer {
+  encode(message: QueryAccountResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.account !== undefined) {
       Any.encode(message.account, writer.uint32(10).fork()).ldelim();
     }
     return writer;
   },
 
-  decode(
-    input: _m0.Reader | Uint8Array,
-    length?: number,
-  ): QueryAccountResponse {
+  decode(input: _m0.Reader | Uint8Array, length?: number): QueryAccountResponse {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryAccountResponse();
@@ -447,19 +404,19 @@ export const QueryAccountResponse = {
 
   toJSON(message: QueryAccountResponse): unknown {
     const obj: any = {};
-    message.account !== undefined &&
-      (obj.account = message.account ? Any.toJSON(message.account) : undefined);
+    message.account !== undefined && (obj.account = message.account ? Any.toJSON(message.account) : undefined);
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<QueryAccountResponse>, I>>(
-    object: I,
-  ): QueryAccountResponse {
+  create(base?: DeepPartial<QueryAccountResponse>): QueryAccountResponse {
+    return QueryAccountResponse.fromPartial(base ?? {});
+  },
+
+  fromPartial(object: DeepPartial<QueryAccountResponse>): QueryAccountResponse {
     const message = createBaseQueryAccountResponse();
-    message.account =
-      object.account !== undefined && object.account !== null
-        ? Any.fromPartial(object.account)
-        : undefined;
+    message.account = (object.account !== undefined && object.account !== null)
+      ? Any.fromPartial(object.account)
+      : undefined;
     return message;
   },
 };
@@ -467,16 +424,13 @@ export const QueryAccountResponse = {
 messageTypeRegistry.set(QueryAccountResponse.$type, QueryAccountResponse);
 
 function createBaseQueryParamsRequest(): QueryParamsRequest {
-  return { $type: 'cosmos.auth.v1beta1.QueryParamsRequest' };
+  return { $type: "cosmos.auth.v1beta1.QueryParamsRequest" };
 }
 
 export const QueryParamsRequest = {
-  $type: 'cosmos.auth.v1beta1.QueryParamsRequest' as const,
+  $type: "cosmos.auth.v1beta1.QueryParamsRequest" as const,
 
-  encode(
-    _: QueryParamsRequest,
-    writer: _m0.Writer = _m0.Writer.create(),
-  ): _m0.Writer {
+  encode(_: QueryParamsRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     return writer;
   },
 
@@ -496,9 +450,7 @@ export const QueryParamsRequest = {
   },
 
   fromJSON(_: any): QueryParamsRequest {
-    return {
-      $type: QueryParamsRequest.$type,
-    };
+    return { $type: QueryParamsRequest.$type };
   },
 
   toJSON(_: QueryParamsRequest): unknown {
@@ -506,9 +458,11 @@ export const QueryParamsRequest = {
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<QueryParamsRequest>, I>>(
-    _: I,
-  ): QueryParamsRequest {
+  create(base?: DeepPartial<QueryParamsRequest>): QueryParamsRequest {
+    return QueryParamsRequest.fromPartial(base ?? {});
+  },
+
+  fromPartial(_: DeepPartial<QueryParamsRequest>): QueryParamsRequest {
     const message = createBaseQueryParamsRequest();
     return message;
   },
@@ -517,19 +471,13 @@ export const QueryParamsRequest = {
 messageTypeRegistry.set(QueryParamsRequest.$type, QueryParamsRequest);
 
 function createBaseQueryParamsResponse(): QueryParamsResponse {
-  return {
-    $type: 'cosmos.auth.v1beta1.QueryParamsResponse',
-    params: undefined,
-  };
+  return { $type: "cosmos.auth.v1beta1.QueryParamsResponse", params: undefined };
 }
 
 export const QueryParamsResponse = {
-  $type: 'cosmos.auth.v1beta1.QueryParamsResponse' as const,
+  $type: "cosmos.auth.v1beta1.QueryParamsResponse" as const,
 
-  encode(
-    message: QueryParamsResponse,
-    writer: _m0.Writer = _m0.Writer.create(),
-  ): _m0.Writer {
+  encode(message: QueryParamsResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.params !== undefined) {
       Params.encode(message.params, writer.uint32(10).fork()).ldelim();
     }
@@ -563,19 +511,19 @@ export const QueryParamsResponse = {
 
   toJSON(message: QueryParamsResponse): unknown {
     const obj: any = {};
-    message.params !== undefined &&
-      (obj.params = message.params ? Params.toJSON(message.params) : undefined);
+    message.params !== undefined && (obj.params = message.params ? Params.toJSON(message.params) : undefined);
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<QueryParamsResponse>, I>>(
-    object: I,
-  ): QueryParamsResponse {
+  create(base?: DeepPartial<QueryParamsResponse>): QueryParamsResponse {
+    return QueryParamsResponse.fromPartial(base ?? {});
+  },
+
+  fromPartial(object: DeepPartial<QueryParamsResponse>): QueryParamsResponse {
     const message = createBaseQueryParamsResponse();
-    message.params =
-      object.params !== undefined && object.params !== null
-        ? Params.fromPartial(object.params)
-        : undefined;
+    message.params = (object.params !== undefined && object.params !== null)
+      ? Params.fromPartial(object.params)
+      : undefined;
     return message;
   },
 };
@@ -583,23 +531,17 @@ export const QueryParamsResponse = {
 messageTypeRegistry.set(QueryParamsResponse.$type, QueryParamsResponse);
 
 function createBaseQueryModuleAccountsRequest(): QueryModuleAccountsRequest {
-  return { $type: 'cosmos.auth.v1beta1.QueryModuleAccountsRequest' };
+  return { $type: "cosmos.auth.v1beta1.QueryModuleAccountsRequest" };
 }
 
 export const QueryModuleAccountsRequest = {
-  $type: 'cosmos.auth.v1beta1.QueryModuleAccountsRequest' as const,
+  $type: "cosmos.auth.v1beta1.QueryModuleAccountsRequest" as const,
 
-  encode(
-    _: QueryModuleAccountsRequest,
-    writer: _m0.Writer = _m0.Writer.create(),
-  ): _m0.Writer {
+  encode(_: QueryModuleAccountsRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     return writer;
   },
 
-  decode(
-    input: _m0.Reader | Uint8Array,
-    length?: number,
-  ): QueryModuleAccountsRequest {
+  decode(input: _m0.Reader | Uint8Array, length?: number): QueryModuleAccountsRequest {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryModuleAccountsRequest();
@@ -615,9 +557,7 @@ export const QueryModuleAccountsRequest = {
   },
 
   fromJSON(_: any): QueryModuleAccountsRequest {
-    return {
-      $type: QueryModuleAccountsRequest.$type,
-    };
+    return { $type: QueryModuleAccountsRequest.$type };
   },
 
   toJSON(_: QueryModuleAccountsRequest): unknown {
@@ -625,43 +565,33 @@ export const QueryModuleAccountsRequest = {
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<QueryModuleAccountsRequest>, I>>(
-    _: I,
-  ): QueryModuleAccountsRequest {
+  create(base?: DeepPartial<QueryModuleAccountsRequest>): QueryModuleAccountsRequest {
+    return QueryModuleAccountsRequest.fromPartial(base ?? {});
+  },
+
+  fromPartial(_: DeepPartial<QueryModuleAccountsRequest>): QueryModuleAccountsRequest {
     const message = createBaseQueryModuleAccountsRequest();
     return message;
   },
 };
 
-messageTypeRegistry.set(
-  QueryModuleAccountsRequest.$type,
-  QueryModuleAccountsRequest,
-);
+messageTypeRegistry.set(QueryModuleAccountsRequest.$type, QueryModuleAccountsRequest);
 
 function createBaseQueryModuleAccountsResponse(): QueryModuleAccountsResponse {
-  return {
-    $type: 'cosmos.auth.v1beta1.QueryModuleAccountsResponse',
-    accounts: [],
-  };
+  return { $type: "cosmos.auth.v1beta1.QueryModuleAccountsResponse", accounts: [] };
 }
 
 export const QueryModuleAccountsResponse = {
-  $type: 'cosmos.auth.v1beta1.QueryModuleAccountsResponse' as const,
+  $type: "cosmos.auth.v1beta1.QueryModuleAccountsResponse" as const,
 
-  encode(
-    message: QueryModuleAccountsResponse,
-    writer: _m0.Writer = _m0.Writer.create(),
-  ): _m0.Writer {
+  encode(message: QueryModuleAccountsResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     for (const v of message.accounts) {
       Any.encode(v!, writer.uint32(10).fork()).ldelim();
     }
     return writer;
   },
 
-  decode(
-    input: _m0.Reader | Uint8Array,
-    length?: number,
-  ): QueryModuleAccountsResponse {
+  decode(input: _m0.Reader | Uint8Array, length?: number): QueryModuleAccountsResponse {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryModuleAccountsResponse();
@@ -682,60 +612,48 @@ export const QueryModuleAccountsResponse = {
   fromJSON(object: any): QueryModuleAccountsResponse {
     return {
       $type: QueryModuleAccountsResponse.$type,
-      accounts: Array.isArray(object?.accounts)
-        ? object.accounts.map((e: any) => Any.fromJSON(e))
-        : [],
+      accounts: Array.isArray(object?.accounts) ? object.accounts.map((e: any) => Any.fromJSON(e)) : [],
     };
   },
 
   toJSON(message: QueryModuleAccountsResponse): unknown {
     const obj: any = {};
     if (message.accounts) {
-      obj.accounts = message.accounts.map(e => (e ? Any.toJSON(e) : undefined));
+      obj.accounts = message.accounts.map((e) => e ? Any.toJSON(e) : undefined);
     } else {
       obj.accounts = [];
     }
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<QueryModuleAccountsResponse>, I>>(
-    object: I,
-  ): QueryModuleAccountsResponse {
+  create(base?: DeepPartial<QueryModuleAccountsResponse>): QueryModuleAccountsResponse {
+    return QueryModuleAccountsResponse.fromPartial(base ?? {});
+  },
+
+  fromPartial(object: DeepPartial<QueryModuleAccountsResponse>): QueryModuleAccountsResponse {
     const message = createBaseQueryModuleAccountsResponse();
-    message.accounts = object.accounts?.map(e => Any.fromPartial(e)) || [];
+    message.accounts = object.accounts?.map((e) => Any.fromPartial(e)) || [];
     return message;
   },
 };
 
-messageTypeRegistry.set(
-  QueryModuleAccountsResponse.$type,
-  QueryModuleAccountsResponse,
-);
+messageTypeRegistry.set(QueryModuleAccountsResponse.$type, QueryModuleAccountsResponse);
 
 function createBaseQueryModuleAccountByNameRequest(): QueryModuleAccountByNameRequest {
-  return {
-    $type: 'cosmos.auth.v1beta1.QueryModuleAccountByNameRequest',
-    name: '',
-  };
+  return { $type: "cosmos.auth.v1beta1.QueryModuleAccountByNameRequest", name: "" };
 }
 
 export const QueryModuleAccountByNameRequest = {
-  $type: 'cosmos.auth.v1beta1.QueryModuleAccountByNameRequest' as const,
+  $type: "cosmos.auth.v1beta1.QueryModuleAccountByNameRequest" as const,
 
-  encode(
-    message: QueryModuleAccountByNameRequest,
-    writer: _m0.Writer = _m0.Writer.create(),
-  ): _m0.Writer {
-    if (message.name !== '') {
+  encode(message: QueryModuleAccountByNameRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+    if (message.name !== "") {
       writer.uint32(10).string(message.name);
     }
     return writer;
   },
 
-  decode(
-    input: _m0.Reader | Uint8Array,
-    length?: number,
-  ): QueryModuleAccountByNameRequest {
+  decode(input: _m0.Reader | Uint8Array, length?: number): QueryModuleAccountByNameRequest {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryModuleAccountByNameRequest();
@@ -754,10 +672,7 @@ export const QueryModuleAccountByNameRequest = {
   },
 
   fromJSON(object: any): QueryModuleAccountByNameRequest {
-    return {
-      $type: QueryModuleAccountByNameRequest.$type,
-      name: isSet(object.name) ? String(object.name) : '',
-    };
+    return { $type: QueryModuleAccountByNameRequest.$type, name: isSet(object.name) ? String(object.name) : "" };
   },
 
   toJSON(message: QueryModuleAccountByNameRequest): unknown {
@@ -766,44 +681,34 @@ export const QueryModuleAccountByNameRequest = {
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<QueryModuleAccountByNameRequest>, I>>(
-    object: I,
-  ): QueryModuleAccountByNameRequest {
+  create(base?: DeepPartial<QueryModuleAccountByNameRequest>): QueryModuleAccountByNameRequest {
+    return QueryModuleAccountByNameRequest.fromPartial(base ?? {});
+  },
+
+  fromPartial(object: DeepPartial<QueryModuleAccountByNameRequest>): QueryModuleAccountByNameRequest {
     const message = createBaseQueryModuleAccountByNameRequest();
-    message.name = object.name ?? '';
+    message.name = object.name ?? "";
     return message;
   },
 };
 
-messageTypeRegistry.set(
-  QueryModuleAccountByNameRequest.$type,
-  QueryModuleAccountByNameRequest,
-);
+messageTypeRegistry.set(QueryModuleAccountByNameRequest.$type, QueryModuleAccountByNameRequest);
 
 function createBaseQueryModuleAccountByNameResponse(): QueryModuleAccountByNameResponse {
-  return {
-    $type: 'cosmos.auth.v1beta1.QueryModuleAccountByNameResponse',
-    account: undefined,
-  };
+  return { $type: "cosmos.auth.v1beta1.QueryModuleAccountByNameResponse", account: undefined };
 }
 
 export const QueryModuleAccountByNameResponse = {
-  $type: 'cosmos.auth.v1beta1.QueryModuleAccountByNameResponse' as const,
+  $type: "cosmos.auth.v1beta1.QueryModuleAccountByNameResponse" as const,
 
-  encode(
-    message: QueryModuleAccountByNameResponse,
-    writer: _m0.Writer = _m0.Writer.create(),
-  ): _m0.Writer {
+  encode(message: QueryModuleAccountByNameResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.account !== undefined) {
       Any.encode(message.account, writer.uint32(10).fork()).ldelim();
     }
     return writer;
   },
 
-  decode(
-    input: _m0.Reader | Uint8Array,
-    length?: number,
-  ): QueryModuleAccountByNameResponse {
+  decode(input: _m0.Reader | Uint8Array, length?: number): QueryModuleAccountByNameResponse {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryModuleAccountByNameResponse();
@@ -830,39 +735,33 @@ export const QueryModuleAccountByNameResponse = {
 
   toJSON(message: QueryModuleAccountByNameResponse): unknown {
     const obj: any = {};
-    message.account !== undefined &&
-      (obj.account = message.account ? Any.toJSON(message.account) : undefined);
+    message.account !== undefined && (obj.account = message.account ? Any.toJSON(message.account) : undefined);
     return obj;
   },
 
-  fromPartial<
-    I extends Exact<DeepPartial<QueryModuleAccountByNameResponse>, I>,
-  >(object: I): QueryModuleAccountByNameResponse {
+  create(base?: DeepPartial<QueryModuleAccountByNameResponse>): QueryModuleAccountByNameResponse {
+    return QueryModuleAccountByNameResponse.fromPartial(base ?? {});
+  },
+
+  fromPartial(object: DeepPartial<QueryModuleAccountByNameResponse>): QueryModuleAccountByNameResponse {
     const message = createBaseQueryModuleAccountByNameResponse();
-    message.account =
-      object.account !== undefined && object.account !== null
-        ? Any.fromPartial(object.account)
-        : undefined;
+    message.account = (object.account !== undefined && object.account !== null)
+      ? Any.fromPartial(object.account)
+      : undefined;
     return message;
   },
 };
 
-messageTypeRegistry.set(
-  QueryModuleAccountByNameResponse.$type,
-  QueryModuleAccountByNameResponse,
-);
+messageTypeRegistry.set(QueryModuleAccountByNameResponse.$type, QueryModuleAccountByNameResponse);
 
 function createBaseBech32PrefixRequest(): Bech32PrefixRequest {
-  return { $type: 'cosmos.auth.v1beta1.Bech32PrefixRequest' };
+  return { $type: "cosmos.auth.v1beta1.Bech32PrefixRequest" };
 }
 
 export const Bech32PrefixRequest = {
-  $type: 'cosmos.auth.v1beta1.Bech32PrefixRequest' as const,
+  $type: "cosmos.auth.v1beta1.Bech32PrefixRequest" as const,
 
-  encode(
-    _: Bech32PrefixRequest,
-    writer: _m0.Writer = _m0.Writer.create(),
-  ): _m0.Writer {
+  encode(_: Bech32PrefixRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     return writer;
   },
 
@@ -882,9 +781,7 @@ export const Bech32PrefixRequest = {
   },
 
   fromJSON(_: any): Bech32PrefixRequest {
-    return {
-      $type: Bech32PrefixRequest.$type,
-    };
+    return { $type: Bech32PrefixRequest.$type };
   },
 
   toJSON(_: Bech32PrefixRequest): unknown {
@@ -892,9 +789,11 @@ export const Bech32PrefixRequest = {
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<Bech32PrefixRequest>, I>>(
-    _: I,
-  ): Bech32PrefixRequest {
+  create(base?: DeepPartial<Bech32PrefixRequest>): Bech32PrefixRequest {
+    return Bech32PrefixRequest.fromPartial(base ?? {});
+  },
+
+  fromPartial(_: DeepPartial<Bech32PrefixRequest>): Bech32PrefixRequest {
     const message = createBaseBech32PrefixRequest();
     return message;
   },
@@ -903,29 +802,20 @@ export const Bech32PrefixRequest = {
 messageTypeRegistry.set(Bech32PrefixRequest.$type, Bech32PrefixRequest);
 
 function createBaseBech32PrefixResponse(): Bech32PrefixResponse {
-  return {
-    $type: 'cosmos.auth.v1beta1.Bech32PrefixResponse',
-    bech32Prefix: '',
-  };
+  return { $type: "cosmos.auth.v1beta1.Bech32PrefixResponse", bech32Prefix: "" };
 }
 
 export const Bech32PrefixResponse = {
-  $type: 'cosmos.auth.v1beta1.Bech32PrefixResponse' as const,
+  $type: "cosmos.auth.v1beta1.Bech32PrefixResponse" as const,
 
-  encode(
-    message: Bech32PrefixResponse,
-    writer: _m0.Writer = _m0.Writer.create(),
-  ): _m0.Writer {
-    if (message.bech32Prefix !== '') {
+  encode(message: Bech32PrefixResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+    if (message.bech32Prefix !== "") {
       writer.uint32(10).string(message.bech32Prefix);
     }
     return writer;
   },
 
-  decode(
-    input: _m0.Reader | Uint8Array,
-    length?: number,
-  ): Bech32PrefixResponse {
+  decode(input: _m0.Reader | Uint8Array, length?: number): Bech32PrefixResponse {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseBech32PrefixResponse();
@@ -946,24 +836,23 @@ export const Bech32PrefixResponse = {
   fromJSON(object: any): Bech32PrefixResponse {
     return {
       $type: Bech32PrefixResponse.$type,
-      bech32Prefix: isSet(object.bech32Prefix)
-        ? String(object.bech32Prefix)
-        : '',
+      bech32Prefix: isSet(object.bech32Prefix) ? String(object.bech32Prefix) : "",
     };
   },
 
   toJSON(message: Bech32PrefixResponse): unknown {
     const obj: any = {};
-    message.bech32Prefix !== undefined &&
-      (obj.bech32Prefix = message.bech32Prefix);
+    message.bech32Prefix !== undefined && (obj.bech32Prefix = message.bech32Prefix);
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<Bech32PrefixResponse>, I>>(
-    object: I,
-  ): Bech32PrefixResponse {
+  create(base?: DeepPartial<Bech32PrefixResponse>): Bech32PrefixResponse {
+    return Bech32PrefixResponse.fromPartial(base ?? {});
+  },
+
+  fromPartial(object: DeepPartial<Bech32PrefixResponse>): Bech32PrefixResponse {
     const message = createBaseBech32PrefixResponse();
-    message.bech32Prefix = object.bech32Prefix ?? '';
+    message.bech32Prefix = object.bech32Prefix ?? "";
     return message;
   },
 };
@@ -971,29 +860,20 @@ export const Bech32PrefixResponse = {
 messageTypeRegistry.set(Bech32PrefixResponse.$type, Bech32PrefixResponse);
 
 function createBaseAddressBytesToStringRequest(): AddressBytesToStringRequest {
-  return {
-    $type: 'cosmos.auth.v1beta1.AddressBytesToStringRequest',
-    addressBytes: new Uint8Array(),
-  };
+  return { $type: "cosmos.auth.v1beta1.AddressBytesToStringRequest", addressBytes: new Uint8Array() };
 }
 
 export const AddressBytesToStringRequest = {
-  $type: 'cosmos.auth.v1beta1.AddressBytesToStringRequest' as const,
+  $type: "cosmos.auth.v1beta1.AddressBytesToStringRequest" as const,
 
-  encode(
-    message: AddressBytesToStringRequest,
-    writer: _m0.Writer = _m0.Writer.create(),
-  ): _m0.Writer {
+  encode(message: AddressBytesToStringRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.addressBytes.length !== 0) {
       writer.uint32(10).bytes(message.addressBytes);
     }
     return writer;
   },
 
-  decode(
-    input: _m0.Reader | Uint8Array,
-    length?: number,
-  ): AddressBytesToStringRequest {
+  decode(input: _m0.Reader | Uint8Array, length?: number): AddressBytesToStringRequest {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseAddressBytesToStringRequest();
@@ -1014,9 +894,7 @@ export const AddressBytesToStringRequest = {
   fromJSON(object: any): AddressBytesToStringRequest {
     return {
       $type: AddressBytesToStringRequest.$type,
-      addressBytes: isSet(object.addressBytes)
-        ? bytesFromBase64(object.addressBytes)
-        : new Uint8Array(),
+      addressBytes: isSet(object.addressBytes) ? bytesFromBase64(object.addressBytes) : new Uint8Array(),
     };
   },
 
@@ -1024,51 +902,39 @@ export const AddressBytesToStringRequest = {
     const obj: any = {};
     message.addressBytes !== undefined &&
       (obj.addressBytes = base64FromBytes(
-        message.addressBytes !== undefined
-          ? message.addressBytes
-          : new Uint8Array(),
+        message.addressBytes !== undefined ? message.addressBytes : new Uint8Array(),
       ));
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<AddressBytesToStringRequest>, I>>(
-    object: I,
-  ): AddressBytesToStringRequest {
+  create(base?: DeepPartial<AddressBytesToStringRequest>): AddressBytesToStringRequest {
+    return AddressBytesToStringRequest.fromPartial(base ?? {});
+  },
+
+  fromPartial(object: DeepPartial<AddressBytesToStringRequest>): AddressBytesToStringRequest {
     const message = createBaseAddressBytesToStringRequest();
     message.addressBytes = object.addressBytes ?? new Uint8Array();
     return message;
   },
 };
 
-messageTypeRegistry.set(
-  AddressBytesToStringRequest.$type,
-  AddressBytesToStringRequest,
-);
+messageTypeRegistry.set(AddressBytesToStringRequest.$type, AddressBytesToStringRequest);
 
 function createBaseAddressBytesToStringResponse(): AddressBytesToStringResponse {
-  return {
-    $type: 'cosmos.auth.v1beta1.AddressBytesToStringResponse',
-    addressString: '',
-  };
+  return { $type: "cosmos.auth.v1beta1.AddressBytesToStringResponse", addressString: "" };
 }
 
 export const AddressBytesToStringResponse = {
-  $type: 'cosmos.auth.v1beta1.AddressBytesToStringResponse' as const,
+  $type: "cosmos.auth.v1beta1.AddressBytesToStringResponse" as const,
 
-  encode(
-    message: AddressBytesToStringResponse,
-    writer: _m0.Writer = _m0.Writer.create(),
-  ): _m0.Writer {
-    if (message.addressString !== '') {
+  encode(message: AddressBytesToStringResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+    if (message.addressString !== "") {
       writer.uint32(10).string(message.addressString);
     }
     return writer;
   },
 
-  decode(
-    input: _m0.Reader | Uint8Array,
-    length?: number,
-  ): AddressBytesToStringResponse {
+  decode(input: _m0.Reader | Uint8Array, length?: number): AddressBytesToStringResponse {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseAddressBytesToStringResponse();
@@ -1089,57 +955,44 @@ export const AddressBytesToStringResponse = {
   fromJSON(object: any): AddressBytesToStringResponse {
     return {
       $type: AddressBytesToStringResponse.$type,
-      addressString: isSet(object.addressString)
-        ? String(object.addressString)
-        : '',
+      addressString: isSet(object.addressString) ? String(object.addressString) : "",
     };
   },
 
   toJSON(message: AddressBytesToStringResponse): unknown {
     const obj: any = {};
-    message.addressString !== undefined &&
-      (obj.addressString = message.addressString);
+    message.addressString !== undefined && (obj.addressString = message.addressString);
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<AddressBytesToStringResponse>, I>>(
-    object: I,
-  ): AddressBytesToStringResponse {
+  create(base?: DeepPartial<AddressBytesToStringResponse>): AddressBytesToStringResponse {
+    return AddressBytesToStringResponse.fromPartial(base ?? {});
+  },
+
+  fromPartial(object: DeepPartial<AddressBytesToStringResponse>): AddressBytesToStringResponse {
     const message = createBaseAddressBytesToStringResponse();
-    message.addressString = object.addressString ?? '';
+    message.addressString = object.addressString ?? "";
     return message;
   },
 };
 
-messageTypeRegistry.set(
-  AddressBytesToStringResponse.$type,
-  AddressBytesToStringResponse,
-);
+messageTypeRegistry.set(AddressBytesToStringResponse.$type, AddressBytesToStringResponse);
 
 function createBaseAddressStringToBytesRequest(): AddressStringToBytesRequest {
-  return {
-    $type: 'cosmos.auth.v1beta1.AddressStringToBytesRequest',
-    addressString: '',
-  };
+  return { $type: "cosmos.auth.v1beta1.AddressStringToBytesRequest", addressString: "" };
 }
 
 export const AddressStringToBytesRequest = {
-  $type: 'cosmos.auth.v1beta1.AddressStringToBytesRequest' as const,
+  $type: "cosmos.auth.v1beta1.AddressStringToBytesRequest" as const,
 
-  encode(
-    message: AddressStringToBytesRequest,
-    writer: _m0.Writer = _m0.Writer.create(),
-  ): _m0.Writer {
-    if (message.addressString !== '') {
+  encode(message: AddressStringToBytesRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+    if (message.addressString !== "") {
       writer.uint32(10).string(message.addressString);
     }
     return writer;
   },
 
-  decode(
-    input: _m0.Reader | Uint8Array,
-    length?: number,
-  ): AddressStringToBytesRequest {
+  decode(input: _m0.Reader | Uint8Array, length?: number): AddressStringToBytesRequest {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseAddressStringToBytesRequest();
@@ -1160,57 +1013,44 @@ export const AddressStringToBytesRequest = {
   fromJSON(object: any): AddressStringToBytesRequest {
     return {
       $type: AddressStringToBytesRequest.$type,
-      addressString: isSet(object.addressString)
-        ? String(object.addressString)
-        : '',
+      addressString: isSet(object.addressString) ? String(object.addressString) : "",
     };
   },
 
   toJSON(message: AddressStringToBytesRequest): unknown {
     const obj: any = {};
-    message.addressString !== undefined &&
-      (obj.addressString = message.addressString);
+    message.addressString !== undefined && (obj.addressString = message.addressString);
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<AddressStringToBytesRequest>, I>>(
-    object: I,
-  ): AddressStringToBytesRequest {
+  create(base?: DeepPartial<AddressStringToBytesRequest>): AddressStringToBytesRequest {
+    return AddressStringToBytesRequest.fromPartial(base ?? {});
+  },
+
+  fromPartial(object: DeepPartial<AddressStringToBytesRequest>): AddressStringToBytesRequest {
     const message = createBaseAddressStringToBytesRequest();
-    message.addressString = object.addressString ?? '';
+    message.addressString = object.addressString ?? "";
     return message;
   },
 };
 
-messageTypeRegistry.set(
-  AddressStringToBytesRequest.$type,
-  AddressStringToBytesRequest,
-);
+messageTypeRegistry.set(AddressStringToBytesRequest.$type, AddressStringToBytesRequest);
 
 function createBaseAddressStringToBytesResponse(): AddressStringToBytesResponse {
-  return {
-    $type: 'cosmos.auth.v1beta1.AddressStringToBytesResponse',
-    addressBytes: new Uint8Array(),
-  };
+  return { $type: "cosmos.auth.v1beta1.AddressStringToBytesResponse", addressBytes: new Uint8Array() };
 }
 
 export const AddressStringToBytesResponse = {
-  $type: 'cosmos.auth.v1beta1.AddressStringToBytesResponse' as const,
+  $type: "cosmos.auth.v1beta1.AddressStringToBytesResponse" as const,
 
-  encode(
-    message: AddressStringToBytesResponse,
-    writer: _m0.Writer = _m0.Writer.create(),
-  ): _m0.Writer {
+  encode(message: AddressStringToBytesResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.addressBytes.length !== 0) {
       writer.uint32(10).bytes(message.addressBytes);
     }
     return writer;
   },
 
-  decode(
-    input: _m0.Reader | Uint8Array,
-    length?: number,
-  ): AddressStringToBytesResponse {
+  decode(input: _m0.Reader | Uint8Array, length?: number): AddressStringToBytesResponse {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseAddressStringToBytesResponse();
@@ -1231,9 +1071,7 @@ export const AddressStringToBytesResponse = {
   fromJSON(object: any): AddressStringToBytesResponse {
     return {
       $type: AddressStringToBytesResponse.$type,
-      addressBytes: isSet(object.addressBytes)
-        ? bytesFromBase64(object.addressBytes)
-        : new Uint8Array(),
+      addressBytes: isSet(object.addressBytes) ? bytesFromBase64(object.addressBytes) : new Uint8Array(),
     };
   },
 
@@ -1241,51 +1079,39 @@ export const AddressStringToBytesResponse = {
     const obj: any = {};
     message.addressBytes !== undefined &&
       (obj.addressBytes = base64FromBytes(
-        message.addressBytes !== undefined
-          ? message.addressBytes
-          : new Uint8Array(),
+        message.addressBytes !== undefined ? message.addressBytes : new Uint8Array(),
       ));
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<AddressStringToBytesResponse>, I>>(
-    object: I,
-  ): AddressStringToBytesResponse {
+  create(base?: DeepPartial<AddressStringToBytesResponse>): AddressStringToBytesResponse {
+    return AddressStringToBytesResponse.fromPartial(base ?? {});
+  },
+
+  fromPartial(object: DeepPartial<AddressStringToBytesResponse>): AddressStringToBytesResponse {
     const message = createBaseAddressStringToBytesResponse();
     message.addressBytes = object.addressBytes ?? new Uint8Array();
     return message;
   },
 };
 
-messageTypeRegistry.set(
-  AddressStringToBytesResponse.$type,
-  AddressStringToBytesResponse,
-);
+messageTypeRegistry.set(AddressStringToBytesResponse.$type, AddressStringToBytesResponse);
 
 function createBaseQueryAccountAddressByIDRequest(): QueryAccountAddressByIDRequest {
-  return {
-    $type: 'cosmos.auth.v1beta1.QueryAccountAddressByIDRequest',
-    id: Long.ZERO,
-  };
+  return { $type: "cosmos.auth.v1beta1.QueryAccountAddressByIDRequest", id: Long.ZERO };
 }
 
 export const QueryAccountAddressByIDRequest = {
-  $type: 'cosmos.auth.v1beta1.QueryAccountAddressByIDRequest' as const,
+  $type: "cosmos.auth.v1beta1.QueryAccountAddressByIDRequest" as const,
 
-  encode(
-    message: QueryAccountAddressByIDRequest,
-    writer: _m0.Writer = _m0.Writer.create(),
-  ): _m0.Writer {
+  encode(message: QueryAccountAddressByIDRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (!message.id.isZero()) {
       writer.uint32(8).int64(message.id);
     }
     return writer;
   },
 
-  decode(
-    input: _m0.Reader | Uint8Array,
-    length?: number,
-  ): QueryAccountAddressByIDRequest {
+  decode(input: _m0.Reader | Uint8Array, length?: number): QueryAccountAddressByIDRequest {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryAccountAddressByIDRequest();
@@ -1306,7 +1132,7 @@ export const QueryAccountAddressByIDRequest = {
   fromJSON(object: any): QueryAccountAddressByIDRequest {
     return {
       $type: QueryAccountAddressByIDRequest.$type,
-      id: isSet(object.id) ? Long.fromString(object.id) : Long.ZERO,
+      id: isSet(object.id) ? Long.fromValue(object.id) : Long.ZERO,
     };
   },
 
@@ -1316,47 +1142,34 @@ export const QueryAccountAddressByIDRequest = {
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<QueryAccountAddressByIDRequest>, I>>(
-    object: I,
-  ): QueryAccountAddressByIDRequest {
+  create(base?: DeepPartial<QueryAccountAddressByIDRequest>): QueryAccountAddressByIDRequest {
+    return QueryAccountAddressByIDRequest.fromPartial(base ?? {});
+  },
+
+  fromPartial(object: DeepPartial<QueryAccountAddressByIDRequest>): QueryAccountAddressByIDRequest {
     const message = createBaseQueryAccountAddressByIDRequest();
-    message.id =
-      object.id !== undefined && object.id !== null
-        ? Long.fromValue(object.id)
-        : Long.ZERO;
+    message.id = (object.id !== undefined && object.id !== null) ? Long.fromValue(object.id) : Long.ZERO;
     return message;
   },
 };
 
-messageTypeRegistry.set(
-  QueryAccountAddressByIDRequest.$type,
-  QueryAccountAddressByIDRequest,
-);
+messageTypeRegistry.set(QueryAccountAddressByIDRequest.$type, QueryAccountAddressByIDRequest);
 
 function createBaseQueryAccountAddressByIDResponse(): QueryAccountAddressByIDResponse {
-  return {
-    $type: 'cosmos.auth.v1beta1.QueryAccountAddressByIDResponse',
-    accountAddress: '',
-  };
+  return { $type: "cosmos.auth.v1beta1.QueryAccountAddressByIDResponse", accountAddress: "" };
 }
 
 export const QueryAccountAddressByIDResponse = {
-  $type: 'cosmos.auth.v1beta1.QueryAccountAddressByIDResponse' as const,
+  $type: "cosmos.auth.v1beta1.QueryAccountAddressByIDResponse" as const,
 
-  encode(
-    message: QueryAccountAddressByIDResponse,
-    writer: _m0.Writer = _m0.Writer.create(),
-  ): _m0.Writer {
-    if (message.accountAddress !== '') {
+  encode(message: QueryAccountAddressByIDResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+    if (message.accountAddress !== "") {
       writer.uint32(10).string(message.accountAddress);
     }
     return writer;
   },
 
-  decode(
-    input: _m0.Reader | Uint8Array,
-    length?: number,
-  ): QueryAccountAddressByIDResponse {
+  decode(input: _m0.Reader | Uint8Array, length?: number): QueryAccountAddressByIDResponse {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryAccountAddressByIDResponse();
@@ -1377,32 +1190,28 @@ export const QueryAccountAddressByIDResponse = {
   fromJSON(object: any): QueryAccountAddressByIDResponse {
     return {
       $type: QueryAccountAddressByIDResponse.$type,
-      accountAddress: isSet(object.accountAddress)
-        ? String(object.accountAddress)
-        : '',
+      accountAddress: isSet(object.accountAddress) ? String(object.accountAddress) : "",
     };
   },
 
   toJSON(message: QueryAccountAddressByIDResponse): unknown {
     const obj: any = {};
-    message.accountAddress !== undefined &&
-      (obj.accountAddress = message.accountAddress);
+    message.accountAddress !== undefined && (obj.accountAddress = message.accountAddress);
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<QueryAccountAddressByIDResponse>, I>>(
-    object: I,
-  ): QueryAccountAddressByIDResponse {
+  create(base?: DeepPartial<QueryAccountAddressByIDResponse>): QueryAccountAddressByIDResponse {
+    return QueryAccountAddressByIDResponse.fromPartial(base ?? {});
+  },
+
+  fromPartial(object: DeepPartial<QueryAccountAddressByIDResponse>): QueryAccountAddressByIDResponse {
     const message = createBaseQueryAccountAddressByIDResponse();
-    message.accountAddress = object.accountAddress ?? '';
+    message.accountAddress = object.accountAddress ?? "";
     return message;
   },
 };
 
-messageTypeRegistry.set(
-  QueryAccountAddressByIDResponse.$type,
-  QueryAccountAddressByIDResponse,
-);
+messageTypeRegistry.set(QueryAccountAddressByIDResponse.$type, QueryAccountAddressByIDResponse);
 
 /** Query defines the gRPC querier service. */
 export interface Query {
@@ -1411,66 +1220,50 @@ export interface Query {
    *
    * Since: cosmos-sdk 0.43
    */
-  Accounts(
-    request: DeepPartial<QueryAccountsRequest>,
-  ): Promise<QueryAccountsResponse>;
+  Accounts(request: DeepPartial<QueryAccountsRequest>): Promise<QueryAccountsResponse>;
   /** Account returns account details based on address. */
-  Account(
-    request: DeepPartial<QueryAccountRequest>,
-  ): Promise<QueryAccountResponse>;
+  Account(request: DeepPartial<QueryAccountRequest>): Promise<QueryAccountResponse>;
   /**
    * AccountAddressByID returns account address based on account number.
    *
    * Since: cosmos-sdk 0.46.2
    */
-  AccountAddressByID(
-    request: DeepPartial<QueryAccountAddressByIDRequest>,
-  ): Promise<QueryAccountAddressByIDResponse>;
+  AccountAddressByID(request: DeepPartial<QueryAccountAddressByIDRequest>): Promise<QueryAccountAddressByIDResponse>;
   /** Params queries all parameters. */
-  Params(
-    request: DeepPartial<QueryParamsRequest>,
-  ): Promise<QueryParamsResponse>;
+  Params(request: DeepPartial<QueryParamsRequest>): Promise<QueryParamsResponse>;
   /**
    * ModuleAccounts returns all the existing module accounts.
    *
    * Since: cosmos-sdk 0.46
    */
-  ModuleAccounts(
-    request: DeepPartial<QueryModuleAccountsRequest>,
-  ): Promise<QueryModuleAccountsResponse>;
+  ModuleAccounts(request: DeepPartial<QueryModuleAccountsRequest>): Promise<QueryModuleAccountsResponse>;
   /** ModuleAccountByName returns the module account info by module name */
-  ModuleAccountByName(
-    request: DeepPartial<QueryModuleAccountByNameRequest>,
-  ): Promise<QueryModuleAccountByNameResponse>;
+  ModuleAccountByName(request: DeepPartial<QueryModuleAccountByNameRequest>): Promise<QueryModuleAccountByNameResponse>;
   /**
    * Bech32Prefix queries bech32Prefix
    *
    * Since: cosmos-sdk 0.46
    */
-  Bech32Prefix(
-    request: DeepPartial<Bech32PrefixRequest>,
-  ): Promise<Bech32PrefixResponse>;
+  Bech32Prefix(request: DeepPartial<Bech32PrefixRequest>): Promise<Bech32PrefixResponse>;
   /**
    * AddressBytesToString converts Account Address bytes to string
    *
    * Since: cosmos-sdk 0.46
    */
-  AddressBytesToString(
-    request: DeepPartial<AddressBytesToStringRequest>,
-  ): Promise<AddressBytesToStringResponse>;
+  AddressBytesToString(request: DeepPartial<AddressBytesToStringRequest>): Promise<AddressBytesToStringResponse>;
   /**
    * AddressStringToBytes converts Address string to bytes
    *
    * Since: cosmos-sdk 0.46
    */
-  AddressStringToBytes(
-    request: DeepPartial<AddressStringToBytesRequest>,
-  ): Promise<AddressStringToBytesResponse>;
+  AddressStringToBytes(request: DeepPartial<AddressStringToBytesRequest>): Promise<AddressStringToBytesResponse>;
 }
 
 export class QueryClientImpl implements Query {
   private readonly rpc: Rpc;
-  constructor(rpc: Rpc) {
+  private readonly service: string;
+  constructor(rpc: Rpc, opts?: { service?: string }) {
+    this.service = opts?.service || "cosmos.auth.v1beta1.Query";
     this.rpc = rpc;
     this.Accounts = this.Accounts.bind(this);
     this.Account = this.Account.bind(this);
@@ -1482,79 +1275,39 @@ export class QueryClientImpl implements Query {
     this.AddressBytesToString = this.AddressBytesToString.bind(this);
     this.AddressStringToBytes = this.AddressStringToBytes.bind(this);
   }
-  Accounts(
-    request: DeepPartial<QueryAccountsRequest>,
-  ): Promise<QueryAccountsResponse> {
+  Accounts(request: DeepPartial<QueryAccountsRequest>): Promise<QueryAccountsResponse> {
     const fromPartial = QueryAccountsRequest.fromPartial(request);
     const data = QueryAccountsRequest.encode(fromPartial).finish();
-    const promise = this.rpc.request(
-      'cosmos.auth.v1beta1.Query',
-      'Accounts',
-      data,
-    );
-    return promise.then(data =>
-      QueryAccountsResponse.decode(new _m0.Reader(data)),
-    );
+    const promise = this.rpc.request(this.service, "Accounts", data);
+    return promise.then((data) => QueryAccountsResponse.decode(new _m0.Reader(data)));
   }
 
-  Account(
-    request: DeepPartial<QueryAccountRequest>,
-  ): Promise<QueryAccountResponse> {
+  Account(request: DeepPartial<QueryAccountRequest>): Promise<QueryAccountResponse> {
     const fromPartial = QueryAccountRequest.fromPartial(request);
     const data = QueryAccountRequest.encode(fromPartial).finish();
-    const promise = this.rpc.request(
-      'cosmos.auth.v1beta1.Query',
-      'Account',
-      data,
-    );
-    return promise.then(data =>
-      QueryAccountResponse.decode(new _m0.Reader(data)),
-    );
+    const promise = this.rpc.request(this.service, "Account", data);
+    return promise.then((data) => QueryAccountResponse.decode(new _m0.Reader(data)));
   }
 
-  AccountAddressByID(
-    request: DeepPartial<QueryAccountAddressByIDRequest>,
-  ): Promise<QueryAccountAddressByIDResponse> {
+  AccountAddressByID(request: DeepPartial<QueryAccountAddressByIDRequest>): Promise<QueryAccountAddressByIDResponse> {
     const fromPartial = QueryAccountAddressByIDRequest.fromPartial(request);
     const data = QueryAccountAddressByIDRequest.encode(fromPartial).finish();
-    const promise = this.rpc.request(
-      'cosmos.auth.v1beta1.Query',
-      'AccountAddressByID',
-      data,
-    );
-    return promise.then(data =>
-      QueryAccountAddressByIDResponse.decode(new _m0.Reader(data)),
-    );
+    const promise = this.rpc.request(this.service, "AccountAddressByID", data);
+    return promise.then((data) => QueryAccountAddressByIDResponse.decode(new _m0.Reader(data)));
   }
 
-  Params(
-    request: DeepPartial<QueryParamsRequest>,
-  ): Promise<QueryParamsResponse> {
+  Params(request: DeepPartial<QueryParamsRequest>): Promise<QueryParamsResponse> {
     const fromPartial = QueryParamsRequest.fromPartial(request);
     const data = QueryParamsRequest.encode(fromPartial).finish();
-    const promise = this.rpc.request(
-      'cosmos.auth.v1beta1.Query',
-      'Params',
-      data,
-    );
-    return promise.then(data =>
-      QueryParamsResponse.decode(new _m0.Reader(data)),
-    );
+    const promise = this.rpc.request(this.service, "Params", data);
+    return promise.then((data) => QueryParamsResponse.decode(new _m0.Reader(data)));
   }
 
-  ModuleAccounts(
-    request: DeepPartial<QueryModuleAccountsRequest>,
-  ): Promise<QueryModuleAccountsResponse> {
+  ModuleAccounts(request: DeepPartial<QueryModuleAccountsRequest>): Promise<QueryModuleAccountsResponse> {
     const fromPartial = QueryModuleAccountsRequest.fromPartial(request);
     const data = QueryModuleAccountsRequest.encode(fromPartial).finish();
-    const promise = this.rpc.request(
-      'cosmos.auth.v1beta1.Query',
-      'ModuleAccounts',
-      data,
-    );
-    return promise.then(data =>
-      QueryModuleAccountsResponse.decode(new _m0.Reader(data)),
-    );
+    const promise = this.rpc.request(this.service, "ModuleAccounts", data);
+    return promise.then((data) => QueryModuleAccountsResponse.decode(new _m0.Reader(data)));
   }
 
   ModuleAccountByName(
@@ -1562,132 +1315,87 @@ export class QueryClientImpl implements Query {
   ): Promise<QueryModuleAccountByNameResponse> {
     const fromPartial = QueryModuleAccountByNameRequest.fromPartial(request);
     const data = QueryModuleAccountByNameRequest.encode(fromPartial).finish();
-    const promise = this.rpc.request(
-      'cosmos.auth.v1beta1.Query',
-      'ModuleAccountByName',
-      data,
-    );
-    return promise.then(data =>
-      QueryModuleAccountByNameResponse.decode(new _m0.Reader(data)),
-    );
+    const promise = this.rpc.request(this.service, "ModuleAccountByName", data);
+    return promise.then((data) => QueryModuleAccountByNameResponse.decode(new _m0.Reader(data)));
   }
 
-  Bech32Prefix(
-    request: DeepPartial<Bech32PrefixRequest>,
-  ): Promise<Bech32PrefixResponse> {
+  Bech32Prefix(request: DeepPartial<Bech32PrefixRequest>): Promise<Bech32PrefixResponse> {
     const fromPartial = Bech32PrefixRequest.fromPartial(request);
     const data = Bech32PrefixRequest.encode(fromPartial).finish();
-    const promise = this.rpc.request(
-      'cosmos.auth.v1beta1.Query',
-      'Bech32Prefix',
-      data,
-    );
-    return promise.then(data =>
-      Bech32PrefixResponse.decode(new _m0.Reader(data)),
-    );
+    const promise = this.rpc.request(this.service, "Bech32Prefix", data);
+    return promise.then((data) => Bech32PrefixResponse.decode(new _m0.Reader(data)));
   }
 
-  AddressBytesToString(
-    request: DeepPartial<AddressBytesToStringRequest>,
-  ): Promise<AddressBytesToStringResponse> {
+  AddressBytesToString(request: DeepPartial<AddressBytesToStringRequest>): Promise<AddressBytesToStringResponse> {
     const fromPartial = AddressBytesToStringRequest.fromPartial(request);
     const data = AddressBytesToStringRequest.encode(fromPartial).finish();
-    const promise = this.rpc.request(
-      'cosmos.auth.v1beta1.Query',
-      'AddressBytesToString',
-      data,
-    );
-    return promise.then(data =>
-      AddressBytesToStringResponse.decode(new _m0.Reader(data)),
-    );
+    const promise = this.rpc.request(this.service, "AddressBytesToString", data);
+    return promise.then((data) => AddressBytesToStringResponse.decode(new _m0.Reader(data)));
   }
 
-  AddressStringToBytes(
-    request: DeepPartial<AddressStringToBytesRequest>,
-  ): Promise<AddressStringToBytesResponse> {
+  AddressStringToBytes(request: DeepPartial<AddressStringToBytesRequest>): Promise<AddressStringToBytesResponse> {
     const fromPartial = AddressStringToBytesRequest.fromPartial(request);
     const data = AddressStringToBytesRequest.encode(fromPartial).finish();
-    const promise = this.rpc.request(
-      'cosmos.auth.v1beta1.Query',
-      'AddressStringToBytes',
-      data,
-    );
-    return promise.then(data =>
-      AddressStringToBytesResponse.decode(new _m0.Reader(data)),
-    );
+    const promise = this.rpc.request(this.service, "AddressStringToBytes", data);
+    return promise.then((data) => AddressStringToBytesResponse.decode(new _m0.Reader(data)));
   }
 }
 
 interface Rpc {
-  request(
-    service: string,
-    method: string,
-    data: Uint8Array,
-  ): Promise<Uint8Array>;
+  request(service: string, method: string, data: Uint8Array): Promise<Uint8Array>;
 }
 
 declare var self: any | undefined;
 declare var window: any | undefined;
 declare var global: any | undefined;
-var globalThis: any = (() => {
-  if (typeof globalThis !== 'undefined') return globalThis;
-  if (typeof self !== 'undefined') return self;
-  if (typeof window !== 'undefined') return window;
-  if (typeof global !== 'undefined') return global;
-  throw 'Unable to locate global object';
+var tsProtoGlobalThis: any = (() => {
+  if (typeof globalThis !== "undefined") {
+    return globalThis;
+  }
+  if (typeof self !== "undefined") {
+    return self;
+  }
+  if (typeof window !== "undefined") {
+    return window;
+  }
+  if (typeof global !== "undefined") {
+    return global;
+  }
+  throw "Unable to locate global object";
 })();
 
-const atob: (b64: string) => string =
-  globalThis.atob ||
-  (b64 => globalThis.Buffer.from(b64, 'base64').toString('binary'));
 function bytesFromBase64(b64: string): Uint8Array {
-  const bin = atob(b64);
-  const arr = new Uint8Array(bin.length);
-  for (let i = 0; i < bin.length; ++i) {
-    arr[i] = bin.charCodeAt(i);
+  if (tsProtoGlobalThis.Buffer) {
+    return Uint8Array.from(tsProtoGlobalThis.Buffer.from(b64, "base64"));
+  } else {
+    const bin = tsProtoGlobalThis.atob(b64);
+    const arr = new Uint8Array(bin.length);
+    for (let i = 0; i < bin.length; ++i) {
+      arr[i] = bin.charCodeAt(i);
+    }
+    return arr;
   }
-  return arr;
 }
 
-const btoa: (bin: string) => string =
-  globalThis.btoa ||
-  (bin => globalThis.Buffer.from(bin, 'binary').toString('base64'));
 function base64FromBytes(arr: Uint8Array): string {
-  const bin: string[] = [];
-  for (const byte of arr) {
-    bin.push(String.fromCharCode(byte));
+  if (tsProtoGlobalThis.Buffer) {
+    return tsProtoGlobalThis.Buffer.from(arr).toString("base64");
+  } else {
+    const bin: string[] = [];
+    arr.forEach((byte) => {
+      bin.push(String.fromCharCode(byte));
+    });
+    return tsProtoGlobalThis.btoa(bin.join(""));
   }
-  return btoa(bin.join(''));
 }
 
-type Builtin =
-  | Date
-  | Function
-  | Uint8Array
-  | string
-  | number
-  | boolean
-  | undefined;
+type Builtin = Date | Function | Uint8Array | string | number | boolean | undefined;
 
-export type DeepPartial<T> = T extends Builtin
-  ? T
-  : T extends Long
-  ? string | number | Long
-  : T extends Array<infer U>
-  ? Array<DeepPartial<U>>
-  : T extends ReadonlyArray<infer U>
-  ? ReadonlyArray<DeepPartial<U>>
-  : T extends {}
-  ? { [K in Exclude<keyof T, '$type'>]?: DeepPartial<T[K]> }
+export type DeepPartial<T> = T extends Builtin ? T
+  : T extends Long ? string | number | Long : T extends Array<infer U> ? Array<DeepPartial<U>>
+  : T extends ReadonlyArray<infer U> ? ReadonlyArray<DeepPartial<U>>
+  : T extends {} ? { [K in Exclude<keyof T, "$type">]?: DeepPartial<T[K]> }
   : Partial<T>;
-
-type KeysOfUnion<T> = T extends T ? keyof T : never;
-export type Exact<P, I extends P> = P extends Builtin
-  ? P
-  : P & { [K in keyof P]: Exact<P[K], I[K]> } & Record<
-        Exclude<keyof I, KeysOfUnion<P> | '$type'>,
-        never
-      >;
 
 if (_m0.util.Long !== Long) {
   _m0.util.Long = Long as any;

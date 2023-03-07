@@ -1,18 +1,18 @@
 /* eslint-disable */
-import { messageTypeRegistry } from '../../../typeRegistry';
-import Long from 'long';
-import _m0 from 'protobufjs/minimal';
-import { CreditType } from './state';
-import { Coin } from '../../../cosmos/base/v1beta1/coin';
+import Long from "long";
+import _m0 from "protobufjs/minimal";
+import { Coin } from "../../../cosmos/base/v1beta1/coin";
+import { messageTypeRegistry } from "../../../typeRegistry";
+import { CreditType } from "./state";
 
-export const protobufPackage = 'regen.ecocredit.v1';
+export const protobufPackage = "regen.ecocredit.v1";
 
 /**
  * Params defines the updatable global parameters of the ecocredit module for
  * use with the x/params module.
  */
 export interface Params {
-  $type: 'regen.ecocredit.v1.Params';
+  $type: "regen.ecocredit.v1.Params";
   /**
    * credit_class_fee is a list of credit class creation fees accepted when
    * creating a credit class. Any fee listed is accepted and charged to the
@@ -56,7 +56,7 @@ export interface Params {
 
 /** Credits represents a simple structure for credits. */
 export interface Credits {
-  $type: 'regen.ecocredit.v1.Credits';
+  $type: "regen.ecocredit.v1.Credits";
   /** batch_denom is the denom of the credit batch. */
   batchDenom: string;
   /** amount is the amount of credits. */
@@ -65,7 +65,7 @@ export interface Credits {
 
 /** BatchIssuance represents a simple structure for a credit batch issuance. */
 export interface BatchIssuance {
-  $type: 'regen.ecocredit.v1.BatchIssuance';
+  $type: "regen.ecocredit.v1.BatchIssuance";
   /** recipient is the address of the account receiving the issued credits. */
   recipient: string;
   /**
@@ -106,7 +106,7 @@ export interface BatchIssuance {
  * the minting of credits.
  */
 export interface OriginTx {
-  $type: 'regen.ecocredit.v1.OriginTx';
+  $type: "regen.ecocredit.v1.OriginTx";
   /**
    * id is the transaction ID of an originating transaction or operation based
    * on a type (i.e. transaction ID, serial number).
@@ -138,7 +138,7 @@ export interface OriginTx {
  * removed in the next version. See MsgAddCreditType.
  */
 export interface CreditTypeProposal {
-  $type: 'regen.ecocredit.v1.CreditTypeProposal';
+  $type: "regen.ecocredit.v1.CreditTypeProposal";
   /** title is the title of the proposal. */
   title: string;
   /** description is the description of the proposal. */
@@ -159,7 +159,7 @@ export interface CreditTypeProposal {
  * queries for params but will also be removed in the next version.
  */
 export interface AllowedDenom {
-  $type: 'regen.ecocredit.v1.AllowedDenom';
+  $type: "regen.ecocredit.v1.AllowedDenom";
   /** denom is the bank denom to allow (ex. ibc/GLKHDSG423SGS) */
   bankDenom: string;
   /**
@@ -177,7 +177,7 @@ export interface AllowedDenom {
 
 function createBaseParams(): Params {
   return {
-    $type: 'regen.ecocredit.v1.Params',
+    $type: "regen.ecocredit.v1.Params",
     creditClassFee: [],
     basketFee: [],
     allowedClassCreators: [],
@@ -188,12 +188,9 @@ function createBaseParams(): Params {
 }
 
 export const Params = {
-  $type: 'regen.ecocredit.v1.Params' as const,
+  $type: "regen.ecocredit.v1.Params" as const,
 
-  encode(
-    message: Params,
-    writer: _m0.Writer = _m0.Writer.create(),
-  ): _m0.Writer {
+  encode(message: Params, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     for (const v of message.creditClassFee) {
       Coin.encode(v!, writer.uint32(10).fork()).ldelim();
     }
@@ -235,9 +232,7 @@ export const Params = {
           message.allowlistEnabled = reader.bool();
           break;
         case 5:
-          message.allowedDenoms.push(
-            AllowedDenom.decode(reader, reader.uint32()),
-          );
+          message.allowedDenoms.push(AllowedDenom.decode(reader, reader.uint32()));
           break;
         case 6:
           message.allowedBridgeChains.push(reader.string());
@@ -256,15 +251,11 @@ export const Params = {
       creditClassFee: Array.isArray(object?.creditClassFee)
         ? object.creditClassFee.map((e: any) => Coin.fromJSON(e))
         : [],
-      basketFee: Array.isArray(object?.basketFee)
-        ? object.basketFee.map((e: any) => Coin.fromJSON(e))
-        : [],
+      basketFee: Array.isArray(object?.basketFee) ? object.basketFee.map((e: any) => Coin.fromJSON(e)) : [],
       allowedClassCreators: Array.isArray(object?.allowedClassCreators)
         ? object.allowedClassCreators.map((e: any) => String(e))
         : [],
-      allowlistEnabled: isSet(object.allowlistEnabled)
-        ? Boolean(object.allowlistEnabled)
-        : false,
+      allowlistEnabled: isSet(object.allowlistEnabled) ? Boolean(object.allowlistEnabled) : false,
       allowedDenoms: Array.isArray(object?.allowedDenoms)
         ? object.allowedDenoms.map((e: any) => AllowedDenom.fromJSON(e))
         : [],
@@ -277,52 +268,46 @@ export const Params = {
   toJSON(message: Params): unknown {
     const obj: any = {};
     if (message.creditClassFee) {
-      obj.creditClassFee = message.creditClassFee.map(e =>
-        e ? Coin.toJSON(e) : undefined,
-      );
+      obj.creditClassFee = message.creditClassFee.map((e) => e ? Coin.toJSON(e) : undefined);
     } else {
       obj.creditClassFee = [];
     }
     if (message.basketFee) {
-      obj.basketFee = message.basketFee.map(e =>
-        e ? Coin.toJSON(e) : undefined,
-      );
+      obj.basketFee = message.basketFee.map((e) => e ? Coin.toJSON(e) : undefined);
     } else {
       obj.basketFee = [];
     }
     if (message.allowedClassCreators) {
-      obj.allowedClassCreators = message.allowedClassCreators.map(e => e);
+      obj.allowedClassCreators = message.allowedClassCreators.map((e) => e);
     } else {
       obj.allowedClassCreators = [];
     }
-    message.allowlistEnabled !== undefined &&
-      (obj.allowlistEnabled = message.allowlistEnabled);
+    message.allowlistEnabled !== undefined && (obj.allowlistEnabled = message.allowlistEnabled);
     if (message.allowedDenoms) {
-      obj.allowedDenoms = message.allowedDenoms.map(e =>
-        e ? AllowedDenom.toJSON(e) : undefined,
-      );
+      obj.allowedDenoms = message.allowedDenoms.map((e) => e ? AllowedDenom.toJSON(e) : undefined);
     } else {
       obj.allowedDenoms = [];
     }
     if (message.allowedBridgeChains) {
-      obj.allowedBridgeChains = message.allowedBridgeChains.map(e => e);
+      obj.allowedBridgeChains = message.allowedBridgeChains.map((e) => e);
     } else {
       obj.allowedBridgeChains = [];
     }
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<Params>, I>>(object: I): Params {
+  create(base?: DeepPartial<Params>): Params {
+    return Params.fromPartial(base ?? {});
+  },
+
+  fromPartial(object: DeepPartial<Params>): Params {
     const message = createBaseParams();
-    message.creditClassFee =
-      object.creditClassFee?.map(e => Coin.fromPartial(e)) || [];
-    message.basketFee = object.basketFee?.map(e => Coin.fromPartial(e)) || [];
-    message.allowedClassCreators =
-      object.allowedClassCreators?.map(e => e) || [];
+    message.creditClassFee = object.creditClassFee?.map((e) => Coin.fromPartial(e)) || [];
+    message.basketFee = object.basketFee?.map((e) => Coin.fromPartial(e)) || [];
+    message.allowedClassCreators = object.allowedClassCreators?.map((e) => e) || [];
     message.allowlistEnabled = object.allowlistEnabled ?? false;
-    message.allowedDenoms =
-      object.allowedDenoms?.map(e => AllowedDenom.fromPartial(e)) || [];
-    message.allowedBridgeChains = object.allowedBridgeChains?.map(e => e) || [];
+    message.allowedDenoms = object.allowedDenoms?.map((e) => AllowedDenom.fromPartial(e)) || [];
+    message.allowedBridgeChains = object.allowedBridgeChains?.map((e) => e) || [];
     return message;
   },
 };
@@ -330,20 +315,17 @@ export const Params = {
 messageTypeRegistry.set(Params.$type, Params);
 
 function createBaseCredits(): Credits {
-  return { $type: 'regen.ecocredit.v1.Credits', batchDenom: '', amount: '' };
+  return { $type: "regen.ecocredit.v1.Credits", batchDenom: "", amount: "" };
 }
 
 export const Credits = {
-  $type: 'regen.ecocredit.v1.Credits' as const,
+  $type: "regen.ecocredit.v1.Credits" as const,
 
-  encode(
-    message: Credits,
-    writer: _m0.Writer = _m0.Writer.create(),
-  ): _m0.Writer {
-    if (message.batchDenom !== '') {
+  encode(message: Credits, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+    if (message.batchDenom !== "") {
       writer.uint32(10).string(message.batchDenom);
     }
-    if (message.amount !== '') {
+    if (message.amount !== "") {
       writer.uint32(18).string(message.amount);
     }
     return writer;
@@ -373,8 +355,8 @@ export const Credits = {
   fromJSON(object: any): Credits {
     return {
       $type: Credits.$type,
-      batchDenom: isSet(object.batchDenom) ? String(object.batchDenom) : '',
-      amount: isSet(object.amount) ? String(object.amount) : '',
+      batchDenom: isSet(object.batchDenom) ? String(object.batchDenom) : "",
+      amount: isSet(object.amount) ? String(object.amount) : "",
     };
   },
 
@@ -385,10 +367,14 @@ export const Credits = {
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<Credits>, I>>(object: I): Credits {
+  create(base?: DeepPartial<Credits>): Credits {
+    return Credits.fromPartial(base ?? {});
+  },
+
+  fromPartial(object: DeepPartial<Credits>): Credits {
     const message = createBaseCredits();
-    message.batchDenom = object.batchDenom ?? '';
-    message.amount = object.amount ?? '';
+    message.batchDenom = object.batchDenom ?? "";
+    message.amount = object.amount ?? "";
     return message;
   },
 };
@@ -397,35 +383,32 @@ messageTypeRegistry.set(Credits.$type, Credits);
 
 function createBaseBatchIssuance(): BatchIssuance {
   return {
-    $type: 'regen.ecocredit.v1.BatchIssuance',
-    recipient: '',
-    tradableAmount: '',
-    retiredAmount: '',
-    retirementJurisdiction: '',
-    retirementReason: '',
+    $type: "regen.ecocredit.v1.BatchIssuance",
+    recipient: "",
+    tradableAmount: "",
+    retiredAmount: "",
+    retirementJurisdiction: "",
+    retirementReason: "",
   };
 }
 
 export const BatchIssuance = {
-  $type: 'regen.ecocredit.v1.BatchIssuance' as const,
+  $type: "regen.ecocredit.v1.BatchIssuance" as const,
 
-  encode(
-    message: BatchIssuance,
-    writer: _m0.Writer = _m0.Writer.create(),
-  ): _m0.Writer {
-    if (message.recipient !== '') {
+  encode(message: BatchIssuance, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+    if (message.recipient !== "") {
       writer.uint32(10).string(message.recipient);
     }
-    if (message.tradableAmount !== '') {
+    if (message.tradableAmount !== "") {
       writer.uint32(18).string(message.tradableAmount);
     }
-    if (message.retiredAmount !== '') {
+    if (message.retiredAmount !== "") {
       writer.uint32(26).string(message.retiredAmount);
     }
-    if (message.retirementJurisdiction !== '') {
+    if (message.retirementJurisdiction !== "") {
       writer.uint32(34).string(message.retirementJurisdiction);
     }
-    if (message.retirementReason !== '') {
+    if (message.retirementReason !== "") {
       writer.uint32(42).string(message.retirementReason);
     }
     return writer;
@@ -464,45 +447,35 @@ export const BatchIssuance = {
   fromJSON(object: any): BatchIssuance {
     return {
       $type: BatchIssuance.$type,
-      recipient: isSet(object.recipient) ? String(object.recipient) : '',
-      tradableAmount: isSet(object.tradableAmount)
-        ? String(object.tradableAmount)
-        : '',
-      retiredAmount: isSet(object.retiredAmount)
-        ? String(object.retiredAmount)
-        : '',
-      retirementJurisdiction: isSet(object.retirementJurisdiction)
-        ? String(object.retirementJurisdiction)
-        : '',
-      retirementReason: isSet(object.retirementReason)
-        ? String(object.retirementReason)
-        : '',
+      recipient: isSet(object.recipient) ? String(object.recipient) : "",
+      tradableAmount: isSet(object.tradableAmount) ? String(object.tradableAmount) : "",
+      retiredAmount: isSet(object.retiredAmount) ? String(object.retiredAmount) : "",
+      retirementJurisdiction: isSet(object.retirementJurisdiction) ? String(object.retirementJurisdiction) : "",
+      retirementReason: isSet(object.retirementReason) ? String(object.retirementReason) : "",
     };
   },
 
   toJSON(message: BatchIssuance): unknown {
     const obj: any = {};
     message.recipient !== undefined && (obj.recipient = message.recipient);
-    message.tradableAmount !== undefined &&
-      (obj.tradableAmount = message.tradableAmount);
-    message.retiredAmount !== undefined &&
-      (obj.retiredAmount = message.retiredAmount);
-    message.retirementJurisdiction !== undefined &&
-      (obj.retirementJurisdiction = message.retirementJurisdiction);
-    message.retirementReason !== undefined &&
-      (obj.retirementReason = message.retirementReason);
+    message.tradableAmount !== undefined && (obj.tradableAmount = message.tradableAmount);
+    message.retiredAmount !== undefined && (obj.retiredAmount = message.retiredAmount);
+    message.retirementJurisdiction !== undefined && (obj.retirementJurisdiction = message.retirementJurisdiction);
+    message.retirementReason !== undefined && (obj.retirementReason = message.retirementReason);
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<BatchIssuance>, I>>(
-    object: I,
-  ): BatchIssuance {
+  create(base?: DeepPartial<BatchIssuance>): BatchIssuance {
+    return BatchIssuance.fromPartial(base ?? {});
+  },
+
+  fromPartial(object: DeepPartial<BatchIssuance>): BatchIssuance {
     const message = createBaseBatchIssuance();
-    message.recipient = object.recipient ?? '';
-    message.tradableAmount = object.tradableAmount ?? '';
-    message.retiredAmount = object.retiredAmount ?? '';
-    message.retirementJurisdiction = object.retirementJurisdiction ?? '';
-    message.retirementReason = object.retirementReason ?? '';
+    message.recipient = object.recipient ?? "";
+    message.tradableAmount = object.tradableAmount ?? "";
+    message.retiredAmount = object.retiredAmount ?? "";
+    message.retirementJurisdiction = object.retirementJurisdiction ?? "";
+    message.retirementReason = object.retirementReason ?? "";
     return message;
   },
 };
@@ -510,32 +483,23 @@ export const BatchIssuance = {
 messageTypeRegistry.set(BatchIssuance.$type, BatchIssuance);
 
 function createBaseOriginTx(): OriginTx {
-  return {
-    $type: 'regen.ecocredit.v1.OriginTx',
-    id: '',
-    source: '',
-    contract: '',
-    note: '',
-  };
+  return { $type: "regen.ecocredit.v1.OriginTx", id: "", source: "", contract: "", note: "" };
 }
 
 export const OriginTx = {
-  $type: 'regen.ecocredit.v1.OriginTx' as const,
+  $type: "regen.ecocredit.v1.OriginTx" as const,
 
-  encode(
-    message: OriginTx,
-    writer: _m0.Writer = _m0.Writer.create(),
-  ): _m0.Writer {
-    if (message.id !== '') {
+  encode(message: OriginTx, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+    if (message.id !== "") {
       writer.uint32(10).string(message.id);
     }
-    if (message.source !== '') {
+    if (message.source !== "") {
       writer.uint32(18).string(message.source);
     }
-    if (message.contract !== '') {
+    if (message.contract !== "") {
       writer.uint32(26).string(message.contract);
     }
-    if (message.note !== '') {
+    if (message.note !== "") {
       writer.uint32(34).string(message.note);
     }
     return writer;
@@ -571,10 +535,10 @@ export const OriginTx = {
   fromJSON(object: any): OriginTx {
     return {
       $type: OriginTx.$type,
-      id: isSet(object.id) ? String(object.id) : '',
-      source: isSet(object.source) ? String(object.source) : '',
-      contract: isSet(object.contract) ? String(object.contract) : '',
-      note: isSet(object.note) ? String(object.note) : '',
+      id: isSet(object.id) ? String(object.id) : "",
+      source: isSet(object.source) ? String(object.source) : "",
+      contract: isSet(object.contract) ? String(object.contract) : "",
+      note: isSet(object.note) ? String(object.note) : "",
     };
   },
 
@@ -587,12 +551,16 @@ export const OriginTx = {
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<OriginTx>, I>>(object: I): OriginTx {
+  create(base?: DeepPartial<OriginTx>): OriginTx {
+    return OriginTx.fromPartial(base ?? {});
+  },
+
+  fromPartial(object: DeepPartial<OriginTx>): OriginTx {
     const message = createBaseOriginTx();
-    message.id = object.id ?? '';
-    message.source = object.source ?? '';
-    message.contract = object.contract ?? '';
-    message.note = object.note ?? '';
+    message.id = object.id ?? "";
+    message.source = object.source ?? "";
+    message.contract = object.contract ?? "";
+    message.note = object.note ?? "";
     return message;
   },
 };
@@ -600,25 +568,17 @@ export const OriginTx = {
 messageTypeRegistry.set(OriginTx.$type, OriginTx);
 
 function createBaseCreditTypeProposal(): CreditTypeProposal {
-  return {
-    $type: 'regen.ecocredit.v1.CreditTypeProposal',
-    title: '',
-    description: '',
-    creditType: undefined,
-  };
+  return { $type: "regen.ecocredit.v1.CreditTypeProposal", title: "", description: "", creditType: undefined };
 }
 
 export const CreditTypeProposal = {
-  $type: 'regen.ecocredit.v1.CreditTypeProposal' as const,
+  $type: "regen.ecocredit.v1.CreditTypeProposal" as const,
 
-  encode(
-    message: CreditTypeProposal,
-    writer: _m0.Writer = _m0.Writer.create(),
-  ): _m0.Writer {
-    if (message.title !== '') {
+  encode(message: CreditTypeProposal, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+    if (message.title !== "") {
       writer.uint32(10).string(message.title);
     }
-    if (message.description !== '') {
+    if (message.description !== "") {
       writer.uint32(18).string(message.description);
     }
     if (message.creditType !== undefined) {
@@ -654,36 +614,32 @@ export const CreditTypeProposal = {
   fromJSON(object: any): CreditTypeProposal {
     return {
       $type: CreditTypeProposal.$type,
-      title: isSet(object.title) ? String(object.title) : '',
-      description: isSet(object.description) ? String(object.description) : '',
-      creditType: isSet(object.creditType)
-        ? CreditType.fromJSON(object.creditType)
-        : undefined,
+      title: isSet(object.title) ? String(object.title) : "",
+      description: isSet(object.description) ? String(object.description) : "",
+      creditType: isSet(object.creditType) ? CreditType.fromJSON(object.creditType) : undefined,
     };
   },
 
   toJSON(message: CreditTypeProposal): unknown {
     const obj: any = {};
     message.title !== undefined && (obj.title = message.title);
-    message.description !== undefined &&
-      (obj.description = message.description);
+    message.description !== undefined && (obj.description = message.description);
     message.creditType !== undefined &&
-      (obj.creditType = message.creditType
-        ? CreditType.toJSON(message.creditType)
-        : undefined);
+      (obj.creditType = message.creditType ? CreditType.toJSON(message.creditType) : undefined);
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<CreditTypeProposal>, I>>(
-    object: I,
-  ): CreditTypeProposal {
+  create(base?: DeepPartial<CreditTypeProposal>): CreditTypeProposal {
+    return CreditTypeProposal.fromPartial(base ?? {});
+  },
+
+  fromPartial(object: DeepPartial<CreditTypeProposal>): CreditTypeProposal {
     const message = createBaseCreditTypeProposal();
-    message.title = object.title ?? '';
-    message.description = object.description ?? '';
-    message.creditType =
-      object.creditType !== undefined && object.creditType !== null
-        ? CreditType.fromPartial(object.creditType)
-        : undefined;
+    message.title = object.title ?? "";
+    message.description = object.description ?? "";
+    message.creditType = (object.creditType !== undefined && object.creditType !== null)
+      ? CreditType.fromPartial(object.creditType)
+      : undefined;
     return message;
   },
 };
@@ -691,25 +647,17 @@ export const CreditTypeProposal = {
 messageTypeRegistry.set(CreditTypeProposal.$type, CreditTypeProposal);
 
 function createBaseAllowedDenom(): AllowedDenom {
-  return {
-    $type: 'regen.ecocredit.v1.AllowedDenom',
-    bankDenom: '',
-    displayDenom: '',
-    exponent: 0,
-  };
+  return { $type: "regen.ecocredit.v1.AllowedDenom", bankDenom: "", displayDenom: "", exponent: 0 };
 }
 
 export const AllowedDenom = {
-  $type: 'regen.ecocredit.v1.AllowedDenom' as const,
+  $type: "regen.ecocredit.v1.AllowedDenom" as const,
 
-  encode(
-    message: AllowedDenom,
-    writer: _m0.Writer = _m0.Writer.create(),
-  ): _m0.Writer {
-    if (message.bankDenom !== '') {
+  encode(message: AllowedDenom, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+    if (message.bankDenom !== "") {
       writer.uint32(10).string(message.bankDenom);
     }
-    if (message.displayDenom !== '') {
+    if (message.displayDenom !== "") {
       writer.uint32(18).string(message.displayDenom);
     }
     if (message.exponent !== 0) {
@@ -745,10 +693,8 @@ export const AllowedDenom = {
   fromJSON(object: any): AllowedDenom {
     return {
       $type: AllowedDenom.$type,
-      bankDenom: isSet(object.bankDenom) ? String(object.bankDenom) : '',
-      displayDenom: isSet(object.displayDenom)
-        ? String(object.displayDenom)
-        : '',
+      bankDenom: isSet(object.bankDenom) ? String(object.bankDenom) : "",
+      displayDenom: isSet(object.displayDenom) ? String(object.displayDenom) : "",
       exponent: isSet(object.exponent) ? Number(object.exponent) : 0,
     };
   },
@@ -756,19 +702,19 @@ export const AllowedDenom = {
   toJSON(message: AllowedDenom): unknown {
     const obj: any = {};
     message.bankDenom !== undefined && (obj.bankDenom = message.bankDenom);
-    message.displayDenom !== undefined &&
-      (obj.displayDenom = message.displayDenom);
-    message.exponent !== undefined &&
-      (obj.exponent = Math.round(message.exponent));
+    message.displayDenom !== undefined && (obj.displayDenom = message.displayDenom);
+    message.exponent !== undefined && (obj.exponent = Math.round(message.exponent));
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<AllowedDenom>, I>>(
-    object: I,
-  ): AllowedDenom {
+  create(base?: DeepPartial<AllowedDenom>): AllowedDenom {
+    return AllowedDenom.fromPartial(base ?? {});
+  },
+
+  fromPartial(object: DeepPartial<AllowedDenom>): AllowedDenom {
     const message = createBaseAllowedDenom();
-    message.bankDenom = object.bankDenom ?? '';
-    message.displayDenom = object.displayDenom ?? '';
+    message.bankDenom = object.bankDenom ?? "";
+    message.displayDenom = object.displayDenom ?? "";
     message.exponent = object.exponent ?? 0;
     return message;
   },
@@ -776,34 +722,13 @@ export const AllowedDenom = {
 
 messageTypeRegistry.set(AllowedDenom.$type, AllowedDenom);
 
-type Builtin =
-  | Date
-  | Function
-  | Uint8Array
-  | string
-  | number
-  | boolean
-  | undefined;
+type Builtin = Date | Function | Uint8Array | string | number | boolean | undefined;
 
-export type DeepPartial<T> = T extends Builtin
-  ? T
-  : T extends Long
-  ? string | number | Long
-  : T extends Array<infer U>
-  ? Array<DeepPartial<U>>
-  : T extends ReadonlyArray<infer U>
-  ? ReadonlyArray<DeepPartial<U>>
-  : T extends {}
-  ? { [K in Exclude<keyof T, '$type'>]?: DeepPartial<T[K]> }
+export type DeepPartial<T> = T extends Builtin ? T
+  : T extends Long ? string | number | Long : T extends Array<infer U> ? Array<DeepPartial<U>>
+  : T extends ReadonlyArray<infer U> ? ReadonlyArray<DeepPartial<U>>
+  : T extends {} ? { [K in Exclude<keyof T, "$type">]?: DeepPartial<T[K]> }
   : Partial<T>;
-
-type KeysOfUnion<T> = T extends T ? keyof T : never;
-export type Exact<P, I extends P> = P extends Builtin
-  ? P
-  : P & { [K in keyof P]: Exact<P[K], I[K]> } & Record<
-        Exclude<keyof I, KeysOfUnion<P> | '$type'>,
-        never
-      >;
 
 if (_m0.util.Long !== Long) {
   _m0.util.Long = Long as any;

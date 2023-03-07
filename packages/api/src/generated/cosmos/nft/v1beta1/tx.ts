@@ -1,13 +1,13 @@
 /* eslint-disable */
-import { messageTypeRegistry } from '../../../typeRegistry';
-import Long from 'long';
-import _m0 from 'protobufjs/minimal';
+import Long from "long";
+import _m0 from "protobufjs/minimal";
+import { messageTypeRegistry } from "../../../typeRegistry";
 
-export const protobufPackage = 'cosmos.nft.v1beta1';
+export const protobufPackage = "cosmos.nft.v1beta1";
 
 /** MsgSend represents a message to send a nft from one account to another account. */
 export interface MsgSend {
-  $type: 'cosmos.nft.v1beta1.MsgSend';
+  $type: "cosmos.nft.v1beta1.MsgSend";
   /** class_id defines the unique identifier of the nft classification, similar to the contract address of ERC721 */
   classId: string;
   /** id defines the unique identification of nft */
@@ -20,36 +20,27 @@ export interface MsgSend {
 
 /** MsgSendResponse defines the Msg/Send response type. */
 export interface MsgSendResponse {
-  $type: 'cosmos.nft.v1beta1.MsgSendResponse';
+  $type: "cosmos.nft.v1beta1.MsgSendResponse";
 }
 
 function createBaseMsgSend(): MsgSend {
-  return {
-    $type: 'cosmos.nft.v1beta1.MsgSend',
-    classId: '',
-    id: '',
-    sender: '',
-    receiver: '',
-  };
+  return { $type: "cosmos.nft.v1beta1.MsgSend", classId: "", id: "", sender: "", receiver: "" };
 }
 
 export const MsgSend = {
-  $type: 'cosmos.nft.v1beta1.MsgSend' as const,
+  $type: "cosmos.nft.v1beta1.MsgSend" as const,
 
-  encode(
-    message: MsgSend,
-    writer: _m0.Writer = _m0.Writer.create(),
-  ): _m0.Writer {
-    if (message.classId !== '') {
+  encode(message: MsgSend, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+    if (message.classId !== "") {
       writer.uint32(10).string(message.classId);
     }
-    if (message.id !== '') {
+    if (message.id !== "") {
       writer.uint32(18).string(message.id);
     }
-    if (message.sender !== '') {
+    if (message.sender !== "") {
       writer.uint32(26).string(message.sender);
     }
-    if (message.receiver !== '') {
+    if (message.receiver !== "") {
       writer.uint32(34).string(message.receiver);
     }
     return writer;
@@ -85,10 +76,10 @@ export const MsgSend = {
   fromJSON(object: any): MsgSend {
     return {
       $type: MsgSend.$type,
-      classId: isSet(object.classId) ? String(object.classId) : '',
-      id: isSet(object.id) ? String(object.id) : '',
-      sender: isSet(object.sender) ? String(object.sender) : '',
-      receiver: isSet(object.receiver) ? String(object.receiver) : '',
+      classId: isSet(object.classId) ? String(object.classId) : "",
+      id: isSet(object.id) ? String(object.id) : "",
+      sender: isSet(object.sender) ? String(object.sender) : "",
+      receiver: isSet(object.receiver) ? String(object.receiver) : "",
     };
   },
 
@@ -101,12 +92,16 @@ export const MsgSend = {
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<MsgSend>, I>>(object: I): MsgSend {
+  create(base?: DeepPartial<MsgSend>): MsgSend {
+    return MsgSend.fromPartial(base ?? {});
+  },
+
+  fromPartial(object: DeepPartial<MsgSend>): MsgSend {
     const message = createBaseMsgSend();
-    message.classId = object.classId ?? '';
-    message.id = object.id ?? '';
-    message.sender = object.sender ?? '';
-    message.receiver = object.receiver ?? '';
+    message.classId = object.classId ?? "";
+    message.id = object.id ?? "";
+    message.sender = object.sender ?? "";
+    message.receiver = object.receiver ?? "";
     return message;
   },
 };
@@ -114,16 +109,13 @@ export const MsgSend = {
 messageTypeRegistry.set(MsgSend.$type, MsgSend);
 
 function createBaseMsgSendResponse(): MsgSendResponse {
-  return { $type: 'cosmos.nft.v1beta1.MsgSendResponse' };
+  return { $type: "cosmos.nft.v1beta1.MsgSendResponse" };
 }
 
 export const MsgSendResponse = {
-  $type: 'cosmos.nft.v1beta1.MsgSendResponse' as const,
+  $type: "cosmos.nft.v1beta1.MsgSendResponse" as const,
 
-  encode(
-    _: MsgSendResponse,
-    writer: _m0.Writer = _m0.Writer.create(),
-  ): _m0.Writer {
+  encode(_: MsgSendResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     return writer;
   },
 
@@ -143,9 +135,7 @@ export const MsgSendResponse = {
   },
 
   fromJSON(_: any): MsgSendResponse {
-    return {
-      $type: MsgSendResponse.$type,
-    };
+    return { $type: MsgSendResponse.$type };
   },
 
   toJSON(_: MsgSendResponse): unknown {
@@ -153,9 +143,11 @@ export const MsgSendResponse = {
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<MsgSendResponse>, I>>(
-    _: I,
-  ): MsgSendResponse {
+  create(base?: DeepPartial<MsgSendResponse>): MsgSendResponse {
+    return MsgSendResponse.fromPartial(base ?? {});
+  },
+
+  fromPartial(_: DeepPartial<MsgSendResponse>): MsgSendResponse {
     const message = createBaseMsgSendResponse();
     return message;
   },
@@ -171,54 +163,31 @@ export interface Msg {
 
 export class MsgClientImpl implements Msg {
   private readonly rpc: Rpc;
-  constructor(rpc: Rpc) {
+  private readonly service: string;
+  constructor(rpc: Rpc, opts?: { service?: string }) {
+    this.service = opts?.service || "cosmos.nft.v1beta1.Msg";
     this.rpc = rpc;
     this.Send = this.Send.bind(this);
   }
   Send(request: DeepPartial<MsgSend>): Promise<MsgSendResponse> {
     const fromPartial = MsgSend.fromPartial(request);
     const data = MsgSend.encode(fromPartial).finish();
-    const promise = this.rpc.request('cosmos.nft.v1beta1.Msg', 'Send', data);
-    return promise.then(data => MsgSendResponse.decode(new _m0.Reader(data)));
+    const promise = this.rpc.request(this.service, "Send", data);
+    return promise.then((data) => MsgSendResponse.decode(new _m0.Reader(data)));
   }
 }
 
 interface Rpc {
-  request(
-    service: string,
-    method: string,
-    data: Uint8Array,
-  ): Promise<Uint8Array>;
+  request(service: string, method: string, data: Uint8Array): Promise<Uint8Array>;
 }
 
-type Builtin =
-  | Date
-  | Function
-  | Uint8Array
-  | string
-  | number
-  | boolean
-  | undefined;
+type Builtin = Date | Function | Uint8Array | string | number | boolean | undefined;
 
-export type DeepPartial<T> = T extends Builtin
-  ? T
-  : T extends Long
-  ? string | number | Long
-  : T extends Array<infer U>
-  ? Array<DeepPartial<U>>
-  : T extends ReadonlyArray<infer U>
-  ? ReadonlyArray<DeepPartial<U>>
-  : T extends {}
-  ? { [K in Exclude<keyof T, '$type'>]?: DeepPartial<T[K]> }
+export type DeepPartial<T> = T extends Builtin ? T
+  : T extends Long ? string | number | Long : T extends Array<infer U> ? Array<DeepPartial<U>>
+  : T extends ReadonlyArray<infer U> ? ReadonlyArray<DeepPartial<U>>
+  : T extends {} ? { [K in Exclude<keyof T, "$type">]?: DeepPartial<T[K]> }
   : Partial<T>;
-
-type KeysOfUnion<T> = T extends T ? keyof T : never;
-export type Exact<P, I extends P> = P extends Builtin
-  ? P
-  : P & { [K in keyof P]: Exact<P[K], I[K]> } & Record<
-        Exclude<keyof I, KeysOfUnion<P> | '$type'>,
-        never
-      >;
 
 if (_m0.util.Long !== Long) {
   _m0.util.Long = Long as any;

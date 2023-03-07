@@ -1,18 +1,18 @@
 /* eslint-disable */
-import { messageTypeRegistry } from '../../../../typeRegistry';
-import Long from 'long';
-import _m0 from 'protobufjs/minimal';
+import Long from "long";
+import _m0 from "protobufjs/minimal";
 import {
   RequestBeginBlock,
-  ResponseBeginBlock,
-  RequestEndBlock,
-  ResponseEndBlock,
-  ResponseCommit,
   RequestDeliverTx,
+  RequestEndBlock,
+  ResponseBeginBlock,
+  ResponseCommit,
   ResponseDeliverTx,
-} from '../../../../tendermint/abci/types';
+  ResponseEndBlock,
+} from "../../../../tendermint/abci/types";
+import { messageTypeRegistry } from "../../../../typeRegistry";
 
-export const protobufPackage = 'cosmos.base.store.v1beta1';
+export const protobufPackage = "cosmos.base.store.v1beta1";
 
 /**
  * StoreKVPair is a KVStore KVPair used for listening to state changes (Sets and Deletes)
@@ -22,7 +22,7 @@ export const protobufPackage = 'cosmos.base.store.v1beta1';
  * Since: cosmos-sdk 0.43
  */
 export interface StoreKVPair {
-  $type: 'cosmos.base.store.v1beta1.StoreKVPair';
+  $type: "cosmos.base.store.v1beta1.StoreKVPair";
   /** the store key for the KVStore this pair originates from */
   storeKey: string;
   /** true indicates a delete operation, false indicates a set operation */
@@ -36,7 +36,7 @@ export interface StoreKVPair {
  * the file streamer dump them into files together with the state changes.
  */
 export interface BlockMetadata {
-  $type: 'cosmos.base.store.v1beta1.BlockMetadata';
+  $type: "cosmos.base.store.v1beta1.BlockMetadata";
   requestBeginBlock?: RequestBeginBlock;
   responseBeginBlock?: ResponseBeginBlock;
   deliverTxs: BlockMetadata_DeliverTx[];
@@ -47,15 +47,15 @@ export interface BlockMetadata {
 
 /** DeliverTx encapulate deliver tx request and response. */
 export interface BlockMetadata_DeliverTx {
-  $type: 'cosmos.base.store.v1beta1.BlockMetadata.DeliverTx';
+  $type: "cosmos.base.store.v1beta1.BlockMetadata.DeliverTx";
   request?: RequestDeliverTx;
   response?: ResponseDeliverTx;
 }
 
 function createBaseStoreKVPair(): StoreKVPair {
   return {
-    $type: 'cosmos.base.store.v1beta1.StoreKVPair',
-    storeKey: '',
+    $type: "cosmos.base.store.v1beta1.StoreKVPair",
+    storeKey: "",
     delete: false,
     key: new Uint8Array(),
     value: new Uint8Array(),
@@ -63,13 +63,10 @@ function createBaseStoreKVPair(): StoreKVPair {
 }
 
 export const StoreKVPair = {
-  $type: 'cosmos.base.store.v1beta1.StoreKVPair' as const,
+  $type: "cosmos.base.store.v1beta1.StoreKVPair" as const,
 
-  encode(
-    message: StoreKVPair,
-    writer: _m0.Writer = _m0.Writer.create(),
-  ): _m0.Writer {
-    if (message.storeKey !== '') {
+  encode(message: StoreKVPair, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+    if (message.storeKey !== "") {
       writer.uint32(10).string(message.storeKey);
     }
     if (message.delete === true) {
@@ -114,12 +111,10 @@ export const StoreKVPair = {
   fromJSON(object: any): StoreKVPair {
     return {
       $type: StoreKVPair.$type,
-      storeKey: isSet(object.storeKey) ? String(object.storeKey) : '',
+      storeKey: isSet(object.storeKey) ? String(object.storeKey) : "",
       delete: isSet(object.delete) ? Boolean(object.delete) : false,
       key: isSet(object.key) ? bytesFromBase64(object.key) : new Uint8Array(),
-      value: isSet(object.value)
-        ? bytesFromBase64(object.value)
-        : new Uint8Array(),
+      value: isSet(object.value) ? bytesFromBase64(object.value) : new Uint8Array(),
     };
   },
 
@@ -128,21 +123,19 @@ export const StoreKVPair = {
     message.storeKey !== undefined && (obj.storeKey = message.storeKey);
     message.delete !== undefined && (obj.delete = message.delete);
     message.key !== undefined &&
-      (obj.key = base64FromBytes(
-        message.key !== undefined ? message.key : new Uint8Array(),
-      ));
+      (obj.key = base64FromBytes(message.key !== undefined ? message.key : new Uint8Array()));
     message.value !== undefined &&
-      (obj.value = base64FromBytes(
-        message.value !== undefined ? message.value : new Uint8Array(),
-      ));
+      (obj.value = base64FromBytes(message.value !== undefined ? message.value : new Uint8Array()));
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<StoreKVPair>, I>>(
-    object: I,
-  ): StoreKVPair {
+  create(base?: DeepPartial<StoreKVPair>): StoreKVPair {
+    return StoreKVPair.fromPartial(base ?? {});
+  },
+
+  fromPartial(object: DeepPartial<StoreKVPair>): StoreKVPair {
     const message = createBaseStoreKVPair();
-    message.storeKey = object.storeKey ?? '';
+    message.storeKey = object.storeKey ?? "";
     message.delete = object.delete ?? false;
     message.key = object.key ?? new Uint8Array();
     message.value = object.value ?? new Uint8Array();
@@ -154,7 +147,7 @@ messageTypeRegistry.set(StoreKVPair.$type, StoreKVPair);
 
 function createBaseBlockMetadata(): BlockMetadata {
   return {
-    $type: 'cosmos.base.store.v1beta1.BlockMetadata',
+    $type: "cosmos.base.store.v1beta1.BlockMetadata",
     requestBeginBlock: undefined,
     responseBeginBlock: undefined,
     deliverTxs: [],
@@ -165,44 +158,26 @@ function createBaseBlockMetadata(): BlockMetadata {
 }
 
 export const BlockMetadata = {
-  $type: 'cosmos.base.store.v1beta1.BlockMetadata' as const,
+  $type: "cosmos.base.store.v1beta1.BlockMetadata" as const,
 
-  encode(
-    message: BlockMetadata,
-    writer: _m0.Writer = _m0.Writer.create(),
-  ): _m0.Writer {
+  encode(message: BlockMetadata, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.requestBeginBlock !== undefined) {
-      RequestBeginBlock.encode(
-        message.requestBeginBlock,
-        writer.uint32(10).fork(),
-      ).ldelim();
+      RequestBeginBlock.encode(message.requestBeginBlock, writer.uint32(10).fork()).ldelim();
     }
     if (message.responseBeginBlock !== undefined) {
-      ResponseBeginBlock.encode(
-        message.responseBeginBlock,
-        writer.uint32(18).fork(),
-      ).ldelim();
+      ResponseBeginBlock.encode(message.responseBeginBlock, writer.uint32(18).fork()).ldelim();
     }
     for (const v of message.deliverTxs) {
       BlockMetadata_DeliverTx.encode(v!, writer.uint32(26).fork()).ldelim();
     }
     if (message.requestEndBlock !== undefined) {
-      RequestEndBlock.encode(
-        message.requestEndBlock,
-        writer.uint32(34).fork(),
-      ).ldelim();
+      RequestEndBlock.encode(message.requestEndBlock, writer.uint32(34).fork()).ldelim();
     }
     if (message.responseEndBlock !== undefined) {
-      ResponseEndBlock.encode(
-        message.responseEndBlock,
-        writer.uint32(42).fork(),
-      ).ldelim();
+      ResponseEndBlock.encode(message.responseEndBlock, writer.uint32(42).fork()).ldelim();
     }
     if (message.responseCommit !== undefined) {
-      ResponseCommit.encode(
-        message.responseCommit,
-        writer.uint32(50).fork(),
-      ).ldelim();
+      ResponseCommit.encode(message.responseCommit, writer.uint32(50).fork()).ldelim();
     }
     return writer;
   },
@@ -215,39 +190,22 @@ export const BlockMetadata = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          message.requestBeginBlock = RequestBeginBlock.decode(
-            reader,
-            reader.uint32(),
-          );
+          message.requestBeginBlock = RequestBeginBlock.decode(reader, reader.uint32());
           break;
         case 2:
-          message.responseBeginBlock = ResponseBeginBlock.decode(
-            reader,
-            reader.uint32(),
-          );
+          message.responseBeginBlock = ResponseBeginBlock.decode(reader, reader.uint32());
           break;
         case 3:
-          message.deliverTxs.push(
-            BlockMetadata_DeliverTx.decode(reader, reader.uint32()),
-          );
+          message.deliverTxs.push(BlockMetadata_DeliverTx.decode(reader, reader.uint32()));
           break;
         case 4:
-          message.requestEndBlock = RequestEndBlock.decode(
-            reader,
-            reader.uint32(),
-          );
+          message.requestEndBlock = RequestEndBlock.decode(reader, reader.uint32());
           break;
         case 5:
-          message.responseEndBlock = ResponseEndBlock.decode(
-            reader,
-            reader.uint32(),
-          );
+          message.responseEndBlock = ResponseEndBlock.decode(reader, reader.uint32());
           break;
         case 6:
-          message.responseCommit = ResponseCommit.decode(
-            reader,
-            reader.uint32(),
-          );
+          message.responseCommit = ResponseCommit.decode(reader, reader.uint32());
           break;
         default:
           reader.skipType(tag & 7);
@@ -269,78 +227,56 @@ export const BlockMetadata = {
       deliverTxs: Array.isArray(object?.deliverTxs)
         ? object.deliverTxs.map((e: any) => BlockMetadata_DeliverTx.fromJSON(e))
         : [],
-      requestEndBlock: isSet(object.requestEndBlock)
-        ? RequestEndBlock.fromJSON(object.requestEndBlock)
-        : undefined,
-      responseEndBlock: isSet(object.responseEndBlock)
-        ? ResponseEndBlock.fromJSON(object.responseEndBlock)
-        : undefined,
-      responseCommit: isSet(object.responseCommit)
-        ? ResponseCommit.fromJSON(object.responseCommit)
-        : undefined,
+      requestEndBlock: isSet(object.requestEndBlock) ? RequestEndBlock.fromJSON(object.requestEndBlock) : undefined,
+      responseEndBlock: isSet(object.responseEndBlock) ? ResponseEndBlock.fromJSON(object.responseEndBlock) : undefined,
+      responseCommit: isSet(object.responseCommit) ? ResponseCommit.fromJSON(object.responseCommit) : undefined,
     };
   },
 
   toJSON(message: BlockMetadata): unknown {
     const obj: any = {};
-    message.requestBeginBlock !== undefined &&
-      (obj.requestBeginBlock = message.requestBeginBlock
-        ? RequestBeginBlock.toJSON(message.requestBeginBlock)
-        : undefined);
-    message.responseBeginBlock !== undefined &&
-      (obj.responseBeginBlock = message.responseBeginBlock
-        ? ResponseBeginBlock.toJSON(message.responseBeginBlock)
-        : undefined);
+    message.requestBeginBlock !== undefined && (obj.requestBeginBlock = message.requestBeginBlock
+      ? RequestBeginBlock.toJSON(message.requestBeginBlock)
+      : undefined);
+    message.responseBeginBlock !== undefined && (obj.responseBeginBlock = message.responseBeginBlock
+      ? ResponseBeginBlock.toJSON(message.responseBeginBlock)
+      : undefined);
     if (message.deliverTxs) {
-      obj.deliverTxs = message.deliverTxs.map(e =>
-        e ? BlockMetadata_DeliverTx.toJSON(e) : undefined,
-      );
+      obj.deliverTxs = message.deliverTxs.map((e) => e ? BlockMetadata_DeliverTx.toJSON(e) : undefined);
     } else {
       obj.deliverTxs = [];
     }
     message.requestEndBlock !== undefined &&
-      (obj.requestEndBlock = message.requestEndBlock
-        ? RequestEndBlock.toJSON(message.requestEndBlock)
-        : undefined);
+      (obj.requestEndBlock = message.requestEndBlock ? RequestEndBlock.toJSON(message.requestEndBlock) : undefined);
     message.responseEndBlock !== undefined &&
-      (obj.responseEndBlock = message.responseEndBlock
-        ? ResponseEndBlock.toJSON(message.responseEndBlock)
-        : undefined);
+      (obj.responseEndBlock = message.responseEndBlock ? ResponseEndBlock.toJSON(message.responseEndBlock) : undefined);
     message.responseCommit !== undefined &&
-      (obj.responseCommit = message.responseCommit
-        ? ResponseCommit.toJSON(message.responseCommit)
-        : undefined);
+      (obj.responseCommit = message.responseCommit ? ResponseCommit.toJSON(message.responseCommit) : undefined);
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<BlockMetadata>, I>>(
-    object: I,
-  ): BlockMetadata {
+  create(base?: DeepPartial<BlockMetadata>): BlockMetadata {
+    return BlockMetadata.fromPartial(base ?? {});
+  },
+
+  fromPartial(object: DeepPartial<BlockMetadata>): BlockMetadata {
     const message = createBaseBlockMetadata();
-    message.requestBeginBlock =
-      object.requestBeginBlock !== undefined &&
-      object.requestBeginBlock !== null
-        ? RequestBeginBlock.fromPartial(object.requestBeginBlock)
-        : undefined;
-    message.responseBeginBlock =
-      object.responseBeginBlock !== undefined &&
-      object.responseBeginBlock !== null
-        ? ResponseBeginBlock.fromPartial(object.responseBeginBlock)
-        : undefined;
-    message.deliverTxs =
-      object.deliverTxs?.map(e => BlockMetadata_DeliverTx.fromPartial(e)) || [];
-    message.requestEndBlock =
-      object.requestEndBlock !== undefined && object.requestEndBlock !== null
-        ? RequestEndBlock.fromPartial(object.requestEndBlock)
-        : undefined;
-    message.responseEndBlock =
-      object.responseEndBlock !== undefined && object.responseEndBlock !== null
-        ? ResponseEndBlock.fromPartial(object.responseEndBlock)
-        : undefined;
-    message.responseCommit =
-      object.responseCommit !== undefined && object.responseCommit !== null
-        ? ResponseCommit.fromPartial(object.responseCommit)
-        : undefined;
+    message.requestBeginBlock = (object.requestBeginBlock !== undefined && object.requestBeginBlock !== null)
+      ? RequestBeginBlock.fromPartial(object.requestBeginBlock)
+      : undefined;
+    message.responseBeginBlock = (object.responseBeginBlock !== undefined && object.responseBeginBlock !== null)
+      ? ResponseBeginBlock.fromPartial(object.responseBeginBlock)
+      : undefined;
+    message.deliverTxs = object.deliverTxs?.map((e) => BlockMetadata_DeliverTx.fromPartial(e)) || [];
+    message.requestEndBlock = (object.requestEndBlock !== undefined && object.requestEndBlock !== null)
+      ? RequestEndBlock.fromPartial(object.requestEndBlock)
+      : undefined;
+    message.responseEndBlock = (object.responseEndBlock !== undefined && object.responseEndBlock !== null)
+      ? ResponseEndBlock.fromPartial(object.responseEndBlock)
+      : undefined;
+    message.responseCommit = (object.responseCommit !== undefined && object.responseCommit !== null)
+      ? ResponseCommit.fromPartial(object.responseCommit)
+      : undefined;
     return message;
   },
 };
@@ -348,39 +284,23 @@ export const BlockMetadata = {
 messageTypeRegistry.set(BlockMetadata.$type, BlockMetadata);
 
 function createBaseBlockMetadata_DeliverTx(): BlockMetadata_DeliverTx {
-  return {
-    $type: 'cosmos.base.store.v1beta1.BlockMetadata.DeliverTx',
-    request: undefined,
-    response: undefined,
-  };
+  return { $type: "cosmos.base.store.v1beta1.BlockMetadata.DeliverTx", request: undefined, response: undefined };
 }
 
 export const BlockMetadata_DeliverTx = {
-  $type: 'cosmos.base.store.v1beta1.BlockMetadata.DeliverTx' as const,
+  $type: "cosmos.base.store.v1beta1.BlockMetadata.DeliverTx" as const,
 
-  encode(
-    message: BlockMetadata_DeliverTx,
-    writer: _m0.Writer = _m0.Writer.create(),
-  ): _m0.Writer {
+  encode(message: BlockMetadata_DeliverTx, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.request !== undefined) {
-      RequestDeliverTx.encode(
-        message.request,
-        writer.uint32(10).fork(),
-      ).ldelim();
+      RequestDeliverTx.encode(message.request, writer.uint32(10).fork()).ldelim();
     }
     if (message.response !== undefined) {
-      ResponseDeliverTx.encode(
-        message.response,
-        writer.uint32(18).fork(),
-      ).ldelim();
+      ResponseDeliverTx.encode(message.response, writer.uint32(18).fork()).ldelim();
     }
     return writer;
   },
 
-  decode(
-    input: _m0.Reader | Uint8Array,
-    length?: number,
-  ): BlockMetadata_DeliverTx {
+  decode(input: _m0.Reader | Uint8Array, length?: number): BlockMetadata_DeliverTx {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseBlockMetadata_DeliverTx();
@@ -404,40 +324,32 @@ export const BlockMetadata_DeliverTx = {
   fromJSON(object: any): BlockMetadata_DeliverTx {
     return {
       $type: BlockMetadata_DeliverTx.$type,
-      request: isSet(object.request)
-        ? RequestDeliverTx.fromJSON(object.request)
-        : undefined,
-      response: isSet(object.response)
-        ? ResponseDeliverTx.fromJSON(object.response)
-        : undefined,
+      request: isSet(object.request) ? RequestDeliverTx.fromJSON(object.request) : undefined,
+      response: isSet(object.response) ? ResponseDeliverTx.fromJSON(object.response) : undefined,
     };
   },
 
   toJSON(message: BlockMetadata_DeliverTx): unknown {
     const obj: any = {};
     message.request !== undefined &&
-      (obj.request = message.request
-        ? RequestDeliverTx.toJSON(message.request)
-        : undefined);
+      (obj.request = message.request ? RequestDeliverTx.toJSON(message.request) : undefined);
     message.response !== undefined &&
-      (obj.response = message.response
-        ? ResponseDeliverTx.toJSON(message.response)
-        : undefined);
+      (obj.response = message.response ? ResponseDeliverTx.toJSON(message.response) : undefined);
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<BlockMetadata_DeliverTx>, I>>(
-    object: I,
-  ): BlockMetadata_DeliverTx {
+  create(base?: DeepPartial<BlockMetadata_DeliverTx>): BlockMetadata_DeliverTx {
+    return BlockMetadata_DeliverTx.fromPartial(base ?? {});
+  },
+
+  fromPartial(object: DeepPartial<BlockMetadata_DeliverTx>): BlockMetadata_DeliverTx {
     const message = createBaseBlockMetadata_DeliverTx();
-    message.request =
-      object.request !== undefined && object.request !== null
-        ? RequestDeliverTx.fromPartial(object.request)
-        : undefined;
-    message.response =
-      object.response !== undefined && object.response !== null
-        ? ResponseDeliverTx.fromPartial(object.response)
-        : undefined;
+    message.request = (object.request !== undefined && object.request !== null)
+      ? RequestDeliverTx.fromPartial(object.request)
+      : undefined;
+    message.response = (object.response !== undefined && object.response !== null)
+      ? ResponseDeliverTx.fromPartial(object.response)
+      : undefined;
     return message;
   },
 };
@@ -447,65 +359,54 @@ messageTypeRegistry.set(BlockMetadata_DeliverTx.$type, BlockMetadata_DeliverTx);
 declare var self: any | undefined;
 declare var window: any | undefined;
 declare var global: any | undefined;
-var globalThis: any = (() => {
-  if (typeof globalThis !== 'undefined') return globalThis;
-  if (typeof self !== 'undefined') return self;
-  if (typeof window !== 'undefined') return window;
-  if (typeof global !== 'undefined') return global;
-  throw 'Unable to locate global object';
+var tsProtoGlobalThis: any = (() => {
+  if (typeof globalThis !== "undefined") {
+    return globalThis;
+  }
+  if (typeof self !== "undefined") {
+    return self;
+  }
+  if (typeof window !== "undefined") {
+    return window;
+  }
+  if (typeof global !== "undefined") {
+    return global;
+  }
+  throw "Unable to locate global object";
 })();
 
-const atob: (b64: string) => string =
-  globalThis.atob ||
-  (b64 => globalThis.Buffer.from(b64, 'base64').toString('binary'));
 function bytesFromBase64(b64: string): Uint8Array {
-  const bin = atob(b64);
-  const arr = new Uint8Array(bin.length);
-  for (let i = 0; i < bin.length; ++i) {
-    arr[i] = bin.charCodeAt(i);
+  if (tsProtoGlobalThis.Buffer) {
+    return Uint8Array.from(tsProtoGlobalThis.Buffer.from(b64, "base64"));
+  } else {
+    const bin = tsProtoGlobalThis.atob(b64);
+    const arr = new Uint8Array(bin.length);
+    for (let i = 0; i < bin.length; ++i) {
+      arr[i] = bin.charCodeAt(i);
+    }
+    return arr;
   }
-  return arr;
 }
 
-const btoa: (bin: string) => string =
-  globalThis.btoa ||
-  (bin => globalThis.Buffer.from(bin, 'binary').toString('base64'));
 function base64FromBytes(arr: Uint8Array): string {
-  const bin: string[] = [];
-  for (const byte of arr) {
-    bin.push(String.fromCharCode(byte));
+  if (tsProtoGlobalThis.Buffer) {
+    return tsProtoGlobalThis.Buffer.from(arr).toString("base64");
+  } else {
+    const bin: string[] = [];
+    arr.forEach((byte) => {
+      bin.push(String.fromCharCode(byte));
+    });
+    return tsProtoGlobalThis.btoa(bin.join(""));
   }
-  return btoa(bin.join(''));
 }
 
-type Builtin =
-  | Date
-  | Function
-  | Uint8Array
-  | string
-  | number
-  | boolean
-  | undefined;
+type Builtin = Date | Function | Uint8Array | string | number | boolean | undefined;
 
-export type DeepPartial<T> = T extends Builtin
-  ? T
-  : T extends Long
-  ? string | number | Long
-  : T extends Array<infer U>
-  ? Array<DeepPartial<U>>
-  : T extends ReadonlyArray<infer U>
-  ? ReadonlyArray<DeepPartial<U>>
-  : T extends {}
-  ? { [K in Exclude<keyof T, '$type'>]?: DeepPartial<T[K]> }
+export type DeepPartial<T> = T extends Builtin ? T
+  : T extends Long ? string | number | Long : T extends Array<infer U> ? Array<DeepPartial<U>>
+  : T extends ReadonlyArray<infer U> ? ReadonlyArray<DeepPartial<U>>
+  : T extends {} ? { [K in Exclude<keyof T, "$type">]?: DeepPartial<T[K]> }
   : Partial<T>;
-
-type KeysOfUnion<T> = T extends T ? keyof T : never;
-export type Exact<P, I extends P> = P extends Builtin
-  ? P
-  : P & { [K in keyof P]: Exact<P[K], I[K]> } & Record<
-        Exclude<keyof I, KeysOfUnion<P> | '$type'>,
-        never
-      >;
 
 if (_m0.util.Long !== Long) {
   _m0.util.Long = Long as any;

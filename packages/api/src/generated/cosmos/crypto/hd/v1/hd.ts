@@ -1,15 +1,15 @@
 /* eslint-disable */
-import { messageTypeRegistry } from '../../../../typeRegistry';
-import Long from 'long';
-import _m0 from 'protobufjs/minimal';
+import Long from "long";
+import _m0 from "protobufjs/minimal";
+import { messageTypeRegistry } from "../../../../typeRegistry";
 
-export const protobufPackage = 'cosmos.crypto.hd.v1';
+export const protobufPackage = "cosmos.crypto.hd.v1";
 
 /** Since: cosmos-sdk 0.46 */
 
 /** BIP44Params is used as path field in ledger item in Record. */
 export interface BIP44Params {
-  $type: 'cosmos.crypto.hd.v1.BIP44Params';
+  $type: "cosmos.crypto.hd.v1.BIP44Params";
   /** purpose is a constant set to 44' (or 0x8000002C) following the BIP43 recommendation */
   purpose: number;
   /** coin_type is a constant that improves privacy */
@@ -27,7 +27,7 @@ export interface BIP44Params {
 
 function createBaseBIP44Params(): BIP44Params {
   return {
-    $type: 'cosmos.crypto.hd.v1.BIP44Params',
+    $type: "cosmos.crypto.hd.v1.BIP44Params",
     purpose: 0,
     coinType: 0,
     account: 0,
@@ -37,12 +37,9 @@ function createBaseBIP44Params(): BIP44Params {
 }
 
 export const BIP44Params = {
-  $type: 'cosmos.crypto.hd.v1.BIP44Params' as const,
+  $type: "cosmos.crypto.hd.v1.BIP44Params" as const,
 
-  encode(
-    message: BIP44Params,
-    writer: _m0.Writer = _m0.Writer.create(),
-  ): _m0.Writer {
+  encode(message: BIP44Params, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.purpose !== 0) {
       writer.uint32(8).uint32(message.purpose);
     }
@@ -98,29 +95,25 @@ export const BIP44Params = {
       coinType: isSet(object.coinType) ? Number(object.coinType) : 0,
       account: isSet(object.account) ? Number(object.account) : 0,
       change: isSet(object.change) ? Boolean(object.change) : false,
-      addressIndex: isSet(object.addressIndex)
-        ? Number(object.addressIndex)
-        : 0,
+      addressIndex: isSet(object.addressIndex) ? Number(object.addressIndex) : 0,
     };
   },
 
   toJSON(message: BIP44Params): unknown {
     const obj: any = {};
-    message.purpose !== undefined &&
-      (obj.purpose = Math.round(message.purpose));
-    message.coinType !== undefined &&
-      (obj.coinType = Math.round(message.coinType));
-    message.account !== undefined &&
-      (obj.account = Math.round(message.account));
+    message.purpose !== undefined && (obj.purpose = Math.round(message.purpose));
+    message.coinType !== undefined && (obj.coinType = Math.round(message.coinType));
+    message.account !== undefined && (obj.account = Math.round(message.account));
     message.change !== undefined && (obj.change = message.change);
-    message.addressIndex !== undefined &&
-      (obj.addressIndex = Math.round(message.addressIndex));
+    message.addressIndex !== undefined && (obj.addressIndex = Math.round(message.addressIndex));
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<BIP44Params>, I>>(
-    object: I,
-  ): BIP44Params {
+  create(base?: DeepPartial<BIP44Params>): BIP44Params {
+    return BIP44Params.fromPartial(base ?? {});
+  },
+
+  fromPartial(object: DeepPartial<BIP44Params>): BIP44Params {
     const message = createBaseBIP44Params();
     message.purpose = object.purpose ?? 0;
     message.coinType = object.coinType ?? 0;
@@ -133,34 +126,32 @@ export const BIP44Params = {
 
 messageTypeRegistry.set(BIP44Params.$type, BIP44Params);
 
-type Builtin =
-  | Date
-  | Function
-  | Uint8Array
-  | string
-  | number
-  | boolean
-  | undefined;
+declare var self: any | undefined;
+declare var window: any | undefined;
+declare var global: any | undefined;
+var tsProtoGlobalThis: any = (() => {
+  if (typeof globalThis !== "undefined") {
+    return globalThis;
+  }
+  if (typeof self !== "undefined") {
+    return self;
+  }
+  if (typeof window !== "undefined") {
+    return window;
+  }
+  if (typeof global !== "undefined") {
+    return global;
+  }
+  throw "Unable to locate global object";
+})();
 
-export type DeepPartial<T> = T extends Builtin
-  ? T
-  : T extends Long
-  ? string | number | Long
-  : T extends Array<infer U>
-  ? Array<DeepPartial<U>>
-  : T extends ReadonlyArray<infer U>
-  ? ReadonlyArray<DeepPartial<U>>
-  : T extends {}
-  ? { [K in Exclude<keyof T, '$type'>]?: DeepPartial<T[K]> }
+type Builtin = Date | Function | Uint8Array | string | number | boolean | undefined;
+
+export type DeepPartial<T> = T extends Builtin ? T
+  : T extends Long ? string | number | Long : T extends Array<infer U> ? Array<DeepPartial<U>>
+  : T extends ReadonlyArray<infer U> ? ReadonlyArray<DeepPartial<U>>
+  : T extends {} ? { [K in Exclude<keyof T, "$type">]?: DeepPartial<T[K]> }
   : Partial<T>;
-
-type KeysOfUnion<T> = T extends T ? keyof T : never;
-export type Exact<P, I extends P> = P extends Builtin
-  ? P
-  : P & { [K in keyof P]: Exact<P[K], I[K]> } & Record<
-        Exclude<keyof I, KeysOfUnion<P> | '$type'>,
-        never
-      >;
 
 if (_m0.util.Long !== Long) {
   _m0.util.Long = Long as any;

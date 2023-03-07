@@ -1,10 +1,10 @@
 /* eslint-disable */
-import { messageTypeRegistry } from '../../../typeRegistry';
-import Long from 'long';
-import _m0 from 'protobufjs/minimal';
-import { Any } from '../../../google/protobuf/any';
+import Long from "long";
+import _m0 from "protobufjs/minimal";
+import { Any } from "../../../google/protobuf/any";
+import { messageTypeRegistry } from "../../../typeRegistry";
 
-export const protobufPackage = 'cosmos.app.v1alpha1';
+export const protobufPackage = "cosmos.app.v1alpha1";
 
 /**
  * Config represents the configuration for a Cosmos SDK ABCI app.
@@ -16,14 +16,14 @@ export const protobufPackage = 'cosmos.app.v1alpha1';
  * their state machine with a config object alone.
  */
 export interface Config {
-  $type: 'cosmos.app.v1alpha1.Config';
+  $type: "cosmos.app.v1alpha1.Config";
   /** modules are the module configurations for the app. */
   modules: ModuleConfig[];
 }
 
 /** ModuleConfig is a module configuration for an app. */
 export interface ModuleConfig {
-  $type: 'cosmos.app.v1alpha1.ModuleConfig';
+  $type: "cosmos.app.v1alpha1.ModuleConfig";
   /**
    * name is the unique name of the module within the app. It should be a name
    * that persists between different versions of a module so that modules
@@ -45,16 +45,13 @@ export interface ModuleConfig {
 }
 
 function createBaseConfig(): Config {
-  return { $type: 'cosmos.app.v1alpha1.Config', modules: [] };
+  return { $type: "cosmos.app.v1alpha1.Config", modules: [] };
 }
 
 export const Config = {
-  $type: 'cosmos.app.v1alpha1.Config' as const,
+  $type: "cosmos.app.v1alpha1.Config" as const,
 
-  encode(
-    message: Config,
-    writer: _m0.Writer = _m0.Writer.create(),
-  ): _m0.Writer {
+  encode(message: Config, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     for (const v of message.modules) {
       ModuleConfig.encode(v!, writer.uint32(10).fork()).ldelim();
     }
@@ -82,28 +79,27 @@ export const Config = {
   fromJSON(object: any): Config {
     return {
       $type: Config.$type,
-      modules: Array.isArray(object?.modules)
-        ? object.modules.map((e: any) => ModuleConfig.fromJSON(e))
-        : [],
+      modules: Array.isArray(object?.modules) ? object.modules.map((e: any) => ModuleConfig.fromJSON(e)) : [],
     };
   },
 
   toJSON(message: Config): unknown {
     const obj: any = {};
     if (message.modules) {
-      obj.modules = message.modules.map(e =>
-        e ? ModuleConfig.toJSON(e) : undefined,
-      );
+      obj.modules = message.modules.map((e) => e ? ModuleConfig.toJSON(e) : undefined);
     } else {
       obj.modules = [];
     }
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<Config>, I>>(object: I): Config {
+  create(base?: DeepPartial<Config>): Config {
+    return Config.fromPartial(base ?? {});
+  },
+
+  fromPartial(object: DeepPartial<Config>): Config {
     const message = createBaseConfig();
-    message.modules =
-      object.modules?.map(e => ModuleConfig.fromPartial(e)) || [];
+    message.modules = object.modules?.map((e) => ModuleConfig.fromPartial(e)) || [];
     return message;
   },
 };
@@ -111,21 +107,14 @@ export const Config = {
 messageTypeRegistry.set(Config.$type, Config);
 
 function createBaseModuleConfig(): ModuleConfig {
-  return {
-    $type: 'cosmos.app.v1alpha1.ModuleConfig',
-    name: '',
-    config: undefined,
-  };
+  return { $type: "cosmos.app.v1alpha1.ModuleConfig", name: "", config: undefined };
 }
 
 export const ModuleConfig = {
-  $type: 'cosmos.app.v1alpha1.ModuleConfig' as const,
+  $type: "cosmos.app.v1alpha1.ModuleConfig" as const,
 
-  encode(
-    message: ModuleConfig,
-    writer: _m0.Writer = _m0.Writer.create(),
-  ): _m0.Writer {
-    if (message.name !== '') {
+  encode(message: ModuleConfig, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+    if (message.name !== "") {
       writer.uint32(10).string(message.name);
     }
     if (message.config !== undefined) {
@@ -158,7 +147,7 @@ export const ModuleConfig = {
   fromJSON(object: any): ModuleConfig {
     return {
       $type: ModuleConfig.$type,
-      name: isSet(object.name) ? String(object.name) : '',
+      name: isSet(object.name) ? String(object.name) : "",
       config: isSet(object.config) ? Any.fromJSON(object.config) : undefined,
     };
   },
@@ -166,54 +155,33 @@ export const ModuleConfig = {
   toJSON(message: ModuleConfig): unknown {
     const obj: any = {};
     message.name !== undefined && (obj.name = message.name);
-    message.config !== undefined &&
-      (obj.config = message.config ? Any.toJSON(message.config) : undefined);
+    message.config !== undefined && (obj.config = message.config ? Any.toJSON(message.config) : undefined);
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<ModuleConfig>, I>>(
-    object: I,
-  ): ModuleConfig {
+  create(base?: DeepPartial<ModuleConfig>): ModuleConfig {
+    return ModuleConfig.fromPartial(base ?? {});
+  },
+
+  fromPartial(object: DeepPartial<ModuleConfig>): ModuleConfig {
     const message = createBaseModuleConfig();
-    message.name = object.name ?? '';
-    message.config =
-      object.config !== undefined && object.config !== null
-        ? Any.fromPartial(object.config)
-        : undefined;
+    message.name = object.name ?? "";
+    message.config = (object.config !== undefined && object.config !== null)
+      ? Any.fromPartial(object.config)
+      : undefined;
     return message;
   },
 };
 
 messageTypeRegistry.set(ModuleConfig.$type, ModuleConfig);
 
-type Builtin =
-  | Date
-  | Function
-  | Uint8Array
-  | string
-  | number
-  | boolean
-  | undefined;
+type Builtin = Date | Function | Uint8Array | string | number | boolean | undefined;
 
-export type DeepPartial<T> = T extends Builtin
-  ? T
-  : T extends Long
-  ? string | number | Long
-  : T extends Array<infer U>
-  ? Array<DeepPartial<U>>
-  : T extends ReadonlyArray<infer U>
-  ? ReadonlyArray<DeepPartial<U>>
-  : T extends {}
-  ? { [K in Exclude<keyof T, '$type'>]?: DeepPartial<T[K]> }
+export type DeepPartial<T> = T extends Builtin ? T
+  : T extends Long ? string | number | Long : T extends Array<infer U> ? Array<DeepPartial<U>>
+  : T extends ReadonlyArray<infer U> ? ReadonlyArray<DeepPartial<U>>
+  : T extends {} ? { [K in Exclude<keyof T, "$type">]?: DeepPartial<T[K]> }
   : Partial<T>;
-
-type KeysOfUnion<T> = T extends T ? keyof T : never;
-export type Exact<P, I extends P> = P extends Builtin
-  ? P
-  : P & { [K in keyof P]: Exact<P[K], I[K]> } & Record<
-        Exclude<keyof I, KeysOfUnion<P> | '$type'>,
-        never
-      >;
 
 if (_m0.util.Long !== Long) {
   _m0.util.Long = Long as any;

@@ -1,14 +1,14 @@
 /* eslint-disable */
-import { messageTypeRegistry } from '../../../typeRegistry';
-import Long from 'long';
-import _m0 from 'protobufjs/minimal';
-import { Any } from '../../../google/protobuf/any';
+import Long from "long";
+import _m0 from "protobufjs/minimal";
+import { Any } from "../../../google/protobuf/any";
+import { messageTypeRegistry } from "../../../typeRegistry";
 
-export const protobufPackage = 'cosmos.nft.v1beta1';
+export const protobufPackage = "cosmos.nft.v1beta1";
 
 /** Class defines the class of the nft type. */
 export interface Class {
-  $type: 'cosmos.nft.v1beta1.Class';
+  $type: "cosmos.nft.v1beta1.Class";
   /** id defines the unique identifier of the NFT classification, similar to the contract address of ERC721 */
   id: string;
   /** name defines the human-readable name of the NFT classification. Optional */
@@ -27,7 +27,7 @@ export interface Class {
 
 /** NFT defines the NFT. */
 export interface NFT {
-  $type: 'cosmos.nft.v1beta1.NFT';
+  $type: "cosmos.nft.v1beta1.NFT";
   /** class_id associated with the NFT, similar to the contract address of ERC721 */
   classId: string;
   /** id is a unique identifier of the NFT */
@@ -42,37 +42,37 @@ export interface NFT {
 
 function createBaseClass(): Class {
   return {
-    $type: 'cosmos.nft.v1beta1.Class',
-    id: '',
-    name: '',
-    symbol: '',
-    description: '',
-    uri: '',
-    uriHash: '',
+    $type: "cosmos.nft.v1beta1.Class",
+    id: "",
+    name: "",
+    symbol: "",
+    description: "",
+    uri: "",
+    uriHash: "",
     data: undefined,
   };
 }
 
 export const Class = {
-  $type: 'cosmos.nft.v1beta1.Class' as const,
+  $type: "cosmos.nft.v1beta1.Class" as const,
 
   encode(message: Class, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
-    if (message.id !== '') {
+    if (message.id !== "") {
       writer.uint32(10).string(message.id);
     }
-    if (message.name !== '') {
+    if (message.name !== "") {
       writer.uint32(18).string(message.name);
     }
-    if (message.symbol !== '') {
+    if (message.symbol !== "") {
       writer.uint32(26).string(message.symbol);
     }
-    if (message.description !== '') {
+    if (message.description !== "") {
       writer.uint32(34).string(message.description);
     }
-    if (message.uri !== '') {
+    if (message.uri !== "") {
       writer.uint32(42).string(message.uri);
     }
-    if (message.uriHash !== '') {
+    if (message.uriHash !== "") {
       writer.uint32(50).string(message.uriHash);
     }
     if (message.data !== undefined) {
@@ -120,12 +120,12 @@ export const Class = {
   fromJSON(object: any): Class {
     return {
       $type: Class.$type,
-      id: isSet(object.id) ? String(object.id) : '',
-      name: isSet(object.name) ? String(object.name) : '',
-      symbol: isSet(object.symbol) ? String(object.symbol) : '',
-      description: isSet(object.description) ? String(object.description) : '',
-      uri: isSet(object.uri) ? String(object.uri) : '',
-      uriHash: isSet(object.uriHash) ? String(object.uriHash) : '',
+      id: isSet(object.id) ? String(object.id) : "",
+      name: isSet(object.name) ? String(object.name) : "",
+      symbol: isSet(object.symbol) ? String(object.symbol) : "",
+      description: isSet(object.description) ? String(object.description) : "",
+      uri: isSet(object.uri) ? String(object.uri) : "",
+      uriHash: isSet(object.uriHash) ? String(object.uriHash) : "",
       data: isSet(object.data) ? Any.fromJSON(object.data) : undefined,
     };
   },
@@ -135,27 +135,26 @@ export const Class = {
     message.id !== undefined && (obj.id = message.id);
     message.name !== undefined && (obj.name = message.name);
     message.symbol !== undefined && (obj.symbol = message.symbol);
-    message.description !== undefined &&
-      (obj.description = message.description);
+    message.description !== undefined && (obj.description = message.description);
     message.uri !== undefined && (obj.uri = message.uri);
     message.uriHash !== undefined && (obj.uriHash = message.uriHash);
-    message.data !== undefined &&
-      (obj.data = message.data ? Any.toJSON(message.data) : undefined);
+    message.data !== undefined && (obj.data = message.data ? Any.toJSON(message.data) : undefined);
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<Class>, I>>(object: I): Class {
+  create(base?: DeepPartial<Class>): Class {
+    return Class.fromPartial(base ?? {});
+  },
+
+  fromPartial(object: DeepPartial<Class>): Class {
     const message = createBaseClass();
-    message.id = object.id ?? '';
-    message.name = object.name ?? '';
-    message.symbol = object.symbol ?? '';
-    message.description = object.description ?? '';
-    message.uri = object.uri ?? '';
-    message.uriHash = object.uriHash ?? '';
-    message.data =
-      object.data !== undefined && object.data !== null
-        ? Any.fromPartial(object.data)
-        : undefined;
+    message.id = object.id ?? "";
+    message.name = object.name ?? "";
+    message.symbol = object.symbol ?? "";
+    message.description = object.description ?? "";
+    message.uri = object.uri ?? "";
+    message.uriHash = object.uriHash ?? "";
+    message.data = (object.data !== undefined && object.data !== null) ? Any.fromPartial(object.data) : undefined;
     return message;
   },
 };
@@ -163,30 +162,23 @@ export const Class = {
 messageTypeRegistry.set(Class.$type, Class);
 
 function createBaseNFT(): NFT {
-  return {
-    $type: 'cosmos.nft.v1beta1.NFT',
-    classId: '',
-    id: '',
-    uri: '',
-    uriHash: '',
-    data: undefined,
-  };
+  return { $type: "cosmos.nft.v1beta1.NFT", classId: "", id: "", uri: "", uriHash: "", data: undefined };
 }
 
 export const NFT = {
-  $type: 'cosmos.nft.v1beta1.NFT' as const,
+  $type: "cosmos.nft.v1beta1.NFT" as const,
 
   encode(message: NFT, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
-    if (message.classId !== '') {
+    if (message.classId !== "") {
       writer.uint32(10).string(message.classId);
     }
-    if (message.id !== '') {
+    if (message.id !== "") {
       writer.uint32(18).string(message.id);
     }
-    if (message.uri !== '') {
+    if (message.uri !== "") {
       writer.uint32(26).string(message.uri);
     }
-    if (message.uriHash !== '') {
+    if (message.uriHash !== "") {
       writer.uint32(34).string(message.uriHash);
     }
     if (message.data !== undefined) {
@@ -228,10 +220,10 @@ export const NFT = {
   fromJSON(object: any): NFT {
     return {
       $type: NFT.$type,
-      classId: isSet(object.classId) ? String(object.classId) : '',
-      id: isSet(object.id) ? String(object.id) : '',
-      uri: isSet(object.uri) ? String(object.uri) : '',
-      uriHash: isSet(object.uriHash) ? String(object.uriHash) : '',
+      classId: isSet(object.classId) ? String(object.classId) : "",
+      id: isSet(object.id) ? String(object.id) : "",
+      uri: isSet(object.uri) ? String(object.uri) : "",
+      uriHash: isSet(object.uriHash) ? String(object.uriHash) : "",
       data: isSet(object.data) ? Any.fromJSON(object.data) : undefined,
     };
   },
@@ -242,55 +234,53 @@ export const NFT = {
     message.id !== undefined && (obj.id = message.id);
     message.uri !== undefined && (obj.uri = message.uri);
     message.uriHash !== undefined && (obj.uriHash = message.uriHash);
-    message.data !== undefined &&
-      (obj.data = message.data ? Any.toJSON(message.data) : undefined);
+    message.data !== undefined && (obj.data = message.data ? Any.toJSON(message.data) : undefined);
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<NFT>, I>>(object: I): NFT {
+  create(base?: DeepPartial<NFT>): NFT {
+    return NFT.fromPartial(base ?? {});
+  },
+
+  fromPartial(object: DeepPartial<NFT>): NFT {
     const message = createBaseNFT();
-    message.classId = object.classId ?? '';
-    message.id = object.id ?? '';
-    message.uri = object.uri ?? '';
-    message.uriHash = object.uriHash ?? '';
-    message.data =
-      object.data !== undefined && object.data !== null
-        ? Any.fromPartial(object.data)
-        : undefined;
+    message.classId = object.classId ?? "";
+    message.id = object.id ?? "";
+    message.uri = object.uri ?? "";
+    message.uriHash = object.uriHash ?? "";
+    message.data = (object.data !== undefined && object.data !== null) ? Any.fromPartial(object.data) : undefined;
     return message;
   },
 };
 
 messageTypeRegistry.set(NFT.$type, NFT);
 
-type Builtin =
-  | Date
-  | Function
-  | Uint8Array
-  | string
-  | number
-  | boolean
-  | undefined;
+declare var self: any | undefined;
+declare var window: any | undefined;
+declare var global: any | undefined;
+var tsProtoGlobalThis: any = (() => {
+  if (typeof globalThis !== "undefined") {
+    return globalThis;
+  }
+  if (typeof self !== "undefined") {
+    return self;
+  }
+  if (typeof window !== "undefined") {
+    return window;
+  }
+  if (typeof global !== "undefined") {
+    return global;
+  }
+  throw "Unable to locate global object";
+})();
 
-export type DeepPartial<T> = T extends Builtin
-  ? T
-  : T extends Long
-  ? string | number | Long
-  : T extends Array<infer U>
-  ? Array<DeepPartial<U>>
-  : T extends ReadonlyArray<infer U>
-  ? ReadonlyArray<DeepPartial<U>>
-  : T extends {}
-  ? { [K in Exclude<keyof T, '$type'>]?: DeepPartial<T[K]> }
+type Builtin = Date | Function | Uint8Array | string | number | boolean | undefined;
+
+export type DeepPartial<T> = T extends Builtin ? T
+  : T extends Long ? string | number | Long : T extends Array<infer U> ? Array<DeepPartial<U>>
+  : T extends ReadonlyArray<infer U> ? ReadonlyArray<DeepPartial<U>>
+  : T extends {} ? { [K in Exclude<keyof T, "$type">]?: DeepPartial<T[K]> }
   : Partial<T>;
-
-type KeysOfUnion<T> = T extends T ? keyof T : never;
-export type Exact<P, I extends P> = P extends Builtin
-  ? P
-  : P & { [K in keyof P]: Exact<P[K], I[K]> } & Record<
-        Exclude<keyof I, KeysOfUnion<P> | '$type'>,
-        never
-      >;
 
 if (_m0.util.Long !== Long) {
   _m0.util.Long = Long as any;

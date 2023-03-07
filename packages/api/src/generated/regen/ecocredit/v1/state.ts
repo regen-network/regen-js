@@ -1,18 +1,18 @@
 /* eslint-disable */
-import { messageTypeRegistry } from '../../../typeRegistry';
-import Long from 'long';
-import _m0 from 'protobufjs/minimal';
-import { Coin } from '../../../cosmos/base/v1beta1/coin';
-import { Timestamp } from '../../../google/protobuf/timestamp';
+import Long from "long";
+import _m0 from "protobufjs/minimal";
+import { Coin } from "../../../cosmos/base/v1beta1/coin";
+import { Timestamp } from "../../../google/protobuf/timestamp";
+import { messageTypeRegistry } from "../../../typeRegistry";
 
-export const protobufPackage = 'regen.ecocredit.v1';
+export const protobufPackage = "regen.ecocredit.v1";
 
 /**
  * CreditType defines the measurement unit/precision of a certain credit type
  * (e.g. carbon, biodiversity...)
  */
 export interface CreditType {
-  $type: 'regen.ecocredit.v1.CreditType';
+  $type: "regen.ecocredit.v1.CreditType";
   /**
    * abbreviation is a 1-3 character uppercase abbreviation of the CreditType
    * name, used in batch denominations within the CreditType. It must be unique.
@@ -28,7 +28,7 @@ export interface CreditType {
 
 /** Class represents the high-level on-chain information for a credit class. */
 export interface Class {
-  $type: 'regen.ecocredit.v1.Class';
+  $type: "regen.ecocredit.v1.Class";
   /**
    * key is the table row identifier of the credit class used internally for
    * efficient lookups. This identifier is auto-incrementing.
@@ -52,7 +52,7 @@ export interface Class {
  * issuers
  */
 export interface ClassIssuer {
-  $type: 'regen.ecocredit.v1.ClassIssuer';
+  $type: "regen.ecocredit.v1.ClassIssuer";
   /**
    * class_key is the table row identifier of the credit class used internally
    * for efficient lookups. This links a class issuer to a credit class.
@@ -64,7 +64,7 @@ export interface ClassIssuer {
 
 /** Project represents the high-level on-chain information for a project. */
 export interface Project {
-  $type: 'regen.ecocredit.v1.Project';
+  $type: "regen.ecocredit.v1.Project";
   /**
    * key is the table row identifier of the project used internally for
    * efficient lookups. This identifier is auto-incrementing.
@@ -95,7 +95,7 @@ export interface Project {
 
 /** Batch represents the high-level on-chain information for a credit batch. */
 export interface Batch {
-  $type: 'regen.ecocredit.v1.Batch';
+  $type: "regen.ecocredit.v1.Batch";
   /**
    * key is the table row identifier of the credit batch used internally for
    * efficient lookups. This identifier is auto-incrementing.
@@ -143,7 +143,7 @@ export interface Batch {
  * within a credit type.
  */
 export interface ClassSequence {
-  $type: 'regen.ecocredit.v1.ClassSequence';
+  $type: "regen.ecocredit.v1.ClassSequence";
   /**
    * credit_type_abbrev is the credit type abbreviation. This links a class
    * sequence to a credit type.
@@ -161,7 +161,7 @@ export interface ClassSequence {
  * a credit class.
  */
 export interface ProjectSequence {
-  $type: 'regen.ecocredit.v1.ProjectSequence';
+  $type: "regen.ecocredit.v1.ProjectSequence";
   /**
    * class_key is the table row identifier of the credit class used internally
    * for efficient lookups. This links a project sequence to a credit class.
@@ -179,7 +179,7 @@ export interface ProjectSequence {
  * within a project.
  */
 export interface BatchSequence {
-  $type: 'regen.ecocredit.v1.BatchSequence';
+  $type: "regen.ecocredit.v1.BatchSequence";
   /**
    * project_key is the table row identifier of the project used internally for
    * efficient lookups. This links a batch sequence to a project.
@@ -194,7 +194,7 @@ export interface BatchSequence {
 
 /** BatchBalance stores each accounts credit balance. */
 export interface BatchBalance {
-  $type: 'regen.ecocredit.v1.BatchBalance';
+  $type: "regen.ecocredit.v1.BatchBalance";
   /**
    * batch_key is the table row identifier of the credit batch used internally
    * for efficient lookups. This links a batch balance to a credit batch.
@@ -217,7 +217,7 @@ export interface BatchBalance {
 
 /** BatchSupply stores the supply of credits for a credit batch. */
 export interface BatchSupply {
-  $type: 'regen.ecocredit.v1.BatchSupply';
+  $type: "regen.ecocredit.v1.BatchSupply";
   /**
    * batch_key is the table row identifier of the credit batch used internally
    * for efficient lookups. This links a batch supply to a credit batch.
@@ -255,7 +255,7 @@ export interface BatchSupply {
  * bridge operations taking place within another credit class.
  */
 export interface OriginTxIndex {
-  $type: 'regen.ecocredit.v1.OriginTxIndex';
+  $type: "regen.ecocredit.v1.OriginTxIndex";
   /**
    * class_key is the table row identifier of the credit class within which the
    * credits were issued or minted. The class_key is included within the index
@@ -282,7 +282,7 @@ export interface OriginTxIndex {
  * have been bridged will always be bridged back to the original contract.
  */
 export interface BatchContract {
-  $type: 'regen.ecocredit.v1.BatchContract';
+  $type: "regen.ecocredit.v1.BatchContract";
   /**
    * batch_key is the table row identifier of the credit batch used internally
    * for efficient lookups. This links an external contract to a credit batch.
@@ -312,7 +312,7 @@ export interface BatchContract {
  * Since Revision 2
  */
 export interface ClassCreatorAllowlist {
-  $type: 'regen.ecocredit.v1.ClassCreatorAllowlist';
+  $type: "regen.ecocredit.v1.ClassCreatorAllowlist";
   /** enabled is whether or not the allow list is enabled. */
   enabled: boolean;
 }
@@ -324,7 +324,7 @@ export interface ClassCreatorAllowlist {
  * Since Revision 2
  */
 export interface AllowedClassCreator {
-  $type: 'regen.ecocredit.v1.AllowedClassCreator';
+  $type: "regen.ecocredit.v1.AllowedClassCreator";
   /** address is the address that is allowed to create credit classes */
   address: Uint8Array;
 }
@@ -336,7 +336,7 @@ export interface AllowedClassCreator {
  * Since Revision 2
  */
 export interface ClassFee {
-  $type: 'regen.ecocredit.v1.ClassFee';
+  $type: "regen.ecocredit.v1.ClassFee";
   /**
    * fee is the credit class creation fee. If not set, a credit class creation
    * fee is not required.
@@ -353,35 +353,26 @@ export interface ClassFee {
  * Since Revision 2
  */
 export interface AllowedBridgeChain {
-  $type: 'regen.ecocredit.v1.AllowedBridgeChain';
+  $type: "regen.ecocredit.v1.AllowedBridgeChain";
   /** chain_name is the name of the chain allowed to bridge ecocredits to. */
   chainName: string;
 }
 
 function createBaseCreditType(): CreditType {
-  return {
-    $type: 'regen.ecocredit.v1.CreditType',
-    abbreviation: '',
-    name: '',
-    unit: '',
-    precision: 0,
-  };
+  return { $type: "regen.ecocredit.v1.CreditType", abbreviation: "", name: "", unit: "", precision: 0 };
 }
 
 export const CreditType = {
-  $type: 'regen.ecocredit.v1.CreditType' as const,
+  $type: "regen.ecocredit.v1.CreditType" as const,
 
-  encode(
-    message: CreditType,
-    writer: _m0.Writer = _m0.Writer.create(),
-  ): _m0.Writer {
-    if (message.abbreviation !== '') {
+  encode(message: CreditType, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+    if (message.abbreviation !== "") {
       writer.uint32(10).string(message.abbreviation);
     }
-    if (message.name !== '') {
+    if (message.name !== "") {
       writer.uint32(18).string(message.name);
     }
-    if (message.unit !== '') {
+    if (message.unit !== "") {
       writer.uint32(26).string(message.unit);
     }
     if (message.precision !== 0) {
@@ -420,33 +411,31 @@ export const CreditType = {
   fromJSON(object: any): CreditType {
     return {
       $type: CreditType.$type,
-      abbreviation: isSet(object.abbreviation)
-        ? String(object.abbreviation)
-        : '',
-      name: isSet(object.name) ? String(object.name) : '',
-      unit: isSet(object.unit) ? String(object.unit) : '',
+      abbreviation: isSet(object.abbreviation) ? String(object.abbreviation) : "",
+      name: isSet(object.name) ? String(object.name) : "",
+      unit: isSet(object.unit) ? String(object.unit) : "",
       precision: isSet(object.precision) ? Number(object.precision) : 0,
     };
   },
 
   toJSON(message: CreditType): unknown {
     const obj: any = {};
-    message.abbreviation !== undefined &&
-      (obj.abbreviation = message.abbreviation);
+    message.abbreviation !== undefined && (obj.abbreviation = message.abbreviation);
     message.name !== undefined && (obj.name = message.name);
     message.unit !== undefined && (obj.unit = message.unit);
-    message.precision !== undefined &&
-      (obj.precision = Math.round(message.precision));
+    message.precision !== undefined && (obj.precision = Math.round(message.precision));
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<CreditType>, I>>(
-    object: I,
-  ): CreditType {
+  create(base?: DeepPartial<CreditType>): CreditType {
+    return CreditType.fromPartial(base ?? {});
+  },
+
+  fromPartial(object: DeepPartial<CreditType>): CreditType {
     const message = createBaseCreditType();
-    message.abbreviation = object.abbreviation ?? '';
-    message.name = object.name ?? '';
-    message.unit = object.unit ?? '';
+    message.abbreviation = object.abbreviation ?? "";
+    message.name = object.name ?? "";
+    message.unit = object.unit ?? "";
     message.precision = object.precision ?? 0;
     return message;
   },
@@ -456,32 +445,32 @@ messageTypeRegistry.set(CreditType.$type, CreditType);
 
 function createBaseClass(): Class {
   return {
-    $type: 'regen.ecocredit.v1.Class',
+    $type: "regen.ecocredit.v1.Class",
     key: Long.UZERO,
-    id: '',
+    id: "",
     admin: new Uint8Array(),
-    metadata: '',
-    creditTypeAbbrev: '',
+    metadata: "",
+    creditTypeAbbrev: "",
   };
 }
 
 export const Class = {
-  $type: 'regen.ecocredit.v1.Class' as const,
+  $type: "regen.ecocredit.v1.Class" as const,
 
   encode(message: Class, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (!message.key.isZero()) {
       writer.uint32(8).uint64(message.key);
     }
-    if (message.id !== '') {
+    if (message.id !== "") {
       writer.uint32(18).string(message.id);
     }
     if (message.admin.length !== 0) {
       writer.uint32(26).bytes(message.admin);
     }
-    if (message.metadata !== '') {
+    if (message.metadata !== "") {
       writer.uint32(34).string(message.metadata);
     }
-    if (message.creditTypeAbbrev !== '') {
+    if (message.creditTypeAbbrev !== "") {
       writer.uint32(42).string(message.creditTypeAbbrev);
     }
     return writer;
@@ -520,43 +509,36 @@ export const Class = {
   fromJSON(object: any): Class {
     return {
       $type: Class.$type,
-      key: isSet(object.key) ? Long.fromString(object.key) : Long.UZERO,
-      id: isSet(object.id) ? String(object.id) : '',
-      admin: isSet(object.admin)
-        ? bytesFromBase64(object.admin)
-        : new Uint8Array(),
-      metadata: isSet(object.metadata) ? String(object.metadata) : '',
-      creditTypeAbbrev: isSet(object.creditTypeAbbrev)
-        ? String(object.creditTypeAbbrev)
-        : '',
+      key: isSet(object.key) ? Long.fromValue(object.key) : Long.UZERO,
+      id: isSet(object.id) ? String(object.id) : "",
+      admin: isSet(object.admin) ? bytesFromBase64(object.admin) : new Uint8Array(),
+      metadata: isSet(object.metadata) ? String(object.metadata) : "",
+      creditTypeAbbrev: isSet(object.creditTypeAbbrev) ? String(object.creditTypeAbbrev) : "",
     };
   },
 
   toJSON(message: Class): unknown {
     const obj: any = {};
-    message.key !== undefined &&
-      (obj.key = (message.key || Long.UZERO).toString());
+    message.key !== undefined && (obj.key = (message.key || Long.UZERO).toString());
     message.id !== undefined && (obj.id = message.id);
     message.admin !== undefined &&
-      (obj.admin = base64FromBytes(
-        message.admin !== undefined ? message.admin : new Uint8Array(),
-      ));
+      (obj.admin = base64FromBytes(message.admin !== undefined ? message.admin : new Uint8Array()));
     message.metadata !== undefined && (obj.metadata = message.metadata);
-    message.creditTypeAbbrev !== undefined &&
-      (obj.creditTypeAbbrev = message.creditTypeAbbrev);
+    message.creditTypeAbbrev !== undefined && (obj.creditTypeAbbrev = message.creditTypeAbbrev);
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<Class>, I>>(object: I): Class {
+  create(base?: DeepPartial<Class>): Class {
+    return Class.fromPartial(base ?? {});
+  },
+
+  fromPartial(object: DeepPartial<Class>): Class {
     const message = createBaseClass();
-    message.key =
-      object.key !== undefined && object.key !== null
-        ? Long.fromValue(object.key)
-        : Long.UZERO;
-    message.id = object.id ?? '';
+    message.key = (object.key !== undefined && object.key !== null) ? Long.fromValue(object.key) : Long.UZERO;
+    message.id = object.id ?? "";
     message.admin = object.admin ?? new Uint8Array();
-    message.metadata = object.metadata ?? '';
-    message.creditTypeAbbrev = object.creditTypeAbbrev ?? '';
+    message.metadata = object.metadata ?? "";
+    message.creditTypeAbbrev = object.creditTypeAbbrev ?? "";
     return message;
   },
 };
@@ -564,20 +546,13 @@ export const Class = {
 messageTypeRegistry.set(Class.$type, Class);
 
 function createBaseClassIssuer(): ClassIssuer {
-  return {
-    $type: 'regen.ecocredit.v1.ClassIssuer',
-    classKey: Long.UZERO,
-    issuer: new Uint8Array(),
-  };
+  return { $type: "regen.ecocredit.v1.ClassIssuer", classKey: Long.UZERO, issuer: new Uint8Array() };
 }
 
 export const ClassIssuer = {
-  $type: 'regen.ecocredit.v1.ClassIssuer' as const,
+  $type: "regen.ecocredit.v1.ClassIssuer" as const,
 
-  encode(
-    message: ClassIssuer,
-    writer: _m0.Writer = _m0.Writer.create(),
-  ): _m0.Writer {
+  encode(message: ClassIssuer, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (!message.classKey.isZero()) {
       writer.uint32(8).uint64(message.classKey);
     }
@@ -611,34 +586,28 @@ export const ClassIssuer = {
   fromJSON(object: any): ClassIssuer {
     return {
       $type: ClassIssuer.$type,
-      classKey: isSet(object.classKey)
-        ? Long.fromString(object.classKey)
-        : Long.UZERO,
-      issuer: isSet(object.issuer)
-        ? bytesFromBase64(object.issuer)
-        : new Uint8Array(),
+      classKey: isSet(object.classKey) ? Long.fromValue(object.classKey) : Long.UZERO,
+      issuer: isSet(object.issuer) ? bytesFromBase64(object.issuer) : new Uint8Array(),
     };
   },
 
   toJSON(message: ClassIssuer): unknown {
     const obj: any = {};
-    message.classKey !== undefined &&
-      (obj.classKey = (message.classKey || Long.UZERO).toString());
+    message.classKey !== undefined && (obj.classKey = (message.classKey || Long.UZERO).toString());
     message.issuer !== undefined &&
-      (obj.issuer = base64FromBytes(
-        message.issuer !== undefined ? message.issuer : new Uint8Array(),
-      ));
+      (obj.issuer = base64FromBytes(message.issuer !== undefined ? message.issuer : new Uint8Array()));
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<ClassIssuer>, I>>(
-    object: I,
-  ): ClassIssuer {
+  create(base?: DeepPartial<ClassIssuer>): ClassIssuer {
+    return ClassIssuer.fromPartial(base ?? {});
+  },
+
+  fromPartial(object: DeepPartial<ClassIssuer>): ClassIssuer {
     const message = createBaseClassIssuer();
-    message.classKey =
-      object.classKey !== undefined && object.classKey !== null
-        ? Long.fromValue(object.classKey)
-        : Long.UZERO;
+    message.classKey = (object.classKey !== undefined && object.classKey !== null)
+      ? Long.fromValue(object.classKey)
+      : Long.UZERO;
     message.issuer = object.issuer ?? new Uint8Array();
     return message;
   },
@@ -648,28 +617,25 @@ messageTypeRegistry.set(ClassIssuer.$type, ClassIssuer);
 
 function createBaseProject(): Project {
   return {
-    $type: 'regen.ecocredit.v1.Project',
+    $type: "regen.ecocredit.v1.Project",
     key: Long.UZERO,
-    id: '',
+    id: "",
     admin: new Uint8Array(),
     classKey: Long.UZERO,
-    jurisdiction: '',
-    metadata: '',
-    referenceId: '',
+    jurisdiction: "",
+    metadata: "",
+    referenceId: "",
   };
 }
 
 export const Project = {
-  $type: 'regen.ecocredit.v1.Project' as const,
+  $type: "regen.ecocredit.v1.Project" as const,
 
-  encode(
-    message: Project,
-    writer: _m0.Writer = _m0.Writer.create(),
-  ): _m0.Writer {
+  encode(message: Project, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (!message.key.isZero()) {
       writer.uint32(8).uint64(message.key);
     }
-    if (message.id !== '') {
+    if (message.id !== "") {
       writer.uint32(18).string(message.id);
     }
     if (message.admin.length !== 0) {
@@ -678,13 +644,13 @@ export const Project = {
     if (!message.classKey.isZero()) {
       writer.uint32(32).uint64(message.classKey);
     }
-    if (message.jurisdiction !== '') {
+    if (message.jurisdiction !== "") {
       writer.uint32(42).string(message.jurisdiction);
     }
-    if (message.metadata !== '') {
+    if (message.metadata !== "") {
       writer.uint32(50).string(message.metadata);
     }
-    if (message.referenceId !== '') {
+    if (message.referenceId !== "") {
       writer.uint32(58).string(message.referenceId);
     }
     return writer;
@@ -729,56 +695,44 @@ export const Project = {
   fromJSON(object: any): Project {
     return {
       $type: Project.$type,
-      key: isSet(object.key) ? Long.fromString(object.key) : Long.UZERO,
-      id: isSet(object.id) ? String(object.id) : '',
-      admin: isSet(object.admin)
-        ? bytesFromBase64(object.admin)
-        : new Uint8Array(),
-      classKey: isSet(object.classKey)
-        ? Long.fromString(object.classKey)
-        : Long.UZERO,
-      jurisdiction: isSet(object.jurisdiction)
-        ? String(object.jurisdiction)
-        : '',
-      metadata: isSet(object.metadata) ? String(object.metadata) : '',
-      referenceId: isSet(object.referenceId) ? String(object.referenceId) : '',
+      key: isSet(object.key) ? Long.fromValue(object.key) : Long.UZERO,
+      id: isSet(object.id) ? String(object.id) : "",
+      admin: isSet(object.admin) ? bytesFromBase64(object.admin) : new Uint8Array(),
+      classKey: isSet(object.classKey) ? Long.fromValue(object.classKey) : Long.UZERO,
+      jurisdiction: isSet(object.jurisdiction) ? String(object.jurisdiction) : "",
+      metadata: isSet(object.metadata) ? String(object.metadata) : "",
+      referenceId: isSet(object.referenceId) ? String(object.referenceId) : "",
     };
   },
 
   toJSON(message: Project): unknown {
     const obj: any = {};
-    message.key !== undefined &&
-      (obj.key = (message.key || Long.UZERO).toString());
+    message.key !== undefined && (obj.key = (message.key || Long.UZERO).toString());
     message.id !== undefined && (obj.id = message.id);
     message.admin !== undefined &&
-      (obj.admin = base64FromBytes(
-        message.admin !== undefined ? message.admin : new Uint8Array(),
-      ));
-    message.classKey !== undefined &&
-      (obj.classKey = (message.classKey || Long.UZERO).toString());
-    message.jurisdiction !== undefined &&
-      (obj.jurisdiction = message.jurisdiction);
+      (obj.admin = base64FromBytes(message.admin !== undefined ? message.admin : new Uint8Array()));
+    message.classKey !== undefined && (obj.classKey = (message.classKey || Long.UZERO).toString());
+    message.jurisdiction !== undefined && (obj.jurisdiction = message.jurisdiction);
     message.metadata !== undefined && (obj.metadata = message.metadata);
-    message.referenceId !== undefined &&
-      (obj.referenceId = message.referenceId);
+    message.referenceId !== undefined && (obj.referenceId = message.referenceId);
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<Project>, I>>(object: I): Project {
+  create(base?: DeepPartial<Project>): Project {
+    return Project.fromPartial(base ?? {});
+  },
+
+  fromPartial(object: DeepPartial<Project>): Project {
     const message = createBaseProject();
-    message.key =
-      object.key !== undefined && object.key !== null
-        ? Long.fromValue(object.key)
-        : Long.UZERO;
-    message.id = object.id ?? '';
+    message.key = (object.key !== undefined && object.key !== null) ? Long.fromValue(object.key) : Long.UZERO;
+    message.id = object.id ?? "";
     message.admin = object.admin ?? new Uint8Array();
-    message.classKey =
-      object.classKey !== undefined && object.classKey !== null
-        ? Long.fromValue(object.classKey)
-        : Long.UZERO;
-    message.jurisdiction = object.jurisdiction ?? '';
-    message.metadata = object.metadata ?? '';
-    message.referenceId = object.referenceId ?? '';
+    message.classKey = (object.classKey !== undefined && object.classKey !== null)
+      ? Long.fromValue(object.classKey)
+      : Long.UZERO;
+    message.jurisdiction = object.jurisdiction ?? "";
+    message.metadata = object.metadata ?? "";
+    message.referenceId = object.referenceId ?? "";
     return message;
   },
 };
@@ -787,12 +741,12 @@ messageTypeRegistry.set(Project.$type, Project);
 
 function createBaseBatch(): Batch {
   return {
-    $type: 'regen.ecocredit.v1.Batch',
+    $type: "regen.ecocredit.v1.Batch",
     key: Long.UZERO,
     issuer: new Uint8Array(),
     projectKey: Long.UZERO,
-    denom: '',
-    metadata: '',
+    denom: "",
+    metadata: "",
     startDate: undefined,
     endDate: undefined,
     issuanceDate: undefined,
@@ -801,7 +755,7 @@ function createBaseBatch(): Batch {
 }
 
 export const Batch = {
-  $type: 'regen.ecocredit.v1.Batch' as const,
+  $type: "regen.ecocredit.v1.Batch" as const,
 
   encode(message: Batch, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (!message.key.isZero()) {
@@ -813,29 +767,20 @@ export const Batch = {
     if (!message.projectKey.isZero()) {
       writer.uint32(24).uint64(message.projectKey);
     }
-    if (message.denom !== '') {
+    if (message.denom !== "") {
       writer.uint32(34).string(message.denom);
     }
-    if (message.metadata !== '') {
+    if (message.metadata !== "") {
       writer.uint32(42).string(message.metadata);
     }
     if (message.startDate !== undefined) {
-      Timestamp.encode(
-        toTimestamp(message.startDate),
-        writer.uint32(50).fork(),
-      ).ldelim();
+      Timestamp.encode(toTimestamp(message.startDate), writer.uint32(50).fork()).ldelim();
     }
     if (message.endDate !== undefined) {
-      Timestamp.encode(
-        toTimestamp(message.endDate),
-        writer.uint32(58).fork(),
-      ).ldelim();
+      Timestamp.encode(toTimestamp(message.endDate), writer.uint32(58).fork()).ldelim();
     }
     if (message.issuanceDate !== undefined) {
-      Timestamp.encode(
-        toTimestamp(message.issuanceDate),
-        writer.uint32(66).fork(),
-      ).ldelim();
+      Timestamp.encode(toTimestamp(message.issuanceDate), writer.uint32(66).fork()).ldelim();
     }
     if (message.open === true) {
       writer.uint32(72).bool(message.open);
@@ -866,19 +811,13 @@ export const Batch = {
           message.metadata = reader.string();
           break;
         case 6:
-          message.startDate = fromTimestamp(
-            Timestamp.decode(reader, reader.uint32()),
-          );
+          message.startDate = fromTimestamp(Timestamp.decode(reader, reader.uint32()));
           break;
         case 7:
-          message.endDate = fromTimestamp(
-            Timestamp.decode(reader, reader.uint32()),
-          );
+          message.endDate = fromTimestamp(Timestamp.decode(reader, reader.uint32()));
           break;
         case 8:
-          message.issuanceDate = fromTimestamp(
-            Timestamp.decode(reader, reader.uint32()),
-          );
+          message.issuanceDate = fromTimestamp(Timestamp.decode(reader, reader.uint32()));
           break;
         case 9:
           message.open = reader.bool();
@@ -894,63 +833,46 @@ export const Batch = {
   fromJSON(object: any): Batch {
     return {
       $type: Batch.$type,
-      key: isSet(object.key) ? Long.fromString(object.key) : Long.UZERO,
-      issuer: isSet(object.issuer)
-        ? bytesFromBase64(object.issuer)
-        : new Uint8Array(),
-      projectKey: isSet(object.projectKey)
-        ? Long.fromString(object.projectKey)
-        : Long.UZERO,
-      denom: isSet(object.denom) ? String(object.denom) : '',
-      metadata: isSet(object.metadata) ? String(object.metadata) : '',
-      startDate: isSet(object.startDate)
-        ? fromJsonTimestamp(object.startDate)
-        : undefined,
-      endDate: isSet(object.endDate)
-        ? fromJsonTimestamp(object.endDate)
-        : undefined,
-      issuanceDate: isSet(object.issuanceDate)
-        ? fromJsonTimestamp(object.issuanceDate)
-        : undefined,
+      key: isSet(object.key) ? Long.fromValue(object.key) : Long.UZERO,
+      issuer: isSet(object.issuer) ? bytesFromBase64(object.issuer) : new Uint8Array(),
+      projectKey: isSet(object.projectKey) ? Long.fromValue(object.projectKey) : Long.UZERO,
+      denom: isSet(object.denom) ? String(object.denom) : "",
+      metadata: isSet(object.metadata) ? String(object.metadata) : "",
+      startDate: isSet(object.startDate) ? fromJsonTimestamp(object.startDate) : undefined,
+      endDate: isSet(object.endDate) ? fromJsonTimestamp(object.endDate) : undefined,
+      issuanceDate: isSet(object.issuanceDate) ? fromJsonTimestamp(object.issuanceDate) : undefined,
       open: isSet(object.open) ? Boolean(object.open) : false,
     };
   },
 
   toJSON(message: Batch): unknown {
     const obj: any = {};
-    message.key !== undefined &&
-      (obj.key = (message.key || Long.UZERO).toString());
+    message.key !== undefined && (obj.key = (message.key || Long.UZERO).toString());
     message.issuer !== undefined &&
-      (obj.issuer = base64FromBytes(
-        message.issuer !== undefined ? message.issuer : new Uint8Array(),
-      ));
-    message.projectKey !== undefined &&
-      (obj.projectKey = (message.projectKey || Long.UZERO).toString());
+      (obj.issuer = base64FromBytes(message.issuer !== undefined ? message.issuer : new Uint8Array()));
+    message.projectKey !== undefined && (obj.projectKey = (message.projectKey || Long.UZERO).toString());
     message.denom !== undefined && (obj.denom = message.denom);
     message.metadata !== undefined && (obj.metadata = message.metadata);
-    message.startDate !== undefined &&
-      (obj.startDate = message.startDate.toISOString());
-    message.endDate !== undefined &&
-      (obj.endDate = message.endDate.toISOString());
-    message.issuanceDate !== undefined &&
-      (obj.issuanceDate = message.issuanceDate.toISOString());
+    message.startDate !== undefined && (obj.startDate = message.startDate.toISOString());
+    message.endDate !== undefined && (obj.endDate = message.endDate.toISOString());
+    message.issuanceDate !== undefined && (obj.issuanceDate = message.issuanceDate.toISOString());
     message.open !== undefined && (obj.open = message.open);
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<Batch>, I>>(object: I): Batch {
+  create(base?: DeepPartial<Batch>): Batch {
+    return Batch.fromPartial(base ?? {});
+  },
+
+  fromPartial(object: DeepPartial<Batch>): Batch {
     const message = createBaseBatch();
-    message.key =
-      object.key !== undefined && object.key !== null
-        ? Long.fromValue(object.key)
-        : Long.UZERO;
+    message.key = (object.key !== undefined && object.key !== null) ? Long.fromValue(object.key) : Long.UZERO;
     message.issuer = object.issuer ?? new Uint8Array();
-    message.projectKey =
-      object.projectKey !== undefined && object.projectKey !== null
-        ? Long.fromValue(object.projectKey)
-        : Long.UZERO;
-    message.denom = object.denom ?? '';
-    message.metadata = object.metadata ?? '';
+    message.projectKey = (object.projectKey !== undefined && object.projectKey !== null)
+      ? Long.fromValue(object.projectKey)
+      : Long.UZERO;
+    message.denom = object.denom ?? "";
+    message.metadata = object.metadata ?? "";
     message.startDate = object.startDate ?? undefined;
     message.endDate = object.endDate ?? undefined;
     message.issuanceDate = object.issuanceDate ?? undefined;
@@ -962,21 +884,14 @@ export const Batch = {
 messageTypeRegistry.set(Batch.$type, Batch);
 
 function createBaseClassSequence(): ClassSequence {
-  return {
-    $type: 'regen.ecocredit.v1.ClassSequence',
-    creditTypeAbbrev: '',
-    nextSequence: Long.UZERO,
-  };
+  return { $type: "regen.ecocredit.v1.ClassSequence", creditTypeAbbrev: "", nextSequence: Long.UZERO };
 }
 
 export const ClassSequence = {
-  $type: 'regen.ecocredit.v1.ClassSequence' as const,
+  $type: "regen.ecocredit.v1.ClassSequence" as const,
 
-  encode(
-    message: ClassSequence,
-    writer: _m0.Writer = _m0.Writer.create(),
-  ): _m0.Writer {
-    if (message.creditTypeAbbrev !== '') {
+  encode(message: ClassSequence, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+    if (message.creditTypeAbbrev !== "") {
       writer.uint32(10).string(message.creditTypeAbbrev);
     }
     if (!message.nextSequence.isZero()) {
@@ -1009,33 +924,28 @@ export const ClassSequence = {
   fromJSON(object: any): ClassSequence {
     return {
       $type: ClassSequence.$type,
-      creditTypeAbbrev: isSet(object.creditTypeAbbrev)
-        ? String(object.creditTypeAbbrev)
-        : '',
-      nextSequence: isSet(object.nextSequence)
-        ? Long.fromString(object.nextSequence)
-        : Long.UZERO,
+      creditTypeAbbrev: isSet(object.creditTypeAbbrev) ? String(object.creditTypeAbbrev) : "",
+      nextSequence: isSet(object.nextSequence) ? Long.fromValue(object.nextSequence) : Long.UZERO,
     };
   },
 
   toJSON(message: ClassSequence): unknown {
     const obj: any = {};
-    message.creditTypeAbbrev !== undefined &&
-      (obj.creditTypeAbbrev = message.creditTypeAbbrev);
-    message.nextSequence !== undefined &&
-      (obj.nextSequence = (message.nextSequence || Long.UZERO).toString());
+    message.creditTypeAbbrev !== undefined && (obj.creditTypeAbbrev = message.creditTypeAbbrev);
+    message.nextSequence !== undefined && (obj.nextSequence = (message.nextSequence || Long.UZERO).toString());
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<ClassSequence>, I>>(
-    object: I,
-  ): ClassSequence {
+  create(base?: DeepPartial<ClassSequence>): ClassSequence {
+    return ClassSequence.fromPartial(base ?? {});
+  },
+
+  fromPartial(object: DeepPartial<ClassSequence>): ClassSequence {
     const message = createBaseClassSequence();
-    message.creditTypeAbbrev = object.creditTypeAbbrev ?? '';
-    message.nextSequence =
-      object.nextSequence !== undefined && object.nextSequence !== null
-        ? Long.fromValue(object.nextSequence)
-        : Long.UZERO;
+    message.creditTypeAbbrev = object.creditTypeAbbrev ?? "";
+    message.nextSequence = (object.nextSequence !== undefined && object.nextSequence !== null)
+      ? Long.fromValue(object.nextSequence)
+      : Long.UZERO;
     return message;
   },
 };
@@ -1043,20 +953,13 @@ export const ClassSequence = {
 messageTypeRegistry.set(ClassSequence.$type, ClassSequence);
 
 function createBaseProjectSequence(): ProjectSequence {
-  return {
-    $type: 'regen.ecocredit.v1.ProjectSequence',
-    classKey: Long.UZERO,
-    nextSequence: Long.UZERO,
-  };
+  return { $type: "regen.ecocredit.v1.ProjectSequence", classKey: Long.UZERO, nextSequence: Long.UZERO };
 }
 
 export const ProjectSequence = {
-  $type: 'regen.ecocredit.v1.ProjectSequence' as const,
+  $type: "regen.ecocredit.v1.ProjectSequence" as const,
 
-  encode(
-    message: ProjectSequence,
-    writer: _m0.Writer = _m0.Writer.create(),
-  ): _m0.Writer {
+  encode(message: ProjectSequence, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (!message.classKey.isZero()) {
       writer.uint32(8).uint64(message.classKey);
     }
@@ -1090,36 +993,30 @@ export const ProjectSequence = {
   fromJSON(object: any): ProjectSequence {
     return {
       $type: ProjectSequence.$type,
-      classKey: isSet(object.classKey)
-        ? Long.fromString(object.classKey)
-        : Long.UZERO,
-      nextSequence: isSet(object.nextSequence)
-        ? Long.fromString(object.nextSequence)
-        : Long.UZERO,
+      classKey: isSet(object.classKey) ? Long.fromValue(object.classKey) : Long.UZERO,
+      nextSequence: isSet(object.nextSequence) ? Long.fromValue(object.nextSequence) : Long.UZERO,
     };
   },
 
   toJSON(message: ProjectSequence): unknown {
     const obj: any = {};
-    message.classKey !== undefined &&
-      (obj.classKey = (message.classKey || Long.UZERO).toString());
-    message.nextSequence !== undefined &&
-      (obj.nextSequence = (message.nextSequence || Long.UZERO).toString());
+    message.classKey !== undefined && (obj.classKey = (message.classKey || Long.UZERO).toString());
+    message.nextSequence !== undefined && (obj.nextSequence = (message.nextSequence || Long.UZERO).toString());
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<ProjectSequence>, I>>(
-    object: I,
-  ): ProjectSequence {
+  create(base?: DeepPartial<ProjectSequence>): ProjectSequence {
+    return ProjectSequence.fromPartial(base ?? {});
+  },
+
+  fromPartial(object: DeepPartial<ProjectSequence>): ProjectSequence {
     const message = createBaseProjectSequence();
-    message.classKey =
-      object.classKey !== undefined && object.classKey !== null
-        ? Long.fromValue(object.classKey)
-        : Long.UZERO;
-    message.nextSequence =
-      object.nextSequence !== undefined && object.nextSequence !== null
-        ? Long.fromValue(object.nextSequence)
-        : Long.UZERO;
+    message.classKey = (object.classKey !== undefined && object.classKey !== null)
+      ? Long.fromValue(object.classKey)
+      : Long.UZERO;
+    message.nextSequence = (object.nextSequence !== undefined && object.nextSequence !== null)
+      ? Long.fromValue(object.nextSequence)
+      : Long.UZERO;
     return message;
   },
 };
@@ -1127,20 +1024,13 @@ export const ProjectSequence = {
 messageTypeRegistry.set(ProjectSequence.$type, ProjectSequence);
 
 function createBaseBatchSequence(): BatchSequence {
-  return {
-    $type: 'regen.ecocredit.v1.BatchSequence',
-    projectKey: Long.UZERO,
-    nextSequence: Long.UZERO,
-  };
+  return { $type: "regen.ecocredit.v1.BatchSequence", projectKey: Long.UZERO, nextSequence: Long.UZERO };
 }
 
 export const BatchSequence = {
-  $type: 'regen.ecocredit.v1.BatchSequence' as const,
+  $type: "regen.ecocredit.v1.BatchSequence" as const,
 
-  encode(
-    message: BatchSequence,
-    writer: _m0.Writer = _m0.Writer.create(),
-  ): _m0.Writer {
+  encode(message: BatchSequence, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (!message.projectKey.isZero()) {
       writer.uint32(8).uint64(message.projectKey);
     }
@@ -1174,36 +1064,30 @@ export const BatchSequence = {
   fromJSON(object: any): BatchSequence {
     return {
       $type: BatchSequence.$type,
-      projectKey: isSet(object.projectKey)
-        ? Long.fromString(object.projectKey)
-        : Long.UZERO,
-      nextSequence: isSet(object.nextSequence)
-        ? Long.fromString(object.nextSequence)
-        : Long.UZERO,
+      projectKey: isSet(object.projectKey) ? Long.fromValue(object.projectKey) : Long.UZERO,
+      nextSequence: isSet(object.nextSequence) ? Long.fromValue(object.nextSequence) : Long.UZERO,
     };
   },
 
   toJSON(message: BatchSequence): unknown {
     const obj: any = {};
-    message.projectKey !== undefined &&
-      (obj.projectKey = (message.projectKey || Long.UZERO).toString());
-    message.nextSequence !== undefined &&
-      (obj.nextSequence = (message.nextSequence || Long.UZERO).toString());
+    message.projectKey !== undefined && (obj.projectKey = (message.projectKey || Long.UZERO).toString());
+    message.nextSequence !== undefined && (obj.nextSequence = (message.nextSequence || Long.UZERO).toString());
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<BatchSequence>, I>>(
-    object: I,
-  ): BatchSequence {
+  create(base?: DeepPartial<BatchSequence>): BatchSequence {
+    return BatchSequence.fromPartial(base ?? {});
+  },
+
+  fromPartial(object: DeepPartial<BatchSequence>): BatchSequence {
     const message = createBaseBatchSequence();
-    message.projectKey =
-      object.projectKey !== undefined && object.projectKey !== null
-        ? Long.fromValue(object.projectKey)
-        : Long.UZERO;
-    message.nextSequence =
-      object.nextSequence !== undefined && object.nextSequence !== null
-        ? Long.fromValue(object.nextSequence)
-        : Long.UZERO;
+    message.projectKey = (object.projectKey !== undefined && object.projectKey !== null)
+      ? Long.fromValue(object.projectKey)
+      : Long.UZERO;
+    message.nextSequence = (object.nextSequence !== undefined && object.nextSequence !== null)
+      ? Long.fromValue(object.nextSequence)
+      : Long.UZERO;
     return message;
   },
 };
@@ -1212,35 +1096,32 @@ messageTypeRegistry.set(BatchSequence.$type, BatchSequence);
 
 function createBaseBatchBalance(): BatchBalance {
   return {
-    $type: 'regen.ecocredit.v1.BatchBalance',
+    $type: "regen.ecocredit.v1.BatchBalance",
     batchKey: Long.UZERO,
     address: new Uint8Array(),
-    tradableAmount: '',
-    retiredAmount: '',
-    escrowedAmount: '',
+    tradableAmount: "",
+    retiredAmount: "",
+    escrowedAmount: "",
   };
 }
 
 export const BatchBalance = {
-  $type: 'regen.ecocredit.v1.BatchBalance' as const,
+  $type: "regen.ecocredit.v1.BatchBalance" as const,
 
-  encode(
-    message: BatchBalance,
-    writer: _m0.Writer = _m0.Writer.create(),
-  ): _m0.Writer {
+  encode(message: BatchBalance, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (!message.batchKey.isZero()) {
       writer.uint32(8).uint64(message.batchKey);
     }
     if (message.address.length !== 0) {
       writer.uint32(18).bytes(message.address);
     }
-    if (message.tradableAmount !== '') {
+    if (message.tradableAmount !== "") {
       writer.uint32(26).string(message.tradableAmount);
     }
-    if (message.retiredAmount !== '') {
+    if (message.retiredAmount !== "") {
       writer.uint32(34).string(message.retiredAmount);
     }
-    if (message.escrowedAmount !== '') {
+    if (message.escrowedAmount !== "") {
       writer.uint32(42).string(message.escrowedAmount);
     }
     return writer;
@@ -1279,53 +1160,38 @@ export const BatchBalance = {
   fromJSON(object: any): BatchBalance {
     return {
       $type: BatchBalance.$type,
-      batchKey: isSet(object.batchKey)
-        ? Long.fromString(object.batchKey)
-        : Long.UZERO,
-      address: isSet(object.address)
-        ? bytesFromBase64(object.address)
-        : new Uint8Array(),
-      tradableAmount: isSet(object.tradableAmount)
-        ? String(object.tradableAmount)
-        : '',
-      retiredAmount: isSet(object.retiredAmount)
-        ? String(object.retiredAmount)
-        : '',
-      escrowedAmount: isSet(object.escrowedAmount)
-        ? String(object.escrowedAmount)
-        : '',
+      batchKey: isSet(object.batchKey) ? Long.fromValue(object.batchKey) : Long.UZERO,
+      address: isSet(object.address) ? bytesFromBase64(object.address) : new Uint8Array(),
+      tradableAmount: isSet(object.tradableAmount) ? String(object.tradableAmount) : "",
+      retiredAmount: isSet(object.retiredAmount) ? String(object.retiredAmount) : "",
+      escrowedAmount: isSet(object.escrowedAmount) ? String(object.escrowedAmount) : "",
     };
   },
 
   toJSON(message: BatchBalance): unknown {
     const obj: any = {};
-    message.batchKey !== undefined &&
-      (obj.batchKey = (message.batchKey || Long.UZERO).toString());
+    message.batchKey !== undefined && (obj.batchKey = (message.batchKey || Long.UZERO).toString());
     message.address !== undefined &&
-      (obj.address = base64FromBytes(
-        message.address !== undefined ? message.address : new Uint8Array(),
-      ));
-    message.tradableAmount !== undefined &&
-      (obj.tradableAmount = message.tradableAmount);
-    message.retiredAmount !== undefined &&
-      (obj.retiredAmount = message.retiredAmount);
-    message.escrowedAmount !== undefined &&
-      (obj.escrowedAmount = message.escrowedAmount);
+      (obj.address = base64FromBytes(message.address !== undefined ? message.address : new Uint8Array()));
+    message.tradableAmount !== undefined && (obj.tradableAmount = message.tradableAmount);
+    message.retiredAmount !== undefined && (obj.retiredAmount = message.retiredAmount);
+    message.escrowedAmount !== undefined && (obj.escrowedAmount = message.escrowedAmount);
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<BatchBalance>, I>>(
-    object: I,
-  ): BatchBalance {
+  create(base?: DeepPartial<BatchBalance>): BatchBalance {
+    return BatchBalance.fromPartial(base ?? {});
+  },
+
+  fromPartial(object: DeepPartial<BatchBalance>): BatchBalance {
     const message = createBaseBatchBalance();
-    message.batchKey =
-      object.batchKey !== undefined && object.batchKey !== null
-        ? Long.fromValue(object.batchKey)
-        : Long.UZERO;
+    message.batchKey = (object.batchKey !== undefined && object.batchKey !== null)
+      ? Long.fromValue(object.batchKey)
+      : Long.UZERO;
     message.address = object.address ?? new Uint8Array();
-    message.tradableAmount = object.tradableAmount ?? '';
-    message.retiredAmount = object.retiredAmount ?? '';
-    message.escrowedAmount = object.escrowedAmount ?? '';
+    message.tradableAmount = object.tradableAmount ?? "";
+    message.retiredAmount = object.retiredAmount ?? "";
+    message.escrowedAmount = object.escrowedAmount ?? "";
     return message;
   },
 };
@@ -1334,31 +1200,28 @@ messageTypeRegistry.set(BatchBalance.$type, BatchBalance);
 
 function createBaseBatchSupply(): BatchSupply {
   return {
-    $type: 'regen.ecocredit.v1.BatchSupply',
+    $type: "regen.ecocredit.v1.BatchSupply",
     batchKey: Long.UZERO,
-    tradableAmount: '',
-    retiredAmount: '',
-    cancelledAmount: '',
+    tradableAmount: "",
+    retiredAmount: "",
+    cancelledAmount: "",
   };
 }
 
 export const BatchSupply = {
-  $type: 'regen.ecocredit.v1.BatchSupply' as const,
+  $type: "regen.ecocredit.v1.BatchSupply" as const,
 
-  encode(
-    message: BatchSupply,
-    writer: _m0.Writer = _m0.Writer.create(),
-  ): _m0.Writer {
+  encode(message: BatchSupply, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (!message.batchKey.isZero()) {
       writer.uint32(8).uint64(message.batchKey);
     }
-    if (message.tradableAmount !== '') {
+    if (message.tradableAmount !== "") {
       writer.uint32(18).string(message.tradableAmount);
     }
-    if (message.retiredAmount !== '') {
+    if (message.retiredAmount !== "") {
       writer.uint32(26).string(message.retiredAmount);
     }
-    if (message.cancelledAmount !== '') {
+    if (message.cancelledAmount !== "") {
       writer.uint32(34).string(message.cancelledAmount);
     }
     return writer;
@@ -1394,45 +1257,34 @@ export const BatchSupply = {
   fromJSON(object: any): BatchSupply {
     return {
       $type: BatchSupply.$type,
-      batchKey: isSet(object.batchKey)
-        ? Long.fromString(object.batchKey)
-        : Long.UZERO,
-      tradableAmount: isSet(object.tradableAmount)
-        ? String(object.tradableAmount)
-        : '',
-      retiredAmount: isSet(object.retiredAmount)
-        ? String(object.retiredAmount)
-        : '',
-      cancelledAmount: isSet(object.cancelledAmount)
-        ? String(object.cancelledAmount)
-        : '',
+      batchKey: isSet(object.batchKey) ? Long.fromValue(object.batchKey) : Long.UZERO,
+      tradableAmount: isSet(object.tradableAmount) ? String(object.tradableAmount) : "",
+      retiredAmount: isSet(object.retiredAmount) ? String(object.retiredAmount) : "",
+      cancelledAmount: isSet(object.cancelledAmount) ? String(object.cancelledAmount) : "",
     };
   },
 
   toJSON(message: BatchSupply): unknown {
     const obj: any = {};
-    message.batchKey !== undefined &&
-      (obj.batchKey = (message.batchKey || Long.UZERO).toString());
-    message.tradableAmount !== undefined &&
-      (obj.tradableAmount = message.tradableAmount);
-    message.retiredAmount !== undefined &&
-      (obj.retiredAmount = message.retiredAmount);
-    message.cancelledAmount !== undefined &&
-      (obj.cancelledAmount = message.cancelledAmount);
+    message.batchKey !== undefined && (obj.batchKey = (message.batchKey || Long.UZERO).toString());
+    message.tradableAmount !== undefined && (obj.tradableAmount = message.tradableAmount);
+    message.retiredAmount !== undefined && (obj.retiredAmount = message.retiredAmount);
+    message.cancelledAmount !== undefined && (obj.cancelledAmount = message.cancelledAmount);
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<BatchSupply>, I>>(
-    object: I,
-  ): BatchSupply {
+  create(base?: DeepPartial<BatchSupply>): BatchSupply {
+    return BatchSupply.fromPartial(base ?? {});
+  },
+
+  fromPartial(object: DeepPartial<BatchSupply>): BatchSupply {
     const message = createBaseBatchSupply();
-    message.batchKey =
-      object.batchKey !== undefined && object.batchKey !== null
-        ? Long.fromValue(object.batchKey)
-        : Long.UZERO;
-    message.tradableAmount = object.tradableAmount ?? '';
-    message.retiredAmount = object.retiredAmount ?? '';
-    message.cancelledAmount = object.cancelledAmount ?? '';
+    message.batchKey = (object.batchKey !== undefined && object.batchKey !== null)
+      ? Long.fromValue(object.batchKey)
+      : Long.UZERO;
+    message.tradableAmount = object.tradableAmount ?? "";
+    message.retiredAmount = object.retiredAmount ?? "";
+    message.cancelledAmount = object.cancelledAmount ?? "";
     return message;
   },
 };
@@ -1440,28 +1292,20 @@ export const BatchSupply = {
 messageTypeRegistry.set(BatchSupply.$type, BatchSupply);
 
 function createBaseOriginTxIndex(): OriginTxIndex {
-  return {
-    $type: 'regen.ecocredit.v1.OriginTxIndex',
-    classKey: Long.UZERO,
-    id: '',
-    source: '',
-  };
+  return { $type: "regen.ecocredit.v1.OriginTxIndex", classKey: Long.UZERO, id: "", source: "" };
 }
 
 export const OriginTxIndex = {
-  $type: 'regen.ecocredit.v1.OriginTxIndex' as const,
+  $type: "regen.ecocredit.v1.OriginTxIndex" as const,
 
-  encode(
-    message: OriginTxIndex,
-    writer: _m0.Writer = _m0.Writer.create(),
-  ): _m0.Writer {
+  encode(message: OriginTxIndex, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (!message.classKey.isZero()) {
       writer.uint32(8).uint64(message.classKey);
     }
-    if (message.id !== '') {
+    if (message.id !== "") {
       writer.uint32(18).string(message.id);
     }
-    if (message.source !== '') {
+    if (message.source !== "") {
       writer.uint32(26).string(message.source);
     }
     return writer;
@@ -1494,33 +1338,31 @@ export const OriginTxIndex = {
   fromJSON(object: any): OriginTxIndex {
     return {
       $type: OriginTxIndex.$type,
-      classKey: isSet(object.classKey)
-        ? Long.fromString(object.classKey)
-        : Long.UZERO,
-      id: isSet(object.id) ? String(object.id) : '',
-      source: isSet(object.source) ? String(object.source) : '',
+      classKey: isSet(object.classKey) ? Long.fromValue(object.classKey) : Long.UZERO,
+      id: isSet(object.id) ? String(object.id) : "",
+      source: isSet(object.source) ? String(object.source) : "",
     };
   },
 
   toJSON(message: OriginTxIndex): unknown {
     const obj: any = {};
-    message.classKey !== undefined &&
-      (obj.classKey = (message.classKey || Long.UZERO).toString());
+    message.classKey !== undefined && (obj.classKey = (message.classKey || Long.UZERO).toString());
     message.id !== undefined && (obj.id = message.id);
     message.source !== undefined && (obj.source = message.source);
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<OriginTxIndex>, I>>(
-    object: I,
-  ): OriginTxIndex {
+  create(base?: DeepPartial<OriginTxIndex>): OriginTxIndex {
+    return OriginTxIndex.fromPartial(base ?? {});
+  },
+
+  fromPartial(object: DeepPartial<OriginTxIndex>): OriginTxIndex {
     const message = createBaseOriginTxIndex();
-    message.classKey =
-      object.classKey !== undefined && object.classKey !== null
-        ? Long.fromValue(object.classKey)
-        : Long.UZERO;
-    message.id = object.id ?? '';
-    message.source = object.source ?? '';
+    message.classKey = (object.classKey !== undefined && object.classKey !== null)
+      ? Long.fromValue(object.classKey)
+      : Long.UZERO;
+    message.id = object.id ?? "";
+    message.source = object.source ?? "";
     return message;
   },
 };
@@ -1528,28 +1370,20 @@ export const OriginTxIndex = {
 messageTypeRegistry.set(OriginTxIndex.$type, OriginTxIndex);
 
 function createBaseBatchContract(): BatchContract {
-  return {
-    $type: 'regen.ecocredit.v1.BatchContract',
-    batchKey: Long.UZERO,
-    classKey: Long.UZERO,
-    contract: '',
-  };
+  return { $type: "regen.ecocredit.v1.BatchContract", batchKey: Long.UZERO, classKey: Long.UZERO, contract: "" };
 }
 
 export const BatchContract = {
-  $type: 'regen.ecocredit.v1.BatchContract' as const,
+  $type: "regen.ecocredit.v1.BatchContract" as const,
 
-  encode(
-    message: BatchContract,
-    writer: _m0.Writer = _m0.Writer.create(),
-  ): _m0.Writer {
+  encode(message: BatchContract, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (!message.batchKey.isZero()) {
       writer.uint32(8).uint64(message.batchKey);
     }
     if (!message.classKey.isZero()) {
       writer.uint32(16).uint64(message.classKey);
     }
-    if (message.contract !== '') {
+    if (message.contract !== "") {
       writer.uint32(26).string(message.contract);
     }
     return writer;
@@ -1582,39 +1416,33 @@ export const BatchContract = {
   fromJSON(object: any): BatchContract {
     return {
       $type: BatchContract.$type,
-      batchKey: isSet(object.batchKey)
-        ? Long.fromString(object.batchKey)
-        : Long.UZERO,
-      classKey: isSet(object.classKey)
-        ? Long.fromString(object.classKey)
-        : Long.UZERO,
-      contract: isSet(object.contract) ? String(object.contract) : '',
+      batchKey: isSet(object.batchKey) ? Long.fromValue(object.batchKey) : Long.UZERO,
+      classKey: isSet(object.classKey) ? Long.fromValue(object.classKey) : Long.UZERO,
+      contract: isSet(object.contract) ? String(object.contract) : "",
     };
   },
 
   toJSON(message: BatchContract): unknown {
     const obj: any = {};
-    message.batchKey !== undefined &&
-      (obj.batchKey = (message.batchKey || Long.UZERO).toString());
-    message.classKey !== undefined &&
-      (obj.classKey = (message.classKey || Long.UZERO).toString());
+    message.batchKey !== undefined && (obj.batchKey = (message.batchKey || Long.UZERO).toString());
+    message.classKey !== undefined && (obj.classKey = (message.classKey || Long.UZERO).toString());
     message.contract !== undefined && (obj.contract = message.contract);
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<BatchContract>, I>>(
-    object: I,
-  ): BatchContract {
+  create(base?: DeepPartial<BatchContract>): BatchContract {
+    return BatchContract.fromPartial(base ?? {});
+  },
+
+  fromPartial(object: DeepPartial<BatchContract>): BatchContract {
     const message = createBaseBatchContract();
-    message.batchKey =
-      object.batchKey !== undefined && object.batchKey !== null
-        ? Long.fromValue(object.batchKey)
-        : Long.UZERO;
-    message.classKey =
-      object.classKey !== undefined && object.classKey !== null
-        ? Long.fromValue(object.classKey)
-        : Long.UZERO;
-    message.contract = object.contract ?? '';
+    message.batchKey = (object.batchKey !== undefined && object.batchKey !== null)
+      ? Long.fromValue(object.batchKey)
+      : Long.UZERO;
+    message.classKey = (object.classKey !== undefined && object.classKey !== null)
+      ? Long.fromValue(object.classKey)
+      : Long.UZERO;
+    message.contract = object.contract ?? "";
     return message;
   },
 };
@@ -1622,26 +1450,20 @@ export const BatchContract = {
 messageTypeRegistry.set(BatchContract.$type, BatchContract);
 
 function createBaseClassCreatorAllowlist(): ClassCreatorAllowlist {
-  return { $type: 'regen.ecocredit.v1.ClassCreatorAllowlist', enabled: false };
+  return { $type: "regen.ecocredit.v1.ClassCreatorAllowlist", enabled: false };
 }
 
 export const ClassCreatorAllowlist = {
-  $type: 'regen.ecocredit.v1.ClassCreatorAllowlist' as const,
+  $type: "regen.ecocredit.v1.ClassCreatorAllowlist" as const,
 
-  encode(
-    message: ClassCreatorAllowlist,
-    writer: _m0.Writer = _m0.Writer.create(),
-  ): _m0.Writer {
+  encode(message: ClassCreatorAllowlist, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.enabled === true) {
       writer.uint32(8).bool(message.enabled);
     }
     return writer;
   },
 
-  decode(
-    input: _m0.Reader | Uint8Array,
-    length?: number,
-  ): ClassCreatorAllowlist {
+  decode(input: _m0.Reader | Uint8Array, length?: number): ClassCreatorAllowlist {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseClassCreatorAllowlist();
@@ -1660,10 +1482,7 @@ export const ClassCreatorAllowlist = {
   },
 
   fromJSON(object: any): ClassCreatorAllowlist {
-    return {
-      $type: ClassCreatorAllowlist.$type,
-      enabled: isSet(object.enabled) ? Boolean(object.enabled) : false,
-    };
+    return { $type: ClassCreatorAllowlist.$type, enabled: isSet(object.enabled) ? Boolean(object.enabled) : false };
   },
 
   toJSON(message: ClassCreatorAllowlist): unknown {
@@ -1672,9 +1491,11 @@ export const ClassCreatorAllowlist = {
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<ClassCreatorAllowlist>, I>>(
-    object: I,
-  ): ClassCreatorAllowlist {
+  create(base?: DeepPartial<ClassCreatorAllowlist>): ClassCreatorAllowlist {
+    return ClassCreatorAllowlist.fromPartial(base ?? {});
+  },
+
+  fromPartial(object: DeepPartial<ClassCreatorAllowlist>): ClassCreatorAllowlist {
     const message = createBaseClassCreatorAllowlist();
     message.enabled = object.enabled ?? false;
     return message;
@@ -1684,19 +1505,13 @@ export const ClassCreatorAllowlist = {
 messageTypeRegistry.set(ClassCreatorAllowlist.$type, ClassCreatorAllowlist);
 
 function createBaseAllowedClassCreator(): AllowedClassCreator {
-  return {
-    $type: 'regen.ecocredit.v1.AllowedClassCreator',
-    address: new Uint8Array(),
-  };
+  return { $type: "regen.ecocredit.v1.AllowedClassCreator", address: new Uint8Array() };
 }
 
 export const AllowedClassCreator = {
-  $type: 'regen.ecocredit.v1.AllowedClassCreator' as const,
+  $type: "regen.ecocredit.v1.AllowedClassCreator" as const,
 
-  encode(
-    message: AllowedClassCreator,
-    writer: _m0.Writer = _m0.Writer.create(),
-  ): _m0.Writer {
+  encode(message: AllowedClassCreator, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.address.length !== 0) {
       writer.uint32(10).bytes(message.address);
     }
@@ -1724,24 +1539,22 @@ export const AllowedClassCreator = {
   fromJSON(object: any): AllowedClassCreator {
     return {
       $type: AllowedClassCreator.$type,
-      address: isSet(object.address)
-        ? bytesFromBase64(object.address)
-        : new Uint8Array(),
+      address: isSet(object.address) ? bytesFromBase64(object.address) : new Uint8Array(),
     };
   },
 
   toJSON(message: AllowedClassCreator): unknown {
     const obj: any = {};
     message.address !== undefined &&
-      (obj.address = base64FromBytes(
-        message.address !== undefined ? message.address : new Uint8Array(),
-      ));
+      (obj.address = base64FromBytes(message.address !== undefined ? message.address : new Uint8Array()));
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<AllowedClassCreator>, I>>(
-    object: I,
-  ): AllowedClassCreator {
+  create(base?: DeepPartial<AllowedClassCreator>): AllowedClassCreator {
+    return AllowedClassCreator.fromPartial(base ?? {});
+  },
+
+  fromPartial(object: DeepPartial<AllowedClassCreator>): AllowedClassCreator {
     const message = createBaseAllowedClassCreator();
     message.address = object.address ?? new Uint8Array();
     return message;
@@ -1751,16 +1564,13 @@ export const AllowedClassCreator = {
 messageTypeRegistry.set(AllowedClassCreator.$type, AllowedClassCreator);
 
 function createBaseClassFee(): ClassFee {
-  return { $type: 'regen.ecocredit.v1.ClassFee', fee: undefined };
+  return { $type: "regen.ecocredit.v1.ClassFee", fee: undefined };
 }
 
 export const ClassFee = {
-  $type: 'regen.ecocredit.v1.ClassFee' as const,
+  $type: "regen.ecocredit.v1.ClassFee" as const,
 
-  encode(
-    message: ClassFee,
-    writer: _m0.Writer = _m0.Writer.create(),
-  ): _m0.Writer {
+  encode(message: ClassFee, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.fee !== undefined) {
       Coin.encode(message.fee, writer.uint32(10).fork()).ldelim();
     }
@@ -1786,25 +1596,22 @@ export const ClassFee = {
   },
 
   fromJSON(object: any): ClassFee {
-    return {
-      $type: ClassFee.$type,
-      fee: isSet(object.fee) ? Coin.fromJSON(object.fee) : undefined,
-    };
+    return { $type: ClassFee.$type, fee: isSet(object.fee) ? Coin.fromJSON(object.fee) : undefined };
   },
 
   toJSON(message: ClassFee): unknown {
     const obj: any = {};
-    message.fee !== undefined &&
-      (obj.fee = message.fee ? Coin.toJSON(message.fee) : undefined);
+    message.fee !== undefined && (obj.fee = message.fee ? Coin.toJSON(message.fee) : undefined);
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<ClassFee>, I>>(object: I): ClassFee {
+  create(base?: DeepPartial<ClassFee>): ClassFee {
+    return ClassFee.fromPartial(base ?? {});
+  },
+
+  fromPartial(object: DeepPartial<ClassFee>): ClassFee {
     const message = createBaseClassFee();
-    message.fee =
-      object.fee !== undefined && object.fee !== null
-        ? Coin.fromPartial(object.fee)
-        : undefined;
+    message.fee = (object.fee !== undefined && object.fee !== null) ? Coin.fromPartial(object.fee) : undefined;
     return message;
   },
 };
@@ -1812,17 +1619,14 @@ export const ClassFee = {
 messageTypeRegistry.set(ClassFee.$type, ClassFee);
 
 function createBaseAllowedBridgeChain(): AllowedBridgeChain {
-  return { $type: 'regen.ecocredit.v1.AllowedBridgeChain', chainName: '' };
+  return { $type: "regen.ecocredit.v1.AllowedBridgeChain", chainName: "" };
 }
 
 export const AllowedBridgeChain = {
-  $type: 'regen.ecocredit.v1.AllowedBridgeChain' as const,
+  $type: "regen.ecocredit.v1.AllowedBridgeChain" as const,
 
-  encode(
-    message: AllowedBridgeChain,
-    writer: _m0.Writer = _m0.Writer.create(),
-  ): _m0.Writer {
-    if (message.chainName !== '') {
+  encode(message: AllowedBridgeChain, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+    if (message.chainName !== "") {
       writer.uint32(10).string(message.chainName);
     }
     return writer;
@@ -1847,10 +1651,7 @@ export const AllowedBridgeChain = {
   },
 
   fromJSON(object: any): AllowedBridgeChain {
-    return {
-      $type: AllowedBridgeChain.$type,
-      chainName: isSet(object.chainName) ? String(object.chainName) : '',
-    };
+    return { $type: AllowedBridgeChain.$type, chainName: isSet(object.chainName) ? String(object.chainName) : "" };
   },
 
   toJSON(message: AllowedBridgeChain): unknown {
@@ -1859,11 +1660,13 @@ export const AllowedBridgeChain = {
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<AllowedBridgeChain>, I>>(
-    object: I,
-  ): AllowedBridgeChain {
+  create(base?: DeepPartial<AllowedBridgeChain>): AllowedBridgeChain {
+    return AllowedBridgeChain.fromPartial(base ?? {});
+  },
+
+  fromPartial(object: DeepPartial<AllowedBridgeChain>): AllowedBridgeChain {
     const message = createBaseAllowedBridgeChain();
-    message.chainName = object.chainName ?? '';
+    message.chainName = object.chainName ?? "";
     return message;
   },
 };
@@ -1873,70 +1676,59 @@ messageTypeRegistry.set(AllowedBridgeChain.$type, AllowedBridgeChain);
 declare var self: any | undefined;
 declare var window: any | undefined;
 declare var global: any | undefined;
-var globalThis: any = (() => {
-  if (typeof globalThis !== 'undefined') return globalThis;
-  if (typeof self !== 'undefined') return self;
-  if (typeof window !== 'undefined') return window;
-  if (typeof global !== 'undefined') return global;
-  throw 'Unable to locate global object';
+var tsProtoGlobalThis: any = (() => {
+  if (typeof globalThis !== "undefined") {
+    return globalThis;
+  }
+  if (typeof self !== "undefined") {
+    return self;
+  }
+  if (typeof window !== "undefined") {
+    return window;
+  }
+  if (typeof global !== "undefined") {
+    return global;
+  }
+  throw "Unable to locate global object";
 })();
 
-const atob: (b64: string) => string =
-  globalThis.atob ||
-  (b64 => globalThis.Buffer.from(b64, 'base64').toString('binary'));
 function bytesFromBase64(b64: string): Uint8Array {
-  const bin = atob(b64);
-  const arr = new Uint8Array(bin.length);
-  for (let i = 0; i < bin.length; ++i) {
-    arr[i] = bin.charCodeAt(i);
+  if (tsProtoGlobalThis.Buffer) {
+    return Uint8Array.from(tsProtoGlobalThis.Buffer.from(b64, "base64"));
+  } else {
+    const bin = tsProtoGlobalThis.atob(b64);
+    const arr = new Uint8Array(bin.length);
+    for (let i = 0; i < bin.length; ++i) {
+      arr[i] = bin.charCodeAt(i);
+    }
+    return arr;
   }
-  return arr;
 }
 
-const btoa: (bin: string) => string =
-  globalThis.btoa ||
-  (bin => globalThis.Buffer.from(bin, 'binary').toString('base64'));
 function base64FromBytes(arr: Uint8Array): string {
-  const bin: string[] = [];
-  for (const byte of arr) {
-    bin.push(String.fromCharCode(byte));
+  if (tsProtoGlobalThis.Buffer) {
+    return tsProtoGlobalThis.Buffer.from(arr).toString("base64");
+  } else {
+    const bin: string[] = [];
+    arr.forEach((byte) => {
+      bin.push(String.fromCharCode(byte));
+    });
+    return tsProtoGlobalThis.btoa(bin.join(""));
   }
-  return btoa(bin.join(''));
 }
 
-type Builtin =
-  | Date
-  | Function
-  | Uint8Array
-  | string
-  | number
-  | boolean
-  | undefined;
+type Builtin = Date | Function | Uint8Array | string | number | boolean | undefined;
 
-export type DeepPartial<T> = T extends Builtin
-  ? T
-  : T extends Long
-  ? string | number | Long
-  : T extends Array<infer U>
-  ? Array<DeepPartial<U>>
-  : T extends ReadonlyArray<infer U>
-  ? ReadonlyArray<DeepPartial<U>>
-  : T extends {}
-  ? { [K in Exclude<keyof T, '$type'>]?: DeepPartial<T[K]> }
+export type DeepPartial<T> = T extends Builtin ? T
+  : T extends Long ? string | number | Long : T extends Array<infer U> ? Array<DeepPartial<U>>
+  : T extends ReadonlyArray<infer U> ? ReadonlyArray<DeepPartial<U>>
+  : T extends {} ? { [K in Exclude<keyof T, "$type">]?: DeepPartial<T[K]> }
   : Partial<T>;
-
-type KeysOfUnion<T> = T extends T ? keyof T : never;
-export type Exact<P, I extends P> = P extends Builtin
-  ? P
-  : P & { [K in keyof P]: Exact<P[K], I[K]> } & Record<
-        Exclude<keyof I, KeysOfUnion<P> | '$type'>,
-        never
-      >;
 
 function toTimestamp(date: Date): Timestamp {
   const seconds = numberToLong(date.getTime() / 1_000);
   const nanos = (date.getTime() % 1_000) * 1_000_000;
-  return { $type: 'google.protobuf.Timestamp', seconds, nanos };
+  return { $type: "google.protobuf.Timestamp", seconds, nanos };
 }
 
 function fromTimestamp(t: Timestamp): Date {
@@ -1948,7 +1740,7 @@ function fromTimestamp(t: Timestamp): Date {
 function fromJsonTimestamp(o: any): Date {
   if (o instanceof Date) {
     return o;
-  } else if (typeof o === 'string') {
+  } else if (typeof o === "string") {
     return new Date(o);
   } else {
     return fromTimestamp(Timestamp.fromJSON(o));

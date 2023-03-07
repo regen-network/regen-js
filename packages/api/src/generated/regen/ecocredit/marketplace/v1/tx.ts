@@ -1,15 +1,15 @@
 /* eslint-disable */
-import { messageTypeRegistry } from '../../../../typeRegistry';
-import Long from 'long';
-import _m0 from 'protobufjs/minimal';
-import { Coin } from '../../../../cosmos/base/v1beta1/coin';
-import { Timestamp } from '../../../../google/protobuf/timestamp';
+import Long from "long";
+import _m0 from "protobufjs/minimal";
+import { Coin } from "../../../../cosmos/base/v1beta1/coin";
+import { Timestamp } from "../../../../google/protobuf/timestamp";
+import { messageTypeRegistry } from "../../../../typeRegistry";
 
-export const protobufPackage = 'regen.ecocredit.marketplace.v1';
+export const protobufPackage = "regen.ecocredit.marketplace.v1";
 
 /** MsgSell is the Msg/Sell request type. */
 export interface MsgSell {
-  $type: 'regen.ecocredit.marketplace.v1.MsgSell';
+  $type: "regen.ecocredit.marketplace.v1.MsgSell";
   /** seller is the address of the account that is selling credits. */
   seller: string;
   /** orders are the sell orders being created. */
@@ -18,7 +18,7 @@ export interface MsgSell {
 
 /** Order is the content of a new sell order. */
 export interface MsgSell_Order {
-  $type: 'regen.ecocredit.marketplace.v1.MsgSell.Order';
+  $type: "regen.ecocredit.marketplace.v1.MsgSell.Order";
   /** batch_denom is the credit batch being sold. */
   batchDenom: string;
   /**
@@ -50,14 +50,14 @@ export interface MsgSell_Order {
 
 /** MsgSellResponse is the Msg/Sell response type. */
 export interface MsgSellResponse {
-  $type: 'regen.ecocredit.marketplace.v1.MsgSellResponse';
+  $type: "regen.ecocredit.marketplace.v1.MsgSellResponse";
   /** sell_order_ids are the sell order IDs of the newly created sell orders. */
   sellOrderIds: Long[];
 }
 
 /** MsgUpdateSellOrders is the Msg/UpdateSellOrders request type. */
 export interface MsgUpdateSellOrders {
-  $type: 'regen.ecocredit.marketplace.v1.MsgUpdateSellOrders';
+  $type: "regen.ecocredit.marketplace.v1.MsgUpdateSellOrders";
   /** seller is the address of the account that is selling credits. */
   seller: string;
   /** updates are updates to existing sell orders. */
@@ -66,7 +66,7 @@ export interface MsgUpdateSellOrders {
 
 /** Update is an update to an existing sell order. */
 export interface MsgUpdateSellOrders_Update {
-  $type: 'regen.ecocredit.marketplace.v1.MsgUpdateSellOrders.Update';
+  $type: "regen.ecocredit.marketplace.v1.MsgUpdateSellOrders.Update";
   /** sell_order_id is the ID of an existing sell order. */
   sellOrderId: Long;
   /** new_quantity is the updated quantity of credits available to sell. */
@@ -87,12 +87,12 @@ export interface MsgUpdateSellOrders_Update {
 
 /** MsgUpdateSellOrdersResponse is the Msg/UpdateSellOrders response type. */
 export interface MsgUpdateSellOrdersResponse {
-  $type: 'regen.ecocredit.marketplace.v1.MsgUpdateSellOrdersResponse';
+  $type: "regen.ecocredit.marketplace.v1.MsgUpdateSellOrdersResponse";
 }
 
 /** MsgCancelSellOrder is the Msg/CancelSellOrder request type. */
 export interface MsgCancelSellOrder {
-  $type: 'regen.ecocredit.marketplace.v1.MsgCancelSellOrder';
+  $type: "regen.ecocredit.marketplace.v1.MsgCancelSellOrder";
   /**
    * seller is the address of the account that created the sell order and is
    * therefore authorized to cancel the sell order.
@@ -104,12 +104,12 @@ export interface MsgCancelSellOrder {
 
 /** MsgCancelSellOrder is the Msg/CancelSellOrder response type. */
 export interface MsgCancelSellOrderResponse {
-  $type: 'regen.ecocredit.marketplace.v1.MsgCancelSellOrderResponse';
+  $type: "regen.ecocredit.marketplace.v1.MsgCancelSellOrderResponse";
 }
 
 /** MsgBuyDirect is the Msg/BuyDirect request type. */
 export interface MsgBuyDirect {
-  $type: 'regen.ecocredit.marketplace.v1.MsgBuyDirect';
+  $type: "regen.ecocredit.marketplace.v1.MsgBuyDirect";
   /** buyer is the address of the account that is buying credits. */
   buyer: string;
   /** orders is a list of orders for ecocredits. */
@@ -118,7 +118,7 @@ export interface MsgBuyDirect {
 
 /** Order contains the information needed to purchase an ecocredit. */
 export interface MsgBuyDirect_Order {
-  $type: 'regen.ecocredit.marketplace.v1.MsgBuyDirect.Order';
+  $type: "regen.ecocredit.marketplace.v1.MsgBuyDirect.Order";
   /**
    * sell_order_id is the sell order ID against which the buyer is trying
    * to buy.
@@ -153,7 +153,7 @@ export interface MsgBuyDirect_Order {
 
 /** MsgBuyDirectResponse is the Msg/BuyDirect response type. */
 export interface MsgBuyDirectResponse {
-  $type: 'regen.ecocredit.marketplace.v1.MsgBuyDirectResponse';
+  $type: "regen.ecocredit.marketplace.v1.MsgBuyDirectResponse";
 }
 
 /**
@@ -162,7 +162,7 @@ export interface MsgBuyDirectResponse {
  * Since Revision 1
  */
 export interface MsgAddAllowedDenom {
-  $type: 'regen.ecocredit.marketplace.v1.MsgAddAllowedDenom';
+  $type: "regen.ecocredit.marketplace.v1.MsgAddAllowedDenom";
   /** authority is the address of the governance account. */
   authority: string;
   /** denom is the bank denom to allow (ex. ibc/GLKHDSG423SGS) */
@@ -186,7 +186,7 @@ export interface MsgAddAllowedDenom {
  * Since Revision 1
  */
 export interface MsgAddAllowedDenomResponse {
-  $type: 'regen.ecocredit.marketplace.v1.MsgAddAllowedDenomResponse';
+  $type: "regen.ecocredit.marketplace.v1.MsgAddAllowedDenomResponse";
 }
 
 /**
@@ -195,7 +195,7 @@ export interface MsgAddAllowedDenomResponse {
  * Since Revision 1
  */
 export interface MsgRemoveAllowedDenom {
-  $type: 'regen.ecocredit.marketplace.v1.MsgRemoveAllowedDenom';
+  $type: "regen.ecocredit.marketplace.v1.MsgRemoveAllowedDenom";
   /** authority is the address of the governance account. */
   authority: string;
   /** denom is the denom to remove (ex. ibc/GLKHDSG423SGS) */
@@ -208,25 +208,18 @@ export interface MsgRemoveAllowedDenom {
  * Since Revision 1
  */
 export interface MsgRemoveAllowedDenomResponse {
-  $type: 'regen.ecocredit.marketplace.v1.MsgRemoveAllowedDenomResponse';
+  $type: "regen.ecocredit.marketplace.v1.MsgRemoveAllowedDenomResponse";
 }
 
 function createBaseMsgSell(): MsgSell {
-  return {
-    $type: 'regen.ecocredit.marketplace.v1.MsgSell',
-    seller: '',
-    orders: [],
-  };
+  return { $type: "regen.ecocredit.marketplace.v1.MsgSell", seller: "", orders: [] };
 }
 
 export const MsgSell = {
-  $type: 'regen.ecocredit.marketplace.v1.MsgSell' as const,
+  $type: "regen.ecocredit.marketplace.v1.MsgSell" as const,
 
-  encode(
-    message: MsgSell,
-    writer: _m0.Writer = _m0.Writer.create(),
-  ): _m0.Writer {
-    if (message.seller !== '') {
+  encode(message: MsgSell, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+    if (message.seller !== "") {
       writer.uint32(10).string(message.seller);
     }
     for (const v of message.orders) {
@@ -259,10 +252,8 @@ export const MsgSell = {
   fromJSON(object: any): MsgSell {
     return {
       $type: MsgSell.$type,
-      seller: isSet(object.seller) ? String(object.seller) : '',
-      orders: Array.isArray(object?.orders)
-        ? object.orders.map((e: any) => MsgSell_Order.fromJSON(e))
-        : [],
+      seller: isSet(object.seller) ? String(object.seller) : "",
+      orders: Array.isArray(object?.orders) ? object.orders.map((e: any) => MsgSell_Order.fromJSON(e)) : [],
     };
   },
 
@@ -270,20 +261,21 @@ export const MsgSell = {
     const obj: any = {};
     message.seller !== undefined && (obj.seller = message.seller);
     if (message.orders) {
-      obj.orders = message.orders.map(e =>
-        e ? MsgSell_Order.toJSON(e) : undefined,
-      );
+      obj.orders = message.orders.map((e) => e ? MsgSell_Order.toJSON(e) : undefined);
     } else {
       obj.orders = [];
     }
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<MsgSell>, I>>(object: I): MsgSell {
+  create(base?: DeepPartial<MsgSell>): MsgSell {
+    return MsgSell.fromPartial(base ?? {});
+  },
+
+  fromPartial(object: DeepPartial<MsgSell>): MsgSell {
     const message = createBaseMsgSell();
-    message.seller = object.seller ?? '';
-    message.orders =
-      object.orders?.map(e => MsgSell_Order.fromPartial(e)) || [];
+    message.seller = object.seller ?? "";
+    message.orders = object.orders?.map((e) => MsgSell_Order.fromPartial(e)) || [];
     return message;
   },
 };
@@ -292,9 +284,9 @@ messageTypeRegistry.set(MsgSell.$type, MsgSell);
 
 function createBaseMsgSell_Order(): MsgSell_Order {
   return {
-    $type: 'regen.ecocredit.marketplace.v1.MsgSell.Order',
-    batchDenom: '',
-    quantity: '',
+    $type: "regen.ecocredit.marketplace.v1.MsgSell.Order",
+    batchDenom: "",
+    quantity: "",
     askPrice: undefined,
     disableAutoRetire: false,
     expiration: undefined,
@@ -302,16 +294,13 @@ function createBaseMsgSell_Order(): MsgSell_Order {
 }
 
 export const MsgSell_Order = {
-  $type: 'regen.ecocredit.marketplace.v1.MsgSell.Order' as const,
+  $type: "regen.ecocredit.marketplace.v1.MsgSell.Order" as const,
 
-  encode(
-    message: MsgSell_Order,
-    writer: _m0.Writer = _m0.Writer.create(),
-  ): _m0.Writer {
-    if (message.batchDenom !== '') {
+  encode(message: MsgSell_Order, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+    if (message.batchDenom !== "") {
       writer.uint32(10).string(message.batchDenom);
     }
-    if (message.quantity !== '') {
+    if (message.quantity !== "") {
       writer.uint32(18).string(message.quantity);
     }
     if (message.askPrice !== undefined) {
@@ -321,10 +310,7 @@ export const MsgSell_Order = {
       writer.uint32(32).bool(message.disableAutoRetire);
     }
     if (message.expiration !== undefined) {
-      Timestamp.encode(
-        toTimestamp(message.expiration),
-        writer.uint32(42).fork(),
-      ).ldelim();
+      Timestamp.encode(toTimestamp(message.expiration), writer.uint32(42).fork()).ldelim();
     }
     return writer;
   },
@@ -349,9 +335,7 @@ export const MsgSell_Order = {
           message.disableAutoRetire = reader.bool();
           break;
         case 5:
-          message.expiration = fromTimestamp(
-            Timestamp.decode(reader, reader.uint32()),
-          );
+          message.expiration = fromTimestamp(Timestamp.decode(reader, reader.uint32()));
           break;
         default:
           reader.skipType(tag & 7);
@@ -364,17 +348,11 @@ export const MsgSell_Order = {
   fromJSON(object: any): MsgSell_Order {
     return {
       $type: MsgSell_Order.$type,
-      batchDenom: isSet(object.batchDenom) ? String(object.batchDenom) : '',
-      quantity: isSet(object.quantity) ? String(object.quantity) : '',
-      askPrice: isSet(object.askPrice)
-        ? Coin.fromJSON(object.askPrice)
-        : undefined,
-      disableAutoRetire: isSet(object.disableAutoRetire)
-        ? Boolean(object.disableAutoRetire)
-        : false,
-      expiration: isSet(object.expiration)
-        ? fromJsonTimestamp(object.expiration)
-        : undefined,
+      batchDenom: isSet(object.batchDenom) ? String(object.batchDenom) : "",
+      quantity: isSet(object.quantity) ? String(object.quantity) : "",
+      askPrice: isSet(object.askPrice) ? Coin.fromJSON(object.askPrice) : undefined,
+      disableAutoRetire: isSet(object.disableAutoRetire) ? Boolean(object.disableAutoRetire) : false,
+      expiration: isSet(object.expiration) ? fromJsonTimestamp(object.expiration) : undefined,
     };
   },
 
@@ -382,27 +360,23 @@ export const MsgSell_Order = {
     const obj: any = {};
     message.batchDenom !== undefined && (obj.batchDenom = message.batchDenom);
     message.quantity !== undefined && (obj.quantity = message.quantity);
-    message.askPrice !== undefined &&
-      (obj.askPrice = message.askPrice
-        ? Coin.toJSON(message.askPrice)
-        : undefined);
-    message.disableAutoRetire !== undefined &&
-      (obj.disableAutoRetire = message.disableAutoRetire);
-    message.expiration !== undefined &&
-      (obj.expiration = message.expiration.toISOString());
+    message.askPrice !== undefined && (obj.askPrice = message.askPrice ? Coin.toJSON(message.askPrice) : undefined);
+    message.disableAutoRetire !== undefined && (obj.disableAutoRetire = message.disableAutoRetire);
+    message.expiration !== undefined && (obj.expiration = message.expiration.toISOString());
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<MsgSell_Order>, I>>(
-    object: I,
-  ): MsgSell_Order {
+  create(base?: DeepPartial<MsgSell_Order>): MsgSell_Order {
+    return MsgSell_Order.fromPartial(base ?? {});
+  },
+
+  fromPartial(object: DeepPartial<MsgSell_Order>): MsgSell_Order {
     const message = createBaseMsgSell_Order();
-    message.batchDenom = object.batchDenom ?? '';
-    message.quantity = object.quantity ?? '';
-    message.askPrice =
-      object.askPrice !== undefined && object.askPrice !== null
-        ? Coin.fromPartial(object.askPrice)
-        : undefined;
+    message.batchDenom = object.batchDenom ?? "";
+    message.quantity = object.quantity ?? "";
+    message.askPrice = (object.askPrice !== undefined && object.askPrice !== null)
+      ? Coin.fromPartial(object.askPrice)
+      : undefined;
     message.disableAutoRetire = object.disableAutoRetire ?? false;
     message.expiration = object.expiration ?? undefined;
     return message;
@@ -412,19 +386,13 @@ export const MsgSell_Order = {
 messageTypeRegistry.set(MsgSell_Order.$type, MsgSell_Order);
 
 function createBaseMsgSellResponse(): MsgSellResponse {
-  return {
-    $type: 'regen.ecocredit.marketplace.v1.MsgSellResponse',
-    sellOrderIds: [],
-  };
+  return { $type: "regen.ecocredit.marketplace.v1.MsgSellResponse", sellOrderIds: [] };
 }
 
 export const MsgSellResponse = {
-  $type: 'regen.ecocredit.marketplace.v1.MsgSellResponse' as const,
+  $type: "regen.ecocredit.marketplace.v1.MsgSellResponse" as const,
 
-  encode(
-    message: MsgSellResponse,
-    writer: _m0.Writer = _m0.Writer.create(),
-  ): _m0.Writer {
+  encode(message: MsgSellResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     writer.uint32(10).fork();
     for (const v of message.sellOrderIds) {
       writer.uint64(v);
@@ -461,30 +429,27 @@ export const MsgSellResponse = {
   fromJSON(object: any): MsgSellResponse {
     return {
       $type: MsgSellResponse.$type,
-      sellOrderIds: Array.isArray(object?.sellOrderIds)
-        ? object.sellOrderIds.map((e: any) => Long.fromString(e))
-        : [],
+      sellOrderIds: Array.isArray(object?.sellOrderIds) ? object.sellOrderIds.map((e: any) => Long.fromValue(e)) : [],
     };
   },
 
   toJSON(message: MsgSellResponse): unknown {
     const obj: any = {};
     if (message.sellOrderIds) {
-      obj.sellOrderIds = message.sellOrderIds.map(e =>
-        (e || Long.UZERO).toString(),
-      );
+      obj.sellOrderIds = message.sellOrderIds.map((e) => (e || Long.UZERO).toString());
     } else {
       obj.sellOrderIds = [];
     }
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<MsgSellResponse>, I>>(
-    object: I,
-  ): MsgSellResponse {
+  create(base?: DeepPartial<MsgSellResponse>): MsgSellResponse {
+    return MsgSellResponse.fromPartial(base ?? {});
+  },
+
+  fromPartial(object: DeepPartial<MsgSellResponse>): MsgSellResponse {
     const message = createBaseMsgSellResponse();
-    message.sellOrderIds =
-      object.sellOrderIds?.map(e => Long.fromValue(e)) || [];
+    message.sellOrderIds = object.sellOrderIds?.map((e) => Long.fromValue(e)) || [];
     return message;
   },
 };
@@ -492,21 +457,14 @@ export const MsgSellResponse = {
 messageTypeRegistry.set(MsgSellResponse.$type, MsgSellResponse);
 
 function createBaseMsgUpdateSellOrders(): MsgUpdateSellOrders {
-  return {
-    $type: 'regen.ecocredit.marketplace.v1.MsgUpdateSellOrders',
-    seller: '',
-    updates: [],
-  };
+  return { $type: "regen.ecocredit.marketplace.v1.MsgUpdateSellOrders", seller: "", updates: [] };
 }
 
 export const MsgUpdateSellOrders = {
-  $type: 'regen.ecocredit.marketplace.v1.MsgUpdateSellOrders' as const,
+  $type: "regen.ecocredit.marketplace.v1.MsgUpdateSellOrders" as const,
 
-  encode(
-    message: MsgUpdateSellOrders,
-    writer: _m0.Writer = _m0.Writer.create(),
-  ): _m0.Writer {
-    if (message.seller !== '') {
+  encode(message: MsgUpdateSellOrders, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+    if (message.seller !== "") {
       writer.uint32(10).string(message.seller);
     }
     for (const v of message.updates) {
@@ -526,9 +484,7 @@ export const MsgUpdateSellOrders = {
           message.seller = reader.string();
           break;
         case 2:
-          message.updates.push(
-            MsgUpdateSellOrders_Update.decode(reader, reader.uint32()),
-          );
+          message.updates.push(MsgUpdateSellOrders_Update.decode(reader, reader.uint32()));
           break;
         default:
           reader.skipType(tag & 7);
@@ -541,7 +497,7 @@ export const MsgUpdateSellOrders = {
   fromJSON(object: any): MsgUpdateSellOrders {
     return {
       $type: MsgUpdateSellOrders.$type,
-      seller: isSet(object.seller) ? String(object.seller) : '',
+      seller: isSet(object.seller) ? String(object.seller) : "",
       updates: Array.isArray(object?.updates)
         ? object.updates.map((e: any) => MsgUpdateSellOrders_Update.fromJSON(e))
         : [],
@@ -552,22 +508,21 @@ export const MsgUpdateSellOrders = {
     const obj: any = {};
     message.seller !== undefined && (obj.seller = message.seller);
     if (message.updates) {
-      obj.updates = message.updates.map(e =>
-        e ? MsgUpdateSellOrders_Update.toJSON(e) : undefined,
-      );
+      obj.updates = message.updates.map((e) => e ? MsgUpdateSellOrders_Update.toJSON(e) : undefined);
     } else {
       obj.updates = [];
     }
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<MsgUpdateSellOrders>, I>>(
-    object: I,
-  ): MsgUpdateSellOrders {
+  create(base?: DeepPartial<MsgUpdateSellOrders>): MsgUpdateSellOrders {
+    return MsgUpdateSellOrders.fromPartial(base ?? {});
+  },
+
+  fromPartial(object: DeepPartial<MsgUpdateSellOrders>): MsgUpdateSellOrders {
     const message = createBaseMsgUpdateSellOrders();
-    message.seller = object.seller ?? '';
-    message.updates =
-      object.updates?.map(e => MsgUpdateSellOrders_Update.fromPartial(e)) || [];
+    message.seller = object.seller ?? "";
+    message.updates = object.updates?.map((e) => MsgUpdateSellOrders_Update.fromPartial(e)) || [];
     return message;
   },
 };
@@ -576,9 +531,9 @@ messageTypeRegistry.set(MsgUpdateSellOrders.$type, MsgUpdateSellOrders);
 
 function createBaseMsgUpdateSellOrders_Update(): MsgUpdateSellOrders_Update {
   return {
-    $type: 'regen.ecocredit.marketplace.v1.MsgUpdateSellOrders.Update',
+    $type: "regen.ecocredit.marketplace.v1.MsgUpdateSellOrders.Update",
     sellOrderId: Long.UZERO,
-    newQuantity: '',
+    newQuantity: "",
     newAskPrice: undefined,
     disableAutoRetire: false,
     newExpiration: undefined,
@@ -586,16 +541,13 @@ function createBaseMsgUpdateSellOrders_Update(): MsgUpdateSellOrders_Update {
 }
 
 export const MsgUpdateSellOrders_Update = {
-  $type: 'regen.ecocredit.marketplace.v1.MsgUpdateSellOrders.Update' as const,
+  $type: "regen.ecocredit.marketplace.v1.MsgUpdateSellOrders.Update" as const,
 
-  encode(
-    message: MsgUpdateSellOrders_Update,
-    writer: _m0.Writer = _m0.Writer.create(),
-  ): _m0.Writer {
+  encode(message: MsgUpdateSellOrders_Update, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (!message.sellOrderId.isZero()) {
       writer.uint32(8).uint64(message.sellOrderId);
     }
-    if (message.newQuantity !== '') {
+    if (message.newQuantity !== "") {
       writer.uint32(18).string(message.newQuantity);
     }
     if (message.newAskPrice !== undefined) {
@@ -605,18 +557,12 @@ export const MsgUpdateSellOrders_Update = {
       writer.uint32(32).bool(message.disableAutoRetire);
     }
     if (message.newExpiration !== undefined) {
-      Timestamp.encode(
-        toTimestamp(message.newExpiration),
-        writer.uint32(42).fork(),
-      ).ldelim();
+      Timestamp.encode(toTimestamp(message.newExpiration), writer.uint32(42).fork()).ldelim();
     }
     return writer;
   },
 
-  decode(
-    input: _m0.Reader | Uint8Array,
-    length?: number,
-  ): MsgUpdateSellOrders_Update {
+  decode(input: _m0.Reader | Uint8Array, length?: number): MsgUpdateSellOrders_Update {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMsgUpdateSellOrders_Update();
@@ -636,9 +582,7 @@ export const MsgUpdateSellOrders_Update = {
           message.disableAutoRetire = reader.bool();
           break;
         case 5:
-          message.newExpiration = fromTimestamp(
-            Timestamp.decode(reader, reader.uint32()),
-          );
+          message.newExpiration = fromTimestamp(Timestamp.decode(reader, reader.uint32()));
           break;
         default:
           reader.skipType(tag & 7);
@@ -651,83 +595,58 @@ export const MsgUpdateSellOrders_Update = {
   fromJSON(object: any): MsgUpdateSellOrders_Update {
     return {
       $type: MsgUpdateSellOrders_Update.$type,
-      sellOrderId: isSet(object.sellOrderId)
-        ? Long.fromString(object.sellOrderId)
-        : Long.UZERO,
-      newQuantity: isSet(object.newQuantity) ? String(object.newQuantity) : '',
-      newAskPrice: isSet(object.newAskPrice)
-        ? Coin.fromJSON(object.newAskPrice)
-        : undefined,
-      disableAutoRetire: isSet(object.disableAutoRetire)
-        ? Boolean(object.disableAutoRetire)
-        : false,
-      newExpiration: isSet(object.newExpiration)
-        ? fromJsonTimestamp(object.newExpiration)
-        : undefined,
+      sellOrderId: isSet(object.sellOrderId) ? Long.fromValue(object.sellOrderId) : Long.UZERO,
+      newQuantity: isSet(object.newQuantity) ? String(object.newQuantity) : "",
+      newAskPrice: isSet(object.newAskPrice) ? Coin.fromJSON(object.newAskPrice) : undefined,
+      disableAutoRetire: isSet(object.disableAutoRetire) ? Boolean(object.disableAutoRetire) : false,
+      newExpiration: isSet(object.newExpiration) ? fromJsonTimestamp(object.newExpiration) : undefined,
     };
   },
 
   toJSON(message: MsgUpdateSellOrders_Update): unknown {
     const obj: any = {};
-    message.sellOrderId !== undefined &&
-      (obj.sellOrderId = (message.sellOrderId || Long.UZERO).toString());
-    message.newQuantity !== undefined &&
-      (obj.newQuantity = message.newQuantity);
+    message.sellOrderId !== undefined && (obj.sellOrderId = (message.sellOrderId || Long.UZERO).toString());
+    message.newQuantity !== undefined && (obj.newQuantity = message.newQuantity);
     message.newAskPrice !== undefined &&
-      (obj.newAskPrice = message.newAskPrice
-        ? Coin.toJSON(message.newAskPrice)
-        : undefined);
-    message.disableAutoRetire !== undefined &&
-      (obj.disableAutoRetire = message.disableAutoRetire);
-    message.newExpiration !== undefined &&
-      (obj.newExpiration = message.newExpiration.toISOString());
+      (obj.newAskPrice = message.newAskPrice ? Coin.toJSON(message.newAskPrice) : undefined);
+    message.disableAutoRetire !== undefined && (obj.disableAutoRetire = message.disableAutoRetire);
+    message.newExpiration !== undefined && (obj.newExpiration = message.newExpiration.toISOString());
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<MsgUpdateSellOrders_Update>, I>>(
-    object: I,
-  ): MsgUpdateSellOrders_Update {
+  create(base?: DeepPartial<MsgUpdateSellOrders_Update>): MsgUpdateSellOrders_Update {
+    return MsgUpdateSellOrders_Update.fromPartial(base ?? {});
+  },
+
+  fromPartial(object: DeepPartial<MsgUpdateSellOrders_Update>): MsgUpdateSellOrders_Update {
     const message = createBaseMsgUpdateSellOrders_Update();
-    message.sellOrderId =
-      object.sellOrderId !== undefined && object.sellOrderId !== null
-        ? Long.fromValue(object.sellOrderId)
-        : Long.UZERO;
-    message.newQuantity = object.newQuantity ?? '';
-    message.newAskPrice =
-      object.newAskPrice !== undefined && object.newAskPrice !== null
-        ? Coin.fromPartial(object.newAskPrice)
-        : undefined;
+    message.sellOrderId = (object.sellOrderId !== undefined && object.sellOrderId !== null)
+      ? Long.fromValue(object.sellOrderId)
+      : Long.UZERO;
+    message.newQuantity = object.newQuantity ?? "";
+    message.newAskPrice = (object.newAskPrice !== undefined && object.newAskPrice !== null)
+      ? Coin.fromPartial(object.newAskPrice)
+      : undefined;
     message.disableAutoRetire = object.disableAutoRetire ?? false;
     message.newExpiration = object.newExpiration ?? undefined;
     return message;
   },
 };
 
-messageTypeRegistry.set(
-  MsgUpdateSellOrders_Update.$type,
-  MsgUpdateSellOrders_Update,
-);
+messageTypeRegistry.set(MsgUpdateSellOrders_Update.$type, MsgUpdateSellOrders_Update);
 
 function createBaseMsgUpdateSellOrdersResponse(): MsgUpdateSellOrdersResponse {
-  return {
-    $type: 'regen.ecocredit.marketplace.v1.MsgUpdateSellOrdersResponse',
-  };
+  return { $type: "regen.ecocredit.marketplace.v1.MsgUpdateSellOrdersResponse" };
 }
 
 export const MsgUpdateSellOrdersResponse = {
-  $type: 'regen.ecocredit.marketplace.v1.MsgUpdateSellOrdersResponse' as const,
+  $type: "regen.ecocredit.marketplace.v1.MsgUpdateSellOrdersResponse" as const,
 
-  encode(
-    _: MsgUpdateSellOrdersResponse,
-    writer: _m0.Writer = _m0.Writer.create(),
-  ): _m0.Writer {
+  encode(_: MsgUpdateSellOrdersResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     return writer;
   },
 
-  decode(
-    input: _m0.Reader | Uint8Array,
-    length?: number,
-  ): MsgUpdateSellOrdersResponse {
+  decode(input: _m0.Reader | Uint8Array, length?: number): MsgUpdateSellOrdersResponse {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMsgUpdateSellOrdersResponse();
@@ -743,9 +662,7 @@ export const MsgUpdateSellOrdersResponse = {
   },
 
   fromJSON(_: any): MsgUpdateSellOrdersResponse {
-    return {
-      $type: MsgUpdateSellOrdersResponse.$type,
-    };
+    return { $type: MsgUpdateSellOrdersResponse.$type };
   },
 
   toJSON(_: MsgUpdateSellOrdersResponse): unknown {
@@ -753,35 +670,27 @@ export const MsgUpdateSellOrdersResponse = {
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<MsgUpdateSellOrdersResponse>, I>>(
-    _: I,
-  ): MsgUpdateSellOrdersResponse {
+  create(base?: DeepPartial<MsgUpdateSellOrdersResponse>): MsgUpdateSellOrdersResponse {
+    return MsgUpdateSellOrdersResponse.fromPartial(base ?? {});
+  },
+
+  fromPartial(_: DeepPartial<MsgUpdateSellOrdersResponse>): MsgUpdateSellOrdersResponse {
     const message = createBaseMsgUpdateSellOrdersResponse();
     return message;
   },
 };
 
-messageTypeRegistry.set(
-  MsgUpdateSellOrdersResponse.$type,
-  MsgUpdateSellOrdersResponse,
-);
+messageTypeRegistry.set(MsgUpdateSellOrdersResponse.$type, MsgUpdateSellOrdersResponse);
 
 function createBaseMsgCancelSellOrder(): MsgCancelSellOrder {
-  return {
-    $type: 'regen.ecocredit.marketplace.v1.MsgCancelSellOrder',
-    seller: '',
-    sellOrderId: Long.UZERO,
-  };
+  return { $type: "regen.ecocredit.marketplace.v1.MsgCancelSellOrder", seller: "", sellOrderId: Long.UZERO };
 }
 
 export const MsgCancelSellOrder = {
-  $type: 'regen.ecocredit.marketplace.v1.MsgCancelSellOrder' as const,
+  $type: "regen.ecocredit.marketplace.v1.MsgCancelSellOrder" as const,
 
-  encode(
-    message: MsgCancelSellOrder,
-    writer: _m0.Writer = _m0.Writer.create(),
-  ): _m0.Writer {
-    if (message.seller !== '') {
+  encode(message: MsgCancelSellOrder, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+    if (message.seller !== "") {
       writer.uint32(10).string(message.seller);
     }
     if (!message.sellOrderId.isZero()) {
@@ -814,30 +723,28 @@ export const MsgCancelSellOrder = {
   fromJSON(object: any): MsgCancelSellOrder {
     return {
       $type: MsgCancelSellOrder.$type,
-      seller: isSet(object.seller) ? String(object.seller) : '',
-      sellOrderId: isSet(object.sellOrderId)
-        ? Long.fromString(object.sellOrderId)
-        : Long.UZERO,
+      seller: isSet(object.seller) ? String(object.seller) : "",
+      sellOrderId: isSet(object.sellOrderId) ? Long.fromValue(object.sellOrderId) : Long.UZERO,
     };
   },
 
   toJSON(message: MsgCancelSellOrder): unknown {
     const obj: any = {};
     message.seller !== undefined && (obj.seller = message.seller);
-    message.sellOrderId !== undefined &&
-      (obj.sellOrderId = (message.sellOrderId || Long.UZERO).toString());
+    message.sellOrderId !== undefined && (obj.sellOrderId = (message.sellOrderId || Long.UZERO).toString());
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<MsgCancelSellOrder>, I>>(
-    object: I,
-  ): MsgCancelSellOrder {
+  create(base?: DeepPartial<MsgCancelSellOrder>): MsgCancelSellOrder {
+    return MsgCancelSellOrder.fromPartial(base ?? {});
+  },
+
+  fromPartial(object: DeepPartial<MsgCancelSellOrder>): MsgCancelSellOrder {
     const message = createBaseMsgCancelSellOrder();
-    message.seller = object.seller ?? '';
-    message.sellOrderId =
-      object.sellOrderId !== undefined && object.sellOrderId !== null
-        ? Long.fromValue(object.sellOrderId)
-        : Long.UZERO;
+    message.seller = object.seller ?? "";
+    message.sellOrderId = (object.sellOrderId !== undefined && object.sellOrderId !== null)
+      ? Long.fromValue(object.sellOrderId)
+      : Long.UZERO;
     return message;
   },
 };
@@ -845,23 +752,17 @@ export const MsgCancelSellOrder = {
 messageTypeRegistry.set(MsgCancelSellOrder.$type, MsgCancelSellOrder);
 
 function createBaseMsgCancelSellOrderResponse(): MsgCancelSellOrderResponse {
-  return { $type: 'regen.ecocredit.marketplace.v1.MsgCancelSellOrderResponse' };
+  return { $type: "regen.ecocredit.marketplace.v1.MsgCancelSellOrderResponse" };
 }
 
 export const MsgCancelSellOrderResponse = {
-  $type: 'regen.ecocredit.marketplace.v1.MsgCancelSellOrderResponse' as const,
+  $type: "regen.ecocredit.marketplace.v1.MsgCancelSellOrderResponse" as const,
 
-  encode(
-    _: MsgCancelSellOrderResponse,
-    writer: _m0.Writer = _m0.Writer.create(),
-  ): _m0.Writer {
+  encode(_: MsgCancelSellOrderResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     return writer;
   },
 
-  decode(
-    input: _m0.Reader | Uint8Array,
-    length?: number,
-  ): MsgCancelSellOrderResponse {
+  decode(input: _m0.Reader | Uint8Array, length?: number): MsgCancelSellOrderResponse {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMsgCancelSellOrderResponse();
@@ -877,9 +778,7 @@ export const MsgCancelSellOrderResponse = {
   },
 
   fromJSON(_: any): MsgCancelSellOrderResponse {
-    return {
-      $type: MsgCancelSellOrderResponse.$type,
-    };
+    return { $type: MsgCancelSellOrderResponse.$type };
   },
 
   toJSON(_: MsgCancelSellOrderResponse): unknown {
@@ -887,35 +786,27 @@ export const MsgCancelSellOrderResponse = {
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<MsgCancelSellOrderResponse>, I>>(
-    _: I,
-  ): MsgCancelSellOrderResponse {
+  create(base?: DeepPartial<MsgCancelSellOrderResponse>): MsgCancelSellOrderResponse {
+    return MsgCancelSellOrderResponse.fromPartial(base ?? {});
+  },
+
+  fromPartial(_: DeepPartial<MsgCancelSellOrderResponse>): MsgCancelSellOrderResponse {
     const message = createBaseMsgCancelSellOrderResponse();
     return message;
   },
 };
 
-messageTypeRegistry.set(
-  MsgCancelSellOrderResponse.$type,
-  MsgCancelSellOrderResponse,
-);
+messageTypeRegistry.set(MsgCancelSellOrderResponse.$type, MsgCancelSellOrderResponse);
 
 function createBaseMsgBuyDirect(): MsgBuyDirect {
-  return {
-    $type: 'regen.ecocredit.marketplace.v1.MsgBuyDirect',
-    buyer: '',
-    orders: [],
-  };
+  return { $type: "regen.ecocredit.marketplace.v1.MsgBuyDirect", buyer: "", orders: [] };
 }
 
 export const MsgBuyDirect = {
-  $type: 'regen.ecocredit.marketplace.v1.MsgBuyDirect' as const,
+  $type: "regen.ecocredit.marketplace.v1.MsgBuyDirect" as const,
 
-  encode(
-    message: MsgBuyDirect,
-    writer: _m0.Writer = _m0.Writer.create(),
-  ): _m0.Writer {
-    if (message.buyer !== '') {
+  encode(message: MsgBuyDirect, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+    if (message.buyer !== "") {
       writer.uint32(10).string(message.buyer);
     }
     for (const v of message.orders) {
@@ -935,9 +826,7 @@ export const MsgBuyDirect = {
           message.buyer = reader.string();
           break;
         case 2:
-          message.orders.push(
-            MsgBuyDirect_Order.decode(reader, reader.uint32()),
-          );
+          message.orders.push(MsgBuyDirect_Order.decode(reader, reader.uint32()));
           break;
         default:
           reader.skipType(tag & 7);
@@ -950,10 +839,8 @@ export const MsgBuyDirect = {
   fromJSON(object: any): MsgBuyDirect {
     return {
       $type: MsgBuyDirect.$type,
-      buyer: isSet(object.buyer) ? String(object.buyer) : '',
-      orders: Array.isArray(object?.orders)
-        ? object.orders.map((e: any) => MsgBuyDirect_Order.fromJSON(e))
-        : [],
+      buyer: isSet(object.buyer) ? String(object.buyer) : "",
+      orders: Array.isArray(object?.orders) ? object.orders.map((e: any) => MsgBuyDirect_Order.fromJSON(e)) : [],
     };
   },
 
@@ -961,22 +848,21 @@ export const MsgBuyDirect = {
     const obj: any = {};
     message.buyer !== undefined && (obj.buyer = message.buyer);
     if (message.orders) {
-      obj.orders = message.orders.map(e =>
-        e ? MsgBuyDirect_Order.toJSON(e) : undefined,
-      );
+      obj.orders = message.orders.map((e) => e ? MsgBuyDirect_Order.toJSON(e) : undefined);
     } else {
       obj.orders = [];
     }
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<MsgBuyDirect>, I>>(
-    object: I,
-  ): MsgBuyDirect {
+  create(base?: DeepPartial<MsgBuyDirect>): MsgBuyDirect {
+    return MsgBuyDirect.fromPartial(base ?? {});
+  },
+
+  fromPartial(object: DeepPartial<MsgBuyDirect>): MsgBuyDirect {
     const message = createBaseMsgBuyDirect();
-    message.buyer = object.buyer ?? '';
-    message.orders =
-      object.orders?.map(e => MsgBuyDirect_Order.fromPartial(e)) || [];
+    message.buyer = object.buyer ?? "";
+    message.orders = object.orders?.map((e) => MsgBuyDirect_Order.fromPartial(e)) || [];
     return message;
   },
 };
@@ -985,27 +871,24 @@ messageTypeRegistry.set(MsgBuyDirect.$type, MsgBuyDirect);
 
 function createBaseMsgBuyDirect_Order(): MsgBuyDirect_Order {
   return {
-    $type: 'regen.ecocredit.marketplace.v1.MsgBuyDirect.Order',
+    $type: "regen.ecocredit.marketplace.v1.MsgBuyDirect.Order",
     sellOrderId: Long.UZERO,
-    quantity: '',
+    quantity: "",
     bidPrice: undefined,
     disableAutoRetire: false,
-    retirementJurisdiction: '',
-    retirementReason: '',
+    retirementJurisdiction: "",
+    retirementReason: "",
   };
 }
 
 export const MsgBuyDirect_Order = {
-  $type: 'regen.ecocredit.marketplace.v1.MsgBuyDirect.Order' as const,
+  $type: "regen.ecocredit.marketplace.v1.MsgBuyDirect.Order" as const,
 
-  encode(
-    message: MsgBuyDirect_Order,
-    writer: _m0.Writer = _m0.Writer.create(),
-  ): _m0.Writer {
+  encode(message: MsgBuyDirect_Order, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (!message.sellOrderId.isZero()) {
       writer.uint32(16).uint64(message.sellOrderId);
     }
-    if (message.quantity !== '') {
+    if (message.quantity !== "") {
       writer.uint32(26).string(message.quantity);
     }
     if (message.bidPrice !== undefined) {
@@ -1014,10 +897,10 @@ export const MsgBuyDirect_Order = {
     if (message.disableAutoRetire === true) {
       writer.uint32(40).bool(message.disableAutoRetire);
     }
-    if (message.retirementJurisdiction !== '') {
+    if (message.retirementJurisdiction !== "") {
       writer.uint32(50).string(message.retirementJurisdiction);
     }
-    if (message.retirementReason !== '') {
+    if (message.retirementReason !== "") {
       writer.uint32(58).string(message.retirementReason);
     }
     return writer;
@@ -1059,59 +942,42 @@ export const MsgBuyDirect_Order = {
   fromJSON(object: any): MsgBuyDirect_Order {
     return {
       $type: MsgBuyDirect_Order.$type,
-      sellOrderId: isSet(object.sellOrderId)
-        ? Long.fromString(object.sellOrderId)
-        : Long.UZERO,
-      quantity: isSet(object.quantity) ? String(object.quantity) : '',
-      bidPrice: isSet(object.bidPrice)
-        ? Coin.fromJSON(object.bidPrice)
-        : undefined,
-      disableAutoRetire: isSet(object.disableAutoRetire)
-        ? Boolean(object.disableAutoRetire)
-        : false,
-      retirementJurisdiction: isSet(object.retirementJurisdiction)
-        ? String(object.retirementJurisdiction)
-        : '',
-      retirementReason: isSet(object.retirementReason)
-        ? String(object.retirementReason)
-        : '',
+      sellOrderId: isSet(object.sellOrderId) ? Long.fromValue(object.sellOrderId) : Long.UZERO,
+      quantity: isSet(object.quantity) ? String(object.quantity) : "",
+      bidPrice: isSet(object.bidPrice) ? Coin.fromJSON(object.bidPrice) : undefined,
+      disableAutoRetire: isSet(object.disableAutoRetire) ? Boolean(object.disableAutoRetire) : false,
+      retirementJurisdiction: isSet(object.retirementJurisdiction) ? String(object.retirementJurisdiction) : "",
+      retirementReason: isSet(object.retirementReason) ? String(object.retirementReason) : "",
     };
   },
 
   toJSON(message: MsgBuyDirect_Order): unknown {
     const obj: any = {};
-    message.sellOrderId !== undefined &&
-      (obj.sellOrderId = (message.sellOrderId || Long.UZERO).toString());
+    message.sellOrderId !== undefined && (obj.sellOrderId = (message.sellOrderId || Long.UZERO).toString());
     message.quantity !== undefined && (obj.quantity = message.quantity);
-    message.bidPrice !== undefined &&
-      (obj.bidPrice = message.bidPrice
-        ? Coin.toJSON(message.bidPrice)
-        : undefined);
-    message.disableAutoRetire !== undefined &&
-      (obj.disableAutoRetire = message.disableAutoRetire);
-    message.retirementJurisdiction !== undefined &&
-      (obj.retirementJurisdiction = message.retirementJurisdiction);
-    message.retirementReason !== undefined &&
-      (obj.retirementReason = message.retirementReason);
+    message.bidPrice !== undefined && (obj.bidPrice = message.bidPrice ? Coin.toJSON(message.bidPrice) : undefined);
+    message.disableAutoRetire !== undefined && (obj.disableAutoRetire = message.disableAutoRetire);
+    message.retirementJurisdiction !== undefined && (obj.retirementJurisdiction = message.retirementJurisdiction);
+    message.retirementReason !== undefined && (obj.retirementReason = message.retirementReason);
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<MsgBuyDirect_Order>, I>>(
-    object: I,
-  ): MsgBuyDirect_Order {
+  create(base?: DeepPartial<MsgBuyDirect_Order>): MsgBuyDirect_Order {
+    return MsgBuyDirect_Order.fromPartial(base ?? {});
+  },
+
+  fromPartial(object: DeepPartial<MsgBuyDirect_Order>): MsgBuyDirect_Order {
     const message = createBaseMsgBuyDirect_Order();
-    message.sellOrderId =
-      object.sellOrderId !== undefined && object.sellOrderId !== null
-        ? Long.fromValue(object.sellOrderId)
-        : Long.UZERO;
-    message.quantity = object.quantity ?? '';
-    message.bidPrice =
-      object.bidPrice !== undefined && object.bidPrice !== null
-        ? Coin.fromPartial(object.bidPrice)
-        : undefined;
+    message.sellOrderId = (object.sellOrderId !== undefined && object.sellOrderId !== null)
+      ? Long.fromValue(object.sellOrderId)
+      : Long.UZERO;
+    message.quantity = object.quantity ?? "";
+    message.bidPrice = (object.bidPrice !== undefined && object.bidPrice !== null)
+      ? Coin.fromPartial(object.bidPrice)
+      : undefined;
     message.disableAutoRetire = object.disableAutoRetire ?? false;
-    message.retirementJurisdiction = object.retirementJurisdiction ?? '';
-    message.retirementReason = object.retirementReason ?? '';
+    message.retirementJurisdiction = object.retirementJurisdiction ?? "";
+    message.retirementReason = object.retirementReason ?? "";
     return message;
   },
 };
@@ -1119,23 +985,17 @@ export const MsgBuyDirect_Order = {
 messageTypeRegistry.set(MsgBuyDirect_Order.$type, MsgBuyDirect_Order);
 
 function createBaseMsgBuyDirectResponse(): MsgBuyDirectResponse {
-  return { $type: 'regen.ecocredit.marketplace.v1.MsgBuyDirectResponse' };
+  return { $type: "regen.ecocredit.marketplace.v1.MsgBuyDirectResponse" };
 }
 
 export const MsgBuyDirectResponse = {
-  $type: 'regen.ecocredit.marketplace.v1.MsgBuyDirectResponse' as const,
+  $type: "regen.ecocredit.marketplace.v1.MsgBuyDirectResponse" as const,
 
-  encode(
-    _: MsgBuyDirectResponse,
-    writer: _m0.Writer = _m0.Writer.create(),
-  ): _m0.Writer {
+  encode(_: MsgBuyDirectResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     return writer;
   },
 
-  decode(
-    input: _m0.Reader | Uint8Array,
-    length?: number,
-  ): MsgBuyDirectResponse {
+  decode(input: _m0.Reader | Uint8Array, length?: number): MsgBuyDirectResponse {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMsgBuyDirectResponse();
@@ -1151,9 +1011,7 @@ export const MsgBuyDirectResponse = {
   },
 
   fromJSON(_: any): MsgBuyDirectResponse {
-    return {
-      $type: MsgBuyDirectResponse.$type,
-    };
+    return { $type: MsgBuyDirectResponse.$type };
   },
 
   toJSON(_: MsgBuyDirectResponse): unknown {
@@ -1161,9 +1019,11 @@ export const MsgBuyDirectResponse = {
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<MsgBuyDirectResponse>, I>>(
-    _: I,
-  ): MsgBuyDirectResponse {
+  create(base?: DeepPartial<MsgBuyDirectResponse>): MsgBuyDirectResponse {
+    return MsgBuyDirectResponse.fromPartial(base ?? {});
+  },
+
+  fromPartial(_: DeepPartial<MsgBuyDirectResponse>): MsgBuyDirectResponse {
     const message = createBaseMsgBuyDirectResponse();
     return message;
   },
@@ -1173,28 +1033,25 @@ messageTypeRegistry.set(MsgBuyDirectResponse.$type, MsgBuyDirectResponse);
 
 function createBaseMsgAddAllowedDenom(): MsgAddAllowedDenom {
   return {
-    $type: 'regen.ecocredit.marketplace.v1.MsgAddAllowedDenom',
-    authority: '',
-    bankDenom: '',
-    displayDenom: '',
+    $type: "regen.ecocredit.marketplace.v1.MsgAddAllowedDenom",
+    authority: "",
+    bankDenom: "",
+    displayDenom: "",
     exponent: 0,
   };
 }
 
 export const MsgAddAllowedDenom = {
-  $type: 'regen.ecocredit.marketplace.v1.MsgAddAllowedDenom' as const,
+  $type: "regen.ecocredit.marketplace.v1.MsgAddAllowedDenom" as const,
 
-  encode(
-    message: MsgAddAllowedDenom,
-    writer: _m0.Writer = _m0.Writer.create(),
-  ): _m0.Writer {
-    if (message.authority !== '') {
+  encode(message: MsgAddAllowedDenom, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+    if (message.authority !== "") {
       writer.uint32(10).string(message.authority);
     }
-    if (message.bankDenom !== '') {
+    if (message.bankDenom !== "") {
       writer.uint32(18).string(message.bankDenom);
     }
-    if (message.displayDenom !== '') {
+    if (message.displayDenom !== "") {
       writer.uint32(26).string(message.displayDenom);
     }
     if (message.exponent !== 0) {
@@ -1233,11 +1090,9 @@ export const MsgAddAllowedDenom = {
   fromJSON(object: any): MsgAddAllowedDenom {
     return {
       $type: MsgAddAllowedDenom.$type,
-      authority: isSet(object.authority) ? String(object.authority) : '',
-      bankDenom: isSet(object.bankDenom) ? String(object.bankDenom) : '',
-      displayDenom: isSet(object.displayDenom)
-        ? String(object.displayDenom)
-        : '',
+      authority: isSet(object.authority) ? String(object.authority) : "",
+      bankDenom: isSet(object.bankDenom) ? String(object.bankDenom) : "",
+      displayDenom: isSet(object.displayDenom) ? String(object.displayDenom) : "",
       exponent: isSet(object.exponent) ? Number(object.exponent) : 0,
     };
   },
@@ -1246,20 +1101,20 @@ export const MsgAddAllowedDenom = {
     const obj: any = {};
     message.authority !== undefined && (obj.authority = message.authority);
     message.bankDenom !== undefined && (obj.bankDenom = message.bankDenom);
-    message.displayDenom !== undefined &&
-      (obj.displayDenom = message.displayDenom);
-    message.exponent !== undefined &&
-      (obj.exponent = Math.round(message.exponent));
+    message.displayDenom !== undefined && (obj.displayDenom = message.displayDenom);
+    message.exponent !== undefined && (obj.exponent = Math.round(message.exponent));
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<MsgAddAllowedDenom>, I>>(
-    object: I,
-  ): MsgAddAllowedDenom {
+  create(base?: DeepPartial<MsgAddAllowedDenom>): MsgAddAllowedDenom {
+    return MsgAddAllowedDenom.fromPartial(base ?? {});
+  },
+
+  fromPartial(object: DeepPartial<MsgAddAllowedDenom>): MsgAddAllowedDenom {
     const message = createBaseMsgAddAllowedDenom();
-    message.authority = object.authority ?? '';
-    message.bankDenom = object.bankDenom ?? '';
-    message.displayDenom = object.displayDenom ?? '';
+    message.authority = object.authority ?? "";
+    message.bankDenom = object.bankDenom ?? "";
+    message.displayDenom = object.displayDenom ?? "";
     message.exponent = object.exponent ?? 0;
     return message;
   },
@@ -1268,23 +1123,17 @@ export const MsgAddAllowedDenom = {
 messageTypeRegistry.set(MsgAddAllowedDenom.$type, MsgAddAllowedDenom);
 
 function createBaseMsgAddAllowedDenomResponse(): MsgAddAllowedDenomResponse {
-  return { $type: 'regen.ecocredit.marketplace.v1.MsgAddAllowedDenomResponse' };
+  return { $type: "regen.ecocredit.marketplace.v1.MsgAddAllowedDenomResponse" };
 }
 
 export const MsgAddAllowedDenomResponse = {
-  $type: 'regen.ecocredit.marketplace.v1.MsgAddAllowedDenomResponse' as const,
+  $type: "regen.ecocredit.marketplace.v1.MsgAddAllowedDenomResponse" as const,
 
-  encode(
-    _: MsgAddAllowedDenomResponse,
-    writer: _m0.Writer = _m0.Writer.create(),
-  ): _m0.Writer {
+  encode(_: MsgAddAllowedDenomResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     return writer;
   },
 
-  decode(
-    input: _m0.Reader | Uint8Array,
-    length?: number,
-  ): MsgAddAllowedDenomResponse {
+  decode(input: _m0.Reader | Uint8Array, length?: number): MsgAddAllowedDenomResponse {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMsgAddAllowedDenomResponse();
@@ -1300,9 +1149,7 @@ export const MsgAddAllowedDenomResponse = {
   },
 
   fromJSON(_: any): MsgAddAllowedDenomResponse {
-    return {
-      $type: MsgAddAllowedDenomResponse.$type,
-    };
+    return { $type: MsgAddAllowedDenomResponse.$type };
   },
 
   toJSON(_: MsgAddAllowedDenomResponse): unknown {
@@ -1310,47 +1157,36 @@ export const MsgAddAllowedDenomResponse = {
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<MsgAddAllowedDenomResponse>, I>>(
-    _: I,
-  ): MsgAddAllowedDenomResponse {
+  create(base?: DeepPartial<MsgAddAllowedDenomResponse>): MsgAddAllowedDenomResponse {
+    return MsgAddAllowedDenomResponse.fromPartial(base ?? {});
+  },
+
+  fromPartial(_: DeepPartial<MsgAddAllowedDenomResponse>): MsgAddAllowedDenomResponse {
     const message = createBaseMsgAddAllowedDenomResponse();
     return message;
   },
 };
 
-messageTypeRegistry.set(
-  MsgAddAllowedDenomResponse.$type,
-  MsgAddAllowedDenomResponse,
-);
+messageTypeRegistry.set(MsgAddAllowedDenomResponse.$type, MsgAddAllowedDenomResponse);
 
 function createBaseMsgRemoveAllowedDenom(): MsgRemoveAllowedDenom {
-  return {
-    $type: 'regen.ecocredit.marketplace.v1.MsgRemoveAllowedDenom',
-    authority: '',
-    denom: '',
-  };
+  return { $type: "regen.ecocredit.marketplace.v1.MsgRemoveAllowedDenom", authority: "", denom: "" };
 }
 
 export const MsgRemoveAllowedDenom = {
-  $type: 'regen.ecocredit.marketplace.v1.MsgRemoveAllowedDenom' as const,
+  $type: "regen.ecocredit.marketplace.v1.MsgRemoveAllowedDenom" as const,
 
-  encode(
-    message: MsgRemoveAllowedDenom,
-    writer: _m0.Writer = _m0.Writer.create(),
-  ): _m0.Writer {
-    if (message.authority !== '') {
+  encode(message: MsgRemoveAllowedDenom, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+    if (message.authority !== "") {
       writer.uint32(10).string(message.authority);
     }
-    if (message.denom !== '') {
+    if (message.denom !== "") {
       writer.uint32(18).string(message.denom);
     }
     return writer;
   },
 
-  decode(
-    input: _m0.Reader | Uint8Array,
-    length?: number,
-  ): MsgRemoveAllowedDenom {
+  decode(input: _m0.Reader | Uint8Array, length?: number): MsgRemoveAllowedDenom {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMsgRemoveAllowedDenom();
@@ -1374,8 +1210,8 @@ export const MsgRemoveAllowedDenom = {
   fromJSON(object: any): MsgRemoveAllowedDenom {
     return {
       $type: MsgRemoveAllowedDenom.$type,
-      authority: isSet(object.authority) ? String(object.authority) : '',
-      denom: isSet(object.denom) ? String(object.denom) : '',
+      authority: isSet(object.authority) ? String(object.authority) : "",
+      denom: isSet(object.denom) ? String(object.denom) : "",
     };
   },
 
@@ -1386,12 +1222,14 @@ export const MsgRemoveAllowedDenom = {
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<MsgRemoveAllowedDenom>, I>>(
-    object: I,
-  ): MsgRemoveAllowedDenom {
+  create(base?: DeepPartial<MsgRemoveAllowedDenom>): MsgRemoveAllowedDenom {
+    return MsgRemoveAllowedDenom.fromPartial(base ?? {});
+  },
+
+  fromPartial(object: DeepPartial<MsgRemoveAllowedDenom>): MsgRemoveAllowedDenom {
     const message = createBaseMsgRemoveAllowedDenom();
-    message.authority = object.authority ?? '';
-    message.denom = object.denom ?? '';
+    message.authority = object.authority ?? "";
+    message.denom = object.denom ?? "";
     return message;
   },
 };
@@ -1399,26 +1237,17 @@ export const MsgRemoveAllowedDenom = {
 messageTypeRegistry.set(MsgRemoveAllowedDenom.$type, MsgRemoveAllowedDenom);
 
 function createBaseMsgRemoveAllowedDenomResponse(): MsgRemoveAllowedDenomResponse {
-  return {
-    $type: 'regen.ecocredit.marketplace.v1.MsgRemoveAllowedDenomResponse',
-  };
+  return { $type: "regen.ecocredit.marketplace.v1.MsgRemoveAllowedDenomResponse" };
 }
 
 export const MsgRemoveAllowedDenomResponse = {
-  $type:
-    'regen.ecocredit.marketplace.v1.MsgRemoveAllowedDenomResponse' as const,
+  $type: "regen.ecocredit.marketplace.v1.MsgRemoveAllowedDenomResponse" as const,
 
-  encode(
-    _: MsgRemoveAllowedDenomResponse,
-    writer: _m0.Writer = _m0.Writer.create(),
-  ): _m0.Writer {
+  encode(_: MsgRemoveAllowedDenomResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     return writer;
   },
 
-  decode(
-    input: _m0.Reader | Uint8Array,
-    length?: number,
-  ): MsgRemoveAllowedDenomResponse {
+  decode(input: _m0.Reader | Uint8Array, length?: number): MsgRemoveAllowedDenomResponse {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMsgRemoveAllowedDenomResponse();
@@ -1434,9 +1263,7 @@ export const MsgRemoveAllowedDenomResponse = {
   },
 
   fromJSON(_: any): MsgRemoveAllowedDenomResponse {
-    return {
-      $type: MsgRemoveAllowedDenomResponse.$type,
-    };
+    return { $type: MsgRemoveAllowedDenomResponse.$type };
   },
 
   toJSON(_: MsgRemoveAllowedDenomResponse): unknown {
@@ -1444,31 +1271,26 @@ export const MsgRemoveAllowedDenomResponse = {
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<MsgRemoveAllowedDenomResponse>, I>>(
-    _: I,
-  ): MsgRemoveAllowedDenomResponse {
+  create(base?: DeepPartial<MsgRemoveAllowedDenomResponse>): MsgRemoveAllowedDenomResponse {
+    return MsgRemoveAllowedDenomResponse.fromPartial(base ?? {});
+  },
+
+  fromPartial(_: DeepPartial<MsgRemoveAllowedDenomResponse>): MsgRemoveAllowedDenomResponse {
     const message = createBaseMsgRemoveAllowedDenomResponse();
     return message;
   },
 };
 
-messageTypeRegistry.set(
-  MsgRemoveAllowedDenomResponse.$type,
-  MsgRemoveAllowedDenomResponse,
-);
+messageTypeRegistry.set(MsgRemoveAllowedDenomResponse.$type, MsgRemoveAllowedDenomResponse);
 
 /** Msg is the regen.ecocredit.marketplace.v1 Msg service. */
 export interface Msg {
   /** Sell creates new sell orders. */
   Sell(request: DeepPartial<MsgSell>): Promise<MsgSellResponse>;
   /** UpdateSellOrders updates existing sell orders. */
-  UpdateSellOrders(
-    request: DeepPartial<MsgUpdateSellOrders>,
-  ): Promise<MsgUpdateSellOrdersResponse>;
+  UpdateSellOrders(request: DeepPartial<MsgUpdateSellOrders>): Promise<MsgUpdateSellOrdersResponse>;
   /** CancelSellOrder cancels a sell order and returns the credits from escrow. */
-  CancelSellOrder(
-    request: DeepPartial<MsgCancelSellOrder>,
-  ): Promise<MsgCancelSellOrderResponse>;
+  CancelSellOrder(request: DeepPartial<MsgCancelSellOrder>): Promise<MsgCancelSellOrderResponse>;
   /** BuyDirect purchases credits directly from the specified sell order. */
   BuyDirect(request: DeepPartial<MsgBuyDirect>): Promise<MsgBuyDirectResponse>;
   /**
@@ -1477,22 +1299,20 @@ export interface Msg {
    *
    * Since Revision 1
    */
-  AddAllowedDenom(
-    request: DeepPartial<MsgAddAllowedDenom>,
-  ): Promise<MsgAddAllowedDenomResponse>;
+  AddAllowedDenom(request: DeepPartial<MsgAddAllowedDenom>): Promise<MsgAddAllowedDenomResponse>;
   /**
    * RemoveAllowedDenom is a governance method that removes allowed denom.
    *
    * Since Revision 1
    */
-  RemoveAllowedDenom(
-    request: DeepPartial<MsgRemoveAllowedDenom>,
-  ): Promise<MsgRemoveAllowedDenomResponse>;
+  RemoveAllowedDenom(request: DeepPartial<MsgRemoveAllowedDenom>): Promise<MsgRemoveAllowedDenomResponse>;
 }
 
 export class MsgClientImpl implements Msg {
   private readonly rpc: Rpc;
-  constructor(rpc: Rpc) {
+  private readonly service: string;
+  constructor(rpc: Rpc, opts?: { service?: string }) {
+    this.service = opts?.service || "regen.ecocredit.marketplace.v1.Msg";
     this.rpc = rpc;
     this.Sell = this.Sell.bind(this);
     this.UpdateSellOrders = this.UpdateSellOrders.bind(this);
@@ -1504,129 +1324,62 @@ export class MsgClientImpl implements Msg {
   Sell(request: DeepPartial<MsgSell>): Promise<MsgSellResponse> {
     const fromPartial = MsgSell.fromPartial(request);
     const data = MsgSell.encode(fromPartial).finish();
-    const promise = this.rpc.request(
-      'regen.ecocredit.marketplace.v1.Msg',
-      'Sell',
-      data,
-    );
-    return promise.then(data => MsgSellResponse.decode(new _m0.Reader(data)));
+    const promise = this.rpc.request(this.service, "Sell", data);
+    return promise.then((data) => MsgSellResponse.decode(new _m0.Reader(data)));
   }
 
-  UpdateSellOrders(
-    request: DeepPartial<MsgUpdateSellOrders>,
-  ): Promise<MsgUpdateSellOrdersResponse> {
+  UpdateSellOrders(request: DeepPartial<MsgUpdateSellOrders>): Promise<MsgUpdateSellOrdersResponse> {
     const fromPartial = MsgUpdateSellOrders.fromPartial(request);
     const data = MsgUpdateSellOrders.encode(fromPartial).finish();
-    const promise = this.rpc.request(
-      'regen.ecocredit.marketplace.v1.Msg',
-      'UpdateSellOrders',
-      data,
-    );
-    return promise.then(data =>
-      MsgUpdateSellOrdersResponse.decode(new _m0.Reader(data)),
-    );
+    const promise = this.rpc.request(this.service, "UpdateSellOrders", data);
+    return promise.then((data) => MsgUpdateSellOrdersResponse.decode(new _m0.Reader(data)));
   }
 
-  CancelSellOrder(
-    request: DeepPartial<MsgCancelSellOrder>,
-  ): Promise<MsgCancelSellOrderResponse> {
+  CancelSellOrder(request: DeepPartial<MsgCancelSellOrder>): Promise<MsgCancelSellOrderResponse> {
     const fromPartial = MsgCancelSellOrder.fromPartial(request);
     const data = MsgCancelSellOrder.encode(fromPartial).finish();
-    const promise = this.rpc.request(
-      'regen.ecocredit.marketplace.v1.Msg',
-      'CancelSellOrder',
-      data,
-    );
-    return promise.then(data =>
-      MsgCancelSellOrderResponse.decode(new _m0.Reader(data)),
-    );
+    const promise = this.rpc.request(this.service, "CancelSellOrder", data);
+    return promise.then((data) => MsgCancelSellOrderResponse.decode(new _m0.Reader(data)));
   }
 
   BuyDirect(request: DeepPartial<MsgBuyDirect>): Promise<MsgBuyDirectResponse> {
     const fromPartial = MsgBuyDirect.fromPartial(request);
     const data = MsgBuyDirect.encode(fromPartial).finish();
-    const promise = this.rpc.request(
-      'regen.ecocredit.marketplace.v1.Msg',
-      'BuyDirect',
-      data,
-    );
-    return promise.then(data =>
-      MsgBuyDirectResponse.decode(new _m0.Reader(data)),
-    );
+    const promise = this.rpc.request(this.service, "BuyDirect", data);
+    return promise.then((data) => MsgBuyDirectResponse.decode(new _m0.Reader(data)));
   }
 
-  AddAllowedDenom(
-    request: DeepPartial<MsgAddAllowedDenom>,
-  ): Promise<MsgAddAllowedDenomResponse> {
+  AddAllowedDenom(request: DeepPartial<MsgAddAllowedDenom>): Promise<MsgAddAllowedDenomResponse> {
     const fromPartial = MsgAddAllowedDenom.fromPartial(request);
     const data = MsgAddAllowedDenom.encode(fromPartial).finish();
-    const promise = this.rpc.request(
-      'regen.ecocredit.marketplace.v1.Msg',
-      'AddAllowedDenom',
-      data,
-    );
-    return promise.then(data =>
-      MsgAddAllowedDenomResponse.decode(new _m0.Reader(data)),
-    );
+    const promise = this.rpc.request(this.service, "AddAllowedDenom", data);
+    return promise.then((data) => MsgAddAllowedDenomResponse.decode(new _m0.Reader(data)));
   }
 
-  RemoveAllowedDenom(
-    request: DeepPartial<MsgRemoveAllowedDenom>,
-  ): Promise<MsgRemoveAllowedDenomResponse> {
+  RemoveAllowedDenom(request: DeepPartial<MsgRemoveAllowedDenom>): Promise<MsgRemoveAllowedDenomResponse> {
     const fromPartial = MsgRemoveAllowedDenom.fromPartial(request);
     const data = MsgRemoveAllowedDenom.encode(fromPartial).finish();
-    const promise = this.rpc.request(
-      'regen.ecocredit.marketplace.v1.Msg',
-      'RemoveAllowedDenom',
-      data,
-    );
-    return promise.then(data =>
-      MsgRemoveAllowedDenomResponse.decode(new _m0.Reader(data)),
-    );
+    const promise = this.rpc.request(this.service, "RemoveAllowedDenom", data);
+    return promise.then((data) => MsgRemoveAllowedDenomResponse.decode(new _m0.Reader(data)));
   }
 }
 
 interface Rpc {
-  request(
-    service: string,
-    method: string,
-    data: Uint8Array,
-  ): Promise<Uint8Array>;
+  request(service: string, method: string, data: Uint8Array): Promise<Uint8Array>;
 }
 
-type Builtin =
-  | Date
-  | Function
-  | Uint8Array
-  | string
-  | number
-  | boolean
-  | undefined;
+type Builtin = Date | Function | Uint8Array | string | number | boolean | undefined;
 
-export type DeepPartial<T> = T extends Builtin
-  ? T
-  : T extends Long
-  ? string | number | Long
-  : T extends Array<infer U>
-  ? Array<DeepPartial<U>>
-  : T extends ReadonlyArray<infer U>
-  ? ReadonlyArray<DeepPartial<U>>
-  : T extends {}
-  ? { [K in Exclude<keyof T, '$type'>]?: DeepPartial<T[K]> }
+export type DeepPartial<T> = T extends Builtin ? T
+  : T extends Long ? string | number | Long : T extends Array<infer U> ? Array<DeepPartial<U>>
+  : T extends ReadonlyArray<infer U> ? ReadonlyArray<DeepPartial<U>>
+  : T extends {} ? { [K in Exclude<keyof T, "$type">]?: DeepPartial<T[K]> }
   : Partial<T>;
-
-type KeysOfUnion<T> = T extends T ? keyof T : never;
-export type Exact<P, I extends P> = P extends Builtin
-  ? P
-  : P & { [K in keyof P]: Exact<P[K], I[K]> } & Record<
-        Exclude<keyof I, KeysOfUnion<P> | '$type'>,
-        never
-      >;
 
 function toTimestamp(date: Date): Timestamp {
   const seconds = numberToLong(date.getTime() / 1_000);
   const nanos = (date.getTime() % 1_000) * 1_000_000;
-  return { $type: 'google.protobuf.Timestamp', seconds, nanos };
+  return { $type: "google.protobuf.Timestamp", seconds, nanos };
 }
 
 function fromTimestamp(t: Timestamp): Date {
@@ -1638,7 +1391,7 @@ function fromTimestamp(t: Timestamp): Date {
 function fromJsonTimestamp(o: any): Date {
   if (o instanceof Date) {
     return o;
-  } else if (typeof o === 'string') {
+  } else if (typeof o === "string") {
     return new Date(o);
   } else {
     return fromTimestamp(Timestamp.fromJSON(o));

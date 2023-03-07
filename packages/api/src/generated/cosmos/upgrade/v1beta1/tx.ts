@@ -1,10 +1,10 @@
 /* eslint-disable */
-import { messageTypeRegistry } from '../../../typeRegistry';
-import Long from 'long';
-import _m0 from 'protobufjs/minimal';
-import { Plan } from './upgrade';
+import Long from "long";
+import _m0 from "protobufjs/minimal";
+import { messageTypeRegistry } from "../../../typeRegistry";
+import { Plan } from "./upgrade";
 
-export const protobufPackage = 'cosmos.upgrade.v1beta1';
+export const protobufPackage = "cosmos.upgrade.v1beta1";
 
 /** Since: cosmos-sdk 0.46 */
 
@@ -14,7 +14,7 @@ export const protobufPackage = 'cosmos.upgrade.v1beta1';
  * Since: cosmos-sdk 0.46
  */
 export interface MsgSoftwareUpgrade {
-  $type: 'cosmos.upgrade.v1beta1.MsgSoftwareUpgrade';
+  $type: "cosmos.upgrade.v1beta1.MsgSoftwareUpgrade";
   /** authority is the address of the governance account. */
   authority: string;
   /** plan is the upgrade plan. */
@@ -27,7 +27,7 @@ export interface MsgSoftwareUpgrade {
  * Since: cosmos-sdk 0.46
  */
 export interface MsgSoftwareUpgradeResponse {
-  $type: 'cosmos.upgrade.v1beta1.MsgSoftwareUpgradeResponse';
+  $type: "cosmos.upgrade.v1beta1.MsgSoftwareUpgradeResponse";
 }
 
 /**
@@ -36,7 +36,7 @@ export interface MsgSoftwareUpgradeResponse {
  * Since: cosmos-sdk 0.46
  */
 export interface MsgCancelUpgrade {
-  $type: 'cosmos.upgrade.v1beta1.MsgCancelUpgrade';
+  $type: "cosmos.upgrade.v1beta1.MsgCancelUpgrade";
   /** authority is the address of the governance account. */
   authority: string;
 }
@@ -47,25 +47,18 @@ export interface MsgCancelUpgrade {
  * Since: cosmos-sdk 0.46
  */
 export interface MsgCancelUpgradeResponse {
-  $type: 'cosmos.upgrade.v1beta1.MsgCancelUpgradeResponse';
+  $type: "cosmos.upgrade.v1beta1.MsgCancelUpgradeResponse";
 }
 
 function createBaseMsgSoftwareUpgrade(): MsgSoftwareUpgrade {
-  return {
-    $type: 'cosmos.upgrade.v1beta1.MsgSoftwareUpgrade',
-    authority: '',
-    plan: undefined,
-  };
+  return { $type: "cosmos.upgrade.v1beta1.MsgSoftwareUpgrade", authority: "", plan: undefined };
 }
 
 export const MsgSoftwareUpgrade = {
-  $type: 'cosmos.upgrade.v1beta1.MsgSoftwareUpgrade' as const,
+  $type: "cosmos.upgrade.v1beta1.MsgSoftwareUpgrade" as const,
 
-  encode(
-    message: MsgSoftwareUpgrade,
-    writer: _m0.Writer = _m0.Writer.create(),
-  ): _m0.Writer {
-    if (message.authority !== '') {
+  encode(message: MsgSoftwareUpgrade, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+    if (message.authority !== "") {
       writer.uint32(10).string(message.authority);
     }
     if (message.plan !== undefined) {
@@ -98,7 +91,7 @@ export const MsgSoftwareUpgrade = {
   fromJSON(object: any): MsgSoftwareUpgrade {
     return {
       $type: MsgSoftwareUpgrade.$type,
-      authority: isSet(object.authority) ? String(object.authority) : '',
+      authority: isSet(object.authority) ? String(object.authority) : "",
       plan: isSet(object.plan) ? Plan.fromJSON(object.plan) : undefined,
     };
   },
@@ -106,20 +99,18 @@ export const MsgSoftwareUpgrade = {
   toJSON(message: MsgSoftwareUpgrade): unknown {
     const obj: any = {};
     message.authority !== undefined && (obj.authority = message.authority);
-    message.plan !== undefined &&
-      (obj.plan = message.plan ? Plan.toJSON(message.plan) : undefined);
+    message.plan !== undefined && (obj.plan = message.plan ? Plan.toJSON(message.plan) : undefined);
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<MsgSoftwareUpgrade>, I>>(
-    object: I,
-  ): MsgSoftwareUpgrade {
+  create(base?: DeepPartial<MsgSoftwareUpgrade>): MsgSoftwareUpgrade {
+    return MsgSoftwareUpgrade.fromPartial(base ?? {});
+  },
+
+  fromPartial(object: DeepPartial<MsgSoftwareUpgrade>): MsgSoftwareUpgrade {
     const message = createBaseMsgSoftwareUpgrade();
-    message.authority = object.authority ?? '';
-    message.plan =
-      object.plan !== undefined && object.plan !== null
-        ? Plan.fromPartial(object.plan)
-        : undefined;
+    message.authority = object.authority ?? "";
+    message.plan = (object.plan !== undefined && object.plan !== null) ? Plan.fromPartial(object.plan) : undefined;
     return message;
   },
 };
@@ -127,23 +118,17 @@ export const MsgSoftwareUpgrade = {
 messageTypeRegistry.set(MsgSoftwareUpgrade.$type, MsgSoftwareUpgrade);
 
 function createBaseMsgSoftwareUpgradeResponse(): MsgSoftwareUpgradeResponse {
-  return { $type: 'cosmos.upgrade.v1beta1.MsgSoftwareUpgradeResponse' };
+  return { $type: "cosmos.upgrade.v1beta1.MsgSoftwareUpgradeResponse" };
 }
 
 export const MsgSoftwareUpgradeResponse = {
-  $type: 'cosmos.upgrade.v1beta1.MsgSoftwareUpgradeResponse' as const,
+  $type: "cosmos.upgrade.v1beta1.MsgSoftwareUpgradeResponse" as const,
 
-  encode(
-    _: MsgSoftwareUpgradeResponse,
-    writer: _m0.Writer = _m0.Writer.create(),
-  ): _m0.Writer {
+  encode(_: MsgSoftwareUpgradeResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     return writer;
   },
 
-  decode(
-    input: _m0.Reader | Uint8Array,
-    length?: number,
-  ): MsgSoftwareUpgradeResponse {
+  decode(input: _m0.Reader | Uint8Array, length?: number): MsgSoftwareUpgradeResponse {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMsgSoftwareUpgradeResponse();
@@ -159,9 +144,7 @@ export const MsgSoftwareUpgradeResponse = {
   },
 
   fromJSON(_: any): MsgSoftwareUpgradeResponse {
-    return {
-      $type: MsgSoftwareUpgradeResponse.$type,
-    };
+    return { $type: MsgSoftwareUpgradeResponse.$type };
   },
 
   toJSON(_: MsgSoftwareUpgradeResponse): unknown {
@@ -169,31 +152,27 @@ export const MsgSoftwareUpgradeResponse = {
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<MsgSoftwareUpgradeResponse>, I>>(
-    _: I,
-  ): MsgSoftwareUpgradeResponse {
+  create(base?: DeepPartial<MsgSoftwareUpgradeResponse>): MsgSoftwareUpgradeResponse {
+    return MsgSoftwareUpgradeResponse.fromPartial(base ?? {});
+  },
+
+  fromPartial(_: DeepPartial<MsgSoftwareUpgradeResponse>): MsgSoftwareUpgradeResponse {
     const message = createBaseMsgSoftwareUpgradeResponse();
     return message;
   },
 };
 
-messageTypeRegistry.set(
-  MsgSoftwareUpgradeResponse.$type,
-  MsgSoftwareUpgradeResponse,
-);
+messageTypeRegistry.set(MsgSoftwareUpgradeResponse.$type, MsgSoftwareUpgradeResponse);
 
 function createBaseMsgCancelUpgrade(): MsgCancelUpgrade {
-  return { $type: 'cosmos.upgrade.v1beta1.MsgCancelUpgrade', authority: '' };
+  return { $type: "cosmos.upgrade.v1beta1.MsgCancelUpgrade", authority: "" };
 }
 
 export const MsgCancelUpgrade = {
-  $type: 'cosmos.upgrade.v1beta1.MsgCancelUpgrade' as const,
+  $type: "cosmos.upgrade.v1beta1.MsgCancelUpgrade" as const,
 
-  encode(
-    message: MsgCancelUpgrade,
-    writer: _m0.Writer = _m0.Writer.create(),
-  ): _m0.Writer {
-    if (message.authority !== '') {
+  encode(message: MsgCancelUpgrade, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+    if (message.authority !== "") {
       writer.uint32(10).string(message.authority);
     }
     return writer;
@@ -218,10 +197,7 @@ export const MsgCancelUpgrade = {
   },
 
   fromJSON(object: any): MsgCancelUpgrade {
-    return {
-      $type: MsgCancelUpgrade.$type,
-      authority: isSet(object.authority) ? String(object.authority) : '',
-    };
+    return { $type: MsgCancelUpgrade.$type, authority: isSet(object.authority) ? String(object.authority) : "" };
   },
 
   toJSON(message: MsgCancelUpgrade): unknown {
@@ -230,11 +206,13 @@ export const MsgCancelUpgrade = {
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<MsgCancelUpgrade>, I>>(
-    object: I,
-  ): MsgCancelUpgrade {
+  create(base?: DeepPartial<MsgCancelUpgrade>): MsgCancelUpgrade {
+    return MsgCancelUpgrade.fromPartial(base ?? {});
+  },
+
+  fromPartial(object: DeepPartial<MsgCancelUpgrade>): MsgCancelUpgrade {
     const message = createBaseMsgCancelUpgrade();
-    message.authority = object.authority ?? '';
+    message.authority = object.authority ?? "";
     return message;
   },
 };
@@ -242,23 +220,17 @@ export const MsgCancelUpgrade = {
 messageTypeRegistry.set(MsgCancelUpgrade.$type, MsgCancelUpgrade);
 
 function createBaseMsgCancelUpgradeResponse(): MsgCancelUpgradeResponse {
-  return { $type: 'cosmos.upgrade.v1beta1.MsgCancelUpgradeResponse' };
+  return { $type: "cosmos.upgrade.v1beta1.MsgCancelUpgradeResponse" };
 }
 
 export const MsgCancelUpgradeResponse = {
-  $type: 'cosmos.upgrade.v1beta1.MsgCancelUpgradeResponse' as const,
+  $type: "cosmos.upgrade.v1beta1.MsgCancelUpgradeResponse" as const,
 
-  encode(
-    _: MsgCancelUpgradeResponse,
-    writer: _m0.Writer = _m0.Writer.create(),
-  ): _m0.Writer {
+  encode(_: MsgCancelUpgradeResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     return writer;
   },
 
-  decode(
-    input: _m0.Reader | Uint8Array,
-    length?: number,
-  ): MsgCancelUpgradeResponse {
+  decode(input: _m0.Reader | Uint8Array, length?: number): MsgCancelUpgradeResponse {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMsgCancelUpgradeResponse();
@@ -274,9 +246,7 @@ export const MsgCancelUpgradeResponse = {
   },
 
   fromJSON(_: any): MsgCancelUpgradeResponse {
-    return {
-      $type: MsgCancelUpgradeResponse.$type,
-    };
+    return { $type: MsgCancelUpgradeResponse.$type };
   },
 
   toJSON(_: MsgCancelUpgradeResponse): unknown {
@@ -284,18 +254,17 @@ export const MsgCancelUpgradeResponse = {
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<MsgCancelUpgradeResponse>, I>>(
-    _: I,
-  ): MsgCancelUpgradeResponse {
+  create(base?: DeepPartial<MsgCancelUpgradeResponse>): MsgCancelUpgradeResponse {
+    return MsgCancelUpgradeResponse.fromPartial(base ?? {});
+  },
+
+  fromPartial(_: DeepPartial<MsgCancelUpgradeResponse>): MsgCancelUpgradeResponse {
     const message = createBaseMsgCancelUpgradeResponse();
     return message;
   },
 };
 
-messageTypeRegistry.set(
-  MsgCancelUpgradeResponse.$type,
-  MsgCancelUpgradeResponse,
-);
+messageTypeRegistry.set(MsgCancelUpgradeResponse.$type, MsgCancelUpgradeResponse);
 
 /** Msg defines the upgrade Msg service. */
 export interface Msg {
@@ -304,94 +273,51 @@ export interface Msg {
    *
    * Since: cosmos-sdk 0.46
    */
-  SoftwareUpgrade(
-    request: DeepPartial<MsgSoftwareUpgrade>,
-  ): Promise<MsgSoftwareUpgradeResponse>;
+  SoftwareUpgrade(request: DeepPartial<MsgSoftwareUpgrade>): Promise<MsgSoftwareUpgradeResponse>;
   /**
    * CancelUpgrade is a governance operation for cancelling a previously
    * approvid software upgrade.
    *
    * Since: cosmos-sdk 0.46
    */
-  CancelUpgrade(
-    request: DeepPartial<MsgCancelUpgrade>,
-  ): Promise<MsgCancelUpgradeResponse>;
+  CancelUpgrade(request: DeepPartial<MsgCancelUpgrade>): Promise<MsgCancelUpgradeResponse>;
 }
 
 export class MsgClientImpl implements Msg {
   private readonly rpc: Rpc;
-  constructor(rpc: Rpc) {
+  private readonly service: string;
+  constructor(rpc: Rpc, opts?: { service?: string }) {
+    this.service = opts?.service || "cosmos.upgrade.v1beta1.Msg";
     this.rpc = rpc;
     this.SoftwareUpgrade = this.SoftwareUpgrade.bind(this);
     this.CancelUpgrade = this.CancelUpgrade.bind(this);
   }
-  SoftwareUpgrade(
-    request: DeepPartial<MsgSoftwareUpgrade>,
-  ): Promise<MsgSoftwareUpgradeResponse> {
+  SoftwareUpgrade(request: DeepPartial<MsgSoftwareUpgrade>): Promise<MsgSoftwareUpgradeResponse> {
     const fromPartial = MsgSoftwareUpgrade.fromPartial(request);
     const data = MsgSoftwareUpgrade.encode(fromPartial).finish();
-    const promise = this.rpc.request(
-      'cosmos.upgrade.v1beta1.Msg',
-      'SoftwareUpgrade',
-      data,
-    );
-    return promise.then(data =>
-      MsgSoftwareUpgradeResponse.decode(new _m0.Reader(data)),
-    );
+    const promise = this.rpc.request(this.service, "SoftwareUpgrade", data);
+    return promise.then((data) => MsgSoftwareUpgradeResponse.decode(new _m0.Reader(data)));
   }
 
-  CancelUpgrade(
-    request: DeepPartial<MsgCancelUpgrade>,
-  ): Promise<MsgCancelUpgradeResponse> {
+  CancelUpgrade(request: DeepPartial<MsgCancelUpgrade>): Promise<MsgCancelUpgradeResponse> {
     const fromPartial = MsgCancelUpgrade.fromPartial(request);
     const data = MsgCancelUpgrade.encode(fromPartial).finish();
-    const promise = this.rpc.request(
-      'cosmos.upgrade.v1beta1.Msg',
-      'CancelUpgrade',
-      data,
-    );
-    return promise.then(data =>
-      MsgCancelUpgradeResponse.decode(new _m0.Reader(data)),
-    );
+    const promise = this.rpc.request(this.service, "CancelUpgrade", data);
+    return promise.then((data) => MsgCancelUpgradeResponse.decode(new _m0.Reader(data)));
   }
 }
 
 interface Rpc {
-  request(
-    service: string,
-    method: string,
-    data: Uint8Array,
-  ): Promise<Uint8Array>;
+  request(service: string, method: string, data: Uint8Array): Promise<Uint8Array>;
 }
 
-type Builtin =
-  | Date
-  | Function
-  | Uint8Array
-  | string
-  | number
-  | boolean
-  | undefined;
+type Builtin = Date | Function | Uint8Array | string | number | boolean | undefined;
 
-export type DeepPartial<T> = T extends Builtin
-  ? T
-  : T extends Long
-  ? string | number | Long
-  : T extends Array<infer U>
-  ? Array<DeepPartial<U>>
-  : T extends ReadonlyArray<infer U>
-  ? ReadonlyArray<DeepPartial<U>>
-  : T extends {}
-  ? { [K in Exclude<keyof T, '$type'>]?: DeepPartial<T[K]> }
+export type DeepPartial<T> = T extends Builtin ? T
+  : T extends Long ? string | number | Long : T extends Array<infer U> ? Array<DeepPartial<U>>
+  : T extends ReadonlyArray<infer U> ? ReadonlyArray<DeepPartial<U>>
+  : T extends {} ? { [K in Exclude<keyof T, "$type">]?: DeepPartial<T[K]> }
   : Partial<T>;
-
-type KeysOfUnion<T> = T extends T ? keyof T : never;
-export type Exact<P, I extends P> = P extends Builtin
-  ? P
-  : P & { [K in keyof P]: Exact<P[K], I[K]> } & Record<
-        Exclude<keyof I, KeysOfUnion<P> | '$type'>,
-        never
-      >;
 
 if (_m0.util.Long !== Long) {
   _m0.util.Long = Long as any;

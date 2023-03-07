@@ -1,24 +1,19 @@
 /* eslint-disable */
-import { messageTypeRegistry } from '../../../typeRegistry';
-import Long from 'long';
-import _m0 from 'protobufjs/minimal';
-import { Any } from '../../../google/protobuf/any';
-import {
-  VoteOption,
-  WeightedVoteOption,
-  voteOptionFromJSON,
-  voteOptionToJSON,
-} from './gov';
-import { Coin } from '../../base/v1beta1/coin';
+import Long from "long";
+import _m0 from "protobufjs/minimal";
+import { Any } from "../../../google/protobuf/any";
+import { messageTypeRegistry } from "../../../typeRegistry";
+import { Coin } from "../../base/v1beta1/coin";
+import { VoteOption, voteOptionFromJSON, voteOptionToJSON, WeightedVoteOption } from "./gov";
 
-export const protobufPackage = 'cosmos.gov.v1beta1';
+export const protobufPackage = "cosmos.gov.v1beta1";
 
 /**
  * MsgSubmitProposal defines an sdk.Msg type that supports submitting arbitrary
  * proposal Content.
  */
 export interface MsgSubmitProposal {
-  $type: 'cosmos.gov.v1beta1.MsgSubmitProposal';
+  $type: "cosmos.gov.v1beta1.MsgSubmitProposal";
   content?: Any;
   initialDeposit: Coin[];
   proposer: string;
@@ -26,13 +21,13 @@ export interface MsgSubmitProposal {
 
 /** MsgSubmitProposalResponse defines the Msg/SubmitProposal response type. */
 export interface MsgSubmitProposalResponse {
-  $type: 'cosmos.gov.v1beta1.MsgSubmitProposalResponse';
+  $type: "cosmos.gov.v1beta1.MsgSubmitProposalResponse";
   proposalId: Long;
 }
 
 /** MsgVote defines a message to cast a vote. */
 export interface MsgVote {
-  $type: 'cosmos.gov.v1beta1.MsgVote';
+  $type: "cosmos.gov.v1beta1.MsgVote";
   proposalId: Long;
   voter: string;
   option: VoteOption;
@@ -40,7 +35,7 @@ export interface MsgVote {
 
 /** MsgVoteResponse defines the Msg/Vote response type. */
 export interface MsgVoteResponse {
-  $type: 'cosmos.gov.v1beta1.MsgVoteResponse';
+  $type: "cosmos.gov.v1beta1.MsgVoteResponse";
 }
 
 /**
@@ -49,7 +44,7 @@ export interface MsgVoteResponse {
  * Since: cosmos-sdk 0.43
  */
 export interface MsgVoteWeighted {
-  $type: 'cosmos.gov.v1beta1.MsgVoteWeighted';
+  $type: "cosmos.gov.v1beta1.MsgVoteWeighted";
   proposalId: Long;
   voter: string;
   options: WeightedVoteOption[];
@@ -61,12 +56,12 @@ export interface MsgVoteWeighted {
  * Since: cosmos-sdk 0.43
  */
 export interface MsgVoteWeightedResponse {
-  $type: 'cosmos.gov.v1beta1.MsgVoteWeightedResponse';
+  $type: "cosmos.gov.v1beta1.MsgVoteWeightedResponse";
 }
 
 /** MsgDeposit defines a message to submit a deposit to an existing proposal. */
 export interface MsgDeposit {
-  $type: 'cosmos.gov.v1beta1.MsgDeposit';
+  $type: "cosmos.gov.v1beta1.MsgDeposit";
   proposalId: Long;
   depositor: string;
   amount: Coin[];
@@ -74,32 +69,24 @@ export interface MsgDeposit {
 
 /** MsgDepositResponse defines the Msg/Deposit response type. */
 export interface MsgDepositResponse {
-  $type: 'cosmos.gov.v1beta1.MsgDepositResponse';
+  $type: "cosmos.gov.v1beta1.MsgDepositResponse";
 }
 
 function createBaseMsgSubmitProposal(): MsgSubmitProposal {
-  return {
-    $type: 'cosmos.gov.v1beta1.MsgSubmitProposal',
-    content: undefined,
-    initialDeposit: [],
-    proposer: '',
-  };
+  return { $type: "cosmos.gov.v1beta1.MsgSubmitProposal", content: undefined, initialDeposit: [], proposer: "" };
 }
 
 export const MsgSubmitProposal = {
-  $type: 'cosmos.gov.v1beta1.MsgSubmitProposal' as const,
+  $type: "cosmos.gov.v1beta1.MsgSubmitProposal" as const,
 
-  encode(
-    message: MsgSubmitProposal,
-    writer: _m0.Writer = _m0.Writer.create(),
-  ): _m0.Writer {
+  encode(message: MsgSubmitProposal, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.content !== undefined) {
       Any.encode(message.content, writer.uint32(10).fork()).ldelim();
     }
     for (const v of message.initialDeposit) {
       Coin.encode(v!, writer.uint32(18).fork()).ldelim();
     }
-    if (message.proposer !== '') {
+    if (message.proposer !== "") {
       writer.uint32(26).string(message.proposer);
     }
     return writer;
@@ -136,18 +123,15 @@ export const MsgSubmitProposal = {
       initialDeposit: Array.isArray(object?.initialDeposit)
         ? object.initialDeposit.map((e: any) => Coin.fromJSON(e))
         : [],
-      proposer: isSet(object.proposer) ? String(object.proposer) : '',
+      proposer: isSet(object.proposer) ? String(object.proposer) : "",
     };
   },
 
   toJSON(message: MsgSubmitProposal): unknown {
     const obj: any = {};
-    message.content !== undefined &&
-      (obj.content = message.content ? Any.toJSON(message.content) : undefined);
+    message.content !== undefined && (obj.content = message.content ? Any.toJSON(message.content) : undefined);
     if (message.initialDeposit) {
-      obj.initialDeposit = message.initialDeposit.map(e =>
-        e ? Coin.toJSON(e) : undefined,
-      );
+      obj.initialDeposit = message.initialDeposit.map((e) => e ? Coin.toJSON(e) : undefined);
     } else {
       obj.initialDeposit = [];
     }
@@ -155,17 +139,17 @@ export const MsgSubmitProposal = {
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<MsgSubmitProposal>, I>>(
-    object: I,
-  ): MsgSubmitProposal {
+  create(base?: DeepPartial<MsgSubmitProposal>): MsgSubmitProposal {
+    return MsgSubmitProposal.fromPartial(base ?? {});
+  },
+
+  fromPartial(object: DeepPartial<MsgSubmitProposal>): MsgSubmitProposal {
     const message = createBaseMsgSubmitProposal();
-    message.content =
-      object.content !== undefined && object.content !== null
-        ? Any.fromPartial(object.content)
-        : undefined;
-    message.initialDeposit =
-      object.initialDeposit?.map(e => Coin.fromPartial(e)) || [];
-    message.proposer = object.proposer ?? '';
+    message.content = (object.content !== undefined && object.content !== null)
+      ? Any.fromPartial(object.content)
+      : undefined;
+    message.initialDeposit = object.initialDeposit?.map((e) => Coin.fromPartial(e)) || [];
+    message.proposer = object.proposer ?? "";
     return message;
   },
 };
@@ -173,29 +157,20 @@ export const MsgSubmitProposal = {
 messageTypeRegistry.set(MsgSubmitProposal.$type, MsgSubmitProposal);
 
 function createBaseMsgSubmitProposalResponse(): MsgSubmitProposalResponse {
-  return {
-    $type: 'cosmos.gov.v1beta1.MsgSubmitProposalResponse',
-    proposalId: Long.UZERO,
-  };
+  return { $type: "cosmos.gov.v1beta1.MsgSubmitProposalResponse", proposalId: Long.UZERO };
 }
 
 export const MsgSubmitProposalResponse = {
-  $type: 'cosmos.gov.v1beta1.MsgSubmitProposalResponse' as const,
+  $type: "cosmos.gov.v1beta1.MsgSubmitProposalResponse" as const,
 
-  encode(
-    message: MsgSubmitProposalResponse,
-    writer: _m0.Writer = _m0.Writer.create(),
-  ): _m0.Writer {
+  encode(message: MsgSubmitProposalResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (!message.proposalId.isZero()) {
       writer.uint32(8).uint64(message.proposalId);
     }
     return writer;
   },
 
-  decode(
-    input: _m0.Reader | Uint8Array,
-    length?: number,
-  ): MsgSubmitProposalResponse {
+  decode(input: _m0.Reader | Uint8Array, length?: number): MsgSubmitProposalResponse {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMsgSubmitProposalResponse();
@@ -216,56 +191,43 @@ export const MsgSubmitProposalResponse = {
   fromJSON(object: any): MsgSubmitProposalResponse {
     return {
       $type: MsgSubmitProposalResponse.$type,
-      proposalId: isSet(object.proposalId)
-        ? Long.fromString(object.proposalId)
-        : Long.UZERO,
+      proposalId: isSet(object.proposalId) ? Long.fromValue(object.proposalId) : Long.UZERO,
     };
   },
 
   toJSON(message: MsgSubmitProposalResponse): unknown {
     const obj: any = {};
-    message.proposalId !== undefined &&
-      (obj.proposalId = (message.proposalId || Long.UZERO).toString());
+    message.proposalId !== undefined && (obj.proposalId = (message.proposalId || Long.UZERO).toString());
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<MsgSubmitProposalResponse>, I>>(
-    object: I,
-  ): MsgSubmitProposalResponse {
+  create(base?: DeepPartial<MsgSubmitProposalResponse>): MsgSubmitProposalResponse {
+    return MsgSubmitProposalResponse.fromPartial(base ?? {});
+  },
+
+  fromPartial(object: DeepPartial<MsgSubmitProposalResponse>): MsgSubmitProposalResponse {
     const message = createBaseMsgSubmitProposalResponse();
-    message.proposalId =
-      object.proposalId !== undefined && object.proposalId !== null
-        ? Long.fromValue(object.proposalId)
-        : Long.UZERO;
+    message.proposalId = (object.proposalId !== undefined && object.proposalId !== null)
+      ? Long.fromValue(object.proposalId)
+      : Long.UZERO;
     return message;
   },
 };
 
-messageTypeRegistry.set(
-  MsgSubmitProposalResponse.$type,
-  MsgSubmitProposalResponse,
-);
+messageTypeRegistry.set(MsgSubmitProposalResponse.$type, MsgSubmitProposalResponse);
 
 function createBaseMsgVote(): MsgVote {
-  return {
-    $type: 'cosmos.gov.v1beta1.MsgVote',
-    proposalId: Long.UZERO,
-    voter: '',
-    option: 0,
-  };
+  return { $type: "cosmos.gov.v1beta1.MsgVote", proposalId: Long.UZERO, voter: "", option: 0 };
 }
 
 export const MsgVote = {
-  $type: 'cosmos.gov.v1beta1.MsgVote' as const,
+  $type: "cosmos.gov.v1beta1.MsgVote" as const,
 
-  encode(
-    message: MsgVote,
-    writer: _m0.Writer = _m0.Writer.create(),
-  ): _m0.Writer {
+  encode(message: MsgVote, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (!message.proposalId.isZero()) {
       writer.uint32(8).uint64(message.proposalId);
     }
-    if (message.voter !== '') {
+    if (message.voter !== "") {
       writer.uint32(18).string(message.voter);
     }
     if (message.option !== 0) {
@@ -301,31 +263,30 @@ export const MsgVote = {
   fromJSON(object: any): MsgVote {
     return {
       $type: MsgVote.$type,
-      proposalId: isSet(object.proposalId)
-        ? Long.fromString(object.proposalId)
-        : Long.UZERO,
-      voter: isSet(object.voter) ? String(object.voter) : '',
+      proposalId: isSet(object.proposalId) ? Long.fromValue(object.proposalId) : Long.UZERO,
+      voter: isSet(object.voter) ? String(object.voter) : "",
       option: isSet(object.option) ? voteOptionFromJSON(object.option) : 0,
     };
   },
 
   toJSON(message: MsgVote): unknown {
     const obj: any = {};
-    message.proposalId !== undefined &&
-      (obj.proposalId = (message.proposalId || Long.UZERO).toString());
+    message.proposalId !== undefined && (obj.proposalId = (message.proposalId || Long.UZERO).toString());
     message.voter !== undefined && (obj.voter = message.voter);
-    message.option !== undefined &&
-      (obj.option = voteOptionToJSON(message.option));
+    message.option !== undefined && (obj.option = voteOptionToJSON(message.option));
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<MsgVote>, I>>(object: I): MsgVote {
+  create(base?: DeepPartial<MsgVote>): MsgVote {
+    return MsgVote.fromPartial(base ?? {});
+  },
+
+  fromPartial(object: DeepPartial<MsgVote>): MsgVote {
     const message = createBaseMsgVote();
-    message.proposalId =
-      object.proposalId !== undefined && object.proposalId !== null
-        ? Long.fromValue(object.proposalId)
-        : Long.UZERO;
-    message.voter = object.voter ?? '';
+    message.proposalId = (object.proposalId !== undefined && object.proposalId !== null)
+      ? Long.fromValue(object.proposalId)
+      : Long.UZERO;
+    message.voter = object.voter ?? "";
     message.option = object.option ?? 0;
     return message;
   },
@@ -334,16 +295,13 @@ export const MsgVote = {
 messageTypeRegistry.set(MsgVote.$type, MsgVote);
 
 function createBaseMsgVoteResponse(): MsgVoteResponse {
-  return { $type: 'cosmos.gov.v1beta1.MsgVoteResponse' };
+  return { $type: "cosmos.gov.v1beta1.MsgVoteResponse" };
 }
 
 export const MsgVoteResponse = {
-  $type: 'cosmos.gov.v1beta1.MsgVoteResponse' as const,
+  $type: "cosmos.gov.v1beta1.MsgVoteResponse" as const,
 
-  encode(
-    _: MsgVoteResponse,
-    writer: _m0.Writer = _m0.Writer.create(),
-  ): _m0.Writer {
+  encode(_: MsgVoteResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     return writer;
   },
 
@@ -363,9 +321,7 @@ export const MsgVoteResponse = {
   },
 
   fromJSON(_: any): MsgVoteResponse {
-    return {
-      $type: MsgVoteResponse.$type,
-    };
+    return { $type: MsgVoteResponse.$type };
   },
 
   toJSON(_: MsgVoteResponse): unknown {
@@ -373,9 +329,11 @@ export const MsgVoteResponse = {
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<MsgVoteResponse>, I>>(
-    _: I,
-  ): MsgVoteResponse {
+  create(base?: DeepPartial<MsgVoteResponse>): MsgVoteResponse {
+    return MsgVoteResponse.fromPartial(base ?? {});
+  },
+
+  fromPartial(_: DeepPartial<MsgVoteResponse>): MsgVoteResponse {
     const message = createBaseMsgVoteResponse();
     return message;
   },
@@ -384,25 +342,17 @@ export const MsgVoteResponse = {
 messageTypeRegistry.set(MsgVoteResponse.$type, MsgVoteResponse);
 
 function createBaseMsgVoteWeighted(): MsgVoteWeighted {
-  return {
-    $type: 'cosmos.gov.v1beta1.MsgVoteWeighted',
-    proposalId: Long.UZERO,
-    voter: '',
-    options: [],
-  };
+  return { $type: "cosmos.gov.v1beta1.MsgVoteWeighted", proposalId: Long.UZERO, voter: "", options: [] };
 }
 
 export const MsgVoteWeighted = {
-  $type: 'cosmos.gov.v1beta1.MsgVoteWeighted' as const,
+  $type: "cosmos.gov.v1beta1.MsgVoteWeighted" as const,
 
-  encode(
-    message: MsgVoteWeighted,
-    writer: _m0.Writer = _m0.Writer.create(),
-  ): _m0.Writer {
+  encode(message: MsgVoteWeighted, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (!message.proposalId.isZero()) {
       writer.uint32(8).uint64(message.proposalId);
     }
-    if (message.voter !== '') {
+    if (message.voter !== "") {
       writer.uint32(18).string(message.voter);
     }
     for (const v of message.options) {
@@ -425,9 +375,7 @@ export const MsgVoteWeighted = {
           message.voter = reader.string();
           break;
         case 3:
-          message.options.push(
-            WeightedVoteOption.decode(reader, reader.uint32()),
-          );
+          message.options.push(WeightedVoteOption.decode(reader, reader.uint32()));
           break;
         default:
           reader.skipType(tag & 7);
@@ -440,42 +388,35 @@ export const MsgVoteWeighted = {
   fromJSON(object: any): MsgVoteWeighted {
     return {
       $type: MsgVoteWeighted.$type,
-      proposalId: isSet(object.proposalId)
-        ? Long.fromString(object.proposalId)
-        : Long.UZERO,
-      voter: isSet(object.voter) ? String(object.voter) : '',
-      options: Array.isArray(object?.options)
-        ? object.options.map((e: any) => WeightedVoteOption.fromJSON(e))
-        : [],
+      proposalId: isSet(object.proposalId) ? Long.fromValue(object.proposalId) : Long.UZERO,
+      voter: isSet(object.voter) ? String(object.voter) : "",
+      options: Array.isArray(object?.options) ? object.options.map((e: any) => WeightedVoteOption.fromJSON(e)) : [],
     };
   },
 
   toJSON(message: MsgVoteWeighted): unknown {
     const obj: any = {};
-    message.proposalId !== undefined &&
-      (obj.proposalId = (message.proposalId || Long.UZERO).toString());
+    message.proposalId !== undefined && (obj.proposalId = (message.proposalId || Long.UZERO).toString());
     message.voter !== undefined && (obj.voter = message.voter);
     if (message.options) {
-      obj.options = message.options.map(e =>
-        e ? WeightedVoteOption.toJSON(e) : undefined,
-      );
+      obj.options = message.options.map((e) => e ? WeightedVoteOption.toJSON(e) : undefined);
     } else {
       obj.options = [];
     }
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<MsgVoteWeighted>, I>>(
-    object: I,
-  ): MsgVoteWeighted {
+  create(base?: DeepPartial<MsgVoteWeighted>): MsgVoteWeighted {
+    return MsgVoteWeighted.fromPartial(base ?? {});
+  },
+
+  fromPartial(object: DeepPartial<MsgVoteWeighted>): MsgVoteWeighted {
     const message = createBaseMsgVoteWeighted();
-    message.proposalId =
-      object.proposalId !== undefined && object.proposalId !== null
-        ? Long.fromValue(object.proposalId)
-        : Long.UZERO;
-    message.voter = object.voter ?? '';
-    message.options =
-      object.options?.map(e => WeightedVoteOption.fromPartial(e)) || [];
+    message.proposalId = (object.proposalId !== undefined && object.proposalId !== null)
+      ? Long.fromValue(object.proposalId)
+      : Long.UZERO;
+    message.voter = object.voter ?? "";
+    message.options = object.options?.map((e) => WeightedVoteOption.fromPartial(e)) || [];
     return message;
   },
 };
@@ -483,23 +424,17 @@ export const MsgVoteWeighted = {
 messageTypeRegistry.set(MsgVoteWeighted.$type, MsgVoteWeighted);
 
 function createBaseMsgVoteWeightedResponse(): MsgVoteWeightedResponse {
-  return { $type: 'cosmos.gov.v1beta1.MsgVoteWeightedResponse' };
+  return { $type: "cosmos.gov.v1beta1.MsgVoteWeightedResponse" };
 }
 
 export const MsgVoteWeightedResponse = {
-  $type: 'cosmos.gov.v1beta1.MsgVoteWeightedResponse' as const,
+  $type: "cosmos.gov.v1beta1.MsgVoteWeightedResponse" as const,
 
-  encode(
-    _: MsgVoteWeightedResponse,
-    writer: _m0.Writer = _m0.Writer.create(),
-  ): _m0.Writer {
+  encode(_: MsgVoteWeightedResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     return writer;
   },
 
-  decode(
-    input: _m0.Reader | Uint8Array,
-    length?: number,
-  ): MsgVoteWeightedResponse {
+  decode(input: _m0.Reader | Uint8Array, length?: number): MsgVoteWeightedResponse {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMsgVoteWeightedResponse();
@@ -515,9 +450,7 @@ export const MsgVoteWeightedResponse = {
   },
 
   fromJSON(_: any): MsgVoteWeightedResponse {
-    return {
-      $type: MsgVoteWeightedResponse.$type,
-    };
+    return { $type: MsgVoteWeightedResponse.$type };
   },
 
   toJSON(_: MsgVoteWeightedResponse): unknown {
@@ -525,9 +458,11 @@ export const MsgVoteWeightedResponse = {
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<MsgVoteWeightedResponse>, I>>(
-    _: I,
-  ): MsgVoteWeightedResponse {
+  create(base?: DeepPartial<MsgVoteWeightedResponse>): MsgVoteWeightedResponse {
+    return MsgVoteWeightedResponse.fromPartial(base ?? {});
+  },
+
+  fromPartial(_: DeepPartial<MsgVoteWeightedResponse>): MsgVoteWeightedResponse {
     const message = createBaseMsgVoteWeightedResponse();
     return message;
   },
@@ -536,25 +471,17 @@ export const MsgVoteWeightedResponse = {
 messageTypeRegistry.set(MsgVoteWeightedResponse.$type, MsgVoteWeightedResponse);
 
 function createBaseMsgDeposit(): MsgDeposit {
-  return {
-    $type: 'cosmos.gov.v1beta1.MsgDeposit',
-    proposalId: Long.UZERO,
-    depositor: '',
-    amount: [],
-  };
+  return { $type: "cosmos.gov.v1beta1.MsgDeposit", proposalId: Long.UZERO, depositor: "", amount: [] };
 }
 
 export const MsgDeposit = {
-  $type: 'cosmos.gov.v1beta1.MsgDeposit' as const,
+  $type: "cosmos.gov.v1beta1.MsgDeposit" as const,
 
-  encode(
-    message: MsgDeposit,
-    writer: _m0.Writer = _m0.Writer.create(),
-  ): _m0.Writer {
+  encode(message: MsgDeposit, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (!message.proposalId.isZero()) {
       writer.uint32(8).uint64(message.proposalId);
     }
-    if (message.depositor !== '') {
+    if (message.depositor !== "") {
       writer.uint32(18).string(message.depositor);
     }
     for (const v of message.amount) {
@@ -590,39 +517,35 @@ export const MsgDeposit = {
   fromJSON(object: any): MsgDeposit {
     return {
       $type: MsgDeposit.$type,
-      proposalId: isSet(object.proposalId)
-        ? Long.fromString(object.proposalId)
-        : Long.UZERO,
-      depositor: isSet(object.depositor) ? String(object.depositor) : '',
-      amount: Array.isArray(object?.amount)
-        ? object.amount.map((e: any) => Coin.fromJSON(e))
-        : [],
+      proposalId: isSet(object.proposalId) ? Long.fromValue(object.proposalId) : Long.UZERO,
+      depositor: isSet(object.depositor) ? String(object.depositor) : "",
+      amount: Array.isArray(object?.amount) ? object.amount.map((e: any) => Coin.fromJSON(e)) : [],
     };
   },
 
   toJSON(message: MsgDeposit): unknown {
     const obj: any = {};
-    message.proposalId !== undefined &&
-      (obj.proposalId = (message.proposalId || Long.UZERO).toString());
+    message.proposalId !== undefined && (obj.proposalId = (message.proposalId || Long.UZERO).toString());
     message.depositor !== undefined && (obj.depositor = message.depositor);
     if (message.amount) {
-      obj.amount = message.amount.map(e => (e ? Coin.toJSON(e) : undefined));
+      obj.amount = message.amount.map((e) => e ? Coin.toJSON(e) : undefined);
     } else {
       obj.amount = [];
     }
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<MsgDeposit>, I>>(
-    object: I,
-  ): MsgDeposit {
+  create(base?: DeepPartial<MsgDeposit>): MsgDeposit {
+    return MsgDeposit.fromPartial(base ?? {});
+  },
+
+  fromPartial(object: DeepPartial<MsgDeposit>): MsgDeposit {
     const message = createBaseMsgDeposit();
-    message.proposalId =
-      object.proposalId !== undefined && object.proposalId !== null
-        ? Long.fromValue(object.proposalId)
-        : Long.UZERO;
-    message.depositor = object.depositor ?? '';
-    message.amount = object.amount?.map(e => Coin.fromPartial(e)) || [];
+    message.proposalId = (object.proposalId !== undefined && object.proposalId !== null)
+      ? Long.fromValue(object.proposalId)
+      : Long.UZERO;
+    message.depositor = object.depositor ?? "";
+    message.amount = object.amount?.map((e) => Coin.fromPartial(e)) || [];
     return message;
   },
 };
@@ -630,16 +553,13 @@ export const MsgDeposit = {
 messageTypeRegistry.set(MsgDeposit.$type, MsgDeposit);
 
 function createBaseMsgDepositResponse(): MsgDepositResponse {
-  return { $type: 'cosmos.gov.v1beta1.MsgDepositResponse' };
+  return { $type: "cosmos.gov.v1beta1.MsgDepositResponse" };
 }
 
 export const MsgDepositResponse = {
-  $type: 'cosmos.gov.v1beta1.MsgDepositResponse' as const,
+  $type: "cosmos.gov.v1beta1.MsgDepositResponse" as const,
 
-  encode(
-    _: MsgDepositResponse,
-    writer: _m0.Writer = _m0.Writer.create(),
-  ): _m0.Writer {
+  encode(_: MsgDepositResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     return writer;
   },
 
@@ -659,9 +579,7 @@ export const MsgDepositResponse = {
   },
 
   fromJSON(_: any): MsgDepositResponse {
-    return {
-      $type: MsgDepositResponse.$type,
-    };
+    return { $type: MsgDepositResponse.$type };
   },
 
   toJSON(_: MsgDepositResponse): unknown {
@@ -669,9 +587,11 @@ export const MsgDepositResponse = {
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<MsgDepositResponse>, I>>(
-    _: I,
-  ): MsgDepositResponse {
+  create(base?: DeepPartial<MsgDepositResponse>): MsgDepositResponse {
+    return MsgDepositResponse.fromPartial(base ?? {});
+  },
+
+  fromPartial(_: DeepPartial<MsgDepositResponse>): MsgDepositResponse {
     const message = createBaseMsgDepositResponse();
     return message;
   },
@@ -682,9 +602,7 @@ messageTypeRegistry.set(MsgDepositResponse.$type, MsgDepositResponse);
 /** Msg defines the bank Msg service. */
 export interface Msg {
   /** SubmitProposal defines a method to create new proposal given a content. */
-  SubmitProposal(
-    request: DeepPartial<MsgSubmitProposal>,
-  ): Promise<MsgSubmitProposalResponse>;
+  SubmitProposal(request: DeepPartial<MsgSubmitProposal>): Promise<MsgSubmitProposalResponse>;
   /** Vote defines a method to add a vote on a specific proposal. */
   Vote(request: DeepPartial<MsgVote>): Promise<MsgVoteResponse>;
   /**
@@ -692,105 +610,62 @@ export interface Msg {
    *
    * Since: cosmos-sdk 0.43
    */
-  VoteWeighted(
-    request: DeepPartial<MsgVoteWeighted>,
-  ): Promise<MsgVoteWeightedResponse>;
+  VoteWeighted(request: DeepPartial<MsgVoteWeighted>): Promise<MsgVoteWeightedResponse>;
   /** Deposit defines a method to add deposit on a specific proposal. */
   Deposit(request: DeepPartial<MsgDeposit>): Promise<MsgDepositResponse>;
 }
 
 export class MsgClientImpl implements Msg {
   private readonly rpc: Rpc;
-  constructor(rpc: Rpc) {
+  private readonly service: string;
+  constructor(rpc: Rpc, opts?: { service?: string }) {
+    this.service = opts?.service || "cosmos.gov.v1beta1.Msg";
     this.rpc = rpc;
     this.SubmitProposal = this.SubmitProposal.bind(this);
     this.Vote = this.Vote.bind(this);
     this.VoteWeighted = this.VoteWeighted.bind(this);
     this.Deposit = this.Deposit.bind(this);
   }
-  SubmitProposal(
-    request: DeepPartial<MsgSubmitProposal>,
-  ): Promise<MsgSubmitProposalResponse> {
+  SubmitProposal(request: DeepPartial<MsgSubmitProposal>): Promise<MsgSubmitProposalResponse> {
     const fromPartial = MsgSubmitProposal.fromPartial(request);
     const data = MsgSubmitProposal.encode(fromPartial).finish();
-    const promise = this.rpc.request(
-      'cosmos.gov.v1beta1.Msg',
-      'SubmitProposal',
-      data,
-    );
-    return promise.then(data =>
-      MsgSubmitProposalResponse.decode(new _m0.Reader(data)),
-    );
+    const promise = this.rpc.request(this.service, "SubmitProposal", data);
+    return promise.then((data) => MsgSubmitProposalResponse.decode(new _m0.Reader(data)));
   }
 
   Vote(request: DeepPartial<MsgVote>): Promise<MsgVoteResponse> {
     const fromPartial = MsgVote.fromPartial(request);
     const data = MsgVote.encode(fromPartial).finish();
-    const promise = this.rpc.request('cosmos.gov.v1beta1.Msg', 'Vote', data);
-    return promise.then(data => MsgVoteResponse.decode(new _m0.Reader(data)));
+    const promise = this.rpc.request(this.service, "Vote", data);
+    return promise.then((data) => MsgVoteResponse.decode(new _m0.Reader(data)));
   }
 
-  VoteWeighted(
-    request: DeepPartial<MsgVoteWeighted>,
-  ): Promise<MsgVoteWeightedResponse> {
+  VoteWeighted(request: DeepPartial<MsgVoteWeighted>): Promise<MsgVoteWeightedResponse> {
     const fromPartial = MsgVoteWeighted.fromPartial(request);
     const data = MsgVoteWeighted.encode(fromPartial).finish();
-    const promise = this.rpc.request(
-      'cosmos.gov.v1beta1.Msg',
-      'VoteWeighted',
-      data,
-    );
-    return promise.then(data =>
-      MsgVoteWeightedResponse.decode(new _m0.Reader(data)),
-    );
+    const promise = this.rpc.request(this.service, "VoteWeighted", data);
+    return promise.then((data) => MsgVoteWeightedResponse.decode(new _m0.Reader(data)));
   }
 
   Deposit(request: DeepPartial<MsgDeposit>): Promise<MsgDepositResponse> {
     const fromPartial = MsgDeposit.fromPartial(request);
     const data = MsgDeposit.encode(fromPartial).finish();
-    const promise = this.rpc.request('cosmos.gov.v1beta1.Msg', 'Deposit', data);
-    return promise.then(data =>
-      MsgDepositResponse.decode(new _m0.Reader(data)),
-    );
+    const promise = this.rpc.request(this.service, "Deposit", data);
+    return promise.then((data) => MsgDepositResponse.decode(new _m0.Reader(data)));
   }
 }
 
 interface Rpc {
-  request(
-    service: string,
-    method: string,
-    data: Uint8Array,
-  ): Promise<Uint8Array>;
+  request(service: string, method: string, data: Uint8Array): Promise<Uint8Array>;
 }
 
-type Builtin =
-  | Date
-  | Function
-  | Uint8Array
-  | string
-  | number
-  | boolean
-  | undefined;
+type Builtin = Date | Function | Uint8Array | string | number | boolean | undefined;
 
-export type DeepPartial<T> = T extends Builtin
-  ? T
-  : T extends Long
-  ? string | number | Long
-  : T extends Array<infer U>
-  ? Array<DeepPartial<U>>
-  : T extends ReadonlyArray<infer U>
-  ? ReadonlyArray<DeepPartial<U>>
-  : T extends {}
-  ? { [K in Exclude<keyof T, '$type'>]?: DeepPartial<T[K]> }
+export type DeepPartial<T> = T extends Builtin ? T
+  : T extends Long ? string | number | Long : T extends Array<infer U> ? Array<DeepPartial<U>>
+  : T extends ReadonlyArray<infer U> ? ReadonlyArray<DeepPartial<U>>
+  : T extends {} ? { [K in Exclude<keyof T, "$type">]?: DeepPartial<T[K]> }
   : Partial<T>;
-
-type KeysOfUnion<T> = T extends T ? keyof T : never;
-export type Exact<P, I extends P> = P extends Builtin
-  ? P
-  : P & { [K in keyof P]: Exact<P[K], I[K]> } & Record<
-        Exclude<keyof I, KeysOfUnion<P> | '$type'>,
-        never
-      >;
 
 if (_m0.util.Long !== Long) {
   _m0.util.Long = Long as any;

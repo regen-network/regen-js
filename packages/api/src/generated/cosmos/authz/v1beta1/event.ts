@@ -1,15 +1,16 @@
 /* eslint-disable */
-import { messageTypeRegistry } from '../../../typeRegistry';
-import Long from 'long';
-import _m0 from 'protobufjs/minimal';
+import Long from "long";
+import _m0 from "protobufjs/minimal";
+import { Timestamp } from "../../../google/protobuf/timestamp";
+import { messageTypeRegistry } from "../../../typeRegistry";
 
-export const protobufPackage = 'cosmos.authz.v1beta1';
+export const protobufPackage = "cosmos.authz.v1beta1";
 
 /** Since: cosmos-sdk 0.43 */
 
 /** EventGrant is emitted on Msg/Grant */
 export interface EventGrant {
-  $type: 'cosmos.authz.v1beta1.EventGrant';
+  $type: "cosmos.authz.v1beta1.EventGrant";
   /** Msg type URL for which an autorization is granted */
   msgTypeUrl: string;
   /** Granter account address */
@@ -20,7 +21,7 @@ export interface EventGrant {
 
 /** EventRevoke is emitted on Msg/Revoke */
 export interface EventRevoke {
-  $type: 'cosmos.authz.v1beta1.EventRevoke';
+  $type: "cosmos.authz.v1beta1.EventRevoke";
   /** Msg type URL for which an autorization is revoked */
   msgTypeUrl: string;
   /** Granter account address */
@@ -30,28 +31,20 @@ export interface EventRevoke {
 }
 
 function createBaseEventGrant(): EventGrant {
-  return {
-    $type: 'cosmos.authz.v1beta1.EventGrant',
-    msgTypeUrl: '',
-    granter: '',
-    grantee: '',
-  };
+  return { $type: "cosmos.authz.v1beta1.EventGrant", msgTypeUrl: "", granter: "", grantee: "" };
 }
 
 export const EventGrant = {
-  $type: 'cosmos.authz.v1beta1.EventGrant' as const,
+  $type: "cosmos.authz.v1beta1.EventGrant" as const,
 
-  encode(
-    message: EventGrant,
-    writer: _m0.Writer = _m0.Writer.create(),
-  ): _m0.Writer {
-    if (message.msgTypeUrl !== '') {
+  encode(message: EventGrant, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+    if (message.msgTypeUrl !== "") {
       writer.uint32(18).string(message.msgTypeUrl);
     }
-    if (message.granter !== '') {
+    if (message.granter !== "") {
       writer.uint32(26).string(message.granter);
     }
-    if (message.grantee !== '') {
+    if (message.grantee !== "") {
       writer.uint32(34).string(message.grantee);
     }
     return writer;
@@ -84,9 +77,9 @@ export const EventGrant = {
   fromJSON(object: any): EventGrant {
     return {
       $type: EventGrant.$type,
-      msgTypeUrl: isSet(object.msgTypeUrl) ? String(object.msgTypeUrl) : '',
-      granter: isSet(object.granter) ? String(object.granter) : '',
-      grantee: isSet(object.grantee) ? String(object.grantee) : '',
+      msgTypeUrl: isSet(object.msgTypeUrl) ? String(object.msgTypeUrl) : "",
+      granter: isSet(object.granter) ? String(object.granter) : "",
+      grantee: isSet(object.grantee) ? String(object.grantee) : "",
     };
   },
 
@@ -98,13 +91,15 @@ export const EventGrant = {
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<EventGrant>, I>>(
-    object: I,
-  ): EventGrant {
+  create(base?: DeepPartial<EventGrant>): EventGrant {
+    return EventGrant.fromPartial(base ?? {});
+  },
+
+  fromPartial(object: DeepPartial<EventGrant>): EventGrant {
     const message = createBaseEventGrant();
-    message.msgTypeUrl = object.msgTypeUrl ?? '';
-    message.granter = object.granter ?? '';
-    message.grantee = object.grantee ?? '';
+    message.msgTypeUrl = object.msgTypeUrl ?? "";
+    message.granter = object.granter ?? "";
+    message.grantee = object.grantee ?? "";
     return message;
   },
 };
@@ -112,28 +107,20 @@ export const EventGrant = {
 messageTypeRegistry.set(EventGrant.$type, EventGrant);
 
 function createBaseEventRevoke(): EventRevoke {
-  return {
-    $type: 'cosmos.authz.v1beta1.EventRevoke',
-    msgTypeUrl: '',
-    granter: '',
-    grantee: '',
-  };
+  return { $type: "cosmos.authz.v1beta1.EventRevoke", msgTypeUrl: "", granter: "", grantee: "" };
 }
 
 export const EventRevoke = {
-  $type: 'cosmos.authz.v1beta1.EventRevoke' as const,
+  $type: "cosmos.authz.v1beta1.EventRevoke" as const,
 
-  encode(
-    message: EventRevoke,
-    writer: _m0.Writer = _m0.Writer.create(),
-  ): _m0.Writer {
-    if (message.msgTypeUrl !== '') {
+  encode(message: EventRevoke, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+    if (message.msgTypeUrl !== "") {
       writer.uint32(18).string(message.msgTypeUrl);
     }
-    if (message.granter !== '') {
+    if (message.granter !== "") {
       writer.uint32(26).string(message.granter);
     }
-    if (message.grantee !== '') {
+    if (message.grantee !== "") {
       writer.uint32(34).string(message.grantee);
     }
     return writer;
@@ -166,9 +153,9 @@ export const EventRevoke = {
   fromJSON(object: any): EventRevoke {
     return {
       $type: EventRevoke.$type,
-      msgTypeUrl: isSet(object.msgTypeUrl) ? String(object.msgTypeUrl) : '',
-      granter: isSet(object.granter) ? String(object.granter) : '',
-      grantee: isSet(object.grantee) ? String(object.grantee) : '',
+      msgTypeUrl: isSet(object.msgTypeUrl) ? String(object.msgTypeUrl) : "",
+      granter: isSet(object.granter) ? String(object.granter) : "",
+      grantee: isSet(object.grantee) ? String(object.grantee) : "",
     };
   },
 
@@ -180,47 +167,38 @@ export const EventRevoke = {
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<EventRevoke>, I>>(
-    object: I,
-  ): EventRevoke {
+  create(base?: DeepPartial<EventRevoke>): EventRevoke {
+    return EventRevoke.fromPartial(base ?? {});
+  },
+
+  fromPartial(object: DeepPartial<EventRevoke>): EventRevoke {
     const message = createBaseEventRevoke();
-    message.msgTypeUrl = object.msgTypeUrl ?? '';
-    message.granter = object.granter ?? '';
-    message.grantee = object.grantee ?? '';
+    message.msgTypeUrl = object.msgTypeUrl ?? "";
+    message.granter = object.granter ?? "";
+    message.grantee = object.grantee ?? "";
     return message;
   },
 };
 
 messageTypeRegistry.set(EventRevoke.$type, EventRevoke);
 
-type Builtin =
-  | Date
-  | Function
-  | Uint8Array
-  | string
-  | number
-  | boolean
-  | undefined;
+type Builtin = Date | Function | Uint8Array | string | number | boolean | undefined;
 
-export type DeepPartial<T> = T extends Builtin
-  ? T
-  : T extends Long
-  ? string | number | Long
-  : T extends Array<infer U>
-  ? Array<DeepPartial<U>>
-  : T extends ReadonlyArray<infer U>
-  ? ReadonlyArray<DeepPartial<U>>
-  : T extends {}
-  ? { [K in Exclude<keyof T, '$type'>]?: DeepPartial<T[K]> }
+export type DeepPartial<T> = T extends Builtin ? T
+  : T extends Long ? string | number | Long : T extends Array<infer U> ? Array<DeepPartial<U>>
+  : T extends ReadonlyArray<infer U> ? ReadonlyArray<DeepPartial<U>>
+  : T extends {} ? { [K in Exclude<keyof T, "$type">]?: DeepPartial<T[K]> }
   : Partial<T>;
 
-type KeysOfUnion<T> = T extends T ? keyof T : never;
-export type Exact<P, I extends P> = P extends Builtin
-  ? P
-  : P & { [K in keyof P]: Exact<P[K], I[K]> } & Record<
-        Exclude<keyof I, KeysOfUnion<P> | '$type'>,
-        never
-      >;
+function fromTimestamp(t: Timestamp): Date {
+  let millis = t.seconds.toNumber() * 1_000;
+  millis += t.nanos / 1_000_000;
+  return new Date(millis);
+}
+
+function numberToLong(number: number) {
+  return Long.fromNumber(number);
+}
 
 if (_m0.util.Long !== Long) {
   _m0.util.Long = Long as any;

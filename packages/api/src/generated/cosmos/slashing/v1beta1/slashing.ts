@@ -1,18 +1,18 @@
 /* eslint-disable */
-import { messageTypeRegistry } from '../../../typeRegistry';
-import Long from 'long';
-import _m0 from 'protobufjs/minimal';
-import { Duration } from '../../../google/protobuf/duration';
-import { Timestamp } from '../../../google/protobuf/timestamp';
+import Long from "long";
+import _m0 from "protobufjs/minimal";
+import { Duration } from "../../../google/protobuf/duration";
+import { Timestamp } from "../../../google/protobuf/timestamp";
+import { messageTypeRegistry } from "../../../typeRegistry";
 
-export const protobufPackage = 'cosmos.slashing.v1beta1';
+export const protobufPackage = "cosmos.slashing.v1beta1";
 
 /**
  * ValidatorSigningInfo defines a validator's signing info for monitoring their
  * liveness activity.
  */
 export interface ValidatorSigningInfo {
-  $type: 'cosmos.slashing.v1beta1.ValidatorSigningInfo';
+  $type: "cosmos.slashing.v1beta1.ValidatorSigningInfo";
   address: string;
   /** Height at which validator was first a candidate OR was unjailed */
   startHeight: Long;
@@ -38,7 +38,7 @@ export interface ValidatorSigningInfo {
 
 /** Params represents the parameters used for by the slashing module. */
 export interface Params {
-  $type: 'cosmos.slashing.v1beta1.Params';
+  $type: "cosmos.slashing.v1beta1.Params";
   signedBlocksWindow: Long;
   minSignedPerWindow: Uint8Array;
   downtimeJailDuration?: Duration;
@@ -48,8 +48,8 @@ export interface Params {
 
 function createBaseValidatorSigningInfo(): ValidatorSigningInfo {
   return {
-    $type: 'cosmos.slashing.v1beta1.ValidatorSigningInfo',
-    address: '',
+    $type: "cosmos.slashing.v1beta1.ValidatorSigningInfo",
+    address: "",
     startHeight: Long.ZERO,
     indexOffset: Long.ZERO,
     jailedUntil: undefined,
@@ -59,13 +59,10 @@ function createBaseValidatorSigningInfo(): ValidatorSigningInfo {
 }
 
 export const ValidatorSigningInfo = {
-  $type: 'cosmos.slashing.v1beta1.ValidatorSigningInfo' as const,
+  $type: "cosmos.slashing.v1beta1.ValidatorSigningInfo" as const,
 
-  encode(
-    message: ValidatorSigningInfo,
-    writer: _m0.Writer = _m0.Writer.create(),
-  ): _m0.Writer {
-    if (message.address !== '') {
+  encode(message: ValidatorSigningInfo, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+    if (message.address !== "") {
       writer.uint32(10).string(message.address);
     }
     if (!message.startHeight.isZero()) {
@@ -75,10 +72,7 @@ export const ValidatorSigningInfo = {
       writer.uint32(24).int64(message.indexOffset);
     }
     if (message.jailedUntil !== undefined) {
-      Timestamp.encode(
-        toTimestamp(message.jailedUntil),
-        writer.uint32(34).fork(),
-      ).ldelim();
+      Timestamp.encode(toTimestamp(message.jailedUntil), writer.uint32(34).fork()).ldelim();
     }
     if (message.tombstoned === true) {
       writer.uint32(40).bool(message.tombstoned);
@@ -89,10 +83,7 @@ export const ValidatorSigningInfo = {
     return writer;
   },
 
-  decode(
-    input: _m0.Reader | Uint8Array,
-    length?: number,
-  ): ValidatorSigningInfo {
+  decode(input: _m0.Reader | Uint8Array, length?: number): ValidatorSigningInfo {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseValidatorSigningInfo();
@@ -109,9 +100,7 @@ export const ValidatorSigningInfo = {
           message.indexOffset = reader.int64() as Long;
           break;
         case 4:
-          message.jailedUntil = fromTimestamp(
-            Timestamp.decode(reader, reader.uint32()),
-          );
+          message.jailedUntil = fromTimestamp(Timestamp.decode(reader, reader.uint32()));
           break;
         case 5:
           message.tombstoned = reader.bool();
@@ -130,60 +119,45 @@ export const ValidatorSigningInfo = {
   fromJSON(object: any): ValidatorSigningInfo {
     return {
       $type: ValidatorSigningInfo.$type,
-      address: isSet(object.address) ? String(object.address) : '',
-      startHeight: isSet(object.startHeight)
-        ? Long.fromString(object.startHeight)
-        : Long.ZERO,
-      indexOffset: isSet(object.indexOffset)
-        ? Long.fromString(object.indexOffset)
-        : Long.ZERO,
-      jailedUntil: isSet(object.jailedUntil)
-        ? fromJsonTimestamp(object.jailedUntil)
-        : undefined,
+      address: isSet(object.address) ? String(object.address) : "",
+      startHeight: isSet(object.startHeight) ? Long.fromValue(object.startHeight) : Long.ZERO,
+      indexOffset: isSet(object.indexOffset) ? Long.fromValue(object.indexOffset) : Long.ZERO,
+      jailedUntil: isSet(object.jailedUntil) ? fromJsonTimestamp(object.jailedUntil) : undefined,
       tombstoned: isSet(object.tombstoned) ? Boolean(object.tombstoned) : false,
-      missedBlocksCounter: isSet(object.missedBlocksCounter)
-        ? Long.fromString(object.missedBlocksCounter)
-        : Long.ZERO,
+      missedBlocksCounter: isSet(object.missedBlocksCounter) ? Long.fromValue(object.missedBlocksCounter) : Long.ZERO,
     };
   },
 
   toJSON(message: ValidatorSigningInfo): unknown {
     const obj: any = {};
     message.address !== undefined && (obj.address = message.address);
-    message.startHeight !== undefined &&
-      (obj.startHeight = (message.startHeight || Long.ZERO).toString());
-    message.indexOffset !== undefined &&
-      (obj.indexOffset = (message.indexOffset || Long.ZERO).toString());
-    message.jailedUntil !== undefined &&
-      (obj.jailedUntil = message.jailedUntil.toISOString());
+    message.startHeight !== undefined && (obj.startHeight = (message.startHeight || Long.ZERO).toString());
+    message.indexOffset !== undefined && (obj.indexOffset = (message.indexOffset || Long.ZERO).toString());
+    message.jailedUntil !== undefined && (obj.jailedUntil = message.jailedUntil.toISOString());
     message.tombstoned !== undefined && (obj.tombstoned = message.tombstoned);
     message.missedBlocksCounter !== undefined &&
-      (obj.missedBlocksCounter = (
-        message.missedBlocksCounter || Long.ZERO
-      ).toString());
+      (obj.missedBlocksCounter = (message.missedBlocksCounter || Long.ZERO).toString());
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<ValidatorSigningInfo>, I>>(
-    object: I,
-  ): ValidatorSigningInfo {
+  create(base?: DeepPartial<ValidatorSigningInfo>): ValidatorSigningInfo {
+    return ValidatorSigningInfo.fromPartial(base ?? {});
+  },
+
+  fromPartial(object: DeepPartial<ValidatorSigningInfo>): ValidatorSigningInfo {
     const message = createBaseValidatorSigningInfo();
-    message.address = object.address ?? '';
-    message.startHeight =
-      object.startHeight !== undefined && object.startHeight !== null
-        ? Long.fromValue(object.startHeight)
-        : Long.ZERO;
-    message.indexOffset =
-      object.indexOffset !== undefined && object.indexOffset !== null
-        ? Long.fromValue(object.indexOffset)
-        : Long.ZERO;
+    message.address = object.address ?? "";
+    message.startHeight = (object.startHeight !== undefined && object.startHeight !== null)
+      ? Long.fromValue(object.startHeight)
+      : Long.ZERO;
+    message.indexOffset = (object.indexOffset !== undefined && object.indexOffset !== null)
+      ? Long.fromValue(object.indexOffset)
+      : Long.ZERO;
     message.jailedUntil = object.jailedUntil ?? undefined;
     message.tombstoned = object.tombstoned ?? false;
-    message.missedBlocksCounter =
-      object.missedBlocksCounter !== undefined &&
-      object.missedBlocksCounter !== null
-        ? Long.fromValue(object.missedBlocksCounter)
-        : Long.ZERO;
+    message.missedBlocksCounter = (object.missedBlocksCounter !== undefined && object.missedBlocksCounter !== null)
+      ? Long.fromValue(object.missedBlocksCounter)
+      : Long.ZERO;
     return message;
   },
 };
@@ -192,7 +166,7 @@ messageTypeRegistry.set(ValidatorSigningInfo.$type, ValidatorSigningInfo);
 
 function createBaseParams(): Params {
   return {
-    $type: 'cosmos.slashing.v1beta1.Params',
+    $type: "cosmos.slashing.v1beta1.Params",
     signedBlocksWindow: Long.ZERO,
     minSignedPerWindow: new Uint8Array(),
     downtimeJailDuration: undefined,
@@ -202,12 +176,9 @@ function createBaseParams(): Params {
 }
 
 export const Params = {
-  $type: 'cosmos.slashing.v1beta1.Params' as const,
+  $type: "cosmos.slashing.v1beta1.Params" as const,
 
-  encode(
-    message: Params,
-    writer: _m0.Writer = _m0.Writer.create(),
-  ): _m0.Writer {
+  encode(message: Params, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (!message.signedBlocksWindow.isZero()) {
       writer.uint32(8).int64(message.signedBlocksWindow);
     }
@@ -215,10 +186,7 @@ export const Params = {
       writer.uint32(18).bytes(message.minSignedPerWindow);
     }
     if (message.downtimeJailDuration !== undefined) {
-      Duration.encode(
-        message.downtimeJailDuration,
-        writer.uint32(26).fork(),
-      ).ldelim();
+      Duration.encode(message.downtimeJailDuration, writer.uint32(26).fork()).ldelim();
     }
     if (message.slashFractionDoubleSign.length !== 0) {
       writer.uint32(34).bytes(message.slashFractionDoubleSign);
@@ -243,10 +211,7 @@ export const Params = {
           message.minSignedPerWindow = reader.bytes();
           break;
         case 3:
-          message.downtimeJailDuration = Duration.decode(
-            reader,
-            reader.uint32(),
-          );
+          message.downtimeJailDuration = Duration.decode(reader, reader.uint32());
           break;
         case 4:
           message.slashFractionDoubleSign = reader.bytes();
@@ -265,9 +230,7 @@ export const Params = {
   fromJSON(object: any): Params {
     return {
       $type: Params.$type,
-      signedBlocksWindow: isSet(object.signedBlocksWindow)
-        ? Long.fromString(object.signedBlocksWindow)
-        : Long.ZERO,
+      signedBlocksWindow: isSet(object.signedBlocksWindow) ? Long.fromValue(object.signedBlocksWindow) : Long.ZERO,
       minSignedPerWindow: isSet(object.minSignedPerWindow)
         ? bytesFromBase64(object.minSignedPerWindow)
         : new Uint8Array(),
@@ -286,51 +249,40 @@ export const Params = {
   toJSON(message: Params): unknown {
     const obj: any = {};
     message.signedBlocksWindow !== undefined &&
-      (obj.signedBlocksWindow = (
-        message.signedBlocksWindow || Long.ZERO
-      ).toString());
+      (obj.signedBlocksWindow = (message.signedBlocksWindow || Long.ZERO).toString());
     message.minSignedPerWindow !== undefined &&
       (obj.minSignedPerWindow = base64FromBytes(
-        message.minSignedPerWindow !== undefined
-          ? message.minSignedPerWindow
-          : new Uint8Array(),
+        message.minSignedPerWindow !== undefined ? message.minSignedPerWindow : new Uint8Array(),
       ));
-    message.downtimeJailDuration !== undefined &&
-      (obj.downtimeJailDuration = message.downtimeJailDuration
-        ? Duration.toJSON(message.downtimeJailDuration)
-        : undefined);
+    message.downtimeJailDuration !== undefined && (obj.downtimeJailDuration = message.downtimeJailDuration
+      ? Duration.toJSON(message.downtimeJailDuration)
+      : undefined);
     message.slashFractionDoubleSign !== undefined &&
       (obj.slashFractionDoubleSign = base64FromBytes(
-        message.slashFractionDoubleSign !== undefined
-          ? message.slashFractionDoubleSign
-          : new Uint8Array(),
+        message.slashFractionDoubleSign !== undefined ? message.slashFractionDoubleSign : new Uint8Array(),
       ));
     message.slashFractionDowntime !== undefined &&
       (obj.slashFractionDowntime = base64FromBytes(
-        message.slashFractionDowntime !== undefined
-          ? message.slashFractionDowntime
-          : new Uint8Array(),
+        message.slashFractionDowntime !== undefined ? message.slashFractionDowntime : new Uint8Array(),
       ));
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<Params>, I>>(object: I): Params {
+  create(base?: DeepPartial<Params>): Params {
+    return Params.fromPartial(base ?? {});
+  },
+
+  fromPartial(object: DeepPartial<Params>): Params {
     const message = createBaseParams();
-    message.signedBlocksWindow =
-      object.signedBlocksWindow !== undefined &&
-      object.signedBlocksWindow !== null
-        ? Long.fromValue(object.signedBlocksWindow)
-        : Long.ZERO;
+    message.signedBlocksWindow = (object.signedBlocksWindow !== undefined && object.signedBlocksWindow !== null)
+      ? Long.fromValue(object.signedBlocksWindow)
+      : Long.ZERO;
     message.minSignedPerWindow = object.minSignedPerWindow ?? new Uint8Array();
-    message.downtimeJailDuration =
-      object.downtimeJailDuration !== undefined &&
-      object.downtimeJailDuration !== null
-        ? Duration.fromPartial(object.downtimeJailDuration)
-        : undefined;
-    message.slashFractionDoubleSign =
-      object.slashFractionDoubleSign ?? new Uint8Array();
-    message.slashFractionDowntime =
-      object.slashFractionDowntime ?? new Uint8Array();
+    message.downtimeJailDuration = (object.downtimeJailDuration !== undefined && object.downtimeJailDuration !== null)
+      ? Duration.fromPartial(object.downtimeJailDuration)
+      : undefined;
+    message.slashFractionDoubleSign = object.slashFractionDoubleSign ?? new Uint8Array();
+    message.slashFractionDowntime = object.slashFractionDowntime ?? new Uint8Array();
     return message;
   },
 };
@@ -340,70 +292,59 @@ messageTypeRegistry.set(Params.$type, Params);
 declare var self: any | undefined;
 declare var window: any | undefined;
 declare var global: any | undefined;
-var globalThis: any = (() => {
-  if (typeof globalThis !== 'undefined') return globalThis;
-  if (typeof self !== 'undefined') return self;
-  if (typeof window !== 'undefined') return window;
-  if (typeof global !== 'undefined') return global;
-  throw 'Unable to locate global object';
+var tsProtoGlobalThis: any = (() => {
+  if (typeof globalThis !== "undefined") {
+    return globalThis;
+  }
+  if (typeof self !== "undefined") {
+    return self;
+  }
+  if (typeof window !== "undefined") {
+    return window;
+  }
+  if (typeof global !== "undefined") {
+    return global;
+  }
+  throw "Unable to locate global object";
 })();
 
-const atob: (b64: string) => string =
-  globalThis.atob ||
-  (b64 => globalThis.Buffer.from(b64, 'base64').toString('binary'));
 function bytesFromBase64(b64: string): Uint8Array {
-  const bin = atob(b64);
-  const arr = new Uint8Array(bin.length);
-  for (let i = 0; i < bin.length; ++i) {
-    arr[i] = bin.charCodeAt(i);
+  if (tsProtoGlobalThis.Buffer) {
+    return Uint8Array.from(tsProtoGlobalThis.Buffer.from(b64, "base64"));
+  } else {
+    const bin = tsProtoGlobalThis.atob(b64);
+    const arr = new Uint8Array(bin.length);
+    for (let i = 0; i < bin.length; ++i) {
+      arr[i] = bin.charCodeAt(i);
+    }
+    return arr;
   }
-  return arr;
 }
 
-const btoa: (bin: string) => string =
-  globalThis.btoa ||
-  (bin => globalThis.Buffer.from(bin, 'binary').toString('base64'));
 function base64FromBytes(arr: Uint8Array): string {
-  const bin: string[] = [];
-  for (const byte of arr) {
-    bin.push(String.fromCharCode(byte));
+  if (tsProtoGlobalThis.Buffer) {
+    return tsProtoGlobalThis.Buffer.from(arr).toString("base64");
+  } else {
+    const bin: string[] = [];
+    arr.forEach((byte) => {
+      bin.push(String.fromCharCode(byte));
+    });
+    return tsProtoGlobalThis.btoa(bin.join(""));
   }
-  return btoa(bin.join(''));
 }
 
-type Builtin =
-  | Date
-  | Function
-  | Uint8Array
-  | string
-  | number
-  | boolean
-  | undefined;
+type Builtin = Date | Function | Uint8Array | string | number | boolean | undefined;
 
-export type DeepPartial<T> = T extends Builtin
-  ? T
-  : T extends Long
-  ? string | number | Long
-  : T extends Array<infer U>
-  ? Array<DeepPartial<U>>
-  : T extends ReadonlyArray<infer U>
-  ? ReadonlyArray<DeepPartial<U>>
-  : T extends {}
-  ? { [K in Exclude<keyof T, '$type'>]?: DeepPartial<T[K]> }
+export type DeepPartial<T> = T extends Builtin ? T
+  : T extends Long ? string | number | Long : T extends Array<infer U> ? Array<DeepPartial<U>>
+  : T extends ReadonlyArray<infer U> ? ReadonlyArray<DeepPartial<U>>
+  : T extends {} ? { [K in Exclude<keyof T, "$type">]?: DeepPartial<T[K]> }
   : Partial<T>;
-
-type KeysOfUnion<T> = T extends T ? keyof T : never;
-export type Exact<P, I extends P> = P extends Builtin
-  ? P
-  : P & { [K in keyof P]: Exact<P[K], I[K]> } & Record<
-        Exclude<keyof I, KeysOfUnion<P> | '$type'>,
-        never
-      >;
 
 function toTimestamp(date: Date): Timestamp {
   const seconds = numberToLong(date.getTime() / 1_000);
   const nanos = (date.getTime() % 1_000) * 1_000_000;
-  return { $type: 'google.protobuf.Timestamp', seconds, nanos };
+  return { $type: "google.protobuf.Timestamp", seconds, nanos };
 }
 
 function fromTimestamp(t: Timestamp): Date {
@@ -415,7 +356,7 @@ function fromTimestamp(t: Timestamp): Date {
 function fromJsonTimestamp(o: any): Date {
   if (o instanceof Date) {
     return o;
-  } else if (typeof o === 'string') {
+  } else if (typeof o === "string") {
     return new Date(o);
   } else {
     return fromTimestamp(Timestamp.fromJSON(o));

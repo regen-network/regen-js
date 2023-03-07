@@ -1,13 +1,13 @@
 /* eslint-disable */
-import { messageTypeRegistry } from '../../../typeRegistry';
-import Long from 'long';
-import _m0 from 'protobufjs/minimal';
+import Long from "long";
+import _m0 from "protobufjs/minimal";
+import { messageTypeRegistry } from "../../../typeRegistry";
 
-export const protobufPackage = 'cosmos.nft.v1beta1';
+export const protobufPackage = "cosmos.nft.v1beta1";
 
 /** EventSend is emitted on Msg/Send */
 export interface EventSend {
-  $type: 'cosmos.nft.v1beta1.EventSend';
+  $type: "cosmos.nft.v1beta1.EventSend";
   classId: string;
   id: string;
   sender: string;
@@ -16,7 +16,7 @@ export interface EventSend {
 
 /** EventMint is emitted on Mint */
 export interface EventMint {
-  $type: 'cosmos.nft.v1beta1.EventMint';
+  $type: "cosmos.nft.v1beta1.EventMint";
   classId: string;
   id: string;
   owner: string;
@@ -24,39 +24,30 @@ export interface EventMint {
 
 /** EventBurn is emitted on Burn */
 export interface EventBurn {
-  $type: 'cosmos.nft.v1beta1.EventBurn';
+  $type: "cosmos.nft.v1beta1.EventBurn";
   classId: string;
   id: string;
   owner: string;
 }
 
 function createBaseEventSend(): EventSend {
-  return {
-    $type: 'cosmos.nft.v1beta1.EventSend',
-    classId: '',
-    id: '',
-    sender: '',
-    receiver: '',
-  };
+  return { $type: "cosmos.nft.v1beta1.EventSend", classId: "", id: "", sender: "", receiver: "" };
 }
 
 export const EventSend = {
-  $type: 'cosmos.nft.v1beta1.EventSend' as const,
+  $type: "cosmos.nft.v1beta1.EventSend" as const,
 
-  encode(
-    message: EventSend,
-    writer: _m0.Writer = _m0.Writer.create(),
-  ): _m0.Writer {
-    if (message.classId !== '') {
+  encode(message: EventSend, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+    if (message.classId !== "") {
       writer.uint32(10).string(message.classId);
     }
-    if (message.id !== '') {
+    if (message.id !== "") {
       writer.uint32(18).string(message.id);
     }
-    if (message.sender !== '') {
+    if (message.sender !== "") {
       writer.uint32(26).string(message.sender);
     }
-    if (message.receiver !== '') {
+    if (message.receiver !== "") {
       writer.uint32(34).string(message.receiver);
     }
     return writer;
@@ -92,10 +83,10 @@ export const EventSend = {
   fromJSON(object: any): EventSend {
     return {
       $type: EventSend.$type,
-      classId: isSet(object.classId) ? String(object.classId) : '',
-      id: isSet(object.id) ? String(object.id) : '',
-      sender: isSet(object.sender) ? String(object.sender) : '',
-      receiver: isSet(object.receiver) ? String(object.receiver) : '',
+      classId: isSet(object.classId) ? String(object.classId) : "",
+      id: isSet(object.id) ? String(object.id) : "",
+      sender: isSet(object.sender) ? String(object.sender) : "",
+      receiver: isSet(object.receiver) ? String(object.receiver) : "",
     };
   },
 
@@ -108,14 +99,16 @@ export const EventSend = {
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<EventSend>, I>>(
-    object: I,
-  ): EventSend {
+  create(base?: DeepPartial<EventSend>): EventSend {
+    return EventSend.fromPartial(base ?? {});
+  },
+
+  fromPartial(object: DeepPartial<EventSend>): EventSend {
     const message = createBaseEventSend();
-    message.classId = object.classId ?? '';
-    message.id = object.id ?? '';
-    message.sender = object.sender ?? '';
-    message.receiver = object.receiver ?? '';
+    message.classId = object.classId ?? "";
+    message.id = object.id ?? "";
+    message.sender = object.sender ?? "";
+    message.receiver = object.receiver ?? "";
     return message;
   },
 };
@@ -123,28 +116,20 @@ export const EventSend = {
 messageTypeRegistry.set(EventSend.$type, EventSend);
 
 function createBaseEventMint(): EventMint {
-  return {
-    $type: 'cosmos.nft.v1beta1.EventMint',
-    classId: '',
-    id: '',
-    owner: '',
-  };
+  return { $type: "cosmos.nft.v1beta1.EventMint", classId: "", id: "", owner: "" };
 }
 
 export const EventMint = {
-  $type: 'cosmos.nft.v1beta1.EventMint' as const,
+  $type: "cosmos.nft.v1beta1.EventMint" as const,
 
-  encode(
-    message: EventMint,
-    writer: _m0.Writer = _m0.Writer.create(),
-  ): _m0.Writer {
-    if (message.classId !== '') {
+  encode(message: EventMint, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+    if (message.classId !== "") {
       writer.uint32(10).string(message.classId);
     }
-    if (message.id !== '') {
+    if (message.id !== "") {
       writer.uint32(18).string(message.id);
     }
-    if (message.owner !== '') {
+    if (message.owner !== "") {
       writer.uint32(26).string(message.owner);
     }
     return writer;
@@ -177,9 +162,9 @@ export const EventMint = {
   fromJSON(object: any): EventMint {
     return {
       $type: EventMint.$type,
-      classId: isSet(object.classId) ? String(object.classId) : '',
-      id: isSet(object.id) ? String(object.id) : '',
-      owner: isSet(object.owner) ? String(object.owner) : '',
+      classId: isSet(object.classId) ? String(object.classId) : "",
+      id: isSet(object.id) ? String(object.id) : "",
+      owner: isSet(object.owner) ? String(object.owner) : "",
     };
   },
 
@@ -191,13 +176,15 @@ export const EventMint = {
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<EventMint>, I>>(
-    object: I,
-  ): EventMint {
+  create(base?: DeepPartial<EventMint>): EventMint {
+    return EventMint.fromPartial(base ?? {});
+  },
+
+  fromPartial(object: DeepPartial<EventMint>): EventMint {
     const message = createBaseEventMint();
-    message.classId = object.classId ?? '';
-    message.id = object.id ?? '';
-    message.owner = object.owner ?? '';
+    message.classId = object.classId ?? "";
+    message.id = object.id ?? "";
+    message.owner = object.owner ?? "";
     return message;
   },
 };
@@ -205,28 +192,20 @@ export const EventMint = {
 messageTypeRegistry.set(EventMint.$type, EventMint);
 
 function createBaseEventBurn(): EventBurn {
-  return {
-    $type: 'cosmos.nft.v1beta1.EventBurn',
-    classId: '',
-    id: '',
-    owner: '',
-  };
+  return { $type: "cosmos.nft.v1beta1.EventBurn", classId: "", id: "", owner: "" };
 }
 
 export const EventBurn = {
-  $type: 'cosmos.nft.v1beta1.EventBurn' as const,
+  $type: "cosmos.nft.v1beta1.EventBurn" as const,
 
-  encode(
-    message: EventBurn,
-    writer: _m0.Writer = _m0.Writer.create(),
-  ): _m0.Writer {
-    if (message.classId !== '') {
+  encode(message: EventBurn, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+    if (message.classId !== "") {
       writer.uint32(10).string(message.classId);
     }
-    if (message.id !== '') {
+    if (message.id !== "") {
       writer.uint32(18).string(message.id);
     }
-    if (message.owner !== '') {
+    if (message.owner !== "") {
       writer.uint32(26).string(message.owner);
     }
     return writer;
@@ -259,9 +238,9 @@ export const EventBurn = {
   fromJSON(object: any): EventBurn {
     return {
       $type: EventBurn.$type,
-      classId: isSet(object.classId) ? String(object.classId) : '',
-      id: isSet(object.id) ? String(object.id) : '',
-      owner: isSet(object.owner) ? String(object.owner) : '',
+      classId: isSet(object.classId) ? String(object.classId) : "",
+      id: isSet(object.id) ? String(object.id) : "",
+      owner: isSet(object.owner) ? String(object.owner) : "",
     };
   },
 
@@ -273,47 +252,28 @@ export const EventBurn = {
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<EventBurn>, I>>(
-    object: I,
-  ): EventBurn {
+  create(base?: DeepPartial<EventBurn>): EventBurn {
+    return EventBurn.fromPartial(base ?? {});
+  },
+
+  fromPartial(object: DeepPartial<EventBurn>): EventBurn {
     const message = createBaseEventBurn();
-    message.classId = object.classId ?? '';
-    message.id = object.id ?? '';
-    message.owner = object.owner ?? '';
+    message.classId = object.classId ?? "";
+    message.id = object.id ?? "";
+    message.owner = object.owner ?? "";
     return message;
   },
 };
 
 messageTypeRegistry.set(EventBurn.$type, EventBurn);
 
-type Builtin =
-  | Date
-  | Function
-  | Uint8Array
-  | string
-  | number
-  | boolean
-  | undefined;
+type Builtin = Date | Function | Uint8Array | string | number | boolean | undefined;
 
-export type DeepPartial<T> = T extends Builtin
-  ? T
-  : T extends Long
-  ? string | number | Long
-  : T extends Array<infer U>
-  ? Array<DeepPartial<U>>
-  : T extends ReadonlyArray<infer U>
-  ? ReadonlyArray<DeepPartial<U>>
-  : T extends {}
-  ? { [K in Exclude<keyof T, '$type'>]?: DeepPartial<T[K]> }
+export type DeepPartial<T> = T extends Builtin ? T
+  : T extends Long ? string | number | Long : T extends Array<infer U> ? Array<DeepPartial<U>>
+  : T extends ReadonlyArray<infer U> ? ReadonlyArray<DeepPartial<U>>
+  : T extends {} ? { [K in Exclude<keyof T, "$type">]?: DeepPartial<T[K]> }
   : Partial<T>;
-
-type KeysOfUnion<T> = T extends T ? keyof T : never;
-export type Exact<P, I extends P> = P extends Builtin
-  ? P
-  : P & { [K in keyof P]: Exact<P[K], I[K]> } & Record<
-        Exclude<keyof I, KeysOfUnion<P> | '$type'>,
-        never
-      >;
 
 if (_m0.util.Long !== Long) {
   _m0.util.Long = Long as any;

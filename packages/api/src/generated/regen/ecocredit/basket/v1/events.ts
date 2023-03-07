@@ -1,14 +1,14 @@
 /* eslint-disable */
-import { messageTypeRegistry } from '../../../../typeRegistry';
-import Long from 'long';
-import _m0 from 'protobufjs/minimal';
-import { BasketCredit } from './types';
+import Long from "long";
+import _m0 from "protobufjs/minimal";
+import { messageTypeRegistry } from "../../../../typeRegistry";
+import { BasketCredit } from "./types";
 
-export const protobufPackage = 'regen.ecocredit.basket.v1';
+export const protobufPackage = "regen.ecocredit.basket.v1";
 
 /** EventCreate is an event emitted when a basket is created. */
 export interface EventCreate {
-  $type: 'regen.ecocredit.basket.v1.EventCreate';
+  $type: "regen.ecocredit.basket.v1.EventCreate";
   /** basket_denom is the basket bank denom. */
   basketDenom: string;
   /**
@@ -28,7 +28,7 @@ export interface EventCreate {
  * basket tokens.
  */
 export interface EventPut {
-  $type: 'regen.ecocredit.basket.v1.EventPut';
+  $type: "regen.ecocredit.basket.v1.EventPut";
   /** owner is the owner of the credits put into the basket. */
   owner: string;
   /** basket_denom is the basket bank denom that the credits were added to. */
@@ -58,7 +58,7 @@ export interface EventPut {
  * from the oldest credits first.
  */
 export interface EventTake {
-  $type: 'regen.ecocredit.basket.v1.EventTake';
+  $type: "regen.ecocredit.basket.v1.EventTake";
   /** owner is the owner of the credits taken from the basket. */
   owner: string;
   /** basket_denom is the basket bank denom that credits were taken from. */
@@ -89,30 +89,23 @@ export interface EventTake {
  * Since Revision 2
  */
 export interface EventUpdateCurator {
-  $type: 'regen.ecocredit.basket.v1.EventUpdateCurator';
+  $type: "regen.ecocredit.basket.v1.EventUpdateCurator";
   /** denom is the basket denom. */
   denom: string;
 }
 
 function createBaseEventCreate(): EventCreate {
-  return {
-    $type: 'regen.ecocredit.basket.v1.EventCreate',
-    basketDenom: '',
-    curator: '',
-  };
+  return { $type: "regen.ecocredit.basket.v1.EventCreate", basketDenom: "", curator: "" };
 }
 
 export const EventCreate = {
-  $type: 'regen.ecocredit.basket.v1.EventCreate' as const,
+  $type: "regen.ecocredit.basket.v1.EventCreate" as const,
 
-  encode(
-    message: EventCreate,
-    writer: _m0.Writer = _m0.Writer.create(),
-  ): _m0.Writer {
-    if (message.basketDenom !== '') {
+  encode(message: EventCreate, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+    if (message.basketDenom !== "") {
       writer.uint32(10).string(message.basketDenom);
     }
-    if (message.curator !== '') {
+    if (message.curator !== "") {
       writer.uint32(18).string(message.curator);
     }
     return writer;
@@ -142,25 +135,26 @@ export const EventCreate = {
   fromJSON(object: any): EventCreate {
     return {
       $type: EventCreate.$type,
-      basketDenom: isSet(object.basketDenom) ? String(object.basketDenom) : '',
-      curator: isSet(object.curator) ? String(object.curator) : '',
+      basketDenom: isSet(object.basketDenom) ? String(object.basketDenom) : "",
+      curator: isSet(object.curator) ? String(object.curator) : "",
     };
   },
 
   toJSON(message: EventCreate): unknown {
     const obj: any = {};
-    message.basketDenom !== undefined &&
-      (obj.basketDenom = message.basketDenom);
+    message.basketDenom !== undefined && (obj.basketDenom = message.basketDenom);
     message.curator !== undefined && (obj.curator = message.curator);
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<EventCreate>, I>>(
-    object: I,
-  ): EventCreate {
+  create(base?: DeepPartial<EventCreate>): EventCreate {
+    return EventCreate.fromPartial(base ?? {});
+  },
+
+  fromPartial(object: DeepPartial<EventCreate>): EventCreate {
     const message = createBaseEventCreate();
-    message.basketDenom = object.basketDenom ?? '';
-    message.curator = object.curator ?? '';
+    message.basketDenom = object.basketDenom ?? "";
+    message.curator = object.curator ?? "";
     return message;
   },
 };
@@ -168,32 +162,23 @@ export const EventCreate = {
 messageTypeRegistry.set(EventCreate.$type, EventCreate);
 
 function createBaseEventPut(): EventPut {
-  return {
-    $type: 'regen.ecocredit.basket.v1.EventPut',
-    owner: '',
-    basketDenom: '',
-    credits: [],
-    amount: '',
-  };
+  return { $type: "regen.ecocredit.basket.v1.EventPut", owner: "", basketDenom: "", credits: [], amount: "" };
 }
 
 export const EventPut = {
-  $type: 'regen.ecocredit.basket.v1.EventPut' as const,
+  $type: "regen.ecocredit.basket.v1.EventPut" as const,
 
-  encode(
-    message: EventPut,
-    writer: _m0.Writer = _m0.Writer.create(),
-  ): _m0.Writer {
-    if (message.owner !== '') {
+  encode(message: EventPut, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+    if (message.owner !== "") {
       writer.uint32(10).string(message.owner);
     }
-    if (message.basketDenom !== '') {
+    if (message.basketDenom !== "") {
       writer.uint32(18).string(message.basketDenom);
     }
     for (const v of message.credits) {
       BasketCredit.encode(v!, writer.uint32(26).fork()).ldelim();
     }
-    if (message.amount !== '') {
+    if (message.amount !== "") {
       writer.uint32(34).string(message.amount);
     }
     return writer;
@@ -229,24 +214,19 @@ export const EventPut = {
   fromJSON(object: any): EventPut {
     return {
       $type: EventPut.$type,
-      owner: isSet(object.owner) ? String(object.owner) : '',
-      basketDenom: isSet(object.basketDenom) ? String(object.basketDenom) : '',
-      credits: Array.isArray(object?.credits)
-        ? object.credits.map((e: any) => BasketCredit.fromJSON(e))
-        : [],
-      amount: isSet(object.amount) ? String(object.amount) : '',
+      owner: isSet(object.owner) ? String(object.owner) : "",
+      basketDenom: isSet(object.basketDenom) ? String(object.basketDenom) : "",
+      credits: Array.isArray(object?.credits) ? object.credits.map((e: any) => BasketCredit.fromJSON(e)) : [],
+      amount: isSet(object.amount) ? String(object.amount) : "",
     };
   },
 
   toJSON(message: EventPut): unknown {
     const obj: any = {};
     message.owner !== undefined && (obj.owner = message.owner);
-    message.basketDenom !== undefined &&
-      (obj.basketDenom = message.basketDenom);
+    message.basketDenom !== undefined && (obj.basketDenom = message.basketDenom);
     if (message.credits) {
-      obj.credits = message.credits.map(e =>
-        e ? BasketCredit.toJSON(e) : undefined,
-      );
+      obj.credits = message.credits.map((e) => e ? BasketCredit.toJSON(e) : undefined);
     } else {
       obj.credits = [];
     }
@@ -254,13 +234,16 @@ export const EventPut = {
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<EventPut>, I>>(object: I): EventPut {
+  create(base?: DeepPartial<EventPut>): EventPut {
+    return EventPut.fromPartial(base ?? {});
+  },
+
+  fromPartial(object: DeepPartial<EventPut>): EventPut {
     const message = createBaseEventPut();
-    message.owner = object.owner ?? '';
-    message.basketDenom = object.basketDenom ?? '';
-    message.credits =
-      object.credits?.map(e => BasketCredit.fromPartial(e)) || [];
-    message.amount = object.amount ?? '';
+    message.owner = object.owner ?? "";
+    message.basketDenom = object.basketDenom ?? "";
+    message.credits = object.credits?.map((e) => BasketCredit.fromPartial(e)) || [];
+    message.amount = object.amount ?? "";
     return message;
   },
 };
@@ -268,32 +251,23 @@ export const EventPut = {
 messageTypeRegistry.set(EventPut.$type, EventPut);
 
 function createBaseEventTake(): EventTake {
-  return {
-    $type: 'regen.ecocredit.basket.v1.EventTake',
-    owner: '',
-    basketDenom: '',
-    credits: [],
-    amount: '',
-  };
+  return { $type: "regen.ecocredit.basket.v1.EventTake", owner: "", basketDenom: "", credits: [], amount: "" };
 }
 
 export const EventTake = {
-  $type: 'regen.ecocredit.basket.v1.EventTake' as const,
+  $type: "regen.ecocredit.basket.v1.EventTake" as const,
 
-  encode(
-    message: EventTake,
-    writer: _m0.Writer = _m0.Writer.create(),
-  ): _m0.Writer {
-    if (message.owner !== '') {
+  encode(message: EventTake, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+    if (message.owner !== "") {
       writer.uint32(10).string(message.owner);
     }
-    if (message.basketDenom !== '') {
+    if (message.basketDenom !== "") {
       writer.uint32(18).string(message.basketDenom);
     }
     for (const v of message.credits) {
       BasketCredit.encode(v!, writer.uint32(26).fork()).ldelim();
     }
-    if (message.amount !== '') {
+    if (message.amount !== "") {
       writer.uint32(34).string(message.amount);
     }
     return writer;
@@ -329,24 +303,19 @@ export const EventTake = {
   fromJSON(object: any): EventTake {
     return {
       $type: EventTake.$type,
-      owner: isSet(object.owner) ? String(object.owner) : '',
-      basketDenom: isSet(object.basketDenom) ? String(object.basketDenom) : '',
-      credits: Array.isArray(object?.credits)
-        ? object.credits.map((e: any) => BasketCredit.fromJSON(e))
-        : [],
-      amount: isSet(object.amount) ? String(object.amount) : '',
+      owner: isSet(object.owner) ? String(object.owner) : "",
+      basketDenom: isSet(object.basketDenom) ? String(object.basketDenom) : "",
+      credits: Array.isArray(object?.credits) ? object.credits.map((e: any) => BasketCredit.fromJSON(e)) : [],
+      amount: isSet(object.amount) ? String(object.amount) : "",
     };
   },
 
   toJSON(message: EventTake): unknown {
     const obj: any = {};
     message.owner !== undefined && (obj.owner = message.owner);
-    message.basketDenom !== undefined &&
-      (obj.basketDenom = message.basketDenom);
+    message.basketDenom !== undefined && (obj.basketDenom = message.basketDenom);
     if (message.credits) {
-      obj.credits = message.credits.map(e =>
-        e ? BasketCredit.toJSON(e) : undefined,
-      );
+      obj.credits = message.credits.map((e) => e ? BasketCredit.toJSON(e) : undefined);
     } else {
       obj.credits = [];
     }
@@ -354,15 +323,16 @@ export const EventTake = {
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<EventTake>, I>>(
-    object: I,
-  ): EventTake {
+  create(base?: DeepPartial<EventTake>): EventTake {
+    return EventTake.fromPartial(base ?? {});
+  },
+
+  fromPartial(object: DeepPartial<EventTake>): EventTake {
     const message = createBaseEventTake();
-    message.owner = object.owner ?? '';
-    message.basketDenom = object.basketDenom ?? '';
-    message.credits =
-      object.credits?.map(e => BasketCredit.fromPartial(e)) || [];
-    message.amount = object.amount ?? '';
+    message.owner = object.owner ?? "";
+    message.basketDenom = object.basketDenom ?? "";
+    message.credits = object.credits?.map((e) => BasketCredit.fromPartial(e)) || [];
+    message.amount = object.amount ?? "";
     return message;
   },
 };
@@ -370,17 +340,14 @@ export const EventTake = {
 messageTypeRegistry.set(EventTake.$type, EventTake);
 
 function createBaseEventUpdateCurator(): EventUpdateCurator {
-  return { $type: 'regen.ecocredit.basket.v1.EventUpdateCurator', denom: '' };
+  return { $type: "regen.ecocredit.basket.v1.EventUpdateCurator", denom: "" };
 }
 
 export const EventUpdateCurator = {
-  $type: 'regen.ecocredit.basket.v1.EventUpdateCurator' as const,
+  $type: "regen.ecocredit.basket.v1.EventUpdateCurator" as const,
 
-  encode(
-    message: EventUpdateCurator,
-    writer: _m0.Writer = _m0.Writer.create(),
-  ): _m0.Writer {
-    if (message.denom !== '') {
+  encode(message: EventUpdateCurator, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+    if (message.denom !== "") {
       writer.uint32(10).string(message.denom);
     }
     return writer;
@@ -405,10 +372,7 @@ export const EventUpdateCurator = {
   },
 
   fromJSON(object: any): EventUpdateCurator {
-    return {
-      $type: EventUpdateCurator.$type,
-      denom: isSet(object.denom) ? String(object.denom) : '',
-    };
+    return { $type: EventUpdateCurator.$type, denom: isSet(object.denom) ? String(object.denom) : "" };
   },
 
   toJSON(message: EventUpdateCurator): unknown {
@@ -417,45 +381,26 @@ export const EventUpdateCurator = {
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<EventUpdateCurator>, I>>(
-    object: I,
-  ): EventUpdateCurator {
+  create(base?: DeepPartial<EventUpdateCurator>): EventUpdateCurator {
+    return EventUpdateCurator.fromPartial(base ?? {});
+  },
+
+  fromPartial(object: DeepPartial<EventUpdateCurator>): EventUpdateCurator {
     const message = createBaseEventUpdateCurator();
-    message.denom = object.denom ?? '';
+    message.denom = object.denom ?? "";
     return message;
   },
 };
 
 messageTypeRegistry.set(EventUpdateCurator.$type, EventUpdateCurator);
 
-type Builtin =
-  | Date
-  | Function
-  | Uint8Array
-  | string
-  | number
-  | boolean
-  | undefined;
+type Builtin = Date | Function | Uint8Array | string | number | boolean | undefined;
 
-export type DeepPartial<T> = T extends Builtin
-  ? T
-  : T extends Long
-  ? string | number | Long
-  : T extends Array<infer U>
-  ? Array<DeepPartial<U>>
-  : T extends ReadonlyArray<infer U>
-  ? ReadonlyArray<DeepPartial<U>>
-  : T extends {}
-  ? { [K in Exclude<keyof T, '$type'>]?: DeepPartial<T[K]> }
+export type DeepPartial<T> = T extends Builtin ? T
+  : T extends Long ? string | number | Long : T extends Array<infer U> ? Array<DeepPartial<U>>
+  : T extends ReadonlyArray<infer U> ? ReadonlyArray<DeepPartial<U>>
+  : T extends {} ? { [K in Exclude<keyof T, "$type">]?: DeepPartial<T[K]> }
   : Partial<T>;
-
-type KeysOfUnion<T> = T extends T ? keyof T : never;
-export type Exact<P, I extends P> = P extends Builtin
-  ? P
-  : P & { [K in keyof P]: Exact<P[K], I[K]> } & Record<
-        Exclude<keyof I, KeysOfUnion<P> | '$type'>,
-        never
-      >;
 
 if (_m0.util.Long !== Long) {
   _m0.util.Long = Long as any;

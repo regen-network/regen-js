@@ -1,9 +1,9 @@
 /* eslint-disable */
-import { messageTypeRegistry } from '../../../../typeRegistry';
-import Long from 'long';
-import _m0 from 'protobufjs/minimal';
+import Long from "long";
+import _m0 from "protobufjs/minimal";
+import { messageTypeRegistry } from "../../../../typeRegistry";
 
-export const protobufPackage = 'cosmos.crypto.multisig.v1beta1';
+export const protobufPackage = "cosmos.crypto.multisig.v1beta1";
 
 /**
  * MultiSignature wraps the signatures from a multisig.LegacyAminoPubKey.
@@ -11,7 +11,7 @@ export const protobufPackage = 'cosmos.crypto.multisig.v1beta1';
  * signed and with which modes.
  */
 export interface MultiSignature {
-  $type: 'cosmos.crypto.multisig.v1beta1.MultiSignature';
+  $type: "cosmos.crypto.multisig.v1beta1.MultiSignature";
   signatures: Uint8Array[];
 }
 
@@ -22,25 +22,19 @@ export interface MultiSignature {
  * This is not thread safe, and is not intended for concurrent usage.
  */
 export interface CompactBitArray {
-  $type: 'cosmos.crypto.multisig.v1beta1.CompactBitArray';
+  $type: "cosmos.crypto.multisig.v1beta1.CompactBitArray";
   extraBitsStored: number;
   elems: Uint8Array;
 }
 
 function createBaseMultiSignature(): MultiSignature {
-  return {
-    $type: 'cosmos.crypto.multisig.v1beta1.MultiSignature',
-    signatures: [],
-  };
+  return { $type: "cosmos.crypto.multisig.v1beta1.MultiSignature", signatures: [] };
 }
 
 export const MultiSignature = {
-  $type: 'cosmos.crypto.multisig.v1beta1.MultiSignature' as const,
+  $type: "cosmos.crypto.multisig.v1beta1.MultiSignature" as const,
 
-  encode(
-    message: MultiSignature,
-    writer: _m0.Writer = _m0.Writer.create(),
-  ): _m0.Writer {
+  encode(message: MultiSignature, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     for (const v of message.signatures) {
       writer.uint32(10).bytes(v!);
     }
@@ -68,29 +62,27 @@ export const MultiSignature = {
   fromJSON(object: any): MultiSignature {
     return {
       $type: MultiSignature.$type,
-      signatures: Array.isArray(object?.signatures)
-        ? object.signatures.map((e: any) => bytesFromBase64(e))
-        : [],
+      signatures: Array.isArray(object?.signatures) ? object.signatures.map((e: any) => bytesFromBase64(e)) : [],
     };
   },
 
   toJSON(message: MultiSignature): unknown {
     const obj: any = {};
     if (message.signatures) {
-      obj.signatures = message.signatures.map(e =>
-        base64FromBytes(e !== undefined ? e : new Uint8Array()),
-      );
+      obj.signatures = message.signatures.map((e) => base64FromBytes(e !== undefined ? e : new Uint8Array()));
     } else {
       obj.signatures = [];
     }
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<MultiSignature>, I>>(
-    object: I,
-  ): MultiSignature {
+  create(base?: DeepPartial<MultiSignature>): MultiSignature {
+    return MultiSignature.fromPartial(base ?? {});
+  },
+
+  fromPartial(object: DeepPartial<MultiSignature>): MultiSignature {
     const message = createBaseMultiSignature();
-    message.signatures = object.signatures?.map(e => e) || [];
+    message.signatures = object.signatures?.map((e) => e) || [];
     return message;
   },
 };
@@ -98,20 +90,13 @@ export const MultiSignature = {
 messageTypeRegistry.set(MultiSignature.$type, MultiSignature);
 
 function createBaseCompactBitArray(): CompactBitArray {
-  return {
-    $type: 'cosmos.crypto.multisig.v1beta1.CompactBitArray',
-    extraBitsStored: 0,
-    elems: new Uint8Array(),
-  };
+  return { $type: "cosmos.crypto.multisig.v1beta1.CompactBitArray", extraBitsStored: 0, elems: new Uint8Array() };
 }
 
 export const CompactBitArray = {
-  $type: 'cosmos.crypto.multisig.v1beta1.CompactBitArray' as const,
+  $type: "cosmos.crypto.multisig.v1beta1.CompactBitArray" as const,
 
-  encode(
-    message: CompactBitArray,
-    writer: _m0.Writer = _m0.Writer.create(),
-  ): _m0.Writer {
+  encode(message: CompactBitArray, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.extraBitsStored !== 0) {
       writer.uint32(8).uint32(message.extraBitsStored);
     }
@@ -145,29 +130,24 @@ export const CompactBitArray = {
   fromJSON(object: any): CompactBitArray {
     return {
       $type: CompactBitArray.$type,
-      extraBitsStored: isSet(object.extraBitsStored)
-        ? Number(object.extraBitsStored)
-        : 0,
-      elems: isSet(object.elems)
-        ? bytesFromBase64(object.elems)
-        : new Uint8Array(),
+      extraBitsStored: isSet(object.extraBitsStored) ? Number(object.extraBitsStored) : 0,
+      elems: isSet(object.elems) ? bytesFromBase64(object.elems) : new Uint8Array(),
     };
   },
 
   toJSON(message: CompactBitArray): unknown {
     const obj: any = {};
-    message.extraBitsStored !== undefined &&
-      (obj.extraBitsStored = Math.round(message.extraBitsStored));
+    message.extraBitsStored !== undefined && (obj.extraBitsStored = Math.round(message.extraBitsStored));
     message.elems !== undefined &&
-      (obj.elems = base64FromBytes(
-        message.elems !== undefined ? message.elems : new Uint8Array(),
-      ));
+      (obj.elems = base64FromBytes(message.elems !== undefined ? message.elems : new Uint8Array()));
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<CompactBitArray>, I>>(
-    object: I,
-  ): CompactBitArray {
+  create(base?: DeepPartial<CompactBitArray>): CompactBitArray {
+    return CompactBitArray.fromPartial(base ?? {});
+  },
+
+  fromPartial(object: DeepPartial<CompactBitArray>): CompactBitArray {
     const message = createBaseCompactBitArray();
     message.extraBitsStored = object.extraBitsStored ?? 0;
     message.elems = object.elems ?? new Uint8Array();
@@ -180,65 +160,54 @@ messageTypeRegistry.set(CompactBitArray.$type, CompactBitArray);
 declare var self: any | undefined;
 declare var window: any | undefined;
 declare var global: any | undefined;
-var globalThis: any = (() => {
-  if (typeof globalThis !== 'undefined') return globalThis;
-  if (typeof self !== 'undefined') return self;
-  if (typeof window !== 'undefined') return window;
-  if (typeof global !== 'undefined') return global;
-  throw 'Unable to locate global object';
+var tsProtoGlobalThis: any = (() => {
+  if (typeof globalThis !== "undefined") {
+    return globalThis;
+  }
+  if (typeof self !== "undefined") {
+    return self;
+  }
+  if (typeof window !== "undefined") {
+    return window;
+  }
+  if (typeof global !== "undefined") {
+    return global;
+  }
+  throw "Unable to locate global object";
 })();
 
-const atob: (b64: string) => string =
-  globalThis.atob ||
-  (b64 => globalThis.Buffer.from(b64, 'base64').toString('binary'));
 function bytesFromBase64(b64: string): Uint8Array {
-  const bin = atob(b64);
-  const arr = new Uint8Array(bin.length);
-  for (let i = 0; i < bin.length; ++i) {
-    arr[i] = bin.charCodeAt(i);
+  if (tsProtoGlobalThis.Buffer) {
+    return Uint8Array.from(tsProtoGlobalThis.Buffer.from(b64, "base64"));
+  } else {
+    const bin = tsProtoGlobalThis.atob(b64);
+    const arr = new Uint8Array(bin.length);
+    for (let i = 0; i < bin.length; ++i) {
+      arr[i] = bin.charCodeAt(i);
+    }
+    return arr;
   }
-  return arr;
 }
 
-const btoa: (bin: string) => string =
-  globalThis.btoa ||
-  (bin => globalThis.Buffer.from(bin, 'binary').toString('base64'));
 function base64FromBytes(arr: Uint8Array): string {
-  const bin: string[] = [];
-  for (const byte of arr) {
-    bin.push(String.fromCharCode(byte));
+  if (tsProtoGlobalThis.Buffer) {
+    return tsProtoGlobalThis.Buffer.from(arr).toString("base64");
+  } else {
+    const bin: string[] = [];
+    arr.forEach((byte) => {
+      bin.push(String.fromCharCode(byte));
+    });
+    return tsProtoGlobalThis.btoa(bin.join(""));
   }
-  return btoa(bin.join(''));
 }
 
-type Builtin =
-  | Date
-  | Function
-  | Uint8Array
-  | string
-  | number
-  | boolean
-  | undefined;
+type Builtin = Date | Function | Uint8Array | string | number | boolean | undefined;
 
-export type DeepPartial<T> = T extends Builtin
-  ? T
-  : T extends Long
-  ? string | number | Long
-  : T extends Array<infer U>
-  ? Array<DeepPartial<U>>
-  : T extends ReadonlyArray<infer U>
-  ? ReadonlyArray<DeepPartial<U>>
-  : T extends {}
-  ? { [K in Exclude<keyof T, '$type'>]?: DeepPartial<T[K]> }
+export type DeepPartial<T> = T extends Builtin ? T
+  : T extends Long ? string | number | Long : T extends Array<infer U> ? Array<DeepPartial<U>>
+  : T extends ReadonlyArray<infer U> ? ReadonlyArray<DeepPartial<U>>
+  : T extends {} ? { [K in Exclude<keyof T, "$type">]?: DeepPartial<T[K]> }
   : Partial<T>;
-
-type KeysOfUnion<T> = T extends T ? keyof T : never;
-export type Exact<P, I extends P> = P extends Builtin
-  ? P
-  : P & { [K in keyof P]: Exact<P[K], I[K]> } & Record<
-        Exclude<keyof I, KeysOfUnion<P> | '$type'>,
-        never
-      >;
 
 if (_m0.util.Long !== Long) {
   _m0.util.Long = Long as any;

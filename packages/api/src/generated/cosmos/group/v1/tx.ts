@@ -1,19 +1,19 @@
 /* eslint-disable */
-import { messageTypeRegistry } from '../../../typeRegistry';
-import Long from 'long';
-import _m0 from 'protobufjs/minimal';
-import { Any } from '../../../google/protobuf/any';
+import Long from "long";
+import _m0 from "protobufjs/minimal";
+import { Any } from "../../../google/protobuf/any";
+import { messageTypeRegistry } from "../../../typeRegistry";
 import {
-  VoteOption,
-  ProposalExecutorResult,
   MemberRequest,
-  voteOptionFromJSON,
-  voteOptionToJSON,
+  ProposalExecutorResult,
   proposalExecutorResultFromJSON,
   proposalExecutorResultToJSON,
-} from './types';
+  VoteOption,
+  voteOptionFromJSON,
+  voteOptionToJSON,
+} from "./types";
 
-export const protobufPackage = 'cosmos.group.v1';
+export const protobufPackage = "cosmos.group.v1";
 
 /** Since: cosmos-sdk 0.46 */
 
@@ -37,13 +37,13 @@ export enum Exec {
 export function execFromJSON(object: any): Exec {
   switch (object) {
     case 0:
-    case 'EXEC_UNSPECIFIED':
+    case "EXEC_UNSPECIFIED":
       return Exec.EXEC_UNSPECIFIED;
     case 1:
-    case 'EXEC_TRY':
+    case "EXEC_TRY":
       return Exec.EXEC_TRY;
     case -1:
-    case 'UNRECOGNIZED':
+    case "UNRECOGNIZED":
     default:
       return Exec.UNRECOGNIZED;
   }
@@ -52,17 +52,18 @@ export function execFromJSON(object: any): Exec {
 export function execToJSON(object: Exec): string {
   switch (object) {
     case Exec.EXEC_UNSPECIFIED:
-      return 'EXEC_UNSPECIFIED';
+      return "EXEC_UNSPECIFIED";
     case Exec.EXEC_TRY:
-      return 'EXEC_TRY';
+      return "EXEC_TRY";
+    case Exec.UNRECOGNIZED:
     default:
-      return 'UNKNOWN';
+      return "UNRECOGNIZED";
   }
 }
 
 /** MsgCreateGroup is the Msg/CreateGroup request type. */
 export interface MsgCreateGroup {
-  $type: 'cosmos.group.v1.MsgCreateGroup';
+  $type: "cosmos.group.v1.MsgCreateGroup";
   /** admin is the account address of the group admin. */
   admin: string;
   /** members defines the group members. */
@@ -73,14 +74,14 @@ export interface MsgCreateGroup {
 
 /** MsgCreateGroupResponse is the Msg/CreateGroup response type. */
 export interface MsgCreateGroupResponse {
-  $type: 'cosmos.group.v1.MsgCreateGroupResponse';
+  $type: "cosmos.group.v1.MsgCreateGroupResponse";
   /** group_id is the unique ID of the newly created group. */
   groupId: Long;
 }
 
 /** MsgUpdateGroupMembers is the Msg/UpdateGroupMembers request type. */
 export interface MsgUpdateGroupMembers {
-  $type: 'cosmos.group.v1.MsgUpdateGroupMembers';
+  $type: "cosmos.group.v1.MsgUpdateGroupMembers";
   /** admin is the account address of the group admin. */
   admin: string;
   /** group_id is the unique ID of the group. */
@@ -94,12 +95,12 @@ export interface MsgUpdateGroupMembers {
 
 /** MsgUpdateGroupMembersResponse is the Msg/UpdateGroupMembers response type. */
 export interface MsgUpdateGroupMembersResponse {
-  $type: 'cosmos.group.v1.MsgUpdateGroupMembersResponse';
+  $type: "cosmos.group.v1.MsgUpdateGroupMembersResponse";
 }
 
 /** MsgUpdateGroupAdmin is the Msg/UpdateGroupAdmin request type. */
 export interface MsgUpdateGroupAdmin {
-  $type: 'cosmos.group.v1.MsgUpdateGroupAdmin';
+  $type: "cosmos.group.v1.MsgUpdateGroupAdmin";
   /** admin is the current account address of the group admin. */
   admin: string;
   /** group_id is the unique ID of the group. */
@@ -110,12 +111,12 @@ export interface MsgUpdateGroupAdmin {
 
 /** MsgUpdateGroupAdminResponse is the Msg/UpdateGroupAdmin response type. */
 export interface MsgUpdateGroupAdminResponse {
-  $type: 'cosmos.group.v1.MsgUpdateGroupAdminResponse';
+  $type: "cosmos.group.v1.MsgUpdateGroupAdminResponse";
 }
 
 /** MsgUpdateGroupMetadata is the Msg/UpdateGroupMetadata request type. */
 export interface MsgUpdateGroupMetadata {
-  $type: 'cosmos.group.v1.MsgUpdateGroupMetadata';
+  $type: "cosmos.group.v1.MsgUpdateGroupMetadata";
   /** admin is the account address of the group admin. */
   admin: string;
   /** group_id is the unique ID of the group. */
@@ -126,12 +127,12 @@ export interface MsgUpdateGroupMetadata {
 
 /** MsgUpdateGroupMetadataResponse is the Msg/UpdateGroupMetadata response type. */
 export interface MsgUpdateGroupMetadataResponse {
-  $type: 'cosmos.group.v1.MsgUpdateGroupMetadataResponse';
+  $type: "cosmos.group.v1.MsgUpdateGroupMetadataResponse";
 }
 
 /** MsgCreateGroupPolicy is the Msg/CreateGroupPolicy request type. */
 export interface MsgCreateGroupPolicy {
-  $type: 'cosmos.group.v1.MsgCreateGroupPolicy';
+  $type: "cosmos.group.v1.MsgCreateGroupPolicy";
   /** admin is the account address of the group admin. */
   admin: string;
   /** group_id is the unique ID of the group. */
@@ -144,14 +145,14 @@ export interface MsgCreateGroupPolicy {
 
 /** MsgCreateGroupPolicyResponse is the Msg/CreateGroupPolicy response type. */
 export interface MsgCreateGroupPolicyResponse {
-  $type: 'cosmos.group.v1.MsgCreateGroupPolicyResponse';
+  $type: "cosmos.group.v1.MsgCreateGroupPolicyResponse";
   /** address is the account address of the newly created group policy. */
   address: string;
 }
 
 /** MsgUpdateGroupPolicyAdmin is the Msg/UpdateGroupPolicyAdmin request type. */
 export interface MsgUpdateGroupPolicyAdmin {
-  $type: 'cosmos.group.v1.MsgUpdateGroupPolicyAdmin';
+  $type: "cosmos.group.v1.MsgUpdateGroupPolicyAdmin";
   /** admin is the account address of the group admin. */
   admin: string;
   /** group_policy_address is the account address of the group policy. */
@@ -162,7 +163,7 @@ export interface MsgUpdateGroupPolicyAdmin {
 
 /** MsgCreateGroupWithPolicy is the Msg/CreateGroupWithPolicy request type. */
 export interface MsgCreateGroupWithPolicy {
-  $type: 'cosmos.group.v1.MsgCreateGroupWithPolicy';
+  $type: "cosmos.group.v1.MsgCreateGroupWithPolicy";
   /** admin is the account address of the group and group policy admin. */
   admin: string;
   /** members defines the group members. */
@@ -182,7 +183,7 @@ export interface MsgCreateGroupWithPolicy {
 
 /** MsgCreateGroupWithPolicyResponse is the Msg/CreateGroupWithPolicy response type. */
 export interface MsgCreateGroupWithPolicyResponse {
-  $type: 'cosmos.group.v1.MsgCreateGroupWithPolicyResponse';
+  $type: "cosmos.group.v1.MsgCreateGroupWithPolicyResponse";
   /** group_id is the unique ID of the newly created group with policy. */
   groupId: Long;
   /** group_policy_address is the account address of the newly created group policy. */
@@ -191,12 +192,12 @@ export interface MsgCreateGroupWithPolicyResponse {
 
 /** MsgUpdateGroupPolicyAdminResponse is the Msg/UpdateGroupPolicyAdmin response type. */
 export interface MsgUpdateGroupPolicyAdminResponse {
-  $type: 'cosmos.group.v1.MsgUpdateGroupPolicyAdminResponse';
+  $type: "cosmos.group.v1.MsgUpdateGroupPolicyAdminResponse";
 }
 
 /** MsgUpdateGroupPolicyDecisionPolicy is the Msg/UpdateGroupPolicyDecisionPolicy request type. */
 export interface MsgUpdateGroupPolicyDecisionPolicy {
-  $type: 'cosmos.group.v1.MsgUpdateGroupPolicyDecisionPolicy';
+  $type: "cosmos.group.v1.MsgUpdateGroupPolicyDecisionPolicy";
   /** admin is the account address of the group admin. */
   admin: string;
   /** group_policy_address is the account address of group policy. */
@@ -207,12 +208,12 @@ export interface MsgUpdateGroupPolicyDecisionPolicy {
 
 /** MsgUpdateGroupPolicyDecisionPolicyResponse is the Msg/UpdateGroupPolicyDecisionPolicy response type. */
 export interface MsgUpdateGroupPolicyDecisionPolicyResponse {
-  $type: 'cosmos.group.v1.MsgUpdateGroupPolicyDecisionPolicyResponse';
+  $type: "cosmos.group.v1.MsgUpdateGroupPolicyDecisionPolicyResponse";
 }
 
 /** MsgUpdateGroupPolicyMetadata is the Msg/UpdateGroupPolicyMetadata request type. */
 export interface MsgUpdateGroupPolicyMetadata {
-  $type: 'cosmos.group.v1.MsgUpdateGroupPolicyMetadata';
+  $type: "cosmos.group.v1.MsgUpdateGroupPolicyMetadata";
   /** admin is the account address of the group admin. */
   admin: string;
   /** group_policy_address is the account address of group policy. */
@@ -223,12 +224,12 @@ export interface MsgUpdateGroupPolicyMetadata {
 
 /** MsgUpdateGroupPolicyMetadataResponse is the Msg/UpdateGroupPolicyMetadata response type. */
 export interface MsgUpdateGroupPolicyMetadataResponse {
-  $type: 'cosmos.group.v1.MsgUpdateGroupPolicyMetadataResponse';
+  $type: "cosmos.group.v1.MsgUpdateGroupPolicyMetadataResponse";
 }
 
 /** MsgSubmitProposal is the Msg/SubmitProposal request type. */
 export interface MsgSubmitProposal {
-  $type: 'cosmos.group.v1.MsgSubmitProposal';
+  $type: "cosmos.group.v1.MsgSubmitProposal";
   /** group_policy_address is the account address of group policy. */
   groupPolicyAddress: string;
   /**
@@ -250,14 +251,14 @@ export interface MsgSubmitProposal {
 
 /** MsgSubmitProposalResponse is the Msg/SubmitProposal response type. */
 export interface MsgSubmitProposalResponse {
-  $type: 'cosmos.group.v1.MsgSubmitProposalResponse';
+  $type: "cosmos.group.v1.MsgSubmitProposalResponse";
   /** proposal is the unique ID of the proposal. */
   proposalId: Long;
 }
 
 /** MsgWithdrawProposal is the Msg/WithdrawProposal request type. */
 export interface MsgWithdrawProposal {
-  $type: 'cosmos.group.v1.MsgWithdrawProposal';
+  $type: "cosmos.group.v1.MsgWithdrawProposal";
   /** proposal is the unique ID of the proposal. */
   proposalId: Long;
   /** address is the admin of the group policy or one of the proposer of the proposal. */
@@ -266,12 +267,12 @@ export interface MsgWithdrawProposal {
 
 /** MsgWithdrawProposalResponse is the Msg/WithdrawProposal response type. */
 export interface MsgWithdrawProposalResponse {
-  $type: 'cosmos.group.v1.MsgWithdrawProposalResponse';
+  $type: "cosmos.group.v1.MsgWithdrawProposalResponse";
 }
 
 /** MsgVote is the Msg/Vote request type. */
 export interface MsgVote {
-  $type: 'cosmos.group.v1.MsgVote';
+  $type: "cosmos.group.v1.MsgVote";
   /** proposal is the unique ID of the proposal. */
   proposalId: Long;
   /** voter is the voter account address. */
@@ -289,12 +290,12 @@ export interface MsgVote {
 
 /** MsgVoteResponse is the Msg/Vote response type. */
 export interface MsgVoteResponse {
-  $type: 'cosmos.group.v1.MsgVoteResponse';
+  $type: "cosmos.group.v1.MsgVoteResponse";
 }
 
 /** MsgExec is the Msg/Exec request type. */
 export interface MsgExec {
-  $type: 'cosmos.group.v1.MsgExec';
+  $type: "cosmos.group.v1.MsgExec";
   /** proposal is the unique ID of the proposal. */
   proposalId: Long;
   /** executor is the account address used to execute the proposal. */
@@ -303,14 +304,14 @@ export interface MsgExec {
 
 /** MsgExecResponse is the Msg/Exec request type. */
 export interface MsgExecResponse {
-  $type: 'cosmos.group.v1.MsgExecResponse';
+  $type: "cosmos.group.v1.MsgExecResponse";
   /** result is the final result of the proposal execution. */
   result: ProposalExecutorResult;
 }
 
 /** MsgLeaveGroup is the Msg/LeaveGroup request type. */
 export interface MsgLeaveGroup {
-  $type: 'cosmos.group.v1.MsgLeaveGroup';
+  $type: "cosmos.group.v1.MsgLeaveGroup";
   /** address is the account address of the group member. */
   address: string;
   /** group_id is the unique ID of the group. */
@@ -319,32 +320,24 @@ export interface MsgLeaveGroup {
 
 /** MsgLeaveGroupResponse is the Msg/LeaveGroup response type. */
 export interface MsgLeaveGroupResponse {
-  $type: 'cosmos.group.v1.MsgLeaveGroupResponse';
+  $type: "cosmos.group.v1.MsgLeaveGroupResponse";
 }
 
 function createBaseMsgCreateGroup(): MsgCreateGroup {
-  return {
-    $type: 'cosmos.group.v1.MsgCreateGroup',
-    admin: '',
-    members: [],
-    metadata: '',
-  };
+  return { $type: "cosmos.group.v1.MsgCreateGroup", admin: "", members: [], metadata: "" };
 }
 
 export const MsgCreateGroup = {
-  $type: 'cosmos.group.v1.MsgCreateGroup' as const,
+  $type: "cosmos.group.v1.MsgCreateGroup" as const,
 
-  encode(
-    message: MsgCreateGroup,
-    writer: _m0.Writer = _m0.Writer.create(),
-  ): _m0.Writer {
-    if (message.admin !== '') {
+  encode(message: MsgCreateGroup, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+    if (message.admin !== "") {
       writer.uint32(10).string(message.admin);
     }
     for (const v of message.members) {
       MemberRequest.encode(v!, writer.uint32(18).fork()).ldelim();
     }
-    if (message.metadata !== '') {
+    if (message.metadata !== "") {
       writer.uint32(26).string(message.metadata);
     }
     return writer;
@@ -377,11 +370,9 @@ export const MsgCreateGroup = {
   fromJSON(object: any): MsgCreateGroup {
     return {
       $type: MsgCreateGroup.$type,
-      admin: isSet(object.admin) ? String(object.admin) : '',
-      members: Array.isArray(object?.members)
-        ? object.members.map((e: any) => MemberRequest.fromJSON(e))
-        : [],
-      metadata: isSet(object.metadata) ? String(object.metadata) : '',
+      admin: isSet(object.admin) ? String(object.admin) : "",
+      members: Array.isArray(object?.members) ? object.members.map((e: any) => MemberRequest.fromJSON(e)) : [],
+      metadata: isSet(object.metadata) ? String(object.metadata) : "",
     };
   },
 
@@ -389,9 +380,7 @@ export const MsgCreateGroup = {
     const obj: any = {};
     message.admin !== undefined && (obj.admin = message.admin);
     if (message.members) {
-      obj.members = message.members.map(e =>
-        e ? MemberRequest.toJSON(e) : undefined,
-      );
+      obj.members = message.members.map((e) => e ? MemberRequest.toJSON(e) : undefined);
     } else {
       obj.members = [];
     }
@@ -399,14 +388,15 @@ export const MsgCreateGroup = {
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<MsgCreateGroup>, I>>(
-    object: I,
-  ): MsgCreateGroup {
+  create(base?: DeepPartial<MsgCreateGroup>): MsgCreateGroup {
+    return MsgCreateGroup.fromPartial(base ?? {});
+  },
+
+  fromPartial(object: DeepPartial<MsgCreateGroup>): MsgCreateGroup {
     const message = createBaseMsgCreateGroup();
-    message.admin = object.admin ?? '';
-    message.members =
-      object.members?.map(e => MemberRequest.fromPartial(e)) || [];
-    message.metadata = object.metadata ?? '';
+    message.admin = object.admin ?? "";
+    message.members = object.members?.map((e) => MemberRequest.fromPartial(e)) || [];
+    message.metadata = object.metadata ?? "";
     return message;
   },
 };
@@ -414,29 +404,20 @@ export const MsgCreateGroup = {
 messageTypeRegistry.set(MsgCreateGroup.$type, MsgCreateGroup);
 
 function createBaseMsgCreateGroupResponse(): MsgCreateGroupResponse {
-  return {
-    $type: 'cosmos.group.v1.MsgCreateGroupResponse',
-    groupId: Long.UZERO,
-  };
+  return { $type: "cosmos.group.v1.MsgCreateGroupResponse", groupId: Long.UZERO };
 }
 
 export const MsgCreateGroupResponse = {
-  $type: 'cosmos.group.v1.MsgCreateGroupResponse' as const,
+  $type: "cosmos.group.v1.MsgCreateGroupResponse" as const,
 
-  encode(
-    message: MsgCreateGroupResponse,
-    writer: _m0.Writer = _m0.Writer.create(),
-  ): _m0.Writer {
+  encode(message: MsgCreateGroupResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (!message.groupId.isZero()) {
       writer.uint32(8).uint64(message.groupId);
     }
     return writer;
   },
 
-  decode(
-    input: _m0.Reader | Uint8Array,
-    length?: number,
-  ): MsgCreateGroupResponse {
+  decode(input: _m0.Reader | Uint8Array, length?: number): MsgCreateGroupResponse {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMsgCreateGroupResponse();
@@ -457,27 +438,25 @@ export const MsgCreateGroupResponse = {
   fromJSON(object: any): MsgCreateGroupResponse {
     return {
       $type: MsgCreateGroupResponse.$type,
-      groupId: isSet(object.groupId)
-        ? Long.fromString(object.groupId)
-        : Long.UZERO,
+      groupId: isSet(object.groupId) ? Long.fromValue(object.groupId) : Long.UZERO,
     };
   },
 
   toJSON(message: MsgCreateGroupResponse): unknown {
     const obj: any = {};
-    message.groupId !== undefined &&
-      (obj.groupId = (message.groupId || Long.UZERO).toString());
+    message.groupId !== undefined && (obj.groupId = (message.groupId || Long.UZERO).toString());
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<MsgCreateGroupResponse>, I>>(
-    object: I,
-  ): MsgCreateGroupResponse {
+  create(base?: DeepPartial<MsgCreateGroupResponse>): MsgCreateGroupResponse {
+    return MsgCreateGroupResponse.fromPartial(base ?? {});
+  },
+
+  fromPartial(object: DeepPartial<MsgCreateGroupResponse>): MsgCreateGroupResponse {
     const message = createBaseMsgCreateGroupResponse();
-    message.groupId =
-      object.groupId !== undefined && object.groupId !== null
-        ? Long.fromValue(object.groupId)
-        : Long.UZERO;
+    message.groupId = (object.groupId !== undefined && object.groupId !== null)
+      ? Long.fromValue(object.groupId)
+      : Long.UZERO;
     return message;
   },
 };
@@ -485,22 +464,14 @@ export const MsgCreateGroupResponse = {
 messageTypeRegistry.set(MsgCreateGroupResponse.$type, MsgCreateGroupResponse);
 
 function createBaseMsgUpdateGroupMembers(): MsgUpdateGroupMembers {
-  return {
-    $type: 'cosmos.group.v1.MsgUpdateGroupMembers',
-    admin: '',
-    groupId: Long.UZERO,
-    memberUpdates: [],
-  };
+  return { $type: "cosmos.group.v1.MsgUpdateGroupMembers", admin: "", groupId: Long.UZERO, memberUpdates: [] };
 }
 
 export const MsgUpdateGroupMembers = {
-  $type: 'cosmos.group.v1.MsgUpdateGroupMembers' as const,
+  $type: "cosmos.group.v1.MsgUpdateGroupMembers" as const,
 
-  encode(
-    message: MsgUpdateGroupMembers,
-    writer: _m0.Writer = _m0.Writer.create(),
-  ): _m0.Writer {
-    if (message.admin !== '') {
+  encode(message: MsgUpdateGroupMembers, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+    if (message.admin !== "") {
       writer.uint32(10).string(message.admin);
     }
     if (!message.groupId.isZero()) {
@@ -512,10 +483,7 @@ export const MsgUpdateGroupMembers = {
     return writer;
   },
 
-  decode(
-    input: _m0.Reader | Uint8Array,
-    length?: number,
-  ): MsgUpdateGroupMembers {
+  decode(input: _m0.Reader | Uint8Array, length?: number): MsgUpdateGroupMembers {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMsgUpdateGroupMembers();
@@ -529,9 +497,7 @@ export const MsgUpdateGroupMembers = {
           message.groupId = reader.uint64() as Long;
           break;
         case 3:
-          message.memberUpdates.push(
-            MemberRequest.decode(reader, reader.uint32()),
-          );
+          message.memberUpdates.push(MemberRequest.decode(reader, reader.uint32()));
           break;
         default:
           reader.skipType(tag & 7);
@@ -544,10 +510,8 @@ export const MsgUpdateGroupMembers = {
   fromJSON(object: any): MsgUpdateGroupMembers {
     return {
       $type: MsgUpdateGroupMembers.$type,
-      admin: isSet(object.admin) ? String(object.admin) : '',
-      groupId: isSet(object.groupId)
-        ? Long.fromString(object.groupId)
-        : Long.UZERO,
+      admin: isSet(object.admin) ? String(object.admin) : "",
+      groupId: isSet(object.groupId) ? Long.fromValue(object.groupId) : Long.UZERO,
       memberUpdates: Array.isArray(object?.memberUpdates)
         ? object.memberUpdates.map((e: any) => MemberRequest.fromJSON(e))
         : [],
@@ -557,29 +521,26 @@ export const MsgUpdateGroupMembers = {
   toJSON(message: MsgUpdateGroupMembers): unknown {
     const obj: any = {};
     message.admin !== undefined && (obj.admin = message.admin);
-    message.groupId !== undefined &&
-      (obj.groupId = (message.groupId || Long.UZERO).toString());
+    message.groupId !== undefined && (obj.groupId = (message.groupId || Long.UZERO).toString());
     if (message.memberUpdates) {
-      obj.memberUpdates = message.memberUpdates.map(e =>
-        e ? MemberRequest.toJSON(e) : undefined,
-      );
+      obj.memberUpdates = message.memberUpdates.map((e) => e ? MemberRequest.toJSON(e) : undefined);
     } else {
       obj.memberUpdates = [];
     }
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<MsgUpdateGroupMembers>, I>>(
-    object: I,
-  ): MsgUpdateGroupMembers {
+  create(base?: DeepPartial<MsgUpdateGroupMembers>): MsgUpdateGroupMembers {
+    return MsgUpdateGroupMembers.fromPartial(base ?? {});
+  },
+
+  fromPartial(object: DeepPartial<MsgUpdateGroupMembers>): MsgUpdateGroupMembers {
     const message = createBaseMsgUpdateGroupMembers();
-    message.admin = object.admin ?? '';
-    message.groupId =
-      object.groupId !== undefined && object.groupId !== null
-        ? Long.fromValue(object.groupId)
-        : Long.UZERO;
-    message.memberUpdates =
-      object.memberUpdates?.map(e => MemberRequest.fromPartial(e)) || [];
+    message.admin = object.admin ?? "";
+    message.groupId = (object.groupId !== undefined && object.groupId !== null)
+      ? Long.fromValue(object.groupId)
+      : Long.UZERO;
+    message.memberUpdates = object.memberUpdates?.map((e) => MemberRequest.fromPartial(e)) || [];
     return message;
   },
 };
@@ -587,23 +548,17 @@ export const MsgUpdateGroupMembers = {
 messageTypeRegistry.set(MsgUpdateGroupMembers.$type, MsgUpdateGroupMembers);
 
 function createBaseMsgUpdateGroupMembersResponse(): MsgUpdateGroupMembersResponse {
-  return { $type: 'cosmos.group.v1.MsgUpdateGroupMembersResponse' };
+  return { $type: "cosmos.group.v1.MsgUpdateGroupMembersResponse" };
 }
 
 export const MsgUpdateGroupMembersResponse = {
-  $type: 'cosmos.group.v1.MsgUpdateGroupMembersResponse' as const,
+  $type: "cosmos.group.v1.MsgUpdateGroupMembersResponse" as const,
 
-  encode(
-    _: MsgUpdateGroupMembersResponse,
-    writer: _m0.Writer = _m0.Writer.create(),
-  ): _m0.Writer {
+  encode(_: MsgUpdateGroupMembersResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     return writer;
   },
 
-  decode(
-    input: _m0.Reader | Uint8Array,
-    length?: number,
-  ): MsgUpdateGroupMembersResponse {
+  decode(input: _m0.Reader | Uint8Array, length?: number): MsgUpdateGroupMembersResponse {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMsgUpdateGroupMembersResponse();
@@ -619,9 +574,7 @@ export const MsgUpdateGroupMembersResponse = {
   },
 
   fromJSON(_: any): MsgUpdateGroupMembersResponse {
-    return {
-      $type: MsgUpdateGroupMembersResponse.$type,
-    };
+    return { $type: MsgUpdateGroupMembersResponse.$type };
   },
 
   toJSON(_: MsgUpdateGroupMembersResponse): unknown {
@@ -629,42 +582,33 @@ export const MsgUpdateGroupMembersResponse = {
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<MsgUpdateGroupMembersResponse>, I>>(
-    _: I,
-  ): MsgUpdateGroupMembersResponse {
+  create(base?: DeepPartial<MsgUpdateGroupMembersResponse>): MsgUpdateGroupMembersResponse {
+    return MsgUpdateGroupMembersResponse.fromPartial(base ?? {});
+  },
+
+  fromPartial(_: DeepPartial<MsgUpdateGroupMembersResponse>): MsgUpdateGroupMembersResponse {
     const message = createBaseMsgUpdateGroupMembersResponse();
     return message;
   },
 };
 
-messageTypeRegistry.set(
-  MsgUpdateGroupMembersResponse.$type,
-  MsgUpdateGroupMembersResponse,
-);
+messageTypeRegistry.set(MsgUpdateGroupMembersResponse.$type, MsgUpdateGroupMembersResponse);
 
 function createBaseMsgUpdateGroupAdmin(): MsgUpdateGroupAdmin {
-  return {
-    $type: 'cosmos.group.v1.MsgUpdateGroupAdmin',
-    admin: '',
-    groupId: Long.UZERO,
-    newAdmin: '',
-  };
+  return { $type: "cosmos.group.v1.MsgUpdateGroupAdmin", admin: "", groupId: Long.UZERO, newAdmin: "" };
 }
 
 export const MsgUpdateGroupAdmin = {
-  $type: 'cosmos.group.v1.MsgUpdateGroupAdmin' as const,
+  $type: "cosmos.group.v1.MsgUpdateGroupAdmin" as const,
 
-  encode(
-    message: MsgUpdateGroupAdmin,
-    writer: _m0.Writer = _m0.Writer.create(),
-  ): _m0.Writer {
-    if (message.admin !== '') {
+  encode(message: MsgUpdateGroupAdmin, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+    if (message.admin !== "") {
       writer.uint32(10).string(message.admin);
     }
     if (!message.groupId.isZero()) {
       writer.uint32(16).uint64(message.groupId);
     }
-    if (message.newAdmin !== '') {
+    if (message.newAdmin !== "") {
       writer.uint32(26).string(message.newAdmin);
     }
     return writer;
@@ -697,33 +641,31 @@ export const MsgUpdateGroupAdmin = {
   fromJSON(object: any): MsgUpdateGroupAdmin {
     return {
       $type: MsgUpdateGroupAdmin.$type,
-      admin: isSet(object.admin) ? String(object.admin) : '',
-      groupId: isSet(object.groupId)
-        ? Long.fromString(object.groupId)
-        : Long.UZERO,
-      newAdmin: isSet(object.newAdmin) ? String(object.newAdmin) : '',
+      admin: isSet(object.admin) ? String(object.admin) : "",
+      groupId: isSet(object.groupId) ? Long.fromValue(object.groupId) : Long.UZERO,
+      newAdmin: isSet(object.newAdmin) ? String(object.newAdmin) : "",
     };
   },
 
   toJSON(message: MsgUpdateGroupAdmin): unknown {
     const obj: any = {};
     message.admin !== undefined && (obj.admin = message.admin);
-    message.groupId !== undefined &&
-      (obj.groupId = (message.groupId || Long.UZERO).toString());
+    message.groupId !== undefined && (obj.groupId = (message.groupId || Long.UZERO).toString());
     message.newAdmin !== undefined && (obj.newAdmin = message.newAdmin);
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<MsgUpdateGroupAdmin>, I>>(
-    object: I,
-  ): MsgUpdateGroupAdmin {
+  create(base?: DeepPartial<MsgUpdateGroupAdmin>): MsgUpdateGroupAdmin {
+    return MsgUpdateGroupAdmin.fromPartial(base ?? {});
+  },
+
+  fromPartial(object: DeepPartial<MsgUpdateGroupAdmin>): MsgUpdateGroupAdmin {
     const message = createBaseMsgUpdateGroupAdmin();
-    message.admin = object.admin ?? '';
-    message.groupId =
-      object.groupId !== undefined && object.groupId !== null
-        ? Long.fromValue(object.groupId)
-        : Long.UZERO;
-    message.newAdmin = object.newAdmin ?? '';
+    message.admin = object.admin ?? "";
+    message.groupId = (object.groupId !== undefined && object.groupId !== null)
+      ? Long.fromValue(object.groupId)
+      : Long.UZERO;
+    message.newAdmin = object.newAdmin ?? "";
     return message;
   },
 };
@@ -731,23 +673,17 @@ export const MsgUpdateGroupAdmin = {
 messageTypeRegistry.set(MsgUpdateGroupAdmin.$type, MsgUpdateGroupAdmin);
 
 function createBaseMsgUpdateGroupAdminResponse(): MsgUpdateGroupAdminResponse {
-  return { $type: 'cosmos.group.v1.MsgUpdateGroupAdminResponse' };
+  return { $type: "cosmos.group.v1.MsgUpdateGroupAdminResponse" };
 }
 
 export const MsgUpdateGroupAdminResponse = {
-  $type: 'cosmos.group.v1.MsgUpdateGroupAdminResponse' as const,
+  $type: "cosmos.group.v1.MsgUpdateGroupAdminResponse" as const,
 
-  encode(
-    _: MsgUpdateGroupAdminResponse,
-    writer: _m0.Writer = _m0.Writer.create(),
-  ): _m0.Writer {
+  encode(_: MsgUpdateGroupAdminResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     return writer;
   },
 
-  decode(
-    input: _m0.Reader | Uint8Array,
-    length?: number,
-  ): MsgUpdateGroupAdminResponse {
+  decode(input: _m0.Reader | Uint8Array, length?: number): MsgUpdateGroupAdminResponse {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMsgUpdateGroupAdminResponse();
@@ -763,9 +699,7 @@ export const MsgUpdateGroupAdminResponse = {
   },
 
   fromJSON(_: any): MsgUpdateGroupAdminResponse {
-    return {
-      $type: MsgUpdateGroupAdminResponse.$type,
-    };
+    return { $type: MsgUpdateGroupAdminResponse.$type };
   },
 
   toJSON(_: MsgUpdateGroupAdminResponse): unknown {
@@ -773,51 +707,39 @@ export const MsgUpdateGroupAdminResponse = {
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<MsgUpdateGroupAdminResponse>, I>>(
-    _: I,
-  ): MsgUpdateGroupAdminResponse {
+  create(base?: DeepPartial<MsgUpdateGroupAdminResponse>): MsgUpdateGroupAdminResponse {
+    return MsgUpdateGroupAdminResponse.fromPartial(base ?? {});
+  },
+
+  fromPartial(_: DeepPartial<MsgUpdateGroupAdminResponse>): MsgUpdateGroupAdminResponse {
     const message = createBaseMsgUpdateGroupAdminResponse();
     return message;
   },
 };
 
-messageTypeRegistry.set(
-  MsgUpdateGroupAdminResponse.$type,
-  MsgUpdateGroupAdminResponse,
-);
+messageTypeRegistry.set(MsgUpdateGroupAdminResponse.$type, MsgUpdateGroupAdminResponse);
 
 function createBaseMsgUpdateGroupMetadata(): MsgUpdateGroupMetadata {
-  return {
-    $type: 'cosmos.group.v1.MsgUpdateGroupMetadata',
-    admin: '',
-    groupId: Long.UZERO,
-    metadata: '',
-  };
+  return { $type: "cosmos.group.v1.MsgUpdateGroupMetadata", admin: "", groupId: Long.UZERO, metadata: "" };
 }
 
 export const MsgUpdateGroupMetadata = {
-  $type: 'cosmos.group.v1.MsgUpdateGroupMetadata' as const,
+  $type: "cosmos.group.v1.MsgUpdateGroupMetadata" as const,
 
-  encode(
-    message: MsgUpdateGroupMetadata,
-    writer: _m0.Writer = _m0.Writer.create(),
-  ): _m0.Writer {
-    if (message.admin !== '') {
+  encode(message: MsgUpdateGroupMetadata, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+    if (message.admin !== "") {
       writer.uint32(10).string(message.admin);
     }
     if (!message.groupId.isZero()) {
       writer.uint32(16).uint64(message.groupId);
     }
-    if (message.metadata !== '') {
+    if (message.metadata !== "") {
       writer.uint32(26).string(message.metadata);
     }
     return writer;
   },
 
-  decode(
-    input: _m0.Reader | Uint8Array,
-    length?: number,
-  ): MsgUpdateGroupMetadata {
+  decode(input: _m0.Reader | Uint8Array, length?: number): MsgUpdateGroupMetadata {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMsgUpdateGroupMetadata();
@@ -844,33 +766,31 @@ export const MsgUpdateGroupMetadata = {
   fromJSON(object: any): MsgUpdateGroupMetadata {
     return {
       $type: MsgUpdateGroupMetadata.$type,
-      admin: isSet(object.admin) ? String(object.admin) : '',
-      groupId: isSet(object.groupId)
-        ? Long.fromString(object.groupId)
-        : Long.UZERO,
-      metadata: isSet(object.metadata) ? String(object.metadata) : '',
+      admin: isSet(object.admin) ? String(object.admin) : "",
+      groupId: isSet(object.groupId) ? Long.fromValue(object.groupId) : Long.UZERO,
+      metadata: isSet(object.metadata) ? String(object.metadata) : "",
     };
   },
 
   toJSON(message: MsgUpdateGroupMetadata): unknown {
     const obj: any = {};
     message.admin !== undefined && (obj.admin = message.admin);
-    message.groupId !== undefined &&
-      (obj.groupId = (message.groupId || Long.UZERO).toString());
+    message.groupId !== undefined && (obj.groupId = (message.groupId || Long.UZERO).toString());
     message.metadata !== undefined && (obj.metadata = message.metadata);
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<MsgUpdateGroupMetadata>, I>>(
-    object: I,
-  ): MsgUpdateGroupMetadata {
+  create(base?: DeepPartial<MsgUpdateGroupMetadata>): MsgUpdateGroupMetadata {
+    return MsgUpdateGroupMetadata.fromPartial(base ?? {});
+  },
+
+  fromPartial(object: DeepPartial<MsgUpdateGroupMetadata>): MsgUpdateGroupMetadata {
     const message = createBaseMsgUpdateGroupMetadata();
-    message.admin = object.admin ?? '';
-    message.groupId =
-      object.groupId !== undefined && object.groupId !== null
-        ? Long.fromValue(object.groupId)
-        : Long.UZERO;
-    message.metadata = object.metadata ?? '';
+    message.admin = object.admin ?? "";
+    message.groupId = (object.groupId !== undefined && object.groupId !== null)
+      ? Long.fromValue(object.groupId)
+      : Long.UZERO;
+    message.metadata = object.metadata ?? "";
     return message;
   },
 };
@@ -878,23 +798,17 @@ export const MsgUpdateGroupMetadata = {
 messageTypeRegistry.set(MsgUpdateGroupMetadata.$type, MsgUpdateGroupMetadata);
 
 function createBaseMsgUpdateGroupMetadataResponse(): MsgUpdateGroupMetadataResponse {
-  return { $type: 'cosmos.group.v1.MsgUpdateGroupMetadataResponse' };
+  return { $type: "cosmos.group.v1.MsgUpdateGroupMetadataResponse" };
 }
 
 export const MsgUpdateGroupMetadataResponse = {
-  $type: 'cosmos.group.v1.MsgUpdateGroupMetadataResponse' as const,
+  $type: "cosmos.group.v1.MsgUpdateGroupMetadataResponse" as const,
 
-  encode(
-    _: MsgUpdateGroupMetadataResponse,
-    writer: _m0.Writer = _m0.Writer.create(),
-  ): _m0.Writer {
+  encode(_: MsgUpdateGroupMetadataResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     return writer;
   },
 
-  decode(
-    input: _m0.Reader | Uint8Array,
-    length?: number,
-  ): MsgUpdateGroupMetadataResponse {
+  decode(input: _m0.Reader | Uint8Array, length?: number): MsgUpdateGroupMetadataResponse {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMsgUpdateGroupMetadataResponse();
@@ -910,9 +824,7 @@ export const MsgUpdateGroupMetadataResponse = {
   },
 
   fromJSON(_: any): MsgUpdateGroupMetadataResponse {
-    return {
-      $type: MsgUpdateGroupMetadataResponse.$type,
-    };
+    return { $type: MsgUpdateGroupMetadataResponse.$type };
   },
 
   toJSON(_: MsgUpdateGroupMetadataResponse): unknown {
@@ -920,43 +832,39 @@ export const MsgUpdateGroupMetadataResponse = {
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<MsgUpdateGroupMetadataResponse>, I>>(
-    _: I,
-  ): MsgUpdateGroupMetadataResponse {
+  create(base?: DeepPartial<MsgUpdateGroupMetadataResponse>): MsgUpdateGroupMetadataResponse {
+    return MsgUpdateGroupMetadataResponse.fromPartial(base ?? {});
+  },
+
+  fromPartial(_: DeepPartial<MsgUpdateGroupMetadataResponse>): MsgUpdateGroupMetadataResponse {
     const message = createBaseMsgUpdateGroupMetadataResponse();
     return message;
   },
 };
 
-messageTypeRegistry.set(
-  MsgUpdateGroupMetadataResponse.$type,
-  MsgUpdateGroupMetadataResponse,
-);
+messageTypeRegistry.set(MsgUpdateGroupMetadataResponse.$type, MsgUpdateGroupMetadataResponse);
 
 function createBaseMsgCreateGroupPolicy(): MsgCreateGroupPolicy {
   return {
-    $type: 'cosmos.group.v1.MsgCreateGroupPolicy',
-    admin: '',
+    $type: "cosmos.group.v1.MsgCreateGroupPolicy",
+    admin: "",
     groupId: Long.UZERO,
-    metadata: '',
+    metadata: "",
     decisionPolicy: undefined,
   };
 }
 
 export const MsgCreateGroupPolicy = {
-  $type: 'cosmos.group.v1.MsgCreateGroupPolicy' as const,
+  $type: "cosmos.group.v1.MsgCreateGroupPolicy" as const,
 
-  encode(
-    message: MsgCreateGroupPolicy,
-    writer: _m0.Writer = _m0.Writer.create(),
-  ): _m0.Writer {
-    if (message.admin !== '') {
+  encode(message: MsgCreateGroupPolicy, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+    if (message.admin !== "") {
       writer.uint32(10).string(message.admin);
     }
     if (!message.groupId.isZero()) {
       writer.uint32(16).uint64(message.groupId);
     }
-    if (message.metadata !== '') {
+    if (message.metadata !== "") {
       writer.uint32(26).string(message.metadata);
     }
     if (message.decisionPolicy !== undefined) {
@@ -965,10 +873,7 @@ export const MsgCreateGroupPolicy = {
     return writer;
   },
 
-  decode(
-    input: _m0.Reader | Uint8Array,
-    length?: number,
-  ): MsgCreateGroupPolicy {
+  decode(input: _m0.Reader | Uint8Array, length?: number): MsgCreateGroupPolicy {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMsgCreateGroupPolicy();
@@ -998,44 +903,37 @@ export const MsgCreateGroupPolicy = {
   fromJSON(object: any): MsgCreateGroupPolicy {
     return {
       $type: MsgCreateGroupPolicy.$type,
-      admin: isSet(object.admin) ? String(object.admin) : '',
-      groupId: isSet(object.groupId)
-        ? Long.fromString(object.groupId)
-        : Long.UZERO,
-      metadata: isSet(object.metadata) ? String(object.metadata) : '',
-      decisionPolicy: isSet(object.decisionPolicy)
-        ? Any.fromJSON(object.decisionPolicy)
-        : undefined,
+      admin: isSet(object.admin) ? String(object.admin) : "",
+      groupId: isSet(object.groupId) ? Long.fromValue(object.groupId) : Long.UZERO,
+      metadata: isSet(object.metadata) ? String(object.metadata) : "",
+      decisionPolicy: isSet(object.decisionPolicy) ? Any.fromJSON(object.decisionPolicy) : undefined,
     };
   },
 
   toJSON(message: MsgCreateGroupPolicy): unknown {
     const obj: any = {};
     message.admin !== undefined && (obj.admin = message.admin);
-    message.groupId !== undefined &&
-      (obj.groupId = (message.groupId || Long.UZERO).toString());
+    message.groupId !== undefined && (obj.groupId = (message.groupId || Long.UZERO).toString());
     message.metadata !== undefined && (obj.metadata = message.metadata);
     message.decisionPolicy !== undefined &&
-      (obj.decisionPolicy = message.decisionPolicy
-        ? Any.toJSON(message.decisionPolicy)
-        : undefined);
+      (obj.decisionPolicy = message.decisionPolicy ? Any.toJSON(message.decisionPolicy) : undefined);
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<MsgCreateGroupPolicy>, I>>(
-    object: I,
-  ): MsgCreateGroupPolicy {
+  create(base?: DeepPartial<MsgCreateGroupPolicy>): MsgCreateGroupPolicy {
+    return MsgCreateGroupPolicy.fromPartial(base ?? {});
+  },
+
+  fromPartial(object: DeepPartial<MsgCreateGroupPolicy>): MsgCreateGroupPolicy {
     const message = createBaseMsgCreateGroupPolicy();
-    message.admin = object.admin ?? '';
-    message.groupId =
-      object.groupId !== undefined && object.groupId !== null
-        ? Long.fromValue(object.groupId)
-        : Long.UZERO;
-    message.metadata = object.metadata ?? '';
-    message.decisionPolicy =
-      object.decisionPolicy !== undefined && object.decisionPolicy !== null
-        ? Any.fromPartial(object.decisionPolicy)
-        : undefined;
+    message.admin = object.admin ?? "";
+    message.groupId = (object.groupId !== undefined && object.groupId !== null)
+      ? Long.fromValue(object.groupId)
+      : Long.UZERO;
+    message.metadata = object.metadata ?? "";
+    message.decisionPolicy = (object.decisionPolicy !== undefined && object.decisionPolicy !== null)
+      ? Any.fromPartial(object.decisionPolicy)
+      : undefined;
     return message;
   },
 };
@@ -1043,26 +941,20 @@ export const MsgCreateGroupPolicy = {
 messageTypeRegistry.set(MsgCreateGroupPolicy.$type, MsgCreateGroupPolicy);
 
 function createBaseMsgCreateGroupPolicyResponse(): MsgCreateGroupPolicyResponse {
-  return { $type: 'cosmos.group.v1.MsgCreateGroupPolicyResponse', address: '' };
+  return { $type: "cosmos.group.v1.MsgCreateGroupPolicyResponse", address: "" };
 }
 
 export const MsgCreateGroupPolicyResponse = {
-  $type: 'cosmos.group.v1.MsgCreateGroupPolicyResponse' as const,
+  $type: "cosmos.group.v1.MsgCreateGroupPolicyResponse" as const,
 
-  encode(
-    message: MsgCreateGroupPolicyResponse,
-    writer: _m0.Writer = _m0.Writer.create(),
-  ): _m0.Writer {
-    if (message.address !== '') {
+  encode(message: MsgCreateGroupPolicyResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+    if (message.address !== "") {
       writer.uint32(10).string(message.address);
     }
     return writer;
   },
 
-  decode(
-    input: _m0.Reader | Uint8Array,
-    length?: number,
-  ): MsgCreateGroupPolicyResponse {
+  decode(input: _m0.Reader | Uint8Array, length?: number): MsgCreateGroupPolicyResponse {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMsgCreateGroupPolicyResponse();
@@ -1081,10 +973,7 @@ export const MsgCreateGroupPolicyResponse = {
   },
 
   fromJSON(object: any): MsgCreateGroupPolicyResponse {
-    return {
-      $type: MsgCreateGroupPolicyResponse.$type,
-      address: isSet(object.address) ? String(object.address) : '',
-    };
+    return { $type: MsgCreateGroupPolicyResponse.$type, address: isSet(object.address) ? String(object.address) : "" };
   },
 
   toJSON(message: MsgCreateGroupPolicyResponse): unknown {
@@ -1093,52 +982,40 @@ export const MsgCreateGroupPolicyResponse = {
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<MsgCreateGroupPolicyResponse>, I>>(
-    object: I,
-  ): MsgCreateGroupPolicyResponse {
+  create(base?: DeepPartial<MsgCreateGroupPolicyResponse>): MsgCreateGroupPolicyResponse {
+    return MsgCreateGroupPolicyResponse.fromPartial(base ?? {});
+  },
+
+  fromPartial(object: DeepPartial<MsgCreateGroupPolicyResponse>): MsgCreateGroupPolicyResponse {
     const message = createBaseMsgCreateGroupPolicyResponse();
-    message.address = object.address ?? '';
+    message.address = object.address ?? "";
     return message;
   },
 };
 
-messageTypeRegistry.set(
-  MsgCreateGroupPolicyResponse.$type,
-  MsgCreateGroupPolicyResponse,
-);
+messageTypeRegistry.set(MsgCreateGroupPolicyResponse.$type, MsgCreateGroupPolicyResponse);
 
 function createBaseMsgUpdateGroupPolicyAdmin(): MsgUpdateGroupPolicyAdmin {
-  return {
-    $type: 'cosmos.group.v1.MsgUpdateGroupPolicyAdmin',
-    admin: '',
-    groupPolicyAddress: '',
-    newAdmin: '',
-  };
+  return { $type: "cosmos.group.v1.MsgUpdateGroupPolicyAdmin", admin: "", groupPolicyAddress: "", newAdmin: "" };
 }
 
 export const MsgUpdateGroupPolicyAdmin = {
-  $type: 'cosmos.group.v1.MsgUpdateGroupPolicyAdmin' as const,
+  $type: "cosmos.group.v1.MsgUpdateGroupPolicyAdmin" as const,
 
-  encode(
-    message: MsgUpdateGroupPolicyAdmin,
-    writer: _m0.Writer = _m0.Writer.create(),
-  ): _m0.Writer {
-    if (message.admin !== '') {
+  encode(message: MsgUpdateGroupPolicyAdmin, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+    if (message.admin !== "") {
       writer.uint32(10).string(message.admin);
     }
-    if (message.groupPolicyAddress !== '') {
+    if (message.groupPolicyAddress !== "") {
       writer.uint32(18).string(message.groupPolicyAddress);
     }
-    if (message.newAdmin !== '') {
+    if (message.newAdmin !== "") {
       writer.uint32(26).string(message.newAdmin);
     }
     return writer;
   },
 
-  decode(
-    input: _m0.Reader | Uint8Array,
-    length?: number,
-  ): MsgUpdateGroupPolicyAdmin {
+  decode(input: _m0.Reader | Uint8Array, length?: number): MsgUpdateGroupPolicyAdmin {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMsgUpdateGroupPolicyAdmin();
@@ -1165,68 +1042,61 @@ export const MsgUpdateGroupPolicyAdmin = {
   fromJSON(object: any): MsgUpdateGroupPolicyAdmin {
     return {
       $type: MsgUpdateGroupPolicyAdmin.$type,
-      admin: isSet(object.admin) ? String(object.admin) : '',
-      groupPolicyAddress: isSet(object.groupPolicyAddress)
-        ? String(object.groupPolicyAddress)
-        : '',
-      newAdmin: isSet(object.newAdmin) ? String(object.newAdmin) : '',
+      admin: isSet(object.admin) ? String(object.admin) : "",
+      groupPolicyAddress: isSet(object.groupPolicyAddress) ? String(object.groupPolicyAddress) : "",
+      newAdmin: isSet(object.newAdmin) ? String(object.newAdmin) : "",
     };
   },
 
   toJSON(message: MsgUpdateGroupPolicyAdmin): unknown {
     const obj: any = {};
     message.admin !== undefined && (obj.admin = message.admin);
-    message.groupPolicyAddress !== undefined &&
-      (obj.groupPolicyAddress = message.groupPolicyAddress);
+    message.groupPolicyAddress !== undefined && (obj.groupPolicyAddress = message.groupPolicyAddress);
     message.newAdmin !== undefined && (obj.newAdmin = message.newAdmin);
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<MsgUpdateGroupPolicyAdmin>, I>>(
-    object: I,
-  ): MsgUpdateGroupPolicyAdmin {
+  create(base?: DeepPartial<MsgUpdateGroupPolicyAdmin>): MsgUpdateGroupPolicyAdmin {
+    return MsgUpdateGroupPolicyAdmin.fromPartial(base ?? {});
+  },
+
+  fromPartial(object: DeepPartial<MsgUpdateGroupPolicyAdmin>): MsgUpdateGroupPolicyAdmin {
     const message = createBaseMsgUpdateGroupPolicyAdmin();
-    message.admin = object.admin ?? '';
-    message.groupPolicyAddress = object.groupPolicyAddress ?? '';
-    message.newAdmin = object.newAdmin ?? '';
+    message.admin = object.admin ?? "";
+    message.groupPolicyAddress = object.groupPolicyAddress ?? "";
+    message.newAdmin = object.newAdmin ?? "";
     return message;
   },
 };
 
-messageTypeRegistry.set(
-  MsgUpdateGroupPolicyAdmin.$type,
-  MsgUpdateGroupPolicyAdmin,
-);
+messageTypeRegistry.set(MsgUpdateGroupPolicyAdmin.$type, MsgUpdateGroupPolicyAdmin);
 
 function createBaseMsgCreateGroupWithPolicy(): MsgCreateGroupWithPolicy {
   return {
-    $type: 'cosmos.group.v1.MsgCreateGroupWithPolicy',
-    admin: '',
+    $type: "cosmos.group.v1.MsgCreateGroupWithPolicy",
+    admin: "",
     members: [],
-    groupMetadata: '',
-    groupPolicyMetadata: '',
+    groupMetadata: "",
+    groupPolicyMetadata: "",
     groupPolicyAsAdmin: false,
     decisionPolicy: undefined,
   };
 }
 
 export const MsgCreateGroupWithPolicy = {
-  $type: 'cosmos.group.v1.MsgCreateGroupWithPolicy' as const,
+  $type: "cosmos.group.v1.MsgCreateGroupWithPolicy" as const,
 
-  encode(
-    message: MsgCreateGroupWithPolicy,
-    writer: _m0.Writer = _m0.Writer.create(),
-  ): _m0.Writer {
-    if (message.admin !== '') {
+  encode(message: MsgCreateGroupWithPolicy, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+    if (message.admin !== "") {
       writer.uint32(10).string(message.admin);
     }
     for (const v of message.members) {
       MemberRequest.encode(v!, writer.uint32(18).fork()).ldelim();
     }
-    if (message.groupMetadata !== '') {
+    if (message.groupMetadata !== "") {
       writer.uint32(26).string(message.groupMetadata);
     }
-    if (message.groupPolicyMetadata !== '') {
+    if (message.groupPolicyMetadata !== "") {
       writer.uint32(34).string(message.groupPolicyMetadata);
     }
     if (message.groupPolicyAsAdmin === true) {
@@ -1238,10 +1108,7 @@ export const MsgCreateGroupWithPolicy = {
     return writer;
   },
 
-  decode(
-    input: _m0.Reader | Uint8Array,
-    length?: number,
-  ): MsgCreateGroupWithPolicy {
+  decode(input: _m0.Reader | Uint8Array, length?: number): MsgCreateGroupWithPolicy {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMsgCreateGroupWithPolicy();
@@ -1277,22 +1144,12 @@ export const MsgCreateGroupWithPolicy = {
   fromJSON(object: any): MsgCreateGroupWithPolicy {
     return {
       $type: MsgCreateGroupWithPolicy.$type,
-      admin: isSet(object.admin) ? String(object.admin) : '',
-      members: Array.isArray(object?.members)
-        ? object.members.map((e: any) => MemberRequest.fromJSON(e))
-        : [],
-      groupMetadata: isSet(object.groupMetadata)
-        ? String(object.groupMetadata)
-        : '',
-      groupPolicyMetadata: isSet(object.groupPolicyMetadata)
-        ? String(object.groupPolicyMetadata)
-        : '',
-      groupPolicyAsAdmin: isSet(object.groupPolicyAsAdmin)
-        ? Boolean(object.groupPolicyAsAdmin)
-        : false,
-      decisionPolicy: isSet(object.decisionPolicy)
-        ? Any.fromJSON(object.decisionPolicy)
-        : undefined,
+      admin: isSet(object.admin) ? String(object.admin) : "",
+      members: Array.isArray(object?.members) ? object.members.map((e: any) => MemberRequest.fromJSON(e)) : [],
+      groupMetadata: isSet(object.groupMetadata) ? String(object.groupMetadata) : "",
+      groupPolicyMetadata: isSet(object.groupPolicyMetadata) ? String(object.groupPolicyMetadata) : "",
+      groupPolicyAsAdmin: isSet(object.groupPolicyAsAdmin) ? Boolean(object.groupPolicyAsAdmin) : false,
+      decisionPolicy: isSet(object.decisionPolicy) ? Any.fromJSON(object.decisionPolicy) : undefined,
     };
   },
 
@@ -1300,76 +1157,56 @@ export const MsgCreateGroupWithPolicy = {
     const obj: any = {};
     message.admin !== undefined && (obj.admin = message.admin);
     if (message.members) {
-      obj.members = message.members.map(e =>
-        e ? MemberRequest.toJSON(e) : undefined,
-      );
+      obj.members = message.members.map((e) => e ? MemberRequest.toJSON(e) : undefined);
     } else {
       obj.members = [];
     }
-    message.groupMetadata !== undefined &&
-      (obj.groupMetadata = message.groupMetadata);
-    message.groupPolicyMetadata !== undefined &&
-      (obj.groupPolicyMetadata = message.groupPolicyMetadata);
-    message.groupPolicyAsAdmin !== undefined &&
-      (obj.groupPolicyAsAdmin = message.groupPolicyAsAdmin);
+    message.groupMetadata !== undefined && (obj.groupMetadata = message.groupMetadata);
+    message.groupPolicyMetadata !== undefined && (obj.groupPolicyMetadata = message.groupPolicyMetadata);
+    message.groupPolicyAsAdmin !== undefined && (obj.groupPolicyAsAdmin = message.groupPolicyAsAdmin);
     message.decisionPolicy !== undefined &&
-      (obj.decisionPolicy = message.decisionPolicy
-        ? Any.toJSON(message.decisionPolicy)
-        : undefined);
+      (obj.decisionPolicy = message.decisionPolicy ? Any.toJSON(message.decisionPolicy) : undefined);
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<MsgCreateGroupWithPolicy>, I>>(
-    object: I,
-  ): MsgCreateGroupWithPolicy {
+  create(base?: DeepPartial<MsgCreateGroupWithPolicy>): MsgCreateGroupWithPolicy {
+    return MsgCreateGroupWithPolicy.fromPartial(base ?? {});
+  },
+
+  fromPartial(object: DeepPartial<MsgCreateGroupWithPolicy>): MsgCreateGroupWithPolicy {
     const message = createBaseMsgCreateGroupWithPolicy();
-    message.admin = object.admin ?? '';
-    message.members =
-      object.members?.map(e => MemberRequest.fromPartial(e)) || [];
-    message.groupMetadata = object.groupMetadata ?? '';
-    message.groupPolicyMetadata = object.groupPolicyMetadata ?? '';
+    message.admin = object.admin ?? "";
+    message.members = object.members?.map((e) => MemberRequest.fromPartial(e)) || [];
+    message.groupMetadata = object.groupMetadata ?? "";
+    message.groupPolicyMetadata = object.groupPolicyMetadata ?? "";
     message.groupPolicyAsAdmin = object.groupPolicyAsAdmin ?? false;
-    message.decisionPolicy =
-      object.decisionPolicy !== undefined && object.decisionPolicy !== null
-        ? Any.fromPartial(object.decisionPolicy)
-        : undefined;
+    message.decisionPolicy = (object.decisionPolicy !== undefined && object.decisionPolicy !== null)
+      ? Any.fromPartial(object.decisionPolicy)
+      : undefined;
     return message;
   },
 };
 
-messageTypeRegistry.set(
-  MsgCreateGroupWithPolicy.$type,
-  MsgCreateGroupWithPolicy,
-);
+messageTypeRegistry.set(MsgCreateGroupWithPolicy.$type, MsgCreateGroupWithPolicy);
 
 function createBaseMsgCreateGroupWithPolicyResponse(): MsgCreateGroupWithPolicyResponse {
-  return {
-    $type: 'cosmos.group.v1.MsgCreateGroupWithPolicyResponse',
-    groupId: Long.UZERO,
-    groupPolicyAddress: '',
-  };
+  return { $type: "cosmos.group.v1.MsgCreateGroupWithPolicyResponse", groupId: Long.UZERO, groupPolicyAddress: "" };
 }
 
 export const MsgCreateGroupWithPolicyResponse = {
-  $type: 'cosmos.group.v1.MsgCreateGroupWithPolicyResponse' as const,
+  $type: "cosmos.group.v1.MsgCreateGroupWithPolicyResponse" as const,
 
-  encode(
-    message: MsgCreateGroupWithPolicyResponse,
-    writer: _m0.Writer = _m0.Writer.create(),
-  ): _m0.Writer {
+  encode(message: MsgCreateGroupWithPolicyResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (!message.groupId.isZero()) {
       writer.uint32(8).uint64(message.groupId);
     }
-    if (message.groupPolicyAddress !== '') {
+    if (message.groupPolicyAddress !== "") {
       writer.uint32(18).string(message.groupPolicyAddress);
     }
     return writer;
   },
 
-  decode(
-    input: _m0.Reader | Uint8Array,
-    length?: number,
-  ): MsgCreateGroupWithPolicyResponse {
+  decode(input: _m0.Reader | Uint8Array, length?: number): MsgCreateGroupWithPolicyResponse {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMsgCreateGroupWithPolicyResponse();
@@ -1393,60 +1230,46 @@ export const MsgCreateGroupWithPolicyResponse = {
   fromJSON(object: any): MsgCreateGroupWithPolicyResponse {
     return {
       $type: MsgCreateGroupWithPolicyResponse.$type,
-      groupId: isSet(object.groupId)
-        ? Long.fromString(object.groupId)
-        : Long.UZERO,
-      groupPolicyAddress: isSet(object.groupPolicyAddress)
-        ? String(object.groupPolicyAddress)
-        : '',
+      groupId: isSet(object.groupId) ? Long.fromValue(object.groupId) : Long.UZERO,
+      groupPolicyAddress: isSet(object.groupPolicyAddress) ? String(object.groupPolicyAddress) : "",
     };
   },
 
   toJSON(message: MsgCreateGroupWithPolicyResponse): unknown {
     const obj: any = {};
-    message.groupId !== undefined &&
-      (obj.groupId = (message.groupId || Long.UZERO).toString());
-    message.groupPolicyAddress !== undefined &&
-      (obj.groupPolicyAddress = message.groupPolicyAddress);
+    message.groupId !== undefined && (obj.groupId = (message.groupId || Long.UZERO).toString());
+    message.groupPolicyAddress !== undefined && (obj.groupPolicyAddress = message.groupPolicyAddress);
     return obj;
   },
 
-  fromPartial<
-    I extends Exact<DeepPartial<MsgCreateGroupWithPolicyResponse>, I>,
-  >(object: I): MsgCreateGroupWithPolicyResponse {
+  create(base?: DeepPartial<MsgCreateGroupWithPolicyResponse>): MsgCreateGroupWithPolicyResponse {
+    return MsgCreateGroupWithPolicyResponse.fromPartial(base ?? {});
+  },
+
+  fromPartial(object: DeepPartial<MsgCreateGroupWithPolicyResponse>): MsgCreateGroupWithPolicyResponse {
     const message = createBaseMsgCreateGroupWithPolicyResponse();
-    message.groupId =
-      object.groupId !== undefined && object.groupId !== null
-        ? Long.fromValue(object.groupId)
-        : Long.UZERO;
-    message.groupPolicyAddress = object.groupPolicyAddress ?? '';
+    message.groupId = (object.groupId !== undefined && object.groupId !== null)
+      ? Long.fromValue(object.groupId)
+      : Long.UZERO;
+    message.groupPolicyAddress = object.groupPolicyAddress ?? "";
     return message;
   },
 };
 
-messageTypeRegistry.set(
-  MsgCreateGroupWithPolicyResponse.$type,
-  MsgCreateGroupWithPolicyResponse,
-);
+messageTypeRegistry.set(MsgCreateGroupWithPolicyResponse.$type, MsgCreateGroupWithPolicyResponse);
 
 function createBaseMsgUpdateGroupPolicyAdminResponse(): MsgUpdateGroupPolicyAdminResponse {
-  return { $type: 'cosmos.group.v1.MsgUpdateGroupPolicyAdminResponse' };
+  return { $type: "cosmos.group.v1.MsgUpdateGroupPolicyAdminResponse" };
 }
 
 export const MsgUpdateGroupPolicyAdminResponse = {
-  $type: 'cosmos.group.v1.MsgUpdateGroupPolicyAdminResponse' as const,
+  $type: "cosmos.group.v1.MsgUpdateGroupPolicyAdminResponse" as const,
 
-  encode(
-    _: MsgUpdateGroupPolicyAdminResponse,
-    writer: _m0.Writer = _m0.Writer.create(),
-  ): _m0.Writer {
+  encode(_: MsgUpdateGroupPolicyAdminResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     return writer;
   },
 
-  decode(
-    input: _m0.Reader | Uint8Array,
-    length?: number,
-  ): MsgUpdateGroupPolicyAdminResponse {
+  decode(input: _m0.Reader | Uint8Array, length?: number): MsgUpdateGroupPolicyAdminResponse {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMsgUpdateGroupPolicyAdminResponse();
@@ -1462,9 +1285,7 @@ export const MsgUpdateGroupPolicyAdminResponse = {
   },
 
   fromJSON(_: any): MsgUpdateGroupPolicyAdminResponse {
-    return {
-      $type: MsgUpdateGroupPolicyAdminResponse.$type,
-    };
+    return { $type: MsgUpdateGroupPolicyAdminResponse.$type };
   },
 
   toJSON(_: MsgUpdateGroupPolicyAdminResponse): unknown {
@@ -1472,39 +1293,35 @@ export const MsgUpdateGroupPolicyAdminResponse = {
     return obj;
   },
 
-  fromPartial<
-    I extends Exact<DeepPartial<MsgUpdateGroupPolicyAdminResponse>, I>,
-  >(_: I): MsgUpdateGroupPolicyAdminResponse {
+  create(base?: DeepPartial<MsgUpdateGroupPolicyAdminResponse>): MsgUpdateGroupPolicyAdminResponse {
+    return MsgUpdateGroupPolicyAdminResponse.fromPartial(base ?? {});
+  },
+
+  fromPartial(_: DeepPartial<MsgUpdateGroupPolicyAdminResponse>): MsgUpdateGroupPolicyAdminResponse {
     const message = createBaseMsgUpdateGroupPolicyAdminResponse();
     return message;
   },
 };
 
-messageTypeRegistry.set(
-  MsgUpdateGroupPolicyAdminResponse.$type,
-  MsgUpdateGroupPolicyAdminResponse,
-);
+messageTypeRegistry.set(MsgUpdateGroupPolicyAdminResponse.$type, MsgUpdateGroupPolicyAdminResponse);
 
 function createBaseMsgUpdateGroupPolicyDecisionPolicy(): MsgUpdateGroupPolicyDecisionPolicy {
   return {
-    $type: 'cosmos.group.v1.MsgUpdateGroupPolicyDecisionPolicy',
-    admin: '',
-    groupPolicyAddress: '',
+    $type: "cosmos.group.v1.MsgUpdateGroupPolicyDecisionPolicy",
+    admin: "",
+    groupPolicyAddress: "",
     decisionPolicy: undefined,
   };
 }
 
 export const MsgUpdateGroupPolicyDecisionPolicy = {
-  $type: 'cosmos.group.v1.MsgUpdateGroupPolicyDecisionPolicy' as const,
+  $type: "cosmos.group.v1.MsgUpdateGroupPolicyDecisionPolicy" as const,
 
-  encode(
-    message: MsgUpdateGroupPolicyDecisionPolicy,
-    writer: _m0.Writer = _m0.Writer.create(),
-  ): _m0.Writer {
-    if (message.admin !== '') {
+  encode(message: MsgUpdateGroupPolicyDecisionPolicy, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+    if (message.admin !== "") {
       writer.uint32(10).string(message.admin);
     }
-    if (message.groupPolicyAddress !== '') {
+    if (message.groupPolicyAddress !== "") {
       writer.uint32(18).string(message.groupPolicyAddress);
     }
     if (message.decisionPolicy !== undefined) {
@@ -1513,10 +1330,7 @@ export const MsgUpdateGroupPolicyDecisionPolicy = {
     return writer;
   },
 
-  decode(
-    input: _m0.Reader | Uint8Array,
-    length?: number,
-  ): MsgUpdateGroupPolicyDecisionPolicy {
+  decode(input: _m0.Reader | Uint8Array, length?: number): MsgUpdateGroupPolicyDecisionPolicy {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMsgUpdateGroupPolicyDecisionPolicy();
@@ -1543,67 +1357,50 @@ export const MsgUpdateGroupPolicyDecisionPolicy = {
   fromJSON(object: any): MsgUpdateGroupPolicyDecisionPolicy {
     return {
       $type: MsgUpdateGroupPolicyDecisionPolicy.$type,
-      admin: isSet(object.admin) ? String(object.admin) : '',
-      groupPolicyAddress: isSet(object.groupPolicyAddress)
-        ? String(object.groupPolicyAddress)
-        : '',
-      decisionPolicy: isSet(object.decisionPolicy)
-        ? Any.fromJSON(object.decisionPolicy)
-        : undefined,
+      admin: isSet(object.admin) ? String(object.admin) : "",
+      groupPolicyAddress: isSet(object.groupPolicyAddress) ? String(object.groupPolicyAddress) : "",
+      decisionPolicy: isSet(object.decisionPolicy) ? Any.fromJSON(object.decisionPolicy) : undefined,
     };
   },
 
   toJSON(message: MsgUpdateGroupPolicyDecisionPolicy): unknown {
     const obj: any = {};
     message.admin !== undefined && (obj.admin = message.admin);
-    message.groupPolicyAddress !== undefined &&
-      (obj.groupPolicyAddress = message.groupPolicyAddress);
+    message.groupPolicyAddress !== undefined && (obj.groupPolicyAddress = message.groupPolicyAddress);
     message.decisionPolicy !== undefined &&
-      (obj.decisionPolicy = message.decisionPolicy
-        ? Any.toJSON(message.decisionPolicy)
-        : undefined);
+      (obj.decisionPolicy = message.decisionPolicy ? Any.toJSON(message.decisionPolicy) : undefined);
     return obj;
   },
 
-  fromPartial<
-    I extends Exact<DeepPartial<MsgUpdateGroupPolicyDecisionPolicy>, I>,
-  >(object: I): MsgUpdateGroupPolicyDecisionPolicy {
+  create(base?: DeepPartial<MsgUpdateGroupPolicyDecisionPolicy>): MsgUpdateGroupPolicyDecisionPolicy {
+    return MsgUpdateGroupPolicyDecisionPolicy.fromPartial(base ?? {});
+  },
+
+  fromPartial(object: DeepPartial<MsgUpdateGroupPolicyDecisionPolicy>): MsgUpdateGroupPolicyDecisionPolicy {
     const message = createBaseMsgUpdateGroupPolicyDecisionPolicy();
-    message.admin = object.admin ?? '';
-    message.groupPolicyAddress = object.groupPolicyAddress ?? '';
-    message.decisionPolicy =
-      object.decisionPolicy !== undefined && object.decisionPolicy !== null
-        ? Any.fromPartial(object.decisionPolicy)
-        : undefined;
+    message.admin = object.admin ?? "";
+    message.groupPolicyAddress = object.groupPolicyAddress ?? "";
+    message.decisionPolicy = (object.decisionPolicy !== undefined && object.decisionPolicy !== null)
+      ? Any.fromPartial(object.decisionPolicy)
+      : undefined;
     return message;
   },
 };
 
-messageTypeRegistry.set(
-  MsgUpdateGroupPolicyDecisionPolicy.$type,
-  MsgUpdateGroupPolicyDecisionPolicy,
-);
+messageTypeRegistry.set(MsgUpdateGroupPolicyDecisionPolicy.$type, MsgUpdateGroupPolicyDecisionPolicy);
 
 function createBaseMsgUpdateGroupPolicyDecisionPolicyResponse(): MsgUpdateGroupPolicyDecisionPolicyResponse {
-  return {
-    $type: 'cosmos.group.v1.MsgUpdateGroupPolicyDecisionPolicyResponse',
-  };
+  return { $type: "cosmos.group.v1.MsgUpdateGroupPolicyDecisionPolicyResponse" };
 }
 
 export const MsgUpdateGroupPolicyDecisionPolicyResponse = {
-  $type: 'cosmos.group.v1.MsgUpdateGroupPolicyDecisionPolicyResponse' as const,
+  $type: "cosmos.group.v1.MsgUpdateGroupPolicyDecisionPolicyResponse" as const,
 
-  encode(
-    _: MsgUpdateGroupPolicyDecisionPolicyResponse,
-    writer: _m0.Writer = _m0.Writer.create(),
-  ): _m0.Writer {
+  encode(_: MsgUpdateGroupPolicyDecisionPolicyResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     return writer;
   },
 
-  decode(
-    input: _m0.Reader | Uint8Array,
-    length?: number,
-  ): MsgUpdateGroupPolicyDecisionPolicyResponse {
+  decode(input: _m0.Reader | Uint8Array, length?: number): MsgUpdateGroupPolicyDecisionPolicyResponse {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMsgUpdateGroupPolicyDecisionPolicyResponse();
@@ -1619,9 +1416,7 @@ export const MsgUpdateGroupPolicyDecisionPolicyResponse = {
   },
 
   fromJSON(_: any): MsgUpdateGroupPolicyDecisionPolicyResponse {
-    return {
-      $type: MsgUpdateGroupPolicyDecisionPolicyResponse.$type,
-    };
+    return { $type: MsgUpdateGroupPolicyDecisionPolicyResponse.$type };
   },
 
   toJSON(_: MsgUpdateGroupPolicyDecisionPolicyResponse): unknown {
@@ -1629,51 +1424,39 @@ export const MsgUpdateGroupPolicyDecisionPolicyResponse = {
     return obj;
   },
 
-  fromPartial<
-    I extends Exact<DeepPartial<MsgUpdateGroupPolicyDecisionPolicyResponse>, I>,
-  >(_: I): MsgUpdateGroupPolicyDecisionPolicyResponse {
+  create(base?: DeepPartial<MsgUpdateGroupPolicyDecisionPolicyResponse>): MsgUpdateGroupPolicyDecisionPolicyResponse {
+    return MsgUpdateGroupPolicyDecisionPolicyResponse.fromPartial(base ?? {});
+  },
+
+  fromPartial(_: DeepPartial<MsgUpdateGroupPolicyDecisionPolicyResponse>): MsgUpdateGroupPolicyDecisionPolicyResponse {
     const message = createBaseMsgUpdateGroupPolicyDecisionPolicyResponse();
     return message;
   },
 };
 
-messageTypeRegistry.set(
-  MsgUpdateGroupPolicyDecisionPolicyResponse.$type,
-  MsgUpdateGroupPolicyDecisionPolicyResponse,
-);
+messageTypeRegistry.set(MsgUpdateGroupPolicyDecisionPolicyResponse.$type, MsgUpdateGroupPolicyDecisionPolicyResponse);
 
 function createBaseMsgUpdateGroupPolicyMetadata(): MsgUpdateGroupPolicyMetadata {
-  return {
-    $type: 'cosmos.group.v1.MsgUpdateGroupPolicyMetadata',
-    admin: '',
-    groupPolicyAddress: '',
-    metadata: '',
-  };
+  return { $type: "cosmos.group.v1.MsgUpdateGroupPolicyMetadata", admin: "", groupPolicyAddress: "", metadata: "" };
 }
 
 export const MsgUpdateGroupPolicyMetadata = {
-  $type: 'cosmos.group.v1.MsgUpdateGroupPolicyMetadata' as const,
+  $type: "cosmos.group.v1.MsgUpdateGroupPolicyMetadata" as const,
 
-  encode(
-    message: MsgUpdateGroupPolicyMetadata,
-    writer: _m0.Writer = _m0.Writer.create(),
-  ): _m0.Writer {
-    if (message.admin !== '') {
+  encode(message: MsgUpdateGroupPolicyMetadata, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+    if (message.admin !== "") {
       writer.uint32(10).string(message.admin);
     }
-    if (message.groupPolicyAddress !== '') {
+    if (message.groupPolicyAddress !== "") {
       writer.uint32(18).string(message.groupPolicyAddress);
     }
-    if (message.metadata !== '') {
+    if (message.metadata !== "") {
       writer.uint32(26).string(message.metadata);
     }
     return writer;
   },
 
-  decode(
-    input: _m0.Reader | Uint8Array,
-    length?: number,
-  ): MsgUpdateGroupPolicyMetadata {
+  decode(input: _m0.Reader | Uint8Array, length?: number): MsgUpdateGroupPolicyMetadata {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMsgUpdateGroupPolicyMetadata();
@@ -1700,57 +1483,47 @@ export const MsgUpdateGroupPolicyMetadata = {
   fromJSON(object: any): MsgUpdateGroupPolicyMetadata {
     return {
       $type: MsgUpdateGroupPolicyMetadata.$type,
-      admin: isSet(object.admin) ? String(object.admin) : '',
-      groupPolicyAddress: isSet(object.groupPolicyAddress)
-        ? String(object.groupPolicyAddress)
-        : '',
-      metadata: isSet(object.metadata) ? String(object.metadata) : '',
+      admin: isSet(object.admin) ? String(object.admin) : "",
+      groupPolicyAddress: isSet(object.groupPolicyAddress) ? String(object.groupPolicyAddress) : "",
+      metadata: isSet(object.metadata) ? String(object.metadata) : "",
     };
   },
 
   toJSON(message: MsgUpdateGroupPolicyMetadata): unknown {
     const obj: any = {};
     message.admin !== undefined && (obj.admin = message.admin);
-    message.groupPolicyAddress !== undefined &&
-      (obj.groupPolicyAddress = message.groupPolicyAddress);
+    message.groupPolicyAddress !== undefined && (obj.groupPolicyAddress = message.groupPolicyAddress);
     message.metadata !== undefined && (obj.metadata = message.metadata);
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<MsgUpdateGroupPolicyMetadata>, I>>(
-    object: I,
-  ): MsgUpdateGroupPolicyMetadata {
+  create(base?: DeepPartial<MsgUpdateGroupPolicyMetadata>): MsgUpdateGroupPolicyMetadata {
+    return MsgUpdateGroupPolicyMetadata.fromPartial(base ?? {});
+  },
+
+  fromPartial(object: DeepPartial<MsgUpdateGroupPolicyMetadata>): MsgUpdateGroupPolicyMetadata {
     const message = createBaseMsgUpdateGroupPolicyMetadata();
-    message.admin = object.admin ?? '';
-    message.groupPolicyAddress = object.groupPolicyAddress ?? '';
-    message.metadata = object.metadata ?? '';
+    message.admin = object.admin ?? "";
+    message.groupPolicyAddress = object.groupPolicyAddress ?? "";
+    message.metadata = object.metadata ?? "";
     return message;
   },
 };
 
-messageTypeRegistry.set(
-  MsgUpdateGroupPolicyMetadata.$type,
-  MsgUpdateGroupPolicyMetadata,
-);
+messageTypeRegistry.set(MsgUpdateGroupPolicyMetadata.$type, MsgUpdateGroupPolicyMetadata);
 
 function createBaseMsgUpdateGroupPolicyMetadataResponse(): MsgUpdateGroupPolicyMetadataResponse {
-  return { $type: 'cosmos.group.v1.MsgUpdateGroupPolicyMetadataResponse' };
+  return { $type: "cosmos.group.v1.MsgUpdateGroupPolicyMetadataResponse" };
 }
 
 export const MsgUpdateGroupPolicyMetadataResponse = {
-  $type: 'cosmos.group.v1.MsgUpdateGroupPolicyMetadataResponse' as const,
+  $type: "cosmos.group.v1.MsgUpdateGroupPolicyMetadataResponse" as const,
 
-  encode(
-    _: MsgUpdateGroupPolicyMetadataResponse,
-    writer: _m0.Writer = _m0.Writer.create(),
-  ): _m0.Writer {
+  encode(_: MsgUpdateGroupPolicyMetadataResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     return writer;
   },
 
-  decode(
-    input: _m0.Reader | Uint8Array,
-    length?: number,
-  ): MsgUpdateGroupPolicyMetadataResponse {
+  decode(input: _m0.Reader | Uint8Array, length?: number): MsgUpdateGroupPolicyMetadataResponse {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMsgUpdateGroupPolicyMetadataResponse();
@@ -1766,9 +1539,7 @@ export const MsgUpdateGroupPolicyMetadataResponse = {
   },
 
   fromJSON(_: any): MsgUpdateGroupPolicyMetadataResponse {
-    return {
-      $type: MsgUpdateGroupPolicyMetadataResponse.$type,
-    };
+    return { $type: MsgUpdateGroupPolicyMetadataResponse.$type };
   },
 
   toJSON(_: MsgUpdateGroupPolicyMetadataResponse): unknown {
@@ -1776,44 +1547,40 @@ export const MsgUpdateGroupPolicyMetadataResponse = {
     return obj;
   },
 
-  fromPartial<
-    I extends Exact<DeepPartial<MsgUpdateGroupPolicyMetadataResponse>, I>,
-  >(_: I): MsgUpdateGroupPolicyMetadataResponse {
+  create(base?: DeepPartial<MsgUpdateGroupPolicyMetadataResponse>): MsgUpdateGroupPolicyMetadataResponse {
+    return MsgUpdateGroupPolicyMetadataResponse.fromPartial(base ?? {});
+  },
+
+  fromPartial(_: DeepPartial<MsgUpdateGroupPolicyMetadataResponse>): MsgUpdateGroupPolicyMetadataResponse {
     const message = createBaseMsgUpdateGroupPolicyMetadataResponse();
     return message;
   },
 };
 
-messageTypeRegistry.set(
-  MsgUpdateGroupPolicyMetadataResponse.$type,
-  MsgUpdateGroupPolicyMetadataResponse,
-);
+messageTypeRegistry.set(MsgUpdateGroupPolicyMetadataResponse.$type, MsgUpdateGroupPolicyMetadataResponse);
 
 function createBaseMsgSubmitProposal(): MsgSubmitProposal {
   return {
-    $type: 'cosmos.group.v1.MsgSubmitProposal',
-    groupPolicyAddress: '',
+    $type: "cosmos.group.v1.MsgSubmitProposal",
+    groupPolicyAddress: "",
     proposers: [],
-    metadata: '',
+    metadata: "",
     messages: [],
     exec: 0,
   };
 }
 
 export const MsgSubmitProposal = {
-  $type: 'cosmos.group.v1.MsgSubmitProposal' as const,
+  $type: "cosmos.group.v1.MsgSubmitProposal" as const,
 
-  encode(
-    message: MsgSubmitProposal,
-    writer: _m0.Writer = _m0.Writer.create(),
-  ): _m0.Writer {
-    if (message.groupPolicyAddress !== '') {
+  encode(message: MsgSubmitProposal, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+    if (message.groupPolicyAddress !== "") {
       writer.uint32(10).string(message.groupPolicyAddress);
     }
     for (const v of message.proposers) {
       writer.uint32(18).string(v!);
     }
-    if (message.metadata !== '') {
+    if (message.metadata !== "") {
       writer.uint32(26).string(message.metadata);
     }
     for (const v of message.messages) {
@@ -1858,32 +1625,25 @@ export const MsgSubmitProposal = {
   fromJSON(object: any): MsgSubmitProposal {
     return {
       $type: MsgSubmitProposal.$type,
-      groupPolicyAddress: isSet(object.groupPolicyAddress)
-        ? String(object.groupPolicyAddress)
-        : '',
-      proposers: Array.isArray(object?.proposers)
-        ? object.proposers.map((e: any) => String(e))
-        : [],
-      metadata: isSet(object.metadata) ? String(object.metadata) : '',
-      messages: Array.isArray(object?.messages)
-        ? object.messages.map((e: any) => Any.fromJSON(e))
-        : [],
+      groupPolicyAddress: isSet(object.groupPolicyAddress) ? String(object.groupPolicyAddress) : "",
+      proposers: Array.isArray(object?.proposers) ? object.proposers.map((e: any) => String(e)) : [],
+      metadata: isSet(object.metadata) ? String(object.metadata) : "",
+      messages: Array.isArray(object?.messages) ? object.messages.map((e: any) => Any.fromJSON(e)) : [],
       exec: isSet(object.exec) ? execFromJSON(object.exec) : 0,
     };
   },
 
   toJSON(message: MsgSubmitProposal): unknown {
     const obj: any = {};
-    message.groupPolicyAddress !== undefined &&
-      (obj.groupPolicyAddress = message.groupPolicyAddress);
+    message.groupPolicyAddress !== undefined && (obj.groupPolicyAddress = message.groupPolicyAddress);
     if (message.proposers) {
-      obj.proposers = message.proposers.map(e => e);
+      obj.proposers = message.proposers.map((e) => e);
     } else {
       obj.proposers = [];
     }
     message.metadata !== undefined && (obj.metadata = message.metadata);
     if (message.messages) {
-      obj.messages = message.messages.map(e => (e ? Any.toJSON(e) : undefined));
+      obj.messages = message.messages.map((e) => e ? Any.toJSON(e) : undefined);
     } else {
       obj.messages = [];
     }
@@ -1891,14 +1651,16 @@ export const MsgSubmitProposal = {
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<MsgSubmitProposal>, I>>(
-    object: I,
-  ): MsgSubmitProposal {
+  create(base?: DeepPartial<MsgSubmitProposal>): MsgSubmitProposal {
+    return MsgSubmitProposal.fromPartial(base ?? {});
+  },
+
+  fromPartial(object: DeepPartial<MsgSubmitProposal>): MsgSubmitProposal {
     const message = createBaseMsgSubmitProposal();
-    message.groupPolicyAddress = object.groupPolicyAddress ?? '';
-    message.proposers = object.proposers?.map(e => e) || [];
-    message.metadata = object.metadata ?? '';
-    message.messages = object.messages?.map(e => Any.fromPartial(e)) || [];
+    message.groupPolicyAddress = object.groupPolicyAddress ?? "";
+    message.proposers = object.proposers?.map((e) => e) || [];
+    message.metadata = object.metadata ?? "";
+    message.messages = object.messages?.map((e) => Any.fromPartial(e)) || [];
     message.exec = object.exec ?? 0;
     return message;
   },
@@ -1907,29 +1669,20 @@ export const MsgSubmitProposal = {
 messageTypeRegistry.set(MsgSubmitProposal.$type, MsgSubmitProposal);
 
 function createBaseMsgSubmitProposalResponse(): MsgSubmitProposalResponse {
-  return {
-    $type: 'cosmos.group.v1.MsgSubmitProposalResponse',
-    proposalId: Long.UZERO,
-  };
+  return { $type: "cosmos.group.v1.MsgSubmitProposalResponse", proposalId: Long.UZERO };
 }
 
 export const MsgSubmitProposalResponse = {
-  $type: 'cosmos.group.v1.MsgSubmitProposalResponse' as const,
+  $type: "cosmos.group.v1.MsgSubmitProposalResponse" as const,
 
-  encode(
-    message: MsgSubmitProposalResponse,
-    writer: _m0.Writer = _m0.Writer.create(),
-  ): _m0.Writer {
+  encode(message: MsgSubmitProposalResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (!message.proposalId.isZero()) {
       writer.uint32(8).uint64(message.proposalId);
     }
     return writer;
   },
 
-  decode(
-    input: _m0.Reader | Uint8Array,
-    length?: number,
-  ): MsgSubmitProposalResponse {
+  decode(input: _m0.Reader | Uint8Array, length?: number): MsgSubmitProposalResponse {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMsgSubmitProposalResponse();
@@ -1950,55 +1703,43 @@ export const MsgSubmitProposalResponse = {
   fromJSON(object: any): MsgSubmitProposalResponse {
     return {
       $type: MsgSubmitProposalResponse.$type,
-      proposalId: isSet(object.proposalId)
-        ? Long.fromString(object.proposalId)
-        : Long.UZERO,
+      proposalId: isSet(object.proposalId) ? Long.fromValue(object.proposalId) : Long.UZERO,
     };
   },
 
   toJSON(message: MsgSubmitProposalResponse): unknown {
     const obj: any = {};
-    message.proposalId !== undefined &&
-      (obj.proposalId = (message.proposalId || Long.UZERO).toString());
+    message.proposalId !== undefined && (obj.proposalId = (message.proposalId || Long.UZERO).toString());
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<MsgSubmitProposalResponse>, I>>(
-    object: I,
-  ): MsgSubmitProposalResponse {
+  create(base?: DeepPartial<MsgSubmitProposalResponse>): MsgSubmitProposalResponse {
+    return MsgSubmitProposalResponse.fromPartial(base ?? {});
+  },
+
+  fromPartial(object: DeepPartial<MsgSubmitProposalResponse>): MsgSubmitProposalResponse {
     const message = createBaseMsgSubmitProposalResponse();
-    message.proposalId =
-      object.proposalId !== undefined && object.proposalId !== null
-        ? Long.fromValue(object.proposalId)
-        : Long.UZERO;
+    message.proposalId = (object.proposalId !== undefined && object.proposalId !== null)
+      ? Long.fromValue(object.proposalId)
+      : Long.UZERO;
     return message;
   },
 };
 
-messageTypeRegistry.set(
-  MsgSubmitProposalResponse.$type,
-  MsgSubmitProposalResponse,
-);
+messageTypeRegistry.set(MsgSubmitProposalResponse.$type, MsgSubmitProposalResponse);
 
 function createBaseMsgWithdrawProposal(): MsgWithdrawProposal {
-  return {
-    $type: 'cosmos.group.v1.MsgWithdrawProposal',
-    proposalId: Long.UZERO,
-    address: '',
-  };
+  return { $type: "cosmos.group.v1.MsgWithdrawProposal", proposalId: Long.UZERO, address: "" };
 }
 
 export const MsgWithdrawProposal = {
-  $type: 'cosmos.group.v1.MsgWithdrawProposal' as const,
+  $type: "cosmos.group.v1.MsgWithdrawProposal" as const,
 
-  encode(
-    message: MsgWithdrawProposal,
-    writer: _m0.Writer = _m0.Writer.create(),
-  ): _m0.Writer {
+  encode(message: MsgWithdrawProposal, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (!message.proposalId.isZero()) {
       writer.uint32(8).uint64(message.proposalId);
     }
-    if (message.address !== '') {
+    if (message.address !== "") {
       writer.uint32(18).string(message.address);
     }
     return writer;
@@ -2028,30 +1769,28 @@ export const MsgWithdrawProposal = {
   fromJSON(object: any): MsgWithdrawProposal {
     return {
       $type: MsgWithdrawProposal.$type,
-      proposalId: isSet(object.proposalId)
-        ? Long.fromString(object.proposalId)
-        : Long.UZERO,
-      address: isSet(object.address) ? String(object.address) : '',
+      proposalId: isSet(object.proposalId) ? Long.fromValue(object.proposalId) : Long.UZERO,
+      address: isSet(object.address) ? String(object.address) : "",
     };
   },
 
   toJSON(message: MsgWithdrawProposal): unknown {
     const obj: any = {};
-    message.proposalId !== undefined &&
-      (obj.proposalId = (message.proposalId || Long.UZERO).toString());
+    message.proposalId !== undefined && (obj.proposalId = (message.proposalId || Long.UZERO).toString());
     message.address !== undefined && (obj.address = message.address);
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<MsgWithdrawProposal>, I>>(
-    object: I,
-  ): MsgWithdrawProposal {
+  create(base?: DeepPartial<MsgWithdrawProposal>): MsgWithdrawProposal {
+    return MsgWithdrawProposal.fromPartial(base ?? {});
+  },
+
+  fromPartial(object: DeepPartial<MsgWithdrawProposal>): MsgWithdrawProposal {
     const message = createBaseMsgWithdrawProposal();
-    message.proposalId =
-      object.proposalId !== undefined && object.proposalId !== null
-        ? Long.fromValue(object.proposalId)
-        : Long.UZERO;
-    message.address = object.address ?? '';
+    message.proposalId = (object.proposalId !== undefined && object.proposalId !== null)
+      ? Long.fromValue(object.proposalId)
+      : Long.UZERO;
+    message.address = object.address ?? "";
     return message;
   },
 };
@@ -2059,23 +1798,17 @@ export const MsgWithdrawProposal = {
 messageTypeRegistry.set(MsgWithdrawProposal.$type, MsgWithdrawProposal);
 
 function createBaseMsgWithdrawProposalResponse(): MsgWithdrawProposalResponse {
-  return { $type: 'cosmos.group.v1.MsgWithdrawProposalResponse' };
+  return { $type: "cosmos.group.v1.MsgWithdrawProposalResponse" };
 }
 
 export const MsgWithdrawProposalResponse = {
-  $type: 'cosmos.group.v1.MsgWithdrawProposalResponse' as const,
+  $type: "cosmos.group.v1.MsgWithdrawProposalResponse" as const,
 
-  encode(
-    _: MsgWithdrawProposalResponse,
-    writer: _m0.Writer = _m0.Writer.create(),
-  ): _m0.Writer {
+  encode(_: MsgWithdrawProposalResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     return writer;
   },
 
-  decode(
-    input: _m0.Reader | Uint8Array,
-    length?: number,
-  ): MsgWithdrawProposalResponse {
+  decode(input: _m0.Reader | Uint8Array, length?: number): MsgWithdrawProposalResponse {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMsgWithdrawProposalResponse();
@@ -2091,9 +1824,7 @@ export const MsgWithdrawProposalResponse = {
   },
 
   fromJSON(_: any): MsgWithdrawProposalResponse {
-    return {
-      $type: MsgWithdrawProposalResponse.$type,
-    };
+    return { $type: MsgWithdrawProposalResponse.$type };
   },
 
   toJSON(_: MsgWithdrawProposalResponse): unknown {
@@ -2101,47 +1832,36 @@ export const MsgWithdrawProposalResponse = {
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<MsgWithdrawProposalResponse>, I>>(
-    _: I,
-  ): MsgWithdrawProposalResponse {
+  create(base?: DeepPartial<MsgWithdrawProposalResponse>): MsgWithdrawProposalResponse {
+    return MsgWithdrawProposalResponse.fromPartial(base ?? {});
+  },
+
+  fromPartial(_: DeepPartial<MsgWithdrawProposalResponse>): MsgWithdrawProposalResponse {
     const message = createBaseMsgWithdrawProposalResponse();
     return message;
   },
 };
 
-messageTypeRegistry.set(
-  MsgWithdrawProposalResponse.$type,
-  MsgWithdrawProposalResponse,
-);
+messageTypeRegistry.set(MsgWithdrawProposalResponse.$type, MsgWithdrawProposalResponse);
 
 function createBaseMsgVote(): MsgVote {
-  return {
-    $type: 'cosmos.group.v1.MsgVote',
-    proposalId: Long.UZERO,
-    voter: '',
-    option: 0,
-    metadata: '',
-    exec: 0,
-  };
+  return { $type: "cosmos.group.v1.MsgVote", proposalId: Long.UZERO, voter: "", option: 0, metadata: "", exec: 0 };
 }
 
 export const MsgVote = {
-  $type: 'cosmos.group.v1.MsgVote' as const,
+  $type: "cosmos.group.v1.MsgVote" as const,
 
-  encode(
-    message: MsgVote,
-    writer: _m0.Writer = _m0.Writer.create(),
-  ): _m0.Writer {
+  encode(message: MsgVote, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (!message.proposalId.isZero()) {
       writer.uint32(8).uint64(message.proposalId);
     }
-    if (message.voter !== '') {
+    if (message.voter !== "") {
       writer.uint32(18).string(message.voter);
     }
     if (message.option !== 0) {
       writer.uint32(24).int32(message.option);
     }
-    if (message.metadata !== '') {
+    if (message.metadata !== "") {
       writer.uint32(34).string(message.metadata);
     }
     if (message.exec !== 0) {
@@ -2183,37 +1903,36 @@ export const MsgVote = {
   fromJSON(object: any): MsgVote {
     return {
       $type: MsgVote.$type,
-      proposalId: isSet(object.proposalId)
-        ? Long.fromString(object.proposalId)
-        : Long.UZERO,
-      voter: isSet(object.voter) ? String(object.voter) : '',
+      proposalId: isSet(object.proposalId) ? Long.fromValue(object.proposalId) : Long.UZERO,
+      voter: isSet(object.voter) ? String(object.voter) : "",
       option: isSet(object.option) ? voteOptionFromJSON(object.option) : 0,
-      metadata: isSet(object.metadata) ? String(object.metadata) : '',
+      metadata: isSet(object.metadata) ? String(object.metadata) : "",
       exec: isSet(object.exec) ? execFromJSON(object.exec) : 0,
     };
   },
 
   toJSON(message: MsgVote): unknown {
     const obj: any = {};
-    message.proposalId !== undefined &&
-      (obj.proposalId = (message.proposalId || Long.UZERO).toString());
+    message.proposalId !== undefined && (obj.proposalId = (message.proposalId || Long.UZERO).toString());
     message.voter !== undefined && (obj.voter = message.voter);
-    message.option !== undefined &&
-      (obj.option = voteOptionToJSON(message.option));
+    message.option !== undefined && (obj.option = voteOptionToJSON(message.option));
     message.metadata !== undefined && (obj.metadata = message.metadata);
     message.exec !== undefined && (obj.exec = execToJSON(message.exec));
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<MsgVote>, I>>(object: I): MsgVote {
+  create(base?: DeepPartial<MsgVote>): MsgVote {
+    return MsgVote.fromPartial(base ?? {});
+  },
+
+  fromPartial(object: DeepPartial<MsgVote>): MsgVote {
     const message = createBaseMsgVote();
-    message.proposalId =
-      object.proposalId !== undefined && object.proposalId !== null
-        ? Long.fromValue(object.proposalId)
-        : Long.UZERO;
-    message.voter = object.voter ?? '';
+    message.proposalId = (object.proposalId !== undefined && object.proposalId !== null)
+      ? Long.fromValue(object.proposalId)
+      : Long.UZERO;
+    message.voter = object.voter ?? "";
     message.option = object.option ?? 0;
-    message.metadata = object.metadata ?? '';
+    message.metadata = object.metadata ?? "";
     message.exec = object.exec ?? 0;
     return message;
   },
@@ -2222,16 +1941,13 @@ export const MsgVote = {
 messageTypeRegistry.set(MsgVote.$type, MsgVote);
 
 function createBaseMsgVoteResponse(): MsgVoteResponse {
-  return { $type: 'cosmos.group.v1.MsgVoteResponse' };
+  return { $type: "cosmos.group.v1.MsgVoteResponse" };
 }
 
 export const MsgVoteResponse = {
-  $type: 'cosmos.group.v1.MsgVoteResponse' as const,
+  $type: "cosmos.group.v1.MsgVoteResponse" as const,
 
-  encode(
-    _: MsgVoteResponse,
-    writer: _m0.Writer = _m0.Writer.create(),
-  ): _m0.Writer {
+  encode(_: MsgVoteResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     return writer;
   },
 
@@ -2251,9 +1967,7 @@ export const MsgVoteResponse = {
   },
 
   fromJSON(_: any): MsgVoteResponse {
-    return {
-      $type: MsgVoteResponse.$type,
-    };
+    return { $type: MsgVoteResponse.$type };
   },
 
   toJSON(_: MsgVoteResponse): unknown {
@@ -2261,9 +1975,11 @@ export const MsgVoteResponse = {
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<MsgVoteResponse>, I>>(
-    _: I,
-  ): MsgVoteResponse {
+  create(base?: DeepPartial<MsgVoteResponse>): MsgVoteResponse {
+    return MsgVoteResponse.fromPartial(base ?? {});
+  },
+
+  fromPartial(_: DeepPartial<MsgVoteResponse>): MsgVoteResponse {
     const message = createBaseMsgVoteResponse();
     return message;
   },
@@ -2272,24 +1988,17 @@ export const MsgVoteResponse = {
 messageTypeRegistry.set(MsgVoteResponse.$type, MsgVoteResponse);
 
 function createBaseMsgExec(): MsgExec {
-  return {
-    $type: 'cosmos.group.v1.MsgExec',
-    proposalId: Long.UZERO,
-    executor: '',
-  };
+  return { $type: "cosmos.group.v1.MsgExec", proposalId: Long.UZERO, executor: "" };
 }
 
 export const MsgExec = {
-  $type: 'cosmos.group.v1.MsgExec' as const,
+  $type: "cosmos.group.v1.MsgExec" as const,
 
-  encode(
-    message: MsgExec,
-    writer: _m0.Writer = _m0.Writer.create(),
-  ): _m0.Writer {
+  encode(message: MsgExec, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (!message.proposalId.isZero()) {
       writer.uint32(8).uint64(message.proposalId);
     }
-    if (message.executor !== '') {
+    if (message.executor !== "") {
       writer.uint32(18).string(message.executor);
     }
     return writer;
@@ -2319,28 +2028,28 @@ export const MsgExec = {
   fromJSON(object: any): MsgExec {
     return {
       $type: MsgExec.$type,
-      proposalId: isSet(object.proposalId)
-        ? Long.fromString(object.proposalId)
-        : Long.UZERO,
-      executor: isSet(object.executor) ? String(object.executor) : '',
+      proposalId: isSet(object.proposalId) ? Long.fromValue(object.proposalId) : Long.UZERO,
+      executor: isSet(object.executor) ? String(object.executor) : "",
     };
   },
 
   toJSON(message: MsgExec): unknown {
     const obj: any = {};
-    message.proposalId !== undefined &&
-      (obj.proposalId = (message.proposalId || Long.UZERO).toString());
+    message.proposalId !== undefined && (obj.proposalId = (message.proposalId || Long.UZERO).toString());
     message.executor !== undefined && (obj.executor = message.executor);
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<MsgExec>, I>>(object: I): MsgExec {
+  create(base?: DeepPartial<MsgExec>): MsgExec {
+    return MsgExec.fromPartial(base ?? {});
+  },
+
+  fromPartial(object: DeepPartial<MsgExec>): MsgExec {
     const message = createBaseMsgExec();
-    message.proposalId =
-      object.proposalId !== undefined && object.proposalId !== null
-        ? Long.fromValue(object.proposalId)
-        : Long.UZERO;
-    message.executor = object.executor ?? '';
+    message.proposalId = (object.proposalId !== undefined && object.proposalId !== null)
+      ? Long.fromValue(object.proposalId)
+      : Long.UZERO;
+    message.executor = object.executor ?? "";
     return message;
   },
 };
@@ -2348,16 +2057,13 @@ export const MsgExec = {
 messageTypeRegistry.set(MsgExec.$type, MsgExec);
 
 function createBaseMsgExecResponse(): MsgExecResponse {
-  return { $type: 'cosmos.group.v1.MsgExecResponse', result: 0 };
+  return { $type: "cosmos.group.v1.MsgExecResponse", result: 0 };
 }
 
 export const MsgExecResponse = {
-  $type: 'cosmos.group.v1.MsgExecResponse' as const,
+  $type: "cosmos.group.v1.MsgExecResponse" as const,
 
-  encode(
-    message: MsgExecResponse,
-    writer: _m0.Writer = _m0.Writer.create(),
-  ): _m0.Writer {
+  encode(message: MsgExecResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.result !== 0) {
       writer.uint32(16).int32(message.result);
     }
@@ -2385,22 +2091,21 @@ export const MsgExecResponse = {
   fromJSON(object: any): MsgExecResponse {
     return {
       $type: MsgExecResponse.$type,
-      result: isSet(object.result)
-        ? proposalExecutorResultFromJSON(object.result)
-        : 0,
+      result: isSet(object.result) ? proposalExecutorResultFromJSON(object.result) : 0,
     };
   },
 
   toJSON(message: MsgExecResponse): unknown {
     const obj: any = {};
-    message.result !== undefined &&
-      (obj.result = proposalExecutorResultToJSON(message.result));
+    message.result !== undefined && (obj.result = proposalExecutorResultToJSON(message.result));
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<MsgExecResponse>, I>>(
-    object: I,
-  ): MsgExecResponse {
+  create(base?: DeepPartial<MsgExecResponse>): MsgExecResponse {
+    return MsgExecResponse.fromPartial(base ?? {});
+  },
+
+  fromPartial(object: DeepPartial<MsgExecResponse>): MsgExecResponse {
     const message = createBaseMsgExecResponse();
     message.result = object.result ?? 0;
     return message;
@@ -2410,21 +2115,14 @@ export const MsgExecResponse = {
 messageTypeRegistry.set(MsgExecResponse.$type, MsgExecResponse);
 
 function createBaseMsgLeaveGroup(): MsgLeaveGroup {
-  return {
-    $type: 'cosmos.group.v1.MsgLeaveGroup',
-    address: '',
-    groupId: Long.UZERO,
-  };
+  return { $type: "cosmos.group.v1.MsgLeaveGroup", address: "", groupId: Long.UZERO };
 }
 
 export const MsgLeaveGroup = {
-  $type: 'cosmos.group.v1.MsgLeaveGroup' as const,
+  $type: "cosmos.group.v1.MsgLeaveGroup" as const,
 
-  encode(
-    message: MsgLeaveGroup,
-    writer: _m0.Writer = _m0.Writer.create(),
-  ): _m0.Writer {
-    if (message.address !== '') {
+  encode(message: MsgLeaveGroup, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+    if (message.address !== "") {
       writer.uint32(10).string(message.address);
     }
     if (!message.groupId.isZero()) {
@@ -2457,30 +2155,28 @@ export const MsgLeaveGroup = {
   fromJSON(object: any): MsgLeaveGroup {
     return {
       $type: MsgLeaveGroup.$type,
-      address: isSet(object.address) ? String(object.address) : '',
-      groupId: isSet(object.groupId)
-        ? Long.fromString(object.groupId)
-        : Long.UZERO,
+      address: isSet(object.address) ? String(object.address) : "",
+      groupId: isSet(object.groupId) ? Long.fromValue(object.groupId) : Long.UZERO,
     };
   },
 
   toJSON(message: MsgLeaveGroup): unknown {
     const obj: any = {};
     message.address !== undefined && (obj.address = message.address);
-    message.groupId !== undefined &&
-      (obj.groupId = (message.groupId || Long.UZERO).toString());
+    message.groupId !== undefined && (obj.groupId = (message.groupId || Long.UZERO).toString());
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<MsgLeaveGroup>, I>>(
-    object: I,
-  ): MsgLeaveGroup {
+  create(base?: DeepPartial<MsgLeaveGroup>): MsgLeaveGroup {
+    return MsgLeaveGroup.fromPartial(base ?? {});
+  },
+
+  fromPartial(object: DeepPartial<MsgLeaveGroup>): MsgLeaveGroup {
     const message = createBaseMsgLeaveGroup();
-    message.address = object.address ?? '';
-    message.groupId =
-      object.groupId !== undefined && object.groupId !== null
-        ? Long.fromValue(object.groupId)
-        : Long.UZERO;
+    message.address = object.address ?? "";
+    message.groupId = (object.groupId !== undefined && object.groupId !== null)
+      ? Long.fromValue(object.groupId)
+      : Long.UZERO;
     return message;
   },
 };
@@ -2488,23 +2184,17 @@ export const MsgLeaveGroup = {
 messageTypeRegistry.set(MsgLeaveGroup.$type, MsgLeaveGroup);
 
 function createBaseMsgLeaveGroupResponse(): MsgLeaveGroupResponse {
-  return { $type: 'cosmos.group.v1.MsgLeaveGroupResponse' };
+  return { $type: "cosmos.group.v1.MsgLeaveGroupResponse" };
 }
 
 export const MsgLeaveGroupResponse = {
-  $type: 'cosmos.group.v1.MsgLeaveGroupResponse' as const,
+  $type: "cosmos.group.v1.MsgLeaveGroupResponse" as const,
 
-  encode(
-    _: MsgLeaveGroupResponse,
-    writer: _m0.Writer = _m0.Writer.create(),
-  ): _m0.Writer {
+  encode(_: MsgLeaveGroupResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     return writer;
   },
 
-  decode(
-    input: _m0.Reader | Uint8Array,
-    length?: number,
-  ): MsgLeaveGroupResponse {
+  decode(input: _m0.Reader | Uint8Array, length?: number): MsgLeaveGroupResponse {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMsgLeaveGroupResponse();
@@ -2520,9 +2210,7 @@ export const MsgLeaveGroupResponse = {
   },
 
   fromJSON(_: any): MsgLeaveGroupResponse {
-    return {
-      $type: MsgLeaveGroupResponse.$type,
-    };
+    return { $type: MsgLeaveGroupResponse.$type };
   },
 
   toJSON(_: MsgLeaveGroupResponse): unknown {
@@ -2530,9 +2218,11 @@ export const MsgLeaveGroupResponse = {
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<MsgLeaveGroupResponse>, I>>(
-    _: I,
-  ): MsgLeaveGroupResponse {
+  create(base?: DeepPartial<MsgLeaveGroupResponse>): MsgLeaveGroupResponse {
+    return MsgLeaveGroupResponse.fromPartial(base ?? {});
+  },
+
+  fromPartial(_: DeepPartial<MsgLeaveGroupResponse>): MsgLeaveGroupResponse {
     const message = createBaseMsgLeaveGroupResponse();
     return message;
   },
@@ -2543,33 +2233,19 @@ messageTypeRegistry.set(MsgLeaveGroupResponse.$type, MsgLeaveGroupResponse);
 /** Msg is the cosmos.group.v1 Msg service. */
 export interface Msg {
   /** CreateGroup creates a new group with an admin account address, a list of members and some optional metadata. */
-  CreateGroup(
-    request: DeepPartial<MsgCreateGroup>,
-  ): Promise<MsgCreateGroupResponse>;
+  CreateGroup(request: DeepPartial<MsgCreateGroup>): Promise<MsgCreateGroupResponse>;
   /** UpdateGroupMembers updates the group members with given group id and admin address. */
-  UpdateGroupMembers(
-    request: DeepPartial<MsgUpdateGroupMembers>,
-  ): Promise<MsgUpdateGroupMembersResponse>;
+  UpdateGroupMembers(request: DeepPartial<MsgUpdateGroupMembers>): Promise<MsgUpdateGroupMembersResponse>;
   /** UpdateGroupAdmin updates the group admin with given group id and previous admin address. */
-  UpdateGroupAdmin(
-    request: DeepPartial<MsgUpdateGroupAdmin>,
-  ): Promise<MsgUpdateGroupAdminResponse>;
+  UpdateGroupAdmin(request: DeepPartial<MsgUpdateGroupAdmin>): Promise<MsgUpdateGroupAdminResponse>;
   /** UpdateGroupMetadata updates the group metadata with given group id and admin address. */
-  UpdateGroupMetadata(
-    request: DeepPartial<MsgUpdateGroupMetadata>,
-  ): Promise<MsgUpdateGroupMetadataResponse>;
+  UpdateGroupMetadata(request: DeepPartial<MsgUpdateGroupMetadata>): Promise<MsgUpdateGroupMetadataResponse>;
   /** CreateGroupPolicy creates a new group policy using given DecisionPolicy. */
-  CreateGroupPolicy(
-    request: DeepPartial<MsgCreateGroupPolicy>,
-  ): Promise<MsgCreateGroupPolicyResponse>;
+  CreateGroupPolicy(request: DeepPartial<MsgCreateGroupPolicy>): Promise<MsgCreateGroupPolicyResponse>;
   /** CreateGroupWithPolicy creates a new group with policy. */
-  CreateGroupWithPolicy(
-    request: DeepPartial<MsgCreateGroupWithPolicy>,
-  ): Promise<MsgCreateGroupWithPolicyResponse>;
+  CreateGroupWithPolicy(request: DeepPartial<MsgCreateGroupWithPolicy>): Promise<MsgCreateGroupWithPolicyResponse>;
   /** UpdateGroupPolicyAdmin updates a group policy admin. */
-  UpdateGroupPolicyAdmin(
-    request: DeepPartial<MsgUpdateGroupPolicyAdmin>,
-  ): Promise<MsgUpdateGroupPolicyAdminResponse>;
+  UpdateGroupPolicyAdmin(request: DeepPartial<MsgUpdateGroupPolicyAdmin>): Promise<MsgUpdateGroupPolicyAdminResponse>;
   /** UpdateGroupPolicyDecisionPolicy allows a group policy's decision policy to be updated. */
   UpdateGroupPolicyDecisionPolicy(
     request: DeepPartial<MsgUpdateGroupPolicyDecisionPolicy>,
@@ -2579,26 +2255,22 @@ export interface Msg {
     request: DeepPartial<MsgUpdateGroupPolicyMetadata>,
   ): Promise<MsgUpdateGroupPolicyMetadataResponse>;
   /** SubmitProposal submits a new proposal. */
-  SubmitProposal(
-    request: DeepPartial<MsgSubmitProposal>,
-  ): Promise<MsgSubmitProposalResponse>;
+  SubmitProposal(request: DeepPartial<MsgSubmitProposal>): Promise<MsgSubmitProposalResponse>;
   /** WithdrawProposal withdraws a proposal. */
-  WithdrawProposal(
-    request: DeepPartial<MsgWithdrawProposal>,
-  ): Promise<MsgWithdrawProposalResponse>;
+  WithdrawProposal(request: DeepPartial<MsgWithdrawProposal>): Promise<MsgWithdrawProposalResponse>;
   /** Vote allows a voter to vote on a proposal. */
   Vote(request: DeepPartial<MsgVote>): Promise<MsgVoteResponse>;
   /** Exec executes a proposal. */
   Exec(request: DeepPartial<MsgExec>): Promise<MsgExecResponse>;
   /** LeaveGroup allows a group member to leave the group. */
-  LeaveGroup(
-    request: DeepPartial<MsgLeaveGroup>,
-  ): Promise<MsgLeaveGroupResponse>;
+  LeaveGroup(request: DeepPartial<MsgLeaveGroup>): Promise<MsgLeaveGroupResponse>;
 }
 
 export class MsgClientImpl implements Msg {
   private readonly rpc: Rpc;
-  constructor(rpc: Rpc) {
+  private readonly service: string;
+  constructor(rpc: Rpc, opts?: { service?: string }) {
+    this.service = opts?.service || "cosmos.group.v1.Msg";
     this.rpc = rpc;
     this.CreateGroup = this.CreateGroup.bind(this);
     this.UpdateGroupMembers = this.UpdateGroupMembers.bind(this);
@@ -2607,8 +2279,7 @@ export class MsgClientImpl implements Msg {
     this.CreateGroupPolicy = this.CreateGroupPolicy.bind(this);
     this.CreateGroupWithPolicy = this.CreateGroupWithPolicy.bind(this);
     this.UpdateGroupPolicyAdmin = this.UpdateGroupPolicyAdmin.bind(this);
-    this.UpdateGroupPolicyDecisionPolicy =
-      this.UpdateGroupPolicyDecisionPolicy.bind(this);
+    this.UpdateGroupPolicyDecisionPolicy = this.UpdateGroupPolicyDecisionPolicy.bind(this);
     this.UpdateGroupPolicyMetadata = this.UpdateGroupPolicyMetadata.bind(this);
     this.SubmitProposal = this.SubmitProposal.bind(this);
     this.WithdrawProposal = this.WithdrawProposal.bind(this);
@@ -2616,125 +2287,62 @@ export class MsgClientImpl implements Msg {
     this.Exec = this.Exec.bind(this);
     this.LeaveGroup = this.LeaveGroup.bind(this);
   }
-  CreateGroup(
-    request: DeepPartial<MsgCreateGroup>,
-  ): Promise<MsgCreateGroupResponse> {
+  CreateGroup(request: DeepPartial<MsgCreateGroup>): Promise<MsgCreateGroupResponse> {
     const fromPartial = MsgCreateGroup.fromPartial(request);
     const data = MsgCreateGroup.encode(fromPartial).finish();
-    const promise = this.rpc.request(
-      'cosmos.group.v1.Msg',
-      'CreateGroup',
-      data,
-    );
-    return promise.then(data =>
-      MsgCreateGroupResponse.decode(new _m0.Reader(data)),
-    );
+    const promise = this.rpc.request(this.service, "CreateGroup", data);
+    return promise.then((data) => MsgCreateGroupResponse.decode(new _m0.Reader(data)));
   }
 
-  UpdateGroupMembers(
-    request: DeepPartial<MsgUpdateGroupMembers>,
-  ): Promise<MsgUpdateGroupMembersResponse> {
+  UpdateGroupMembers(request: DeepPartial<MsgUpdateGroupMembers>): Promise<MsgUpdateGroupMembersResponse> {
     const fromPartial = MsgUpdateGroupMembers.fromPartial(request);
     const data = MsgUpdateGroupMembers.encode(fromPartial).finish();
-    const promise = this.rpc.request(
-      'cosmos.group.v1.Msg',
-      'UpdateGroupMembers',
-      data,
-    );
-    return promise.then(data =>
-      MsgUpdateGroupMembersResponse.decode(new _m0.Reader(data)),
-    );
+    const promise = this.rpc.request(this.service, "UpdateGroupMembers", data);
+    return promise.then((data) => MsgUpdateGroupMembersResponse.decode(new _m0.Reader(data)));
   }
 
-  UpdateGroupAdmin(
-    request: DeepPartial<MsgUpdateGroupAdmin>,
-  ): Promise<MsgUpdateGroupAdminResponse> {
+  UpdateGroupAdmin(request: DeepPartial<MsgUpdateGroupAdmin>): Promise<MsgUpdateGroupAdminResponse> {
     const fromPartial = MsgUpdateGroupAdmin.fromPartial(request);
     const data = MsgUpdateGroupAdmin.encode(fromPartial).finish();
-    const promise = this.rpc.request(
-      'cosmos.group.v1.Msg',
-      'UpdateGroupAdmin',
-      data,
-    );
-    return promise.then(data =>
-      MsgUpdateGroupAdminResponse.decode(new _m0.Reader(data)),
-    );
+    const promise = this.rpc.request(this.service, "UpdateGroupAdmin", data);
+    return promise.then((data) => MsgUpdateGroupAdminResponse.decode(new _m0.Reader(data)));
   }
 
-  UpdateGroupMetadata(
-    request: DeepPartial<MsgUpdateGroupMetadata>,
-  ): Promise<MsgUpdateGroupMetadataResponse> {
+  UpdateGroupMetadata(request: DeepPartial<MsgUpdateGroupMetadata>): Promise<MsgUpdateGroupMetadataResponse> {
     const fromPartial = MsgUpdateGroupMetadata.fromPartial(request);
     const data = MsgUpdateGroupMetadata.encode(fromPartial).finish();
-    const promise = this.rpc.request(
-      'cosmos.group.v1.Msg',
-      'UpdateGroupMetadata',
-      data,
-    );
-    return promise.then(data =>
-      MsgUpdateGroupMetadataResponse.decode(new _m0.Reader(data)),
-    );
+    const promise = this.rpc.request(this.service, "UpdateGroupMetadata", data);
+    return promise.then((data) => MsgUpdateGroupMetadataResponse.decode(new _m0.Reader(data)));
   }
 
-  CreateGroupPolicy(
-    request: DeepPartial<MsgCreateGroupPolicy>,
-  ): Promise<MsgCreateGroupPolicyResponse> {
+  CreateGroupPolicy(request: DeepPartial<MsgCreateGroupPolicy>): Promise<MsgCreateGroupPolicyResponse> {
     const fromPartial = MsgCreateGroupPolicy.fromPartial(request);
     const data = MsgCreateGroupPolicy.encode(fromPartial).finish();
-    const promise = this.rpc.request(
-      'cosmos.group.v1.Msg',
-      'CreateGroupPolicy',
-      data,
-    );
-    return promise.then(data =>
-      MsgCreateGroupPolicyResponse.decode(new _m0.Reader(data)),
-    );
+    const promise = this.rpc.request(this.service, "CreateGroupPolicy", data);
+    return promise.then((data) => MsgCreateGroupPolicyResponse.decode(new _m0.Reader(data)));
   }
 
-  CreateGroupWithPolicy(
-    request: DeepPartial<MsgCreateGroupWithPolicy>,
-  ): Promise<MsgCreateGroupWithPolicyResponse> {
+  CreateGroupWithPolicy(request: DeepPartial<MsgCreateGroupWithPolicy>): Promise<MsgCreateGroupWithPolicyResponse> {
     const fromPartial = MsgCreateGroupWithPolicy.fromPartial(request);
     const data = MsgCreateGroupWithPolicy.encode(fromPartial).finish();
-    const promise = this.rpc.request(
-      'cosmos.group.v1.Msg',
-      'CreateGroupWithPolicy',
-      data,
-    );
-    return promise.then(data =>
-      MsgCreateGroupWithPolicyResponse.decode(new _m0.Reader(data)),
-    );
+    const promise = this.rpc.request(this.service, "CreateGroupWithPolicy", data);
+    return promise.then((data) => MsgCreateGroupWithPolicyResponse.decode(new _m0.Reader(data)));
   }
 
-  UpdateGroupPolicyAdmin(
-    request: DeepPartial<MsgUpdateGroupPolicyAdmin>,
-  ): Promise<MsgUpdateGroupPolicyAdminResponse> {
+  UpdateGroupPolicyAdmin(request: DeepPartial<MsgUpdateGroupPolicyAdmin>): Promise<MsgUpdateGroupPolicyAdminResponse> {
     const fromPartial = MsgUpdateGroupPolicyAdmin.fromPartial(request);
     const data = MsgUpdateGroupPolicyAdmin.encode(fromPartial).finish();
-    const promise = this.rpc.request(
-      'cosmos.group.v1.Msg',
-      'UpdateGroupPolicyAdmin',
-      data,
-    );
-    return promise.then(data =>
-      MsgUpdateGroupPolicyAdminResponse.decode(new _m0.Reader(data)),
-    );
+    const promise = this.rpc.request(this.service, "UpdateGroupPolicyAdmin", data);
+    return promise.then((data) => MsgUpdateGroupPolicyAdminResponse.decode(new _m0.Reader(data)));
   }
 
   UpdateGroupPolicyDecisionPolicy(
     request: DeepPartial<MsgUpdateGroupPolicyDecisionPolicy>,
   ): Promise<MsgUpdateGroupPolicyDecisionPolicyResponse> {
     const fromPartial = MsgUpdateGroupPolicyDecisionPolicy.fromPartial(request);
-    const data =
-      MsgUpdateGroupPolicyDecisionPolicy.encode(fromPartial).finish();
-    const promise = this.rpc.request(
-      'cosmos.group.v1.Msg',
-      'UpdateGroupPolicyDecisionPolicy',
-      data,
-    );
-    return promise.then(data =>
-      MsgUpdateGroupPolicyDecisionPolicyResponse.decode(new _m0.Reader(data)),
-    );
+    const data = MsgUpdateGroupPolicyDecisionPolicy.encode(fromPartial).finish();
+    const promise = this.rpc.request(this.service, "UpdateGroupPolicyDecisionPolicy", data);
+    return promise.then((data) => MsgUpdateGroupPolicyDecisionPolicyResponse.decode(new _m0.Reader(data)));
   }
 
   UpdateGroupPolicyMetadata(
@@ -2742,108 +2350,57 @@ export class MsgClientImpl implements Msg {
   ): Promise<MsgUpdateGroupPolicyMetadataResponse> {
     const fromPartial = MsgUpdateGroupPolicyMetadata.fromPartial(request);
     const data = MsgUpdateGroupPolicyMetadata.encode(fromPartial).finish();
-    const promise = this.rpc.request(
-      'cosmos.group.v1.Msg',
-      'UpdateGroupPolicyMetadata',
-      data,
-    );
-    return promise.then(data =>
-      MsgUpdateGroupPolicyMetadataResponse.decode(new _m0.Reader(data)),
-    );
+    const promise = this.rpc.request(this.service, "UpdateGroupPolicyMetadata", data);
+    return promise.then((data) => MsgUpdateGroupPolicyMetadataResponse.decode(new _m0.Reader(data)));
   }
 
-  SubmitProposal(
-    request: DeepPartial<MsgSubmitProposal>,
-  ): Promise<MsgSubmitProposalResponse> {
+  SubmitProposal(request: DeepPartial<MsgSubmitProposal>): Promise<MsgSubmitProposalResponse> {
     const fromPartial = MsgSubmitProposal.fromPartial(request);
     const data = MsgSubmitProposal.encode(fromPartial).finish();
-    const promise = this.rpc.request(
-      'cosmos.group.v1.Msg',
-      'SubmitProposal',
-      data,
-    );
-    return promise.then(data =>
-      MsgSubmitProposalResponse.decode(new _m0.Reader(data)),
-    );
+    const promise = this.rpc.request(this.service, "SubmitProposal", data);
+    return promise.then((data) => MsgSubmitProposalResponse.decode(new _m0.Reader(data)));
   }
 
-  WithdrawProposal(
-    request: DeepPartial<MsgWithdrawProposal>,
-  ): Promise<MsgWithdrawProposalResponse> {
+  WithdrawProposal(request: DeepPartial<MsgWithdrawProposal>): Promise<MsgWithdrawProposalResponse> {
     const fromPartial = MsgWithdrawProposal.fromPartial(request);
     const data = MsgWithdrawProposal.encode(fromPartial).finish();
-    const promise = this.rpc.request(
-      'cosmos.group.v1.Msg',
-      'WithdrawProposal',
-      data,
-    );
-    return promise.then(data =>
-      MsgWithdrawProposalResponse.decode(new _m0.Reader(data)),
-    );
+    const promise = this.rpc.request(this.service, "WithdrawProposal", data);
+    return promise.then((data) => MsgWithdrawProposalResponse.decode(new _m0.Reader(data)));
   }
 
   Vote(request: DeepPartial<MsgVote>): Promise<MsgVoteResponse> {
     const fromPartial = MsgVote.fromPartial(request);
     const data = MsgVote.encode(fromPartial).finish();
-    const promise = this.rpc.request('cosmos.group.v1.Msg', 'Vote', data);
-    return promise.then(data => MsgVoteResponse.decode(new _m0.Reader(data)));
+    const promise = this.rpc.request(this.service, "Vote", data);
+    return promise.then((data) => MsgVoteResponse.decode(new _m0.Reader(data)));
   }
 
   Exec(request: DeepPartial<MsgExec>): Promise<MsgExecResponse> {
     const fromPartial = MsgExec.fromPartial(request);
     const data = MsgExec.encode(fromPartial).finish();
-    const promise = this.rpc.request('cosmos.group.v1.Msg', 'Exec', data);
-    return promise.then(data => MsgExecResponse.decode(new _m0.Reader(data)));
+    const promise = this.rpc.request(this.service, "Exec", data);
+    return promise.then((data) => MsgExecResponse.decode(new _m0.Reader(data)));
   }
 
-  LeaveGroup(
-    request: DeepPartial<MsgLeaveGroup>,
-  ): Promise<MsgLeaveGroupResponse> {
+  LeaveGroup(request: DeepPartial<MsgLeaveGroup>): Promise<MsgLeaveGroupResponse> {
     const fromPartial = MsgLeaveGroup.fromPartial(request);
     const data = MsgLeaveGroup.encode(fromPartial).finish();
-    const promise = this.rpc.request('cosmos.group.v1.Msg', 'LeaveGroup', data);
-    return promise.then(data =>
-      MsgLeaveGroupResponse.decode(new _m0.Reader(data)),
-    );
+    const promise = this.rpc.request(this.service, "LeaveGroup", data);
+    return promise.then((data) => MsgLeaveGroupResponse.decode(new _m0.Reader(data)));
   }
 }
 
 interface Rpc {
-  request(
-    service: string,
-    method: string,
-    data: Uint8Array,
-  ): Promise<Uint8Array>;
+  request(service: string, method: string, data: Uint8Array): Promise<Uint8Array>;
 }
 
-type Builtin =
-  | Date
-  | Function
-  | Uint8Array
-  | string
-  | number
-  | boolean
-  | undefined;
+type Builtin = Date | Function | Uint8Array | string | number | boolean | undefined;
 
-export type DeepPartial<T> = T extends Builtin
-  ? T
-  : T extends Long
-  ? string | number | Long
-  : T extends Array<infer U>
-  ? Array<DeepPartial<U>>
-  : T extends ReadonlyArray<infer U>
-  ? ReadonlyArray<DeepPartial<U>>
-  : T extends {}
-  ? { [K in Exclude<keyof T, '$type'>]?: DeepPartial<T[K]> }
+export type DeepPartial<T> = T extends Builtin ? T
+  : T extends Long ? string | number | Long : T extends Array<infer U> ? Array<DeepPartial<U>>
+  : T extends ReadonlyArray<infer U> ? ReadonlyArray<DeepPartial<U>>
+  : T extends {} ? { [K in Exclude<keyof T, "$type">]?: DeepPartial<T[K]> }
   : Partial<T>;
-
-type KeysOfUnion<T> = T extends T ? keyof T : never;
-export type Exact<P, I extends P> = P extends Builtin
-  ? P
-  : P & { [K in keyof P]: Exact<P[K], I[K]> } & Record<
-        Exclude<keyof I, KeysOfUnion<P> | '$type'>,
-        never
-      >;
 
 if (_m0.util.Long !== Long) {
   _m0.util.Long = Long as any;

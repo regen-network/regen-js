@@ -1,13 +1,13 @@
 /* eslint-disable */
-import { messageTypeRegistry } from '../../../typeRegistry';
-import Long from 'long';
-import _m0 from 'protobufjs/minimal';
+import Long from "long";
+import _m0 from "protobufjs/minimal";
+import { messageTypeRegistry } from "../../../typeRegistry";
 
-export const protobufPackage = 'cosmos.orm.v1';
+export const protobufPackage = "cosmos.orm.v1";
 
 /** TableDescriptor describes an ORM table. */
 export interface TableDescriptor {
-  $type: 'cosmos.orm.v1.TableDescriptor';
+  $type: "cosmos.orm.v1.TableDescriptor";
   /** primary_key defines the primary key for the table. */
   primaryKey?: PrimaryKeyDescriptor;
   /** index defines one or more secondary indexes. */
@@ -22,7 +22,7 @@ export interface TableDescriptor {
 
 /** PrimaryKeyDescriptor describes a table primary key. */
 export interface PrimaryKeyDescriptor {
-  $type: 'cosmos.orm.v1.PrimaryKeyDescriptor';
+  $type: "cosmos.orm.v1.PrimaryKeyDescriptor";
   /**
    * fields is a comma-separated list of fields in the primary key. Spaces are
    * not allowed. Supported field types, their encodings, and any applicable constraints
@@ -66,7 +66,7 @@ export interface PrimaryKeyDescriptor {
 
 /** PrimaryKeyDescriptor describes a table secondary index. */
 export interface SecondaryIndexDescriptor {
-  $type: 'cosmos.orm.v1.SecondaryIndexDescriptor';
+  $type: "cosmos.orm.v1.SecondaryIndexDescriptor";
   /**
    * fields is a comma-separated list of fields in the index. The supported
    * field types are the same as those for PrimaryKeyDescriptor.fields.
@@ -91,7 +91,7 @@ export interface SecondaryIndexDescriptor {
 
 /** TableDescriptor describes an ORM singleton table which has at most one instance. */
 export interface SingletonDescriptor {
-  $type: 'cosmos.orm.v1.SingletonDescriptor';
+  $type: "cosmos.orm.v1.SingletonDescriptor";
   /**
    * id is a non-zero integer ID that must be unique within the
    * tables and singletons in this file. It may be deprecated in the future when this
@@ -101,26 +101,15 @@ export interface SingletonDescriptor {
 }
 
 function createBaseTableDescriptor(): TableDescriptor {
-  return {
-    $type: 'cosmos.orm.v1.TableDescriptor',
-    primaryKey: undefined,
-    index: [],
-    id: 0,
-  };
+  return { $type: "cosmos.orm.v1.TableDescriptor", primaryKey: undefined, index: [], id: 0 };
 }
 
 export const TableDescriptor = {
-  $type: 'cosmos.orm.v1.TableDescriptor' as const,
+  $type: "cosmos.orm.v1.TableDescriptor" as const,
 
-  encode(
-    message: TableDescriptor,
-    writer: _m0.Writer = _m0.Writer.create(),
-  ): _m0.Writer {
+  encode(message: TableDescriptor, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.primaryKey !== undefined) {
-      PrimaryKeyDescriptor.encode(
-        message.primaryKey,
-        writer.uint32(10).fork(),
-      ).ldelim();
+      PrimaryKeyDescriptor.encode(message.primaryKey, writer.uint32(10).fork()).ldelim();
     }
     for (const v of message.index) {
       SecondaryIndexDescriptor.encode(v!, writer.uint32(18).fork()).ldelim();
@@ -139,15 +128,10 @@ export const TableDescriptor = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          message.primaryKey = PrimaryKeyDescriptor.decode(
-            reader,
-            reader.uint32(),
-          );
+          message.primaryKey = PrimaryKeyDescriptor.decode(reader, reader.uint32());
           break;
         case 2:
-          message.index.push(
-            SecondaryIndexDescriptor.decode(reader, reader.uint32()),
-          );
+          message.index.push(SecondaryIndexDescriptor.decode(reader, reader.uint32()));
           break;
         case 3:
           message.id = reader.uint32();
@@ -163,12 +147,8 @@ export const TableDescriptor = {
   fromJSON(object: any): TableDescriptor {
     return {
       $type: TableDescriptor.$type,
-      primaryKey: isSet(object.primaryKey)
-        ? PrimaryKeyDescriptor.fromJSON(object.primaryKey)
-        : undefined,
-      index: Array.isArray(object?.index)
-        ? object.index.map((e: any) => SecondaryIndexDescriptor.fromJSON(e))
-        : [],
+      primaryKey: isSet(object.primaryKey) ? PrimaryKeyDescriptor.fromJSON(object.primaryKey) : undefined,
+      index: Array.isArray(object?.index) ? object.index.map((e: any) => SecondaryIndexDescriptor.fromJSON(e)) : [],
       id: isSet(object.id) ? Number(object.id) : 0,
     };
   },
@@ -176,13 +156,9 @@ export const TableDescriptor = {
   toJSON(message: TableDescriptor): unknown {
     const obj: any = {};
     message.primaryKey !== undefined &&
-      (obj.primaryKey = message.primaryKey
-        ? PrimaryKeyDescriptor.toJSON(message.primaryKey)
-        : undefined);
+      (obj.primaryKey = message.primaryKey ? PrimaryKeyDescriptor.toJSON(message.primaryKey) : undefined);
     if (message.index) {
-      obj.index = message.index.map(e =>
-        e ? SecondaryIndexDescriptor.toJSON(e) : undefined,
-      );
+      obj.index = message.index.map((e) => e ? SecondaryIndexDescriptor.toJSON(e) : undefined);
     } else {
       obj.index = [];
     }
@@ -190,16 +166,16 @@ export const TableDescriptor = {
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<TableDescriptor>, I>>(
-    object: I,
-  ): TableDescriptor {
+  create(base?: DeepPartial<TableDescriptor>): TableDescriptor {
+    return TableDescriptor.fromPartial(base ?? {});
+  },
+
+  fromPartial(object: DeepPartial<TableDescriptor>): TableDescriptor {
     const message = createBaseTableDescriptor();
-    message.primaryKey =
-      object.primaryKey !== undefined && object.primaryKey !== null
-        ? PrimaryKeyDescriptor.fromPartial(object.primaryKey)
-        : undefined;
-    message.index =
-      object.index?.map(e => SecondaryIndexDescriptor.fromPartial(e)) || [];
+    message.primaryKey = (object.primaryKey !== undefined && object.primaryKey !== null)
+      ? PrimaryKeyDescriptor.fromPartial(object.primaryKey)
+      : undefined;
+    message.index = object.index?.map((e) => SecondaryIndexDescriptor.fromPartial(e)) || [];
     message.id = object.id ?? 0;
     return message;
   },
@@ -208,21 +184,14 @@ export const TableDescriptor = {
 messageTypeRegistry.set(TableDescriptor.$type, TableDescriptor);
 
 function createBasePrimaryKeyDescriptor(): PrimaryKeyDescriptor {
-  return {
-    $type: 'cosmos.orm.v1.PrimaryKeyDescriptor',
-    fields: '',
-    autoIncrement: false,
-  };
+  return { $type: "cosmos.orm.v1.PrimaryKeyDescriptor", fields: "", autoIncrement: false };
 }
 
 export const PrimaryKeyDescriptor = {
-  $type: 'cosmos.orm.v1.PrimaryKeyDescriptor' as const,
+  $type: "cosmos.orm.v1.PrimaryKeyDescriptor" as const,
 
-  encode(
-    message: PrimaryKeyDescriptor,
-    writer: _m0.Writer = _m0.Writer.create(),
-  ): _m0.Writer {
-    if (message.fields !== '') {
+  encode(message: PrimaryKeyDescriptor, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+    if (message.fields !== "") {
       writer.uint32(10).string(message.fields);
     }
     if (message.autoIncrement === true) {
@@ -231,10 +200,7 @@ export const PrimaryKeyDescriptor = {
     return writer;
   },
 
-  decode(
-    input: _m0.Reader | Uint8Array,
-    length?: number,
-  ): PrimaryKeyDescriptor {
+  decode(input: _m0.Reader | Uint8Array, length?: number): PrimaryKeyDescriptor {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBasePrimaryKeyDescriptor();
@@ -258,26 +224,25 @@ export const PrimaryKeyDescriptor = {
   fromJSON(object: any): PrimaryKeyDescriptor {
     return {
       $type: PrimaryKeyDescriptor.$type,
-      fields: isSet(object.fields) ? String(object.fields) : '',
-      autoIncrement: isSet(object.autoIncrement)
-        ? Boolean(object.autoIncrement)
-        : false,
+      fields: isSet(object.fields) ? String(object.fields) : "",
+      autoIncrement: isSet(object.autoIncrement) ? Boolean(object.autoIncrement) : false,
     };
   },
 
   toJSON(message: PrimaryKeyDescriptor): unknown {
     const obj: any = {};
     message.fields !== undefined && (obj.fields = message.fields);
-    message.autoIncrement !== undefined &&
-      (obj.autoIncrement = message.autoIncrement);
+    message.autoIncrement !== undefined && (obj.autoIncrement = message.autoIncrement);
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<PrimaryKeyDescriptor>, I>>(
-    object: I,
-  ): PrimaryKeyDescriptor {
+  create(base?: DeepPartial<PrimaryKeyDescriptor>): PrimaryKeyDescriptor {
+    return PrimaryKeyDescriptor.fromPartial(base ?? {});
+  },
+
+  fromPartial(object: DeepPartial<PrimaryKeyDescriptor>): PrimaryKeyDescriptor {
     const message = createBasePrimaryKeyDescriptor();
-    message.fields = object.fields ?? '';
+    message.fields = object.fields ?? "";
     message.autoIncrement = object.autoIncrement ?? false;
     return message;
   },
@@ -286,22 +251,14 @@ export const PrimaryKeyDescriptor = {
 messageTypeRegistry.set(PrimaryKeyDescriptor.$type, PrimaryKeyDescriptor);
 
 function createBaseSecondaryIndexDescriptor(): SecondaryIndexDescriptor {
-  return {
-    $type: 'cosmos.orm.v1.SecondaryIndexDescriptor',
-    fields: '',
-    id: 0,
-    unique: false,
-  };
+  return { $type: "cosmos.orm.v1.SecondaryIndexDescriptor", fields: "", id: 0, unique: false };
 }
 
 export const SecondaryIndexDescriptor = {
-  $type: 'cosmos.orm.v1.SecondaryIndexDescriptor' as const,
+  $type: "cosmos.orm.v1.SecondaryIndexDescriptor" as const,
 
-  encode(
-    message: SecondaryIndexDescriptor,
-    writer: _m0.Writer = _m0.Writer.create(),
-  ): _m0.Writer {
-    if (message.fields !== '') {
+  encode(message: SecondaryIndexDescriptor, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+    if (message.fields !== "") {
       writer.uint32(10).string(message.fields);
     }
     if (message.id !== 0) {
@@ -313,10 +270,7 @@ export const SecondaryIndexDescriptor = {
     return writer;
   },
 
-  decode(
-    input: _m0.Reader | Uint8Array,
-    length?: number,
-  ): SecondaryIndexDescriptor {
+  decode(input: _m0.Reader | Uint8Array, length?: number): SecondaryIndexDescriptor {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseSecondaryIndexDescriptor();
@@ -343,7 +297,7 @@ export const SecondaryIndexDescriptor = {
   fromJSON(object: any): SecondaryIndexDescriptor {
     return {
       $type: SecondaryIndexDescriptor.$type,
-      fields: isSet(object.fields) ? String(object.fields) : '',
+      fields: isSet(object.fields) ? String(object.fields) : "",
       id: isSet(object.id) ? Number(object.id) : 0,
       unique: isSet(object.unique) ? Boolean(object.unique) : false,
     };
@@ -357,33 +311,29 @@ export const SecondaryIndexDescriptor = {
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<SecondaryIndexDescriptor>, I>>(
-    object: I,
-  ): SecondaryIndexDescriptor {
+  create(base?: DeepPartial<SecondaryIndexDescriptor>): SecondaryIndexDescriptor {
+    return SecondaryIndexDescriptor.fromPartial(base ?? {});
+  },
+
+  fromPartial(object: DeepPartial<SecondaryIndexDescriptor>): SecondaryIndexDescriptor {
     const message = createBaseSecondaryIndexDescriptor();
-    message.fields = object.fields ?? '';
+    message.fields = object.fields ?? "";
     message.id = object.id ?? 0;
     message.unique = object.unique ?? false;
     return message;
   },
 };
 
-messageTypeRegistry.set(
-  SecondaryIndexDescriptor.$type,
-  SecondaryIndexDescriptor,
-);
+messageTypeRegistry.set(SecondaryIndexDescriptor.$type, SecondaryIndexDescriptor);
 
 function createBaseSingletonDescriptor(): SingletonDescriptor {
-  return { $type: 'cosmos.orm.v1.SingletonDescriptor', id: 0 };
+  return { $type: "cosmos.orm.v1.SingletonDescriptor", id: 0 };
 }
 
 export const SingletonDescriptor = {
-  $type: 'cosmos.orm.v1.SingletonDescriptor' as const,
+  $type: "cosmos.orm.v1.SingletonDescriptor" as const,
 
-  encode(
-    message: SingletonDescriptor,
-    writer: _m0.Writer = _m0.Writer.create(),
-  ): _m0.Writer {
+  encode(message: SingletonDescriptor, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.id !== 0) {
       writer.uint32(8).uint32(message.id);
     }
@@ -409,10 +359,7 @@ export const SingletonDescriptor = {
   },
 
   fromJSON(object: any): SingletonDescriptor {
-    return {
-      $type: SingletonDescriptor.$type,
-      id: isSet(object.id) ? Number(object.id) : 0,
-    };
+    return { $type: SingletonDescriptor.$type, id: isSet(object.id) ? Number(object.id) : 0 };
   },
 
   toJSON(message: SingletonDescriptor): unknown {
@@ -421,9 +368,11 @@ export const SingletonDescriptor = {
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<SingletonDescriptor>, I>>(
-    object: I,
-  ): SingletonDescriptor {
+  create(base?: DeepPartial<SingletonDescriptor>): SingletonDescriptor {
+    return SingletonDescriptor.fromPartial(base ?? {});
+  },
+
+  fromPartial(object: DeepPartial<SingletonDescriptor>): SingletonDescriptor {
     const message = createBaseSingletonDescriptor();
     message.id = object.id ?? 0;
     return message;
@@ -432,34 +381,13 @@ export const SingletonDescriptor = {
 
 messageTypeRegistry.set(SingletonDescriptor.$type, SingletonDescriptor);
 
-type Builtin =
-  | Date
-  | Function
-  | Uint8Array
-  | string
-  | number
-  | boolean
-  | undefined;
+type Builtin = Date | Function | Uint8Array | string | number | boolean | undefined;
 
-export type DeepPartial<T> = T extends Builtin
-  ? T
-  : T extends Long
-  ? string | number | Long
-  : T extends Array<infer U>
-  ? Array<DeepPartial<U>>
-  : T extends ReadonlyArray<infer U>
-  ? ReadonlyArray<DeepPartial<U>>
-  : T extends {}
-  ? { [K in Exclude<keyof T, '$type'>]?: DeepPartial<T[K]> }
+export type DeepPartial<T> = T extends Builtin ? T
+  : T extends Long ? string | number | Long : T extends Array<infer U> ? Array<DeepPartial<U>>
+  : T extends ReadonlyArray<infer U> ? ReadonlyArray<DeepPartial<U>>
+  : T extends {} ? { [K in Exclude<keyof T, "$type">]?: DeepPartial<T[K]> }
   : Partial<T>;
-
-type KeysOfUnion<T> = T extends T ? keyof T : never;
-export type Exact<P, I extends P> = P extends Builtin
-  ? P
-  : P & { [K in keyof P]: Exact<P[K], I[K]> } & Record<
-        Exclude<keyof I, KeysOfUnion<P> | '$type'>,
-        never
-      >;
 
 if (_m0.util.Long !== Long) {
   _m0.util.Long = Long as any;

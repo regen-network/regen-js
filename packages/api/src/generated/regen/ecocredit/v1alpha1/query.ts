@@ -1,37 +1,34 @@
 /* eslint-disable */
-import { messageTypeRegistry } from '../../../typeRegistry';
-import Long from 'long';
-import _m0 from 'protobufjs/minimal';
-import { Params, ClassInfo, BatchInfo, CreditType } from './types';
-import {
-  PageRequest,
-  PageResponse,
-} from '../../../cosmos/base/query/v1beta1/pagination';
+import Long from "long";
+import _m0 from "protobufjs/minimal";
+import { PageRequest, PageResponse } from "../../../cosmos/base/query/v1beta1/pagination";
+import { messageTypeRegistry } from "../../../typeRegistry";
+import { BatchInfo, ClassInfo, CreditType, Params } from "./types";
 
-export const protobufPackage = 'regen.ecocredit.v1alpha1';
+export const protobufPackage = "regen.ecocredit.v1alpha1";
 
 /** QueryParamsRequest is the Query/Params request type. */
 export interface QueryParamsRequest {
-  $type: 'regen.ecocredit.v1alpha1.QueryParamsRequest';
+  $type: "regen.ecocredit.v1alpha1.QueryParamsRequest";
 }
 
 /** QueryParamsResponse is the Query/Params response type. */
 export interface QueryParamsResponse {
-  $type: 'regen.ecocredit.v1alpha1.QueryParamsResponse';
+  $type: "regen.ecocredit.v1alpha1.QueryParamsResponse";
   /** params defines the parameters of the ecocredit module. */
   params?: Params;
 }
 
 /** QueryClassesRequest is the Query/Classes request type. */
 export interface QueryClassesRequest {
-  $type: 'regen.ecocredit.v1alpha1.QueryClassesRequest';
+  $type: "regen.ecocredit.v1alpha1.QueryClassesRequest";
   /** pagination defines an optional pagination for the request. */
   pagination?: PageRequest;
 }
 
 /** QueryClassesResponse is the Query/Classes response type. */
 export interface QueryClassesResponse {
-  $type: 'regen.ecocredit.v1alpha1.QueryClassesResponse';
+  $type: "regen.ecocredit.v1alpha1.QueryClassesResponse";
   /** classes are the fetched credit classes. */
   classes: ClassInfo[];
   /** pagination defines the pagination in the response. */
@@ -40,21 +37,21 @@ export interface QueryClassesResponse {
 
 /** QueryClassInfoRequest is the Query/ClassInfo request type. */
 export interface QueryClassInfoRequest {
-  $type: 'regen.ecocredit.v1alpha1.QueryClassInfoRequest';
+  $type: "regen.ecocredit.v1alpha1.QueryClassInfoRequest";
   /** class_id is the unique ID of credit class to query. */
   classId: string;
 }
 
 /** QueryClassInfoResponse is the Query/ClassInfo request type. */
 export interface QueryClassInfoResponse {
-  $type: 'regen.ecocredit.v1alpha1.QueryClassInfoResponse';
+  $type: "regen.ecocredit.v1alpha1.QueryClassInfoResponse";
   /** info is the ClassInfo for the credit class. */
   info?: ClassInfo;
 }
 
 /** QueryBatchesRequest is the Query/Batches request type. */
 export interface QueryBatchesRequest {
-  $type: 'regen.ecocredit.v1alpha1.QueryBatchesRequest';
+  $type: "regen.ecocredit.v1alpha1.QueryBatchesRequest";
   /** class_id is the unique ID of the credit class to query. */
   classId: string;
   /** pagination defines an optional pagination for the request. */
@@ -63,7 +60,7 @@ export interface QueryBatchesRequest {
 
 /** QueryBatchesResponse is the Query/Batches response type. */
 export interface QueryBatchesResponse {
-  $type: 'regen.ecocredit.v1alpha1.QueryBatchesResponse';
+  $type: "regen.ecocredit.v1alpha1.QueryBatchesResponse";
   /** batches are the fetched credit batches within the class. */
   batches: BatchInfo[];
   /** pagination defines the pagination in the response. */
@@ -72,21 +69,21 @@ export interface QueryBatchesResponse {
 
 /** QueryBatchInfoRequest is the Query/BatchInfo request type. */
 export interface QueryBatchInfoRequest {
-  $type: 'regen.ecocredit.v1alpha1.QueryBatchInfoRequest';
+  $type: "regen.ecocredit.v1alpha1.QueryBatchInfoRequest";
   /** batch_denom is the unique ID of credit batch to query. */
   batchDenom: string;
 }
 
 /** QueryBatchInfoResponse is the Query/BatchInfo response type. */
 export interface QueryBatchInfoResponse {
-  $type: 'regen.ecocredit.v1alpha1.QueryBatchInfoResponse';
+  $type: "regen.ecocredit.v1alpha1.QueryBatchInfoResponse";
   /** info is the BatchInfo for the credit batch. */
   info?: BatchInfo;
 }
 
 /** QueryBalanceRequest is the Query/Balance request type. */
 export interface QueryBalanceRequest {
-  $type: 'regen.ecocredit.v1alpha1.QueryBalanceRequest';
+  $type: "regen.ecocredit.v1alpha1.QueryBalanceRequest";
   /** account is the address of the account whose balance is being queried. */
   account: string;
   /** batch_denom is the unique ID of credit batch balance to query. */
@@ -95,7 +92,7 @@ export interface QueryBalanceRequest {
 
 /** QueryBalanceResponse is the Query/Balance response type. */
 export interface QueryBalanceResponse {
-  $type: 'regen.ecocredit.v1alpha1.QueryBalanceResponse';
+  $type: "regen.ecocredit.v1alpha1.QueryBalanceResponse";
   /** tradable_amount is the decimal number of tradable credits. */
   tradableAmount: string;
   /** retired_amount is the decimal number of retired credits. */
@@ -104,14 +101,14 @@ export interface QueryBalanceResponse {
 
 /** QuerySupplyRequest is the Query/Supply request type. */
 export interface QuerySupplyRequest {
-  $type: 'regen.ecocredit.v1alpha1.QuerySupplyRequest';
+  $type: "regen.ecocredit.v1alpha1.QuerySupplyRequest";
   /** batch_denom is the unique ID of credit batch to query. */
   batchDenom: string;
 }
 
 /** QuerySupplyResponse is the Query/Supply response type. */
 export interface QuerySupplyResponse {
-  $type: 'regen.ecocredit.v1alpha1.QuerySupplyResponse';
+  $type: "regen.ecocredit.v1alpha1.QuerySupplyResponse";
   /**
    * tradable_supply is the decimal number of tradable credits in the batch
    * supply.
@@ -126,27 +123,24 @@ export interface QuerySupplyResponse {
 
 /** QueryCreditTypesRequest is the Query/Credit_Types request type */
 export interface QueryCreditTypesRequest {
-  $type: 'regen.ecocredit.v1alpha1.QueryCreditTypesRequest';
+  $type: "regen.ecocredit.v1alpha1.QueryCreditTypesRequest";
 }
 
 /** QueryCreditTypesRequest is the Query/Credit_Types response type */
 export interface QueryCreditTypesResponse {
-  $type: 'regen.ecocredit.v1alpha1.QueryCreditTypesResponse';
+  $type: "regen.ecocredit.v1alpha1.QueryCreditTypesResponse";
   /** list of credit types */
   creditTypes: CreditType[];
 }
 
 function createBaseQueryParamsRequest(): QueryParamsRequest {
-  return { $type: 'regen.ecocredit.v1alpha1.QueryParamsRequest' };
+  return { $type: "regen.ecocredit.v1alpha1.QueryParamsRequest" };
 }
 
 export const QueryParamsRequest = {
-  $type: 'regen.ecocredit.v1alpha1.QueryParamsRequest' as const,
+  $type: "regen.ecocredit.v1alpha1.QueryParamsRequest" as const,
 
-  encode(
-    _: QueryParamsRequest,
-    writer: _m0.Writer = _m0.Writer.create(),
-  ): _m0.Writer {
+  encode(_: QueryParamsRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     return writer;
   },
 
@@ -166,9 +160,7 @@ export const QueryParamsRequest = {
   },
 
   fromJSON(_: any): QueryParamsRequest {
-    return {
-      $type: QueryParamsRequest.$type,
-    };
+    return { $type: QueryParamsRequest.$type };
   },
 
   toJSON(_: QueryParamsRequest): unknown {
@@ -176,9 +168,11 @@ export const QueryParamsRequest = {
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<QueryParamsRequest>, I>>(
-    _: I,
-  ): QueryParamsRequest {
+  create(base?: DeepPartial<QueryParamsRequest>): QueryParamsRequest {
+    return QueryParamsRequest.fromPartial(base ?? {});
+  },
+
+  fromPartial(_: DeepPartial<QueryParamsRequest>): QueryParamsRequest {
     const message = createBaseQueryParamsRequest();
     return message;
   },
@@ -187,19 +181,13 @@ export const QueryParamsRequest = {
 messageTypeRegistry.set(QueryParamsRequest.$type, QueryParamsRequest);
 
 function createBaseQueryParamsResponse(): QueryParamsResponse {
-  return {
-    $type: 'regen.ecocredit.v1alpha1.QueryParamsResponse',
-    params: undefined,
-  };
+  return { $type: "regen.ecocredit.v1alpha1.QueryParamsResponse", params: undefined };
 }
 
 export const QueryParamsResponse = {
-  $type: 'regen.ecocredit.v1alpha1.QueryParamsResponse' as const,
+  $type: "regen.ecocredit.v1alpha1.QueryParamsResponse" as const,
 
-  encode(
-    message: QueryParamsResponse,
-    writer: _m0.Writer = _m0.Writer.create(),
-  ): _m0.Writer {
+  encode(message: QueryParamsResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.params !== undefined) {
       Params.encode(message.params, writer.uint32(10).fork()).ldelim();
     }
@@ -233,19 +221,19 @@ export const QueryParamsResponse = {
 
   toJSON(message: QueryParamsResponse): unknown {
     const obj: any = {};
-    message.params !== undefined &&
-      (obj.params = message.params ? Params.toJSON(message.params) : undefined);
+    message.params !== undefined && (obj.params = message.params ? Params.toJSON(message.params) : undefined);
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<QueryParamsResponse>, I>>(
-    object: I,
-  ): QueryParamsResponse {
+  create(base?: DeepPartial<QueryParamsResponse>): QueryParamsResponse {
+    return QueryParamsResponse.fromPartial(base ?? {});
+  },
+
+  fromPartial(object: DeepPartial<QueryParamsResponse>): QueryParamsResponse {
     const message = createBaseQueryParamsResponse();
-    message.params =
-      object.params !== undefined && object.params !== null
-        ? Params.fromPartial(object.params)
-        : undefined;
+    message.params = (object.params !== undefined && object.params !== null)
+      ? Params.fromPartial(object.params)
+      : undefined;
     return message;
   },
 };
@@ -253,19 +241,13 @@ export const QueryParamsResponse = {
 messageTypeRegistry.set(QueryParamsResponse.$type, QueryParamsResponse);
 
 function createBaseQueryClassesRequest(): QueryClassesRequest {
-  return {
-    $type: 'regen.ecocredit.v1alpha1.QueryClassesRequest',
-    pagination: undefined,
-  };
+  return { $type: "regen.ecocredit.v1alpha1.QueryClassesRequest", pagination: undefined };
 }
 
 export const QueryClassesRequest = {
-  $type: 'regen.ecocredit.v1alpha1.QueryClassesRequest' as const,
+  $type: "regen.ecocredit.v1alpha1.QueryClassesRequest" as const,
 
-  encode(
-    message: QueryClassesRequest,
-    writer: _m0.Writer = _m0.Writer.create(),
-  ): _m0.Writer {
+  encode(message: QueryClassesRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.pagination !== undefined) {
       PageRequest.encode(message.pagination, writer.uint32(10).fork()).ldelim();
     }
@@ -293,29 +275,26 @@ export const QueryClassesRequest = {
   fromJSON(object: any): QueryClassesRequest {
     return {
       $type: QueryClassesRequest.$type,
-      pagination: isSet(object.pagination)
-        ? PageRequest.fromJSON(object.pagination)
-        : undefined,
+      pagination: isSet(object.pagination) ? PageRequest.fromJSON(object.pagination) : undefined,
     };
   },
 
   toJSON(message: QueryClassesRequest): unknown {
     const obj: any = {};
     message.pagination !== undefined &&
-      (obj.pagination = message.pagination
-        ? PageRequest.toJSON(message.pagination)
-        : undefined);
+      (obj.pagination = message.pagination ? PageRequest.toJSON(message.pagination) : undefined);
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<QueryClassesRequest>, I>>(
-    object: I,
-  ): QueryClassesRequest {
+  create(base?: DeepPartial<QueryClassesRequest>): QueryClassesRequest {
+    return QueryClassesRequest.fromPartial(base ?? {});
+  },
+
+  fromPartial(object: DeepPartial<QueryClassesRequest>): QueryClassesRequest {
     const message = createBaseQueryClassesRequest();
-    message.pagination =
-      object.pagination !== undefined && object.pagination !== null
-        ? PageRequest.fromPartial(object.pagination)
-        : undefined;
+    message.pagination = (object.pagination !== undefined && object.pagination !== null)
+      ? PageRequest.fromPartial(object.pagination)
+      : undefined;
     return message;
   },
 };
@@ -323,36 +302,23 @@ export const QueryClassesRequest = {
 messageTypeRegistry.set(QueryClassesRequest.$type, QueryClassesRequest);
 
 function createBaseQueryClassesResponse(): QueryClassesResponse {
-  return {
-    $type: 'regen.ecocredit.v1alpha1.QueryClassesResponse',
-    classes: [],
-    pagination: undefined,
-  };
+  return { $type: "regen.ecocredit.v1alpha1.QueryClassesResponse", classes: [], pagination: undefined };
 }
 
 export const QueryClassesResponse = {
-  $type: 'regen.ecocredit.v1alpha1.QueryClassesResponse' as const,
+  $type: "regen.ecocredit.v1alpha1.QueryClassesResponse" as const,
 
-  encode(
-    message: QueryClassesResponse,
-    writer: _m0.Writer = _m0.Writer.create(),
-  ): _m0.Writer {
+  encode(message: QueryClassesResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     for (const v of message.classes) {
       ClassInfo.encode(v!, writer.uint32(10).fork()).ldelim();
     }
     if (message.pagination !== undefined) {
-      PageResponse.encode(
-        message.pagination,
-        writer.uint32(18).fork(),
-      ).ldelim();
+      PageResponse.encode(message.pagination, writer.uint32(18).fork()).ldelim();
     }
     return writer;
   },
 
-  decode(
-    input: _m0.Reader | Uint8Array,
-    length?: number,
-  ): QueryClassesResponse {
+  decode(input: _m0.Reader | Uint8Array, length?: number): QueryClassesResponse {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryClassesResponse();
@@ -376,40 +342,33 @@ export const QueryClassesResponse = {
   fromJSON(object: any): QueryClassesResponse {
     return {
       $type: QueryClassesResponse.$type,
-      classes: Array.isArray(object?.classes)
-        ? object.classes.map((e: any) => ClassInfo.fromJSON(e))
-        : [],
-      pagination: isSet(object.pagination)
-        ? PageResponse.fromJSON(object.pagination)
-        : undefined,
+      classes: Array.isArray(object?.classes) ? object.classes.map((e: any) => ClassInfo.fromJSON(e)) : [],
+      pagination: isSet(object.pagination) ? PageResponse.fromJSON(object.pagination) : undefined,
     };
   },
 
   toJSON(message: QueryClassesResponse): unknown {
     const obj: any = {};
     if (message.classes) {
-      obj.classes = message.classes.map(e =>
-        e ? ClassInfo.toJSON(e) : undefined,
-      );
+      obj.classes = message.classes.map((e) => e ? ClassInfo.toJSON(e) : undefined);
     } else {
       obj.classes = [];
     }
     message.pagination !== undefined &&
-      (obj.pagination = message.pagination
-        ? PageResponse.toJSON(message.pagination)
-        : undefined);
+      (obj.pagination = message.pagination ? PageResponse.toJSON(message.pagination) : undefined);
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<QueryClassesResponse>, I>>(
-    object: I,
-  ): QueryClassesResponse {
+  create(base?: DeepPartial<QueryClassesResponse>): QueryClassesResponse {
+    return QueryClassesResponse.fromPartial(base ?? {});
+  },
+
+  fromPartial(object: DeepPartial<QueryClassesResponse>): QueryClassesResponse {
     const message = createBaseQueryClassesResponse();
-    message.classes = object.classes?.map(e => ClassInfo.fromPartial(e)) || [];
-    message.pagination =
-      object.pagination !== undefined && object.pagination !== null
-        ? PageResponse.fromPartial(object.pagination)
-        : undefined;
+    message.classes = object.classes?.map((e) => ClassInfo.fromPartial(e)) || [];
+    message.pagination = (object.pagination !== undefined && object.pagination !== null)
+      ? PageResponse.fromPartial(object.pagination)
+      : undefined;
     return message;
   },
 };
@@ -417,29 +376,20 @@ export const QueryClassesResponse = {
 messageTypeRegistry.set(QueryClassesResponse.$type, QueryClassesResponse);
 
 function createBaseQueryClassInfoRequest(): QueryClassInfoRequest {
-  return {
-    $type: 'regen.ecocredit.v1alpha1.QueryClassInfoRequest',
-    classId: '',
-  };
+  return { $type: "regen.ecocredit.v1alpha1.QueryClassInfoRequest", classId: "" };
 }
 
 export const QueryClassInfoRequest = {
-  $type: 'regen.ecocredit.v1alpha1.QueryClassInfoRequest' as const,
+  $type: "regen.ecocredit.v1alpha1.QueryClassInfoRequest" as const,
 
-  encode(
-    message: QueryClassInfoRequest,
-    writer: _m0.Writer = _m0.Writer.create(),
-  ): _m0.Writer {
-    if (message.classId !== '') {
+  encode(message: QueryClassInfoRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+    if (message.classId !== "") {
       writer.uint32(10).string(message.classId);
     }
     return writer;
   },
 
-  decode(
-    input: _m0.Reader | Uint8Array,
-    length?: number,
-  ): QueryClassInfoRequest {
+  decode(input: _m0.Reader | Uint8Array, length?: number): QueryClassInfoRequest {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryClassInfoRequest();
@@ -458,10 +408,7 @@ export const QueryClassInfoRequest = {
   },
 
   fromJSON(object: any): QueryClassInfoRequest {
-    return {
-      $type: QueryClassInfoRequest.$type,
-      classId: isSet(object.classId) ? String(object.classId) : '',
-    };
+    return { $type: QueryClassInfoRequest.$type, classId: isSet(object.classId) ? String(object.classId) : "" };
   },
 
   toJSON(message: QueryClassInfoRequest): unknown {
@@ -470,11 +417,13 @@ export const QueryClassInfoRequest = {
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<QueryClassInfoRequest>, I>>(
-    object: I,
-  ): QueryClassInfoRequest {
+  create(base?: DeepPartial<QueryClassInfoRequest>): QueryClassInfoRequest {
+    return QueryClassInfoRequest.fromPartial(base ?? {});
+  },
+
+  fromPartial(object: DeepPartial<QueryClassInfoRequest>): QueryClassInfoRequest {
     const message = createBaseQueryClassInfoRequest();
-    message.classId = object.classId ?? '';
+    message.classId = object.classId ?? "";
     return message;
   },
 };
@@ -482,29 +431,20 @@ export const QueryClassInfoRequest = {
 messageTypeRegistry.set(QueryClassInfoRequest.$type, QueryClassInfoRequest);
 
 function createBaseQueryClassInfoResponse(): QueryClassInfoResponse {
-  return {
-    $type: 'regen.ecocredit.v1alpha1.QueryClassInfoResponse',
-    info: undefined,
-  };
+  return { $type: "regen.ecocredit.v1alpha1.QueryClassInfoResponse", info: undefined };
 }
 
 export const QueryClassInfoResponse = {
-  $type: 'regen.ecocredit.v1alpha1.QueryClassInfoResponse' as const,
+  $type: "regen.ecocredit.v1alpha1.QueryClassInfoResponse" as const,
 
-  encode(
-    message: QueryClassInfoResponse,
-    writer: _m0.Writer = _m0.Writer.create(),
-  ): _m0.Writer {
+  encode(message: QueryClassInfoResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.info !== undefined) {
       ClassInfo.encode(message.info, writer.uint32(10).fork()).ldelim();
     }
     return writer;
   },
 
-  decode(
-    input: _m0.Reader | Uint8Array,
-    length?: number,
-  ): QueryClassInfoResponse {
+  decode(input: _m0.Reader | Uint8Array, length?: number): QueryClassInfoResponse {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryClassInfoResponse();
@@ -531,19 +471,17 @@ export const QueryClassInfoResponse = {
 
   toJSON(message: QueryClassInfoResponse): unknown {
     const obj: any = {};
-    message.info !== undefined &&
-      (obj.info = message.info ? ClassInfo.toJSON(message.info) : undefined);
+    message.info !== undefined && (obj.info = message.info ? ClassInfo.toJSON(message.info) : undefined);
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<QueryClassInfoResponse>, I>>(
-    object: I,
-  ): QueryClassInfoResponse {
+  create(base?: DeepPartial<QueryClassInfoResponse>): QueryClassInfoResponse {
+    return QueryClassInfoResponse.fromPartial(base ?? {});
+  },
+
+  fromPartial(object: DeepPartial<QueryClassInfoResponse>): QueryClassInfoResponse {
     const message = createBaseQueryClassInfoResponse();
-    message.info =
-      object.info !== undefined && object.info !== null
-        ? ClassInfo.fromPartial(object.info)
-        : undefined;
+    message.info = (object.info !== undefined && object.info !== null) ? ClassInfo.fromPartial(object.info) : undefined;
     return message;
   },
 };
@@ -551,21 +489,14 @@ export const QueryClassInfoResponse = {
 messageTypeRegistry.set(QueryClassInfoResponse.$type, QueryClassInfoResponse);
 
 function createBaseQueryBatchesRequest(): QueryBatchesRequest {
-  return {
-    $type: 'regen.ecocredit.v1alpha1.QueryBatchesRequest',
-    classId: '',
-    pagination: undefined,
-  };
+  return { $type: "regen.ecocredit.v1alpha1.QueryBatchesRequest", classId: "", pagination: undefined };
 }
 
 export const QueryBatchesRequest = {
-  $type: 'regen.ecocredit.v1alpha1.QueryBatchesRequest' as const,
+  $type: "regen.ecocredit.v1alpha1.QueryBatchesRequest" as const,
 
-  encode(
-    message: QueryBatchesRequest,
-    writer: _m0.Writer = _m0.Writer.create(),
-  ): _m0.Writer {
-    if (message.classId !== '') {
+  encode(message: QueryBatchesRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+    if (message.classId !== "") {
       writer.uint32(10).string(message.classId);
     }
     if (message.pagination !== undefined) {
@@ -598,10 +529,8 @@ export const QueryBatchesRequest = {
   fromJSON(object: any): QueryBatchesRequest {
     return {
       $type: QueryBatchesRequest.$type,
-      classId: isSet(object.classId) ? String(object.classId) : '',
-      pagination: isSet(object.pagination)
-        ? PageRequest.fromJSON(object.pagination)
-        : undefined,
+      classId: isSet(object.classId) ? String(object.classId) : "",
+      pagination: isSet(object.pagination) ? PageRequest.fromJSON(object.pagination) : undefined,
     };
   },
 
@@ -609,21 +538,20 @@ export const QueryBatchesRequest = {
     const obj: any = {};
     message.classId !== undefined && (obj.classId = message.classId);
     message.pagination !== undefined &&
-      (obj.pagination = message.pagination
-        ? PageRequest.toJSON(message.pagination)
-        : undefined);
+      (obj.pagination = message.pagination ? PageRequest.toJSON(message.pagination) : undefined);
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<QueryBatchesRequest>, I>>(
-    object: I,
-  ): QueryBatchesRequest {
+  create(base?: DeepPartial<QueryBatchesRequest>): QueryBatchesRequest {
+    return QueryBatchesRequest.fromPartial(base ?? {});
+  },
+
+  fromPartial(object: DeepPartial<QueryBatchesRequest>): QueryBatchesRequest {
     const message = createBaseQueryBatchesRequest();
-    message.classId = object.classId ?? '';
-    message.pagination =
-      object.pagination !== undefined && object.pagination !== null
-        ? PageRequest.fromPartial(object.pagination)
-        : undefined;
+    message.classId = object.classId ?? "";
+    message.pagination = (object.pagination !== undefined && object.pagination !== null)
+      ? PageRequest.fromPartial(object.pagination)
+      : undefined;
     return message;
   },
 };
@@ -631,36 +559,23 @@ export const QueryBatchesRequest = {
 messageTypeRegistry.set(QueryBatchesRequest.$type, QueryBatchesRequest);
 
 function createBaseQueryBatchesResponse(): QueryBatchesResponse {
-  return {
-    $type: 'regen.ecocredit.v1alpha1.QueryBatchesResponse',
-    batches: [],
-    pagination: undefined,
-  };
+  return { $type: "regen.ecocredit.v1alpha1.QueryBatchesResponse", batches: [], pagination: undefined };
 }
 
 export const QueryBatchesResponse = {
-  $type: 'regen.ecocredit.v1alpha1.QueryBatchesResponse' as const,
+  $type: "regen.ecocredit.v1alpha1.QueryBatchesResponse" as const,
 
-  encode(
-    message: QueryBatchesResponse,
-    writer: _m0.Writer = _m0.Writer.create(),
-  ): _m0.Writer {
+  encode(message: QueryBatchesResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     for (const v of message.batches) {
       BatchInfo.encode(v!, writer.uint32(10).fork()).ldelim();
     }
     if (message.pagination !== undefined) {
-      PageResponse.encode(
-        message.pagination,
-        writer.uint32(18).fork(),
-      ).ldelim();
+      PageResponse.encode(message.pagination, writer.uint32(18).fork()).ldelim();
     }
     return writer;
   },
 
-  decode(
-    input: _m0.Reader | Uint8Array,
-    length?: number,
-  ): QueryBatchesResponse {
+  decode(input: _m0.Reader | Uint8Array, length?: number): QueryBatchesResponse {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryBatchesResponse();
@@ -684,40 +599,33 @@ export const QueryBatchesResponse = {
   fromJSON(object: any): QueryBatchesResponse {
     return {
       $type: QueryBatchesResponse.$type,
-      batches: Array.isArray(object?.batches)
-        ? object.batches.map((e: any) => BatchInfo.fromJSON(e))
-        : [],
-      pagination: isSet(object.pagination)
-        ? PageResponse.fromJSON(object.pagination)
-        : undefined,
+      batches: Array.isArray(object?.batches) ? object.batches.map((e: any) => BatchInfo.fromJSON(e)) : [],
+      pagination: isSet(object.pagination) ? PageResponse.fromJSON(object.pagination) : undefined,
     };
   },
 
   toJSON(message: QueryBatchesResponse): unknown {
     const obj: any = {};
     if (message.batches) {
-      obj.batches = message.batches.map(e =>
-        e ? BatchInfo.toJSON(e) : undefined,
-      );
+      obj.batches = message.batches.map((e) => e ? BatchInfo.toJSON(e) : undefined);
     } else {
       obj.batches = [];
     }
     message.pagination !== undefined &&
-      (obj.pagination = message.pagination
-        ? PageResponse.toJSON(message.pagination)
-        : undefined);
+      (obj.pagination = message.pagination ? PageResponse.toJSON(message.pagination) : undefined);
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<QueryBatchesResponse>, I>>(
-    object: I,
-  ): QueryBatchesResponse {
+  create(base?: DeepPartial<QueryBatchesResponse>): QueryBatchesResponse {
+    return QueryBatchesResponse.fromPartial(base ?? {});
+  },
+
+  fromPartial(object: DeepPartial<QueryBatchesResponse>): QueryBatchesResponse {
     const message = createBaseQueryBatchesResponse();
-    message.batches = object.batches?.map(e => BatchInfo.fromPartial(e)) || [];
-    message.pagination =
-      object.pagination !== undefined && object.pagination !== null
-        ? PageResponse.fromPartial(object.pagination)
-        : undefined;
+    message.batches = object.batches?.map((e) => BatchInfo.fromPartial(e)) || [];
+    message.pagination = (object.pagination !== undefined && object.pagination !== null)
+      ? PageResponse.fromPartial(object.pagination)
+      : undefined;
     return message;
   },
 };
@@ -725,29 +633,20 @@ export const QueryBatchesResponse = {
 messageTypeRegistry.set(QueryBatchesResponse.$type, QueryBatchesResponse);
 
 function createBaseQueryBatchInfoRequest(): QueryBatchInfoRequest {
-  return {
-    $type: 'regen.ecocredit.v1alpha1.QueryBatchInfoRequest',
-    batchDenom: '',
-  };
+  return { $type: "regen.ecocredit.v1alpha1.QueryBatchInfoRequest", batchDenom: "" };
 }
 
 export const QueryBatchInfoRequest = {
-  $type: 'regen.ecocredit.v1alpha1.QueryBatchInfoRequest' as const,
+  $type: "regen.ecocredit.v1alpha1.QueryBatchInfoRequest" as const,
 
-  encode(
-    message: QueryBatchInfoRequest,
-    writer: _m0.Writer = _m0.Writer.create(),
-  ): _m0.Writer {
-    if (message.batchDenom !== '') {
+  encode(message: QueryBatchInfoRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+    if (message.batchDenom !== "") {
       writer.uint32(10).string(message.batchDenom);
     }
     return writer;
   },
 
-  decode(
-    input: _m0.Reader | Uint8Array,
-    length?: number,
-  ): QueryBatchInfoRequest {
+  decode(input: _m0.Reader | Uint8Array, length?: number): QueryBatchInfoRequest {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryBatchInfoRequest();
@@ -768,7 +667,7 @@ export const QueryBatchInfoRequest = {
   fromJSON(object: any): QueryBatchInfoRequest {
     return {
       $type: QueryBatchInfoRequest.$type,
-      batchDenom: isSet(object.batchDenom) ? String(object.batchDenom) : '',
+      batchDenom: isSet(object.batchDenom) ? String(object.batchDenom) : "",
     };
   },
 
@@ -778,11 +677,13 @@ export const QueryBatchInfoRequest = {
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<QueryBatchInfoRequest>, I>>(
-    object: I,
-  ): QueryBatchInfoRequest {
+  create(base?: DeepPartial<QueryBatchInfoRequest>): QueryBatchInfoRequest {
+    return QueryBatchInfoRequest.fromPartial(base ?? {});
+  },
+
+  fromPartial(object: DeepPartial<QueryBatchInfoRequest>): QueryBatchInfoRequest {
     const message = createBaseQueryBatchInfoRequest();
-    message.batchDenom = object.batchDenom ?? '';
+    message.batchDenom = object.batchDenom ?? "";
     return message;
   },
 };
@@ -790,29 +691,20 @@ export const QueryBatchInfoRequest = {
 messageTypeRegistry.set(QueryBatchInfoRequest.$type, QueryBatchInfoRequest);
 
 function createBaseQueryBatchInfoResponse(): QueryBatchInfoResponse {
-  return {
-    $type: 'regen.ecocredit.v1alpha1.QueryBatchInfoResponse',
-    info: undefined,
-  };
+  return { $type: "regen.ecocredit.v1alpha1.QueryBatchInfoResponse", info: undefined };
 }
 
 export const QueryBatchInfoResponse = {
-  $type: 'regen.ecocredit.v1alpha1.QueryBatchInfoResponse' as const,
+  $type: "regen.ecocredit.v1alpha1.QueryBatchInfoResponse" as const,
 
-  encode(
-    message: QueryBatchInfoResponse,
-    writer: _m0.Writer = _m0.Writer.create(),
-  ): _m0.Writer {
+  encode(message: QueryBatchInfoResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.info !== undefined) {
       BatchInfo.encode(message.info, writer.uint32(10).fork()).ldelim();
     }
     return writer;
   },
 
-  decode(
-    input: _m0.Reader | Uint8Array,
-    length?: number,
-  ): QueryBatchInfoResponse {
+  decode(input: _m0.Reader | Uint8Array, length?: number): QueryBatchInfoResponse {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryBatchInfoResponse();
@@ -839,19 +731,17 @@ export const QueryBatchInfoResponse = {
 
   toJSON(message: QueryBatchInfoResponse): unknown {
     const obj: any = {};
-    message.info !== undefined &&
-      (obj.info = message.info ? BatchInfo.toJSON(message.info) : undefined);
+    message.info !== undefined && (obj.info = message.info ? BatchInfo.toJSON(message.info) : undefined);
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<QueryBatchInfoResponse>, I>>(
-    object: I,
-  ): QueryBatchInfoResponse {
+  create(base?: DeepPartial<QueryBatchInfoResponse>): QueryBatchInfoResponse {
+    return QueryBatchInfoResponse.fromPartial(base ?? {});
+  },
+
+  fromPartial(object: DeepPartial<QueryBatchInfoResponse>): QueryBatchInfoResponse {
     const message = createBaseQueryBatchInfoResponse();
-    message.info =
-      object.info !== undefined && object.info !== null
-        ? BatchInfo.fromPartial(object.info)
-        : undefined;
+    message.info = (object.info !== undefined && object.info !== null) ? BatchInfo.fromPartial(object.info) : undefined;
     return message;
   },
 };
@@ -859,24 +749,17 @@ export const QueryBatchInfoResponse = {
 messageTypeRegistry.set(QueryBatchInfoResponse.$type, QueryBatchInfoResponse);
 
 function createBaseQueryBalanceRequest(): QueryBalanceRequest {
-  return {
-    $type: 'regen.ecocredit.v1alpha1.QueryBalanceRequest',
-    account: '',
-    batchDenom: '',
-  };
+  return { $type: "regen.ecocredit.v1alpha1.QueryBalanceRequest", account: "", batchDenom: "" };
 }
 
 export const QueryBalanceRequest = {
-  $type: 'regen.ecocredit.v1alpha1.QueryBalanceRequest' as const,
+  $type: "regen.ecocredit.v1alpha1.QueryBalanceRequest" as const,
 
-  encode(
-    message: QueryBalanceRequest,
-    writer: _m0.Writer = _m0.Writer.create(),
-  ): _m0.Writer {
-    if (message.account !== '') {
+  encode(message: QueryBalanceRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+    if (message.account !== "") {
       writer.uint32(10).string(message.account);
     }
-    if (message.batchDenom !== '') {
+    if (message.batchDenom !== "") {
       writer.uint32(18).string(message.batchDenom);
     }
     return writer;
@@ -906,8 +789,8 @@ export const QueryBalanceRequest = {
   fromJSON(object: any): QueryBalanceRequest {
     return {
       $type: QueryBalanceRequest.$type,
-      account: isSet(object.account) ? String(object.account) : '',
-      batchDenom: isSet(object.batchDenom) ? String(object.batchDenom) : '',
+      account: isSet(object.account) ? String(object.account) : "",
+      batchDenom: isSet(object.batchDenom) ? String(object.batchDenom) : "",
     };
   },
 
@@ -918,12 +801,14 @@ export const QueryBalanceRequest = {
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<QueryBalanceRequest>, I>>(
-    object: I,
-  ): QueryBalanceRequest {
+  create(base?: DeepPartial<QueryBalanceRequest>): QueryBalanceRequest {
+    return QueryBalanceRequest.fromPartial(base ?? {});
+  },
+
+  fromPartial(object: DeepPartial<QueryBalanceRequest>): QueryBalanceRequest {
     const message = createBaseQueryBalanceRequest();
-    message.account = object.account ?? '';
-    message.batchDenom = object.batchDenom ?? '';
+    message.account = object.account ?? "";
+    message.batchDenom = object.batchDenom ?? "";
     return message;
   },
 };
@@ -931,33 +816,23 @@ export const QueryBalanceRequest = {
 messageTypeRegistry.set(QueryBalanceRequest.$type, QueryBalanceRequest);
 
 function createBaseQueryBalanceResponse(): QueryBalanceResponse {
-  return {
-    $type: 'regen.ecocredit.v1alpha1.QueryBalanceResponse',
-    tradableAmount: '',
-    retiredAmount: '',
-  };
+  return { $type: "regen.ecocredit.v1alpha1.QueryBalanceResponse", tradableAmount: "", retiredAmount: "" };
 }
 
 export const QueryBalanceResponse = {
-  $type: 'regen.ecocredit.v1alpha1.QueryBalanceResponse' as const,
+  $type: "regen.ecocredit.v1alpha1.QueryBalanceResponse" as const,
 
-  encode(
-    message: QueryBalanceResponse,
-    writer: _m0.Writer = _m0.Writer.create(),
-  ): _m0.Writer {
-    if (message.tradableAmount !== '') {
+  encode(message: QueryBalanceResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+    if (message.tradableAmount !== "") {
       writer.uint32(10).string(message.tradableAmount);
     }
-    if (message.retiredAmount !== '') {
+    if (message.retiredAmount !== "") {
       writer.uint32(18).string(message.retiredAmount);
     }
     return writer;
   },
 
-  decode(
-    input: _m0.Reader | Uint8Array,
-    length?: number,
-  ): QueryBalanceResponse {
+  decode(input: _m0.Reader | Uint8Array, length?: number): QueryBalanceResponse {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryBalanceResponse();
@@ -981,30 +856,26 @@ export const QueryBalanceResponse = {
   fromJSON(object: any): QueryBalanceResponse {
     return {
       $type: QueryBalanceResponse.$type,
-      tradableAmount: isSet(object.tradableAmount)
-        ? String(object.tradableAmount)
-        : '',
-      retiredAmount: isSet(object.retiredAmount)
-        ? String(object.retiredAmount)
-        : '',
+      tradableAmount: isSet(object.tradableAmount) ? String(object.tradableAmount) : "",
+      retiredAmount: isSet(object.retiredAmount) ? String(object.retiredAmount) : "",
     };
   },
 
   toJSON(message: QueryBalanceResponse): unknown {
     const obj: any = {};
-    message.tradableAmount !== undefined &&
-      (obj.tradableAmount = message.tradableAmount);
-    message.retiredAmount !== undefined &&
-      (obj.retiredAmount = message.retiredAmount);
+    message.tradableAmount !== undefined && (obj.tradableAmount = message.tradableAmount);
+    message.retiredAmount !== undefined && (obj.retiredAmount = message.retiredAmount);
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<QueryBalanceResponse>, I>>(
-    object: I,
-  ): QueryBalanceResponse {
+  create(base?: DeepPartial<QueryBalanceResponse>): QueryBalanceResponse {
+    return QueryBalanceResponse.fromPartial(base ?? {});
+  },
+
+  fromPartial(object: DeepPartial<QueryBalanceResponse>): QueryBalanceResponse {
     const message = createBaseQueryBalanceResponse();
-    message.tradableAmount = object.tradableAmount ?? '';
-    message.retiredAmount = object.retiredAmount ?? '';
+    message.tradableAmount = object.tradableAmount ?? "";
+    message.retiredAmount = object.retiredAmount ?? "";
     return message;
   },
 };
@@ -1012,20 +883,14 @@ export const QueryBalanceResponse = {
 messageTypeRegistry.set(QueryBalanceResponse.$type, QueryBalanceResponse);
 
 function createBaseQuerySupplyRequest(): QuerySupplyRequest {
-  return {
-    $type: 'regen.ecocredit.v1alpha1.QuerySupplyRequest',
-    batchDenom: '',
-  };
+  return { $type: "regen.ecocredit.v1alpha1.QuerySupplyRequest", batchDenom: "" };
 }
 
 export const QuerySupplyRequest = {
-  $type: 'regen.ecocredit.v1alpha1.QuerySupplyRequest' as const,
+  $type: "regen.ecocredit.v1alpha1.QuerySupplyRequest" as const,
 
-  encode(
-    message: QuerySupplyRequest,
-    writer: _m0.Writer = _m0.Writer.create(),
-  ): _m0.Writer {
-    if (message.batchDenom !== '') {
+  encode(message: QuerySupplyRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+    if (message.batchDenom !== "") {
       writer.uint32(10).string(message.batchDenom);
     }
     return writer;
@@ -1050,10 +915,7 @@ export const QuerySupplyRequest = {
   },
 
   fromJSON(object: any): QuerySupplyRequest {
-    return {
-      $type: QuerySupplyRequest.$type,
-      batchDenom: isSet(object.batchDenom) ? String(object.batchDenom) : '',
-    };
+    return { $type: QuerySupplyRequest.$type, batchDenom: isSet(object.batchDenom) ? String(object.batchDenom) : "" };
   },
 
   toJSON(message: QuerySupplyRequest): unknown {
@@ -1062,11 +924,13 @@ export const QuerySupplyRequest = {
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<QuerySupplyRequest>, I>>(
-    object: I,
-  ): QuerySupplyRequest {
+  create(base?: DeepPartial<QuerySupplyRequest>): QuerySupplyRequest {
+    return QuerySupplyRequest.fromPartial(base ?? {});
+  },
+
+  fromPartial(object: DeepPartial<QuerySupplyRequest>): QuerySupplyRequest {
     const message = createBaseQuerySupplyRequest();
-    message.batchDenom = object.batchDenom ?? '';
+    message.batchDenom = object.batchDenom ?? "";
     return message;
   },
 };
@@ -1074,24 +938,17 @@ export const QuerySupplyRequest = {
 messageTypeRegistry.set(QuerySupplyRequest.$type, QuerySupplyRequest);
 
 function createBaseQuerySupplyResponse(): QuerySupplyResponse {
-  return {
-    $type: 'regen.ecocredit.v1alpha1.QuerySupplyResponse',
-    tradableSupply: '',
-    retiredSupply: '',
-  };
+  return { $type: "regen.ecocredit.v1alpha1.QuerySupplyResponse", tradableSupply: "", retiredSupply: "" };
 }
 
 export const QuerySupplyResponse = {
-  $type: 'regen.ecocredit.v1alpha1.QuerySupplyResponse' as const,
+  $type: "regen.ecocredit.v1alpha1.QuerySupplyResponse" as const,
 
-  encode(
-    message: QuerySupplyResponse,
-    writer: _m0.Writer = _m0.Writer.create(),
-  ): _m0.Writer {
-    if (message.tradableSupply !== '') {
+  encode(message: QuerySupplyResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+    if (message.tradableSupply !== "") {
       writer.uint32(10).string(message.tradableSupply);
     }
-    if (message.retiredSupply !== '') {
+    if (message.retiredSupply !== "") {
       writer.uint32(18).string(message.retiredSupply);
     }
     return writer;
@@ -1121,30 +978,26 @@ export const QuerySupplyResponse = {
   fromJSON(object: any): QuerySupplyResponse {
     return {
       $type: QuerySupplyResponse.$type,
-      tradableSupply: isSet(object.tradableSupply)
-        ? String(object.tradableSupply)
-        : '',
-      retiredSupply: isSet(object.retiredSupply)
-        ? String(object.retiredSupply)
-        : '',
+      tradableSupply: isSet(object.tradableSupply) ? String(object.tradableSupply) : "",
+      retiredSupply: isSet(object.retiredSupply) ? String(object.retiredSupply) : "",
     };
   },
 
   toJSON(message: QuerySupplyResponse): unknown {
     const obj: any = {};
-    message.tradableSupply !== undefined &&
-      (obj.tradableSupply = message.tradableSupply);
-    message.retiredSupply !== undefined &&
-      (obj.retiredSupply = message.retiredSupply);
+    message.tradableSupply !== undefined && (obj.tradableSupply = message.tradableSupply);
+    message.retiredSupply !== undefined && (obj.retiredSupply = message.retiredSupply);
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<QuerySupplyResponse>, I>>(
-    object: I,
-  ): QuerySupplyResponse {
+  create(base?: DeepPartial<QuerySupplyResponse>): QuerySupplyResponse {
+    return QuerySupplyResponse.fromPartial(base ?? {});
+  },
+
+  fromPartial(object: DeepPartial<QuerySupplyResponse>): QuerySupplyResponse {
     const message = createBaseQuerySupplyResponse();
-    message.tradableSupply = object.tradableSupply ?? '';
-    message.retiredSupply = object.retiredSupply ?? '';
+    message.tradableSupply = object.tradableSupply ?? "";
+    message.retiredSupply = object.retiredSupply ?? "";
     return message;
   },
 };
@@ -1152,23 +1005,17 @@ export const QuerySupplyResponse = {
 messageTypeRegistry.set(QuerySupplyResponse.$type, QuerySupplyResponse);
 
 function createBaseQueryCreditTypesRequest(): QueryCreditTypesRequest {
-  return { $type: 'regen.ecocredit.v1alpha1.QueryCreditTypesRequest' };
+  return { $type: "regen.ecocredit.v1alpha1.QueryCreditTypesRequest" };
 }
 
 export const QueryCreditTypesRequest = {
-  $type: 'regen.ecocredit.v1alpha1.QueryCreditTypesRequest' as const,
+  $type: "regen.ecocredit.v1alpha1.QueryCreditTypesRequest" as const,
 
-  encode(
-    _: QueryCreditTypesRequest,
-    writer: _m0.Writer = _m0.Writer.create(),
-  ): _m0.Writer {
+  encode(_: QueryCreditTypesRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     return writer;
   },
 
-  decode(
-    input: _m0.Reader | Uint8Array,
-    length?: number,
-  ): QueryCreditTypesRequest {
+  decode(input: _m0.Reader | Uint8Array, length?: number): QueryCreditTypesRequest {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryCreditTypesRequest();
@@ -1184,9 +1031,7 @@ export const QueryCreditTypesRequest = {
   },
 
   fromJSON(_: any): QueryCreditTypesRequest {
-    return {
-      $type: QueryCreditTypesRequest.$type,
-    };
+    return { $type: QueryCreditTypesRequest.$type };
   },
 
   toJSON(_: QueryCreditTypesRequest): unknown {
@@ -1194,9 +1039,11 @@ export const QueryCreditTypesRequest = {
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<QueryCreditTypesRequest>, I>>(
-    _: I,
-  ): QueryCreditTypesRequest {
+  create(base?: DeepPartial<QueryCreditTypesRequest>): QueryCreditTypesRequest {
+    return QueryCreditTypesRequest.fromPartial(base ?? {});
+  },
+
+  fromPartial(_: DeepPartial<QueryCreditTypesRequest>): QueryCreditTypesRequest {
     const message = createBaseQueryCreditTypesRequest();
     return message;
   },
@@ -1205,29 +1052,20 @@ export const QueryCreditTypesRequest = {
 messageTypeRegistry.set(QueryCreditTypesRequest.$type, QueryCreditTypesRequest);
 
 function createBaseQueryCreditTypesResponse(): QueryCreditTypesResponse {
-  return {
-    $type: 'regen.ecocredit.v1alpha1.QueryCreditTypesResponse',
-    creditTypes: [],
-  };
+  return { $type: "regen.ecocredit.v1alpha1.QueryCreditTypesResponse", creditTypes: [] };
 }
 
 export const QueryCreditTypesResponse = {
-  $type: 'regen.ecocredit.v1alpha1.QueryCreditTypesResponse' as const,
+  $type: "regen.ecocredit.v1alpha1.QueryCreditTypesResponse" as const,
 
-  encode(
-    message: QueryCreditTypesResponse,
-    writer: _m0.Writer = _m0.Writer.create(),
-  ): _m0.Writer {
+  encode(message: QueryCreditTypesResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     for (const v of message.creditTypes) {
       CreditType.encode(v!, writer.uint32(10).fork()).ldelim();
     }
     return writer;
   },
 
-  decode(
-    input: _m0.Reader | Uint8Array,
-    length?: number,
-  ): QueryCreditTypesResponse {
+  decode(input: _m0.Reader | Uint8Array, length?: number): QueryCreditTypesResponse {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryCreditTypesResponse();
@@ -1248,84 +1086,64 @@ export const QueryCreditTypesResponse = {
   fromJSON(object: any): QueryCreditTypesResponse {
     return {
       $type: QueryCreditTypesResponse.$type,
-      creditTypes: Array.isArray(object?.creditTypes)
-        ? object.creditTypes.map((e: any) => CreditType.fromJSON(e))
-        : [],
+      creditTypes: Array.isArray(object?.creditTypes) ? object.creditTypes.map((e: any) => CreditType.fromJSON(e)) : [],
     };
   },
 
   toJSON(message: QueryCreditTypesResponse): unknown {
     const obj: any = {};
     if (message.creditTypes) {
-      obj.creditTypes = message.creditTypes.map(e =>
-        e ? CreditType.toJSON(e) : undefined,
-      );
+      obj.creditTypes = message.creditTypes.map((e) => e ? CreditType.toJSON(e) : undefined);
     } else {
       obj.creditTypes = [];
     }
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<QueryCreditTypesResponse>, I>>(
-    object: I,
-  ): QueryCreditTypesResponse {
+  create(base?: DeepPartial<QueryCreditTypesResponse>): QueryCreditTypesResponse {
+    return QueryCreditTypesResponse.fromPartial(base ?? {});
+  },
+
+  fromPartial(object: DeepPartial<QueryCreditTypesResponse>): QueryCreditTypesResponse {
     const message = createBaseQueryCreditTypesResponse();
-    message.creditTypes =
-      object.creditTypes?.map(e => CreditType.fromPartial(e)) || [];
+    message.creditTypes = object.creditTypes?.map((e) => CreditType.fromPartial(e)) || [];
     return message;
   },
 };
 
-messageTypeRegistry.set(
-  QueryCreditTypesResponse.$type,
-  QueryCreditTypesResponse,
-);
+messageTypeRegistry.set(QueryCreditTypesResponse.$type, QueryCreditTypesResponse);
 
 /** Msg is the regen.ecocredit.v1alpha1 Query service. */
 export interface Query {
   /** Classes queries for all credit classes with pagination. */
-  Classes(
-    request: DeepPartial<QueryClassesRequest>,
-  ): Promise<QueryClassesResponse>;
+  Classes(request: DeepPartial<QueryClassesRequest>): Promise<QueryClassesResponse>;
   /** ClassInfo queries for information on a credit class. */
-  ClassInfo(
-    request: DeepPartial<QueryClassInfoRequest>,
-  ): Promise<QueryClassInfoResponse>;
+  ClassInfo(request: DeepPartial<QueryClassInfoRequest>): Promise<QueryClassInfoResponse>;
   /** Batches queries for all batches in the given credit class with pagination. */
-  Batches(
-    request: DeepPartial<QueryBatchesRequest>,
-  ): Promise<QueryBatchesResponse>;
+  Batches(request: DeepPartial<QueryBatchesRequest>): Promise<QueryBatchesResponse>;
   /** BatchInfo queries for information on a credit batch. */
-  BatchInfo(
-    request: DeepPartial<QueryBatchInfoRequest>,
-  ): Promise<QueryBatchInfoResponse>;
+  BatchInfo(request: DeepPartial<QueryBatchInfoRequest>): Promise<QueryBatchInfoResponse>;
   /**
    * Balance queries the balance (both tradable and retired) of a given credit
    * batch for a given account.
    */
-  Balance(
-    request: DeepPartial<QueryBalanceRequest>,
-  ): Promise<QueryBalanceResponse>;
+  Balance(request: DeepPartial<QueryBalanceRequest>): Promise<QueryBalanceResponse>;
   /** Supply queries the tradable and retired supply of a credit batch. */
-  Supply(
-    request: DeepPartial<QuerySupplyRequest>,
-  ): Promise<QuerySupplyResponse>;
+  Supply(request: DeepPartial<QuerySupplyRequest>): Promise<QuerySupplyResponse>;
   /**
    * CreditTypes returns the list of allowed types that credit classes can have.
    * See Types/CreditType for more details.
    */
-  CreditTypes(
-    request: DeepPartial<QueryCreditTypesRequest>,
-  ): Promise<QueryCreditTypesResponse>;
+  CreditTypes(request: DeepPartial<QueryCreditTypesRequest>): Promise<QueryCreditTypesResponse>;
   /** Params queries the ecocredit module parameters. */
-  Params(
-    request: DeepPartial<QueryParamsRequest>,
-  ): Promise<QueryParamsResponse>;
+  Params(request: DeepPartial<QueryParamsRequest>): Promise<QueryParamsResponse>;
 }
 
 export class QueryClientImpl implements Query {
   private readonly rpc: Rpc;
-  constructor(rpc: Rpc) {
+  private readonly service: string;
+  constructor(rpc: Rpc, opts?: { service?: string }) {
+    this.service = opts?.service || "regen.ecocredit.v1alpha1.Query";
     this.rpc = rpc;
     this.Classes = this.Classes.bind(this);
     this.ClassInfo = this.ClassInfo.bind(this);
@@ -1336,163 +1154,74 @@ export class QueryClientImpl implements Query {
     this.CreditTypes = this.CreditTypes.bind(this);
     this.Params = this.Params.bind(this);
   }
-  Classes(
-    request: DeepPartial<QueryClassesRequest>,
-  ): Promise<QueryClassesResponse> {
+  Classes(request: DeepPartial<QueryClassesRequest>): Promise<QueryClassesResponse> {
     const fromPartial = QueryClassesRequest.fromPartial(request);
     const data = QueryClassesRequest.encode(fromPartial).finish();
-    const promise = this.rpc.request(
-      'regen.ecocredit.v1alpha1.Query',
-      'Classes',
-      data,
-    );
-    return promise.then(data =>
-      QueryClassesResponse.decode(new _m0.Reader(data)),
-    );
+    const promise = this.rpc.request(this.service, "Classes", data);
+    return promise.then((data) => QueryClassesResponse.decode(new _m0.Reader(data)));
   }
 
-  ClassInfo(
-    request: DeepPartial<QueryClassInfoRequest>,
-  ): Promise<QueryClassInfoResponse> {
+  ClassInfo(request: DeepPartial<QueryClassInfoRequest>): Promise<QueryClassInfoResponse> {
     const fromPartial = QueryClassInfoRequest.fromPartial(request);
     const data = QueryClassInfoRequest.encode(fromPartial).finish();
-    const promise = this.rpc.request(
-      'regen.ecocredit.v1alpha1.Query',
-      'ClassInfo',
-      data,
-    );
-    return promise.then(data =>
-      QueryClassInfoResponse.decode(new _m0.Reader(data)),
-    );
+    const promise = this.rpc.request(this.service, "ClassInfo", data);
+    return promise.then((data) => QueryClassInfoResponse.decode(new _m0.Reader(data)));
   }
 
-  Batches(
-    request: DeepPartial<QueryBatchesRequest>,
-  ): Promise<QueryBatchesResponse> {
+  Batches(request: DeepPartial<QueryBatchesRequest>): Promise<QueryBatchesResponse> {
     const fromPartial = QueryBatchesRequest.fromPartial(request);
     const data = QueryBatchesRequest.encode(fromPartial).finish();
-    const promise = this.rpc.request(
-      'regen.ecocredit.v1alpha1.Query',
-      'Batches',
-      data,
-    );
-    return promise.then(data =>
-      QueryBatchesResponse.decode(new _m0.Reader(data)),
-    );
+    const promise = this.rpc.request(this.service, "Batches", data);
+    return promise.then((data) => QueryBatchesResponse.decode(new _m0.Reader(data)));
   }
 
-  BatchInfo(
-    request: DeepPartial<QueryBatchInfoRequest>,
-  ): Promise<QueryBatchInfoResponse> {
+  BatchInfo(request: DeepPartial<QueryBatchInfoRequest>): Promise<QueryBatchInfoResponse> {
     const fromPartial = QueryBatchInfoRequest.fromPartial(request);
     const data = QueryBatchInfoRequest.encode(fromPartial).finish();
-    const promise = this.rpc.request(
-      'regen.ecocredit.v1alpha1.Query',
-      'BatchInfo',
-      data,
-    );
-    return promise.then(data =>
-      QueryBatchInfoResponse.decode(new _m0.Reader(data)),
-    );
+    const promise = this.rpc.request(this.service, "BatchInfo", data);
+    return promise.then((data) => QueryBatchInfoResponse.decode(new _m0.Reader(data)));
   }
 
-  Balance(
-    request: DeepPartial<QueryBalanceRequest>,
-  ): Promise<QueryBalanceResponse> {
+  Balance(request: DeepPartial<QueryBalanceRequest>): Promise<QueryBalanceResponse> {
     const fromPartial = QueryBalanceRequest.fromPartial(request);
     const data = QueryBalanceRequest.encode(fromPartial).finish();
-    const promise = this.rpc.request(
-      'regen.ecocredit.v1alpha1.Query',
-      'Balance',
-      data,
-    );
-    return promise.then(data =>
-      QueryBalanceResponse.decode(new _m0.Reader(data)),
-    );
+    const promise = this.rpc.request(this.service, "Balance", data);
+    return promise.then((data) => QueryBalanceResponse.decode(new _m0.Reader(data)));
   }
 
-  Supply(
-    request: DeepPartial<QuerySupplyRequest>,
-  ): Promise<QuerySupplyResponse> {
+  Supply(request: DeepPartial<QuerySupplyRequest>): Promise<QuerySupplyResponse> {
     const fromPartial = QuerySupplyRequest.fromPartial(request);
     const data = QuerySupplyRequest.encode(fromPartial).finish();
-    const promise = this.rpc.request(
-      'regen.ecocredit.v1alpha1.Query',
-      'Supply',
-      data,
-    );
-    return promise.then(data =>
-      QuerySupplyResponse.decode(new _m0.Reader(data)),
-    );
+    const promise = this.rpc.request(this.service, "Supply", data);
+    return promise.then((data) => QuerySupplyResponse.decode(new _m0.Reader(data)));
   }
 
-  CreditTypes(
-    request: DeepPartial<QueryCreditTypesRequest>,
-  ): Promise<QueryCreditTypesResponse> {
+  CreditTypes(request: DeepPartial<QueryCreditTypesRequest>): Promise<QueryCreditTypesResponse> {
     const fromPartial = QueryCreditTypesRequest.fromPartial(request);
     const data = QueryCreditTypesRequest.encode(fromPartial).finish();
-    const promise = this.rpc.request(
-      'regen.ecocredit.v1alpha1.Query',
-      'CreditTypes',
-      data,
-    );
-    return promise.then(data =>
-      QueryCreditTypesResponse.decode(new _m0.Reader(data)),
-    );
+    const promise = this.rpc.request(this.service, "CreditTypes", data);
+    return promise.then((data) => QueryCreditTypesResponse.decode(new _m0.Reader(data)));
   }
 
-  Params(
-    request: DeepPartial<QueryParamsRequest>,
-  ): Promise<QueryParamsResponse> {
+  Params(request: DeepPartial<QueryParamsRequest>): Promise<QueryParamsResponse> {
     const fromPartial = QueryParamsRequest.fromPartial(request);
     const data = QueryParamsRequest.encode(fromPartial).finish();
-    const promise = this.rpc.request(
-      'regen.ecocredit.v1alpha1.Query',
-      'Params',
-      data,
-    );
-    return promise.then(data =>
-      QueryParamsResponse.decode(new _m0.Reader(data)),
-    );
+    const promise = this.rpc.request(this.service, "Params", data);
+    return promise.then((data) => QueryParamsResponse.decode(new _m0.Reader(data)));
   }
 }
 
 interface Rpc {
-  request(
-    service: string,
-    method: string,
-    data: Uint8Array,
-  ): Promise<Uint8Array>;
+  request(service: string, method: string, data: Uint8Array): Promise<Uint8Array>;
 }
 
-type Builtin =
-  | Date
-  | Function
-  | Uint8Array
-  | string
-  | number
-  | boolean
-  | undefined;
+type Builtin = Date | Function | Uint8Array | string | number | boolean | undefined;
 
-export type DeepPartial<T> = T extends Builtin
-  ? T
-  : T extends Long
-  ? string | number | Long
-  : T extends Array<infer U>
-  ? Array<DeepPartial<U>>
-  : T extends ReadonlyArray<infer U>
-  ? ReadonlyArray<DeepPartial<U>>
-  : T extends {}
-  ? { [K in Exclude<keyof T, '$type'>]?: DeepPartial<T[K]> }
+export type DeepPartial<T> = T extends Builtin ? T
+  : T extends Long ? string | number | Long : T extends Array<infer U> ? Array<DeepPartial<U>>
+  : T extends ReadonlyArray<infer U> ? ReadonlyArray<DeepPartial<U>>
+  : T extends {} ? { [K in Exclude<keyof T, "$type">]?: DeepPartial<T[K]> }
   : Partial<T>;
-
-type KeysOfUnion<T> = T extends T ? keyof T : never;
-export type Exact<P, I extends P> = P extends Builtin
-  ? P
-  : P & { [K in keyof P]: Exact<P[K], I[K]> } & Record<
-        Exclude<keyof I, KeysOfUnion<P> | '$type'>,
-        never
-      >;
 
 if (_m0.util.Long !== Long) {
   _m0.util.Long = Long as any;

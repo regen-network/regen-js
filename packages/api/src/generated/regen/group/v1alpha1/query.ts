@@ -1,52 +1,43 @@
 /* eslint-disable */
-import { messageTypeRegistry } from '../../../typeRegistry';
-import Long from 'long';
-import _m0 from 'protobufjs/minimal';
-import {
-  GroupInfo,
-  GroupAccountInfo,
-  Proposal,
-  Vote,
-  GroupMember,
-} from './types';
-import {
-  PageRequest,
-  PageResponse,
-} from '../../../cosmos/base/query/v1beta1/pagination';
+import Long from "long";
+import _m0 from "protobufjs/minimal";
+import { PageRequest, PageResponse } from "../../../cosmos/base/query/v1beta1/pagination";
+import { messageTypeRegistry } from "../../../typeRegistry";
+import { GroupAccountInfo, GroupInfo, GroupMember, Proposal, Vote } from "./types";
 
-export const protobufPackage = 'regen.group.v1alpha1';
+export const protobufPackage = "regen.group.v1alpha1";
 
 /** QueryGroupInfoRequest is the Query/GroupInfo request type. */
 export interface QueryGroupInfoRequest {
-  $type: 'regen.group.v1alpha1.QueryGroupInfoRequest';
+  $type: "regen.group.v1alpha1.QueryGroupInfoRequest";
   /** group_id is the unique ID of the group. */
   groupId: Long;
 }
 
 /** QueryGroupInfoResponse is the Query/GroupInfo response type. */
 export interface QueryGroupInfoResponse {
-  $type: 'regen.group.v1alpha1.QueryGroupInfoResponse';
+  $type: "regen.group.v1alpha1.QueryGroupInfoResponse";
   /** info is the GroupInfo for the group. */
   info?: GroupInfo;
 }
 
 /** QueryGroupAccountInfoRequest is the Query/GroupAccountInfo request type. */
 export interface QueryGroupAccountInfoRequest {
-  $type: 'regen.group.v1alpha1.QueryGroupAccountInfoRequest';
+  $type: "regen.group.v1alpha1.QueryGroupAccountInfoRequest";
   /** address is the account address of the group account. */
   address: string;
 }
 
 /** QueryGroupAccountInfoResponse is the Query/GroupAccountInfo response type. */
 export interface QueryGroupAccountInfoResponse {
-  $type: 'regen.group.v1alpha1.QueryGroupAccountInfoResponse';
+  $type: "regen.group.v1alpha1.QueryGroupAccountInfoResponse";
   /** info is the GroupAccountInfo for the group account. */
   info?: GroupAccountInfo;
 }
 
 /** QueryGroupMembersRequest is the Query/GroupMembersRequest request type. */
 export interface QueryGroupMembersRequest {
-  $type: 'regen.group.v1alpha1.QueryGroupMembersRequest';
+  $type: "regen.group.v1alpha1.QueryGroupMembersRequest";
   /** group_id is the unique ID of the group. */
   groupId: Long;
   /** pagination defines an optional pagination for the request. */
@@ -55,7 +46,7 @@ export interface QueryGroupMembersRequest {
 
 /** QueryGroupMembersResponse is the Query/GroupMembersResponse response type. */
 export interface QueryGroupMembersResponse {
-  $type: 'regen.group.v1alpha1.QueryGroupMembersResponse';
+  $type: "regen.group.v1alpha1.QueryGroupMembersResponse";
   /** members are the members of the group with given group_id. */
   members: GroupMember[];
   /** pagination defines the pagination in the response. */
@@ -64,7 +55,7 @@ export interface QueryGroupMembersResponse {
 
 /** QueryGroupsByAdminRequest is the Query/GroupsByAdminRequest request type. */
 export interface QueryGroupsByAdminRequest {
-  $type: 'regen.group.v1alpha1.QueryGroupsByAdminRequest';
+  $type: "regen.group.v1alpha1.QueryGroupsByAdminRequest";
   /** admin is the account address of a group's admin. */
   admin: string;
   /** pagination defines an optional pagination for the request. */
@@ -73,7 +64,7 @@ export interface QueryGroupsByAdminRequest {
 
 /** QueryGroupsByAdminResponse is the Query/GroupsByAdminResponse response type. */
 export interface QueryGroupsByAdminResponse {
-  $type: 'regen.group.v1alpha1.QueryGroupsByAdminResponse';
+  $type: "regen.group.v1alpha1.QueryGroupsByAdminResponse";
   /** groups are the groups info with the provided admin. */
   groups: GroupInfo[];
   /** pagination defines the pagination in the response. */
@@ -85,7 +76,7 @@ export interface QueryGroupsByAdminResponse {
  * type.
  */
 export interface QueryGroupAccountsByGroupRequest {
-  $type: 'regen.group.v1alpha1.QueryGroupAccountsByGroupRequest';
+  $type: "regen.group.v1alpha1.QueryGroupAccountsByGroupRequest";
   /** group_id is the unique ID of the group account's group. */
   groupId: Long;
   /** pagination defines an optional pagination for the request. */
@@ -97,7 +88,7 @@ export interface QueryGroupAccountsByGroupRequest {
  * type.
  */
 export interface QueryGroupAccountsByGroupResponse {
-  $type: 'regen.group.v1alpha1.QueryGroupAccountsByGroupResponse';
+  $type: "regen.group.v1alpha1.QueryGroupAccountsByGroupResponse";
   /**
    * group_accounts are the group accounts info associated with the provided
    * group.
@@ -112,7 +103,7 @@ export interface QueryGroupAccountsByGroupResponse {
  * type.
  */
 export interface QueryGroupAccountsByAdminRequest {
-  $type: 'regen.group.v1alpha1.QueryGroupAccountsByAdminRequest';
+  $type: "regen.group.v1alpha1.QueryGroupAccountsByAdminRequest";
   /** admin is the admin address of the group account. */
   admin: string;
   /** pagination defines an optional pagination for the request. */
@@ -124,7 +115,7 @@ export interface QueryGroupAccountsByAdminRequest {
  * type.
  */
 export interface QueryGroupAccountsByAdminResponse {
-  $type: 'regen.group.v1alpha1.QueryGroupAccountsByAdminResponse';
+  $type: "regen.group.v1alpha1.QueryGroupAccountsByAdminResponse";
   /** group_accounts are the group accounts info with provided admin. */
   groupAccounts: GroupAccountInfo[];
   /** pagination defines the pagination in the response. */
@@ -133,14 +124,14 @@ export interface QueryGroupAccountsByAdminResponse {
 
 /** QueryProposalRequest is the Query/Proposal request type. */
 export interface QueryProposalRequest {
-  $type: 'regen.group.v1alpha1.QueryProposalRequest';
+  $type: "regen.group.v1alpha1.QueryProposalRequest";
   /** proposal_id is the unique ID of a proposal. */
   proposalId: Long;
 }
 
 /** QueryProposalResponse is the Query/Proposal response type. */
 export interface QueryProposalResponse {
-  $type: 'regen.group.v1alpha1.QueryProposalResponse';
+  $type: "regen.group.v1alpha1.QueryProposalResponse";
   /** proposal is the proposal info. */
   proposal?: Proposal;
 }
@@ -150,7 +141,7 @@ export interface QueryProposalResponse {
  * request type.
  */
 export interface QueryProposalsByGroupAccountRequest {
-  $type: 'regen.group.v1alpha1.QueryProposalsByGroupAccountRequest';
+  $type: "regen.group.v1alpha1.QueryProposalsByGroupAccountRequest";
   /** address is the group account address related to proposals. */
   address: string;
   /** pagination defines an optional pagination for the request. */
@@ -162,7 +153,7 @@ export interface QueryProposalsByGroupAccountRequest {
  * response type.
  */
 export interface QueryProposalsByGroupAccountResponse {
-  $type: 'regen.group.v1alpha1.QueryProposalsByGroupAccountResponse';
+  $type: "regen.group.v1alpha1.QueryProposalsByGroupAccountResponse";
   /** proposals are the proposals with given group account. */
   proposals: Proposal[];
   /** pagination defines the pagination in the response. */
@@ -174,7 +165,7 @@ export interface QueryProposalsByGroupAccountResponse {
  * type.
  */
 export interface QueryVoteByProposalVoterRequest {
-  $type: 'regen.group.v1alpha1.QueryVoteByProposalVoterRequest';
+  $type: "regen.group.v1alpha1.QueryVoteByProposalVoterRequest";
   /** proposal_id is the unique ID of a proposal. */
   proposalId: Long;
   /** voter is a proposal voter account address. */
@@ -186,14 +177,14 @@ export interface QueryVoteByProposalVoterRequest {
  * type.
  */
 export interface QueryVoteByProposalVoterResponse {
-  $type: 'regen.group.v1alpha1.QueryVoteByProposalVoterResponse';
+  $type: "regen.group.v1alpha1.QueryVoteByProposalVoterResponse";
   /** vote is the vote with given proposal_id and voter. */
   vote?: Vote;
 }
 
 /** QueryVotesByProposalResponse is the Query/VotesByProposal request type. */
 export interface QueryVotesByProposalRequest {
-  $type: 'regen.group.v1alpha1.QueryVotesByProposalRequest';
+  $type: "regen.group.v1alpha1.QueryVotesByProposalRequest";
   /** proposal_id is the unique ID of a proposal. */
   proposalId: Long;
   /** pagination defines an optional pagination for the request. */
@@ -202,7 +193,7 @@ export interface QueryVotesByProposalRequest {
 
 /** QueryVotesByProposalResponse is the Query/VotesByProposal response type. */
 export interface QueryVotesByProposalResponse {
-  $type: 'regen.group.v1alpha1.QueryVotesByProposalResponse';
+  $type: "regen.group.v1alpha1.QueryVotesByProposalResponse";
   /** votes are the list of votes for given proposal_id. */
   votes: Vote[];
   /** pagination defines the pagination in the response. */
@@ -211,7 +202,7 @@ export interface QueryVotesByProposalResponse {
 
 /** QueryVotesByVoterResponse is the Query/VotesByVoter request type. */
 export interface QueryVotesByVoterRequest {
-  $type: 'regen.group.v1alpha1.QueryVotesByVoterRequest';
+  $type: "regen.group.v1alpha1.QueryVotesByVoterRequest";
   /** voter is a proposal voter account address. */
   voter: string;
   /** pagination defines an optional pagination for the request. */
@@ -220,7 +211,7 @@ export interface QueryVotesByVoterRequest {
 
 /** QueryVotesByVoterResponse is the Query/VotesByVoter response type. */
 export interface QueryVotesByVoterResponse {
-  $type: 'regen.group.v1alpha1.QueryVotesByVoterResponse';
+  $type: "regen.group.v1alpha1.QueryVotesByVoterResponse";
   /** votes are the list of votes by given voter. */
   votes: Vote[];
   /** pagination defines the pagination in the response. */
@@ -228,29 +219,20 @@ export interface QueryVotesByVoterResponse {
 }
 
 function createBaseQueryGroupInfoRequest(): QueryGroupInfoRequest {
-  return {
-    $type: 'regen.group.v1alpha1.QueryGroupInfoRequest',
-    groupId: Long.UZERO,
-  };
+  return { $type: "regen.group.v1alpha1.QueryGroupInfoRequest", groupId: Long.UZERO };
 }
 
 export const QueryGroupInfoRequest = {
-  $type: 'regen.group.v1alpha1.QueryGroupInfoRequest' as const,
+  $type: "regen.group.v1alpha1.QueryGroupInfoRequest" as const,
 
-  encode(
-    message: QueryGroupInfoRequest,
-    writer: _m0.Writer = _m0.Writer.create(),
-  ): _m0.Writer {
+  encode(message: QueryGroupInfoRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (!message.groupId.isZero()) {
       writer.uint32(8).uint64(message.groupId);
     }
     return writer;
   },
 
-  decode(
-    input: _m0.Reader | Uint8Array,
-    length?: number,
-  ): QueryGroupInfoRequest {
+  decode(input: _m0.Reader | Uint8Array, length?: number): QueryGroupInfoRequest {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryGroupInfoRequest();
@@ -271,27 +253,25 @@ export const QueryGroupInfoRequest = {
   fromJSON(object: any): QueryGroupInfoRequest {
     return {
       $type: QueryGroupInfoRequest.$type,
-      groupId: isSet(object.groupId)
-        ? Long.fromString(object.groupId)
-        : Long.UZERO,
+      groupId: isSet(object.groupId) ? Long.fromValue(object.groupId) : Long.UZERO,
     };
   },
 
   toJSON(message: QueryGroupInfoRequest): unknown {
     const obj: any = {};
-    message.groupId !== undefined &&
-      (obj.groupId = (message.groupId || Long.UZERO).toString());
+    message.groupId !== undefined && (obj.groupId = (message.groupId || Long.UZERO).toString());
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<QueryGroupInfoRequest>, I>>(
-    object: I,
-  ): QueryGroupInfoRequest {
+  create(base?: DeepPartial<QueryGroupInfoRequest>): QueryGroupInfoRequest {
+    return QueryGroupInfoRequest.fromPartial(base ?? {});
+  },
+
+  fromPartial(object: DeepPartial<QueryGroupInfoRequest>): QueryGroupInfoRequest {
     const message = createBaseQueryGroupInfoRequest();
-    message.groupId =
-      object.groupId !== undefined && object.groupId !== null
-        ? Long.fromValue(object.groupId)
-        : Long.UZERO;
+    message.groupId = (object.groupId !== undefined && object.groupId !== null)
+      ? Long.fromValue(object.groupId)
+      : Long.UZERO;
     return message;
   },
 };
@@ -299,29 +279,20 @@ export const QueryGroupInfoRequest = {
 messageTypeRegistry.set(QueryGroupInfoRequest.$type, QueryGroupInfoRequest);
 
 function createBaseQueryGroupInfoResponse(): QueryGroupInfoResponse {
-  return {
-    $type: 'regen.group.v1alpha1.QueryGroupInfoResponse',
-    info: undefined,
-  };
+  return { $type: "regen.group.v1alpha1.QueryGroupInfoResponse", info: undefined };
 }
 
 export const QueryGroupInfoResponse = {
-  $type: 'regen.group.v1alpha1.QueryGroupInfoResponse' as const,
+  $type: "regen.group.v1alpha1.QueryGroupInfoResponse" as const,
 
-  encode(
-    message: QueryGroupInfoResponse,
-    writer: _m0.Writer = _m0.Writer.create(),
-  ): _m0.Writer {
+  encode(message: QueryGroupInfoResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.info !== undefined) {
       GroupInfo.encode(message.info, writer.uint32(10).fork()).ldelim();
     }
     return writer;
   },
 
-  decode(
-    input: _m0.Reader | Uint8Array,
-    length?: number,
-  ): QueryGroupInfoResponse {
+  decode(input: _m0.Reader | Uint8Array, length?: number): QueryGroupInfoResponse {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryGroupInfoResponse();
@@ -348,19 +319,17 @@ export const QueryGroupInfoResponse = {
 
   toJSON(message: QueryGroupInfoResponse): unknown {
     const obj: any = {};
-    message.info !== undefined &&
-      (obj.info = message.info ? GroupInfo.toJSON(message.info) : undefined);
+    message.info !== undefined && (obj.info = message.info ? GroupInfo.toJSON(message.info) : undefined);
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<QueryGroupInfoResponse>, I>>(
-    object: I,
-  ): QueryGroupInfoResponse {
+  create(base?: DeepPartial<QueryGroupInfoResponse>): QueryGroupInfoResponse {
+    return QueryGroupInfoResponse.fromPartial(base ?? {});
+  },
+
+  fromPartial(object: DeepPartial<QueryGroupInfoResponse>): QueryGroupInfoResponse {
     const message = createBaseQueryGroupInfoResponse();
-    message.info =
-      object.info !== undefined && object.info !== null
-        ? GroupInfo.fromPartial(object.info)
-        : undefined;
+    message.info = (object.info !== undefined && object.info !== null) ? GroupInfo.fromPartial(object.info) : undefined;
     return message;
   },
 };
@@ -368,29 +337,20 @@ export const QueryGroupInfoResponse = {
 messageTypeRegistry.set(QueryGroupInfoResponse.$type, QueryGroupInfoResponse);
 
 function createBaseQueryGroupAccountInfoRequest(): QueryGroupAccountInfoRequest {
-  return {
-    $type: 'regen.group.v1alpha1.QueryGroupAccountInfoRequest',
-    address: '',
-  };
+  return { $type: "regen.group.v1alpha1.QueryGroupAccountInfoRequest", address: "" };
 }
 
 export const QueryGroupAccountInfoRequest = {
-  $type: 'regen.group.v1alpha1.QueryGroupAccountInfoRequest' as const,
+  $type: "regen.group.v1alpha1.QueryGroupAccountInfoRequest" as const,
 
-  encode(
-    message: QueryGroupAccountInfoRequest,
-    writer: _m0.Writer = _m0.Writer.create(),
-  ): _m0.Writer {
-    if (message.address !== '') {
+  encode(message: QueryGroupAccountInfoRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+    if (message.address !== "") {
       writer.uint32(10).string(message.address);
     }
     return writer;
   },
 
-  decode(
-    input: _m0.Reader | Uint8Array,
-    length?: number,
-  ): QueryGroupAccountInfoRequest {
+  decode(input: _m0.Reader | Uint8Array, length?: number): QueryGroupAccountInfoRequest {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryGroupAccountInfoRequest();
@@ -409,10 +369,7 @@ export const QueryGroupAccountInfoRequest = {
   },
 
   fromJSON(object: any): QueryGroupAccountInfoRequest {
-    return {
-      $type: QueryGroupAccountInfoRequest.$type,
-      address: isSet(object.address) ? String(object.address) : '',
-    };
+    return { $type: QueryGroupAccountInfoRequest.$type, address: isSet(object.address) ? String(object.address) : "" };
   },
 
   toJSON(message: QueryGroupAccountInfoRequest): unknown {
@@ -421,44 +378,34 @@ export const QueryGroupAccountInfoRequest = {
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<QueryGroupAccountInfoRequest>, I>>(
-    object: I,
-  ): QueryGroupAccountInfoRequest {
+  create(base?: DeepPartial<QueryGroupAccountInfoRequest>): QueryGroupAccountInfoRequest {
+    return QueryGroupAccountInfoRequest.fromPartial(base ?? {});
+  },
+
+  fromPartial(object: DeepPartial<QueryGroupAccountInfoRequest>): QueryGroupAccountInfoRequest {
     const message = createBaseQueryGroupAccountInfoRequest();
-    message.address = object.address ?? '';
+    message.address = object.address ?? "";
     return message;
   },
 };
 
-messageTypeRegistry.set(
-  QueryGroupAccountInfoRequest.$type,
-  QueryGroupAccountInfoRequest,
-);
+messageTypeRegistry.set(QueryGroupAccountInfoRequest.$type, QueryGroupAccountInfoRequest);
 
 function createBaseQueryGroupAccountInfoResponse(): QueryGroupAccountInfoResponse {
-  return {
-    $type: 'regen.group.v1alpha1.QueryGroupAccountInfoResponse',
-    info: undefined,
-  };
+  return { $type: "regen.group.v1alpha1.QueryGroupAccountInfoResponse", info: undefined };
 }
 
 export const QueryGroupAccountInfoResponse = {
-  $type: 'regen.group.v1alpha1.QueryGroupAccountInfoResponse' as const,
+  $type: "regen.group.v1alpha1.QueryGroupAccountInfoResponse" as const,
 
-  encode(
-    message: QueryGroupAccountInfoResponse,
-    writer: _m0.Writer = _m0.Writer.create(),
-  ): _m0.Writer {
+  encode(message: QueryGroupAccountInfoResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.info !== undefined) {
       GroupAccountInfo.encode(message.info, writer.uint32(10).fork()).ldelim();
     }
     return writer;
   },
 
-  decode(
-    input: _m0.Reader | Uint8Array,
-    length?: number,
-  ): QueryGroupAccountInfoResponse {
+  decode(input: _m0.Reader | Uint8Array, length?: number): QueryGroupAccountInfoResponse {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryGroupAccountInfoResponse();
@@ -479,53 +426,39 @@ export const QueryGroupAccountInfoResponse = {
   fromJSON(object: any): QueryGroupAccountInfoResponse {
     return {
       $type: QueryGroupAccountInfoResponse.$type,
-      info: isSet(object.info)
-        ? GroupAccountInfo.fromJSON(object.info)
-        : undefined,
+      info: isSet(object.info) ? GroupAccountInfo.fromJSON(object.info) : undefined,
     };
   },
 
   toJSON(message: QueryGroupAccountInfoResponse): unknown {
     const obj: any = {};
-    message.info !== undefined &&
-      (obj.info = message.info
-        ? GroupAccountInfo.toJSON(message.info)
-        : undefined);
+    message.info !== undefined && (obj.info = message.info ? GroupAccountInfo.toJSON(message.info) : undefined);
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<QueryGroupAccountInfoResponse>, I>>(
-    object: I,
-  ): QueryGroupAccountInfoResponse {
+  create(base?: DeepPartial<QueryGroupAccountInfoResponse>): QueryGroupAccountInfoResponse {
+    return QueryGroupAccountInfoResponse.fromPartial(base ?? {});
+  },
+
+  fromPartial(object: DeepPartial<QueryGroupAccountInfoResponse>): QueryGroupAccountInfoResponse {
     const message = createBaseQueryGroupAccountInfoResponse();
-    message.info =
-      object.info !== undefined && object.info !== null
-        ? GroupAccountInfo.fromPartial(object.info)
-        : undefined;
+    message.info = (object.info !== undefined && object.info !== null)
+      ? GroupAccountInfo.fromPartial(object.info)
+      : undefined;
     return message;
   },
 };
 
-messageTypeRegistry.set(
-  QueryGroupAccountInfoResponse.$type,
-  QueryGroupAccountInfoResponse,
-);
+messageTypeRegistry.set(QueryGroupAccountInfoResponse.$type, QueryGroupAccountInfoResponse);
 
 function createBaseQueryGroupMembersRequest(): QueryGroupMembersRequest {
-  return {
-    $type: 'regen.group.v1alpha1.QueryGroupMembersRequest',
-    groupId: Long.UZERO,
-    pagination: undefined,
-  };
+  return { $type: "regen.group.v1alpha1.QueryGroupMembersRequest", groupId: Long.UZERO, pagination: undefined };
 }
 
 export const QueryGroupMembersRequest = {
-  $type: 'regen.group.v1alpha1.QueryGroupMembersRequest' as const,
+  $type: "regen.group.v1alpha1.QueryGroupMembersRequest" as const,
 
-  encode(
-    message: QueryGroupMembersRequest,
-    writer: _m0.Writer = _m0.Writer.create(),
-  ): _m0.Writer {
+  encode(message: QueryGroupMembersRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (!message.groupId.isZero()) {
       writer.uint32(8).uint64(message.groupId);
     }
@@ -535,10 +468,7 @@ export const QueryGroupMembersRequest = {
     return writer;
   },
 
-  decode(
-    input: _m0.Reader | Uint8Array,
-    length?: number,
-  ): QueryGroupMembersRequest {
+  decode(input: _m0.Reader | Uint8Array, length?: number): QueryGroupMembersRequest {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryGroupMembersRequest();
@@ -562,78 +492,55 @@ export const QueryGroupMembersRequest = {
   fromJSON(object: any): QueryGroupMembersRequest {
     return {
       $type: QueryGroupMembersRequest.$type,
-      groupId: isSet(object.groupId)
-        ? Long.fromString(object.groupId)
-        : Long.UZERO,
-      pagination: isSet(object.pagination)
-        ? PageRequest.fromJSON(object.pagination)
-        : undefined,
+      groupId: isSet(object.groupId) ? Long.fromValue(object.groupId) : Long.UZERO,
+      pagination: isSet(object.pagination) ? PageRequest.fromJSON(object.pagination) : undefined,
     };
   },
 
   toJSON(message: QueryGroupMembersRequest): unknown {
     const obj: any = {};
-    message.groupId !== undefined &&
-      (obj.groupId = (message.groupId || Long.UZERO).toString());
+    message.groupId !== undefined && (obj.groupId = (message.groupId || Long.UZERO).toString());
     message.pagination !== undefined &&
-      (obj.pagination = message.pagination
-        ? PageRequest.toJSON(message.pagination)
-        : undefined);
+      (obj.pagination = message.pagination ? PageRequest.toJSON(message.pagination) : undefined);
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<QueryGroupMembersRequest>, I>>(
-    object: I,
-  ): QueryGroupMembersRequest {
+  create(base?: DeepPartial<QueryGroupMembersRequest>): QueryGroupMembersRequest {
+    return QueryGroupMembersRequest.fromPartial(base ?? {});
+  },
+
+  fromPartial(object: DeepPartial<QueryGroupMembersRequest>): QueryGroupMembersRequest {
     const message = createBaseQueryGroupMembersRequest();
-    message.groupId =
-      object.groupId !== undefined && object.groupId !== null
-        ? Long.fromValue(object.groupId)
-        : Long.UZERO;
-    message.pagination =
-      object.pagination !== undefined && object.pagination !== null
-        ? PageRequest.fromPartial(object.pagination)
-        : undefined;
+    message.groupId = (object.groupId !== undefined && object.groupId !== null)
+      ? Long.fromValue(object.groupId)
+      : Long.UZERO;
+    message.pagination = (object.pagination !== undefined && object.pagination !== null)
+      ? PageRequest.fromPartial(object.pagination)
+      : undefined;
     return message;
   },
 };
 
-messageTypeRegistry.set(
-  QueryGroupMembersRequest.$type,
-  QueryGroupMembersRequest,
-);
+messageTypeRegistry.set(QueryGroupMembersRequest.$type, QueryGroupMembersRequest);
 
 function createBaseQueryGroupMembersResponse(): QueryGroupMembersResponse {
-  return {
-    $type: 'regen.group.v1alpha1.QueryGroupMembersResponse',
-    members: [],
-    pagination: undefined,
-  };
+  return { $type: "regen.group.v1alpha1.QueryGroupMembersResponse", members: [], pagination: undefined };
 }
 
 export const QueryGroupMembersResponse = {
-  $type: 'regen.group.v1alpha1.QueryGroupMembersResponse' as const,
+  $type: "regen.group.v1alpha1.QueryGroupMembersResponse" as const,
 
-  encode(
-    message: QueryGroupMembersResponse,
-    writer: _m0.Writer = _m0.Writer.create(),
-  ): _m0.Writer {
+  encode(message: QueryGroupMembersResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     for (const v of message.members) {
       GroupMember.encode(v!, writer.uint32(10).fork()).ldelim();
     }
     if (message.pagination !== undefined) {
-      PageResponse.encode(
-        message.pagination,
-        writer.uint32(18).fork(),
-      ).ldelim();
+      PageResponse.encode(message.pagination, writer.uint32(18).fork()).ldelim();
     }
     return writer;
   },
 
-  decode(
-    input: _m0.Reader | Uint8Array,
-    length?: number,
-  ): QueryGroupMembersResponse {
+  decode(input: _m0.Reader | Uint8Array, length?: number): QueryGroupMembersResponse {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryGroupMembersResponse();
@@ -657,66 +564,48 @@ export const QueryGroupMembersResponse = {
   fromJSON(object: any): QueryGroupMembersResponse {
     return {
       $type: QueryGroupMembersResponse.$type,
-      members: Array.isArray(object?.members)
-        ? object.members.map((e: any) => GroupMember.fromJSON(e))
-        : [],
-      pagination: isSet(object.pagination)
-        ? PageResponse.fromJSON(object.pagination)
-        : undefined,
+      members: Array.isArray(object?.members) ? object.members.map((e: any) => GroupMember.fromJSON(e)) : [],
+      pagination: isSet(object.pagination) ? PageResponse.fromJSON(object.pagination) : undefined,
     };
   },
 
   toJSON(message: QueryGroupMembersResponse): unknown {
     const obj: any = {};
     if (message.members) {
-      obj.members = message.members.map(e =>
-        e ? GroupMember.toJSON(e) : undefined,
-      );
+      obj.members = message.members.map((e) => e ? GroupMember.toJSON(e) : undefined);
     } else {
       obj.members = [];
     }
     message.pagination !== undefined &&
-      (obj.pagination = message.pagination
-        ? PageResponse.toJSON(message.pagination)
-        : undefined);
+      (obj.pagination = message.pagination ? PageResponse.toJSON(message.pagination) : undefined);
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<QueryGroupMembersResponse>, I>>(
-    object: I,
-  ): QueryGroupMembersResponse {
+  create(base?: DeepPartial<QueryGroupMembersResponse>): QueryGroupMembersResponse {
+    return QueryGroupMembersResponse.fromPartial(base ?? {});
+  },
+
+  fromPartial(object: DeepPartial<QueryGroupMembersResponse>): QueryGroupMembersResponse {
     const message = createBaseQueryGroupMembersResponse();
-    message.members =
-      object.members?.map(e => GroupMember.fromPartial(e)) || [];
-    message.pagination =
-      object.pagination !== undefined && object.pagination !== null
-        ? PageResponse.fromPartial(object.pagination)
-        : undefined;
+    message.members = object.members?.map((e) => GroupMember.fromPartial(e)) || [];
+    message.pagination = (object.pagination !== undefined && object.pagination !== null)
+      ? PageResponse.fromPartial(object.pagination)
+      : undefined;
     return message;
   },
 };
 
-messageTypeRegistry.set(
-  QueryGroupMembersResponse.$type,
-  QueryGroupMembersResponse,
-);
+messageTypeRegistry.set(QueryGroupMembersResponse.$type, QueryGroupMembersResponse);
 
 function createBaseQueryGroupsByAdminRequest(): QueryGroupsByAdminRequest {
-  return {
-    $type: 'regen.group.v1alpha1.QueryGroupsByAdminRequest',
-    admin: '',
-    pagination: undefined,
-  };
+  return { $type: "regen.group.v1alpha1.QueryGroupsByAdminRequest", admin: "", pagination: undefined };
 }
 
 export const QueryGroupsByAdminRequest = {
-  $type: 'regen.group.v1alpha1.QueryGroupsByAdminRequest' as const,
+  $type: "regen.group.v1alpha1.QueryGroupsByAdminRequest" as const,
 
-  encode(
-    message: QueryGroupsByAdminRequest,
-    writer: _m0.Writer = _m0.Writer.create(),
-  ): _m0.Writer {
-    if (message.admin !== '') {
+  encode(message: QueryGroupsByAdminRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+    if (message.admin !== "") {
       writer.uint32(10).string(message.admin);
     }
     if (message.pagination !== undefined) {
@@ -725,10 +614,7 @@ export const QueryGroupsByAdminRequest = {
     return writer;
   },
 
-  decode(
-    input: _m0.Reader | Uint8Array,
-    length?: number,
-  ): QueryGroupsByAdminRequest {
+  decode(input: _m0.Reader | Uint8Array, length?: number): QueryGroupsByAdminRequest {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryGroupsByAdminRequest();
@@ -752,10 +638,8 @@ export const QueryGroupsByAdminRequest = {
   fromJSON(object: any): QueryGroupsByAdminRequest {
     return {
       $type: QueryGroupsByAdminRequest.$type,
-      admin: isSet(object.admin) ? String(object.admin) : '',
-      pagination: isSet(object.pagination)
-        ? PageRequest.fromJSON(object.pagination)
-        : undefined,
+      admin: isSet(object.admin) ? String(object.admin) : "",
+      pagination: isSet(object.pagination) ? PageRequest.fromJSON(object.pagination) : undefined,
     };
   },
 
@@ -763,61 +647,44 @@ export const QueryGroupsByAdminRequest = {
     const obj: any = {};
     message.admin !== undefined && (obj.admin = message.admin);
     message.pagination !== undefined &&
-      (obj.pagination = message.pagination
-        ? PageRequest.toJSON(message.pagination)
-        : undefined);
+      (obj.pagination = message.pagination ? PageRequest.toJSON(message.pagination) : undefined);
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<QueryGroupsByAdminRequest>, I>>(
-    object: I,
-  ): QueryGroupsByAdminRequest {
+  create(base?: DeepPartial<QueryGroupsByAdminRequest>): QueryGroupsByAdminRequest {
+    return QueryGroupsByAdminRequest.fromPartial(base ?? {});
+  },
+
+  fromPartial(object: DeepPartial<QueryGroupsByAdminRequest>): QueryGroupsByAdminRequest {
     const message = createBaseQueryGroupsByAdminRequest();
-    message.admin = object.admin ?? '';
-    message.pagination =
-      object.pagination !== undefined && object.pagination !== null
-        ? PageRequest.fromPartial(object.pagination)
-        : undefined;
+    message.admin = object.admin ?? "";
+    message.pagination = (object.pagination !== undefined && object.pagination !== null)
+      ? PageRequest.fromPartial(object.pagination)
+      : undefined;
     return message;
   },
 };
 
-messageTypeRegistry.set(
-  QueryGroupsByAdminRequest.$type,
-  QueryGroupsByAdminRequest,
-);
+messageTypeRegistry.set(QueryGroupsByAdminRequest.$type, QueryGroupsByAdminRequest);
 
 function createBaseQueryGroupsByAdminResponse(): QueryGroupsByAdminResponse {
-  return {
-    $type: 'regen.group.v1alpha1.QueryGroupsByAdminResponse',
-    groups: [],
-    pagination: undefined,
-  };
+  return { $type: "regen.group.v1alpha1.QueryGroupsByAdminResponse", groups: [], pagination: undefined };
 }
 
 export const QueryGroupsByAdminResponse = {
-  $type: 'regen.group.v1alpha1.QueryGroupsByAdminResponse' as const,
+  $type: "regen.group.v1alpha1.QueryGroupsByAdminResponse" as const,
 
-  encode(
-    message: QueryGroupsByAdminResponse,
-    writer: _m0.Writer = _m0.Writer.create(),
-  ): _m0.Writer {
+  encode(message: QueryGroupsByAdminResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     for (const v of message.groups) {
       GroupInfo.encode(v!, writer.uint32(10).fork()).ldelim();
     }
     if (message.pagination !== undefined) {
-      PageResponse.encode(
-        message.pagination,
-        writer.uint32(18).fork(),
-      ).ldelim();
+      PageResponse.encode(message.pagination, writer.uint32(18).fork()).ldelim();
     }
     return writer;
   },
 
-  decode(
-    input: _m0.Reader | Uint8Array,
-    length?: number,
-  ): QueryGroupsByAdminResponse {
+  decode(input: _m0.Reader | Uint8Array, length?: number): QueryGroupsByAdminResponse {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryGroupsByAdminResponse();
@@ -841,64 +708,47 @@ export const QueryGroupsByAdminResponse = {
   fromJSON(object: any): QueryGroupsByAdminResponse {
     return {
       $type: QueryGroupsByAdminResponse.$type,
-      groups: Array.isArray(object?.groups)
-        ? object.groups.map((e: any) => GroupInfo.fromJSON(e))
-        : [],
-      pagination: isSet(object.pagination)
-        ? PageResponse.fromJSON(object.pagination)
-        : undefined,
+      groups: Array.isArray(object?.groups) ? object.groups.map((e: any) => GroupInfo.fromJSON(e)) : [],
+      pagination: isSet(object.pagination) ? PageResponse.fromJSON(object.pagination) : undefined,
     };
   },
 
   toJSON(message: QueryGroupsByAdminResponse): unknown {
     const obj: any = {};
     if (message.groups) {
-      obj.groups = message.groups.map(e =>
-        e ? GroupInfo.toJSON(e) : undefined,
-      );
+      obj.groups = message.groups.map((e) => e ? GroupInfo.toJSON(e) : undefined);
     } else {
       obj.groups = [];
     }
     message.pagination !== undefined &&
-      (obj.pagination = message.pagination
-        ? PageResponse.toJSON(message.pagination)
-        : undefined);
+      (obj.pagination = message.pagination ? PageResponse.toJSON(message.pagination) : undefined);
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<QueryGroupsByAdminResponse>, I>>(
-    object: I,
-  ): QueryGroupsByAdminResponse {
+  create(base?: DeepPartial<QueryGroupsByAdminResponse>): QueryGroupsByAdminResponse {
+    return QueryGroupsByAdminResponse.fromPartial(base ?? {});
+  },
+
+  fromPartial(object: DeepPartial<QueryGroupsByAdminResponse>): QueryGroupsByAdminResponse {
     const message = createBaseQueryGroupsByAdminResponse();
-    message.groups = object.groups?.map(e => GroupInfo.fromPartial(e)) || [];
-    message.pagination =
-      object.pagination !== undefined && object.pagination !== null
-        ? PageResponse.fromPartial(object.pagination)
-        : undefined;
+    message.groups = object.groups?.map((e) => GroupInfo.fromPartial(e)) || [];
+    message.pagination = (object.pagination !== undefined && object.pagination !== null)
+      ? PageResponse.fromPartial(object.pagination)
+      : undefined;
     return message;
   },
 };
 
-messageTypeRegistry.set(
-  QueryGroupsByAdminResponse.$type,
-  QueryGroupsByAdminResponse,
-);
+messageTypeRegistry.set(QueryGroupsByAdminResponse.$type, QueryGroupsByAdminResponse);
 
 function createBaseQueryGroupAccountsByGroupRequest(): QueryGroupAccountsByGroupRequest {
-  return {
-    $type: 'regen.group.v1alpha1.QueryGroupAccountsByGroupRequest',
-    groupId: Long.UZERO,
-    pagination: undefined,
-  };
+  return { $type: "regen.group.v1alpha1.QueryGroupAccountsByGroupRequest", groupId: Long.UZERO, pagination: undefined };
 }
 
 export const QueryGroupAccountsByGroupRequest = {
-  $type: 'regen.group.v1alpha1.QueryGroupAccountsByGroupRequest' as const,
+  $type: "regen.group.v1alpha1.QueryGroupAccountsByGroupRequest" as const,
 
-  encode(
-    message: QueryGroupAccountsByGroupRequest,
-    writer: _m0.Writer = _m0.Writer.create(),
-  ): _m0.Writer {
+  encode(message: QueryGroupAccountsByGroupRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (!message.groupId.isZero()) {
       writer.uint32(8).uint64(message.groupId);
     }
@@ -908,10 +758,7 @@ export const QueryGroupAccountsByGroupRequest = {
     return writer;
   },
 
-  decode(
-    input: _m0.Reader | Uint8Array,
-    length?: number,
-  ): QueryGroupAccountsByGroupRequest {
+  decode(input: _m0.Reader | Uint8Array, length?: number): QueryGroupAccountsByGroupRequest {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryGroupAccountsByGroupRequest();
@@ -935,78 +782,55 @@ export const QueryGroupAccountsByGroupRequest = {
   fromJSON(object: any): QueryGroupAccountsByGroupRequest {
     return {
       $type: QueryGroupAccountsByGroupRequest.$type,
-      groupId: isSet(object.groupId)
-        ? Long.fromString(object.groupId)
-        : Long.UZERO,
-      pagination: isSet(object.pagination)
-        ? PageRequest.fromJSON(object.pagination)
-        : undefined,
+      groupId: isSet(object.groupId) ? Long.fromValue(object.groupId) : Long.UZERO,
+      pagination: isSet(object.pagination) ? PageRequest.fromJSON(object.pagination) : undefined,
     };
   },
 
   toJSON(message: QueryGroupAccountsByGroupRequest): unknown {
     const obj: any = {};
-    message.groupId !== undefined &&
-      (obj.groupId = (message.groupId || Long.UZERO).toString());
+    message.groupId !== undefined && (obj.groupId = (message.groupId || Long.UZERO).toString());
     message.pagination !== undefined &&
-      (obj.pagination = message.pagination
-        ? PageRequest.toJSON(message.pagination)
-        : undefined);
+      (obj.pagination = message.pagination ? PageRequest.toJSON(message.pagination) : undefined);
     return obj;
   },
 
-  fromPartial<
-    I extends Exact<DeepPartial<QueryGroupAccountsByGroupRequest>, I>,
-  >(object: I): QueryGroupAccountsByGroupRequest {
+  create(base?: DeepPartial<QueryGroupAccountsByGroupRequest>): QueryGroupAccountsByGroupRequest {
+    return QueryGroupAccountsByGroupRequest.fromPartial(base ?? {});
+  },
+
+  fromPartial(object: DeepPartial<QueryGroupAccountsByGroupRequest>): QueryGroupAccountsByGroupRequest {
     const message = createBaseQueryGroupAccountsByGroupRequest();
-    message.groupId =
-      object.groupId !== undefined && object.groupId !== null
-        ? Long.fromValue(object.groupId)
-        : Long.UZERO;
-    message.pagination =
-      object.pagination !== undefined && object.pagination !== null
-        ? PageRequest.fromPartial(object.pagination)
-        : undefined;
+    message.groupId = (object.groupId !== undefined && object.groupId !== null)
+      ? Long.fromValue(object.groupId)
+      : Long.UZERO;
+    message.pagination = (object.pagination !== undefined && object.pagination !== null)
+      ? PageRequest.fromPartial(object.pagination)
+      : undefined;
     return message;
   },
 };
 
-messageTypeRegistry.set(
-  QueryGroupAccountsByGroupRequest.$type,
-  QueryGroupAccountsByGroupRequest,
-);
+messageTypeRegistry.set(QueryGroupAccountsByGroupRequest.$type, QueryGroupAccountsByGroupRequest);
 
 function createBaseQueryGroupAccountsByGroupResponse(): QueryGroupAccountsByGroupResponse {
-  return {
-    $type: 'regen.group.v1alpha1.QueryGroupAccountsByGroupResponse',
-    groupAccounts: [],
-    pagination: undefined,
-  };
+  return { $type: "regen.group.v1alpha1.QueryGroupAccountsByGroupResponse", groupAccounts: [], pagination: undefined };
 }
 
 export const QueryGroupAccountsByGroupResponse = {
-  $type: 'regen.group.v1alpha1.QueryGroupAccountsByGroupResponse' as const,
+  $type: "regen.group.v1alpha1.QueryGroupAccountsByGroupResponse" as const,
 
-  encode(
-    message: QueryGroupAccountsByGroupResponse,
-    writer: _m0.Writer = _m0.Writer.create(),
-  ): _m0.Writer {
+  encode(message: QueryGroupAccountsByGroupResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     for (const v of message.groupAccounts) {
       GroupAccountInfo.encode(v!, writer.uint32(10).fork()).ldelim();
     }
     if (message.pagination !== undefined) {
-      PageResponse.encode(
-        message.pagination,
-        writer.uint32(18).fork(),
-      ).ldelim();
+      PageResponse.encode(message.pagination, writer.uint32(18).fork()).ldelim();
     }
     return writer;
   },
 
-  decode(
-    input: _m0.Reader | Uint8Array,
-    length?: number,
-  ): QueryGroupAccountsByGroupResponse {
+  decode(input: _m0.Reader | Uint8Array, length?: number): QueryGroupAccountsByGroupResponse {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryGroupAccountsByGroupResponse();
@@ -1014,9 +838,7 @@ export const QueryGroupAccountsByGroupResponse = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          message.groupAccounts.push(
-            GroupAccountInfo.decode(reader, reader.uint32()),
-          );
+          message.groupAccounts.push(GroupAccountInfo.decode(reader, reader.uint32()));
           break;
         case 2:
           message.pagination = PageResponse.decode(reader, reader.uint32());
@@ -1035,63 +857,47 @@ export const QueryGroupAccountsByGroupResponse = {
       groupAccounts: Array.isArray(object?.groupAccounts)
         ? object.groupAccounts.map((e: any) => GroupAccountInfo.fromJSON(e))
         : [],
-      pagination: isSet(object.pagination)
-        ? PageResponse.fromJSON(object.pagination)
-        : undefined,
+      pagination: isSet(object.pagination) ? PageResponse.fromJSON(object.pagination) : undefined,
     };
   },
 
   toJSON(message: QueryGroupAccountsByGroupResponse): unknown {
     const obj: any = {};
     if (message.groupAccounts) {
-      obj.groupAccounts = message.groupAccounts.map(e =>
-        e ? GroupAccountInfo.toJSON(e) : undefined,
-      );
+      obj.groupAccounts = message.groupAccounts.map((e) => e ? GroupAccountInfo.toJSON(e) : undefined);
     } else {
       obj.groupAccounts = [];
     }
     message.pagination !== undefined &&
-      (obj.pagination = message.pagination
-        ? PageResponse.toJSON(message.pagination)
-        : undefined);
+      (obj.pagination = message.pagination ? PageResponse.toJSON(message.pagination) : undefined);
     return obj;
   },
 
-  fromPartial<
-    I extends Exact<DeepPartial<QueryGroupAccountsByGroupResponse>, I>,
-  >(object: I): QueryGroupAccountsByGroupResponse {
+  create(base?: DeepPartial<QueryGroupAccountsByGroupResponse>): QueryGroupAccountsByGroupResponse {
+    return QueryGroupAccountsByGroupResponse.fromPartial(base ?? {});
+  },
+
+  fromPartial(object: DeepPartial<QueryGroupAccountsByGroupResponse>): QueryGroupAccountsByGroupResponse {
     const message = createBaseQueryGroupAccountsByGroupResponse();
-    message.groupAccounts =
-      object.groupAccounts?.map(e => GroupAccountInfo.fromPartial(e)) || [];
-    message.pagination =
-      object.pagination !== undefined && object.pagination !== null
-        ? PageResponse.fromPartial(object.pagination)
-        : undefined;
+    message.groupAccounts = object.groupAccounts?.map((e) => GroupAccountInfo.fromPartial(e)) || [];
+    message.pagination = (object.pagination !== undefined && object.pagination !== null)
+      ? PageResponse.fromPartial(object.pagination)
+      : undefined;
     return message;
   },
 };
 
-messageTypeRegistry.set(
-  QueryGroupAccountsByGroupResponse.$type,
-  QueryGroupAccountsByGroupResponse,
-);
+messageTypeRegistry.set(QueryGroupAccountsByGroupResponse.$type, QueryGroupAccountsByGroupResponse);
 
 function createBaseQueryGroupAccountsByAdminRequest(): QueryGroupAccountsByAdminRequest {
-  return {
-    $type: 'regen.group.v1alpha1.QueryGroupAccountsByAdminRequest',
-    admin: '',
-    pagination: undefined,
-  };
+  return { $type: "regen.group.v1alpha1.QueryGroupAccountsByAdminRequest", admin: "", pagination: undefined };
 }
 
 export const QueryGroupAccountsByAdminRequest = {
-  $type: 'regen.group.v1alpha1.QueryGroupAccountsByAdminRequest' as const,
+  $type: "regen.group.v1alpha1.QueryGroupAccountsByAdminRequest" as const,
 
-  encode(
-    message: QueryGroupAccountsByAdminRequest,
-    writer: _m0.Writer = _m0.Writer.create(),
-  ): _m0.Writer {
-    if (message.admin !== '') {
+  encode(message: QueryGroupAccountsByAdminRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+    if (message.admin !== "") {
       writer.uint32(10).string(message.admin);
     }
     if (message.pagination !== undefined) {
@@ -1100,10 +906,7 @@ export const QueryGroupAccountsByAdminRequest = {
     return writer;
   },
 
-  decode(
-    input: _m0.Reader | Uint8Array,
-    length?: number,
-  ): QueryGroupAccountsByAdminRequest {
+  decode(input: _m0.Reader | Uint8Array, length?: number): QueryGroupAccountsByAdminRequest {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryGroupAccountsByAdminRequest();
@@ -1127,10 +930,8 @@ export const QueryGroupAccountsByAdminRequest = {
   fromJSON(object: any): QueryGroupAccountsByAdminRequest {
     return {
       $type: QueryGroupAccountsByAdminRequest.$type,
-      admin: isSet(object.admin) ? String(object.admin) : '',
-      pagination: isSet(object.pagination)
-        ? PageRequest.fromJSON(object.pagination)
-        : undefined,
+      admin: isSet(object.admin) ? String(object.admin) : "",
+      pagination: isSet(object.pagination) ? PageRequest.fromJSON(object.pagination) : undefined,
     };
   },
 
@@ -1138,61 +939,44 @@ export const QueryGroupAccountsByAdminRequest = {
     const obj: any = {};
     message.admin !== undefined && (obj.admin = message.admin);
     message.pagination !== undefined &&
-      (obj.pagination = message.pagination
-        ? PageRequest.toJSON(message.pagination)
-        : undefined);
+      (obj.pagination = message.pagination ? PageRequest.toJSON(message.pagination) : undefined);
     return obj;
   },
 
-  fromPartial<
-    I extends Exact<DeepPartial<QueryGroupAccountsByAdminRequest>, I>,
-  >(object: I): QueryGroupAccountsByAdminRequest {
+  create(base?: DeepPartial<QueryGroupAccountsByAdminRequest>): QueryGroupAccountsByAdminRequest {
+    return QueryGroupAccountsByAdminRequest.fromPartial(base ?? {});
+  },
+
+  fromPartial(object: DeepPartial<QueryGroupAccountsByAdminRequest>): QueryGroupAccountsByAdminRequest {
     const message = createBaseQueryGroupAccountsByAdminRequest();
-    message.admin = object.admin ?? '';
-    message.pagination =
-      object.pagination !== undefined && object.pagination !== null
-        ? PageRequest.fromPartial(object.pagination)
-        : undefined;
+    message.admin = object.admin ?? "";
+    message.pagination = (object.pagination !== undefined && object.pagination !== null)
+      ? PageRequest.fromPartial(object.pagination)
+      : undefined;
     return message;
   },
 };
 
-messageTypeRegistry.set(
-  QueryGroupAccountsByAdminRequest.$type,
-  QueryGroupAccountsByAdminRequest,
-);
+messageTypeRegistry.set(QueryGroupAccountsByAdminRequest.$type, QueryGroupAccountsByAdminRequest);
 
 function createBaseQueryGroupAccountsByAdminResponse(): QueryGroupAccountsByAdminResponse {
-  return {
-    $type: 'regen.group.v1alpha1.QueryGroupAccountsByAdminResponse',
-    groupAccounts: [],
-    pagination: undefined,
-  };
+  return { $type: "regen.group.v1alpha1.QueryGroupAccountsByAdminResponse", groupAccounts: [], pagination: undefined };
 }
 
 export const QueryGroupAccountsByAdminResponse = {
-  $type: 'regen.group.v1alpha1.QueryGroupAccountsByAdminResponse' as const,
+  $type: "regen.group.v1alpha1.QueryGroupAccountsByAdminResponse" as const,
 
-  encode(
-    message: QueryGroupAccountsByAdminResponse,
-    writer: _m0.Writer = _m0.Writer.create(),
-  ): _m0.Writer {
+  encode(message: QueryGroupAccountsByAdminResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     for (const v of message.groupAccounts) {
       GroupAccountInfo.encode(v!, writer.uint32(10).fork()).ldelim();
     }
     if (message.pagination !== undefined) {
-      PageResponse.encode(
-        message.pagination,
-        writer.uint32(18).fork(),
-      ).ldelim();
+      PageResponse.encode(message.pagination, writer.uint32(18).fork()).ldelim();
     }
     return writer;
   },
 
-  decode(
-    input: _m0.Reader | Uint8Array,
-    length?: number,
-  ): QueryGroupAccountsByAdminResponse {
+  decode(input: _m0.Reader | Uint8Array, length?: number): QueryGroupAccountsByAdminResponse {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryGroupAccountsByAdminResponse();
@@ -1200,9 +984,7 @@ export const QueryGroupAccountsByAdminResponse = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          message.groupAccounts.push(
-            GroupAccountInfo.decode(reader, reader.uint32()),
-          );
+          message.groupAccounts.push(GroupAccountInfo.decode(reader, reader.uint32()));
           break;
         case 2:
           message.pagination = PageResponse.decode(reader, reader.uint32());
@@ -1221,71 +1003,53 @@ export const QueryGroupAccountsByAdminResponse = {
       groupAccounts: Array.isArray(object?.groupAccounts)
         ? object.groupAccounts.map((e: any) => GroupAccountInfo.fromJSON(e))
         : [],
-      pagination: isSet(object.pagination)
-        ? PageResponse.fromJSON(object.pagination)
-        : undefined,
+      pagination: isSet(object.pagination) ? PageResponse.fromJSON(object.pagination) : undefined,
     };
   },
 
   toJSON(message: QueryGroupAccountsByAdminResponse): unknown {
     const obj: any = {};
     if (message.groupAccounts) {
-      obj.groupAccounts = message.groupAccounts.map(e =>
-        e ? GroupAccountInfo.toJSON(e) : undefined,
-      );
+      obj.groupAccounts = message.groupAccounts.map((e) => e ? GroupAccountInfo.toJSON(e) : undefined);
     } else {
       obj.groupAccounts = [];
     }
     message.pagination !== undefined &&
-      (obj.pagination = message.pagination
-        ? PageResponse.toJSON(message.pagination)
-        : undefined);
+      (obj.pagination = message.pagination ? PageResponse.toJSON(message.pagination) : undefined);
     return obj;
   },
 
-  fromPartial<
-    I extends Exact<DeepPartial<QueryGroupAccountsByAdminResponse>, I>,
-  >(object: I): QueryGroupAccountsByAdminResponse {
+  create(base?: DeepPartial<QueryGroupAccountsByAdminResponse>): QueryGroupAccountsByAdminResponse {
+    return QueryGroupAccountsByAdminResponse.fromPartial(base ?? {});
+  },
+
+  fromPartial(object: DeepPartial<QueryGroupAccountsByAdminResponse>): QueryGroupAccountsByAdminResponse {
     const message = createBaseQueryGroupAccountsByAdminResponse();
-    message.groupAccounts =
-      object.groupAccounts?.map(e => GroupAccountInfo.fromPartial(e)) || [];
-    message.pagination =
-      object.pagination !== undefined && object.pagination !== null
-        ? PageResponse.fromPartial(object.pagination)
-        : undefined;
+    message.groupAccounts = object.groupAccounts?.map((e) => GroupAccountInfo.fromPartial(e)) || [];
+    message.pagination = (object.pagination !== undefined && object.pagination !== null)
+      ? PageResponse.fromPartial(object.pagination)
+      : undefined;
     return message;
   },
 };
 
-messageTypeRegistry.set(
-  QueryGroupAccountsByAdminResponse.$type,
-  QueryGroupAccountsByAdminResponse,
-);
+messageTypeRegistry.set(QueryGroupAccountsByAdminResponse.$type, QueryGroupAccountsByAdminResponse);
 
 function createBaseQueryProposalRequest(): QueryProposalRequest {
-  return {
-    $type: 'regen.group.v1alpha1.QueryProposalRequest',
-    proposalId: Long.UZERO,
-  };
+  return { $type: "regen.group.v1alpha1.QueryProposalRequest", proposalId: Long.UZERO };
 }
 
 export const QueryProposalRequest = {
-  $type: 'regen.group.v1alpha1.QueryProposalRequest' as const,
+  $type: "regen.group.v1alpha1.QueryProposalRequest" as const,
 
-  encode(
-    message: QueryProposalRequest,
-    writer: _m0.Writer = _m0.Writer.create(),
-  ): _m0.Writer {
+  encode(message: QueryProposalRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (!message.proposalId.isZero()) {
       writer.uint32(8).uint64(message.proposalId);
     }
     return writer;
   },
 
-  decode(
-    input: _m0.Reader | Uint8Array,
-    length?: number,
-  ): QueryProposalRequest {
+  decode(input: _m0.Reader | Uint8Array, length?: number): QueryProposalRequest {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryProposalRequest();
@@ -1306,27 +1070,25 @@ export const QueryProposalRequest = {
   fromJSON(object: any): QueryProposalRequest {
     return {
       $type: QueryProposalRequest.$type,
-      proposalId: isSet(object.proposalId)
-        ? Long.fromString(object.proposalId)
-        : Long.UZERO,
+      proposalId: isSet(object.proposalId) ? Long.fromValue(object.proposalId) : Long.UZERO,
     };
   },
 
   toJSON(message: QueryProposalRequest): unknown {
     const obj: any = {};
-    message.proposalId !== undefined &&
-      (obj.proposalId = (message.proposalId || Long.UZERO).toString());
+    message.proposalId !== undefined && (obj.proposalId = (message.proposalId || Long.UZERO).toString());
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<QueryProposalRequest>, I>>(
-    object: I,
-  ): QueryProposalRequest {
+  create(base?: DeepPartial<QueryProposalRequest>): QueryProposalRequest {
+    return QueryProposalRequest.fromPartial(base ?? {});
+  },
+
+  fromPartial(object: DeepPartial<QueryProposalRequest>): QueryProposalRequest {
     const message = createBaseQueryProposalRequest();
-    message.proposalId =
-      object.proposalId !== undefined && object.proposalId !== null
-        ? Long.fromValue(object.proposalId)
-        : Long.UZERO;
+    message.proposalId = (object.proposalId !== undefined && object.proposalId !== null)
+      ? Long.fromValue(object.proposalId)
+      : Long.UZERO;
     return message;
   },
 };
@@ -1334,29 +1096,20 @@ export const QueryProposalRequest = {
 messageTypeRegistry.set(QueryProposalRequest.$type, QueryProposalRequest);
 
 function createBaseQueryProposalResponse(): QueryProposalResponse {
-  return {
-    $type: 'regen.group.v1alpha1.QueryProposalResponse',
-    proposal: undefined,
-  };
+  return { $type: "regen.group.v1alpha1.QueryProposalResponse", proposal: undefined };
 }
 
 export const QueryProposalResponse = {
-  $type: 'regen.group.v1alpha1.QueryProposalResponse' as const,
+  $type: "regen.group.v1alpha1.QueryProposalResponse" as const,
 
-  encode(
-    message: QueryProposalResponse,
-    writer: _m0.Writer = _m0.Writer.create(),
-  ): _m0.Writer {
+  encode(message: QueryProposalResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.proposal !== undefined) {
       Proposal.encode(message.proposal, writer.uint32(10).fork()).ldelim();
     }
     return writer;
   },
 
-  decode(
-    input: _m0.Reader | Uint8Array,
-    length?: number,
-  ): QueryProposalResponse {
+  decode(input: _m0.Reader | Uint8Array, length?: number): QueryProposalResponse {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryProposalResponse();
@@ -1377,29 +1130,25 @@ export const QueryProposalResponse = {
   fromJSON(object: any): QueryProposalResponse {
     return {
       $type: QueryProposalResponse.$type,
-      proposal: isSet(object.proposal)
-        ? Proposal.fromJSON(object.proposal)
-        : undefined,
+      proposal: isSet(object.proposal) ? Proposal.fromJSON(object.proposal) : undefined,
     };
   },
 
   toJSON(message: QueryProposalResponse): unknown {
     const obj: any = {};
-    message.proposal !== undefined &&
-      (obj.proposal = message.proposal
-        ? Proposal.toJSON(message.proposal)
-        : undefined);
+    message.proposal !== undefined && (obj.proposal = message.proposal ? Proposal.toJSON(message.proposal) : undefined);
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<QueryProposalResponse>, I>>(
-    object: I,
-  ): QueryProposalResponse {
+  create(base?: DeepPartial<QueryProposalResponse>): QueryProposalResponse {
+    return QueryProposalResponse.fromPartial(base ?? {});
+  },
+
+  fromPartial(object: DeepPartial<QueryProposalResponse>): QueryProposalResponse {
     const message = createBaseQueryProposalResponse();
-    message.proposal =
-      object.proposal !== undefined && object.proposal !== null
-        ? Proposal.fromPartial(object.proposal)
-        : undefined;
+    message.proposal = (object.proposal !== undefined && object.proposal !== null)
+      ? Proposal.fromPartial(object.proposal)
+      : undefined;
     return message;
   },
 };
@@ -1407,21 +1156,14 @@ export const QueryProposalResponse = {
 messageTypeRegistry.set(QueryProposalResponse.$type, QueryProposalResponse);
 
 function createBaseQueryProposalsByGroupAccountRequest(): QueryProposalsByGroupAccountRequest {
-  return {
-    $type: 'regen.group.v1alpha1.QueryProposalsByGroupAccountRequest',
-    address: '',
-    pagination: undefined,
-  };
+  return { $type: "regen.group.v1alpha1.QueryProposalsByGroupAccountRequest", address: "", pagination: undefined };
 }
 
 export const QueryProposalsByGroupAccountRequest = {
-  $type: 'regen.group.v1alpha1.QueryProposalsByGroupAccountRequest' as const,
+  $type: "regen.group.v1alpha1.QueryProposalsByGroupAccountRequest" as const,
 
-  encode(
-    message: QueryProposalsByGroupAccountRequest,
-    writer: _m0.Writer = _m0.Writer.create(),
-  ): _m0.Writer {
-    if (message.address !== '') {
+  encode(message: QueryProposalsByGroupAccountRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+    if (message.address !== "") {
       writer.uint32(10).string(message.address);
     }
     if (message.pagination !== undefined) {
@@ -1430,10 +1172,7 @@ export const QueryProposalsByGroupAccountRequest = {
     return writer;
   },
 
-  decode(
-    input: _m0.Reader | Uint8Array,
-    length?: number,
-  ): QueryProposalsByGroupAccountRequest {
+  decode(input: _m0.Reader | Uint8Array, length?: number): QueryProposalsByGroupAccountRequest {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryProposalsByGroupAccountRequest();
@@ -1457,10 +1196,8 @@ export const QueryProposalsByGroupAccountRequest = {
   fromJSON(object: any): QueryProposalsByGroupAccountRequest {
     return {
       $type: QueryProposalsByGroupAccountRequest.$type,
-      address: isSet(object.address) ? String(object.address) : '',
-      pagination: isSet(object.pagination)
-        ? PageRequest.fromJSON(object.pagination)
-        : undefined,
+      address: isSet(object.address) ? String(object.address) : "",
+      pagination: isSet(object.pagination) ? PageRequest.fromJSON(object.pagination) : undefined,
     };
   },
 
@@ -1468,61 +1205,44 @@ export const QueryProposalsByGroupAccountRequest = {
     const obj: any = {};
     message.address !== undefined && (obj.address = message.address);
     message.pagination !== undefined &&
-      (obj.pagination = message.pagination
-        ? PageRequest.toJSON(message.pagination)
-        : undefined);
+      (obj.pagination = message.pagination ? PageRequest.toJSON(message.pagination) : undefined);
     return obj;
   },
 
-  fromPartial<
-    I extends Exact<DeepPartial<QueryProposalsByGroupAccountRequest>, I>,
-  >(object: I): QueryProposalsByGroupAccountRequest {
+  create(base?: DeepPartial<QueryProposalsByGroupAccountRequest>): QueryProposalsByGroupAccountRequest {
+    return QueryProposalsByGroupAccountRequest.fromPartial(base ?? {});
+  },
+
+  fromPartial(object: DeepPartial<QueryProposalsByGroupAccountRequest>): QueryProposalsByGroupAccountRequest {
     const message = createBaseQueryProposalsByGroupAccountRequest();
-    message.address = object.address ?? '';
-    message.pagination =
-      object.pagination !== undefined && object.pagination !== null
-        ? PageRequest.fromPartial(object.pagination)
-        : undefined;
+    message.address = object.address ?? "";
+    message.pagination = (object.pagination !== undefined && object.pagination !== null)
+      ? PageRequest.fromPartial(object.pagination)
+      : undefined;
     return message;
   },
 };
 
-messageTypeRegistry.set(
-  QueryProposalsByGroupAccountRequest.$type,
-  QueryProposalsByGroupAccountRequest,
-);
+messageTypeRegistry.set(QueryProposalsByGroupAccountRequest.$type, QueryProposalsByGroupAccountRequest);
 
 function createBaseQueryProposalsByGroupAccountResponse(): QueryProposalsByGroupAccountResponse {
-  return {
-    $type: 'regen.group.v1alpha1.QueryProposalsByGroupAccountResponse',
-    proposals: [],
-    pagination: undefined,
-  };
+  return { $type: "regen.group.v1alpha1.QueryProposalsByGroupAccountResponse", proposals: [], pagination: undefined };
 }
 
 export const QueryProposalsByGroupAccountResponse = {
-  $type: 'regen.group.v1alpha1.QueryProposalsByGroupAccountResponse' as const,
+  $type: "regen.group.v1alpha1.QueryProposalsByGroupAccountResponse" as const,
 
-  encode(
-    message: QueryProposalsByGroupAccountResponse,
-    writer: _m0.Writer = _m0.Writer.create(),
-  ): _m0.Writer {
+  encode(message: QueryProposalsByGroupAccountResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     for (const v of message.proposals) {
       Proposal.encode(v!, writer.uint32(10).fork()).ldelim();
     }
     if (message.pagination !== undefined) {
-      PageResponse.encode(
-        message.pagination,
-        writer.uint32(18).fork(),
-      ).ldelim();
+      PageResponse.encode(message.pagination, writer.uint32(18).fork()).ldelim();
     }
     return writer;
   },
 
-  decode(
-    input: _m0.Reader | Uint8Array,
-    length?: number,
-  ): QueryProposalsByGroupAccountResponse {
+  decode(input: _m0.Reader | Uint8Array, length?: number): QueryProposalsByGroupAccountResponse {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryProposalsByGroupAccountResponse();
@@ -1546,78 +1266,57 @@ export const QueryProposalsByGroupAccountResponse = {
   fromJSON(object: any): QueryProposalsByGroupAccountResponse {
     return {
       $type: QueryProposalsByGroupAccountResponse.$type,
-      proposals: Array.isArray(object?.proposals)
-        ? object.proposals.map((e: any) => Proposal.fromJSON(e))
-        : [],
-      pagination: isSet(object.pagination)
-        ? PageResponse.fromJSON(object.pagination)
-        : undefined,
+      proposals: Array.isArray(object?.proposals) ? object.proposals.map((e: any) => Proposal.fromJSON(e)) : [],
+      pagination: isSet(object.pagination) ? PageResponse.fromJSON(object.pagination) : undefined,
     };
   },
 
   toJSON(message: QueryProposalsByGroupAccountResponse): unknown {
     const obj: any = {};
     if (message.proposals) {
-      obj.proposals = message.proposals.map(e =>
-        e ? Proposal.toJSON(e) : undefined,
-      );
+      obj.proposals = message.proposals.map((e) => e ? Proposal.toJSON(e) : undefined);
     } else {
       obj.proposals = [];
     }
     message.pagination !== undefined &&
-      (obj.pagination = message.pagination
-        ? PageResponse.toJSON(message.pagination)
-        : undefined);
+      (obj.pagination = message.pagination ? PageResponse.toJSON(message.pagination) : undefined);
     return obj;
   },
 
-  fromPartial<
-    I extends Exact<DeepPartial<QueryProposalsByGroupAccountResponse>, I>,
-  >(object: I): QueryProposalsByGroupAccountResponse {
+  create(base?: DeepPartial<QueryProposalsByGroupAccountResponse>): QueryProposalsByGroupAccountResponse {
+    return QueryProposalsByGroupAccountResponse.fromPartial(base ?? {});
+  },
+
+  fromPartial(object: DeepPartial<QueryProposalsByGroupAccountResponse>): QueryProposalsByGroupAccountResponse {
     const message = createBaseQueryProposalsByGroupAccountResponse();
-    message.proposals =
-      object.proposals?.map(e => Proposal.fromPartial(e)) || [];
-    message.pagination =
-      object.pagination !== undefined && object.pagination !== null
-        ? PageResponse.fromPartial(object.pagination)
-        : undefined;
+    message.proposals = object.proposals?.map((e) => Proposal.fromPartial(e)) || [];
+    message.pagination = (object.pagination !== undefined && object.pagination !== null)
+      ? PageResponse.fromPartial(object.pagination)
+      : undefined;
     return message;
   },
 };
 
-messageTypeRegistry.set(
-  QueryProposalsByGroupAccountResponse.$type,
-  QueryProposalsByGroupAccountResponse,
-);
+messageTypeRegistry.set(QueryProposalsByGroupAccountResponse.$type, QueryProposalsByGroupAccountResponse);
 
 function createBaseQueryVoteByProposalVoterRequest(): QueryVoteByProposalVoterRequest {
-  return {
-    $type: 'regen.group.v1alpha1.QueryVoteByProposalVoterRequest',
-    proposalId: Long.UZERO,
-    voter: '',
-  };
+  return { $type: "regen.group.v1alpha1.QueryVoteByProposalVoterRequest", proposalId: Long.UZERO, voter: "" };
 }
 
 export const QueryVoteByProposalVoterRequest = {
-  $type: 'regen.group.v1alpha1.QueryVoteByProposalVoterRequest' as const,
+  $type: "regen.group.v1alpha1.QueryVoteByProposalVoterRequest" as const,
 
-  encode(
-    message: QueryVoteByProposalVoterRequest,
-    writer: _m0.Writer = _m0.Writer.create(),
-  ): _m0.Writer {
+  encode(message: QueryVoteByProposalVoterRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (!message.proposalId.isZero()) {
       writer.uint32(8).uint64(message.proposalId);
     }
-    if (message.voter !== '') {
+    if (message.voter !== "") {
       writer.uint32(18).string(message.voter);
     }
     return writer;
   },
 
-  decode(
-    input: _m0.Reader | Uint8Array,
-    length?: number,
-  ): QueryVoteByProposalVoterRequest {
+  decode(input: _m0.Reader | Uint8Array, length?: number): QueryVoteByProposalVoterRequest {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryVoteByProposalVoterRequest();
@@ -1641,63 +1340,49 @@ export const QueryVoteByProposalVoterRequest = {
   fromJSON(object: any): QueryVoteByProposalVoterRequest {
     return {
       $type: QueryVoteByProposalVoterRequest.$type,
-      proposalId: isSet(object.proposalId)
-        ? Long.fromString(object.proposalId)
-        : Long.UZERO,
-      voter: isSet(object.voter) ? String(object.voter) : '',
+      proposalId: isSet(object.proposalId) ? Long.fromValue(object.proposalId) : Long.UZERO,
+      voter: isSet(object.voter) ? String(object.voter) : "",
     };
   },
 
   toJSON(message: QueryVoteByProposalVoterRequest): unknown {
     const obj: any = {};
-    message.proposalId !== undefined &&
-      (obj.proposalId = (message.proposalId || Long.UZERO).toString());
+    message.proposalId !== undefined && (obj.proposalId = (message.proposalId || Long.UZERO).toString());
     message.voter !== undefined && (obj.voter = message.voter);
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<QueryVoteByProposalVoterRequest>, I>>(
-    object: I,
-  ): QueryVoteByProposalVoterRequest {
+  create(base?: DeepPartial<QueryVoteByProposalVoterRequest>): QueryVoteByProposalVoterRequest {
+    return QueryVoteByProposalVoterRequest.fromPartial(base ?? {});
+  },
+
+  fromPartial(object: DeepPartial<QueryVoteByProposalVoterRequest>): QueryVoteByProposalVoterRequest {
     const message = createBaseQueryVoteByProposalVoterRequest();
-    message.proposalId =
-      object.proposalId !== undefined && object.proposalId !== null
-        ? Long.fromValue(object.proposalId)
-        : Long.UZERO;
-    message.voter = object.voter ?? '';
+    message.proposalId = (object.proposalId !== undefined && object.proposalId !== null)
+      ? Long.fromValue(object.proposalId)
+      : Long.UZERO;
+    message.voter = object.voter ?? "";
     return message;
   },
 };
 
-messageTypeRegistry.set(
-  QueryVoteByProposalVoterRequest.$type,
-  QueryVoteByProposalVoterRequest,
-);
+messageTypeRegistry.set(QueryVoteByProposalVoterRequest.$type, QueryVoteByProposalVoterRequest);
 
 function createBaseQueryVoteByProposalVoterResponse(): QueryVoteByProposalVoterResponse {
-  return {
-    $type: 'regen.group.v1alpha1.QueryVoteByProposalVoterResponse',
-    vote: undefined,
-  };
+  return { $type: "regen.group.v1alpha1.QueryVoteByProposalVoterResponse", vote: undefined };
 }
 
 export const QueryVoteByProposalVoterResponse = {
-  $type: 'regen.group.v1alpha1.QueryVoteByProposalVoterResponse' as const,
+  $type: "regen.group.v1alpha1.QueryVoteByProposalVoterResponse" as const,
 
-  encode(
-    message: QueryVoteByProposalVoterResponse,
-    writer: _m0.Writer = _m0.Writer.create(),
-  ): _m0.Writer {
+  encode(message: QueryVoteByProposalVoterResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.vote !== undefined) {
       Vote.encode(message.vote, writer.uint32(10).fork()).ldelim();
     }
     return writer;
   },
 
-  decode(
-    input: _m0.Reader | Uint8Array,
-    length?: number,
-  ): QueryVoteByProposalVoterResponse {
+  decode(input: _m0.Reader | Uint8Array, length?: number): QueryVoteByProposalVoterResponse {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryVoteByProposalVoterResponse();
@@ -1724,43 +1409,31 @@ export const QueryVoteByProposalVoterResponse = {
 
   toJSON(message: QueryVoteByProposalVoterResponse): unknown {
     const obj: any = {};
-    message.vote !== undefined &&
-      (obj.vote = message.vote ? Vote.toJSON(message.vote) : undefined);
+    message.vote !== undefined && (obj.vote = message.vote ? Vote.toJSON(message.vote) : undefined);
     return obj;
   },
 
-  fromPartial<
-    I extends Exact<DeepPartial<QueryVoteByProposalVoterResponse>, I>,
-  >(object: I): QueryVoteByProposalVoterResponse {
+  create(base?: DeepPartial<QueryVoteByProposalVoterResponse>): QueryVoteByProposalVoterResponse {
+    return QueryVoteByProposalVoterResponse.fromPartial(base ?? {});
+  },
+
+  fromPartial(object: DeepPartial<QueryVoteByProposalVoterResponse>): QueryVoteByProposalVoterResponse {
     const message = createBaseQueryVoteByProposalVoterResponse();
-    message.vote =
-      object.vote !== undefined && object.vote !== null
-        ? Vote.fromPartial(object.vote)
-        : undefined;
+    message.vote = (object.vote !== undefined && object.vote !== null) ? Vote.fromPartial(object.vote) : undefined;
     return message;
   },
 };
 
-messageTypeRegistry.set(
-  QueryVoteByProposalVoterResponse.$type,
-  QueryVoteByProposalVoterResponse,
-);
+messageTypeRegistry.set(QueryVoteByProposalVoterResponse.$type, QueryVoteByProposalVoterResponse);
 
 function createBaseQueryVotesByProposalRequest(): QueryVotesByProposalRequest {
-  return {
-    $type: 'regen.group.v1alpha1.QueryVotesByProposalRequest',
-    proposalId: Long.UZERO,
-    pagination: undefined,
-  };
+  return { $type: "regen.group.v1alpha1.QueryVotesByProposalRequest", proposalId: Long.UZERO, pagination: undefined };
 }
 
 export const QueryVotesByProposalRequest = {
-  $type: 'regen.group.v1alpha1.QueryVotesByProposalRequest' as const,
+  $type: "regen.group.v1alpha1.QueryVotesByProposalRequest" as const,
 
-  encode(
-    message: QueryVotesByProposalRequest,
-    writer: _m0.Writer = _m0.Writer.create(),
-  ): _m0.Writer {
+  encode(message: QueryVotesByProposalRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (!message.proposalId.isZero()) {
       writer.uint32(8).uint64(message.proposalId);
     }
@@ -1770,10 +1443,7 @@ export const QueryVotesByProposalRequest = {
     return writer;
   },
 
-  decode(
-    input: _m0.Reader | Uint8Array,
-    length?: number,
-  ): QueryVotesByProposalRequest {
+  decode(input: _m0.Reader | Uint8Array, length?: number): QueryVotesByProposalRequest {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryVotesByProposalRequest();
@@ -1797,78 +1467,55 @@ export const QueryVotesByProposalRequest = {
   fromJSON(object: any): QueryVotesByProposalRequest {
     return {
       $type: QueryVotesByProposalRequest.$type,
-      proposalId: isSet(object.proposalId)
-        ? Long.fromString(object.proposalId)
-        : Long.UZERO,
-      pagination: isSet(object.pagination)
-        ? PageRequest.fromJSON(object.pagination)
-        : undefined,
+      proposalId: isSet(object.proposalId) ? Long.fromValue(object.proposalId) : Long.UZERO,
+      pagination: isSet(object.pagination) ? PageRequest.fromJSON(object.pagination) : undefined,
     };
   },
 
   toJSON(message: QueryVotesByProposalRequest): unknown {
     const obj: any = {};
-    message.proposalId !== undefined &&
-      (obj.proposalId = (message.proposalId || Long.UZERO).toString());
+    message.proposalId !== undefined && (obj.proposalId = (message.proposalId || Long.UZERO).toString());
     message.pagination !== undefined &&
-      (obj.pagination = message.pagination
-        ? PageRequest.toJSON(message.pagination)
-        : undefined);
+      (obj.pagination = message.pagination ? PageRequest.toJSON(message.pagination) : undefined);
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<QueryVotesByProposalRequest>, I>>(
-    object: I,
-  ): QueryVotesByProposalRequest {
+  create(base?: DeepPartial<QueryVotesByProposalRequest>): QueryVotesByProposalRequest {
+    return QueryVotesByProposalRequest.fromPartial(base ?? {});
+  },
+
+  fromPartial(object: DeepPartial<QueryVotesByProposalRequest>): QueryVotesByProposalRequest {
     const message = createBaseQueryVotesByProposalRequest();
-    message.proposalId =
-      object.proposalId !== undefined && object.proposalId !== null
-        ? Long.fromValue(object.proposalId)
-        : Long.UZERO;
-    message.pagination =
-      object.pagination !== undefined && object.pagination !== null
-        ? PageRequest.fromPartial(object.pagination)
-        : undefined;
+    message.proposalId = (object.proposalId !== undefined && object.proposalId !== null)
+      ? Long.fromValue(object.proposalId)
+      : Long.UZERO;
+    message.pagination = (object.pagination !== undefined && object.pagination !== null)
+      ? PageRequest.fromPartial(object.pagination)
+      : undefined;
     return message;
   },
 };
 
-messageTypeRegistry.set(
-  QueryVotesByProposalRequest.$type,
-  QueryVotesByProposalRequest,
-);
+messageTypeRegistry.set(QueryVotesByProposalRequest.$type, QueryVotesByProposalRequest);
 
 function createBaseQueryVotesByProposalResponse(): QueryVotesByProposalResponse {
-  return {
-    $type: 'regen.group.v1alpha1.QueryVotesByProposalResponse',
-    votes: [],
-    pagination: undefined,
-  };
+  return { $type: "regen.group.v1alpha1.QueryVotesByProposalResponse", votes: [], pagination: undefined };
 }
 
 export const QueryVotesByProposalResponse = {
-  $type: 'regen.group.v1alpha1.QueryVotesByProposalResponse' as const,
+  $type: "regen.group.v1alpha1.QueryVotesByProposalResponse" as const,
 
-  encode(
-    message: QueryVotesByProposalResponse,
-    writer: _m0.Writer = _m0.Writer.create(),
-  ): _m0.Writer {
+  encode(message: QueryVotesByProposalResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     for (const v of message.votes) {
       Vote.encode(v!, writer.uint32(10).fork()).ldelim();
     }
     if (message.pagination !== undefined) {
-      PageResponse.encode(
-        message.pagination,
-        writer.uint32(18).fork(),
-      ).ldelim();
+      PageResponse.encode(message.pagination, writer.uint32(18).fork()).ldelim();
     }
     return writer;
   },
 
-  decode(
-    input: _m0.Reader | Uint8Array,
-    length?: number,
-  ): QueryVotesByProposalResponse {
+  decode(input: _m0.Reader | Uint8Array, length?: number): QueryVotesByProposalResponse {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryVotesByProposalResponse();
@@ -1892,63 +1539,48 @@ export const QueryVotesByProposalResponse = {
   fromJSON(object: any): QueryVotesByProposalResponse {
     return {
       $type: QueryVotesByProposalResponse.$type,
-      votes: Array.isArray(object?.votes)
-        ? object.votes.map((e: any) => Vote.fromJSON(e))
-        : [],
-      pagination: isSet(object.pagination)
-        ? PageResponse.fromJSON(object.pagination)
-        : undefined,
+      votes: Array.isArray(object?.votes) ? object.votes.map((e: any) => Vote.fromJSON(e)) : [],
+      pagination: isSet(object.pagination) ? PageResponse.fromJSON(object.pagination) : undefined,
     };
   },
 
   toJSON(message: QueryVotesByProposalResponse): unknown {
     const obj: any = {};
     if (message.votes) {
-      obj.votes = message.votes.map(e => (e ? Vote.toJSON(e) : undefined));
+      obj.votes = message.votes.map((e) => e ? Vote.toJSON(e) : undefined);
     } else {
       obj.votes = [];
     }
     message.pagination !== undefined &&
-      (obj.pagination = message.pagination
-        ? PageResponse.toJSON(message.pagination)
-        : undefined);
+      (obj.pagination = message.pagination ? PageResponse.toJSON(message.pagination) : undefined);
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<QueryVotesByProposalResponse>, I>>(
-    object: I,
-  ): QueryVotesByProposalResponse {
+  create(base?: DeepPartial<QueryVotesByProposalResponse>): QueryVotesByProposalResponse {
+    return QueryVotesByProposalResponse.fromPartial(base ?? {});
+  },
+
+  fromPartial(object: DeepPartial<QueryVotesByProposalResponse>): QueryVotesByProposalResponse {
     const message = createBaseQueryVotesByProposalResponse();
-    message.votes = object.votes?.map(e => Vote.fromPartial(e)) || [];
-    message.pagination =
-      object.pagination !== undefined && object.pagination !== null
-        ? PageResponse.fromPartial(object.pagination)
-        : undefined;
+    message.votes = object.votes?.map((e) => Vote.fromPartial(e)) || [];
+    message.pagination = (object.pagination !== undefined && object.pagination !== null)
+      ? PageResponse.fromPartial(object.pagination)
+      : undefined;
     return message;
   },
 };
 
-messageTypeRegistry.set(
-  QueryVotesByProposalResponse.$type,
-  QueryVotesByProposalResponse,
-);
+messageTypeRegistry.set(QueryVotesByProposalResponse.$type, QueryVotesByProposalResponse);
 
 function createBaseQueryVotesByVoterRequest(): QueryVotesByVoterRequest {
-  return {
-    $type: 'regen.group.v1alpha1.QueryVotesByVoterRequest',
-    voter: '',
-    pagination: undefined,
-  };
+  return { $type: "regen.group.v1alpha1.QueryVotesByVoterRequest", voter: "", pagination: undefined };
 }
 
 export const QueryVotesByVoterRequest = {
-  $type: 'regen.group.v1alpha1.QueryVotesByVoterRequest' as const,
+  $type: "regen.group.v1alpha1.QueryVotesByVoterRequest" as const,
 
-  encode(
-    message: QueryVotesByVoterRequest,
-    writer: _m0.Writer = _m0.Writer.create(),
-  ): _m0.Writer {
-    if (message.voter !== '') {
+  encode(message: QueryVotesByVoterRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+    if (message.voter !== "") {
       writer.uint32(10).string(message.voter);
     }
     if (message.pagination !== undefined) {
@@ -1957,10 +1589,7 @@ export const QueryVotesByVoterRequest = {
     return writer;
   },
 
-  decode(
-    input: _m0.Reader | Uint8Array,
-    length?: number,
-  ): QueryVotesByVoterRequest {
+  decode(input: _m0.Reader | Uint8Array, length?: number): QueryVotesByVoterRequest {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryVotesByVoterRequest();
@@ -1984,10 +1613,8 @@ export const QueryVotesByVoterRequest = {
   fromJSON(object: any): QueryVotesByVoterRequest {
     return {
       $type: QueryVotesByVoterRequest.$type,
-      voter: isSet(object.voter) ? String(object.voter) : '',
-      pagination: isSet(object.pagination)
-        ? PageRequest.fromJSON(object.pagination)
-        : undefined,
+      voter: isSet(object.voter) ? String(object.voter) : "",
+      pagination: isSet(object.pagination) ? PageRequest.fromJSON(object.pagination) : undefined,
     };
   },
 
@@ -1995,61 +1622,44 @@ export const QueryVotesByVoterRequest = {
     const obj: any = {};
     message.voter !== undefined && (obj.voter = message.voter);
     message.pagination !== undefined &&
-      (obj.pagination = message.pagination
-        ? PageRequest.toJSON(message.pagination)
-        : undefined);
+      (obj.pagination = message.pagination ? PageRequest.toJSON(message.pagination) : undefined);
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<QueryVotesByVoterRequest>, I>>(
-    object: I,
-  ): QueryVotesByVoterRequest {
+  create(base?: DeepPartial<QueryVotesByVoterRequest>): QueryVotesByVoterRequest {
+    return QueryVotesByVoterRequest.fromPartial(base ?? {});
+  },
+
+  fromPartial(object: DeepPartial<QueryVotesByVoterRequest>): QueryVotesByVoterRequest {
     const message = createBaseQueryVotesByVoterRequest();
-    message.voter = object.voter ?? '';
-    message.pagination =
-      object.pagination !== undefined && object.pagination !== null
-        ? PageRequest.fromPartial(object.pagination)
-        : undefined;
+    message.voter = object.voter ?? "";
+    message.pagination = (object.pagination !== undefined && object.pagination !== null)
+      ? PageRequest.fromPartial(object.pagination)
+      : undefined;
     return message;
   },
 };
 
-messageTypeRegistry.set(
-  QueryVotesByVoterRequest.$type,
-  QueryVotesByVoterRequest,
-);
+messageTypeRegistry.set(QueryVotesByVoterRequest.$type, QueryVotesByVoterRequest);
 
 function createBaseQueryVotesByVoterResponse(): QueryVotesByVoterResponse {
-  return {
-    $type: 'regen.group.v1alpha1.QueryVotesByVoterResponse',
-    votes: [],
-    pagination: undefined,
-  };
+  return { $type: "regen.group.v1alpha1.QueryVotesByVoterResponse", votes: [], pagination: undefined };
 }
 
 export const QueryVotesByVoterResponse = {
-  $type: 'regen.group.v1alpha1.QueryVotesByVoterResponse' as const,
+  $type: "regen.group.v1alpha1.QueryVotesByVoterResponse" as const,
 
-  encode(
-    message: QueryVotesByVoterResponse,
-    writer: _m0.Writer = _m0.Writer.create(),
-  ): _m0.Writer {
+  encode(message: QueryVotesByVoterResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     for (const v of message.votes) {
       Vote.encode(v!, writer.uint32(10).fork()).ldelim();
     }
     if (message.pagination !== undefined) {
-      PageResponse.encode(
-        message.pagination,
-        writer.uint32(18).fork(),
-      ).ldelim();
+      PageResponse.encode(message.pagination, writer.uint32(18).fork()).ldelim();
     }
     return writer;
   },
 
-  decode(
-    input: _m0.Reader | Uint8Array,
-    length?: number,
-  ): QueryVotesByVoterResponse {
+  decode(input: _m0.Reader | Uint8Array, length?: number): QueryVotesByVoterResponse {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryVotesByVoterResponse();
@@ -2073,65 +1683,49 @@ export const QueryVotesByVoterResponse = {
   fromJSON(object: any): QueryVotesByVoterResponse {
     return {
       $type: QueryVotesByVoterResponse.$type,
-      votes: Array.isArray(object?.votes)
-        ? object.votes.map((e: any) => Vote.fromJSON(e))
-        : [],
-      pagination: isSet(object.pagination)
-        ? PageResponse.fromJSON(object.pagination)
-        : undefined,
+      votes: Array.isArray(object?.votes) ? object.votes.map((e: any) => Vote.fromJSON(e)) : [],
+      pagination: isSet(object.pagination) ? PageResponse.fromJSON(object.pagination) : undefined,
     };
   },
 
   toJSON(message: QueryVotesByVoterResponse): unknown {
     const obj: any = {};
     if (message.votes) {
-      obj.votes = message.votes.map(e => (e ? Vote.toJSON(e) : undefined));
+      obj.votes = message.votes.map((e) => e ? Vote.toJSON(e) : undefined);
     } else {
       obj.votes = [];
     }
     message.pagination !== undefined &&
-      (obj.pagination = message.pagination
-        ? PageResponse.toJSON(message.pagination)
-        : undefined);
+      (obj.pagination = message.pagination ? PageResponse.toJSON(message.pagination) : undefined);
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<QueryVotesByVoterResponse>, I>>(
-    object: I,
-  ): QueryVotesByVoterResponse {
+  create(base?: DeepPartial<QueryVotesByVoterResponse>): QueryVotesByVoterResponse {
+    return QueryVotesByVoterResponse.fromPartial(base ?? {});
+  },
+
+  fromPartial(object: DeepPartial<QueryVotesByVoterResponse>): QueryVotesByVoterResponse {
     const message = createBaseQueryVotesByVoterResponse();
-    message.votes = object.votes?.map(e => Vote.fromPartial(e)) || [];
-    message.pagination =
-      object.pagination !== undefined && object.pagination !== null
-        ? PageResponse.fromPartial(object.pagination)
-        : undefined;
+    message.votes = object.votes?.map((e) => Vote.fromPartial(e)) || [];
+    message.pagination = (object.pagination !== undefined && object.pagination !== null)
+      ? PageResponse.fromPartial(object.pagination)
+      : undefined;
     return message;
   },
 };
 
-messageTypeRegistry.set(
-  QueryVotesByVoterResponse.$type,
-  QueryVotesByVoterResponse,
-);
+messageTypeRegistry.set(QueryVotesByVoterResponse.$type, QueryVotesByVoterResponse);
 
 /** Query is the regen.group.v1alpha1 Query service. */
 export interface Query {
   /** GroupInfo queries group info based on group id. */
-  GroupInfo(
-    request: DeepPartial<QueryGroupInfoRequest>,
-  ): Promise<QueryGroupInfoResponse>;
+  GroupInfo(request: DeepPartial<QueryGroupInfoRequest>): Promise<QueryGroupInfoResponse>;
   /** GroupAccountInfo queries group account info based on group account address. */
-  GroupAccountInfo(
-    request: DeepPartial<QueryGroupAccountInfoRequest>,
-  ): Promise<QueryGroupAccountInfoResponse>;
+  GroupAccountInfo(request: DeepPartial<QueryGroupAccountInfoRequest>): Promise<QueryGroupAccountInfoResponse>;
   /** GroupMembers queries members of a group */
-  GroupMembers(
-    request: DeepPartial<QueryGroupMembersRequest>,
-  ): Promise<QueryGroupMembersResponse>;
+  GroupMembers(request: DeepPartial<QueryGroupMembersRequest>): Promise<QueryGroupMembersResponse>;
   /** GroupsByAdmin queries groups by admin address. */
-  GroupsByAdmin(
-    request: DeepPartial<QueryGroupsByAdminRequest>,
-  ): Promise<QueryGroupsByAdminResponse>;
+  GroupsByAdmin(request: DeepPartial<QueryGroupsByAdminRequest>): Promise<QueryGroupsByAdminResponse>;
   /** GroupAccountsByGroup queries group accounts by group id. */
   GroupAccountsByGroup(
     request: DeepPartial<QueryGroupAccountsByGroupRequest>,
@@ -2141,30 +1735,24 @@ export interface Query {
     request: DeepPartial<QueryGroupAccountsByAdminRequest>,
   ): Promise<QueryGroupAccountsByAdminResponse>;
   /** Proposal queries a proposal based on proposal id. */
-  Proposal(
-    request: DeepPartial<QueryProposalRequest>,
-  ): Promise<QueryProposalResponse>;
+  Proposal(request: DeepPartial<QueryProposalRequest>): Promise<QueryProposalResponse>;
   /** ProposalsByGroupAccount queries proposals based on group account address. */
   ProposalsByGroupAccount(
     request: DeepPartial<QueryProposalsByGroupAccountRequest>,
   ): Promise<QueryProposalsByGroupAccountResponse>;
   /** VoteByProposalVoter queries a vote by proposal id and voter. */
-  VoteByProposalVoter(
-    request: DeepPartial<QueryVoteByProposalVoterRequest>,
-  ): Promise<QueryVoteByProposalVoterResponse>;
+  VoteByProposalVoter(request: DeepPartial<QueryVoteByProposalVoterRequest>): Promise<QueryVoteByProposalVoterResponse>;
   /** VotesByProposal queries a vote by proposal. */
-  VotesByProposal(
-    request: DeepPartial<QueryVotesByProposalRequest>,
-  ): Promise<QueryVotesByProposalResponse>;
+  VotesByProposal(request: DeepPartial<QueryVotesByProposalRequest>): Promise<QueryVotesByProposalResponse>;
   /** VotesByVoter queries a vote by voter. */
-  VotesByVoter(
-    request: DeepPartial<QueryVotesByVoterRequest>,
-  ): Promise<QueryVotesByVoterResponse>;
+  VotesByVoter(request: DeepPartial<QueryVotesByVoterRequest>): Promise<QueryVotesByVoterResponse>;
 }
 
 export class QueryClientImpl implements Query {
   private readonly rpc: Rpc;
-  constructor(rpc: Rpc) {
+  private readonly service: string;
+  constructor(rpc: Rpc, opts?: { service?: string }) {
+    this.service = opts?.service || "regen.group.v1alpha1.Query";
     this.rpc = rpc;
     this.GroupInfo = this.GroupInfo.bind(this);
     this.GroupAccountInfo = this.GroupAccountInfo.bind(this);
@@ -2178,64 +1766,32 @@ export class QueryClientImpl implements Query {
     this.VotesByProposal = this.VotesByProposal.bind(this);
     this.VotesByVoter = this.VotesByVoter.bind(this);
   }
-  GroupInfo(
-    request: DeepPartial<QueryGroupInfoRequest>,
-  ): Promise<QueryGroupInfoResponse> {
+  GroupInfo(request: DeepPartial<QueryGroupInfoRequest>): Promise<QueryGroupInfoResponse> {
     const fromPartial = QueryGroupInfoRequest.fromPartial(request);
     const data = QueryGroupInfoRequest.encode(fromPartial).finish();
-    const promise = this.rpc.request(
-      'regen.group.v1alpha1.Query',
-      'GroupInfo',
-      data,
-    );
-    return promise.then(data =>
-      QueryGroupInfoResponse.decode(new _m0.Reader(data)),
-    );
+    const promise = this.rpc.request(this.service, "GroupInfo", data);
+    return promise.then((data) => QueryGroupInfoResponse.decode(new _m0.Reader(data)));
   }
 
-  GroupAccountInfo(
-    request: DeepPartial<QueryGroupAccountInfoRequest>,
-  ): Promise<QueryGroupAccountInfoResponse> {
+  GroupAccountInfo(request: DeepPartial<QueryGroupAccountInfoRequest>): Promise<QueryGroupAccountInfoResponse> {
     const fromPartial = QueryGroupAccountInfoRequest.fromPartial(request);
     const data = QueryGroupAccountInfoRequest.encode(fromPartial).finish();
-    const promise = this.rpc.request(
-      'regen.group.v1alpha1.Query',
-      'GroupAccountInfo',
-      data,
-    );
-    return promise.then(data =>
-      QueryGroupAccountInfoResponse.decode(new _m0.Reader(data)),
-    );
+    const promise = this.rpc.request(this.service, "GroupAccountInfo", data);
+    return promise.then((data) => QueryGroupAccountInfoResponse.decode(new _m0.Reader(data)));
   }
 
-  GroupMembers(
-    request: DeepPartial<QueryGroupMembersRequest>,
-  ): Promise<QueryGroupMembersResponse> {
+  GroupMembers(request: DeepPartial<QueryGroupMembersRequest>): Promise<QueryGroupMembersResponse> {
     const fromPartial = QueryGroupMembersRequest.fromPartial(request);
     const data = QueryGroupMembersRequest.encode(fromPartial).finish();
-    const promise = this.rpc.request(
-      'regen.group.v1alpha1.Query',
-      'GroupMembers',
-      data,
-    );
-    return promise.then(data =>
-      QueryGroupMembersResponse.decode(new _m0.Reader(data)),
-    );
+    const promise = this.rpc.request(this.service, "GroupMembers", data);
+    return promise.then((data) => QueryGroupMembersResponse.decode(new _m0.Reader(data)));
   }
 
-  GroupsByAdmin(
-    request: DeepPartial<QueryGroupsByAdminRequest>,
-  ): Promise<QueryGroupsByAdminResponse> {
+  GroupsByAdmin(request: DeepPartial<QueryGroupsByAdminRequest>): Promise<QueryGroupsByAdminResponse> {
     const fromPartial = QueryGroupsByAdminRequest.fromPartial(request);
     const data = QueryGroupsByAdminRequest.encode(fromPartial).finish();
-    const promise = this.rpc.request(
-      'regen.group.v1alpha1.Query',
-      'GroupsByAdmin',
-      data,
-    );
-    return promise.then(data =>
-      QueryGroupsByAdminResponse.decode(new _m0.Reader(data)),
-    );
+    const promise = this.rpc.request(this.service, "GroupsByAdmin", data);
+    return promise.then((data) => QueryGroupsByAdminResponse.decode(new _m0.Reader(data)));
   }
 
   GroupAccountsByGroup(
@@ -2243,14 +1799,8 @@ export class QueryClientImpl implements Query {
   ): Promise<QueryGroupAccountsByGroupResponse> {
     const fromPartial = QueryGroupAccountsByGroupRequest.fromPartial(request);
     const data = QueryGroupAccountsByGroupRequest.encode(fromPartial).finish();
-    const promise = this.rpc.request(
-      'regen.group.v1alpha1.Query',
-      'GroupAccountsByGroup',
-      data,
-    );
-    return promise.then(data =>
-      QueryGroupAccountsByGroupResponse.decode(new _m0.Reader(data)),
-    );
+    const promise = this.rpc.request(this.service, "GroupAccountsByGroup", data);
+    return promise.then((data) => QueryGroupAccountsByGroupResponse.decode(new _m0.Reader(data)));
   }
 
   GroupAccountsByAdmin(
@@ -2258,46 +1808,24 @@ export class QueryClientImpl implements Query {
   ): Promise<QueryGroupAccountsByAdminResponse> {
     const fromPartial = QueryGroupAccountsByAdminRequest.fromPartial(request);
     const data = QueryGroupAccountsByAdminRequest.encode(fromPartial).finish();
-    const promise = this.rpc.request(
-      'regen.group.v1alpha1.Query',
-      'GroupAccountsByAdmin',
-      data,
-    );
-    return promise.then(data =>
-      QueryGroupAccountsByAdminResponse.decode(new _m0.Reader(data)),
-    );
+    const promise = this.rpc.request(this.service, "GroupAccountsByAdmin", data);
+    return promise.then((data) => QueryGroupAccountsByAdminResponse.decode(new _m0.Reader(data)));
   }
 
-  Proposal(
-    request: DeepPartial<QueryProposalRequest>,
-  ): Promise<QueryProposalResponse> {
+  Proposal(request: DeepPartial<QueryProposalRequest>): Promise<QueryProposalResponse> {
     const fromPartial = QueryProposalRequest.fromPartial(request);
     const data = QueryProposalRequest.encode(fromPartial).finish();
-    const promise = this.rpc.request(
-      'regen.group.v1alpha1.Query',
-      'Proposal',
-      data,
-    );
-    return promise.then(data =>
-      QueryProposalResponse.decode(new _m0.Reader(data)),
-    );
+    const promise = this.rpc.request(this.service, "Proposal", data);
+    return promise.then((data) => QueryProposalResponse.decode(new _m0.Reader(data)));
   }
 
   ProposalsByGroupAccount(
     request: DeepPartial<QueryProposalsByGroupAccountRequest>,
   ): Promise<QueryProposalsByGroupAccountResponse> {
-    const fromPartial =
-      QueryProposalsByGroupAccountRequest.fromPartial(request);
-    const data =
-      QueryProposalsByGroupAccountRequest.encode(fromPartial).finish();
-    const promise = this.rpc.request(
-      'regen.group.v1alpha1.Query',
-      'ProposalsByGroupAccount',
-      data,
-    );
-    return promise.then(data =>
-      QueryProposalsByGroupAccountResponse.decode(new _m0.Reader(data)),
-    );
+    const fromPartial = QueryProposalsByGroupAccountRequest.fromPartial(request);
+    const data = QueryProposalsByGroupAccountRequest.encode(fromPartial).finish();
+    const promise = this.rpc.request(this.service, "ProposalsByGroupAccount", data);
+    return promise.then((data) => QueryProposalsByGroupAccountResponse.decode(new _m0.Reader(data)));
   }
 
   VoteByProposalVoter(
@@ -2305,83 +1833,36 @@ export class QueryClientImpl implements Query {
   ): Promise<QueryVoteByProposalVoterResponse> {
     const fromPartial = QueryVoteByProposalVoterRequest.fromPartial(request);
     const data = QueryVoteByProposalVoterRequest.encode(fromPartial).finish();
-    const promise = this.rpc.request(
-      'regen.group.v1alpha1.Query',
-      'VoteByProposalVoter',
-      data,
-    );
-    return promise.then(data =>
-      QueryVoteByProposalVoterResponse.decode(new _m0.Reader(data)),
-    );
+    const promise = this.rpc.request(this.service, "VoteByProposalVoter", data);
+    return promise.then((data) => QueryVoteByProposalVoterResponse.decode(new _m0.Reader(data)));
   }
 
-  VotesByProposal(
-    request: DeepPartial<QueryVotesByProposalRequest>,
-  ): Promise<QueryVotesByProposalResponse> {
+  VotesByProposal(request: DeepPartial<QueryVotesByProposalRequest>): Promise<QueryVotesByProposalResponse> {
     const fromPartial = QueryVotesByProposalRequest.fromPartial(request);
     const data = QueryVotesByProposalRequest.encode(fromPartial).finish();
-    const promise = this.rpc.request(
-      'regen.group.v1alpha1.Query',
-      'VotesByProposal',
-      data,
-    );
-    return promise.then(data =>
-      QueryVotesByProposalResponse.decode(new _m0.Reader(data)),
-    );
+    const promise = this.rpc.request(this.service, "VotesByProposal", data);
+    return promise.then((data) => QueryVotesByProposalResponse.decode(new _m0.Reader(data)));
   }
 
-  VotesByVoter(
-    request: DeepPartial<QueryVotesByVoterRequest>,
-  ): Promise<QueryVotesByVoterResponse> {
+  VotesByVoter(request: DeepPartial<QueryVotesByVoterRequest>): Promise<QueryVotesByVoterResponse> {
     const fromPartial = QueryVotesByVoterRequest.fromPartial(request);
     const data = QueryVotesByVoterRequest.encode(fromPartial).finish();
-    const promise = this.rpc.request(
-      'regen.group.v1alpha1.Query',
-      'VotesByVoter',
-      data,
-    );
-    return promise.then(data =>
-      QueryVotesByVoterResponse.decode(new _m0.Reader(data)),
-    );
+    const promise = this.rpc.request(this.service, "VotesByVoter", data);
+    return promise.then((data) => QueryVotesByVoterResponse.decode(new _m0.Reader(data)));
   }
 }
 
 interface Rpc {
-  request(
-    service: string,
-    method: string,
-    data: Uint8Array,
-  ): Promise<Uint8Array>;
+  request(service: string, method: string, data: Uint8Array): Promise<Uint8Array>;
 }
 
-type Builtin =
-  | Date
-  | Function
-  | Uint8Array
-  | string
-  | number
-  | boolean
-  | undefined;
+type Builtin = Date | Function | Uint8Array | string | number | boolean | undefined;
 
-export type DeepPartial<T> = T extends Builtin
-  ? T
-  : T extends Long
-  ? string | number | Long
-  : T extends Array<infer U>
-  ? Array<DeepPartial<U>>
-  : T extends ReadonlyArray<infer U>
-  ? ReadonlyArray<DeepPartial<U>>
-  : T extends {}
-  ? { [K in Exclude<keyof T, '$type'>]?: DeepPartial<T[K]> }
+export type DeepPartial<T> = T extends Builtin ? T
+  : T extends Long ? string | number | Long : T extends Array<infer U> ? Array<DeepPartial<U>>
+  : T extends ReadonlyArray<infer U> ? ReadonlyArray<DeepPartial<U>>
+  : T extends {} ? { [K in Exclude<keyof T, "$type">]?: DeepPartial<T[K]> }
   : Partial<T>;
-
-type KeysOfUnion<T> = T extends T ? keyof T : never;
-export type Exact<P, I extends P> = P extends Builtin
-  ? P
-  : P & { [K in keyof P]: Exact<P[K], I[K]> } & Record<
-        Exclude<keyof I, KeysOfUnion<P> | '$type'>,
-        never
-      >;
 
 if (_m0.util.Long !== Long) {
   _m0.util.Long = Long as any;

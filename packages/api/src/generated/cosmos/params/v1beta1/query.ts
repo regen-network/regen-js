@@ -1,14 +1,14 @@
 /* eslint-disable */
-import { messageTypeRegistry } from '../../../typeRegistry';
-import Long from 'long';
-import _m0 from 'protobufjs/minimal';
-import { ParamChange } from './params';
+import Long from "long";
+import _m0 from "protobufjs/minimal";
+import { messageTypeRegistry } from "../../../typeRegistry";
+import { ParamChange } from "./params";
 
-export const protobufPackage = 'cosmos.params.v1beta1';
+export const protobufPackage = "cosmos.params.v1beta1";
 
 /** QueryParamsRequest is request type for the Query/Params RPC method. */
 export interface QueryParamsRequest {
-  $type: 'cosmos.params.v1beta1.QueryParamsRequest';
+  $type: "cosmos.params.v1beta1.QueryParamsRequest";
   /** subspace defines the module to query the parameter for. */
   subspace: string;
   /** key defines the key of the parameter in the subspace. */
@@ -17,7 +17,7 @@ export interface QueryParamsRequest {
 
 /** QueryParamsResponse is response type for the Query/Params RPC method. */
 export interface QueryParamsResponse {
-  $type: 'cosmos.params.v1beta1.QueryParamsResponse';
+  $type: "cosmos.params.v1beta1.QueryParamsResponse";
   /** param defines the queried parameter. */
   param?: ParamChange;
 }
@@ -29,7 +29,7 @@ export interface QueryParamsResponse {
  * Since: cosmos-sdk 0.46
  */
 export interface QuerySubspacesRequest {
-  $type: 'cosmos.params.v1beta1.QuerySubspacesRequest';
+  $type: "cosmos.params.v1beta1.QuerySubspacesRequest";
 }
 
 /**
@@ -39,7 +39,7 @@ export interface QuerySubspacesRequest {
  * Since: cosmos-sdk 0.46
  */
 export interface QuerySubspacesResponse {
-  $type: 'cosmos.params.v1beta1.QuerySubspacesResponse';
+  $type: "cosmos.params.v1beta1.QuerySubspacesResponse";
   subspaces: Subspace[];
 }
 
@@ -50,30 +50,23 @@ export interface QuerySubspacesResponse {
  * Since: cosmos-sdk 0.46
  */
 export interface Subspace {
-  $type: 'cosmos.params.v1beta1.Subspace';
+  $type: "cosmos.params.v1beta1.Subspace";
   subspace: string;
   keys: string[];
 }
 
 function createBaseQueryParamsRequest(): QueryParamsRequest {
-  return {
-    $type: 'cosmos.params.v1beta1.QueryParamsRequest',
-    subspace: '',
-    key: '',
-  };
+  return { $type: "cosmos.params.v1beta1.QueryParamsRequest", subspace: "", key: "" };
 }
 
 export const QueryParamsRequest = {
-  $type: 'cosmos.params.v1beta1.QueryParamsRequest' as const,
+  $type: "cosmos.params.v1beta1.QueryParamsRequest" as const,
 
-  encode(
-    message: QueryParamsRequest,
-    writer: _m0.Writer = _m0.Writer.create(),
-  ): _m0.Writer {
-    if (message.subspace !== '') {
+  encode(message: QueryParamsRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+    if (message.subspace !== "") {
       writer.uint32(10).string(message.subspace);
     }
-    if (message.key !== '') {
+    if (message.key !== "") {
       writer.uint32(18).string(message.key);
     }
     return writer;
@@ -103,8 +96,8 @@ export const QueryParamsRequest = {
   fromJSON(object: any): QueryParamsRequest {
     return {
       $type: QueryParamsRequest.$type,
-      subspace: isSet(object.subspace) ? String(object.subspace) : '',
-      key: isSet(object.key) ? String(object.key) : '',
+      subspace: isSet(object.subspace) ? String(object.subspace) : "",
+      key: isSet(object.key) ? String(object.key) : "",
     };
   },
 
@@ -115,12 +108,14 @@ export const QueryParamsRequest = {
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<QueryParamsRequest>, I>>(
-    object: I,
-  ): QueryParamsRequest {
+  create(base?: DeepPartial<QueryParamsRequest>): QueryParamsRequest {
+    return QueryParamsRequest.fromPartial(base ?? {});
+  },
+
+  fromPartial(object: DeepPartial<QueryParamsRequest>): QueryParamsRequest {
     const message = createBaseQueryParamsRequest();
-    message.subspace = object.subspace ?? '';
-    message.key = object.key ?? '';
+    message.subspace = object.subspace ?? "";
+    message.key = object.key ?? "";
     return message;
   },
 };
@@ -128,19 +123,13 @@ export const QueryParamsRequest = {
 messageTypeRegistry.set(QueryParamsRequest.$type, QueryParamsRequest);
 
 function createBaseQueryParamsResponse(): QueryParamsResponse {
-  return {
-    $type: 'cosmos.params.v1beta1.QueryParamsResponse',
-    param: undefined,
-  };
+  return { $type: "cosmos.params.v1beta1.QueryParamsResponse", param: undefined };
 }
 
 export const QueryParamsResponse = {
-  $type: 'cosmos.params.v1beta1.QueryParamsResponse' as const,
+  $type: "cosmos.params.v1beta1.QueryParamsResponse" as const,
 
-  encode(
-    message: QueryParamsResponse,
-    writer: _m0.Writer = _m0.Writer.create(),
-  ): _m0.Writer {
+  encode(message: QueryParamsResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.param !== undefined) {
       ParamChange.encode(message.param, writer.uint32(10).fork()).ldelim();
     }
@@ -168,29 +157,25 @@ export const QueryParamsResponse = {
   fromJSON(object: any): QueryParamsResponse {
     return {
       $type: QueryParamsResponse.$type,
-      param: isSet(object.param)
-        ? ParamChange.fromJSON(object.param)
-        : undefined,
+      param: isSet(object.param) ? ParamChange.fromJSON(object.param) : undefined,
     };
   },
 
   toJSON(message: QueryParamsResponse): unknown {
     const obj: any = {};
-    message.param !== undefined &&
-      (obj.param = message.param
-        ? ParamChange.toJSON(message.param)
-        : undefined);
+    message.param !== undefined && (obj.param = message.param ? ParamChange.toJSON(message.param) : undefined);
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<QueryParamsResponse>, I>>(
-    object: I,
-  ): QueryParamsResponse {
+  create(base?: DeepPartial<QueryParamsResponse>): QueryParamsResponse {
+    return QueryParamsResponse.fromPartial(base ?? {});
+  },
+
+  fromPartial(object: DeepPartial<QueryParamsResponse>): QueryParamsResponse {
     const message = createBaseQueryParamsResponse();
-    message.param =
-      object.param !== undefined && object.param !== null
-        ? ParamChange.fromPartial(object.param)
-        : undefined;
+    message.param = (object.param !== undefined && object.param !== null)
+      ? ParamChange.fromPartial(object.param)
+      : undefined;
     return message;
   },
 };
@@ -198,23 +183,17 @@ export const QueryParamsResponse = {
 messageTypeRegistry.set(QueryParamsResponse.$type, QueryParamsResponse);
 
 function createBaseQuerySubspacesRequest(): QuerySubspacesRequest {
-  return { $type: 'cosmos.params.v1beta1.QuerySubspacesRequest' };
+  return { $type: "cosmos.params.v1beta1.QuerySubspacesRequest" };
 }
 
 export const QuerySubspacesRequest = {
-  $type: 'cosmos.params.v1beta1.QuerySubspacesRequest' as const,
+  $type: "cosmos.params.v1beta1.QuerySubspacesRequest" as const,
 
-  encode(
-    _: QuerySubspacesRequest,
-    writer: _m0.Writer = _m0.Writer.create(),
-  ): _m0.Writer {
+  encode(_: QuerySubspacesRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     return writer;
   },
 
-  decode(
-    input: _m0.Reader | Uint8Array,
-    length?: number,
-  ): QuerySubspacesRequest {
+  decode(input: _m0.Reader | Uint8Array, length?: number): QuerySubspacesRequest {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQuerySubspacesRequest();
@@ -230,9 +209,7 @@ export const QuerySubspacesRequest = {
   },
 
   fromJSON(_: any): QuerySubspacesRequest {
-    return {
-      $type: QuerySubspacesRequest.$type,
-    };
+    return { $type: QuerySubspacesRequest.$type };
   },
 
   toJSON(_: QuerySubspacesRequest): unknown {
@@ -240,9 +217,11 @@ export const QuerySubspacesRequest = {
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<QuerySubspacesRequest>, I>>(
-    _: I,
-  ): QuerySubspacesRequest {
+  create(base?: DeepPartial<QuerySubspacesRequest>): QuerySubspacesRequest {
+    return QuerySubspacesRequest.fromPartial(base ?? {});
+  },
+
+  fromPartial(_: DeepPartial<QuerySubspacesRequest>): QuerySubspacesRequest {
     const message = createBaseQuerySubspacesRequest();
     return message;
   },
@@ -251,29 +230,20 @@ export const QuerySubspacesRequest = {
 messageTypeRegistry.set(QuerySubspacesRequest.$type, QuerySubspacesRequest);
 
 function createBaseQuerySubspacesResponse(): QuerySubspacesResponse {
-  return {
-    $type: 'cosmos.params.v1beta1.QuerySubspacesResponse',
-    subspaces: [],
-  };
+  return { $type: "cosmos.params.v1beta1.QuerySubspacesResponse", subspaces: [] };
 }
 
 export const QuerySubspacesResponse = {
-  $type: 'cosmos.params.v1beta1.QuerySubspacesResponse' as const,
+  $type: "cosmos.params.v1beta1.QuerySubspacesResponse" as const,
 
-  encode(
-    message: QuerySubspacesResponse,
-    writer: _m0.Writer = _m0.Writer.create(),
-  ): _m0.Writer {
+  encode(message: QuerySubspacesResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     for (const v of message.subspaces) {
       Subspace.encode(v!, writer.uint32(10).fork()).ldelim();
     }
     return writer;
   },
 
-  decode(
-    input: _m0.Reader | Uint8Array,
-    length?: number,
-  ): QuerySubspacesResponse {
+  decode(input: _m0.Reader | Uint8Array, length?: number): QuerySubspacesResponse {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQuerySubspacesResponse();
@@ -294,30 +264,27 @@ export const QuerySubspacesResponse = {
   fromJSON(object: any): QuerySubspacesResponse {
     return {
       $type: QuerySubspacesResponse.$type,
-      subspaces: Array.isArray(object?.subspaces)
-        ? object.subspaces.map((e: any) => Subspace.fromJSON(e))
-        : [],
+      subspaces: Array.isArray(object?.subspaces) ? object.subspaces.map((e: any) => Subspace.fromJSON(e)) : [],
     };
   },
 
   toJSON(message: QuerySubspacesResponse): unknown {
     const obj: any = {};
     if (message.subspaces) {
-      obj.subspaces = message.subspaces.map(e =>
-        e ? Subspace.toJSON(e) : undefined,
-      );
+      obj.subspaces = message.subspaces.map((e) => e ? Subspace.toJSON(e) : undefined);
     } else {
       obj.subspaces = [];
     }
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<QuerySubspacesResponse>, I>>(
-    object: I,
-  ): QuerySubspacesResponse {
+  create(base?: DeepPartial<QuerySubspacesResponse>): QuerySubspacesResponse {
+    return QuerySubspacesResponse.fromPartial(base ?? {});
+  },
+
+  fromPartial(object: DeepPartial<QuerySubspacesResponse>): QuerySubspacesResponse {
     const message = createBaseQuerySubspacesResponse();
-    message.subspaces =
-      object.subspaces?.map(e => Subspace.fromPartial(e)) || [];
+    message.subspaces = object.subspaces?.map((e) => Subspace.fromPartial(e)) || [];
     return message;
   },
 };
@@ -325,17 +292,14 @@ export const QuerySubspacesResponse = {
 messageTypeRegistry.set(QuerySubspacesResponse.$type, QuerySubspacesResponse);
 
 function createBaseSubspace(): Subspace {
-  return { $type: 'cosmos.params.v1beta1.Subspace', subspace: '', keys: [] };
+  return { $type: "cosmos.params.v1beta1.Subspace", subspace: "", keys: [] };
 }
 
 export const Subspace = {
-  $type: 'cosmos.params.v1beta1.Subspace' as const,
+  $type: "cosmos.params.v1beta1.Subspace" as const,
 
-  encode(
-    message: Subspace,
-    writer: _m0.Writer = _m0.Writer.create(),
-  ): _m0.Writer {
-    if (message.subspace !== '') {
+  encode(message: Subspace, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+    if (message.subspace !== "") {
       writer.uint32(10).string(message.subspace);
     }
     for (const v of message.keys) {
@@ -368,10 +332,8 @@ export const Subspace = {
   fromJSON(object: any): Subspace {
     return {
       $type: Subspace.$type,
-      subspace: isSet(object.subspace) ? String(object.subspace) : '',
-      keys: Array.isArray(object?.keys)
-        ? object.keys.map((e: any) => String(e))
-        : [],
+      subspace: isSet(object.subspace) ? String(object.subspace) : "",
+      keys: Array.isArray(object?.keys) ? object.keys.map((e: any) => String(e)) : [],
     };
   },
 
@@ -379,17 +341,21 @@ export const Subspace = {
     const obj: any = {};
     message.subspace !== undefined && (obj.subspace = message.subspace);
     if (message.keys) {
-      obj.keys = message.keys.map(e => e);
+      obj.keys = message.keys.map((e) => e);
     } else {
       obj.keys = [];
     }
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<Subspace>, I>>(object: I): Subspace {
+  create(base?: DeepPartial<Subspace>): Subspace {
+    return Subspace.fromPartial(base ?? {});
+  },
+
+  fromPartial(object: DeepPartial<Subspace>): Subspace {
     const message = createBaseSubspace();
-    message.subspace = object.subspace ?? '';
-    message.keys = object.keys?.map(e => e) || [];
+    message.subspace = object.subspace ?? "";
+    message.keys = object.keys?.map((e) => e) || [];
     return message;
   },
 };
@@ -402,93 +368,50 @@ export interface Query {
    * Params queries a specific parameter of a module, given its subspace and
    * key.
    */
-  Params(
-    request: DeepPartial<QueryParamsRequest>,
-  ): Promise<QueryParamsResponse>;
+  Params(request: DeepPartial<QueryParamsRequest>): Promise<QueryParamsResponse>;
   /**
    * Subspaces queries for all registered subspaces and all keys for a subspace.
    *
    * Since: cosmos-sdk 0.46
    */
-  Subspaces(
-    request: DeepPartial<QuerySubspacesRequest>,
-  ): Promise<QuerySubspacesResponse>;
+  Subspaces(request: DeepPartial<QuerySubspacesRequest>): Promise<QuerySubspacesResponse>;
 }
 
 export class QueryClientImpl implements Query {
   private readonly rpc: Rpc;
-  constructor(rpc: Rpc) {
+  private readonly service: string;
+  constructor(rpc: Rpc, opts?: { service?: string }) {
+    this.service = opts?.service || "cosmos.params.v1beta1.Query";
     this.rpc = rpc;
     this.Params = this.Params.bind(this);
     this.Subspaces = this.Subspaces.bind(this);
   }
-  Params(
-    request: DeepPartial<QueryParamsRequest>,
-  ): Promise<QueryParamsResponse> {
+  Params(request: DeepPartial<QueryParamsRequest>): Promise<QueryParamsResponse> {
     const fromPartial = QueryParamsRequest.fromPartial(request);
     const data = QueryParamsRequest.encode(fromPartial).finish();
-    const promise = this.rpc.request(
-      'cosmos.params.v1beta1.Query',
-      'Params',
-      data,
-    );
-    return promise.then(data =>
-      QueryParamsResponse.decode(new _m0.Reader(data)),
-    );
+    const promise = this.rpc.request(this.service, "Params", data);
+    return promise.then((data) => QueryParamsResponse.decode(new _m0.Reader(data)));
   }
 
-  Subspaces(
-    request: DeepPartial<QuerySubspacesRequest>,
-  ): Promise<QuerySubspacesResponse> {
+  Subspaces(request: DeepPartial<QuerySubspacesRequest>): Promise<QuerySubspacesResponse> {
     const fromPartial = QuerySubspacesRequest.fromPartial(request);
     const data = QuerySubspacesRequest.encode(fromPartial).finish();
-    const promise = this.rpc.request(
-      'cosmos.params.v1beta1.Query',
-      'Subspaces',
-      data,
-    );
-    return promise.then(data =>
-      QuerySubspacesResponse.decode(new _m0.Reader(data)),
-    );
+    const promise = this.rpc.request(this.service, "Subspaces", data);
+    return promise.then((data) => QuerySubspacesResponse.decode(new _m0.Reader(data)));
   }
 }
 
 interface Rpc {
-  request(
-    service: string,
-    method: string,
-    data: Uint8Array,
-  ): Promise<Uint8Array>;
+  request(service: string, method: string, data: Uint8Array): Promise<Uint8Array>;
 }
 
-type Builtin =
-  | Date
-  | Function
-  | Uint8Array
-  | string
-  | number
-  | boolean
-  | undefined;
+type Builtin = Date | Function | Uint8Array | string | number | boolean | undefined;
 
-export type DeepPartial<T> = T extends Builtin
-  ? T
-  : T extends Long
-  ? string | number | Long
-  : T extends Array<infer U>
-  ? Array<DeepPartial<U>>
-  : T extends ReadonlyArray<infer U>
-  ? ReadonlyArray<DeepPartial<U>>
-  : T extends {}
-  ? { [K in Exclude<keyof T, '$type'>]?: DeepPartial<T[K]> }
+export type DeepPartial<T> = T extends Builtin ? T
+  : T extends Long ? string | number | Long : T extends Array<infer U> ? Array<DeepPartial<U>>
+  : T extends ReadonlyArray<infer U> ? ReadonlyArray<DeepPartial<U>>
+  : T extends {} ? { [K in Exclude<keyof T, "$type">]?: DeepPartial<T[K]> }
   : Partial<T>;
-
-type KeysOfUnion<T> = T extends T ? keyof T : never;
-export type Exact<P, I extends P> = P extends Builtin
-  ? P
-  : P & { [K in keyof P]: Exact<P[K], I[K]> } & Record<
-        Exclude<keyof I, KeysOfUnion<P> | '$type'>,
-        never
-      >;
 
 if (_m0.util.Long !== Long) {
   _m0.util.Long = Long as any;

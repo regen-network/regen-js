@@ -1,17 +1,17 @@
 /* eslint-disable */
-import { messageTypeRegistry } from '../../typeRegistry';
-import Long from 'long';
-import _m0 from 'protobufjs/minimal';
-import { Duration } from '../../google/protobuf/duration';
+import Long from "long";
+import _m0 from "protobufjs/minimal";
+import { Duration } from "../../google/protobuf/duration";
+import { messageTypeRegistry } from "../../typeRegistry";
 
-export const protobufPackage = 'tendermint.types';
+export const protobufPackage = "tendermint.types";
 
 /**
  * ConsensusParams contains consensus critical parameters that determine the
  * validity of blocks.
  */
 export interface ConsensusParams {
-  $type: 'tendermint.types.ConsensusParams';
+  $type: "tendermint.types.ConsensusParams";
   block?: BlockParams;
   evidence?: EvidenceParams;
   validator?: ValidatorParams;
@@ -20,7 +20,7 @@ export interface ConsensusParams {
 
 /** BlockParams contains limits on the block size. */
 export interface BlockParams {
-  $type: 'tendermint.types.BlockParams';
+  $type: "tendermint.types.BlockParams";
   /**
    * Max block size, in bytes.
    * Note: must be greater than 0
@@ -42,7 +42,7 @@ export interface BlockParams {
 
 /** EvidenceParams determine how we handle evidence of malfeasance. */
 export interface EvidenceParams {
-  $type: 'tendermint.types.EvidenceParams';
+  $type: "tendermint.types.EvidenceParams";
   /**
    * Max age of evidence, in blocks.
    *
@@ -71,13 +71,13 @@ export interface EvidenceParams {
  * NOTE: uses ABCI pubkey naming, not Amino names.
  */
 export interface ValidatorParams {
-  $type: 'tendermint.types.ValidatorParams';
+  $type: "tendermint.types.ValidatorParams";
   pubKeyTypes: string[];
 }
 
 /** VersionParams contains the ABCI application version. */
 export interface VersionParams {
-  $type: 'tendermint.types.VersionParams';
+  $type: "tendermint.types.VersionParams";
   appVersion: Long;
 }
 
@@ -87,14 +87,14 @@ export interface VersionParams {
  * It is hashed into the Header.ConsensusHash.
  */
 export interface HashedParams {
-  $type: 'tendermint.types.HashedParams';
+  $type: "tendermint.types.HashedParams";
   blockMaxBytes: Long;
   blockMaxGas: Long;
 }
 
 function createBaseConsensusParams(): ConsensusParams {
   return {
-    $type: 'tendermint.types.ConsensusParams',
+    $type: "tendermint.types.ConsensusParams",
     block: undefined,
     evidence: undefined,
     validator: undefined,
@@ -103,26 +103,17 @@ function createBaseConsensusParams(): ConsensusParams {
 }
 
 export const ConsensusParams = {
-  $type: 'tendermint.types.ConsensusParams' as const,
+  $type: "tendermint.types.ConsensusParams" as const,
 
-  encode(
-    message: ConsensusParams,
-    writer: _m0.Writer = _m0.Writer.create(),
-  ): _m0.Writer {
+  encode(message: ConsensusParams, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.block !== undefined) {
       BlockParams.encode(message.block, writer.uint32(10).fork()).ldelim();
     }
     if (message.evidence !== undefined) {
-      EvidenceParams.encode(
-        message.evidence,
-        writer.uint32(18).fork(),
-      ).ldelim();
+      EvidenceParams.encode(message.evidence, writer.uint32(18).fork()).ldelim();
     }
     if (message.validator !== undefined) {
-      ValidatorParams.encode(
-        message.validator,
-        writer.uint32(26).fork(),
-      ).ldelim();
+      ValidatorParams.encode(message.validator, writer.uint32(26).fork()).ldelim();
     }
     if (message.version !== undefined) {
       VersionParams.encode(message.version, writer.uint32(34).fork()).ldelim();
@@ -160,62 +151,43 @@ export const ConsensusParams = {
   fromJSON(object: any): ConsensusParams {
     return {
       $type: ConsensusParams.$type,
-      block: isSet(object.block)
-        ? BlockParams.fromJSON(object.block)
-        : undefined,
-      evidence: isSet(object.evidence)
-        ? EvidenceParams.fromJSON(object.evidence)
-        : undefined,
-      validator: isSet(object.validator)
-        ? ValidatorParams.fromJSON(object.validator)
-        : undefined,
-      version: isSet(object.version)
-        ? VersionParams.fromJSON(object.version)
-        : undefined,
+      block: isSet(object.block) ? BlockParams.fromJSON(object.block) : undefined,
+      evidence: isSet(object.evidence) ? EvidenceParams.fromJSON(object.evidence) : undefined,
+      validator: isSet(object.validator) ? ValidatorParams.fromJSON(object.validator) : undefined,
+      version: isSet(object.version) ? VersionParams.fromJSON(object.version) : undefined,
     };
   },
 
   toJSON(message: ConsensusParams): unknown {
     const obj: any = {};
-    message.block !== undefined &&
-      (obj.block = message.block
-        ? BlockParams.toJSON(message.block)
-        : undefined);
+    message.block !== undefined && (obj.block = message.block ? BlockParams.toJSON(message.block) : undefined);
     message.evidence !== undefined &&
-      (obj.evidence = message.evidence
-        ? EvidenceParams.toJSON(message.evidence)
-        : undefined);
+      (obj.evidence = message.evidence ? EvidenceParams.toJSON(message.evidence) : undefined);
     message.validator !== undefined &&
-      (obj.validator = message.validator
-        ? ValidatorParams.toJSON(message.validator)
-        : undefined);
+      (obj.validator = message.validator ? ValidatorParams.toJSON(message.validator) : undefined);
     message.version !== undefined &&
-      (obj.version = message.version
-        ? VersionParams.toJSON(message.version)
-        : undefined);
+      (obj.version = message.version ? VersionParams.toJSON(message.version) : undefined);
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<ConsensusParams>, I>>(
-    object: I,
-  ): ConsensusParams {
+  create(base?: DeepPartial<ConsensusParams>): ConsensusParams {
+    return ConsensusParams.fromPartial(base ?? {});
+  },
+
+  fromPartial(object: DeepPartial<ConsensusParams>): ConsensusParams {
     const message = createBaseConsensusParams();
-    message.block =
-      object.block !== undefined && object.block !== null
-        ? BlockParams.fromPartial(object.block)
-        : undefined;
-    message.evidence =
-      object.evidence !== undefined && object.evidence !== null
-        ? EvidenceParams.fromPartial(object.evidence)
-        : undefined;
-    message.validator =
-      object.validator !== undefined && object.validator !== null
-        ? ValidatorParams.fromPartial(object.validator)
-        : undefined;
-    message.version =
-      object.version !== undefined && object.version !== null
-        ? VersionParams.fromPartial(object.version)
-        : undefined;
+    message.block = (object.block !== undefined && object.block !== null)
+      ? BlockParams.fromPartial(object.block)
+      : undefined;
+    message.evidence = (object.evidence !== undefined && object.evidence !== null)
+      ? EvidenceParams.fromPartial(object.evidence)
+      : undefined;
+    message.validator = (object.validator !== undefined && object.validator !== null)
+      ? ValidatorParams.fromPartial(object.validator)
+      : undefined;
+    message.version = (object.version !== undefined && object.version !== null)
+      ? VersionParams.fromPartial(object.version)
+      : undefined;
     return message;
   },
 };
@@ -223,21 +195,13 @@ export const ConsensusParams = {
 messageTypeRegistry.set(ConsensusParams.$type, ConsensusParams);
 
 function createBaseBlockParams(): BlockParams {
-  return {
-    $type: 'tendermint.types.BlockParams',
-    maxBytes: Long.ZERO,
-    maxGas: Long.ZERO,
-    timeIotaMs: Long.ZERO,
-  };
+  return { $type: "tendermint.types.BlockParams", maxBytes: Long.ZERO, maxGas: Long.ZERO, timeIotaMs: Long.ZERO };
 }
 
 export const BlockParams = {
-  $type: 'tendermint.types.BlockParams' as const,
+  $type: "tendermint.types.BlockParams" as const,
 
-  encode(
-    message: BlockParams,
-    writer: _m0.Writer = _m0.Writer.create(),
-  ): _m0.Writer {
+  encode(message: BlockParams, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (!message.maxBytes.isZero()) {
       writer.uint32(8).int64(message.maxBytes);
     }
@@ -277,43 +241,35 @@ export const BlockParams = {
   fromJSON(object: any): BlockParams {
     return {
       $type: BlockParams.$type,
-      maxBytes: isSet(object.maxBytes)
-        ? Long.fromString(object.maxBytes)
-        : Long.ZERO,
-      maxGas: isSet(object.maxGas) ? Long.fromString(object.maxGas) : Long.ZERO,
-      timeIotaMs: isSet(object.timeIotaMs)
-        ? Long.fromString(object.timeIotaMs)
-        : Long.ZERO,
+      maxBytes: isSet(object.maxBytes) ? Long.fromValue(object.maxBytes) : Long.ZERO,
+      maxGas: isSet(object.maxGas) ? Long.fromValue(object.maxGas) : Long.ZERO,
+      timeIotaMs: isSet(object.timeIotaMs) ? Long.fromValue(object.timeIotaMs) : Long.ZERO,
     };
   },
 
   toJSON(message: BlockParams): unknown {
     const obj: any = {};
-    message.maxBytes !== undefined &&
-      (obj.maxBytes = (message.maxBytes || Long.ZERO).toString());
-    message.maxGas !== undefined &&
-      (obj.maxGas = (message.maxGas || Long.ZERO).toString());
-    message.timeIotaMs !== undefined &&
-      (obj.timeIotaMs = (message.timeIotaMs || Long.ZERO).toString());
+    message.maxBytes !== undefined && (obj.maxBytes = (message.maxBytes || Long.ZERO).toString());
+    message.maxGas !== undefined && (obj.maxGas = (message.maxGas || Long.ZERO).toString());
+    message.timeIotaMs !== undefined && (obj.timeIotaMs = (message.timeIotaMs || Long.ZERO).toString());
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<BlockParams>, I>>(
-    object: I,
-  ): BlockParams {
+  create(base?: DeepPartial<BlockParams>): BlockParams {
+    return BlockParams.fromPartial(base ?? {});
+  },
+
+  fromPartial(object: DeepPartial<BlockParams>): BlockParams {
     const message = createBaseBlockParams();
-    message.maxBytes =
-      object.maxBytes !== undefined && object.maxBytes !== null
-        ? Long.fromValue(object.maxBytes)
-        : Long.ZERO;
-    message.maxGas =
-      object.maxGas !== undefined && object.maxGas !== null
-        ? Long.fromValue(object.maxGas)
-        : Long.ZERO;
-    message.timeIotaMs =
-      object.timeIotaMs !== undefined && object.timeIotaMs !== null
-        ? Long.fromValue(object.timeIotaMs)
-        : Long.ZERO;
+    message.maxBytes = (object.maxBytes !== undefined && object.maxBytes !== null)
+      ? Long.fromValue(object.maxBytes)
+      : Long.ZERO;
+    message.maxGas = (object.maxGas !== undefined && object.maxGas !== null)
+      ? Long.fromValue(object.maxGas)
+      : Long.ZERO;
+    message.timeIotaMs = (object.timeIotaMs !== undefined && object.timeIotaMs !== null)
+      ? Long.fromValue(object.timeIotaMs)
+      : Long.ZERO;
     return message;
   },
 };
@@ -322,7 +278,7 @@ messageTypeRegistry.set(BlockParams.$type, BlockParams);
 
 function createBaseEvidenceParams(): EvidenceParams {
   return {
-    $type: 'tendermint.types.EvidenceParams',
+    $type: "tendermint.types.EvidenceParams",
     maxAgeNumBlocks: Long.ZERO,
     maxAgeDuration: undefined,
     maxBytes: Long.ZERO,
@@ -330,20 +286,14 @@ function createBaseEvidenceParams(): EvidenceParams {
 }
 
 export const EvidenceParams = {
-  $type: 'tendermint.types.EvidenceParams' as const,
+  $type: "tendermint.types.EvidenceParams" as const,
 
-  encode(
-    message: EvidenceParams,
-    writer: _m0.Writer = _m0.Writer.create(),
-  ): _m0.Writer {
+  encode(message: EvidenceParams, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (!message.maxAgeNumBlocks.isZero()) {
       writer.uint32(8).int64(message.maxAgeNumBlocks);
     }
     if (message.maxAgeDuration !== undefined) {
-      Duration.encode(
-        message.maxAgeDuration,
-        writer.uint32(18).fork(),
-      ).ldelim();
+      Duration.encode(message.maxAgeDuration, writer.uint32(18).fork()).ldelim();
     }
     if (!message.maxBytes.isZero()) {
       writer.uint32(24).int64(message.maxBytes);
@@ -378,47 +328,36 @@ export const EvidenceParams = {
   fromJSON(object: any): EvidenceParams {
     return {
       $type: EvidenceParams.$type,
-      maxAgeNumBlocks: isSet(object.maxAgeNumBlocks)
-        ? Long.fromString(object.maxAgeNumBlocks)
-        : Long.ZERO,
-      maxAgeDuration: isSet(object.maxAgeDuration)
-        ? Duration.fromJSON(object.maxAgeDuration)
-        : undefined,
-      maxBytes: isSet(object.maxBytes)
-        ? Long.fromString(object.maxBytes)
-        : Long.ZERO,
+      maxAgeNumBlocks: isSet(object.maxAgeNumBlocks) ? Long.fromValue(object.maxAgeNumBlocks) : Long.ZERO,
+      maxAgeDuration: isSet(object.maxAgeDuration) ? Duration.fromJSON(object.maxAgeDuration) : undefined,
+      maxBytes: isSet(object.maxBytes) ? Long.fromValue(object.maxBytes) : Long.ZERO,
     };
   },
 
   toJSON(message: EvidenceParams): unknown {
     const obj: any = {};
-    message.maxAgeNumBlocks !== undefined &&
-      (obj.maxAgeNumBlocks = (message.maxAgeNumBlocks || Long.ZERO).toString());
+    message.maxAgeNumBlocks !== undefined && (obj.maxAgeNumBlocks = (message.maxAgeNumBlocks || Long.ZERO).toString());
     message.maxAgeDuration !== undefined &&
-      (obj.maxAgeDuration = message.maxAgeDuration
-        ? Duration.toJSON(message.maxAgeDuration)
-        : undefined);
-    message.maxBytes !== undefined &&
-      (obj.maxBytes = (message.maxBytes || Long.ZERO).toString());
+      (obj.maxAgeDuration = message.maxAgeDuration ? Duration.toJSON(message.maxAgeDuration) : undefined);
+    message.maxBytes !== undefined && (obj.maxBytes = (message.maxBytes || Long.ZERO).toString());
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<EvidenceParams>, I>>(
-    object: I,
-  ): EvidenceParams {
+  create(base?: DeepPartial<EvidenceParams>): EvidenceParams {
+    return EvidenceParams.fromPartial(base ?? {});
+  },
+
+  fromPartial(object: DeepPartial<EvidenceParams>): EvidenceParams {
     const message = createBaseEvidenceParams();
-    message.maxAgeNumBlocks =
-      object.maxAgeNumBlocks !== undefined && object.maxAgeNumBlocks !== null
-        ? Long.fromValue(object.maxAgeNumBlocks)
-        : Long.ZERO;
-    message.maxAgeDuration =
-      object.maxAgeDuration !== undefined && object.maxAgeDuration !== null
-        ? Duration.fromPartial(object.maxAgeDuration)
-        : undefined;
-    message.maxBytes =
-      object.maxBytes !== undefined && object.maxBytes !== null
-        ? Long.fromValue(object.maxBytes)
-        : Long.ZERO;
+    message.maxAgeNumBlocks = (object.maxAgeNumBlocks !== undefined && object.maxAgeNumBlocks !== null)
+      ? Long.fromValue(object.maxAgeNumBlocks)
+      : Long.ZERO;
+    message.maxAgeDuration = (object.maxAgeDuration !== undefined && object.maxAgeDuration !== null)
+      ? Duration.fromPartial(object.maxAgeDuration)
+      : undefined;
+    message.maxBytes = (object.maxBytes !== undefined && object.maxBytes !== null)
+      ? Long.fromValue(object.maxBytes)
+      : Long.ZERO;
     return message;
   },
 };
@@ -426,16 +365,13 @@ export const EvidenceParams = {
 messageTypeRegistry.set(EvidenceParams.$type, EvidenceParams);
 
 function createBaseValidatorParams(): ValidatorParams {
-  return { $type: 'tendermint.types.ValidatorParams', pubKeyTypes: [] };
+  return { $type: "tendermint.types.ValidatorParams", pubKeyTypes: [] };
 }
 
 export const ValidatorParams = {
-  $type: 'tendermint.types.ValidatorParams' as const,
+  $type: "tendermint.types.ValidatorParams" as const,
 
-  encode(
-    message: ValidatorParams,
-    writer: _m0.Writer = _m0.Writer.create(),
-  ): _m0.Writer {
+  encode(message: ValidatorParams, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     for (const v of message.pubKeyTypes) {
       writer.uint32(10).string(v!);
     }
@@ -463,27 +399,27 @@ export const ValidatorParams = {
   fromJSON(object: any): ValidatorParams {
     return {
       $type: ValidatorParams.$type,
-      pubKeyTypes: Array.isArray(object?.pubKeyTypes)
-        ? object.pubKeyTypes.map((e: any) => String(e))
-        : [],
+      pubKeyTypes: Array.isArray(object?.pubKeyTypes) ? object.pubKeyTypes.map((e: any) => String(e)) : [],
     };
   },
 
   toJSON(message: ValidatorParams): unknown {
     const obj: any = {};
     if (message.pubKeyTypes) {
-      obj.pubKeyTypes = message.pubKeyTypes.map(e => e);
+      obj.pubKeyTypes = message.pubKeyTypes.map((e) => e);
     } else {
       obj.pubKeyTypes = [];
     }
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<ValidatorParams>, I>>(
-    object: I,
-  ): ValidatorParams {
+  create(base?: DeepPartial<ValidatorParams>): ValidatorParams {
+    return ValidatorParams.fromPartial(base ?? {});
+  },
+
+  fromPartial(object: DeepPartial<ValidatorParams>): ValidatorParams {
     const message = createBaseValidatorParams();
-    message.pubKeyTypes = object.pubKeyTypes?.map(e => e) || [];
+    message.pubKeyTypes = object.pubKeyTypes?.map((e) => e) || [];
     return message;
   },
 };
@@ -491,16 +427,13 @@ export const ValidatorParams = {
 messageTypeRegistry.set(ValidatorParams.$type, ValidatorParams);
 
 function createBaseVersionParams(): VersionParams {
-  return { $type: 'tendermint.types.VersionParams', appVersion: Long.UZERO };
+  return { $type: "tendermint.types.VersionParams", appVersion: Long.UZERO };
 }
 
 export const VersionParams = {
-  $type: 'tendermint.types.VersionParams' as const,
+  $type: "tendermint.types.VersionParams" as const,
 
-  encode(
-    message: VersionParams,
-    writer: _m0.Writer = _m0.Writer.create(),
-  ): _m0.Writer {
+  encode(message: VersionParams, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (!message.appVersion.isZero()) {
       writer.uint32(8).uint64(message.appVersion);
     }
@@ -528,27 +461,25 @@ export const VersionParams = {
   fromJSON(object: any): VersionParams {
     return {
       $type: VersionParams.$type,
-      appVersion: isSet(object.appVersion)
-        ? Long.fromString(object.appVersion)
-        : Long.UZERO,
+      appVersion: isSet(object.appVersion) ? Long.fromValue(object.appVersion) : Long.UZERO,
     };
   },
 
   toJSON(message: VersionParams): unknown {
     const obj: any = {};
-    message.appVersion !== undefined &&
-      (obj.appVersion = (message.appVersion || Long.UZERO).toString());
+    message.appVersion !== undefined && (obj.appVersion = (message.appVersion || Long.UZERO).toString());
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<VersionParams>, I>>(
-    object: I,
-  ): VersionParams {
+  create(base?: DeepPartial<VersionParams>): VersionParams {
+    return VersionParams.fromPartial(base ?? {});
+  },
+
+  fromPartial(object: DeepPartial<VersionParams>): VersionParams {
     const message = createBaseVersionParams();
-    message.appVersion =
-      object.appVersion !== undefined && object.appVersion !== null
-        ? Long.fromValue(object.appVersion)
-        : Long.UZERO;
+    message.appVersion = (object.appVersion !== undefined && object.appVersion !== null)
+      ? Long.fromValue(object.appVersion)
+      : Long.UZERO;
     return message;
   },
 };
@@ -556,20 +487,13 @@ export const VersionParams = {
 messageTypeRegistry.set(VersionParams.$type, VersionParams);
 
 function createBaseHashedParams(): HashedParams {
-  return {
-    $type: 'tendermint.types.HashedParams',
-    blockMaxBytes: Long.ZERO,
-    blockMaxGas: Long.ZERO,
-  };
+  return { $type: "tendermint.types.HashedParams", blockMaxBytes: Long.ZERO, blockMaxGas: Long.ZERO };
 }
 
 export const HashedParams = {
-  $type: 'tendermint.types.HashedParams' as const,
+  $type: "tendermint.types.HashedParams" as const,
 
-  encode(
-    message: HashedParams,
-    writer: _m0.Writer = _m0.Writer.create(),
-  ): _m0.Writer {
+  encode(message: HashedParams, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (!message.blockMaxBytes.isZero()) {
       writer.uint32(8).int64(message.blockMaxBytes);
     }
@@ -603,70 +527,43 @@ export const HashedParams = {
   fromJSON(object: any): HashedParams {
     return {
       $type: HashedParams.$type,
-      blockMaxBytes: isSet(object.blockMaxBytes)
-        ? Long.fromString(object.blockMaxBytes)
-        : Long.ZERO,
-      blockMaxGas: isSet(object.blockMaxGas)
-        ? Long.fromString(object.blockMaxGas)
-        : Long.ZERO,
+      blockMaxBytes: isSet(object.blockMaxBytes) ? Long.fromValue(object.blockMaxBytes) : Long.ZERO,
+      blockMaxGas: isSet(object.blockMaxGas) ? Long.fromValue(object.blockMaxGas) : Long.ZERO,
     };
   },
 
   toJSON(message: HashedParams): unknown {
     const obj: any = {};
-    message.blockMaxBytes !== undefined &&
-      (obj.blockMaxBytes = (message.blockMaxBytes || Long.ZERO).toString());
-    message.blockMaxGas !== undefined &&
-      (obj.blockMaxGas = (message.blockMaxGas || Long.ZERO).toString());
+    message.blockMaxBytes !== undefined && (obj.blockMaxBytes = (message.blockMaxBytes || Long.ZERO).toString());
+    message.blockMaxGas !== undefined && (obj.blockMaxGas = (message.blockMaxGas || Long.ZERO).toString());
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<HashedParams>, I>>(
-    object: I,
-  ): HashedParams {
+  create(base?: DeepPartial<HashedParams>): HashedParams {
+    return HashedParams.fromPartial(base ?? {});
+  },
+
+  fromPartial(object: DeepPartial<HashedParams>): HashedParams {
     const message = createBaseHashedParams();
-    message.blockMaxBytes =
-      object.blockMaxBytes !== undefined && object.blockMaxBytes !== null
-        ? Long.fromValue(object.blockMaxBytes)
-        : Long.ZERO;
-    message.blockMaxGas =
-      object.blockMaxGas !== undefined && object.blockMaxGas !== null
-        ? Long.fromValue(object.blockMaxGas)
-        : Long.ZERO;
+    message.blockMaxBytes = (object.blockMaxBytes !== undefined && object.blockMaxBytes !== null)
+      ? Long.fromValue(object.blockMaxBytes)
+      : Long.ZERO;
+    message.blockMaxGas = (object.blockMaxGas !== undefined && object.blockMaxGas !== null)
+      ? Long.fromValue(object.blockMaxGas)
+      : Long.ZERO;
     return message;
   },
 };
 
 messageTypeRegistry.set(HashedParams.$type, HashedParams);
 
-type Builtin =
-  | Date
-  | Function
-  | Uint8Array
-  | string
-  | number
-  | boolean
-  | undefined;
+type Builtin = Date | Function | Uint8Array | string | number | boolean | undefined;
 
-export type DeepPartial<T> = T extends Builtin
-  ? T
-  : T extends Long
-  ? string | number | Long
-  : T extends Array<infer U>
-  ? Array<DeepPartial<U>>
-  : T extends ReadonlyArray<infer U>
-  ? ReadonlyArray<DeepPartial<U>>
-  : T extends {}
-  ? { [K in Exclude<keyof T, '$type'>]?: DeepPartial<T[K]> }
+export type DeepPartial<T> = T extends Builtin ? T
+  : T extends Long ? string | number | Long : T extends Array<infer U> ? Array<DeepPartial<U>>
+  : T extends ReadonlyArray<infer U> ? ReadonlyArray<DeepPartial<U>>
+  : T extends {} ? { [K in Exclude<keyof T, "$type">]?: DeepPartial<T[K]> }
   : Partial<T>;
-
-type KeysOfUnion<T> = T extends T ? keyof T : never;
-export type Exact<P, I extends P> = P extends Builtin
-  ? P
-  : P & { [K in keyof P]: Exact<P[K], I[K]> } & Record<
-        Exclude<keyof I, KeysOfUnion<P> | '$type'>,
-        never
-      >;
 
 if (_m0.util.Long !== Long) {
   _m0.util.Long = Long as any;

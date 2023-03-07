@@ -1,10 +1,11 @@
 /* eslint-disable */
-import { messageTypeRegistry } from '../../../../typeRegistry';
-import Long from 'long';
-import _m0 from 'protobufjs/minimal';
-import { AllowedDenom } from './state';
+import Long from "long";
+import _m0 from "protobufjs/minimal";
+import { Timestamp } from "../../../../google/protobuf/timestamp";
+import { messageTypeRegistry } from "../../../../typeRegistry";
+import { AllowedDenom } from "./state";
 
-export const protobufPackage = 'regen.ecocredit.marketplace.v1';
+export const protobufPackage = "regen.ecocredit.marketplace.v1";
 
 /**
  * AllowDenomProposal is a gov Content type for approving a denom for use in the
@@ -14,7 +15,7 @@ export const protobufPackage = 'regen.ecocredit.marketplace.v1';
  * removed in the next version. See MsgAddAllowedDenom.
  */
 export interface AllowDenomProposal {
-  $type: 'regen.ecocredit.marketplace.v1.AllowDenomProposal';
+  $type: "regen.ecocredit.marketplace.v1.AllowDenomProposal";
   /** title is the title of the proposal. */
   title: string;
   /** description is the description of the proposal. */
@@ -27,25 +28,17 @@ export interface AllowDenomProposal {
 }
 
 function createBaseAllowDenomProposal(): AllowDenomProposal {
-  return {
-    $type: 'regen.ecocredit.marketplace.v1.AllowDenomProposal',
-    title: '',
-    description: '',
-    denom: undefined,
-  };
+  return { $type: "regen.ecocredit.marketplace.v1.AllowDenomProposal", title: "", description: "", denom: undefined };
 }
 
 export const AllowDenomProposal = {
-  $type: 'regen.ecocredit.marketplace.v1.AllowDenomProposal' as const,
+  $type: "regen.ecocredit.marketplace.v1.AllowDenomProposal" as const,
 
-  encode(
-    message: AllowDenomProposal,
-    writer: _m0.Writer = _m0.Writer.create(),
-  ): _m0.Writer {
-    if (message.title !== '') {
+  encode(message: AllowDenomProposal, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+    if (message.title !== "") {
       writer.uint32(10).string(message.title);
     }
-    if (message.description !== '') {
+    if (message.description !== "") {
       writer.uint32(18).string(message.description);
     }
     if (message.denom !== undefined) {
@@ -81,70 +74,54 @@ export const AllowDenomProposal = {
   fromJSON(object: any): AllowDenomProposal {
     return {
       $type: AllowDenomProposal.$type,
-      title: isSet(object.title) ? String(object.title) : '',
-      description: isSet(object.description) ? String(object.description) : '',
-      denom: isSet(object.denom)
-        ? AllowedDenom.fromJSON(object.denom)
-        : undefined,
+      title: isSet(object.title) ? String(object.title) : "",
+      description: isSet(object.description) ? String(object.description) : "",
+      denom: isSet(object.denom) ? AllowedDenom.fromJSON(object.denom) : undefined,
     };
   },
 
   toJSON(message: AllowDenomProposal): unknown {
     const obj: any = {};
     message.title !== undefined && (obj.title = message.title);
-    message.description !== undefined &&
-      (obj.description = message.description);
-    message.denom !== undefined &&
-      (obj.denom = message.denom
-        ? AllowedDenom.toJSON(message.denom)
-        : undefined);
+    message.description !== undefined && (obj.description = message.description);
+    message.denom !== undefined && (obj.denom = message.denom ? AllowedDenom.toJSON(message.denom) : undefined);
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<AllowDenomProposal>, I>>(
-    object: I,
-  ): AllowDenomProposal {
+  create(base?: DeepPartial<AllowDenomProposal>): AllowDenomProposal {
+    return AllowDenomProposal.fromPartial(base ?? {});
+  },
+
+  fromPartial(object: DeepPartial<AllowDenomProposal>): AllowDenomProposal {
     const message = createBaseAllowDenomProposal();
-    message.title = object.title ?? '';
-    message.description = object.description ?? '';
-    message.denom =
-      object.denom !== undefined && object.denom !== null
-        ? AllowedDenom.fromPartial(object.denom)
-        : undefined;
+    message.title = object.title ?? "";
+    message.description = object.description ?? "";
+    message.denom = (object.denom !== undefined && object.denom !== null)
+      ? AllowedDenom.fromPartial(object.denom)
+      : undefined;
     return message;
   },
 };
 
 messageTypeRegistry.set(AllowDenomProposal.$type, AllowDenomProposal);
 
-type Builtin =
-  | Date
-  | Function
-  | Uint8Array
-  | string
-  | number
-  | boolean
-  | undefined;
+type Builtin = Date | Function | Uint8Array | string | number | boolean | undefined;
 
-export type DeepPartial<T> = T extends Builtin
-  ? T
-  : T extends Long
-  ? string | number | Long
-  : T extends Array<infer U>
-  ? Array<DeepPartial<U>>
-  : T extends ReadonlyArray<infer U>
-  ? ReadonlyArray<DeepPartial<U>>
-  : T extends {}
-  ? { [K in Exclude<keyof T, '$type'>]?: DeepPartial<T[K]> }
+export type DeepPartial<T> = T extends Builtin ? T
+  : T extends Long ? string | number | Long : T extends Array<infer U> ? Array<DeepPartial<U>>
+  : T extends ReadonlyArray<infer U> ? ReadonlyArray<DeepPartial<U>>
+  : T extends {} ? { [K in Exclude<keyof T, "$type">]?: DeepPartial<T[K]> }
   : Partial<T>;
 
-type KeysOfUnion<T> = T extends T ? keyof T : never;
-export type Exact<P, I extends P> = P extends Builtin
-  ? P
-  : P & { [K in keyof P]: Exact<P[K], I[K]> } & Record<
-        Exclude<keyof I, KeysOfUnion<P> | '$type'>,
-        never
-      >;
+function fromTimestamp(t: Timestamp): Date {
+  let millis = t.seconds.toNumber() * 1_000;
+  millis += t.nanos / 1_000_000;
+  return new Date(millis);
+}
+
+function numberToLong(number: number) {
+  return Long.fromNumber(number);
+}
 
 if (_m0.util.Long !== Long) {
   _m0.util.Long = Long as any;

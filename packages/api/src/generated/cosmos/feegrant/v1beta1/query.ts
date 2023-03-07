@@ -1,17 +1,17 @@
 /* eslint-disable */
-import { messageTypeRegistry } from '../../../typeRegistry';
-import Long from 'long';
-import _m0 from 'protobufjs/minimal';
-import { Grant } from './feegrant';
-import { PageRequest, PageResponse } from '../../base/query/v1beta1/pagination';
+import Long from "long";
+import _m0 from "protobufjs/minimal";
+import { messageTypeRegistry } from "../../../typeRegistry";
+import { PageRequest, PageResponse } from "../../base/query/v1beta1/pagination";
+import { Grant } from "./feegrant";
 
-export const protobufPackage = 'cosmos.feegrant.v1beta1';
+export const protobufPackage = "cosmos.feegrant.v1beta1";
 
 /** Since: cosmos-sdk 0.43 */
 
 /** QueryAllowanceRequest is the request type for the Query/Allowance RPC method. */
 export interface QueryAllowanceRequest {
-  $type: 'cosmos.feegrant.v1beta1.QueryAllowanceRequest';
+  $type: "cosmos.feegrant.v1beta1.QueryAllowanceRequest";
   /** granter is the address of the user granting an allowance of their funds. */
   granter: string;
   /** grantee is the address of the user being granted an allowance of another user's funds. */
@@ -20,14 +20,14 @@ export interface QueryAllowanceRequest {
 
 /** QueryAllowanceResponse is the response type for the Query/Allowance RPC method. */
 export interface QueryAllowanceResponse {
-  $type: 'cosmos.feegrant.v1beta1.QueryAllowanceResponse';
+  $type: "cosmos.feegrant.v1beta1.QueryAllowanceResponse";
   /** allowance is a allowance granted for grantee by granter. */
   allowance?: Grant;
 }
 
 /** QueryAllowancesRequest is the request type for the Query/Allowances RPC method. */
 export interface QueryAllowancesRequest {
-  $type: 'cosmos.feegrant.v1beta1.QueryAllowancesRequest';
+  $type: "cosmos.feegrant.v1beta1.QueryAllowancesRequest";
   grantee: string;
   /** pagination defines an pagination for the request. */
   pagination?: PageRequest;
@@ -35,7 +35,7 @@ export interface QueryAllowancesRequest {
 
 /** QueryAllowancesResponse is the response type for the Query/Allowances RPC method. */
 export interface QueryAllowancesResponse {
-  $type: 'cosmos.feegrant.v1beta1.QueryAllowancesResponse';
+  $type: "cosmos.feegrant.v1beta1.QueryAllowancesResponse";
   /** allowances are allowance's granted for grantee by granter. */
   allowances: Grant[];
   /** pagination defines an pagination for the response. */
@@ -48,7 +48,7 @@ export interface QueryAllowancesResponse {
  * Since: cosmos-sdk 0.46
  */
 export interface QueryAllowancesByGranterRequest {
-  $type: 'cosmos.feegrant.v1beta1.QueryAllowancesByGranterRequest';
+  $type: "cosmos.feegrant.v1beta1.QueryAllowancesByGranterRequest";
   granter: string;
   /** pagination defines an pagination for the request. */
   pagination?: PageRequest;
@@ -60,7 +60,7 @@ export interface QueryAllowancesByGranterRequest {
  * Since: cosmos-sdk 0.46
  */
 export interface QueryAllowancesByGranterResponse {
-  $type: 'cosmos.feegrant.v1beta1.QueryAllowancesByGranterResponse';
+  $type: "cosmos.feegrant.v1beta1.QueryAllowancesByGranterResponse";
   /** allowances that have been issued by the granter. */
   allowances: Grant[];
   /** pagination defines an pagination for the response. */
@@ -68,33 +68,23 @@ export interface QueryAllowancesByGranterResponse {
 }
 
 function createBaseQueryAllowanceRequest(): QueryAllowanceRequest {
-  return {
-    $type: 'cosmos.feegrant.v1beta1.QueryAllowanceRequest',
-    granter: '',
-    grantee: '',
-  };
+  return { $type: "cosmos.feegrant.v1beta1.QueryAllowanceRequest", granter: "", grantee: "" };
 }
 
 export const QueryAllowanceRequest = {
-  $type: 'cosmos.feegrant.v1beta1.QueryAllowanceRequest' as const,
+  $type: "cosmos.feegrant.v1beta1.QueryAllowanceRequest" as const,
 
-  encode(
-    message: QueryAllowanceRequest,
-    writer: _m0.Writer = _m0.Writer.create(),
-  ): _m0.Writer {
-    if (message.granter !== '') {
+  encode(message: QueryAllowanceRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+    if (message.granter !== "") {
       writer.uint32(10).string(message.granter);
     }
-    if (message.grantee !== '') {
+    if (message.grantee !== "") {
       writer.uint32(18).string(message.grantee);
     }
     return writer;
   },
 
-  decode(
-    input: _m0.Reader | Uint8Array,
-    length?: number,
-  ): QueryAllowanceRequest {
+  decode(input: _m0.Reader | Uint8Array, length?: number): QueryAllowanceRequest {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryAllowanceRequest();
@@ -118,8 +108,8 @@ export const QueryAllowanceRequest = {
   fromJSON(object: any): QueryAllowanceRequest {
     return {
       $type: QueryAllowanceRequest.$type,
-      granter: isSet(object.granter) ? String(object.granter) : '',
-      grantee: isSet(object.grantee) ? String(object.grantee) : '',
+      granter: isSet(object.granter) ? String(object.granter) : "",
+      grantee: isSet(object.grantee) ? String(object.grantee) : "",
     };
   },
 
@@ -130,12 +120,14 @@ export const QueryAllowanceRequest = {
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<QueryAllowanceRequest>, I>>(
-    object: I,
-  ): QueryAllowanceRequest {
+  create(base?: DeepPartial<QueryAllowanceRequest>): QueryAllowanceRequest {
+    return QueryAllowanceRequest.fromPartial(base ?? {});
+  },
+
+  fromPartial(object: DeepPartial<QueryAllowanceRequest>): QueryAllowanceRequest {
     const message = createBaseQueryAllowanceRequest();
-    message.granter = object.granter ?? '';
-    message.grantee = object.grantee ?? '';
+    message.granter = object.granter ?? "";
+    message.grantee = object.grantee ?? "";
     return message;
   },
 };
@@ -143,29 +135,20 @@ export const QueryAllowanceRequest = {
 messageTypeRegistry.set(QueryAllowanceRequest.$type, QueryAllowanceRequest);
 
 function createBaseQueryAllowanceResponse(): QueryAllowanceResponse {
-  return {
-    $type: 'cosmos.feegrant.v1beta1.QueryAllowanceResponse',
-    allowance: undefined,
-  };
+  return { $type: "cosmos.feegrant.v1beta1.QueryAllowanceResponse", allowance: undefined };
 }
 
 export const QueryAllowanceResponse = {
-  $type: 'cosmos.feegrant.v1beta1.QueryAllowanceResponse' as const,
+  $type: "cosmos.feegrant.v1beta1.QueryAllowanceResponse" as const,
 
-  encode(
-    message: QueryAllowanceResponse,
-    writer: _m0.Writer = _m0.Writer.create(),
-  ): _m0.Writer {
+  encode(message: QueryAllowanceResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.allowance !== undefined) {
       Grant.encode(message.allowance, writer.uint32(10).fork()).ldelim();
     }
     return writer;
   },
 
-  decode(
-    input: _m0.Reader | Uint8Array,
-    length?: number,
-  ): QueryAllowanceResponse {
+  decode(input: _m0.Reader | Uint8Array, length?: number): QueryAllowanceResponse {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryAllowanceResponse();
@@ -186,29 +169,26 @@ export const QueryAllowanceResponse = {
   fromJSON(object: any): QueryAllowanceResponse {
     return {
       $type: QueryAllowanceResponse.$type,
-      allowance: isSet(object.allowance)
-        ? Grant.fromJSON(object.allowance)
-        : undefined,
+      allowance: isSet(object.allowance) ? Grant.fromJSON(object.allowance) : undefined,
     };
   },
 
   toJSON(message: QueryAllowanceResponse): unknown {
     const obj: any = {};
     message.allowance !== undefined &&
-      (obj.allowance = message.allowance
-        ? Grant.toJSON(message.allowance)
-        : undefined);
+      (obj.allowance = message.allowance ? Grant.toJSON(message.allowance) : undefined);
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<QueryAllowanceResponse>, I>>(
-    object: I,
-  ): QueryAllowanceResponse {
+  create(base?: DeepPartial<QueryAllowanceResponse>): QueryAllowanceResponse {
+    return QueryAllowanceResponse.fromPartial(base ?? {});
+  },
+
+  fromPartial(object: DeepPartial<QueryAllowanceResponse>): QueryAllowanceResponse {
     const message = createBaseQueryAllowanceResponse();
-    message.allowance =
-      object.allowance !== undefined && object.allowance !== null
-        ? Grant.fromPartial(object.allowance)
-        : undefined;
+    message.allowance = (object.allowance !== undefined && object.allowance !== null)
+      ? Grant.fromPartial(object.allowance)
+      : undefined;
     return message;
   },
 };
@@ -216,21 +196,14 @@ export const QueryAllowanceResponse = {
 messageTypeRegistry.set(QueryAllowanceResponse.$type, QueryAllowanceResponse);
 
 function createBaseQueryAllowancesRequest(): QueryAllowancesRequest {
-  return {
-    $type: 'cosmos.feegrant.v1beta1.QueryAllowancesRequest',
-    grantee: '',
-    pagination: undefined,
-  };
+  return { $type: "cosmos.feegrant.v1beta1.QueryAllowancesRequest", grantee: "", pagination: undefined };
 }
 
 export const QueryAllowancesRequest = {
-  $type: 'cosmos.feegrant.v1beta1.QueryAllowancesRequest' as const,
+  $type: "cosmos.feegrant.v1beta1.QueryAllowancesRequest" as const,
 
-  encode(
-    message: QueryAllowancesRequest,
-    writer: _m0.Writer = _m0.Writer.create(),
-  ): _m0.Writer {
-    if (message.grantee !== '') {
+  encode(message: QueryAllowancesRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+    if (message.grantee !== "") {
       writer.uint32(10).string(message.grantee);
     }
     if (message.pagination !== undefined) {
@@ -239,10 +212,7 @@ export const QueryAllowancesRequest = {
     return writer;
   },
 
-  decode(
-    input: _m0.Reader | Uint8Array,
-    length?: number,
-  ): QueryAllowancesRequest {
+  decode(input: _m0.Reader | Uint8Array, length?: number): QueryAllowancesRequest {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryAllowancesRequest();
@@ -266,10 +236,8 @@ export const QueryAllowancesRequest = {
   fromJSON(object: any): QueryAllowancesRequest {
     return {
       $type: QueryAllowancesRequest.$type,
-      grantee: isSet(object.grantee) ? String(object.grantee) : '',
-      pagination: isSet(object.pagination)
-        ? PageRequest.fromJSON(object.pagination)
-        : undefined,
+      grantee: isSet(object.grantee) ? String(object.grantee) : "",
+      pagination: isSet(object.pagination) ? PageRequest.fromJSON(object.pagination) : undefined,
     };
   },
 
@@ -277,21 +245,20 @@ export const QueryAllowancesRequest = {
     const obj: any = {};
     message.grantee !== undefined && (obj.grantee = message.grantee);
     message.pagination !== undefined &&
-      (obj.pagination = message.pagination
-        ? PageRequest.toJSON(message.pagination)
-        : undefined);
+      (obj.pagination = message.pagination ? PageRequest.toJSON(message.pagination) : undefined);
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<QueryAllowancesRequest>, I>>(
-    object: I,
-  ): QueryAllowancesRequest {
+  create(base?: DeepPartial<QueryAllowancesRequest>): QueryAllowancesRequest {
+    return QueryAllowancesRequest.fromPartial(base ?? {});
+  },
+
+  fromPartial(object: DeepPartial<QueryAllowancesRequest>): QueryAllowancesRequest {
     const message = createBaseQueryAllowancesRequest();
-    message.grantee = object.grantee ?? '';
-    message.pagination =
-      object.pagination !== undefined && object.pagination !== null
-        ? PageRequest.fromPartial(object.pagination)
-        : undefined;
+    message.grantee = object.grantee ?? "";
+    message.pagination = (object.pagination !== undefined && object.pagination !== null)
+      ? PageRequest.fromPartial(object.pagination)
+      : undefined;
     return message;
   },
 };
@@ -299,36 +266,23 @@ export const QueryAllowancesRequest = {
 messageTypeRegistry.set(QueryAllowancesRequest.$type, QueryAllowancesRequest);
 
 function createBaseQueryAllowancesResponse(): QueryAllowancesResponse {
-  return {
-    $type: 'cosmos.feegrant.v1beta1.QueryAllowancesResponse',
-    allowances: [],
-    pagination: undefined,
-  };
+  return { $type: "cosmos.feegrant.v1beta1.QueryAllowancesResponse", allowances: [], pagination: undefined };
 }
 
 export const QueryAllowancesResponse = {
-  $type: 'cosmos.feegrant.v1beta1.QueryAllowancesResponse' as const,
+  $type: "cosmos.feegrant.v1beta1.QueryAllowancesResponse" as const,
 
-  encode(
-    message: QueryAllowancesResponse,
-    writer: _m0.Writer = _m0.Writer.create(),
-  ): _m0.Writer {
+  encode(message: QueryAllowancesResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     for (const v of message.allowances) {
       Grant.encode(v!, writer.uint32(10).fork()).ldelim();
     }
     if (message.pagination !== undefined) {
-      PageResponse.encode(
-        message.pagination,
-        writer.uint32(18).fork(),
-      ).ldelim();
+      PageResponse.encode(message.pagination, writer.uint32(18).fork()).ldelim();
     }
     return writer;
   },
 
-  decode(
-    input: _m0.Reader | Uint8Array,
-    length?: number,
-  ): QueryAllowancesResponse {
+  decode(input: _m0.Reader | Uint8Array, length?: number): QueryAllowancesResponse {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryAllowancesResponse();
@@ -352,41 +306,33 @@ export const QueryAllowancesResponse = {
   fromJSON(object: any): QueryAllowancesResponse {
     return {
       $type: QueryAllowancesResponse.$type,
-      allowances: Array.isArray(object?.allowances)
-        ? object.allowances.map((e: any) => Grant.fromJSON(e))
-        : [],
-      pagination: isSet(object.pagination)
-        ? PageResponse.fromJSON(object.pagination)
-        : undefined,
+      allowances: Array.isArray(object?.allowances) ? object.allowances.map((e: any) => Grant.fromJSON(e)) : [],
+      pagination: isSet(object.pagination) ? PageResponse.fromJSON(object.pagination) : undefined,
     };
   },
 
   toJSON(message: QueryAllowancesResponse): unknown {
     const obj: any = {};
     if (message.allowances) {
-      obj.allowances = message.allowances.map(e =>
-        e ? Grant.toJSON(e) : undefined,
-      );
+      obj.allowances = message.allowances.map((e) => e ? Grant.toJSON(e) : undefined);
     } else {
       obj.allowances = [];
     }
     message.pagination !== undefined &&
-      (obj.pagination = message.pagination
-        ? PageResponse.toJSON(message.pagination)
-        : undefined);
+      (obj.pagination = message.pagination ? PageResponse.toJSON(message.pagination) : undefined);
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<QueryAllowancesResponse>, I>>(
-    object: I,
-  ): QueryAllowancesResponse {
+  create(base?: DeepPartial<QueryAllowancesResponse>): QueryAllowancesResponse {
+    return QueryAllowancesResponse.fromPartial(base ?? {});
+  },
+
+  fromPartial(object: DeepPartial<QueryAllowancesResponse>): QueryAllowancesResponse {
     const message = createBaseQueryAllowancesResponse();
-    message.allowances =
-      object.allowances?.map(e => Grant.fromPartial(e)) || [];
-    message.pagination =
-      object.pagination !== undefined && object.pagination !== null
-        ? PageResponse.fromPartial(object.pagination)
-        : undefined;
+    message.allowances = object.allowances?.map((e) => Grant.fromPartial(e)) || [];
+    message.pagination = (object.pagination !== undefined && object.pagination !== null)
+      ? PageResponse.fromPartial(object.pagination)
+      : undefined;
     return message;
   },
 };
@@ -394,21 +340,14 @@ export const QueryAllowancesResponse = {
 messageTypeRegistry.set(QueryAllowancesResponse.$type, QueryAllowancesResponse);
 
 function createBaseQueryAllowancesByGranterRequest(): QueryAllowancesByGranterRequest {
-  return {
-    $type: 'cosmos.feegrant.v1beta1.QueryAllowancesByGranterRequest',
-    granter: '',
-    pagination: undefined,
-  };
+  return { $type: "cosmos.feegrant.v1beta1.QueryAllowancesByGranterRequest", granter: "", pagination: undefined };
 }
 
 export const QueryAllowancesByGranterRequest = {
-  $type: 'cosmos.feegrant.v1beta1.QueryAllowancesByGranterRequest' as const,
+  $type: "cosmos.feegrant.v1beta1.QueryAllowancesByGranterRequest" as const,
 
-  encode(
-    message: QueryAllowancesByGranterRequest,
-    writer: _m0.Writer = _m0.Writer.create(),
-  ): _m0.Writer {
-    if (message.granter !== '') {
+  encode(message: QueryAllowancesByGranterRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+    if (message.granter !== "") {
       writer.uint32(10).string(message.granter);
     }
     if (message.pagination !== undefined) {
@@ -417,10 +356,7 @@ export const QueryAllowancesByGranterRequest = {
     return writer;
   },
 
-  decode(
-    input: _m0.Reader | Uint8Array,
-    length?: number,
-  ): QueryAllowancesByGranterRequest {
+  decode(input: _m0.Reader | Uint8Array, length?: number): QueryAllowancesByGranterRequest {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryAllowancesByGranterRequest();
@@ -444,10 +380,8 @@ export const QueryAllowancesByGranterRequest = {
   fromJSON(object: any): QueryAllowancesByGranterRequest {
     return {
       $type: QueryAllowancesByGranterRequest.$type,
-      granter: isSet(object.granter) ? String(object.granter) : '',
-      pagination: isSet(object.pagination)
-        ? PageRequest.fromJSON(object.pagination)
-        : undefined,
+      granter: isSet(object.granter) ? String(object.granter) : "",
+      pagination: isSet(object.pagination) ? PageRequest.fromJSON(object.pagination) : undefined,
     };
   },
 
@@ -455,61 +389,44 @@ export const QueryAllowancesByGranterRequest = {
     const obj: any = {};
     message.granter !== undefined && (obj.granter = message.granter);
     message.pagination !== undefined &&
-      (obj.pagination = message.pagination
-        ? PageRequest.toJSON(message.pagination)
-        : undefined);
+      (obj.pagination = message.pagination ? PageRequest.toJSON(message.pagination) : undefined);
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<QueryAllowancesByGranterRequest>, I>>(
-    object: I,
-  ): QueryAllowancesByGranterRequest {
+  create(base?: DeepPartial<QueryAllowancesByGranterRequest>): QueryAllowancesByGranterRequest {
+    return QueryAllowancesByGranterRequest.fromPartial(base ?? {});
+  },
+
+  fromPartial(object: DeepPartial<QueryAllowancesByGranterRequest>): QueryAllowancesByGranterRequest {
     const message = createBaseQueryAllowancesByGranterRequest();
-    message.granter = object.granter ?? '';
-    message.pagination =
-      object.pagination !== undefined && object.pagination !== null
-        ? PageRequest.fromPartial(object.pagination)
-        : undefined;
+    message.granter = object.granter ?? "";
+    message.pagination = (object.pagination !== undefined && object.pagination !== null)
+      ? PageRequest.fromPartial(object.pagination)
+      : undefined;
     return message;
   },
 };
 
-messageTypeRegistry.set(
-  QueryAllowancesByGranterRequest.$type,
-  QueryAllowancesByGranterRequest,
-);
+messageTypeRegistry.set(QueryAllowancesByGranterRequest.$type, QueryAllowancesByGranterRequest);
 
 function createBaseQueryAllowancesByGranterResponse(): QueryAllowancesByGranterResponse {
-  return {
-    $type: 'cosmos.feegrant.v1beta1.QueryAllowancesByGranterResponse',
-    allowances: [],
-    pagination: undefined,
-  };
+  return { $type: "cosmos.feegrant.v1beta1.QueryAllowancesByGranterResponse", allowances: [], pagination: undefined };
 }
 
 export const QueryAllowancesByGranterResponse = {
-  $type: 'cosmos.feegrant.v1beta1.QueryAllowancesByGranterResponse' as const,
+  $type: "cosmos.feegrant.v1beta1.QueryAllowancesByGranterResponse" as const,
 
-  encode(
-    message: QueryAllowancesByGranterResponse,
-    writer: _m0.Writer = _m0.Writer.create(),
-  ): _m0.Writer {
+  encode(message: QueryAllowancesByGranterResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     for (const v of message.allowances) {
       Grant.encode(v!, writer.uint32(10).fork()).ldelim();
     }
     if (message.pagination !== undefined) {
-      PageResponse.encode(
-        message.pagination,
-        writer.uint32(18).fork(),
-      ).ldelim();
+      PageResponse.encode(message.pagination, writer.uint32(18).fork()).ldelim();
     }
     return writer;
   },
 
-  decode(
-    input: _m0.Reader | Uint8Array,
-    length?: number,
-  ): QueryAllowancesByGranterResponse {
+  decode(input: _m0.Reader | Uint8Array, length?: number): QueryAllowancesByGranterResponse {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryAllowancesByGranterResponse();
@@ -533,106 +450,75 @@ export const QueryAllowancesByGranterResponse = {
   fromJSON(object: any): QueryAllowancesByGranterResponse {
     return {
       $type: QueryAllowancesByGranterResponse.$type,
-      allowances: Array.isArray(object?.allowances)
-        ? object.allowances.map((e: any) => Grant.fromJSON(e))
-        : [],
-      pagination: isSet(object.pagination)
-        ? PageResponse.fromJSON(object.pagination)
-        : undefined,
+      allowances: Array.isArray(object?.allowances) ? object.allowances.map((e: any) => Grant.fromJSON(e)) : [],
+      pagination: isSet(object.pagination) ? PageResponse.fromJSON(object.pagination) : undefined,
     };
   },
 
   toJSON(message: QueryAllowancesByGranterResponse): unknown {
     const obj: any = {};
     if (message.allowances) {
-      obj.allowances = message.allowances.map(e =>
-        e ? Grant.toJSON(e) : undefined,
-      );
+      obj.allowances = message.allowances.map((e) => e ? Grant.toJSON(e) : undefined);
     } else {
       obj.allowances = [];
     }
     message.pagination !== undefined &&
-      (obj.pagination = message.pagination
-        ? PageResponse.toJSON(message.pagination)
-        : undefined);
+      (obj.pagination = message.pagination ? PageResponse.toJSON(message.pagination) : undefined);
     return obj;
   },
 
-  fromPartial<
-    I extends Exact<DeepPartial<QueryAllowancesByGranterResponse>, I>,
-  >(object: I): QueryAllowancesByGranterResponse {
+  create(base?: DeepPartial<QueryAllowancesByGranterResponse>): QueryAllowancesByGranterResponse {
+    return QueryAllowancesByGranterResponse.fromPartial(base ?? {});
+  },
+
+  fromPartial(object: DeepPartial<QueryAllowancesByGranterResponse>): QueryAllowancesByGranterResponse {
     const message = createBaseQueryAllowancesByGranterResponse();
-    message.allowances =
-      object.allowances?.map(e => Grant.fromPartial(e)) || [];
-    message.pagination =
-      object.pagination !== undefined && object.pagination !== null
-        ? PageResponse.fromPartial(object.pagination)
-        : undefined;
+    message.allowances = object.allowances?.map((e) => Grant.fromPartial(e)) || [];
+    message.pagination = (object.pagination !== undefined && object.pagination !== null)
+      ? PageResponse.fromPartial(object.pagination)
+      : undefined;
     return message;
   },
 };
 
-messageTypeRegistry.set(
-  QueryAllowancesByGranterResponse.$type,
-  QueryAllowancesByGranterResponse,
-);
+messageTypeRegistry.set(QueryAllowancesByGranterResponse.$type, QueryAllowancesByGranterResponse);
 
 /** Query defines the gRPC querier service. */
 export interface Query {
   /** Allowance returns fee granted to the grantee by the granter. */
-  Allowance(
-    request: DeepPartial<QueryAllowanceRequest>,
-  ): Promise<QueryAllowanceResponse>;
+  Allowance(request: DeepPartial<QueryAllowanceRequest>): Promise<QueryAllowanceResponse>;
   /** Allowances returns all the grants for address. */
-  Allowances(
-    request: DeepPartial<QueryAllowancesRequest>,
-  ): Promise<QueryAllowancesResponse>;
+  Allowances(request: DeepPartial<QueryAllowancesRequest>): Promise<QueryAllowancesResponse>;
   /**
    * AllowancesByGranter returns all the grants given by an address
    *
    * Since: cosmos-sdk 0.46
    */
-  AllowancesByGranter(
-    request: DeepPartial<QueryAllowancesByGranterRequest>,
-  ): Promise<QueryAllowancesByGranterResponse>;
+  AllowancesByGranter(request: DeepPartial<QueryAllowancesByGranterRequest>): Promise<QueryAllowancesByGranterResponse>;
 }
 
 export class QueryClientImpl implements Query {
   private readonly rpc: Rpc;
-  constructor(rpc: Rpc) {
+  private readonly service: string;
+  constructor(rpc: Rpc, opts?: { service?: string }) {
+    this.service = opts?.service || "cosmos.feegrant.v1beta1.Query";
     this.rpc = rpc;
     this.Allowance = this.Allowance.bind(this);
     this.Allowances = this.Allowances.bind(this);
     this.AllowancesByGranter = this.AllowancesByGranter.bind(this);
   }
-  Allowance(
-    request: DeepPartial<QueryAllowanceRequest>,
-  ): Promise<QueryAllowanceResponse> {
+  Allowance(request: DeepPartial<QueryAllowanceRequest>): Promise<QueryAllowanceResponse> {
     const fromPartial = QueryAllowanceRequest.fromPartial(request);
     const data = QueryAllowanceRequest.encode(fromPartial).finish();
-    const promise = this.rpc.request(
-      'cosmos.feegrant.v1beta1.Query',
-      'Allowance',
-      data,
-    );
-    return promise.then(data =>
-      QueryAllowanceResponse.decode(new _m0.Reader(data)),
-    );
+    const promise = this.rpc.request(this.service, "Allowance", data);
+    return promise.then((data) => QueryAllowanceResponse.decode(new _m0.Reader(data)));
   }
 
-  Allowances(
-    request: DeepPartial<QueryAllowancesRequest>,
-  ): Promise<QueryAllowancesResponse> {
+  Allowances(request: DeepPartial<QueryAllowancesRequest>): Promise<QueryAllowancesResponse> {
     const fromPartial = QueryAllowancesRequest.fromPartial(request);
     const data = QueryAllowancesRequest.encode(fromPartial).finish();
-    const promise = this.rpc.request(
-      'cosmos.feegrant.v1beta1.Query',
-      'Allowances',
-      data,
-    );
-    return promise.then(data =>
-      QueryAllowancesResponse.decode(new _m0.Reader(data)),
-    );
+    const promise = this.rpc.request(this.service, "Allowances", data);
+    return promise.then((data) => QueryAllowancesResponse.decode(new _m0.Reader(data)));
   }
 
   AllowancesByGranter(
@@ -640,53 +526,22 @@ export class QueryClientImpl implements Query {
   ): Promise<QueryAllowancesByGranterResponse> {
     const fromPartial = QueryAllowancesByGranterRequest.fromPartial(request);
     const data = QueryAllowancesByGranterRequest.encode(fromPartial).finish();
-    const promise = this.rpc.request(
-      'cosmos.feegrant.v1beta1.Query',
-      'AllowancesByGranter',
-      data,
-    );
-    return promise.then(data =>
-      QueryAllowancesByGranterResponse.decode(new _m0.Reader(data)),
-    );
+    const promise = this.rpc.request(this.service, "AllowancesByGranter", data);
+    return promise.then((data) => QueryAllowancesByGranterResponse.decode(new _m0.Reader(data)));
   }
 }
 
 interface Rpc {
-  request(
-    service: string,
-    method: string,
-    data: Uint8Array,
-  ): Promise<Uint8Array>;
+  request(service: string, method: string, data: Uint8Array): Promise<Uint8Array>;
 }
 
-type Builtin =
-  | Date
-  | Function
-  | Uint8Array
-  | string
-  | number
-  | boolean
-  | undefined;
+type Builtin = Date | Function | Uint8Array | string | number | boolean | undefined;
 
-export type DeepPartial<T> = T extends Builtin
-  ? T
-  : T extends Long
-  ? string | number | Long
-  : T extends Array<infer U>
-  ? Array<DeepPartial<U>>
-  : T extends ReadonlyArray<infer U>
-  ? ReadonlyArray<DeepPartial<U>>
-  : T extends {}
-  ? { [K in Exclude<keyof T, '$type'>]?: DeepPartial<T[K]> }
+export type DeepPartial<T> = T extends Builtin ? T
+  : T extends Long ? string | number | Long : T extends Array<infer U> ? Array<DeepPartial<U>>
+  : T extends ReadonlyArray<infer U> ? ReadonlyArray<DeepPartial<U>>
+  : T extends {} ? { [K in Exclude<keyof T, "$type">]?: DeepPartial<T[K]> }
   : Partial<T>;
-
-type KeysOfUnion<T> = T extends T ? keyof T : never;
-export type Exact<P, I extends P> = P extends Builtin
-  ? P
-  : P & { [K in keyof P]: Exact<P[K], I[K]> } & Record<
-        Exclude<keyof I, KeysOfUnion<P> | '$type'>,
-        never
-      >;
 
 if (_m0.util.Long !== Long) {
   _m0.util.Long = Long as any;

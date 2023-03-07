@@ -1,14 +1,15 @@
 /* eslint-disable */
-import { messageTypeRegistry } from '../../typeRegistry';
-import Long from 'long';
-import _m0 from 'protobufjs/minimal';
-import { Header, Data, Commit } from './types';
-import { EvidenceList } from './evidence';
+import Long from "long";
+import _m0 from "protobufjs/minimal";
+import { Timestamp } from "../../google/protobuf/timestamp";
+import { messageTypeRegistry } from "../../typeRegistry";
+import { EvidenceList } from "./evidence";
+import { Commit, Data, Header } from "./types";
 
-export const protobufPackage = 'tendermint.types';
+export const protobufPackage = "tendermint.types";
 
 export interface Block {
-  $type: 'tendermint.types.Block';
+  $type: "tendermint.types.Block";
   header?: Header;
   data?: Data;
   evidence?: EvidenceList;
@@ -17,7 +18,7 @@ export interface Block {
 
 function createBaseBlock(): Block {
   return {
-    $type: 'tendermint.types.Block',
+    $type: "tendermint.types.Block",
     header: undefined,
     data: undefined,
     evidence: undefined,
@@ -26,7 +27,7 @@ function createBaseBlock(): Block {
 }
 
 export const Block = {
-  $type: 'tendermint.types.Block' as const,
+  $type: "tendermint.types.Block" as const,
 
   encode(message: Block, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.header !== undefined) {
@@ -76,84 +77,61 @@ export const Block = {
       $type: Block.$type,
       header: isSet(object.header) ? Header.fromJSON(object.header) : undefined,
       data: isSet(object.data) ? Data.fromJSON(object.data) : undefined,
-      evidence: isSet(object.evidence)
-        ? EvidenceList.fromJSON(object.evidence)
-        : undefined,
-      lastCommit: isSet(object.lastCommit)
-        ? Commit.fromJSON(object.lastCommit)
-        : undefined,
+      evidence: isSet(object.evidence) ? EvidenceList.fromJSON(object.evidence) : undefined,
+      lastCommit: isSet(object.lastCommit) ? Commit.fromJSON(object.lastCommit) : undefined,
     };
   },
 
   toJSON(message: Block): unknown {
     const obj: any = {};
-    message.header !== undefined &&
-      (obj.header = message.header ? Header.toJSON(message.header) : undefined);
-    message.data !== undefined &&
-      (obj.data = message.data ? Data.toJSON(message.data) : undefined);
+    message.header !== undefined && (obj.header = message.header ? Header.toJSON(message.header) : undefined);
+    message.data !== undefined && (obj.data = message.data ? Data.toJSON(message.data) : undefined);
     message.evidence !== undefined &&
-      (obj.evidence = message.evidence
-        ? EvidenceList.toJSON(message.evidence)
-        : undefined);
+      (obj.evidence = message.evidence ? EvidenceList.toJSON(message.evidence) : undefined);
     message.lastCommit !== undefined &&
-      (obj.lastCommit = message.lastCommit
-        ? Commit.toJSON(message.lastCommit)
-        : undefined);
+      (obj.lastCommit = message.lastCommit ? Commit.toJSON(message.lastCommit) : undefined);
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<Block>, I>>(object: I): Block {
+  create(base?: DeepPartial<Block>): Block {
+    return Block.fromPartial(base ?? {});
+  },
+
+  fromPartial(object: DeepPartial<Block>): Block {
     const message = createBaseBlock();
-    message.header =
-      object.header !== undefined && object.header !== null
-        ? Header.fromPartial(object.header)
-        : undefined;
-    message.data =
-      object.data !== undefined && object.data !== null
-        ? Data.fromPartial(object.data)
-        : undefined;
-    message.evidence =
-      object.evidence !== undefined && object.evidence !== null
-        ? EvidenceList.fromPartial(object.evidence)
-        : undefined;
-    message.lastCommit =
-      object.lastCommit !== undefined && object.lastCommit !== null
-        ? Commit.fromPartial(object.lastCommit)
-        : undefined;
+    message.header = (object.header !== undefined && object.header !== null)
+      ? Header.fromPartial(object.header)
+      : undefined;
+    message.data = (object.data !== undefined && object.data !== null) ? Data.fromPartial(object.data) : undefined;
+    message.evidence = (object.evidence !== undefined && object.evidence !== null)
+      ? EvidenceList.fromPartial(object.evidence)
+      : undefined;
+    message.lastCommit = (object.lastCommit !== undefined && object.lastCommit !== null)
+      ? Commit.fromPartial(object.lastCommit)
+      : undefined;
     return message;
   },
 };
 
 messageTypeRegistry.set(Block.$type, Block);
 
-type Builtin =
-  | Date
-  | Function
-  | Uint8Array
-  | string
-  | number
-  | boolean
-  | undefined;
+type Builtin = Date | Function | Uint8Array | string | number | boolean | undefined;
 
-export type DeepPartial<T> = T extends Builtin
-  ? T
-  : T extends Long
-  ? string | number | Long
-  : T extends Array<infer U>
-  ? Array<DeepPartial<U>>
-  : T extends ReadonlyArray<infer U>
-  ? ReadonlyArray<DeepPartial<U>>
-  : T extends {}
-  ? { [K in Exclude<keyof T, '$type'>]?: DeepPartial<T[K]> }
+export type DeepPartial<T> = T extends Builtin ? T
+  : T extends Long ? string | number | Long : T extends Array<infer U> ? Array<DeepPartial<U>>
+  : T extends ReadonlyArray<infer U> ? ReadonlyArray<DeepPartial<U>>
+  : T extends {} ? { [K in Exclude<keyof T, "$type">]?: DeepPartial<T[K]> }
   : Partial<T>;
 
-type KeysOfUnion<T> = T extends T ? keyof T : never;
-export type Exact<P, I extends P> = P extends Builtin
-  ? P
-  : P & { [K in keyof P]: Exact<P[K], I[K]> } & Record<
-        Exclude<keyof I, KeysOfUnion<P> | '$type'>,
-        never
-      >;
+function fromTimestamp(t: Timestamp): Date {
+  let millis = t.seconds.toNumber() * 1_000;
+  millis += t.nanos / 1_000_000;
+  return new Date(millis);
+}
+
+function numberToLong(number: number) {
+  return Long.fromNumber(number);
+}
 
 if (_m0.util.Long !== Long) {
   _m0.util.Long = Long as any;

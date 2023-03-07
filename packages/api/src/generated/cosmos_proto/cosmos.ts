@@ -1,9 +1,9 @@
 /* eslint-disable */
-import { messageTypeRegistry } from '../typeRegistry';
-import Long from 'long';
-import _m0 from 'protobufjs/minimal';
+import Long from "long";
+import _m0 from "protobufjs/minimal";
+import { messageTypeRegistry } from "../typeRegistry";
 
-export const protobufPackage = 'cosmos_proto';
+export const protobufPackage = "cosmos_proto";
 
 export enum ScalarType {
   SCALAR_TYPE_UNSPECIFIED = 0,
@@ -15,16 +15,16 @@ export enum ScalarType {
 export function scalarTypeFromJSON(object: any): ScalarType {
   switch (object) {
     case 0:
-    case 'SCALAR_TYPE_UNSPECIFIED':
+    case "SCALAR_TYPE_UNSPECIFIED":
       return ScalarType.SCALAR_TYPE_UNSPECIFIED;
     case 1:
-    case 'SCALAR_TYPE_STRING':
+    case "SCALAR_TYPE_STRING":
       return ScalarType.SCALAR_TYPE_STRING;
     case 2:
-    case 'SCALAR_TYPE_BYTES':
+    case "SCALAR_TYPE_BYTES":
       return ScalarType.SCALAR_TYPE_BYTES;
     case -1:
-    case 'UNRECOGNIZED':
+    case "UNRECOGNIZED":
     default:
       return ScalarType.UNRECOGNIZED;
   }
@@ -33,13 +33,14 @@ export function scalarTypeFromJSON(object: any): ScalarType {
 export function scalarTypeToJSON(object: ScalarType): string {
   switch (object) {
     case ScalarType.SCALAR_TYPE_UNSPECIFIED:
-      return 'SCALAR_TYPE_UNSPECIFIED';
+      return "SCALAR_TYPE_UNSPECIFIED";
     case ScalarType.SCALAR_TYPE_STRING:
-      return 'SCALAR_TYPE_STRING';
+      return "SCALAR_TYPE_STRING";
     case ScalarType.SCALAR_TYPE_BYTES:
-      return 'SCALAR_TYPE_BYTES';
+      return "SCALAR_TYPE_BYTES";
+    case ScalarType.UNRECOGNIZED:
     default:
-      return 'UNKNOWN';
+      return "UNRECOGNIZED";
   }
 }
 
@@ -48,7 +49,7 @@ export function scalarTypeToJSON(object: ScalarType): string {
  * accepts_interface and implements_interface and declared by declare_interface.
  */
 export interface InterfaceDescriptor {
-  $type: 'cosmos_proto.InterfaceDescriptor';
+  $type: "cosmos_proto.InterfaceDescriptor";
   /**
    * name is the name of the interface. It should be a short-name (without
    * a period) such that the fully qualified name of the interface will be
@@ -73,7 +74,7 @@ export interface InterfaceDescriptor {
  * i.e. the encoding should be deterministic.
  */
 export interface ScalarDescriptor {
-  $type: 'cosmos_proto.ScalarDescriptor';
+  $type: "cosmos_proto.ScalarDescriptor";
   /**
    * name is the name of the scalar. It should be a short-name (without
    * a period) such that the fully qualified name of the scalar will be
@@ -97,24 +98,17 @@ export interface ScalarDescriptor {
 }
 
 function createBaseInterfaceDescriptor(): InterfaceDescriptor {
-  return {
-    $type: 'cosmos_proto.InterfaceDescriptor',
-    name: '',
-    description: '',
-  };
+  return { $type: "cosmos_proto.InterfaceDescriptor", name: "", description: "" };
 }
 
 export const InterfaceDescriptor = {
-  $type: 'cosmos_proto.InterfaceDescriptor' as const,
+  $type: "cosmos_proto.InterfaceDescriptor" as const,
 
-  encode(
-    message: InterfaceDescriptor,
-    writer: _m0.Writer = _m0.Writer.create(),
-  ): _m0.Writer {
-    if (message.name !== '') {
+  encode(message: InterfaceDescriptor, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+    if (message.name !== "") {
       writer.uint32(10).string(message.name);
     }
-    if (message.description !== '') {
+    if (message.description !== "") {
       writer.uint32(18).string(message.description);
     }
     return writer;
@@ -144,25 +138,26 @@ export const InterfaceDescriptor = {
   fromJSON(object: any): InterfaceDescriptor {
     return {
       $type: InterfaceDescriptor.$type,
-      name: isSet(object.name) ? String(object.name) : '',
-      description: isSet(object.description) ? String(object.description) : '',
+      name: isSet(object.name) ? String(object.name) : "",
+      description: isSet(object.description) ? String(object.description) : "",
     };
   },
 
   toJSON(message: InterfaceDescriptor): unknown {
     const obj: any = {};
     message.name !== undefined && (obj.name = message.name);
-    message.description !== undefined &&
-      (obj.description = message.description);
+    message.description !== undefined && (obj.description = message.description);
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<InterfaceDescriptor>, I>>(
-    object: I,
-  ): InterfaceDescriptor {
+  create(base?: DeepPartial<InterfaceDescriptor>): InterfaceDescriptor {
+    return InterfaceDescriptor.fromPartial(base ?? {});
+  },
+
+  fromPartial(object: DeepPartial<InterfaceDescriptor>): InterfaceDescriptor {
     const message = createBaseInterfaceDescriptor();
-    message.name = object.name ?? '';
-    message.description = object.description ?? '';
+    message.name = object.name ?? "";
+    message.description = object.description ?? "";
     return message;
   },
 };
@@ -170,25 +165,17 @@ export const InterfaceDescriptor = {
 messageTypeRegistry.set(InterfaceDescriptor.$type, InterfaceDescriptor);
 
 function createBaseScalarDescriptor(): ScalarDescriptor {
-  return {
-    $type: 'cosmos_proto.ScalarDescriptor',
-    name: '',
-    description: '',
-    fieldType: [],
-  };
+  return { $type: "cosmos_proto.ScalarDescriptor", name: "", description: "", fieldType: [] };
 }
 
 export const ScalarDescriptor = {
-  $type: 'cosmos_proto.ScalarDescriptor' as const,
+  $type: "cosmos_proto.ScalarDescriptor" as const,
 
-  encode(
-    message: ScalarDescriptor,
-    writer: _m0.Writer = _m0.Writer.create(),
-  ): _m0.Writer {
-    if (message.name !== '') {
+  encode(message: ScalarDescriptor, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+    if (message.name !== "") {
       writer.uint32(10).string(message.name);
     }
-    if (message.description !== '') {
+    if (message.description !== "") {
       writer.uint32(18).string(message.description);
     }
     writer.uint32(26).fork();
@@ -233,68 +220,46 @@ export const ScalarDescriptor = {
   fromJSON(object: any): ScalarDescriptor {
     return {
       $type: ScalarDescriptor.$type,
-      name: isSet(object.name) ? String(object.name) : '',
-      description: isSet(object.description) ? String(object.description) : '',
-      fieldType: Array.isArray(object?.fieldType)
-        ? object.fieldType.map((e: any) => scalarTypeFromJSON(e))
-        : [],
+      name: isSet(object.name) ? String(object.name) : "",
+      description: isSet(object.description) ? String(object.description) : "",
+      fieldType: Array.isArray(object?.fieldType) ? object.fieldType.map((e: any) => scalarTypeFromJSON(e)) : [],
     };
   },
 
   toJSON(message: ScalarDescriptor): unknown {
     const obj: any = {};
     message.name !== undefined && (obj.name = message.name);
-    message.description !== undefined &&
-      (obj.description = message.description);
+    message.description !== undefined && (obj.description = message.description);
     if (message.fieldType) {
-      obj.fieldType = message.fieldType.map(e => scalarTypeToJSON(e));
+      obj.fieldType = message.fieldType.map((e) => scalarTypeToJSON(e));
     } else {
       obj.fieldType = [];
     }
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<ScalarDescriptor>, I>>(
-    object: I,
-  ): ScalarDescriptor {
+  create(base?: DeepPartial<ScalarDescriptor>): ScalarDescriptor {
+    return ScalarDescriptor.fromPartial(base ?? {});
+  },
+
+  fromPartial(object: DeepPartial<ScalarDescriptor>): ScalarDescriptor {
     const message = createBaseScalarDescriptor();
-    message.name = object.name ?? '';
-    message.description = object.description ?? '';
-    message.fieldType = object.fieldType?.map(e => e) || [];
+    message.name = object.name ?? "";
+    message.description = object.description ?? "";
+    message.fieldType = object.fieldType?.map((e) => e) || [];
     return message;
   },
 };
 
 messageTypeRegistry.set(ScalarDescriptor.$type, ScalarDescriptor);
 
-type Builtin =
-  | Date
-  | Function
-  | Uint8Array
-  | string
-  | number
-  | boolean
-  | undefined;
+type Builtin = Date | Function | Uint8Array | string | number | boolean | undefined;
 
-export type DeepPartial<T> = T extends Builtin
-  ? T
-  : T extends Long
-  ? string | number | Long
-  : T extends Array<infer U>
-  ? Array<DeepPartial<U>>
-  : T extends ReadonlyArray<infer U>
-  ? ReadonlyArray<DeepPartial<U>>
-  : T extends {}
-  ? { [K in Exclude<keyof T, '$type'>]?: DeepPartial<T[K]> }
+export type DeepPartial<T> = T extends Builtin ? T
+  : T extends Long ? string | number | Long : T extends Array<infer U> ? Array<DeepPartial<U>>
+  : T extends ReadonlyArray<infer U> ? ReadonlyArray<DeepPartial<U>>
+  : T extends {} ? { [K in Exclude<keyof T, "$type">]?: DeepPartial<T[K]> }
   : Partial<T>;
-
-type KeysOfUnion<T> = T extends T ? keyof T : never;
-export type Exact<P, I extends P> = P extends Builtin
-  ? P
-  : P & { [K in keyof P]: Exact<P[K], I[K]> } & Record<
-        Exclude<keyof I, KeysOfUnion<P> | '$type'>,
-        never
-      >;
 
 if (_m0.util.Long !== Long) {
   _m0.util.Long = Long as any;
