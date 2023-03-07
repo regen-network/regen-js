@@ -69,6 +69,7 @@ export function mintBatchCreditsConverter(): AminoConverter {
             tradableAmount: i.tradable_amount || '',
             retiredAmount: i.retired_amount || '',
             retirementJurisdiction: i.retirement_jurisdiction || '',
+            retirementReason: i.retirement_reason || '',
           };
         }),
         originTx: origin_tx && {

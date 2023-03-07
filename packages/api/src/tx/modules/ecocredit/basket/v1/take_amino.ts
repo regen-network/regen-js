@@ -14,6 +14,7 @@ export interface AminoMsgTake extends AminoMsg {
     readonly amount: string;
     readonly retire_on_take?: boolean;
     readonly retirement_jurisdiction?: string;
+    readonly retirement_reason?: string;
   };
 }
 
@@ -30,6 +31,7 @@ export function takeConverter(): AminoConverter {
       amount,
       retireOnTake,
       retirementJurisdiction,
+      retirementReason,
     }: MsgTake): AminoMsgTake['value'] => {
       return {
         owner,
@@ -37,6 +39,7 @@ export function takeConverter(): AminoConverter {
         amount,
         retire_on_take: retireOnTake || undefined,
         retirement_jurisdiction: retirementJurisdiction || undefined,
+        retirement_reason: retirementReason || undefined,
       };
     },
     fromAmino: ({
@@ -45,6 +48,7 @@ export function takeConverter(): AminoConverter {
       amount,
       retire_on_take,
       retirement_jurisdiction,
+      retirement_reason,
     }: AminoMsgTake['value']): Partial<MsgTake> => {
       return {
         owner,
@@ -52,6 +56,7 @@ export function takeConverter(): AminoConverter {
         amount,
         retireOnTake: retire_on_take,
         retirementJurisdiction: retirement_jurisdiction,
+        retirementReason: retirement_reason,
       };
     },
   };

@@ -95,7 +95,7 @@ xdescribe('RegenApi with tendermint connection - Amino Tests', () => {
 
       const TEST_MSG_SEND = MsgSend.fromPartial({
         sender: TEST_ADDRESS,
-        recipient: TEST_ADDRESS,
+        recipient: TEST_BUYER_ADDRESS,
         credits: [
           {
             batchDenom: TEST_BATCH_DENOM,
@@ -111,12 +111,13 @@ xdescribe('RegenApi with tendermint connection - Amino Tests', () => {
 
       const TEST_MSG_SEND = MsgSend.fromPartial({
         sender: TEST_ADDRESS,
-        recipient: TEST_ADDRESS,
+        recipient: TEST_BUYER_ADDRESS,
         credits: [
           {
             batchDenom: TEST_BATCH_DENOM,
             retiredAmount: MIN_CREDIT_AMOUNT,
             retirementJurisdiction: 'US-WA',
+            retirementReason: 'test',
           },
         ],
       });
@@ -128,13 +129,14 @@ xdescribe('RegenApi with tendermint connection - Amino Tests', () => {
 
       const TEST_MSG_SEND = MsgSend.fromPartial({
         sender: TEST_ADDRESS,
-        recipient: TEST_ADDRESS,
+        recipient: TEST_BUYER_ADDRESS,
         credits: [
           {
             batchDenom: TEST_BATCH_DENOM,
             tradableAmount: MIN_CREDIT_AMOUNT,
             retiredAmount: MIN_CREDIT_AMOUNT,
             retirementJurisdiction: 'US-WA',
+            retirementReason: 'test',
           },
         ],
       });
@@ -194,6 +196,7 @@ xdescribe('RegenApi with tendermint connection - Amino Tests', () => {
             tradableAmount: '1.503',
             retiredAmount: '1.503',
             retirementJurisdiction: 'US-OR',
+            retirementReason: 'test',
           },
         ],
         startDate: startDate,
@@ -234,6 +237,23 @@ xdescribe('RegenApi with tendermint connection - Amino Tests', () => {
       await runAminoTest(msgClient, TEST_MSG_CREATE_BATCH);
     });
     it('should sign and broadcast MsgRetire using legacy amino sign mode', async () => {
+      const { msgClient } = await connect();
+
+      const TEST_MSG_RETIRE = MsgRetire.fromPartial({
+        owner: TEST_ADDRESS,
+        credits: [
+          {
+            batchDenom: TEST_BATCH_DENOM,
+            amount: '0.000001',
+          },
+        ],
+        jurisdiction: 'US-OR',
+        reason: 'test',
+      });
+
+      await runAminoTest(msgClient, TEST_MSG_RETIRE);
+    });
+    it('should sign and broadcast MsgRetire with default values using legacy amino sign mode', async () => {
       const { msgClient } = await connect();
 
       const TEST_MSG_RETIRE = MsgRetire.fromPartial({
@@ -324,7 +344,20 @@ xdescribe('RegenApi with tendermint connection - Amino Tests', () => {
       const TEST_BASKET_MSG_TAKE = MsgTake.fromPartial({
         owner: TEST_ADDRESS,
         basketDenom: 'eco.uC.NCT',
-        amount: '1000000',
+        amount: '100000',
+        retirementJurisdiction: 'US-CO 98765',
+        retireOnTake: true,
+        retirementReason: 'test',
+      });
+
+      await runAminoTest(msgClient, TEST_BASKET_MSG_TAKE);
+    });
+    it('should sign and broadcast MsgTake with default values', async () => {
+      const { msgClient } = await connect();
+      const TEST_BASKET_MSG_TAKE = MsgTake.fromPartial({
+        owner: TEST_ADDRESS,
+        basketDenom: 'eco.uC.NCT',
+        amount: '100000',
         retirementJurisdiction: 'US-CO 98765',
         retireOnTake: true,
       });
@@ -411,6 +444,7 @@ xdescribe('RegenApi with tendermint connection - Amino Tests', () => {
             bidPrice: { denom: 'uregen', amount: '1000000' },
             disableAutoRetire: false,
             retirementJurisdiction: 'US',
+            retirementReason: 'test',
           },
         ],
       });

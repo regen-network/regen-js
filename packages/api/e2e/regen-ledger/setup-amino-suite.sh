@@ -13,7 +13,7 @@ log_response() {
 }
 
 echo "INFO: Creating Credit Class - C01"
-regen tx ecocredit create-class $ADDR1 C "Test Credit Class" 20000000uregen $TX_FLAGS | log_response
+regen tx ecocredit create-class $ADDR1 C "Test Credit Class" --class-fee 20000000uregen $TX_FLAGS | log_response
 
 echo "INFO: Creating project C01-001"
 regen tx ecocredit create-project C01 US "Horsetail Ranch" $TX_FLAGS | log_response
