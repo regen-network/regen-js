@@ -14,7 +14,7 @@ interface AminoMsgSend_SendCredits {
   tradable_amount?: string;
   retired_amount?: string;
   retirement_jurisdiction?: string;
-  // retirement_reason?: string;
+  retirement_reason?: string;
 }
 
 export interface AminoMsgSend extends AminoMsg {
@@ -48,7 +48,7 @@ export function ecocreditSendConverter(): AminoConverter {
             tradable_amount: credit.tradableAmount || undefined,
             retired_amount: credit.retiredAmount || undefined,
             retirement_jurisdiction: credit.retirementJurisdiction || undefined,
-            // retirement_reason: credit.retirementReason || undefined,
+            retirement_reason: credit.retirementReason || undefined,
           };
         }),
       };
@@ -68,7 +68,7 @@ export function ecocreditSendConverter(): AminoConverter {
             tradableAmount: credit.tradable_amount || '',
             retiredAmount: credit.retired_amount || '',
             retirementJurisdiction: credit.retirement_jurisdiction || '',
-            retirementReason: '',
+            retirementReason: credit.retirement_reason || '',
           };
         }),
       };
