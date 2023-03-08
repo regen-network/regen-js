@@ -8,6 +8,7 @@ import {
   MsgRetire,
   MsgSend,
   MsgBridge,
+  MsgMintBatchCredits,
 } from '../src/generated/regen/ecocredit/v1/tx';
 import { StdFee } from '@cosmjs/amino/build/signdoc';
 import { Secp256k1HdWallet } from '@cosmjs/amino/build/secp256k1hdwallet';
@@ -236,6 +237,53 @@ xdescribe('RegenApi with tendermint connection - Amino Tests', () => {
 
       await runAminoTest(msgClient, TEST_MSG_CREATE_BATCH);
     });
+    it('should sign and broadcast MsgMintBatch using legacy amino sign mode', async () => {
+      const { msgClient } = await connect();
+
+      const TEST_MSG_MINT_BATCH = MsgMintBatchCredits.fromPartial({
+        issuer: TEST_ADDRESS,
+        batchDenom: TEST_BATCH_DENOM,
+        issuance: [
+          {
+            recipient: TEST_ADDRESS,
+            tradableAmount: '1.503',
+            retiredAmount: '1.503',
+            retirementJurisdiction: 'US',
+            retirementReason: 'test',
+          },
+        ],
+        originTx: {
+          id: makeEthTxHash(),
+          source: 'polygon',
+          contract: makeEthContract(),
+          note: 'bridged from another chain',
+        },
+      });
+
+      await runAminoTest(msgClient, TEST_MSG_MINT_BATCH);
+    });
+    it('should sign and broadcast MsgMintBatch with default values using legacy amino sign mode', async () => {
+      const { msgClient } = await connect();
+
+      const TEST_MSG_MINT_BATCH = MsgMintBatchCredits.fromPartial({
+        issuer: TEST_ADDRESS,
+        batchDenom: TEST_BATCH_DENOM,
+        issuance: [
+          {
+            recipient: TEST_ADDRESS,
+            tradableAmount: '1.503',
+          },
+        ],
+        originTx: {
+          id: makeEthTxHash(),
+          source: 'polygon',
+          contract: makeEthContract(),
+          note: 'bridged from another chain',
+        },
+      });
+
+      await runAminoTest(msgClient, TEST_MSG_MINT_BATCH);
+    });
     it('should sign and broadcast MsgRetire using legacy amino sign mode', async () => {
       const { msgClient } = await connect();
 
@@ -287,7 +335,6 @@ xdescribe('RegenApi with tendermint connection - Amino Tests', () => {
     });
     it('should sign and broadcast MsgBridge using legacy amino sign mode', async () => {
       const { msgClient } = await connect();
-      const TEST_BRIDGE_BATCH_DENOM = 'C02-001-20200101-20210101-001';
 
       const TEST_MSG_BRIDGE = MsgBridge.fromPartial({
         owner: TEST_ADDRESS,
@@ -295,7 +342,7 @@ xdescribe('RegenApi with tendermint connection - Amino Tests', () => {
         target: 'polygon',
         credits: [
           {
-            batchDenom: TEST_BRIDGE_BATCH_DENOM,
+            batchDenom: TEST_BATCH_DENOM,
             amount: MIN_CREDIT_AMOUNT,
           },
         ],

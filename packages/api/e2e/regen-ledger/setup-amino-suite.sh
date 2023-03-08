@@ -43,7 +43,13 @@ cat > $BATCH_JSON <<EOL
   "metadata": "regen:13toVgf5UjYBz6J29x28pLQyjKz5FpcW3f4bT5uRKGxGREWGKjEdXYG.rdf",
   "start_date": "2020-01-01T00:00:00Z",
   "end_date": "2021-01-01T00:00:00Z",
-  "open": false
+  "open": true,
+  "origin_tx": {
+    "id": "123",
+    "source": "polygon",
+    "contract": "0x563aF37a8264ec29e959Ca51489AF3282d05a8FB",
+    "note": "note"
+  }
 }
 EOL
 
