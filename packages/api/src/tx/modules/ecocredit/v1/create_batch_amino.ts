@@ -68,6 +68,7 @@ export function createBatchConverter(): AminoConverter {
             tradable_amount: i.tradableAmount || undefined,
             retired_amount: i.retiredAmount || undefined,
             retirement_jurisdiction: i.retirementJurisdiction || undefined,
+            retirement_reason: i.retirementReason || undefined,
           };
         }),
         metadata,
