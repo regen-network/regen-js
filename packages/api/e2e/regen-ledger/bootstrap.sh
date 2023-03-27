@@ -12,6 +12,8 @@ regen init test_moniker --chain-id $REGEN_CHAIN_ID 2>&1 | jq -r '"Created genesi
 if [[ $(uname -s) == 'Darwin' ]]; then
   # change stake denom to uregen
   sed -i "" "s/stake/uregen/g" $REGEN_HOME/config/genesis.json
+  # set polygon as allowed bridge chain
+  sed -i "" "s/regen.ecocredit.v1.AllowedBridgeChain\": \[\]/regen.ecocredit.v1.AllowedBridgeChain\": [{\"chain_name\": \"polygon\"}]/g" $REGEN_HOME/config/genesis.json
   # set min gas price
   sed -i "" "s/minimum-gas-prices = \"\"/minimum-gas-prices = \"0.025uregen\"/g" $REGEN_HOME/config/app.toml
   # decrease block-time so tests run faster
@@ -19,6 +21,8 @@ if [[ $(uname -s) == 'Darwin' ]]; then
 else
   # change stake denom to uregen
   sed -i "s/stake/uregen/g" $REGEN_HOME/config/genesis.json
+  # set polygon as allowed bridge chain
+  sed -i "s/regen.ecocredit.v1.AllowedBridgeChain\": \[\]/regen.ecocredit.v1.AllowedBridgeChain\": [{\"chain_name\": \"polygon\"}]/g" $REGEN_HOME/config/genesis.json
   # set min gas price
   sed -i "s/minimum-gas-prices = \"\"/minimum-gas-prices = \"0.025uregen\"/g" $REGEN_HOME/config/app.toml
   # decrease block-time so tests run faster

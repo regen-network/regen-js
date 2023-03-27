@@ -1,11 +1,11 @@
 /* eslint-disable */
-import { messageTypeRegistry } from '../../../../typeRegistry';
-import Long from 'long';
-import _m0 from 'protobufjs/minimal';
-import { Coin } from '../../../../cosmos/base/v1beta1/coin';
-import { Height } from '../../../../ibc/core/client/v1/client';
+import Long from "long";
+import _m0 from "protobufjs/minimal";
+import { Coin } from "../../../../cosmos/base/v1beta1/coin";
+import { messageTypeRegistry } from "../../../../typeRegistry";
+import { Height } from "../../../core/client/v1/client";
 
-export const protobufPackage = 'ibc.applications.transfer.v1';
+export const protobufPackage = "ibc.applications.transfer.v1";
 
 /**
  * MsgTransfer defines a msg to transfer fungible tokens (i.e Coins) between
@@ -13,7 +13,7 @@ export const protobufPackage = 'ibc.applications.transfer.v1';
  * https://github.com/cosmos/ibc/tree/master/spec/app/ics-020-fungible-token-transfer#data-structures
  */
 export interface MsgTransfer {
-  $type: 'ibc.applications.transfer.v1.MsgTransfer';
+  $type: "ibc.applications.transfer.v1.MsgTransfer";
   /** the port on which the packet will be sent */
   sourcePort: string;
   /** the channel by which the packet will be sent */
@@ -38,42 +38,39 @@ export interface MsgTransfer {
 
 /** MsgTransferResponse defines the Msg/Transfer response type. */
 export interface MsgTransferResponse {
-  $type: 'ibc.applications.transfer.v1.MsgTransferResponse';
+  $type: "ibc.applications.transfer.v1.MsgTransferResponse";
 }
 
 function createBaseMsgTransfer(): MsgTransfer {
   return {
-    $type: 'ibc.applications.transfer.v1.MsgTransfer',
-    sourcePort: '',
-    sourceChannel: '',
+    $type: "ibc.applications.transfer.v1.MsgTransfer",
+    sourcePort: "",
+    sourceChannel: "",
     token: undefined,
-    sender: '',
-    receiver: '',
+    sender: "",
+    receiver: "",
     timeoutHeight: undefined,
     timeoutTimestamp: Long.UZERO,
   };
 }
 
 export const MsgTransfer = {
-  $type: 'ibc.applications.transfer.v1.MsgTransfer' as const,
+  $type: "ibc.applications.transfer.v1.MsgTransfer" as const,
 
-  encode(
-    message: MsgTransfer,
-    writer: _m0.Writer = _m0.Writer.create(),
-  ): _m0.Writer {
-    if (message.sourcePort !== '') {
+  encode(message: MsgTransfer, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+    if (message.sourcePort !== "") {
       writer.uint32(10).string(message.sourcePort);
     }
-    if (message.sourceChannel !== '') {
+    if (message.sourceChannel !== "") {
       writer.uint32(18).string(message.sourceChannel);
     }
     if (message.token !== undefined) {
       Coin.encode(message.token, writer.uint32(26).fork()).ldelim();
     }
-    if (message.sender !== '') {
+    if (message.sender !== "") {
       writer.uint32(34).string(message.sender);
     }
-    if (message.receiver !== '') {
+    if (message.receiver !== "") {
       writer.uint32(42).string(message.receiver);
     }
     if (message.timeoutHeight !== undefined) {
@@ -124,62 +121,47 @@ export const MsgTransfer = {
   fromJSON(object: any): MsgTransfer {
     return {
       $type: MsgTransfer.$type,
-      sourcePort: isSet(object.sourcePort) ? String(object.sourcePort) : '',
-      sourceChannel: isSet(object.sourceChannel)
-        ? String(object.sourceChannel)
-        : '',
+      sourcePort: isSet(object.sourcePort) ? String(object.sourcePort) : "",
+      sourceChannel: isSet(object.sourceChannel) ? String(object.sourceChannel) : "",
       token: isSet(object.token) ? Coin.fromJSON(object.token) : undefined,
-      sender: isSet(object.sender) ? String(object.sender) : '',
-      receiver: isSet(object.receiver) ? String(object.receiver) : '',
-      timeoutHeight: isSet(object.timeoutHeight)
-        ? Height.fromJSON(object.timeoutHeight)
-        : undefined,
-      timeoutTimestamp: isSet(object.timeoutTimestamp)
-        ? Long.fromString(object.timeoutTimestamp)
-        : Long.UZERO,
+      sender: isSet(object.sender) ? String(object.sender) : "",
+      receiver: isSet(object.receiver) ? String(object.receiver) : "",
+      timeoutHeight: isSet(object.timeoutHeight) ? Height.fromJSON(object.timeoutHeight) : undefined,
+      timeoutTimestamp: isSet(object.timeoutTimestamp) ? Long.fromValue(object.timeoutTimestamp) : Long.UZERO,
     };
   },
 
   toJSON(message: MsgTransfer): unknown {
     const obj: any = {};
     message.sourcePort !== undefined && (obj.sourcePort = message.sourcePort);
-    message.sourceChannel !== undefined &&
-      (obj.sourceChannel = message.sourceChannel);
-    message.token !== undefined &&
-      (obj.token = message.token ? Coin.toJSON(message.token) : undefined);
+    message.sourceChannel !== undefined && (obj.sourceChannel = message.sourceChannel);
+    message.token !== undefined && (obj.token = message.token ? Coin.toJSON(message.token) : undefined);
     message.sender !== undefined && (obj.sender = message.sender);
     message.receiver !== undefined && (obj.receiver = message.receiver);
     message.timeoutHeight !== undefined &&
-      (obj.timeoutHeight = message.timeoutHeight
-        ? Height.toJSON(message.timeoutHeight)
-        : undefined);
+      (obj.timeoutHeight = message.timeoutHeight ? Height.toJSON(message.timeoutHeight) : undefined);
     message.timeoutTimestamp !== undefined &&
-      (obj.timeoutTimestamp = (
-        message.timeoutTimestamp || Long.UZERO
-      ).toString());
+      (obj.timeoutTimestamp = (message.timeoutTimestamp || Long.UZERO).toString());
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<MsgTransfer>, I>>(
-    object: I,
-  ): MsgTransfer {
+  create(base?: DeepPartial<MsgTransfer>): MsgTransfer {
+    return MsgTransfer.fromPartial(base ?? {});
+  },
+
+  fromPartial(object: DeepPartial<MsgTransfer>): MsgTransfer {
     const message = createBaseMsgTransfer();
-    message.sourcePort = object.sourcePort ?? '';
-    message.sourceChannel = object.sourceChannel ?? '';
-    message.token =
-      object.token !== undefined && object.token !== null
-        ? Coin.fromPartial(object.token)
-        : undefined;
-    message.sender = object.sender ?? '';
-    message.receiver = object.receiver ?? '';
-    message.timeoutHeight =
-      object.timeoutHeight !== undefined && object.timeoutHeight !== null
-        ? Height.fromPartial(object.timeoutHeight)
-        : undefined;
-    message.timeoutTimestamp =
-      object.timeoutTimestamp !== undefined && object.timeoutTimestamp !== null
-        ? Long.fromValue(object.timeoutTimestamp)
-        : Long.UZERO;
+    message.sourcePort = object.sourcePort ?? "";
+    message.sourceChannel = object.sourceChannel ?? "";
+    message.token = (object.token !== undefined && object.token !== null) ? Coin.fromPartial(object.token) : undefined;
+    message.sender = object.sender ?? "";
+    message.receiver = object.receiver ?? "";
+    message.timeoutHeight = (object.timeoutHeight !== undefined && object.timeoutHeight !== null)
+      ? Height.fromPartial(object.timeoutHeight)
+      : undefined;
+    message.timeoutTimestamp = (object.timeoutTimestamp !== undefined && object.timeoutTimestamp !== null)
+      ? Long.fromValue(object.timeoutTimestamp)
+      : Long.UZERO;
     return message;
   },
 };
@@ -187,16 +169,13 @@ export const MsgTransfer = {
 messageTypeRegistry.set(MsgTransfer.$type, MsgTransfer);
 
 function createBaseMsgTransferResponse(): MsgTransferResponse {
-  return { $type: 'ibc.applications.transfer.v1.MsgTransferResponse' };
+  return { $type: "ibc.applications.transfer.v1.MsgTransferResponse" };
 }
 
 export const MsgTransferResponse = {
-  $type: 'ibc.applications.transfer.v1.MsgTransferResponse' as const,
+  $type: "ibc.applications.transfer.v1.MsgTransferResponse" as const,
 
-  encode(
-    _: MsgTransferResponse,
-    writer: _m0.Writer = _m0.Writer.create(),
-  ): _m0.Writer {
+  encode(_: MsgTransferResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     return writer;
   },
 
@@ -216,9 +195,7 @@ export const MsgTransferResponse = {
   },
 
   fromJSON(_: any): MsgTransferResponse {
-    return {
-      $type: MsgTransferResponse.$type,
-    };
+    return { $type: MsgTransferResponse.$type };
   },
 
   toJSON(_: MsgTransferResponse): unknown {
@@ -226,9 +203,11 @@ export const MsgTransferResponse = {
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<MsgTransferResponse>, I>>(
-    _: I,
-  ): MsgTransferResponse {
+  create(base?: DeepPartial<MsgTransferResponse>): MsgTransferResponse {
+    return MsgTransferResponse.fromPartial(base ?? {});
+  },
+
+  fromPartial(_: DeepPartial<MsgTransferResponse>): MsgTransferResponse {
     const message = createBaseMsgTransferResponse();
     return message;
   },
@@ -244,60 +223,31 @@ export interface Msg {
 
 export class MsgClientImpl implements Msg {
   private readonly rpc: Rpc;
-  constructor(rpc: Rpc) {
+  private readonly service: string;
+  constructor(rpc: Rpc, opts?: { service?: string }) {
+    this.service = opts?.service || "ibc.applications.transfer.v1.Msg";
     this.rpc = rpc;
     this.Transfer = this.Transfer.bind(this);
   }
   Transfer(request: DeepPartial<MsgTransfer>): Promise<MsgTransferResponse> {
     const fromPartial = MsgTransfer.fromPartial(request);
     const data = MsgTransfer.encode(fromPartial).finish();
-    const promise = this.rpc.request(
-      'ibc.applications.transfer.v1.Msg',
-      'Transfer',
-      data,
-    );
-    return promise.then(data =>
-      MsgTransferResponse.decode(new _m0.Reader(data)),
-    );
+    const promise = this.rpc.request(this.service, "Transfer", data);
+    return promise.then((data) => MsgTransferResponse.decode(new _m0.Reader(data)));
   }
 }
 
 interface Rpc {
-  request(
-    service: string,
-    method: string,
-    data: Uint8Array,
-  ): Promise<Uint8Array>;
+  request(service: string, method: string, data: Uint8Array): Promise<Uint8Array>;
 }
 
-type Builtin =
-  | Date
-  | Function
-  | Uint8Array
-  | string
-  | number
-  | boolean
-  | undefined;
+type Builtin = Date | Function | Uint8Array | string | number | boolean | undefined;
 
-export type DeepPartial<T> = T extends Builtin
-  ? T
-  : T extends Long
-  ? string | number | Long
-  : T extends Array<infer U>
-  ? Array<DeepPartial<U>>
-  : T extends ReadonlyArray<infer U>
-  ? ReadonlyArray<DeepPartial<U>>
-  : T extends {}
-  ? { [K in Exclude<keyof T, '$type'>]?: DeepPartial<T[K]> }
+export type DeepPartial<T> = T extends Builtin ? T
+  : T extends Long ? string | number | Long : T extends Array<infer U> ? Array<DeepPartial<U>>
+  : T extends ReadonlyArray<infer U> ? ReadonlyArray<DeepPartial<U>>
+  : T extends {} ? { [K in Exclude<keyof T, "$type">]?: DeepPartial<T[K]> }
   : Partial<T>;
-
-type KeysOfUnion<T> = T extends T ? keyof T : never;
-export type Exact<P, I extends P> = P extends Builtin
-  ? P
-  : P & { [K in keyof P]: Exact<P[K], I[K]> } & Record<
-        Exclude<keyof I, KeysOfUnion<P> | '$type'>,
-        never
-      >;
 
 if (_m0.util.Long !== Long) {
   _m0.util.Long = Long as any;

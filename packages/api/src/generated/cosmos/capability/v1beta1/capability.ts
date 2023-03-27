@@ -1,16 +1,16 @@
 /* eslint-disable */
-import { messageTypeRegistry } from '../../../typeRegistry';
-import Long from 'long';
-import _m0 from 'protobufjs/minimal';
+import Long from "long";
+import _m0 from "protobufjs/minimal";
+import { messageTypeRegistry } from "../../../typeRegistry";
 
-export const protobufPackage = 'cosmos.capability.v1beta1';
+export const protobufPackage = "cosmos.capability.v1beta1";
 
 /**
  * Capability defines an implementation of an object capability. The index
  * provided to a Capability must be globally unique.
  */
 export interface Capability {
-  $type: 'cosmos.capability.v1beta1.Capability';
+  $type: "cosmos.capability.v1beta1.Capability";
   index: Long;
 }
 
@@ -19,7 +19,7 @@ export interface Capability {
  * capability and the module name.
  */
 export interface Owner {
-  $type: 'cosmos.capability.v1beta1.Owner';
+  $type: "cosmos.capability.v1beta1.Owner";
   module: string;
   name: string;
 }
@@ -29,21 +29,18 @@ export interface Owner {
  * owners must be unique.
  */
 export interface CapabilityOwners {
-  $type: 'cosmos.capability.v1beta1.CapabilityOwners';
+  $type: "cosmos.capability.v1beta1.CapabilityOwners";
   owners: Owner[];
 }
 
 function createBaseCapability(): Capability {
-  return { $type: 'cosmos.capability.v1beta1.Capability', index: Long.UZERO };
+  return { $type: "cosmos.capability.v1beta1.Capability", index: Long.UZERO };
 }
 
 export const Capability = {
-  $type: 'cosmos.capability.v1beta1.Capability' as const,
+  $type: "cosmos.capability.v1beta1.Capability" as const,
 
-  encode(
-    message: Capability,
-    writer: _m0.Writer = _m0.Writer.create(),
-  ): _m0.Writer {
+  encode(message: Capability, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (!message.index.isZero()) {
       writer.uint32(8).uint64(message.index);
     }
@@ -69,27 +66,22 @@ export const Capability = {
   },
 
   fromJSON(object: any): Capability {
-    return {
-      $type: Capability.$type,
-      index: isSet(object.index) ? Long.fromString(object.index) : Long.UZERO,
-    };
+    return { $type: Capability.$type, index: isSet(object.index) ? Long.fromValue(object.index) : Long.UZERO };
   },
 
   toJSON(message: Capability): unknown {
     const obj: any = {};
-    message.index !== undefined &&
-      (obj.index = (message.index || Long.UZERO).toString());
+    message.index !== undefined && (obj.index = (message.index || Long.UZERO).toString());
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<Capability>, I>>(
-    object: I,
-  ): Capability {
+  create(base?: DeepPartial<Capability>): Capability {
+    return Capability.fromPartial(base ?? {});
+  },
+
+  fromPartial(object: DeepPartial<Capability>): Capability {
     const message = createBaseCapability();
-    message.index =
-      object.index !== undefined && object.index !== null
-        ? Long.fromValue(object.index)
-        : Long.UZERO;
+    message.index = (object.index !== undefined && object.index !== null) ? Long.fromValue(object.index) : Long.UZERO;
     return message;
   },
 };
@@ -97,17 +89,17 @@ export const Capability = {
 messageTypeRegistry.set(Capability.$type, Capability);
 
 function createBaseOwner(): Owner {
-  return { $type: 'cosmos.capability.v1beta1.Owner', module: '', name: '' };
+  return { $type: "cosmos.capability.v1beta1.Owner", module: "", name: "" };
 }
 
 export const Owner = {
-  $type: 'cosmos.capability.v1beta1.Owner' as const,
+  $type: "cosmos.capability.v1beta1.Owner" as const,
 
   encode(message: Owner, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
-    if (message.module !== '') {
+    if (message.module !== "") {
       writer.uint32(10).string(message.module);
     }
-    if (message.name !== '') {
+    if (message.name !== "") {
       writer.uint32(18).string(message.name);
     }
     return writer;
@@ -137,8 +129,8 @@ export const Owner = {
   fromJSON(object: any): Owner {
     return {
       $type: Owner.$type,
-      module: isSet(object.module) ? String(object.module) : '',
-      name: isSet(object.name) ? String(object.name) : '',
+      module: isSet(object.module) ? String(object.module) : "",
+      name: isSet(object.name) ? String(object.name) : "",
     };
   },
 
@@ -149,10 +141,14 @@ export const Owner = {
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<Owner>, I>>(object: I): Owner {
+  create(base?: DeepPartial<Owner>): Owner {
+    return Owner.fromPartial(base ?? {});
+  },
+
+  fromPartial(object: DeepPartial<Owner>): Owner {
     const message = createBaseOwner();
-    message.module = object.module ?? '';
-    message.name = object.name ?? '';
+    message.module = object.module ?? "";
+    message.name = object.name ?? "";
     return message;
   },
 };
@@ -160,16 +156,13 @@ export const Owner = {
 messageTypeRegistry.set(Owner.$type, Owner);
 
 function createBaseCapabilityOwners(): CapabilityOwners {
-  return { $type: 'cosmos.capability.v1beta1.CapabilityOwners', owners: [] };
+  return { $type: "cosmos.capability.v1beta1.CapabilityOwners", owners: [] };
 }
 
 export const CapabilityOwners = {
-  $type: 'cosmos.capability.v1beta1.CapabilityOwners' as const,
+  $type: "cosmos.capability.v1beta1.CapabilityOwners" as const,
 
-  encode(
-    message: CapabilityOwners,
-    writer: _m0.Writer = _m0.Writer.create(),
-  ): _m0.Writer {
+  encode(message: CapabilityOwners, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     for (const v of message.owners) {
       Owner.encode(v!, writer.uint32(10).fork()).ldelim();
     }
@@ -197,61 +190,40 @@ export const CapabilityOwners = {
   fromJSON(object: any): CapabilityOwners {
     return {
       $type: CapabilityOwners.$type,
-      owners: Array.isArray(object?.owners)
-        ? object.owners.map((e: any) => Owner.fromJSON(e))
-        : [],
+      owners: Array.isArray(object?.owners) ? object.owners.map((e: any) => Owner.fromJSON(e)) : [],
     };
   },
 
   toJSON(message: CapabilityOwners): unknown {
     const obj: any = {};
     if (message.owners) {
-      obj.owners = message.owners.map(e => (e ? Owner.toJSON(e) : undefined));
+      obj.owners = message.owners.map((e) => e ? Owner.toJSON(e) : undefined);
     } else {
       obj.owners = [];
     }
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<CapabilityOwners>, I>>(
-    object: I,
-  ): CapabilityOwners {
+  create(base?: DeepPartial<CapabilityOwners>): CapabilityOwners {
+    return CapabilityOwners.fromPartial(base ?? {});
+  },
+
+  fromPartial(object: DeepPartial<CapabilityOwners>): CapabilityOwners {
     const message = createBaseCapabilityOwners();
-    message.owners = object.owners?.map(e => Owner.fromPartial(e)) || [];
+    message.owners = object.owners?.map((e) => Owner.fromPartial(e)) || [];
     return message;
   },
 };
 
 messageTypeRegistry.set(CapabilityOwners.$type, CapabilityOwners);
 
-type Builtin =
-  | Date
-  | Function
-  | Uint8Array
-  | string
-  | number
-  | boolean
-  | undefined;
+type Builtin = Date | Function | Uint8Array | string | number | boolean | undefined;
 
-export type DeepPartial<T> = T extends Builtin
-  ? T
-  : T extends Long
-  ? string | number | Long
-  : T extends Array<infer U>
-  ? Array<DeepPartial<U>>
-  : T extends ReadonlyArray<infer U>
-  ? ReadonlyArray<DeepPartial<U>>
-  : T extends {}
-  ? { [K in Exclude<keyof T, '$type'>]?: DeepPartial<T[K]> }
+export type DeepPartial<T> = T extends Builtin ? T
+  : T extends Long ? string | number | Long : T extends Array<infer U> ? Array<DeepPartial<U>>
+  : T extends ReadonlyArray<infer U> ? ReadonlyArray<DeepPartial<U>>
+  : T extends {} ? { [K in Exclude<keyof T, "$type">]?: DeepPartial<T[K]> }
   : Partial<T>;
-
-type KeysOfUnion<T> = T extends T ? keyof T : never;
-export type Exact<P, I extends P> = P extends Builtin
-  ? P
-  : P & { [K in keyof P]: Exact<P[K], I[K]> } & Record<
-        Exclude<keyof I, KeysOfUnion<P> | '$type'>,
-        never
-      >;
 
 if (_m0.util.Long !== Long) {
   _m0.util.Long = Long as any;

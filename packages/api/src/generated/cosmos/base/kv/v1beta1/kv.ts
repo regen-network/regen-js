@@ -1,29 +1,29 @@
 /* eslint-disable */
-import { messageTypeRegistry } from '../../../../typeRegistry';
-import Long from 'long';
-import _m0 from 'protobufjs/minimal';
+import Long from "long";
+import _m0 from "protobufjs/minimal";
+import { messageTypeRegistry } from "../../../../typeRegistry";
 
-export const protobufPackage = 'cosmos.base.kv.v1beta1';
+export const protobufPackage = "cosmos.base.kv.v1beta1";
 
 /** Pairs defines a repeated slice of Pair objects. */
 export interface Pairs {
-  $type: 'cosmos.base.kv.v1beta1.Pairs';
+  $type: "cosmos.base.kv.v1beta1.Pairs";
   pairs: Pair[];
 }
 
 /** Pair defines a key/value bytes tuple. */
 export interface Pair {
-  $type: 'cosmos.base.kv.v1beta1.Pair';
+  $type: "cosmos.base.kv.v1beta1.Pair";
   key: Uint8Array;
   value: Uint8Array;
 }
 
 function createBasePairs(): Pairs {
-  return { $type: 'cosmos.base.kv.v1beta1.Pairs', pairs: [] };
+  return { $type: "cosmos.base.kv.v1beta1.Pairs", pairs: [] };
 }
 
 export const Pairs = {
-  $type: 'cosmos.base.kv.v1beta1.Pairs' as const,
+  $type: "cosmos.base.kv.v1beta1.Pairs" as const,
 
   encode(message: Pairs, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     for (const v of message.pairs) {
@@ -53,25 +53,27 @@ export const Pairs = {
   fromJSON(object: any): Pairs {
     return {
       $type: Pairs.$type,
-      pairs: Array.isArray(object?.pairs)
-        ? object.pairs.map((e: any) => Pair.fromJSON(e))
-        : [],
+      pairs: Array.isArray(object?.pairs) ? object.pairs.map((e: any) => Pair.fromJSON(e)) : [],
     };
   },
 
   toJSON(message: Pairs): unknown {
     const obj: any = {};
     if (message.pairs) {
-      obj.pairs = message.pairs.map(e => (e ? Pair.toJSON(e) : undefined));
+      obj.pairs = message.pairs.map((e) => e ? Pair.toJSON(e) : undefined);
     } else {
       obj.pairs = [];
     }
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<Pairs>, I>>(object: I): Pairs {
+  create(base?: DeepPartial<Pairs>): Pairs {
+    return Pairs.fromPartial(base ?? {});
+  },
+
+  fromPartial(object: DeepPartial<Pairs>): Pairs {
     const message = createBasePairs();
-    message.pairs = object.pairs?.map(e => Pair.fromPartial(e)) || [];
+    message.pairs = object.pairs?.map((e) => Pair.fromPartial(e)) || [];
     return message;
   },
 };
@@ -79,15 +81,11 @@ export const Pairs = {
 messageTypeRegistry.set(Pairs.$type, Pairs);
 
 function createBasePair(): Pair {
-  return {
-    $type: 'cosmos.base.kv.v1beta1.Pair',
-    key: new Uint8Array(),
-    value: new Uint8Array(),
-  };
+  return { $type: "cosmos.base.kv.v1beta1.Pair", key: new Uint8Array(), value: new Uint8Array() };
 }
 
 export const Pair = {
-  $type: 'cosmos.base.kv.v1beta1.Pair' as const,
+  $type: "cosmos.base.kv.v1beta1.Pair" as const,
 
   encode(message: Pair, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.key.length !== 0) {
@@ -124,26 +122,24 @@ export const Pair = {
     return {
       $type: Pair.$type,
       key: isSet(object.key) ? bytesFromBase64(object.key) : new Uint8Array(),
-      value: isSet(object.value)
-        ? bytesFromBase64(object.value)
-        : new Uint8Array(),
+      value: isSet(object.value) ? bytesFromBase64(object.value) : new Uint8Array(),
     };
   },
 
   toJSON(message: Pair): unknown {
     const obj: any = {};
     message.key !== undefined &&
-      (obj.key = base64FromBytes(
-        message.key !== undefined ? message.key : new Uint8Array(),
-      ));
+      (obj.key = base64FromBytes(message.key !== undefined ? message.key : new Uint8Array()));
     message.value !== undefined &&
-      (obj.value = base64FromBytes(
-        message.value !== undefined ? message.value : new Uint8Array(),
-      ));
+      (obj.value = base64FromBytes(message.value !== undefined ? message.value : new Uint8Array()));
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<Pair>, I>>(object: I): Pair {
+  create(base?: DeepPartial<Pair>): Pair {
+    return Pair.fromPartial(base ?? {});
+  },
+
+  fromPartial(object: DeepPartial<Pair>): Pair {
     const message = createBasePair();
     message.key = object.key ?? new Uint8Array();
     message.value = object.value ?? new Uint8Array();
@@ -156,65 +152,54 @@ messageTypeRegistry.set(Pair.$type, Pair);
 declare var self: any | undefined;
 declare var window: any | undefined;
 declare var global: any | undefined;
-var globalThis: any = (() => {
-  if (typeof globalThis !== 'undefined') return globalThis;
-  if (typeof self !== 'undefined') return self;
-  if (typeof window !== 'undefined') return window;
-  if (typeof global !== 'undefined') return global;
-  throw 'Unable to locate global object';
+var tsProtoGlobalThis: any = (() => {
+  if (typeof globalThis !== "undefined") {
+    return globalThis;
+  }
+  if (typeof self !== "undefined") {
+    return self;
+  }
+  if (typeof window !== "undefined") {
+    return window;
+  }
+  if (typeof global !== "undefined") {
+    return global;
+  }
+  throw "Unable to locate global object";
 })();
 
-const atob: (b64: string) => string =
-  globalThis.atob ||
-  (b64 => globalThis.Buffer.from(b64, 'base64').toString('binary'));
 function bytesFromBase64(b64: string): Uint8Array {
-  const bin = atob(b64);
-  const arr = new Uint8Array(bin.length);
-  for (let i = 0; i < bin.length; ++i) {
-    arr[i] = bin.charCodeAt(i);
+  if (tsProtoGlobalThis.Buffer) {
+    return Uint8Array.from(tsProtoGlobalThis.Buffer.from(b64, "base64"));
+  } else {
+    const bin = tsProtoGlobalThis.atob(b64);
+    const arr = new Uint8Array(bin.length);
+    for (let i = 0; i < bin.length; ++i) {
+      arr[i] = bin.charCodeAt(i);
+    }
+    return arr;
   }
-  return arr;
 }
 
-const btoa: (bin: string) => string =
-  globalThis.btoa ||
-  (bin => globalThis.Buffer.from(bin, 'binary').toString('base64'));
 function base64FromBytes(arr: Uint8Array): string {
-  const bin: string[] = [];
-  for (const byte of arr) {
-    bin.push(String.fromCharCode(byte));
+  if (tsProtoGlobalThis.Buffer) {
+    return tsProtoGlobalThis.Buffer.from(arr).toString("base64");
+  } else {
+    const bin: string[] = [];
+    arr.forEach((byte) => {
+      bin.push(String.fromCharCode(byte));
+    });
+    return tsProtoGlobalThis.btoa(bin.join(""));
   }
-  return btoa(bin.join(''));
 }
 
-type Builtin =
-  | Date
-  | Function
-  | Uint8Array
-  | string
-  | number
-  | boolean
-  | undefined;
+type Builtin = Date | Function | Uint8Array | string | number | boolean | undefined;
 
-export type DeepPartial<T> = T extends Builtin
-  ? T
-  : T extends Long
-  ? string | number | Long
-  : T extends Array<infer U>
-  ? Array<DeepPartial<U>>
-  : T extends ReadonlyArray<infer U>
-  ? ReadonlyArray<DeepPartial<U>>
-  : T extends {}
-  ? { [K in Exclude<keyof T, '$type'>]?: DeepPartial<T[K]> }
+export type DeepPartial<T> = T extends Builtin ? T
+  : T extends Long ? string | number | Long : T extends Array<infer U> ? Array<DeepPartial<U>>
+  : T extends ReadonlyArray<infer U> ? ReadonlyArray<DeepPartial<U>>
+  : T extends {} ? { [K in Exclude<keyof T, "$type">]?: DeepPartial<T[K]> }
   : Partial<T>;
-
-type KeysOfUnion<T> = T extends T ? keyof T : never;
-export type Exact<P, I extends P> = P extends Builtin
-  ? P
-  : P & { [K in keyof P]: Exact<P[K], I[K]> } & Record<
-        Exclude<keyof I, KeysOfUnion<P> | '$type'>,
-        never
-      >;
 
 if (_m0.util.Long !== Long) {
   _m0.util.Long = Long as any;

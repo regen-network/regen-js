@@ -1,14 +1,14 @@
 /* eslint-disable */
-import { messageTypeRegistry } from '../../../typeRegistry';
-import Long from 'long';
-import _m0 from 'protobufjs/minimal';
-import { Timestamp } from '../../../google/protobuf/timestamp';
+import Long from "long";
+import _m0 from "protobufjs/minimal";
+import { Timestamp } from "../../../google/protobuf/timestamp";
+import { messageTypeRegistry } from "../../../typeRegistry";
 
-export const protobufPackage = 'regen.ecocredit.v1alpha1';
+export const protobufPackage = "regen.ecocredit.v1alpha1";
 
 /** MsgCreateClass is the Msg/CreateClass request type. */
 export interface MsgCreateClass {
-  $type: 'regen.ecocredit.v1alpha1.MsgCreateClass';
+  $type: "regen.ecocredit.v1alpha1.MsgCreateClass";
   /** admin is the address of the account that created the credit class. */
   admin: string;
   /** issuers are the account addresses of the approved issuers. */
@@ -24,14 +24,14 @@ export interface MsgCreateClass {
 
 /** MsgCreateClassResponse is the Msg/CreateClass response type. */
 export interface MsgCreateClassResponse {
-  $type: 'regen.ecocredit.v1alpha1.MsgCreateClassResponse';
+  $type: "regen.ecocredit.v1alpha1.MsgCreateClassResponse";
   /** class_id is the unique ID of the newly created credit class. */
   classId: string;
 }
 
 /** MsgCreateBatch is the Msg/CreateBatch request type. */
 export interface MsgCreateBatch {
-  $type: 'regen.ecocredit.v1alpha1.MsgCreateBatch';
+  $type: "regen.ecocredit.v1alpha1.MsgCreateBatch";
   /** issuer is the address of the batch issuer. */
   issuer: string;
   /** class_id is the unique ID of the class. */
@@ -66,7 +66,7 @@ export interface MsgCreateBatch {
  * single recipient.
  */
 export interface MsgCreateBatch_BatchIssuance {
-  $type: 'regen.ecocredit.v1alpha1.MsgCreateBatch.BatchIssuance';
+  $type: "regen.ecocredit.v1alpha1.MsgCreateBatch.BatchIssuance";
   /** recipient is the account of the recipient. */
   recipient: string;
   /**
@@ -93,14 +93,14 @@ export interface MsgCreateBatch_BatchIssuance {
 
 /** MsgCreateBatchResponse is the Msg/CreateBatch response type. */
 export interface MsgCreateBatchResponse {
-  $type: 'regen.ecocredit.v1alpha1.MsgCreateBatchResponse';
+  $type: "regen.ecocredit.v1alpha1.MsgCreateBatchResponse";
   /** batch_denom is the unique denomination ID of the newly created batch. */
   batchDenom: string;
 }
 
 /** MsgSend is the Msg/Send request type. */
 export interface MsgSend {
-  $type: 'regen.ecocredit.v1alpha1.MsgSend';
+  $type: "regen.ecocredit.v1alpha1.MsgSend";
   /** sender is the address of the account sending credits. */
   sender: string;
   /** sender is the address of the account receiving credits. */
@@ -115,7 +115,7 @@ export interface MsgSend {
  * and retired credits, which will be retired on receipt.
  */
 export interface MsgSend_SendCredits {
-  $type: 'regen.ecocredit.v1alpha1.MsgSend.SendCredits';
+  $type: "regen.ecocredit.v1alpha1.MsgSend.SendCredits";
   /** batch_denom is the unique ID of the credit batch. */
   batchDenom: string;
   /**
@@ -143,12 +143,12 @@ export interface MsgSend_SendCredits {
 
 /** MsgSendResponse is the Msg/Send response type. */
 export interface MsgSendResponse {
-  $type: 'regen.ecocredit.v1alpha1.MsgSendResponse';
+  $type: "regen.ecocredit.v1alpha1.MsgSendResponse";
 }
 
 /** MsgRetire is the Msg/Retire request type. */
 export interface MsgRetire {
-  $type: 'regen.ecocredit.v1alpha1.MsgRetire';
+  $type: "regen.ecocredit.v1alpha1.MsgRetire";
   /** holder is the credit holder address. */
   holder: string;
   /** credits are the credits being retired. */
@@ -165,7 +165,7 @@ export interface MsgRetire {
 
 /** RetireCredits specifies a batch and the number of credits being retired. */
 export interface MsgRetire_RetireCredits {
-  $type: 'regen.ecocredit.v1alpha1.MsgRetire.RetireCredits';
+  $type: "regen.ecocredit.v1alpha1.MsgRetire.RetireCredits";
   /** batch_denom is the unique ID of the credit batch. */
   batchDenom: string;
   /**
@@ -178,12 +178,12 @@ export interface MsgRetire_RetireCredits {
 
 /** MsgRetire is the Msg/Retire response type. */
 export interface MsgRetireResponse {
-  $type: 'regen.ecocredit.v1alpha1.MsgRetireResponse';
+  $type: "regen.ecocredit.v1alpha1.MsgRetireResponse";
 }
 
 /** MsgCancel is the Msg/Cancel request type. */
 export interface MsgCancel {
-  $type: 'regen.ecocredit.v1alpha1.MsgCancel';
+  $type: "regen.ecocredit.v1alpha1.MsgCancel";
   /** holder is the credit holder address. */
   holder: string;
   /** credits are the credits being cancelled. */
@@ -192,7 +192,7 @@ export interface MsgCancel {
 
 /** CancelCredits specifies a batch and the number of credits being cancelled. */
 export interface MsgCancel_CancelCredits {
-  $type: 'regen.ecocredit.v1alpha1.MsgCancel.CancelCredits';
+  $type: "regen.ecocredit.v1alpha1.MsgCancel.CancelCredits";
   /** batch_denom is the unique ID of the credit batch. */
   batchDenom: string;
   /**
@@ -205,12 +205,12 @@ export interface MsgCancel_CancelCredits {
 
 /** MsgCancelResponse is the Msg/Cancel response type. */
 export interface MsgCancelResponse {
-  $type: 'regen.ecocredit.v1alpha1.MsgCancelResponse';
+  $type: "regen.ecocredit.v1alpha1.MsgCancelResponse";
 }
 
 /** MsgUpdateClassAdmin is the Msg/UpdateClassAdmin request type. */
 export interface MsgUpdateClassAdmin {
-  $type: 'regen.ecocredit.v1alpha1.MsgUpdateClassAdmin';
+  $type: "regen.ecocredit.v1alpha1.MsgUpdateClassAdmin";
   /** admin is the address of the account that is the admin of the credit class. */
   admin: string;
   /** class_id is the unique ID of the credit class. */
@@ -221,12 +221,12 @@ export interface MsgUpdateClassAdmin {
 
 /** MsgUpdateClassAdminResponse is the MsgUpdateClassAdmin response type. */
 export interface MsgUpdateClassAdminResponse {
-  $type: 'regen.ecocredit.v1alpha1.MsgUpdateClassAdminResponse';
+  $type: "regen.ecocredit.v1alpha1.MsgUpdateClassAdminResponse";
 }
 
 /** MsgUpdateClassIssuers is the Msg/UpdateClassIssuers request type. */
 export interface MsgUpdateClassIssuers {
-  $type: 'regen.ecocredit.v1alpha1.MsgUpdateClassIssuers';
+  $type: "regen.ecocredit.v1alpha1.MsgUpdateClassIssuers";
   /** admin is the address of the account that is the admin of the credit class. */
   admin: string;
   /** class_id is the unique ID of the credit class. */
@@ -237,12 +237,12 @@ export interface MsgUpdateClassIssuers {
 
 /** MsgUpdateClassIssuersResponse is the MsgUpdateClassIssuers response type. */
 export interface MsgUpdateClassIssuersResponse {
-  $type: 'regen.ecocredit.v1alpha1.MsgUpdateClassIssuersResponse';
+  $type: "regen.ecocredit.v1alpha1.MsgUpdateClassIssuersResponse";
 }
 
 /** MsgUpdateClassMetadata is the Msg/UpdateClassMetadata request type. */
 export interface MsgUpdateClassMetadata {
-  $type: 'regen.ecocredit.v1alpha1.MsgUpdateClassMetadata';
+  $type: "regen.ecocredit.v1alpha1.MsgUpdateClassMetadata";
   /** admin is the address of the account that is the admin of the credit class. */
   admin: string;
   /** class_id is the unique ID of the credit class. */
@@ -256,27 +256,24 @@ export interface MsgUpdateClassMetadata {
 
 /** MsgUpdateClassMetadataResponse is the MsgUpdateClassMetadata response type. */
 export interface MsgUpdateClassMetadataResponse {
-  $type: 'regen.ecocredit.v1alpha1.MsgUpdateClassMetadataResponse';
+  $type: "regen.ecocredit.v1alpha1.MsgUpdateClassMetadataResponse";
 }
 
 function createBaseMsgCreateClass(): MsgCreateClass {
   return {
-    $type: 'regen.ecocredit.v1alpha1.MsgCreateClass',
-    admin: '',
+    $type: "regen.ecocredit.v1alpha1.MsgCreateClass",
+    admin: "",
     issuers: [],
     metadata: new Uint8Array(),
-    creditTypeName: '',
+    creditTypeName: "",
   };
 }
 
 export const MsgCreateClass = {
-  $type: 'regen.ecocredit.v1alpha1.MsgCreateClass' as const,
+  $type: "regen.ecocredit.v1alpha1.MsgCreateClass" as const,
 
-  encode(
-    message: MsgCreateClass,
-    writer: _m0.Writer = _m0.Writer.create(),
-  ): _m0.Writer {
-    if (message.admin !== '') {
+  encode(message: MsgCreateClass, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+    if (message.admin !== "") {
       writer.uint32(10).string(message.admin);
     }
     for (const v of message.issuers) {
@@ -285,7 +282,7 @@ export const MsgCreateClass = {
     if (message.metadata.length !== 0) {
       writer.uint32(26).bytes(message.metadata);
     }
-    if (message.creditTypeName !== '') {
+    if (message.creditTypeName !== "") {
       writer.uint32(34).string(message.creditTypeName);
     }
     return writer;
@@ -321,16 +318,10 @@ export const MsgCreateClass = {
   fromJSON(object: any): MsgCreateClass {
     return {
       $type: MsgCreateClass.$type,
-      admin: isSet(object.admin) ? String(object.admin) : '',
-      issuers: Array.isArray(object?.issuers)
-        ? object.issuers.map((e: any) => String(e))
-        : [],
-      metadata: isSet(object.metadata)
-        ? bytesFromBase64(object.metadata)
-        : new Uint8Array(),
-      creditTypeName: isSet(object.creditTypeName)
-        ? String(object.creditTypeName)
-        : '',
+      admin: isSet(object.admin) ? String(object.admin) : "",
+      issuers: Array.isArray(object?.issuers) ? object.issuers.map((e: any) => String(e)) : [],
+      metadata: isSet(object.metadata) ? bytesFromBase64(object.metadata) : new Uint8Array(),
+      creditTypeName: isSet(object.creditTypeName) ? String(object.creditTypeName) : "",
     };
   },
 
@@ -338,27 +329,26 @@ export const MsgCreateClass = {
     const obj: any = {};
     message.admin !== undefined && (obj.admin = message.admin);
     if (message.issuers) {
-      obj.issuers = message.issuers.map(e => e);
+      obj.issuers = message.issuers.map((e) => e);
     } else {
       obj.issuers = [];
     }
     message.metadata !== undefined &&
-      (obj.metadata = base64FromBytes(
-        message.metadata !== undefined ? message.metadata : new Uint8Array(),
-      ));
-    message.creditTypeName !== undefined &&
-      (obj.creditTypeName = message.creditTypeName);
+      (obj.metadata = base64FromBytes(message.metadata !== undefined ? message.metadata : new Uint8Array()));
+    message.creditTypeName !== undefined && (obj.creditTypeName = message.creditTypeName);
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<MsgCreateClass>, I>>(
-    object: I,
-  ): MsgCreateClass {
+  create(base?: DeepPartial<MsgCreateClass>): MsgCreateClass {
+    return MsgCreateClass.fromPartial(base ?? {});
+  },
+
+  fromPartial(object: DeepPartial<MsgCreateClass>): MsgCreateClass {
     const message = createBaseMsgCreateClass();
-    message.admin = object.admin ?? '';
-    message.issuers = object.issuers?.map(e => e) || [];
+    message.admin = object.admin ?? "";
+    message.issuers = object.issuers?.map((e) => e) || [];
     message.metadata = object.metadata ?? new Uint8Array();
-    message.creditTypeName = object.creditTypeName ?? '';
+    message.creditTypeName = object.creditTypeName ?? "";
     return message;
   },
 };
@@ -366,29 +356,20 @@ export const MsgCreateClass = {
 messageTypeRegistry.set(MsgCreateClass.$type, MsgCreateClass);
 
 function createBaseMsgCreateClassResponse(): MsgCreateClassResponse {
-  return {
-    $type: 'regen.ecocredit.v1alpha1.MsgCreateClassResponse',
-    classId: '',
-  };
+  return { $type: "regen.ecocredit.v1alpha1.MsgCreateClassResponse", classId: "" };
 }
 
 export const MsgCreateClassResponse = {
-  $type: 'regen.ecocredit.v1alpha1.MsgCreateClassResponse' as const,
+  $type: "regen.ecocredit.v1alpha1.MsgCreateClassResponse" as const,
 
-  encode(
-    message: MsgCreateClassResponse,
-    writer: _m0.Writer = _m0.Writer.create(),
-  ): _m0.Writer {
-    if (message.classId !== '') {
+  encode(message: MsgCreateClassResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+    if (message.classId !== "") {
       writer.uint32(10).string(message.classId);
     }
     return writer;
   },
 
-  decode(
-    input: _m0.Reader | Uint8Array,
-    length?: number,
-  ): MsgCreateClassResponse {
+  decode(input: _m0.Reader | Uint8Array, length?: number): MsgCreateClassResponse {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMsgCreateClassResponse();
@@ -407,10 +388,7 @@ export const MsgCreateClassResponse = {
   },
 
   fromJSON(object: any): MsgCreateClassResponse {
-    return {
-      $type: MsgCreateClassResponse.$type,
-      classId: isSet(object.classId) ? String(object.classId) : '',
-    };
+    return { $type: MsgCreateClassResponse.$type, classId: isSet(object.classId) ? String(object.classId) : "" };
   },
 
   toJSON(message: MsgCreateClassResponse): unknown {
@@ -419,11 +397,13 @@ export const MsgCreateClassResponse = {
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<MsgCreateClassResponse>, I>>(
-    object: I,
-  ): MsgCreateClassResponse {
+  create(base?: DeepPartial<MsgCreateClassResponse>): MsgCreateClassResponse {
+    return MsgCreateClassResponse.fromPartial(base ?? {});
+  },
+
+  fromPartial(object: DeepPartial<MsgCreateClassResponse>): MsgCreateClassResponse {
     const message = createBaseMsgCreateClassResponse();
-    message.classId = object.classId ?? '';
+    message.classId = object.classId ?? "";
     return message;
   },
 };
@@ -432,52 +412,40 @@ messageTypeRegistry.set(MsgCreateClassResponse.$type, MsgCreateClassResponse);
 
 function createBaseMsgCreateBatch(): MsgCreateBatch {
   return {
-    $type: 'regen.ecocredit.v1alpha1.MsgCreateBatch',
-    issuer: '',
-    classId: '',
+    $type: "regen.ecocredit.v1alpha1.MsgCreateBatch",
+    issuer: "",
+    classId: "",
     issuance: [],
     metadata: new Uint8Array(),
     startDate: undefined,
     endDate: undefined,
-    projectLocation: '',
+    projectLocation: "",
   };
 }
 
 export const MsgCreateBatch = {
-  $type: 'regen.ecocredit.v1alpha1.MsgCreateBatch' as const,
+  $type: "regen.ecocredit.v1alpha1.MsgCreateBatch" as const,
 
-  encode(
-    message: MsgCreateBatch,
-    writer: _m0.Writer = _m0.Writer.create(),
-  ): _m0.Writer {
-    if (message.issuer !== '') {
+  encode(message: MsgCreateBatch, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+    if (message.issuer !== "") {
       writer.uint32(10).string(message.issuer);
     }
-    if (message.classId !== '') {
+    if (message.classId !== "") {
       writer.uint32(18).string(message.classId);
     }
     for (const v of message.issuance) {
-      MsgCreateBatch_BatchIssuance.encode(
-        v!,
-        writer.uint32(26).fork(),
-      ).ldelim();
+      MsgCreateBatch_BatchIssuance.encode(v!, writer.uint32(26).fork()).ldelim();
     }
     if (message.metadata.length !== 0) {
       writer.uint32(34).bytes(message.metadata);
     }
     if (message.startDate !== undefined) {
-      Timestamp.encode(
-        toTimestamp(message.startDate),
-        writer.uint32(42).fork(),
-      ).ldelim();
+      Timestamp.encode(toTimestamp(message.startDate), writer.uint32(42).fork()).ldelim();
     }
     if (message.endDate !== undefined) {
-      Timestamp.encode(
-        toTimestamp(message.endDate),
-        writer.uint32(50).fork(),
-      ).ldelim();
+      Timestamp.encode(toTimestamp(message.endDate), writer.uint32(50).fork()).ldelim();
     }
-    if (message.projectLocation !== '') {
+    if (message.projectLocation !== "") {
       writer.uint32(58).string(message.projectLocation);
     }
     return writer;
@@ -497,22 +465,16 @@ export const MsgCreateBatch = {
           message.classId = reader.string();
           break;
         case 3:
-          message.issuance.push(
-            MsgCreateBatch_BatchIssuance.decode(reader, reader.uint32()),
-          );
+          message.issuance.push(MsgCreateBatch_BatchIssuance.decode(reader, reader.uint32()));
           break;
         case 4:
           message.metadata = reader.bytes();
           break;
         case 5:
-          message.startDate = fromTimestamp(
-            Timestamp.decode(reader, reader.uint32()),
-          );
+          message.startDate = fromTimestamp(Timestamp.decode(reader, reader.uint32()));
           break;
         case 6:
-          message.endDate = fromTimestamp(
-            Timestamp.decode(reader, reader.uint32()),
-          );
+          message.endDate = fromTimestamp(Timestamp.decode(reader, reader.uint32()));
           break;
         case 7:
           message.projectLocation = reader.string();
@@ -528,25 +490,15 @@ export const MsgCreateBatch = {
   fromJSON(object: any): MsgCreateBatch {
     return {
       $type: MsgCreateBatch.$type,
-      issuer: isSet(object.issuer) ? String(object.issuer) : '',
-      classId: isSet(object.classId) ? String(object.classId) : '',
+      issuer: isSet(object.issuer) ? String(object.issuer) : "",
+      classId: isSet(object.classId) ? String(object.classId) : "",
       issuance: Array.isArray(object?.issuance)
-        ? object.issuance.map((e: any) =>
-            MsgCreateBatch_BatchIssuance.fromJSON(e),
-          )
+        ? object.issuance.map((e: any) => MsgCreateBatch_BatchIssuance.fromJSON(e))
         : [],
-      metadata: isSet(object.metadata)
-        ? bytesFromBase64(object.metadata)
-        : new Uint8Array(),
-      startDate: isSet(object.startDate)
-        ? fromJsonTimestamp(object.startDate)
-        : undefined,
-      endDate: isSet(object.endDate)
-        ? fromJsonTimestamp(object.endDate)
-        : undefined,
-      projectLocation: isSet(object.projectLocation)
-        ? String(object.projectLocation)
-        : '',
+      metadata: isSet(object.metadata) ? bytesFromBase64(object.metadata) : new Uint8Array(),
+      startDate: isSet(object.startDate) ? fromJsonTimestamp(object.startDate) : undefined,
+      endDate: isSet(object.endDate) ? fromJsonTimestamp(object.endDate) : undefined,
+      projectLocation: isSet(object.projectLocation) ? String(object.projectLocation) : "",
     };
   },
 
@@ -555,38 +507,31 @@ export const MsgCreateBatch = {
     message.issuer !== undefined && (obj.issuer = message.issuer);
     message.classId !== undefined && (obj.classId = message.classId);
     if (message.issuance) {
-      obj.issuance = message.issuance.map(e =>
-        e ? MsgCreateBatch_BatchIssuance.toJSON(e) : undefined,
-      );
+      obj.issuance = message.issuance.map((e) => e ? MsgCreateBatch_BatchIssuance.toJSON(e) : undefined);
     } else {
       obj.issuance = [];
     }
     message.metadata !== undefined &&
-      (obj.metadata = base64FromBytes(
-        message.metadata !== undefined ? message.metadata : new Uint8Array(),
-      ));
-    message.startDate !== undefined &&
-      (obj.startDate = message.startDate.toISOString());
-    message.endDate !== undefined &&
-      (obj.endDate = message.endDate.toISOString());
-    message.projectLocation !== undefined &&
-      (obj.projectLocation = message.projectLocation);
+      (obj.metadata = base64FromBytes(message.metadata !== undefined ? message.metadata : new Uint8Array()));
+    message.startDate !== undefined && (obj.startDate = message.startDate.toISOString());
+    message.endDate !== undefined && (obj.endDate = message.endDate.toISOString());
+    message.projectLocation !== undefined && (obj.projectLocation = message.projectLocation);
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<MsgCreateBatch>, I>>(
-    object: I,
-  ): MsgCreateBatch {
+  create(base?: DeepPartial<MsgCreateBatch>): MsgCreateBatch {
+    return MsgCreateBatch.fromPartial(base ?? {});
+  },
+
+  fromPartial(object: DeepPartial<MsgCreateBatch>): MsgCreateBatch {
     const message = createBaseMsgCreateBatch();
-    message.issuer = object.issuer ?? '';
-    message.classId = object.classId ?? '';
-    message.issuance =
-      object.issuance?.map(e => MsgCreateBatch_BatchIssuance.fromPartial(e)) ||
-      [];
+    message.issuer = object.issuer ?? "";
+    message.classId = object.classId ?? "";
+    message.issuance = object.issuance?.map((e) => MsgCreateBatch_BatchIssuance.fromPartial(e)) || [];
     message.metadata = object.metadata ?? new Uint8Array();
     message.startDate = object.startDate ?? undefined;
     message.endDate = object.endDate ?? undefined;
-    message.projectLocation = object.projectLocation ?? '';
+    message.projectLocation = object.projectLocation ?? "";
     return message;
   },
 };
@@ -595,40 +540,34 @@ messageTypeRegistry.set(MsgCreateBatch.$type, MsgCreateBatch);
 
 function createBaseMsgCreateBatch_BatchIssuance(): MsgCreateBatch_BatchIssuance {
   return {
-    $type: 'regen.ecocredit.v1alpha1.MsgCreateBatch.BatchIssuance',
-    recipient: '',
-    tradableAmount: '',
-    retiredAmount: '',
-    retirementLocation: '',
+    $type: "regen.ecocredit.v1alpha1.MsgCreateBatch.BatchIssuance",
+    recipient: "",
+    tradableAmount: "",
+    retiredAmount: "",
+    retirementLocation: "",
   };
 }
 
 export const MsgCreateBatch_BatchIssuance = {
-  $type: 'regen.ecocredit.v1alpha1.MsgCreateBatch.BatchIssuance' as const,
+  $type: "regen.ecocredit.v1alpha1.MsgCreateBatch.BatchIssuance" as const,
 
-  encode(
-    message: MsgCreateBatch_BatchIssuance,
-    writer: _m0.Writer = _m0.Writer.create(),
-  ): _m0.Writer {
-    if (message.recipient !== '') {
+  encode(message: MsgCreateBatch_BatchIssuance, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+    if (message.recipient !== "") {
       writer.uint32(10).string(message.recipient);
     }
-    if (message.tradableAmount !== '') {
+    if (message.tradableAmount !== "") {
       writer.uint32(18).string(message.tradableAmount);
     }
-    if (message.retiredAmount !== '') {
+    if (message.retiredAmount !== "") {
       writer.uint32(26).string(message.retiredAmount);
     }
-    if (message.retirementLocation !== '') {
+    if (message.retirementLocation !== "") {
       writer.uint32(34).string(message.retirementLocation);
     }
     return writer;
   },
 
-  decode(
-    input: _m0.Reader | Uint8Array,
-    length?: number,
-  ): MsgCreateBatch_BatchIssuance {
+  decode(input: _m0.Reader | Uint8Array, length?: number): MsgCreateBatch_BatchIssuance {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMsgCreateBatch_BatchIssuance();
@@ -658,72 +597,53 @@ export const MsgCreateBatch_BatchIssuance = {
   fromJSON(object: any): MsgCreateBatch_BatchIssuance {
     return {
       $type: MsgCreateBatch_BatchIssuance.$type,
-      recipient: isSet(object.recipient) ? String(object.recipient) : '',
-      tradableAmount: isSet(object.tradableAmount)
-        ? String(object.tradableAmount)
-        : '',
-      retiredAmount: isSet(object.retiredAmount)
-        ? String(object.retiredAmount)
-        : '',
-      retirementLocation: isSet(object.retirementLocation)
-        ? String(object.retirementLocation)
-        : '',
+      recipient: isSet(object.recipient) ? String(object.recipient) : "",
+      tradableAmount: isSet(object.tradableAmount) ? String(object.tradableAmount) : "",
+      retiredAmount: isSet(object.retiredAmount) ? String(object.retiredAmount) : "",
+      retirementLocation: isSet(object.retirementLocation) ? String(object.retirementLocation) : "",
     };
   },
 
   toJSON(message: MsgCreateBatch_BatchIssuance): unknown {
     const obj: any = {};
     message.recipient !== undefined && (obj.recipient = message.recipient);
-    message.tradableAmount !== undefined &&
-      (obj.tradableAmount = message.tradableAmount);
-    message.retiredAmount !== undefined &&
-      (obj.retiredAmount = message.retiredAmount);
-    message.retirementLocation !== undefined &&
-      (obj.retirementLocation = message.retirementLocation);
+    message.tradableAmount !== undefined && (obj.tradableAmount = message.tradableAmount);
+    message.retiredAmount !== undefined && (obj.retiredAmount = message.retiredAmount);
+    message.retirementLocation !== undefined && (obj.retirementLocation = message.retirementLocation);
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<MsgCreateBatch_BatchIssuance>, I>>(
-    object: I,
-  ): MsgCreateBatch_BatchIssuance {
+  create(base?: DeepPartial<MsgCreateBatch_BatchIssuance>): MsgCreateBatch_BatchIssuance {
+    return MsgCreateBatch_BatchIssuance.fromPartial(base ?? {});
+  },
+
+  fromPartial(object: DeepPartial<MsgCreateBatch_BatchIssuance>): MsgCreateBatch_BatchIssuance {
     const message = createBaseMsgCreateBatch_BatchIssuance();
-    message.recipient = object.recipient ?? '';
-    message.tradableAmount = object.tradableAmount ?? '';
-    message.retiredAmount = object.retiredAmount ?? '';
-    message.retirementLocation = object.retirementLocation ?? '';
+    message.recipient = object.recipient ?? "";
+    message.tradableAmount = object.tradableAmount ?? "";
+    message.retiredAmount = object.retiredAmount ?? "";
+    message.retirementLocation = object.retirementLocation ?? "";
     return message;
   },
 };
 
-messageTypeRegistry.set(
-  MsgCreateBatch_BatchIssuance.$type,
-  MsgCreateBatch_BatchIssuance,
-);
+messageTypeRegistry.set(MsgCreateBatch_BatchIssuance.$type, MsgCreateBatch_BatchIssuance);
 
 function createBaseMsgCreateBatchResponse(): MsgCreateBatchResponse {
-  return {
-    $type: 'regen.ecocredit.v1alpha1.MsgCreateBatchResponse',
-    batchDenom: '',
-  };
+  return { $type: "regen.ecocredit.v1alpha1.MsgCreateBatchResponse", batchDenom: "" };
 }
 
 export const MsgCreateBatchResponse = {
-  $type: 'regen.ecocredit.v1alpha1.MsgCreateBatchResponse' as const,
+  $type: "regen.ecocredit.v1alpha1.MsgCreateBatchResponse" as const,
 
-  encode(
-    message: MsgCreateBatchResponse,
-    writer: _m0.Writer = _m0.Writer.create(),
-  ): _m0.Writer {
-    if (message.batchDenom !== '') {
+  encode(message: MsgCreateBatchResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+    if (message.batchDenom !== "") {
       writer.uint32(10).string(message.batchDenom);
     }
     return writer;
   },
 
-  decode(
-    input: _m0.Reader | Uint8Array,
-    length?: number,
-  ): MsgCreateBatchResponse {
+  decode(input: _m0.Reader | Uint8Array, length?: number): MsgCreateBatchResponse {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMsgCreateBatchResponse();
@@ -744,7 +664,7 @@ export const MsgCreateBatchResponse = {
   fromJSON(object: any): MsgCreateBatchResponse {
     return {
       $type: MsgCreateBatchResponse.$type,
-      batchDenom: isSet(object.batchDenom) ? String(object.batchDenom) : '',
+      batchDenom: isSet(object.batchDenom) ? String(object.batchDenom) : "",
     };
   },
 
@@ -754,11 +674,13 @@ export const MsgCreateBatchResponse = {
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<MsgCreateBatchResponse>, I>>(
-    object: I,
-  ): MsgCreateBatchResponse {
+  create(base?: DeepPartial<MsgCreateBatchResponse>): MsgCreateBatchResponse {
+    return MsgCreateBatchResponse.fromPartial(base ?? {});
+  },
+
+  fromPartial(object: DeepPartial<MsgCreateBatchResponse>): MsgCreateBatchResponse {
     const message = createBaseMsgCreateBatchResponse();
-    message.batchDenom = object.batchDenom ?? '';
+    message.batchDenom = object.batchDenom ?? "";
     return message;
   },
 };
@@ -766,25 +688,17 @@ export const MsgCreateBatchResponse = {
 messageTypeRegistry.set(MsgCreateBatchResponse.$type, MsgCreateBatchResponse);
 
 function createBaseMsgSend(): MsgSend {
-  return {
-    $type: 'regen.ecocredit.v1alpha1.MsgSend',
-    sender: '',
-    recipient: '',
-    credits: [],
-  };
+  return { $type: "regen.ecocredit.v1alpha1.MsgSend", sender: "", recipient: "", credits: [] };
 }
 
 export const MsgSend = {
-  $type: 'regen.ecocredit.v1alpha1.MsgSend' as const,
+  $type: "regen.ecocredit.v1alpha1.MsgSend" as const,
 
-  encode(
-    message: MsgSend,
-    writer: _m0.Writer = _m0.Writer.create(),
-  ): _m0.Writer {
-    if (message.sender !== '') {
+  encode(message: MsgSend, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+    if (message.sender !== "") {
       writer.uint32(10).string(message.sender);
     }
-    if (message.recipient !== '') {
+    if (message.recipient !== "") {
       writer.uint32(18).string(message.recipient);
     }
     for (const v of message.credits) {
@@ -807,9 +721,7 @@ export const MsgSend = {
           message.recipient = reader.string();
           break;
         case 3:
-          message.credits.push(
-            MsgSend_SendCredits.decode(reader, reader.uint32()),
-          );
+          message.credits.push(MsgSend_SendCredits.decode(reader, reader.uint32()));
           break;
         default:
           reader.skipType(tag & 7);
@@ -822,11 +734,9 @@ export const MsgSend = {
   fromJSON(object: any): MsgSend {
     return {
       $type: MsgSend.$type,
-      sender: isSet(object.sender) ? String(object.sender) : '',
-      recipient: isSet(object.recipient) ? String(object.recipient) : '',
-      credits: Array.isArray(object?.credits)
-        ? object.credits.map((e: any) => MsgSend_SendCredits.fromJSON(e))
-        : [],
+      sender: isSet(object.sender) ? String(object.sender) : "",
+      recipient: isSet(object.recipient) ? String(object.recipient) : "",
+      credits: Array.isArray(object?.credits) ? object.credits.map((e: any) => MsgSend_SendCredits.fromJSON(e)) : [],
     };
   },
 
@@ -835,21 +745,22 @@ export const MsgSend = {
     message.sender !== undefined && (obj.sender = message.sender);
     message.recipient !== undefined && (obj.recipient = message.recipient);
     if (message.credits) {
-      obj.credits = message.credits.map(e =>
-        e ? MsgSend_SendCredits.toJSON(e) : undefined,
-      );
+      obj.credits = message.credits.map((e) => e ? MsgSend_SendCredits.toJSON(e) : undefined);
     } else {
       obj.credits = [];
     }
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<MsgSend>, I>>(object: I): MsgSend {
+  create(base?: DeepPartial<MsgSend>): MsgSend {
+    return MsgSend.fromPartial(base ?? {});
+  },
+
+  fromPartial(object: DeepPartial<MsgSend>): MsgSend {
     const message = createBaseMsgSend();
-    message.sender = object.sender ?? '';
-    message.recipient = object.recipient ?? '';
-    message.credits =
-      object.credits?.map(e => MsgSend_SendCredits.fromPartial(e)) || [];
+    message.sender = object.sender ?? "";
+    message.recipient = object.recipient ?? "";
+    message.credits = object.credits?.map((e) => MsgSend_SendCredits.fromPartial(e)) || [];
     return message;
   },
 };
@@ -858,31 +769,28 @@ messageTypeRegistry.set(MsgSend.$type, MsgSend);
 
 function createBaseMsgSend_SendCredits(): MsgSend_SendCredits {
   return {
-    $type: 'regen.ecocredit.v1alpha1.MsgSend.SendCredits',
-    batchDenom: '',
-    tradableAmount: '',
-    retiredAmount: '',
-    retirementLocation: '',
+    $type: "regen.ecocredit.v1alpha1.MsgSend.SendCredits",
+    batchDenom: "",
+    tradableAmount: "",
+    retiredAmount: "",
+    retirementLocation: "",
   };
 }
 
 export const MsgSend_SendCredits = {
-  $type: 'regen.ecocredit.v1alpha1.MsgSend.SendCredits' as const,
+  $type: "regen.ecocredit.v1alpha1.MsgSend.SendCredits" as const,
 
-  encode(
-    message: MsgSend_SendCredits,
-    writer: _m0.Writer = _m0.Writer.create(),
-  ): _m0.Writer {
-    if (message.batchDenom !== '') {
+  encode(message: MsgSend_SendCredits, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+    if (message.batchDenom !== "") {
       writer.uint32(10).string(message.batchDenom);
     }
-    if (message.tradableAmount !== '') {
+    if (message.tradableAmount !== "") {
       writer.uint32(18).string(message.tradableAmount);
     }
-    if (message.retiredAmount !== '') {
+    if (message.retiredAmount !== "") {
       writer.uint32(26).string(message.retiredAmount);
     }
-    if (message.retirementLocation !== '') {
+    if (message.retirementLocation !== "") {
       writer.uint32(34).string(message.retirementLocation);
     }
     return writer;
@@ -918,39 +826,32 @@ export const MsgSend_SendCredits = {
   fromJSON(object: any): MsgSend_SendCredits {
     return {
       $type: MsgSend_SendCredits.$type,
-      batchDenom: isSet(object.batchDenom) ? String(object.batchDenom) : '',
-      tradableAmount: isSet(object.tradableAmount)
-        ? String(object.tradableAmount)
-        : '',
-      retiredAmount: isSet(object.retiredAmount)
-        ? String(object.retiredAmount)
-        : '',
-      retirementLocation: isSet(object.retirementLocation)
-        ? String(object.retirementLocation)
-        : '',
+      batchDenom: isSet(object.batchDenom) ? String(object.batchDenom) : "",
+      tradableAmount: isSet(object.tradableAmount) ? String(object.tradableAmount) : "",
+      retiredAmount: isSet(object.retiredAmount) ? String(object.retiredAmount) : "",
+      retirementLocation: isSet(object.retirementLocation) ? String(object.retirementLocation) : "",
     };
   },
 
   toJSON(message: MsgSend_SendCredits): unknown {
     const obj: any = {};
     message.batchDenom !== undefined && (obj.batchDenom = message.batchDenom);
-    message.tradableAmount !== undefined &&
-      (obj.tradableAmount = message.tradableAmount);
-    message.retiredAmount !== undefined &&
-      (obj.retiredAmount = message.retiredAmount);
-    message.retirementLocation !== undefined &&
-      (obj.retirementLocation = message.retirementLocation);
+    message.tradableAmount !== undefined && (obj.tradableAmount = message.tradableAmount);
+    message.retiredAmount !== undefined && (obj.retiredAmount = message.retiredAmount);
+    message.retirementLocation !== undefined && (obj.retirementLocation = message.retirementLocation);
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<MsgSend_SendCredits>, I>>(
-    object: I,
-  ): MsgSend_SendCredits {
+  create(base?: DeepPartial<MsgSend_SendCredits>): MsgSend_SendCredits {
+    return MsgSend_SendCredits.fromPartial(base ?? {});
+  },
+
+  fromPartial(object: DeepPartial<MsgSend_SendCredits>): MsgSend_SendCredits {
     const message = createBaseMsgSend_SendCredits();
-    message.batchDenom = object.batchDenom ?? '';
-    message.tradableAmount = object.tradableAmount ?? '';
-    message.retiredAmount = object.retiredAmount ?? '';
-    message.retirementLocation = object.retirementLocation ?? '';
+    message.batchDenom = object.batchDenom ?? "";
+    message.tradableAmount = object.tradableAmount ?? "";
+    message.retiredAmount = object.retiredAmount ?? "";
+    message.retirementLocation = object.retirementLocation ?? "";
     return message;
   },
 };
@@ -958,16 +859,13 @@ export const MsgSend_SendCredits = {
 messageTypeRegistry.set(MsgSend_SendCredits.$type, MsgSend_SendCredits);
 
 function createBaseMsgSendResponse(): MsgSendResponse {
-  return { $type: 'regen.ecocredit.v1alpha1.MsgSendResponse' };
+  return { $type: "regen.ecocredit.v1alpha1.MsgSendResponse" };
 }
 
 export const MsgSendResponse = {
-  $type: 'regen.ecocredit.v1alpha1.MsgSendResponse' as const,
+  $type: "regen.ecocredit.v1alpha1.MsgSendResponse" as const,
 
-  encode(
-    _: MsgSendResponse,
-    writer: _m0.Writer = _m0.Writer.create(),
-  ): _m0.Writer {
+  encode(_: MsgSendResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     return writer;
   },
 
@@ -987,9 +885,7 @@ export const MsgSendResponse = {
   },
 
   fromJSON(_: any): MsgSendResponse {
-    return {
-      $type: MsgSendResponse.$type,
-    };
+    return { $type: MsgSendResponse.$type };
   },
 
   toJSON(_: MsgSendResponse): unknown {
@@ -997,9 +893,11 @@ export const MsgSendResponse = {
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<MsgSendResponse>, I>>(
-    _: I,
-  ): MsgSendResponse {
+  create(base?: DeepPartial<MsgSendResponse>): MsgSendResponse {
+    return MsgSendResponse.fromPartial(base ?? {});
+  },
+
+  fromPartial(_: DeepPartial<MsgSendResponse>): MsgSendResponse {
     const message = createBaseMsgSendResponse();
     return message;
   },
@@ -1008,28 +906,20 @@ export const MsgSendResponse = {
 messageTypeRegistry.set(MsgSendResponse.$type, MsgSendResponse);
 
 function createBaseMsgRetire(): MsgRetire {
-  return {
-    $type: 'regen.ecocredit.v1alpha1.MsgRetire',
-    holder: '',
-    credits: [],
-    location: '',
-  };
+  return { $type: "regen.ecocredit.v1alpha1.MsgRetire", holder: "", credits: [], location: "" };
 }
 
 export const MsgRetire = {
-  $type: 'regen.ecocredit.v1alpha1.MsgRetire' as const,
+  $type: "regen.ecocredit.v1alpha1.MsgRetire" as const,
 
-  encode(
-    message: MsgRetire,
-    writer: _m0.Writer = _m0.Writer.create(),
-  ): _m0.Writer {
-    if (message.holder !== '') {
+  encode(message: MsgRetire, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+    if (message.holder !== "") {
       writer.uint32(10).string(message.holder);
     }
     for (const v of message.credits) {
       MsgRetire_RetireCredits.encode(v!, writer.uint32(18).fork()).ldelim();
     }
-    if (message.location !== '') {
+    if (message.location !== "") {
       writer.uint32(26).string(message.location);
     }
     return writer;
@@ -1046,9 +936,7 @@ export const MsgRetire = {
           message.holder = reader.string();
           break;
         case 2:
-          message.credits.push(
-            MsgRetire_RetireCredits.decode(reader, reader.uint32()),
-          );
+          message.credits.push(MsgRetire_RetireCredits.decode(reader, reader.uint32()));
           break;
         case 3:
           message.location = reader.string();
@@ -1064,11 +952,11 @@ export const MsgRetire = {
   fromJSON(object: any): MsgRetire {
     return {
       $type: MsgRetire.$type,
-      holder: isSet(object.holder) ? String(object.holder) : '',
+      holder: isSet(object.holder) ? String(object.holder) : "",
       credits: Array.isArray(object?.credits)
         ? object.credits.map((e: any) => MsgRetire_RetireCredits.fromJSON(e))
         : [],
-      location: isSet(object.location) ? String(object.location) : '',
+      location: isSet(object.location) ? String(object.location) : "",
     };
   },
 
@@ -1076,9 +964,7 @@ export const MsgRetire = {
     const obj: any = {};
     message.holder !== undefined && (obj.holder = message.holder);
     if (message.credits) {
-      obj.credits = message.credits.map(e =>
-        e ? MsgRetire_RetireCredits.toJSON(e) : undefined,
-      );
+      obj.credits = message.credits.map((e) => e ? MsgRetire_RetireCredits.toJSON(e) : undefined);
     } else {
       obj.credits = [];
     }
@@ -1086,14 +972,15 @@ export const MsgRetire = {
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<MsgRetire>, I>>(
-    object: I,
-  ): MsgRetire {
+  create(base?: DeepPartial<MsgRetire>): MsgRetire {
+    return MsgRetire.fromPartial(base ?? {});
+  },
+
+  fromPartial(object: DeepPartial<MsgRetire>): MsgRetire {
     const message = createBaseMsgRetire();
-    message.holder = object.holder ?? '';
-    message.credits =
-      object.credits?.map(e => MsgRetire_RetireCredits.fromPartial(e)) || [];
-    message.location = object.location ?? '';
+    message.holder = object.holder ?? "";
+    message.credits = object.credits?.map((e) => MsgRetire_RetireCredits.fromPartial(e)) || [];
+    message.location = object.location ?? "";
     return message;
   },
 };
@@ -1101,33 +988,23 @@ export const MsgRetire = {
 messageTypeRegistry.set(MsgRetire.$type, MsgRetire);
 
 function createBaseMsgRetire_RetireCredits(): MsgRetire_RetireCredits {
-  return {
-    $type: 'regen.ecocredit.v1alpha1.MsgRetire.RetireCredits',
-    batchDenom: '',
-    amount: '',
-  };
+  return { $type: "regen.ecocredit.v1alpha1.MsgRetire.RetireCredits", batchDenom: "", amount: "" };
 }
 
 export const MsgRetire_RetireCredits = {
-  $type: 'regen.ecocredit.v1alpha1.MsgRetire.RetireCredits' as const,
+  $type: "regen.ecocredit.v1alpha1.MsgRetire.RetireCredits" as const,
 
-  encode(
-    message: MsgRetire_RetireCredits,
-    writer: _m0.Writer = _m0.Writer.create(),
-  ): _m0.Writer {
-    if (message.batchDenom !== '') {
+  encode(message: MsgRetire_RetireCredits, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+    if (message.batchDenom !== "") {
       writer.uint32(10).string(message.batchDenom);
     }
-    if (message.amount !== '') {
+    if (message.amount !== "") {
       writer.uint32(18).string(message.amount);
     }
     return writer;
   },
 
-  decode(
-    input: _m0.Reader | Uint8Array,
-    length?: number,
-  ): MsgRetire_RetireCredits {
+  decode(input: _m0.Reader | Uint8Array, length?: number): MsgRetire_RetireCredits {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMsgRetire_RetireCredits();
@@ -1151,8 +1028,8 @@ export const MsgRetire_RetireCredits = {
   fromJSON(object: any): MsgRetire_RetireCredits {
     return {
       $type: MsgRetire_RetireCredits.$type,
-      batchDenom: isSet(object.batchDenom) ? String(object.batchDenom) : '',
-      amount: isSet(object.amount) ? String(object.amount) : '',
+      batchDenom: isSet(object.batchDenom) ? String(object.batchDenom) : "",
+      amount: isSet(object.amount) ? String(object.amount) : "",
     };
   },
 
@@ -1163,12 +1040,14 @@ export const MsgRetire_RetireCredits = {
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<MsgRetire_RetireCredits>, I>>(
-    object: I,
-  ): MsgRetire_RetireCredits {
+  create(base?: DeepPartial<MsgRetire_RetireCredits>): MsgRetire_RetireCredits {
+    return MsgRetire_RetireCredits.fromPartial(base ?? {});
+  },
+
+  fromPartial(object: DeepPartial<MsgRetire_RetireCredits>): MsgRetire_RetireCredits {
     const message = createBaseMsgRetire_RetireCredits();
-    message.batchDenom = object.batchDenom ?? '';
-    message.amount = object.amount ?? '';
+    message.batchDenom = object.batchDenom ?? "";
+    message.amount = object.amount ?? "";
     return message;
   },
 };
@@ -1176,16 +1055,13 @@ export const MsgRetire_RetireCredits = {
 messageTypeRegistry.set(MsgRetire_RetireCredits.$type, MsgRetire_RetireCredits);
 
 function createBaseMsgRetireResponse(): MsgRetireResponse {
-  return { $type: 'regen.ecocredit.v1alpha1.MsgRetireResponse' };
+  return { $type: "regen.ecocredit.v1alpha1.MsgRetireResponse" };
 }
 
 export const MsgRetireResponse = {
-  $type: 'regen.ecocredit.v1alpha1.MsgRetireResponse' as const,
+  $type: "regen.ecocredit.v1alpha1.MsgRetireResponse" as const,
 
-  encode(
-    _: MsgRetireResponse,
-    writer: _m0.Writer = _m0.Writer.create(),
-  ): _m0.Writer {
+  encode(_: MsgRetireResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     return writer;
   },
 
@@ -1205,9 +1081,7 @@ export const MsgRetireResponse = {
   },
 
   fromJSON(_: any): MsgRetireResponse {
-    return {
-      $type: MsgRetireResponse.$type,
-    };
+    return { $type: MsgRetireResponse.$type };
   },
 
   toJSON(_: MsgRetireResponse): unknown {
@@ -1215,9 +1089,11 @@ export const MsgRetireResponse = {
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<MsgRetireResponse>, I>>(
-    _: I,
-  ): MsgRetireResponse {
+  create(base?: DeepPartial<MsgRetireResponse>): MsgRetireResponse {
+    return MsgRetireResponse.fromPartial(base ?? {});
+  },
+
+  fromPartial(_: DeepPartial<MsgRetireResponse>): MsgRetireResponse {
     const message = createBaseMsgRetireResponse();
     return message;
   },
@@ -1226,21 +1102,14 @@ export const MsgRetireResponse = {
 messageTypeRegistry.set(MsgRetireResponse.$type, MsgRetireResponse);
 
 function createBaseMsgCancel(): MsgCancel {
-  return {
-    $type: 'regen.ecocredit.v1alpha1.MsgCancel',
-    holder: '',
-    credits: [],
-  };
+  return { $type: "regen.ecocredit.v1alpha1.MsgCancel", holder: "", credits: [] };
 }
 
 export const MsgCancel = {
-  $type: 'regen.ecocredit.v1alpha1.MsgCancel' as const,
+  $type: "regen.ecocredit.v1alpha1.MsgCancel" as const,
 
-  encode(
-    message: MsgCancel,
-    writer: _m0.Writer = _m0.Writer.create(),
-  ): _m0.Writer {
-    if (message.holder !== '') {
+  encode(message: MsgCancel, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+    if (message.holder !== "") {
       writer.uint32(10).string(message.holder);
     }
     for (const v of message.credits) {
@@ -1260,9 +1129,7 @@ export const MsgCancel = {
           message.holder = reader.string();
           break;
         case 2:
-          message.credits.push(
-            MsgCancel_CancelCredits.decode(reader, reader.uint32()),
-          );
+          message.credits.push(MsgCancel_CancelCredits.decode(reader, reader.uint32()));
           break;
         default:
           reader.skipType(tag & 7);
@@ -1275,7 +1142,7 @@ export const MsgCancel = {
   fromJSON(object: any): MsgCancel {
     return {
       $type: MsgCancel.$type,
-      holder: isSet(object.holder) ? String(object.holder) : '',
+      holder: isSet(object.holder) ? String(object.holder) : "",
       credits: Array.isArray(object?.credits)
         ? object.credits.map((e: any) => MsgCancel_CancelCredits.fromJSON(e))
         : [],
@@ -1286,22 +1153,21 @@ export const MsgCancel = {
     const obj: any = {};
     message.holder !== undefined && (obj.holder = message.holder);
     if (message.credits) {
-      obj.credits = message.credits.map(e =>
-        e ? MsgCancel_CancelCredits.toJSON(e) : undefined,
-      );
+      obj.credits = message.credits.map((e) => e ? MsgCancel_CancelCredits.toJSON(e) : undefined);
     } else {
       obj.credits = [];
     }
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<MsgCancel>, I>>(
-    object: I,
-  ): MsgCancel {
+  create(base?: DeepPartial<MsgCancel>): MsgCancel {
+    return MsgCancel.fromPartial(base ?? {});
+  },
+
+  fromPartial(object: DeepPartial<MsgCancel>): MsgCancel {
     const message = createBaseMsgCancel();
-    message.holder = object.holder ?? '';
-    message.credits =
-      object.credits?.map(e => MsgCancel_CancelCredits.fromPartial(e)) || [];
+    message.holder = object.holder ?? "";
+    message.credits = object.credits?.map((e) => MsgCancel_CancelCredits.fromPartial(e)) || [];
     return message;
   },
 };
@@ -1309,33 +1175,23 @@ export const MsgCancel = {
 messageTypeRegistry.set(MsgCancel.$type, MsgCancel);
 
 function createBaseMsgCancel_CancelCredits(): MsgCancel_CancelCredits {
-  return {
-    $type: 'regen.ecocredit.v1alpha1.MsgCancel.CancelCredits',
-    batchDenom: '',
-    amount: '',
-  };
+  return { $type: "regen.ecocredit.v1alpha1.MsgCancel.CancelCredits", batchDenom: "", amount: "" };
 }
 
 export const MsgCancel_CancelCredits = {
-  $type: 'regen.ecocredit.v1alpha1.MsgCancel.CancelCredits' as const,
+  $type: "regen.ecocredit.v1alpha1.MsgCancel.CancelCredits" as const,
 
-  encode(
-    message: MsgCancel_CancelCredits,
-    writer: _m0.Writer = _m0.Writer.create(),
-  ): _m0.Writer {
-    if (message.batchDenom !== '') {
+  encode(message: MsgCancel_CancelCredits, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+    if (message.batchDenom !== "") {
       writer.uint32(10).string(message.batchDenom);
     }
-    if (message.amount !== '') {
+    if (message.amount !== "") {
       writer.uint32(18).string(message.amount);
     }
     return writer;
   },
 
-  decode(
-    input: _m0.Reader | Uint8Array,
-    length?: number,
-  ): MsgCancel_CancelCredits {
+  decode(input: _m0.Reader | Uint8Array, length?: number): MsgCancel_CancelCredits {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMsgCancel_CancelCredits();
@@ -1359,8 +1215,8 @@ export const MsgCancel_CancelCredits = {
   fromJSON(object: any): MsgCancel_CancelCredits {
     return {
       $type: MsgCancel_CancelCredits.$type,
-      batchDenom: isSet(object.batchDenom) ? String(object.batchDenom) : '',
-      amount: isSet(object.amount) ? String(object.amount) : '',
+      batchDenom: isSet(object.batchDenom) ? String(object.batchDenom) : "",
+      amount: isSet(object.amount) ? String(object.amount) : "",
     };
   },
 
@@ -1371,12 +1227,14 @@ export const MsgCancel_CancelCredits = {
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<MsgCancel_CancelCredits>, I>>(
-    object: I,
-  ): MsgCancel_CancelCredits {
+  create(base?: DeepPartial<MsgCancel_CancelCredits>): MsgCancel_CancelCredits {
+    return MsgCancel_CancelCredits.fromPartial(base ?? {});
+  },
+
+  fromPartial(object: DeepPartial<MsgCancel_CancelCredits>): MsgCancel_CancelCredits {
     const message = createBaseMsgCancel_CancelCredits();
-    message.batchDenom = object.batchDenom ?? '';
-    message.amount = object.amount ?? '';
+    message.batchDenom = object.batchDenom ?? "";
+    message.amount = object.amount ?? "";
     return message;
   },
 };
@@ -1384,16 +1242,13 @@ export const MsgCancel_CancelCredits = {
 messageTypeRegistry.set(MsgCancel_CancelCredits.$type, MsgCancel_CancelCredits);
 
 function createBaseMsgCancelResponse(): MsgCancelResponse {
-  return { $type: 'regen.ecocredit.v1alpha1.MsgCancelResponse' };
+  return { $type: "regen.ecocredit.v1alpha1.MsgCancelResponse" };
 }
 
 export const MsgCancelResponse = {
-  $type: 'regen.ecocredit.v1alpha1.MsgCancelResponse' as const,
+  $type: "regen.ecocredit.v1alpha1.MsgCancelResponse" as const,
 
-  encode(
-    _: MsgCancelResponse,
-    writer: _m0.Writer = _m0.Writer.create(),
-  ): _m0.Writer {
+  encode(_: MsgCancelResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     return writer;
   },
 
@@ -1413,9 +1268,7 @@ export const MsgCancelResponse = {
   },
 
   fromJSON(_: any): MsgCancelResponse {
-    return {
-      $type: MsgCancelResponse.$type,
-    };
+    return { $type: MsgCancelResponse.$type };
   },
 
   toJSON(_: MsgCancelResponse): unknown {
@@ -1423,9 +1276,11 @@ export const MsgCancelResponse = {
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<MsgCancelResponse>, I>>(
-    _: I,
-  ): MsgCancelResponse {
+  create(base?: DeepPartial<MsgCancelResponse>): MsgCancelResponse {
+    return MsgCancelResponse.fromPartial(base ?? {});
+  },
+
+  fromPartial(_: DeepPartial<MsgCancelResponse>): MsgCancelResponse {
     const message = createBaseMsgCancelResponse();
     return message;
   },
@@ -1434,28 +1289,20 @@ export const MsgCancelResponse = {
 messageTypeRegistry.set(MsgCancelResponse.$type, MsgCancelResponse);
 
 function createBaseMsgUpdateClassAdmin(): MsgUpdateClassAdmin {
-  return {
-    $type: 'regen.ecocredit.v1alpha1.MsgUpdateClassAdmin',
-    admin: '',
-    classId: '',
-    newAdmin: '',
-  };
+  return { $type: "regen.ecocredit.v1alpha1.MsgUpdateClassAdmin", admin: "", classId: "", newAdmin: "" };
 }
 
 export const MsgUpdateClassAdmin = {
-  $type: 'regen.ecocredit.v1alpha1.MsgUpdateClassAdmin' as const,
+  $type: "regen.ecocredit.v1alpha1.MsgUpdateClassAdmin" as const,
 
-  encode(
-    message: MsgUpdateClassAdmin,
-    writer: _m0.Writer = _m0.Writer.create(),
-  ): _m0.Writer {
-    if (message.admin !== '') {
+  encode(message: MsgUpdateClassAdmin, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+    if (message.admin !== "") {
       writer.uint32(10).string(message.admin);
     }
-    if (message.classId !== '') {
+    if (message.classId !== "") {
       writer.uint32(18).string(message.classId);
     }
-    if (message.newAdmin !== '') {
+    if (message.newAdmin !== "") {
       writer.uint32(26).string(message.newAdmin);
     }
     return writer;
@@ -1488,9 +1335,9 @@ export const MsgUpdateClassAdmin = {
   fromJSON(object: any): MsgUpdateClassAdmin {
     return {
       $type: MsgUpdateClassAdmin.$type,
-      admin: isSet(object.admin) ? String(object.admin) : '',
-      classId: isSet(object.classId) ? String(object.classId) : '',
-      newAdmin: isSet(object.newAdmin) ? String(object.newAdmin) : '',
+      admin: isSet(object.admin) ? String(object.admin) : "",
+      classId: isSet(object.classId) ? String(object.classId) : "",
+      newAdmin: isSet(object.newAdmin) ? String(object.newAdmin) : "",
     };
   },
 
@@ -1502,13 +1349,15 @@ export const MsgUpdateClassAdmin = {
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<MsgUpdateClassAdmin>, I>>(
-    object: I,
-  ): MsgUpdateClassAdmin {
+  create(base?: DeepPartial<MsgUpdateClassAdmin>): MsgUpdateClassAdmin {
+    return MsgUpdateClassAdmin.fromPartial(base ?? {});
+  },
+
+  fromPartial(object: DeepPartial<MsgUpdateClassAdmin>): MsgUpdateClassAdmin {
     const message = createBaseMsgUpdateClassAdmin();
-    message.admin = object.admin ?? '';
-    message.classId = object.classId ?? '';
-    message.newAdmin = object.newAdmin ?? '';
+    message.admin = object.admin ?? "";
+    message.classId = object.classId ?? "";
+    message.newAdmin = object.newAdmin ?? "";
     return message;
   },
 };
@@ -1516,23 +1365,17 @@ export const MsgUpdateClassAdmin = {
 messageTypeRegistry.set(MsgUpdateClassAdmin.$type, MsgUpdateClassAdmin);
 
 function createBaseMsgUpdateClassAdminResponse(): MsgUpdateClassAdminResponse {
-  return { $type: 'regen.ecocredit.v1alpha1.MsgUpdateClassAdminResponse' };
+  return { $type: "regen.ecocredit.v1alpha1.MsgUpdateClassAdminResponse" };
 }
 
 export const MsgUpdateClassAdminResponse = {
-  $type: 'regen.ecocredit.v1alpha1.MsgUpdateClassAdminResponse' as const,
+  $type: "regen.ecocredit.v1alpha1.MsgUpdateClassAdminResponse" as const,
 
-  encode(
-    _: MsgUpdateClassAdminResponse,
-    writer: _m0.Writer = _m0.Writer.create(),
-  ): _m0.Writer {
+  encode(_: MsgUpdateClassAdminResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     return writer;
   },
 
-  decode(
-    input: _m0.Reader | Uint8Array,
-    length?: number,
-  ): MsgUpdateClassAdminResponse {
+  decode(input: _m0.Reader | Uint8Array, length?: number): MsgUpdateClassAdminResponse {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMsgUpdateClassAdminResponse();
@@ -1548,9 +1391,7 @@ export const MsgUpdateClassAdminResponse = {
   },
 
   fromJSON(_: any): MsgUpdateClassAdminResponse {
-    return {
-      $type: MsgUpdateClassAdminResponse.$type,
-    };
+    return { $type: MsgUpdateClassAdminResponse.$type };
   },
 
   toJSON(_: MsgUpdateClassAdminResponse): unknown {
@@ -1558,39 +1399,30 @@ export const MsgUpdateClassAdminResponse = {
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<MsgUpdateClassAdminResponse>, I>>(
-    _: I,
-  ): MsgUpdateClassAdminResponse {
+  create(base?: DeepPartial<MsgUpdateClassAdminResponse>): MsgUpdateClassAdminResponse {
+    return MsgUpdateClassAdminResponse.fromPartial(base ?? {});
+  },
+
+  fromPartial(_: DeepPartial<MsgUpdateClassAdminResponse>): MsgUpdateClassAdminResponse {
     const message = createBaseMsgUpdateClassAdminResponse();
     return message;
   },
 };
 
-messageTypeRegistry.set(
-  MsgUpdateClassAdminResponse.$type,
-  MsgUpdateClassAdminResponse,
-);
+messageTypeRegistry.set(MsgUpdateClassAdminResponse.$type, MsgUpdateClassAdminResponse);
 
 function createBaseMsgUpdateClassIssuers(): MsgUpdateClassIssuers {
-  return {
-    $type: 'regen.ecocredit.v1alpha1.MsgUpdateClassIssuers',
-    admin: '',
-    classId: '',
-    issuers: [],
-  };
+  return { $type: "regen.ecocredit.v1alpha1.MsgUpdateClassIssuers", admin: "", classId: "", issuers: [] };
 }
 
 export const MsgUpdateClassIssuers = {
-  $type: 'regen.ecocredit.v1alpha1.MsgUpdateClassIssuers' as const,
+  $type: "regen.ecocredit.v1alpha1.MsgUpdateClassIssuers" as const,
 
-  encode(
-    message: MsgUpdateClassIssuers,
-    writer: _m0.Writer = _m0.Writer.create(),
-  ): _m0.Writer {
-    if (message.admin !== '') {
+  encode(message: MsgUpdateClassIssuers, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+    if (message.admin !== "") {
       writer.uint32(10).string(message.admin);
     }
-    if (message.classId !== '') {
+    if (message.classId !== "") {
       writer.uint32(18).string(message.classId);
     }
     for (const v of message.issuers) {
@@ -1599,10 +1431,7 @@ export const MsgUpdateClassIssuers = {
     return writer;
   },
 
-  decode(
-    input: _m0.Reader | Uint8Array,
-    length?: number,
-  ): MsgUpdateClassIssuers {
+  decode(input: _m0.Reader | Uint8Array, length?: number): MsgUpdateClassIssuers {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMsgUpdateClassIssuers();
@@ -1629,11 +1458,9 @@ export const MsgUpdateClassIssuers = {
   fromJSON(object: any): MsgUpdateClassIssuers {
     return {
       $type: MsgUpdateClassIssuers.$type,
-      admin: isSet(object.admin) ? String(object.admin) : '',
-      classId: isSet(object.classId) ? String(object.classId) : '',
-      issuers: Array.isArray(object?.issuers)
-        ? object.issuers.map((e: any) => String(e))
-        : [],
+      admin: isSet(object.admin) ? String(object.admin) : "",
+      classId: isSet(object.classId) ? String(object.classId) : "",
+      issuers: Array.isArray(object?.issuers) ? object.issuers.map((e: any) => String(e)) : [],
     };
   },
 
@@ -1642,20 +1469,22 @@ export const MsgUpdateClassIssuers = {
     message.admin !== undefined && (obj.admin = message.admin);
     message.classId !== undefined && (obj.classId = message.classId);
     if (message.issuers) {
-      obj.issuers = message.issuers.map(e => e);
+      obj.issuers = message.issuers.map((e) => e);
     } else {
       obj.issuers = [];
     }
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<MsgUpdateClassIssuers>, I>>(
-    object: I,
-  ): MsgUpdateClassIssuers {
+  create(base?: DeepPartial<MsgUpdateClassIssuers>): MsgUpdateClassIssuers {
+    return MsgUpdateClassIssuers.fromPartial(base ?? {});
+  },
+
+  fromPartial(object: DeepPartial<MsgUpdateClassIssuers>): MsgUpdateClassIssuers {
     const message = createBaseMsgUpdateClassIssuers();
-    message.admin = object.admin ?? '';
-    message.classId = object.classId ?? '';
-    message.issuers = object.issuers?.map(e => e) || [];
+    message.admin = object.admin ?? "";
+    message.classId = object.classId ?? "";
+    message.issuers = object.issuers?.map((e) => e) || [];
     return message;
   },
 };
@@ -1663,23 +1492,17 @@ export const MsgUpdateClassIssuers = {
 messageTypeRegistry.set(MsgUpdateClassIssuers.$type, MsgUpdateClassIssuers);
 
 function createBaseMsgUpdateClassIssuersResponse(): MsgUpdateClassIssuersResponse {
-  return { $type: 'regen.ecocredit.v1alpha1.MsgUpdateClassIssuersResponse' };
+  return { $type: "regen.ecocredit.v1alpha1.MsgUpdateClassIssuersResponse" };
 }
 
 export const MsgUpdateClassIssuersResponse = {
-  $type: 'regen.ecocredit.v1alpha1.MsgUpdateClassIssuersResponse' as const,
+  $type: "regen.ecocredit.v1alpha1.MsgUpdateClassIssuersResponse" as const,
 
-  encode(
-    _: MsgUpdateClassIssuersResponse,
-    writer: _m0.Writer = _m0.Writer.create(),
-  ): _m0.Writer {
+  encode(_: MsgUpdateClassIssuersResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     return writer;
   },
 
-  decode(
-    input: _m0.Reader | Uint8Array,
-    length?: number,
-  ): MsgUpdateClassIssuersResponse {
+  decode(input: _m0.Reader | Uint8Array, length?: number): MsgUpdateClassIssuersResponse {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMsgUpdateClassIssuersResponse();
@@ -1695,9 +1518,7 @@ export const MsgUpdateClassIssuersResponse = {
   },
 
   fromJSON(_: any): MsgUpdateClassIssuersResponse {
-    return {
-      $type: MsgUpdateClassIssuersResponse.$type,
-    };
+    return { $type: MsgUpdateClassIssuersResponse.$type };
   },
 
   toJSON(_: MsgUpdateClassIssuersResponse): unknown {
@@ -1705,39 +1526,35 @@ export const MsgUpdateClassIssuersResponse = {
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<MsgUpdateClassIssuersResponse>, I>>(
-    _: I,
-  ): MsgUpdateClassIssuersResponse {
+  create(base?: DeepPartial<MsgUpdateClassIssuersResponse>): MsgUpdateClassIssuersResponse {
+    return MsgUpdateClassIssuersResponse.fromPartial(base ?? {});
+  },
+
+  fromPartial(_: DeepPartial<MsgUpdateClassIssuersResponse>): MsgUpdateClassIssuersResponse {
     const message = createBaseMsgUpdateClassIssuersResponse();
     return message;
   },
 };
 
-messageTypeRegistry.set(
-  MsgUpdateClassIssuersResponse.$type,
-  MsgUpdateClassIssuersResponse,
-);
+messageTypeRegistry.set(MsgUpdateClassIssuersResponse.$type, MsgUpdateClassIssuersResponse);
 
 function createBaseMsgUpdateClassMetadata(): MsgUpdateClassMetadata {
   return {
-    $type: 'regen.ecocredit.v1alpha1.MsgUpdateClassMetadata',
-    admin: '',
-    classId: '',
+    $type: "regen.ecocredit.v1alpha1.MsgUpdateClassMetadata",
+    admin: "",
+    classId: "",
     metadata: new Uint8Array(),
   };
 }
 
 export const MsgUpdateClassMetadata = {
-  $type: 'regen.ecocredit.v1alpha1.MsgUpdateClassMetadata' as const,
+  $type: "regen.ecocredit.v1alpha1.MsgUpdateClassMetadata" as const,
 
-  encode(
-    message: MsgUpdateClassMetadata,
-    writer: _m0.Writer = _m0.Writer.create(),
-  ): _m0.Writer {
-    if (message.admin !== '') {
+  encode(message: MsgUpdateClassMetadata, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+    if (message.admin !== "") {
       writer.uint32(10).string(message.admin);
     }
-    if (message.classId !== '') {
+    if (message.classId !== "") {
       writer.uint32(18).string(message.classId);
     }
     if (message.metadata.length !== 0) {
@@ -1746,10 +1563,7 @@ export const MsgUpdateClassMetadata = {
     return writer;
   },
 
-  decode(
-    input: _m0.Reader | Uint8Array,
-    length?: number,
-  ): MsgUpdateClassMetadata {
+  decode(input: _m0.Reader | Uint8Array, length?: number): MsgUpdateClassMetadata {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMsgUpdateClassMetadata();
@@ -1776,11 +1590,9 @@ export const MsgUpdateClassMetadata = {
   fromJSON(object: any): MsgUpdateClassMetadata {
     return {
       $type: MsgUpdateClassMetadata.$type,
-      admin: isSet(object.admin) ? String(object.admin) : '',
-      classId: isSet(object.classId) ? String(object.classId) : '',
-      metadata: isSet(object.metadata)
-        ? bytesFromBase64(object.metadata)
-        : new Uint8Array(),
+      admin: isSet(object.admin) ? String(object.admin) : "",
+      classId: isSet(object.classId) ? String(object.classId) : "",
+      metadata: isSet(object.metadata) ? bytesFromBase64(object.metadata) : new Uint8Array(),
     };
   },
 
@@ -1789,18 +1601,18 @@ export const MsgUpdateClassMetadata = {
     message.admin !== undefined && (obj.admin = message.admin);
     message.classId !== undefined && (obj.classId = message.classId);
     message.metadata !== undefined &&
-      (obj.metadata = base64FromBytes(
-        message.metadata !== undefined ? message.metadata : new Uint8Array(),
-      ));
+      (obj.metadata = base64FromBytes(message.metadata !== undefined ? message.metadata : new Uint8Array()));
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<MsgUpdateClassMetadata>, I>>(
-    object: I,
-  ): MsgUpdateClassMetadata {
+  create(base?: DeepPartial<MsgUpdateClassMetadata>): MsgUpdateClassMetadata {
+    return MsgUpdateClassMetadata.fromPartial(base ?? {});
+  },
+
+  fromPartial(object: DeepPartial<MsgUpdateClassMetadata>): MsgUpdateClassMetadata {
     const message = createBaseMsgUpdateClassMetadata();
-    message.admin = object.admin ?? '';
-    message.classId = object.classId ?? '';
+    message.admin = object.admin ?? "";
+    message.classId = object.classId ?? "";
     message.metadata = object.metadata ?? new Uint8Array();
     return message;
   },
@@ -1809,23 +1621,17 @@ export const MsgUpdateClassMetadata = {
 messageTypeRegistry.set(MsgUpdateClassMetadata.$type, MsgUpdateClassMetadata);
 
 function createBaseMsgUpdateClassMetadataResponse(): MsgUpdateClassMetadataResponse {
-  return { $type: 'regen.ecocredit.v1alpha1.MsgUpdateClassMetadataResponse' };
+  return { $type: "regen.ecocredit.v1alpha1.MsgUpdateClassMetadataResponse" };
 }
 
 export const MsgUpdateClassMetadataResponse = {
-  $type: 'regen.ecocredit.v1alpha1.MsgUpdateClassMetadataResponse' as const,
+  $type: "regen.ecocredit.v1alpha1.MsgUpdateClassMetadataResponse" as const,
 
-  encode(
-    _: MsgUpdateClassMetadataResponse,
-    writer: _m0.Writer = _m0.Writer.create(),
-  ): _m0.Writer {
+  encode(_: MsgUpdateClassMetadataResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     return writer;
   },
 
-  decode(
-    input: _m0.Reader | Uint8Array,
-    length?: number,
-  ): MsgUpdateClassMetadataResponse {
+  decode(input: _m0.Reader | Uint8Array, length?: number): MsgUpdateClassMetadataResponse {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMsgUpdateClassMetadataResponse();
@@ -1841,9 +1647,7 @@ export const MsgUpdateClassMetadataResponse = {
   },
 
   fromJSON(_: any): MsgUpdateClassMetadataResponse {
-    return {
-      $type: MsgUpdateClassMetadataResponse.$type,
-    };
+    return { $type: MsgUpdateClassMetadataResponse.$type };
   },
 
   toJSON(_: MsgUpdateClassMetadataResponse): unknown {
@@ -1851,18 +1655,17 @@ export const MsgUpdateClassMetadataResponse = {
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<MsgUpdateClassMetadataResponse>, I>>(
-    _: I,
-  ): MsgUpdateClassMetadataResponse {
+  create(base?: DeepPartial<MsgUpdateClassMetadataResponse>): MsgUpdateClassMetadataResponse {
+    return MsgUpdateClassMetadataResponse.fromPartial(base ?? {});
+  },
+
+  fromPartial(_: DeepPartial<MsgUpdateClassMetadataResponse>): MsgUpdateClassMetadataResponse {
     const message = createBaseMsgUpdateClassMetadataResponse();
     return message;
   },
 };
 
-messageTypeRegistry.set(
-  MsgUpdateClassMetadataResponse.$type,
-  MsgUpdateClassMetadataResponse,
-);
+messageTypeRegistry.set(MsgUpdateClassMetadataResponse.$type, MsgUpdateClassMetadataResponse);
 
 /** Msg is the regen.ecocredit.v1alpha1 Msg service. */
 export interface Msg {
@@ -1870,17 +1673,13 @@ export interface Msg {
    * CreateClass creates a new credit class with an approved list of issuers and
    * optional metadata.
    */
-  CreateClass(
-    request: DeepPartial<MsgCreateClass>,
-  ): Promise<MsgCreateClassResponse>;
+  CreateClass(request: DeepPartial<MsgCreateClass>): Promise<MsgCreateClassResponse>;
   /**
    * CreateBatch creates a new batch of credits for an existing credit class.
    * This will create a new batch denom with a fixed supply. Issued credits can
    * be distributed to recipients in either tradable or retired form.
    */
-  CreateBatch(
-    request: DeepPartial<MsgCreateBatch>,
-  ): Promise<MsgCreateBatchResponse>;
+  CreateBatch(request: DeepPartial<MsgCreateBatch>): Promise<MsgCreateBatchResponse>;
   /**
    * Send sends tradable credits from one account to another account. Sent
    * credits can either be tradable or retired on receipt.
@@ -1895,22 +1694,18 @@ export interface Msg {
    */
   Cancel(request: DeepPartial<MsgCancel>): Promise<MsgCancelResponse>;
   /** UpdateClassAdmin updates the credit class admin */
-  UpdateClassAdmin(
-    request: DeepPartial<MsgUpdateClassAdmin>,
-  ): Promise<MsgUpdateClassAdminResponse>;
+  UpdateClassAdmin(request: DeepPartial<MsgUpdateClassAdmin>): Promise<MsgUpdateClassAdminResponse>;
   /** UpdateClassIssuers updates the credit class issuer list */
-  UpdateClassIssuers(
-    request: DeepPartial<MsgUpdateClassIssuers>,
-  ): Promise<MsgUpdateClassIssuersResponse>;
+  UpdateClassIssuers(request: DeepPartial<MsgUpdateClassIssuers>): Promise<MsgUpdateClassIssuersResponse>;
   /** UpdateClassMetadata updates the credit class metadata */
-  UpdateClassMetadata(
-    request: DeepPartial<MsgUpdateClassMetadata>,
-  ): Promise<MsgUpdateClassMetadataResponse>;
+  UpdateClassMetadata(request: DeepPartial<MsgUpdateClassMetadata>): Promise<MsgUpdateClassMetadataResponse>;
 }
 
 export class MsgClientImpl implements Msg {
   private readonly rpc: Rpc;
-  constructor(rpc: Rpc) {
+  private readonly service: string;
+  constructor(rpc: Rpc, opts?: { service?: string }) {
+    this.service = opts?.service || "regen.ecocredit.v1alpha1.Msg";
     this.rpc = rpc;
     this.CreateClass = this.CreateClass.bind(this);
     this.CreateBatch = this.CreateBatch.bind(this);
@@ -1921,190 +1716,123 @@ export class MsgClientImpl implements Msg {
     this.UpdateClassIssuers = this.UpdateClassIssuers.bind(this);
     this.UpdateClassMetadata = this.UpdateClassMetadata.bind(this);
   }
-  CreateClass(
-    request: DeepPartial<MsgCreateClass>,
-  ): Promise<MsgCreateClassResponse> {
+  CreateClass(request: DeepPartial<MsgCreateClass>): Promise<MsgCreateClassResponse> {
     const fromPartial = MsgCreateClass.fromPartial(request);
     const data = MsgCreateClass.encode(fromPartial).finish();
-    const promise = this.rpc.request(
-      'regen.ecocredit.v1alpha1.Msg',
-      'CreateClass',
-      data,
-    );
-    return promise.then(data =>
-      MsgCreateClassResponse.decode(new _m0.Reader(data)),
-    );
+    const promise = this.rpc.request(this.service, "CreateClass", data);
+    return promise.then((data) => MsgCreateClassResponse.decode(new _m0.Reader(data)));
   }
 
-  CreateBatch(
-    request: DeepPartial<MsgCreateBatch>,
-  ): Promise<MsgCreateBatchResponse> {
+  CreateBatch(request: DeepPartial<MsgCreateBatch>): Promise<MsgCreateBatchResponse> {
     const fromPartial = MsgCreateBatch.fromPartial(request);
     const data = MsgCreateBatch.encode(fromPartial).finish();
-    const promise = this.rpc.request(
-      'regen.ecocredit.v1alpha1.Msg',
-      'CreateBatch',
-      data,
-    );
-    return promise.then(data =>
-      MsgCreateBatchResponse.decode(new _m0.Reader(data)),
-    );
+    const promise = this.rpc.request(this.service, "CreateBatch", data);
+    return promise.then((data) => MsgCreateBatchResponse.decode(new _m0.Reader(data)));
   }
 
   Send(request: DeepPartial<MsgSend>): Promise<MsgSendResponse> {
     const fromPartial = MsgSend.fromPartial(request);
     const data = MsgSend.encode(fromPartial).finish();
-    const promise = this.rpc.request(
-      'regen.ecocredit.v1alpha1.Msg',
-      'Send',
-      data,
-    );
-    return promise.then(data => MsgSendResponse.decode(new _m0.Reader(data)));
+    const promise = this.rpc.request(this.service, "Send", data);
+    return promise.then((data) => MsgSendResponse.decode(new _m0.Reader(data)));
   }
 
   Retire(request: DeepPartial<MsgRetire>): Promise<MsgRetireResponse> {
     const fromPartial = MsgRetire.fromPartial(request);
     const data = MsgRetire.encode(fromPartial).finish();
-    const promise = this.rpc.request(
-      'regen.ecocredit.v1alpha1.Msg',
-      'Retire',
-      data,
-    );
-    return promise.then(data => MsgRetireResponse.decode(new _m0.Reader(data)));
+    const promise = this.rpc.request(this.service, "Retire", data);
+    return promise.then((data) => MsgRetireResponse.decode(new _m0.Reader(data)));
   }
 
   Cancel(request: DeepPartial<MsgCancel>): Promise<MsgCancelResponse> {
     const fromPartial = MsgCancel.fromPartial(request);
     const data = MsgCancel.encode(fromPartial).finish();
-    const promise = this.rpc.request(
-      'regen.ecocredit.v1alpha1.Msg',
-      'Cancel',
-      data,
-    );
-    return promise.then(data => MsgCancelResponse.decode(new _m0.Reader(data)));
+    const promise = this.rpc.request(this.service, "Cancel", data);
+    return promise.then((data) => MsgCancelResponse.decode(new _m0.Reader(data)));
   }
 
-  UpdateClassAdmin(
-    request: DeepPartial<MsgUpdateClassAdmin>,
-  ): Promise<MsgUpdateClassAdminResponse> {
+  UpdateClassAdmin(request: DeepPartial<MsgUpdateClassAdmin>): Promise<MsgUpdateClassAdminResponse> {
     const fromPartial = MsgUpdateClassAdmin.fromPartial(request);
     const data = MsgUpdateClassAdmin.encode(fromPartial).finish();
-    const promise = this.rpc.request(
-      'regen.ecocredit.v1alpha1.Msg',
-      'UpdateClassAdmin',
-      data,
-    );
-    return promise.then(data =>
-      MsgUpdateClassAdminResponse.decode(new _m0.Reader(data)),
-    );
+    const promise = this.rpc.request(this.service, "UpdateClassAdmin", data);
+    return promise.then((data) => MsgUpdateClassAdminResponse.decode(new _m0.Reader(data)));
   }
 
-  UpdateClassIssuers(
-    request: DeepPartial<MsgUpdateClassIssuers>,
-  ): Promise<MsgUpdateClassIssuersResponse> {
+  UpdateClassIssuers(request: DeepPartial<MsgUpdateClassIssuers>): Promise<MsgUpdateClassIssuersResponse> {
     const fromPartial = MsgUpdateClassIssuers.fromPartial(request);
     const data = MsgUpdateClassIssuers.encode(fromPartial).finish();
-    const promise = this.rpc.request(
-      'regen.ecocredit.v1alpha1.Msg',
-      'UpdateClassIssuers',
-      data,
-    );
-    return promise.then(data =>
-      MsgUpdateClassIssuersResponse.decode(new _m0.Reader(data)),
-    );
+    const promise = this.rpc.request(this.service, "UpdateClassIssuers", data);
+    return promise.then((data) => MsgUpdateClassIssuersResponse.decode(new _m0.Reader(data)));
   }
 
-  UpdateClassMetadata(
-    request: DeepPartial<MsgUpdateClassMetadata>,
-  ): Promise<MsgUpdateClassMetadataResponse> {
+  UpdateClassMetadata(request: DeepPartial<MsgUpdateClassMetadata>): Promise<MsgUpdateClassMetadataResponse> {
     const fromPartial = MsgUpdateClassMetadata.fromPartial(request);
     const data = MsgUpdateClassMetadata.encode(fromPartial).finish();
-    const promise = this.rpc.request(
-      'regen.ecocredit.v1alpha1.Msg',
-      'UpdateClassMetadata',
-      data,
-    );
-    return promise.then(data =>
-      MsgUpdateClassMetadataResponse.decode(new _m0.Reader(data)),
-    );
+    const promise = this.rpc.request(this.service, "UpdateClassMetadata", data);
+    return promise.then((data) => MsgUpdateClassMetadataResponse.decode(new _m0.Reader(data)));
   }
 }
 
 interface Rpc {
-  request(
-    service: string,
-    method: string,
-    data: Uint8Array,
-  ): Promise<Uint8Array>;
+  request(service: string, method: string, data: Uint8Array): Promise<Uint8Array>;
 }
 
 declare var self: any | undefined;
 declare var window: any | undefined;
 declare var global: any | undefined;
-var globalThis: any = (() => {
-  if (typeof globalThis !== 'undefined') return globalThis;
-  if (typeof self !== 'undefined') return self;
-  if (typeof window !== 'undefined') return window;
-  if (typeof global !== 'undefined') return global;
-  throw 'Unable to locate global object';
+var tsProtoGlobalThis: any = (() => {
+  if (typeof globalThis !== "undefined") {
+    return globalThis;
+  }
+  if (typeof self !== "undefined") {
+    return self;
+  }
+  if (typeof window !== "undefined") {
+    return window;
+  }
+  if (typeof global !== "undefined") {
+    return global;
+  }
+  throw "Unable to locate global object";
 })();
 
-const atob: (b64: string) => string =
-  globalThis.atob ||
-  (b64 => globalThis.Buffer.from(b64, 'base64').toString('binary'));
 function bytesFromBase64(b64: string): Uint8Array {
-  const bin = atob(b64);
-  const arr = new Uint8Array(bin.length);
-  for (let i = 0; i < bin.length; ++i) {
-    arr[i] = bin.charCodeAt(i);
+  if (tsProtoGlobalThis.Buffer) {
+    return Uint8Array.from(tsProtoGlobalThis.Buffer.from(b64, "base64"));
+  } else {
+    const bin = tsProtoGlobalThis.atob(b64);
+    const arr = new Uint8Array(bin.length);
+    for (let i = 0; i < bin.length; ++i) {
+      arr[i] = bin.charCodeAt(i);
+    }
+    return arr;
   }
-  return arr;
 }
 
-const btoa: (bin: string) => string =
-  globalThis.btoa ||
-  (bin => globalThis.Buffer.from(bin, 'binary').toString('base64'));
 function base64FromBytes(arr: Uint8Array): string {
-  const bin: string[] = [];
-  for (const byte of arr) {
-    bin.push(String.fromCharCode(byte));
+  if (tsProtoGlobalThis.Buffer) {
+    return tsProtoGlobalThis.Buffer.from(arr).toString("base64");
+  } else {
+    const bin: string[] = [];
+    arr.forEach((byte) => {
+      bin.push(String.fromCharCode(byte));
+    });
+    return tsProtoGlobalThis.btoa(bin.join(""));
   }
-  return btoa(bin.join(''));
 }
 
-type Builtin =
-  | Date
-  | Function
-  | Uint8Array
-  | string
-  | number
-  | boolean
-  | undefined;
+type Builtin = Date | Function | Uint8Array | string | number | boolean | undefined;
 
-export type DeepPartial<T> = T extends Builtin
-  ? T
-  : T extends Long
-  ? string | number | Long
-  : T extends Array<infer U>
-  ? Array<DeepPartial<U>>
-  : T extends ReadonlyArray<infer U>
-  ? ReadonlyArray<DeepPartial<U>>
-  : T extends {}
-  ? { [K in Exclude<keyof T, '$type'>]?: DeepPartial<T[K]> }
+export type DeepPartial<T> = T extends Builtin ? T
+  : T extends Long ? string | number | Long : T extends Array<infer U> ? Array<DeepPartial<U>>
+  : T extends ReadonlyArray<infer U> ? ReadonlyArray<DeepPartial<U>>
+  : T extends {} ? { [K in Exclude<keyof T, "$type">]?: DeepPartial<T[K]> }
   : Partial<T>;
-
-type KeysOfUnion<T> = T extends T ? keyof T : never;
-export type Exact<P, I extends P> = P extends Builtin
-  ? P
-  : P & { [K in keyof P]: Exact<P[K], I[K]> } & Record<
-        Exclude<keyof I, KeysOfUnion<P> | '$type'>,
-        never
-      >;
 
 function toTimestamp(date: Date): Timestamp {
   const seconds = numberToLong(date.getTime() / 1_000);
   const nanos = (date.getTime() % 1_000) * 1_000_000;
-  return { $type: 'google.protobuf.Timestamp', seconds, nanos };
+  return { $type: "google.protobuf.Timestamp", seconds, nanos };
 }
 
 function fromTimestamp(t: Timestamp): Date {
@@ -2116,7 +1844,7 @@ function fromTimestamp(t: Timestamp): Date {
 function fromJsonTimestamp(o: any): Date {
   if (o instanceof Date) {
     return o;
-  } else if (typeof o === 'string') {
+  } else if (typeof o === "string") {
     return new Date(o);
   } else {
     return fromTimestamp(Timestamp.fromJSON(o));

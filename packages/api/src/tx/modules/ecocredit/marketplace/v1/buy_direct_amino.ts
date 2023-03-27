@@ -18,6 +18,7 @@ interface AminoBuyDirect_Order {
   bid_price?: AminoCoin;
   disable_auto_retire?: boolean;
   retirement_jurisdiction?: string;
+  retirement_reason?: string;
 }
 
 export interface AminoMsgBuyDirect extends AminoMsg {
@@ -48,6 +49,7 @@ export function buyDirectConverter(): AminoConverter {
             },
             disable_auto_retire: omitDefault(b.disableAutoRetire),
             retirement_jurisdiction: omitDefault(b.retirementJurisdiction),
+            retirement_reason: omitDefault(b.retirementReason),
           };
         }),
       };
@@ -70,6 +72,7 @@ export function buyDirectConverter(): AminoConverter {
             },
             disableAutoRetire: Boolean(b.disable_auto_retire),
             retirementJurisdiction: b.retirement_jurisdiction || '',
+            retirementReason: b.retirement_reason || '',
           };
         }),
       };

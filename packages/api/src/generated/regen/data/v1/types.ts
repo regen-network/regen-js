@@ -1,9 +1,9 @@
 /* eslint-disable */
-import { messageTypeRegistry } from '../../../typeRegistry';
-import Long from 'long';
-import _m0 from 'protobufjs/minimal';
+import Long from "long";
+import _m0 from "protobufjs/minimal";
+import { messageTypeRegistry } from "../../../typeRegistry";
 
-export const protobufPackage = 'regen.data.v1';
+export const protobufPackage = "regen.data.v1";
 
 /** DigestAlgorithm is the hash digest algorithm */
 export enum DigestAlgorithm {
@@ -17,13 +17,13 @@ export enum DigestAlgorithm {
 export function digestAlgorithmFromJSON(object: any): DigestAlgorithm {
   switch (object) {
     case 0:
-    case 'DIGEST_ALGORITHM_UNSPECIFIED':
+    case "DIGEST_ALGORITHM_UNSPECIFIED":
       return DigestAlgorithm.DIGEST_ALGORITHM_UNSPECIFIED;
     case 1:
-    case 'DIGEST_ALGORITHM_BLAKE2B_256':
+    case "DIGEST_ALGORITHM_BLAKE2B_256":
       return DigestAlgorithm.DIGEST_ALGORITHM_BLAKE2B_256;
     case -1:
-    case 'UNRECOGNIZED':
+    case "UNRECOGNIZED":
     default:
       return DigestAlgorithm.UNRECOGNIZED;
   }
@@ -32,11 +32,12 @@ export function digestAlgorithmFromJSON(object: any): DigestAlgorithm {
 export function digestAlgorithmToJSON(object: DigestAlgorithm): string {
   switch (object) {
     case DigestAlgorithm.DIGEST_ALGORITHM_UNSPECIFIED:
-      return 'DIGEST_ALGORITHM_UNSPECIFIED';
+      return "DIGEST_ALGORITHM_UNSPECIFIED";
     case DigestAlgorithm.DIGEST_ALGORITHM_BLAKE2B_256:
-      return 'DIGEST_ALGORITHM_BLAKE2B_256';
+      return "DIGEST_ALGORITHM_BLAKE2B_256";
+    case DigestAlgorithm.UNRECOGNIZED:
     default:
-      return 'UNKNOWN';
+      return "UNRECOGNIZED";
   }
 }
 
@@ -84,61 +85,61 @@ export enum RawMediaType {
 export function rawMediaTypeFromJSON(object: any): RawMediaType {
   switch (object) {
     case 0:
-    case 'RAW_MEDIA_TYPE_UNSPECIFIED':
+    case "RAW_MEDIA_TYPE_UNSPECIFIED":
       return RawMediaType.RAW_MEDIA_TYPE_UNSPECIFIED;
     case 1:
-    case 'RAW_MEDIA_TYPE_TEXT_PLAIN':
+    case "RAW_MEDIA_TYPE_TEXT_PLAIN":
       return RawMediaType.RAW_MEDIA_TYPE_TEXT_PLAIN;
     case 2:
-    case 'RAW_MEDIA_TYPE_JSON':
+    case "RAW_MEDIA_TYPE_JSON":
       return RawMediaType.RAW_MEDIA_TYPE_JSON;
     case 3:
-    case 'RAW_MEDIA_TYPE_CSV':
+    case "RAW_MEDIA_TYPE_CSV":
       return RawMediaType.RAW_MEDIA_TYPE_CSV;
     case 4:
-    case 'RAW_MEDIA_TYPE_XML':
+    case "RAW_MEDIA_TYPE_XML":
       return RawMediaType.RAW_MEDIA_TYPE_XML;
     case 5:
-    case 'RAW_MEDIA_TYPE_PDF':
+    case "RAW_MEDIA_TYPE_PDF":
       return RawMediaType.RAW_MEDIA_TYPE_PDF;
     case 16:
-    case 'RAW_MEDIA_TYPE_TIFF':
+    case "RAW_MEDIA_TYPE_TIFF":
       return RawMediaType.RAW_MEDIA_TYPE_TIFF;
     case 17:
-    case 'RAW_MEDIA_TYPE_JPG':
+    case "RAW_MEDIA_TYPE_JPG":
       return RawMediaType.RAW_MEDIA_TYPE_JPG;
     case 18:
-    case 'RAW_MEDIA_TYPE_PNG':
+    case "RAW_MEDIA_TYPE_PNG":
       return RawMediaType.RAW_MEDIA_TYPE_PNG;
     case 19:
-    case 'RAW_MEDIA_TYPE_SVG':
+    case "RAW_MEDIA_TYPE_SVG":
       return RawMediaType.RAW_MEDIA_TYPE_SVG;
     case 20:
-    case 'RAW_MEDIA_TYPE_WEBP':
+    case "RAW_MEDIA_TYPE_WEBP":
       return RawMediaType.RAW_MEDIA_TYPE_WEBP;
     case 21:
-    case 'RAW_MEDIA_TYPE_AVIF':
+    case "RAW_MEDIA_TYPE_AVIF":
       return RawMediaType.RAW_MEDIA_TYPE_AVIF;
     case 22:
-    case 'RAW_MEDIA_TYPE_GIF':
+    case "RAW_MEDIA_TYPE_GIF":
       return RawMediaType.RAW_MEDIA_TYPE_GIF;
     case 23:
-    case 'RAW_MEDIA_TYPE_APNG':
+    case "RAW_MEDIA_TYPE_APNG":
       return RawMediaType.RAW_MEDIA_TYPE_APNG;
     case 32:
-    case 'RAW_MEDIA_TYPE_MPEG':
+    case "RAW_MEDIA_TYPE_MPEG":
       return RawMediaType.RAW_MEDIA_TYPE_MPEG;
     case 33:
-    case 'RAW_MEDIA_TYPE_MP4':
+    case "RAW_MEDIA_TYPE_MP4":
       return RawMediaType.RAW_MEDIA_TYPE_MP4;
     case 34:
-    case 'RAW_MEDIA_TYPE_WEBM':
+    case "RAW_MEDIA_TYPE_WEBM":
       return RawMediaType.RAW_MEDIA_TYPE_WEBM;
     case 35:
-    case 'RAW_MEDIA_TYPE_OGG':
+    case "RAW_MEDIA_TYPE_OGG":
       return RawMediaType.RAW_MEDIA_TYPE_OGG;
     case -1:
-    case 'UNRECOGNIZED':
+    case "UNRECOGNIZED":
     default:
       return RawMediaType.UNRECOGNIZED;
   }
@@ -147,43 +148,44 @@ export function rawMediaTypeFromJSON(object: any): RawMediaType {
 export function rawMediaTypeToJSON(object: RawMediaType): string {
   switch (object) {
     case RawMediaType.RAW_MEDIA_TYPE_UNSPECIFIED:
-      return 'RAW_MEDIA_TYPE_UNSPECIFIED';
+      return "RAW_MEDIA_TYPE_UNSPECIFIED";
     case RawMediaType.RAW_MEDIA_TYPE_TEXT_PLAIN:
-      return 'RAW_MEDIA_TYPE_TEXT_PLAIN';
+      return "RAW_MEDIA_TYPE_TEXT_PLAIN";
     case RawMediaType.RAW_MEDIA_TYPE_JSON:
-      return 'RAW_MEDIA_TYPE_JSON';
+      return "RAW_MEDIA_TYPE_JSON";
     case RawMediaType.RAW_MEDIA_TYPE_CSV:
-      return 'RAW_MEDIA_TYPE_CSV';
+      return "RAW_MEDIA_TYPE_CSV";
     case RawMediaType.RAW_MEDIA_TYPE_XML:
-      return 'RAW_MEDIA_TYPE_XML';
+      return "RAW_MEDIA_TYPE_XML";
     case RawMediaType.RAW_MEDIA_TYPE_PDF:
-      return 'RAW_MEDIA_TYPE_PDF';
+      return "RAW_MEDIA_TYPE_PDF";
     case RawMediaType.RAW_MEDIA_TYPE_TIFF:
-      return 'RAW_MEDIA_TYPE_TIFF';
+      return "RAW_MEDIA_TYPE_TIFF";
     case RawMediaType.RAW_MEDIA_TYPE_JPG:
-      return 'RAW_MEDIA_TYPE_JPG';
+      return "RAW_MEDIA_TYPE_JPG";
     case RawMediaType.RAW_MEDIA_TYPE_PNG:
-      return 'RAW_MEDIA_TYPE_PNG';
+      return "RAW_MEDIA_TYPE_PNG";
     case RawMediaType.RAW_MEDIA_TYPE_SVG:
-      return 'RAW_MEDIA_TYPE_SVG';
+      return "RAW_MEDIA_TYPE_SVG";
     case RawMediaType.RAW_MEDIA_TYPE_WEBP:
-      return 'RAW_MEDIA_TYPE_WEBP';
+      return "RAW_MEDIA_TYPE_WEBP";
     case RawMediaType.RAW_MEDIA_TYPE_AVIF:
-      return 'RAW_MEDIA_TYPE_AVIF';
+      return "RAW_MEDIA_TYPE_AVIF";
     case RawMediaType.RAW_MEDIA_TYPE_GIF:
-      return 'RAW_MEDIA_TYPE_GIF';
+      return "RAW_MEDIA_TYPE_GIF";
     case RawMediaType.RAW_MEDIA_TYPE_APNG:
-      return 'RAW_MEDIA_TYPE_APNG';
+      return "RAW_MEDIA_TYPE_APNG";
     case RawMediaType.RAW_MEDIA_TYPE_MPEG:
-      return 'RAW_MEDIA_TYPE_MPEG';
+      return "RAW_MEDIA_TYPE_MPEG";
     case RawMediaType.RAW_MEDIA_TYPE_MP4:
-      return 'RAW_MEDIA_TYPE_MP4';
+      return "RAW_MEDIA_TYPE_MP4";
     case RawMediaType.RAW_MEDIA_TYPE_WEBM:
-      return 'RAW_MEDIA_TYPE_WEBM';
+      return "RAW_MEDIA_TYPE_WEBM";
     case RawMediaType.RAW_MEDIA_TYPE_OGG:
-      return 'RAW_MEDIA_TYPE_OGG';
+      return "RAW_MEDIA_TYPE_OGG";
+    case RawMediaType.UNRECOGNIZED:
     default:
-      return 'UNKNOWN';
+      return "UNRECOGNIZED";
   }
 }
 
@@ -196,33 +198,30 @@ export enum GraphCanonicalizationAlgorithm {
   UNRECOGNIZED = -1,
 }
 
-export function graphCanonicalizationAlgorithmFromJSON(
-  object: any,
-): GraphCanonicalizationAlgorithm {
+export function graphCanonicalizationAlgorithmFromJSON(object: any): GraphCanonicalizationAlgorithm {
   switch (object) {
     case 0:
-    case 'GRAPH_CANONICALIZATION_ALGORITHM_UNSPECIFIED':
+    case "GRAPH_CANONICALIZATION_ALGORITHM_UNSPECIFIED":
       return GraphCanonicalizationAlgorithm.GRAPH_CANONICALIZATION_ALGORITHM_UNSPECIFIED;
     case 1:
-    case 'GRAPH_CANONICALIZATION_ALGORITHM_URDNA2015':
+    case "GRAPH_CANONICALIZATION_ALGORITHM_URDNA2015":
       return GraphCanonicalizationAlgorithm.GRAPH_CANONICALIZATION_ALGORITHM_URDNA2015;
     case -1:
-    case 'UNRECOGNIZED':
+    case "UNRECOGNIZED":
     default:
       return GraphCanonicalizationAlgorithm.UNRECOGNIZED;
   }
 }
 
-export function graphCanonicalizationAlgorithmToJSON(
-  object: GraphCanonicalizationAlgorithm,
-): string {
+export function graphCanonicalizationAlgorithmToJSON(object: GraphCanonicalizationAlgorithm): string {
   switch (object) {
     case GraphCanonicalizationAlgorithm.GRAPH_CANONICALIZATION_ALGORITHM_UNSPECIFIED:
-      return 'GRAPH_CANONICALIZATION_ALGORITHM_UNSPECIFIED';
+      return "GRAPH_CANONICALIZATION_ALGORITHM_UNSPECIFIED";
     case GraphCanonicalizationAlgorithm.GRAPH_CANONICALIZATION_ALGORITHM_URDNA2015:
-      return 'GRAPH_CANONICALIZATION_ALGORITHM_URDNA2015';
+      return "GRAPH_CANONICALIZATION_ALGORITHM_URDNA2015";
+    case GraphCanonicalizationAlgorithm.UNRECOGNIZED:
     default:
-      return 'UNKNOWN';
+      return "UNRECOGNIZED";
   }
 }
 
@@ -236,10 +235,10 @@ export enum GraphMerkleTree {
 export function graphMerkleTreeFromJSON(object: any): GraphMerkleTree {
   switch (object) {
     case 0:
-    case 'GRAPH_MERKLE_TREE_NONE_UNSPECIFIED':
+    case "GRAPH_MERKLE_TREE_NONE_UNSPECIFIED":
       return GraphMerkleTree.GRAPH_MERKLE_TREE_NONE_UNSPECIFIED;
     case -1:
-    case 'UNRECOGNIZED':
+    case "UNRECOGNIZED":
     default:
       return GraphMerkleTree.UNRECOGNIZED;
   }
@@ -248,15 +247,16 @@ export function graphMerkleTreeFromJSON(object: any): GraphMerkleTree {
 export function graphMerkleTreeToJSON(object: GraphMerkleTree): string {
   switch (object) {
     case GraphMerkleTree.GRAPH_MERKLE_TREE_NONE_UNSPECIFIED:
-      return 'GRAPH_MERKLE_TREE_NONE_UNSPECIFIED';
+      return "GRAPH_MERKLE_TREE_NONE_UNSPECIFIED";
+    case GraphMerkleTree.UNRECOGNIZED:
     default:
-      return 'UNKNOWN';
+      return "UNRECOGNIZED";
   }
 }
 
 /** ContentHash specifies a hash-based content identifier for a piece of data. */
 export interface ContentHash {
-  $type: 'regen.data.v1.ContentHash';
+  $type: "regen.data.v1.ContentHash";
   /**
    * Raw specifies "raw" data which does not specify a deterministic, canonical
    * encoding. Users of these hashes MUST maintain a copy of the hashed data
@@ -277,7 +277,7 @@ export interface ContentHash {
 
 /** Raw is the content hash type used for raw data. */
 export interface ContentHash_Raw {
-  $type: 'regen.data.v1.ContentHash.Raw';
+  $type: "regen.data.v1.ContentHash.Raw";
   /**
    * hash represents the hash of the data based on the specified
    * digest_algorithm.
@@ -291,7 +291,7 @@ export interface ContentHash_Raw {
 
 /** Graph is the content hash type used for RDF graph data. */
 export interface ContentHash_Graph {
-  $type: 'regen.data.v1.ContentHash.Graph';
+  $type: "regen.data.v1.ContentHash.Graph";
   /**
    * hash represents the hash of the data based on the specified
    * digest_algorithm.
@@ -310,34 +310,24 @@ export interface ContentHash_Graph {
 
 /** ContentHashes contains list of content ContentHash. */
 export interface ContentHashes {
-  $type: 'regen.data.v1.ContentHashes';
+  $type: "regen.data.v1.ContentHashes";
   /** data is a list of content hashes which the resolver claims to serve. */
   contentHashes: ContentHash[];
 }
 
 function createBaseContentHash(): ContentHash {
-  return {
-    $type: 'regen.data.v1.ContentHash',
-    raw: undefined,
-    graph: undefined,
-  };
+  return { $type: "regen.data.v1.ContentHash", raw: undefined, graph: undefined };
 }
 
 export const ContentHash = {
-  $type: 'regen.data.v1.ContentHash' as const,
+  $type: "regen.data.v1.ContentHash" as const,
 
-  encode(
-    message: ContentHash,
-    writer: _m0.Writer = _m0.Writer.create(),
-  ): _m0.Writer {
+  encode(message: ContentHash, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.raw !== undefined) {
       ContentHash_Raw.encode(message.raw, writer.uint32(10).fork()).ldelim();
     }
     if (message.graph !== undefined) {
-      ContentHash_Graph.encode(
-        message.graph,
-        writer.uint32(18).fork(),
-      ).ldelim();
+      ContentHash_Graph.encode(message.graph, writer.uint32(18).fork()).ldelim();
     }
     return writer;
   },
@@ -367,35 +357,29 @@ export const ContentHash = {
     return {
       $type: ContentHash.$type,
       raw: isSet(object.raw) ? ContentHash_Raw.fromJSON(object.raw) : undefined,
-      graph: isSet(object.graph)
-        ? ContentHash_Graph.fromJSON(object.graph)
-        : undefined,
+      graph: isSet(object.graph) ? ContentHash_Graph.fromJSON(object.graph) : undefined,
     };
   },
 
   toJSON(message: ContentHash): unknown {
     const obj: any = {};
-    message.raw !== undefined &&
-      (obj.raw = message.raw ? ContentHash_Raw.toJSON(message.raw) : undefined);
-    message.graph !== undefined &&
-      (obj.graph = message.graph
-        ? ContentHash_Graph.toJSON(message.graph)
-        : undefined);
+    message.raw !== undefined && (obj.raw = message.raw ? ContentHash_Raw.toJSON(message.raw) : undefined);
+    message.graph !== undefined && (obj.graph = message.graph ? ContentHash_Graph.toJSON(message.graph) : undefined);
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<ContentHash>, I>>(
-    object: I,
-  ): ContentHash {
+  create(base?: DeepPartial<ContentHash>): ContentHash {
+    return ContentHash.fromPartial(base ?? {});
+  },
+
+  fromPartial(object: DeepPartial<ContentHash>): ContentHash {
     const message = createBaseContentHash();
-    message.raw =
-      object.raw !== undefined && object.raw !== null
-        ? ContentHash_Raw.fromPartial(object.raw)
-        : undefined;
-    message.graph =
-      object.graph !== undefined && object.graph !== null
-        ? ContentHash_Graph.fromPartial(object.graph)
-        : undefined;
+    message.raw = (object.raw !== undefined && object.raw !== null)
+      ? ContentHash_Raw.fromPartial(object.raw)
+      : undefined;
+    message.graph = (object.graph !== undefined && object.graph !== null)
+      ? ContentHash_Graph.fromPartial(object.graph)
+      : undefined;
     return message;
   },
 };
@@ -403,21 +387,13 @@ export const ContentHash = {
 messageTypeRegistry.set(ContentHash.$type, ContentHash);
 
 function createBaseContentHash_Raw(): ContentHash_Raw {
-  return {
-    $type: 'regen.data.v1.ContentHash.Raw',
-    hash: new Uint8Array(),
-    digestAlgorithm: 0,
-    mediaType: 0,
-  };
+  return { $type: "regen.data.v1.ContentHash.Raw", hash: new Uint8Array(), digestAlgorithm: 0, mediaType: 0 };
 }
 
 export const ContentHash_Raw = {
-  $type: 'regen.data.v1.ContentHash.Raw' as const,
+  $type: "regen.data.v1.ContentHash.Raw" as const,
 
-  encode(
-    message: ContentHash_Raw,
-    writer: _m0.Writer = _m0.Writer.create(),
-  ): _m0.Writer {
+  encode(message: ContentHash_Raw, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.hash.length !== 0) {
       writer.uint32(10).bytes(message.hash);
     }
@@ -457,34 +433,26 @@ export const ContentHash_Raw = {
   fromJSON(object: any): ContentHash_Raw {
     return {
       $type: ContentHash_Raw.$type,
-      hash: isSet(object.hash)
-        ? bytesFromBase64(object.hash)
-        : new Uint8Array(),
-      digestAlgorithm: isSet(object.digestAlgorithm)
-        ? digestAlgorithmFromJSON(object.digestAlgorithm)
-        : 0,
-      mediaType: isSet(object.mediaType)
-        ? rawMediaTypeFromJSON(object.mediaType)
-        : 0,
+      hash: isSet(object.hash) ? bytesFromBase64(object.hash) : new Uint8Array(),
+      digestAlgorithm: isSet(object.digestAlgorithm) ? digestAlgorithmFromJSON(object.digestAlgorithm) : 0,
+      mediaType: isSet(object.mediaType) ? rawMediaTypeFromJSON(object.mediaType) : 0,
     };
   },
 
   toJSON(message: ContentHash_Raw): unknown {
     const obj: any = {};
     message.hash !== undefined &&
-      (obj.hash = base64FromBytes(
-        message.hash !== undefined ? message.hash : new Uint8Array(),
-      ));
-    message.digestAlgorithm !== undefined &&
-      (obj.digestAlgorithm = digestAlgorithmToJSON(message.digestAlgorithm));
-    message.mediaType !== undefined &&
-      (obj.mediaType = rawMediaTypeToJSON(message.mediaType));
+      (obj.hash = base64FromBytes(message.hash !== undefined ? message.hash : new Uint8Array()));
+    message.digestAlgorithm !== undefined && (obj.digestAlgorithm = digestAlgorithmToJSON(message.digestAlgorithm));
+    message.mediaType !== undefined && (obj.mediaType = rawMediaTypeToJSON(message.mediaType));
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<ContentHash_Raw>, I>>(
-    object: I,
-  ): ContentHash_Raw {
+  create(base?: DeepPartial<ContentHash_Raw>): ContentHash_Raw {
+    return ContentHash_Raw.fromPartial(base ?? {});
+  },
+
+  fromPartial(object: DeepPartial<ContentHash_Raw>): ContentHash_Raw {
     const message = createBaseContentHash_Raw();
     message.hash = object.hash ?? new Uint8Array();
     message.digestAlgorithm = object.digestAlgorithm ?? 0;
@@ -497,7 +465,7 @@ messageTypeRegistry.set(ContentHash_Raw.$type, ContentHash_Raw);
 
 function createBaseContentHash_Graph(): ContentHash_Graph {
   return {
-    $type: 'regen.data.v1.ContentHash.Graph',
+    $type: "regen.data.v1.ContentHash.Graph",
     hash: new Uint8Array(),
     digestAlgorithm: 0,
     canonicalizationAlgorithm: 0,
@@ -506,12 +474,9 @@ function createBaseContentHash_Graph(): ContentHash_Graph {
 }
 
 export const ContentHash_Graph = {
-  $type: 'regen.data.v1.ContentHash.Graph' as const,
+  $type: "regen.data.v1.ContentHash.Graph" as const,
 
-  encode(
-    message: ContentHash_Graph,
-    writer: _m0.Writer = _m0.Writer.create(),
-  ): _m0.Writer {
+  encode(message: ContentHash_Graph, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.hash.length !== 0) {
       writer.uint32(10).bytes(message.hash);
     }
@@ -557,43 +522,31 @@ export const ContentHash_Graph = {
   fromJSON(object: any): ContentHash_Graph {
     return {
       $type: ContentHash_Graph.$type,
-      hash: isSet(object.hash)
-        ? bytesFromBase64(object.hash)
-        : new Uint8Array(),
-      digestAlgorithm: isSet(object.digestAlgorithm)
-        ? digestAlgorithmFromJSON(object.digestAlgorithm)
-        : 0,
+      hash: isSet(object.hash) ? bytesFromBase64(object.hash) : new Uint8Array(),
+      digestAlgorithm: isSet(object.digestAlgorithm) ? digestAlgorithmFromJSON(object.digestAlgorithm) : 0,
       canonicalizationAlgorithm: isSet(object.canonicalizationAlgorithm)
-        ? graphCanonicalizationAlgorithmFromJSON(
-            object.canonicalizationAlgorithm,
-          )
+        ? graphCanonicalizationAlgorithmFromJSON(object.canonicalizationAlgorithm)
         : 0,
-      merkleTree: isSet(object.merkleTree)
-        ? graphMerkleTreeFromJSON(object.merkleTree)
-        : 0,
+      merkleTree: isSet(object.merkleTree) ? graphMerkleTreeFromJSON(object.merkleTree) : 0,
     };
   },
 
   toJSON(message: ContentHash_Graph): unknown {
     const obj: any = {};
     message.hash !== undefined &&
-      (obj.hash = base64FromBytes(
-        message.hash !== undefined ? message.hash : new Uint8Array(),
-      ));
-    message.digestAlgorithm !== undefined &&
-      (obj.digestAlgorithm = digestAlgorithmToJSON(message.digestAlgorithm));
+      (obj.hash = base64FromBytes(message.hash !== undefined ? message.hash : new Uint8Array()));
+    message.digestAlgorithm !== undefined && (obj.digestAlgorithm = digestAlgorithmToJSON(message.digestAlgorithm));
     message.canonicalizationAlgorithm !== undefined &&
-      (obj.canonicalizationAlgorithm = graphCanonicalizationAlgorithmToJSON(
-        message.canonicalizationAlgorithm,
-      ));
-    message.merkleTree !== undefined &&
-      (obj.merkleTree = graphMerkleTreeToJSON(message.merkleTree));
+      (obj.canonicalizationAlgorithm = graphCanonicalizationAlgorithmToJSON(message.canonicalizationAlgorithm));
+    message.merkleTree !== undefined && (obj.merkleTree = graphMerkleTreeToJSON(message.merkleTree));
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<ContentHash_Graph>, I>>(
-    object: I,
-  ): ContentHash_Graph {
+  create(base?: DeepPartial<ContentHash_Graph>): ContentHash_Graph {
+    return ContentHash_Graph.fromPartial(base ?? {});
+  },
+
+  fromPartial(object: DeepPartial<ContentHash_Graph>): ContentHash_Graph {
     const message = createBaseContentHash_Graph();
     message.hash = object.hash ?? new Uint8Array();
     message.digestAlgorithm = object.digestAlgorithm ?? 0;
@@ -606,16 +559,13 @@ export const ContentHash_Graph = {
 messageTypeRegistry.set(ContentHash_Graph.$type, ContentHash_Graph);
 
 function createBaseContentHashes(): ContentHashes {
-  return { $type: 'regen.data.v1.ContentHashes', contentHashes: [] };
+  return { $type: "regen.data.v1.ContentHashes", contentHashes: [] };
 }
 
 export const ContentHashes = {
-  $type: 'regen.data.v1.ContentHashes' as const,
+  $type: "regen.data.v1.ContentHashes" as const,
 
-  encode(
-    message: ContentHashes,
-    writer: _m0.Writer = _m0.Writer.create(),
-  ): _m0.Writer {
+  encode(message: ContentHashes, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     for (const v of message.contentHashes) {
       ContentHash.encode(v!, writer.uint32(10).fork()).ldelim();
     }
@@ -630,9 +580,7 @@ export const ContentHashes = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          message.contentHashes.push(
-            ContentHash.decode(reader, reader.uint32()),
-          );
+          message.contentHashes.push(ContentHash.decode(reader, reader.uint32()));
           break;
         default:
           reader.skipType(tag & 7);
@@ -654,21 +602,20 @@ export const ContentHashes = {
   toJSON(message: ContentHashes): unknown {
     const obj: any = {};
     if (message.contentHashes) {
-      obj.contentHashes = message.contentHashes.map(e =>
-        e ? ContentHash.toJSON(e) : undefined,
-      );
+      obj.contentHashes = message.contentHashes.map((e) => e ? ContentHash.toJSON(e) : undefined);
     } else {
       obj.contentHashes = [];
     }
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<ContentHashes>, I>>(
-    object: I,
-  ): ContentHashes {
+  create(base?: DeepPartial<ContentHashes>): ContentHashes {
+    return ContentHashes.fromPartial(base ?? {});
+  },
+
+  fromPartial(object: DeepPartial<ContentHashes>): ContentHashes {
     const message = createBaseContentHashes();
-    message.contentHashes =
-      object.contentHashes?.map(e => ContentHash.fromPartial(e)) || [];
+    message.contentHashes = object.contentHashes?.map((e) => ContentHash.fromPartial(e)) || [];
     return message;
   },
 };
@@ -678,65 +625,54 @@ messageTypeRegistry.set(ContentHashes.$type, ContentHashes);
 declare var self: any | undefined;
 declare var window: any | undefined;
 declare var global: any | undefined;
-var globalThis: any = (() => {
-  if (typeof globalThis !== 'undefined') return globalThis;
-  if (typeof self !== 'undefined') return self;
-  if (typeof window !== 'undefined') return window;
-  if (typeof global !== 'undefined') return global;
-  throw 'Unable to locate global object';
+var tsProtoGlobalThis: any = (() => {
+  if (typeof globalThis !== "undefined") {
+    return globalThis;
+  }
+  if (typeof self !== "undefined") {
+    return self;
+  }
+  if (typeof window !== "undefined") {
+    return window;
+  }
+  if (typeof global !== "undefined") {
+    return global;
+  }
+  throw "Unable to locate global object";
 })();
 
-const atob: (b64: string) => string =
-  globalThis.atob ||
-  (b64 => globalThis.Buffer.from(b64, 'base64').toString('binary'));
 function bytesFromBase64(b64: string): Uint8Array {
-  const bin = atob(b64);
-  const arr = new Uint8Array(bin.length);
-  for (let i = 0; i < bin.length; ++i) {
-    arr[i] = bin.charCodeAt(i);
+  if (tsProtoGlobalThis.Buffer) {
+    return Uint8Array.from(tsProtoGlobalThis.Buffer.from(b64, "base64"));
+  } else {
+    const bin = tsProtoGlobalThis.atob(b64);
+    const arr = new Uint8Array(bin.length);
+    for (let i = 0; i < bin.length; ++i) {
+      arr[i] = bin.charCodeAt(i);
+    }
+    return arr;
   }
-  return arr;
 }
 
-const btoa: (bin: string) => string =
-  globalThis.btoa ||
-  (bin => globalThis.Buffer.from(bin, 'binary').toString('base64'));
 function base64FromBytes(arr: Uint8Array): string {
-  const bin: string[] = [];
-  for (const byte of arr) {
-    bin.push(String.fromCharCode(byte));
+  if (tsProtoGlobalThis.Buffer) {
+    return tsProtoGlobalThis.Buffer.from(arr).toString("base64");
+  } else {
+    const bin: string[] = [];
+    arr.forEach((byte) => {
+      bin.push(String.fromCharCode(byte));
+    });
+    return tsProtoGlobalThis.btoa(bin.join(""));
   }
-  return btoa(bin.join(''));
 }
 
-type Builtin =
-  | Date
-  | Function
-  | Uint8Array
-  | string
-  | number
-  | boolean
-  | undefined;
+type Builtin = Date | Function | Uint8Array | string | number | boolean | undefined;
 
-export type DeepPartial<T> = T extends Builtin
-  ? T
-  : T extends Long
-  ? string | number | Long
-  : T extends Array<infer U>
-  ? Array<DeepPartial<U>>
-  : T extends ReadonlyArray<infer U>
-  ? ReadonlyArray<DeepPartial<U>>
-  : T extends {}
-  ? { [K in Exclude<keyof T, '$type'>]?: DeepPartial<T[K]> }
+export type DeepPartial<T> = T extends Builtin ? T
+  : T extends Long ? string | number | Long : T extends Array<infer U> ? Array<DeepPartial<U>>
+  : T extends ReadonlyArray<infer U> ? ReadonlyArray<DeepPartial<U>>
+  : T extends {} ? { [K in Exclude<keyof T, "$type">]?: DeepPartial<T[K]> }
   : Partial<T>;
-
-type KeysOfUnion<T> = T extends T ? keyof T : never;
-export type Exact<P, I extends P> = P extends Builtin
-  ? P
-  : P & { [K in keyof P]: Exact<P[K], I[K]> } & Record<
-        Exclude<keyof I, KeysOfUnion<P> | '$type'>,
-        never
-      >;
 
 if (_m0.util.Long !== Long) {
   _m0.util.Long = Long as any;

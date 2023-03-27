@@ -41,10 +41,11 @@ export function mintBatchCreditsConverter(): AminoConverter {
         batch_denom: batchDenom,
         issuance: issuance.map(i => {
           return {
-            recipient: i.recipient,
-            tradable_amount: i.tradableAmount,
-            retired_amount: i.retiredAmount,
-            retirement_jurisdiction: i.retirementJurisdiction,
+            recipient: i.recipient || undefined,
+            tradable_amount: i.tradableAmount || undefined,
+            retired_amount: i.retiredAmount || undefined,
+            retirement_jurisdiction: i.retirementJurisdiction || undefined,
+            retirement_reason: i.retirementReason || undefined,
           };
         }),
         origin_tx: originTx && {
@@ -69,6 +70,7 @@ export function mintBatchCreditsConverter(): AminoConverter {
             tradableAmount: i.tradable_amount || '',
             retiredAmount: i.retired_amount || '',
             retirementJurisdiction: i.retirement_jurisdiction || '',
+            retirementReason: i.retirement_reason || '',
           };
         }),
         originTx: origin_tx && {

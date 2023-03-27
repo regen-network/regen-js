@@ -1,9 +1,9 @@
 /* eslint-disable */
-import { messageTypeRegistry } from '../../typeRegistry';
-import Long from 'long';
-import _m0 from 'protobufjs/minimal';
+import Long from "long";
+import _m0 from "protobufjs/minimal";
+import { messageTypeRegistry } from "../../typeRegistry";
 
-export const protobufPackage = 'google.protobuf';
+export const protobufPackage = "google.protobuf";
 
 /**
  * A Timestamp represents a point in time independent of any time zone or local
@@ -56,7 +56,6 @@ export const protobufPackage = 'google.protobuf';
  *     Timestamp timestamp = Timestamp.newBuilder().setSeconds(millis / 1000)
  *         .setNanos((int) ((millis % 1000) * 1000000)).build();
  *
- *
  * Example 5: Compute Timestamp from Java `Instant.now()`.
  *
  *     Instant now = Instant.now();
@@ -64,7 +63,6 @@ export const protobufPackage = 'google.protobuf';
  *     Timestamp timestamp =
  *         Timestamp.newBuilder().setSeconds(now.getEpochSecond())
  *             .setNanos(now.getNano()).build();
- *
  *
  * Example 6: Compute Timestamp from current time in Python.
  *
@@ -99,7 +97,7 @@ export const protobufPackage = 'google.protobuf';
  * ) to obtain a formatter capable of generating timestamps in this format.
  */
 export interface Timestamp {
-  $type: 'google.protobuf.Timestamp';
+  $type: "google.protobuf.Timestamp";
   /**
    * Represents seconds of UTC time since Unix epoch
    * 1970-01-01T00:00:00Z. Must be from 0001-01-01T00:00:00Z to
@@ -116,16 +114,13 @@ export interface Timestamp {
 }
 
 function createBaseTimestamp(): Timestamp {
-  return { $type: 'google.protobuf.Timestamp', seconds: Long.ZERO, nanos: 0 };
+  return { $type: "google.protobuf.Timestamp", seconds: Long.ZERO, nanos: 0 };
 }
 
 export const Timestamp = {
-  $type: 'google.protobuf.Timestamp' as const,
+  $type: "google.protobuf.Timestamp" as const,
 
-  encode(
-    message: Timestamp,
-    writer: _m0.Writer = _m0.Writer.create(),
-  ): _m0.Writer {
+  encode(message: Timestamp, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (!message.seconds.isZero()) {
       writer.uint32(8).int64(message.seconds);
     }
@@ -159,29 +154,27 @@ export const Timestamp = {
   fromJSON(object: any): Timestamp {
     return {
       $type: Timestamp.$type,
-      seconds: isSet(object.seconds)
-        ? Long.fromString(object.seconds)
-        : Long.ZERO,
+      seconds: isSet(object.seconds) ? Long.fromValue(object.seconds) : Long.ZERO,
       nanos: isSet(object.nanos) ? Number(object.nanos) : 0,
     };
   },
 
   toJSON(message: Timestamp): unknown {
     const obj: any = {};
-    message.seconds !== undefined &&
-      (obj.seconds = (message.seconds || Long.ZERO).toString());
+    message.seconds !== undefined && (obj.seconds = (message.seconds || Long.ZERO).toString());
     message.nanos !== undefined && (obj.nanos = Math.round(message.nanos));
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<Timestamp>, I>>(
-    object: I,
-  ): Timestamp {
+  create(base?: DeepPartial<Timestamp>): Timestamp {
+    return Timestamp.fromPartial(base ?? {});
+  },
+
+  fromPartial(object: DeepPartial<Timestamp>): Timestamp {
     const message = createBaseTimestamp();
-    message.seconds =
-      object.seconds !== undefined && object.seconds !== null
-        ? Long.fromValue(object.seconds)
-        : Long.ZERO;
+    message.seconds = (object.seconds !== undefined && object.seconds !== null)
+      ? Long.fromValue(object.seconds)
+      : Long.ZERO;
     message.nanos = object.nanos ?? 0;
     return message;
   },
@@ -189,34 +182,13 @@ export const Timestamp = {
 
 messageTypeRegistry.set(Timestamp.$type, Timestamp);
 
-type Builtin =
-  | Date
-  | Function
-  | Uint8Array
-  | string
-  | number
-  | boolean
-  | undefined;
+type Builtin = Date | Function | Uint8Array | string | number | boolean | undefined;
 
-export type DeepPartial<T> = T extends Builtin
-  ? T
-  : T extends Long
-  ? string | number | Long
-  : T extends Array<infer U>
-  ? Array<DeepPartial<U>>
-  : T extends ReadonlyArray<infer U>
-  ? ReadonlyArray<DeepPartial<U>>
-  : T extends {}
-  ? { [K in Exclude<keyof T, '$type'>]?: DeepPartial<T[K]> }
+export type DeepPartial<T> = T extends Builtin ? T
+  : T extends Long ? string | number | Long : T extends Array<infer U> ? Array<DeepPartial<U>>
+  : T extends ReadonlyArray<infer U> ? ReadonlyArray<DeepPartial<U>>
+  : T extends {} ? { [K in Exclude<keyof T, "$type">]?: DeepPartial<T[K]> }
   : Partial<T>;
-
-type KeysOfUnion<T> = T extends T ? keyof T : never;
-export type Exact<P, I extends P> = P extends Builtin
-  ? P
-  : P & { [K in keyof P]: Exact<P[K], I[K]> } & Record<
-        Exclude<keyof I, KeysOfUnion<P> | '$type'>,
-        never
-      >;
 
 if (_m0.util.Long !== Long) {
   _m0.util.Long = Long as any;

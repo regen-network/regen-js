@@ -1,9 +1,9 @@
 /* eslint-disable */
-import { messageTypeRegistry } from '../../typeRegistry';
-import Long from 'long';
-import _m0 from 'protobufjs/minimal';
+import Long from "long";
+import _m0 from "protobufjs/minimal";
+import { messageTypeRegistry } from "../../typeRegistry";
 
-export const protobufPackage = 'google.protobuf';
+export const protobufPackage = "google.protobuf";
 
 /**
  * A Duration represents a signed, fixed-length span of time represented
@@ -66,7 +66,7 @@ export const protobufPackage = 'google.protobuf';
  * microsecond should be expressed in JSON format as "3.000001s".
  */
 export interface Duration {
-  $type: 'google.protobuf.Duration';
+  $type: "google.protobuf.Duration";
   /**
    * Signed seconds of the span of time. Must be from -315,576,000,000
    * to +315,576,000,000 inclusive. Note: these bounds are computed from:
@@ -85,16 +85,13 @@ export interface Duration {
 }
 
 function createBaseDuration(): Duration {
-  return { $type: 'google.protobuf.Duration', seconds: Long.ZERO, nanos: 0 };
+  return { $type: "google.protobuf.Duration", seconds: Long.ZERO, nanos: 0 };
 }
 
 export const Duration = {
-  $type: 'google.protobuf.Duration' as const,
+  $type: "google.protobuf.Duration" as const,
 
-  encode(
-    message: Duration,
-    writer: _m0.Writer = _m0.Writer.create(),
-  ): _m0.Writer {
+  encode(message: Duration, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (!message.seconds.isZero()) {
       writer.uint32(8).int64(message.seconds);
     }
@@ -128,27 +125,27 @@ export const Duration = {
   fromJSON(object: any): Duration {
     return {
       $type: Duration.$type,
-      seconds: isSet(object.seconds)
-        ? Long.fromString(object.seconds)
-        : Long.ZERO,
+      seconds: isSet(object.seconds) ? Long.fromValue(object.seconds) : Long.ZERO,
       nanos: isSet(object.nanos) ? Number(object.nanos) : 0,
     };
   },
 
   toJSON(message: Duration): unknown {
     const obj: any = {};
-    message.seconds !== undefined &&
-      (obj.seconds = (message.seconds || Long.ZERO).toString());
+    message.seconds !== undefined && (obj.seconds = (message.seconds || Long.ZERO).toString());
     message.nanos !== undefined && (obj.nanos = Math.round(message.nanos));
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<Duration>, I>>(object: I): Duration {
+  create(base?: DeepPartial<Duration>): Duration {
+    return Duration.fromPartial(base ?? {});
+  },
+
+  fromPartial(object: DeepPartial<Duration>): Duration {
     const message = createBaseDuration();
-    message.seconds =
-      object.seconds !== undefined && object.seconds !== null
-        ? Long.fromValue(object.seconds)
-        : Long.ZERO;
+    message.seconds = (object.seconds !== undefined && object.seconds !== null)
+      ? Long.fromValue(object.seconds)
+      : Long.ZERO;
     message.nanos = object.nanos ?? 0;
     return message;
   },
@@ -156,34 +153,32 @@ export const Duration = {
 
 messageTypeRegistry.set(Duration.$type, Duration);
 
-type Builtin =
-  | Date
-  | Function
-  | Uint8Array
-  | string
-  | number
-  | boolean
-  | undefined;
+declare var self: any | undefined;
+declare var window: any | undefined;
+declare var global: any | undefined;
+var tsProtoGlobalThis: any = (() => {
+  if (typeof globalThis !== "undefined") {
+    return globalThis;
+  }
+  if (typeof self !== "undefined") {
+    return self;
+  }
+  if (typeof window !== "undefined") {
+    return window;
+  }
+  if (typeof global !== "undefined") {
+    return global;
+  }
+  throw "Unable to locate global object";
+})();
 
-export type DeepPartial<T> = T extends Builtin
-  ? T
-  : T extends Long
-  ? string | number | Long
-  : T extends Array<infer U>
-  ? Array<DeepPartial<U>>
-  : T extends ReadonlyArray<infer U>
-  ? ReadonlyArray<DeepPartial<U>>
-  : T extends {}
-  ? { [K in Exclude<keyof T, '$type'>]?: DeepPartial<T[K]> }
+type Builtin = Date | Function | Uint8Array | string | number | boolean | undefined;
+
+export type DeepPartial<T> = T extends Builtin ? T
+  : T extends Long ? string | number | Long : T extends Array<infer U> ? Array<DeepPartial<U>>
+  : T extends ReadonlyArray<infer U> ? ReadonlyArray<DeepPartial<U>>
+  : T extends {} ? { [K in Exclude<keyof T, "$type">]?: DeepPartial<T[K]> }
   : Partial<T>;
-
-type KeysOfUnion<T> = T extends T ? keyof T : never;
-export type Exact<P, I extends P> = P extends Builtin
-  ? P
-  : P & { [K in keyof P]: Exact<P[K], I[K]> } & Record<
-        Exclude<keyof I, KeysOfUnion<P> | '$type'>,
-        never
-      >;
 
 if (_m0.util.Long !== Long) {
   _m0.util.Long = Long as any;

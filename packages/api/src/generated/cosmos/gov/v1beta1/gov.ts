@@ -1,13 +1,13 @@
 /* eslint-disable */
-import { messageTypeRegistry } from '../../../typeRegistry';
-import Long from 'long';
-import _m0 from 'protobufjs/minimal';
-import { Any } from '../../../google/protobuf/any';
-import { Duration } from '../../../google/protobuf/duration';
-import { Timestamp } from '../../../google/protobuf/timestamp';
-import { Coin } from '../../../cosmos/base/v1beta1/coin';
+import Long from "long";
+import _m0 from "protobufjs/minimal";
+import { Any } from "../../../google/protobuf/any";
+import { Duration } from "../../../google/protobuf/duration";
+import { Timestamp } from "../../../google/protobuf/timestamp";
+import { messageTypeRegistry } from "../../../typeRegistry";
+import { Coin } from "../../base/v1beta1/coin";
 
-export const protobufPackage = 'cosmos.gov.v1beta1';
+export const protobufPackage = "cosmos.gov.v1beta1";
 
 /** VoteOption enumerates the valid vote options for a given governance proposal. */
 export enum VoteOption {
@@ -27,22 +27,22 @@ export enum VoteOption {
 export function voteOptionFromJSON(object: any): VoteOption {
   switch (object) {
     case 0:
-    case 'VOTE_OPTION_UNSPECIFIED':
+    case "VOTE_OPTION_UNSPECIFIED":
       return VoteOption.VOTE_OPTION_UNSPECIFIED;
     case 1:
-    case 'VOTE_OPTION_YES':
+    case "VOTE_OPTION_YES":
       return VoteOption.VOTE_OPTION_YES;
     case 2:
-    case 'VOTE_OPTION_ABSTAIN':
+    case "VOTE_OPTION_ABSTAIN":
       return VoteOption.VOTE_OPTION_ABSTAIN;
     case 3:
-    case 'VOTE_OPTION_NO':
+    case "VOTE_OPTION_NO":
       return VoteOption.VOTE_OPTION_NO;
     case 4:
-    case 'VOTE_OPTION_NO_WITH_VETO':
+    case "VOTE_OPTION_NO_WITH_VETO":
       return VoteOption.VOTE_OPTION_NO_WITH_VETO;
     case -1:
-    case 'UNRECOGNIZED':
+    case "UNRECOGNIZED":
     default:
       return VoteOption.UNRECOGNIZED;
   }
@@ -51,23 +51,24 @@ export function voteOptionFromJSON(object: any): VoteOption {
 export function voteOptionToJSON(object: VoteOption): string {
   switch (object) {
     case VoteOption.VOTE_OPTION_UNSPECIFIED:
-      return 'VOTE_OPTION_UNSPECIFIED';
+      return "VOTE_OPTION_UNSPECIFIED";
     case VoteOption.VOTE_OPTION_YES:
-      return 'VOTE_OPTION_YES';
+      return "VOTE_OPTION_YES";
     case VoteOption.VOTE_OPTION_ABSTAIN:
-      return 'VOTE_OPTION_ABSTAIN';
+      return "VOTE_OPTION_ABSTAIN";
     case VoteOption.VOTE_OPTION_NO:
-      return 'VOTE_OPTION_NO';
+      return "VOTE_OPTION_NO";
     case VoteOption.VOTE_OPTION_NO_WITH_VETO:
-      return 'VOTE_OPTION_NO_WITH_VETO';
+      return "VOTE_OPTION_NO_WITH_VETO";
+    case VoteOption.UNRECOGNIZED:
     default:
-      return 'UNKNOWN';
+      return "UNRECOGNIZED";
   }
 }
 
 /** ProposalStatus enumerates the valid statuses of a proposal. */
 export enum ProposalStatus {
-  /** PROPOSAL_STATUS_UNSPECIFIED - PROPOSAL_STATUS_UNSPECIFIED defines the default propopsal status. */
+  /** PROPOSAL_STATUS_UNSPECIFIED - PROPOSAL_STATUS_UNSPECIFIED defines the default proposal status. */
   PROPOSAL_STATUS_UNSPECIFIED = 0,
   /**
    * PROPOSAL_STATUS_DEPOSIT_PERIOD - PROPOSAL_STATUS_DEPOSIT_PERIOD defines a proposal status during the deposit
@@ -100,25 +101,25 @@ export enum ProposalStatus {
 export function proposalStatusFromJSON(object: any): ProposalStatus {
   switch (object) {
     case 0:
-    case 'PROPOSAL_STATUS_UNSPECIFIED':
+    case "PROPOSAL_STATUS_UNSPECIFIED":
       return ProposalStatus.PROPOSAL_STATUS_UNSPECIFIED;
     case 1:
-    case 'PROPOSAL_STATUS_DEPOSIT_PERIOD':
+    case "PROPOSAL_STATUS_DEPOSIT_PERIOD":
       return ProposalStatus.PROPOSAL_STATUS_DEPOSIT_PERIOD;
     case 2:
-    case 'PROPOSAL_STATUS_VOTING_PERIOD':
+    case "PROPOSAL_STATUS_VOTING_PERIOD":
       return ProposalStatus.PROPOSAL_STATUS_VOTING_PERIOD;
     case 3:
-    case 'PROPOSAL_STATUS_PASSED':
+    case "PROPOSAL_STATUS_PASSED":
       return ProposalStatus.PROPOSAL_STATUS_PASSED;
     case 4:
-    case 'PROPOSAL_STATUS_REJECTED':
+    case "PROPOSAL_STATUS_REJECTED":
       return ProposalStatus.PROPOSAL_STATUS_REJECTED;
     case 5:
-    case 'PROPOSAL_STATUS_FAILED':
+    case "PROPOSAL_STATUS_FAILED":
       return ProposalStatus.PROPOSAL_STATUS_FAILED;
     case -1:
-    case 'UNRECOGNIZED':
+    case "UNRECOGNIZED":
     default:
       return ProposalStatus.UNRECOGNIZED;
   }
@@ -127,25 +128,30 @@ export function proposalStatusFromJSON(object: any): ProposalStatus {
 export function proposalStatusToJSON(object: ProposalStatus): string {
   switch (object) {
     case ProposalStatus.PROPOSAL_STATUS_UNSPECIFIED:
-      return 'PROPOSAL_STATUS_UNSPECIFIED';
+      return "PROPOSAL_STATUS_UNSPECIFIED";
     case ProposalStatus.PROPOSAL_STATUS_DEPOSIT_PERIOD:
-      return 'PROPOSAL_STATUS_DEPOSIT_PERIOD';
+      return "PROPOSAL_STATUS_DEPOSIT_PERIOD";
     case ProposalStatus.PROPOSAL_STATUS_VOTING_PERIOD:
-      return 'PROPOSAL_STATUS_VOTING_PERIOD';
+      return "PROPOSAL_STATUS_VOTING_PERIOD";
     case ProposalStatus.PROPOSAL_STATUS_PASSED:
-      return 'PROPOSAL_STATUS_PASSED';
+      return "PROPOSAL_STATUS_PASSED";
     case ProposalStatus.PROPOSAL_STATUS_REJECTED:
-      return 'PROPOSAL_STATUS_REJECTED';
+      return "PROPOSAL_STATUS_REJECTED";
     case ProposalStatus.PROPOSAL_STATUS_FAILED:
-      return 'PROPOSAL_STATUS_FAILED';
+      return "PROPOSAL_STATUS_FAILED";
+    case ProposalStatus.UNRECOGNIZED:
     default:
-      return 'UNKNOWN';
+      return "UNRECOGNIZED";
   }
 }
 
-/** WeightedVoteOption defines a unit of vote for vote split. */
+/**
+ * WeightedVoteOption defines a unit of vote for vote split.
+ *
+ * Since: cosmos-sdk 0.43
+ */
 export interface WeightedVoteOption {
-  $type: 'cosmos.gov.v1beta1.WeightedVoteOption';
+  $type: "cosmos.gov.v1beta1.WeightedVoteOption";
   option: VoteOption;
   weight: string;
 }
@@ -155,7 +161,7 @@ export interface WeightedVoteOption {
  * manually updated in case of approval.
  */
 export interface TextProposal {
-  $type: 'cosmos.gov.v1beta1.TextProposal';
+  $type: "cosmos.gov.v1beta1.TextProposal";
   title: string;
   description: string;
 }
@@ -165,7 +171,7 @@ export interface TextProposal {
  * proposal.
  */
 export interface Deposit {
-  $type: 'cosmos.gov.v1beta1.Deposit';
+  $type: "cosmos.gov.v1beta1.Deposit";
   proposalId: Long;
   depositor: string;
   amount: Coin[];
@@ -173,10 +179,15 @@ export interface Deposit {
 
 /** Proposal defines the core field members of a governance proposal. */
 export interface Proposal {
-  $type: 'cosmos.gov.v1beta1.Proposal';
+  $type: "cosmos.gov.v1beta1.Proposal";
   proposalId: Long;
   content?: Any;
   status: ProposalStatus;
+  /**
+   * final_tally_result is the final tally result of the proposal. When
+   * querying a proposal via gRPC, this field is not populated until the
+   * proposal's voting period has ended.
+   */
   finalTallyResult?: TallyResult;
   submitTime?: Date;
   depositEndTime?: Date;
@@ -187,7 +198,7 @@ export interface Proposal {
 
 /** TallyResult defines a standard tally for a governance proposal. */
 export interface TallyResult {
-  $type: 'cosmos.gov.v1beta1.TallyResult';
+  $type: "cosmos.gov.v1beta1.TallyResult";
   yes: string;
   abstain: string;
   no: string;
@@ -199,7 +210,7 @@ export interface TallyResult {
  * A Vote consists of a proposal ID, the voter, and the vote option.
  */
 export interface Vote {
-  $type: 'cosmos.gov.v1beta1.Vote';
+  $type: "cosmos.gov.v1beta1.Vote";
   proposalId: Long;
   voter: string;
   /**
@@ -210,12 +221,13 @@ export interface Vote {
    * @deprecated
    */
   option: VoteOption;
+  /** Since: cosmos-sdk 0.43 */
   options: WeightedVoteOption[];
 }
 
 /** DepositParams defines the params for deposits on governance proposals. */
 export interface DepositParams {
-  $type: 'cosmos.gov.v1beta1.DepositParams';
+  $type: "cosmos.gov.v1beta1.DepositParams";
   /** Minimum deposit for a proposal to enter voting period. */
   minDeposit: Coin[];
   /**
@@ -227,14 +239,14 @@ export interface DepositParams {
 
 /** VotingParams defines the params for voting on governance proposals. */
 export interface VotingParams {
-  $type: 'cosmos.gov.v1beta1.VotingParams';
+  $type: "cosmos.gov.v1beta1.VotingParams";
   /** Length of the voting period. */
   votingPeriod?: Duration;
 }
 
 /** TallyParams defines the params for tallying votes on governance proposals. */
 export interface TallyParams {
-  $type: 'cosmos.gov.v1beta1.TallyParams';
+  $type: "cosmos.gov.v1beta1.TallyParams";
   /**
    * Minimum percentage of total stake needed to vote for a result to be
    *  considered valid.
@@ -250,24 +262,17 @@ export interface TallyParams {
 }
 
 function createBaseWeightedVoteOption(): WeightedVoteOption {
-  return {
-    $type: 'cosmos.gov.v1beta1.WeightedVoteOption',
-    option: 0,
-    weight: '',
-  };
+  return { $type: "cosmos.gov.v1beta1.WeightedVoteOption", option: 0, weight: "" };
 }
 
 export const WeightedVoteOption = {
-  $type: 'cosmos.gov.v1beta1.WeightedVoteOption' as const,
+  $type: "cosmos.gov.v1beta1.WeightedVoteOption" as const,
 
-  encode(
-    message: WeightedVoteOption,
-    writer: _m0.Writer = _m0.Writer.create(),
-  ): _m0.Writer {
+  encode(message: WeightedVoteOption, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.option !== 0) {
       writer.uint32(8).int32(message.option);
     }
-    if (message.weight !== '') {
+    if (message.weight !== "") {
       writer.uint32(18).string(message.weight);
     }
     return writer;
@@ -298,24 +303,25 @@ export const WeightedVoteOption = {
     return {
       $type: WeightedVoteOption.$type,
       option: isSet(object.option) ? voteOptionFromJSON(object.option) : 0,
-      weight: isSet(object.weight) ? String(object.weight) : '',
+      weight: isSet(object.weight) ? String(object.weight) : "",
     };
   },
 
   toJSON(message: WeightedVoteOption): unknown {
     const obj: any = {};
-    message.option !== undefined &&
-      (obj.option = voteOptionToJSON(message.option));
+    message.option !== undefined && (obj.option = voteOptionToJSON(message.option));
     message.weight !== undefined && (obj.weight = message.weight);
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<WeightedVoteOption>, I>>(
-    object: I,
-  ): WeightedVoteOption {
+  create(base?: DeepPartial<WeightedVoteOption>): WeightedVoteOption {
+    return WeightedVoteOption.fromPartial(base ?? {});
+  },
+
+  fromPartial(object: DeepPartial<WeightedVoteOption>): WeightedVoteOption {
     const message = createBaseWeightedVoteOption();
     message.option = object.option ?? 0;
-    message.weight = object.weight ?? '';
+    message.weight = object.weight ?? "";
     return message;
   },
 };
@@ -323,24 +329,17 @@ export const WeightedVoteOption = {
 messageTypeRegistry.set(WeightedVoteOption.$type, WeightedVoteOption);
 
 function createBaseTextProposal(): TextProposal {
-  return {
-    $type: 'cosmos.gov.v1beta1.TextProposal',
-    title: '',
-    description: '',
-  };
+  return { $type: "cosmos.gov.v1beta1.TextProposal", title: "", description: "" };
 }
 
 export const TextProposal = {
-  $type: 'cosmos.gov.v1beta1.TextProposal' as const,
+  $type: "cosmos.gov.v1beta1.TextProposal" as const,
 
-  encode(
-    message: TextProposal,
-    writer: _m0.Writer = _m0.Writer.create(),
-  ): _m0.Writer {
-    if (message.title !== '') {
+  encode(message: TextProposal, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+    if (message.title !== "") {
       writer.uint32(10).string(message.title);
     }
-    if (message.description !== '') {
+    if (message.description !== "") {
       writer.uint32(18).string(message.description);
     }
     return writer;
@@ -370,25 +369,26 @@ export const TextProposal = {
   fromJSON(object: any): TextProposal {
     return {
       $type: TextProposal.$type,
-      title: isSet(object.title) ? String(object.title) : '',
-      description: isSet(object.description) ? String(object.description) : '',
+      title: isSet(object.title) ? String(object.title) : "",
+      description: isSet(object.description) ? String(object.description) : "",
     };
   },
 
   toJSON(message: TextProposal): unknown {
     const obj: any = {};
     message.title !== undefined && (obj.title = message.title);
-    message.description !== undefined &&
-      (obj.description = message.description);
+    message.description !== undefined && (obj.description = message.description);
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<TextProposal>, I>>(
-    object: I,
-  ): TextProposal {
+  create(base?: DeepPartial<TextProposal>): TextProposal {
+    return TextProposal.fromPartial(base ?? {});
+  },
+
+  fromPartial(object: DeepPartial<TextProposal>): TextProposal {
     const message = createBaseTextProposal();
-    message.title = object.title ?? '';
-    message.description = object.description ?? '';
+    message.title = object.title ?? "";
+    message.description = object.description ?? "";
     return message;
   },
 };
@@ -396,25 +396,17 @@ export const TextProposal = {
 messageTypeRegistry.set(TextProposal.$type, TextProposal);
 
 function createBaseDeposit(): Deposit {
-  return {
-    $type: 'cosmos.gov.v1beta1.Deposit',
-    proposalId: Long.UZERO,
-    depositor: '',
-    amount: [],
-  };
+  return { $type: "cosmos.gov.v1beta1.Deposit", proposalId: Long.UZERO, depositor: "", amount: [] };
 }
 
 export const Deposit = {
-  $type: 'cosmos.gov.v1beta1.Deposit' as const,
+  $type: "cosmos.gov.v1beta1.Deposit" as const,
 
-  encode(
-    message: Deposit,
-    writer: _m0.Writer = _m0.Writer.create(),
-  ): _m0.Writer {
+  encode(message: Deposit, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (!message.proposalId.isZero()) {
       writer.uint32(8).uint64(message.proposalId);
     }
-    if (message.depositor !== '') {
+    if (message.depositor !== "") {
       writer.uint32(18).string(message.depositor);
     }
     for (const v of message.amount) {
@@ -450,37 +442,35 @@ export const Deposit = {
   fromJSON(object: any): Deposit {
     return {
       $type: Deposit.$type,
-      proposalId: isSet(object.proposalId)
-        ? Long.fromString(object.proposalId)
-        : Long.UZERO,
-      depositor: isSet(object.depositor) ? String(object.depositor) : '',
-      amount: Array.isArray(object?.amount)
-        ? object.amount.map((e: any) => Coin.fromJSON(e))
-        : [],
+      proposalId: isSet(object.proposalId) ? Long.fromValue(object.proposalId) : Long.UZERO,
+      depositor: isSet(object.depositor) ? String(object.depositor) : "",
+      amount: Array.isArray(object?.amount) ? object.amount.map((e: any) => Coin.fromJSON(e)) : [],
     };
   },
 
   toJSON(message: Deposit): unknown {
     const obj: any = {};
-    message.proposalId !== undefined &&
-      (obj.proposalId = (message.proposalId || Long.UZERO).toString());
+    message.proposalId !== undefined && (obj.proposalId = (message.proposalId || Long.UZERO).toString());
     message.depositor !== undefined && (obj.depositor = message.depositor);
     if (message.amount) {
-      obj.amount = message.amount.map(e => (e ? Coin.toJSON(e) : undefined));
+      obj.amount = message.amount.map((e) => e ? Coin.toJSON(e) : undefined);
     } else {
       obj.amount = [];
     }
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<Deposit>, I>>(object: I): Deposit {
+  create(base?: DeepPartial<Deposit>): Deposit {
+    return Deposit.fromPartial(base ?? {});
+  },
+
+  fromPartial(object: DeepPartial<Deposit>): Deposit {
     const message = createBaseDeposit();
-    message.proposalId =
-      object.proposalId !== undefined && object.proposalId !== null
-        ? Long.fromValue(object.proposalId)
-        : Long.UZERO;
-    message.depositor = object.depositor ?? '';
-    message.amount = object.amount?.map(e => Coin.fromPartial(e)) || [];
+    message.proposalId = (object.proposalId !== undefined && object.proposalId !== null)
+      ? Long.fromValue(object.proposalId)
+      : Long.UZERO;
+    message.depositor = object.depositor ?? "";
+    message.amount = object.amount?.map((e) => Coin.fromPartial(e)) || [];
     return message;
   },
 };
@@ -489,7 +479,7 @@ messageTypeRegistry.set(Deposit.$type, Deposit);
 
 function createBaseProposal(): Proposal {
   return {
-    $type: 'cosmos.gov.v1beta1.Proposal',
+    $type: "cosmos.gov.v1beta1.Proposal",
     proposalId: Long.UZERO,
     content: undefined,
     status: 0,
@@ -503,12 +493,9 @@ function createBaseProposal(): Proposal {
 }
 
 export const Proposal = {
-  $type: 'cosmos.gov.v1beta1.Proposal' as const,
+  $type: "cosmos.gov.v1beta1.Proposal" as const,
 
-  encode(
-    message: Proposal,
-    writer: _m0.Writer = _m0.Writer.create(),
-  ): _m0.Writer {
+  encode(message: Proposal, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (!message.proposalId.isZero()) {
       writer.uint32(8).uint64(message.proposalId);
     }
@@ -519,37 +506,22 @@ export const Proposal = {
       writer.uint32(24).int32(message.status);
     }
     if (message.finalTallyResult !== undefined) {
-      TallyResult.encode(
-        message.finalTallyResult,
-        writer.uint32(34).fork(),
-      ).ldelim();
+      TallyResult.encode(message.finalTallyResult, writer.uint32(34).fork()).ldelim();
     }
     if (message.submitTime !== undefined) {
-      Timestamp.encode(
-        toTimestamp(message.submitTime),
-        writer.uint32(42).fork(),
-      ).ldelim();
+      Timestamp.encode(toTimestamp(message.submitTime), writer.uint32(42).fork()).ldelim();
     }
     if (message.depositEndTime !== undefined) {
-      Timestamp.encode(
-        toTimestamp(message.depositEndTime),
-        writer.uint32(50).fork(),
-      ).ldelim();
+      Timestamp.encode(toTimestamp(message.depositEndTime), writer.uint32(50).fork()).ldelim();
     }
     for (const v of message.totalDeposit) {
       Coin.encode(v!, writer.uint32(58).fork()).ldelim();
     }
     if (message.votingStartTime !== undefined) {
-      Timestamp.encode(
-        toTimestamp(message.votingStartTime),
-        writer.uint32(66).fork(),
-      ).ldelim();
+      Timestamp.encode(toTimestamp(message.votingStartTime), writer.uint32(66).fork()).ldelim();
     }
     if (message.votingEndTime !== undefined) {
-      Timestamp.encode(
-        toTimestamp(message.votingEndTime),
-        writer.uint32(74).fork(),
-      ).ldelim();
+      Timestamp.encode(toTimestamp(message.votingEndTime), writer.uint32(74).fork()).ldelim();
     }
     return writer;
   },
@@ -571,33 +543,22 @@ export const Proposal = {
           message.status = reader.int32() as any;
           break;
         case 4:
-          message.finalTallyResult = TallyResult.decode(
-            reader,
-            reader.uint32(),
-          );
+          message.finalTallyResult = TallyResult.decode(reader, reader.uint32());
           break;
         case 5:
-          message.submitTime = fromTimestamp(
-            Timestamp.decode(reader, reader.uint32()),
-          );
+          message.submitTime = fromTimestamp(Timestamp.decode(reader, reader.uint32()));
           break;
         case 6:
-          message.depositEndTime = fromTimestamp(
-            Timestamp.decode(reader, reader.uint32()),
-          );
+          message.depositEndTime = fromTimestamp(Timestamp.decode(reader, reader.uint32()));
           break;
         case 7:
           message.totalDeposit.push(Coin.decode(reader, reader.uint32()));
           break;
         case 8:
-          message.votingStartTime = fromTimestamp(
-            Timestamp.decode(reader, reader.uint32()),
-          );
+          message.votingStartTime = fromTimestamp(Timestamp.decode(reader, reader.uint32()));
           break;
         case 9:
-          message.votingEndTime = fromTimestamp(
-            Timestamp.decode(reader, reader.uint32()),
-          );
+          message.votingEndTime = fromTimestamp(Timestamp.decode(reader, reader.uint32()));
           break;
         default:
           reader.skipType(tag & 7);
@@ -610,81 +571,56 @@ export const Proposal = {
   fromJSON(object: any): Proposal {
     return {
       $type: Proposal.$type,
-      proposalId: isSet(object.proposalId)
-        ? Long.fromString(object.proposalId)
-        : Long.UZERO,
+      proposalId: isSet(object.proposalId) ? Long.fromValue(object.proposalId) : Long.UZERO,
       content: isSet(object.content) ? Any.fromJSON(object.content) : undefined,
       status: isSet(object.status) ? proposalStatusFromJSON(object.status) : 0,
-      finalTallyResult: isSet(object.finalTallyResult)
-        ? TallyResult.fromJSON(object.finalTallyResult)
-        : undefined,
-      submitTime: isSet(object.submitTime)
-        ? fromJsonTimestamp(object.submitTime)
-        : undefined,
-      depositEndTime: isSet(object.depositEndTime)
-        ? fromJsonTimestamp(object.depositEndTime)
-        : undefined,
-      totalDeposit: Array.isArray(object?.totalDeposit)
-        ? object.totalDeposit.map((e: any) => Coin.fromJSON(e))
-        : [],
-      votingStartTime: isSet(object.votingStartTime)
-        ? fromJsonTimestamp(object.votingStartTime)
-        : undefined,
-      votingEndTime: isSet(object.votingEndTime)
-        ? fromJsonTimestamp(object.votingEndTime)
-        : undefined,
+      finalTallyResult: isSet(object.finalTallyResult) ? TallyResult.fromJSON(object.finalTallyResult) : undefined,
+      submitTime: isSet(object.submitTime) ? fromJsonTimestamp(object.submitTime) : undefined,
+      depositEndTime: isSet(object.depositEndTime) ? fromJsonTimestamp(object.depositEndTime) : undefined,
+      totalDeposit: Array.isArray(object?.totalDeposit) ? object.totalDeposit.map((e: any) => Coin.fromJSON(e)) : [],
+      votingStartTime: isSet(object.votingStartTime) ? fromJsonTimestamp(object.votingStartTime) : undefined,
+      votingEndTime: isSet(object.votingEndTime) ? fromJsonTimestamp(object.votingEndTime) : undefined,
     };
   },
 
   toJSON(message: Proposal): unknown {
     const obj: any = {};
-    message.proposalId !== undefined &&
-      (obj.proposalId = (message.proposalId || Long.UZERO).toString());
-    message.content !== undefined &&
-      (obj.content = message.content ? Any.toJSON(message.content) : undefined);
-    message.status !== undefined &&
-      (obj.status = proposalStatusToJSON(message.status));
+    message.proposalId !== undefined && (obj.proposalId = (message.proposalId || Long.UZERO).toString());
+    message.content !== undefined && (obj.content = message.content ? Any.toJSON(message.content) : undefined);
+    message.status !== undefined && (obj.status = proposalStatusToJSON(message.status));
     message.finalTallyResult !== undefined &&
-      (obj.finalTallyResult = message.finalTallyResult
-        ? TallyResult.toJSON(message.finalTallyResult)
-        : undefined);
-    message.submitTime !== undefined &&
-      (obj.submitTime = message.submitTime.toISOString());
-    message.depositEndTime !== undefined &&
-      (obj.depositEndTime = message.depositEndTime.toISOString());
+      (obj.finalTallyResult = message.finalTallyResult ? TallyResult.toJSON(message.finalTallyResult) : undefined);
+    message.submitTime !== undefined && (obj.submitTime = message.submitTime.toISOString());
+    message.depositEndTime !== undefined && (obj.depositEndTime = message.depositEndTime.toISOString());
     if (message.totalDeposit) {
-      obj.totalDeposit = message.totalDeposit.map(e =>
-        e ? Coin.toJSON(e) : undefined,
-      );
+      obj.totalDeposit = message.totalDeposit.map((e) => e ? Coin.toJSON(e) : undefined);
     } else {
       obj.totalDeposit = [];
     }
-    message.votingStartTime !== undefined &&
-      (obj.votingStartTime = message.votingStartTime.toISOString());
-    message.votingEndTime !== undefined &&
-      (obj.votingEndTime = message.votingEndTime.toISOString());
+    message.votingStartTime !== undefined && (obj.votingStartTime = message.votingStartTime.toISOString());
+    message.votingEndTime !== undefined && (obj.votingEndTime = message.votingEndTime.toISOString());
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<Proposal>, I>>(object: I): Proposal {
+  create(base?: DeepPartial<Proposal>): Proposal {
+    return Proposal.fromPartial(base ?? {});
+  },
+
+  fromPartial(object: DeepPartial<Proposal>): Proposal {
     const message = createBaseProposal();
-    message.proposalId =
-      object.proposalId !== undefined && object.proposalId !== null
-        ? Long.fromValue(object.proposalId)
-        : Long.UZERO;
-    message.content =
-      object.content !== undefined && object.content !== null
-        ? Any.fromPartial(object.content)
-        : undefined;
+    message.proposalId = (object.proposalId !== undefined && object.proposalId !== null)
+      ? Long.fromValue(object.proposalId)
+      : Long.UZERO;
+    message.content = (object.content !== undefined && object.content !== null)
+      ? Any.fromPartial(object.content)
+      : undefined;
     message.status = object.status ?? 0;
-    message.finalTallyResult =
-      object.finalTallyResult !== undefined && object.finalTallyResult !== null
-        ? TallyResult.fromPartial(object.finalTallyResult)
-        : undefined;
+    message.finalTallyResult = (object.finalTallyResult !== undefined && object.finalTallyResult !== null)
+      ? TallyResult.fromPartial(object.finalTallyResult)
+      : undefined;
     message.submitTime = object.submitTime ?? undefined;
     message.depositEndTime = object.depositEndTime ?? undefined;
-    message.totalDeposit =
-      object.totalDeposit?.map(e => Coin.fromPartial(e)) || [];
+    message.totalDeposit = object.totalDeposit?.map((e) => Coin.fromPartial(e)) || [];
     message.votingStartTime = object.votingStartTime ?? undefined;
     message.votingEndTime = object.votingEndTime ?? undefined;
     return message;
@@ -694,32 +630,23 @@ export const Proposal = {
 messageTypeRegistry.set(Proposal.$type, Proposal);
 
 function createBaseTallyResult(): TallyResult {
-  return {
-    $type: 'cosmos.gov.v1beta1.TallyResult',
-    yes: '',
-    abstain: '',
-    no: '',
-    noWithVeto: '',
-  };
+  return { $type: "cosmos.gov.v1beta1.TallyResult", yes: "", abstain: "", no: "", noWithVeto: "" };
 }
 
 export const TallyResult = {
-  $type: 'cosmos.gov.v1beta1.TallyResult' as const,
+  $type: "cosmos.gov.v1beta1.TallyResult" as const,
 
-  encode(
-    message: TallyResult,
-    writer: _m0.Writer = _m0.Writer.create(),
-  ): _m0.Writer {
-    if (message.yes !== '') {
+  encode(message: TallyResult, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+    if (message.yes !== "") {
       writer.uint32(10).string(message.yes);
     }
-    if (message.abstain !== '') {
+    if (message.abstain !== "") {
       writer.uint32(18).string(message.abstain);
     }
-    if (message.no !== '') {
+    if (message.no !== "") {
       writer.uint32(26).string(message.no);
     }
-    if (message.noWithVeto !== '') {
+    if (message.noWithVeto !== "") {
       writer.uint32(34).string(message.noWithVeto);
     }
     return writer;
@@ -755,10 +682,10 @@ export const TallyResult = {
   fromJSON(object: any): TallyResult {
     return {
       $type: TallyResult.$type,
-      yes: isSet(object.yes) ? String(object.yes) : '',
-      abstain: isSet(object.abstain) ? String(object.abstain) : '',
-      no: isSet(object.no) ? String(object.no) : '',
-      noWithVeto: isSet(object.noWithVeto) ? String(object.noWithVeto) : '',
+      yes: isSet(object.yes) ? String(object.yes) : "",
+      abstain: isSet(object.abstain) ? String(object.abstain) : "",
+      no: isSet(object.no) ? String(object.no) : "",
+      noWithVeto: isSet(object.noWithVeto) ? String(object.noWithVeto) : "",
     };
   },
 
@@ -771,14 +698,16 @@ export const TallyResult = {
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<TallyResult>, I>>(
-    object: I,
-  ): TallyResult {
+  create(base?: DeepPartial<TallyResult>): TallyResult {
+    return TallyResult.fromPartial(base ?? {});
+  },
+
+  fromPartial(object: DeepPartial<TallyResult>): TallyResult {
     const message = createBaseTallyResult();
-    message.yes = object.yes ?? '';
-    message.abstain = object.abstain ?? '';
-    message.no = object.no ?? '';
-    message.noWithVeto = object.noWithVeto ?? '';
+    message.yes = object.yes ?? "";
+    message.abstain = object.abstain ?? "";
+    message.no = object.no ?? "";
+    message.noWithVeto = object.noWithVeto ?? "";
     return message;
   },
 };
@@ -786,23 +715,17 @@ export const TallyResult = {
 messageTypeRegistry.set(TallyResult.$type, TallyResult);
 
 function createBaseVote(): Vote {
-  return {
-    $type: 'cosmos.gov.v1beta1.Vote',
-    proposalId: Long.UZERO,
-    voter: '',
-    option: 0,
-    options: [],
-  };
+  return { $type: "cosmos.gov.v1beta1.Vote", proposalId: Long.UZERO, voter: "", option: 0, options: [] };
 }
 
 export const Vote = {
-  $type: 'cosmos.gov.v1beta1.Vote' as const,
+  $type: "cosmos.gov.v1beta1.Vote" as const,
 
   encode(message: Vote, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (!message.proposalId.isZero()) {
       writer.uint32(8).uint64(message.proposalId);
     }
-    if (message.voter !== '') {
+    if (message.voter !== "") {
       writer.uint32(18).string(message.voter);
     }
     if (message.option !== 0) {
@@ -831,9 +754,7 @@ export const Vote = {
           message.option = reader.int32() as any;
           break;
         case 4:
-          message.options.push(
-            WeightedVoteOption.decode(reader, reader.uint32()),
-          );
+          message.options.push(WeightedVoteOption.decode(reader, reader.uint32()));
           break;
         default:
           reader.skipType(tag & 7);
@@ -846,44 +767,38 @@ export const Vote = {
   fromJSON(object: any): Vote {
     return {
       $type: Vote.$type,
-      proposalId: isSet(object.proposalId)
-        ? Long.fromString(object.proposalId)
-        : Long.UZERO,
-      voter: isSet(object.voter) ? String(object.voter) : '',
+      proposalId: isSet(object.proposalId) ? Long.fromValue(object.proposalId) : Long.UZERO,
+      voter: isSet(object.voter) ? String(object.voter) : "",
       option: isSet(object.option) ? voteOptionFromJSON(object.option) : 0,
-      options: Array.isArray(object?.options)
-        ? object.options.map((e: any) => WeightedVoteOption.fromJSON(e))
-        : [],
+      options: Array.isArray(object?.options) ? object.options.map((e: any) => WeightedVoteOption.fromJSON(e)) : [],
     };
   },
 
   toJSON(message: Vote): unknown {
     const obj: any = {};
-    message.proposalId !== undefined &&
-      (obj.proposalId = (message.proposalId || Long.UZERO).toString());
+    message.proposalId !== undefined && (obj.proposalId = (message.proposalId || Long.UZERO).toString());
     message.voter !== undefined && (obj.voter = message.voter);
-    message.option !== undefined &&
-      (obj.option = voteOptionToJSON(message.option));
+    message.option !== undefined && (obj.option = voteOptionToJSON(message.option));
     if (message.options) {
-      obj.options = message.options.map(e =>
-        e ? WeightedVoteOption.toJSON(e) : undefined,
-      );
+      obj.options = message.options.map((e) => e ? WeightedVoteOption.toJSON(e) : undefined);
     } else {
       obj.options = [];
     }
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<Vote>, I>>(object: I): Vote {
+  create(base?: DeepPartial<Vote>): Vote {
+    return Vote.fromPartial(base ?? {});
+  },
+
+  fromPartial(object: DeepPartial<Vote>): Vote {
     const message = createBaseVote();
-    message.proposalId =
-      object.proposalId !== undefined && object.proposalId !== null
-        ? Long.fromValue(object.proposalId)
-        : Long.UZERO;
-    message.voter = object.voter ?? '';
+    message.proposalId = (object.proposalId !== undefined && object.proposalId !== null)
+      ? Long.fromValue(object.proposalId)
+      : Long.UZERO;
+    message.voter = object.voter ?? "";
     message.option = object.option ?? 0;
-    message.options =
-      object.options?.map(e => WeightedVoteOption.fromPartial(e)) || [];
+    message.options = object.options?.map((e) => WeightedVoteOption.fromPartial(e)) || [];
     return message;
   },
 };
@@ -891,28 +806,18 @@ export const Vote = {
 messageTypeRegistry.set(Vote.$type, Vote);
 
 function createBaseDepositParams(): DepositParams {
-  return {
-    $type: 'cosmos.gov.v1beta1.DepositParams',
-    minDeposit: [],
-    maxDepositPeriod: undefined,
-  };
+  return { $type: "cosmos.gov.v1beta1.DepositParams", minDeposit: [], maxDepositPeriod: undefined };
 }
 
 export const DepositParams = {
-  $type: 'cosmos.gov.v1beta1.DepositParams' as const,
+  $type: "cosmos.gov.v1beta1.DepositParams" as const,
 
-  encode(
-    message: DepositParams,
-    writer: _m0.Writer = _m0.Writer.create(),
-  ): _m0.Writer {
+  encode(message: DepositParams, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     for (const v of message.minDeposit) {
       Coin.encode(v!, writer.uint32(10).fork()).ldelim();
     }
     if (message.maxDepositPeriod !== undefined) {
-      Duration.encode(
-        message.maxDepositPeriod,
-        writer.uint32(18).fork(),
-      ).ldelim();
+      Duration.encode(message.maxDepositPeriod, writer.uint32(18).fork()).ldelim();
     }
     return writer;
   },
@@ -941,40 +846,33 @@ export const DepositParams = {
   fromJSON(object: any): DepositParams {
     return {
       $type: DepositParams.$type,
-      minDeposit: Array.isArray(object?.minDeposit)
-        ? object.minDeposit.map((e: any) => Coin.fromJSON(e))
-        : [],
-      maxDepositPeriod: isSet(object.maxDepositPeriod)
-        ? Duration.fromJSON(object.maxDepositPeriod)
-        : undefined,
+      minDeposit: Array.isArray(object?.minDeposit) ? object.minDeposit.map((e: any) => Coin.fromJSON(e)) : [],
+      maxDepositPeriod: isSet(object.maxDepositPeriod) ? Duration.fromJSON(object.maxDepositPeriod) : undefined,
     };
   },
 
   toJSON(message: DepositParams): unknown {
     const obj: any = {};
     if (message.minDeposit) {
-      obj.minDeposit = message.minDeposit.map(e =>
-        e ? Coin.toJSON(e) : undefined,
-      );
+      obj.minDeposit = message.minDeposit.map((e) => e ? Coin.toJSON(e) : undefined);
     } else {
       obj.minDeposit = [];
     }
     message.maxDepositPeriod !== undefined &&
-      (obj.maxDepositPeriod = message.maxDepositPeriod
-        ? Duration.toJSON(message.maxDepositPeriod)
-        : undefined);
+      (obj.maxDepositPeriod = message.maxDepositPeriod ? Duration.toJSON(message.maxDepositPeriod) : undefined);
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<DepositParams>, I>>(
-    object: I,
-  ): DepositParams {
+  create(base?: DeepPartial<DepositParams>): DepositParams {
+    return DepositParams.fromPartial(base ?? {});
+  },
+
+  fromPartial(object: DeepPartial<DepositParams>): DepositParams {
     const message = createBaseDepositParams();
-    message.minDeposit = object.minDeposit?.map(e => Coin.fromPartial(e)) || [];
-    message.maxDepositPeriod =
-      object.maxDepositPeriod !== undefined && object.maxDepositPeriod !== null
-        ? Duration.fromPartial(object.maxDepositPeriod)
-        : undefined;
+    message.minDeposit = object.minDeposit?.map((e) => Coin.fromPartial(e)) || [];
+    message.maxDepositPeriod = (object.maxDepositPeriod !== undefined && object.maxDepositPeriod !== null)
+      ? Duration.fromPartial(object.maxDepositPeriod)
+      : undefined;
     return message;
   },
 };
@@ -982,16 +880,13 @@ export const DepositParams = {
 messageTypeRegistry.set(DepositParams.$type, DepositParams);
 
 function createBaseVotingParams(): VotingParams {
-  return { $type: 'cosmos.gov.v1beta1.VotingParams', votingPeriod: undefined };
+  return { $type: "cosmos.gov.v1beta1.VotingParams", votingPeriod: undefined };
 }
 
 export const VotingParams = {
-  $type: 'cosmos.gov.v1beta1.VotingParams' as const,
+  $type: "cosmos.gov.v1beta1.VotingParams" as const,
 
-  encode(
-    message: VotingParams,
-    writer: _m0.Writer = _m0.Writer.create(),
-  ): _m0.Writer {
+  encode(message: VotingParams, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.votingPeriod !== undefined) {
       Duration.encode(message.votingPeriod, writer.uint32(10).fork()).ldelim();
     }
@@ -1019,29 +914,26 @@ export const VotingParams = {
   fromJSON(object: any): VotingParams {
     return {
       $type: VotingParams.$type,
-      votingPeriod: isSet(object.votingPeriod)
-        ? Duration.fromJSON(object.votingPeriod)
-        : undefined,
+      votingPeriod: isSet(object.votingPeriod) ? Duration.fromJSON(object.votingPeriod) : undefined,
     };
   },
 
   toJSON(message: VotingParams): unknown {
     const obj: any = {};
     message.votingPeriod !== undefined &&
-      (obj.votingPeriod = message.votingPeriod
-        ? Duration.toJSON(message.votingPeriod)
-        : undefined);
+      (obj.votingPeriod = message.votingPeriod ? Duration.toJSON(message.votingPeriod) : undefined);
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<VotingParams>, I>>(
-    object: I,
-  ): VotingParams {
+  create(base?: DeepPartial<VotingParams>): VotingParams {
+    return VotingParams.fromPartial(base ?? {});
+  },
+
+  fromPartial(object: DeepPartial<VotingParams>): VotingParams {
     const message = createBaseVotingParams();
-    message.votingPeriod =
-      object.votingPeriod !== undefined && object.votingPeriod !== null
-        ? Duration.fromPartial(object.votingPeriod)
-        : undefined;
+    message.votingPeriod = (object.votingPeriod !== undefined && object.votingPeriod !== null)
+      ? Duration.fromPartial(object.votingPeriod)
+      : undefined;
     return message;
   },
 };
@@ -1050,7 +942,7 @@ messageTypeRegistry.set(VotingParams.$type, VotingParams);
 
 function createBaseTallyParams(): TallyParams {
   return {
-    $type: 'cosmos.gov.v1beta1.TallyParams',
+    $type: "cosmos.gov.v1beta1.TallyParams",
     quorum: new Uint8Array(),
     threshold: new Uint8Array(),
     vetoThreshold: new Uint8Array(),
@@ -1058,12 +950,9 @@ function createBaseTallyParams(): TallyParams {
 }
 
 export const TallyParams = {
-  $type: 'cosmos.gov.v1beta1.TallyParams' as const,
+  $type: "cosmos.gov.v1beta1.TallyParams" as const,
 
-  encode(
-    message: TallyParams,
-    writer: _m0.Writer = _m0.Writer.create(),
-  ): _m0.Writer {
+  encode(message: TallyParams, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.quorum.length !== 0) {
       writer.uint32(10).bytes(message.quorum);
     }
@@ -1103,40 +992,30 @@ export const TallyParams = {
   fromJSON(object: any): TallyParams {
     return {
       $type: TallyParams.$type,
-      quorum: isSet(object.quorum)
-        ? bytesFromBase64(object.quorum)
-        : new Uint8Array(),
-      threshold: isSet(object.threshold)
-        ? bytesFromBase64(object.threshold)
-        : new Uint8Array(),
-      vetoThreshold: isSet(object.vetoThreshold)
-        ? bytesFromBase64(object.vetoThreshold)
-        : new Uint8Array(),
+      quorum: isSet(object.quorum) ? bytesFromBase64(object.quorum) : new Uint8Array(),
+      threshold: isSet(object.threshold) ? bytesFromBase64(object.threshold) : new Uint8Array(),
+      vetoThreshold: isSet(object.vetoThreshold) ? bytesFromBase64(object.vetoThreshold) : new Uint8Array(),
     };
   },
 
   toJSON(message: TallyParams): unknown {
     const obj: any = {};
     message.quorum !== undefined &&
-      (obj.quorum = base64FromBytes(
-        message.quorum !== undefined ? message.quorum : new Uint8Array(),
-      ));
+      (obj.quorum = base64FromBytes(message.quorum !== undefined ? message.quorum : new Uint8Array()));
     message.threshold !== undefined &&
-      (obj.threshold = base64FromBytes(
-        message.threshold !== undefined ? message.threshold : new Uint8Array(),
-      ));
+      (obj.threshold = base64FromBytes(message.threshold !== undefined ? message.threshold : new Uint8Array()));
     message.vetoThreshold !== undefined &&
       (obj.vetoThreshold = base64FromBytes(
-        message.vetoThreshold !== undefined
-          ? message.vetoThreshold
-          : new Uint8Array(),
+        message.vetoThreshold !== undefined ? message.vetoThreshold : new Uint8Array(),
       ));
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<TallyParams>, I>>(
-    object: I,
-  ): TallyParams {
+  create(base?: DeepPartial<TallyParams>): TallyParams {
+    return TallyParams.fromPartial(base ?? {});
+  },
+
+  fromPartial(object: DeepPartial<TallyParams>): TallyParams {
     const message = createBaseTallyParams();
     message.quorum = object.quorum ?? new Uint8Array();
     message.threshold = object.threshold ?? new Uint8Array();
@@ -1150,70 +1029,59 @@ messageTypeRegistry.set(TallyParams.$type, TallyParams);
 declare var self: any | undefined;
 declare var window: any | undefined;
 declare var global: any | undefined;
-var globalThis: any = (() => {
-  if (typeof globalThis !== 'undefined') return globalThis;
-  if (typeof self !== 'undefined') return self;
-  if (typeof window !== 'undefined') return window;
-  if (typeof global !== 'undefined') return global;
-  throw 'Unable to locate global object';
+var tsProtoGlobalThis: any = (() => {
+  if (typeof globalThis !== "undefined") {
+    return globalThis;
+  }
+  if (typeof self !== "undefined") {
+    return self;
+  }
+  if (typeof window !== "undefined") {
+    return window;
+  }
+  if (typeof global !== "undefined") {
+    return global;
+  }
+  throw "Unable to locate global object";
 })();
 
-const atob: (b64: string) => string =
-  globalThis.atob ||
-  (b64 => globalThis.Buffer.from(b64, 'base64').toString('binary'));
 function bytesFromBase64(b64: string): Uint8Array {
-  const bin = atob(b64);
-  const arr = new Uint8Array(bin.length);
-  for (let i = 0; i < bin.length; ++i) {
-    arr[i] = bin.charCodeAt(i);
+  if (tsProtoGlobalThis.Buffer) {
+    return Uint8Array.from(tsProtoGlobalThis.Buffer.from(b64, "base64"));
+  } else {
+    const bin = tsProtoGlobalThis.atob(b64);
+    const arr = new Uint8Array(bin.length);
+    for (let i = 0; i < bin.length; ++i) {
+      arr[i] = bin.charCodeAt(i);
+    }
+    return arr;
   }
-  return arr;
 }
 
-const btoa: (bin: string) => string =
-  globalThis.btoa ||
-  (bin => globalThis.Buffer.from(bin, 'binary').toString('base64'));
 function base64FromBytes(arr: Uint8Array): string {
-  const bin: string[] = [];
-  for (const byte of arr) {
-    bin.push(String.fromCharCode(byte));
+  if (tsProtoGlobalThis.Buffer) {
+    return tsProtoGlobalThis.Buffer.from(arr).toString("base64");
+  } else {
+    const bin: string[] = [];
+    arr.forEach((byte) => {
+      bin.push(String.fromCharCode(byte));
+    });
+    return tsProtoGlobalThis.btoa(bin.join(""));
   }
-  return btoa(bin.join(''));
 }
 
-type Builtin =
-  | Date
-  | Function
-  | Uint8Array
-  | string
-  | number
-  | boolean
-  | undefined;
+type Builtin = Date | Function | Uint8Array | string | number | boolean | undefined;
 
-export type DeepPartial<T> = T extends Builtin
-  ? T
-  : T extends Long
-  ? string | number | Long
-  : T extends Array<infer U>
-  ? Array<DeepPartial<U>>
-  : T extends ReadonlyArray<infer U>
-  ? ReadonlyArray<DeepPartial<U>>
-  : T extends {}
-  ? { [K in Exclude<keyof T, '$type'>]?: DeepPartial<T[K]> }
+export type DeepPartial<T> = T extends Builtin ? T
+  : T extends Long ? string | number | Long : T extends Array<infer U> ? Array<DeepPartial<U>>
+  : T extends ReadonlyArray<infer U> ? ReadonlyArray<DeepPartial<U>>
+  : T extends {} ? { [K in Exclude<keyof T, "$type">]?: DeepPartial<T[K]> }
   : Partial<T>;
-
-type KeysOfUnion<T> = T extends T ? keyof T : never;
-export type Exact<P, I extends P> = P extends Builtin
-  ? P
-  : P & { [K in keyof P]: Exact<P[K], I[K]> } & Record<
-        Exclude<keyof I, KeysOfUnion<P> | '$type'>,
-        never
-      >;
 
 function toTimestamp(date: Date): Timestamp {
   const seconds = numberToLong(date.getTime() / 1_000);
   const nanos = (date.getTime() % 1_000) * 1_000_000;
-  return { $type: 'google.protobuf.Timestamp', seconds, nanos };
+  return { $type: "google.protobuf.Timestamp", seconds, nanos };
 }
 
 function fromTimestamp(t: Timestamp): Date {
@@ -1225,7 +1093,7 @@ function fromTimestamp(t: Timestamp): Date {
 function fromJsonTimestamp(o: any): Date {
   if (o instanceof Date) {
     return o;
-  } else if (typeof o === 'string') {
+  } else if (typeof o === "string") {
     return new Date(o);
   } else {
     return fromTimestamp(Timestamp.fromJSON(o));

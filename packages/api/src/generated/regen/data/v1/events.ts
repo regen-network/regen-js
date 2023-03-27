@@ -1,20 +1,20 @@
 /* eslint-disable */
-import { messageTypeRegistry } from '../../../typeRegistry';
-import Long from 'long';
-import _m0 from 'protobufjs/minimal';
+import Long from "long";
+import _m0 from "protobufjs/minimal";
+import { messageTypeRegistry } from "../../../typeRegistry";
 
-export const protobufPackage = 'regen.data.v1';
+export const protobufPackage = "regen.data.v1";
 
 /** EventAnchor is an event emitted when data is anchored on chain. */
 export interface EventAnchor {
-  $type: 'regen.data.v1.EventAnchor';
+  $type: "regen.data.v1.EventAnchor";
   /** iri is the IRI of the data anchored on chain. */
   iri: string;
 }
 
 /** EventAttest is an event emitted when data is attested to on chain. */
 export interface EventAttest {
-  $type: 'regen.data.v1.EventAttest';
+  $type: "regen.data.v1.EventAttest";
   /** iri is the IRI of the data attested to. */
   iri: string;
   /**
@@ -26,7 +26,7 @@ export interface EventAttest {
 
 /** EventDefineResolver is an event emitted when a resolved is defined on chain. */
 export interface EventDefineResolver {
-  $type: 'regen.data.v1.EventDefineResolver';
+  $type: "regen.data.v1.EventDefineResolver";
   /** id is the ID of the defined resolver. */
   id: Long;
 }
@@ -36,7 +36,7 @@ export interface EventDefineResolver {
  * resolver on chain.
  */
 export interface EventRegisterResolver {
-  $type: 'regen.data.v1.EventRegisterResolver';
+  $type: "regen.data.v1.EventRegisterResolver";
   /** id is the ID of the resolver that the data was registered to. */
   id: Long;
   /** iri is the IRI of the data that was registered. */
@@ -44,17 +44,14 @@ export interface EventRegisterResolver {
 }
 
 function createBaseEventAnchor(): EventAnchor {
-  return { $type: 'regen.data.v1.EventAnchor', iri: '' };
+  return { $type: "regen.data.v1.EventAnchor", iri: "" };
 }
 
 export const EventAnchor = {
-  $type: 'regen.data.v1.EventAnchor' as const,
+  $type: "regen.data.v1.EventAnchor" as const,
 
-  encode(
-    message: EventAnchor,
-    writer: _m0.Writer = _m0.Writer.create(),
-  ): _m0.Writer {
-    if (message.iri !== '') {
+  encode(message: EventAnchor, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+    if (message.iri !== "") {
       writer.uint32(10).string(message.iri);
     }
     return writer;
@@ -79,10 +76,7 @@ export const EventAnchor = {
   },
 
   fromJSON(object: any): EventAnchor {
-    return {
-      $type: EventAnchor.$type,
-      iri: isSet(object.iri) ? String(object.iri) : '',
-    };
+    return { $type: EventAnchor.$type, iri: isSet(object.iri) ? String(object.iri) : "" };
   },
 
   toJSON(message: EventAnchor): unknown {
@@ -91,11 +85,13 @@ export const EventAnchor = {
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<EventAnchor>, I>>(
-    object: I,
-  ): EventAnchor {
+  create(base?: DeepPartial<EventAnchor>): EventAnchor {
+    return EventAnchor.fromPartial(base ?? {});
+  },
+
+  fromPartial(object: DeepPartial<EventAnchor>): EventAnchor {
     const message = createBaseEventAnchor();
-    message.iri = object.iri ?? '';
+    message.iri = object.iri ?? "";
     return message;
   },
 };
@@ -103,20 +99,17 @@ export const EventAnchor = {
 messageTypeRegistry.set(EventAnchor.$type, EventAnchor);
 
 function createBaseEventAttest(): EventAttest {
-  return { $type: 'regen.data.v1.EventAttest', iri: '', attestor: '' };
+  return { $type: "regen.data.v1.EventAttest", iri: "", attestor: "" };
 }
 
 export const EventAttest = {
-  $type: 'regen.data.v1.EventAttest' as const,
+  $type: "regen.data.v1.EventAttest" as const,
 
-  encode(
-    message: EventAttest,
-    writer: _m0.Writer = _m0.Writer.create(),
-  ): _m0.Writer {
-    if (message.iri !== '') {
+  encode(message: EventAttest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+    if (message.iri !== "") {
       writer.uint32(10).string(message.iri);
     }
-    if (message.attestor !== '') {
+    if (message.attestor !== "") {
       writer.uint32(18).string(message.attestor);
     }
     return writer;
@@ -146,8 +139,8 @@ export const EventAttest = {
   fromJSON(object: any): EventAttest {
     return {
       $type: EventAttest.$type,
-      iri: isSet(object.iri) ? String(object.iri) : '',
-      attestor: isSet(object.attestor) ? String(object.attestor) : '',
+      iri: isSet(object.iri) ? String(object.iri) : "",
+      attestor: isSet(object.attestor) ? String(object.attestor) : "",
     };
   },
 
@@ -158,12 +151,14 @@ export const EventAttest = {
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<EventAttest>, I>>(
-    object: I,
-  ): EventAttest {
+  create(base?: DeepPartial<EventAttest>): EventAttest {
+    return EventAttest.fromPartial(base ?? {});
+  },
+
+  fromPartial(object: DeepPartial<EventAttest>): EventAttest {
     const message = createBaseEventAttest();
-    message.iri = object.iri ?? '';
-    message.attestor = object.attestor ?? '';
+    message.iri = object.iri ?? "";
+    message.attestor = object.attestor ?? "";
     return message;
   },
 };
@@ -171,16 +166,13 @@ export const EventAttest = {
 messageTypeRegistry.set(EventAttest.$type, EventAttest);
 
 function createBaseEventDefineResolver(): EventDefineResolver {
-  return { $type: 'regen.data.v1.EventDefineResolver', id: Long.UZERO };
+  return { $type: "regen.data.v1.EventDefineResolver", id: Long.UZERO };
 }
 
 export const EventDefineResolver = {
-  $type: 'regen.data.v1.EventDefineResolver' as const,
+  $type: "regen.data.v1.EventDefineResolver" as const,
 
-  encode(
-    message: EventDefineResolver,
-    writer: _m0.Writer = _m0.Writer.create(),
-  ): _m0.Writer {
+  encode(message: EventDefineResolver, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (!message.id.isZero()) {
       writer.uint32(8).uint64(message.id);
     }
@@ -206,27 +198,22 @@ export const EventDefineResolver = {
   },
 
   fromJSON(object: any): EventDefineResolver {
-    return {
-      $type: EventDefineResolver.$type,
-      id: isSet(object.id) ? Long.fromString(object.id) : Long.UZERO,
-    };
+    return { $type: EventDefineResolver.$type, id: isSet(object.id) ? Long.fromValue(object.id) : Long.UZERO };
   },
 
   toJSON(message: EventDefineResolver): unknown {
     const obj: any = {};
-    message.id !== undefined &&
-      (obj.id = (message.id || Long.UZERO).toString());
+    message.id !== undefined && (obj.id = (message.id || Long.UZERO).toString());
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<EventDefineResolver>, I>>(
-    object: I,
-  ): EventDefineResolver {
+  create(base?: DeepPartial<EventDefineResolver>): EventDefineResolver {
+    return EventDefineResolver.fromPartial(base ?? {});
+  },
+
+  fromPartial(object: DeepPartial<EventDefineResolver>): EventDefineResolver {
     const message = createBaseEventDefineResolver();
-    message.id =
-      object.id !== undefined && object.id !== null
-        ? Long.fromValue(object.id)
-        : Long.UZERO;
+    message.id = (object.id !== undefined && object.id !== null) ? Long.fromValue(object.id) : Long.UZERO;
     return message;
   },
 };
@@ -234,33 +221,23 @@ export const EventDefineResolver = {
 messageTypeRegistry.set(EventDefineResolver.$type, EventDefineResolver);
 
 function createBaseEventRegisterResolver(): EventRegisterResolver {
-  return {
-    $type: 'regen.data.v1.EventRegisterResolver',
-    id: Long.UZERO,
-    iri: '',
-  };
+  return { $type: "regen.data.v1.EventRegisterResolver", id: Long.UZERO, iri: "" };
 }
 
 export const EventRegisterResolver = {
-  $type: 'regen.data.v1.EventRegisterResolver' as const,
+  $type: "regen.data.v1.EventRegisterResolver" as const,
 
-  encode(
-    message: EventRegisterResolver,
-    writer: _m0.Writer = _m0.Writer.create(),
-  ): _m0.Writer {
+  encode(message: EventRegisterResolver, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (!message.id.isZero()) {
       writer.uint32(8).uint64(message.id);
     }
-    if (message.iri !== '') {
+    if (message.iri !== "") {
       writer.uint32(18).string(message.iri);
     }
     return writer;
   },
 
-  decode(
-    input: _m0.Reader | Uint8Array,
-    length?: number,
-  ): EventRegisterResolver {
+  decode(input: _m0.Reader | Uint8Array, length?: number): EventRegisterResolver {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseEventRegisterResolver();
@@ -284,62 +261,39 @@ export const EventRegisterResolver = {
   fromJSON(object: any): EventRegisterResolver {
     return {
       $type: EventRegisterResolver.$type,
-      id: isSet(object.id) ? Long.fromString(object.id) : Long.UZERO,
-      iri: isSet(object.iri) ? String(object.iri) : '',
+      id: isSet(object.id) ? Long.fromValue(object.id) : Long.UZERO,
+      iri: isSet(object.iri) ? String(object.iri) : "",
     };
   },
 
   toJSON(message: EventRegisterResolver): unknown {
     const obj: any = {};
-    message.id !== undefined &&
-      (obj.id = (message.id || Long.UZERO).toString());
+    message.id !== undefined && (obj.id = (message.id || Long.UZERO).toString());
     message.iri !== undefined && (obj.iri = message.iri);
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<EventRegisterResolver>, I>>(
-    object: I,
-  ): EventRegisterResolver {
+  create(base?: DeepPartial<EventRegisterResolver>): EventRegisterResolver {
+    return EventRegisterResolver.fromPartial(base ?? {});
+  },
+
+  fromPartial(object: DeepPartial<EventRegisterResolver>): EventRegisterResolver {
     const message = createBaseEventRegisterResolver();
-    message.id =
-      object.id !== undefined && object.id !== null
-        ? Long.fromValue(object.id)
-        : Long.UZERO;
-    message.iri = object.iri ?? '';
+    message.id = (object.id !== undefined && object.id !== null) ? Long.fromValue(object.id) : Long.UZERO;
+    message.iri = object.iri ?? "";
     return message;
   },
 };
 
 messageTypeRegistry.set(EventRegisterResolver.$type, EventRegisterResolver);
 
-type Builtin =
-  | Date
-  | Function
-  | Uint8Array
-  | string
-  | number
-  | boolean
-  | undefined;
+type Builtin = Date | Function | Uint8Array | string | number | boolean | undefined;
 
-export type DeepPartial<T> = T extends Builtin
-  ? T
-  : T extends Long
-  ? string | number | Long
-  : T extends Array<infer U>
-  ? Array<DeepPartial<U>>
-  : T extends ReadonlyArray<infer U>
-  ? ReadonlyArray<DeepPartial<U>>
-  : T extends {}
-  ? { [K in Exclude<keyof T, '$type'>]?: DeepPartial<T[K]> }
+export type DeepPartial<T> = T extends Builtin ? T
+  : T extends Long ? string | number | Long : T extends Array<infer U> ? Array<DeepPartial<U>>
+  : T extends ReadonlyArray<infer U> ? ReadonlyArray<DeepPartial<U>>
+  : T extends {} ? { [K in Exclude<keyof T, "$type">]?: DeepPartial<T[K]> }
   : Partial<T>;
-
-type KeysOfUnion<T> = T extends T ? keyof T : never;
-export type Exact<P, I extends P> = P extends Builtin
-  ? P
-  : P & { [K in keyof P]: Exact<P[K], I[K]> } & Record<
-        Exclude<keyof I, KeysOfUnion<P> | '$type'>,
-        never
-      >;
 
 if (_m0.util.Long !== Long) {
   _m0.util.Long = Long as any;

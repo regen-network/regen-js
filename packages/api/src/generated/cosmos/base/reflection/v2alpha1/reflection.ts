@@ -1,13 +1,15 @@
 /* eslint-disable */
-import { messageTypeRegistry } from '../../../../typeRegistry';
-import Long from 'long';
-import _m0 from 'protobufjs/minimal';
+import Long from "long";
+import _m0 from "protobufjs/minimal";
+import { messageTypeRegistry } from "../../../../typeRegistry";
 
-export const protobufPackage = 'cosmos.base.reflection.v2alpha1';
+export const protobufPackage = "cosmos.base.reflection.v2alpha1";
+
+/** Since: cosmos-sdk 0.43 */
 
 /** AppDescriptor describes a cosmos-sdk based application */
 export interface AppDescriptor {
-  $type: 'cosmos.base.reflection.v2alpha1.AppDescriptor';
+  $type: "cosmos.base.reflection.v2alpha1.AppDescriptor";
   /**
    * AuthnDescriptor provides information on how to authenticate transactions on the application
    * NOTE: experimental and subject to change in future releases.
@@ -27,7 +29,7 @@ export interface AppDescriptor {
 
 /** TxDescriptor describes the accepted transaction type */
 export interface TxDescriptor {
-  $type: 'cosmos.base.reflection.v2alpha1.TxDescriptor';
+  $type: "cosmos.base.reflection.v2alpha1.TxDescriptor";
   /**
    * fullname is the protobuf fullname of the raw transaction type (for instance the tx.Tx type)
    * it is not meant to support polymorphism of transaction types, it is supposed to be used by
@@ -43,7 +45,7 @@ export interface TxDescriptor {
  * on the online RPCs GetTxMetadata and CombineUnsignedTxAndSignatures
  */
 export interface AuthnDescriptor {
-  $type: 'cosmos.base.reflection.v2alpha1.AuthnDescriptor';
+  $type: "cosmos.base.reflection.v2alpha1.AuthnDescriptor";
   /** sign_modes defines the supported signature algorithm */
   signModes: SigningModeDescriptor[];
 }
@@ -55,7 +57,7 @@ export interface AuthnDescriptor {
  * this another time
  */
 export interface SigningModeDescriptor {
-  $type: 'cosmos.base.reflection.v2alpha1.SigningModeDescriptor';
+  $type: "cosmos.base.reflection.v2alpha1.SigningModeDescriptor";
   /** name defines the unique name of the signing mode */
   name: string;
   /** number is the unique int32 identifier for the sign_mode enum */
@@ -69,21 +71,21 @@ export interface SigningModeDescriptor {
 
 /** ChainDescriptor describes chain information of the application */
 export interface ChainDescriptor {
-  $type: 'cosmos.base.reflection.v2alpha1.ChainDescriptor';
+  $type: "cosmos.base.reflection.v2alpha1.ChainDescriptor";
   /** id is the chain id */
   id: string;
 }
 
 /** CodecDescriptor describes the registered interfaces and provides metadata information on the types */
 export interface CodecDescriptor {
-  $type: 'cosmos.base.reflection.v2alpha1.CodecDescriptor';
+  $type: "cosmos.base.reflection.v2alpha1.CodecDescriptor";
   /** interfaces is a list of the registerted interfaces descriptors */
   interfaces: InterfaceDescriptor[];
 }
 
 /** InterfaceDescriptor describes the implementation of an interface */
 export interface InterfaceDescriptor {
-  $type: 'cosmos.base.reflection.v2alpha1.InterfaceDescriptor';
+  $type: "cosmos.base.reflection.v2alpha1.InterfaceDescriptor";
   /** fullname is the name of the interface */
   fullname: string;
   /**
@@ -97,7 +99,7 @@ export interface InterfaceDescriptor {
 
 /** InterfaceImplementerDescriptor describes an interface implementer */
 export interface InterfaceImplementerDescriptor {
-  $type: 'cosmos.base.reflection.v2alpha1.InterfaceImplementerDescriptor';
+  $type: "cosmos.base.reflection.v2alpha1.InterfaceImplementerDescriptor";
   /** fullname is the protobuf queryable name of the interface implementer */
   fullname: string;
   /**
@@ -114,7 +116,7 @@ export interface InterfaceImplementerDescriptor {
  * an interface represented as a google.protobuf.Any
  */
 export interface InterfaceAcceptingMessageDescriptor {
-  $type: 'cosmos.base.reflection.v2alpha1.InterfaceAcceptingMessageDescriptor';
+  $type: "cosmos.base.reflection.v2alpha1.InterfaceAcceptingMessageDescriptor";
   /** fullname is the protobuf fullname of the type containing the interface */
   fullname: string;
   /**
@@ -127,86 +129,86 @@ export interface InterfaceAcceptingMessageDescriptor {
 
 /** ConfigurationDescriptor contains metadata information on the sdk.Config */
 export interface ConfigurationDescriptor {
-  $type: 'cosmos.base.reflection.v2alpha1.ConfigurationDescriptor';
+  $type: "cosmos.base.reflection.v2alpha1.ConfigurationDescriptor";
   /** bech32_account_address_prefix is the account address prefix */
   bech32AccountAddressPrefix: string;
 }
 
 /** MsgDescriptor describes a cosmos-sdk message that can be delivered with a transaction */
 export interface MsgDescriptor {
-  $type: 'cosmos.base.reflection.v2alpha1.MsgDescriptor';
+  $type: "cosmos.base.reflection.v2alpha1.MsgDescriptor";
   /** msg_type_url contains the TypeURL of a sdk.Msg. */
   msgTypeUrl: string;
 }
 
 /** GetAuthnDescriptorRequest is the request used for the GetAuthnDescriptor RPC */
 export interface GetAuthnDescriptorRequest {
-  $type: 'cosmos.base.reflection.v2alpha1.GetAuthnDescriptorRequest';
+  $type: "cosmos.base.reflection.v2alpha1.GetAuthnDescriptorRequest";
 }
 
 /** GetAuthnDescriptorResponse is the response returned by the GetAuthnDescriptor RPC */
 export interface GetAuthnDescriptorResponse {
-  $type: 'cosmos.base.reflection.v2alpha1.GetAuthnDescriptorResponse';
+  $type: "cosmos.base.reflection.v2alpha1.GetAuthnDescriptorResponse";
   /** authn describes how to authenticate to the application when sending transactions */
   authn?: AuthnDescriptor;
 }
 
 /** GetChainDescriptorRequest is the request used for the GetChainDescriptor RPC */
 export interface GetChainDescriptorRequest {
-  $type: 'cosmos.base.reflection.v2alpha1.GetChainDescriptorRequest';
+  $type: "cosmos.base.reflection.v2alpha1.GetChainDescriptorRequest";
 }
 
 /** GetChainDescriptorResponse is the response returned by the GetChainDescriptor RPC */
 export interface GetChainDescriptorResponse {
-  $type: 'cosmos.base.reflection.v2alpha1.GetChainDescriptorResponse';
+  $type: "cosmos.base.reflection.v2alpha1.GetChainDescriptorResponse";
   /** chain describes application chain information */
   chain?: ChainDescriptor;
 }
 
 /** GetCodecDescriptorRequest is the request used for the GetCodecDescriptor RPC */
 export interface GetCodecDescriptorRequest {
-  $type: 'cosmos.base.reflection.v2alpha1.GetCodecDescriptorRequest';
+  $type: "cosmos.base.reflection.v2alpha1.GetCodecDescriptorRequest";
 }
 
 /** GetCodecDescriptorResponse is the response returned by the GetCodecDescriptor RPC */
 export interface GetCodecDescriptorResponse {
-  $type: 'cosmos.base.reflection.v2alpha1.GetCodecDescriptorResponse';
+  $type: "cosmos.base.reflection.v2alpha1.GetCodecDescriptorResponse";
   /** codec describes the application codec such as registered interfaces and implementations */
   codec?: CodecDescriptor;
 }
 
 /** GetConfigurationDescriptorRequest is the request used for the GetConfigurationDescriptor RPC */
 export interface GetConfigurationDescriptorRequest {
-  $type: 'cosmos.base.reflection.v2alpha1.GetConfigurationDescriptorRequest';
+  $type: "cosmos.base.reflection.v2alpha1.GetConfigurationDescriptorRequest";
 }
 
 /** GetConfigurationDescriptorResponse is the response returned by the GetConfigurationDescriptor RPC */
 export interface GetConfigurationDescriptorResponse {
-  $type: 'cosmos.base.reflection.v2alpha1.GetConfigurationDescriptorResponse';
+  $type: "cosmos.base.reflection.v2alpha1.GetConfigurationDescriptorResponse";
   /** config describes the application's sdk.Config */
   config?: ConfigurationDescriptor;
 }
 
 /** GetQueryServicesDescriptorRequest is the request used for the GetQueryServicesDescriptor RPC */
 export interface GetQueryServicesDescriptorRequest {
-  $type: 'cosmos.base.reflection.v2alpha1.GetQueryServicesDescriptorRequest';
+  $type: "cosmos.base.reflection.v2alpha1.GetQueryServicesDescriptorRequest";
 }
 
 /** GetQueryServicesDescriptorResponse is the response returned by the GetQueryServicesDescriptor RPC */
 export interface GetQueryServicesDescriptorResponse {
-  $type: 'cosmos.base.reflection.v2alpha1.GetQueryServicesDescriptorResponse';
+  $type: "cosmos.base.reflection.v2alpha1.GetQueryServicesDescriptorResponse";
   /** queries provides information on the available queryable services */
   queries?: QueryServicesDescriptor;
 }
 
 /** GetTxDescriptorRequest is the request used for the GetTxDescriptor RPC */
 export interface GetTxDescriptorRequest {
-  $type: 'cosmos.base.reflection.v2alpha1.GetTxDescriptorRequest';
+  $type: "cosmos.base.reflection.v2alpha1.GetTxDescriptorRequest";
 }
 
 /** GetTxDescriptorResponse is the response returned by the GetTxDescriptor RPC */
 export interface GetTxDescriptorResponse {
-  $type: 'cosmos.base.reflection.v2alpha1.GetTxDescriptorResponse';
+  $type: "cosmos.base.reflection.v2alpha1.GetTxDescriptorResponse";
   /**
    * tx provides information on msgs that can be forwarded to the application
    * alongside the accepted transaction protobuf type
@@ -216,14 +218,14 @@ export interface GetTxDescriptorResponse {
 
 /** QueryServicesDescriptor contains the list of cosmos-sdk queriable services */
 export interface QueryServicesDescriptor {
-  $type: 'cosmos.base.reflection.v2alpha1.QueryServicesDescriptor';
+  $type: "cosmos.base.reflection.v2alpha1.QueryServicesDescriptor";
   /** query_services is a list of cosmos-sdk QueryServiceDescriptor */
   queryServices: QueryServiceDescriptor[];
 }
 
 /** QueryServiceDescriptor describes a cosmos-sdk queryable service */
 export interface QueryServiceDescriptor {
-  $type: 'cosmos.base.reflection.v2alpha1.QueryServiceDescriptor';
+  $type: "cosmos.base.reflection.v2alpha1.QueryServiceDescriptor";
   /** fullname is the protobuf fullname of the service descriptor */
   fullname: string;
   /** is_module describes if this service is actually exposed by an application's module */
@@ -238,7 +240,7 @@ export interface QueryServiceDescriptor {
  * because it would be redundant with the grpc reflection service
  */
 export interface QueryMethodDescriptor {
-  $type: 'cosmos.base.reflection.v2alpha1.QueryMethodDescriptor';
+  $type: "cosmos.base.reflection.v2alpha1.QueryMethodDescriptor";
   /** name is the protobuf name (not fullname) of the method */
   name: string;
   /**
@@ -250,7 +252,7 @@ export interface QueryMethodDescriptor {
 
 function createBaseAppDescriptor(): AppDescriptor {
   return {
-    $type: 'cosmos.base.reflection.v2alpha1.AppDescriptor',
+    $type: "cosmos.base.reflection.v2alpha1.AppDescriptor",
     authn: undefined,
     chain: undefined,
     codec: undefined,
@@ -261,12 +263,9 @@ function createBaseAppDescriptor(): AppDescriptor {
 }
 
 export const AppDescriptor = {
-  $type: 'cosmos.base.reflection.v2alpha1.AppDescriptor' as const,
+  $type: "cosmos.base.reflection.v2alpha1.AppDescriptor" as const,
 
-  encode(
-    message: AppDescriptor,
-    writer: _m0.Writer = _m0.Writer.create(),
-  ): _m0.Writer {
+  encode(message: AppDescriptor, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.authn !== undefined) {
       AuthnDescriptor.encode(message.authn, writer.uint32(10).fork()).ldelim();
     }
@@ -277,16 +276,10 @@ export const AppDescriptor = {
       CodecDescriptor.encode(message.codec, writer.uint32(26).fork()).ldelim();
     }
     if (message.configuration !== undefined) {
-      ConfigurationDescriptor.encode(
-        message.configuration,
-        writer.uint32(34).fork(),
-      ).ldelim();
+      ConfigurationDescriptor.encode(message.configuration, writer.uint32(34).fork()).ldelim();
     }
     if (message.queryServices !== undefined) {
-      QueryServicesDescriptor.encode(
-        message.queryServices,
-        writer.uint32(42).fork(),
-      ).ldelim();
+      QueryServicesDescriptor.encode(message.queryServices, writer.uint32(42).fork()).ldelim();
     }
     if (message.tx !== undefined) {
       TxDescriptor.encode(message.tx, writer.uint32(50).fork()).ldelim();
@@ -311,16 +304,10 @@ export const AppDescriptor = {
           message.codec = CodecDescriptor.decode(reader, reader.uint32());
           break;
         case 4:
-          message.configuration = ConfigurationDescriptor.decode(
-            reader,
-            reader.uint32(),
-          );
+          message.configuration = ConfigurationDescriptor.decode(reader, reader.uint32());
           break;
         case 5:
-          message.queryServices = QueryServicesDescriptor.decode(
-            reader,
-            reader.uint32(),
-          );
+          message.queryServices = QueryServicesDescriptor.decode(reader, reader.uint32());
           break;
         case 6:
           message.tx = TxDescriptor.decode(reader, reader.uint32());
@@ -336,80 +323,50 @@ export const AppDescriptor = {
   fromJSON(object: any): AppDescriptor {
     return {
       $type: AppDescriptor.$type,
-      authn: isSet(object.authn)
-        ? AuthnDescriptor.fromJSON(object.authn)
-        : undefined,
-      chain: isSet(object.chain)
-        ? ChainDescriptor.fromJSON(object.chain)
-        : undefined,
-      codec: isSet(object.codec)
-        ? CodecDescriptor.fromJSON(object.codec)
-        : undefined,
-      configuration: isSet(object.configuration)
-        ? ConfigurationDescriptor.fromJSON(object.configuration)
-        : undefined,
-      queryServices: isSet(object.queryServices)
-        ? QueryServicesDescriptor.fromJSON(object.queryServices)
-        : undefined,
+      authn: isSet(object.authn) ? AuthnDescriptor.fromJSON(object.authn) : undefined,
+      chain: isSet(object.chain) ? ChainDescriptor.fromJSON(object.chain) : undefined,
+      codec: isSet(object.codec) ? CodecDescriptor.fromJSON(object.codec) : undefined,
+      configuration: isSet(object.configuration) ? ConfigurationDescriptor.fromJSON(object.configuration) : undefined,
+      queryServices: isSet(object.queryServices) ? QueryServicesDescriptor.fromJSON(object.queryServices) : undefined,
       tx: isSet(object.tx) ? TxDescriptor.fromJSON(object.tx) : undefined,
     };
   },
 
   toJSON(message: AppDescriptor): unknown {
     const obj: any = {};
-    message.authn !== undefined &&
-      (obj.authn = message.authn
-        ? AuthnDescriptor.toJSON(message.authn)
-        : undefined);
-    message.chain !== undefined &&
-      (obj.chain = message.chain
-        ? ChainDescriptor.toJSON(message.chain)
-        : undefined);
-    message.codec !== undefined &&
-      (obj.codec = message.codec
-        ? CodecDescriptor.toJSON(message.codec)
-        : undefined);
+    message.authn !== undefined && (obj.authn = message.authn ? AuthnDescriptor.toJSON(message.authn) : undefined);
+    message.chain !== undefined && (obj.chain = message.chain ? ChainDescriptor.toJSON(message.chain) : undefined);
+    message.codec !== undefined && (obj.codec = message.codec ? CodecDescriptor.toJSON(message.codec) : undefined);
     message.configuration !== undefined &&
-      (obj.configuration = message.configuration
-        ? ConfigurationDescriptor.toJSON(message.configuration)
-        : undefined);
+      (obj.configuration = message.configuration ? ConfigurationDescriptor.toJSON(message.configuration) : undefined);
     message.queryServices !== undefined &&
-      (obj.queryServices = message.queryServices
-        ? QueryServicesDescriptor.toJSON(message.queryServices)
-        : undefined);
-    message.tx !== undefined &&
-      (obj.tx = message.tx ? TxDescriptor.toJSON(message.tx) : undefined);
+      (obj.queryServices = message.queryServices ? QueryServicesDescriptor.toJSON(message.queryServices) : undefined);
+    message.tx !== undefined && (obj.tx = message.tx ? TxDescriptor.toJSON(message.tx) : undefined);
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<AppDescriptor>, I>>(
-    object: I,
-  ): AppDescriptor {
+  create(base?: DeepPartial<AppDescriptor>): AppDescriptor {
+    return AppDescriptor.fromPartial(base ?? {});
+  },
+
+  fromPartial(object: DeepPartial<AppDescriptor>): AppDescriptor {
     const message = createBaseAppDescriptor();
-    message.authn =
-      object.authn !== undefined && object.authn !== null
-        ? AuthnDescriptor.fromPartial(object.authn)
-        : undefined;
-    message.chain =
-      object.chain !== undefined && object.chain !== null
-        ? ChainDescriptor.fromPartial(object.chain)
-        : undefined;
-    message.codec =
-      object.codec !== undefined && object.codec !== null
-        ? CodecDescriptor.fromPartial(object.codec)
-        : undefined;
-    message.configuration =
-      object.configuration !== undefined && object.configuration !== null
-        ? ConfigurationDescriptor.fromPartial(object.configuration)
-        : undefined;
-    message.queryServices =
-      object.queryServices !== undefined && object.queryServices !== null
-        ? QueryServicesDescriptor.fromPartial(object.queryServices)
-        : undefined;
-    message.tx =
-      object.tx !== undefined && object.tx !== null
-        ? TxDescriptor.fromPartial(object.tx)
-        : undefined;
+    message.authn = (object.authn !== undefined && object.authn !== null)
+      ? AuthnDescriptor.fromPartial(object.authn)
+      : undefined;
+    message.chain = (object.chain !== undefined && object.chain !== null)
+      ? ChainDescriptor.fromPartial(object.chain)
+      : undefined;
+    message.codec = (object.codec !== undefined && object.codec !== null)
+      ? CodecDescriptor.fromPartial(object.codec)
+      : undefined;
+    message.configuration = (object.configuration !== undefined && object.configuration !== null)
+      ? ConfigurationDescriptor.fromPartial(object.configuration)
+      : undefined;
+    message.queryServices = (object.queryServices !== undefined && object.queryServices !== null)
+      ? QueryServicesDescriptor.fromPartial(object.queryServices)
+      : undefined;
+    message.tx = (object.tx !== undefined && object.tx !== null) ? TxDescriptor.fromPartial(object.tx) : undefined;
     return message;
   },
 };
@@ -417,21 +374,14 @@ export const AppDescriptor = {
 messageTypeRegistry.set(AppDescriptor.$type, AppDescriptor);
 
 function createBaseTxDescriptor(): TxDescriptor {
-  return {
-    $type: 'cosmos.base.reflection.v2alpha1.TxDescriptor',
-    fullname: '',
-    msgs: [],
-  };
+  return { $type: "cosmos.base.reflection.v2alpha1.TxDescriptor", fullname: "", msgs: [] };
 }
 
 export const TxDescriptor = {
-  $type: 'cosmos.base.reflection.v2alpha1.TxDescriptor' as const,
+  $type: "cosmos.base.reflection.v2alpha1.TxDescriptor" as const,
 
-  encode(
-    message: TxDescriptor,
-    writer: _m0.Writer = _m0.Writer.create(),
-  ): _m0.Writer {
-    if (message.fullname !== '') {
+  encode(message: TxDescriptor, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+    if (message.fullname !== "") {
       writer.uint32(10).string(message.fullname);
     }
     for (const v of message.msgs) {
@@ -464,10 +414,8 @@ export const TxDescriptor = {
   fromJSON(object: any): TxDescriptor {
     return {
       $type: TxDescriptor.$type,
-      fullname: isSet(object.fullname) ? String(object.fullname) : '',
-      msgs: Array.isArray(object?.msgs)
-        ? object.msgs.map((e: any) => MsgDescriptor.fromJSON(e))
-        : [],
+      fullname: isSet(object.fullname) ? String(object.fullname) : "",
+      msgs: Array.isArray(object?.msgs) ? object.msgs.map((e: any) => MsgDescriptor.fromJSON(e)) : [],
     };
   },
 
@@ -475,21 +423,21 @@ export const TxDescriptor = {
     const obj: any = {};
     message.fullname !== undefined && (obj.fullname = message.fullname);
     if (message.msgs) {
-      obj.msgs = message.msgs.map(e =>
-        e ? MsgDescriptor.toJSON(e) : undefined,
-      );
+      obj.msgs = message.msgs.map((e) => e ? MsgDescriptor.toJSON(e) : undefined);
     } else {
       obj.msgs = [];
     }
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<TxDescriptor>, I>>(
-    object: I,
-  ): TxDescriptor {
+  create(base?: DeepPartial<TxDescriptor>): TxDescriptor {
+    return TxDescriptor.fromPartial(base ?? {});
+  },
+
+  fromPartial(object: DeepPartial<TxDescriptor>): TxDescriptor {
     const message = createBaseTxDescriptor();
-    message.fullname = object.fullname ?? '';
-    message.msgs = object.msgs?.map(e => MsgDescriptor.fromPartial(e)) || [];
+    message.fullname = object.fullname ?? "";
+    message.msgs = object.msgs?.map((e) => MsgDescriptor.fromPartial(e)) || [];
     return message;
   },
 };
@@ -497,19 +445,13 @@ export const TxDescriptor = {
 messageTypeRegistry.set(TxDescriptor.$type, TxDescriptor);
 
 function createBaseAuthnDescriptor(): AuthnDescriptor {
-  return {
-    $type: 'cosmos.base.reflection.v2alpha1.AuthnDescriptor',
-    signModes: [],
-  };
+  return { $type: "cosmos.base.reflection.v2alpha1.AuthnDescriptor", signModes: [] };
 }
 
 export const AuthnDescriptor = {
-  $type: 'cosmos.base.reflection.v2alpha1.AuthnDescriptor' as const,
+  $type: "cosmos.base.reflection.v2alpha1.AuthnDescriptor" as const,
 
-  encode(
-    message: AuthnDescriptor,
-    writer: _m0.Writer = _m0.Writer.create(),
-  ): _m0.Writer {
+  encode(message: AuthnDescriptor, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     for (const v of message.signModes) {
       SigningModeDescriptor.encode(v!, writer.uint32(10).fork()).ldelim();
     }
@@ -524,9 +466,7 @@ export const AuthnDescriptor = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          message.signModes.push(
-            SigningModeDescriptor.decode(reader, reader.uint32()),
-          );
+          message.signModes.push(SigningModeDescriptor.decode(reader, reader.uint32()));
           break;
         default:
           reader.skipType(tag & 7);
@@ -548,21 +488,20 @@ export const AuthnDescriptor = {
   toJSON(message: AuthnDescriptor): unknown {
     const obj: any = {};
     if (message.signModes) {
-      obj.signModes = message.signModes.map(e =>
-        e ? SigningModeDescriptor.toJSON(e) : undefined,
-      );
+      obj.signModes = message.signModes.map((e) => e ? SigningModeDescriptor.toJSON(e) : undefined);
     } else {
       obj.signModes = [];
     }
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<AuthnDescriptor>, I>>(
-    object: I,
-  ): AuthnDescriptor {
+  create(base?: DeepPartial<AuthnDescriptor>): AuthnDescriptor {
+    return AuthnDescriptor.fromPartial(base ?? {});
+  },
+
+  fromPartial(object: DeepPartial<AuthnDescriptor>): AuthnDescriptor {
     const message = createBaseAuthnDescriptor();
-    message.signModes =
-      object.signModes?.map(e => SigningModeDescriptor.fromPartial(e)) || [];
+    message.signModes = object.signModes?.map((e) => SigningModeDescriptor.fromPartial(e)) || [];
     return message;
   },
 };
@@ -571,36 +510,30 @@ messageTypeRegistry.set(AuthnDescriptor.$type, AuthnDescriptor);
 
 function createBaseSigningModeDescriptor(): SigningModeDescriptor {
   return {
-    $type: 'cosmos.base.reflection.v2alpha1.SigningModeDescriptor',
-    name: '',
+    $type: "cosmos.base.reflection.v2alpha1.SigningModeDescriptor",
+    name: "",
     number: 0,
-    authnInfoProviderMethodFullname: '',
+    authnInfoProviderMethodFullname: "",
   };
 }
 
 export const SigningModeDescriptor = {
-  $type: 'cosmos.base.reflection.v2alpha1.SigningModeDescriptor' as const,
+  $type: "cosmos.base.reflection.v2alpha1.SigningModeDescriptor" as const,
 
-  encode(
-    message: SigningModeDescriptor,
-    writer: _m0.Writer = _m0.Writer.create(),
-  ): _m0.Writer {
-    if (message.name !== '') {
+  encode(message: SigningModeDescriptor, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+    if (message.name !== "") {
       writer.uint32(10).string(message.name);
     }
     if (message.number !== 0) {
       writer.uint32(16).int32(message.number);
     }
-    if (message.authnInfoProviderMethodFullname !== '') {
+    if (message.authnInfoProviderMethodFullname !== "") {
       writer.uint32(26).string(message.authnInfoProviderMethodFullname);
     }
     return writer;
   },
 
-  decode(
-    input: _m0.Reader | Uint8Array,
-    length?: number,
-  ): SigningModeDescriptor {
+  decode(input: _m0.Reader | Uint8Array, length?: number): SigningModeDescriptor {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseSigningModeDescriptor();
@@ -627,13 +560,11 @@ export const SigningModeDescriptor = {
   fromJSON(object: any): SigningModeDescriptor {
     return {
       $type: SigningModeDescriptor.$type,
-      name: isSet(object.name) ? String(object.name) : '',
+      name: isSet(object.name) ? String(object.name) : "",
       number: isSet(object.number) ? Number(object.number) : 0,
-      authnInfoProviderMethodFullname: isSet(
-        object.authnInfoProviderMethodFullname,
-      )
+      authnInfoProviderMethodFullname: isSet(object.authnInfoProviderMethodFullname)
         ? String(object.authnInfoProviderMethodFullname)
-        : '',
+        : "",
     };
   },
 
@@ -642,19 +573,19 @@ export const SigningModeDescriptor = {
     message.name !== undefined && (obj.name = message.name);
     message.number !== undefined && (obj.number = Math.round(message.number));
     message.authnInfoProviderMethodFullname !== undefined &&
-      (obj.authnInfoProviderMethodFullname =
-        message.authnInfoProviderMethodFullname);
+      (obj.authnInfoProviderMethodFullname = message.authnInfoProviderMethodFullname);
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<SigningModeDescriptor>, I>>(
-    object: I,
-  ): SigningModeDescriptor {
+  create(base?: DeepPartial<SigningModeDescriptor>): SigningModeDescriptor {
+    return SigningModeDescriptor.fromPartial(base ?? {});
+  },
+
+  fromPartial(object: DeepPartial<SigningModeDescriptor>): SigningModeDescriptor {
     const message = createBaseSigningModeDescriptor();
-    message.name = object.name ?? '';
+    message.name = object.name ?? "";
     message.number = object.number ?? 0;
-    message.authnInfoProviderMethodFullname =
-      object.authnInfoProviderMethodFullname ?? '';
+    message.authnInfoProviderMethodFullname = object.authnInfoProviderMethodFullname ?? "";
     return message;
   },
 };
@@ -662,17 +593,14 @@ export const SigningModeDescriptor = {
 messageTypeRegistry.set(SigningModeDescriptor.$type, SigningModeDescriptor);
 
 function createBaseChainDescriptor(): ChainDescriptor {
-  return { $type: 'cosmos.base.reflection.v2alpha1.ChainDescriptor', id: '' };
+  return { $type: "cosmos.base.reflection.v2alpha1.ChainDescriptor", id: "" };
 }
 
 export const ChainDescriptor = {
-  $type: 'cosmos.base.reflection.v2alpha1.ChainDescriptor' as const,
+  $type: "cosmos.base.reflection.v2alpha1.ChainDescriptor" as const,
 
-  encode(
-    message: ChainDescriptor,
-    writer: _m0.Writer = _m0.Writer.create(),
-  ): _m0.Writer {
-    if (message.id !== '') {
+  encode(message: ChainDescriptor, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+    if (message.id !== "") {
       writer.uint32(10).string(message.id);
     }
     return writer;
@@ -697,10 +625,7 @@ export const ChainDescriptor = {
   },
 
   fromJSON(object: any): ChainDescriptor {
-    return {
-      $type: ChainDescriptor.$type,
-      id: isSet(object.id) ? String(object.id) : '',
-    };
+    return { $type: ChainDescriptor.$type, id: isSet(object.id) ? String(object.id) : "" };
   },
 
   toJSON(message: ChainDescriptor): unknown {
@@ -709,11 +634,13 @@ export const ChainDescriptor = {
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<ChainDescriptor>, I>>(
-    object: I,
-  ): ChainDescriptor {
+  create(base?: DeepPartial<ChainDescriptor>): ChainDescriptor {
+    return ChainDescriptor.fromPartial(base ?? {});
+  },
+
+  fromPartial(object: DeepPartial<ChainDescriptor>): ChainDescriptor {
     const message = createBaseChainDescriptor();
-    message.id = object.id ?? '';
+    message.id = object.id ?? "";
     return message;
   },
 };
@@ -721,19 +648,13 @@ export const ChainDescriptor = {
 messageTypeRegistry.set(ChainDescriptor.$type, ChainDescriptor);
 
 function createBaseCodecDescriptor(): CodecDescriptor {
-  return {
-    $type: 'cosmos.base.reflection.v2alpha1.CodecDescriptor',
-    interfaces: [],
-  };
+  return { $type: "cosmos.base.reflection.v2alpha1.CodecDescriptor", interfaces: [] };
 }
 
 export const CodecDescriptor = {
-  $type: 'cosmos.base.reflection.v2alpha1.CodecDescriptor' as const,
+  $type: "cosmos.base.reflection.v2alpha1.CodecDescriptor" as const,
 
-  encode(
-    message: CodecDescriptor,
-    writer: _m0.Writer = _m0.Writer.create(),
-  ): _m0.Writer {
+  encode(message: CodecDescriptor, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     for (const v of message.interfaces) {
       InterfaceDescriptor.encode(v!, writer.uint32(10).fork()).ldelim();
     }
@@ -748,9 +669,7 @@ export const CodecDescriptor = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          message.interfaces.push(
-            InterfaceDescriptor.decode(reader, reader.uint32()),
-          );
+          message.interfaces.push(InterfaceDescriptor.decode(reader, reader.uint32()));
           break;
         default:
           reader.skipType(tag & 7);
@@ -772,21 +691,20 @@ export const CodecDescriptor = {
   toJSON(message: CodecDescriptor): unknown {
     const obj: any = {};
     if (message.interfaces) {
-      obj.interfaces = message.interfaces.map(e =>
-        e ? InterfaceDescriptor.toJSON(e) : undefined,
-      );
+      obj.interfaces = message.interfaces.map((e) => e ? InterfaceDescriptor.toJSON(e) : undefined);
     } else {
       obj.interfaces = [];
     }
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<CodecDescriptor>, I>>(
-    object: I,
-  ): CodecDescriptor {
+  create(base?: DeepPartial<CodecDescriptor>): CodecDescriptor {
+    return CodecDescriptor.fromPartial(base ?? {});
+  },
+
+  fromPartial(object: DeepPartial<CodecDescriptor>): CodecDescriptor {
     const message = createBaseCodecDescriptor();
-    message.interfaces =
-      object.interfaces?.map(e => InterfaceDescriptor.fromPartial(e)) || [];
+    message.interfaces = object.interfaces?.map((e) => InterfaceDescriptor.fromPartial(e)) || [];
     return message;
   },
 };
@@ -795,34 +713,25 @@ messageTypeRegistry.set(CodecDescriptor.$type, CodecDescriptor);
 
 function createBaseInterfaceDescriptor(): InterfaceDescriptor {
   return {
-    $type: 'cosmos.base.reflection.v2alpha1.InterfaceDescriptor',
-    fullname: '',
+    $type: "cosmos.base.reflection.v2alpha1.InterfaceDescriptor",
+    fullname: "",
     interfaceAcceptingMessages: [],
     interfaceImplementers: [],
   };
 }
 
 export const InterfaceDescriptor = {
-  $type: 'cosmos.base.reflection.v2alpha1.InterfaceDescriptor' as const,
+  $type: "cosmos.base.reflection.v2alpha1.InterfaceDescriptor" as const,
 
-  encode(
-    message: InterfaceDescriptor,
-    writer: _m0.Writer = _m0.Writer.create(),
-  ): _m0.Writer {
-    if (message.fullname !== '') {
+  encode(message: InterfaceDescriptor, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+    if (message.fullname !== "") {
       writer.uint32(10).string(message.fullname);
     }
     for (const v of message.interfaceAcceptingMessages) {
-      InterfaceAcceptingMessageDescriptor.encode(
-        v!,
-        writer.uint32(18).fork(),
-      ).ldelim();
+      InterfaceAcceptingMessageDescriptor.encode(v!, writer.uint32(18).fork()).ldelim();
     }
     for (const v of message.interfaceImplementers) {
-      InterfaceImplementerDescriptor.encode(
-        v!,
-        writer.uint32(26).fork(),
-      ).ldelim();
+      InterfaceImplementerDescriptor.encode(v!, writer.uint32(26).fork()).ldelim();
     }
     return writer;
   },
@@ -838,14 +747,10 @@ export const InterfaceDescriptor = {
           message.fullname = reader.string();
           break;
         case 2:
-          message.interfaceAcceptingMessages.push(
-            InterfaceAcceptingMessageDescriptor.decode(reader, reader.uint32()),
-          );
+          message.interfaceAcceptingMessages.push(InterfaceAcceptingMessageDescriptor.decode(reader, reader.uint32()));
           break;
         case 3:
-          message.interfaceImplementers.push(
-            InterfaceImplementerDescriptor.decode(reader, reader.uint32()),
-          );
+          message.interfaceImplementers.push(InterfaceImplementerDescriptor.decode(reader, reader.uint32()));
           break;
         default:
           reader.skipType(tag & 7);
@@ -858,18 +763,12 @@ export const InterfaceDescriptor = {
   fromJSON(object: any): InterfaceDescriptor {
     return {
       $type: InterfaceDescriptor.$type,
-      fullname: isSet(object.fullname) ? String(object.fullname) : '',
-      interfaceAcceptingMessages: Array.isArray(
-        object?.interfaceAcceptingMessages,
-      )
-        ? object.interfaceAcceptingMessages.map((e: any) =>
-            InterfaceAcceptingMessageDescriptor.fromJSON(e),
-          )
+      fullname: isSet(object.fullname) ? String(object.fullname) : "",
+      interfaceAcceptingMessages: Array.isArray(object?.interfaceAcceptingMessages)
+        ? object.interfaceAcceptingMessages.map((e: any) => InterfaceAcceptingMessageDescriptor.fromJSON(e))
         : [],
       interfaceImplementers: Array.isArray(object?.interfaceImplementers)
-        ? object.interfaceImplementers.map((e: any) =>
-            InterfaceImplementerDescriptor.fromJSON(e),
-          )
+        ? object.interfaceImplementers.map((e: any) => InterfaceImplementerDescriptor.fromJSON(e))
         : [],
     };
   },
@@ -878,15 +777,15 @@ export const InterfaceDescriptor = {
     const obj: any = {};
     message.fullname !== undefined && (obj.fullname = message.fullname);
     if (message.interfaceAcceptingMessages) {
-      obj.interfaceAcceptingMessages = message.interfaceAcceptingMessages.map(
-        e => (e ? InterfaceAcceptingMessageDescriptor.toJSON(e) : undefined),
+      obj.interfaceAcceptingMessages = message.interfaceAcceptingMessages.map((e) =>
+        e ? InterfaceAcceptingMessageDescriptor.toJSON(e) : undefined
       );
     } else {
       obj.interfaceAcceptingMessages = [];
     }
     if (message.interfaceImplementers) {
-      obj.interfaceImplementers = message.interfaceImplementers.map(e =>
-        e ? InterfaceImplementerDescriptor.toJSON(e) : undefined,
+      obj.interfaceImplementers = message.interfaceImplementers.map((e) =>
+        e ? InterfaceImplementerDescriptor.toJSON(e) : undefined
       );
     } else {
       obj.interfaceImplementers = [];
@@ -894,19 +793,17 @@ export const InterfaceDescriptor = {
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<InterfaceDescriptor>, I>>(
-    object: I,
-  ): InterfaceDescriptor {
+  create(base?: DeepPartial<InterfaceDescriptor>): InterfaceDescriptor {
+    return InterfaceDescriptor.fromPartial(base ?? {});
+  },
+
+  fromPartial(object: DeepPartial<InterfaceDescriptor>): InterfaceDescriptor {
     const message = createBaseInterfaceDescriptor();
-    message.fullname = object.fullname ?? '';
+    message.fullname = object.fullname ?? "";
     message.interfaceAcceptingMessages =
-      object.interfaceAcceptingMessages?.map(e =>
-        InterfaceAcceptingMessageDescriptor.fromPartial(e),
-      ) || [];
+      object.interfaceAcceptingMessages?.map((e) => InterfaceAcceptingMessageDescriptor.fromPartial(e)) || [];
     message.interfaceImplementers =
-      object.interfaceImplementers?.map(e =>
-        InterfaceImplementerDescriptor.fromPartial(e),
-      ) || [];
+      object.interfaceImplementers?.map((e) => InterfaceImplementerDescriptor.fromPartial(e)) || [];
     return message;
   },
 };
@@ -914,34 +811,23 @@ export const InterfaceDescriptor = {
 messageTypeRegistry.set(InterfaceDescriptor.$type, InterfaceDescriptor);
 
 function createBaseInterfaceImplementerDescriptor(): InterfaceImplementerDescriptor {
-  return {
-    $type: 'cosmos.base.reflection.v2alpha1.InterfaceImplementerDescriptor',
-    fullname: '',
-    typeUrl: '',
-  };
+  return { $type: "cosmos.base.reflection.v2alpha1.InterfaceImplementerDescriptor", fullname: "", typeUrl: "" };
 }
 
 export const InterfaceImplementerDescriptor = {
-  $type:
-    'cosmos.base.reflection.v2alpha1.InterfaceImplementerDescriptor' as const,
+  $type: "cosmos.base.reflection.v2alpha1.InterfaceImplementerDescriptor" as const,
 
-  encode(
-    message: InterfaceImplementerDescriptor,
-    writer: _m0.Writer = _m0.Writer.create(),
-  ): _m0.Writer {
-    if (message.fullname !== '') {
+  encode(message: InterfaceImplementerDescriptor, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+    if (message.fullname !== "") {
       writer.uint32(10).string(message.fullname);
     }
-    if (message.typeUrl !== '') {
+    if (message.typeUrl !== "") {
       writer.uint32(18).string(message.typeUrl);
     }
     return writer;
   },
 
-  decode(
-    input: _m0.Reader | Uint8Array,
-    length?: number,
-  ): InterfaceImplementerDescriptor {
+  decode(input: _m0.Reader | Uint8Array, length?: number): InterfaceImplementerDescriptor {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseInterfaceImplementerDescriptor();
@@ -965,8 +851,8 @@ export const InterfaceImplementerDescriptor = {
   fromJSON(object: any): InterfaceImplementerDescriptor {
     return {
       $type: InterfaceImplementerDescriptor.$type,
-      fullname: isSet(object.fullname) ? String(object.fullname) : '',
-      typeUrl: isSet(object.typeUrl) ? String(object.typeUrl) : '',
+      fullname: isSet(object.fullname) ? String(object.fullname) : "",
+      typeUrl: isSet(object.typeUrl) ? String(object.typeUrl) : "",
     };
   },
 
@@ -977,39 +863,33 @@ export const InterfaceImplementerDescriptor = {
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<InterfaceImplementerDescriptor>, I>>(
-    object: I,
-  ): InterfaceImplementerDescriptor {
+  create(base?: DeepPartial<InterfaceImplementerDescriptor>): InterfaceImplementerDescriptor {
+    return InterfaceImplementerDescriptor.fromPartial(base ?? {});
+  },
+
+  fromPartial(object: DeepPartial<InterfaceImplementerDescriptor>): InterfaceImplementerDescriptor {
     const message = createBaseInterfaceImplementerDescriptor();
-    message.fullname = object.fullname ?? '';
-    message.typeUrl = object.typeUrl ?? '';
+    message.fullname = object.fullname ?? "";
+    message.typeUrl = object.typeUrl ?? "";
     return message;
   },
 };
 
-messageTypeRegistry.set(
-  InterfaceImplementerDescriptor.$type,
-  InterfaceImplementerDescriptor,
-);
+messageTypeRegistry.set(InterfaceImplementerDescriptor.$type, InterfaceImplementerDescriptor);
 
 function createBaseInterfaceAcceptingMessageDescriptor(): InterfaceAcceptingMessageDescriptor {
   return {
-    $type:
-      'cosmos.base.reflection.v2alpha1.InterfaceAcceptingMessageDescriptor',
-    fullname: '',
+    $type: "cosmos.base.reflection.v2alpha1.InterfaceAcceptingMessageDescriptor",
+    fullname: "",
     fieldDescriptorNames: [],
   };
 }
 
 export const InterfaceAcceptingMessageDescriptor = {
-  $type:
-    'cosmos.base.reflection.v2alpha1.InterfaceAcceptingMessageDescriptor' as const,
+  $type: "cosmos.base.reflection.v2alpha1.InterfaceAcceptingMessageDescriptor" as const,
 
-  encode(
-    message: InterfaceAcceptingMessageDescriptor,
-    writer: _m0.Writer = _m0.Writer.create(),
-  ): _m0.Writer {
-    if (message.fullname !== '') {
+  encode(message: InterfaceAcceptingMessageDescriptor, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+    if (message.fullname !== "") {
       writer.uint32(10).string(message.fullname);
     }
     for (const v of message.fieldDescriptorNames) {
@@ -1018,10 +898,7 @@ export const InterfaceAcceptingMessageDescriptor = {
     return writer;
   },
 
-  decode(
-    input: _m0.Reader | Uint8Array,
-    length?: number,
-  ): InterfaceAcceptingMessageDescriptor {
+  decode(input: _m0.Reader | Uint8Array, length?: number): InterfaceAcceptingMessageDescriptor {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseInterfaceAcceptingMessageDescriptor();
@@ -1045,7 +922,7 @@ export const InterfaceAcceptingMessageDescriptor = {
   fromJSON(object: any): InterfaceAcceptingMessageDescriptor {
     return {
       $type: InterfaceAcceptingMessageDescriptor.$type,
-      fullname: isSet(object.fullname) ? String(object.fullname) : '',
+      fullname: isSet(object.fullname) ? String(object.fullname) : "",
       fieldDescriptorNames: Array.isArray(object?.fieldDescriptorNames)
         ? object.fieldDescriptorNames.map((e: any) => String(e))
         : [],
@@ -1056,53 +933,42 @@ export const InterfaceAcceptingMessageDescriptor = {
     const obj: any = {};
     message.fullname !== undefined && (obj.fullname = message.fullname);
     if (message.fieldDescriptorNames) {
-      obj.fieldDescriptorNames = message.fieldDescriptorNames.map(e => e);
+      obj.fieldDescriptorNames = message.fieldDescriptorNames.map((e) => e);
     } else {
       obj.fieldDescriptorNames = [];
     }
     return obj;
   },
 
-  fromPartial<
-    I extends Exact<DeepPartial<InterfaceAcceptingMessageDescriptor>, I>,
-  >(object: I): InterfaceAcceptingMessageDescriptor {
+  create(base?: DeepPartial<InterfaceAcceptingMessageDescriptor>): InterfaceAcceptingMessageDescriptor {
+    return InterfaceAcceptingMessageDescriptor.fromPartial(base ?? {});
+  },
+
+  fromPartial(object: DeepPartial<InterfaceAcceptingMessageDescriptor>): InterfaceAcceptingMessageDescriptor {
     const message = createBaseInterfaceAcceptingMessageDescriptor();
-    message.fullname = object.fullname ?? '';
-    message.fieldDescriptorNames =
-      object.fieldDescriptorNames?.map(e => e) || [];
+    message.fullname = object.fullname ?? "";
+    message.fieldDescriptorNames = object.fieldDescriptorNames?.map((e) => e) || [];
     return message;
   },
 };
 
-messageTypeRegistry.set(
-  InterfaceAcceptingMessageDescriptor.$type,
-  InterfaceAcceptingMessageDescriptor,
-);
+messageTypeRegistry.set(InterfaceAcceptingMessageDescriptor.$type, InterfaceAcceptingMessageDescriptor);
 
 function createBaseConfigurationDescriptor(): ConfigurationDescriptor {
-  return {
-    $type: 'cosmos.base.reflection.v2alpha1.ConfigurationDescriptor',
-    bech32AccountAddressPrefix: '',
-  };
+  return { $type: "cosmos.base.reflection.v2alpha1.ConfigurationDescriptor", bech32AccountAddressPrefix: "" };
 }
 
 export const ConfigurationDescriptor = {
-  $type: 'cosmos.base.reflection.v2alpha1.ConfigurationDescriptor' as const,
+  $type: "cosmos.base.reflection.v2alpha1.ConfigurationDescriptor" as const,
 
-  encode(
-    message: ConfigurationDescriptor,
-    writer: _m0.Writer = _m0.Writer.create(),
-  ): _m0.Writer {
-    if (message.bech32AccountAddressPrefix !== '') {
+  encode(message: ConfigurationDescriptor, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+    if (message.bech32AccountAddressPrefix !== "") {
       writer.uint32(10).string(message.bech32AccountAddressPrefix);
     }
     return writer;
   },
 
-  decode(
-    input: _m0.Reader | Uint8Array,
-    length?: number,
-  ): ConfigurationDescriptor {
+  decode(input: _m0.Reader | Uint8Array, length?: number): ConfigurationDescriptor {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseConfigurationDescriptor();
@@ -1125,7 +991,7 @@ export const ConfigurationDescriptor = {
       $type: ConfigurationDescriptor.$type,
       bech32AccountAddressPrefix: isSet(object.bech32AccountAddressPrefix)
         ? String(object.bech32AccountAddressPrefix)
-        : '',
+        : "",
     };
   },
 
@@ -1136,12 +1002,13 @@ export const ConfigurationDescriptor = {
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<ConfigurationDescriptor>, I>>(
-    object: I,
-  ): ConfigurationDescriptor {
+  create(base?: DeepPartial<ConfigurationDescriptor>): ConfigurationDescriptor {
+    return ConfigurationDescriptor.fromPartial(base ?? {});
+  },
+
+  fromPartial(object: DeepPartial<ConfigurationDescriptor>): ConfigurationDescriptor {
     const message = createBaseConfigurationDescriptor();
-    message.bech32AccountAddressPrefix =
-      object.bech32AccountAddressPrefix ?? '';
+    message.bech32AccountAddressPrefix = object.bech32AccountAddressPrefix ?? "";
     return message;
   },
 };
@@ -1149,20 +1016,14 @@ export const ConfigurationDescriptor = {
 messageTypeRegistry.set(ConfigurationDescriptor.$type, ConfigurationDescriptor);
 
 function createBaseMsgDescriptor(): MsgDescriptor {
-  return {
-    $type: 'cosmos.base.reflection.v2alpha1.MsgDescriptor',
-    msgTypeUrl: '',
-  };
+  return { $type: "cosmos.base.reflection.v2alpha1.MsgDescriptor", msgTypeUrl: "" };
 }
 
 export const MsgDescriptor = {
-  $type: 'cosmos.base.reflection.v2alpha1.MsgDescriptor' as const,
+  $type: "cosmos.base.reflection.v2alpha1.MsgDescriptor" as const,
 
-  encode(
-    message: MsgDescriptor,
-    writer: _m0.Writer = _m0.Writer.create(),
-  ): _m0.Writer {
-    if (message.msgTypeUrl !== '') {
+  encode(message: MsgDescriptor, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+    if (message.msgTypeUrl !== "") {
       writer.uint32(10).string(message.msgTypeUrl);
     }
     return writer;
@@ -1187,10 +1048,7 @@ export const MsgDescriptor = {
   },
 
   fromJSON(object: any): MsgDescriptor {
-    return {
-      $type: MsgDescriptor.$type,
-      msgTypeUrl: isSet(object.msgTypeUrl) ? String(object.msgTypeUrl) : '',
-    };
+    return { $type: MsgDescriptor.$type, msgTypeUrl: isSet(object.msgTypeUrl) ? String(object.msgTypeUrl) : "" };
   },
 
   toJSON(message: MsgDescriptor): unknown {
@@ -1199,11 +1057,13 @@ export const MsgDescriptor = {
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<MsgDescriptor>, I>>(
-    object: I,
-  ): MsgDescriptor {
+  create(base?: DeepPartial<MsgDescriptor>): MsgDescriptor {
+    return MsgDescriptor.fromPartial(base ?? {});
+  },
+
+  fromPartial(object: DeepPartial<MsgDescriptor>): MsgDescriptor {
     const message = createBaseMsgDescriptor();
-    message.msgTypeUrl = object.msgTypeUrl ?? '';
+    message.msgTypeUrl = object.msgTypeUrl ?? "";
     return message;
   },
 };
@@ -1211,23 +1071,17 @@ export const MsgDescriptor = {
 messageTypeRegistry.set(MsgDescriptor.$type, MsgDescriptor);
 
 function createBaseGetAuthnDescriptorRequest(): GetAuthnDescriptorRequest {
-  return { $type: 'cosmos.base.reflection.v2alpha1.GetAuthnDescriptorRequest' };
+  return { $type: "cosmos.base.reflection.v2alpha1.GetAuthnDescriptorRequest" };
 }
 
 export const GetAuthnDescriptorRequest = {
-  $type: 'cosmos.base.reflection.v2alpha1.GetAuthnDescriptorRequest' as const,
+  $type: "cosmos.base.reflection.v2alpha1.GetAuthnDescriptorRequest" as const,
 
-  encode(
-    _: GetAuthnDescriptorRequest,
-    writer: _m0.Writer = _m0.Writer.create(),
-  ): _m0.Writer {
+  encode(_: GetAuthnDescriptorRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     return writer;
   },
 
-  decode(
-    input: _m0.Reader | Uint8Array,
-    length?: number,
-  ): GetAuthnDescriptorRequest {
+  decode(input: _m0.Reader | Uint8Array, length?: number): GetAuthnDescriptorRequest {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseGetAuthnDescriptorRequest();
@@ -1243,9 +1097,7 @@ export const GetAuthnDescriptorRequest = {
   },
 
   fromJSON(_: any): GetAuthnDescriptorRequest {
-    return {
-      $type: GetAuthnDescriptorRequest.$type,
-    };
+    return { $type: GetAuthnDescriptorRequest.$type };
   },
 
   toJSON(_: GetAuthnDescriptorRequest): unknown {
@@ -1253,43 +1105,33 @@ export const GetAuthnDescriptorRequest = {
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<GetAuthnDescriptorRequest>, I>>(
-    _: I,
-  ): GetAuthnDescriptorRequest {
+  create(base?: DeepPartial<GetAuthnDescriptorRequest>): GetAuthnDescriptorRequest {
+    return GetAuthnDescriptorRequest.fromPartial(base ?? {});
+  },
+
+  fromPartial(_: DeepPartial<GetAuthnDescriptorRequest>): GetAuthnDescriptorRequest {
     const message = createBaseGetAuthnDescriptorRequest();
     return message;
   },
 };
 
-messageTypeRegistry.set(
-  GetAuthnDescriptorRequest.$type,
-  GetAuthnDescriptorRequest,
-);
+messageTypeRegistry.set(GetAuthnDescriptorRequest.$type, GetAuthnDescriptorRequest);
 
 function createBaseGetAuthnDescriptorResponse(): GetAuthnDescriptorResponse {
-  return {
-    $type: 'cosmos.base.reflection.v2alpha1.GetAuthnDescriptorResponse',
-    authn: undefined,
-  };
+  return { $type: "cosmos.base.reflection.v2alpha1.GetAuthnDescriptorResponse", authn: undefined };
 }
 
 export const GetAuthnDescriptorResponse = {
-  $type: 'cosmos.base.reflection.v2alpha1.GetAuthnDescriptorResponse' as const,
+  $type: "cosmos.base.reflection.v2alpha1.GetAuthnDescriptorResponse" as const,
 
-  encode(
-    message: GetAuthnDescriptorResponse,
-    writer: _m0.Writer = _m0.Writer.create(),
-  ): _m0.Writer {
+  encode(message: GetAuthnDescriptorResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.authn !== undefined) {
       AuthnDescriptor.encode(message.authn, writer.uint32(10).fork()).ldelim();
     }
     return writer;
   },
 
-  decode(
-    input: _m0.Reader | Uint8Array,
-    length?: number,
-  ): GetAuthnDescriptorResponse {
+  decode(input: _m0.Reader | Uint8Array, length?: number): GetAuthnDescriptorResponse {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseGetAuthnDescriptorResponse();
@@ -1310,56 +1152,43 @@ export const GetAuthnDescriptorResponse = {
   fromJSON(object: any): GetAuthnDescriptorResponse {
     return {
       $type: GetAuthnDescriptorResponse.$type,
-      authn: isSet(object.authn)
-        ? AuthnDescriptor.fromJSON(object.authn)
-        : undefined,
+      authn: isSet(object.authn) ? AuthnDescriptor.fromJSON(object.authn) : undefined,
     };
   },
 
   toJSON(message: GetAuthnDescriptorResponse): unknown {
     const obj: any = {};
-    message.authn !== undefined &&
-      (obj.authn = message.authn
-        ? AuthnDescriptor.toJSON(message.authn)
-        : undefined);
+    message.authn !== undefined && (obj.authn = message.authn ? AuthnDescriptor.toJSON(message.authn) : undefined);
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<GetAuthnDescriptorResponse>, I>>(
-    object: I,
-  ): GetAuthnDescriptorResponse {
+  create(base?: DeepPartial<GetAuthnDescriptorResponse>): GetAuthnDescriptorResponse {
+    return GetAuthnDescriptorResponse.fromPartial(base ?? {});
+  },
+
+  fromPartial(object: DeepPartial<GetAuthnDescriptorResponse>): GetAuthnDescriptorResponse {
     const message = createBaseGetAuthnDescriptorResponse();
-    message.authn =
-      object.authn !== undefined && object.authn !== null
-        ? AuthnDescriptor.fromPartial(object.authn)
-        : undefined;
+    message.authn = (object.authn !== undefined && object.authn !== null)
+      ? AuthnDescriptor.fromPartial(object.authn)
+      : undefined;
     return message;
   },
 };
 
-messageTypeRegistry.set(
-  GetAuthnDescriptorResponse.$type,
-  GetAuthnDescriptorResponse,
-);
+messageTypeRegistry.set(GetAuthnDescriptorResponse.$type, GetAuthnDescriptorResponse);
 
 function createBaseGetChainDescriptorRequest(): GetChainDescriptorRequest {
-  return { $type: 'cosmos.base.reflection.v2alpha1.GetChainDescriptorRequest' };
+  return { $type: "cosmos.base.reflection.v2alpha1.GetChainDescriptorRequest" };
 }
 
 export const GetChainDescriptorRequest = {
-  $type: 'cosmos.base.reflection.v2alpha1.GetChainDescriptorRequest' as const,
+  $type: "cosmos.base.reflection.v2alpha1.GetChainDescriptorRequest" as const,
 
-  encode(
-    _: GetChainDescriptorRequest,
-    writer: _m0.Writer = _m0.Writer.create(),
-  ): _m0.Writer {
+  encode(_: GetChainDescriptorRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     return writer;
   },
 
-  decode(
-    input: _m0.Reader | Uint8Array,
-    length?: number,
-  ): GetChainDescriptorRequest {
+  decode(input: _m0.Reader | Uint8Array, length?: number): GetChainDescriptorRequest {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseGetChainDescriptorRequest();
@@ -1375,9 +1204,7 @@ export const GetChainDescriptorRequest = {
   },
 
   fromJSON(_: any): GetChainDescriptorRequest {
-    return {
-      $type: GetChainDescriptorRequest.$type,
-    };
+    return { $type: GetChainDescriptorRequest.$type };
   },
 
   toJSON(_: GetChainDescriptorRequest): unknown {
@@ -1385,43 +1212,33 @@ export const GetChainDescriptorRequest = {
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<GetChainDescriptorRequest>, I>>(
-    _: I,
-  ): GetChainDescriptorRequest {
+  create(base?: DeepPartial<GetChainDescriptorRequest>): GetChainDescriptorRequest {
+    return GetChainDescriptorRequest.fromPartial(base ?? {});
+  },
+
+  fromPartial(_: DeepPartial<GetChainDescriptorRequest>): GetChainDescriptorRequest {
     const message = createBaseGetChainDescriptorRequest();
     return message;
   },
 };
 
-messageTypeRegistry.set(
-  GetChainDescriptorRequest.$type,
-  GetChainDescriptorRequest,
-);
+messageTypeRegistry.set(GetChainDescriptorRequest.$type, GetChainDescriptorRequest);
 
 function createBaseGetChainDescriptorResponse(): GetChainDescriptorResponse {
-  return {
-    $type: 'cosmos.base.reflection.v2alpha1.GetChainDescriptorResponse',
-    chain: undefined,
-  };
+  return { $type: "cosmos.base.reflection.v2alpha1.GetChainDescriptorResponse", chain: undefined };
 }
 
 export const GetChainDescriptorResponse = {
-  $type: 'cosmos.base.reflection.v2alpha1.GetChainDescriptorResponse' as const,
+  $type: "cosmos.base.reflection.v2alpha1.GetChainDescriptorResponse" as const,
 
-  encode(
-    message: GetChainDescriptorResponse,
-    writer: _m0.Writer = _m0.Writer.create(),
-  ): _m0.Writer {
+  encode(message: GetChainDescriptorResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.chain !== undefined) {
       ChainDescriptor.encode(message.chain, writer.uint32(10).fork()).ldelim();
     }
     return writer;
   },
 
-  decode(
-    input: _m0.Reader | Uint8Array,
-    length?: number,
-  ): GetChainDescriptorResponse {
+  decode(input: _m0.Reader | Uint8Array, length?: number): GetChainDescriptorResponse {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseGetChainDescriptorResponse();
@@ -1442,56 +1259,43 @@ export const GetChainDescriptorResponse = {
   fromJSON(object: any): GetChainDescriptorResponse {
     return {
       $type: GetChainDescriptorResponse.$type,
-      chain: isSet(object.chain)
-        ? ChainDescriptor.fromJSON(object.chain)
-        : undefined,
+      chain: isSet(object.chain) ? ChainDescriptor.fromJSON(object.chain) : undefined,
     };
   },
 
   toJSON(message: GetChainDescriptorResponse): unknown {
     const obj: any = {};
-    message.chain !== undefined &&
-      (obj.chain = message.chain
-        ? ChainDescriptor.toJSON(message.chain)
-        : undefined);
+    message.chain !== undefined && (obj.chain = message.chain ? ChainDescriptor.toJSON(message.chain) : undefined);
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<GetChainDescriptorResponse>, I>>(
-    object: I,
-  ): GetChainDescriptorResponse {
+  create(base?: DeepPartial<GetChainDescriptorResponse>): GetChainDescriptorResponse {
+    return GetChainDescriptorResponse.fromPartial(base ?? {});
+  },
+
+  fromPartial(object: DeepPartial<GetChainDescriptorResponse>): GetChainDescriptorResponse {
     const message = createBaseGetChainDescriptorResponse();
-    message.chain =
-      object.chain !== undefined && object.chain !== null
-        ? ChainDescriptor.fromPartial(object.chain)
-        : undefined;
+    message.chain = (object.chain !== undefined && object.chain !== null)
+      ? ChainDescriptor.fromPartial(object.chain)
+      : undefined;
     return message;
   },
 };
 
-messageTypeRegistry.set(
-  GetChainDescriptorResponse.$type,
-  GetChainDescriptorResponse,
-);
+messageTypeRegistry.set(GetChainDescriptorResponse.$type, GetChainDescriptorResponse);
 
 function createBaseGetCodecDescriptorRequest(): GetCodecDescriptorRequest {
-  return { $type: 'cosmos.base.reflection.v2alpha1.GetCodecDescriptorRequest' };
+  return { $type: "cosmos.base.reflection.v2alpha1.GetCodecDescriptorRequest" };
 }
 
 export const GetCodecDescriptorRequest = {
-  $type: 'cosmos.base.reflection.v2alpha1.GetCodecDescriptorRequest' as const,
+  $type: "cosmos.base.reflection.v2alpha1.GetCodecDescriptorRequest" as const,
 
-  encode(
-    _: GetCodecDescriptorRequest,
-    writer: _m0.Writer = _m0.Writer.create(),
-  ): _m0.Writer {
+  encode(_: GetCodecDescriptorRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     return writer;
   },
 
-  decode(
-    input: _m0.Reader | Uint8Array,
-    length?: number,
-  ): GetCodecDescriptorRequest {
+  decode(input: _m0.Reader | Uint8Array, length?: number): GetCodecDescriptorRequest {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseGetCodecDescriptorRequest();
@@ -1507,9 +1311,7 @@ export const GetCodecDescriptorRequest = {
   },
 
   fromJSON(_: any): GetCodecDescriptorRequest {
-    return {
-      $type: GetCodecDescriptorRequest.$type,
-    };
+    return { $type: GetCodecDescriptorRequest.$type };
   },
 
   toJSON(_: GetCodecDescriptorRequest): unknown {
@@ -1517,43 +1319,33 @@ export const GetCodecDescriptorRequest = {
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<GetCodecDescriptorRequest>, I>>(
-    _: I,
-  ): GetCodecDescriptorRequest {
+  create(base?: DeepPartial<GetCodecDescriptorRequest>): GetCodecDescriptorRequest {
+    return GetCodecDescriptorRequest.fromPartial(base ?? {});
+  },
+
+  fromPartial(_: DeepPartial<GetCodecDescriptorRequest>): GetCodecDescriptorRequest {
     const message = createBaseGetCodecDescriptorRequest();
     return message;
   },
 };
 
-messageTypeRegistry.set(
-  GetCodecDescriptorRequest.$type,
-  GetCodecDescriptorRequest,
-);
+messageTypeRegistry.set(GetCodecDescriptorRequest.$type, GetCodecDescriptorRequest);
 
 function createBaseGetCodecDescriptorResponse(): GetCodecDescriptorResponse {
-  return {
-    $type: 'cosmos.base.reflection.v2alpha1.GetCodecDescriptorResponse',
-    codec: undefined,
-  };
+  return { $type: "cosmos.base.reflection.v2alpha1.GetCodecDescriptorResponse", codec: undefined };
 }
 
 export const GetCodecDescriptorResponse = {
-  $type: 'cosmos.base.reflection.v2alpha1.GetCodecDescriptorResponse' as const,
+  $type: "cosmos.base.reflection.v2alpha1.GetCodecDescriptorResponse" as const,
 
-  encode(
-    message: GetCodecDescriptorResponse,
-    writer: _m0.Writer = _m0.Writer.create(),
-  ): _m0.Writer {
+  encode(message: GetCodecDescriptorResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.codec !== undefined) {
       CodecDescriptor.encode(message.codec, writer.uint32(10).fork()).ldelim();
     }
     return writer;
   },
 
-  decode(
-    input: _m0.Reader | Uint8Array,
-    length?: number,
-  ): GetCodecDescriptorResponse {
+  decode(input: _m0.Reader | Uint8Array, length?: number): GetCodecDescriptorResponse {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseGetCodecDescriptorResponse();
@@ -1574,59 +1366,43 @@ export const GetCodecDescriptorResponse = {
   fromJSON(object: any): GetCodecDescriptorResponse {
     return {
       $type: GetCodecDescriptorResponse.$type,
-      codec: isSet(object.codec)
-        ? CodecDescriptor.fromJSON(object.codec)
-        : undefined,
+      codec: isSet(object.codec) ? CodecDescriptor.fromJSON(object.codec) : undefined,
     };
   },
 
   toJSON(message: GetCodecDescriptorResponse): unknown {
     const obj: any = {};
-    message.codec !== undefined &&
-      (obj.codec = message.codec
-        ? CodecDescriptor.toJSON(message.codec)
-        : undefined);
+    message.codec !== undefined && (obj.codec = message.codec ? CodecDescriptor.toJSON(message.codec) : undefined);
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<GetCodecDescriptorResponse>, I>>(
-    object: I,
-  ): GetCodecDescriptorResponse {
+  create(base?: DeepPartial<GetCodecDescriptorResponse>): GetCodecDescriptorResponse {
+    return GetCodecDescriptorResponse.fromPartial(base ?? {});
+  },
+
+  fromPartial(object: DeepPartial<GetCodecDescriptorResponse>): GetCodecDescriptorResponse {
     const message = createBaseGetCodecDescriptorResponse();
-    message.codec =
-      object.codec !== undefined && object.codec !== null
-        ? CodecDescriptor.fromPartial(object.codec)
-        : undefined;
+    message.codec = (object.codec !== undefined && object.codec !== null)
+      ? CodecDescriptor.fromPartial(object.codec)
+      : undefined;
     return message;
   },
 };
 
-messageTypeRegistry.set(
-  GetCodecDescriptorResponse.$type,
-  GetCodecDescriptorResponse,
-);
+messageTypeRegistry.set(GetCodecDescriptorResponse.$type, GetCodecDescriptorResponse);
 
 function createBaseGetConfigurationDescriptorRequest(): GetConfigurationDescriptorRequest {
-  return {
-    $type: 'cosmos.base.reflection.v2alpha1.GetConfigurationDescriptorRequest',
-  };
+  return { $type: "cosmos.base.reflection.v2alpha1.GetConfigurationDescriptorRequest" };
 }
 
 export const GetConfigurationDescriptorRequest = {
-  $type:
-    'cosmos.base.reflection.v2alpha1.GetConfigurationDescriptorRequest' as const,
+  $type: "cosmos.base.reflection.v2alpha1.GetConfigurationDescriptorRequest" as const,
 
-  encode(
-    _: GetConfigurationDescriptorRequest,
-    writer: _m0.Writer = _m0.Writer.create(),
-  ): _m0.Writer {
+  encode(_: GetConfigurationDescriptorRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     return writer;
   },
 
-  decode(
-    input: _m0.Reader | Uint8Array,
-    length?: number,
-  ): GetConfigurationDescriptorRequest {
+  decode(input: _m0.Reader | Uint8Array, length?: number): GetConfigurationDescriptorRequest {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseGetConfigurationDescriptorRequest();
@@ -1642,9 +1418,7 @@ export const GetConfigurationDescriptorRequest = {
   },
 
   fromJSON(_: any): GetConfigurationDescriptorRequest {
-    return {
-      $type: GetConfigurationDescriptorRequest.$type,
-    };
+    return { $type: GetConfigurationDescriptorRequest.$type };
   },
 
   toJSON(_: GetConfigurationDescriptorRequest): unknown {
@@ -1652,47 +1426,33 @@ export const GetConfigurationDescriptorRequest = {
     return obj;
   },
 
-  fromPartial<
-    I extends Exact<DeepPartial<GetConfigurationDescriptorRequest>, I>,
-  >(_: I): GetConfigurationDescriptorRequest {
+  create(base?: DeepPartial<GetConfigurationDescriptorRequest>): GetConfigurationDescriptorRequest {
+    return GetConfigurationDescriptorRequest.fromPartial(base ?? {});
+  },
+
+  fromPartial(_: DeepPartial<GetConfigurationDescriptorRequest>): GetConfigurationDescriptorRequest {
     const message = createBaseGetConfigurationDescriptorRequest();
     return message;
   },
 };
 
-messageTypeRegistry.set(
-  GetConfigurationDescriptorRequest.$type,
-  GetConfigurationDescriptorRequest,
-);
+messageTypeRegistry.set(GetConfigurationDescriptorRequest.$type, GetConfigurationDescriptorRequest);
 
 function createBaseGetConfigurationDescriptorResponse(): GetConfigurationDescriptorResponse {
-  return {
-    $type: 'cosmos.base.reflection.v2alpha1.GetConfigurationDescriptorResponse',
-    config: undefined,
-  };
+  return { $type: "cosmos.base.reflection.v2alpha1.GetConfigurationDescriptorResponse", config: undefined };
 }
 
 export const GetConfigurationDescriptorResponse = {
-  $type:
-    'cosmos.base.reflection.v2alpha1.GetConfigurationDescriptorResponse' as const,
+  $type: "cosmos.base.reflection.v2alpha1.GetConfigurationDescriptorResponse" as const,
 
-  encode(
-    message: GetConfigurationDescriptorResponse,
-    writer: _m0.Writer = _m0.Writer.create(),
-  ): _m0.Writer {
+  encode(message: GetConfigurationDescriptorResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.config !== undefined) {
-      ConfigurationDescriptor.encode(
-        message.config,
-        writer.uint32(10).fork(),
-      ).ldelim();
+      ConfigurationDescriptor.encode(message.config, writer.uint32(10).fork()).ldelim();
     }
     return writer;
   },
 
-  decode(
-    input: _m0.Reader | Uint8Array,
-    length?: number,
-  ): GetConfigurationDescriptorResponse {
+  decode(input: _m0.Reader | Uint8Array, length?: number): GetConfigurationDescriptorResponse {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseGetConfigurationDescriptorResponse();
@@ -1700,10 +1460,7 @@ export const GetConfigurationDescriptorResponse = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          message.config = ConfigurationDescriptor.decode(
-            reader,
-            reader.uint32(),
-          );
+          message.config = ConfigurationDescriptor.decode(reader, reader.uint32());
           break;
         default:
           reader.skipType(tag & 7);
@@ -1716,59 +1473,44 @@ export const GetConfigurationDescriptorResponse = {
   fromJSON(object: any): GetConfigurationDescriptorResponse {
     return {
       $type: GetConfigurationDescriptorResponse.$type,
-      config: isSet(object.config)
-        ? ConfigurationDescriptor.fromJSON(object.config)
-        : undefined,
+      config: isSet(object.config) ? ConfigurationDescriptor.fromJSON(object.config) : undefined,
     };
   },
 
   toJSON(message: GetConfigurationDescriptorResponse): unknown {
     const obj: any = {};
     message.config !== undefined &&
-      (obj.config = message.config
-        ? ConfigurationDescriptor.toJSON(message.config)
-        : undefined);
+      (obj.config = message.config ? ConfigurationDescriptor.toJSON(message.config) : undefined);
     return obj;
   },
 
-  fromPartial<
-    I extends Exact<DeepPartial<GetConfigurationDescriptorResponse>, I>,
-  >(object: I): GetConfigurationDescriptorResponse {
+  create(base?: DeepPartial<GetConfigurationDescriptorResponse>): GetConfigurationDescriptorResponse {
+    return GetConfigurationDescriptorResponse.fromPartial(base ?? {});
+  },
+
+  fromPartial(object: DeepPartial<GetConfigurationDescriptorResponse>): GetConfigurationDescriptorResponse {
     const message = createBaseGetConfigurationDescriptorResponse();
-    message.config =
-      object.config !== undefined && object.config !== null
-        ? ConfigurationDescriptor.fromPartial(object.config)
-        : undefined;
+    message.config = (object.config !== undefined && object.config !== null)
+      ? ConfigurationDescriptor.fromPartial(object.config)
+      : undefined;
     return message;
   },
 };
 
-messageTypeRegistry.set(
-  GetConfigurationDescriptorResponse.$type,
-  GetConfigurationDescriptorResponse,
-);
+messageTypeRegistry.set(GetConfigurationDescriptorResponse.$type, GetConfigurationDescriptorResponse);
 
 function createBaseGetQueryServicesDescriptorRequest(): GetQueryServicesDescriptorRequest {
-  return {
-    $type: 'cosmos.base.reflection.v2alpha1.GetQueryServicesDescriptorRequest',
-  };
+  return { $type: "cosmos.base.reflection.v2alpha1.GetQueryServicesDescriptorRequest" };
 }
 
 export const GetQueryServicesDescriptorRequest = {
-  $type:
-    'cosmos.base.reflection.v2alpha1.GetQueryServicesDescriptorRequest' as const,
+  $type: "cosmos.base.reflection.v2alpha1.GetQueryServicesDescriptorRequest" as const,
 
-  encode(
-    _: GetQueryServicesDescriptorRequest,
-    writer: _m0.Writer = _m0.Writer.create(),
-  ): _m0.Writer {
+  encode(_: GetQueryServicesDescriptorRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     return writer;
   },
 
-  decode(
-    input: _m0.Reader | Uint8Array,
-    length?: number,
-  ): GetQueryServicesDescriptorRequest {
+  decode(input: _m0.Reader | Uint8Array, length?: number): GetQueryServicesDescriptorRequest {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseGetQueryServicesDescriptorRequest();
@@ -1784,9 +1526,7 @@ export const GetQueryServicesDescriptorRequest = {
   },
 
   fromJSON(_: any): GetQueryServicesDescriptorRequest {
-    return {
-      $type: GetQueryServicesDescriptorRequest.$type,
-    };
+    return { $type: GetQueryServicesDescriptorRequest.$type };
   },
 
   toJSON(_: GetQueryServicesDescriptorRequest): unknown {
@@ -1794,47 +1534,33 @@ export const GetQueryServicesDescriptorRequest = {
     return obj;
   },
 
-  fromPartial<
-    I extends Exact<DeepPartial<GetQueryServicesDescriptorRequest>, I>,
-  >(_: I): GetQueryServicesDescriptorRequest {
+  create(base?: DeepPartial<GetQueryServicesDescriptorRequest>): GetQueryServicesDescriptorRequest {
+    return GetQueryServicesDescriptorRequest.fromPartial(base ?? {});
+  },
+
+  fromPartial(_: DeepPartial<GetQueryServicesDescriptorRequest>): GetQueryServicesDescriptorRequest {
     const message = createBaseGetQueryServicesDescriptorRequest();
     return message;
   },
 };
 
-messageTypeRegistry.set(
-  GetQueryServicesDescriptorRequest.$type,
-  GetQueryServicesDescriptorRequest,
-);
+messageTypeRegistry.set(GetQueryServicesDescriptorRequest.$type, GetQueryServicesDescriptorRequest);
 
 function createBaseGetQueryServicesDescriptorResponse(): GetQueryServicesDescriptorResponse {
-  return {
-    $type: 'cosmos.base.reflection.v2alpha1.GetQueryServicesDescriptorResponse',
-    queries: undefined,
-  };
+  return { $type: "cosmos.base.reflection.v2alpha1.GetQueryServicesDescriptorResponse", queries: undefined };
 }
 
 export const GetQueryServicesDescriptorResponse = {
-  $type:
-    'cosmos.base.reflection.v2alpha1.GetQueryServicesDescriptorResponse' as const,
+  $type: "cosmos.base.reflection.v2alpha1.GetQueryServicesDescriptorResponse" as const,
 
-  encode(
-    message: GetQueryServicesDescriptorResponse,
-    writer: _m0.Writer = _m0.Writer.create(),
-  ): _m0.Writer {
+  encode(message: GetQueryServicesDescriptorResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.queries !== undefined) {
-      QueryServicesDescriptor.encode(
-        message.queries,
-        writer.uint32(10).fork(),
-      ).ldelim();
+      QueryServicesDescriptor.encode(message.queries, writer.uint32(10).fork()).ldelim();
     }
     return writer;
   },
 
-  decode(
-    input: _m0.Reader | Uint8Array,
-    length?: number,
-  ): GetQueryServicesDescriptorResponse {
+  decode(input: _m0.Reader | Uint8Array, length?: number): GetQueryServicesDescriptorResponse {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseGetQueryServicesDescriptorResponse();
@@ -1842,10 +1568,7 @@ export const GetQueryServicesDescriptorResponse = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          message.queries = QueryServicesDescriptor.decode(
-            reader,
-            reader.uint32(),
-          );
+          message.queries = QueryServicesDescriptor.decode(reader, reader.uint32());
           break;
         default:
           reader.skipType(tag & 7);
@@ -1858,56 +1581,44 @@ export const GetQueryServicesDescriptorResponse = {
   fromJSON(object: any): GetQueryServicesDescriptorResponse {
     return {
       $type: GetQueryServicesDescriptorResponse.$type,
-      queries: isSet(object.queries)
-        ? QueryServicesDescriptor.fromJSON(object.queries)
-        : undefined,
+      queries: isSet(object.queries) ? QueryServicesDescriptor.fromJSON(object.queries) : undefined,
     };
   },
 
   toJSON(message: GetQueryServicesDescriptorResponse): unknown {
     const obj: any = {};
     message.queries !== undefined &&
-      (obj.queries = message.queries
-        ? QueryServicesDescriptor.toJSON(message.queries)
-        : undefined);
+      (obj.queries = message.queries ? QueryServicesDescriptor.toJSON(message.queries) : undefined);
     return obj;
   },
 
-  fromPartial<
-    I extends Exact<DeepPartial<GetQueryServicesDescriptorResponse>, I>,
-  >(object: I): GetQueryServicesDescriptorResponse {
+  create(base?: DeepPartial<GetQueryServicesDescriptorResponse>): GetQueryServicesDescriptorResponse {
+    return GetQueryServicesDescriptorResponse.fromPartial(base ?? {});
+  },
+
+  fromPartial(object: DeepPartial<GetQueryServicesDescriptorResponse>): GetQueryServicesDescriptorResponse {
     const message = createBaseGetQueryServicesDescriptorResponse();
-    message.queries =
-      object.queries !== undefined && object.queries !== null
-        ? QueryServicesDescriptor.fromPartial(object.queries)
-        : undefined;
+    message.queries = (object.queries !== undefined && object.queries !== null)
+      ? QueryServicesDescriptor.fromPartial(object.queries)
+      : undefined;
     return message;
   },
 };
 
-messageTypeRegistry.set(
-  GetQueryServicesDescriptorResponse.$type,
-  GetQueryServicesDescriptorResponse,
-);
+messageTypeRegistry.set(GetQueryServicesDescriptorResponse.$type, GetQueryServicesDescriptorResponse);
 
 function createBaseGetTxDescriptorRequest(): GetTxDescriptorRequest {
-  return { $type: 'cosmos.base.reflection.v2alpha1.GetTxDescriptorRequest' };
+  return { $type: "cosmos.base.reflection.v2alpha1.GetTxDescriptorRequest" };
 }
 
 export const GetTxDescriptorRequest = {
-  $type: 'cosmos.base.reflection.v2alpha1.GetTxDescriptorRequest' as const,
+  $type: "cosmos.base.reflection.v2alpha1.GetTxDescriptorRequest" as const,
 
-  encode(
-    _: GetTxDescriptorRequest,
-    writer: _m0.Writer = _m0.Writer.create(),
-  ): _m0.Writer {
+  encode(_: GetTxDescriptorRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     return writer;
   },
 
-  decode(
-    input: _m0.Reader | Uint8Array,
-    length?: number,
-  ): GetTxDescriptorRequest {
+  decode(input: _m0.Reader | Uint8Array, length?: number): GetTxDescriptorRequest {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseGetTxDescriptorRequest();
@@ -1923,9 +1634,7 @@ export const GetTxDescriptorRequest = {
   },
 
   fromJSON(_: any): GetTxDescriptorRequest {
-    return {
-      $type: GetTxDescriptorRequest.$type,
-    };
+    return { $type: GetTxDescriptorRequest.$type };
   },
 
   toJSON(_: GetTxDescriptorRequest): unknown {
@@ -1933,9 +1642,11 @@ export const GetTxDescriptorRequest = {
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<GetTxDescriptorRequest>, I>>(
-    _: I,
-  ): GetTxDescriptorRequest {
+  create(base?: DeepPartial<GetTxDescriptorRequest>): GetTxDescriptorRequest {
+    return GetTxDescriptorRequest.fromPartial(base ?? {});
+  },
+
+  fromPartial(_: DeepPartial<GetTxDescriptorRequest>): GetTxDescriptorRequest {
     const message = createBaseGetTxDescriptorRequest();
     return message;
   },
@@ -1944,29 +1655,20 @@ export const GetTxDescriptorRequest = {
 messageTypeRegistry.set(GetTxDescriptorRequest.$type, GetTxDescriptorRequest);
 
 function createBaseGetTxDescriptorResponse(): GetTxDescriptorResponse {
-  return {
-    $type: 'cosmos.base.reflection.v2alpha1.GetTxDescriptorResponse',
-    tx: undefined,
-  };
+  return { $type: "cosmos.base.reflection.v2alpha1.GetTxDescriptorResponse", tx: undefined };
 }
 
 export const GetTxDescriptorResponse = {
-  $type: 'cosmos.base.reflection.v2alpha1.GetTxDescriptorResponse' as const,
+  $type: "cosmos.base.reflection.v2alpha1.GetTxDescriptorResponse" as const,
 
-  encode(
-    message: GetTxDescriptorResponse,
-    writer: _m0.Writer = _m0.Writer.create(),
-  ): _m0.Writer {
+  encode(message: GetTxDescriptorResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.tx !== undefined) {
       TxDescriptor.encode(message.tx, writer.uint32(10).fork()).ldelim();
     }
     return writer;
   },
 
-  decode(
-    input: _m0.Reader | Uint8Array,
-    length?: number,
-  ): GetTxDescriptorResponse {
+  decode(input: _m0.Reader | Uint8Array, length?: number): GetTxDescriptorResponse {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseGetTxDescriptorResponse();
@@ -1993,19 +1695,17 @@ export const GetTxDescriptorResponse = {
 
   toJSON(message: GetTxDescriptorResponse): unknown {
     const obj: any = {};
-    message.tx !== undefined &&
-      (obj.tx = message.tx ? TxDescriptor.toJSON(message.tx) : undefined);
+    message.tx !== undefined && (obj.tx = message.tx ? TxDescriptor.toJSON(message.tx) : undefined);
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<GetTxDescriptorResponse>, I>>(
-    object: I,
-  ): GetTxDescriptorResponse {
+  create(base?: DeepPartial<GetTxDescriptorResponse>): GetTxDescriptorResponse {
+    return GetTxDescriptorResponse.fromPartial(base ?? {});
+  },
+
+  fromPartial(object: DeepPartial<GetTxDescriptorResponse>): GetTxDescriptorResponse {
     const message = createBaseGetTxDescriptorResponse();
-    message.tx =
-      object.tx !== undefined && object.tx !== null
-        ? TxDescriptor.fromPartial(object.tx)
-        : undefined;
+    message.tx = (object.tx !== undefined && object.tx !== null) ? TxDescriptor.fromPartial(object.tx) : undefined;
     return message;
   },
 };
@@ -2013,29 +1713,20 @@ export const GetTxDescriptorResponse = {
 messageTypeRegistry.set(GetTxDescriptorResponse.$type, GetTxDescriptorResponse);
 
 function createBaseQueryServicesDescriptor(): QueryServicesDescriptor {
-  return {
-    $type: 'cosmos.base.reflection.v2alpha1.QueryServicesDescriptor',
-    queryServices: [],
-  };
+  return { $type: "cosmos.base.reflection.v2alpha1.QueryServicesDescriptor", queryServices: [] };
 }
 
 export const QueryServicesDescriptor = {
-  $type: 'cosmos.base.reflection.v2alpha1.QueryServicesDescriptor' as const,
+  $type: "cosmos.base.reflection.v2alpha1.QueryServicesDescriptor" as const,
 
-  encode(
-    message: QueryServicesDescriptor,
-    writer: _m0.Writer = _m0.Writer.create(),
-  ): _m0.Writer {
+  encode(message: QueryServicesDescriptor, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     for (const v of message.queryServices) {
       QueryServiceDescriptor.encode(v!, writer.uint32(10).fork()).ldelim();
     }
     return writer;
   },
 
-  decode(
-    input: _m0.Reader | Uint8Array,
-    length?: number,
-  ): QueryServicesDescriptor {
+  decode(input: _m0.Reader | Uint8Array, length?: number): QueryServicesDescriptor {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryServicesDescriptor();
@@ -2043,9 +1734,7 @@ export const QueryServicesDescriptor = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          message.queryServices.push(
-            QueryServiceDescriptor.decode(reader, reader.uint32()),
-          );
+          message.queryServices.push(QueryServiceDescriptor.decode(reader, reader.uint32()));
           break;
         default:
           reader.skipType(tag & 7);
@@ -2059,9 +1748,7 @@ export const QueryServicesDescriptor = {
     return {
       $type: QueryServicesDescriptor.$type,
       queryServices: Array.isArray(object?.queryServices)
-        ? object.queryServices.map((e: any) =>
-            QueryServiceDescriptor.fromJSON(e),
-          )
+        ? object.queryServices.map((e: any) => QueryServiceDescriptor.fromJSON(e))
         : [],
     };
   },
@@ -2069,22 +1756,20 @@ export const QueryServicesDescriptor = {
   toJSON(message: QueryServicesDescriptor): unknown {
     const obj: any = {};
     if (message.queryServices) {
-      obj.queryServices = message.queryServices.map(e =>
-        e ? QueryServiceDescriptor.toJSON(e) : undefined,
-      );
+      obj.queryServices = message.queryServices.map((e) => e ? QueryServiceDescriptor.toJSON(e) : undefined);
     } else {
       obj.queryServices = [];
     }
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<QueryServicesDescriptor>, I>>(
-    object: I,
-  ): QueryServicesDescriptor {
+  create(base?: DeepPartial<QueryServicesDescriptor>): QueryServicesDescriptor {
+    return QueryServicesDescriptor.fromPartial(base ?? {});
+  },
+
+  fromPartial(object: DeepPartial<QueryServicesDescriptor>): QueryServicesDescriptor {
     const message = createBaseQueryServicesDescriptor();
-    message.queryServices =
-      object.queryServices?.map(e => QueryServiceDescriptor.fromPartial(e)) ||
-      [];
+    message.queryServices = object.queryServices?.map((e) => QueryServiceDescriptor.fromPartial(e)) || [];
     return message;
   },
 };
@@ -2093,21 +1778,18 @@ messageTypeRegistry.set(QueryServicesDescriptor.$type, QueryServicesDescriptor);
 
 function createBaseQueryServiceDescriptor(): QueryServiceDescriptor {
   return {
-    $type: 'cosmos.base.reflection.v2alpha1.QueryServiceDescriptor',
-    fullname: '',
+    $type: "cosmos.base.reflection.v2alpha1.QueryServiceDescriptor",
+    fullname: "",
     isModule: false,
     methods: [],
   };
 }
 
 export const QueryServiceDescriptor = {
-  $type: 'cosmos.base.reflection.v2alpha1.QueryServiceDescriptor' as const,
+  $type: "cosmos.base.reflection.v2alpha1.QueryServiceDescriptor" as const,
 
-  encode(
-    message: QueryServiceDescriptor,
-    writer: _m0.Writer = _m0.Writer.create(),
-  ): _m0.Writer {
-    if (message.fullname !== '') {
+  encode(message: QueryServiceDescriptor, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+    if (message.fullname !== "") {
       writer.uint32(10).string(message.fullname);
     }
     if (message.isModule === true) {
@@ -2119,10 +1801,7 @@ export const QueryServiceDescriptor = {
     return writer;
   },
 
-  decode(
-    input: _m0.Reader | Uint8Array,
-    length?: number,
-  ): QueryServiceDescriptor {
+  decode(input: _m0.Reader | Uint8Array, length?: number): QueryServiceDescriptor {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryServiceDescriptor();
@@ -2136,9 +1815,7 @@ export const QueryServiceDescriptor = {
           message.isModule = reader.bool();
           break;
         case 3:
-          message.methods.push(
-            QueryMethodDescriptor.decode(reader, reader.uint32()),
-          );
+          message.methods.push(QueryMethodDescriptor.decode(reader, reader.uint32()));
           break;
         default:
           reader.skipType(tag & 7);
@@ -2151,11 +1828,9 @@ export const QueryServiceDescriptor = {
   fromJSON(object: any): QueryServiceDescriptor {
     return {
       $type: QueryServiceDescriptor.$type,
-      fullname: isSet(object.fullname) ? String(object.fullname) : '',
+      fullname: isSet(object.fullname) ? String(object.fullname) : "",
       isModule: isSet(object.isModule) ? Boolean(object.isModule) : false,
-      methods: Array.isArray(object?.methods)
-        ? object.methods.map((e: any) => QueryMethodDescriptor.fromJSON(e))
-        : [],
+      methods: Array.isArray(object?.methods) ? object.methods.map((e: any) => QueryMethodDescriptor.fromJSON(e)) : [],
     };
   },
 
@@ -2164,23 +1839,22 @@ export const QueryServiceDescriptor = {
     message.fullname !== undefined && (obj.fullname = message.fullname);
     message.isModule !== undefined && (obj.isModule = message.isModule);
     if (message.methods) {
-      obj.methods = message.methods.map(e =>
-        e ? QueryMethodDescriptor.toJSON(e) : undefined,
-      );
+      obj.methods = message.methods.map((e) => e ? QueryMethodDescriptor.toJSON(e) : undefined);
     } else {
       obj.methods = [];
     }
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<QueryServiceDescriptor>, I>>(
-    object: I,
-  ): QueryServiceDescriptor {
+  create(base?: DeepPartial<QueryServiceDescriptor>): QueryServiceDescriptor {
+    return QueryServiceDescriptor.fromPartial(base ?? {});
+  },
+
+  fromPartial(object: DeepPartial<QueryServiceDescriptor>): QueryServiceDescriptor {
     const message = createBaseQueryServiceDescriptor();
-    message.fullname = object.fullname ?? '';
+    message.fullname = object.fullname ?? "";
     message.isModule = object.isModule ?? false;
-    message.methods =
-      object.methods?.map(e => QueryMethodDescriptor.fromPartial(e)) || [];
+    message.methods = object.methods?.map((e) => QueryMethodDescriptor.fromPartial(e)) || [];
     return message;
   },
 };
@@ -2188,33 +1862,23 @@ export const QueryServiceDescriptor = {
 messageTypeRegistry.set(QueryServiceDescriptor.$type, QueryServiceDescriptor);
 
 function createBaseQueryMethodDescriptor(): QueryMethodDescriptor {
-  return {
-    $type: 'cosmos.base.reflection.v2alpha1.QueryMethodDescriptor',
-    name: '',
-    fullQueryPath: '',
-  };
+  return { $type: "cosmos.base.reflection.v2alpha1.QueryMethodDescriptor", name: "", fullQueryPath: "" };
 }
 
 export const QueryMethodDescriptor = {
-  $type: 'cosmos.base.reflection.v2alpha1.QueryMethodDescriptor' as const,
+  $type: "cosmos.base.reflection.v2alpha1.QueryMethodDescriptor" as const,
 
-  encode(
-    message: QueryMethodDescriptor,
-    writer: _m0.Writer = _m0.Writer.create(),
-  ): _m0.Writer {
-    if (message.name !== '') {
+  encode(message: QueryMethodDescriptor, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+    if (message.name !== "") {
       writer.uint32(10).string(message.name);
     }
-    if (message.fullQueryPath !== '') {
+    if (message.fullQueryPath !== "") {
       writer.uint32(18).string(message.fullQueryPath);
     }
     return writer;
   },
 
-  decode(
-    input: _m0.Reader | Uint8Array,
-    length?: number,
-  ): QueryMethodDescriptor {
+  decode(input: _m0.Reader | Uint8Array, length?: number): QueryMethodDescriptor {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryMethodDescriptor();
@@ -2238,27 +1902,26 @@ export const QueryMethodDescriptor = {
   fromJSON(object: any): QueryMethodDescriptor {
     return {
       $type: QueryMethodDescriptor.$type,
-      name: isSet(object.name) ? String(object.name) : '',
-      fullQueryPath: isSet(object.fullQueryPath)
-        ? String(object.fullQueryPath)
-        : '',
+      name: isSet(object.name) ? String(object.name) : "",
+      fullQueryPath: isSet(object.fullQueryPath) ? String(object.fullQueryPath) : "",
     };
   },
 
   toJSON(message: QueryMethodDescriptor): unknown {
     const obj: any = {};
     message.name !== undefined && (obj.name = message.name);
-    message.fullQueryPath !== undefined &&
-      (obj.fullQueryPath = message.fullQueryPath);
+    message.fullQueryPath !== undefined && (obj.fullQueryPath = message.fullQueryPath);
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<QueryMethodDescriptor>, I>>(
-    object: I,
-  ): QueryMethodDescriptor {
+  create(base?: DeepPartial<QueryMethodDescriptor>): QueryMethodDescriptor {
+    return QueryMethodDescriptor.fromPartial(base ?? {});
+  },
+
+  fromPartial(object: DeepPartial<QueryMethodDescriptor>): QueryMethodDescriptor {
     const message = createBaseQueryMethodDescriptor();
-    message.name = object.name ?? '';
-    message.fullQueryPath = object.fullQueryPath ?? '';
+    message.name = object.name ?? "";
+    message.fullQueryPath = object.fullQueryPath ?? "";
     return message;
   },
 };
@@ -2272,17 +1935,11 @@ export interface ReflectionService {
    * NOTE: this RPC is still experimental and might be subject to breaking changes or removal in
    * future releases of the cosmos-sdk.
    */
-  GetAuthnDescriptor(
-    request: DeepPartial<GetAuthnDescriptorRequest>,
-  ): Promise<GetAuthnDescriptorResponse>;
+  GetAuthnDescriptor(request: DeepPartial<GetAuthnDescriptorRequest>): Promise<GetAuthnDescriptorResponse>;
   /** GetChainDescriptor returns the description of the chain */
-  GetChainDescriptor(
-    request: DeepPartial<GetChainDescriptorRequest>,
-  ): Promise<GetChainDescriptorResponse>;
+  GetChainDescriptor(request: DeepPartial<GetChainDescriptorRequest>): Promise<GetChainDescriptorResponse>;
   /** GetCodecDescriptor returns the descriptor of the codec of the application */
-  GetCodecDescriptor(
-    request: DeepPartial<GetCodecDescriptorRequest>,
-  ): Promise<GetCodecDescriptorResponse>;
+  GetCodecDescriptor(request: DeepPartial<GetCodecDescriptorRequest>): Promise<GetCodecDescriptorResponse>;
   /** GetConfigurationDescriptor returns the descriptor for the sdk.Config of the application */
   GetConfigurationDescriptor(
     request: DeepPartial<GetConfigurationDescriptorRequest>,
@@ -2292,67 +1949,41 @@ export interface ReflectionService {
     request: DeepPartial<GetQueryServicesDescriptorRequest>,
   ): Promise<GetQueryServicesDescriptorResponse>;
   /** GetTxDescriptor returns information on the used transaction object and available msgs that can be used */
-  GetTxDescriptor(
-    request: DeepPartial<GetTxDescriptorRequest>,
-  ): Promise<GetTxDescriptorResponse>;
+  GetTxDescriptor(request: DeepPartial<GetTxDescriptorRequest>): Promise<GetTxDescriptorResponse>;
 }
 
 export class ReflectionServiceClientImpl implements ReflectionService {
   private readonly rpc: Rpc;
-  constructor(rpc: Rpc) {
+  private readonly service: string;
+  constructor(rpc: Rpc, opts?: { service?: string }) {
+    this.service = opts?.service || "cosmos.base.reflection.v2alpha1.ReflectionService";
     this.rpc = rpc;
     this.GetAuthnDescriptor = this.GetAuthnDescriptor.bind(this);
     this.GetChainDescriptor = this.GetChainDescriptor.bind(this);
     this.GetCodecDescriptor = this.GetCodecDescriptor.bind(this);
-    this.GetConfigurationDescriptor =
-      this.GetConfigurationDescriptor.bind(this);
-    this.GetQueryServicesDescriptor =
-      this.GetQueryServicesDescriptor.bind(this);
+    this.GetConfigurationDescriptor = this.GetConfigurationDescriptor.bind(this);
+    this.GetQueryServicesDescriptor = this.GetQueryServicesDescriptor.bind(this);
     this.GetTxDescriptor = this.GetTxDescriptor.bind(this);
   }
-  GetAuthnDescriptor(
-    request: DeepPartial<GetAuthnDescriptorRequest>,
-  ): Promise<GetAuthnDescriptorResponse> {
+  GetAuthnDescriptor(request: DeepPartial<GetAuthnDescriptorRequest>): Promise<GetAuthnDescriptorResponse> {
     const fromPartial = GetAuthnDescriptorRequest.fromPartial(request);
     const data = GetAuthnDescriptorRequest.encode(fromPartial).finish();
-    const promise = this.rpc.request(
-      'cosmos.base.reflection.v2alpha1.ReflectionService',
-      'GetAuthnDescriptor',
-      data,
-    );
-    return promise.then(data =>
-      GetAuthnDescriptorResponse.decode(new _m0.Reader(data)),
-    );
+    const promise = this.rpc.request(this.service, "GetAuthnDescriptor", data);
+    return promise.then((data) => GetAuthnDescriptorResponse.decode(new _m0.Reader(data)));
   }
 
-  GetChainDescriptor(
-    request: DeepPartial<GetChainDescriptorRequest>,
-  ): Promise<GetChainDescriptorResponse> {
+  GetChainDescriptor(request: DeepPartial<GetChainDescriptorRequest>): Promise<GetChainDescriptorResponse> {
     const fromPartial = GetChainDescriptorRequest.fromPartial(request);
     const data = GetChainDescriptorRequest.encode(fromPartial).finish();
-    const promise = this.rpc.request(
-      'cosmos.base.reflection.v2alpha1.ReflectionService',
-      'GetChainDescriptor',
-      data,
-    );
-    return promise.then(data =>
-      GetChainDescriptorResponse.decode(new _m0.Reader(data)),
-    );
+    const promise = this.rpc.request(this.service, "GetChainDescriptor", data);
+    return promise.then((data) => GetChainDescriptorResponse.decode(new _m0.Reader(data)));
   }
 
-  GetCodecDescriptor(
-    request: DeepPartial<GetCodecDescriptorRequest>,
-  ): Promise<GetCodecDescriptorResponse> {
+  GetCodecDescriptor(request: DeepPartial<GetCodecDescriptorRequest>): Promise<GetCodecDescriptorResponse> {
     const fromPartial = GetCodecDescriptorRequest.fromPartial(request);
     const data = GetCodecDescriptorRequest.encode(fromPartial).finish();
-    const promise = this.rpc.request(
-      'cosmos.base.reflection.v2alpha1.ReflectionService',
-      'GetCodecDescriptor',
-      data,
-    );
-    return promise.then(data =>
-      GetCodecDescriptorResponse.decode(new _m0.Reader(data)),
-    );
+    const promise = this.rpc.request(this.service, "GetCodecDescriptor", data);
+    return promise.then((data) => GetCodecDescriptorResponse.decode(new _m0.Reader(data)));
   }
 
   GetConfigurationDescriptor(
@@ -2360,14 +1991,8 @@ export class ReflectionServiceClientImpl implements ReflectionService {
   ): Promise<GetConfigurationDescriptorResponse> {
     const fromPartial = GetConfigurationDescriptorRequest.fromPartial(request);
     const data = GetConfigurationDescriptorRequest.encode(fromPartial).finish();
-    const promise = this.rpc.request(
-      'cosmos.base.reflection.v2alpha1.ReflectionService',
-      'GetConfigurationDescriptor',
-      data,
-    );
-    return promise.then(data =>
-      GetConfigurationDescriptorResponse.decode(new _m0.Reader(data)),
-    );
+    const promise = this.rpc.request(this.service, "GetConfigurationDescriptor", data);
+    return promise.then((data) => GetConfigurationDescriptorResponse.decode(new _m0.Reader(data)));
   }
 
   GetQueryServicesDescriptor(
@@ -2375,68 +2000,29 @@ export class ReflectionServiceClientImpl implements ReflectionService {
   ): Promise<GetQueryServicesDescriptorResponse> {
     const fromPartial = GetQueryServicesDescriptorRequest.fromPartial(request);
     const data = GetQueryServicesDescriptorRequest.encode(fromPartial).finish();
-    const promise = this.rpc.request(
-      'cosmos.base.reflection.v2alpha1.ReflectionService',
-      'GetQueryServicesDescriptor',
-      data,
-    );
-    return promise.then(data =>
-      GetQueryServicesDescriptorResponse.decode(new _m0.Reader(data)),
-    );
+    const promise = this.rpc.request(this.service, "GetQueryServicesDescriptor", data);
+    return promise.then((data) => GetQueryServicesDescriptorResponse.decode(new _m0.Reader(data)));
   }
 
-  GetTxDescriptor(
-    request: DeepPartial<GetTxDescriptorRequest>,
-  ): Promise<GetTxDescriptorResponse> {
+  GetTxDescriptor(request: DeepPartial<GetTxDescriptorRequest>): Promise<GetTxDescriptorResponse> {
     const fromPartial = GetTxDescriptorRequest.fromPartial(request);
     const data = GetTxDescriptorRequest.encode(fromPartial).finish();
-    const promise = this.rpc.request(
-      'cosmos.base.reflection.v2alpha1.ReflectionService',
-      'GetTxDescriptor',
-      data,
-    );
-    return promise.then(data =>
-      GetTxDescriptorResponse.decode(new _m0.Reader(data)),
-    );
+    const promise = this.rpc.request(this.service, "GetTxDescriptor", data);
+    return promise.then((data) => GetTxDescriptorResponse.decode(new _m0.Reader(data)));
   }
 }
 
 interface Rpc {
-  request(
-    service: string,
-    method: string,
-    data: Uint8Array,
-  ): Promise<Uint8Array>;
+  request(service: string, method: string, data: Uint8Array): Promise<Uint8Array>;
 }
 
-type Builtin =
-  | Date
-  | Function
-  | Uint8Array
-  | string
-  | number
-  | boolean
-  | undefined;
+type Builtin = Date | Function | Uint8Array | string | number | boolean | undefined;
 
-export type DeepPartial<T> = T extends Builtin
-  ? T
-  : T extends Long
-  ? string | number | Long
-  : T extends Array<infer U>
-  ? Array<DeepPartial<U>>
-  : T extends ReadonlyArray<infer U>
-  ? ReadonlyArray<DeepPartial<U>>
-  : T extends {}
-  ? { [K in Exclude<keyof T, '$type'>]?: DeepPartial<T[K]> }
+export type DeepPartial<T> = T extends Builtin ? T
+  : T extends Long ? string | number | Long : T extends Array<infer U> ? Array<DeepPartial<U>>
+  : T extends ReadonlyArray<infer U> ? ReadonlyArray<DeepPartial<U>>
+  : T extends {} ? { [K in Exclude<keyof T, "$type">]?: DeepPartial<T[K]> }
   : Partial<T>;
-
-type KeysOfUnion<T> = T extends T ? keyof T : never;
-export type Exact<P, I extends P> = P extends Builtin
-  ? P
-  : P & { [K in keyof P]: Exact<P[K], I[K]> } & Record<
-        Exclude<keyof I, KeysOfUnion<P> | '$type'>,
-        never
-      >;
 
 if (_m0.util.Long !== Long) {
   _m0.util.Long = Long as any;
