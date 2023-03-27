@@ -1,13 +1,13 @@
 {
 	"name": "@regen-network/demo-app",
-	"version": "0.5.0",
+	"version": "0.6.0",
 	"author": "admin@regen.network",
 	"description": "Demo web application using @regen-network/api",
 	"license": "Apache-2.0",
 	"private": true,
 	"repository": "https://github.com/regen-network/regen-js",
 	"dependencies": {
-		"@regen-network/api": "^0.5.0",
+		"@regen-network/api": "^0.6.0",
 		"@testing-library/jest-dom": "^5.11.8",
 		"@testing-library/react": "^11.2.2",
 		"@testing-library/user-event": "^12.6.0",
