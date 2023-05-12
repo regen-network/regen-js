@@ -1,0 +1,225 @@
+import { DateCriteria, DateCriteriaSDKType } from "./types";
+import { Timestamp, TimestampSDKType } from "../../../../google/protobuf/timestamp";
+import { Coin, CoinSDKType } from "../../../../cosmos/base/v1beta1/coin";
+import * as _m0 from "protobufjs/minimal";
+import { Long } from "../../../../helpers";
+/** Basket represents a basket in state. */
+export interface Basket {
+    /**
+     * id is the uint64 ID of the basket. It is used internally for reducing
+     * storage space.
+     */
+    id: Long;
+    /**
+     * basket_denom is the basket bank denom formed from name and credit type with
+     * the format `eco.<prefix><credit_type_abbrev>.<name>` where prefix is the
+     * prefix of the bank denom exponent, a standard SI unit derived from credit
+     * type precision, and mapped as follows:
+     *   0 - no prefix
+     *   1 - d (deci)
+     *   2 - c (centi)
+     *   3 - m (milli)
+     *   6 - u (micro)
+     *   9 - n (nano)
+     *   12 - p (pico)
+     *   15 - f (femto)
+     *   18 - a (atto)
+     *   21 - z (zepto)
+     *   24 - y (yocto)
+     */
+    basketDenom: string;
+    /**
+     * name is the unique name of the basket specified in MsgCreate. Basket
+     * names must be unique across all credit types and choices of exponent
+     * above and beyond the uniqueness constraint on basket_denom.
+     */
+    name: string;
+    /**
+     * disable_auto_retire indicates whether or not the credits will be retired
+     * upon withdraw from the basket.
+     */
+    disableAutoRetire: boolean;
+    /**
+     * credit_type_abbrev is the abbreviation of the credit type this basket is
+     * able to hold.
+     */
+    creditTypeAbbrev: string;
+    /** date_criteria is the date criteria for batches admitted to the basket. */
+    dateCriteria?: DateCriteria;
+    /**
+     * Deprecated (Since Revision 1): This field is no longer used and will be
+     * removed in the next version. The value of credit type precision is always
+     * used as the exponent when converting credits to/from basket tokens. This
+     * field will be set to the value of credit type precision until removed.
+     */
+    /** @deprecated */
+    exponent: number;
+    /**
+     * curator is the address of the basket curator who is able to change certain
+     * basket settings.
+     *
+     * Since Revision 1
+     */
+    curator: Uint8Array;
+}
+/** Basket represents a basket in state. */
+export interface BasketSDKType {
+    /**
+     * id is the uint64 ID of the basket. It is used internally for reducing
+     * storage space.
+     */
+    id: Long;
+    /**
+     * basket_denom is the basket bank denom formed from name and credit type with
+     * the format `eco.<prefix><credit_type_abbrev>.<name>` where prefix is the
+     * prefix of the bank denom exponent, a standard SI unit derived from credit
+     * type precision, and mapped as follows:
+     *   0 - no prefix
+     *   1 - d (deci)
+     *   2 - c (centi)
+     *   3 - m (milli)
+     *   6 - u (micro)
+     *   9 - n (nano)
+     *   12 - p (pico)
+     *   15 - f (femto)
+     *   18 - a (atto)
+     *   21 - z (zepto)
+     *   24 - y (yocto)
+     */
+    basket_denom: string;
+    /**
+     * name is the unique name of the basket specified in MsgCreate. Basket
+     * names must be unique across all credit types and choices of exponent
+     * above and beyond the uniqueness constraint on basket_denom.
+     */
+    name: string;
+    /**
+     * disable_auto_retire indicates whether or not the credits will be retired
+     * upon withdraw from the basket.
+     */
+    disable_auto_retire: boolean;
+    /**
+     * credit_type_abbrev is the abbreviation of the credit type this basket is
+     * able to hold.
+     */
+    credit_type_abbrev: string;
+    /** date_criteria is the date criteria for batches admitted to the basket. */
+    date_criteria?: DateCriteriaSDKType;
+    /**
+     * Deprecated (Since Revision 1): This field is no longer used and will be
+     * removed in the next version. The value of credit type precision is always
+     * used as the exponent when converting credits to/from basket tokens. This
+     * field will be set to the value of credit type precision until removed.
+     */
+    /** @deprecated */
+    exponent: number;
+    /**
+     * curator is the address of the basket curator who is able to change certain
+     * basket settings.
+     *
+     * Since Revision 1
+     */
+    curator: Uint8Array;
+}
+/** BasketClass describes a credit class that can be deposited in a basket. */
+export interface BasketClass {
+    /** basket_id is the ID of the basket */
+    basketId: Long;
+    /**
+     * class_id is the id of the credit class that is allowed to be deposited in
+     * the basket
+     */
+    classId: string;
+}
+/** BasketClass describes a credit class that can be deposited in a basket. */
+export interface BasketClassSDKType {
+    /** basket_id is the ID of the basket */
+    basket_id: Long;
+    /**
+     * class_id is the id of the credit class that is allowed to be deposited in
+     * the basket
+     */
+    class_id: string;
+}
+/** BasketBalance stores the amount of credits from a batch in a basket */
+export interface BasketBalance {
+    /** basket_id is the ID of the basket */
+    basketId: Long;
+    /** batch_denom is the denom of the credit batch */
+    batchDenom: string;
+    /** balance is the amount of ecocredits held in the basket */
+    balance: string;
+    /**
+     * batch_start_date is the start date of the batch. This field is used
+     * to create an index which is used to remove the oldest credits first.
+     */
+    batchStartDate?: Timestamp;
+}
+/** BasketBalance stores the amount of credits from a batch in a basket */
+export interface BasketBalanceSDKType {
+    /** basket_id is the ID of the basket */
+    basket_id: Long;
+    /** batch_denom is the denom of the credit batch */
+    batch_denom: string;
+    /** balance is the amount of ecocredits held in the basket */
+    balance: string;
+    /**
+     * batch_start_date is the start date of the batch. This field is used
+     * to create an index which is used to remove the oldest credits first.
+     */
+    batch_start_date?: TimestampSDKType;
+}
+/**
+ * BasketFee is the basket creation fee. If not set, a basket creation fee is
+ * not required. This table is controlled via governance.
+ *
+ * Since Revision 2
+ */
+export interface BasketFee {
+    /**
+     * fee is the basket creation fee. If not set, a basket creation fee is not
+     * required.
+     */
+    fee?: Coin;
+}
+/**
+ * BasketFee is the basket creation fee. If not set, a basket creation fee is
+ * not required. This table is controlled via governance.
+ *
+ * Since Revision 2
+ */
+export interface BasketFeeSDKType {
+    /**
+     * fee is the basket creation fee. If not set, a basket creation fee is not
+     * required.
+     */
+    fee?: CoinSDKType;
+}
+export declare const Basket: {
+    encode(message: Basket, writer?: _m0.Writer): _m0.Writer;
+    decode(input: _m0.Reader | Uint8Array, length?: number): Basket;
+    fromJSON(object: any): Basket;
+    toJSON(message: Basket): unknown;
+    fromPartial(object: Partial<Basket>): Basket;
+};
+export declare const BasketClass: {
+    encode(message: BasketClass, writer?: _m0.Writer): _m0.Writer;
+    decode(input: _m0.Reader | Uint8Array, length?: number): BasketClass;
+    fromJSON(object: any): BasketClass;
+    toJSON(message: BasketClass): unknown;
+    fromPartial(object: Partial<BasketClass>): BasketClass;
+};
+export declare const BasketBalance: {
+    encode(message: BasketBalance, writer?: _m0.Writer): _m0.Writer;
+    decode(input: _m0.Reader | Uint8Array, length?: number): BasketBalance;
+    fromJSON(object: any): BasketBalance;
+    toJSON(message: BasketBalance): unknown;
+    fromPartial(object: Partial<BasketBalance>): BasketBalance;
+};
+export declare const BasketFee: {
+    encode(message: BasketFee, writer?: _m0.Writer): _m0.Writer;
+    decode(input: _m0.Reader | Uint8Array, length?: number): BasketFee;
+    fromJSON(object: any): BasketFee;
+    toJSON(message: BasketFee): unknown;
+    fromPartial(object: Partial<BasketFee>): BasketFee;
+};

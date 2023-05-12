@@ -1,0 +1,17 @@
+# system
+.DS_Store
+
+# editors
+.idea
+.vscode
+
+# logs
+*.log
+npm-debug.log*
+
+# dependencies
+node_modules
+
+# build
+/main
+/module

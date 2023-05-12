@@ -1,0 +1,30 @@
+# system
+.DS_Store
+
+# editors
+.idea
+.vscode
+
+# logs
+*.log
+npm-debug.log*
+
+# dependencies
+node_modules
+
+# package
+package.json
+
+# package lock
+package-lock.json
+yarn.lock
+
+# project
+/proto
+/scripts
+/src
+
+# other
+.babelrc.js
+.gitignore
+tsconfig.json
