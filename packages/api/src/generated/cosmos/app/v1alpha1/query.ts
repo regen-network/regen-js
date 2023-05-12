@@ -1,34 +1,31 @@
 /* eslint-disable */
-import { messageTypeRegistry } from '../../../typeRegistry';
-import Long from 'long';
-import _m0 from 'protobufjs/minimal';
-import { Config } from '../../../cosmos/app/v1alpha1/config';
+import Long from "long";
+import _m0 from "protobufjs/minimal";
+import { messageTypeRegistry } from "../../../typeRegistry";
+import { Config } from "./config";
 
-export const protobufPackage = 'cosmos.app.v1alpha1';
+export const protobufPackage = "cosmos.app.v1alpha1";
 
 /** QueryConfigRequest is the Query/Config request type. */
 export interface QueryConfigRequest {
-  $type: 'cosmos.app.v1alpha1.QueryConfigRequest';
+  $type: "cosmos.app.v1alpha1.QueryConfigRequest";
 }
 
 /** QueryConfigRequest is the Query/Config response type. */
 export interface QueryConfigResponse {
-  $type: 'cosmos.app.v1alpha1.QueryConfigResponse';
+  $type: "cosmos.app.v1alpha1.QueryConfigResponse";
   /** config is the current app config. */
   config?: Config;
 }
 
 function createBaseQueryConfigRequest(): QueryConfigRequest {
-  return { $type: 'cosmos.app.v1alpha1.QueryConfigRequest' };
+  return { $type: "cosmos.app.v1alpha1.QueryConfigRequest" };
 }
 
 export const QueryConfigRequest = {
-  $type: 'cosmos.app.v1alpha1.QueryConfigRequest' as const,
+  $type: "cosmos.app.v1alpha1.QueryConfigRequest" as const,
 
-  encode(
-    _: QueryConfigRequest,
-    writer: _m0.Writer = _m0.Writer.create(),
-  ): _m0.Writer {
+  encode(_: QueryConfigRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     return writer;
   },
 
@@ -48,9 +45,7 @@ export const QueryConfigRequest = {
   },
 
   fromJSON(_: any): QueryConfigRequest {
-    return {
-      $type: QueryConfigRequest.$type,
-    };
+    return { $type: QueryConfigRequest.$type };
   },
 
   toJSON(_: QueryConfigRequest): unknown {
@@ -58,9 +53,11 @@ export const QueryConfigRequest = {
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<QueryConfigRequest>, I>>(
-    _: I,
-  ): QueryConfigRequest {
+  create(base?: DeepPartial<QueryConfigRequest>): QueryConfigRequest {
+    return QueryConfigRequest.fromPartial(base ?? {});
+  },
+
+  fromPartial(_: DeepPartial<QueryConfigRequest>): QueryConfigRequest {
     const message = createBaseQueryConfigRequest();
     return message;
   },
@@ -69,19 +66,13 @@ export const QueryConfigRequest = {
 messageTypeRegistry.set(QueryConfigRequest.$type, QueryConfigRequest);
 
 function createBaseQueryConfigResponse(): QueryConfigResponse {
-  return {
-    $type: 'cosmos.app.v1alpha1.QueryConfigResponse',
-    config: undefined,
-  };
+  return { $type: "cosmos.app.v1alpha1.QueryConfigResponse", config: undefined };
 }
 
 export const QueryConfigResponse = {
-  $type: 'cosmos.app.v1alpha1.QueryConfigResponse' as const,
+  $type: "cosmos.app.v1alpha1.QueryConfigResponse" as const,
 
-  encode(
-    message: QueryConfigResponse,
-    writer: _m0.Writer = _m0.Writer.create(),
-  ): _m0.Writer {
+  encode(message: QueryConfigResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.config !== undefined) {
       Config.encode(message.config, writer.uint32(10).fork()).ldelim();
     }
@@ -115,19 +106,19 @@ export const QueryConfigResponse = {
 
   toJSON(message: QueryConfigResponse): unknown {
     const obj: any = {};
-    message.config !== undefined &&
-      (obj.config = message.config ? Config.toJSON(message.config) : undefined);
+    message.config !== undefined && (obj.config = message.config ? Config.toJSON(message.config) : undefined);
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<QueryConfigResponse>, I>>(
-    object: I,
-  ): QueryConfigResponse {
+  create(base?: DeepPartial<QueryConfigResponse>): QueryConfigResponse {
+    return QueryConfigResponse.fromPartial(base ?? {});
+  },
+
+  fromPartial(object: DeepPartial<QueryConfigResponse>): QueryConfigResponse {
     const message = createBaseQueryConfigResponse();
-    message.config =
-      object.config !== undefined && object.config !== null
-        ? Config.fromPartial(object.config)
-        : undefined;
+    message.config = (object.config !== undefined && object.config !== null)
+      ? Config.fromPartial(object.config)
+      : undefined;
     return message;
   },
 };
@@ -137,69 +128,36 @@ messageTypeRegistry.set(QueryConfigResponse.$type, QueryConfigResponse);
 /** Query is the app module query service. */
 export interface Query {
   /** Config returns the current app config. */
-  Config(
-    request: DeepPartial<QueryConfigRequest>,
-  ): Promise<QueryConfigResponse>;
+  Config(request: DeepPartial<QueryConfigRequest>): Promise<QueryConfigResponse>;
 }
 
 export class QueryClientImpl implements Query {
   private readonly rpc: Rpc;
-  constructor(rpc: Rpc) {
+  private readonly service: string;
+  constructor(rpc: Rpc, opts?: { service?: string }) {
+    this.service = opts?.service || "cosmos.app.v1alpha1.Query";
     this.rpc = rpc;
     this.Config = this.Config.bind(this);
   }
-  Config(
-    request: DeepPartial<QueryConfigRequest>,
-  ): Promise<QueryConfigResponse> {
+  Config(request: DeepPartial<QueryConfigRequest>): Promise<QueryConfigResponse> {
     const fromPartial = QueryConfigRequest.fromPartial(request);
     const data = QueryConfigRequest.encode(fromPartial).finish();
-    const promise = this.rpc.request(
-      'cosmos.app.v1alpha1.Query',
-      'Config',
-      data,
-    );
-    return promise.then(data =>
-      QueryConfigResponse.decode(new _m0.Reader(data)),
-    );
+    const promise = this.rpc.request(this.service, "Config", data);
+    return promise.then((data) => QueryConfigResponse.decode(new _m0.Reader(data)));
   }
 }
 
 interface Rpc {
-  request(
-    service: string,
-    method: string,
-    data: Uint8Array,
-  ): Promise<Uint8Array>;
+  request(service: string, method: string, data: Uint8Array): Promise<Uint8Array>;
 }
 
-type Builtin =
-  | Date
-  | Function
-  | Uint8Array
-  | string
-  | number
-  | boolean
-  | undefined;
+type Builtin = Date | Function | Uint8Array | string | number | boolean | undefined;
 
-export type DeepPartial<T> = T extends Builtin
-  ? T
-  : T extends Long
-  ? string | number | Long
-  : T extends Array<infer U>
-  ? Array<DeepPartial<U>>
-  : T extends ReadonlyArray<infer U>
-  ? ReadonlyArray<DeepPartial<U>>
-  : T extends {}
-  ? { [K in Exclude<keyof T, '$type'>]?: DeepPartial<T[K]> }
+export type DeepPartial<T> = T extends Builtin ? T
+  : T extends Long ? string | number | Long : T extends Array<infer U> ? Array<DeepPartial<U>>
+  : T extends ReadonlyArray<infer U> ? ReadonlyArray<DeepPartial<U>>
+  : T extends {} ? { [K in Exclude<keyof T, "$type">]?: DeepPartial<T[K]> }
   : Partial<T>;
-
-type KeysOfUnion<T> = T extends T ? keyof T : never;
-export type Exact<P, I extends P> = P extends Builtin
-  ? P
-  : P & { [K in keyof P]: Exact<P[K], I[K]> } & Record<
-        Exclude<keyof I, KeysOfUnion<P> | '$type'>,
-        never
-      >;
 
 if (_m0.util.Long !== Long) {
   _m0.util.Long = Long as any;

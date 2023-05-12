@@ -7,7 +7,7 @@ import {
 } from '../../../../generated/regen/ecocredit/v1/types';
 import { AminoDate } from '../converter-utils';
 
-const msgCreateBatchAminoType = 'regen.core/MsgCreateBatch';
+const msgCreateBatchAminoType = 'regen/MsgCreateBatch';
 
 export const createBatchTypeUrl = '/' + MsgCreateBatch.$type;
 
@@ -16,6 +16,7 @@ export interface AminoBatchIssuance {
   tradable_amount?: string;
   retired_amount?: string;
   retirement_jurisdiction?: string;
+  retirement_reason?: string;
 }
 
 export interface AminoOriginTx {
@@ -67,6 +68,7 @@ export function createBatchConverter(): AminoConverter {
             tradable_amount: i.tradableAmount || undefined,
             retired_amount: i.retiredAmount || undefined,
             retirement_jurisdiction: i.retirementJurisdiction || undefined,
+            retirement_reason: i.retirementReason || undefined,
           };
         }),
         metadata,
@@ -108,6 +110,7 @@ export function createBatchConverter(): AminoConverter {
             tradableAmount: i.tradable_amount || '',
             retiredAmount: i.retired_amount || '',
             retirementJurisdiction: i.retirement_jurisdiction || '',
+            retirementReason: i.retirement_reason || '',
           };
         }),
         metadata,

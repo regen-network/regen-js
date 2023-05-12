@@ -1,33 +1,30 @@
 /* eslint-disable */
-import { messageTypeRegistry } from '../../../typeRegistry';
-import Long from 'long';
-import _m0 from 'protobufjs/minimal';
+import Long from "long";
+import _m0 from "protobufjs/minimal";
+import { messageTypeRegistry } from "../../../typeRegistry";
 
-export const protobufPackage = 'cosmos.slashing.v1beta1';
+export const protobufPackage = "cosmos.slashing.v1beta1";
 
 /** MsgUnjail defines the Msg/Unjail request type */
 export interface MsgUnjail {
-  $type: 'cosmos.slashing.v1beta1.MsgUnjail';
+  $type: "cosmos.slashing.v1beta1.MsgUnjail";
   validatorAddr: string;
 }
 
 /** MsgUnjailResponse defines the Msg/Unjail response type */
 export interface MsgUnjailResponse {
-  $type: 'cosmos.slashing.v1beta1.MsgUnjailResponse';
+  $type: "cosmos.slashing.v1beta1.MsgUnjailResponse";
 }
 
 function createBaseMsgUnjail(): MsgUnjail {
-  return { $type: 'cosmos.slashing.v1beta1.MsgUnjail', validatorAddr: '' };
+  return { $type: "cosmos.slashing.v1beta1.MsgUnjail", validatorAddr: "" };
 }
 
 export const MsgUnjail = {
-  $type: 'cosmos.slashing.v1beta1.MsgUnjail' as const,
+  $type: "cosmos.slashing.v1beta1.MsgUnjail" as const,
 
-  encode(
-    message: MsgUnjail,
-    writer: _m0.Writer = _m0.Writer.create(),
-  ): _m0.Writer {
-    if (message.validatorAddr !== '') {
+  encode(message: MsgUnjail, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+    if (message.validatorAddr !== "") {
       writer.uint32(10).string(message.validatorAddr);
     }
     return writer;
@@ -52,26 +49,22 @@ export const MsgUnjail = {
   },
 
   fromJSON(object: any): MsgUnjail {
-    return {
-      $type: MsgUnjail.$type,
-      validatorAddr: isSet(object.validatorAddr)
-        ? String(object.validatorAddr)
-        : '',
-    };
+    return { $type: MsgUnjail.$type, validatorAddr: isSet(object.validatorAddr) ? String(object.validatorAddr) : "" };
   },
 
   toJSON(message: MsgUnjail): unknown {
     const obj: any = {};
-    message.validatorAddr !== undefined &&
-      (obj.validatorAddr = message.validatorAddr);
+    message.validatorAddr !== undefined && (obj.validatorAddr = message.validatorAddr);
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<MsgUnjail>, I>>(
-    object: I,
-  ): MsgUnjail {
+  create(base?: DeepPartial<MsgUnjail>): MsgUnjail {
+    return MsgUnjail.fromPartial(base ?? {});
+  },
+
+  fromPartial(object: DeepPartial<MsgUnjail>): MsgUnjail {
     const message = createBaseMsgUnjail();
-    message.validatorAddr = object.validatorAddr ?? '';
+    message.validatorAddr = object.validatorAddr ?? "";
     return message;
   },
 };
@@ -79,16 +72,13 @@ export const MsgUnjail = {
 messageTypeRegistry.set(MsgUnjail.$type, MsgUnjail);
 
 function createBaseMsgUnjailResponse(): MsgUnjailResponse {
-  return { $type: 'cosmos.slashing.v1beta1.MsgUnjailResponse' };
+  return { $type: "cosmos.slashing.v1beta1.MsgUnjailResponse" };
 }
 
 export const MsgUnjailResponse = {
-  $type: 'cosmos.slashing.v1beta1.MsgUnjailResponse' as const,
+  $type: "cosmos.slashing.v1beta1.MsgUnjailResponse" as const,
 
-  encode(
-    _: MsgUnjailResponse,
-    writer: _m0.Writer = _m0.Writer.create(),
-  ): _m0.Writer {
+  encode(_: MsgUnjailResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     return writer;
   },
 
@@ -108,9 +98,7 @@ export const MsgUnjailResponse = {
   },
 
   fromJSON(_: any): MsgUnjailResponse {
-    return {
-      $type: MsgUnjailResponse.$type,
-    };
+    return { $type: MsgUnjailResponse.$type };
   },
 
   toJSON(_: MsgUnjailResponse): unknown {
@@ -118,9 +106,11 @@ export const MsgUnjailResponse = {
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<MsgUnjailResponse>, I>>(
-    _: I,
-  ): MsgUnjailResponse {
+  create(base?: DeepPartial<MsgUnjailResponse>): MsgUnjailResponse {
+    return MsgUnjailResponse.fromPartial(base ?? {});
+  },
+
+  fromPartial(_: DeepPartial<MsgUnjailResponse>): MsgUnjailResponse {
     const message = createBaseMsgUnjailResponse();
     return message;
   },
@@ -140,58 +130,31 @@ export interface Msg {
 
 export class MsgClientImpl implements Msg {
   private readonly rpc: Rpc;
-  constructor(rpc: Rpc) {
+  private readonly service: string;
+  constructor(rpc: Rpc, opts?: { service?: string }) {
+    this.service = opts?.service || "cosmos.slashing.v1beta1.Msg";
     this.rpc = rpc;
     this.Unjail = this.Unjail.bind(this);
   }
   Unjail(request: DeepPartial<MsgUnjail>): Promise<MsgUnjailResponse> {
     const fromPartial = MsgUnjail.fromPartial(request);
     const data = MsgUnjail.encode(fromPartial).finish();
-    const promise = this.rpc.request(
-      'cosmos.slashing.v1beta1.Msg',
-      'Unjail',
-      data,
-    );
-    return promise.then(data => MsgUnjailResponse.decode(new _m0.Reader(data)));
+    const promise = this.rpc.request(this.service, "Unjail", data);
+    return promise.then((data) => MsgUnjailResponse.decode(new _m0.Reader(data)));
   }
 }
 
 interface Rpc {
-  request(
-    service: string,
-    method: string,
-    data: Uint8Array,
-  ): Promise<Uint8Array>;
+  request(service: string, method: string, data: Uint8Array): Promise<Uint8Array>;
 }
 
-type Builtin =
-  | Date
-  | Function
-  | Uint8Array
-  | string
-  | number
-  | boolean
-  | undefined;
+type Builtin = Date | Function | Uint8Array | string | number | boolean | undefined;
 
-export type DeepPartial<T> = T extends Builtin
-  ? T
-  : T extends Long
-  ? string | number | Long
-  : T extends Array<infer U>
-  ? Array<DeepPartial<U>>
-  : T extends ReadonlyArray<infer U>
-  ? ReadonlyArray<DeepPartial<U>>
-  : T extends {}
-  ? { [K in Exclude<keyof T, '$type'>]?: DeepPartial<T[K]> }
+export type DeepPartial<T> = T extends Builtin ? T
+  : T extends Long ? string | number | Long : T extends Array<infer U> ? Array<DeepPartial<U>>
+  : T extends ReadonlyArray<infer U> ? ReadonlyArray<DeepPartial<U>>
+  : T extends {} ? { [K in Exclude<keyof T, "$type">]?: DeepPartial<T[K]> }
   : Partial<T>;
-
-type KeysOfUnion<T> = T extends T ? keyof T : never;
-export type Exact<P, I extends P> = P extends Builtin
-  ? P
-  : P & { [K in keyof P]: Exact<P[K], I[K]> } & Record<
-        Exclude<keyof I, KeysOfUnion<P> | '$type'>,
-        never
-      >;
 
 if (_m0.util.Long !== Long) {
   _m0.util.Long = Long as any;

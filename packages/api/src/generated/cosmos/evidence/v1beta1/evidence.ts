@@ -1,17 +1,17 @@
 /* eslint-disable */
-import { messageTypeRegistry } from '../../../typeRegistry';
-import Long from 'long';
-import _m0 from 'protobufjs/minimal';
-import { Timestamp } from '../../../google/protobuf/timestamp';
+import Long from "long";
+import _m0 from "protobufjs/minimal";
+import { Timestamp } from "../../../google/protobuf/timestamp";
+import { messageTypeRegistry } from "../../../typeRegistry";
 
-export const protobufPackage = 'cosmos.evidence.v1beta1';
+export const protobufPackage = "cosmos.evidence.v1beta1";
 
 /**
  * Equivocation implements the Evidence interface and defines evidence of double
  * signing misbehavior.
  */
 export interface Equivocation {
-  $type: 'cosmos.evidence.v1beta1.Equivocation';
+  $type: "cosmos.evidence.v1beta1.Equivocation";
   height: Long;
   time?: Date;
   power: Long;
@@ -20,34 +20,28 @@ export interface Equivocation {
 
 function createBaseEquivocation(): Equivocation {
   return {
-    $type: 'cosmos.evidence.v1beta1.Equivocation',
+    $type: "cosmos.evidence.v1beta1.Equivocation",
     height: Long.ZERO,
     time: undefined,
     power: Long.ZERO,
-    consensusAddress: '',
+    consensusAddress: "",
   };
 }
 
 export const Equivocation = {
-  $type: 'cosmos.evidence.v1beta1.Equivocation' as const,
+  $type: "cosmos.evidence.v1beta1.Equivocation" as const,
 
-  encode(
-    message: Equivocation,
-    writer: _m0.Writer = _m0.Writer.create(),
-  ): _m0.Writer {
+  encode(message: Equivocation, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (!message.height.isZero()) {
       writer.uint32(8).int64(message.height);
     }
     if (message.time !== undefined) {
-      Timestamp.encode(
-        toTimestamp(message.time),
-        writer.uint32(18).fork(),
-      ).ldelim();
+      Timestamp.encode(toTimestamp(message.time), writer.uint32(18).fork()).ldelim();
     }
     if (!message.power.isZero()) {
       writer.uint32(24).int64(message.power);
     }
-    if (message.consensusAddress !== '') {
+    if (message.consensusAddress !== "") {
       writer.uint32(34).string(message.consensusAddress);
     }
     return writer;
@@ -64,9 +58,7 @@ export const Equivocation = {
           message.height = reader.int64() as Long;
           break;
         case 2:
-          message.time = fromTimestamp(
-            Timestamp.decode(reader, reader.uint32()),
-          );
+          message.time = fromTimestamp(Timestamp.decode(reader, reader.uint32()));
           break;
         case 3:
           message.power = reader.int64() as Long;
@@ -85,80 +77,52 @@ export const Equivocation = {
   fromJSON(object: any): Equivocation {
     return {
       $type: Equivocation.$type,
-      height: isSet(object.height) ? Long.fromString(object.height) : Long.ZERO,
+      height: isSet(object.height) ? Long.fromValue(object.height) : Long.ZERO,
       time: isSet(object.time) ? fromJsonTimestamp(object.time) : undefined,
-      power: isSet(object.power) ? Long.fromString(object.power) : Long.ZERO,
-      consensusAddress: isSet(object.consensusAddress)
-        ? String(object.consensusAddress)
-        : '',
+      power: isSet(object.power) ? Long.fromValue(object.power) : Long.ZERO,
+      consensusAddress: isSet(object.consensusAddress) ? String(object.consensusAddress) : "",
     };
   },
 
   toJSON(message: Equivocation): unknown {
     const obj: any = {};
-    message.height !== undefined &&
-      (obj.height = (message.height || Long.ZERO).toString());
+    message.height !== undefined && (obj.height = (message.height || Long.ZERO).toString());
     message.time !== undefined && (obj.time = message.time.toISOString());
-    message.power !== undefined &&
-      (obj.power = (message.power || Long.ZERO).toString());
-    message.consensusAddress !== undefined &&
-      (obj.consensusAddress = message.consensusAddress);
+    message.power !== undefined && (obj.power = (message.power || Long.ZERO).toString());
+    message.consensusAddress !== undefined && (obj.consensusAddress = message.consensusAddress);
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<Equivocation>, I>>(
-    object: I,
-  ): Equivocation {
+  create(base?: DeepPartial<Equivocation>): Equivocation {
+    return Equivocation.fromPartial(base ?? {});
+  },
+
+  fromPartial(object: DeepPartial<Equivocation>): Equivocation {
     const message = createBaseEquivocation();
-    message.height =
-      object.height !== undefined && object.height !== null
-        ? Long.fromValue(object.height)
-        : Long.ZERO;
+    message.height = (object.height !== undefined && object.height !== null)
+      ? Long.fromValue(object.height)
+      : Long.ZERO;
     message.time = object.time ?? undefined;
-    message.power =
-      object.power !== undefined && object.power !== null
-        ? Long.fromValue(object.power)
-        : Long.ZERO;
-    message.consensusAddress = object.consensusAddress ?? '';
+    message.power = (object.power !== undefined && object.power !== null) ? Long.fromValue(object.power) : Long.ZERO;
+    message.consensusAddress = object.consensusAddress ?? "";
     return message;
   },
 };
 
 messageTypeRegistry.set(Equivocation.$type, Equivocation);
 
-type Builtin =
-  | Date
-  | Function
-  | Uint8Array
-  | string
-  | number
-  | boolean
-  | undefined;
+type Builtin = Date | Function | Uint8Array | string | number | boolean | undefined;
 
-export type DeepPartial<T> = T extends Builtin
-  ? T
-  : T extends Long
-  ? string | number | Long
-  : T extends Array<infer U>
-  ? Array<DeepPartial<U>>
-  : T extends ReadonlyArray<infer U>
-  ? ReadonlyArray<DeepPartial<U>>
-  : T extends {}
-  ? { [K in Exclude<keyof T, '$type'>]?: DeepPartial<T[K]> }
+export type DeepPartial<T> = T extends Builtin ? T
+  : T extends Long ? string | number | Long : T extends Array<infer U> ? Array<DeepPartial<U>>
+  : T extends ReadonlyArray<infer U> ? ReadonlyArray<DeepPartial<U>>
+  : T extends {} ? { [K in Exclude<keyof T, "$type">]?: DeepPartial<T[K]> }
   : Partial<T>;
-
-type KeysOfUnion<T> = T extends T ? keyof T : never;
-export type Exact<P, I extends P> = P extends Builtin
-  ? P
-  : P & { [K in keyof P]: Exact<P[K], I[K]> } & Record<
-        Exclude<keyof I, KeysOfUnion<P> | '$type'>,
-        never
-      >;
 
 function toTimestamp(date: Date): Timestamp {
   const seconds = numberToLong(date.getTime() / 1_000);
   const nanos = (date.getTime() % 1_000) * 1_000_000;
-  return { $type: 'google.protobuf.Timestamp', seconds, nanos };
+  return { $type: "google.protobuf.Timestamp", seconds, nanos };
 }
 
 function fromTimestamp(t: Timestamp): Date {
@@ -170,7 +134,7 @@ function fromTimestamp(t: Timestamp): Date {
 function fromJsonTimestamp(o: any): Date {
   if (o instanceof Date) {
     return o;
-  } else if (typeof o === 'string') {
+  } else if (typeof o === "string") {
     return new Date(o);
   } else {
     return fromTimestamp(Timestamp.fromJSON(o));

@@ -2,7 +2,7 @@ import { AminoMsg } from '@cosmjs/amino';
 import { AminoConverter } from '@cosmjs/stargate';
 import { MsgUpdateClassAdmin } from '../../../../generated/regen/ecocredit/v1/tx';
 
-const msgUpdateClassAdminAminoType = 'regen.core/MsgUpdateClassAdmin';
+const msgUpdateClassAdminAminoType = 'regen/MsgUpdateClassAdmin';
 
 export const updateClassAdminTypeUrl = '/' + MsgUpdateClassAdmin.$type;
 

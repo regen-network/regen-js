@@ -4,7 +4,7 @@ import { MsgRetire } from '../../../../generated/regen/ecocredit/v1/tx';
 import { Credits } from '../../../../generated/regen/ecocredit/v1/types';
 import { AminoCredits } from './msg_cancel';
 
-const msgRetireAminoType = 'regen.core/MsgRetire';
+const msgRetireAminoType = 'regen/MsgRetire';
 
 export const retireTypeUrl = '/' + MsgRetire.$type;
 
@@ -14,6 +14,7 @@ export interface AminoMsgRetire extends AminoMsg {
     readonly owner: string;
     readonly credits: AminoCredits[];
     readonly jurisdiction: string;
+    readonly reason?: string;
   };
 }
 
@@ -28,6 +29,7 @@ export function retireAminoConverter(): AminoConverter {
       owner,
       credits,
       jurisdiction,
+      reason,
     }: MsgRetire): AminoMsgRetire['value'] => {
       return {
         owner,
@@ -38,12 +40,14 @@ export function retireAminoConverter(): AminoConverter {
           };
         }),
         jurisdiction,
+        reason: reason || undefined,
       };
     },
     fromAmino: ({
       owner,
       credits,
       jurisdiction,
+      reason,
     }: AminoMsgRetire['value']): Partial<MsgRetire> => {
       return {
         owner,
@@ -55,6 +59,7 @@ export function retireAminoConverter(): AminoConverter {
           };
         }),
         jurisdiction,
+        reason: reason || '',
       };
     },
   };

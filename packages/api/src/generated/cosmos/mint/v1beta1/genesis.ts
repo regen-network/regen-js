@@ -1,14 +1,14 @@
 /* eslint-disable */
-import { messageTypeRegistry } from '../../../typeRegistry';
-import Long from 'long';
-import _m0 from 'protobufjs/minimal';
-import { Minter, Params } from '../../../cosmos/mint/v1beta1/mint';
+import Long from "long";
+import _m0 from "protobufjs/minimal";
+import { messageTypeRegistry } from "../../../typeRegistry";
+import { Minter, Params } from "./mint";
 
-export const protobufPackage = 'cosmos.mint.v1beta1';
+export const protobufPackage = "cosmos.mint.v1beta1";
 
 /** GenesisState defines the mint module's genesis state. */
 export interface GenesisState {
-  $type: 'cosmos.mint.v1beta1.GenesisState';
+  $type: "cosmos.mint.v1beta1.GenesisState";
   /** minter is a space for holding current inflation information. */
   minter?: Minter;
   /** params defines all the paramaters of the module. */
@@ -16,20 +16,13 @@ export interface GenesisState {
 }
 
 function createBaseGenesisState(): GenesisState {
-  return {
-    $type: 'cosmos.mint.v1beta1.GenesisState',
-    minter: undefined,
-    params: undefined,
-  };
+  return { $type: "cosmos.mint.v1beta1.GenesisState", minter: undefined, params: undefined };
 }
 
 export const GenesisState = {
-  $type: 'cosmos.mint.v1beta1.GenesisState' as const,
+  $type: "cosmos.mint.v1beta1.GenesisState" as const,
 
-  encode(
-    message: GenesisState,
-    writer: _m0.Writer = _m0.Writer.create(),
-  ): _m0.Writer {
+  encode(message: GenesisState, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.minter !== undefined) {
       Minter.encode(message.minter, writer.uint32(10).fork()).ldelim();
     }
@@ -70,59 +63,36 @@ export const GenesisState = {
 
   toJSON(message: GenesisState): unknown {
     const obj: any = {};
-    message.minter !== undefined &&
-      (obj.minter = message.minter ? Minter.toJSON(message.minter) : undefined);
-    message.params !== undefined &&
-      (obj.params = message.params ? Params.toJSON(message.params) : undefined);
+    message.minter !== undefined && (obj.minter = message.minter ? Minter.toJSON(message.minter) : undefined);
+    message.params !== undefined && (obj.params = message.params ? Params.toJSON(message.params) : undefined);
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<GenesisState>, I>>(
-    object: I,
-  ): GenesisState {
+  create(base?: DeepPartial<GenesisState>): GenesisState {
+    return GenesisState.fromPartial(base ?? {});
+  },
+
+  fromPartial(object: DeepPartial<GenesisState>): GenesisState {
     const message = createBaseGenesisState();
-    message.minter =
-      object.minter !== undefined && object.minter !== null
-        ? Minter.fromPartial(object.minter)
-        : undefined;
-    message.params =
-      object.params !== undefined && object.params !== null
-        ? Params.fromPartial(object.params)
-        : undefined;
+    message.minter = (object.minter !== undefined && object.minter !== null)
+      ? Minter.fromPartial(object.minter)
+      : undefined;
+    message.params = (object.params !== undefined && object.params !== null)
+      ? Params.fromPartial(object.params)
+      : undefined;
     return message;
   },
 };
 
 messageTypeRegistry.set(GenesisState.$type, GenesisState);
 
-type Builtin =
-  | Date
-  | Function
-  | Uint8Array
-  | string
-  | number
-  | boolean
-  | undefined;
+type Builtin = Date | Function | Uint8Array | string | number | boolean | undefined;
 
-export type DeepPartial<T> = T extends Builtin
-  ? T
-  : T extends Long
-  ? string | number | Long
-  : T extends Array<infer U>
-  ? Array<DeepPartial<U>>
-  : T extends ReadonlyArray<infer U>
-  ? ReadonlyArray<DeepPartial<U>>
-  : T extends {}
-  ? { [K in Exclude<keyof T, '$type'>]?: DeepPartial<T[K]> }
+export type DeepPartial<T> = T extends Builtin ? T
+  : T extends Long ? string | number | Long : T extends Array<infer U> ? Array<DeepPartial<U>>
+  : T extends ReadonlyArray<infer U> ? ReadonlyArray<DeepPartial<U>>
+  : T extends {} ? { [K in Exclude<keyof T, "$type">]?: DeepPartial<T[K]> }
   : Partial<T>;
-
-type KeysOfUnion<T> = T extends T ? keyof T : never;
-export type Exact<P, I extends P> = P extends Builtin
-  ? P
-  : P & { [K in keyof P]: Exact<P[K], I[K]> } & Record<
-        Exclude<keyof I, KeysOfUnion<P> | '$type'>,
-        never
-      >;
 
 if (_m0.util.Long !== Long) {
   _m0.util.Long = Long as any;

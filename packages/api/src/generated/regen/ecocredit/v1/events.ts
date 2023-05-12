@@ -1,28 +1,28 @@
 /* eslint-disable */
-import { messageTypeRegistry } from '../../../typeRegistry';
-import Long from 'long';
-import _m0 from 'protobufjs/minimal';
-import { OriginTx } from '../../../regen/ecocredit/v1/types';
+import Long from "long";
+import _m0 from "protobufjs/minimal";
+import { messageTypeRegistry } from "../../../typeRegistry";
+import { OriginTx } from "./types";
 
-export const protobufPackage = 'regen.ecocredit.v1';
+export const protobufPackage = "regen.ecocredit.v1";
 
 /** EventCreateClass is an event emitted when a credit class is created. */
 export interface EventCreateClass {
-  $type: 'regen.ecocredit.v1.EventCreateClass';
+  $type: "regen.ecocredit.v1.EventCreateClass";
   /** class_id is the unique identifier of the credit class. */
   classId: string;
 }
 
 /** EventCreateProject is an event emitted when a project is created. */
 export interface EventCreateProject {
-  $type: 'regen.ecocredit.v1.EventCreateProject';
+  $type: "regen.ecocredit.v1.EventCreateProject";
   /** project_id is the unique identifier of the project. */
   projectId: string;
 }
 
 /** EventCreateBatch is an event emitted when a credit batch is created. */
 export interface EventCreateBatch {
-  $type: 'regen.ecocredit.v1.EventCreateBatch';
+  $type: "regen.ecocredit.v1.EventCreateBatch";
   /** batch_denom is the unique identifier of the credit batch. */
   batchDenom: string;
   /**
@@ -37,7 +37,7 @@ export interface EventCreateBatch {
  * credit batch or when bridging assets from another chain or registry.
  */
 export interface EventMint {
-  $type: 'regen.ecocredit.v1.EventMint';
+  $type: "regen.ecocredit.v1.EventMint";
   /**
    * batch_denom is the unique identifier of the credit batch within which the
    * credits were minted.
@@ -54,7 +54,7 @@ export interface EventMint {
  * existing open credit batch.
  */
 export interface EventMintBatchCredits {
-  $type: 'regen.ecocredit.v1.EventMintBatchCredits';
+  $type: "regen.ecocredit.v1.EventMintBatchCredits";
   /**
    * batch_denom is the unique identifier of the credit batch within which the
    * credits were minted.
@@ -72,7 +72,7 @@ export interface EventMintBatchCredits {
  * account to another including transfers to or from a module account.
  */
 export interface EventTransfer {
-  $type: 'regen.ecocredit.v1.EventTransfer';
+  $type: "regen.ecocredit.v1.EventTransfer";
   /**
    * sender is the sender of the credits. In the case that the credits were
    * transferred from a base account, this will be the account address. In the
@@ -101,7 +101,7 @@ export interface EventTransfer {
  * emitted for each batch_denom. This allows for easier indexing.
  */
 export interface EventRetire {
-  $type: 'regen.ecocredit.v1.EventRetire';
+  $type: "regen.ecocredit.v1.EventRetire";
   /**
    * owner is the address of the account that owns the retired credits. This
    * will be the account receiving credits in the case that credits were retired
@@ -125,6 +125,13 @@ export interface EventRetire {
    * alphanumeric characters.
    */
   jurisdiction: string;
+  /**
+   * reason is any arbitrary string that specifies the reason for retiring
+   * credits.
+   *
+   * Since Revision 2
+   */
+  reason: string;
 }
 
 /**
@@ -133,7 +140,7 @@ export interface EventRetire {
  * emitted for each batch_denom. This allows for easier indexing.
  */
 export interface EventCancel {
-  $type: 'regen.ecocredit.v1.EventCancel';
+  $type: "regen.ecocredit.v1.EventCancel";
   /** owner is the address of the account that cancelled the credits. */
   owner: string;
   /**
@@ -152,7 +159,7 @@ export interface EventCancel {
  * changed.
  */
 export interface EventUpdateClassAdmin {
-  $type: 'regen.ecocredit.v1.EventUpdateClassAdmin';
+  $type: "regen.ecocredit.v1.EventUpdateClassAdmin";
   /** class_id is the unique identifier of the class that was updated. */
   classId: string;
 }
@@ -162,7 +169,7 @@ export interface EventUpdateClassAdmin {
  * is updated.
  */
 export interface EventUpdateClassIssuers {
-  $type: 'regen.ecocredit.v1.EventUpdateClassIssuers';
+  $type: "regen.ecocredit.v1.EventUpdateClassIssuers";
   /** class_id is the unique identifier of the class that was updated. */
   classId: string;
 }
@@ -172,42 +179,54 @@ export interface EventUpdateClassIssuers {
  * changed.
  */
 export interface EventUpdateClassMetadata {
-  $type: 'regen.ecocredit.v1.EventUpdateClassMetadata';
+  $type: "regen.ecocredit.v1.EventUpdateClassMetadata";
   /** class_id is the unique identifier of the class that was updated. */
   classId: string;
 }
 
 /** EventUpdateProjectAdmin is emitted when the project admin is changed. */
 export interface EventUpdateProjectAdmin {
-  $type: 'regen.ecocredit.v1.EventUpdateProjectAdmin';
+  $type: "regen.ecocredit.v1.EventUpdateProjectAdmin";
   /** project_id is the unique identifier of the project that was updated. */
   projectId: string;
 }
 
 /** EventUpdateProjectMetadata is emitted when the project metadata is changed. */
 export interface EventUpdateProjectMetadata {
-  $type: 'regen.ecocredit.v1.EventUpdateProjectMetadata';
+  $type: "regen.ecocredit.v1.EventUpdateProjectMetadata";
   /** project_id is the unique identifier of the project that was updated. */
   projectId: string;
 }
 
+/**
+ * EventUpdateBatchMetadata is emitted when the credit batch metadata is
+ * changed.
+ *
+ * Since Revision 2
+ */
+export interface EventUpdateBatchMetadata {
+  $type: "regen.ecocredit.v1.EventUpdateBatchMetadata";
+  /** batch_denom is the unique identifier of the batch that was updated. */
+  batchDenom: string;
+}
+
 /** EventSealBatch is emitted when a batch is sealed. */
 export interface EventSealBatch {
-  $type: 'regen.ecocredit.v1.EventSealBatch';
+  $type: "regen.ecocredit.v1.EventSealBatch";
   /** batch_denom is the denom of the batch that was sealed. */
   batchDenom: string;
 }
 
 /** EventAddCreditType is emitted when governance approves a new credit type. */
 export interface EventAddCreditType {
-  $type: 'regen.ecocredit.v1.EventAddCreditType';
+  $type: "regen.ecocredit.v1.EventAddCreditType";
   /** abbreviation is the abbreviation of the credit type. */
   abbreviation: string;
 }
 
 /** EventBridge is emitted when credits are bridged to another chain. */
 export interface EventBridge {
-  $type: 'regen.ecocredit.v1.EventBridge';
+  $type: "regen.ecocredit.v1.EventBridge";
   /** target is the target chain. */
   target: string;
   /** recipient is the recipient address. */
@@ -216,11 +235,17 @@ export interface EventBridge {
   contract: string;
   /** amount is the amount of credits. */
   amount: string;
+  /**
+   * owner is the owner address.
+   *
+   * Since Revision 1
+   */
+  owner: string;
 }
 
 /** EventBridgeReceive is emitted when credits are bridged from another chain. */
 export interface EventBridgeReceive {
-  $type: 'regen.ecocredit.v1.EventBridgeReceive';
+  $type: "regen.ecocredit.v1.EventBridgeReceive";
   /**
    * project_id is the unique identifier of the project that was either created
    * or the existing project within which the credit batch exists.
@@ -234,17 +259,14 @@ export interface EventBridgeReceive {
 }
 
 function createBaseEventCreateClass(): EventCreateClass {
-  return { $type: 'regen.ecocredit.v1.EventCreateClass', classId: '' };
+  return { $type: "regen.ecocredit.v1.EventCreateClass", classId: "" };
 }
 
 export const EventCreateClass = {
-  $type: 'regen.ecocredit.v1.EventCreateClass' as const,
+  $type: "regen.ecocredit.v1.EventCreateClass" as const,
 
-  encode(
-    message: EventCreateClass,
-    writer: _m0.Writer = _m0.Writer.create(),
-  ): _m0.Writer {
-    if (message.classId !== '') {
+  encode(message: EventCreateClass, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+    if (message.classId !== "") {
       writer.uint32(10).string(message.classId);
     }
     return writer;
@@ -269,10 +291,7 @@ export const EventCreateClass = {
   },
 
   fromJSON(object: any): EventCreateClass {
-    return {
-      $type: EventCreateClass.$type,
-      classId: isSet(object.classId) ? String(object.classId) : '',
-    };
+    return { $type: EventCreateClass.$type, classId: isSet(object.classId) ? String(object.classId) : "" };
   },
 
   toJSON(message: EventCreateClass): unknown {
@@ -281,11 +300,13 @@ export const EventCreateClass = {
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<EventCreateClass>, I>>(
-    object: I,
-  ): EventCreateClass {
+  create(base?: DeepPartial<EventCreateClass>): EventCreateClass {
+    return EventCreateClass.fromPartial(base ?? {});
+  },
+
+  fromPartial(object: DeepPartial<EventCreateClass>): EventCreateClass {
     const message = createBaseEventCreateClass();
-    message.classId = object.classId ?? '';
+    message.classId = object.classId ?? "";
     return message;
   },
 };
@@ -293,17 +314,14 @@ export const EventCreateClass = {
 messageTypeRegistry.set(EventCreateClass.$type, EventCreateClass);
 
 function createBaseEventCreateProject(): EventCreateProject {
-  return { $type: 'regen.ecocredit.v1.EventCreateProject', projectId: '' };
+  return { $type: "regen.ecocredit.v1.EventCreateProject", projectId: "" };
 }
 
 export const EventCreateProject = {
-  $type: 'regen.ecocredit.v1.EventCreateProject' as const,
+  $type: "regen.ecocredit.v1.EventCreateProject" as const,
 
-  encode(
-    message: EventCreateProject,
-    writer: _m0.Writer = _m0.Writer.create(),
-  ): _m0.Writer {
-    if (message.projectId !== '') {
+  encode(message: EventCreateProject, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+    if (message.projectId !== "") {
       writer.uint32(10).string(message.projectId);
     }
     return writer;
@@ -328,10 +346,7 @@ export const EventCreateProject = {
   },
 
   fromJSON(object: any): EventCreateProject {
-    return {
-      $type: EventCreateProject.$type,
-      projectId: isSet(object.projectId) ? String(object.projectId) : '',
-    };
+    return { $type: EventCreateProject.$type, projectId: isSet(object.projectId) ? String(object.projectId) : "" };
   },
 
   toJSON(message: EventCreateProject): unknown {
@@ -340,11 +355,13 @@ export const EventCreateProject = {
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<EventCreateProject>, I>>(
-    object: I,
-  ): EventCreateProject {
+  create(base?: DeepPartial<EventCreateProject>): EventCreateProject {
+    return EventCreateProject.fromPartial(base ?? {});
+  },
+
+  fromPartial(object: DeepPartial<EventCreateProject>): EventCreateProject {
     const message = createBaseEventCreateProject();
-    message.projectId = object.projectId ?? '';
+    message.projectId = object.projectId ?? "";
     return message;
   },
 };
@@ -352,21 +369,14 @@ export const EventCreateProject = {
 messageTypeRegistry.set(EventCreateProject.$type, EventCreateProject);
 
 function createBaseEventCreateBatch(): EventCreateBatch {
-  return {
-    $type: 'regen.ecocredit.v1.EventCreateBatch',
-    batchDenom: '',
-    originTx: undefined,
-  };
+  return { $type: "regen.ecocredit.v1.EventCreateBatch", batchDenom: "", originTx: undefined };
 }
 
 export const EventCreateBatch = {
-  $type: 'regen.ecocredit.v1.EventCreateBatch' as const,
+  $type: "regen.ecocredit.v1.EventCreateBatch" as const,
 
-  encode(
-    message: EventCreateBatch,
-    writer: _m0.Writer = _m0.Writer.create(),
-  ): _m0.Writer {
-    if (message.batchDenom !== '') {
+  encode(message: EventCreateBatch, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+    if (message.batchDenom !== "") {
       writer.uint32(10).string(message.batchDenom);
     }
     if (message.originTx !== undefined) {
@@ -399,32 +409,28 @@ export const EventCreateBatch = {
   fromJSON(object: any): EventCreateBatch {
     return {
       $type: EventCreateBatch.$type,
-      batchDenom: isSet(object.batchDenom) ? String(object.batchDenom) : '',
-      originTx: isSet(object.originTx)
-        ? OriginTx.fromJSON(object.originTx)
-        : undefined,
+      batchDenom: isSet(object.batchDenom) ? String(object.batchDenom) : "",
+      originTx: isSet(object.originTx) ? OriginTx.fromJSON(object.originTx) : undefined,
     };
   },
 
   toJSON(message: EventCreateBatch): unknown {
     const obj: any = {};
     message.batchDenom !== undefined && (obj.batchDenom = message.batchDenom);
-    message.originTx !== undefined &&
-      (obj.originTx = message.originTx
-        ? OriginTx.toJSON(message.originTx)
-        : undefined);
+    message.originTx !== undefined && (obj.originTx = message.originTx ? OriginTx.toJSON(message.originTx) : undefined);
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<EventCreateBatch>, I>>(
-    object: I,
-  ): EventCreateBatch {
+  create(base?: DeepPartial<EventCreateBatch>): EventCreateBatch {
+    return EventCreateBatch.fromPartial(base ?? {});
+  },
+
+  fromPartial(object: DeepPartial<EventCreateBatch>): EventCreateBatch {
     const message = createBaseEventCreateBatch();
-    message.batchDenom = object.batchDenom ?? '';
-    message.originTx =
-      object.originTx !== undefined && object.originTx !== null
-        ? OriginTx.fromPartial(object.originTx)
-        : undefined;
+    message.batchDenom = object.batchDenom ?? "";
+    message.originTx = (object.originTx !== undefined && object.originTx !== null)
+      ? OriginTx.fromPartial(object.originTx)
+      : undefined;
     return message;
   },
 };
@@ -432,28 +438,20 @@ export const EventCreateBatch = {
 messageTypeRegistry.set(EventCreateBatch.$type, EventCreateBatch);
 
 function createBaseEventMint(): EventMint {
-  return {
-    $type: 'regen.ecocredit.v1.EventMint',
-    batchDenom: '',
-    tradableAmount: '',
-    retiredAmount: '',
-  };
+  return { $type: "regen.ecocredit.v1.EventMint", batchDenom: "", tradableAmount: "", retiredAmount: "" };
 }
 
 export const EventMint = {
-  $type: 'regen.ecocredit.v1.EventMint' as const,
+  $type: "regen.ecocredit.v1.EventMint" as const,
 
-  encode(
-    message: EventMint,
-    writer: _m0.Writer = _m0.Writer.create(),
-  ): _m0.Writer {
-    if (message.batchDenom !== '') {
+  encode(message: EventMint, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+    if (message.batchDenom !== "") {
       writer.uint32(10).string(message.batchDenom);
     }
-    if (message.tradableAmount !== '') {
+    if (message.tradableAmount !== "") {
       writer.uint32(18).string(message.tradableAmount);
     }
-    if (message.retiredAmount !== '') {
+    if (message.retiredAmount !== "") {
       writer.uint32(26).string(message.retiredAmount);
     }
     return writer;
@@ -486,33 +484,29 @@ export const EventMint = {
   fromJSON(object: any): EventMint {
     return {
       $type: EventMint.$type,
-      batchDenom: isSet(object.batchDenom) ? String(object.batchDenom) : '',
-      tradableAmount: isSet(object.tradableAmount)
-        ? String(object.tradableAmount)
-        : '',
-      retiredAmount: isSet(object.retiredAmount)
-        ? String(object.retiredAmount)
-        : '',
+      batchDenom: isSet(object.batchDenom) ? String(object.batchDenom) : "",
+      tradableAmount: isSet(object.tradableAmount) ? String(object.tradableAmount) : "",
+      retiredAmount: isSet(object.retiredAmount) ? String(object.retiredAmount) : "",
     };
   },
 
   toJSON(message: EventMint): unknown {
     const obj: any = {};
     message.batchDenom !== undefined && (obj.batchDenom = message.batchDenom);
-    message.tradableAmount !== undefined &&
-      (obj.tradableAmount = message.tradableAmount);
-    message.retiredAmount !== undefined &&
-      (obj.retiredAmount = message.retiredAmount);
+    message.tradableAmount !== undefined && (obj.tradableAmount = message.tradableAmount);
+    message.retiredAmount !== undefined && (obj.retiredAmount = message.retiredAmount);
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<EventMint>, I>>(
-    object: I,
-  ): EventMint {
+  create(base?: DeepPartial<EventMint>): EventMint {
+    return EventMint.fromPartial(base ?? {});
+  },
+
+  fromPartial(object: DeepPartial<EventMint>): EventMint {
     const message = createBaseEventMint();
-    message.batchDenom = object.batchDenom ?? '';
-    message.tradableAmount = object.tradableAmount ?? '';
-    message.retiredAmount = object.retiredAmount ?? '';
+    message.batchDenom = object.batchDenom ?? "";
+    message.tradableAmount = object.tradableAmount ?? "";
+    message.retiredAmount = object.retiredAmount ?? "";
     return message;
   },
 };
@@ -520,21 +514,14 @@ export const EventMint = {
 messageTypeRegistry.set(EventMint.$type, EventMint);
 
 function createBaseEventMintBatchCredits(): EventMintBatchCredits {
-  return {
-    $type: 'regen.ecocredit.v1.EventMintBatchCredits',
-    batchDenom: '',
-    originTx: undefined,
-  };
+  return { $type: "regen.ecocredit.v1.EventMintBatchCredits", batchDenom: "", originTx: undefined };
 }
 
 export const EventMintBatchCredits = {
-  $type: 'regen.ecocredit.v1.EventMintBatchCredits' as const,
+  $type: "regen.ecocredit.v1.EventMintBatchCredits" as const,
 
-  encode(
-    message: EventMintBatchCredits,
-    writer: _m0.Writer = _m0.Writer.create(),
-  ): _m0.Writer {
-    if (message.batchDenom !== '') {
+  encode(message: EventMintBatchCredits, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+    if (message.batchDenom !== "") {
       writer.uint32(10).string(message.batchDenom);
     }
     if (message.originTx !== undefined) {
@@ -543,10 +530,7 @@ export const EventMintBatchCredits = {
     return writer;
   },
 
-  decode(
-    input: _m0.Reader | Uint8Array,
-    length?: number,
-  ): EventMintBatchCredits {
+  decode(input: _m0.Reader | Uint8Array, length?: number): EventMintBatchCredits {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseEventMintBatchCredits();
@@ -570,32 +554,28 @@ export const EventMintBatchCredits = {
   fromJSON(object: any): EventMintBatchCredits {
     return {
       $type: EventMintBatchCredits.$type,
-      batchDenom: isSet(object.batchDenom) ? String(object.batchDenom) : '',
-      originTx: isSet(object.originTx)
-        ? OriginTx.fromJSON(object.originTx)
-        : undefined,
+      batchDenom: isSet(object.batchDenom) ? String(object.batchDenom) : "",
+      originTx: isSet(object.originTx) ? OriginTx.fromJSON(object.originTx) : undefined,
     };
   },
 
   toJSON(message: EventMintBatchCredits): unknown {
     const obj: any = {};
     message.batchDenom !== undefined && (obj.batchDenom = message.batchDenom);
-    message.originTx !== undefined &&
-      (obj.originTx = message.originTx
-        ? OriginTx.toJSON(message.originTx)
-        : undefined);
+    message.originTx !== undefined && (obj.originTx = message.originTx ? OriginTx.toJSON(message.originTx) : undefined);
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<EventMintBatchCredits>, I>>(
-    object: I,
-  ): EventMintBatchCredits {
+  create(base?: DeepPartial<EventMintBatchCredits>): EventMintBatchCredits {
+    return EventMintBatchCredits.fromPartial(base ?? {});
+  },
+
+  fromPartial(object: DeepPartial<EventMintBatchCredits>): EventMintBatchCredits {
     const message = createBaseEventMintBatchCredits();
-    message.batchDenom = object.batchDenom ?? '';
-    message.originTx =
-      object.originTx !== undefined && object.originTx !== null
-        ? OriginTx.fromPartial(object.originTx)
-        : undefined;
+    message.batchDenom = object.batchDenom ?? "";
+    message.originTx = (object.originTx !== undefined && object.originTx !== null)
+      ? OriginTx.fromPartial(object.originTx)
+      : undefined;
     return message;
   },
 };
@@ -604,35 +584,32 @@ messageTypeRegistry.set(EventMintBatchCredits.$type, EventMintBatchCredits);
 
 function createBaseEventTransfer(): EventTransfer {
   return {
-    $type: 'regen.ecocredit.v1.EventTransfer',
-    sender: '',
-    recipient: '',
-    batchDenom: '',
-    tradableAmount: '',
-    retiredAmount: '',
+    $type: "regen.ecocredit.v1.EventTransfer",
+    sender: "",
+    recipient: "",
+    batchDenom: "",
+    tradableAmount: "",
+    retiredAmount: "",
   };
 }
 
 export const EventTransfer = {
-  $type: 'regen.ecocredit.v1.EventTransfer' as const,
+  $type: "regen.ecocredit.v1.EventTransfer" as const,
 
-  encode(
-    message: EventTransfer,
-    writer: _m0.Writer = _m0.Writer.create(),
-  ): _m0.Writer {
-    if (message.sender !== '') {
+  encode(message: EventTransfer, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+    if (message.sender !== "") {
       writer.uint32(10).string(message.sender);
     }
-    if (message.recipient !== '') {
+    if (message.recipient !== "") {
       writer.uint32(18).string(message.recipient);
     }
-    if (message.batchDenom !== '') {
+    if (message.batchDenom !== "") {
       writer.uint32(26).string(message.batchDenom);
     }
-    if (message.tradableAmount !== '') {
+    if (message.tradableAmount !== "") {
       writer.uint32(34).string(message.tradableAmount);
     }
-    if (message.retiredAmount !== '') {
+    if (message.retiredAmount !== "") {
       writer.uint32(42).string(message.retiredAmount);
     }
     return writer;
@@ -671,15 +648,11 @@ export const EventTransfer = {
   fromJSON(object: any): EventTransfer {
     return {
       $type: EventTransfer.$type,
-      sender: isSet(object.sender) ? String(object.sender) : '',
-      recipient: isSet(object.recipient) ? String(object.recipient) : '',
-      batchDenom: isSet(object.batchDenom) ? String(object.batchDenom) : '',
-      tradableAmount: isSet(object.tradableAmount)
-        ? String(object.tradableAmount)
-        : '',
-      retiredAmount: isSet(object.retiredAmount)
-        ? String(object.retiredAmount)
-        : '',
+      sender: isSet(object.sender) ? String(object.sender) : "",
+      recipient: isSet(object.recipient) ? String(object.recipient) : "",
+      batchDenom: isSet(object.batchDenom) ? String(object.batchDenom) : "",
+      tradableAmount: isSet(object.tradableAmount) ? String(object.tradableAmount) : "",
+      retiredAmount: isSet(object.retiredAmount) ? String(object.retiredAmount) : "",
     };
   },
 
@@ -688,22 +661,22 @@ export const EventTransfer = {
     message.sender !== undefined && (obj.sender = message.sender);
     message.recipient !== undefined && (obj.recipient = message.recipient);
     message.batchDenom !== undefined && (obj.batchDenom = message.batchDenom);
-    message.tradableAmount !== undefined &&
-      (obj.tradableAmount = message.tradableAmount);
-    message.retiredAmount !== undefined &&
-      (obj.retiredAmount = message.retiredAmount);
+    message.tradableAmount !== undefined && (obj.tradableAmount = message.tradableAmount);
+    message.retiredAmount !== undefined && (obj.retiredAmount = message.retiredAmount);
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<EventTransfer>, I>>(
-    object: I,
-  ): EventTransfer {
+  create(base?: DeepPartial<EventTransfer>): EventTransfer {
+    return EventTransfer.fromPartial(base ?? {});
+  },
+
+  fromPartial(object: DeepPartial<EventTransfer>): EventTransfer {
     const message = createBaseEventTransfer();
-    message.sender = object.sender ?? '';
-    message.recipient = object.recipient ?? '';
-    message.batchDenom = object.batchDenom ?? '';
-    message.tradableAmount = object.tradableAmount ?? '';
-    message.retiredAmount = object.retiredAmount ?? '';
+    message.sender = object.sender ?? "";
+    message.recipient = object.recipient ?? "";
+    message.batchDenom = object.batchDenom ?? "";
+    message.tradableAmount = object.tradableAmount ?? "";
+    message.retiredAmount = object.retiredAmount ?? "";
     return message;
   },
 };
@@ -712,32 +685,33 @@ messageTypeRegistry.set(EventTransfer.$type, EventTransfer);
 
 function createBaseEventRetire(): EventRetire {
   return {
-    $type: 'regen.ecocredit.v1.EventRetire',
-    owner: '',
-    batchDenom: '',
-    amount: '',
-    jurisdiction: '',
+    $type: "regen.ecocredit.v1.EventRetire",
+    owner: "",
+    batchDenom: "",
+    amount: "",
+    jurisdiction: "",
+    reason: "",
   };
 }
 
 export const EventRetire = {
-  $type: 'regen.ecocredit.v1.EventRetire' as const,
+  $type: "regen.ecocredit.v1.EventRetire" as const,
 
-  encode(
-    message: EventRetire,
-    writer: _m0.Writer = _m0.Writer.create(),
-  ): _m0.Writer {
-    if (message.owner !== '') {
+  encode(message: EventRetire, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+    if (message.owner !== "") {
       writer.uint32(10).string(message.owner);
     }
-    if (message.batchDenom !== '') {
+    if (message.batchDenom !== "") {
       writer.uint32(18).string(message.batchDenom);
     }
-    if (message.amount !== '') {
+    if (message.amount !== "") {
       writer.uint32(26).string(message.amount);
     }
-    if (message.jurisdiction !== '') {
+    if (message.jurisdiction !== "") {
       writer.uint32(34).string(message.jurisdiction);
+    }
+    if (message.reason !== "") {
+      writer.uint32(42).string(message.reason);
     }
     return writer;
   },
@@ -761,6 +735,9 @@ export const EventRetire = {
         case 4:
           message.jurisdiction = reader.string();
           break;
+        case 5:
+          message.reason = reader.string();
+          break;
         default:
           reader.skipType(tag & 7);
           break;
@@ -772,12 +749,11 @@ export const EventRetire = {
   fromJSON(object: any): EventRetire {
     return {
       $type: EventRetire.$type,
-      owner: isSet(object.owner) ? String(object.owner) : '',
-      batchDenom: isSet(object.batchDenom) ? String(object.batchDenom) : '',
-      amount: isSet(object.amount) ? String(object.amount) : '',
-      jurisdiction: isSet(object.jurisdiction)
-        ? String(object.jurisdiction)
-        : '',
+      owner: isSet(object.owner) ? String(object.owner) : "",
+      batchDenom: isSet(object.batchDenom) ? String(object.batchDenom) : "",
+      amount: isSet(object.amount) ? String(object.amount) : "",
+      jurisdiction: isSet(object.jurisdiction) ? String(object.jurisdiction) : "",
+      reason: isSet(object.reason) ? String(object.reason) : "",
     };
   },
 
@@ -786,19 +762,22 @@ export const EventRetire = {
     message.owner !== undefined && (obj.owner = message.owner);
     message.batchDenom !== undefined && (obj.batchDenom = message.batchDenom);
     message.amount !== undefined && (obj.amount = message.amount);
-    message.jurisdiction !== undefined &&
-      (obj.jurisdiction = message.jurisdiction);
+    message.jurisdiction !== undefined && (obj.jurisdiction = message.jurisdiction);
+    message.reason !== undefined && (obj.reason = message.reason);
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<EventRetire>, I>>(
-    object: I,
-  ): EventRetire {
+  create(base?: DeepPartial<EventRetire>): EventRetire {
+    return EventRetire.fromPartial(base ?? {});
+  },
+
+  fromPartial(object: DeepPartial<EventRetire>): EventRetire {
     const message = createBaseEventRetire();
-    message.owner = object.owner ?? '';
-    message.batchDenom = object.batchDenom ?? '';
-    message.amount = object.amount ?? '';
-    message.jurisdiction = object.jurisdiction ?? '';
+    message.owner = object.owner ?? "";
+    message.batchDenom = object.batchDenom ?? "";
+    message.amount = object.amount ?? "";
+    message.jurisdiction = object.jurisdiction ?? "";
+    message.reason = object.reason ?? "";
     return message;
   },
 };
@@ -806,32 +785,23 @@ export const EventRetire = {
 messageTypeRegistry.set(EventRetire.$type, EventRetire);
 
 function createBaseEventCancel(): EventCancel {
-  return {
-    $type: 'regen.ecocredit.v1.EventCancel',
-    owner: '',
-    batchDenom: '',
-    amount: '',
-    reason: '',
-  };
+  return { $type: "regen.ecocredit.v1.EventCancel", owner: "", batchDenom: "", amount: "", reason: "" };
 }
 
 export const EventCancel = {
-  $type: 'regen.ecocredit.v1.EventCancel' as const,
+  $type: "regen.ecocredit.v1.EventCancel" as const,
 
-  encode(
-    message: EventCancel,
-    writer: _m0.Writer = _m0.Writer.create(),
-  ): _m0.Writer {
-    if (message.owner !== '') {
+  encode(message: EventCancel, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+    if (message.owner !== "") {
       writer.uint32(10).string(message.owner);
     }
-    if (message.batchDenom !== '') {
+    if (message.batchDenom !== "") {
       writer.uint32(18).string(message.batchDenom);
     }
-    if (message.amount !== '') {
+    if (message.amount !== "") {
       writer.uint32(26).string(message.amount);
     }
-    if (message.reason !== '') {
+    if (message.reason !== "") {
       writer.uint32(34).string(message.reason);
     }
     return writer;
@@ -867,10 +837,10 @@ export const EventCancel = {
   fromJSON(object: any): EventCancel {
     return {
       $type: EventCancel.$type,
-      owner: isSet(object.owner) ? String(object.owner) : '',
-      batchDenom: isSet(object.batchDenom) ? String(object.batchDenom) : '',
-      amount: isSet(object.amount) ? String(object.amount) : '',
-      reason: isSet(object.reason) ? String(object.reason) : '',
+      owner: isSet(object.owner) ? String(object.owner) : "",
+      batchDenom: isSet(object.batchDenom) ? String(object.batchDenom) : "",
+      amount: isSet(object.amount) ? String(object.amount) : "",
+      reason: isSet(object.reason) ? String(object.reason) : "",
     };
   },
 
@@ -883,14 +853,16 @@ export const EventCancel = {
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<EventCancel>, I>>(
-    object: I,
-  ): EventCancel {
+  create(base?: DeepPartial<EventCancel>): EventCancel {
+    return EventCancel.fromPartial(base ?? {});
+  },
+
+  fromPartial(object: DeepPartial<EventCancel>): EventCancel {
     const message = createBaseEventCancel();
-    message.owner = object.owner ?? '';
-    message.batchDenom = object.batchDenom ?? '';
-    message.amount = object.amount ?? '';
-    message.reason = object.reason ?? '';
+    message.owner = object.owner ?? "";
+    message.batchDenom = object.batchDenom ?? "";
+    message.amount = object.amount ?? "";
+    message.reason = object.reason ?? "";
     return message;
   },
 };
@@ -898,26 +870,20 @@ export const EventCancel = {
 messageTypeRegistry.set(EventCancel.$type, EventCancel);
 
 function createBaseEventUpdateClassAdmin(): EventUpdateClassAdmin {
-  return { $type: 'regen.ecocredit.v1.EventUpdateClassAdmin', classId: '' };
+  return { $type: "regen.ecocredit.v1.EventUpdateClassAdmin", classId: "" };
 }
 
 export const EventUpdateClassAdmin = {
-  $type: 'regen.ecocredit.v1.EventUpdateClassAdmin' as const,
+  $type: "regen.ecocredit.v1.EventUpdateClassAdmin" as const,
 
-  encode(
-    message: EventUpdateClassAdmin,
-    writer: _m0.Writer = _m0.Writer.create(),
-  ): _m0.Writer {
-    if (message.classId !== '') {
+  encode(message: EventUpdateClassAdmin, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+    if (message.classId !== "") {
       writer.uint32(10).string(message.classId);
     }
     return writer;
   },
 
-  decode(
-    input: _m0.Reader | Uint8Array,
-    length?: number,
-  ): EventUpdateClassAdmin {
+  decode(input: _m0.Reader | Uint8Array, length?: number): EventUpdateClassAdmin {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseEventUpdateClassAdmin();
@@ -936,10 +902,7 @@ export const EventUpdateClassAdmin = {
   },
 
   fromJSON(object: any): EventUpdateClassAdmin {
-    return {
-      $type: EventUpdateClassAdmin.$type,
-      classId: isSet(object.classId) ? String(object.classId) : '',
-    };
+    return { $type: EventUpdateClassAdmin.$type, classId: isSet(object.classId) ? String(object.classId) : "" };
   },
 
   toJSON(message: EventUpdateClassAdmin): unknown {
@@ -948,11 +911,13 @@ export const EventUpdateClassAdmin = {
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<EventUpdateClassAdmin>, I>>(
-    object: I,
-  ): EventUpdateClassAdmin {
+  create(base?: DeepPartial<EventUpdateClassAdmin>): EventUpdateClassAdmin {
+    return EventUpdateClassAdmin.fromPartial(base ?? {});
+  },
+
+  fromPartial(object: DeepPartial<EventUpdateClassAdmin>): EventUpdateClassAdmin {
     const message = createBaseEventUpdateClassAdmin();
-    message.classId = object.classId ?? '';
+    message.classId = object.classId ?? "";
     return message;
   },
 };
@@ -960,26 +925,20 @@ export const EventUpdateClassAdmin = {
 messageTypeRegistry.set(EventUpdateClassAdmin.$type, EventUpdateClassAdmin);
 
 function createBaseEventUpdateClassIssuers(): EventUpdateClassIssuers {
-  return { $type: 'regen.ecocredit.v1.EventUpdateClassIssuers', classId: '' };
+  return { $type: "regen.ecocredit.v1.EventUpdateClassIssuers", classId: "" };
 }
 
 export const EventUpdateClassIssuers = {
-  $type: 'regen.ecocredit.v1.EventUpdateClassIssuers' as const,
+  $type: "regen.ecocredit.v1.EventUpdateClassIssuers" as const,
 
-  encode(
-    message: EventUpdateClassIssuers,
-    writer: _m0.Writer = _m0.Writer.create(),
-  ): _m0.Writer {
-    if (message.classId !== '') {
+  encode(message: EventUpdateClassIssuers, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+    if (message.classId !== "") {
       writer.uint32(10).string(message.classId);
     }
     return writer;
   },
 
-  decode(
-    input: _m0.Reader | Uint8Array,
-    length?: number,
-  ): EventUpdateClassIssuers {
+  decode(input: _m0.Reader | Uint8Array, length?: number): EventUpdateClassIssuers {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseEventUpdateClassIssuers();
@@ -998,10 +957,7 @@ export const EventUpdateClassIssuers = {
   },
 
   fromJSON(object: any): EventUpdateClassIssuers {
-    return {
-      $type: EventUpdateClassIssuers.$type,
-      classId: isSet(object.classId) ? String(object.classId) : '',
-    };
+    return { $type: EventUpdateClassIssuers.$type, classId: isSet(object.classId) ? String(object.classId) : "" };
   },
 
   toJSON(message: EventUpdateClassIssuers): unknown {
@@ -1010,11 +966,13 @@ export const EventUpdateClassIssuers = {
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<EventUpdateClassIssuers>, I>>(
-    object: I,
-  ): EventUpdateClassIssuers {
+  create(base?: DeepPartial<EventUpdateClassIssuers>): EventUpdateClassIssuers {
+    return EventUpdateClassIssuers.fromPartial(base ?? {});
+  },
+
+  fromPartial(object: DeepPartial<EventUpdateClassIssuers>): EventUpdateClassIssuers {
     const message = createBaseEventUpdateClassIssuers();
-    message.classId = object.classId ?? '';
+    message.classId = object.classId ?? "";
     return message;
   },
 };
@@ -1022,26 +980,20 @@ export const EventUpdateClassIssuers = {
 messageTypeRegistry.set(EventUpdateClassIssuers.$type, EventUpdateClassIssuers);
 
 function createBaseEventUpdateClassMetadata(): EventUpdateClassMetadata {
-  return { $type: 'regen.ecocredit.v1.EventUpdateClassMetadata', classId: '' };
+  return { $type: "regen.ecocredit.v1.EventUpdateClassMetadata", classId: "" };
 }
 
 export const EventUpdateClassMetadata = {
-  $type: 'regen.ecocredit.v1.EventUpdateClassMetadata' as const,
+  $type: "regen.ecocredit.v1.EventUpdateClassMetadata" as const,
 
-  encode(
-    message: EventUpdateClassMetadata,
-    writer: _m0.Writer = _m0.Writer.create(),
-  ): _m0.Writer {
-    if (message.classId !== '') {
+  encode(message: EventUpdateClassMetadata, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+    if (message.classId !== "") {
       writer.uint32(10).string(message.classId);
     }
     return writer;
   },
 
-  decode(
-    input: _m0.Reader | Uint8Array,
-    length?: number,
-  ): EventUpdateClassMetadata {
+  decode(input: _m0.Reader | Uint8Array, length?: number): EventUpdateClassMetadata {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseEventUpdateClassMetadata();
@@ -1060,10 +1012,7 @@ export const EventUpdateClassMetadata = {
   },
 
   fromJSON(object: any): EventUpdateClassMetadata {
-    return {
-      $type: EventUpdateClassMetadata.$type,
-      classId: isSet(object.classId) ? String(object.classId) : '',
-    };
+    return { $type: EventUpdateClassMetadata.$type, classId: isSet(object.classId) ? String(object.classId) : "" };
   },
 
   toJSON(message: EventUpdateClassMetadata): unknown {
@@ -1072,41 +1021,34 @@ export const EventUpdateClassMetadata = {
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<EventUpdateClassMetadata>, I>>(
-    object: I,
-  ): EventUpdateClassMetadata {
+  create(base?: DeepPartial<EventUpdateClassMetadata>): EventUpdateClassMetadata {
+    return EventUpdateClassMetadata.fromPartial(base ?? {});
+  },
+
+  fromPartial(object: DeepPartial<EventUpdateClassMetadata>): EventUpdateClassMetadata {
     const message = createBaseEventUpdateClassMetadata();
-    message.classId = object.classId ?? '';
+    message.classId = object.classId ?? "";
     return message;
   },
 };
 
-messageTypeRegistry.set(
-  EventUpdateClassMetadata.$type,
-  EventUpdateClassMetadata,
-);
+messageTypeRegistry.set(EventUpdateClassMetadata.$type, EventUpdateClassMetadata);
 
 function createBaseEventUpdateProjectAdmin(): EventUpdateProjectAdmin {
-  return { $type: 'regen.ecocredit.v1.EventUpdateProjectAdmin', projectId: '' };
+  return { $type: "regen.ecocredit.v1.EventUpdateProjectAdmin", projectId: "" };
 }
 
 export const EventUpdateProjectAdmin = {
-  $type: 'regen.ecocredit.v1.EventUpdateProjectAdmin' as const,
+  $type: "regen.ecocredit.v1.EventUpdateProjectAdmin" as const,
 
-  encode(
-    message: EventUpdateProjectAdmin,
-    writer: _m0.Writer = _m0.Writer.create(),
-  ): _m0.Writer {
-    if (message.projectId !== '') {
+  encode(message: EventUpdateProjectAdmin, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+    if (message.projectId !== "") {
       writer.uint32(10).string(message.projectId);
     }
     return writer;
   },
 
-  decode(
-    input: _m0.Reader | Uint8Array,
-    length?: number,
-  ): EventUpdateProjectAdmin {
+  decode(input: _m0.Reader | Uint8Array, length?: number): EventUpdateProjectAdmin {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseEventUpdateProjectAdmin();
@@ -1125,10 +1067,7 @@ export const EventUpdateProjectAdmin = {
   },
 
   fromJSON(object: any): EventUpdateProjectAdmin {
-    return {
-      $type: EventUpdateProjectAdmin.$type,
-      projectId: isSet(object.projectId) ? String(object.projectId) : '',
-    };
+    return { $type: EventUpdateProjectAdmin.$type, projectId: isSet(object.projectId) ? String(object.projectId) : "" };
   },
 
   toJSON(message: EventUpdateProjectAdmin): unknown {
@@ -1137,11 +1076,13 @@ export const EventUpdateProjectAdmin = {
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<EventUpdateProjectAdmin>, I>>(
-    object: I,
-  ): EventUpdateProjectAdmin {
+  create(base?: DeepPartial<EventUpdateProjectAdmin>): EventUpdateProjectAdmin {
+    return EventUpdateProjectAdmin.fromPartial(base ?? {});
+  },
+
+  fromPartial(object: DeepPartial<EventUpdateProjectAdmin>): EventUpdateProjectAdmin {
     const message = createBaseEventUpdateProjectAdmin();
-    message.projectId = object.projectId ?? '';
+    message.projectId = object.projectId ?? "";
     return message;
   },
 };
@@ -1149,29 +1090,20 @@ export const EventUpdateProjectAdmin = {
 messageTypeRegistry.set(EventUpdateProjectAdmin.$type, EventUpdateProjectAdmin);
 
 function createBaseEventUpdateProjectMetadata(): EventUpdateProjectMetadata {
-  return {
-    $type: 'regen.ecocredit.v1.EventUpdateProjectMetadata',
-    projectId: '',
-  };
+  return { $type: "regen.ecocredit.v1.EventUpdateProjectMetadata", projectId: "" };
 }
 
 export const EventUpdateProjectMetadata = {
-  $type: 'regen.ecocredit.v1.EventUpdateProjectMetadata' as const,
+  $type: "regen.ecocredit.v1.EventUpdateProjectMetadata" as const,
 
-  encode(
-    message: EventUpdateProjectMetadata,
-    writer: _m0.Writer = _m0.Writer.create(),
-  ): _m0.Writer {
-    if (message.projectId !== '') {
+  encode(message: EventUpdateProjectMetadata, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+    if (message.projectId !== "") {
       writer.uint32(10).string(message.projectId);
     }
     return writer;
   },
 
-  decode(
-    input: _m0.Reader | Uint8Array,
-    length?: number,
-  ): EventUpdateProjectMetadata {
+  decode(input: _m0.Reader | Uint8Array, length?: number): EventUpdateProjectMetadata {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseEventUpdateProjectMetadata();
@@ -1192,7 +1124,7 @@ export const EventUpdateProjectMetadata = {
   fromJSON(object: any): EventUpdateProjectMetadata {
     return {
       $type: EventUpdateProjectMetadata.$type,
-      projectId: isSet(object.projectId) ? String(object.projectId) : '',
+      projectId: isSet(object.projectId) ? String(object.projectId) : "",
     };
   },
 
@@ -1202,32 +1134,86 @@ export const EventUpdateProjectMetadata = {
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<EventUpdateProjectMetadata>, I>>(
-    object: I,
-  ): EventUpdateProjectMetadata {
+  create(base?: DeepPartial<EventUpdateProjectMetadata>): EventUpdateProjectMetadata {
+    return EventUpdateProjectMetadata.fromPartial(base ?? {});
+  },
+
+  fromPartial(object: DeepPartial<EventUpdateProjectMetadata>): EventUpdateProjectMetadata {
     const message = createBaseEventUpdateProjectMetadata();
-    message.projectId = object.projectId ?? '';
+    message.projectId = object.projectId ?? "";
     return message;
   },
 };
 
-messageTypeRegistry.set(
-  EventUpdateProjectMetadata.$type,
-  EventUpdateProjectMetadata,
-);
+messageTypeRegistry.set(EventUpdateProjectMetadata.$type, EventUpdateProjectMetadata);
+
+function createBaseEventUpdateBatchMetadata(): EventUpdateBatchMetadata {
+  return { $type: "regen.ecocredit.v1.EventUpdateBatchMetadata", batchDenom: "" };
+}
+
+export const EventUpdateBatchMetadata = {
+  $type: "regen.ecocredit.v1.EventUpdateBatchMetadata" as const,
+
+  encode(message: EventUpdateBatchMetadata, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+    if (message.batchDenom !== "") {
+      writer.uint32(10).string(message.batchDenom);
+    }
+    return writer;
+  },
+
+  decode(input: _m0.Reader | Uint8Array, length?: number): EventUpdateBatchMetadata {
+    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+    let end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseEventUpdateBatchMetadata();
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+        case 1:
+          message.batchDenom = reader.string();
+          break;
+        default:
+          reader.skipType(tag & 7);
+          break;
+      }
+    }
+    return message;
+  },
+
+  fromJSON(object: any): EventUpdateBatchMetadata {
+    return {
+      $type: EventUpdateBatchMetadata.$type,
+      batchDenom: isSet(object.batchDenom) ? String(object.batchDenom) : "",
+    };
+  },
+
+  toJSON(message: EventUpdateBatchMetadata): unknown {
+    const obj: any = {};
+    message.batchDenom !== undefined && (obj.batchDenom = message.batchDenom);
+    return obj;
+  },
+
+  create(base?: DeepPartial<EventUpdateBatchMetadata>): EventUpdateBatchMetadata {
+    return EventUpdateBatchMetadata.fromPartial(base ?? {});
+  },
+
+  fromPartial(object: DeepPartial<EventUpdateBatchMetadata>): EventUpdateBatchMetadata {
+    const message = createBaseEventUpdateBatchMetadata();
+    message.batchDenom = object.batchDenom ?? "";
+    return message;
+  },
+};
+
+messageTypeRegistry.set(EventUpdateBatchMetadata.$type, EventUpdateBatchMetadata);
 
 function createBaseEventSealBatch(): EventSealBatch {
-  return { $type: 'regen.ecocredit.v1.EventSealBatch', batchDenom: '' };
+  return { $type: "regen.ecocredit.v1.EventSealBatch", batchDenom: "" };
 }
 
 export const EventSealBatch = {
-  $type: 'regen.ecocredit.v1.EventSealBatch' as const,
+  $type: "regen.ecocredit.v1.EventSealBatch" as const,
 
-  encode(
-    message: EventSealBatch,
-    writer: _m0.Writer = _m0.Writer.create(),
-  ): _m0.Writer {
-    if (message.batchDenom !== '') {
+  encode(message: EventSealBatch, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+    if (message.batchDenom !== "") {
       writer.uint32(10).string(message.batchDenom);
     }
     return writer;
@@ -1252,10 +1238,7 @@ export const EventSealBatch = {
   },
 
   fromJSON(object: any): EventSealBatch {
-    return {
-      $type: EventSealBatch.$type,
-      batchDenom: isSet(object.batchDenom) ? String(object.batchDenom) : '',
-    };
+    return { $type: EventSealBatch.$type, batchDenom: isSet(object.batchDenom) ? String(object.batchDenom) : "" };
   },
 
   toJSON(message: EventSealBatch): unknown {
@@ -1264,11 +1247,13 @@ export const EventSealBatch = {
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<EventSealBatch>, I>>(
-    object: I,
-  ): EventSealBatch {
+  create(base?: DeepPartial<EventSealBatch>): EventSealBatch {
+    return EventSealBatch.fromPartial(base ?? {});
+  },
+
+  fromPartial(object: DeepPartial<EventSealBatch>): EventSealBatch {
     const message = createBaseEventSealBatch();
-    message.batchDenom = object.batchDenom ?? '';
+    message.batchDenom = object.batchDenom ?? "";
     return message;
   },
 };
@@ -1276,17 +1261,14 @@ export const EventSealBatch = {
 messageTypeRegistry.set(EventSealBatch.$type, EventSealBatch);
 
 function createBaseEventAddCreditType(): EventAddCreditType {
-  return { $type: 'regen.ecocredit.v1.EventAddCreditType', abbreviation: '' };
+  return { $type: "regen.ecocredit.v1.EventAddCreditType", abbreviation: "" };
 }
 
 export const EventAddCreditType = {
-  $type: 'regen.ecocredit.v1.EventAddCreditType' as const,
+  $type: "regen.ecocredit.v1.EventAddCreditType" as const,
 
-  encode(
-    message: EventAddCreditType,
-    writer: _m0.Writer = _m0.Writer.create(),
-  ): _m0.Writer {
-    if (message.abbreviation !== '') {
+  encode(message: EventAddCreditType, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+    if (message.abbreviation !== "") {
       writer.uint32(10).string(message.abbreviation);
     }
     return writer;
@@ -1313,24 +1295,23 @@ export const EventAddCreditType = {
   fromJSON(object: any): EventAddCreditType {
     return {
       $type: EventAddCreditType.$type,
-      abbreviation: isSet(object.abbreviation)
-        ? String(object.abbreviation)
-        : '',
+      abbreviation: isSet(object.abbreviation) ? String(object.abbreviation) : "",
     };
   },
 
   toJSON(message: EventAddCreditType): unknown {
     const obj: any = {};
-    message.abbreviation !== undefined &&
-      (obj.abbreviation = message.abbreviation);
+    message.abbreviation !== undefined && (obj.abbreviation = message.abbreviation);
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<EventAddCreditType>, I>>(
-    object: I,
-  ): EventAddCreditType {
+  create(base?: DeepPartial<EventAddCreditType>): EventAddCreditType {
+    return EventAddCreditType.fromPartial(base ?? {});
+  },
+
+  fromPartial(object: DeepPartial<EventAddCreditType>): EventAddCreditType {
     const message = createBaseEventAddCreditType();
-    message.abbreviation = object.abbreviation ?? '';
+    message.abbreviation = object.abbreviation ?? "";
     return message;
   },
 };
@@ -1338,33 +1319,27 @@ export const EventAddCreditType = {
 messageTypeRegistry.set(EventAddCreditType.$type, EventAddCreditType);
 
 function createBaseEventBridge(): EventBridge {
-  return {
-    $type: 'regen.ecocredit.v1.EventBridge',
-    target: '',
-    recipient: '',
-    contract: '',
-    amount: '',
-  };
+  return { $type: "regen.ecocredit.v1.EventBridge", target: "", recipient: "", contract: "", amount: "", owner: "" };
 }
 
 export const EventBridge = {
-  $type: 'regen.ecocredit.v1.EventBridge' as const,
+  $type: "regen.ecocredit.v1.EventBridge" as const,
 
-  encode(
-    message: EventBridge,
-    writer: _m0.Writer = _m0.Writer.create(),
-  ): _m0.Writer {
-    if (message.target !== '') {
+  encode(message: EventBridge, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+    if (message.target !== "") {
       writer.uint32(10).string(message.target);
     }
-    if (message.recipient !== '') {
+    if (message.recipient !== "") {
       writer.uint32(18).string(message.recipient);
     }
-    if (message.contract !== '') {
+    if (message.contract !== "") {
       writer.uint32(26).string(message.contract);
     }
-    if (message.amount !== '') {
+    if (message.amount !== "") {
       writer.uint32(34).string(message.amount);
+    }
+    if (message.owner !== "") {
+      writer.uint32(42).string(message.owner);
     }
     return writer;
   },
@@ -1388,6 +1363,9 @@ export const EventBridge = {
         case 4:
           message.amount = reader.string();
           break;
+        case 5:
+          message.owner = reader.string();
+          break;
         default:
           reader.skipType(tag & 7);
           break;
@@ -1399,10 +1377,11 @@ export const EventBridge = {
   fromJSON(object: any): EventBridge {
     return {
       $type: EventBridge.$type,
-      target: isSet(object.target) ? String(object.target) : '',
-      recipient: isSet(object.recipient) ? String(object.recipient) : '',
-      contract: isSet(object.contract) ? String(object.contract) : '',
-      amount: isSet(object.amount) ? String(object.amount) : '',
+      target: isSet(object.target) ? String(object.target) : "",
+      recipient: isSet(object.recipient) ? String(object.recipient) : "",
+      contract: isSet(object.contract) ? String(object.contract) : "",
+      amount: isSet(object.amount) ? String(object.amount) : "",
+      owner: isSet(object.owner) ? String(object.owner) : "",
     };
   },
 
@@ -1412,17 +1391,21 @@ export const EventBridge = {
     message.recipient !== undefined && (obj.recipient = message.recipient);
     message.contract !== undefined && (obj.contract = message.contract);
     message.amount !== undefined && (obj.amount = message.amount);
+    message.owner !== undefined && (obj.owner = message.owner);
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<EventBridge>, I>>(
-    object: I,
-  ): EventBridge {
+  create(base?: DeepPartial<EventBridge>): EventBridge {
+    return EventBridge.fromPartial(base ?? {});
+  },
+
+  fromPartial(object: DeepPartial<EventBridge>): EventBridge {
     const message = createBaseEventBridge();
-    message.target = object.target ?? '';
-    message.recipient = object.recipient ?? '';
-    message.contract = object.contract ?? '';
-    message.amount = object.amount ?? '';
+    message.target = object.target ?? "";
+    message.recipient = object.recipient ?? "";
+    message.contract = object.contract ?? "";
+    message.amount = object.amount ?? "";
+    message.owner = object.owner ?? "";
     return message;
   },
 };
@@ -1430,24 +1413,17 @@ export const EventBridge = {
 messageTypeRegistry.set(EventBridge.$type, EventBridge);
 
 function createBaseEventBridgeReceive(): EventBridgeReceive {
-  return {
-    $type: 'regen.ecocredit.v1.EventBridgeReceive',
-    projectId: '',
-    batchDenom: '',
-  };
+  return { $type: "regen.ecocredit.v1.EventBridgeReceive", projectId: "", batchDenom: "" };
 }
 
 export const EventBridgeReceive = {
-  $type: 'regen.ecocredit.v1.EventBridgeReceive' as const,
+  $type: "regen.ecocredit.v1.EventBridgeReceive" as const,
 
-  encode(
-    message: EventBridgeReceive,
-    writer: _m0.Writer = _m0.Writer.create(),
-  ): _m0.Writer {
-    if (message.projectId !== '') {
+  encode(message: EventBridgeReceive, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+    if (message.projectId !== "") {
       writer.uint32(10).string(message.projectId);
     }
-    if (message.batchDenom !== '') {
+    if (message.batchDenom !== "") {
       writer.uint32(18).string(message.batchDenom);
     }
     return writer;
@@ -1477,8 +1453,8 @@ export const EventBridgeReceive = {
   fromJSON(object: any): EventBridgeReceive {
     return {
       $type: EventBridgeReceive.$type,
-      projectId: isSet(object.projectId) ? String(object.projectId) : '',
-      batchDenom: isSet(object.batchDenom) ? String(object.batchDenom) : '',
+      projectId: isSet(object.projectId) ? String(object.projectId) : "",
+      batchDenom: isSet(object.batchDenom) ? String(object.batchDenom) : "",
     };
   },
 
@@ -1489,46 +1465,27 @@ export const EventBridgeReceive = {
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<EventBridgeReceive>, I>>(
-    object: I,
-  ): EventBridgeReceive {
+  create(base?: DeepPartial<EventBridgeReceive>): EventBridgeReceive {
+    return EventBridgeReceive.fromPartial(base ?? {});
+  },
+
+  fromPartial(object: DeepPartial<EventBridgeReceive>): EventBridgeReceive {
     const message = createBaseEventBridgeReceive();
-    message.projectId = object.projectId ?? '';
-    message.batchDenom = object.batchDenom ?? '';
+    message.projectId = object.projectId ?? "";
+    message.batchDenom = object.batchDenom ?? "";
     return message;
   },
 };
 
 messageTypeRegistry.set(EventBridgeReceive.$type, EventBridgeReceive);
 
-type Builtin =
-  | Date
-  | Function
-  | Uint8Array
-  | string
-  | number
-  | boolean
-  | undefined;
+type Builtin = Date | Function | Uint8Array | string | number | boolean | undefined;
 
-export type DeepPartial<T> = T extends Builtin
-  ? T
-  : T extends Long
-  ? string | number | Long
-  : T extends Array<infer U>
-  ? Array<DeepPartial<U>>
-  : T extends ReadonlyArray<infer U>
-  ? ReadonlyArray<DeepPartial<U>>
-  : T extends {}
-  ? { [K in Exclude<keyof T, '$type'>]?: DeepPartial<T[K]> }
+export type DeepPartial<T> = T extends Builtin ? T
+  : T extends Long ? string | number | Long : T extends Array<infer U> ? Array<DeepPartial<U>>
+  : T extends ReadonlyArray<infer U> ? ReadonlyArray<DeepPartial<U>>
+  : T extends {} ? { [K in Exclude<keyof T, "$type">]?: DeepPartial<T[K]> }
   : Partial<T>;
-
-type KeysOfUnion<T> = T extends T ? keyof T : never;
-export type Exact<P, I extends P> = P extends Builtin
-  ? P
-  : P & { [K in keyof P]: Exact<P[K], I[K]> } & Record<
-        Exclude<keyof I, KeysOfUnion<P> | '$type'>,
-        never
-      >;
 
 if (_m0.util.Long !== Long) {
   _m0.util.Long = Long as any;

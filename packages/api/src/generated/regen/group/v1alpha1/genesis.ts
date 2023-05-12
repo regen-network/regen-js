@@ -1,20 +1,14 @@
 /* eslint-disable */
-import { messageTypeRegistry } from '../../../typeRegistry';
-import Long from 'long';
-import _m0 from 'protobufjs/minimal';
-import {
-  GroupInfo,
-  GroupMember,
-  GroupAccountInfo,
-  Proposal,
-  Vote,
-} from '../../../regen/group/v1alpha1/types';
+import Long from "long";
+import _m0 from "protobufjs/minimal";
+import { messageTypeRegistry } from "../../../typeRegistry";
+import { GroupAccountInfo, GroupInfo, GroupMember, Proposal, Vote } from "./types";
 
-export const protobufPackage = 'regen.group.v1alpha1';
+export const protobufPackage = "regen.group.v1alpha1";
 
 /** GenesisState defines the group module's genesis state. */
 export interface GenesisState {
-  $type: 'regen.group.v1alpha1.GenesisState';
+  $type: "regen.group.v1alpha1.GenesisState";
   /**
    * group_seq is the group table orm.Sequence,
    * it is used to get the next group ID.
@@ -44,7 +38,7 @@ export interface GenesisState {
 
 function createBaseGenesisState(): GenesisState {
   return {
-    $type: 'regen.group.v1alpha1.GenesisState',
+    $type: "regen.group.v1alpha1.GenesisState",
     groupSeq: Long.UZERO,
     groups: [],
     groupMembers: [],
@@ -57,12 +51,9 @@ function createBaseGenesisState(): GenesisState {
 }
 
 export const GenesisState = {
-  $type: 'regen.group.v1alpha1.GenesisState' as const,
+  $type: "regen.group.v1alpha1.GenesisState" as const,
 
-  encode(
-    message: GenesisState,
-    writer: _m0.Writer = _m0.Writer.create(),
-  ): _m0.Writer {
+  encode(message: GenesisState, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (!message.groupSeq.isZero()) {
       writer.uint32(8).uint64(message.groupSeq);
     }
@@ -104,17 +95,13 @@ export const GenesisState = {
           message.groups.push(GroupInfo.decode(reader, reader.uint32()));
           break;
         case 3:
-          message.groupMembers.push(
-            GroupMember.decode(reader, reader.uint32()),
-          );
+          message.groupMembers.push(GroupMember.decode(reader, reader.uint32()));
           break;
         case 4:
           message.groupAccountSeq = reader.uint64() as Long;
           break;
         case 5:
-          message.groupAccounts.push(
-            GroupAccountInfo.decode(reader, reader.uint32()),
-          );
+          message.groupAccounts.push(GroupAccountInfo.decode(reader, reader.uint32()));
           break;
         case 6:
           message.proposalSeq = reader.uint64() as Long;
@@ -136,137 +123,87 @@ export const GenesisState = {
   fromJSON(object: any): GenesisState {
     return {
       $type: GenesisState.$type,
-      groupSeq: isSet(object.groupSeq)
-        ? Long.fromString(object.groupSeq)
-        : Long.UZERO,
-      groups: Array.isArray(object?.groups)
-        ? object.groups.map((e: any) => GroupInfo.fromJSON(e))
-        : [],
+      groupSeq: isSet(object.groupSeq) ? Long.fromValue(object.groupSeq) : Long.UZERO,
+      groups: Array.isArray(object?.groups) ? object.groups.map((e: any) => GroupInfo.fromJSON(e)) : [],
       groupMembers: Array.isArray(object?.groupMembers)
         ? object.groupMembers.map((e: any) => GroupMember.fromJSON(e))
         : [],
-      groupAccountSeq: isSet(object.groupAccountSeq)
-        ? Long.fromString(object.groupAccountSeq)
-        : Long.UZERO,
+      groupAccountSeq: isSet(object.groupAccountSeq) ? Long.fromValue(object.groupAccountSeq) : Long.UZERO,
       groupAccounts: Array.isArray(object?.groupAccounts)
         ? object.groupAccounts.map((e: any) => GroupAccountInfo.fromJSON(e))
         : [],
-      proposalSeq: isSet(object.proposalSeq)
-        ? Long.fromString(object.proposalSeq)
-        : Long.UZERO,
-      proposals: Array.isArray(object?.proposals)
-        ? object.proposals.map((e: any) => Proposal.fromJSON(e))
-        : [],
-      votes: Array.isArray(object?.votes)
-        ? object.votes.map((e: any) => Vote.fromJSON(e))
-        : [],
+      proposalSeq: isSet(object.proposalSeq) ? Long.fromValue(object.proposalSeq) : Long.UZERO,
+      proposals: Array.isArray(object?.proposals) ? object.proposals.map((e: any) => Proposal.fromJSON(e)) : [],
+      votes: Array.isArray(object?.votes) ? object.votes.map((e: any) => Vote.fromJSON(e)) : [],
     };
   },
 
   toJSON(message: GenesisState): unknown {
     const obj: any = {};
-    message.groupSeq !== undefined &&
-      (obj.groupSeq = (message.groupSeq || Long.UZERO).toString());
+    message.groupSeq !== undefined && (obj.groupSeq = (message.groupSeq || Long.UZERO).toString());
     if (message.groups) {
-      obj.groups = message.groups.map(e =>
-        e ? GroupInfo.toJSON(e) : undefined,
-      );
+      obj.groups = message.groups.map((e) => e ? GroupInfo.toJSON(e) : undefined);
     } else {
       obj.groups = [];
     }
     if (message.groupMembers) {
-      obj.groupMembers = message.groupMembers.map(e =>
-        e ? GroupMember.toJSON(e) : undefined,
-      );
+      obj.groupMembers = message.groupMembers.map((e) => e ? GroupMember.toJSON(e) : undefined);
     } else {
       obj.groupMembers = [];
     }
-    message.groupAccountSeq !== undefined &&
-      (obj.groupAccountSeq = (
-        message.groupAccountSeq || Long.UZERO
-      ).toString());
+    message.groupAccountSeq !== undefined && (obj.groupAccountSeq = (message.groupAccountSeq || Long.UZERO).toString());
     if (message.groupAccounts) {
-      obj.groupAccounts = message.groupAccounts.map(e =>
-        e ? GroupAccountInfo.toJSON(e) : undefined,
-      );
+      obj.groupAccounts = message.groupAccounts.map((e) => e ? GroupAccountInfo.toJSON(e) : undefined);
     } else {
       obj.groupAccounts = [];
     }
-    message.proposalSeq !== undefined &&
-      (obj.proposalSeq = (message.proposalSeq || Long.UZERO).toString());
+    message.proposalSeq !== undefined && (obj.proposalSeq = (message.proposalSeq || Long.UZERO).toString());
     if (message.proposals) {
-      obj.proposals = message.proposals.map(e =>
-        e ? Proposal.toJSON(e) : undefined,
-      );
+      obj.proposals = message.proposals.map((e) => e ? Proposal.toJSON(e) : undefined);
     } else {
       obj.proposals = [];
     }
     if (message.votes) {
-      obj.votes = message.votes.map(e => (e ? Vote.toJSON(e) : undefined));
+      obj.votes = message.votes.map((e) => e ? Vote.toJSON(e) : undefined);
     } else {
       obj.votes = [];
     }
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<GenesisState>, I>>(
-    object: I,
-  ): GenesisState {
+  create(base?: DeepPartial<GenesisState>): GenesisState {
+    return GenesisState.fromPartial(base ?? {});
+  },
+
+  fromPartial(object: DeepPartial<GenesisState>): GenesisState {
     const message = createBaseGenesisState();
-    message.groupSeq =
-      object.groupSeq !== undefined && object.groupSeq !== null
-        ? Long.fromValue(object.groupSeq)
-        : Long.UZERO;
-    message.groups = object.groups?.map(e => GroupInfo.fromPartial(e)) || [];
-    message.groupMembers =
-      object.groupMembers?.map(e => GroupMember.fromPartial(e)) || [];
-    message.groupAccountSeq =
-      object.groupAccountSeq !== undefined && object.groupAccountSeq !== null
-        ? Long.fromValue(object.groupAccountSeq)
-        : Long.UZERO;
-    message.groupAccounts =
-      object.groupAccounts?.map(e => GroupAccountInfo.fromPartial(e)) || [];
-    message.proposalSeq =
-      object.proposalSeq !== undefined && object.proposalSeq !== null
-        ? Long.fromValue(object.proposalSeq)
-        : Long.UZERO;
-    message.proposals =
-      object.proposals?.map(e => Proposal.fromPartial(e)) || [];
-    message.votes = object.votes?.map(e => Vote.fromPartial(e)) || [];
+    message.groupSeq = (object.groupSeq !== undefined && object.groupSeq !== null)
+      ? Long.fromValue(object.groupSeq)
+      : Long.UZERO;
+    message.groups = object.groups?.map((e) => GroupInfo.fromPartial(e)) || [];
+    message.groupMembers = object.groupMembers?.map((e) => GroupMember.fromPartial(e)) || [];
+    message.groupAccountSeq = (object.groupAccountSeq !== undefined && object.groupAccountSeq !== null)
+      ? Long.fromValue(object.groupAccountSeq)
+      : Long.UZERO;
+    message.groupAccounts = object.groupAccounts?.map((e) => GroupAccountInfo.fromPartial(e)) || [];
+    message.proposalSeq = (object.proposalSeq !== undefined && object.proposalSeq !== null)
+      ? Long.fromValue(object.proposalSeq)
+      : Long.UZERO;
+    message.proposals = object.proposals?.map((e) => Proposal.fromPartial(e)) || [];
+    message.votes = object.votes?.map((e) => Vote.fromPartial(e)) || [];
     return message;
   },
 };
 
 messageTypeRegistry.set(GenesisState.$type, GenesisState);
 
-type Builtin =
-  | Date
-  | Function
-  | Uint8Array
-  | string
-  | number
-  | boolean
-  | undefined;
+type Builtin = Date | Function | Uint8Array | string | number | boolean | undefined;
 
-export type DeepPartial<T> = T extends Builtin
-  ? T
-  : T extends Long
-  ? string | number | Long
-  : T extends Array<infer U>
-  ? Array<DeepPartial<U>>
-  : T extends ReadonlyArray<infer U>
-  ? ReadonlyArray<DeepPartial<U>>
-  : T extends {}
-  ? { [K in Exclude<keyof T, '$type'>]?: DeepPartial<T[K]> }
+export type DeepPartial<T> = T extends Builtin ? T
+  : T extends Long ? string | number | Long : T extends Array<infer U> ? Array<DeepPartial<U>>
+  : T extends ReadonlyArray<infer U> ? ReadonlyArray<DeepPartial<U>>
+  : T extends {} ? { [K in Exclude<keyof T, "$type">]?: DeepPartial<T[K]> }
   : Partial<T>;
-
-type KeysOfUnion<T> = T extends T ? keyof T : never;
-export type Exact<P, I extends P> = P extends Builtin
-  ? P
-  : P & { [K in keyof P]: Exact<P[K], I[K]> } & Record<
-        Exclude<keyof I, KeysOfUnion<P> | '$type'>,
-        never
-      >;
 
 if (_m0.util.Long !== Long) {
   _m0.util.Long = Long as any;

@@ -1,9 +1,9 @@
 /* eslint-disable */
-import { messageTypeRegistry } from '../../../typeRegistry';
-import Long from 'long';
-import _m0 from 'protobufjs/minimal';
+import Long from "long";
+import _m0 from "protobufjs/minimal";
+import { messageTypeRegistry } from "../../../typeRegistry";
 
-export const protobufPackage = 'cosmos.crypto.ed25519';
+export const protobufPackage = "cosmos.crypto.ed25519";
 
 /**
  * PubKey is an ed25519 public key for handling Tendermint keys in SDK.
@@ -13,7 +13,7 @@ export const protobufPackage = 'cosmos.crypto.ed25519';
  * then you must create a new proto message and follow ADR-28 for Address construction.
  */
 export interface PubKey {
-  $type: 'cosmos.crypto.ed25519.PubKey';
+  $type: "cosmos.crypto.ed25519.PubKey";
   key: Uint8Array;
 }
 
@@ -22,21 +22,18 @@ export interface PubKey {
  * NOTE: ed25519 keys must not be used in SDK apps except in a tendermint validator context.
  */
 export interface PrivKey {
-  $type: 'cosmos.crypto.ed25519.PrivKey';
+  $type: "cosmos.crypto.ed25519.PrivKey";
   key: Uint8Array;
 }
 
 function createBasePubKey(): PubKey {
-  return { $type: 'cosmos.crypto.ed25519.PubKey', key: new Uint8Array() };
+  return { $type: "cosmos.crypto.ed25519.PubKey", key: new Uint8Array() };
 }
 
 export const PubKey = {
-  $type: 'cosmos.crypto.ed25519.PubKey' as const,
+  $type: "cosmos.crypto.ed25519.PubKey" as const,
 
-  encode(
-    message: PubKey,
-    writer: _m0.Writer = _m0.Writer.create(),
-  ): _m0.Writer {
+  encode(message: PubKey, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.key.length !== 0) {
       writer.uint32(10).bytes(message.key);
     }
@@ -62,22 +59,21 @@ export const PubKey = {
   },
 
   fromJSON(object: any): PubKey {
-    return {
-      $type: PubKey.$type,
-      key: isSet(object.key) ? bytesFromBase64(object.key) : new Uint8Array(),
-    };
+    return { $type: PubKey.$type, key: isSet(object.key) ? bytesFromBase64(object.key) : new Uint8Array() };
   },
 
   toJSON(message: PubKey): unknown {
     const obj: any = {};
     message.key !== undefined &&
-      (obj.key = base64FromBytes(
-        message.key !== undefined ? message.key : new Uint8Array(),
-      ));
+      (obj.key = base64FromBytes(message.key !== undefined ? message.key : new Uint8Array()));
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<PubKey>, I>>(object: I): PubKey {
+  create(base?: DeepPartial<PubKey>): PubKey {
+    return PubKey.fromPartial(base ?? {});
+  },
+
+  fromPartial(object: DeepPartial<PubKey>): PubKey {
     const message = createBasePubKey();
     message.key = object.key ?? new Uint8Array();
     return message;
@@ -87,16 +83,13 @@ export const PubKey = {
 messageTypeRegistry.set(PubKey.$type, PubKey);
 
 function createBasePrivKey(): PrivKey {
-  return { $type: 'cosmos.crypto.ed25519.PrivKey', key: new Uint8Array() };
+  return { $type: "cosmos.crypto.ed25519.PrivKey", key: new Uint8Array() };
 }
 
 export const PrivKey = {
-  $type: 'cosmos.crypto.ed25519.PrivKey' as const,
+  $type: "cosmos.crypto.ed25519.PrivKey" as const,
 
-  encode(
-    message: PrivKey,
-    writer: _m0.Writer = _m0.Writer.create(),
-  ): _m0.Writer {
+  encode(message: PrivKey, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.key.length !== 0) {
       writer.uint32(10).bytes(message.key);
     }
@@ -122,22 +115,21 @@ export const PrivKey = {
   },
 
   fromJSON(object: any): PrivKey {
-    return {
-      $type: PrivKey.$type,
-      key: isSet(object.key) ? bytesFromBase64(object.key) : new Uint8Array(),
-    };
+    return { $type: PrivKey.$type, key: isSet(object.key) ? bytesFromBase64(object.key) : new Uint8Array() };
   },
 
   toJSON(message: PrivKey): unknown {
     const obj: any = {};
     message.key !== undefined &&
-      (obj.key = base64FromBytes(
-        message.key !== undefined ? message.key : new Uint8Array(),
-      ));
+      (obj.key = base64FromBytes(message.key !== undefined ? message.key : new Uint8Array()));
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<PrivKey>, I>>(object: I): PrivKey {
+  create(base?: DeepPartial<PrivKey>): PrivKey {
+    return PrivKey.fromPartial(base ?? {});
+  },
+
+  fromPartial(object: DeepPartial<PrivKey>): PrivKey {
     const message = createBasePrivKey();
     message.key = object.key ?? new Uint8Array();
     return message;
@@ -149,65 +141,54 @@ messageTypeRegistry.set(PrivKey.$type, PrivKey);
 declare var self: any | undefined;
 declare var window: any | undefined;
 declare var global: any | undefined;
-var globalThis: any = (() => {
-  if (typeof globalThis !== 'undefined') return globalThis;
-  if (typeof self !== 'undefined') return self;
-  if (typeof window !== 'undefined') return window;
-  if (typeof global !== 'undefined') return global;
-  throw 'Unable to locate global object';
+var tsProtoGlobalThis: any = (() => {
+  if (typeof globalThis !== "undefined") {
+    return globalThis;
+  }
+  if (typeof self !== "undefined") {
+    return self;
+  }
+  if (typeof window !== "undefined") {
+    return window;
+  }
+  if (typeof global !== "undefined") {
+    return global;
+  }
+  throw "Unable to locate global object";
 })();
 
-const atob: (b64: string) => string =
-  globalThis.atob ||
-  (b64 => globalThis.Buffer.from(b64, 'base64').toString('binary'));
 function bytesFromBase64(b64: string): Uint8Array {
-  const bin = atob(b64);
-  const arr = new Uint8Array(bin.length);
-  for (let i = 0; i < bin.length; ++i) {
-    arr[i] = bin.charCodeAt(i);
+  if (tsProtoGlobalThis.Buffer) {
+    return Uint8Array.from(tsProtoGlobalThis.Buffer.from(b64, "base64"));
+  } else {
+    const bin = tsProtoGlobalThis.atob(b64);
+    const arr = new Uint8Array(bin.length);
+    for (let i = 0; i < bin.length; ++i) {
+      arr[i] = bin.charCodeAt(i);
+    }
+    return arr;
   }
-  return arr;
 }
 
-const btoa: (bin: string) => string =
-  globalThis.btoa ||
-  (bin => globalThis.Buffer.from(bin, 'binary').toString('base64'));
 function base64FromBytes(arr: Uint8Array): string {
-  const bin: string[] = [];
-  for (const byte of arr) {
-    bin.push(String.fromCharCode(byte));
+  if (tsProtoGlobalThis.Buffer) {
+    return tsProtoGlobalThis.Buffer.from(arr).toString("base64");
+  } else {
+    const bin: string[] = [];
+    arr.forEach((byte) => {
+      bin.push(String.fromCharCode(byte));
+    });
+    return tsProtoGlobalThis.btoa(bin.join(""));
   }
-  return btoa(bin.join(''));
 }
 
-type Builtin =
-  | Date
-  | Function
-  | Uint8Array
-  | string
-  | number
-  | boolean
-  | undefined;
+type Builtin = Date | Function | Uint8Array | string | number | boolean | undefined;
 
-export type DeepPartial<T> = T extends Builtin
-  ? T
-  : T extends Long
-  ? string | number | Long
-  : T extends Array<infer U>
-  ? Array<DeepPartial<U>>
-  : T extends ReadonlyArray<infer U>
-  ? ReadonlyArray<DeepPartial<U>>
-  : T extends {}
-  ? { [K in Exclude<keyof T, '$type'>]?: DeepPartial<T[K]> }
+export type DeepPartial<T> = T extends Builtin ? T
+  : T extends Long ? string | number | Long : T extends Array<infer U> ? Array<DeepPartial<U>>
+  : T extends ReadonlyArray<infer U> ? ReadonlyArray<DeepPartial<U>>
+  : T extends {} ? { [K in Exclude<keyof T, "$type">]?: DeepPartial<T[K]> }
   : Partial<T>;
-
-type KeysOfUnion<T> = T extends T ? keyof T : never;
-export type Exact<P, I extends P> = P extends Builtin
-  ? P
-  : P & { [K in keyof P]: Exact<P[K], I[K]> } & Record<
-        Exclude<keyof I, KeysOfUnion<P> | '$type'>,
-        never
-      >;
 
 if (_m0.util.Long !== Long) {
   _m0.util.Long = Long as any;

@@ -13,7 +13,7 @@ log_response() {
 }
 
 echo "INFO: Creating Credit Class - C01"
-regen tx ecocredit create-class $ADDR1 C "Test Credit Class" 20000000uregen $TX_FLAGS | log_response
+regen tx ecocredit create-class $ADDR1 C "Test Credit Class" --class-fee 20000000uregen $TX_FLAGS | log_response
 
 echo "INFO: Creating project C01-001"
 regen tx ecocredit create-project C01 US "Horsetail Ranch" $TX_FLAGS | log_response
@@ -43,7 +43,13 @@ cat > $BATCH_JSON <<EOL
   "metadata": "regen:13toVgf5UjYBz6J29x28pLQyjKz5FpcW3f4bT5uRKGxGREWGKjEdXYG.rdf",
   "start_date": "2020-01-01T00:00:00Z",
   "end_date": "2021-01-01T00:00:00Z",
-  "open": false
+  "open": true,
+  "origin_tx": {
+    "id": "123",
+    "source": "polygon",
+    "contract": "0x563aF37a8264ec29e959Ca51489AF3282d05a8FB",
+    "note": "note"
+  }
 }
 EOL
 

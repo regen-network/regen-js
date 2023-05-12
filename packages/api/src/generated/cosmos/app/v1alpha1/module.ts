@@ -1,19 +1,17 @@
 /* eslint-disable */
-import { messageTypeRegistry } from '../../../typeRegistry';
-import Long from 'long';
-import _m0 from 'protobufjs/minimal';
+import Long from "long";
+import _m0 from "protobufjs/minimal";
+import { messageTypeRegistry } from "../../../typeRegistry";
 
-export const protobufPackage = 'cosmos.app.v1alpha1';
+export const protobufPackage = "cosmos.app.v1alpha1";
 
 /** ModuleDescriptor describes an app module. */
 export interface ModuleDescriptor {
-  $type: 'cosmos.app.v1alpha1.ModuleDescriptor';
+  $type: "cosmos.app.v1alpha1.ModuleDescriptor";
   /**
    * go_import names the package that should be imported by an app to load the
-   * module in the runtime module registry. Either go_import must be defined here
-   * or the go_package option must be defined at the file level to indicate
-   * to users where to location the module implementation. go_import takes
-   * precedence over go_package when both are defined.
+   * module in the runtime module registry. It is required to make debugging
+   * of configuration errors easier for users.
    */
   goImport: string;
   /**
@@ -37,7 +35,7 @@ export interface ModuleDescriptor {
 
 /** PackageReference is a reference to a protobuf package used by a module. */
 export interface PackageReference {
-  $type: 'cosmos.app.v1alpha1.PackageReference';
+  $type: "cosmos.app.v1alpha1.PackageReference";
   /** name is the fully-qualified name of the package. */
   name: string;
   /**
@@ -49,8 +47,8 @@ export interface PackageReference {
    * present in a previous version.
    *
    * A package should indicate its revision with a source code comment
-   * above the package declaration in one of its fields containing the
-   * test "Revision N" where N is an integer revision. All packages start
+   * above the package declaration in one of its files containing the
+   * text "Revision N" where N is an integer revision. All packages start
    * at revision 0 the first time they are released in a module.
    *
    * When a new version of a module is released and items are added to existing
@@ -85,7 +83,7 @@ export interface PackageReference {
  * can migrate from.
  */
 export interface MigrateFromInfo {
-  $type: 'cosmos.app.v1alpha1.MigrateFromInfo';
+  $type: "cosmos.app.v1alpha1.MigrateFromInfo";
   /**
    * module is the fully-qualified protobuf name of the module config object
    * for the previous module version, ex: "cosmos.group.module.v1.Module".
@@ -94,22 +92,14 @@ export interface MigrateFromInfo {
 }
 
 function createBaseModuleDescriptor(): ModuleDescriptor {
-  return {
-    $type: 'cosmos.app.v1alpha1.ModuleDescriptor',
-    goImport: '',
-    usePackage: [],
-    canMigrateFrom: [],
-  };
+  return { $type: "cosmos.app.v1alpha1.ModuleDescriptor", goImport: "", usePackage: [], canMigrateFrom: [] };
 }
 
 export const ModuleDescriptor = {
-  $type: 'cosmos.app.v1alpha1.ModuleDescriptor' as const,
+  $type: "cosmos.app.v1alpha1.ModuleDescriptor" as const,
 
-  encode(
-    message: ModuleDescriptor,
-    writer: _m0.Writer = _m0.Writer.create(),
-  ): _m0.Writer {
-    if (message.goImport !== '') {
+  encode(message: ModuleDescriptor, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+    if (message.goImport !== "") {
       writer.uint32(10).string(message.goImport);
     }
     for (const v of message.usePackage) {
@@ -132,14 +122,10 @@ export const ModuleDescriptor = {
           message.goImport = reader.string();
           break;
         case 2:
-          message.usePackage.push(
-            PackageReference.decode(reader, reader.uint32()),
-          );
+          message.usePackage.push(PackageReference.decode(reader, reader.uint32()));
           break;
         case 3:
-          message.canMigrateFrom.push(
-            MigrateFromInfo.decode(reader, reader.uint32()),
-          );
+          message.canMigrateFrom.push(MigrateFromInfo.decode(reader, reader.uint32()));
           break;
         default:
           reader.skipType(tag & 7);
@@ -152,7 +138,7 @@ export const ModuleDescriptor = {
   fromJSON(object: any): ModuleDescriptor {
     return {
       $type: ModuleDescriptor.$type,
-      goImport: isSet(object.goImport) ? String(object.goImport) : '',
+      goImport: isSet(object.goImport) ? String(object.goImport) : "",
       usePackage: Array.isArray(object?.usePackage)
         ? object.usePackage.map((e: any) => PackageReference.fromJSON(e))
         : [],
@@ -166,31 +152,27 @@ export const ModuleDescriptor = {
     const obj: any = {};
     message.goImport !== undefined && (obj.goImport = message.goImport);
     if (message.usePackage) {
-      obj.usePackage = message.usePackage.map(e =>
-        e ? PackageReference.toJSON(e) : undefined,
-      );
+      obj.usePackage = message.usePackage.map((e) => e ? PackageReference.toJSON(e) : undefined);
     } else {
       obj.usePackage = [];
     }
     if (message.canMigrateFrom) {
-      obj.canMigrateFrom = message.canMigrateFrom.map(e =>
-        e ? MigrateFromInfo.toJSON(e) : undefined,
-      );
+      obj.canMigrateFrom = message.canMigrateFrom.map((e) => e ? MigrateFromInfo.toJSON(e) : undefined);
     } else {
       obj.canMigrateFrom = [];
     }
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<ModuleDescriptor>, I>>(
-    object: I,
-  ): ModuleDescriptor {
+  create(base?: DeepPartial<ModuleDescriptor>): ModuleDescriptor {
+    return ModuleDescriptor.fromPartial(base ?? {});
+  },
+
+  fromPartial(object: DeepPartial<ModuleDescriptor>): ModuleDescriptor {
     const message = createBaseModuleDescriptor();
-    message.goImport = object.goImport ?? '';
-    message.usePackage =
-      object.usePackage?.map(e => PackageReference.fromPartial(e)) || [];
-    message.canMigrateFrom =
-      object.canMigrateFrom?.map(e => MigrateFromInfo.fromPartial(e)) || [];
+    message.goImport = object.goImport ?? "";
+    message.usePackage = object.usePackage?.map((e) => PackageReference.fromPartial(e)) || [];
+    message.canMigrateFrom = object.canMigrateFrom?.map((e) => MigrateFromInfo.fromPartial(e)) || [];
     return message;
   },
 };
@@ -198,21 +180,14 @@ export const ModuleDescriptor = {
 messageTypeRegistry.set(ModuleDescriptor.$type, ModuleDescriptor);
 
 function createBasePackageReference(): PackageReference {
-  return {
-    $type: 'cosmos.app.v1alpha1.PackageReference',
-    name: '',
-    revision: 0,
-  };
+  return { $type: "cosmos.app.v1alpha1.PackageReference", name: "", revision: 0 };
 }
 
 export const PackageReference = {
-  $type: 'cosmos.app.v1alpha1.PackageReference' as const,
+  $type: "cosmos.app.v1alpha1.PackageReference" as const,
 
-  encode(
-    message: PackageReference,
-    writer: _m0.Writer = _m0.Writer.create(),
-  ): _m0.Writer {
-    if (message.name !== '') {
+  encode(message: PackageReference, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+    if (message.name !== "") {
       writer.uint32(10).string(message.name);
     }
     if (message.revision !== 0) {
@@ -245,7 +220,7 @@ export const PackageReference = {
   fromJSON(object: any): PackageReference {
     return {
       $type: PackageReference.$type,
-      name: isSet(object.name) ? String(object.name) : '',
+      name: isSet(object.name) ? String(object.name) : "",
       revision: isSet(object.revision) ? Number(object.revision) : 0,
     };
   },
@@ -253,16 +228,17 @@ export const PackageReference = {
   toJSON(message: PackageReference): unknown {
     const obj: any = {};
     message.name !== undefined && (obj.name = message.name);
-    message.revision !== undefined &&
-      (obj.revision = Math.round(message.revision));
+    message.revision !== undefined && (obj.revision = Math.round(message.revision));
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<PackageReference>, I>>(
-    object: I,
-  ): PackageReference {
+  create(base?: DeepPartial<PackageReference>): PackageReference {
+    return PackageReference.fromPartial(base ?? {});
+  },
+
+  fromPartial(object: DeepPartial<PackageReference>): PackageReference {
     const message = createBasePackageReference();
-    message.name = object.name ?? '';
+    message.name = object.name ?? "";
     message.revision = object.revision ?? 0;
     return message;
   },
@@ -271,17 +247,14 @@ export const PackageReference = {
 messageTypeRegistry.set(PackageReference.$type, PackageReference);
 
 function createBaseMigrateFromInfo(): MigrateFromInfo {
-  return { $type: 'cosmos.app.v1alpha1.MigrateFromInfo', module: '' };
+  return { $type: "cosmos.app.v1alpha1.MigrateFromInfo", module: "" };
 }
 
 export const MigrateFromInfo = {
-  $type: 'cosmos.app.v1alpha1.MigrateFromInfo' as const,
+  $type: "cosmos.app.v1alpha1.MigrateFromInfo" as const,
 
-  encode(
-    message: MigrateFromInfo,
-    writer: _m0.Writer = _m0.Writer.create(),
-  ): _m0.Writer {
-    if (message.module !== '') {
+  encode(message: MigrateFromInfo, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+    if (message.module !== "") {
       writer.uint32(10).string(message.module);
     }
     return writer;
@@ -306,10 +279,7 @@ export const MigrateFromInfo = {
   },
 
   fromJSON(object: any): MigrateFromInfo {
-    return {
-      $type: MigrateFromInfo.$type,
-      module: isSet(object.module) ? String(object.module) : '',
-    };
+    return { $type: MigrateFromInfo.$type, module: isSet(object.module) ? String(object.module) : "" };
   },
 
   toJSON(message: MigrateFromInfo): unknown {
@@ -318,45 +288,26 @@ export const MigrateFromInfo = {
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<MigrateFromInfo>, I>>(
-    object: I,
-  ): MigrateFromInfo {
+  create(base?: DeepPartial<MigrateFromInfo>): MigrateFromInfo {
+    return MigrateFromInfo.fromPartial(base ?? {});
+  },
+
+  fromPartial(object: DeepPartial<MigrateFromInfo>): MigrateFromInfo {
     const message = createBaseMigrateFromInfo();
-    message.module = object.module ?? '';
+    message.module = object.module ?? "";
     return message;
   },
 };
 
 messageTypeRegistry.set(MigrateFromInfo.$type, MigrateFromInfo);
 
-type Builtin =
-  | Date
-  | Function
-  | Uint8Array
-  | string
-  | number
-  | boolean
-  | undefined;
+type Builtin = Date | Function | Uint8Array | string | number | boolean | undefined;
 
-export type DeepPartial<T> = T extends Builtin
-  ? T
-  : T extends Long
-  ? string | number | Long
-  : T extends Array<infer U>
-  ? Array<DeepPartial<U>>
-  : T extends ReadonlyArray<infer U>
-  ? ReadonlyArray<DeepPartial<U>>
-  : T extends {}
-  ? { [K in Exclude<keyof T, '$type'>]?: DeepPartial<T[K]> }
+export type DeepPartial<T> = T extends Builtin ? T
+  : T extends Long ? string | number | Long : T extends Array<infer U> ? Array<DeepPartial<U>>
+  : T extends ReadonlyArray<infer U> ? ReadonlyArray<DeepPartial<U>>
+  : T extends {} ? { [K in Exclude<keyof T, "$type">]?: DeepPartial<T[K]> }
   : Partial<T>;
-
-type KeysOfUnion<T> = T extends T ? keyof T : never;
-export type Exact<P, I extends P> = P extends Builtin
-  ? P
-  : P & { [K in keyof P]: Exact<P[K], I[K]> } & Record<
-        Exclude<keyof I, KeysOfUnion<P> | '$type'>,
-        never
-      >;
 
 if (_m0.util.Long !== Long) {
   _m0.util.Long = Long as any;

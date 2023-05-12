@@ -1,16 +1,11 @@
 /* eslint-disable */
-import { messageTypeRegistry } from '../../../typeRegistry';
-import Long from 'long';
-import _m0 from 'protobufjs/minimal';
-import { Any } from '../../../google/protobuf/any';
-import {
-  Choice,
-  Member,
-  choiceFromJSON,
-  choiceToJSON,
-} from '../../../regen/group/v1alpha1/types';
+import Long from "long";
+import _m0 from "protobufjs/minimal";
+import { Any } from "../../../google/protobuf/any";
+import { messageTypeRegistry } from "../../../typeRegistry";
+import { Choice, choiceFromJSON, choiceToJSON, Member } from "./types";
 
-export const protobufPackage = 'regen.group.v1alpha1';
+export const protobufPackage = "regen.group.v1alpha1";
 
 /** Exec defines modes of execution of a proposal on creation or on new vote. */
 export enum Exec {
@@ -32,13 +27,13 @@ export enum Exec {
 export function execFromJSON(object: any): Exec {
   switch (object) {
     case 0:
-    case 'EXEC_UNSPECIFIED':
+    case "EXEC_UNSPECIFIED":
       return Exec.EXEC_UNSPECIFIED;
     case 1:
-    case 'EXEC_TRY':
+    case "EXEC_TRY":
       return Exec.EXEC_TRY;
     case -1:
-    case 'UNRECOGNIZED':
+    case "UNRECOGNIZED":
     default:
       return Exec.UNRECOGNIZED;
   }
@@ -47,17 +42,18 @@ export function execFromJSON(object: any): Exec {
 export function execToJSON(object: Exec): string {
   switch (object) {
     case Exec.EXEC_UNSPECIFIED:
-      return 'EXEC_UNSPECIFIED';
+      return "EXEC_UNSPECIFIED";
     case Exec.EXEC_TRY:
-      return 'EXEC_TRY';
+      return "EXEC_TRY";
+    case Exec.UNRECOGNIZED:
     default:
-      return 'UNKNOWN';
+      return "UNRECOGNIZED";
   }
 }
 
 /** MsgCreateGroup is the Msg/CreateGroup request type. */
 export interface MsgCreateGroup {
-  $type: 'regen.group.v1alpha1.MsgCreateGroup';
+  $type: "regen.group.v1alpha1.MsgCreateGroup";
   /** admin is the account address of the group admin. */
   admin: string;
   /** members defines the group members. */
@@ -68,14 +64,14 @@ export interface MsgCreateGroup {
 
 /** MsgCreateGroupResponse is the Msg/CreateGroup response type. */
 export interface MsgCreateGroupResponse {
-  $type: 'regen.group.v1alpha1.MsgCreateGroupResponse';
+  $type: "regen.group.v1alpha1.MsgCreateGroupResponse";
   /** group_id is the unique ID of the newly created group. */
   groupId: Long;
 }
 
 /** MsgUpdateGroupMembers is the Msg/UpdateGroupMembers request type. */
 export interface MsgUpdateGroupMembers {
-  $type: 'regen.group.v1alpha1.MsgUpdateGroupMembers';
+  $type: "regen.group.v1alpha1.MsgUpdateGroupMembers";
   /** admin is the account address of the group admin. */
   admin: string;
   /** group_id is the unique ID of the group. */
@@ -89,12 +85,12 @@ export interface MsgUpdateGroupMembers {
 
 /** MsgUpdateGroupMembersResponse is the Msg/UpdateGroupMembers response type. */
 export interface MsgUpdateGroupMembersResponse {
-  $type: 'regen.group.v1alpha1.MsgUpdateGroupMembersResponse';
+  $type: "regen.group.v1alpha1.MsgUpdateGroupMembersResponse";
 }
 
 /** MsgUpdateGroupAdmin is the Msg/UpdateGroupAdmin request type. */
 export interface MsgUpdateGroupAdmin {
-  $type: 'regen.group.v1alpha1.MsgUpdateGroupAdmin';
+  $type: "regen.group.v1alpha1.MsgUpdateGroupAdmin";
   /** admin is the current account address of the group admin. */
   admin: string;
   /** group_id is the unique ID of the group. */
@@ -105,12 +101,12 @@ export interface MsgUpdateGroupAdmin {
 
 /** MsgUpdateGroupAdminResponse is the Msg/UpdateGroupAdmin response type. */
 export interface MsgUpdateGroupAdminResponse {
-  $type: 'regen.group.v1alpha1.MsgUpdateGroupAdminResponse';
+  $type: "regen.group.v1alpha1.MsgUpdateGroupAdminResponse";
 }
 
 /** MsgUpdateGroupMetadata is the Msg/UpdateGroupMetadata request type. */
 export interface MsgUpdateGroupMetadata {
-  $type: 'regen.group.v1alpha1.MsgUpdateGroupMetadata';
+  $type: "regen.group.v1alpha1.MsgUpdateGroupMetadata";
   /** admin is the account address of the group admin. */
   admin: string;
   /** group_id is the unique ID of the group. */
@@ -121,12 +117,12 @@ export interface MsgUpdateGroupMetadata {
 
 /** MsgUpdateGroupMetadataResponse is the Msg/UpdateGroupMetadata response type. */
 export interface MsgUpdateGroupMetadataResponse {
-  $type: 'regen.group.v1alpha1.MsgUpdateGroupMetadataResponse';
+  $type: "regen.group.v1alpha1.MsgUpdateGroupMetadataResponse";
 }
 
 /** MsgCreateGroupAccount is the Msg/CreateGroupAccount request type. */
 export interface MsgCreateGroupAccount {
-  $type: 'regen.group.v1alpha1.MsgCreateGroupAccount';
+  $type: "regen.group.v1alpha1.MsgCreateGroupAccount";
   /** admin is the account address of the group admin. */
   admin: string;
   /** group_id is the unique ID of the group. */
@@ -139,14 +135,14 @@ export interface MsgCreateGroupAccount {
 
 /** MsgCreateGroupAccountResponse is the Msg/CreateGroupAccount response type. */
 export interface MsgCreateGroupAccountResponse {
-  $type: 'regen.group.v1alpha1.MsgCreateGroupAccountResponse';
+  $type: "regen.group.v1alpha1.MsgCreateGroupAccountResponse";
   /** address is the account address of the newly created group account. */
   address: string;
 }
 
 /** MsgUpdateGroupAccountAdmin is the Msg/UpdateGroupAccountAdmin request type. */
 export interface MsgUpdateGroupAccountAdmin {
-  $type: 'regen.group.v1alpha1.MsgUpdateGroupAccountAdmin';
+  $type: "regen.group.v1alpha1.MsgUpdateGroupAccountAdmin";
   /** admin is the account address of the group admin. */
   admin: string;
   /** address is the group account address. */
@@ -160,7 +156,7 @@ export interface MsgUpdateGroupAccountAdmin {
  * response type.
  */
 export interface MsgUpdateGroupAccountAdminResponse {
-  $type: 'regen.group.v1alpha1.MsgUpdateGroupAccountAdminResponse';
+  $type: "regen.group.v1alpha1.MsgUpdateGroupAccountAdminResponse";
 }
 
 /**
@@ -168,7 +164,7 @@ export interface MsgUpdateGroupAccountAdminResponse {
  * Msg/UpdateGroupAccountDecisionPolicy request type.
  */
 export interface MsgUpdateGroupAccountDecisionPolicy {
-  $type: 'regen.group.v1alpha1.MsgUpdateGroupAccountDecisionPolicy';
+  $type: "regen.group.v1alpha1.MsgUpdateGroupAccountDecisionPolicy";
   /** admin is the account address of the group admin. */
   admin: string;
   /** address is the group account address. */
@@ -182,7 +178,7 @@ export interface MsgUpdateGroupAccountDecisionPolicy {
  * Msg/UpdateGroupAccountDecisionPolicy response type.
  */
 export interface MsgUpdateGroupAccountDecisionPolicyResponse {
-  $type: 'regen.group.v1alpha1.MsgUpdateGroupAccountDecisionPolicyResponse';
+  $type: "regen.group.v1alpha1.MsgUpdateGroupAccountDecisionPolicyResponse";
 }
 
 /**
@@ -190,7 +186,7 @@ export interface MsgUpdateGroupAccountDecisionPolicyResponse {
  * type.
  */
 export interface MsgUpdateGroupAccountMetadata {
-  $type: 'regen.group.v1alpha1.MsgUpdateGroupAccountMetadata';
+  $type: "regen.group.v1alpha1.MsgUpdateGroupAccountMetadata";
   /** admin is the account address of the group admin. */
   admin: string;
   /** address is the group account address. */
@@ -204,12 +200,12 @@ export interface MsgUpdateGroupAccountMetadata {
  * response type.
  */
 export interface MsgUpdateGroupAccountMetadataResponse {
-  $type: 'regen.group.v1alpha1.MsgUpdateGroupAccountMetadataResponse';
+  $type: "regen.group.v1alpha1.MsgUpdateGroupAccountMetadataResponse";
 }
 
 /** MsgCreateProposal is the Msg/CreateProposal request type. */
 export interface MsgCreateProposal {
-  $type: 'regen.group.v1alpha1.MsgCreateProposal';
+  $type: "regen.group.v1alpha1.MsgCreateProposal";
   /** address is the group account address. */
   address: string;
   /**
@@ -231,14 +227,14 @@ export interface MsgCreateProposal {
 
 /** MsgCreateProposalResponse is the Msg/CreateProposal response type. */
 export interface MsgCreateProposalResponse {
-  $type: 'regen.group.v1alpha1.MsgCreateProposalResponse';
+  $type: "regen.group.v1alpha1.MsgCreateProposalResponse";
   /** proposal is the unique ID of the proposal. */
   proposalId: Long;
 }
 
 /** MsgVote is the Msg/Vote request type. */
 export interface MsgVote {
-  $type: 'regen.group.v1alpha1.MsgVote';
+  $type: "regen.group.v1alpha1.MsgVote";
   /** proposal is the unique ID of the proposal. */
   proposalId: Long;
   /** voter is the voter account address. */
@@ -256,12 +252,12 @@ export interface MsgVote {
 
 /** MsgVoteResponse is the Msg/Vote response type. */
 export interface MsgVoteResponse {
-  $type: 'regen.group.v1alpha1.MsgVoteResponse';
+  $type: "regen.group.v1alpha1.MsgVoteResponse";
 }
 
 /** MsgExec is the Msg/Exec request type. */
 export interface MsgExec {
-  $type: 'regen.group.v1alpha1.MsgExec';
+  $type: "regen.group.v1alpha1.MsgExec";
   /** proposal is the unique ID of the proposal. */
   proposalId: Long;
   /** signer is the account address used to execute the proposal. */
@@ -270,26 +266,18 @@ export interface MsgExec {
 
 /** MsgExecResponse is the Msg/Exec request type. */
 export interface MsgExecResponse {
-  $type: 'regen.group.v1alpha1.MsgExecResponse';
+  $type: "regen.group.v1alpha1.MsgExecResponse";
 }
 
 function createBaseMsgCreateGroup(): MsgCreateGroup {
-  return {
-    $type: 'regen.group.v1alpha1.MsgCreateGroup',
-    admin: '',
-    members: [],
-    metadata: new Uint8Array(),
-  };
+  return { $type: "regen.group.v1alpha1.MsgCreateGroup", admin: "", members: [], metadata: new Uint8Array() };
 }
 
 export const MsgCreateGroup = {
-  $type: 'regen.group.v1alpha1.MsgCreateGroup' as const,
+  $type: "regen.group.v1alpha1.MsgCreateGroup" as const,
 
-  encode(
-    message: MsgCreateGroup,
-    writer: _m0.Writer = _m0.Writer.create(),
-  ): _m0.Writer {
-    if (message.admin !== '') {
+  encode(message: MsgCreateGroup, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+    if (message.admin !== "") {
       writer.uint32(10).string(message.admin);
     }
     for (const v of message.members) {
@@ -328,13 +316,9 @@ export const MsgCreateGroup = {
   fromJSON(object: any): MsgCreateGroup {
     return {
       $type: MsgCreateGroup.$type,
-      admin: isSet(object.admin) ? String(object.admin) : '',
-      members: Array.isArray(object?.members)
-        ? object.members.map((e: any) => Member.fromJSON(e))
-        : [],
-      metadata: isSet(object.metadata)
-        ? bytesFromBase64(object.metadata)
-        : new Uint8Array(),
+      admin: isSet(object.admin) ? String(object.admin) : "",
+      members: Array.isArray(object?.members) ? object.members.map((e: any) => Member.fromJSON(e)) : [],
+      metadata: isSet(object.metadata) ? bytesFromBase64(object.metadata) : new Uint8Array(),
     };
   },
 
@@ -342,25 +326,23 @@ export const MsgCreateGroup = {
     const obj: any = {};
     message.admin !== undefined && (obj.admin = message.admin);
     if (message.members) {
-      obj.members = message.members.map(e =>
-        e ? Member.toJSON(e) : undefined,
-      );
+      obj.members = message.members.map((e) => e ? Member.toJSON(e) : undefined);
     } else {
       obj.members = [];
     }
     message.metadata !== undefined &&
-      (obj.metadata = base64FromBytes(
-        message.metadata !== undefined ? message.metadata : new Uint8Array(),
-      ));
+      (obj.metadata = base64FromBytes(message.metadata !== undefined ? message.metadata : new Uint8Array()));
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<MsgCreateGroup>, I>>(
-    object: I,
-  ): MsgCreateGroup {
+  create(base?: DeepPartial<MsgCreateGroup>): MsgCreateGroup {
+    return MsgCreateGroup.fromPartial(base ?? {});
+  },
+
+  fromPartial(object: DeepPartial<MsgCreateGroup>): MsgCreateGroup {
     const message = createBaseMsgCreateGroup();
-    message.admin = object.admin ?? '';
-    message.members = object.members?.map(e => Member.fromPartial(e)) || [];
+    message.admin = object.admin ?? "";
+    message.members = object.members?.map((e) => Member.fromPartial(e)) || [];
     message.metadata = object.metadata ?? new Uint8Array();
     return message;
   },
@@ -369,29 +351,20 @@ export const MsgCreateGroup = {
 messageTypeRegistry.set(MsgCreateGroup.$type, MsgCreateGroup);
 
 function createBaseMsgCreateGroupResponse(): MsgCreateGroupResponse {
-  return {
-    $type: 'regen.group.v1alpha1.MsgCreateGroupResponse',
-    groupId: Long.UZERO,
-  };
+  return { $type: "regen.group.v1alpha1.MsgCreateGroupResponse", groupId: Long.UZERO };
 }
 
 export const MsgCreateGroupResponse = {
-  $type: 'regen.group.v1alpha1.MsgCreateGroupResponse' as const,
+  $type: "regen.group.v1alpha1.MsgCreateGroupResponse" as const,
 
-  encode(
-    message: MsgCreateGroupResponse,
-    writer: _m0.Writer = _m0.Writer.create(),
-  ): _m0.Writer {
+  encode(message: MsgCreateGroupResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (!message.groupId.isZero()) {
       writer.uint32(8).uint64(message.groupId);
     }
     return writer;
   },
 
-  decode(
-    input: _m0.Reader | Uint8Array,
-    length?: number,
-  ): MsgCreateGroupResponse {
+  decode(input: _m0.Reader | Uint8Array, length?: number): MsgCreateGroupResponse {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMsgCreateGroupResponse();
@@ -412,27 +385,25 @@ export const MsgCreateGroupResponse = {
   fromJSON(object: any): MsgCreateGroupResponse {
     return {
       $type: MsgCreateGroupResponse.$type,
-      groupId: isSet(object.groupId)
-        ? Long.fromString(object.groupId)
-        : Long.UZERO,
+      groupId: isSet(object.groupId) ? Long.fromValue(object.groupId) : Long.UZERO,
     };
   },
 
   toJSON(message: MsgCreateGroupResponse): unknown {
     const obj: any = {};
-    message.groupId !== undefined &&
-      (obj.groupId = (message.groupId || Long.UZERO).toString());
+    message.groupId !== undefined && (obj.groupId = (message.groupId || Long.UZERO).toString());
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<MsgCreateGroupResponse>, I>>(
-    object: I,
-  ): MsgCreateGroupResponse {
+  create(base?: DeepPartial<MsgCreateGroupResponse>): MsgCreateGroupResponse {
+    return MsgCreateGroupResponse.fromPartial(base ?? {});
+  },
+
+  fromPartial(object: DeepPartial<MsgCreateGroupResponse>): MsgCreateGroupResponse {
     const message = createBaseMsgCreateGroupResponse();
-    message.groupId =
-      object.groupId !== undefined && object.groupId !== null
-        ? Long.fromValue(object.groupId)
-        : Long.UZERO;
+    message.groupId = (object.groupId !== undefined && object.groupId !== null)
+      ? Long.fromValue(object.groupId)
+      : Long.UZERO;
     return message;
   },
 };
@@ -440,22 +411,14 @@ export const MsgCreateGroupResponse = {
 messageTypeRegistry.set(MsgCreateGroupResponse.$type, MsgCreateGroupResponse);
 
 function createBaseMsgUpdateGroupMembers(): MsgUpdateGroupMembers {
-  return {
-    $type: 'regen.group.v1alpha1.MsgUpdateGroupMembers',
-    admin: '',
-    groupId: Long.UZERO,
-    memberUpdates: [],
-  };
+  return { $type: "regen.group.v1alpha1.MsgUpdateGroupMembers", admin: "", groupId: Long.UZERO, memberUpdates: [] };
 }
 
 export const MsgUpdateGroupMembers = {
-  $type: 'regen.group.v1alpha1.MsgUpdateGroupMembers' as const,
+  $type: "regen.group.v1alpha1.MsgUpdateGroupMembers" as const,
 
-  encode(
-    message: MsgUpdateGroupMembers,
-    writer: _m0.Writer = _m0.Writer.create(),
-  ): _m0.Writer {
-    if (message.admin !== '') {
+  encode(message: MsgUpdateGroupMembers, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+    if (message.admin !== "") {
       writer.uint32(10).string(message.admin);
     }
     if (!message.groupId.isZero()) {
@@ -467,10 +430,7 @@ export const MsgUpdateGroupMembers = {
     return writer;
   },
 
-  decode(
-    input: _m0.Reader | Uint8Array,
-    length?: number,
-  ): MsgUpdateGroupMembers {
+  decode(input: _m0.Reader | Uint8Array, length?: number): MsgUpdateGroupMembers {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMsgUpdateGroupMembers();
@@ -497,10 +457,8 @@ export const MsgUpdateGroupMembers = {
   fromJSON(object: any): MsgUpdateGroupMembers {
     return {
       $type: MsgUpdateGroupMembers.$type,
-      admin: isSet(object.admin) ? String(object.admin) : '',
-      groupId: isSet(object.groupId)
-        ? Long.fromString(object.groupId)
-        : Long.UZERO,
+      admin: isSet(object.admin) ? String(object.admin) : "",
+      groupId: isSet(object.groupId) ? Long.fromValue(object.groupId) : Long.UZERO,
       memberUpdates: Array.isArray(object?.memberUpdates)
         ? object.memberUpdates.map((e: any) => Member.fromJSON(e))
         : [],
@@ -510,29 +468,26 @@ export const MsgUpdateGroupMembers = {
   toJSON(message: MsgUpdateGroupMembers): unknown {
     const obj: any = {};
     message.admin !== undefined && (obj.admin = message.admin);
-    message.groupId !== undefined &&
-      (obj.groupId = (message.groupId || Long.UZERO).toString());
+    message.groupId !== undefined && (obj.groupId = (message.groupId || Long.UZERO).toString());
     if (message.memberUpdates) {
-      obj.memberUpdates = message.memberUpdates.map(e =>
-        e ? Member.toJSON(e) : undefined,
-      );
+      obj.memberUpdates = message.memberUpdates.map((e) => e ? Member.toJSON(e) : undefined);
     } else {
       obj.memberUpdates = [];
     }
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<MsgUpdateGroupMembers>, I>>(
-    object: I,
-  ): MsgUpdateGroupMembers {
+  create(base?: DeepPartial<MsgUpdateGroupMembers>): MsgUpdateGroupMembers {
+    return MsgUpdateGroupMembers.fromPartial(base ?? {});
+  },
+
+  fromPartial(object: DeepPartial<MsgUpdateGroupMembers>): MsgUpdateGroupMembers {
     const message = createBaseMsgUpdateGroupMembers();
-    message.admin = object.admin ?? '';
-    message.groupId =
-      object.groupId !== undefined && object.groupId !== null
-        ? Long.fromValue(object.groupId)
-        : Long.UZERO;
-    message.memberUpdates =
-      object.memberUpdates?.map(e => Member.fromPartial(e)) || [];
+    message.admin = object.admin ?? "";
+    message.groupId = (object.groupId !== undefined && object.groupId !== null)
+      ? Long.fromValue(object.groupId)
+      : Long.UZERO;
+    message.memberUpdates = object.memberUpdates?.map((e) => Member.fromPartial(e)) || [];
     return message;
   },
 };
@@ -540,23 +495,17 @@ export const MsgUpdateGroupMembers = {
 messageTypeRegistry.set(MsgUpdateGroupMembers.$type, MsgUpdateGroupMembers);
 
 function createBaseMsgUpdateGroupMembersResponse(): MsgUpdateGroupMembersResponse {
-  return { $type: 'regen.group.v1alpha1.MsgUpdateGroupMembersResponse' };
+  return { $type: "regen.group.v1alpha1.MsgUpdateGroupMembersResponse" };
 }
 
 export const MsgUpdateGroupMembersResponse = {
-  $type: 'regen.group.v1alpha1.MsgUpdateGroupMembersResponse' as const,
+  $type: "regen.group.v1alpha1.MsgUpdateGroupMembersResponse" as const,
 
-  encode(
-    _: MsgUpdateGroupMembersResponse,
-    writer: _m0.Writer = _m0.Writer.create(),
-  ): _m0.Writer {
+  encode(_: MsgUpdateGroupMembersResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     return writer;
   },
 
-  decode(
-    input: _m0.Reader | Uint8Array,
-    length?: number,
-  ): MsgUpdateGroupMembersResponse {
+  decode(input: _m0.Reader | Uint8Array, length?: number): MsgUpdateGroupMembersResponse {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMsgUpdateGroupMembersResponse();
@@ -572,9 +521,7 @@ export const MsgUpdateGroupMembersResponse = {
   },
 
   fromJSON(_: any): MsgUpdateGroupMembersResponse {
-    return {
-      $type: MsgUpdateGroupMembersResponse.$type,
-    };
+    return { $type: MsgUpdateGroupMembersResponse.$type };
   },
 
   toJSON(_: MsgUpdateGroupMembersResponse): unknown {
@@ -582,42 +529,33 @@ export const MsgUpdateGroupMembersResponse = {
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<MsgUpdateGroupMembersResponse>, I>>(
-    _: I,
-  ): MsgUpdateGroupMembersResponse {
+  create(base?: DeepPartial<MsgUpdateGroupMembersResponse>): MsgUpdateGroupMembersResponse {
+    return MsgUpdateGroupMembersResponse.fromPartial(base ?? {});
+  },
+
+  fromPartial(_: DeepPartial<MsgUpdateGroupMembersResponse>): MsgUpdateGroupMembersResponse {
     const message = createBaseMsgUpdateGroupMembersResponse();
     return message;
   },
 };
 
-messageTypeRegistry.set(
-  MsgUpdateGroupMembersResponse.$type,
-  MsgUpdateGroupMembersResponse,
-);
+messageTypeRegistry.set(MsgUpdateGroupMembersResponse.$type, MsgUpdateGroupMembersResponse);
 
 function createBaseMsgUpdateGroupAdmin(): MsgUpdateGroupAdmin {
-  return {
-    $type: 'regen.group.v1alpha1.MsgUpdateGroupAdmin',
-    admin: '',
-    groupId: Long.UZERO,
-    newAdmin: '',
-  };
+  return { $type: "regen.group.v1alpha1.MsgUpdateGroupAdmin", admin: "", groupId: Long.UZERO, newAdmin: "" };
 }
 
 export const MsgUpdateGroupAdmin = {
-  $type: 'regen.group.v1alpha1.MsgUpdateGroupAdmin' as const,
+  $type: "regen.group.v1alpha1.MsgUpdateGroupAdmin" as const,
 
-  encode(
-    message: MsgUpdateGroupAdmin,
-    writer: _m0.Writer = _m0.Writer.create(),
-  ): _m0.Writer {
-    if (message.admin !== '') {
+  encode(message: MsgUpdateGroupAdmin, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+    if (message.admin !== "") {
       writer.uint32(10).string(message.admin);
     }
     if (!message.groupId.isZero()) {
       writer.uint32(16).uint64(message.groupId);
     }
-    if (message.newAdmin !== '') {
+    if (message.newAdmin !== "") {
       writer.uint32(26).string(message.newAdmin);
     }
     return writer;
@@ -650,33 +588,31 @@ export const MsgUpdateGroupAdmin = {
   fromJSON(object: any): MsgUpdateGroupAdmin {
     return {
       $type: MsgUpdateGroupAdmin.$type,
-      admin: isSet(object.admin) ? String(object.admin) : '',
-      groupId: isSet(object.groupId)
-        ? Long.fromString(object.groupId)
-        : Long.UZERO,
-      newAdmin: isSet(object.newAdmin) ? String(object.newAdmin) : '',
+      admin: isSet(object.admin) ? String(object.admin) : "",
+      groupId: isSet(object.groupId) ? Long.fromValue(object.groupId) : Long.UZERO,
+      newAdmin: isSet(object.newAdmin) ? String(object.newAdmin) : "",
     };
   },
 
   toJSON(message: MsgUpdateGroupAdmin): unknown {
     const obj: any = {};
     message.admin !== undefined && (obj.admin = message.admin);
-    message.groupId !== undefined &&
-      (obj.groupId = (message.groupId || Long.UZERO).toString());
+    message.groupId !== undefined && (obj.groupId = (message.groupId || Long.UZERO).toString());
     message.newAdmin !== undefined && (obj.newAdmin = message.newAdmin);
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<MsgUpdateGroupAdmin>, I>>(
-    object: I,
-  ): MsgUpdateGroupAdmin {
+  create(base?: DeepPartial<MsgUpdateGroupAdmin>): MsgUpdateGroupAdmin {
+    return MsgUpdateGroupAdmin.fromPartial(base ?? {});
+  },
+
+  fromPartial(object: DeepPartial<MsgUpdateGroupAdmin>): MsgUpdateGroupAdmin {
     const message = createBaseMsgUpdateGroupAdmin();
-    message.admin = object.admin ?? '';
-    message.groupId =
-      object.groupId !== undefined && object.groupId !== null
-        ? Long.fromValue(object.groupId)
-        : Long.UZERO;
-    message.newAdmin = object.newAdmin ?? '';
+    message.admin = object.admin ?? "";
+    message.groupId = (object.groupId !== undefined && object.groupId !== null)
+      ? Long.fromValue(object.groupId)
+      : Long.UZERO;
+    message.newAdmin = object.newAdmin ?? "";
     return message;
   },
 };
@@ -684,23 +620,17 @@ export const MsgUpdateGroupAdmin = {
 messageTypeRegistry.set(MsgUpdateGroupAdmin.$type, MsgUpdateGroupAdmin);
 
 function createBaseMsgUpdateGroupAdminResponse(): MsgUpdateGroupAdminResponse {
-  return { $type: 'regen.group.v1alpha1.MsgUpdateGroupAdminResponse' };
+  return { $type: "regen.group.v1alpha1.MsgUpdateGroupAdminResponse" };
 }
 
 export const MsgUpdateGroupAdminResponse = {
-  $type: 'regen.group.v1alpha1.MsgUpdateGroupAdminResponse' as const,
+  $type: "regen.group.v1alpha1.MsgUpdateGroupAdminResponse" as const,
 
-  encode(
-    _: MsgUpdateGroupAdminResponse,
-    writer: _m0.Writer = _m0.Writer.create(),
-  ): _m0.Writer {
+  encode(_: MsgUpdateGroupAdminResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     return writer;
   },
 
-  decode(
-    input: _m0.Reader | Uint8Array,
-    length?: number,
-  ): MsgUpdateGroupAdminResponse {
+  decode(input: _m0.Reader | Uint8Array, length?: number): MsgUpdateGroupAdminResponse {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMsgUpdateGroupAdminResponse();
@@ -716,9 +646,7 @@ export const MsgUpdateGroupAdminResponse = {
   },
 
   fromJSON(_: any): MsgUpdateGroupAdminResponse {
-    return {
-      $type: MsgUpdateGroupAdminResponse.$type,
-    };
+    return { $type: MsgUpdateGroupAdminResponse.$type };
   },
 
   toJSON(_: MsgUpdateGroupAdminResponse): unknown {
@@ -726,36 +654,32 @@ export const MsgUpdateGroupAdminResponse = {
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<MsgUpdateGroupAdminResponse>, I>>(
-    _: I,
-  ): MsgUpdateGroupAdminResponse {
+  create(base?: DeepPartial<MsgUpdateGroupAdminResponse>): MsgUpdateGroupAdminResponse {
+    return MsgUpdateGroupAdminResponse.fromPartial(base ?? {});
+  },
+
+  fromPartial(_: DeepPartial<MsgUpdateGroupAdminResponse>): MsgUpdateGroupAdminResponse {
     const message = createBaseMsgUpdateGroupAdminResponse();
     return message;
   },
 };
 
-messageTypeRegistry.set(
-  MsgUpdateGroupAdminResponse.$type,
-  MsgUpdateGroupAdminResponse,
-);
+messageTypeRegistry.set(MsgUpdateGroupAdminResponse.$type, MsgUpdateGroupAdminResponse);
 
 function createBaseMsgUpdateGroupMetadata(): MsgUpdateGroupMetadata {
   return {
-    $type: 'regen.group.v1alpha1.MsgUpdateGroupMetadata',
-    admin: '',
+    $type: "regen.group.v1alpha1.MsgUpdateGroupMetadata",
+    admin: "",
     groupId: Long.UZERO,
     metadata: new Uint8Array(),
   };
 }
 
 export const MsgUpdateGroupMetadata = {
-  $type: 'regen.group.v1alpha1.MsgUpdateGroupMetadata' as const,
+  $type: "regen.group.v1alpha1.MsgUpdateGroupMetadata" as const,
 
-  encode(
-    message: MsgUpdateGroupMetadata,
-    writer: _m0.Writer = _m0.Writer.create(),
-  ): _m0.Writer {
-    if (message.admin !== '') {
+  encode(message: MsgUpdateGroupMetadata, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+    if (message.admin !== "") {
       writer.uint32(10).string(message.admin);
     }
     if (!message.groupId.isZero()) {
@@ -767,10 +691,7 @@ export const MsgUpdateGroupMetadata = {
     return writer;
   },
 
-  decode(
-    input: _m0.Reader | Uint8Array,
-    length?: number,
-  ): MsgUpdateGroupMetadata {
+  decode(input: _m0.Reader | Uint8Array, length?: number): MsgUpdateGroupMetadata {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMsgUpdateGroupMetadata();
@@ -797,37 +718,31 @@ export const MsgUpdateGroupMetadata = {
   fromJSON(object: any): MsgUpdateGroupMetadata {
     return {
       $type: MsgUpdateGroupMetadata.$type,
-      admin: isSet(object.admin) ? String(object.admin) : '',
-      groupId: isSet(object.groupId)
-        ? Long.fromString(object.groupId)
-        : Long.UZERO,
-      metadata: isSet(object.metadata)
-        ? bytesFromBase64(object.metadata)
-        : new Uint8Array(),
+      admin: isSet(object.admin) ? String(object.admin) : "",
+      groupId: isSet(object.groupId) ? Long.fromValue(object.groupId) : Long.UZERO,
+      metadata: isSet(object.metadata) ? bytesFromBase64(object.metadata) : new Uint8Array(),
     };
   },
 
   toJSON(message: MsgUpdateGroupMetadata): unknown {
     const obj: any = {};
     message.admin !== undefined && (obj.admin = message.admin);
-    message.groupId !== undefined &&
-      (obj.groupId = (message.groupId || Long.UZERO).toString());
+    message.groupId !== undefined && (obj.groupId = (message.groupId || Long.UZERO).toString());
     message.metadata !== undefined &&
-      (obj.metadata = base64FromBytes(
-        message.metadata !== undefined ? message.metadata : new Uint8Array(),
-      ));
+      (obj.metadata = base64FromBytes(message.metadata !== undefined ? message.metadata : new Uint8Array()));
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<MsgUpdateGroupMetadata>, I>>(
-    object: I,
-  ): MsgUpdateGroupMetadata {
+  create(base?: DeepPartial<MsgUpdateGroupMetadata>): MsgUpdateGroupMetadata {
+    return MsgUpdateGroupMetadata.fromPartial(base ?? {});
+  },
+
+  fromPartial(object: DeepPartial<MsgUpdateGroupMetadata>): MsgUpdateGroupMetadata {
     const message = createBaseMsgUpdateGroupMetadata();
-    message.admin = object.admin ?? '';
-    message.groupId =
-      object.groupId !== undefined && object.groupId !== null
-        ? Long.fromValue(object.groupId)
-        : Long.UZERO;
+    message.admin = object.admin ?? "";
+    message.groupId = (object.groupId !== undefined && object.groupId !== null)
+      ? Long.fromValue(object.groupId)
+      : Long.UZERO;
     message.metadata = object.metadata ?? new Uint8Array();
     return message;
   },
@@ -836,23 +751,17 @@ export const MsgUpdateGroupMetadata = {
 messageTypeRegistry.set(MsgUpdateGroupMetadata.$type, MsgUpdateGroupMetadata);
 
 function createBaseMsgUpdateGroupMetadataResponse(): MsgUpdateGroupMetadataResponse {
-  return { $type: 'regen.group.v1alpha1.MsgUpdateGroupMetadataResponse' };
+  return { $type: "regen.group.v1alpha1.MsgUpdateGroupMetadataResponse" };
 }
 
 export const MsgUpdateGroupMetadataResponse = {
-  $type: 'regen.group.v1alpha1.MsgUpdateGroupMetadataResponse' as const,
+  $type: "regen.group.v1alpha1.MsgUpdateGroupMetadataResponse" as const,
 
-  encode(
-    _: MsgUpdateGroupMetadataResponse,
-    writer: _m0.Writer = _m0.Writer.create(),
-  ): _m0.Writer {
+  encode(_: MsgUpdateGroupMetadataResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     return writer;
   },
 
-  decode(
-    input: _m0.Reader | Uint8Array,
-    length?: number,
-  ): MsgUpdateGroupMetadataResponse {
+  decode(input: _m0.Reader | Uint8Array, length?: number): MsgUpdateGroupMetadataResponse {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMsgUpdateGroupMetadataResponse();
@@ -868,9 +777,7 @@ export const MsgUpdateGroupMetadataResponse = {
   },
 
   fromJSON(_: any): MsgUpdateGroupMetadataResponse {
-    return {
-      $type: MsgUpdateGroupMetadataResponse.$type,
-    };
+    return { $type: MsgUpdateGroupMetadataResponse.$type };
   },
 
   toJSON(_: MsgUpdateGroupMetadataResponse): unknown {
@@ -878,23 +785,22 @@ export const MsgUpdateGroupMetadataResponse = {
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<MsgUpdateGroupMetadataResponse>, I>>(
-    _: I,
-  ): MsgUpdateGroupMetadataResponse {
+  create(base?: DeepPartial<MsgUpdateGroupMetadataResponse>): MsgUpdateGroupMetadataResponse {
+    return MsgUpdateGroupMetadataResponse.fromPartial(base ?? {});
+  },
+
+  fromPartial(_: DeepPartial<MsgUpdateGroupMetadataResponse>): MsgUpdateGroupMetadataResponse {
     const message = createBaseMsgUpdateGroupMetadataResponse();
     return message;
   },
 };
 
-messageTypeRegistry.set(
-  MsgUpdateGroupMetadataResponse.$type,
-  MsgUpdateGroupMetadataResponse,
-);
+messageTypeRegistry.set(MsgUpdateGroupMetadataResponse.$type, MsgUpdateGroupMetadataResponse);
 
 function createBaseMsgCreateGroupAccount(): MsgCreateGroupAccount {
   return {
-    $type: 'regen.group.v1alpha1.MsgCreateGroupAccount',
-    admin: '',
+    $type: "regen.group.v1alpha1.MsgCreateGroupAccount",
+    admin: "",
     groupId: Long.UZERO,
     metadata: new Uint8Array(),
     decisionPolicy: undefined,
@@ -902,13 +808,10 @@ function createBaseMsgCreateGroupAccount(): MsgCreateGroupAccount {
 }
 
 export const MsgCreateGroupAccount = {
-  $type: 'regen.group.v1alpha1.MsgCreateGroupAccount' as const,
+  $type: "regen.group.v1alpha1.MsgCreateGroupAccount" as const,
 
-  encode(
-    message: MsgCreateGroupAccount,
-    writer: _m0.Writer = _m0.Writer.create(),
-  ): _m0.Writer {
-    if (message.admin !== '') {
+  encode(message: MsgCreateGroupAccount, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+    if (message.admin !== "") {
       writer.uint32(10).string(message.admin);
     }
     if (!message.groupId.isZero()) {
@@ -923,10 +826,7 @@ export const MsgCreateGroupAccount = {
     return writer;
   },
 
-  decode(
-    input: _m0.Reader | Uint8Array,
-    length?: number,
-  ): MsgCreateGroupAccount {
+  decode(input: _m0.Reader | Uint8Array, length?: number): MsgCreateGroupAccount {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMsgCreateGroupAccount();
@@ -956,49 +856,38 @@ export const MsgCreateGroupAccount = {
   fromJSON(object: any): MsgCreateGroupAccount {
     return {
       $type: MsgCreateGroupAccount.$type,
-      admin: isSet(object.admin) ? String(object.admin) : '',
-      groupId: isSet(object.groupId)
-        ? Long.fromString(object.groupId)
-        : Long.UZERO,
-      metadata: isSet(object.metadata)
-        ? bytesFromBase64(object.metadata)
-        : new Uint8Array(),
-      decisionPolicy: isSet(object.decisionPolicy)
-        ? Any.fromJSON(object.decisionPolicy)
-        : undefined,
+      admin: isSet(object.admin) ? String(object.admin) : "",
+      groupId: isSet(object.groupId) ? Long.fromValue(object.groupId) : Long.UZERO,
+      metadata: isSet(object.metadata) ? bytesFromBase64(object.metadata) : new Uint8Array(),
+      decisionPolicy: isSet(object.decisionPolicy) ? Any.fromJSON(object.decisionPolicy) : undefined,
     };
   },
 
   toJSON(message: MsgCreateGroupAccount): unknown {
     const obj: any = {};
     message.admin !== undefined && (obj.admin = message.admin);
-    message.groupId !== undefined &&
-      (obj.groupId = (message.groupId || Long.UZERO).toString());
+    message.groupId !== undefined && (obj.groupId = (message.groupId || Long.UZERO).toString());
     message.metadata !== undefined &&
-      (obj.metadata = base64FromBytes(
-        message.metadata !== undefined ? message.metadata : new Uint8Array(),
-      ));
+      (obj.metadata = base64FromBytes(message.metadata !== undefined ? message.metadata : new Uint8Array()));
     message.decisionPolicy !== undefined &&
-      (obj.decisionPolicy = message.decisionPolicy
-        ? Any.toJSON(message.decisionPolicy)
-        : undefined);
+      (obj.decisionPolicy = message.decisionPolicy ? Any.toJSON(message.decisionPolicy) : undefined);
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<MsgCreateGroupAccount>, I>>(
-    object: I,
-  ): MsgCreateGroupAccount {
+  create(base?: DeepPartial<MsgCreateGroupAccount>): MsgCreateGroupAccount {
+    return MsgCreateGroupAccount.fromPartial(base ?? {});
+  },
+
+  fromPartial(object: DeepPartial<MsgCreateGroupAccount>): MsgCreateGroupAccount {
     const message = createBaseMsgCreateGroupAccount();
-    message.admin = object.admin ?? '';
-    message.groupId =
-      object.groupId !== undefined && object.groupId !== null
-        ? Long.fromValue(object.groupId)
-        : Long.UZERO;
+    message.admin = object.admin ?? "";
+    message.groupId = (object.groupId !== undefined && object.groupId !== null)
+      ? Long.fromValue(object.groupId)
+      : Long.UZERO;
     message.metadata = object.metadata ?? new Uint8Array();
-    message.decisionPolicy =
-      object.decisionPolicy !== undefined && object.decisionPolicy !== null
-        ? Any.fromPartial(object.decisionPolicy)
-        : undefined;
+    message.decisionPolicy = (object.decisionPolicy !== undefined && object.decisionPolicy !== null)
+      ? Any.fromPartial(object.decisionPolicy)
+      : undefined;
     return message;
   },
 };
@@ -1006,29 +895,20 @@ export const MsgCreateGroupAccount = {
 messageTypeRegistry.set(MsgCreateGroupAccount.$type, MsgCreateGroupAccount);
 
 function createBaseMsgCreateGroupAccountResponse(): MsgCreateGroupAccountResponse {
-  return {
-    $type: 'regen.group.v1alpha1.MsgCreateGroupAccountResponse',
-    address: '',
-  };
+  return { $type: "regen.group.v1alpha1.MsgCreateGroupAccountResponse", address: "" };
 }
 
 export const MsgCreateGroupAccountResponse = {
-  $type: 'regen.group.v1alpha1.MsgCreateGroupAccountResponse' as const,
+  $type: "regen.group.v1alpha1.MsgCreateGroupAccountResponse" as const,
 
-  encode(
-    message: MsgCreateGroupAccountResponse,
-    writer: _m0.Writer = _m0.Writer.create(),
-  ): _m0.Writer {
-    if (message.address !== '') {
+  encode(message: MsgCreateGroupAccountResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+    if (message.address !== "") {
       writer.uint32(10).string(message.address);
     }
     return writer;
   },
 
-  decode(
-    input: _m0.Reader | Uint8Array,
-    length?: number,
-  ): MsgCreateGroupAccountResponse {
+  decode(input: _m0.Reader | Uint8Array, length?: number): MsgCreateGroupAccountResponse {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMsgCreateGroupAccountResponse();
@@ -1047,10 +927,7 @@ export const MsgCreateGroupAccountResponse = {
   },
 
   fromJSON(object: any): MsgCreateGroupAccountResponse {
-    return {
-      $type: MsgCreateGroupAccountResponse.$type,
-      address: isSet(object.address) ? String(object.address) : '',
-    };
+    return { $type: MsgCreateGroupAccountResponse.$type, address: isSet(object.address) ? String(object.address) : "" };
   },
 
   toJSON(message: MsgCreateGroupAccountResponse): unknown {
@@ -1059,52 +936,40 @@ export const MsgCreateGroupAccountResponse = {
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<MsgCreateGroupAccountResponse>, I>>(
-    object: I,
-  ): MsgCreateGroupAccountResponse {
+  create(base?: DeepPartial<MsgCreateGroupAccountResponse>): MsgCreateGroupAccountResponse {
+    return MsgCreateGroupAccountResponse.fromPartial(base ?? {});
+  },
+
+  fromPartial(object: DeepPartial<MsgCreateGroupAccountResponse>): MsgCreateGroupAccountResponse {
     const message = createBaseMsgCreateGroupAccountResponse();
-    message.address = object.address ?? '';
+    message.address = object.address ?? "";
     return message;
   },
 };
 
-messageTypeRegistry.set(
-  MsgCreateGroupAccountResponse.$type,
-  MsgCreateGroupAccountResponse,
-);
+messageTypeRegistry.set(MsgCreateGroupAccountResponse.$type, MsgCreateGroupAccountResponse);
 
 function createBaseMsgUpdateGroupAccountAdmin(): MsgUpdateGroupAccountAdmin {
-  return {
-    $type: 'regen.group.v1alpha1.MsgUpdateGroupAccountAdmin',
-    admin: '',
-    address: '',
-    newAdmin: '',
-  };
+  return { $type: "regen.group.v1alpha1.MsgUpdateGroupAccountAdmin", admin: "", address: "", newAdmin: "" };
 }
 
 export const MsgUpdateGroupAccountAdmin = {
-  $type: 'regen.group.v1alpha1.MsgUpdateGroupAccountAdmin' as const,
+  $type: "regen.group.v1alpha1.MsgUpdateGroupAccountAdmin" as const,
 
-  encode(
-    message: MsgUpdateGroupAccountAdmin,
-    writer: _m0.Writer = _m0.Writer.create(),
-  ): _m0.Writer {
-    if (message.admin !== '') {
+  encode(message: MsgUpdateGroupAccountAdmin, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+    if (message.admin !== "") {
       writer.uint32(10).string(message.admin);
     }
-    if (message.address !== '') {
+    if (message.address !== "") {
       writer.uint32(18).string(message.address);
     }
-    if (message.newAdmin !== '') {
+    if (message.newAdmin !== "") {
       writer.uint32(26).string(message.newAdmin);
     }
     return writer;
   },
 
-  decode(
-    input: _m0.Reader | Uint8Array,
-    length?: number,
-  ): MsgUpdateGroupAccountAdmin {
+  decode(input: _m0.Reader | Uint8Array, length?: number): MsgUpdateGroupAccountAdmin {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMsgUpdateGroupAccountAdmin();
@@ -1131,9 +996,9 @@ export const MsgUpdateGroupAccountAdmin = {
   fromJSON(object: any): MsgUpdateGroupAccountAdmin {
     return {
       $type: MsgUpdateGroupAccountAdmin.$type,
-      admin: isSet(object.admin) ? String(object.admin) : '',
-      address: isSet(object.address) ? String(object.address) : '',
-      newAdmin: isSet(object.newAdmin) ? String(object.newAdmin) : '',
+      admin: isSet(object.admin) ? String(object.admin) : "",
+      address: isSet(object.address) ? String(object.address) : "",
+      newAdmin: isSet(object.newAdmin) ? String(object.newAdmin) : "",
     };
   },
 
@@ -1145,40 +1010,33 @@ export const MsgUpdateGroupAccountAdmin = {
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<MsgUpdateGroupAccountAdmin>, I>>(
-    object: I,
-  ): MsgUpdateGroupAccountAdmin {
+  create(base?: DeepPartial<MsgUpdateGroupAccountAdmin>): MsgUpdateGroupAccountAdmin {
+    return MsgUpdateGroupAccountAdmin.fromPartial(base ?? {});
+  },
+
+  fromPartial(object: DeepPartial<MsgUpdateGroupAccountAdmin>): MsgUpdateGroupAccountAdmin {
     const message = createBaseMsgUpdateGroupAccountAdmin();
-    message.admin = object.admin ?? '';
-    message.address = object.address ?? '';
-    message.newAdmin = object.newAdmin ?? '';
+    message.admin = object.admin ?? "";
+    message.address = object.address ?? "";
+    message.newAdmin = object.newAdmin ?? "";
     return message;
   },
 };
 
-messageTypeRegistry.set(
-  MsgUpdateGroupAccountAdmin.$type,
-  MsgUpdateGroupAccountAdmin,
-);
+messageTypeRegistry.set(MsgUpdateGroupAccountAdmin.$type, MsgUpdateGroupAccountAdmin);
 
 function createBaseMsgUpdateGroupAccountAdminResponse(): MsgUpdateGroupAccountAdminResponse {
-  return { $type: 'regen.group.v1alpha1.MsgUpdateGroupAccountAdminResponse' };
+  return { $type: "regen.group.v1alpha1.MsgUpdateGroupAccountAdminResponse" };
 }
 
 export const MsgUpdateGroupAccountAdminResponse = {
-  $type: 'regen.group.v1alpha1.MsgUpdateGroupAccountAdminResponse' as const,
+  $type: "regen.group.v1alpha1.MsgUpdateGroupAccountAdminResponse" as const,
 
-  encode(
-    _: MsgUpdateGroupAccountAdminResponse,
-    writer: _m0.Writer = _m0.Writer.create(),
-  ): _m0.Writer {
+  encode(_: MsgUpdateGroupAccountAdminResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     return writer;
   },
 
-  decode(
-    input: _m0.Reader | Uint8Array,
-    length?: number,
-  ): MsgUpdateGroupAccountAdminResponse {
+  decode(input: _m0.Reader | Uint8Array, length?: number): MsgUpdateGroupAccountAdminResponse {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMsgUpdateGroupAccountAdminResponse();
@@ -1194,9 +1052,7 @@ export const MsgUpdateGroupAccountAdminResponse = {
   },
 
   fromJSON(_: any): MsgUpdateGroupAccountAdminResponse {
-    return {
-      $type: MsgUpdateGroupAccountAdminResponse.$type,
-    };
+    return { $type: MsgUpdateGroupAccountAdminResponse.$type };
   },
 
   toJSON(_: MsgUpdateGroupAccountAdminResponse): unknown {
@@ -1204,39 +1060,35 @@ export const MsgUpdateGroupAccountAdminResponse = {
     return obj;
   },
 
-  fromPartial<
-    I extends Exact<DeepPartial<MsgUpdateGroupAccountAdminResponse>, I>,
-  >(_: I): MsgUpdateGroupAccountAdminResponse {
+  create(base?: DeepPartial<MsgUpdateGroupAccountAdminResponse>): MsgUpdateGroupAccountAdminResponse {
+    return MsgUpdateGroupAccountAdminResponse.fromPartial(base ?? {});
+  },
+
+  fromPartial(_: DeepPartial<MsgUpdateGroupAccountAdminResponse>): MsgUpdateGroupAccountAdminResponse {
     const message = createBaseMsgUpdateGroupAccountAdminResponse();
     return message;
   },
 };
 
-messageTypeRegistry.set(
-  MsgUpdateGroupAccountAdminResponse.$type,
-  MsgUpdateGroupAccountAdminResponse,
-);
+messageTypeRegistry.set(MsgUpdateGroupAccountAdminResponse.$type, MsgUpdateGroupAccountAdminResponse);
 
 function createBaseMsgUpdateGroupAccountDecisionPolicy(): MsgUpdateGroupAccountDecisionPolicy {
   return {
-    $type: 'regen.group.v1alpha1.MsgUpdateGroupAccountDecisionPolicy',
-    admin: '',
-    address: '',
+    $type: "regen.group.v1alpha1.MsgUpdateGroupAccountDecisionPolicy",
+    admin: "",
+    address: "",
     decisionPolicy: undefined,
   };
 }
 
 export const MsgUpdateGroupAccountDecisionPolicy = {
-  $type: 'regen.group.v1alpha1.MsgUpdateGroupAccountDecisionPolicy' as const,
+  $type: "regen.group.v1alpha1.MsgUpdateGroupAccountDecisionPolicy" as const,
 
-  encode(
-    message: MsgUpdateGroupAccountDecisionPolicy,
-    writer: _m0.Writer = _m0.Writer.create(),
-  ): _m0.Writer {
-    if (message.admin !== '') {
+  encode(message: MsgUpdateGroupAccountDecisionPolicy, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+    if (message.admin !== "") {
       writer.uint32(10).string(message.admin);
     }
-    if (message.address !== '') {
+    if (message.address !== "") {
       writer.uint32(18).string(message.address);
     }
     if (message.decisionPolicy !== undefined) {
@@ -1245,10 +1097,7 @@ export const MsgUpdateGroupAccountDecisionPolicy = {
     return writer;
   },
 
-  decode(
-    input: _m0.Reader | Uint8Array,
-    length?: number,
-  ): MsgUpdateGroupAccountDecisionPolicy {
+  decode(input: _m0.Reader | Uint8Array, length?: number): MsgUpdateGroupAccountDecisionPolicy {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMsgUpdateGroupAccountDecisionPolicy();
@@ -1275,11 +1124,9 @@ export const MsgUpdateGroupAccountDecisionPolicy = {
   fromJSON(object: any): MsgUpdateGroupAccountDecisionPolicy {
     return {
       $type: MsgUpdateGroupAccountDecisionPolicy.$type,
-      admin: isSet(object.admin) ? String(object.admin) : '',
-      address: isSet(object.address) ? String(object.address) : '',
-      decisionPolicy: isSet(object.decisionPolicy)
-        ? Any.fromJSON(object.decisionPolicy)
-        : undefined,
+      admin: isSet(object.admin) ? String(object.admin) : "",
+      address: isSet(object.address) ? String(object.address) : "",
+      decisionPolicy: isSet(object.decisionPolicy) ? Any.fromJSON(object.decisionPolicy) : undefined,
     };
   },
 
@@ -1288,52 +1135,39 @@ export const MsgUpdateGroupAccountDecisionPolicy = {
     message.admin !== undefined && (obj.admin = message.admin);
     message.address !== undefined && (obj.address = message.address);
     message.decisionPolicy !== undefined &&
-      (obj.decisionPolicy = message.decisionPolicy
-        ? Any.toJSON(message.decisionPolicy)
-        : undefined);
+      (obj.decisionPolicy = message.decisionPolicy ? Any.toJSON(message.decisionPolicy) : undefined);
     return obj;
   },
 
-  fromPartial<
-    I extends Exact<DeepPartial<MsgUpdateGroupAccountDecisionPolicy>, I>,
-  >(object: I): MsgUpdateGroupAccountDecisionPolicy {
+  create(base?: DeepPartial<MsgUpdateGroupAccountDecisionPolicy>): MsgUpdateGroupAccountDecisionPolicy {
+    return MsgUpdateGroupAccountDecisionPolicy.fromPartial(base ?? {});
+  },
+
+  fromPartial(object: DeepPartial<MsgUpdateGroupAccountDecisionPolicy>): MsgUpdateGroupAccountDecisionPolicy {
     const message = createBaseMsgUpdateGroupAccountDecisionPolicy();
-    message.admin = object.admin ?? '';
-    message.address = object.address ?? '';
-    message.decisionPolicy =
-      object.decisionPolicy !== undefined && object.decisionPolicy !== null
-        ? Any.fromPartial(object.decisionPolicy)
-        : undefined;
+    message.admin = object.admin ?? "";
+    message.address = object.address ?? "";
+    message.decisionPolicy = (object.decisionPolicy !== undefined && object.decisionPolicy !== null)
+      ? Any.fromPartial(object.decisionPolicy)
+      : undefined;
     return message;
   },
 };
 
-messageTypeRegistry.set(
-  MsgUpdateGroupAccountDecisionPolicy.$type,
-  MsgUpdateGroupAccountDecisionPolicy,
-);
+messageTypeRegistry.set(MsgUpdateGroupAccountDecisionPolicy.$type, MsgUpdateGroupAccountDecisionPolicy);
 
 function createBaseMsgUpdateGroupAccountDecisionPolicyResponse(): MsgUpdateGroupAccountDecisionPolicyResponse {
-  return {
-    $type: 'regen.group.v1alpha1.MsgUpdateGroupAccountDecisionPolicyResponse',
-  };
+  return { $type: "regen.group.v1alpha1.MsgUpdateGroupAccountDecisionPolicyResponse" };
 }
 
 export const MsgUpdateGroupAccountDecisionPolicyResponse = {
-  $type:
-    'regen.group.v1alpha1.MsgUpdateGroupAccountDecisionPolicyResponse' as const,
+  $type: "regen.group.v1alpha1.MsgUpdateGroupAccountDecisionPolicyResponse" as const,
 
-  encode(
-    _: MsgUpdateGroupAccountDecisionPolicyResponse,
-    writer: _m0.Writer = _m0.Writer.create(),
-  ): _m0.Writer {
+  encode(_: MsgUpdateGroupAccountDecisionPolicyResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     return writer;
   },
 
-  decode(
-    input: _m0.Reader | Uint8Array,
-    length?: number,
-  ): MsgUpdateGroupAccountDecisionPolicyResponse {
+  decode(input: _m0.Reader | Uint8Array, length?: number): MsgUpdateGroupAccountDecisionPolicyResponse {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMsgUpdateGroupAccountDecisionPolicyResponse();
@@ -1349,9 +1183,7 @@ export const MsgUpdateGroupAccountDecisionPolicyResponse = {
   },
 
   fromJSON(_: any): MsgUpdateGroupAccountDecisionPolicyResponse {
-    return {
-      $type: MsgUpdateGroupAccountDecisionPolicyResponse.$type,
-    };
+    return { $type: MsgUpdateGroupAccountDecisionPolicyResponse.$type };
   },
 
   toJSON(_: MsgUpdateGroupAccountDecisionPolicyResponse): unknown {
@@ -1359,42 +1191,37 @@ export const MsgUpdateGroupAccountDecisionPolicyResponse = {
     return obj;
   },
 
-  fromPartial<
-    I extends Exact<
-      DeepPartial<MsgUpdateGroupAccountDecisionPolicyResponse>,
-      I
-    >,
-  >(_: I): MsgUpdateGroupAccountDecisionPolicyResponse {
+  create(base?: DeepPartial<MsgUpdateGroupAccountDecisionPolicyResponse>): MsgUpdateGroupAccountDecisionPolicyResponse {
+    return MsgUpdateGroupAccountDecisionPolicyResponse.fromPartial(base ?? {});
+  },
+
+  fromPartial(
+    _: DeepPartial<MsgUpdateGroupAccountDecisionPolicyResponse>,
+  ): MsgUpdateGroupAccountDecisionPolicyResponse {
     const message = createBaseMsgUpdateGroupAccountDecisionPolicyResponse();
     return message;
   },
 };
 
-messageTypeRegistry.set(
-  MsgUpdateGroupAccountDecisionPolicyResponse.$type,
-  MsgUpdateGroupAccountDecisionPolicyResponse,
-);
+messageTypeRegistry.set(MsgUpdateGroupAccountDecisionPolicyResponse.$type, MsgUpdateGroupAccountDecisionPolicyResponse);
 
 function createBaseMsgUpdateGroupAccountMetadata(): MsgUpdateGroupAccountMetadata {
   return {
-    $type: 'regen.group.v1alpha1.MsgUpdateGroupAccountMetadata',
-    admin: '',
-    address: '',
+    $type: "regen.group.v1alpha1.MsgUpdateGroupAccountMetadata",
+    admin: "",
+    address: "",
     metadata: new Uint8Array(),
   };
 }
 
 export const MsgUpdateGroupAccountMetadata = {
-  $type: 'regen.group.v1alpha1.MsgUpdateGroupAccountMetadata' as const,
+  $type: "regen.group.v1alpha1.MsgUpdateGroupAccountMetadata" as const,
 
-  encode(
-    message: MsgUpdateGroupAccountMetadata,
-    writer: _m0.Writer = _m0.Writer.create(),
-  ): _m0.Writer {
-    if (message.admin !== '') {
+  encode(message: MsgUpdateGroupAccountMetadata, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+    if (message.admin !== "") {
       writer.uint32(10).string(message.admin);
     }
-    if (message.address !== '') {
+    if (message.address !== "") {
       writer.uint32(18).string(message.address);
     }
     if (message.metadata.length !== 0) {
@@ -1403,10 +1230,7 @@ export const MsgUpdateGroupAccountMetadata = {
     return writer;
   },
 
-  decode(
-    input: _m0.Reader | Uint8Array,
-    length?: number,
-  ): MsgUpdateGroupAccountMetadata {
+  decode(input: _m0.Reader | Uint8Array, length?: number): MsgUpdateGroupAccountMetadata {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMsgUpdateGroupAccountMetadata();
@@ -1433,11 +1257,9 @@ export const MsgUpdateGroupAccountMetadata = {
   fromJSON(object: any): MsgUpdateGroupAccountMetadata {
     return {
       $type: MsgUpdateGroupAccountMetadata.$type,
-      admin: isSet(object.admin) ? String(object.admin) : '',
-      address: isSet(object.address) ? String(object.address) : '',
-      metadata: isSet(object.metadata)
-        ? bytesFromBase64(object.metadata)
-        : new Uint8Array(),
+      admin: isSet(object.admin) ? String(object.admin) : "",
+      address: isSet(object.address) ? String(object.address) : "",
+      metadata: isSet(object.metadata) ? bytesFromBase64(object.metadata) : new Uint8Array(),
     };
   },
 
@@ -1446,48 +1268,37 @@ export const MsgUpdateGroupAccountMetadata = {
     message.admin !== undefined && (obj.admin = message.admin);
     message.address !== undefined && (obj.address = message.address);
     message.metadata !== undefined &&
-      (obj.metadata = base64FromBytes(
-        message.metadata !== undefined ? message.metadata : new Uint8Array(),
-      ));
+      (obj.metadata = base64FromBytes(message.metadata !== undefined ? message.metadata : new Uint8Array()));
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<MsgUpdateGroupAccountMetadata>, I>>(
-    object: I,
-  ): MsgUpdateGroupAccountMetadata {
+  create(base?: DeepPartial<MsgUpdateGroupAccountMetadata>): MsgUpdateGroupAccountMetadata {
+    return MsgUpdateGroupAccountMetadata.fromPartial(base ?? {});
+  },
+
+  fromPartial(object: DeepPartial<MsgUpdateGroupAccountMetadata>): MsgUpdateGroupAccountMetadata {
     const message = createBaseMsgUpdateGroupAccountMetadata();
-    message.admin = object.admin ?? '';
-    message.address = object.address ?? '';
+    message.admin = object.admin ?? "";
+    message.address = object.address ?? "";
     message.metadata = object.metadata ?? new Uint8Array();
     return message;
   },
 };
 
-messageTypeRegistry.set(
-  MsgUpdateGroupAccountMetadata.$type,
-  MsgUpdateGroupAccountMetadata,
-);
+messageTypeRegistry.set(MsgUpdateGroupAccountMetadata.$type, MsgUpdateGroupAccountMetadata);
 
 function createBaseMsgUpdateGroupAccountMetadataResponse(): MsgUpdateGroupAccountMetadataResponse {
-  return {
-    $type: 'regen.group.v1alpha1.MsgUpdateGroupAccountMetadataResponse',
-  };
+  return { $type: "regen.group.v1alpha1.MsgUpdateGroupAccountMetadataResponse" };
 }
 
 export const MsgUpdateGroupAccountMetadataResponse = {
-  $type: 'regen.group.v1alpha1.MsgUpdateGroupAccountMetadataResponse' as const,
+  $type: "regen.group.v1alpha1.MsgUpdateGroupAccountMetadataResponse" as const,
 
-  encode(
-    _: MsgUpdateGroupAccountMetadataResponse,
-    writer: _m0.Writer = _m0.Writer.create(),
-  ): _m0.Writer {
+  encode(_: MsgUpdateGroupAccountMetadataResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     return writer;
   },
 
-  decode(
-    input: _m0.Reader | Uint8Array,
-    length?: number,
-  ): MsgUpdateGroupAccountMetadataResponse {
+  decode(input: _m0.Reader | Uint8Array, length?: number): MsgUpdateGroupAccountMetadataResponse {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMsgUpdateGroupAccountMetadataResponse();
@@ -1503,9 +1314,7 @@ export const MsgUpdateGroupAccountMetadataResponse = {
   },
 
   fromJSON(_: any): MsgUpdateGroupAccountMetadataResponse {
-    return {
-      $type: MsgUpdateGroupAccountMetadataResponse.$type,
-    };
+    return { $type: MsgUpdateGroupAccountMetadataResponse.$type };
   },
 
   toJSON(_: MsgUpdateGroupAccountMetadataResponse): unknown {
@@ -1513,23 +1322,22 @@ export const MsgUpdateGroupAccountMetadataResponse = {
     return obj;
   },
 
-  fromPartial<
-    I extends Exact<DeepPartial<MsgUpdateGroupAccountMetadataResponse>, I>,
-  >(_: I): MsgUpdateGroupAccountMetadataResponse {
+  create(base?: DeepPartial<MsgUpdateGroupAccountMetadataResponse>): MsgUpdateGroupAccountMetadataResponse {
+    return MsgUpdateGroupAccountMetadataResponse.fromPartial(base ?? {});
+  },
+
+  fromPartial(_: DeepPartial<MsgUpdateGroupAccountMetadataResponse>): MsgUpdateGroupAccountMetadataResponse {
     const message = createBaseMsgUpdateGroupAccountMetadataResponse();
     return message;
   },
 };
 
-messageTypeRegistry.set(
-  MsgUpdateGroupAccountMetadataResponse.$type,
-  MsgUpdateGroupAccountMetadataResponse,
-);
+messageTypeRegistry.set(MsgUpdateGroupAccountMetadataResponse.$type, MsgUpdateGroupAccountMetadataResponse);
 
 function createBaseMsgCreateProposal(): MsgCreateProposal {
   return {
-    $type: 'regen.group.v1alpha1.MsgCreateProposal',
-    address: '',
+    $type: "regen.group.v1alpha1.MsgCreateProposal",
+    address: "",
     proposers: [],
     metadata: new Uint8Array(),
     msgs: [],
@@ -1538,13 +1346,10 @@ function createBaseMsgCreateProposal(): MsgCreateProposal {
 }
 
 export const MsgCreateProposal = {
-  $type: 'regen.group.v1alpha1.MsgCreateProposal' as const,
+  $type: "regen.group.v1alpha1.MsgCreateProposal" as const,
 
-  encode(
-    message: MsgCreateProposal,
-    writer: _m0.Writer = _m0.Writer.create(),
-  ): _m0.Writer {
-    if (message.address !== '') {
+  encode(message: MsgCreateProposal, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+    if (message.address !== "") {
       writer.uint32(10).string(message.address);
     }
     for (const v of message.proposers) {
@@ -1595,16 +1400,10 @@ export const MsgCreateProposal = {
   fromJSON(object: any): MsgCreateProposal {
     return {
       $type: MsgCreateProposal.$type,
-      address: isSet(object.address) ? String(object.address) : '',
-      proposers: Array.isArray(object?.proposers)
-        ? object.proposers.map((e: any) => String(e))
-        : [],
-      metadata: isSet(object.metadata)
-        ? bytesFromBase64(object.metadata)
-        : new Uint8Array(),
-      msgs: Array.isArray(object?.msgs)
-        ? object.msgs.map((e: any) => Any.fromJSON(e))
-        : [],
+      address: isSet(object.address) ? String(object.address) : "",
+      proposers: Array.isArray(object?.proposers) ? object.proposers.map((e: any) => String(e)) : [],
+      metadata: isSet(object.metadata) ? bytesFromBase64(object.metadata) : new Uint8Array(),
+      msgs: Array.isArray(object?.msgs) ? object.msgs.map((e: any) => Any.fromJSON(e)) : [],
       exec: isSet(object.exec) ? execFromJSON(object.exec) : 0,
     };
   },
@@ -1613,16 +1412,14 @@ export const MsgCreateProposal = {
     const obj: any = {};
     message.address !== undefined && (obj.address = message.address);
     if (message.proposers) {
-      obj.proposers = message.proposers.map(e => e);
+      obj.proposers = message.proposers.map((e) => e);
     } else {
       obj.proposers = [];
     }
     message.metadata !== undefined &&
-      (obj.metadata = base64FromBytes(
-        message.metadata !== undefined ? message.metadata : new Uint8Array(),
-      ));
+      (obj.metadata = base64FromBytes(message.metadata !== undefined ? message.metadata : new Uint8Array()));
     if (message.msgs) {
-      obj.msgs = message.msgs.map(e => (e ? Any.toJSON(e) : undefined));
+      obj.msgs = message.msgs.map((e) => e ? Any.toJSON(e) : undefined);
     } else {
       obj.msgs = [];
     }
@@ -1630,14 +1427,16 @@ export const MsgCreateProposal = {
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<MsgCreateProposal>, I>>(
-    object: I,
-  ): MsgCreateProposal {
+  create(base?: DeepPartial<MsgCreateProposal>): MsgCreateProposal {
+    return MsgCreateProposal.fromPartial(base ?? {});
+  },
+
+  fromPartial(object: DeepPartial<MsgCreateProposal>): MsgCreateProposal {
     const message = createBaseMsgCreateProposal();
-    message.address = object.address ?? '';
-    message.proposers = object.proposers?.map(e => e) || [];
+    message.address = object.address ?? "";
+    message.proposers = object.proposers?.map((e) => e) || [];
     message.metadata = object.metadata ?? new Uint8Array();
-    message.msgs = object.msgs?.map(e => Any.fromPartial(e)) || [];
+    message.msgs = object.msgs?.map((e) => Any.fromPartial(e)) || [];
     message.exec = object.exec ?? 0;
     return message;
   },
@@ -1646,29 +1445,20 @@ export const MsgCreateProposal = {
 messageTypeRegistry.set(MsgCreateProposal.$type, MsgCreateProposal);
 
 function createBaseMsgCreateProposalResponse(): MsgCreateProposalResponse {
-  return {
-    $type: 'regen.group.v1alpha1.MsgCreateProposalResponse',
-    proposalId: Long.UZERO,
-  };
+  return { $type: "regen.group.v1alpha1.MsgCreateProposalResponse", proposalId: Long.UZERO };
 }
 
 export const MsgCreateProposalResponse = {
-  $type: 'regen.group.v1alpha1.MsgCreateProposalResponse' as const,
+  $type: "regen.group.v1alpha1.MsgCreateProposalResponse" as const,
 
-  encode(
-    message: MsgCreateProposalResponse,
-    writer: _m0.Writer = _m0.Writer.create(),
-  ): _m0.Writer {
+  encode(message: MsgCreateProposalResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (!message.proposalId.isZero()) {
       writer.uint32(8).uint64(message.proposalId);
     }
     return writer;
   },
 
-  decode(
-    input: _m0.Reader | Uint8Array,
-    length?: number,
-  ): MsgCreateProposalResponse {
+  decode(input: _m0.Reader | Uint8Array, length?: number): MsgCreateProposalResponse {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMsgCreateProposalResponse();
@@ -1689,41 +1479,36 @@ export const MsgCreateProposalResponse = {
   fromJSON(object: any): MsgCreateProposalResponse {
     return {
       $type: MsgCreateProposalResponse.$type,
-      proposalId: isSet(object.proposalId)
-        ? Long.fromString(object.proposalId)
-        : Long.UZERO,
+      proposalId: isSet(object.proposalId) ? Long.fromValue(object.proposalId) : Long.UZERO,
     };
   },
 
   toJSON(message: MsgCreateProposalResponse): unknown {
     const obj: any = {};
-    message.proposalId !== undefined &&
-      (obj.proposalId = (message.proposalId || Long.UZERO).toString());
+    message.proposalId !== undefined && (obj.proposalId = (message.proposalId || Long.UZERO).toString());
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<MsgCreateProposalResponse>, I>>(
-    object: I,
-  ): MsgCreateProposalResponse {
+  create(base?: DeepPartial<MsgCreateProposalResponse>): MsgCreateProposalResponse {
+    return MsgCreateProposalResponse.fromPartial(base ?? {});
+  },
+
+  fromPartial(object: DeepPartial<MsgCreateProposalResponse>): MsgCreateProposalResponse {
     const message = createBaseMsgCreateProposalResponse();
-    message.proposalId =
-      object.proposalId !== undefined && object.proposalId !== null
-        ? Long.fromValue(object.proposalId)
-        : Long.UZERO;
+    message.proposalId = (object.proposalId !== undefined && object.proposalId !== null)
+      ? Long.fromValue(object.proposalId)
+      : Long.UZERO;
     return message;
   },
 };
 
-messageTypeRegistry.set(
-  MsgCreateProposalResponse.$type,
-  MsgCreateProposalResponse,
-);
+messageTypeRegistry.set(MsgCreateProposalResponse.$type, MsgCreateProposalResponse);
 
 function createBaseMsgVote(): MsgVote {
   return {
-    $type: 'regen.group.v1alpha1.MsgVote',
+    $type: "regen.group.v1alpha1.MsgVote",
     proposalId: Long.UZERO,
-    voter: '',
+    voter: "",
     choice: 0,
     metadata: new Uint8Array(),
     exec: 0,
@@ -1731,16 +1516,13 @@ function createBaseMsgVote(): MsgVote {
 }
 
 export const MsgVote = {
-  $type: 'regen.group.v1alpha1.MsgVote' as const,
+  $type: "regen.group.v1alpha1.MsgVote" as const,
 
-  encode(
-    message: MsgVote,
-    writer: _m0.Writer = _m0.Writer.create(),
-  ): _m0.Writer {
+  encode(message: MsgVote, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (!message.proposalId.isZero()) {
       writer.uint32(8).uint64(message.proposalId);
     }
-    if (message.voter !== '') {
+    if (message.voter !== "") {
       writer.uint32(18).string(message.voter);
     }
     if (message.choice !== 0) {
@@ -1788,39 +1570,35 @@ export const MsgVote = {
   fromJSON(object: any): MsgVote {
     return {
       $type: MsgVote.$type,
-      proposalId: isSet(object.proposalId)
-        ? Long.fromString(object.proposalId)
-        : Long.UZERO,
-      voter: isSet(object.voter) ? String(object.voter) : '',
+      proposalId: isSet(object.proposalId) ? Long.fromValue(object.proposalId) : Long.UZERO,
+      voter: isSet(object.voter) ? String(object.voter) : "",
       choice: isSet(object.choice) ? choiceFromJSON(object.choice) : 0,
-      metadata: isSet(object.metadata)
-        ? bytesFromBase64(object.metadata)
-        : new Uint8Array(),
+      metadata: isSet(object.metadata) ? bytesFromBase64(object.metadata) : new Uint8Array(),
       exec: isSet(object.exec) ? execFromJSON(object.exec) : 0,
     };
   },
 
   toJSON(message: MsgVote): unknown {
     const obj: any = {};
-    message.proposalId !== undefined &&
-      (obj.proposalId = (message.proposalId || Long.UZERO).toString());
+    message.proposalId !== undefined && (obj.proposalId = (message.proposalId || Long.UZERO).toString());
     message.voter !== undefined && (obj.voter = message.voter);
     message.choice !== undefined && (obj.choice = choiceToJSON(message.choice));
     message.metadata !== undefined &&
-      (obj.metadata = base64FromBytes(
-        message.metadata !== undefined ? message.metadata : new Uint8Array(),
-      ));
+      (obj.metadata = base64FromBytes(message.metadata !== undefined ? message.metadata : new Uint8Array()));
     message.exec !== undefined && (obj.exec = execToJSON(message.exec));
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<MsgVote>, I>>(object: I): MsgVote {
+  create(base?: DeepPartial<MsgVote>): MsgVote {
+    return MsgVote.fromPartial(base ?? {});
+  },
+
+  fromPartial(object: DeepPartial<MsgVote>): MsgVote {
     const message = createBaseMsgVote();
-    message.proposalId =
-      object.proposalId !== undefined && object.proposalId !== null
-        ? Long.fromValue(object.proposalId)
-        : Long.UZERO;
-    message.voter = object.voter ?? '';
+    message.proposalId = (object.proposalId !== undefined && object.proposalId !== null)
+      ? Long.fromValue(object.proposalId)
+      : Long.UZERO;
+    message.voter = object.voter ?? "";
     message.choice = object.choice ?? 0;
     message.metadata = object.metadata ?? new Uint8Array();
     message.exec = object.exec ?? 0;
@@ -1831,16 +1609,13 @@ export const MsgVote = {
 messageTypeRegistry.set(MsgVote.$type, MsgVote);
 
 function createBaseMsgVoteResponse(): MsgVoteResponse {
-  return { $type: 'regen.group.v1alpha1.MsgVoteResponse' };
+  return { $type: "regen.group.v1alpha1.MsgVoteResponse" };
 }
 
 export const MsgVoteResponse = {
-  $type: 'regen.group.v1alpha1.MsgVoteResponse' as const,
+  $type: "regen.group.v1alpha1.MsgVoteResponse" as const,
 
-  encode(
-    _: MsgVoteResponse,
-    writer: _m0.Writer = _m0.Writer.create(),
-  ): _m0.Writer {
+  encode(_: MsgVoteResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     return writer;
   },
 
@@ -1860,9 +1635,7 @@ export const MsgVoteResponse = {
   },
 
   fromJSON(_: any): MsgVoteResponse {
-    return {
-      $type: MsgVoteResponse.$type,
-    };
+    return { $type: MsgVoteResponse.$type };
   },
 
   toJSON(_: MsgVoteResponse): unknown {
@@ -1870,9 +1643,11 @@ export const MsgVoteResponse = {
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<MsgVoteResponse>, I>>(
-    _: I,
-  ): MsgVoteResponse {
+  create(base?: DeepPartial<MsgVoteResponse>): MsgVoteResponse {
+    return MsgVoteResponse.fromPartial(base ?? {});
+  },
+
+  fromPartial(_: DeepPartial<MsgVoteResponse>): MsgVoteResponse {
     const message = createBaseMsgVoteResponse();
     return message;
   },
@@ -1881,24 +1656,17 @@ export const MsgVoteResponse = {
 messageTypeRegistry.set(MsgVoteResponse.$type, MsgVoteResponse);
 
 function createBaseMsgExec(): MsgExec {
-  return {
-    $type: 'regen.group.v1alpha1.MsgExec',
-    proposalId: Long.UZERO,
-    signer: '',
-  };
+  return { $type: "regen.group.v1alpha1.MsgExec", proposalId: Long.UZERO, signer: "" };
 }
 
 export const MsgExec = {
-  $type: 'regen.group.v1alpha1.MsgExec' as const,
+  $type: "regen.group.v1alpha1.MsgExec" as const,
 
-  encode(
-    message: MsgExec,
-    writer: _m0.Writer = _m0.Writer.create(),
-  ): _m0.Writer {
+  encode(message: MsgExec, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (!message.proposalId.isZero()) {
       writer.uint32(8).uint64(message.proposalId);
     }
-    if (message.signer !== '') {
+    if (message.signer !== "") {
       writer.uint32(18).string(message.signer);
     }
     return writer;
@@ -1928,28 +1696,28 @@ export const MsgExec = {
   fromJSON(object: any): MsgExec {
     return {
       $type: MsgExec.$type,
-      proposalId: isSet(object.proposalId)
-        ? Long.fromString(object.proposalId)
-        : Long.UZERO,
-      signer: isSet(object.signer) ? String(object.signer) : '',
+      proposalId: isSet(object.proposalId) ? Long.fromValue(object.proposalId) : Long.UZERO,
+      signer: isSet(object.signer) ? String(object.signer) : "",
     };
   },
 
   toJSON(message: MsgExec): unknown {
     const obj: any = {};
-    message.proposalId !== undefined &&
-      (obj.proposalId = (message.proposalId || Long.UZERO).toString());
+    message.proposalId !== undefined && (obj.proposalId = (message.proposalId || Long.UZERO).toString());
     message.signer !== undefined && (obj.signer = message.signer);
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<MsgExec>, I>>(object: I): MsgExec {
+  create(base?: DeepPartial<MsgExec>): MsgExec {
+    return MsgExec.fromPartial(base ?? {});
+  },
+
+  fromPartial(object: DeepPartial<MsgExec>): MsgExec {
     const message = createBaseMsgExec();
-    message.proposalId =
-      object.proposalId !== undefined && object.proposalId !== null
-        ? Long.fromValue(object.proposalId)
-        : Long.UZERO;
-    message.signer = object.signer ?? '';
+    message.proposalId = (object.proposalId !== undefined && object.proposalId !== null)
+      ? Long.fromValue(object.proposalId)
+      : Long.UZERO;
+    message.signer = object.signer ?? "";
     return message;
   },
 };
@@ -1957,16 +1725,13 @@ export const MsgExec = {
 messageTypeRegistry.set(MsgExec.$type, MsgExec);
 
 function createBaseMsgExecResponse(): MsgExecResponse {
-  return { $type: 'regen.group.v1alpha1.MsgExecResponse' };
+  return { $type: "regen.group.v1alpha1.MsgExecResponse" };
 }
 
 export const MsgExecResponse = {
-  $type: 'regen.group.v1alpha1.MsgExecResponse' as const,
+  $type: "regen.group.v1alpha1.MsgExecResponse" as const,
 
-  encode(
-    _: MsgExecResponse,
-    writer: _m0.Writer = _m0.Writer.create(),
-  ): _m0.Writer {
+  encode(_: MsgExecResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     return writer;
   },
 
@@ -1986,9 +1751,7 @@ export const MsgExecResponse = {
   },
 
   fromJSON(_: any): MsgExecResponse {
-    return {
-      $type: MsgExecResponse.$type,
-    };
+    return { $type: MsgExecResponse.$type };
   },
 
   toJSON(_: MsgExecResponse): unknown {
@@ -1996,9 +1759,11 @@ export const MsgExecResponse = {
     return obj;
   },
 
-  fromPartial<I extends Exact<DeepPartial<MsgExecResponse>, I>>(
-    _: I,
-  ): MsgExecResponse {
+  create(base?: DeepPartial<MsgExecResponse>): MsgExecResponse {
+    return MsgExecResponse.fromPartial(base ?? {});
+  },
+
+  fromPartial(_: DeepPartial<MsgExecResponse>): MsgExecResponse {
     const message = createBaseMsgExecResponse();
     return message;
   },
@@ -2012,34 +1777,24 @@ export interface Msg {
    * CreateGroup creates a new group with an admin account address, a list of
    * members and some optional metadata.
    */
-  CreateGroup(
-    request: DeepPartial<MsgCreateGroup>,
-  ): Promise<MsgCreateGroupResponse>;
+  CreateGroup(request: DeepPartial<MsgCreateGroup>): Promise<MsgCreateGroupResponse>;
   /**
    * UpdateGroupMembers updates the group members with given group id and admin
    * address.
    */
-  UpdateGroupMembers(
-    request: DeepPartial<MsgUpdateGroupMembers>,
-  ): Promise<MsgUpdateGroupMembersResponse>;
+  UpdateGroupMembers(request: DeepPartial<MsgUpdateGroupMembers>): Promise<MsgUpdateGroupMembersResponse>;
   /**
    * UpdateGroupAdmin updates the group admin with given group id and previous
    * admin address.
    */
-  UpdateGroupAdmin(
-    request: DeepPartial<MsgUpdateGroupAdmin>,
-  ): Promise<MsgUpdateGroupAdminResponse>;
+  UpdateGroupAdmin(request: DeepPartial<MsgUpdateGroupAdmin>): Promise<MsgUpdateGroupAdminResponse>;
   /**
    * UpdateGroupMetadata updates the group metadata with given group id and
    * admin address.
    */
-  UpdateGroupMetadata(
-    request: DeepPartial<MsgUpdateGroupMetadata>,
-  ): Promise<MsgUpdateGroupMetadataResponse>;
+  UpdateGroupMetadata(request: DeepPartial<MsgUpdateGroupMetadata>): Promise<MsgUpdateGroupMetadataResponse>;
   /** CreateGroupAccount creates a new group account using given DecisionPolicy. */
-  CreateGroupAccount(
-    request: DeepPartial<MsgCreateGroupAccount>,
-  ): Promise<MsgCreateGroupAccountResponse>;
+  CreateGroupAccount(request: DeepPartial<MsgCreateGroupAccount>): Promise<MsgCreateGroupAccountResponse>;
   /** UpdateGroupAccountAdmin updates a group account admin. */
   UpdateGroupAccountAdmin(
     request: DeepPartial<MsgUpdateGroupAccountAdmin>,
@@ -2056,9 +1811,7 @@ export interface Msg {
     request: DeepPartial<MsgUpdateGroupAccountMetadata>,
   ): Promise<MsgUpdateGroupAccountMetadataResponse>;
   /** CreateProposal submits a new proposal. */
-  CreateProposal(
-    request: DeepPartial<MsgCreateProposal>,
-  ): Promise<MsgCreateProposalResponse>;
+  CreateProposal(request: DeepPartial<MsgCreateProposal>): Promise<MsgCreateProposalResponse>;
   /** Vote allows a voter to vote on a proposal. */
   Vote(request: DeepPartial<MsgVote>): Promise<MsgVoteResponse>;
   /** Exec executes a proposal. */
@@ -2067,7 +1820,9 @@ export interface Msg {
 
 export class MsgClientImpl implements Msg {
   private readonly rpc: Rpc;
-  constructor(rpc: Rpc) {
+  private readonly service: string;
+  constructor(rpc: Rpc, opts?: { service?: string }) {
+    this.service = opts?.service || "regen.group.v1alpha1.Msg";
     this.rpc = rpc;
     this.CreateGroup = this.CreateGroup.bind(this);
     this.UpdateGroupMembers = this.UpdateGroupMembers.bind(this);
@@ -2075,87 +1830,45 @@ export class MsgClientImpl implements Msg {
     this.UpdateGroupMetadata = this.UpdateGroupMetadata.bind(this);
     this.CreateGroupAccount = this.CreateGroupAccount.bind(this);
     this.UpdateGroupAccountAdmin = this.UpdateGroupAccountAdmin.bind(this);
-    this.UpdateGroupAccountDecisionPolicy =
-      this.UpdateGroupAccountDecisionPolicy.bind(this);
-    this.UpdateGroupAccountMetadata =
-      this.UpdateGroupAccountMetadata.bind(this);
+    this.UpdateGroupAccountDecisionPolicy = this.UpdateGroupAccountDecisionPolicy.bind(this);
+    this.UpdateGroupAccountMetadata = this.UpdateGroupAccountMetadata.bind(this);
     this.CreateProposal = this.CreateProposal.bind(this);
     this.Vote = this.Vote.bind(this);
     this.Exec = this.Exec.bind(this);
   }
-  CreateGroup(
-    request: DeepPartial<MsgCreateGroup>,
-  ): Promise<MsgCreateGroupResponse> {
+  CreateGroup(request: DeepPartial<MsgCreateGroup>): Promise<MsgCreateGroupResponse> {
     const fromPartial = MsgCreateGroup.fromPartial(request);
     const data = MsgCreateGroup.encode(fromPartial).finish();
-    const promise = this.rpc.request(
-      'regen.group.v1alpha1.Msg',
-      'CreateGroup',
-      data,
-    );
-    return promise.then(data =>
-      MsgCreateGroupResponse.decode(new _m0.Reader(data)),
-    );
+    const promise = this.rpc.request(this.service, "CreateGroup", data);
+    return promise.then((data) => MsgCreateGroupResponse.decode(new _m0.Reader(data)));
   }
 
-  UpdateGroupMembers(
-    request: DeepPartial<MsgUpdateGroupMembers>,
-  ): Promise<MsgUpdateGroupMembersResponse> {
+  UpdateGroupMembers(request: DeepPartial<MsgUpdateGroupMembers>): Promise<MsgUpdateGroupMembersResponse> {
     const fromPartial = MsgUpdateGroupMembers.fromPartial(request);
     const data = MsgUpdateGroupMembers.encode(fromPartial).finish();
-    const promise = this.rpc.request(
-      'regen.group.v1alpha1.Msg',
-      'UpdateGroupMembers',
-      data,
-    );
-    return promise.then(data =>
-      MsgUpdateGroupMembersResponse.decode(new _m0.Reader(data)),
-    );
+    const promise = this.rpc.request(this.service, "UpdateGroupMembers", data);
+    return promise.then((data) => MsgUpdateGroupMembersResponse.decode(new _m0.Reader(data)));
   }
 
-  UpdateGroupAdmin(
-    request: DeepPartial<MsgUpdateGroupAdmin>,
-  ): Promise<MsgUpdateGroupAdminResponse> {
+  UpdateGroupAdmin(request: DeepPartial<MsgUpdateGroupAdmin>): Promise<MsgUpdateGroupAdminResponse> {
     const fromPartial = MsgUpdateGroupAdmin.fromPartial(request);
     const data = MsgUpdateGroupAdmin.encode(fromPartial).finish();
-    const promise = this.rpc.request(
-      'regen.group.v1alpha1.Msg',
-      'UpdateGroupAdmin',
-      data,
-    );
-    return promise.then(data =>
-      MsgUpdateGroupAdminResponse.decode(new _m0.Reader(data)),
-    );
+    const promise = this.rpc.request(this.service, "UpdateGroupAdmin", data);
+    return promise.then((data) => MsgUpdateGroupAdminResponse.decode(new _m0.Reader(data)));
   }
 
-  UpdateGroupMetadata(
-    request: DeepPartial<MsgUpdateGroupMetadata>,
-  ): Promise<MsgUpdateGroupMetadataResponse> {
+  UpdateGroupMetadata(request: DeepPartial<MsgUpdateGroupMetadata>): Promise<MsgUpdateGroupMetadataResponse> {
     const fromPartial = MsgUpdateGroupMetadata.fromPartial(request);
     const data = MsgUpdateGroupMetadata.encode(fromPartial).finish();
-    const promise = this.rpc.request(
-      'regen.group.v1alpha1.Msg',
-      'UpdateGroupMetadata',
-      data,
-    );
-    return promise.then(data =>
-      MsgUpdateGroupMetadataResponse.decode(new _m0.Reader(data)),
-    );
+    const promise = this.rpc.request(this.service, "UpdateGroupMetadata", data);
+    return promise.then((data) => MsgUpdateGroupMetadataResponse.decode(new _m0.Reader(data)));
   }
 
-  CreateGroupAccount(
-    request: DeepPartial<MsgCreateGroupAccount>,
-  ): Promise<MsgCreateGroupAccountResponse> {
+  CreateGroupAccount(request: DeepPartial<MsgCreateGroupAccount>): Promise<MsgCreateGroupAccountResponse> {
     const fromPartial = MsgCreateGroupAccount.fromPartial(request);
     const data = MsgCreateGroupAccount.encode(fromPartial).finish();
-    const promise = this.rpc.request(
-      'regen.group.v1alpha1.Msg',
-      'CreateGroupAccount',
-      data,
-    );
-    return promise.then(data =>
-      MsgCreateGroupAccountResponse.decode(new _m0.Reader(data)),
-    );
+    const promise = this.rpc.request(this.service, "CreateGroupAccount", data);
+    return promise.then((data) => MsgCreateGroupAccountResponse.decode(new _m0.Reader(data)));
   }
 
   UpdateGroupAccountAdmin(
@@ -2163,31 +1876,17 @@ export class MsgClientImpl implements Msg {
   ): Promise<MsgUpdateGroupAccountAdminResponse> {
     const fromPartial = MsgUpdateGroupAccountAdmin.fromPartial(request);
     const data = MsgUpdateGroupAccountAdmin.encode(fromPartial).finish();
-    const promise = this.rpc.request(
-      'regen.group.v1alpha1.Msg',
-      'UpdateGroupAccountAdmin',
-      data,
-    );
-    return promise.then(data =>
-      MsgUpdateGroupAccountAdminResponse.decode(new _m0.Reader(data)),
-    );
+    const promise = this.rpc.request(this.service, "UpdateGroupAccountAdmin", data);
+    return promise.then((data) => MsgUpdateGroupAccountAdminResponse.decode(new _m0.Reader(data)));
   }
 
   UpdateGroupAccountDecisionPolicy(
     request: DeepPartial<MsgUpdateGroupAccountDecisionPolicy>,
   ): Promise<MsgUpdateGroupAccountDecisionPolicyResponse> {
-    const fromPartial =
-      MsgUpdateGroupAccountDecisionPolicy.fromPartial(request);
-    const data =
-      MsgUpdateGroupAccountDecisionPolicy.encode(fromPartial).finish();
-    const promise = this.rpc.request(
-      'regen.group.v1alpha1.Msg',
-      'UpdateGroupAccountDecisionPolicy',
-      data,
-    );
-    return promise.then(data =>
-      MsgUpdateGroupAccountDecisionPolicyResponse.decode(new _m0.Reader(data)),
-    );
+    const fromPartial = MsgUpdateGroupAccountDecisionPolicy.fromPartial(request);
+    const data = MsgUpdateGroupAccountDecisionPolicy.encode(fromPartial).finish();
+    const promise = this.rpc.request(this.service, "UpdateGroupAccountDecisionPolicy", data);
+    return promise.then((data) => MsgUpdateGroupAccountDecisionPolicyResponse.decode(new _m0.Reader(data)));
   }
 
   UpdateGroupAccountMetadata(
@@ -2195,116 +1894,87 @@ export class MsgClientImpl implements Msg {
   ): Promise<MsgUpdateGroupAccountMetadataResponse> {
     const fromPartial = MsgUpdateGroupAccountMetadata.fromPartial(request);
     const data = MsgUpdateGroupAccountMetadata.encode(fromPartial).finish();
-    const promise = this.rpc.request(
-      'regen.group.v1alpha1.Msg',
-      'UpdateGroupAccountMetadata',
-      data,
-    );
-    return promise.then(data =>
-      MsgUpdateGroupAccountMetadataResponse.decode(new _m0.Reader(data)),
-    );
+    const promise = this.rpc.request(this.service, "UpdateGroupAccountMetadata", data);
+    return promise.then((data) => MsgUpdateGroupAccountMetadataResponse.decode(new _m0.Reader(data)));
   }
 
-  CreateProposal(
-    request: DeepPartial<MsgCreateProposal>,
-  ): Promise<MsgCreateProposalResponse> {
+  CreateProposal(request: DeepPartial<MsgCreateProposal>): Promise<MsgCreateProposalResponse> {
     const fromPartial = MsgCreateProposal.fromPartial(request);
     const data = MsgCreateProposal.encode(fromPartial).finish();
-    const promise = this.rpc.request(
-      'regen.group.v1alpha1.Msg',
-      'CreateProposal',
-      data,
-    );
-    return promise.then(data =>
-      MsgCreateProposalResponse.decode(new _m0.Reader(data)),
-    );
+    const promise = this.rpc.request(this.service, "CreateProposal", data);
+    return promise.then((data) => MsgCreateProposalResponse.decode(new _m0.Reader(data)));
   }
 
   Vote(request: DeepPartial<MsgVote>): Promise<MsgVoteResponse> {
     const fromPartial = MsgVote.fromPartial(request);
     const data = MsgVote.encode(fromPartial).finish();
-    const promise = this.rpc.request('regen.group.v1alpha1.Msg', 'Vote', data);
-    return promise.then(data => MsgVoteResponse.decode(new _m0.Reader(data)));
+    const promise = this.rpc.request(this.service, "Vote", data);
+    return promise.then((data) => MsgVoteResponse.decode(new _m0.Reader(data)));
   }
 
   Exec(request: DeepPartial<MsgExec>): Promise<MsgExecResponse> {
     const fromPartial = MsgExec.fromPartial(request);
     const data = MsgExec.encode(fromPartial).finish();
-    const promise = this.rpc.request('regen.group.v1alpha1.Msg', 'Exec', data);
-    return promise.then(data => MsgExecResponse.decode(new _m0.Reader(data)));
+    const promise = this.rpc.request(this.service, "Exec", data);
+    return promise.then((data) => MsgExecResponse.decode(new _m0.Reader(data)));
   }
 }
 
 interface Rpc {
-  request(
-    service: string,
-    method: string,
-    data: Uint8Array,
-  ): Promise<Uint8Array>;
+  request(service: string, method: string, data: Uint8Array): Promise<Uint8Array>;
 }
 
 declare var self: any | undefined;
 declare var window: any | undefined;
 declare var global: any | undefined;
-var globalThis: any = (() => {
-  if (typeof globalThis !== 'undefined') return globalThis;
-  if (typeof self !== 'undefined') return self;
-  if (typeof window !== 'undefined') return window;
-  if (typeof global !== 'undefined') return global;
-  throw 'Unable to locate global object';
+var tsProtoGlobalThis: any = (() => {
+  if (typeof globalThis !== "undefined") {
+    return globalThis;
+  }
+  if (typeof self !== "undefined") {
+    return self;
+  }
+  if (typeof window !== "undefined") {
+    return window;
+  }
+  if (typeof global !== "undefined") {
+    return global;
+  }
+  throw "Unable to locate global object";
 })();
 
-const atob: (b64: string) => string =
-  globalThis.atob ||
-  (b64 => globalThis.Buffer.from(b64, 'base64').toString('binary'));
 function bytesFromBase64(b64: string): Uint8Array {
-  const bin = atob(b64);
-  const arr = new Uint8Array(bin.length);
-  for (let i = 0; i < bin.length; ++i) {
-    arr[i] = bin.charCodeAt(i);
+  if (tsProtoGlobalThis.Buffer) {
+    return Uint8Array.from(tsProtoGlobalThis.Buffer.from(b64, "base64"));
+  } else {
+    const bin = tsProtoGlobalThis.atob(b64);
+    const arr = new Uint8Array(bin.length);
+    for (let i = 0; i < bin.length; ++i) {
+      arr[i] = bin.charCodeAt(i);
+    }
+    return arr;
   }
-  return arr;
 }
 
-const btoa: (bin: string) => string =
-  globalThis.btoa ||
-  (bin => globalThis.Buffer.from(bin, 'binary').toString('base64'));
 function base64FromBytes(arr: Uint8Array): string {
-  const bin: string[] = [];
-  for (const byte of arr) {
-    bin.push(String.fromCharCode(byte));
+  if (tsProtoGlobalThis.Buffer) {
+    return tsProtoGlobalThis.Buffer.from(arr).toString("base64");
+  } else {
+    const bin: string[] = [];
+    arr.forEach((byte) => {
+      bin.push(String.fromCharCode(byte));
+    });
+    return tsProtoGlobalThis.btoa(bin.join(""));
   }
-  return btoa(bin.join(''));
 }
 
-type Builtin =
-  | Date
-  | Function
-  | Uint8Array
-  | string
-  | number
-  | boolean
-  | undefined;
+type Builtin = Date | Function | Uint8Array | string | number | boolean | undefined;
 
-export type DeepPartial<T> = T extends Builtin
-  ? T
-  : T extends Long
-  ? string | number | Long
-  : T extends Array<infer U>
-  ? Array<DeepPartial<U>>
-  : T extends ReadonlyArray<infer U>
-  ? ReadonlyArray<DeepPartial<U>>
-  : T extends {}
-  ? { [K in Exclude<keyof T, '$type'>]?: DeepPartial<T[K]> }
+export type DeepPartial<T> = T extends Builtin ? T
+  : T extends Long ? string | number | Long : T extends Array<infer U> ? Array<DeepPartial<U>>
+  : T extends ReadonlyArray<infer U> ? ReadonlyArray<DeepPartial<U>>
+  : T extends {} ? { [K in Exclude<keyof T, "$type">]?: DeepPartial<T[K]> }
   : Partial<T>;
-
-type KeysOfUnion<T> = T extends T ? keyof T : never;
-export type Exact<P, I extends P> = P extends Builtin
-  ? P
-  : P & { [K in keyof P]: Exact<P[K], I[K]> } & Record<
-        Exclude<keyof I, KeysOfUnion<P> | '$type'>,
-        never
-      >;
 
 if (_m0.util.Long !== Long) {
   _m0.util.Long = Long as any;
