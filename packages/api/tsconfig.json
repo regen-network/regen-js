@@ -1,9 +1,21 @@
 {
-	"compilerOptions": {
-		"declaration": true,
-		"esModuleInterop": true,
-		"outDir": "lib"
-	},
-	"extends": "../../tsconfig",
-	"include": ["src"]
+  "compilerOptions": {
+    "declaration": true,
+    "declarationDir": "./types",
+    "emitDeclarationOnly": true,
+    "strict": true,
+    "forceConsistentCasingInFileNames": true,
+    "isolatedModules": true,
+    "esModuleInterop": true,
+    "allowJs": true,
+    "lib": [
+      "es2015"
+    ]
+  },
+  "include": [
+    "src/**/*"
+  ],
+  "exclude": [
+    "node_modules"
+  ]
 }
