@@ -1,3 +1,7 @@
 .eslintrc.js
-**/lib/*
+
 **/build/*
+**/codegen/*
+
+/packages/api/main
+/packages/api/module

@@ -14,42 +14,42 @@ telescope({
     tsDisable: {
       files: [
         'cosmos/authz/v1beta1/tx.amino.ts',
-        'cosmos/staking/v1beta1/tx.amino.ts'
-      ]
+        'cosmos/staking/v1beta1/tx.amino.ts',
+      ],
     },
     prototypes: {
       includePackageVar: false,
       parser: {
-        keepCase: false
+        keepCase: false,
       },
       typingsFormat: {
         useDeepPartial: false,
         useExact: false,
         timestamp: 'timestamp',
-        duration: 'duration'
+        duration: 'duration',
       },
       methods: {
         toJSON: true,
-        fromJSON: true
-      }
+        fromJSON: true,
+      },
     },
     aminoEncoding: {
       enabled: true,
-      exceptions: AMINO_MAP
+      exceptions: AMINO_MAP,
     },
     lcdClients: {
-      enabled: true
+      enabled: true,
     },
     rpcClients: {
       enabled: false,
-      camelCase: true
-    }
-  }
+      camelCase: true,
+    },
+  },
 })
   .then(() => {
     console.log('✨ all done!');
   })
-  .catch((e) => {
+  .catch(e => {
     console.error(e);
     process.exit(1);
   });

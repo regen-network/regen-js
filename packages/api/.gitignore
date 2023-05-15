@@ -12,9 +12,6 @@ npm-debug.log*
 # dependencies
 node_modules
 
-# generated code
-codegen
-
 # build
 /main
 /module
