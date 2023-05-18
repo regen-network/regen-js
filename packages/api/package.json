@@ -1,29 +1,68 @@
 {
-	"name": "@regen-network/api",
-	"version": "0.6.0",
-	"author": "admin@regen.network",
-	"description": "A client library for the Regen Ledger",
-	"license": "Apache-2.0",
-	"main": "lib",
-	"publishConfig": {
-		"access": "public"
-	},
-	"repository": "https://github.com/regen-network/regen-js",
-	"dependencies": {
-		"@cosmjs/proto-signing": "0.28.13",
-		"@cosmjs/stargate": "0.28.13",
-		"@cosmjs/tendermint-rpc": "0.28.13"
-	},
-	"scripts": {
-		"build": "rimraf lib && tsc",
-		"gen": "rimraf src/generated && mkdir src/generated && ./scripts/protocgen.sh",
-		"test": "jest"
-	},
-	"devDependencies": {
-		"@regen-network/ts-proto": "1.140.1-0",
-		"ethers": "^5.7.0",
-		"jest": "26.6.0",
-		"rimraf": "^3.0.2",
-		"ts-jest": "^26.4.4"
-	}
+  "name": "@regen-network/api",
+  "version": "v1.0.0-beta1",
+  "author": "admin@regen.network",
+  "description": "A client library for the Regen Ledger",
+  "license": "Apache-2.0",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/regen-network/regen-js"
+  },
+  "bugs": {
+    "url": "https://github.com/regen-network/regen-js/issues"
+  },
+  "main": "main/index.js",
+  "module": "module/index.js",
+  "typings": "types/index.js",
+  "directories": {
+    "lib": "src"
+  },
+  "files": [
+    "src",
+    "types",
+    "main",
+    "module"
+  ],
+  "publishConfig": {
+    "access": "public"
+  },
+  "scripts": {
+    "build:main": "cross-env BABEL_ENV=production babel src --out-dir main --delete-dir-on-start --extensions \".tsx,.ts,.js\"",
+    "build:module": "cross-env MODULE=true babel src --out-dir module --delete-dir-on-start  --extensions \".tsx,.ts,.js\"",
+    "build:ts": "tsc --project ./tsconfig.json",
+    "build": "yarn build:module && yarn build:main",
+    "codegen": "cross-env NODE_ENV=development babel-node scripts/codegen.js"
+  },
+  "dependencies": {
+    "@babel/runtime": "^7.19.4",
+    "@cosmjs/amino": "0.29.4",
+    "@cosmjs/proto-signing": "0.29.4",
+    "@cosmjs/stargate": "0.29.4",
+    "@cosmjs/tendermint-rpc": "^0.29.4",
+    "protobufjs": "^6.11.2"
+  },
+  "devDependencies": {
+    "@babel/cli": "7.19.3",
+    "@babel/core": "7.19.3",
+    "@babel/node": "^7.19.1",
+    "@babel/plugin-proposal-class-properties": "7.18.6",
+    "@babel/plugin-proposal-export-default-from": "7.18.10",
+    "@babel/plugin-proposal-nullish-coalescing-operator": "7.18.6",
+    "@babel/plugin-proposal-numeric-separator": "7.18.6",
+    "@babel/plugin-proposal-object-rest-spread": "7.19.4",
+    "@babel/plugin-proposal-optional-chaining": "7.18.9",
+    "@babel/plugin-transform-runtime": "7.19.1",
+    "@babel/preset-env": "7.19.4",
+    "@babel/preset-typescript": "^7.18.6",
+    "@osmonauts/lcd": "^0.11.1",
+    "@osmonauts/telescope": "^0.78.0",
+    "babel-core": "7.0.0-bridge.0",
+    "babel-jest": "29.1.2",
+    "babel-watch": "^7.0.0",
+    "cross-env": "^7.0.2",
+    "long": "^5.2.0",
+    "regenerator-runtime": "^0.13.7",
+    "rimraf": "^3.0.2",
+    "typescript": "^4.8.4"
+  }
 }

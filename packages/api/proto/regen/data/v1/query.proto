@@ -16,7 +16,7 @@ service Query {
   rpc AnchorByIRI(QueryAnchorByIRIRequest) returns (QueryAnchorByIRIResponse) {
     option (google.api.http) = {
       get : "/regen/data/v1/anchor-by-iri/{iri}"
-      additional_bindings : [ {get : "/regen/data/v1/anchors/iri/{iri}"} ]
+      // additional_bindings : [ {get : "/regen/data/v1/anchors/iri/{iri}"} ]
     };
   }
 
@@ -26,9 +26,9 @@ service Query {
     option (google.api.http) = {
       post : "/regen/data/v1/anchor-by-hash"
       body : "*"
-      additional_bindings : [
-        {post : "/regen/data/v1/anchors/hash" body : "*"}
-      ]
+      // additional_bindings : [
+      //   {post : "/regen/data/v1/anchors/hash" body : "*"}
+      // ]
     };
   }
 
@@ -37,9 +37,9 @@ service Query {
       returns (QueryAttestationsByAttestorResponse) {
     option (google.api.http) = {
       get : "/regen/data/v1/attestations-by-attestor/{attestor}"
-      additional_bindings : [
-        {get : "/regen/data/v1/attestations/attestor/{attestor}"}
-      ]
+      // additional_bindings : [
+      //   {get : "/regen/data/v1/attestations/attestor/{attestor}"}
+      // ]
     };
   }
 
@@ -48,7 +48,7 @@ service Query {
       returns (QueryAttestationsByIRIResponse) {
     option (google.api.http) = {
       get : "/regen/data/v1/attestations-by-iri/{iri}"
-      additional_bindings : [ {get : "/regen/data/v1/attestations/iri/{iri}"} ]
+      // additional_bindings : [ {get : "/regen/data/v1/attestations/iri/{iri}"} ]
     };
   }
 
@@ -59,9 +59,9 @@ service Query {
     option (google.api.http) = {
       post : "/regen/data/v1/attestations-by-hash"
       body : "*"
-      additional_bindings : [
-        {post : "/regen/data/v1/attestations/hash" body : "*"}
-      ]
+      // additional_bindings : [
+      //   {post : "/regen/data/v1/attestations/hash" body : "*"}
+      // ]
     };
   }
 
@@ -69,7 +69,7 @@ service Query {
   rpc Resolver(QueryResolverRequest) returns (QueryResolverResponse) {
     option (google.api.http) = {
       get : "/regen/data/v1/resolver/{id}"
-      additional_bindings : [ {get : "/regen/data/v1/resolvers/{id}"} ]
+      // additional_bindings : [ {get : "/regen/data/v1/resolvers/{id}"} ]
     };
   }
 
@@ -79,7 +79,7 @@ service Query {
       returns (QueryResolversByIRIResponse) {
     option (google.api.http) = {
       get : "/regen/data/v1/resolvers-by-iri/{iri}"
-      additional_bindings : [ {get : "/regen/data/v1/resolvers/iri/{iri}"} ]
+      // additional_bindings : [ {get : "/regen/data/v1/resolvers/iri/{iri}"} ]
     };
   }
 
@@ -90,9 +90,9 @@ service Query {
     option (google.api.http) = {
       post : "/regen/data/v1/resolvers-by-hash"
       body : "*"
-      additional_bindings : [
-        {post : "/regen/data/v1/resolvers/hash" body : "*"}
-      ]
+      // additional_bindings : [
+      //   {post : "/regen/data/v1/resolvers/hash" body : "*"}
+      // ]
     };
   }
 
@@ -102,9 +102,9 @@ service Query {
     option (google.api.http) = {
       post : "/regen/data/v1/resolvers-by-url"
       body : "*"
-      additional_bindings : [
-        {post : "/regen/data/v1/resolvers/url" body : "*"}
-      ]
+      // additional_bindings : [
+      //   {post : "/regen/data/v1/resolvers/url" body : "*"}
+      // ]
     };
   }
 

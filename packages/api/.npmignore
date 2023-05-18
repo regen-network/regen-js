@@ -1,18 +1,30 @@
+# system
+.DS_Store
+
+# editors
+.idea
+.vscode
+
+# logs
+*.log
+npm-debug.log*
+
 # dependencies
 node_modules
 
-# testing
-coverage
+# package
+package.json
 
-# logs
-*.log*
+# package lock
+package-lock.json
+yarn.lock
 
-# os-generated files
-.DS_Store
+# project
+/proto
+/scripts
+/src
 
-# TS source code
-src
-
-# Proto definitions
-proto
-scripts
+# other
+.babelrc.js
+.gitignore
+tsconfig.json

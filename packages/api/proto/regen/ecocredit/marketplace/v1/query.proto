@@ -16,9 +16,9 @@ service Query {
   rpc SellOrder(QuerySellOrderRequest) returns (QuerySellOrderResponse) {
     option (google.api.http) = {
       get : "/regen/ecocredit/marketplace/v1/sell-order/{sell_order_id}"
-      additional_bindings : [
-        {get : "/regen/ecocredit/marketplace/v1/sell-orders/{sell_order_id}"}
-      ]
+      // additional_bindings : [
+      //   {get : "/regen/ecocredit/marketplace/v1/sell-orders/{sell_order_id}"}
+      // ]
     };
   }
 
@@ -34,9 +34,9 @@ service Query {
       returns (QuerySellOrdersByBatchResponse) {
     option (google.api.http) = {
       get : "/regen/ecocredit/marketplace/v1/sell-orders-by-batch/{batch_denom}"
-      additional_bindings : [ {
-        get : "/regen/ecocredit/marketplace/v1/sell-orders/batch/{batch_denom}"
-      } ]
+      // additional_bindings : [ {
+      //   get : "/regen/ecocredit/marketplace/v1/sell-orders/batch/{batch_denom}"
+      // } ]
     };
   }
 
@@ -46,9 +46,9 @@ service Query {
       returns (QuerySellOrdersBySellerResponse) {
     option (google.api.http) = {
       get : "/regen/ecocredit/marketplace/v1/sell-orders-by-seller/{seller}"
-      additional_bindings : [
-        {get : "/regen/ecocredit/marketplace/v1/sell-orders/seller/{seller}"}
-      ]
+      // additional_bindings : [
+      //   {get : "/regen/ecocredit/marketplace/v1/sell-orders/seller/{seller}"}
+      // ]
     };
   }
 
