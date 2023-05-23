@@ -3,7 +3,7 @@ import { AminoMsg } from "@cosmjs/amino";
 import { Long } from "../../../helpers";
 import { MsgAnchor, MsgAttest, MsgDefineResolver, MsgRegisterResolver } from "./tx";
 export interface AminoMsgAnchor extends AminoMsg {
-  type: "/regen.data.v1.MsgAnchor";
+  type: "regen-ledger/MsgAnchor";
   value: {
     sender: string;
     content_hash: {
@@ -22,7 +22,7 @@ export interface AminoMsgAnchor extends AminoMsg {
   };
 }
 export interface AminoMsgAttest extends AminoMsg {
-  type: "/regen.data.v1.MsgAttest";
+  type: "regen-ledger/MsgAttest";
   value: {
     attestor: string;
     content_hashes: {
@@ -34,14 +34,14 @@ export interface AminoMsgAttest extends AminoMsg {
   };
 }
 export interface AminoMsgDefineResolver extends AminoMsg {
-  type: "/regen.data.v1.MsgDefineResolver";
+  type: "regen-ledger/MsgDefineResolver";
   value: {
     manager: string;
     resolver_url: string;
   };
 }
 export interface AminoMsgRegisterResolver extends AminoMsg {
-  type: "/regen.data.v1.MsgRegisterResolver";
+  type: "regen-ledger/MsgRegisterResolver";
   value: {
     manager: string;
     resolver_id: string;
@@ -62,7 +62,7 @@ export interface AminoMsgRegisterResolver extends AminoMsg {
 }
 export const AminoConverter = {
   "/regen.data.v1.MsgAnchor": {
-    aminoType: "/regen.data.v1.MsgAnchor",
+    aminoType: "regen-ledger/MsgAnchor",
     toAmino: ({
       sender,
       contentHash
@@ -107,7 +107,7 @@ export const AminoConverter = {
     }
   },
   "/regen.data.v1.MsgAttest": {
-    aminoType: "/regen.data.v1.MsgAttest",
+    aminoType: "regen-ledger/MsgAttest",
     toAmino: ({
       attestor,
       contentHashes
@@ -138,7 +138,7 @@ export const AminoConverter = {
     }
   },
   "/regen.data.v1.MsgDefineResolver": {
-    aminoType: "/regen.data.v1.MsgDefineResolver",
+    aminoType: "regen-ledger/MsgDefineResolver",
     toAmino: ({
       manager,
       resolverUrl
@@ -159,7 +159,7 @@ export const AminoConverter = {
     }
   },
   "/regen.data.v1.MsgRegisterResolver": {
-    aminoType: "/regen.data.v1.MsgRegisterResolver",
+    aminoType: "regen-ledger/MsgRegisterResolver",
     toAmino: ({
       manager,
       resolverId,

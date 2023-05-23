@@ -2,7 +2,7 @@ import { AminoMsg } from "@cosmjs/amino";
 import { Long } from "../../../helpers";
 import { MsgCreateClass, MsgCreateProject, MsgCreateBatch, MsgMintBatchCredits, MsgSealBatch, MsgSend, MsgRetire, MsgCancel, MsgUpdateClassAdmin, MsgUpdateClassIssuers, MsgUpdateClassMetadata, MsgUpdateProjectAdmin, MsgUpdateProjectMetadata, MsgUpdateBatchMetadata, MsgBridge, MsgBridgeReceive, MsgAddCreditType, MsgSetClassCreatorAllowlist, MsgAddClassCreator, MsgRemoveClassCreator, MsgUpdateClassFee, MsgAddAllowedBridgeChain, MsgRemoveAllowedBridgeChain } from "./tx";
 export interface AminoMsgCreateClass extends AminoMsg {
-  type: "/regen.ecocredit.v1.MsgCreateClass";
+  type: "regen/MsgCreateClass";
   value: {
     admin: string;
     issuers: string[];
@@ -15,7 +15,7 @@ export interface AminoMsgCreateClass extends AminoMsg {
   };
 }
 export interface AminoMsgCreateProject extends AminoMsg {
-  type: "/regen.ecocredit.v1.MsgCreateProject";
+  type: "regen/MsgCreateProject";
   value: {
     admin: string;
     class_id: string;
@@ -25,7 +25,7 @@ export interface AminoMsgCreateProject extends AminoMsg {
   };
 }
 export interface AminoMsgCreateBatch extends AminoMsg {
-  type: "/regen.ecocredit.v1.MsgCreateBatch";
+  type: "regen/MsgCreateBatch";
   value: {
     issuer: string;
     project_id: string;
@@ -55,7 +55,7 @@ export interface AminoMsgCreateBatch extends AminoMsg {
   };
 }
 export interface AminoMsgMintBatchCredits extends AminoMsg {
-  type: "/regen.ecocredit.v1.MsgMintBatchCredits";
+  type: "regen/MsgMintBatchCredits";
   value: {
     issuer: string;
     batch_denom: string;
@@ -75,14 +75,14 @@ export interface AminoMsgMintBatchCredits extends AminoMsg {
   };
 }
 export interface AminoMsgSealBatch extends AminoMsg {
-  type: "/regen.ecocredit.v1.MsgSealBatch";
+  type: "regen/MsgSealBatch";
   value: {
     issuer: string;
     batch_denom: string;
   };
 }
 export interface AminoMsgSend extends AminoMsg {
-  type: "/regen.ecocredit.v1.MsgSend";
+  type: "regen/MsgSend";
   value: {
     sender: string;
     recipient: string;
@@ -96,7 +96,7 @@ export interface AminoMsgSend extends AminoMsg {
   };
 }
 export interface AminoMsgRetire extends AminoMsg {
-  type: "/regen.ecocredit.v1.MsgRetire";
+  type: "regen/MsgRetire";
   value: {
     owner: string;
     credits: {
@@ -108,7 +108,7 @@ export interface AminoMsgRetire extends AminoMsg {
   };
 }
 export interface AminoMsgCancel extends AminoMsg {
-  type: "/regen.ecocredit.v1.MsgCancel";
+  type: "regen/MsgCancel";
   value: {
     owner: string;
     credits: {
@@ -119,7 +119,7 @@ export interface AminoMsgCancel extends AminoMsg {
   };
 }
 export interface AminoMsgUpdateClassAdmin extends AminoMsg {
-  type: "/regen.ecocredit.v1.MsgUpdateClassAdmin";
+  type: "regen/MsgUpdateClassAdmin";
   value: {
     admin: string;
     class_id: string;
@@ -127,7 +127,7 @@ export interface AminoMsgUpdateClassAdmin extends AminoMsg {
   };
 }
 export interface AminoMsgUpdateClassIssuers extends AminoMsg {
-  type: "/regen.ecocredit.v1.MsgUpdateClassIssuers";
+  type: "regen/MsgUpdateClassIssuers";
   value: {
     admin: string;
     class_id: string;
@@ -136,7 +136,7 @@ export interface AminoMsgUpdateClassIssuers extends AminoMsg {
   };
 }
 export interface AminoMsgUpdateClassMetadata extends AminoMsg {
-  type: "/regen.ecocredit.v1.MsgUpdateClassMetadata";
+  type: "regen/MsgUpdateClassMetadata";
   value: {
     admin: string;
     class_id: string;
@@ -144,7 +144,7 @@ export interface AminoMsgUpdateClassMetadata extends AminoMsg {
   };
 }
 export interface AminoMsgUpdateProjectAdmin extends AminoMsg {
-  type: "/regen.ecocredit.v1.MsgUpdateProjectAdmin";
+  type: "regen/MsgUpdateProjectAdmin";
   value: {
     admin: string;
     project_id: string;
@@ -152,7 +152,7 @@ export interface AminoMsgUpdateProjectAdmin extends AminoMsg {
   };
 }
 export interface AminoMsgUpdateProjectMetadata extends AminoMsg {
-  type: "/regen.ecocredit.v1.MsgUpdateProjectMetadata";
+  type: "regen/MsgUpdateProjectMetadata";
   value: {
     admin: string;
     project_id: string;
@@ -160,7 +160,7 @@ export interface AminoMsgUpdateProjectMetadata extends AminoMsg {
   };
 }
 export interface AminoMsgUpdateBatchMetadata extends AminoMsg {
-  type: "/regen.ecocredit.v1.MsgUpdateBatchMetadata";
+  type: "regen/MsgUpdateBatchMetadata";
   value: {
     issuer: string;
     batch_denom: string;
@@ -168,7 +168,7 @@ export interface AminoMsgUpdateBatchMetadata extends AminoMsg {
   };
 }
 export interface AminoMsgBridge extends AminoMsg {
-  type: "/regen.ecocredit.v1.MsgBridge";
+  type: "regen/MsgBridge";
   value: {
     owner: string;
     target: string;
@@ -180,7 +180,7 @@ export interface AminoMsgBridge extends AminoMsg {
   };
 }
 export interface AminoMsgBridgeReceive extends AminoMsg {
-  type: "/regen.ecocredit.v1.MsgBridgeReceive";
+  type: "regen/MsgBridgeReceive";
   value: {
     issuer: string;
     class_id: string;
@@ -211,7 +211,7 @@ export interface AminoMsgBridgeReceive extends AminoMsg {
   };
 }
 export interface AminoMsgAddCreditType extends AminoMsg {
-  type: "/regen.ecocredit.v1.MsgAddCreditType";
+  type: "regen/MsgAddCreditType";
   value: {
     authority: string;
     credit_type: {
@@ -223,28 +223,28 @@ export interface AminoMsgAddCreditType extends AminoMsg {
   };
 }
 export interface AminoMsgSetClassCreatorAllowlist extends AminoMsg {
-  type: "/regen.ecocredit.v1.MsgSetClassCreatorAllowlist";
+  type: "regen/MsgSetClassCreatorAllowlist";
   value: {
     authority: string;
     enabled: boolean;
   };
 }
 export interface AminoMsgAddClassCreator extends AminoMsg {
-  type: "/regen.ecocredit.v1.MsgAddClassCreator";
+  type: "regen/MsgAddClassCreator";
   value: {
     authority: string;
     creator: string;
   };
 }
 export interface AminoMsgRemoveClassCreator extends AminoMsg {
-  type: "/regen.ecocredit.v1.MsgRemoveClassCreator";
+  type: "regen/MsgRemoveClassCreator";
   value: {
     authority: string;
     creator: string;
   };
 }
 export interface AminoMsgUpdateClassFee extends AminoMsg {
-  type: "/regen.ecocredit.v1.MsgUpdateClassFee";
+  type: "regen/MsgUpdateClassFee";
   value: {
     authority: string;
     fee: {
@@ -254,14 +254,14 @@ export interface AminoMsgUpdateClassFee extends AminoMsg {
   };
 }
 export interface AminoMsgAddAllowedBridgeChain extends AminoMsg {
-  type: "/regen.ecocredit.v1.MsgAddAllowedBridgeChain";
+  type: "regen/MsgAddAllowedBridgeChain";
   value: {
     authority: string;
     chain_name: string;
   };
 }
 export interface AminoMsgRemoveAllowedBridgeChain extends AminoMsg {
-  type: "/regen.ecocredit.v1.MsgRemoveAllowedBridgeChain";
+  type: "regen/MsgRemoveAllowedBridgeChain";
   value: {
     authority: string;
     chain_name: string;
@@ -269,7 +269,7 @@ export interface AminoMsgRemoveAllowedBridgeChain extends AminoMsg {
 }
 export const AminoConverter = {
   "/regen.ecocredit.v1.MsgCreateClass": {
-    aminoType: "/regen.ecocredit.v1.MsgCreateClass",
+    aminoType: "regen/MsgCreateClass",
     toAmino: ({
       admin,
       issuers,
@@ -308,7 +308,7 @@ export const AminoConverter = {
     }
   },
   "/regen.ecocredit.v1.MsgCreateProject": {
-    aminoType: "/regen.ecocredit.v1.MsgCreateProject",
+    aminoType: "regen/MsgCreateProject",
     toAmino: ({
       admin,
       classId,
@@ -341,7 +341,7 @@ export const AminoConverter = {
     }
   },
   "/regen.ecocredit.v1.MsgCreateBatch": {
-    aminoType: "/regen.ecocredit.v1.MsgCreateBatch",
+    aminoType: "regen/MsgCreateBatch",
     toAmino: ({
       issuer,
       projectId,
@@ -408,7 +408,7 @@ export const AminoConverter = {
     }
   },
   "/regen.ecocredit.v1.MsgMintBatchCredits": {
-    aminoType: "/regen.ecocredit.v1.MsgMintBatchCredits",
+    aminoType: "regen/MsgMintBatchCredits",
     toAmino: ({
       issuer,
       batchDenom,
@@ -459,7 +459,7 @@ export const AminoConverter = {
     }
   },
   "/regen.ecocredit.v1.MsgSealBatch": {
-    aminoType: "/regen.ecocredit.v1.MsgSealBatch",
+    aminoType: "regen/MsgSealBatch",
     toAmino: ({
       issuer,
       batchDenom
@@ -480,7 +480,7 @@ export const AminoConverter = {
     }
   },
   "/regen.ecocredit.v1.MsgSend": {
-    aminoType: "/regen.ecocredit.v1.MsgSend",
+    aminoType: "regen/MsgSend",
     toAmino: ({
       sender,
       recipient,
@@ -517,7 +517,7 @@ export const AminoConverter = {
     }
   },
   "/regen.ecocredit.v1.MsgRetire": {
-    aminoType: "/regen.ecocredit.v1.MsgRetire",
+    aminoType: "regen/MsgRetire",
     toAmino: ({
       owner,
       credits,
@@ -552,7 +552,7 @@ export const AminoConverter = {
     }
   },
   "/regen.ecocredit.v1.MsgCancel": {
-    aminoType: "/regen.ecocredit.v1.MsgCancel",
+    aminoType: "regen/MsgCancel",
     toAmino: ({
       owner,
       credits,
@@ -583,7 +583,7 @@ export const AminoConverter = {
     }
   },
   "/regen.ecocredit.v1.MsgUpdateClassAdmin": {
-    aminoType: "/regen.ecocredit.v1.MsgUpdateClassAdmin",
+    aminoType: "regen/MsgUpdateClassAdmin",
     toAmino: ({
       admin,
       classId,
@@ -608,7 +608,7 @@ export const AminoConverter = {
     }
   },
   "/regen.ecocredit.v1.MsgUpdateClassIssuers": {
-    aminoType: "/regen.ecocredit.v1.MsgUpdateClassIssuers",
+    aminoType: "regen/MsgUpdateClassIssuers",
     toAmino: ({
       admin,
       classId,
@@ -637,7 +637,7 @@ export const AminoConverter = {
     }
   },
   "/regen.ecocredit.v1.MsgUpdateClassMetadata": {
-    aminoType: "/regen.ecocredit.v1.MsgUpdateClassMetadata",
+    aminoType: "regen/MsgUpdateClassMetadata",
     toAmino: ({
       admin,
       classId,
@@ -662,7 +662,7 @@ export const AminoConverter = {
     }
   },
   "/regen.ecocredit.v1.MsgUpdateProjectAdmin": {
-    aminoType: "/regen.ecocredit.v1.MsgUpdateProjectAdmin",
+    aminoType: "regen/MsgUpdateProjectAdmin",
     toAmino: ({
       admin,
       projectId,
@@ -687,7 +687,7 @@ export const AminoConverter = {
     }
   },
   "/regen.ecocredit.v1.MsgUpdateProjectMetadata": {
-    aminoType: "/regen.ecocredit.v1.MsgUpdateProjectMetadata",
+    aminoType: "regen/MsgUpdateProjectMetadata",
     toAmino: ({
       admin,
       projectId,
@@ -712,7 +712,7 @@ export const AminoConverter = {
     }
   },
   "/regen.ecocredit.v1.MsgUpdateBatchMetadata": {
-    aminoType: "/regen.ecocredit.v1.MsgUpdateBatchMetadata",
+    aminoType: "regen/MsgUpdateBatchMetadata",
     toAmino: ({
       issuer,
       batchDenom,
@@ -737,7 +737,7 @@ export const AminoConverter = {
     }
   },
   "/regen.ecocredit.v1.MsgBridge": {
-    aminoType: "/regen.ecocredit.v1.MsgBridge",
+    aminoType: "regen/MsgBridge",
     toAmino: ({
       owner,
       target,
@@ -772,7 +772,7 @@ export const AminoConverter = {
     }
   },
   "/regen.ecocredit.v1.MsgBridgeReceive": {
-    aminoType: "/regen.ecocredit.v1.MsgBridgeReceive",
+    aminoType: "regen/MsgBridgeReceive",
     toAmino: ({
       issuer,
       classId,
@@ -835,7 +835,7 @@ export const AminoConverter = {
     }
   },
   "/regen.ecocredit.v1.MsgAddCreditType": {
-    aminoType: "/regen.ecocredit.v1.MsgAddCreditType",
+    aminoType: "regen/MsgAddCreditType",
     toAmino: ({
       authority,
       creditType
@@ -866,7 +866,7 @@ export const AminoConverter = {
     }
   },
   "/regen.ecocredit.v1.MsgSetClassCreatorAllowlist": {
-    aminoType: "/regen.ecocredit.v1.MsgSetClassCreatorAllowlist",
+    aminoType: "regen/MsgSetClassCreatorAllowlist",
     toAmino: ({
       authority,
       enabled
@@ -887,7 +887,7 @@ export const AminoConverter = {
     }
   },
   "/regen.ecocredit.v1.MsgAddClassCreator": {
-    aminoType: "/regen.ecocredit.v1.MsgAddClassCreator",
+    aminoType: "regen/MsgAddClassCreator",
     toAmino: ({
       authority,
       creator
@@ -908,7 +908,7 @@ export const AminoConverter = {
     }
   },
   "/regen.ecocredit.v1.MsgRemoveClassCreator": {
-    aminoType: "/regen.ecocredit.v1.MsgRemoveClassCreator",
+    aminoType: "regen/MsgRemoveClassCreator",
     toAmino: ({
       authority,
       creator
@@ -929,7 +929,7 @@ export const AminoConverter = {
     }
   },
   "/regen.ecocredit.v1.MsgUpdateClassFee": {
-    aminoType: "/regen.ecocredit.v1.MsgUpdateClassFee",
+    aminoType: "regen/MsgUpdateClassFee",
     toAmino: ({
       authority,
       fee
@@ -956,7 +956,7 @@ export const AminoConverter = {
     }
   },
   "/regen.ecocredit.v1.MsgAddAllowedBridgeChain": {
-    aminoType: "/regen.ecocredit.v1.MsgAddAllowedBridgeChain",
+    aminoType: "regen/MsgAddAllowedBridgeChain",
     toAmino: ({
       authority,
       chainName
@@ -977,7 +977,7 @@ export const AminoConverter = {
     }
   },
   "/regen.ecocredit.v1.MsgRemoveAllowedBridgeChain": {
-    aminoType: "/regen.ecocredit.v1.MsgRemoveAllowedBridgeChain",
+    aminoType: "regen/MsgRemoveAllowedBridgeChain",
     toAmino: ({
       authority,
       chainName

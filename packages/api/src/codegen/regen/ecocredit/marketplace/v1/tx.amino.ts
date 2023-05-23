@@ -2,7 +2,7 @@ import { AminoMsg } from "@cosmjs/amino";
 import { Long } from "../../../../helpers";
 import { MsgSell, MsgUpdateSellOrders, MsgCancelSellOrder, MsgBuyDirect, MsgAddAllowedDenom, MsgRemoveAllowedDenom } from "./tx";
 export interface AminoMsgSell extends AminoMsg {
-  type: "/regen.ecocredit.marketplace.v1.MsgSell";
+  type: "regen.marketplace/MsgSell";
   value: {
     seller: string;
     orders: {
@@ -21,7 +21,7 @@ export interface AminoMsgSell extends AminoMsg {
   };
 }
 export interface AminoMsgUpdateSellOrders extends AminoMsg {
-  type: "/regen.ecocredit.marketplace.v1.MsgUpdateSellOrders";
+  type: "regen.marketplace/MsgUpdateSellOrders";
   value: {
     seller: string;
     updates: {
@@ -40,14 +40,14 @@ export interface AminoMsgUpdateSellOrders extends AminoMsg {
   };
 }
 export interface AminoMsgCancelSellOrder extends AminoMsg {
-  type: "/regen.ecocredit.marketplace.v1.MsgCancelSellOrder";
+  type: "regen.marketplace/MsgCancelSellOrder";
   value: {
     seller: string;
     sell_order_id: string;
   };
 }
 export interface AminoMsgBuyDirect extends AminoMsg {
-  type: "/regen.ecocredit.marketplace.v1.MsgBuyDirect";
+  type: "regen.marketplace/MsgBuyDirect";
   value: {
     buyer: string;
     orders: {
@@ -66,7 +66,7 @@ export interface AminoMsgBuyDirect extends AminoMsg {
   };
 }
 export interface AminoMsgAddAllowedDenom extends AminoMsg {
-  type: "/regen.ecocredit.marketplace.v1.MsgAddAllowedDenom";
+  type: "regen.marketplace/MsgAddAllowedDenom";
   value: {
     authority: string;
     bank_denom: string;
@@ -75,7 +75,7 @@ export interface AminoMsgAddAllowedDenom extends AminoMsg {
   };
 }
 export interface AminoMsgRemoveAllowedDenom extends AminoMsg {
-  type: "/regen.ecocredit.marketplace.v1.MsgRemoveAllowedDenom";
+  type: "regen.marketplace/MsgRemoveAllowedDenom";
   value: {
     authority: string;
     denom: string;
@@ -83,7 +83,7 @@ export interface AminoMsgRemoveAllowedDenom extends AminoMsg {
 }
 export const AminoConverter = {
   "/regen.ecocredit.marketplace.v1.MsgSell": {
-    aminoType: "/regen.ecocredit.marketplace.v1.MsgSell",
+    aminoType: "regen.marketplace/MsgSell",
     toAmino: ({
       seller,
       orders
@@ -122,7 +122,7 @@ export const AminoConverter = {
     }
   },
   "/regen.ecocredit.marketplace.v1.MsgUpdateSellOrders": {
-    aminoType: "/regen.ecocredit.marketplace.v1.MsgUpdateSellOrders",
+    aminoType: "regen.marketplace/MsgUpdateSellOrders",
     toAmino: ({
       seller,
       updates
@@ -161,7 +161,7 @@ export const AminoConverter = {
     }
   },
   "/regen.ecocredit.marketplace.v1.MsgCancelSellOrder": {
-    aminoType: "/regen.ecocredit.marketplace.v1.MsgCancelSellOrder",
+    aminoType: "regen.marketplace/MsgCancelSellOrder",
     toAmino: ({
       seller,
       sellOrderId
@@ -182,7 +182,7 @@ export const AminoConverter = {
     }
   },
   "/regen.ecocredit.marketplace.v1.MsgBuyDirect": {
-    aminoType: "/regen.ecocredit.marketplace.v1.MsgBuyDirect",
+    aminoType: "regen.marketplace/MsgBuyDirect",
     toAmino: ({
       buyer,
       orders
@@ -221,7 +221,7 @@ export const AminoConverter = {
     }
   },
   "/regen.ecocredit.marketplace.v1.MsgAddAllowedDenom": {
-    aminoType: "/regen.ecocredit.marketplace.v1.MsgAddAllowedDenom",
+    aminoType: "regen.marketplace/MsgAddAllowedDenom",
     toAmino: ({
       authority,
       bankDenom,
@@ -250,7 +250,7 @@ export const AminoConverter = {
     }
   },
   "/regen.ecocredit.marketplace.v1.MsgRemoveAllowedDenom": {
-    aminoType: "/regen.ecocredit.marketplace.v1.MsgRemoveAllowedDenom",
+    aminoType: "regen.marketplace/MsgRemoveAllowedDenom",
     toAmino: ({
       authority,
       denom

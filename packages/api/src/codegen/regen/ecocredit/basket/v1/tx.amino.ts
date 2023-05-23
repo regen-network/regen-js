@@ -2,7 +2,7 @@ import { AminoMsg } from "@cosmjs/amino";
 import { Long } from "../../../../helpers";
 import { MsgCreate, MsgPut, MsgTake, MsgUpdateBasketFee, MsgUpdateCurator, MsgUpdateDateCriteria } from "./tx";
 export interface AminoMsgCreate extends AminoMsg {
-  type: "/regen.ecocredit.basket.v1.MsgCreate";
+  type: "regen.basket/MsgCreate";
   value: {
     curator: string;
     name: string;
@@ -29,7 +29,7 @@ export interface AminoMsgCreate extends AminoMsg {
   };
 }
 export interface AminoMsgPut extends AminoMsg {
-  type: "/regen.ecocredit.basket.v1.MsgPut";
+  type: "regen.basket/MsgPut";
   value: {
     owner: string;
     basket_denom: string;
@@ -40,7 +40,7 @@ export interface AminoMsgPut extends AminoMsg {
   };
 }
 export interface AminoMsgTake extends AminoMsg {
-  type: "/regen.ecocredit.basket.v1.MsgTake";
+  type: "regen.basket/MsgTake";
   value: {
     owner: string;
     basket_denom: string;
@@ -52,7 +52,7 @@ export interface AminoMsgTake extends AminoMsg {
   };
 }
 export interface AminoMsgUpdateBasketFee extends AminoMsg {
-  type: "/regen.ecocredit.basket.v1.MsgUpdateBasketFee";
+  type: "regen.basket/MsgUpdateBasketFee";
   value: {
     authority: string;
     fee: {
@@ -62,7 +62,7 @@ export interface AminoMsgUpdateBasketFee extends AminoMsg {
   };
 }
 export interface AminoMsgUpdateCurator extends AminoMsg {
-  type: "/regen.ecocredit.basket.v1.MsgUpdateCurator";
+  type: "regen.basket/MsgUpdateCurator";
   value: {
     curator: string;
     denom: string;
@@ -70,7 +70,7 @@ export interface AminoMsgUpdateCurator extends AminoMsg {
   };
 }
 export interface AminoMsgUpdateDateCriteria extends AminoMsg {
-  type: "/regen.ecocredit.basket.v1.MsgUpdateDateCriteria";
+  type: "regen.basket/MsgUpdateDateCriteria";
   value: {
     authority: string;
     denom: string;
@@ -89,7 +89,7 @@ export interface AminoMsgUpdateDateCriteria extends AminoMsg {
 }
 export const AminoConverter = {
   "/regen.ecocredit.basket.v1.MsgCreate": {
-    aminoType: "/regen.ecocredit.basket.v1.MsgCreate",
+    aminoType: "regen.basket/MsgCreate",
     toAmino: ({
       curator,
       name,
@@ -155,7 +155,7 @@ export const AminoConverter = {
     }
   },
   "/regen.ecocredit.basket.v1.MsgPut": {
-    aminoType: "/regen.ecocredit.basket.v1.MsgPut",
+    aminoType: "regen.basket/MsgPut",
     toAmino: ({
       owner,
       basketDenom,
@@ -186,7 +186,7 @@ export const AminoConverter = {
     }
   },
   "/regen.ecocredit.basket.v1.MsgTake": {
-    aminoType: "/regen.ecocredit.basket.v1.MsgTake",
+    aminoType: "regen.basket/MsgTake",
     toAmino: ({
       owner,
       basketDenom,
@@ -227,7 +227,7 @@ export const AminoConverter = {
     }
   },
   "/regen.ecocredit.basket.v1.MsgUpdateBasketFee": {
-    aminoType: "/regen.ecocredit.basket.v1.MsgUpdateBasketFee",
+    aminoType: "regen.basket/MsgUpdateBasketFee",
     toAmino: ({
       authority,
       fee
@@ -254,7 +254,7 @@ export const AminoConverter = {
     }
   },
   "/regen.ecocredit.basket.v1.MsgUpdateCurator": {
-    aminoType: "/regen.ecocredit.basket.v1.MsgUpdateCurator",
+    aminoType: "regen.basket/MsgUpdateCurator",
     toAmino: ({
       curator,
       denom,
@@ -279,7 +279,7 @@ export const AminoConverter = {
     }
   },
   "/regen.ecocredit.basket.v1.MsgUpdateDateCriteria": {
-    aminoType: "/regen.ecocredit.basket.v1.MsgUpdateDateCriteria",
+    aminoType: "regen.basket/MsgUpdateDateCriteria",
     toAmino: ({
       authority,
       denom,
