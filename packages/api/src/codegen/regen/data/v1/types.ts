@@ -10,16 +10,8 @@ export enum DigestAlgorithm {
   DIGEST_ALGORITHM_BLAKE2B_256 = 1,
   UNRECOGNIZED = -1,
 }
-/** DigestAlgorithm is the hash digest algorithm */
-
-export enum DigestAlgorithmSDKType {
-  /** DIGEST_ALGORITHM_UNSPECIFIED - unspecified and invalid */
-  DIGEST_ALGORITHM_UNSPECIFIED = 0,
-
-  /** DIGEST_ALGORITHM_BLAKE2B_256 - BLAKE2b-256 */
-  DIGEST_ALGORITHM_BLAKE2B_256 = 1,
-  UNRECOGNIZED = -1,
-}
+export const DigestAlgorithmSDKType = DigestAlgorithm;
+export const DigestAlgorithmAmino = DigestAlgorithm;
 export function digestAlgorithmFromJSON(object: any): DigestAlgorithm {
   switch (object) {
     case 0:
@@ -107,64 +99,8 @@ export enum RawMediaType {
   RAW_MEDIA_TYPE_OGG = 35,
   UNRECOGNIZED = -1,
 }
-/** RawMediaType defines MIME media types to be used with a ContentHash.Raw hash. */
-
-export enum RawMediaTypeSDKType {
-  /** RAW_MEDIA_TYPE_UNSPECIFIED - RAW_MEDIA_TYPE_UNSPECIFIED can be used for raw binary data */
-  RAW_MEDIA_TYPE_UNSPECIFIED = 0,
-
-  /** RAW_MEDIA_TYPE_TEXT_PLAIN - plain text */
-  RAW_MEDIA_TYPE_TEXT_PLAIN = 1,
-
-  /** RAW_MEDIA_TYPE_JSON - JSON */
-  RAW_MEDIA_TYPE_JSON = 2,
-
-  /** RAW_MEDIA_TYPE_CSV - CSV */
-  RAW_MEDIA_TYPE_CSV = 3,
-
-  /** RAW_MEDIA_TYPE_XML - XML */
-  RAW_MEDIA_TYPE_XML = 4,
-
-  /** RAW_MEDIA_TYPE_PDF - PDF */
-  RAW_MEDIA_TYPE_PDF = 5,
-
-  /** RAW_MEDIA_TYPE_TIFF - TIIF */
-  RAW_MEDIA_TYPE_TIFF = 16,
-
-  /** RAW_MEDIA_TYPE_JPG - JPG */
-  RAW_MEDIA_TYPE_JPG = 17,
-
-  /** RAW_MEDIA_TYPE_PNG - PNG */
-  RAW_MEDIA_TYPE_PNG = 18,
-
-  /** RAW_MEDIA_TYPE_SVG - SVG */
-  RAW_MEDIA_TYPE_SVG = 19,
-
-  /** RAW_MEDIA_TYPE_WEBP - WEBP */
-  RAW_MEDIA_TYPE_WEBP = 20,
-
-  /** RAW_MEDIA_TYPE_AVIF - AVIF */
-  RAW_MEDIA_TYPE_AVIF = 21,
-
-  /** RAW_MEDIA_TYPE_GIF - GIF */
-  RAW_MEDIA_TYPE_GIF = 22,
-
-  /** RAW_MEDIA_TYPE_APNG - APNG */
-  RAW_MEDIA_TYPE_APNG = 23,
-
-  /** RAW_MEDIA_TYPE_MPEG - MPEG */
-  RAW_MEDIA_TYPE_MPEG = 32,
-
-  /** RAW_MEDIA_TYPE_MP4 - MP4 */
-  RAW_MEDIA_TYPE_MP4 = 33,
-
-  /** RAW_MEDIA_TYPE_WEBM - WEBM */
-  RAW_MEDIA_TYPE_WEBM = 34,
-
-  /** RAW_MEDIA_TYPE_OGG - OGG */
-  RAW_MEDIA_TYPE_OGG = 35,
-  UNRECOGNIZED = -1,
-}
+export const RawMediaTypeSDKType = RawMediaType;
+export const RawMediaTypeAmino = RawMediaType;
 export function rawMediaTypeFromJSON(object: any): RawMediaType {
   switch (object) {
     case 0:
@@ -316,16 +252,8 @@ export enum GraphCanonicalizationAlgorithm {
   GRAPH_CANONICALIZATION_ALGORITHM_URDNA2015 = 1,
   UNRECOGNIZED = -1,
 }
-/** GraphCanonicalizationAlgorithm is the graph canonicalization algorithm */
-
-export enum GraphCanonicalizationAlgorithmSDKType {
-  /** GRAPH_CANONICALIZATION_ALGORITHM_UNSPECIFIED - unspecified and invalid */
-  GRAPH_CANONICALIZATION_ALGORITHM_UNSPECIFIED = 0,
-
-  /** GRAPH_CANONICALIZATION_ALGORITHM_URDNA2015 - URDNA2015 graph hashing */
-  GRAPH_CANONICALIZATION_ALGORITHM_URDNA2015 = 1,
-  UNRECOGNIZED = -1,
-}
+export const GraphCanonicalizationAlgorithmSDKType = GraphCanonicalizationAlgorithm;
+export const GraphCanonicalizationAlgorithmAmino = GraphCanonicalizationAlgorithm;
 export function graphCanonicalizationAlgorithmFromJSON(object: any): GraphCanonicalizationAlgorithm {
   switch (object) {
     case 0:
@@ -362,13 +290,8 @@ export enum GraphMerkleTree {
   GRAPH_MERKLE_TREE_NONE_UNSPECIFIED = 0,
   UNRECOGNIZED = -1,
 }
-/** GraphMerkleTree is the graph merkle tree type used for hashing, if any */
-
-export enum GraphMerkleTreeSDKType {
-  /** GRAPH_MERKLE_TREE_NONE_UNSPECIFIED - unspecified and valid */
-  GRAPH_MERKLE_TREE_NONE_UNSPECIFIED = 0,
-  UNRECOGNIZED = -1,
-}
+export const GraphMerkleTreeSDKType = GraphMerkleTree;
+export const GraphMerkleTreeAmino = GraphMerkleTree;
 export function graphMerkleTreeFromJSON(object: any): GraphMerkleTree {
   switch (object) {
     case 0:
@@ -412,9 +335,13 @@ export interface ContentHash {
 
   graph?: ContentHash_Graph;
 }
+export interface ContentHashProtoMsg {
+  typeUrl: "/regen.data.v1.ContentHash";
+  value: Uint8Array;
+}
 /** ContentHash specifies a hash-based content identifier for a piece of data. */
 
-export interface ContentHashSDKType {
+export interface ContentHashAmino {
   /**
    * Raw specifies "raw" data which does not specify a deterministic, canonical
    * encoding. Users of these hashes MUST maintain a copy of the hashed data
@@ -424,13 +351,23 @@ export interface ContentHashSDKType {
    * the guarantee that the canonical hash will not change. The media type for
    * "raw" data is defined by the MediaType enum.
    */
-  raw?: ContentHash_RawSDKType;
+  raw?: ContentHash_RawAmino;
   /**
    * Graph specifies graph data that conforms to the RDF data model.
    * The canonicalization algorithm used for an RDF graph is specified by
    * GraphCanonicalizationAlgorithm.
    */
 
+  graph?: ContentHash_GraphAmino;
+}
+export interface ContentHashAminoMsg {
+  type: "/regen.data.v1.ContentHash";
+  value: ContentHashAmino;
+}
+/** ContentHash specifies a hash-based content identifier for a piece of data. */
+
+export interface ContentHashSDKType {
+  raw?: ContentHash_RawSDKType;
   graph?: ContentHash_GraphSDKType;
 }
 /** Raw is the content hash type used for raw data. */
@@ -448,9 +385,13 @@ export interface ContentHash_Raw {
 
   mediaType: RawMediaType;
 }
+export interface ContentHash_RawProtoMsg {
+  typeUrl: "/regen.data.v1.Raw";
+  value: Uint8Array;
+}
 /** Raw is the content hash type used for raw data. */
 
-export interface ContentHash_RawSDKType {
+export interface ContentHash_RawAmino {
   /**
    * hash represents the hash of the data based on the specified
    * digest_algorithm.
@@ -458,10 +399,21 @@ export interface ContentHash_RawSDKType {
   hash: Uint8Array;
   /** digest_algorithm represents the hash digest algorithm. */
 
-  digest_algorithm: DigestAlgorithmSDKType;
+  digest_algorithm: DigestAlgorithm;
   /** media_type represents the media type for raw data. */
 
-  media_type: RawMediaTypeSDKType;
+  media_type: RawMediaType;
+}
+export interface ContentHash_RawAminoMsg {
+  type: "/regen.data.v1.Raw";
+  value: ContentHash_RawAmino;
+}
+/** Raw is the content hash type used for raw data. */
+
+export interface ContentHash_RawSDKType {
+  hash: Uint8Array;
+  digest_algorithm: DigestAlgorithm;
+  media_type: RawMediaType;
 }
 /** Graph is the content hash type used for RDF graph data. */
 
@@ -484,9 +436,13 @@ export interface ContentHash_Graph {
 
   merkleTree: GraphMerkleTree;
 }
+export interface ContentHash_GraphProtoMsg {
+  typeUrl: "/regen.data.v1.Graph";
+  value: Uint8Array;
+}
 /** Graph is the content hash type used for RDF graph data. */
 
-export interface ContentHash_GraphSDKType {
+export interface ContentHash_GraphAmino {
   /**
    * hash represents the hash of the data based on the specified
    * digest_algorithm.
@@ -494,16 +450,28 @@ export interface ContentHash_GraphSDKType {
   hash: Uint8Array;
   /** digest_algorithm represents the hash digest algorithm. */
 
-  digest_algorithm: DigestAlgorithmSDKType;
+  digest_algorithm: DigestAlgorithm;
   /**
    * graph_canonicalization_algorithm represents the RDF graph
    * canonicalization algorithm.
    */
 
-  canonicalization_algorithm: GraphCanonicalizationAlgorithmSDKType;
+  canonicalization_algorithm: GraphCanonicalizationAlgorithm;
   /** merkle_tree is the merkle tree type used for the graph hash, if any. */
 
-  merkle_tree: GraphMerkleTreeSDKType;
+  merkle_tree: GraphMerkleTree;
+}
+export interface ContentHash_GraphAminoMsg {
+  type: "/regen.data.v1.Graph";
+  value: ContentHash_GraphAmino;
+}
+/** Graph is the content hash type used for RDF graph data. */
+
+export interface ContentHash_GraphSDKType {
+  hash: Uint8Array;
+  digest_algorithm: DigestAlgorithm;
+  canonicalization_algorithm: GraphCanonicalizationAlgorithm;
+  merkle_tree: GraphMerkleTree;
 }
 /** ContentHashes contains list of content ContentHash. */
 
@@ -511,10 +479,23 @@ export interface ContentHashes {
   /** data is a list of content hashes which the resolver claims to serve. */
   contentHashes: ContentHash[];
 }
+export interface ContentHashesProtoMsg {
+  typeUrl: "/regen.data.v1.ContentHashes";
+  value: Uint8Array;
+}
+/** ContentHashes contains list of content ContentHash. */
+
+export interface ContentHashesAmino {
+  /** data is a list of content hashes which the resolver claims to serve. */
+  content_hashes: ContentHashAmino[];
+}
+export interface ContentHashesAminoMsg {
+  type: "/regen.data.v1.ContentHashes";
+  value: ContentHashesAmino;
+}
 /** ContentHashes contains list of content ContentHash. */
 
 export interface ContentHashesSDKType {
-  /** data is a list of content hashes which the resolver claims to serve. */
   content_hashes: ContentHashSDKType[];
 }
 
@@ -583,6 +564,39 @@ export const ContentHash = {
     message.raw = object.raw !== undefined && object.raw !== null ? ContentHash_Raw.fromPartial(object.raw) : undefined;
     message.graph = object.graph !== undefined && object.graph !== null ? ContentHash_Graph.fromPartial(object.graph) : undefined;
     return message;
+  },
+
+  fromAmino(object: ContentHashAmino): ContentHash {
+    return {
+      raw: object?.raw ? ContentHash_Raw.fromAmino(object.raw) : undefined,
+      graph: object?.graph ? ContentHash_Graph.fromAmino(object.graph) : undefined
+    };
+  },
+
+  toAmino(message: ContentHash): ContentHashAmino {
+    const obj: any = {};
+    obj.raw = message.raw ? ContentHash_Raw.toAmino(message.raw) : undefined;
+    obj.graph = message.graph ? ContentHash_Graph.toAmino(message.graph) : undefined;
+    return obj;
+  },
+
+  fromAminoMsg(object: ContentHashAminoMsg): ContentHash {
+    return ContentHash.fromAmino(object.value);
+  },
+
+  fromProtoMsg(message: ContentHashProtoMsg): ContentHash {
+    return ContentHash.decode(message.value);
+  },
+
+  toProto(message: ContentHash): Uint8Array {
+    return ContentHash.encode(message).finish();
+  },
+
+  toProtoMsg(message: ContentHash): ContentHashProtoMsg {
+    return {
+      typeUrl: "/regen.data.v1.ContentHash",
+      value: ContentHash.encode(message).finish()
+    };
   }
 
 };
@@ -664,6 +678,41 @@ export const ContentHash_Raw = {
     message.digestAlgorithm = object.digestAlgorithm ?? 0;
     message.mediaType = object.mediaType ?? 0;
     return message;
+  },
+
+  fromAmino(object: ContentHash_RawAmino): ContentHash_Raw {
+    return {
+      hash: object.hash,
+      digestAlgorithm: isSet(object.digest_algorithm) ? digestAlgorithmFromJSON(object.digest_algorithm) : 0,
+      mediaType: isSet(object.media_type) ? rawMediaTypeFromJSON(object.media_type) : 0
+    };
+  },
+
+  toAmino(message: ContentHash_Raw): ContentHash_RawAmino {
+    const obj: any = {};
+    obj.hash = message.hash;
+    obj.digest_algorithm = message.digestAlgorithm;
+    obj.media_type = message.mediaType;
+    return obj;
+  },
+
+  fromAminoMsg(object: ContentHash_RawAminoMsg): ContentHash_Raw {
+    return ContentHash_Raw.fromAmino(object.value);
+  },
+
+  fromProtoMsg(message: ContentHash_RawProtoMsg): ContentHash_Raw {
+    return ContentHash_Raw.decode(message.value);
+  },
+
+  toProto(message: ContentHash_Raw): Uint8Array {
+    return ContentHash_Raw.encode(message).finish();
+  },
+
+  toProtoMsg(message: ContentHash_Raw): ContentHash_RawProtoMsg {
+    return {
+      typeUrl: "/regen.data.v1.Raw",
+      value: ContentHash_Raw.encode(message).finish()
+    };
   }
 
 };
@@ -757,6 +806,43 @@ export const ContentHash_Graph = {
     message.canonicalizationAlgorithm = object.canonicalizationAlgorithm ?? 0;
     message.merkleTree = object.merkleTree ?? 0;
     return message;
+  },
+
+  fromAmino(object: ContentHash_GraphAmino): ContentHash_Graph {
+    return {
+      hash: object.hash,
+      digestAlgorithm: isSet(object.digest_algorithm) ? digestAlgorithmFromJSON(object.digest_algorithm) : 0,
+      canonicalizationAlgorithm: isSet(object.canonicalization_algorithm) ? graphCanonicalizationAlgorithmFromJSON(object.canonicalization_algorithm) : 0,
+      merkleTree: isSet(object.merkle_tree) ? graphMerkleTreeFromJSON(object.merkle_tree) : 0
+    };
+  },
+
+  toAmino(message: ContentHash_Graph): ContentHash_GraphAmino {
+    const obj: any = {};
+    obj.hash = message.hash;
+    obj.digest_algorithm = message.digestAlgorithm;
+    obj.canonicalization_algorithm = message.canonicalizationAlgorithm;
+    obj.merkle_tree = message.merkleTree;
+    return obj;
+  },
+
+  fromAminoMsg(object: ContentHash_GraphAminoMsg): ContentHash_Graph {
+    return ContentHash_Graph.fromAmino(object.value);
+  },
+
+  fromProtoMsg(message: ContentHash_GraphProtoMsg): ContentHash_Graph {
+    return ContentHash_Graph.decode(message.value);
+  },
+
+  toProto(message: ContentHash_Graph): Uint8Array {
+    return ContentHash_Graph.encode(message).finish();
+  },
+
+  toProtoMsg(message: ContentHash_Graph): ContentHash_GraphProtoMsg {
+    return {
+      typeUrl: "/regen.data.v1.Graph",
+      value: ContentHash_Graph.encode(message).finish()
+    };
   }
 
 };
@@ -820,6 +906,43 @@ export const ContentHashes = {
     const message = createBaseContentHashes();
     message.contentHashes = object.contentHashes?.map(e => ContentHash.fromPartial(e)) || [];
     return message;
+  },
+
+  fromAmino(object: ContentHashesAmino): ContentHashes {
+    return {
+      contentHashes: Array.isArray(object?.content_hashes) ? object.content_hashes.map((e: any) => ContentHash.fromAmino(e)) : []
+    };
+  },
+
+  toAmino(message: ContentHashes): ContentHashesAmino {
+    const obj: any = {};
+
+    if (message.contentHashes) {
+      obj.content_hashes = message.contentHashes.map(e => e ? ContentHash.toAmino(e) : undefined);
+    } else {
+      obj.content_hashes = [];
+    }
+
+    return obj;
+  },
+
+  fromAminoMsg(object: ContentHashesAminoMsg): ContentHashes {
+    return ContentHashes.fromAmino(object.value);
+  },
+
+  fromProtoMsg(message: ContentHashesProtoMsg): ContentHashes {
+    return ContentHashes.decode(message.value);
+  },
+
+  toProto(message: ContentHashes): Uint8Array {
+    return ContentHashes.encode(message).finish();
+  },
+
+  toProtoMsg(message: ContentHashes): ContentHashesProtoMsg {
+    return {
+      typeUrl: "/regen.data.v1.ContentHashes",
+      value: ContentHashes.encode(message).finish()
+    };
   }
 
 };

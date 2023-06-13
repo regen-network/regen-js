@@ -1,9 +1,22 @@
-import { Grant, GrantSDKType } from "./feegrant";
+import { Grant, GrantAmino, GrantSDKType } from "./feegrant";
 import * as _m0 from "protobufjs/minimal";
 /** GenesisState contains a set of fee allowances, persisted from the store */
 
 export interface GenesisState {
   allowances: Grant[];
+}
+export interface GenesisStateProtoMsg {
+  typeUrl: "/cosmos.feegrant.v1beta1.GenesisState";
+  value: Uint8Array;
+}
+/** GenesisState contains a set of fee allowances, persisted from the store */
+
+export interface GenesisStateAmino {
+  allowances: GrantAmino[];
+}
+export interface GenesisStateAminoMsg {
+  type: "cosmos-sdk/GenesisState";
+  value: GenesisStateAmino;
 }
 /** GenesisState contains a set of fee allowances, persisted from the store */
 
@@ -70,6 +83,50 @@ export const GenesisState = {
     const message = createBaseGenesisState();
     message.allowances = object.allowances?.map(e => Grant.fromPartial(e)) || [];
     return message;
+  },
+
+  fromAmino(object: GenesisStateAmino): GenesisState {
+    return {
+      allowances: Array.isArray(object?.allowances) ? object.allowances.map((e: any) => Grant.fromAmino(e)) : []
+    };
+  },
+
+  toAmino(message: GenesisState): GenesisStateAmino {
+    const obj: any = {};
+
+    if (message.allowances) {
+      obj.allowances = message.allowances.map(e => e ? Grant.toAmino(e) : undefined);
+    } else {
+      obj.allowances = [];
+    }
+
+    return obj;
+  },
+
+  fromAminoMsg(object: GenesisStateAminoMsg): GenesisState {
+    return GenesisState.fromAmino(object.value);
+  },
+
+  toAminoMsg(message: GenesisState): GenesisStateAminoMsg {
+    return {
+      type: "cosmos-sdk/GenesisState",
+      value: GenesisState.toAmino(message)
+    };
+  },
+
+  fromProtoMsg(message: GenesisStateProtoMsg): GenesisState {
+    return GenesisState.decode(message.value);
+  },
+
+  toProto(message: GenesisState): Uint8Array {
+    return GenesisState.encode(message).finish();
+  },
+
+  toProtoMsg(message: GenesisState): GenesisStateProtoMsg {
+    return {
+      typeUrl: "/cosmos.feegrant.v1beta1.GenesisState",
+      value: GenesisState.encode(message).finish()
+    };
   }
 
 };

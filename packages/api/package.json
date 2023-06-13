@@ -1,6 +1,6 @@
 {
   "name": "@regen-network/api",
-  "version": "v1.0.0-beta1",
+  "version": "v1.0.0-alpha2",
   "author": "admin@regen.network",
   "description": "A client library for the Regen Ledger",
   "license": "Apache-2.0",
@@ -35,10 +35,10 @@
   },
   "dependencies": {
     "@babel/runtime": "^7.19.4",
-    "@cosmjs/amino": "0.29.4",
-    "@cosmjs/proto-signing": "0.29.4",
-    "@cosmjs/stargate": "0.29.4",
-    "@cosmjs/tendermint-rpc": "^0.29.4",
+    "@cosmjs/amino": "0.29.5",
+    "@cosmjs/proto-signing": "0.29.5",
+    "@cosmjs/stargate": "0.29.5",
+    "@cosmjs/tendermint-rpc": "^0.29.5",
     "@osmonauts/lcd": "^0.11.1",
     "protobufjs": "^6.11.2"
   },
@@ -55,7 +55,7 @@
     "@babel/plugin-transform-runtime": "7.19.1",
     "@babel/preset-env": "7.19.4",
     "@babel/preset-typescript": "^7.18.6",
-    "@osmonauts/telescope": "^0.78.0",
+    "@osmonauts/telescope": "^0.85.0",
     "babel-core": "7.0.0-bridge.0",
     "babel-jest": "29.1.2",
     "babel-watch": "^7.0.0",

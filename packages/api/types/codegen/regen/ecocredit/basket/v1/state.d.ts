@@ -1,8 +1,8 @@
-import { DateCriteria, DateCriteriaSDKType } from "./types";
-import { Timestamp, TimestampSDKType } from "../../../../google/protobuf/timestamp";
-import { Coin, CoinSDKType } from "../../../../cosmos/base/v1beta1/coin";
-import * as _m0 from "protobufjs/minimal";
+import { DateCriteria, DateCriteriaAmino, DateCriteriaSDKType } from "./types";
+import { Timestamp, TimestampAmino, TimestampSDKType } from "../../../../google/protobuf/timestamp";
+import { Coin, CoinAmino, CoinSDKType } from "../../../../cosmos/base/v1beta1/coin";
 import { Long } from "../../../../helpers";
+import * as _m0 from "protobufjs/minimal";
 /** Basket represents a basket in state. */
 export interface Basket {
     /**
@@ -62,13 +62,17 @@ export interface Basket {
      */
     curator: Uint8Array;
 }
+export interface BasketProtoMsg {
+    typeUrl: "/regen.ecocredit.basket.v1.Basket";
+    value: Uint8Array;
+}
 /** Basket represents a basket in state. */
-export interface BasketSDKType {
+export interface BasketAmino {
     /**
      * id is the uint64 ID of the basket. It is used internally for reducing
      * storage space.
      */
-    id: Long;
+    id: string;
     /**
      * basket_denom is the basket bank denom formed from name and credit type with
      * the format `eco.<prefix><credit_type_abbrev>.<name>` where prefix is the
@@ -104,7 +108,7 @@ export interface BasketSDKType {
      */
     credit_type_abbrev: string;
     /** date_criteria is the date criteria for batches admitted to the basket. */
-    date_criteria?: DateCriteriaSDKType;
+    date_criteria?: DateCriteriaAmino;
     /**
      * Deprecated (Since Revision 1): This field is no longer used and will be
      * removed in the next version. The value of credit type precision is always
@@ -121,6 +125,22 @@ export interface BasketSDKType {
      */
     curator: Uint8Array;
 }
+export interface BasketAminoMsg {
+    type: "/regen.ecocredit.basket.v1.Basket";
+    value: BasketAmino;
+}
+/** Basket represents a basket in state. */
+export interface BasketSDKType {
+    id: Long;
+    basket_denom: string;
+    name: string;
+    disable_auto_retire: boolean;
+    credit_type_abbrev: string;
+    date_criteria?: DateCriteriaSDKType;
+    /** @deprecated */
+    exponent: number;
+    curator: Uint8Array;
+}
 /** BasketClass describes a credit class that can be deposited in a basket. */
 export interface BasketClass {
     /** basket_id is the ID of the basket */
@@ -131,14 +151,27 @@ export interface BasketClass {
      */
     classId: string;
 }
+export interface BasketClassProtoMsg {
+    typeUrl: "/regen.ecocredit.basket.v1.BasketClass";
+    value: Uint8Array;
+}
 /** BasketClass describes a credit class that can be deposited in a basket. */
-export interface BasketClassSDKType {
+export interface BasketClassAmino {
     /** basket_id is the ID of the basket */
-    basket_id: Long;
+    basket_id: string;
     /**
      * class_id is the id of the credit class that is allowed to be deposited in
      * the basket
      */
+    class_id: string;
+}
+export interface BasketClassAminoMsg {
+    type: "/regen.ecocredit.basket.v1.BasketClass";
+    value: BasketClassAmino;
+}
+/** BasketClass describes a credit class that can be deposited in a basket. */
+export interface BasketClassSDKType {
+    basket_id: Long;
     class_id: string;
 }
 /** BasketBalance stores the amount of credits from a batch in a basket */
@@ -155,10 +188,14 @@ export interface BasketBalance {
      */
     batchStartDate?: Timestamp;
 }
+export interface BasketBalanceProtoMsg {
+    typeUrl: "/regen.ecocredit.basket.v1.BasketBalance";
+    value: Uint8Array;
+}
 /** BasketBalance stores the amount of credits from a batch in a basket */
-export interface BasketBalanceSDKType {
+export interface BasketBalanceAmino {
     /** basket_id is the ID of the basket */
-    basket_id: Long;
+    basket_id: string;
     /** batch_denom is the denom of the credit batch */
     batch_denom: string;
     /** balance is the amount of ecocredits held in the basket */
@@ -167,6 +204,17 @@ export interface BasketBalanceSDKType {
      * batch_start_date is the start date of the batch. This field is used
      * to create an index which is used to remove the oldest credits first.
      */
+    batch_start_date?: TimestampAmino;
+}
+export interface BasketBalanceAminoMsg {
+    type: "/regen.ecocredit.basket.v1.BasketBalance";
+    value: BasketBalanceAmino;
+}
+/** BasketBalance stores the amount of credits from a batch in a basket */
+export interface BasketBalanceSDKType {
+    basket_id: Long;
+    batch_denom: string;
+    balance: string;
     batch_start_date?: TimestampSDKType;
 }
 /**
@@ -182,6 +230,27 @@ export interface BasketFee {
      */
     fee?: Coin;
 }
+export interface BasketFeeProtoMsg {
+    typeUrl: "/regen.ecocredit.basket.v1.BasketFee";
+    value: Uint8Array;
+}
+/**
+ * BasketFee is the basket creation fee. If not set, a basket creation fee is
+ * not required. This table is controlled via governance.
+ *
+ * Since Revision 2
+ */
+export interface BasketFeeAmino {
+    /**
+     * fee is the basket creation fee. If not set, a basket creation fee is not
+     * required.
+     */
+    fee?: CoinAmino;
+}
+export interface BasketFeeAminoMsg {
+    type: "/regen.ecocredit.basket.v1.BasketFee";
+    value: BasketFeeAmino;
+}
 /**
  * BasketFee is the basket creation fee. If not set, a basket creation fee is
  * not required. This table is controlled via governance.
@@ -189,10 +258,6 @@ export interface BasketFee {
  * Since Revision 2
  */
 export interface BasketFeeSDKType {
-    /**
-     * fee is the basket creation fee. If not set, a basket creation fee is not
-     * required.
-     */
     fee?: CoinSDKType;
 }
 export declare const Basket: {
@@ -201,6 +266,12 @@ export declare const Basket: {
     fromJSON(object: any): Basket;
     toJSON(message: Basket): unknown;
     fromPartial(object: Partial<Basket>): Basket;
+    fromAmino(object: BasketAmino): Basket;
+    toAmino(message: Basket): BasketAmino;
+    fromAminoMsg(object: BasketAminoMsg): Basket;
+    fromProtoMsg(message: BasketProtoMsg): Basket;
+    toProto(message: Basket): Uint8Array;
+    toProtoMsg(message: Basket): BasketProtoMsg;
 };
 export declare const BasketClass: {
     encode(message: BasketClass, writer?: _m0.Writer): _m0.Writer;
@@ -208,6 +279,12 @@ export declare const BasketClass: {
     fromJSON(object: any): BasketClass;
     toJSON(message: BasketClass): unknown;
     fromPartial(object: Partial<BasketClass>): BasketClass;
+    fromAmino(object: BasketClassAmino): BasketClass;
+    toAmino(message: BasketClass): BasketClassAmino;
+    fromAminoMsg(object: BasketClassAminoMsg): BasketClass;
+    fromProtoMsg(message: BasketClassProtoMsg): BasketClass;
+    toProto(message: BasketClass): Uint8Array;
+    toProtoMsg(message: BasketClass): BasketClassProtoMsg;
 };
 export declare const BasketBalance: {
     encode(message: BasketBalance, writer?: _m0.Writer): _m0.Writer;
@@ -215,6 +292,12 @@ export declare const BasketBalance: {
     fromJSON(object: any): BasketBalance;
     toJSON(message: BasketBalance): unknown;
     fromPartial(object: Partial<BasketBalance>): BasketBalance;
+    fromAmino(object: BasketBalanceAmino): BasketBalance;
+    toAmino(message: BasketBalance): BasketBalanceAmino;
+    fromAminoMsg(object: BasketBalanceAminoMsg): BasketBalance;
+    fromProtoMsg(message: BasketBalanceProtoMsg): BasketBalance;
+    toProto(message: BasketBalance): Uint8Array;
+    toProtoMsg(message: BasketBalance): BasketBalanceProtoMsg;
 };
 export declare const BasketFee: {
     encode(message: BasketFee, writer?: _m0.Writer): _m0.Writer;
@@ -222,4 +305,10 @@ export declare const BasketFee: {
     fromJSON(object: any): BasketFee;
     toJSON(message: BasketFee): unknown;
     fromPartial(object: Partial<BasketFee>): BasketFee;
+    fromAmino(object: BasketFeeAmino): BasketFee;
+    toAmino(message: BasketFee): BasketFeeAmino;
+    fromAminoMsg(object: BasketFeeAminoMsg): BasketFee;
+    fromProtoMsg(message: BasketFeeProtoMsg): BasketFee;
+    toProto(message: BasketFee): Uint8Array;
+    toProtoMsg(message: BasketFee): BasketFeeProtoMsg;
 };

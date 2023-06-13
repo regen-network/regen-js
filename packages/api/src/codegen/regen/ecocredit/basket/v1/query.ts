@@ -1,7 +1,7 @@
-import { PageRequest, PageRequestSDKType, PageResponse, PageResponseSDKType } from "../../../../cosmos/base/query/v1beta1/pagination";
-import { Basket, BasketSDKType, BasketBalance, BasketBalanceSDKType } from "./state";
-import { DateCriteria, DateCriteriaSDKType } from "./types";
-import { Coin, CoinSDKType } from "../../../../cosmos/base/v1beta1/coin";
+import { PageRequest, PageRequestAmino, PageRequestSDKType, PageResponse, PageResponseAmino, PageResponseSDKType } from "../../../../cosmos/base/query/v1beta1/pagination";
+import { Basket, BasketAmino, BasketSDKType, BasketBalance, BasketBalanceAmino, BasketBalanceSDKType } from "./state";
+import { DateCriteria, DateCriteriaAmino, DateCriteriaSDKType } from "./types";
+import { Coin, CoinAmino, CoinSDKType } from "../../../../cosmos/base/v1beta1/coin";
 import * as _m0 from "protobufjs/minimal";
 import { isSet } from "../../../../helpers";
 /** QueryBasketRequest is the Query/Basket request type. */
@@ -10,10 +10,23 @@ export interface QueryBasketRequest {
   /** basket_denom represents the denom of the basket to query. */
   basketDenom: string;
 }
+export interface QueryBasketRequestProtoMsg {
+  typeUrl: "/regen.ecocredit.basket.v1.QueryBasketRequest";
+  value: Uint8Array;
+}
+/** QueryBasketRequest is the Query/Basket request type. */
+
+export interface QueryBasketRequestAmino {
+  /** basket_denom represents the denom of the basket to query. */
+  basket_denom: string;
+}
+export interface QueryBasketRequestAminoMsg {
+  type: "/regen.ecocredit.basket.v1.QueryBasketRequest";
+  value: QueryBasketRequestAmino;
+}
 /** QueryBasketRequest is the Query/Basket request type. */
 
 export interface QueryBasketRequestSDKType {
-  /** basket_denom represents the denom of the basket to query. */
   basket_denom: string;
 }
 /** QueryBasketResponse is the Query/Basket response type. */
@@ -40,9 +53,13 @@ export interface QueryBasketResponse {
 
   basketInfo?: BasketInfo;
 }
+export interface QueryBasketResponseProtoMsg {
+  typeUrl: "/regen.ecocredit.basket.v1.QueryBasketResponse";
+  value: Uint8Array;
+}
 /** QueryBasketResponse is the Query/Basket response type. */
 
-export interface QueryBasketResponseSDKType {
+export interface QueryBasketResponseAmino {
   /**
    * basket is the queried basket.
    * 
@@ -52,7 +69,7 @@ export interface QueryBasketResponseSDKType {
    */
 
   /** @deprecated */
-  basket?: BasketSDKType;
+  basket?: BasketAmino;
   /** classes are the credit classes that can be deposited in the basket. */
 
   classes: string[];
@@ -62,6 +79,18 @@ export interface QueryBasketResponseSDKType {
    * Since Revision 1
    */
 
+  basket_info?: BasketInfoAmino;
+}
+export interface QueryBasketResponseAminoMsg {
+  type: "/regen.ecocredit.basket.v1.QueryBasketResponse";
+  value: QueryBasketResponseAmino;
+}
+/** QueryBasketResponse is the Query/Basket response type. */
+
+export interface QueryBasketResponseSDKType {
+  /** @deprecated */
+  basket?: BasketSDKType;
+  classes: string[];
   basket_info?: BasketInfoSDKType;
 }
 /** QueryBasketsRequest is the Query/Baskets request type. */
@@ -70,10 +99,23 @@ export interface QueryBasketsRequest {
   /** pagination defines an optional pagination for the request. */
   pagination?: PageRequest;
 }
+export interface QueryBasketsRequestProtoMsg {
+  typeUrl: "/regen.ecocredit.basket.v1.QueryBasketsRequest";
+  value: Uint8Array;
+}
+/** QueryBasketsRequest is the Query/Baskets request type. */
+
+export interface QueryBasketsRequestAmino {
+  /** pagination defines an optional pagination for the request. */
+  pagination?: PageRequestAmino;
+}
+export interface QueryBasketsRequestAminoMsg {
+  type: "/regen.ecocredit.basket.v1.QueryBasketsRequest";
+  value: QueryBasketsRequestAmino;
+}
 /** QueryBasketsRequest is the Query/Baskets request type. */
 
 export interface QueryBasketsRequestSDKType {
-  /** pagination defines an optional pagination for the request. */
   pagination?: PageRequestSDKType;
 }
 /** QueryBasketsResponse is the Query/Baskets response type. */
@@ -100,9 +142,13 @@ export interface QueryBasketsResponse {
 
   basketsInfo: BasketInfo[];
 }
+export interface QueryBasketsResponseProtoMsg {
+  typeUrl: "/regen.ecocredit.basket.v1.QueryBasketsResponse";
+  value: Uint8Array;
+}
 /** QueryBasketsResponse is the Query/Baskets response type. */
 
-export interface QueryBasketsResponseSDKType {
+export interface QueryBasketsResponseAmino {
   /**
    * baskets are the fetched baskets.
    * 
@@ -112,16 +158,28 @@ export interface QueryBasketsResponseSDKType {
    */
 
   /** @deprecated */
-  baskets: BasketSDKType[];
+  baskets: BasketAmino[];
   /** pagination defines the pagination in the response. */
 
-  pagination?: PageResponseSDKType;
+  pagination?: PageResponseAmino;
   /**
    * baskets_info are the fetched baskets.
    * 
    * Since Revision 1
    */
 
+  baskets_info: BasketInfoAmino[];
+}
+export interface QueryBasketsResponseAminoMsg {
+  type: "/regen.ecocredit.basket.v1.QueryBasketsResponse";
+  value: QueryBasketsResponseAmino;
+}
+/** QueryBasketsResponse is the Query/Baskets response type. */
+
+export interface QueryBasketsResponseSDKType {
+  /** @deprecated */
+  baskets: BasketSDKType[];
+  pagination?: PageResponseSDKType;
   baskets_info: BasketInfoSDKType[];
 }
 /** QueryBasketBalancesRequest is the Query/BasketBalances request type. */
@@ -133,13 +191,27 @@ export interface QueryBasketBalancesRequest {
 
   pagination?: PageRequest;
 }
+export interface QueryBasketBalancesRequestProtoMsg {
+  typeUrl: "/regen.ecocredit.basket.v1.QueryBasketBalancesRequest";
+  value: Uint8Array;
+}
 /** QueryBasketBalancesRequest is the Query/BasketBalances request type. */
 
-export interface QueryBasketBalancesRequestSDKType {
+export interface QueryBasketBalancesRequestAmino {
   /** basket_denom is the denom of the basket. */
   basket_denom: string;
   /** pagination defines an optional pagination for the request. */
 
+  pagination?: PageRequestAmino;
+}
+export interface QueryBasketBalancesRequestAminoMsg {
+  type: "/regen.ecocredit.basket.v1.QueryBasketBalancesRequest";
+  value: QueryBasketBalancesRequestAmino;
+}
+/** QueryBasketBalancesRequest is the Query/BasketBalances request type. */
+
+export interface QueryBasketBalancesRequestSDKType {
+  basket_denom: string;
   pagination?: PageRequestSDKType;
 }
 /** QueryBasketBalancesResponse is the Query/BasketBalances response type. */
@@ -166,9 +238,13 @@ export interface QueryBasketBalancesResponse {
 
   balancesInfo: BasketBalanceInfo[];
 }
+export interface QueryBasketBalancesResponseProtoMsg {
+  typeUrl: "/regen.ecocredit.basket.v1.QueryBasketBalancesResponse";
+  value: Uint8Array;
+}
 /** QueryBasketBalancesResponse is the Query/BasketBalances response type. */
 
-export interface QueryBasketBalancesResponseSDKType {
+export interface QueryBasketBalancesResponseAmino {
   /**
    * balances is a list of credit balances in the basket.
    * 
@@ -178,16 +254,28 @@ export interface QueryBasketBalancesResponseSDKType {
    */
 
   /** @deprecated */
-  balances: BasketBalanceSDKType[];
+  balances: BasketBalanceAmino[];
   /** pagination defines the pagination in the response. */
 
-  pagination?: PageResponseSDKType;
+  pagination?: PageResponseAmino;
   /**
    * balances_info is a list of credit balances in the basket.
    * 
    * Since Revision 1
    */
 
+  balances_info: BasketBalanceInfoAmino[];
+}
+export interface QueryBasketBalancesResponseAminoMsg {
+  type: "/regen.ecocredit.basket.v1.QueryBasketBalancesResponse";
+  value: QueryBasketBalancesResponseAmino;
+}
+/** QueryBasketBalancesResponse is the Query/BasketBalances response type. */
+
+export interface QueryBasketBalancesResponseSDKType {
+  /** @deprecated */
+  balances: BasketBalanceSDKType[];
+  pagination?: PageResponseSDKType;
   balances_info: BasketBalanceInfoSDKType[];
 }
 /** QueryBasketBalanceRequest is the Query/BasketBalance request type. */
@@ -199,13 +287,27 @@ export interface QueryBasketBalanceRequest {
 
   batchDenom: string;
 }
+export interface QueryBasketBalanceRequestProtoMsg {
+  typeUrl: "/regen.ecocredit.basket.v1.QueryBasketBalanceRequest";
+  value: Uint8Array;
+}
 /** QueryBasketBalanceRequest is the Query/BasketBalance request type. */
 
-export interface QueryBasketBalanceRequestSDKType {
+export interface QueryBasketBalanceRequestAmino {
   /** basket_denom is the denom of the basket. */
   basket_denom: string;
   /** batch_denom is the denom of the credit batch. */
 
+  batch_denom: string;
+}
+export interface QueryBasketBalanceRequestAminoMsg {
+  type: "/regen.ecocredit.basket.v1.QueryBasketBalanceRequest";
+  value: QueryBasketBalanceRequestAmino;
+}
+/** QueryBasketBalanceRequest is the Query/BasketBalance request type. */
+
+export interface QueryBasketBalanceRequestSDKType {
+  basket_denom: string;
   batch_denom: string;
 }
 /** QueryBasketBalanceResponse is the Query/BasketBalance response type. */
@@ -214,10 +316,23 @@ export interface QueryBasketBalanceResponse {
   /** balance is the amount of the queried credit batch in the basket. */
   balance: string;
 }
+export interface QueryBasketBalanceResponseProtoMsg {
+  typeUrl: "/regen.ecocredit.basket.v1.QueryBasketBalanceResponse";
+  value: Uint8Array;
+}
+/** QueryBasketBalanceResponse is the Query/BasketBalance response type. */
+
+export interface QueryBasketBalanceResponseAmino {
+  /** balance is the amount of the queried credit batch in the basket. */
+  balance: string;
+}
+export interface QueryBasketBalanceResponseAminoMsg {
+  type: "/regen.ecocredit.basket.v1.QueryBasketBalanceResponse";
+  value: QueryBasketBalanceResponseAmino;
+}
 /** QueryBasketBalanceResponse is the Query/BasketBalance response type. */
 
 export interface QueryBasketBalanceResponseSDKType {
-  /** balance is the amount of the queried credit batch in the basket. */
   balance: string;
 }
 /** BasketInfo is the human-readable basket information. */
@@ -257,9 +372,13 @@ export interface BasketInfo {
 
   curator: string;
 }
+export interface BasketInfoProtoMsg {
+  typeUrl: "/regen.ecocredit.basket.v1.BasketInfo";
+  value: Uint8Array;
+}
 /** BasketInfo is the human-readable basket information. */
 
-export interface BasketInfoSDKType {
+export interface BasketInfoAmino {
   /** basket_denom is the basket bank denom. */
   basket_denom: string;
   /**
@@ -283,7 +402,7 @@ export interface BasketInfoSDKType {
   credit_type_abbrev: string;
   /** date_criteria is the date criteria for batches admitted to the basket. */
 
-  date_criteria?: DateCriteriaSDKType;
+  date_criteria?: DateCriteriaAmino;
   /** exponent is the exponent for converting credits to/from basket tokens. */
 
   exponent: number;
@@ -292,6 +411,21 @@ export interface BasketInfoSDKType {
    * basket settings.
    */
 
+  curator: string;
+}
+export interface BasketInfoAminoMsg {
+  type: "/regen.ecocredit.basket.v1.BasketInfo";
+  value: BasketInfoAmino;
+}
+/** BasketInfo is the human-readable basket information. */
+
+export interface BasketInfoSDKType {
+  basket_denom: string;
+  name: string;
+  disable_auto_retire: boolean;
+  credit_type_abbrev: string;
+  date_criteria?: DateCriteriaSDKType;
+  exponent: number;
   curator: string;
 }
 /** BasketBalanceInfo is the human-readable basket balance information. */
@@ -303,13 +437,27 @@ export interface BasketBalanceInfo {
 
   balance: string;
 }
+export interface BasketBalanceInfoProtoMsg {
+  typeUrl: "/regen.ecocredit.basket.v1.BasketBalanceInfo";
+  value: Uint8Array;
+}
 /** BasketBalanceInfo is the human-readable basket balance information. */
 
-export interface BasketBalanceInfoSDKType {
+export interface BasketBalanceInfoAmino {
   /** batch_denom is the denom of the credit batch */
   batch_denom: string;
   /** balance is the amount of ecocredits held in the basket */
 
+  balance: string;
+}
+export interface BasketBalanceInfoAminoMsg {
+  type: "/regen.ecocredit.basket.v1.BasketBalanceInfo";
+  value: BasketBalanceInfoAmino;
+}
+/** BasketBalanceInfo is the human-readable basket balance information. */
+
+export interface BasketBalanceInfoSDKType {
+  batch_denom: string;
   balance: string;
 }
 /**
@@ -319,6 +467,21 @@ export interface BasketBalanceInfoSDKType {
  */
 
 export interface QueryBasketFeeRequest {}
+export interface QueryBasketFeeRequestProtoMsg {
+  typeUrl: "/regen.ecocredit.basket.v1.QueryBasketFeeRequest";
+  value: Uint8Array;
+}
+/**
+ * QueryBasketFeeRequest is the Query/BasketFee request type.
+ * 
+ * Since Revision 2
+ */
+
+export interface QueryBasketFeeRequestAmino {}
+export interface QueryBasketFeeRequestAminoMsg {
+  type: "/regen.ecocredit.basket.v1.QueryBasketFeeRequest";
+  value: QueryBasketFeeRequestAmino;
+}
 /**
  * QueryBasketFeeRequest is the Query/BasketFee request type.
  * 
@@ -339,6 +502,27 @@ export interface QueryBasketFeeResponse {
    */
   fee?: Coin;
 }
+export interface QueryBasketFeeResponseProtoMsg {
+  typeUrl: "/regen.ecocredit.basket.v1.QueryBasketFeeResponse";
+  value: Uint8Array;
+}
+/**
+ * QueryBasketFeeResponse is the Query/BasketFee response type.
+ * 
+ * Since Revision 2
+ */
+
+export interface QueryBasketFeeResponseAmino {
+  /**
+   * fee is the basket creation fee. If not set, a basket creation fee is not
+   * required.
+   */
+  fee?: CoinAmino;
+}
+export interface QueryBasketFeeResponseAminoMsg {
+  type: "/regen.ecocredit.basket.v1.QueryBasketFeeResponse";
+  value: QueryBasketFeeResponseAmino;
+}
 /**
  * QueryBasketFeeResponse is the Query/BasketFee response type.
  * 
@@ -346,10 +530,6 @@ export interface QueryBasketFeeResponse {
  */
 
 export interface QueryBasketFeeResponseSDKType {
-  /**
-   * fee is the basket creation fee. If not set, a basket creation fee is not
-   * required.
-   */
   fee?: CoinSDKType;
 }
 
@@ -406,6 +586,37 @@ export const QueryBasketRequest = {
     const message = createBaseQueryBasketRequest();
     message.basketDenom = object.basketDenom ?? "";
     return message;
+  },
+
+  fromAmino(object: QueryBasketRequestAmino): QueryBasketRequest {
+    return {
+      basketDenom: object.basket_denom
+    };
+  },
+
+  toAmino(message: QueryBasketRequest): QueryBasketRequestAmino {
+    const obj: any = {};
+    obj.basket_denom = message.basketDenom;
+    return obj;
+  },
+
+  fromAminoMsg(object: QueryBasketRequestAminoMsg): QueryBasketRequest {
+    return QueryBasketRequest.fromAmino(object.value);
+  },
+
+  fromProtoMsg(message: QueryBasketRequestProtoMsg): QueryBasketRequest {
+    return QueryBasketRequest.decode(message.value);
+  },
+
+  toProto(message: QueryBasketRequest): Uint8Array {
+    return QueryBasketRequest.encode(message).finish();
+  },
+
+  toProtoMsg(message: QueryBasketRequest): QueryBasketRequestProtoMsg {
+    return {
+      typeUrl: "/regen.ecocredit.basket.v1.QueryBasketRequest",
+      value: QueryBasketRequest.encode(message).finish()
+    };
   }
 
 };
@@ -493,6 +704,47 @@ export const QueryBasketResponse = {
     message.classes = object.classes?.map(e => e) || [];
     message.basketInfo = object.basketInfo !== undefined && object.basketInfo !== null ? BasketInfo.fromPartial(object.basketInfo) : undefined;
     return message;
+  },
+
+  fromAmino(object: QueryBasketResponseAmino): QueryBasketResponse {
+    return {
+      basket: object?.basket ? Basket.fromAmino(object.basket) : undefined,
+      classes: Array.isArray(object?.classes) ? object.classes.map((e: any) => e) : [],
+      basketInfo: object?.basket_info ? BasketInfo.fromAmino(object.basket_info) : undefined
+    };
+  },
+
+  toAmino(message: QueryBasketResponse): QueryBasketResponseAmino {
+    const obj: any = {};
+    obj.basket = message.basket ? Basket.toAmino(message.basket) : undefined;
+
+    if (message.classes) {
+      obj.classes = message.classes.map(e => e);
+    } else {
+      obj.classes = [];
+    }
+
+    obj.basket_info = message.basketInfo ? BasketInfo.toAmino(message.basketInfo) : undefined;
+    return obj;
+  },
+
+  fromAminoMsg(object: QueryBasketResponseAminoMsg): QueryBasketResponse {
+    return QueryBasketResponse.fromAmino(object.value);
+  },
+
+  fromProtoMsg(message: QueryBasketResponseProtoMsg): QueryBasketResponse {
+    return QueryBasketResponse.decode(message.value);
+  },
+
+  toProto(message: QueryBasketResponse): Uint8Array {
+    return QueryBasketResponse.encode(message).finish();
+  },
+
+  toProtoMsg(message: QueryBasketResponse): QueryBasketResponseProtoMsg {
+    return {
+      typeUrl: "/regen.ecocredit.basket.v1.QueryBasketResponse",
+      value: QueryBasketResponse.encode(message).finish()
+    };
   }
 
 };
@@ -550,6 +802,37 @@ export const QueryBasketsRequest = {
     const message = createBaseQueryBasketsRequest();
     message.pagination = object.pagination !== undefined && object.pagination !== null ? PageRequest.fromPartial(object.pagination) : undefined;
     return message;
+  },
+
+  fromAmino(object: QueryBasketsRequestAmino): QueryBasketsRequest {
+    return {
+      pagination: object?.pagination ? PageRequest.fromAmino(object.pagination) : undefined
+    };
+  },
+
+  toAmino(message: QueryBasketsRequest): QueryBasketsRequestAmino {
+    const obj: any = {};
+    obj.pagination = message.pagination ? PageRequest.toAmino(message.pagination) : undefined;
+    return obj;
+  },
+
+  fromAminoMsg(object: QueryBasketsRequestAminoMsg): QueryBasketsRequest {
+    return QueryBasketsRequest.fromAmino(object.value);
+  },
+
+  fromProtoMsg(message: QueryBasketsRequestProtoMsg): QueryBasketsRequest {
+    return QueryBasketsRequest.decode(message.value);
+  },
+
+  toProto(message: QueryBasketsRequest): Uint8Array {
+    return QueryBasketsRequest.encode(message).finish();
+  },
+
+  toProtoMsg(message: QueryBasketsRequest): QueryBasketsRequestProtoMsg {
+    return {
+      typeUrl: "/regen.ecocredit.basket.v1.QueryBasketsRequest",
+      value: QueryBasketsRequest.encode(message).finish()
+    };
   }
 
 };
@@ -643,6 +926,53 @@ export const QueryBasketsResponse = {
     message.pagination = object.pagination !== undefined && object.pagination !== null ? PageResponse.fromPartial(object.pagination) : undefined;
     message.basketsInfo = object.basketsInfo?.map(e => BasketInfo.fromPartial(e)) || [];
     return message;
+  },
+
+  fromAmino(object: QueryBasketsResponseAmino): QueryBasketsResponse {
+    return {
+      baskets: Array.isArray(object?.baskets) ? object.baskets.map((e: any) => Basket.fromAmino(e)) : [],
+      pagination: object?.pagination ? PageResponse.fromAmino(object.pagination) : undefined,
+      basketsInfo: Array.isArray(object?.baskets_info) ? object.baskets_info.map((e: any) => BasketInfo.fromAmino(e)) : []
+    };
+  },
+
+  toAmino(message: QueryBasketsResponse): QueryBasketsResponseAmino {
+    const obj: any = {};
+
+    if (message.baskets) {
+      obj.baskets = message.baskets.map(e => e ? Basket.toAmino(e) : undefined);
+    } else {
+      obj.baskets = [];
+    }
+
+    obj.pagination = message.pagination ? PageResponse.toAmino(message.pagination) : undefined;
+
+    if (message.basketsInfo) {
+      obj.baskets_info = message.basketsInfo.map(e => e ? BasketInfo.toAmino(e) : undefined);
+    } else {
+      obj.baskets_info = [];
+    }
+
+    return obj;
+  },
+
+  fromAminoMsg(object: QueryBasketsResponseAminoMsg): QueryBasketsResponse {
+    return QueryBasketsResponse.fromAmino(object.value);
+  },
+
+  fromProtoMsg(message: QueryBasketsResponseProtoMsg): QueryBasketsResponse {
+    return QueryBasketsResponse.decode(message.value);
+  },
+
+  toProto(message: QueryBasketsResponse): Uint8Array {
+    return QueryBasketsResponse.encode(message).finish();
+  },
+
+  toProtoMsg(message: QueryBasketsResponse): QueryBasketsResponseProtoMsg {
+    return {
+      typeUrl: "/regen.ecocredit.basket.v1.QueryBasketsResponse",
+      value: QueryBasketsResponse.encode(message).finish()
+    };
   }
 
 };
@@ -712,6 +1042,39 @@ export const QueryBasketBalancesRequest = {
     message.basketDenom = object.basketDenom ?? "";
     message.pagination = object.pagination !== undefined && object.pagination !== null ? PageRequest.fromPartial(object.pagination) : undefined;
     return message;
+  },
+
+  fromAmino(object: QueryBasketBalancesRequestAmino): QueryBasketBalancesRequest {
+    return {
+      basketDenom: object.basket_denom,
+      pagination: object?.pagination ? PageRequest.fromAmino(object.pagination) : undefined
+    };
+  },
+
+  toAmino(message: QueryBasketBalancesRequest): QueryBasketBalancesRequestAmino {
+    const obj: any = {};
+    obj.basket_denom = message.basketDenom;
+    obj.pagination = message.pagination ? PageRequest.toAmino(message.pagination) : undefined;
+    return obj;
+  },
+
+  fromAminoMsg(object: QueryBasketBalancesRequestAminoMsg): QueryBasketBalancesRequest {
+    return QueryBasketBalancesRequest.fromAmino(object.value);
+  },
+
+  fromProtoMsg(message: QueryBasketBalancesRequestProtoMsg): QueryBasketBalancesRequest {
+    return QueryBasketBalancesRequest.decode(message.value);
+  },
+
+  toProto(message: QueryBasketBalancesRequest): Uint8Array {
+    return QueryBasketBalancesRequest.encode(message).finish();
+  },
+
+  toProtoMsg(message: QueryBasketBalancesRequest): QueryBasketBalancesRequestProtoMsg {
+    return {
+      typeUrl: "/regen.ecocredit.basket.v1.QueryBasketBalancesRequest",
+      value: QueryBasketBalancesRequest.encode(message).finish()
+    };
   }
 
 };
@@ -805,6 +1168,53 @@ export const QueryBasketBalancesResponse = {
     message.pagination = object.pagination !== undefined && object.pagination !== null ? PageResponse.fromPartial(object.pagination) : undefined;
     message.balancesInfo = object.balancesInfo?.map(e => BasketBalanceInfo.fromPartial(e)) || [];
     return message;
+  },
+
+  fromAmino(object: QueryBasketBalancesResponseAmino): QueryBasketBalancesResponse {
+    return {
+      balances: Array.isArray(object?.balances) ? object.balances.map((e: any) => BasketBalance.fromAmino(e)) : [],
+      pagination: object?.pagination ? PageResponse.fromAmino(object.pagination) : undefined,
+      balancesInfo: Array.isArray(object?.balances_info) ? object.balances_info.map((e: any) => BasketBalanceInfo.fromAmino(e)) : []
+    };
+  },
+
+  toAmino(message: QueryBasketBalancesResponse): QueryBasketBalancesResponseAmino {
+    const obj: any = {};
+
+    if (message.balances) {
+      obj.balances = message.balances.map(e => e ? BasketBalance.toAmino(e) : undefined);
+    } else {
+      obj.balances = [];
+    }
+
+    obj.pagination = message.pagination ? PageResponse.toAmino(message.pagination) : undefined;
+
+    if (message.balancesInfo) {
+      obj.balances_info = message.balancesInfo.map(e => e ? BasketBalanceInfo.toAmino(e) : undefined);
+    } else {
+      obj.balances_info = [];
+    }
+
+    return obj;
+  },
+
+  fromAminoMsg(object: QueryBasketBalancesResponseAminoMsg): QueryBasketBalancesResponse {
+    return QueryBasketBalancesResponse.fromAmino(object.value);
+  },
+
+  fromProtoMsg(message: QueryBasketBalancesResponseProtoMsg): QueryBasketBalancesResponse {
+    return QueryBasketBalancesResponse.decode(message.value);
+  },
+
+  toProto(message: QueryBasketBalancesResponse): Uint8Array {
+    return QueryBasketBalancesResponse.encode(message).finish();
+  },
+
+  toProtoMsg(message: QueryBasketBalancesResponse): QueryBasketBalancesResponseProtoMsg {
+    return {
+      typeUrl: "/regen.ecocredit.basket.v1.QueryBasketBalancesResponse",
+      value: QueryBasketBalancesResponse.encode(message).finish()
+    };
   }
 
 };
@@ -874,6 +1284,39 @@ export const QueryBasketBalanceRequest = {
     message.basketDenom = object.basketDenom ?? "";
     message.batchDenom = object.batchDenom ?? "";
     return message;
+  },
+
+  fromAmino(object: QueryBasketBalanceRequestAmino): QueryBasketBalanceRequest {
+    return {
+      basketDenom: object.basket_denom,
+      batchDenom: object.batch_denom
+    };
+  },
+
+  toAmino(message: QueryBasketBalanceRequest): QueryBasketBalanceRequestAmino {
+    const obj: any = {};
+    obj.basket_denom = message.basketDenom;
+    obj.batch_denom = message.batchDenom;
+    return obj;
+  },
+
+  fromAminoMsg(object: QueryBasketBalanceRequestAminoMsg): QueryBasketBalanceRequest {
+    return QueryBasketBalanceRequest.fromAmino(object.value);
+  },
+
+  fromProtoMsg(message: QueryBasketBalanceRequestProtoMsg): QueryBasketBalanceRequest {
+    return QueryBasketBalanceRequest.decode(message.value);
+  },
+
+  toProto(message: QueryBasketBalanceRequest): Uint8Array {
+    return QueryBasketBalanceRequest.encode(message).finish();
+  },
+
+  toProtoMsg(message: QueryBasketBalanceRequest): QueryBasketBalanceRequestProtoMsg {
+    return {
+      typeUrl: "/regen.ecocredit.basket.v1.QueryBasketBalanceRequest",
+      value: QueryBasketBalanceRequest.encode(message).finish()
+    };
   }
 
 };
@@ -931,6 +1374,37 @@ export const QueryBasketBalanceResponse = {
     const message = createBaseQueryBasketBalanceResponse();
     message.balance = object.balance ?? "";
     return message;
+  },
+
+  fromAmino(object: QueryBasketBalanceResponseAmino): QueryBasketBalanceResponse {
+    return {
+      balance: object.balance
+    };
+  },
+
+  toAmino(message: QueryBasketBalanceResponse): QueryBasketBalanceResponseAmino {
+    const obj: any = {};
+    obj.balance = message.balance;
+    return obj;
+  },
+
+  fromAminoMsg(object: QueryBasketBalanceResponseAminoMsg): QueryBasketBalanceResponse {
+    return QueryBasketBalanceResponse.fromAmino(object.value);
+  },
+
+  fromProtoMsg(message: QueryBasketBalanceResponseProtoMsg): QueryBasketBalanceResponse {
+    return QueryBasketBalanceResponse.decode(message.value);
+  },
+
+  toProto(message: QueryBasketBalanceResponse): Uint8Array {
+    return QueryBasketBalanceResponse.encode(message).finish();
+  },
+
+  toProtoMsg(message: QueryBasketBalanceResponse): QueryBasketBalanceResponseProtoMsg {
+    return {
+      typeUrl: "/regen.ecocredit.basket.v1.QueryBasketBalanceResponse",
+      value: QueryBasketBalanceResponse.encode(message).finish()
+    };
   }
 
 };
@@ -1060,6 +1534,49 @@ export const BasketInfo = {
     message.exponent = object.exponent ?? 0;
     message.curator = object.curator ?? "";
     return message;
+  },
+
+  fromAmino(object: BasketInfoAmino): BasketInfo {
+    return {
+      basketDenom: object.basket_denom,
+      name: object.name,
+      disableAutoRetire: object.disable_auto_retire,
+      creditTypeAbbrev: object.credit_type_abbrev,
+      dateCriteria: object?.date_criteria ? DateCriteria.fromAmino(object.date_criteria) : undefined,
+      exponent: object.exponent,
+      curator: object.curator
+    };
+  },
+
+  toAmino(message: BasketInfo): BasketInfoAmino {
+    const obj: any = {};
+    obj.basket_denom = message.basketDenom;
+    obj.name = message.name;
+    obj.disable_auto_retire = message.disableAutoRetire;
+    obj.credit_type_abbrev = message.creditTypeAbbrev;
+    obj.date_criteria = message.dateCriteria ? DateCriteria.toAmino(message.dateCriteria) : undefined;
+    obj.exponent = message.exponent;
+    obj.curator = message.curator;
+    return obj;
+  },
+
+  fromAminoMsg(object: BasketInfoAminoMsg): BasketInfo {
+    return BasketInfo.fromAmino(object.value);
+  },
+
+  fromProtoMsg(message: BasketInfoProtoMsg): BasketInfo {
+    return BasketInfo.decode(message.value);
+  },
+
+  toProto(message: BasketInfo): Uint8Array {
+    return BasketInfo.encode(message).finish();
+  },
+
+  toProtoMsg(message: BasketInfo): BasketInfoProtoMsg {
+    return {
+      typeUrl: "/regen.ecocredit.basket.v1.BasketInfo",
+      value: BasketInfo.encode(message).finish()
+    };
   }
 
 };
@@ -1129,6 +1646,39 @@ export const BasketBalanceInfo = {
     message.batchDenom = object.batchDenom ?? "";
     message.balance = object.balance ?? "";
     return message;
+  },
+
+  fromAmino(object: BasketBalanceInfoAmino): BasketBalanceInfo {
+    return {
+      batchDenom: object.batch_denom,
+      balance: object.balance
+    };
+  },
+
+  toAmino(message: BasketBalanceInfo): BasketBalanceInfoAmino {
+    const obj: any = {};
+    obj.batch_denom = message.batchDenom;
+    obj.balance = message.balance;
+    return obj;
+  },
+
+  fromAminoMsg(object: BasketBalanceInfoAminoMsg): BasketBalanceInfo {
+    return BasketBalanceInfo.fromAmino(object.value);
+  },
+
+  fromProtoMsg(message: BasketBalanceInfoProtoMsg): BasketBalanceInfo {
+    return BasketBalanceInfo.decode(message.value);
+  },
+
+  toProto(message: BasketBalanceInfo): Uint8Array {
+    return BasketBalanceInfo.encode(message).finish();
+  },
+
+  toProtoMsg(message: BasketBalanceInfo): BasketBalanceInfoProtoMsg {
+    return {
+      typeUrl: "/regen.ecocredit.basket.v1.BasketBalanceInfo",
+      value: BasketBalanceInfo.encode(message).finish()
+    };
   }
 
 };
@@ -1172,6 +1722,34 @@ export const QueryBasketFeeRequest = {
   fromPartial(_: Partial<QueryBasketFeeRequest>): QueryBasketFeeRequest {
     const message = createBaseQueryBasketFeeRequest();
     return message;
+  },
+
+  fromAmino(_: QueryBasketFeeRequestAmino): QueryBasketFeeRequest {
+    return {};
+  },
+
+  toAmino(_: QueryBasketFeeRequest): QueryBasketFeeRequestAmino {
+    const obj: any = {};
+    return obj;
+  },
+
+  fromAminoMsg(object: QueryBasketFeeRequestAminoMsg): QueryBasketFeeRequest {
+    return QueryBasketFeeRequest.fromAmino(object.value);
+  },
+
+  fromProtoMsg(message: QueryBasketFeeRequestProtoMsg): QueryBasketFeeRequest {
+    return QueryBasketFeeRequest.decode(message.value);
+  },
+
+  toProto(message: QueryBasketFeeRequest): Uint8Array {
+    return QueryBasketFeeRequest.encode(message).finish();
+  },
+
+  toProtoMsg(message: QueryBasketFeeRequest): QueryBasketFeeRequestProtoMsg {
+    return {
+      typeUrl: "/regen.ecocredit.basket.v1.QueryBasketFeeRequest",
+      value: QueryBasketFeeRequest.encode(message).finish()
+    };
   }
 
 };
@@ -1229,6 +1807,37 @@ export const QueryBasketFeeResponse = {
     const message = createBaseQueryBasketFeeResponse();
     message.fee = object.fee !== undefined && object.fee !== null ? Coin.fromPartial(object.fee) : undefined;
     return message;
+  },
+
+  fromAmino(object: QueryBasketFeeResponseAmino): QueryBasketFeeResponse {
+    return {
+      fee: object?.fee ? Coin.fromAmino(object.fee) : undefined
+    };
+  },
+
+  toAmino(message: QueryBasketFeeResponse): QueryBasketFeeResponseAmino {
+    const obj: any = {};
+    obj.fee = message.fee ? Coin.toAmino(message.fee) : undefined;
+    return obj;
+  },
+
+  fromAminoMsg(object: QueryBasketFeeResponseAminoMsg): QueryBasketFeeResponse {
+    return QueryBasketFeeResponse.fromAmino(object.value);
+  },
+
+  fromProtoMsg(message: QueryBasketFeeResponseProtoMsg): QueryBasketFeeResponse {
+    return QueryBasketFeeResponse.decode(message.value);
+  },
+
+  toProto(message: QueryBasketFeeResponse): Uint8Array {
+    return QueryBasketFeeResponse.encode(message).finish();
+  },
+
+  toProtoMsg(message: QueryBasketFeeResponse): QueryBasketFeeResponseProtoMsg {
+    return {
+      typeUrl: "/regen.ecocredit.basket.v1.QueryBasketFeeResponse",
+      value: QueryBasketFeeResponse.encode(message).finish()
+    };
   }
 
 };

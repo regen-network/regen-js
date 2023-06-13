@@ -6,11 +6,24 @@ export interface EventCreateClass {
     /** admin is the admin of the credit class. */
     admin: string;
 }
+export interface EventCreateClassProtoMsg {
+    typeUrl: "/regen.ecocredit.v1alpha1.EventCreateClass";
+    value: Uint8Array;
+}
 /** EventCreateClass is an event emitted when a credit class is created. */
-export interface EventCreateClassSDKType {
+export interface EventCreateClassAmino {
     /** class_id is the unique ID of credit class. */
     class_id: string;
     /** admin is the admin of the credit class. */
+    admin: string;
+}
+export interface EventCreateClassAminoMsg {
+    type: "/regen.ecocredit.v1alpha1.EventCreateClass";
+    value: EventCreateClassAmino;
+}
+/** EventCreateClass is an event emitted when a credit class is created. */
+export interface EventCreateClassSDKType {
+    class_id: string;
     admin: string;
 }
 /** EventCreateBatch is an event emitted when a credit batch is created. */
@@ -39,8 +52,12 @@ export interface EventCreateBatch {
      */
     projectLocation: string;
 }
+export interface EventCreateBatchProtoMsg {
+    typeUrl: "/regen.ecocredit.v1alpha1.EventCreateBatch";
+    value: Uint8Array;
+}
 /** EventCreateBatch is an event emitted when a credit batch is created. */
-export interface EventCreateBatchSDKType {
+export interface EventCreateBatchAmino {
     /** class_id is the unique ID of credit class. */
     class_id: string;
     /** batch_denom is the unique ID of credit batch. */
@@ -63,6 +80,20 @@ export interface EventCreateBatchSDKType {
      * project_location is the location of the project backing the credits in this
      * batch. Full documentation can be found in MsgCreateBatch.project_location.
      */
+    project_location: string;
+}
+export interface EventCreateBatchAminoMsg {
+    type: "/regen.ecocredit.v1alpha1.EventCreateBatch";
+    value: EventCreateBatchAmino;
+}
+/** EventCreateBatch is an event emitted when a credit batch is created. */
+export interface EventCreateBatchSDKType {
+    class_id: string;
+    batch_denom: string;
+    issuer: string;
+    total_amount: string;
+    start_date: string;
+    end_date: string;
     project_location: string;
 }
 /**
@@ -94,13 +125,17 @@ export interface EventReceive {
      */
     basketDenom: string;
 }
+export interface EventReceiveProtoMsg {
+    typeUrl: "/regen.ecocredit.v1alpha1.EventReceive";
+    value: Uint8Array;
+}
 /**
  * EventReceive is an event emitted when credits are received either via
  * creation of a new batch, transfer of credits, or taking credits from a
  * basket. Each batch_denom created, transferred or taken from a baset will
  * result in a separate EventReceive for easy indexing.
  */
-export interface EventReceiveSDKType {
+export interface EventReceiveAmino {
     /**
      * sender is the sender of the credits in the case that this event is the
      * result of a transfer. It will not be set when credits are received at
@@ -121,6 +156,24 @@ export interface EventReceiveSDKType {
      * from a basket. It will not be set if the credits were sent by a user, or by
      * initial issuance.
      */
+    basket_denom: string;
+}
+export interface EventReceiveAminoMsg {
+    type: "/regen.ecocredit.v1alpha1.EventReceive";
+    value: EventReceiveAmino;
+}
+/**
+ * EventReceive is an event emitted when credits are received either via
+ * creation of a new batch, transfer of credits, or taking credits from a
+ * basket. Each batch_denom created, transferred or taken from a baset will
+ * result in a separate EventReceive for easy indexing.
+ */
+export interface EventReceiveSDKType {
+    sender: string;
+    recipient: string;
+    batch_denom: string;
+    tradable_amount: string;
+    retired_amount: string;
     basket_denom: string;
 }
 /**
@@ -148,12 +201,16 @@ export interface EventRetire {
      */
     location: string;
 }
+export interface EventRetireProtoMsg {
+    typeUrl: "/regen.ecocredit.v1alpha1.EventRetire";
+    value: Uint8Array;
+}
 /**
  * EventRetire is an event emitted when credits are retired. When credits are
  * retired from multiple batches in the same transaction, a separate event is
  * emitted for each batch_denom. This allows for easier indexing.
  */
-export interface EventRetireSDKType {
+export interface EventRetireAmino {
     /**
      * retirer is the account which has done the "retiring". This will be the
      * account receiving credits in the case that credits were retired upon
@@ -173,6 +230,21 @@ export interface EventRetireSDKType {
      */
     location: string;
 }
+export interface EventRetireAminoMsg {
+    type: "/regen.ecocredit.v1alpha1.EventRetire";
+    value: EventRetireAmino;
+}
+/**
+ * EventRetire is an event emitted when credits are retired. When credits are
+ * retired from multiple batches in the same transaction, a separate event is
+ * emitted for each batch_denom. This allows for easier indexing.
+ */
+export interface EventRetireSDKType {
+    retirer: string;
+    batch_denom: string;
+    amount: string;
+    location: string;
+}
 /**
  * EventCancel is an event emitted when credits are cancelled. When credits are
  * cancelled from multiple batches in the same transaction, a separate event is
@@ -189,12 +261,16 @@ export interface EventCancel {
     /** amount is the decimal number of credits that have been cancelled. */
     amount: string;
 }
+export interface EventCancelProtoMsg {
+    typeUrl: "/regen.ecocredit.v1alpha1.EventCancel";
+    value: Uint8Array;
+}
 /**
  * EventCancel is an event emitted when credits are cancelled. When credits are
  * cancelled from multiple batches in the same transaction, a separate event is
  * emitted for each batch_denom. This allows for easier indexing.
  */
-export interface EventCancelSDKType {
+export interface EventCancelAmino {
     /**
      * canceller is the account which has cancelled the credits, which should be
      * the holder of the credits.
@@ -205,12 +281,32 @@ export interface EventCancelSDKType {
     /** amount is the decimal number of credits that have been cancelled. */
     amount: string;
 }
+export interface EventCancelAminoMsg {
+    type: "/regen.ecocredit.v1alpha1.EventCancel";
+    value: EventCancelAmino;
+}
+/**
+ * EventCancel is an event emitted when credits are cancelled. When credits are
+ * cancelled from multiple batches in the same transaction, a separate event is
+ * emitted for each batch_denom. This allows for easier indexing.
+ */
+export interface EventCancelSDKType {
+    canceller: string;
+    batch_denom: string;
+    amount: string;
+}
 export declare const EventCreateClass: {
     encode(message: EventCreateClass, writer?: _m0.Writer): _m0.Writer;
     decode(input: _m0.Reader | Uint8Array, length?: number): EventCreateClass;
     fromJSON(object: any): EventCreateClass;
     toJSON(message: EventCreateClass): unknown;
     fromPartial(object: Partial<EventCreateClass>): EventCreateClass;
+    fromAmino(object: EventCreateClassAmino): EventCreateClass;
+    toAmino(message: EventCreateClass): EventCreateClassAmino;
+    fromAminoMsg(object: EventCreateClassAminoMsg): EventCreateClass;
+    fromProtoMsg(message: EventCreateClassProtoMsg): EventCreateClass;
+    toProto(message: EventCreateClass): Uint8Array;
+    toProtoMsg(message: EventCreateClass): EventCreateClassProtoMsg;
 };
 export declare const EventCreateBatch: {
     encode(message: EventCreateBatch, writer?: _m0.Writer): _m0.Writer;
@@ -218,6 +314,12 @@ export declare const EventCreateBatch: {
     fromJSON(object: any): EventCreateBatch;
     toJSON(message: EventCreateBatch): unknown;
     fromPartial(object: Partial<EventCreateBatch>): EventCreateBatch;
+    fromAmino(object: EventCreateBatchAmino): EventCreateBatch;
+    toAmino(message: EventCreateBatch): EventCreateBatchAmino;
+    fromAminoMsg(object: EventCreateBatchAminoMsg): EventCreateBatch;
+    fromProtoMsg(message: EventCreateBatchProtoMsg): EventCreateBatch;
+    toProto(message: EventCreateBatch): Uint8Array;
+    toProtoMsg(message: EventCreateBatch): EventCreateBatchProtoMsg;
 };
 export declare const EventReceive: {
     encode(message: EventReceive, writer?: _m0.Writer): _m0.Writer;
@@ -225,6 +327,12 @@ export declare const EventReceive: {
     fromJSON(object: any): EventReceive;
     toJSON(message: EventReceive): unknown;
     fromPartial(object: Partial<EventReceive>): EventReceive;
+    fromAmino(object: EventReceiveAmino): EventReceive;
+    toAmino(message: EventReceive): EventReceiveAmino;
+    fromAminoMsg(object: EventReceiveAminoMsg): EventReceive;
+    fromProtoMsg(message: EventReceiveProtoMsg): EventReceive;
+    toProto(message: EventReceive): Uint8Array;
+    toProtoMsg(message: EventReceive): EventReceiveProtoMsg;
 };
 export declare const EventRetire: {
     encode(message: EventRetire, writer?: _m0.Writer): _m0.Writer;
@@ -232,6 +340,12 @@ export declare const EventRetire: {
     fromJSON(object: any): EventRetire;
     toJSON(message: EventRetire): unknown;
     fromPartial(object: Partial<EventRetire>): EventRetire;
+    fromAmino(object: EventRetireAmino): EventRetire;
+    toAmino(message: EventRetire): EventRetireAmino;
+    fromAminoMsg(object: EventRetireAminoMsg): EventRetire;
+    fromProtoMsg(message: EventRetireProtoMsg): EventRetire;
+    toProto(message: EventRetire): Uint8Array;
+    toProtoMsg(message: EventRetire): EventRetireProtoMsg;
 };
 export declare const EventCancel: {
     encode(message: EventCancel, writer?: _m0.Writer): _m0.Writer;
@@ -239,4 +353,10 @@ export declare const EventCancel: {
     fromJSON(object: any): EventCancel;
     toJSON(message: EventCancel): unknown;
     fromPartial(object: Partial<EventCancel>): EventCancel;
+    fromAmino(object: EventCancelAmino): EventCancel;
+    toAmino(message: EventCancel): EventCancelAmino;
+    fromAminoMsg(object: EventCancelAminoMsg): EventCancel;
+    fromProtoMsg(message: EventCancelProtoMsg): EventCancel;
+    toProto(message: EventCancel): Uint8Array;
+    toProtoMsg(message: EventCancel): EventCancelProtoMsg;
 };

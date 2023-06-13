@@ -1,5 +1,5 @@
-import { Coin, CoinSDKType } from "../../../cosmos/base/v1beta1/coin";
-import { CreditType, CreditTypeSDKType } from "./state";
+import { Coin, CoinAmino, CoinSDKType } from "../../../cosmos/base/v1beta1/coin";
+import { CreditType, CreditTypeAmino, CreditTypeSDKType } from "./state";
 import * as _m0 from "protobufjs/minimal";
 /**
  * Params defines the updatable global parameters of the ecocredit module for
@@ -46,23 +46,27 @@ export interface Params {
      */
     allowedBridgeChains: string[];
 }
+export interface ParamsProtoMsg {
+    typeUrl: "/regen.ecocredit.v1.Params";
+    value: Uint8Array;
+}
 /**
  * Params defines the updatable global parameters of the ecocredit module for
  * use with the x/params module.
  */
-export interface ParamsSDKType {
+export interface ParamsAmino {
     /**
      * credit_class_fee is a list of credit class creation fees accepted when
      * creating a credit class. Any fee listed is accepted and charged to the
      * credit class creator when creating a credit class.
      */
-    credit_class_fee: CoinSDKType[];
+    credit_class_fee: CoinAmino[];
     /**
      * basket_fee is a list of basket creation fees accepted when creating a
      * basket. Any fee listed is accepted and charged to the basket creator when
      * creating a basket.
      */
-    basket_fee: CoinSDKType[];
+    basket_fee: CoinAmino[];
     /**
      * allowed_class_creators is an allowlist defining the addresses with the
      * required permissions to create credit classes when allowlist_enabled is set
@@ -82,13 +86,29 @@ export interface ParamsSDKType {
      *
      * Since Revision 2
      */
-    allowed_denoms: AllowedDenomSDKType[];
+    allowed_denoms: AllowedDenomAmino[];
     /**
      * AllowedBridgeChains is a list of chain names that are allowed to be used in
      * bridge operations.
      *
      * Since Revision 2
      */
+    allowed_bridge_chains: string[];
+}
+export interface ParamsAminoMsg {
+    type: "/regen.ecocredit.v1.Params";
+    value: ParamsAmino;
+}
+/**
+ * Params defines the updatable global parameters of the ecocredit module for
+ * use with the x/params module.
+ */
+export interface ParamsSDKType {
+    credit_class_fee: CoinSDKType[];
+    basket_fee: CoinSDKType[];
+    allowed_class_creators: string[];
+    allowlist_enabled: boolean;
+    allowed_denoms: AllowedDenomSDKType[];
     allowed_bridge_chains: string[];
 }
 /** Credits represents a simple structure for credits. */
@@ -98,11 +118,24 @@ export interface Credits {
     /** amount is the amount of credits. */
     amount: string;
 }
+export interface CreditsProtoMsg {
+    typeUrl: "/regen.ecocredit.v1.Credits";
+    value: Uint8Array;
+}
 /** Credits represents a simple structure for credits. */
-export interface CreditsSDKType {
+export interface CreditsAmino {
     /** batch_denom is the denom of the credit batch. */
     batch_denom: string;
     /** amount is the amount of credits. */
+    amount: string;
+}
+export interface CreditsAminoMsg {
+    type: "/regen.ecocredit.v1.Credits";
+    value: CreditsAmino;
+}
+/** Credits represents a simple structure for credits. */
+export interface CreditsSDKType {
+    batch_denom: string;
     amount: string;
 }
 /** BatchIssuance represents a simple structure for a credit batch issuance. */
@@ -141,8 +174,12 @@ export interface BatchIssuance {
      */
     retirementReason: string;
 }
+export interface BatchIssuanceProtoMsg {
+    typeUrl: "/regen.ecocredit.v1.BatchIssuance";
+    value: Uint8Array;
+}
 /** BatchIssuance represents a simple structure for a credit batch issuance. */
-export interface BatchIssuanceSDKType {
+export interface BatchIssuanceAmino {
     /** recipient is the address of the account receiving the issued credits. */
     recipient: string;
     /**
@@ -177,6 +214,18 @@ export interface BatchIssuanceSDKType {
      */
     retirement_reason: string;
 }
+export interface BatchIssuanceAminoMsg {
+    type: "/regen.ecocredit.v1.BatchIssuance";
+    value: BatchIssuanceAmino;
+}
+/** BatchIssuance represents a simple structure for a credit batch issuance. */
+export interface BatchIssuanceSDKType {
+    recipient: string;
+    tradable_amount: string;
+    retired_amount: string;
+    retirement_jurisdiction: string;
+    retirement_reason: string;
+}
 /**
  * OriginTx is the transaction from another chain or registry that triggered
  * the minting of credits.
@@ -206,11 +255,15 @@ export interface OriginTx {
      */
     note: string;
 }
+export interface OriginTxProtoMsg {
+    typeUrl: "/regen.ecocredit.v1.OriginTx";
+    value: Uint8Array;
+}
 /**
  * OriginTx is the transaction from another chain or registry that triggered
  * the minting of credits.
  */
-export interface OriginTxSDKType {
+export interface OriginTxAmino {
     /**
      * id is the transaction ID of an originating transaction or operation based
      * on a type (i.e. transaction ID, serial number).
@@ -235,6 +288,20 @@ export interface OriginTxSDKType {
      */
     note: string;
 }
+export interface OriginTxAminoMsg {
+    type: "/regen.ecocredit.v1.OriginTx";
+    value: OriginTxAmino;
+}
+/**
+ * OriginTx is the transaction from another chain or registry that triggered
+ * the minting of credits.
+ */
+export interface OriginTxSDKType {
+    id: string;
+    source: string;
+    contract: string;
+    note: string;
+}
 /**
  * CreditTypeProposal is a gov Content type for adding a credit type.
  * Deprecated (Since Revision 2): This message is no longer used and will be
@@ -251,12 +318,16 @@ export interface CreditTypeProposal {
      */
     creditType?: CreditType;
 }
+export interface CreditTypeProposalProtoMsg {
+    typeUrl: "/regen.ecocredit.v1.CreditTypeProposal";
+    value: Uint8Array;
+}
 /**
  * CreditTypeProposal is a gov Content type for adding a credit type.
  * Deprecated (Since Revision 2): This message is no longer used and will be
  * removed in the next version. See MsgAddCreditType.
  */
-export interface CreditTypeProposalSDKType {
+export interface CreditTypeProposalAmino {
     /** title is the title of the proposal. */
     title: string;
     /** description is the description of the proposal. */
@@ -265,6 +336,20 @@ export interface CreditTypeProposalSDKType {
      * credit_type is the credit type to be added to the network if the proposal
      * passes.
      */
+    credit_type?: CreditTypeAmino;
+}
+export interface CreditTypeProposalAminoMsg {
+    type: "/regen.ecocredit.v1.CreditTypeProposal";
+    value: CreditTypeProposalAmino;
+}
+/**
+ * CreditTypeProposal is a gov Content type for adding a credit type.
+ * Deprecated (Since Revision 2): This message is no longer used and will be
+ * removed in the next version. See MsgAddCreditType.
+ */
+export interface CreditTypeProposalSDKType {
+    title: string;
+    description: string;
     credit_type?: CreditTypeSDKType;
 }
 /**
@@ -290,6 +375,10 @@ export interface AllowedDenom {
      */
     exponent: number;
 }
+export interface AllowedDenomProtoMsg {
+    typeUrl: "/regen.ecocredit.v1.AllowedDenom";
+    value: Uint8Array;
+}
 /**
  * AllowedDenom represents the information for an allowed ask denom.
  *
@@ -298,7 +387,7 @@ export interface AllowedDenom {
  * Deprecated(Since Revision 2): This type was added to support historical
  * queries for params but will also be removed in the next version.
  */
-export interface AllowedDenomSDKType {
+export interface AllowedDenomAmino {
     /** denom is the bank denom to allow (ex. ibc/GLKHDSG423SGS) */
     bank_denom: string;
     /**
@@ -313,12 +402,35 @@ export interface AllowedDenomSDKType {
      */
     exponent: number;
 }
+export interface AllowedDenomAminoMsg {
+    type: "/regen.ecocredit.v1.AllowedDenom";
+    value: AllowedDenomAmino;
+}
+/**
+ * AllowedDenom represents the information for an allowed ask denom.
+ *
+ * Since Revision 2
+ *
+ * Deprecated(Since Revision 2): This type was added to support historical
+ * queries for params but will also be removed in the next version.
+ */
+export interface AllowedDenomSDKType {
+    bank_denom: string;
+    display_denom: string;
+    exponent: number;
+}
 export declare const Params: {
     encode(message: Params, writer?: _m0.Writer): _m0.Writer;
     decode(input: _m0.Reader | Uint8Array, length?: number): Params;
     fromJSON(object: any): Params;
     toJSON(message: Params): unknown;
     fromPartial(object: Partial<Params>): Params;
+    fromAmino(object: ParamsAmino): Params;
+    toAmino(message: Params): ParamsAmino;
+    fromAminoMsg(object: ParamsAminoMsg): Params;
+    fromProtoMsg(message: ParamsProtoMsg): Params;
+    toProto(message: Params): Uint8Array;
+    toProtoMsg(message: Params): ParamsProtoMsg;
 };
 export declare const Credits: {
     encode(message: Credits, writer?: _m0.Writer): _m0.Writer;
@@ -326,6 +438,12 @@ export declare const Credits: {
     fromJSON(object: any): Credits;
     toJSON(message: Credits): unknown;
     fromPartial(object: Partial<Credits>): Credits;
+    fromAmino(object: CreditsAmino): Credits;
+    toAmino(message: Credits): CreditsAmino;
+    fromAminoMsg(object: CreditsAminoMsg): Credits;
+    fromProtoMsg(message: CreditsProtoMsg): Credits;
+    toProto(message: Credits): Uint8Array;
+    toProtoMsg(message: Credits): CreditsProtoMsg;
 };
 export declare const BatchIssuance: {
     encode(message: BatchIssuance, writer?: _m0.Writer): _m0.Writer;
@@ -333,6 +451,12 @@ export declare const BatchIssuance: {
     fromJSON(object: any): BatchIssuance;
     toJSON(message: BatchIssuance): unknown;
     fromPartial(object: Partial<BatchIssuance>): BatchIssuance;
+    fromAmino(object: BatchIssuanceAmino): BatchIssuance;
+    toAmino(message: BatchIssuance): BatchIssuanceAmino;
+    fromAminoMsg(object: BatchIssuanceAminoMsg): BatchIssuance;
+    fromProtoMsg(message: BatchIssuanceProtoMsg): BatchIssuance;
+    toProto(message: BatchIssuance): Uint8Array;
+    toProtoMsg(message: BatchIssuance): BatchIssuanceProtoMsg;
 };
 export declare const OriginTx: {
     encode(message: OriginTx, writer?: _m0.Writer): _m0.Writer;
@@ -340,6 +464,12 @@ export declare const OriginTx: {
     fromJSON(object: any): OriginTx;
     toJSON(message: OriginTx): unknown;
     fromPartial(object: Partial<OriginTx>): OriginTx;
+    fromAmino(object: OriginTxAmino): OriginTx;
+    toAmino(message: OriginTx): OriginTxAmino;
+    fromAminoMsg(object: OriginTxAminoMsg): OriginTx;
+    fromProtoMsg(message: OriginTxProtoMsg): OriginTx;
+    toProto(message: OriginTx): Uint8Array;
+    toProtoMsg(message: OriginTx): OriginTxProtoMsg;
 };
 export declare const CreditTypeProposal: {
     encode(message: CreditTypeProposal, writer?: _m0.Writer): _m0.Writer;
@@ -347,6 +477,12 @@ export declare const CreditTypeProposal: {
     fromJSON(object: any): CreditTypeProposal;
     toJSON(message: CreditTypeProposal): unknown;
     fromPartial(object: Partial<CreditTypeProposal>): CreditTypeProposal;
+    fromAmino(object: CreditTypeProposalAmino): CreditTypeProposal;
+    toAmino(message: CreditTypeProposal): CreditTypeProposalAmino;
+    fromAminoMsg(object: CreditTypeProposalAminoMsg): CreditTypeProposal;
+    fromProtoMsg(message: CreditTypeProposalProtoMsg): CreditTypeProposal;
+    toProto(message: CreditTypeProposal): Uint8Array;
+    toProtoMsg(message: CreditTypeProposal): CreditTypeProposalProtoMsg;
 };
 export declare const AllowedDenom: {
     encode(message: AllowedDenom, writer?: _m0.Writer): _m0.Writer;
@@ -354,4 +490,10 @@ export declare const AllowedDenom: {
     fromJSON(object: any): AllowedDenom;
     toJSON(message: AllowedDenom): unknown;
     fromPartial(object: Partial<AllowedDenom>): AllowedDenom;
+    fromAmino(object: AllowedDenomAmino): AllowedDenom;
+    toAmino(message: AllowedDenom): AllowedDenomAmino;
+    fromAminoMsg(object: AllowedDenomAminoMsg): AllowedDenom;
+    fromProtoMsg(message: AllowedDenomProtoMsg): AllowedDenom;
+    toProto(message: AllowedDenom): Uint8Array;
+    toProtoMsg(message: AllowedDenom): AllowedDenomProtoMsg;
 };

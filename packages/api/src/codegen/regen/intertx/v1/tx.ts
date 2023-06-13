@@ -1,4 +1,4 @@
-import { Any, AnySDKType } from "../../../google/protobuf/any";
+import { Any, AnyAmino, AnySDKType } from "../../../google/protobuf/any";
 import * as _m0 from "protobufjs/minimal";
 import { isSet } from "../../../helpers";
 /** MsgRegisterAccount defines the payload for Msg/RegisterAccount */
@@ -17,9 +17,13 @@ export interface MsgRegisterAccount {
 
   version: string;
 }
+export interface MsgRegisterAccountProtoMsg {
+  typeUrl: "/regen.intertx.v1.MsgRegisterAccount";
+  value: Uint8Array;
+}
 /** MsgRegisterAccount defines the payload for Msg/RegisterAccount */
 
-export interface MsgRegisterAccountSDKType {
+export interface MsgRegisterAccountAmino {
   /** owner is the address of the interchain account owner. */
   owner: string;
   /** connection_id is the connection id string (i.e. channel-5). */
@@ -33,9 +37,31 @@ export interface MsgRegisterAccountSDKType {
 
   version: string;
 }
+export interface MsgRegisterAccountAminoMsg {
+  type: "/regen.intertx.v1.MsgRegisterAccount";
+  value: MsgRegisterAccountAmino;
+}
+/** MsgRegisterAccount defines the payload for Msg/RegisterAccount */
+
+export interface MsgRegisterAccountSDKType {
+  owner: string;
+  connection_id: string;
+  version: string;
+}
 /** MsgRegisterAccountResponse defines the response for Msg/RegisterAccount */
 
 export interface MsgRegisterAccountResponse {}
+export interface MsgRegisterAccountResponseProtoMsg {
+  typeUrl: "/regen.intertx.v1.MsgRegisterAccountResponse";
+  value: Uint8Array;
+}
+/** MsgRegisterAccountResponse defines the response for Msg/RegisterAccount */
+
+export interface MsgRegisterAccountResponseAmino {}
+export interface MsgRegisterAccountResponseAminoMsg {
+  type: "/regen.intertx.v1.MsgRegisterAccountResponse";
+  value: MsgRegisterAccountResponseAmino;
+}
 /** MsgRegisterAccountResponse defines the response for Msg/RegisterAccount */
 
 export interface MsgRegisterAccountResponseSDKType {}
@@ -51,9 +77,13 @@ export interface MsgSubmitTx {
 
   msg?: Any;
 }
+export interface MsgSubmitTxProtoMsg {
+  typeUrl: "/regen.intertx.v1.MsgSubmitTx";
+  value: Uint8Array;
+}
 /** MsgSubmitTx defines the payload for Msg/SubmitTx */
 
-export interface MsgSubmitTxSDKType {
+export interface MsgSubmitTxAmino {
   /** owner is the owner address of the interchain account. */
   owner: string;
   /** connection_id is the id of the connection. */
@@ -61,11 +91,33 @@ export interface MsgSubmitTxSDKType {
   connection_id: string;
   /** msg is the bytes of the transaction msg to send. */
 
+  msg?: AnyAmino;
+}
+export interface MsgSubmitTxAminoMsg {
+  type: "/regen.intertx.v1.MsgSubmitTx";
+  value: MsgSubmitTxAmino;
+}
+/** MsgSubmitTx defines the payload for Msg/SubmitTx */
+
+export interface MsgSubmitTxSDKType {
+  owner: string;
+  connection_id: string;
   msg?: AnySDKType;
 }
 /** MsgSubmitTxResponse defines the response for Msg/SubmitTx */
 
 export interface MsgSubmitTxResponse {}
+export interface MsgSubmitTxResponseProtoMsg {
+  typeUrl: "/regen.intertx.v1.MsgSubmitTxResponse";
+  value: Uint8Array;
+}
+/** MsgSubmitTxResponse defines the response for Msg/SubmitTx */
+
+export interface MsgSubmitTxResponseAmino {}
+export interface MsgSubmitTxResponseAminoMsg {
+  type: "/regen.intertx.v1.MsgSubmitTxResponse";
+  value: MsgSubmitTxResponseAmino;
+}
 /** MsgSubmitTxResponse defines the response for Msg/SubmitTx */
 
 export interface MsgSubmitTxResponseSDKType {}
@@ -147,6 +199,41 @@ export const MsgRegisterAccount = {
     message.connectionId = object.connectionId ?? "";
     message.version = object.version ?? "";
     return message;
+  },
+
+  fromAmino(object: MsgRegisterAccountAmino): MsgRegisterAccount {
+    return {
+      owner: object.owner,
+      connectionId: object.connection_id,
+      version: object.version
+    };
+  },
+
+  toAmino(message: MsgRegisterAccount): MsgRegisterAccountAmino {
+    const obj: any = {};
+    obj.owner = message.owner;
+    obj.connection_id = message.connectionId;
+    obj.version = message.version;
+    return obj;
+  },
+
+  fromAminoMsg(object: MsgRegisterAccountAminoMsg): MsgRegisterAccount {
+    return MsgRegisterAccount.fromAmino(object.value);
+  },
+
+  fromProtoMsg(message: MsgRegisterAccountProtoMsg): MsgRegisterAccount {
+    return MsgRegisterAccount.decode(message.value);
+  },
+
+  toProto(message: MsgRegisterAccount): Uint8Array {
+    return MsgRegisterAccount.encode(message).finish();
+  },
+
+  toProtoMsg(message: MsgRegisterAccount): MsgRegisterAccountProtoMsg {
+    return {
+      typeUrl: "/regen.intertx.v1.MsgRegisterAccount",
+      value: MsgRegisterAccount.encode(message).finish()
+    };
   }
 
 };
@@ -190,6 +277,34 @@ export const MsgRegisterAccountResponse = {
   fromPartial(_: Partial<MsgRegisterAccountResponse>): MsgRegisterAccountResponse {
     const message = createBaseMsgRegisterAccountResponse();
     return message;
+  },
+
+  fromAmino(_: MsgRegisterAccountResponseAmino): MsgRegisterAccountResponse {
+    return {};
+  },
+
+  toAmino(_: MsgRegisterAccountResponse): MsgRegisterAccountResponseAmino {
+    const obj: any = {};
+    return obj;
+  },
+
+  fromAminoMsg(object: MsgRegisterAccountResponseAminoMsg): MsgRegisterAccountResponse {
+    return MsgRegisterAccountResponse.fromAmino(object.value);
+  },
+
+  fromProtoMsg(message: MsgRegisterAccountResponseProtoMsg): MsgRegisterAccountResponse {
+    return MsgRegisterAccountResponse.decode(message.value);
+  },
+
+  toProto(message: MsgRegisterAccountResponse): Uint8Array {
+    return MsgRegisterAccountResponse.encode(message).finish();
+  },
+
+  toProtoMsg(message: MsgRegisterAccountResponse): MsgRegisterAccountResponseProtoMsg {
+    return {
+      typeUrl: "/regen.intertx.v1.MsgRegisterAccountResponse",
+      value: MsgRegisterAccountResponse.encode(message).finish()
+    };
   }
 
 };
@@ -271,6 +386,41 @@ export const MsgSubmitTx = {
     message.connectionId = object.connectionId ?? "";
     message.msg = object.msg !== undefined && object.msg !== null ? Any.fromPartial(object.msg) : undefined;
     return message;
+  },
+
+  fromAmino(object: MsgSubmitTxAmino): MsgSubmitTx {
+    return {
+      owner: object.owner,
+      connectionId: object.connection_id,
+      msg: object?.msg ? Any.fromAmino(object.msg) : undefined
+    };
+  },
+
+  toAmino(message: MsgSubmitTx): MsgSubmitTxAmino {
+    const obj: any = {};
+    obj.owner = message.owner;
+    obj.connection_id = message.connectionId;
+    obj.msg = message.msg ? Any.toAmino(message.msg) : undefined;
+    return obj;
+  },
+
+  fromAminoMsg(object: MsgSubmitTxAminoMsg): MsgSubmitTx {
+    return MsgSubmitTx.fromAmino(object.value);
+  },
+
+  fromProtoMsg(message: MsgSubmitTxProtoMsg): MsgSubmitTx {
+    return MsgSubmitTx.decode(message.value);
+  },
+
+  toProto(message: MsgSubmitTx): Uint8Array {
+    return MsgSubmitTx.encode(message).finish();
+  },
+
+  toProtoMsg(message: MsgSubmitTx): MsgSubmitTxProtoMsg {
+    return {
+      typeUrl: "/regen.intertx.v1.MsgSubmitTx",
+      value: MsgSubmitTx.encode(message).finish()
+    };
   }
 
 };
@@ -314,6 +464,34 @@ export const MsgSubmitTxResponse = {
   fromPartial(_: Partial<MsgSubmitTxResponse>): MsgSubmitTxResponse {
     const message = createBaseMsgSubmitTxResponse();
     return message;
+  },
+
+  fromAmino(_: MsgSubmitTxResponseAmino): MsgSubmitTxResponse {
+    return {};
+  },
+
+  toAmino(_: MsgSubmitTxResponse): MsgSubmitTxResponseAmino {
+    const obj: any = {};
+    return obj;
+  },
+
+  fromAminoMsg(object: MsgSubmitTxResponseAminoMsg): MsgSubmitTxResponse {
+    return MsgSubmitTxResponse.fromAmino(object.value);
+  },
+
+  fromProtoMsg(message: MsgSubmitTxResponseProtoMsg): MsgSubmitTxResponse {
+    return MsgSubmitTxResponse.decode(message.value);
+  },
+
+  toProto(message: MsgSubmitTxResponse): Uint8Array {
+    return MsgSubmitTxResponse.encode(message).finish();
+  },
+
+  toProtoMsg(message: MsgSubmitTxResponse): MsgSubmitTxResponseProtoMsg {
+    return {
+      typeUrl: "/regen.intertx.v1.MsgSubmitTxResponse",
+      value: MsgSubmitTxResponse.encode(message).finish()
+    };
   }
 
 };

@@ -1,7 +1,7 @@
-import { Timestamp, TimestampSDKType } from "../../../google/protobuf/timestamp";
-import { Coin, CoinSDKType } from "../../../cosmos/base/v1beta1/coin";
-import * as _m0 from "protobufjs/minimal";
+import { Timestamp, TimestampAmino, TimestampSDKType } from "../../../google/protobuf/timestamp";
+import { Coin, CoinAmino, CoinSDKType } from "../../../cosmos/base/v1beta1/coin";
 import { Long, isSet, bytesFromBase64, base64FromBytes, fromJsonTimestamp, fromTimestamp } from "../../../helpers";
+import * as _m0 from "protobufjs/minimal";
 /** ClassInfo represents the high-level on-chain information for a credit class. */
 
 export interface ClassInfo {
@@ -26,9 +26,13 @@ export interface ClassInfo {
 
   numBatches: Long;
 }
+export interface ClassInfoProtoMsg {
+  typeUrl: "/regen.ecocredit.v1alpha1.ClassInfo";
+  value: Uint8Array;
+}
 /** ClassInfo represents the high-level on-chain information for a credit class. */
 
-export interface ClassInfoSDKType {
+export interface ClassInfoAmino {
   /** class_id is the unique ID of credit class. */
   class_id: string;
   /** admin is the admin of the credit class. */
@@ -45,9 +49,23 @@ export interface ClassInfoSDKType {
    * well as unit and precision.
    */
 
-  credit_type?: CreditTypeSDKType;
+  credit_type?: CreditTypeAmino;
   /** The number of batches issued in this credit class. */
 
+  num_batches: string;
+}
+export interface ClassInfoAminoMsg {
+  type: "/regen.ecocredit.v1alpha1.ClassInfo";
+  value: ClassInfoAmino;
+}
+/** ClassInfo represents the high-level on-chain information for a credit class. */
+
+export interface ClassInfoSDKType {
+  class_id: string;
+  admin: string;
+  issuers: string[];
+  metadata: Uint8Array;
+  credit_type?: CreditTypeSDKType;
   num_batches: Long;
 }
 /** BatchInfo represents the high-level on-chain information for a credit batch. */
@@ -100,9 +118,13 @@ export interface BatchInfo {
 
   projectLocation: string;
 }
+export interface BatchInfoProtoMsg {
+  typeUrl: "/regen.ecocredit.v1alpha1.BatchInfo";
+  value: Uint8Array;
+}
 /** BatchInfo represents the high-level on-chain information for a credit batch. */
 
-export interface BatchInfoSDKType {
+export interface BatchInfoAmino {
   /** class_id is the unique ID of credit class. */
   class_id: string;
   /** batch_denom is the unique ID of credit batch. */
@@ -136,18 +158,35 @@ export interface BatchInfoSDKType {
    * was quantified and verified.
    */
 
-  start_date?: TimestampSDKType;
+  start_date?: TimestampAmino;
   /**
    * end_date is the end of the period during which this credit batch was
    * quantified and verified.
    */
 
-  end_date?: TimestampSDKType;
+  end_date?: TimestampAmino;
   /**
    * project_location is the location of the project backing the credits in this
    * batch. Full documentation can be found in MsgCreateBatch.project_location.
    */
 
+  project_location: string;
+}
+export interface BatchInfoAminoMsg {
+  type: "/regen.ecocredit.v1alpha1.BatchInfo";
+  value: BatchInfoAmino;
+}
+/** BatchInfo represents the high-level on-chain information for a credit batch. */
+
+export interface BatchInfoSDKType {
+  class_id: string;
+  batch_denom: string;
+  issuer: string;
+  total_amount: string;
+  metadata: Uint8Array;
+  amount_cancelled: string;
+  start_date?: TimestampSDKType;
+  end_date?: TimestampSDKType;
   project_location: string;
 }
 /**
@@ -177,14 +216,18 @@ export interface Params {
 
   basketCreationFee: Coin[];
 }
+export interface ParamsProtoMsg {
+  typeUrl: "/regen.ecocredit.v1alpha1.Params";
+  value: Uint8Array;
+}
 /**
  * Params defines the updatable global parameters of the ecocredit module for
  * use with the x/params module.
  */
 
-export interface ParamsSDKType {
+export interface ParamsAmino {
   /** credit_class_fee is the fixed fee charged on creation of a new credit class */
-  credit_class_fee: CoinSDKType[];
+  credit_class_fee: CoinAmino[];
   /**
    * allowed_class_creators is an allowlist defining the addresses with
    * the required permissions to create credit classes
@@ -199,9 +242,25 @@ export interface ParamsSDKType {
   allowlist_enabled: boolean;
   /** credit_types is a list of definitions for credit types */
 
-  credit_types: CreditTypeSDKType[];
+  credit_types: CreditTypeAmino[];
   /** basket_creation_fee is the fee to create a new basket denom. */
 
+  basket_creation_fee: CoinAmino[];
+}
+export interface ParamsAminoMsg {
+  type: "/regen.ecocredit.v1alpha1.Params";
+  value: ParamsAmino;
+}
+/**
+ * Params defines the updatable global parameters of the ecocredit module for
+ * use with the x/params module.
+ */
+
+export interface ParamsSDKType {
+  credit_class_fee: CoinSDKType[];
+  allowed_class_creators: string[];
+  allowlist_enabled: boolean;
+  credit_types: CreditTypeSDKType[];
   basket_creation_fee: CoinSDKType[];
 }
 /**
@@ -225,12 +284,16 @@ export interface CreditType {
 
   precision: number;
 }
+export interface CreditTypeProtoMsg {
+  typeUrl: "/regen.ecocredit.v1alpha1.CreditType";
+  value: Uint8Array;
+}
 /**
  * CreditType defines the measurement unit/precision of a certain credit type
  * (e.g. carbon, biodiversity...)
  */
 
-export interface CreditTypeSDKType {
+export interface CreditTypeAmino {
   /** the type of credit (e.g. carbon, biodiversity, etc) */
   name: string;
   /**
@@ -246,6 +309,21 @@ export interface CreditTypeSDKType {
 
   precision: number;
 }
+export interface CreditTypeAminoMsg {
+  type: "/regen.ecocredit.v1alpha1.CreditType";
+  value: CreditTypeAmino;
+}
+/**
+ * CreditType defines the measurement unit/precision of a certain credit type
+ * (e.g. carbon, biodiversity...)
+ */
+
+export interface CreditTypeSDKType {
+  name: string;
+  abbreviation: string;
+  unit: string;
+  precision: number;
+}
 /**
  * CreditTypeSeq associates a sequence number with a credit type abbreviation.
  * This represents the number of credit classes created with that credit type.
@@ -258,16 +336,33 @@ export interface CreditTypeSeq {
 
   seqNumber: Long;
 }
+export interface CreditTypeSeqProtoMsg {
+  typeUrl: "/regen.ecocredit.v1alpha1.CreditTypeSeq";
+  value: Uint8Array;
+}
+/**
+ * CreditTypeSeq associates a sequence number with a credit type abbreviation.
+ * This represents the number of credit classes created with that credit type.
+ */
+
+export interface CreditTypeSeqAmino {
+  /** The credit type abbreviation */
+  abbreviation: string;
+  /** The sequence number of classes of the credit type */
+
+  seq_number: string;
+}
+export interface CreditTypeSeqAminoMsg {
+  type: "/regen.ecocredit.v1alpha1.CreditTypeSeq";
+  value: CreditTypeSeqAmino;
+}
 /**
  * CreditTypeSeq associates a sequence number with a credit type abbreviation.
  * This represents the number of credit classes created with that credit type.
  */
 
 export interface CreditTypeSeqSDKType {
-  /** The credit type abbreviation */
   abbreviation: string;
-  /** The sequence number of classes of the credit type */
-
   seq_number: Long;
 }
 
@@ -390,6 +485,53 @@ export const ClassInfo = {
     message.creditType = object.creditType !== undefined && object.creditType !== null ? CreditType.fromPartial(object.creditType) : undefined;
     message.numBatches = object.numBatches !== undefined && object.numBatches !== null ? Long.fromValue(object.numBatches) : Long.UZERO;
     return message;
+  },
+
+  fromAmino(object: ClassInfoAmino): ClassInfo {
+    return {
+      classId: object.class_id,
+      admin: object.admin,
+      issuers: Array.isArray(object?.issuers) ? object.issuers.map((e: any) => e) : [],
+      metadata: object.metadata,
+      creditType: object?.credit_type ? CreditType.fromAmino(object.credit_type) : undefined,
+      numBatches: Long.fromString(object.num_batches)
+    };
+  },
+
+  toAmino(message: ClassInfo): ClassInfoAmino {
+    const obj: any = {};
+    obj.class_id = message.classId;
+    obj.admin = message.admin;
+
+    if (message.issuers) {
+      obj.issuers = message.issuers.map(e => e);
+    } else {
+      obj.issuers = [];
+    }
+
+    obj.metadata = message.metadata;
+    obj.credit_type = message.creditType ? CreditType.toAmino(message.creditType) : undefined;
+    obj.num_batches = message.numBatches ? message.numBatches.toString() : undefined;
+    return obj;
+  },
+
+  fromAminoMsg(object: ClassInfoAminoMsg): ClassInfo {
+    return ClassInfo.fromAmino(object.value);
+  },
+
+  fromProtoMsg(message: ClassInfoProtoMsg): ClassInfo {
+    return ClassInfo.decode(message.value);
+  },
+
+  toProto(message: ClassInfo): Uint8Array {
+    return ClassInfo.encode(message).finish();
+  },
+
+  toProtoMsg(message: ClassInfo): ClassInfoProtoMsg {
+    return {
+      typeUrl: "/regen.ecocredit.v1alpha1.ClassInfo",
+      value: ClassInfo.encode(message).finish()
+    };
   }
 
 };
@@ -543,6 +685,53 @@ export const BatchInfo = {
     message.endDate = object.endDate !== undefined && object.endDate !== null ? Timestamp.fromPartial(object.endDate) : undefined;
     message.projectLocation = object.projectLocation ?? "";
     return message;
+  },
+
+  fromAmino(object: BatchInfoAmino): BatchInfo {
+    return {
+      classId: object.class_id,
+      batchDenom: object.batch_denom,
+      issuer: object.issuer,
+      totalAmount: object.total_amount,
+      metadata: object.metadata,
+      amountCancelled: object.amount_cancelled,
+      startDate: object?.start_date ? Timestamp.fromAmino(object.start_date) : undefined,
+      endDate: object?.end_date ? Timestamp.fromAmino(object.end_date) : undefined,
+      projectLocation: object.project_location
+    };
+  },
+
+  toAmino(message: BatchInfo): BatchInfoAmino {
+    const obj: any = {};
+    obj.class_id = message.classId;
+    obj.batch_denom = message.batchDenom;
+    obj.issuer = message.issuer;
+    obj.total_amount = message.totalAmount;
+    obj.metadata = message.metadata;
+    obj.amount_cancelled = message.amountCancelled;
+    obj.start_date = message.startDate ? Timestamp.toAmino(message.startDate) : undefined;
+    obj.end_date = message.endDate ? Timestamp.toAmino(message.endDate) : undefined;
+    obj.project_location = message.projectLocation;
+    return obj;
+  },
+
+  fromAminoMsg(object: BatchInfoAminoMsg): BatchInfo {
+    return BatchInfo.fromAmino(object.value);
+  },
+
+  fromProtoMsg(message: BatchInfoProtoMsg): BatchInfo {
+    return BatchInfo.decode(message.value);
+  },
+
+  toProto(message: BatchInfo): Uint8Array {
+    return BatchInfo.encode(message).finish();
+  },
+
+  toProtoMsg(message: BatchInfo): BatchInfoProtoMsg {
+    return {
+      typeUrl: "/regen.ecocredit.v1alpha1.BatchInfo",
+      value: BatchInfo.encode(message).finish()
+    };
   }
 
 };
@@ -670,6 +859,67 @@ export const Params = {
     message.creditTypes = object.creditTypes?.map(e => CreditType.fromPartial(e)) || [];
     message.basketCreationFee = object.basketCreationFee?.map(e => Coin.fromPartial(e)) || [];
     return message;
+  },
+
+  fromAmino(object: ParamsAmino): Params {
+    return {
+      creditClassFee: Array.isArray(object?.credit_class_fee) ? object.credit_class_fee.map((e: any) => Coin.fromAmino(e)) : [],
+      allowedClassCreators: Array.isArray(object?.allowed_class_creators) ? object.allowed_class_creators.map((e: any) => e) : [],
+      allowlistEnabled: object.allowlist_enabled,
+      creditTypes: Array.isArray(object?.credit_types) ? object.credit_types.map((e: any) => CreditType.fromAmino(e)) : [],
+      basketCreationFee: Array.isArray(object?.basket_creation_fee) ? object.basket_creation_fee.map((e: any) => Coin.fromAmino(e)) : []
+    };
+  },
+
+  toAmino(message: Params): ParamsAmino {
+    const obj: any = {};
+
+    if (message.creditClassFee) {
+      obj.credit_class_fee = message.creditClassFee.map(e => e ? Coin.toAmino(e) : undefined);
+    } else {
+      obj.credit_class_fee = [];
+    }
+
+    if (message.allowedClassCreators) {
+      obj.allowed_class_creators = message.allowedClassCreators.map(e => e);
+    } else {
+      obj.allowed_class_creators = [];
+    }
+
+    obj.allowlist_enabled = message.allowlistEnabled;
+
+    if (message.creditTypes) {
+      obj.credit_types = message.creditTypes.map(e => e ? CreditType.toAmino(e) : undefined);
+    } else {
+      obj.credit_types = [];
+    }
+
+    if (message.basketCreationFee) {
+      obj.basket_creation_fee = message.basketCreationFee.map(e => e ? Coin.toAmino(e) : undefined);
+    } else {
+      obj.basket_creation_fee = [];
+    }
+
+    return obj;
+  },
+
+  fromAminoMsg(object: ParamsAminoMsg): Params {
+    return Params.fromAmino(object.value);
+  },
+
+  fromProtoMsg(message: ParamsProtoMsg): Params {
+    return Params.decode(message.value);
+  },
+
+  toProto(message: Params): Uint8Array {
+    return Params.encode(message).finish();
+  },
+
+  toProtoMsg(message: Params): ParamsProtoMsg {
+    return {
+      typeUrl: "/regen.ecocredit.v1alpha1.Params",
+      value: Params.encode(message).finish()
+    };
   }
 
 };
@@ -763,6 +1013,43 @@ export const CreditType = {
     message.unit = object.unit ?? "";
     message.precision = object.precision ?? 0;
     return message;
+  },
+
+  fromAmino(object: CreditTypeAmino): CreditType {
+    return {
+      name: object.name,
+      abbreviation: object.abbreviation,
+      unit: object.unit,
+      precision: object.precision
+    };
+  },
+
+  toAmino(message: CreditType): CreditTypeAmino {
+    const obj: any = {};
+    obj.name = message.name;
+    obj.abbreviation = message.abbreviation;
+    obj.unit = message.unit;
+    obj.precision = message.precision;
+    return obj;
+  },
+
+  fromAminoMsg(object: CreditTypeAminoMsg): CreditType {
+    return CreditType.fromAmino(object.value);
+  },
+
+  fromProtoMsg(message: CreditTypeProtoMsg): CreditType {
+    return CreditType.decode(message.value);
+  },
+
+  toProto(message: CreditType): Uint8Array {
+    return CreditType.encode(message).finish();
+  },
+
+  toProtoMsg(message: CreditType): CreditTypeProtoMsg {
+    return {
+      typeUrl: "/regen.ecocredit.v1alpha1.CreditType",
+      value: CreditType.encode(message).finish()
+    };
   }
 
 };
@@ -832,6 +1119,39 @@ export const CreditTypeSeq = {
     message.abbreviation = object.abbreviation ?? "";
     message.seqNumber = object.seqNumber !== undefined && object.seqNumber !== null ? Long.fromValue(object.seqNumber) : Long.UZERO;
     return message;
+  },
+
+  fromAmino(object: CreditTypeSeqAmino): CreditTypeSeq {
+    return {
+      abbreviation: object.abbreviation,
+      seqNumber: Long.fromString(object.seq_number)
+    };
+  },
+
+  toAmino(message: CreditTypeSeq): CreditTypeSeqAmino {
+    const obj: any = {};
+    obj.abbreviation = message.abbreviation;
+    obj.seq_number = message.seqNumber ? message.seqNumber.toString() : undefined;
+    return obj;
+  },
+
+  fromAminoMsg(object: CreditTypeSeqAminoMsg): CreditTypeSeq {
+    return CreditTypeSeq.fromAmino(object.value);
+  },
+
+  fromProtoMsg(message: CreditTypeSeqProtoMsg): CreditTypeSeq {
+    return CreditTypeSeq.decode(message.value);
+  },
+
+  toProto(message: CreditTypeSeq): Uint8Array {
+    return CreditTypeSeq.encode(message).finish();
+  },
+
+  toProtoMsg(message: CreditTypeSeq): CreditTypeSeqProtoMsg {
+    return {
+      typeUrl: "/regen.ecocredit.v1alpha1.CreditTypeSeq",
+      value: CreditTypeSeq.encode(message).finish()
+    };
   }
 
 };

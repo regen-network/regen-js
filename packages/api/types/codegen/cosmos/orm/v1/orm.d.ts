@@ -12,17 +12,31 @@ export interface TableDescriptor {
      */
     id: number;
 }
+export interface TableDescriptorProtoMsg {
+    typeUrl: "/cosmos.orm.v1.TableDescriptor";
+    value: Uint8Array;
+}
 /** TableDescriptor describes an ORM table. */
-export interface TableDescriptorSDKType {
+export interface TableDescriptorAmino {
     /** primary_key defines the primary key for the table. */
-    primary_key?: PrimaryKeyDescriptorSDKType;
+    primary_key?: PrimaryKeyDescriptorAmino;
     /** index defines one or more secondary indexes. */
-    index: SecondaryIndexDescriptorSDKType[];
+    index: SecondaryIndexDescriptorAmino[];
     /**
      * id is a non-zero integer ID that must be unique within the
      * tables and singletons in this file. It may be deprecated in the future when this
      * can be auto-generated.
      */
+    id: number;
+}
+export interface TableDescriptorAminoMsg {
+    type: "cosmos-sdk/TableDescriptor";
+    value: TableDescriptorAmino;
+}
+/** TableDescriptor describes an ORM table. */
+export interface TableDescriptorSDKType {
+    primary_key?: PrimaryKeyDescriptorSDKType;
+    index: SecondaryIndexDescriptorSDKType[];
     id: number;
 }
 /** PrimaryKeyDescriptor describes a table primary key. */
@@ -67,8 +81,12 @@ export interface PrimaryKeyDescriptor {
      */
     autoIncrement: boolean;
 }
+export interface PrimaryKeyDescriptorProtoMsg {
+    typeUrl: "/cosmos.orm.v1.PrimaryKeyDescriptor";
+    value: Uint8Array;
+}
 /** PrimaryKeyDescriptor describes a table primary key. */
-export interface PrimaryKeyDescriptorSDKType {
+export interface PrimaryKeyDescriptorAmino {
     /**
      * fields is a comma-separated list of fields in the primary key. Spaces are
      * not allowed. Supported field types, their encodings, and any applicable constraints
@@ -109,6 +127,15 @@ export interface PrimaryKeyDescriptorSDKType {
      */
     auto_increment: boolean;
 }
+export interface PrimaryKeyDescriptorAminoMsg {
+    type: "cosmos-sdk/PrimaryKeyDescriptor";
+    value: PrimaryKeyDescriptorAmino;
+}
+/** PrimaryKeyDescriptor describes a table primary key. */
+export interface PrimaryKeyDescriptorSDKType {
+    fields: string;
+    auto_increment: boolean;
+}
 /** PrimaryKeyDescriptor describes a table secondary index. */
 export interface SecondaryIndexDescriptor {
     /**
@@ -132,8 +159,12 @@ export interface SecondaryIndexDescriptor {
     /** unique specifies that this an unique index. */
     unique: boolean;
 }
+export interface SecondaryIndexDescriptorProtoMsg {
+    typeUrl: "/cosmos.orm.v1.SecondaryIndexDescriptor";
+    value: Uint8Array;
+}
 /** PrimaryKeyDescriptor describes a table secondary index. */
-export interface SecondaryIndexDescriptorSDKType {
+export interface SecondaryIndexDescriptorAmino {
     /**
      * fields is a comma-separated list of fields in the index. The supported
      * field types are the same as those for PrimaryKeyDescriptor.fields.
@@ -155,6 +186,16 @@ export interface SecondaryIndexDescriptorSDKType {
     /** unique specifies that this an unique index. */
     unique: boolean;
 }
+export interface SecondaryIndexDescriptorAminoMsg {
+    type: "cosmos-sdk/SecondaryIndexDescriptor";
+    value: SecondaryIndexDescriptorAmino;
+}
+/** PrimaryKeyDescriptor describes a table secondary index. */
+export interface SecondaryIndexDescriptorSDKType {
+    fields: string;
+    id: number;
+    unique: boolean;
+}
 /** TableDescriptor describes an ORM singleton table which has at most one instance. */
 export interface SingletonDescriptor {
     /**
@@ -164,13 +205,25 @@ export interface SingletonDescriptor {
      */
     id: number;
 }
+export interface SingletonDescriptorProtoMsg {
+    typeUrl: "/cosmos.orm.v1.SingletonDescriptor";
+    value: Uint8Array;
+}
 /** TableDescriptor describes an ORM singleton table which has at most one instance. */
-export interface SingletonDescriptorSDKType {
+export interface SingletonDescriptorAmino {
     /**
      * id is a non-zero integer ID that must be unique within the
      * tables and singletons in this file. It may be deprecated in the future when this
      * can be auto-generated.
      */
+    id: number;
+}
+export interface SingletonDescriptorAminoMsg {
+    type: "cosmos-sdk/SingletonDescriptor";
+    value: SingletonDescriptorAmino;
+}
+/** TableDescriptor describes an ORM singleton table which has at most one instance. */
+export interface SingletonDescriptorSDKType {
     id: number;
 }
 export declare const TableDescriptor: {
@@ -179,6 +232,13 @@ export declare const TableDescriptor: {
     fromJSON(object: any): TableDescriptor;
     toJSON(message: TableDescriptor): unknown;
     fromPartial(object: Partial<TableDescriptor>): TableDescriptor;
+    fromAmino(object: TableDescriptorAmino): TableDescriptor;
+    toAmino(message: TableDescriptor): TableDescriptorAmino;
+    fromAminoMsg(object: TableDescriptorAminoMsg): TableDescriptor;
+    toAminoMsg(message: TableDescriptor): TableDescriptorAminoMsg;
+    fromProtoMsg(message: TableDescriptorProtoMsg): TableDescriptor;
+    toProto(message: TableDescriptor): Uint8Array;
+    toProtoMsg(message: TableDescriptor): TableDescriptorProtoMsg;
 };
 export declare const PrimaryKeyDescriptor: {
     encode(message: PrimaryKeyDescriptor, writer?: _m0.Writer): _m0.Writer;
@@ -186,6 +246,13 @@ export declare const PrimaryKeyDescriptor: {
     fromJSON(object: any): PrimaryKeyDescriptor;
     toJSON(message: PrimaryKeyDescriptor): unknown;
     fromPartial(object: Partial<PrimaryKeyDescriptor>): PrimaryKeyDescriptor;
+    fromAmino(object: PrimaryKeyDescriptorAmino): PrimaryKeyDescriptor;
+    toAmino(message: PrimaryKeyDescriptor): PrimaryKeyDescriptorAmino;
+    fromAminoMsg(object: PrimaryKeyDescriptorAminoMsg): PrimaryKeyDescriptor;
+    toAminoMsg(message: PrimaryKeyDescriptor): PrimaryKeyDescriptorAminoMsg;
+    fromProtoMsg(message: PrimaryKeyDescriptorProtoMsg): PrimaryKeyDescriptor;
+    toProto(message: PrimaryKeyDescriptor): Uint8Array;
+    toProtoMsg(message: PrimaryKeyDescriptor): PrimaryKeyDescriptorProtoMsg;
 };
 export declare const SecondaryIndexDescriptor: {
     encode(message: SecondaryIndexDescriptor, writer?: _m0.Writer): _m0.Writer;
@@ -193,6 +260,13 @@ export declare const SecondaryIndexDescriptor: {
     fromJSON(object: any): SecondaryIndexDescriptor;
     toJSON(message: SecondaryIndexDescriptor): unknown;
     fromPartial(object: Partial<SecondaryIndexDescriptor>): SecondaryIndexDescriptor;
+    fromAmino(object: SecondaryIndexDescriptorAmino): SecondaryIndexDescriptor;
+    toAmino(message: SecondaryIndexDescriptor): SecondaryIndexDescriptorAmino;
+    fromAminoMsg(object: SecondaryIndexDescriptorAminoMsg): SecondaryIndexDescriptor;
+    toAminoMsg(message: SecondaryIndexDescriptor): SecondaryIndexDescriptorAminoMsg;
+    fromProtoMsg(message: SecondaryIndexDescriptorProtoMsg): SecondaryIndexDescriptor;
+    toProto(message: SecondaryIndexDescriptor): Uint8Array;
+    toProtoMsg(message: SecondaryIndexDescriptor): SecondaryIndexDescriptorProtoMsg;
 };
 export declare const SingletonDescriptor: {
     encode(message: SingletonDescriptor, writer?: _m0.Writer): _m0.Writer;
@@ -200,4 +274,11 @@ export declare const SingletonDescriptor: {
     fromJSON(object: any): SingletonDescriptor;
     toJSON(message: SingletonDescriptor): unknown;
     fromPartial(object: Partial<SingletonDescriptor>): SingletonDescriptor;
+    fromAmino(object: SingletonDescriptorAmino): SingletonDescriptor;
+    toAmino(message: SingletonDescriptor): SingletonDescriptorAmino;
+    fromAminoMsg(object: SingletonDescriptorAminoMsg): SingletonDescriptor;
+    toAminoMsg(message: SingletonDescriptor): SingletonDescriptorAminoMsg;
+    fromProtoMsg(message: SingletonDescriptorProtoMsg): SingletonDescriptor;
+    toProto(message: SingletonDescriptor): Uint8Array;
+    toProtoMsg(message: SingletonDescriptor): SingletonDescriptorProtoMsg;
 };

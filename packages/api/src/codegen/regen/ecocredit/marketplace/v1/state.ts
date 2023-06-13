@@ -1,6 +1,6 @@
-import { Timestamp, TimestampSDKType } from "../../../../google/protobuf/timestamp";
-import * as _m0 from "protobufjs/minimal";
+import { Timestamp, TimestampAmino, TimestampSDKType } from "../../../../google/protobuf/timestamp";
 import { Long, isSet, bytesFromBase64, fromJsonTimestamp, base64FromBytes, fromTimestamp } from "../../../../helpers";
+import * as _m0 from "protobufjs/minimal";
 /** SellOrder represents the information for a sell order. */
 
 export interface SellOrder {
@@ -52,11 +52,15 @@ export interface SellOrder {
 
   maker: boolean;
 }
+export interface SellOrderProtoMsg {
+  typeUrl: "/regen.ecocredit.marketplace.v1.SellOrder";
+  value: Uint8Array;
+}
 /** SellOrder represents the information for a sell order. */
 
-export interface SellOrderSDKType {
+export interface SellOrderAmino {
   /** id is the unique ID of sell order. */
-  id: Long;
+  id: string;
   /** seller is the address of the account that is selling credits. */
 
   seller: Uint8Array;
@@ -65,7 +69,7 @@ export interface SellOrderSDKType {
    * for efficient lookups. This links a sell order to a credit batch.
    */
 
-  batch_key: Long;
+  batch_key: string;
   /** quantity is the decimal quantity of credits being sold. */
 
   quantity: string;
@@ -74,7 +78,7 @@ export interface SellOrderSDKType {
    * the bank_denom that ask_amount corresponds to forming the ask_price.
    */
 
-  market_id: Long;
+  market_id: string;
   /**
    * ask_amount is the integer amount (encoded as a string) that the seller is
    * asking for each credit unit of the batch. Each credit unit of the batch
@@ -95,12 +99,29 @@ export interface SellOrderSDKType {
    * expiration time is reached, the sell order is removed from state.
    */
 
-  expiration?: TimestampSDKType;
+  expiration?: TimestampAmino;
   /**
    * maker indicates that this is a maker order, meaning that when it hit
    * the order book, there were no matching buy orders.
    */
 
+  maker: boolean;
+}
+export interface SellOrderAminoMsg {
+  type: "/regen.ecocredit.marketplace.v1.SellOrder";
+  value: SellOrderAmino;
+}
+/** SellOrder represents the information for a sell order. */
+
+export interface SellOrderSDKType {
+  id: Long;
+  seller: Uint8Array;
+  batch_key: Long;
+  quantity: string;
+  market_id: Long;
+  ask_amount: string;
+  disable_auto_retire: boolean;
+  expiration?: TimestampSDKType;
   maker: boolean;
 }
 /** AllowedDenom represents the information for an allowed ask/bid denom. */
@@ -122,9 +143,13 @@ export interface AllowedDenom {
 
   exponent: number;
 }
+export interface AllowedDenomProtoMsg {
+  typeUrl: "/regen.ecocredit.marketplace.v1.AllowedDenom";
+  value: Uint8Array;
+}
 /** AllowedDenom represents the information for an allowed ask/bid denom. */
 
-export interface AllowedDenomSDKType {
+export interface AllowedDenomAmino {
   /** denom is the bank denom to allow (ex. ibc/GLKHDSG423SGS) */
   bank_denom: string;
   /**
@@ -139,6 +164,17 @@ export interface AllowedDenomSDKType {
    * informational
    */
 
+  exponent: number;
+}
+export interface AllowedDenomAminoMsg {
+  type: "/regen.ecocredit.marketplace.v1.AllowedDenom";
+  value: AllowedDenomAmino;
+}
+/** AllowedDenom represents the information for an allowed ask/bid denom. */
+
+export interface AllowedDenomSDKType {
+  bank_denom: string;
+  display_denom: string;
   exponent: number;
 }
 /**
@@ -192,6 +228,10 @@ export interface Market {
 
   precisionModifier: number;
 }
+export interface MarketProtoMsg {
+  typeUrl: "/regen.ecocredit.marketplace.v1.Market";
+  value: Uint8Array;
+}
 /**
  * Market describes a distinctly processed market between a credit type and
  * allowed bank denom. Each market has its own precision in the order book
@@ -204,9 +244,9 @@ export interface Market {
  * with care.
  */
 
-export interface MarketSDKType {
+export interface MarketAmino {
   /** id is the unique ID of the market. */
-  id: Long;
+  id: string;
   /** credit_type_abbrev is the abbreviation of the credit type. */
 
   credit_type_abbrev: string;
@@ -241,6 +281,28 @@ export interface MarketSDKType {
    * exchange for less precision at the lower end.
    */
 
+  precision_modifier: number;
+}
+export interface MarketAminoMsg {
+  type: "/regen.ecocredit.marketplace.v1.Market";
+  value: MarketAmino;
+}
+/**
+ * Market describes a distinctly processed market between a credit type and
+ * allowed bank denom. Each market has its own precision in the order book
+ * and is processed independently of other markets. Governance must enable
+ * markets one by one. Every additional enabled market potentially adds more
+ * processing overhead to the blockchain and potentially weakens liquidity in
+ * competing markets. For instance, enabling side by side USD/Carbon and
+ * EUR/Carbon markets may have the end result that each market individually has
+ * less liquidity and longer settlement times. Such decisions should be taken
+ * with care.
+ */
+
+export interface MarketSDKType {
+  id: Long;
+  credit_type_abbrev: string;
+  bank_denom: string;
   precision_modifier: number;
 }
 
@@ -393,6 +455,53 @@ export const SellOrder = {
     message.expiration = object.expiration !== undefined && object.expiration !== null ? Timestamp.fromPartial(object.expiration) : undefined;
     message.maker = object.maker ?? false;
     return message;
+  },
+
+  fromAmino(object: SellOrderAmino): SellOrder {
+    return {
+      id: Long.fromString(object.id),
+      seller: object.seller,
+      batchKey: Long.fromString(object.batch_key),
+      quantity: object.quantity,
+      marketId: Long.fromString(object.market_id),
+      askAmount: object.ask_amount,
+      disableAutoRetire: object.disable_auto_retire,
+      expiration: object?.expiration ? Timestamp.fromAmino(object.expiration) : undefined,
+      maker: object.maker
+    };
+  },
+
+  toAmino(message: SellOrder): SellOrderAmino {
+    const obj: any = {};
+    obj.id = message.id ? message.id.toString() : undefined;
+    obj.seller = message.seller;
+    obj.batch_key = message.batchKey ? message.batchKey.toString() : undefined;
+    obj.quantity = message.quantity;
+    obj.market_id = message.marketId ? message.marketId.toString() : undefined;
+    obj.ask_amount = message.askAmount;
+    obj.disable_auto_retire = message.disableAutoRetire;
+    obj.expiration = message.expiration ? Timestamp.toAmino(message.expiration) : undefined;
+    obj.maker = message.maker;
+    return obj;
+  },
+
+  fromAminoMsg(object: SellOrderAminoMsg): SellOrder {
+    return SellOrder.fromAmino(object.value);
+  },
+
+  fromProtoMsg(message: SellOrderProtoMsg): SellOrder {
+    return SellOrder.decode(message.value);
+  },
+
+  toProto(message: SellOrder): Uint8Array {
+    return SellOrder.encode(message).finish();
+  },
+
+  toProtoMsg(message: SellOrder): SellOrderProtoMsg {
+    return {
+      typeUrl: "/regen.ecocredit.marketplace.v1.SellOrder",
+      value: SellOrder.encode(message).finish()
+    };
   }
 
 };
@@ -474,6 +583,41 @@ export const AllowedDenom = {
     message.displayDenom = object.displayDenom ?? "";
     message.exponent = object.exponent ?? 0;
     return message;
+  },
+
+  fromAmino(object: AllowedDenomAmino): AllowedDenom {
+    return {
+      bankDenom: object.bank_denom,
+      displayDenom: object.display_denom,
+      exponent: object.exponent
+    };
+  },
+
+  toAmino(message: AllowedDenom): AllowedDenomAmino {
+    const obj: any = {};
+    obj.bank_denom = message.bankDenom;
+    obj.display_denom = message.displayDenom;
+    obj.exponent = message.exponent;
+    return obj;
+  },
+
+  fromAminoMsg(object: AllowedDenomAminoMsg): AllowedDenom {
+    return AllowedDenom.fromAmino(object.value);
+  },
+
+  fromProtoMsg(message: AllowedDenomProtoMsg): AllowedDenom {
+    return AllowedDenom.decode(message.value);
+  },
+
+  toProto(message: AllowedDenom): Uint8Array {
+    return AllowedDenom.encode(message).finish();
+  },
+
+  toProtoMsg(message: AllowedDenom): AllowedDenomProtoMsg {
+    return {
+      typeUrl: "/regen.ecocredit.marketplace.v1.AllowedDenom",
+      value: AllowedDenom.encode(message).finish()
+    };
   }
 
 };
@@ -567,6 +711,43 @@ export const Market = {
     message.bankDenom = object.bankDenom ?? "";
     message.precisionModifier = object.precisionModifier ?? 0;
     return message;
+  },
+
+  fromAmino(object: MarketAmino): Market {
+    return {
+      id: Long.fromString(object.id),
+      creditTypeAbbrev: object.credit_type_abbrev,
+      bankDenom: object.bank_denom,
+      precisionModifier: object.precision_modifier
+    };
+  },
+
+  toAmino(message: Market): MarketAmino {
+    const obj: any = {};
+    obj.id = message.id ? message.id.toString() : undefined;
+    obj.credit_type_abbrev = message.creditTypeAbbrev;
+    obj.bank_denom = message.bankDenom;
+    obj.precision_modifier = message.precisionModifier;
+    return obj;
+  },
+
+  fromAminoMsg(object: MarketAminoMsg): Market {
+    return Market.fromAmino(object.value);
+  },
+
+  fromProtoMsg(message: MarketProtoMsg): Market {
+    return Market.decode(message.value);
+  },
+
+  toProto(message: Market): Uint8Array {
+    return Market.encode(message).finish();
+  },
+
+  toProtoMsg(message: Market): MarketProtoMsg {
+    return {
+      typeUrl: "/regen.ecocredit.marketplace.v1.Market",
+      value: Market.encode(message).finish()
+    };
   }
 
 };

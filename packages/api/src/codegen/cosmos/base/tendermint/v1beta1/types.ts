@@ -1,7 +1,7 @@
-import { Data, DataSDKType, Commit, CommitSDKType, BlockID, BlockIDSDKType } from "../../../../tendermint/types/types";
-import { EvidenceList, EvidenceListSDKType } from "../../../../tendermint/types/evidence";
-import { Consensus, ConsensusSDKType } from "../../../../tendermint/version/types";
-import { Timestamp, TimestampSDKType } from "../../../../google/protobuf/timestamp";
+import { Data, DataAmino, DataSDKType, Commit, CommitAmino, CommitSDKType, BlockID, BlockIDAmino, BlockIDSDKType } from "../../../../tendermint/types/types";
+import { EvidenceList, EvidenceListAmino, EvidenceListSDKType } from "../../../../tendermint/types/evidence";
+import { Consensus, ConsensusAmino, ConsensusSDKType } from "../../../../tendermint/version/types";
+import { Timestamp, TimestampAmino, TimestampSDKType } from "../../../../google/protobuf/timestamp";
 import * as _m0 from "protobufjs/minimal";
 import { isSet, Long, fromJsonTimestamp, bytesFromBase64, fromTimestamp, base64FromBytes } from "../../../../helpers";
 /**
@@ -14,6 +14,25 @@ export interface Block {
   data?: Data;
   evidence?: EvidenceList;
   lastCommit?: Commit;
+}
+export interface BlockProtoMsg {
+  typeUrl: "/cosmos.base.tendermint.v1beta1.Block";
+  value: Uint8Array;
+}
+/**
+ * Block is tendermint type Block, with the Header proposer address
+ * field converted to bech32 string.
+ */
+
+export interface BlockAmino {
+  header?: HeaderAmino;
+  data?: DataAmino;
+  evidence?: EvidenceListAmino;
+  last_commit?: CommitAmino;
+}
+export interface BlockAminoMsg {
+  type: "cosmos-sdk/Block";
+  value: BlockAmino;
 }
 /**
  * Block is tendermint type Block, with the Header proposer address
@@ -65,17 +84,21 @@ export interface Header {
 
   proposerAddress: string;
 }
+export interface HeaderProtoMsg {
+  typeUrl: "/cosmos.base.tendermint.v1beta1.Header";
+  value: Uint8Array;
+}
 /** Header defines the structure of a Tendermint block header. */
 
-export interface HeaderSDKType {
+export interface HeaderAmino {
   /** basic block info */
-  version?: ConsensusSDKType;
+  version?: ConsensusAmino;
   chain_id: string;
-  height: Long;
-  time?: TimestampSDKType;
+  height: string;
+  time?: TimestampAmino;
   /** prev block info */
 
-  last_block_id?: BlockIDSDKType;
+  last_block_id?: BlockIDAmino;
   /** hashes of block data */
 
   last_commit_hash: Uint8Array;
@@ -102,6 +125,28 @@ export interface HeaderSDKType {
    * for better UX.
    */
 
+  proposer_address: string;
+}
+export interface HeaderAminoMsg {
+  type: "cosmos-sdk/Header";
+  value: HeaderAmino;
+}
+/** Header defines the structure of a Tendermint block header. */
+
+export interface HeaderSDKType {
+  version?: ConsensusSDKType;
+  chain_id: string;
+  height: Long;
+  time?: TimestampSDKType;
+  last_block_id?: BlockIDSDKType;
+  last_commit_hash: Uint8Array;
+  data_hash: Uint8Array;
+  validators_hash: Uint8Array;
+  next_validators_hash: Uint8Array;
+  consensus_hash: Uint8Array;
+  app_hash: Uint8Array;
+  last_results_hash: Uint8Array;
+  evidence_hash: Uint8Array;
   proposer_address: string;
 }
 
@@ -194,6 +239,50 @@ export const Block = {
     message.evidence = object.evidence !== undefined && object.evidence !== null ? EvidenceList.fromPartial(object.evidence) : undefined;
     message.lastCommit = object.lastCommit !== undefined && object.lastCommit !== null ? Commit.fromPartial(object.lastCommit) : undefined;
     return message;
+  },
+
+  fromAmino(object: BlockAmino): Block {
+    return {
+      header: object?.header ? Header.fromAmino(object.header) : undefined,
+      data: object?.data ? Data.fromAmino(object.data) : undefined,
+      evidence: object?.evidence ? EvidenceList.fromAmino(object.evidence) : undefined,
+      lastCommit: object?.last_commit ? Commit.fromAmino(object.last_commit) : undefined
+    };
+  },
+
+  toAmino(message: Block): BlockAmino {
+    const obj: any = {};
+    obj.header = message.header ? Header.toAmino(message.header) : undefined;
+    obj.data = message.data ? Data.toAmino(message.data) : undefined;
+    obj.evidence = message.evidence ? EvidenceList.toAmino(message.evidence) : undefined;
+    obj.last_commit = message.lastCommit ? Commit.toAmino(message.lastCommit) : undefined;
+    return obj;
+  },
+
+  fromAminoMsg(object: BlockAminoMsg): Block {
+    return Block.fromAmino(object.value);
+  },
+
+  toAminoMsg(message: Block): BlockAminoMsg {
+    return {
+      type: "cosmos-sdk/Block",
+      value: Block.toAmino(message)
+    };
+  },
+
+  fromProtoMsg(message: BlockProtoMsg): Block {
+    return Block.decode(message.value);
+  },
+
+  toProto(message: Block): Uint8Array {
+    return Block.encode(message).finish();
+  },
+
+  toProtoMsg(message: Block): BlockProtoMsg {
+    return {
+      typeUrl: "/cosmos.base.tendermint.v1beta1.Block",
+      value: Block.encode(message).finish()
+    };
   }
 
 };
@@ -407,6 +496,70 @@ export const Header = {
     message.evidenceHash = object.evidenceHash ?? new Uint8Array();
     message.proposerAddress = object.proposerAddress ?? "";
     return message;
+  },
+
+  fromAmino(object: HeaderAmino): Header {
+    return {
+      version: object?.version ? Consensus.fromAmino(object.version) : undefined,
+      chainId: object.chain_id,
+      height: Long.fromString(object.height),
+      time: object?.time ? Timestamp.fromAmino(object.time) : undefined,
+      lastBlockId: object?.last_block_id ? BlockID.fromAmino(object.last_block_id) : undefined,
+      lastCommitHash: object.last_commit_hash,
+      dataHash: object.data_hash,
+      validatorsHash: object.validators_hash,
+      nextValidatorsHash: object.next_validators_hash,
+      consensusHash: object.consensus_hash,
+      appHash: object.app_hash,
+      lastResultsHash: object.last_results_hash,
+      evidenceHash: object.evidence_hash,
+      proposerAddress: object.proposer_address
+    };
+  },
+
+  toAmino(message: Header): HeaderAmino {
+    const obj: any = {};
+    obj.version = message.version ? Consensus.toAmino(message.version) : undefined;
+    obj.chain_id = message.chainId;
+    obj.height = message.height ? message.height.toString() : undefined;
+    obj.time = message.time ? Timestamp.toAmino(message.time) : undefined;
+    obj.last_block_id = message.lastBlockId ? BlockID.toAmino(message.lastBlockId) : undefined;
+    obj.last_commit_hash = message.lastCommitHash;
+    obj.data_hash = message.dataHash;
+    obj.validators_hash = message.validatorsHash;
+    obj.next_validators_hash = message.nextValidatorsHash;
+    obj.consensus_hash = message.consensusHash;
+    obj.app_hash = message.appHash;
+    obj.last_results_hash = message.lastResultsHash;
+    obj.evidence_hash = message.evidenceHash;
+    obj.proposer_address = message.proposerAddress;
+    return obj;
+  },
+
+  fromAminoMsg(object: HeaderAminoMsg): Header {
+    return Header.fromAmino(object.value);
+  },
+
+  toAminoMsg(message: Header): HeaderAminoMsg {
+    return {
+      type: "cosmos-sdk/Header",
+      value: Header.toAmino(message)
+    };
+  },
+
+  fromProtoMsg(message: HeaderProtoMsg): Header {
+    return Header.decode(message.value);
+  },
+
+  toProto(message: Header): Uint8Array {
+    return Header.encode(message).finish();
+  },
+
+  toProtoMsg(message: Header): HeaderProtoMsg {
+    return {
+      typeUrl: "/cosmos.base.tendermint.v1beta1.Header",
+      value: Header.encode(message).finish()
+    };
   }
 
 };

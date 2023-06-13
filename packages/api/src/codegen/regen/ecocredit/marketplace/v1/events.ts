@@ -1,15 +1,28 @@
-import * as _m0 from "protobufjs/minimal";
 import { Long, isSet } from "../../../../helpers";
+import * as _m0 from "protobufjs/minimal";
 /** EventSell is an event emitted when a sell order is created. */
 
 export interface EventSell {
   /** sell_order_id is the unique identifier of the sell order that was created. */
   sellOrderId: Long;
 }
+export interface EventSellProtoMsg {
+  typeUrl: "/regen.ecocredit.marketplace.v1.EventSell";
+  value: Uint8Array;
+}
+/** EventSell is an event emitted when a sell order is created. */
+
+export interface EventSellAmino {
+  /** sell_order_id is the unique identifier of the sell order that was created. */
+  sell_order_id: string;
+}
+export interface EventSellAminoMsg {
+  type: "/regen.ecocredit.marketplace.v1.EventSell";
+  value: EventSellAmino;
+}
 /** EventSell is an event emitted when a sell order is created. */
 
 export interface EventSellSDKType {
-  /** sell_order_id is the unique identifier of the sell order that was created. */
   sell_order_id: Long;
 }
 /** EventBuyDirect is an event emitted when a direct buy order is processed. */
@@ -21,13 +34,26 @@ export interface EventBuyDirect {
    */
   sellOrderId: Long;
 }
+export interface EventBuyDirectProtoMsg {
+  typeUrl: "/regen.ecocredit.marketplace.v1.EventBuyDirect";
+  value: Uint8Array;
+}
 /** EventBuyDirect is an event emitted when a direct buy order is processed. */
 
-export interface EventBuyDirectSDKType {
+export interface EventBuyDirectAmino {
   /**
    * sell_order_id is the unique identifier of the sell order that credits were
    * purchased from.
    */
+  sell_order_id: string;
+}
+export interface EventBuyDirectAminoMsg {
+  type: "/regen.ecocredit.marketplace.v1.EventBuyDirect";
+  value: EventBuyDirectAmino;
+}
+/** EventBuyDirect is an event emitted when a direct buy order is processed. */
+
+export interface EventBuyDirectSDKType {
   sell_order_id: Long;
 }
 /** EventUpdateSellOrder is an event emitted when a sell order is updated. */
@@ -36,10 +62,23 @@ export interface EventUpdateSellOrder {
   /** sell_order_id is the unique identifier of the sell order that was updated. */
   sellOrderId: Long;
 }
+export interface EventUpdateSellOrderProtoMsg {
+  typeUrl: "/regen.ecocredit.marketplace.v1.EventUpdateSellOrder";
+  value: Uint8Array;
+}
+/** EventUpdateSellOrder is an event emitted when a sell order is updated. */
+
+export interface EventUpdateSellOrderAmino {
+  /** sell_order_id is the unique identifier of the sell order that was updated. */
+  sell_order_id: string;
+}
+export interface EventUpdateSellOrderAminoMsg {
+  type: "/regen.ecocredit.marketplace.v1.EventUpdateSellOrder";
+  value: EventUpdateSellOrderAmino;
+}
 /** EventUpdateSellOrder is an event emitted when a sell order is updated. */
 
 export interface EventUpdateSellOrderSDKType {
-  /** sell_order_id is the unique identifier of the sell order that was updated. */
   sell_order_id: Long;
 }
 /** EventCancelSellOrder is an event emitted when a sell order is cancelled. */
@@ -51,13 +90,26 @@ export interface EventCancelSellOrder {
    */
   sellOrderId: Long;
 }
+export interface EventCancelSellOrderProtoMsg {
+  typeUrl: "/regen.ecocredit.marketplace.v1.EventCancelSellOrder";
+  value: Uint8Array;
+}
 /** EventCancelSellOrder is an event emitted when a sell order is cancelled. */
 
-export interface EventCancelSellOrderSDKType {
+export interface EventCancelSellOrderAmino {
   /**
    * sell_order_id is the unique identifier of the sell order that was
    * cancelled.
    */
+  sell_order_id: string;
+}
+export interface EventCancelSellOrderAminoMsg {
+  type: "/regen.ecocredit.marketplace.v1.EventCancelSellOrder";
+  value: EventCancelSellOrderAmino;
+}
+/** EventCancelSellOrder is an event emitted when a sell order is cancelled. */
+
+export interface EventCancelSellOrderSDKType {
   sell_order_id: Long;
 }
 /**
@@ -72,16 +124,32 @@ export interface EventAllowDenom {
    */
   denom: string;
 }
+export interface EventAllowDenomProtoMsg {
+  typeUrl: "/regen.ecocredit.marketplace.v1.EventAllowDenom";
+  value: Uint8Array;
+}
+/**
+ * EventAllowDenom is an event emitted when a new denom is added for use in the
+ * marketplace.
+ */
+
+export interface EventAllowDenomAmino {
+  /**
+   * denom is the bank denom (e.g. ibc/GLKHDSG423SGS) added to the list of
+   * allowed denoms for use in the marketplace.
+   */
+  denom: string;
+}
+export interface EventAllowDenomAminoMsg {
+  type: "/regen.ecocredit.marketplace.v1.EventAllowDenom";
+  value: EventAllowDenomAmino;
+}
 /**
  * EventAllowDenom is an event emitted when a new denom is added for use in the
  * marketplace.
  */
 
 export interface EventAllowDenomSDKType {
-  /**
-   * denom is the bank denom (e.g. ibc/GLKHDSG423SGS) added to the list of
-   * allowed denoms for use in the marketplace.
-   */
   denom: string;
 }
 /**
@@ -98,6 +166,28 @@ export interface EventRemoveAllowedDenom {
    */
   denom: string;
 }
+export interface EventRemoveAllowedDenomProtoMsg {
+  typeUrl: "/regen.ecocredit.marketplace.v1.EventRemoveAllowedDenom";
+  value: Uint8Array;
+}
+/**
+ * EventRemoveAllowedDenom is an event emitted when a denom is removed from use
+ * in the marketplace.
+ * 
+ * Since Revision 1
+ */
+
+export interface EventRemoveAllowedDenomAmino {
+  /**
+   * denom is the bank denom (e.g. ibc/GLKHDSG423SGS) removed from the list of
+   * allowed denoms for use in the marketplace.
+   */
+  denom: string;
+}
+export interface EventRemoveAllowedDenomAminoMsg {
+  type: "/regen.ecocredit.marketplace.v1.EventRemoveAllowedDenom";
+  value: EventRemoveAllowedDenomAmino;
+}
 /**
  * EventRemoveAllowedDenom is an event emitted when a denom is removed from use
  * in the marketplace.
@@ -106,10 +196,6 @@ export interface EventRemoveAllowedDenom {
  */
 
 export interface EventRemoveAllowedDenomSDKType {
-  /**
-   * denom is the bank denom (e.g. ibc/GLKHDSG423SGS) removed from the list of
-   * allowed denoms for use in the marketplace.
-   */
   denom: string;
 }
 
@@ -166,6 +252,37 @@ export const EventSell = {
     const message = createBaseEventSell();
     message.sellOrderId = object.sellOrderId !== undefined && object.sellOrderId !== null ? Long.fromValue(object.sellOrderId) : Long.UZERO;
     return message;
+  },
+
+  fromAmino(object: EventSellAmino): EventSell {
+    return {
+      sellOrderId: Long.fromString(object.sell_order_id)
+    };
+  },
+
+  toAmino(message: EventSell): EventSellAmino {
+    const obj: any = {};
+    obj.sell_order_id = message.sellOrderId ? message.sellOrderId.toString() : undefined;
+    return obj;
+  },
+
+  fromAminoMsg(object: EventSellAminoMsg): EventSell {
+    return EventSell.fromAmino(object.value);
+  },
+
+  fromProtoMsg(message: EventSellProtoMsg): EventSell {
+    return EventSell.decode(message.value);
+  },
+
+  toProto(message: EventSell): Uint8Array {
+    return EventSell.encode(message).finish();
+  },
+
+  toProtoMsg(message: EventSell): EventSellProtoMsg {
+    return {
+      typeUrl: "/regen.ecocredit.marketplace.v1.EventSell",
+      value: EventSell.encode(message).finish()
+    };
   }
 
 };
@@ -223,6 +340,37 @@ export const EventBuyDirect = {
     const message = createBaseEventBuyDirect();
     message.sellOrderId = object.sellOrderId !== undefined && object.sellOrderId !== null ? Long.fromValue(object.sellOrderId) : Long.UZERO;
     return message;
+  },
+
+  fromAmino(object: EventBuyDirectAmino): EventBuyDirect {
+    return {
+      sellOrderId: Long.fromString(object.sell_order_id)
+    };
+  },
+
+  toAmino(message: EventBuyDirect): EventBuyDirectAmino {
+    const obj: any = {};
+    obj.sell_order_id = message.sellOrderId ? message.sellOrderId.toString() : undefined;
+    return obj;
+  },
+
+  fromAminoMsg(object: EventBuyDirectAminoMsg): EventBuyDirect {
+    return EventBuyDirect.fromAmino(object.value);
+  },
+
+  fromProtoMsg(message: EventBuyDirectProtoMsg): EventBuyDirect {
+    return EventBuyDirect.decode(message.value);
+  },
+
+  toProto(message: EventBuyDirect): Uint8Array {
+    return EventBuyDirect.encode(message).finish();
+  },
+
+  toProtoMsg(message: EventBuyDirect): EventBuyDirectProtoMsg {
+    return {
+      typeUrl: "/regen.ecocredit.marketplace.v1.EventBuyDirect",
+      value: EventBuyDirect.encode(message).finish()
+    };
   }
 
 };
@@ -280,6 +428,37 @@ export const EventUpdateSellOrder = {
     const message = createBaseEventUpdateSellOrder();
     message.sellOrderId = object.sellOrderId !== undefined && object.sellOrderId !== null ? Long.fromValue(object.sellOrderId) : Long.UZERO;
     return message;
+  },
+
+  fromAmino(object: EventUpdateSellOrderAmino): EventUpdateSellOrder {
+    return {
+      sellOrderId: Long.fromString(object.sell_order_id)
+    };
+  },
+
+  toAmino(message: EventUpdateSellOrder): EventUpdateSellOrderAmino {
+    const obj: any = {};
+    obj.sell_order_id = message.sellOrderId ? message.sellOrderId.toString() : undefined;
+    return obj;
+  },
+
+  fromAminoMsg(object: EventUpdateSellOrderAminoMsg): EventUpdateSellOrder {
+    return EventUpdateSellOrder.fromAmino(object.value);
+  },
+
+  fromProtoMsg(message: EventUpdateSellOrderProtoMsg): EventUpdateSellOrder {
+    return EventUpdateSellOrder.decode(message.value);
+  },
+
+  toProto(message: EventUpdateSellOrder): Uint8Array {
+    return EventUpdateSellOrder.encode(message).finish();
+  },
+
+  toProtoMsg(message: EventUpdateSellOrder): EventUpdateSellOrderProtoMsg {
+    return {
+      typeUrl: "/regen.ecocredit.marketplace.v1.EventUpdateSellOrder",
+      value: EventUpdateSellOrder.encode(message).finish()
+    };
   }
 
 };
@@ -337,6 +516,37 @@ export const EventCancelSellOrder = {
     const message = createBaseEventCancelSellOrder();
     message.sellOrderId = object.sellOrderId !== undefined && object.sellOrderId !== null ? Long.fromValue(object.sellOrderId) : Long.UZERO;
     return message;
+  },
+
+  fromAmino(object: EventCancelSellOrderAmino): EventCancelSellOrder {
+    return {
+      sellOrderId: Long.fromString(object.sell_order_id)
+    };
+  },
+
+  toAmino(message: EventCancelSellOrder): EventCancelSellOrderAmino {
+    const obj: any = {};
+    obj.sell_order_id = message.sellOrderId ? message.sellOrderId.toString() : undefined;
+    return obj;
+  },
+
+  fromAminoMsg(object: EventCancelSellOrderAminoMsg): EventCancelSellOrder {
+    return EventCancelSellOrder.fromAmino(object.value);
+  },
+
+  fromProtoMsg(message: EventCancelSellOrderProtoMsg): EventCancelSellOrder {
+    return EventCancelSellOrder.decode(message.value);
+  },
+
+  toProto(message: EventCancelSellOrder): Uint8Array {
+    return EventCancelSellOrder.encode(message).finish();
+  },
+
+  toProtoMsg(message: EventCancelSellOrder): EventCancelSellOrderProtoMsg {
+    return {
+      typeUrl: "/regen.ecocredit.marketplace.v1.EventCancelSellOrder",
+      value: EventCancelSellOrder.encode(message).finish()
+    };
   }
 
 };
@@ -394,6 +604,37 @@ export const EventAllowDenom = {
     const message = createBaseEventAllowDenom();
     message.denom = object.denom ?? "";
     return message;
+  },
+
+  fromAmino(object: EventAllowDenomAmino): EventAllowDenom {
+    return {
+      denom: object.denom
+    };
+  },
+
+  toAmino(message: EventAllowDenom): EventAllowDenomAmino {
+    const obj: any = {};
+    obj.denom = message.denom;
+    return obj;
+  },
+
+  fromAminoMsg(object: EventAllowDenomAminoMsg): EventAllowDenom {
+    return EventAllowDenom.fromAmino(object.value);
+  },
+
+  fromProtoMsg(message: EventAllowDenomProtoMsg): EventAllowDenom {
+    return EventAllowDenom.decode(message.value);
+  },
+
+  toProto(message: EventAllowDenom): Uint8Array {
+    return EventAllowDenom.encode(message).finish();
+  },
+
+  toProtoMsg(message: EventAllowDenom): EventAllowDenomProtoMsg {
+    return {
+      typeUrl: "/regen.ecocredit.marketplace.v1.EventAllowDenom",
+      value: EventAllowDenom.encode(message).finish()
+    };
   }
 
 };
@@ -451,6 +692,37 @@ export const EventRemoveAllowedDenom = {
     const message = createBaseEventRemoveAllowedDenom();
     message.denom = object.denom ?? "";
     return message;
+  },
+
+  fromAmino(object: EventRemoveAllowedDenomAmino): EventRemoveAllowedDenom {
+    return {
+      denom: object.denom
+    };
+  },
+
+  toAmino(message: EventRemoveAllowedDenom): EventRemoveAllowedDenomAmino {
+    const obj: any = {};
+    obj.denom = message.denom;
+    return obj;
+  },
+
+  fromAminoMsg(object: EventRemoveAllowedDenomAminoMsg): EventRemoveAllowedDenom {
+    return EventRemoveAllowedDenom.fromAmino(object.value);
+  },
+
+  fromProtoMsg(message: EventRemoveAllowedDenomProtoMsg): EventRemoveAllowedDenom {
+    return EventRemoveAllowedDenom.decode(message.value);
+  },
+
+  toProto(message: EventRemoveAllowedDenom): Uint8Array {
+    return EventRemoveAllowedDenom.encode(message).finish();
+  },
+
+  toProtoMsg(message: EventRemoveAllowedDenom): EventRemoveAllowedDenomProtoMsg {
+    return {
+      typeUrl: "/regen.ecocredit.marketplace.v1.EventRemoveAllowedDenom",
+      value: EventRemoveAllowedDenom.encode(message).finish()
+    };
   }
 
 };
