@@ -33,7 +33,7 @@ export interface MsgAnchorAmino {
   content_hash?: ContentHashAmino;
 }
 export interface MsgAnchorAminoMsg {
-  type: "/regen.data.v1.MsgAnchor";
+  type: "regen-ledger/MsgAnchor";
   value: MsgAnchorAmino;
 }
 /** MsgAnchor is the Msg/Anchor request type. */
@@ -115,7 +115,7 @@ export interface MsgAttestAmino {
   content_hashes: ContentHash_GraphAmino[];
 }
 export interface MsgAttestAminoMsg {
-  type: "/regen.data.v1.MsgAttest";
+  type: "regen-ledger/MsgAttest";
   value: MsgAttestAmino;
 }
 /** MsgAttest is the Msg/Attest request type. */
@@ -209,7 +209,7 @@ export interface MsgDefineResolverAmino {
   resolver_url: string;
 }
 export interface MsgDefineResolverAminoMsg {
-  type: "/regen.data.v1.MsgDefineResolver";
+  type: "regen-ledger/MsgDefineResolver";
   value: MsgDefineResolverAmino;
 }
 /** MsgDefineResolver is the Msg/DefineResolver request type. */
@@ -290,7 +290,7 @@ export interface MsgRegisterResolverAmino {
   content_hashes: ContentHashAmino[];
 }
 export interface MsgRegisterResolverAminoMsg {
-  type: "/regen.data.v1.MsgRegisterResolver";
+  type: "regen-ledger/MsgRegisterResolver";
   value: MsgRegisterResolverAmino;
 }
 /** MsgRegisterResolver is the Msg/RegisterResolver request type. */
@@ -401,6 +401,13 @@ export const MsgAnchor = {
 
   fromAminoMsg(object: MsgAnchorAminoMsg): MsgAnchor {
     return MsgAnchor.fromAmino(object.value);
+  },
+
+  toAminoMsg(message: MsgAnchor): MsgAnchorAminoMsg {
+    return {
+      type: "regen-ledger/MsgAnchor",
+      value: MsgAnchor.toAmino(message)
+    };
   },
 
   fromProtoMsg(message: MsgAnchorProtoMsg): MsgAnchor {
@@ -619,6 +626,13 @@ export const MsgAttest = {
     return MsgAttest.fromAmino(object.value);
   },
 
+  toAminoMsg(message: MsgAttest): MsgAttestAminoMsg {
+    return {
+      type: "regen-ledger/MsgAttest",
+      value: MsgAttest.toAmino(message)
+    };
+  },
+
   fromProtoMsg(message: MsgAttestProtoMsg): MsgAttest {
     return MsgAttest.decode(message.value);
   },
@@ -835,6 +849,13 @@ export const MsgDefineResolver = {
     return MsgDefineResolver.fromAmino(object.value);
   },
 
+  toAminoMsg(message: MsgDefineResolver): MsgDefineResolverAminoMsg {
+    return {
+      type: "regen-ledger/MsgDefineResolver",
+      value: MsgDefineResolver.toAmino(message)
+    };
+  },
+
   fromProtoMsg(message: MsgDefineResolverProtoMsg): MsgDefineResolver {
     return MsgDefineResolver.decode(message.value);
   },
@@ -1049,6 +1070,13 @@ export const MsgRegisterResolver = {
 
   fromAminoMsg(object: MsgRegisterResolverAminoMsg): MsgRegisterResolver {
     return MsgRegisterResolver.fromAmino(object.value);
+  },
+
+  toAminoMsg(message: MsgRegisterResolver): MsgRegisterResolverAminoMsg {
+    return {
+      type: "regen-ledger/MsgRegisterResolver",
+      value: MsgRegisterResolver.toAmino(message)
+    };
   },
 
   fromProtoMsg(message: MsgRegisterResolverProtoMsg): MsgRegisterResolver {

@@ -25,7 +25,7 @@ export interface MsgSellAmino {
   orders: MsgSell_OrderAmino[];
 }
 export interface MsgSellAminoMsg {
-  type: "/regen.ecocredit.marketplace.v1.MsgSell";
+  type: "regen.marketplace/MsgSell";
   value: MsgSellAmino;
 }
 /** MsgSell is the Msg/Sell request type. */
@@ -169,7 +169,7 @@ export interface MsgUpdateSellOrdersAmino {
   updates: MsgUpdateSellOrders_UpdateAmino[];
 }
 export interface MsgUpdateSellOrdersAminoMsg {
-  type: "/regen.ecocredit.marketplace.v1.MsgUpdateSellOrders";
+  type: "regen.marketplace/MsgUpdateSellOrders";
   value: MsgUpdateSellOrdersAmino;
 }
 /** MsgUpdateSellOrders is the Msg/UpdateSellOrders request type. */
@@ -289,7 +289,7 @@ export interface MsgCancelSellOrderAmino {
   sell_order_id: string;
 }
 export interface MsgCancelSellOrderAminoMsg {
-  type: "/regen.ecocredit.marketplace.v1.MsgCancelSellOrder";
+  type: "regen.marketplace/MsgCancelSellOrder";
   value: MsgCancelSellOrderAmino;
 }
 /** MsgCancelSellOrder is the Msg/CancelSellOrder request type. */
@@ -338,7 +338,7 @@ export interface MsgBuyDirectAmino {
   orders: MsgBuyDirect_OrderAmino[];
 }
 export interface MsgBuyDirectAminoMsg {
-  type: "/regen.ecocredit.marketplace.v1.MsgBuyDirect";
+  type: "regen.marketplace/MsgBuyDirect";
   value: MsgBuyDirectAmino;
 }
 /** MsgBuyDirect is the Msg/BuyDirect request type. */
@@ -517,7 +517,7 @@ export interface MsgAddAllowedDenomAmino {
   exponent: number;
 }
 export interface MsgAddAllowedDenomAminoMsg {
-  type: "/regen.ecocredit.marketplace.v1.MsgAddAllowedDenom";
+  type: "regen.marketplace/MsgAddAllowedDenom";
   value: MsgAddAllowedDenomAmino;
 }
 /**
@@ -592,7 +592,7 @@ export interface MsgRemoveAllowedDenomAmino {
   denom: string;
 }
 export interface MsgRemoveAllowedDenomAminoMsg {
-  type: "/regen.ecocredit.marketplace.v1.MsgRemoveAllowedDenom";
+  type: "regen.marketplace/MsgRemoveAllowedDenom";
   value: MsgRemoveAllowedDenomAmino;
 }
 /**
@@ -730,6 +730,13 @@ export const MsgSell = {
 
   fromAminoMsg(object: MsgSellAminoMsg): MsgSell {
     return MsgSell.fromAmino(object.value);
+  },
+
+  toAminoMsg(message: MsgSell): MsgSellAminoMsg {
+    return {
+      type: "regen.marketplace/MsgSell",
+      value: MsgSell.toAmino(message)
+    };
   },
 
   fromProtoMsg(message: MsgSellProtoMsg): MsgSell {
@@ -1102,6 +1109,13 @@ export const MsgUpdateSellOrders = {
     return MsgUpdateSellOrders.fromAmino(object.value);
   },
 
+  toAminoMsg(message: MsgUpdateSellOrders): MsgUpdateSellOrdersAminoMsg {
+    return {
+      type: "regen.marketplace/MsgUpdateSellOrders",
+      value: MsgUpdateSellOrders.toAmino(message)
+    };
+  },
+
   fromProtoMsg(message: MsgUpdateSellOrdersProtoMsg): MsgUpdateSellOrders {
     return MsgUpdateSellOrders.decode(message.value);
   },
@@ -1419,6 +1433,13 @@ export const MsgCancelSellOrder = {
     return MsgCancelSellOrder.fromAmino(object.value);
   },
 
+  toAminoMsg(message: MsgCancelSellOrder): MsgCancelSellOrderAminoMsg {
+    return {
+      type: "regen.marketplace/MsgCancelSellOrder",
+      value: MsgCancelSellOrder.toAmino(message)
+    };
+  },
+
   fromProtoMsg(message: MsgCancelSellOrderProtoMsg): MsgCancelSellOrder {
     return MsgCancelSellOrder.decode(message.value);
   },
@@ -1602,6 +1623,13 @@ export const MsgBuyDirect = {
 
   fromAminoMsg(object: MsgBuyDirectAminoMsg): MsgBuyDirect {
     return MsgBuyDirect.fromAmino(object.value);
+  },
+
+  toAminoMsg(message: MsgBuyDirect): MsgBuyDirectAminoMsg {
+    return {
+      type: "regen.marketplace/MsgBuyDirect",
+      value: MsgBuyDirect.toAmino(message)
+    };
   },
 
   fromProtoMsg(message: MsgBuyDirectProtoMsg): MsgBuyDirect {
@@ -1963,6 +1991,13 @@ export const MsgAddAllowedDenom = {
     return MsgAddAllowedDenom.fromAmino(object.value);
   },
 
+  toAminoMsg(message: MsgAddAllowedDenom): MsgAddAllowedDenomAminoMsg {
+    return {
+      type: "regen.marketplace/MsgAddAllowedDenom",
+      value: MsgAddAllowedDenom.toAmino(message)
+    };
+  },
+
   fromProtoMsg(message: MsgAddAllowedDenomProtoMsg): MsgAddAllowedDenom {
     return MsgAddAllowedDenom.decode(message.value);
   },
@@ -2134,6 +2169,13 @@ export const MsgRemoveAllowedDenom = {
 
   fromAminoMsg(object: MsgRemoveAllowedDenomAminoMsg): MsgRemoveAllowedDenom {
     return MsgRemoveAllowedDenom.fromAmino(object.value);
+  },
+
+  toAminoMsg(message: MsgRemoveAllowedDenom): MsgRemoveAllowedDenomAminoMsg {
+    return {
+      type: "regen.marketplace/MsgRemoveAllowedDenom",
+      value: MsgRemoveAllowedDenom.toAmino(message)
+    };
   },
 
   fromProtoMsg(message: MsgRemoveAllowedDenomProtoMsg): MsgRemoveAllowedDenom {

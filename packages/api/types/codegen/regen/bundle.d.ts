@@ -233,6 +233,7 @@ export declare namespace regen {
                 fromAmino(object: _115.MsgAnchorAmino): _115.MsgAnchor;
                 toAmino(message: _115.MsgAnchor): _115.MsgAnchorAmino;
                 fromAminoMsg(object: _115.MsgAnchorAminoMsg): _115.MsgAnchor;
+                toAminoMsg(message: _115.MsgAnchor): _115.MsgAnchorAminoMsg;
                 fromProtoMsg(message: _115.MsgAnchorProtoMsg): _115.MsgAnchor;
                 toProto(message: _115.MsgAnchor): Uint8Array;
                 toProtoMsg(message: _115.MsgAnchor): _115.MsgAnchorProtoMsg;
@@ -259,6 +260,7 @@ export declare namespace regen {
                 fromAmino(object: _115.MsgAttestAmino): _115.MsgAttest;
                 toAmino(message: _115.MsgAttest): _115.MsgAttestAmino;
                 fromAminoMsg(object: _115.MsgAttestAminoMsg): _115.MsgAttest;
+                toAminoMsg(message: _115.MsgAttest): _115.MsgAttestAminoMsg;
                 fromProtoMsg(message: _115.MsgAttestProtoMsg): _115.MsgAttest;
                 toProto(message: _115.MsgAttest): Uint8Array;
                 toProtoMsg(message: _115.MsgAttest): _115.MsgAttestProtoMsg;
@@ -285,6 +287,7 @@ export declare namespace regen {
                 fromAmino(object: _115.MsgDefineResolverAmino): _115.MsgDefineResolver;
                 toAmino(message: _115.MsgDefineResolver): _115.MsgDefineResolverAmino;
                 fromAminoMsg(object: _115.MsgDefineResolverAminoMsg): _115.MsgDefineResolver;
+                toAminoMsg(message: _115.MsgDefineResolver): _115.MsgDefineResolverAminoMsg;
                 fromProtoMsg(message: _115.MsgDefineResolverProtoMsg): _115.MsgDefineResolver;
                 toProto(message: _115.MsgDefineResolver): Uint8Array;
                 toProtoMsg(message: _115.MsgDefineResolver): _115.MsgDefineResolverProtoMsg;
@@ -311,6 +314,7 @@ export declare namespace regen {
                 fromAmino(object: _115.MsgRegisterResolverAmino): _115.MsgRegisterResolver;
                 toAmino(message: _115.MsgRegisterResolver): _115.MsgRegisterResolverAmino;
                 fromAminoMsg(object: _115.MsgRegisterResolverAminoMsg): _115.MsgRegisterResolver;
+                toAminoMsg(message: _115.MsgRegisterResolver): _115.MsgRegisterResolverAminoMsg;
                 fromProtoMsg(message: _115.MsgRegisterResolverProtoMsg): _115.MsgRegisterResolver;
                 toProto(message: _115.MsgRegisterResolver): Uint8Array;
                 toProtoMsg(message: _115.MsgRegisterResolver): _115.MsgRegisterResolverProtoMsg;
@@ -977,6 +981,7 @@ export declare namespace regen {
                     fromAmino(object: _120.MsgCreateAmino): _120.MsgCreate;
                     toAmino(message: _120.MsgCreate): _120.MsgCreateAmino;
                     fromAminoMsg(object: _120.MsgCreateAminoMsg): _120.MsgCreate;
+                    toAminoMsg(message: _120.MsgCreate): _120.MsgCreateAminoMsg;
                     fromProtoMsg(message: _120.MsgCreateProtoMsg): _120.MsgCreate;
                     toProto(message: _120.MsgCreate): Uint8Array;
                     toProtoMsg(message: _120.MsgCreate): _120.MsgCreateProtoMsg;
@@ -1003,6 +1008,7 @@ export declare namespace regen {
                     fromAmino(object: _120.MsgPutAmino): _120.MsgPut;
                     toAmino(message: _120.MsgPut): _120.MsgPutAmino;
                     fromAminoMsg(object: _120.MsgPutAminoMsg): _120.MsgPut;
+                    toAminoMsg(message: _120.MsgPut): _120.MsgPutAminoMsg;
                     fromProtoMsg(message: _120.MsgPutProtoMsg): _120.MsgPut;
                     toProto(message: _120.MsgPut): Uint8Array;
                     toProtoMsg(message: _120.MsgPut): _120.MsgPutProtoMsg;
@@ -1029,6 +1035,7 @@ export declare namespace regen {
                     fromAmino(object: _120.MsgTakeAmino): _120.MsgTake;
                     toAmino(message: _120.MsgTake): _120.MsgTakeAmino;
                     fromAminoMsg(object: _120.MsgTakeAminoMsg): _120.MsgTake;
+                    toAminoMsg(message: _120.MsgTake): _120.MsgTakeAminoMsg;
                     fromProtoMsg(message: _120.MsgTakeProtoMsg): _120.MsgTake;
                     toProto(message: _120.MsgTake): Uint8Array;
                     toProtoMsg(message: _120.MsgTake): _120.MsgTakeProtoMsg;
@@ -1055,6 +1062,7 @@ export declare namespace regen {
                     fromAmino(object: _120.MsgUpdateBasketFeeAmino): _120.MsgUpdateBasketFee;
                     toAmino(message: _120.MsgUpdateBasketFee): _120.MsgUpdateBasketFeeAmino;
                     fromAminoMsg(object: _120.MsgUpdateBasketFeeAminoMsg): _120.MsgUpdateBasketFee;
+                    toAminoMsg(message: _120.MsgUpdateBasketFee): _120.MsgUpdateBasketFeeAminoMsg;
                     fromProtoMsg(message: _120.MsgUpdateBasketFeeProtoMsg): _120.MsgUpdateBasketFee;
                     toProto(message: _120.MsgUpdateBasketFee): Uint8Array;
                     toProtoMsg(message: _120.MsgUpdateBasketFee): _120.MsgUpdateBasketFeeProtoMsg;
@@ -1081,6 +1089,7 @@ export declare namespace regen {
                     fromAmino(object: _120.MsgUpdateCuratorAmino): _120.MsgUpdateCurator;
                     toAmino(message: _120.MsgUpdateCurator): _120.MsgUpdateCuratorAmino;
                     fromAminoMsg(object: _120.MsgUpdateCuratorAminoMsg): _120.MsgUpdateCurator;
+                    toAminoMsg(message: _120.MsgUpdateCurator): _120.MsgUpdateCuratorAminoMsg;
                     fromProtoMsg(message: _120.MsgUpdateCuratorProtoMsg): _120.MsgUpdateCurator;
                     toProto(message: _120.MsgUpdateCurator): Uint8Array;
                     toProtoMsg(message: _120.MsgUpdateCurator): _120.MsgUpdateCuratorProtoMsg;
@@ -1107,6 +1116,7 @@ export declare namespace regen {
                     fromAmino(object: _120.MsgUpdateDateCriteriaAmino): _120.MsgUpdateDateCriteria;
                     toAmino(message: _120.MsgUpdateDateCriteria): _120.MsgUpdateDateCriteriaAmino;
                     fromAminoMsg(object: _120.MsgUpdateDateCriteriaAminoMsg): _120.MsgUpdateDateCriteria;
+                    toAminoMsg(message: _120.MsgUpdateDateCriteria): _120.MsgUpdateDateCriteriaAminoMsg;
                     fromProtoMsg(message: _120.MsgUpdateDateCriteriaProtoMsg): _120.MsgUpdateDateCriteria;
                     toProto(message: _120.MsgUpdateDateCriteria): Uint8Array;
                     toProtoMsg(message: _120.MsgUpdateDateCriteria): _120.MsgUpdateDateCriteriaProtoMsg;
@@ -1590,6 +1600,7 @@ export declare namespace regen {
                     fromAmino(object: _125.MsgSellAmino): _125.MsgSell;
                     toAmino(message: _125.MsgSell): _125.MsgSellAmino;
                     fromAminoMsg(object: _125.MsgSellAminoMsg): _125.MsgSell;
+                    toAminoMsg(message: _125.MsgSell): _125.MsgSellAminoMsg;
                     fromProtoMsg(message: _125.MsgSellProtoMsg): _125.MsgSell;
                     toProto(message: _125.MsgSell): Uint8Array;
                     toProtoMsg(message: _125.MsgSell): _125.MsgSellProtoMsg;
@@ -1629,6 +1640,7 @@ export declare namespace regen {
                     fromAmino(object: _125.MsgUpdateSellOrdersAmino): _125.MsgUpdateSellOrders;
                     toAmino(message: _125.MsgUpdateSellOrders): _125.MsgUpdateSellOrdersAmino;
                     fromAminoMsg(object: _125.MsgUpdateSellOrdersAminoMsg): _125.MsgUpdateSellOrders;
+                    toAminoMsg(message: _125.MsgUpdateSellOrders): _125.MsgUpdateSellOrdersAminoMsg;
                     fromProtoMsg(message: _125.MsgUpdateSellOrdersProtoMsg): _125.MsgUpdateSellOrders;
                     toProto(message: _125.MsgUpdateSellOrders): Uint8Array;
                     toProtoMsg(message: _125.MsgUpdateSellOrders): _125.MsgUpdateSellOrdersProtoMsg;
@@ -1668,6 +1680,7 @@ export declare namespace regen {
                     fromAmino(object: _125.MsgCancelSellOrderAmino): _125.MsgCancelSellOrder;
                     toAmino(message: _125.MsgCancelSellOrder): _125.MsgCancelSellOrderAmino;
                     fromAminoMsg(object: _125.MsgCancelSellOrderAminoMsg): _125.MsgCancelSellOrder;
+                    toAminoMsg(message: _125.MsgCancelSellOrder): _125.MsgCancelSellOrderAminoMsg;
                     fromProtoMsg(message: _125.MsgCancelSellOrderProtoMsg): _125.MsgCancelSellOrder;
                     toProto(message: _125.MsgCancelSellOrder): Uint8Array;
                     toProtoMsg(message: _125.MsgCancelSellOrder): _125.MsgCancelSellOrderProtoMsg;
@@ -1694,6 +1707,7 @@ export declare namespace regen {
                     fromAmino(object: _125.MsgBuyDirectAmino): _125.MsgBuyDirect;
                     toAmino(message: _125.MsgBuyDirect): _125.MsgBuyDirectAmino;
                     fromAminoMsg(object: _125.MsgBuyDirectAminoMsg): _125.MsgBuyDirect;
+                    toAminoMsg(message: _125.MsgBuyDirect): _125.MsgBuyDirectAminoMsg;
                     fromProtoMsg(message: _125.MsgBuyDirectProtoMsg): _125.MsgBuyDirect;
                     toProto(message: _125.MsgBuyDirect): Uint8Array;
                     toProtoMsg(message: _125.MsgBuyDirect): _125.MsgBuyDirectProtoMsg;
@@ -1733,6 +1747,7 @@ export declare namespace regen {
                     fromAmino(object: _125.MsgAddAllowedDenomAmino): _125.MsgAddAllowedDenom;
                     toAmino(message: _125.MsgAddAllowedDenom): _125.MsgAddAllowedDenomAmino;
                     fromAminoMsg(object: _125.MsgAddAllowedDenomAminoMsg): _125.MsgAddAllowedDenom;
+                    toAminoMsg(message: _125.MsgAddAllowedDenom): _125.MsgAddAllowedDenomAminoMsg;
                     fromProtoMsg(message: _125.MsgAddAllowedDenomProtoMsg): _125.MsgAddAllowedDenom;
                     toProto(message: _125.MsgAddAllowedDenom): Uint8Array;
                     toProtoMsg(message: _125.MsgAddAllowedDenom): _125.MsgAddAllowedDenomProtoMsg;
@@ -1759,6 +1774,7 @@ export declare namespace regen {
                     fromAmino(object: _125.MsgRemoveAllowedDenomAmino): _125.MsgRemoveAllowedDenom;
                     toAmino(message: _125.MsgRemoveAllowedDenom): _125.MsgRemoveAllowedDenomAmino;
                     fromAminoMsg(object: _125.MsgRemoveAllowedDenomAminoMsg): _125.MsgRemoveAllowedDenom;
+                    toAminoMsg(message: _125.MsgRemoveAllowedDenom): _125.MsgRemoveAllowedDenomAminoMsg;
                     fromProtoMsg(message: _125.MsgRemoveAllowedDenomProtoMsg): _125.MsgRemoveAllowedDenom;
                     toProto(message: _125.MsgRemoveAllowedDenom): Uint8Array;
                     toProtoMsg(message: _125.MsgRemoveAllowedDenom): _125.MsgRemoveAllowedDenomProtoMsg;
@@ -2774,6 +2790,7 @@ export declare namespace regen {
                 fromAmino(object: _131.MsgAddCreditTypeAmino): _131.MsgAddCreditType;
                 toAmino(message: _131.MsgAddCreditType): _131.MsgAddCreditTypeAmino;
                 fromAminoMsg(object: _131.MsgAddCreditTypeAminoMsg): _131.MsgAddCreditType;
+                toAminoMsg(message: _131.MsgAddCreditType): _131.MsgAddCreditTypeAminoMsg;
                 fromProtoMsg(message: _131.MsgAddCreditTypeProtoMsg): _131.MsgAddCreditType;
                 toProto(message: _131.MsgAddCreditType): Uint8Array;
                 toProtoMsg(message: _131.MsgAddCreditType): _131.MsgAddCreditTypeProtoMsg;
@@ -2800,6 +2817,7 @@ export declare namespace regen {
                 fromAmino(object: _131.MsgCreateClassAmino): _131.MsgCreateClass;
                 toAmino(message: _131.MsgCreateClass): _131.MsgCreateClassAmino;
                 fromAminoMsg(object: _131.MsgCreateClassAminoMsg): _131.MsgCreateClass;
+                toAminoMsg(message: _131.MsgCreateClass): _131.MsgCreateClassAminoMsg;
                 fromProtoMsg(message: _131.MsgCreateClassProtoMsg): _131.MsgCreateClass;
                 toProto(message: _131.MsgCreateClass): Uint8Array;
                 toProtoMsg(message: _131.MsgCreateClass): _131.MsgCreateClassProtoMsg;
@@ -2826,6 +2844,7 @@ export declare namespace regen {
                 fromAmino(object: _131.MsgCreateProjectAmino): _131.MsgCreateProject;
                 toAmino(message: _131.MsgCreateProject): _131.MsgCreateProjectAmino;
                 fromAminoMsg(object: _131.MsgCreateProjectAminoMsg): _131.MsgCreateProject;
+                toAminoMsg(message: _131.MsgCreateProject): _131.MsgCreateProjectAminoMsg;
                 fromProtoMsg(message: _131.MsgCreateProjectProtoMsg): _131.MsgCreateProject;
                 toProto(message: _131.MsgCreateProject): Uint8Array;
                 toProtoMsg(message: _131.MsgCreateProject): _131.MsgCreateProjectProtoMsg;
@@ -2852,6 +2871,7 @@ export declare namespace regen {
                 fromAmino(object: _131.MsgCreateBatchAmino): _131.MsgCreateBatch;
                 toAmino(message: _131.MsgCreateBatch): _131.MsgCreateBatchAmino;
                 fromAminoMsg(object: _131.MsgCreateBatchAminoMsg): _131.MsgCreateBatch;
+                toAminoMsg(message: _131.MsgCreateBatch): _131.MsgCreateBatchAminoMsg;
                 fromProtoMsg(message: _131.MsgCreateBatchProtoMsg): _131.MsgCreateBatch;
                 toProto(message: _131.MsgCreateBatch): Uint8Array;
                 toProtoMsg(message: _131.MsgCreateBatch): _131.MsgCreateBatchProtoMsg;
@@ -2878,6 +2898,7 @@ export declare namespace regen {
                 fromAmino(object: _131.MsgMintBatchCreditsAmino): _131.MsgMintBatchCredits;
                 toAmino(message: _131.MsgMintBatchCredits): _131.MsgMintBatchCreditsAmino;
                 fromAminoMsg(object: _131.MsgMintBatchCreditsAminoMsg): _131.MsgMintBatchCredits;
+                toAminoMsg(message: _131.MsgMintBatchCredits): _131.MsgMintBatchCreditsAminoMsg;
                 fromProtoMsg(message: _131.MsgMintBatchCreditsProtoMsg): _131.MsgMintBatchCredits;
                 toProto(message: _131.MsgMintBatchCredits): Uint8Array;
                 toProtoMsg(message: _131.MsgMintBatchCredits): _131.MsgMintBatchCreditsProtoMsg;
@@ -2904,6 +2925,7 @@ export declare namespace regen {
                 fromAmino(object: _131.MsgSealBatchAmino): _131.MsgSealBatch;
                 toAmino(message: _131.MsgSealBatch): _131.MsgSealBatchAmino;
                 fromAminoMsg(object: _131.MsgSealBatchAminoMsg): _131.MsgSealBatch;
+                toAminoMsg(message: _131.MsgSealBatch): _131.MsgSealBatchAminoMsg;
                 fromProtoMsg(message: _131.MsgSealBatchProtoMsg): _131.MsgSealBatch;
                 toProto(message: _131.MsgSealBatch): Uint8Array;
                 toProtoMsg(message: _131.MsgSealBatch): _131.MsgSealBatchProtoMsg;
@@ -2930,6 +2952,7 @@ export declare namespace regen {
                 fromAmino(object: _131.MsgSendAmino): _131.MsgSend;
                 toAmino(message: _131.MsgSend): _131.MsgSendAmino;
                 fromAminoMsg(object: _131.MsgSendAminoMsg): _131.MsgSend;
+                toAminoMsg(message: _131.MsgSend): _131.MsgSendAminoMsg;
                 fromProtoMsg(message: _131.MsgSendProtoMsg): _131.MsgSend;
                 toProto(message: _131.MsgSend): Uint8Array;
                 toProtoMsg(message: _131.MsgSend): _131.MsgSendProtoMsg;
@@ -2969,6 +2992,7 @@ export declare namespace regen {
                 fromAmino(object: _131.MsgRetireAmino): _131.MsgRetire;
                 toAmino(message: _131.MsgRetire): _131.MsgRetireAmino;
                 fromAminoMsg(object: _131.MsgRetireAminoMsg): _131.MsgRetire;
+                toAminoMsg(message: _131.MsgRetire): _131.MsgRetireAminoMsg;
                 fromProtoMsg(message: _131.MsgRetireProtoMsg): _131.MsgRetire;
                 toProto(message: _131.MsgRetire): Uint8Array;
                 toProtoMsg(message: _131.MsgRetire): _131.MsgRetireProtoMsg;
@@ -2995,6 +3019,7 @@ export declare namespace regen {
                 fromAmino(object: _131.MsgCancelAmino): _131.MsgCancel;
                 toAmino(message: _131.MsgCancel): _131.MsgCancelAmino;
                 fromAminoMsg(object: _131.MsgCancelAminoMsg): _131.MsgCancel;
+                toAminoMsg(message: _131.MsgCancel): _131.MsgCancelAminoMsg;
                 fromProtoMsg(message: _131.MsgCancelProtoMsg): _131.MsgCancel;
                 toProto(message: _131.MsgCancel): Uint8Array;
                 toProtoMsg(message: _131.MsgCancel): _131.MsgCancelProtoMsg;
@@ -3021,6 +3046,7 @@ export declare namespace regen {
                 fromAmino(object: _131.MsgUpdateClassAdminAmino): _131.MsgUpdateClassAdmin;
                 toAmino(message: _131.MsgUpdateClassAdmin): _131.MsgUpdateClassAdminAmino;
                 fromAminoMsg(object: _131.MsgUpdateClassAdminAminoMsg): _131.MsgUpdateClassAdmin;
+                toAminoMsg(message: _131.MsgUpdateClassAdmin): _131.MsgUpdateClassAdminAminoMsg;
                 fromProtoMsg(message: _131.MsgUpdateClassAdminProtoMsg): _131.MsgUpdateClassAdmin;
                 toProto(message: _131.MsgUpdateClassAdmin): Uint8Array;
                 toProtoMsg(message: _131.MsgUpdateClassAdmin): _131.MsgUpdateClassAdminProtoMsg;
@@ -3047,6 +3073,7 @@ export declare namespace regen {
                 fromAmino(object: _131.MsgUpdateClassIssuersAmino): _131.MsgUpdateClassIssuers;
                 toAmino(message: _131.MsgUpdateClassIssuers): _131.MsgUpdateClassIssuersAmino;
                 fromAminoMsg(object: _131.MsgUpdateClassIssuersAminoMsg): _131.MsgUpdateClassIssuers;
+                toAminoMsg(message: _131.MsgUpdateClassIssuers): _131.MsgUpdateClassIssuersAminoMsg;
                 fromProtoMsg(message: _131.MsgUpdateClassIssuersProtoMsg): _131.MsgUpdateClassIssuers;
                 toProto(message: _131.MsgUpdateClassIssuers): Uint8Array;
                 toProtoMsg(message: _131.MsgUpdateClassIssuers): _131.MsgUpdateClassIssuersProtoMsg;
@@ -3073,6 +3100,7 @@ export declare namespace regen {
                 fromAmino(object: _131.MsgUpdateClassMetadataAmino): _131.MsgUpdateClassMetadata;
                 toAmino(message: _131.MsgUpdateClassMetadata): _131.MsgUpdateClassMetadataAmino;
                 fromAminoMsg(object: _131.MsgUpdateClassMetadataAminoMsg): _131.MsgUpdateClassMetadata;
+                toAminoMsg(message: _131.MsgUpdateClassMetadata): _131.MsgUpdateClassMetadataAminoMsg;
                 fromProtoMsg(message: _131.MsgUpdateClassMetadataProtoMsg): _131.MsgUpdateClassMetadata;
                 toProto(message: _131.MsgUpdateClassMetadata): Uint8Array;
                 toProtoMsg(message: _131.MsgUpdateClassMetadata): _131.MsgUpdateClassMetadataProtoMsg;
@@ -3099,6 +3127,7 @@ export declare namespace regen {
                 fromAmino(object: _131.MsgUpdateProjectAdminAmino): _131.MsgUpdateProjectAdmin;
                 toAmino(message: _131.MsgUpdateProjectAdmin): _131.MsgUpdateProjectAdminAmino;
                 fromAminoMsg(object: _131.MsgUpdateProjectAdminAminoMsg): _131.MsgUpdateProjectAdmin;
+                toAminoMsg(message: _131.MsgUpdateProjectAdmin): _131.MsgUpdateProjectAdminAminoMsg;
                 fromProtoMsg(message: _131.MsgUpdateProjectAdminProtoMsg): _131.MsgUpdateProjectAdmin;
                 toProto(message: _131.MsgUpdateProjectAdmin): Uint8Array;
                 toProtoMsg(message: _131.MsgUpdateProjectAdmin): _131.MsgUpdateProjectAdminProtoMsg;
@@ -3125,6 +3154,7 @@ export declare namespace regen {
                 fromAmino(object: _131.MsgUpdateProjectMetadataAmino): _131.MsgUpdateProjectMetadata;
                 toAmino(message: _131.MsgUpdateProjectMetadata): _131.MsgUpdateProjectMetadataAmino;
                 fromAminoMsg(object: _131.MsgUpdateProjectMetadataAminoMsg): _131.MsgUpdateProjectMetadata;
+                toAminoMsg(message: _131.MsgUpdateProjectMetadata): _131.MsgUpdateProjectMetadataAminoMsg;
                 fromProtoMsg(message: _131.MsgUpdateProjectMetadataProtoMsg): _131.MsgUpdateProjectMetadata;
                 toProto(message: _131.MsgUpdateProjectMetadata): Uint8Array;
                 toProtoMsg(message: _131.MsgUpdateProjectMetadata): _131.MsgUpdateProjectMetadataProtoMsg;
@@ -3151,6 +3181,7 @@ export declare namespace regen {
                 fromAmino(object: _131.MsgBridgeAmino): _131.MsgBridge;
                 toAmino(message: _131.MsgBridge): _131.MsgBridgeAmino;
                 fromAminoMsg(object: _131.MsgBridgeAminoMsg): _131.MsgBridge;
+                toAminoMsg(message: _131.MsgBridge): _131.MsgBridgeAminoMsg;
                 fromProtoMsg(message: _131.MsgBridgeProtoMsg): _131.MsgBridge;
                 toProto(message: _131.MsgBridge): Uint8Array;
                 toProtoMsg(message: _131.MsgBridge): _131.MsgBridgeProtoMsg;
@@ -3164,6 +3195,7 @@ export declare namespace regen {
                 fromAmino(object: _131.MsgUpdateBatchMetadataAmino): _131.MsgUpdateBatchMetadata;
                 toAmino(message: _131.MsgUpdateBatchMetadata): _131.MsgUpdateBatchMetadataAmino;
                 fromAminoMsg(object: _131.MsgUpdateBatchMetadataAminoMsg): _131.MsgUpdateBatchMetadata;
+                toAminoMsg(message: _131.MsgUpdateBatchMetadata): _131.MsgUpdateBatchMetadataAminoMsg;
                 fromProtoMsg(message: _131.MsgUpdateBatchMetadataProtoMsg): _131.MsgUpdateBatchMetadata;
                 toProto(message: _131.MsgUpdateBatchMetadata): Uint8Array;
                 toProtoMsg(message: _131.MsgUpdateBatchMetadata): _131.MsgUpdateBatchMetadataProtoMsg;
@@ -3203,6 +3235,7 @@ export declare namespace regen {
                 fromAmino(object: _131.MsgBridgeReceiveAmino): _131.MsgBridgeReceive;
                 toAmino(message: _131.MsgBridgeReceive): _131.MsgBridgeReceiveAmino;
                 fromAminoMsg(object: _131.MsgBridgeReceiveAminoMsg): _131.MsgBridgeReceive;
+                toAminoMsg(message: _131.MsgBridgeReceive): _131.MsgBridgeReceiveAminoMsg;
                 fromProtoMsg(message: _131.MsgBridgeReceiveProtoMsg): _131.MsgBridgeReceive;
                 toProto(message: _131.MsgBridgeReceive): Uint8Array;
                 toProtoMsg(message: _131.MsgBridgeReceive): _131.MsgBridgeReceiveProtoMsg;
@@ -3255,6 +3288,7 @@ export declare namespace regen {
                 fromAmino(object: _131.MsgAddClassCreatorAmino): _131.MsgAddClassCreator;
                 toAmino(message: _131.MsgAddClassCreator): _131.MsgAddClassCreatorAmino;
                 fromAminoMsg(object: _131.MsgAddClassCreatorAminoMsg): _131.MsgAddClassCreator;
+                toAminoMsg(message: _131.MsgAddClassCreator): _131.MsgAddClassCreatorAminoMsg;
                 fromProtoMsg(message: _131.MsgAddClassCreatorProtoMsg): _131.MsgAddClassCreator;
                 toProto(message: _131.MsgAddClassCreator): Uint8Array;
                 toProtoMsg(message: _131.MsgAddClassCreator): _131.MsgAddClassCreatorProtoMsg;
@@ -3281,6 +3315,7 @@ export declare namespace regen {
                 fromAmino(object: _131.MsgSetClassCreatorAllowlistAmino): _131.MsgSetClassCreatorAllowlist;
                 toAmino(message: _131.MsgSetClassCreatorAllowlist): _131.MsgSetClassCreatorAllowlistAmino;
                 fromAminoMsg(object: _131.MsgSetClassCreatorAllowlistAminoMsg): _131.MsgSetClassCreatorAllowlist;
+                toAminoMsg(message: _131.MsgSetClassCreatorAllowlist): _131.MsgSetClassCreatorAllowlistAminoMsg;
                 fromProtoMsg(message: _131.MsgSetClassCreatorAllowlistProtoMsg): _131.MsgSetClassCreatorAllowlist;
                 toProto(message: _131.MsgSetClassCreatorAllowlist): Uint8Array;
                 toProtoMsg(message: _131.MsgSetClassCreatorAllowlist): _131.MsgSetClassCreatorAllowlistProtoMsg;
@@ -3307,6 +3342,7 @@ export declare namespace regen {
                 fromAmino(object: _131.MsgRemoveClassCreatorAmino): _131.MsgRemoveClassCreator;
                 toAmino(message: _131.MsgRemoveClassCreator): _131.MsgRemoveClassCreatorAmino;
                 fromAminoMsg(object: _131.MsgRemoveClassCreatorAminoMsg): _131.MsgRemoveClassCreator;
+                toAminoMsg(message: _131.MsgRemoveClassCreator): _131.MsgRemoveClassCreatorAminoMsg;
                 fromProtoMsg(message: _131.MsgRemoveClassCreatorProtoMsg): _131.MsgRemoveClassCreator;
                 toProto(message: _131.MsgRemoveClassCreator): Uint8Array;
                 toProtoMsg(message: _131.MsgRemoveClassCreator): _131.MsgRemoveClassCreatorProtoMsg;
@@ -3333,6 +3369,7 @@ export declare namespace regen {
                 fromAmino(object: _131.MsgUpdateClassFeeAmino): _131.MsgUpdateClassFee;
                 toAmino(message: _131.MsgUpdateClassFee): _131.MsgUpdateClassFeeAmino;
                 fromAminoMsg(object: _131.MsgUpdateClassFeeAminoMsg): _131.MsgUpdateClassFee;
+                toAminoMsg(message: _131.MsgUpdateClassFee): _131.MsgUpdateClassFeeAminoMsg;
                 fromProtoMsg(message: _131.MsgUpdateClassFeeProtoMsg): _131.MsgUpdateClassFee;
                 toProto(message: _131.MsgUpdateClassFee): Uint8Array;
                 toProtoMsg(message: _131.MsgUpdateClassFee): _131.MsgUpdateClassFeeProtoMsg;
@@ -3359,6 +3396,7 @@ export declare namespace regen {
                 fromAmino(object: _131.MsgAddAllowedBridgeChainAmino): _131.MsgAddAllowedBridgeChain;
                 toAmino(message: _131.MsgAddAllowedBridgeChain): _131.MsgAddAllowedBridgeChainAmino;
                 fromAminoMsg(object: _131.MsgAddAllowedBridgeChainAminoMsg): _131.MsgAddAllowedBridgeChain;
+                toAminoMsg(message: _131.MsgAddAllowedBridgeChain): _131.MsgAddAllowedBridgeChainAminoMsg;
                 fromProtoMsg(message: _131.MsgAddAllowedBridgeChainProtoMsg): _131.MsgAddAllowedBridgeChain;
                 toProto(message: _131.MsgAddAllowedBridgeChain): Uint8Array;
                 toProtoMsg(message: _131.MsgAddAllowedBridgeChain): _131.MsgAddAllowedBridgeChainProtoMsg;
@@ -3385,6 +3423,7 @@ export declare namespace regen {
                 fromAmino(object: _131.MsgRemoveAllowedBridgeChainAmino): _131.MsgRemoveAllowedBridgeChain;
                 toAmino(message: _131.MsgRemoveAllowedBridgeChain): _131.MsgRemoveAllowedBridgeChainAmino;
                 fromAminoMsg(object: _131.MsgRemoveAllowedBridgeChainAminoMsg): _131.MsgRemoveAllowedBridgeChain;
+                toAminoMsg(message: _131.MsgRemoveAllowedBridgeChain): _131.MsgRemoveAllowedBridgeChainAminoMsg;
                 fromProtoMsg(message: _131.MsgRemoveAllowedBridgeChainProtoMsg): _131.MsgRemoveAllowedBridgeChain;
                 toProto(message: _131.MsgRemoveAllowedBridgeChain): Uint8Array;
                 toProtoMsg(message: _131.MsgRemoveAllowedBridgeChain): _131.MsgRemoveAllowedBridgeChainProtoMsg;

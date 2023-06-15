@@ -35,7 +35,7 @@ export interface MsgAddCreditTypeAmino {
   credit_type?: CreditTypeAmino;
 }
 export interface MsgAddCreditTypeAminoMsg {
-  type: "/regen.ecocredit.v1.MsgAddCreditType";
+  type: "regen/MsgAddCreditType";
   value: MsgAddCreditTypeAmino;
 }
 /**
@@ -156,7 +156,7 @@ export interface MsgCreateClassAmino {
   fee?: CoinAmino;
 }
 export interface MsgCreateClassAminoMsg {
-  type: "/regen.ecocredit.v1.MsgCreateClass";
+  type: "regen/MsgCreateClass";
   value: MsgCreateClassAmino;
 }
 /** MsgCreateClass is the Msg/CreateClass request type. */
@@ -280,7 +280,7 @@ export interface MsgCreateProjectAmino {
   reference_id: string;
 }
 export interface MsgCreateProjectAminoMsg {
-  type: "/regen.ecocredit.v1.MsgCreateProject";
+  type: "regen/MsgCreateProject";
   value: MsgCreateProjectAmino;
 }
 /** MsgCreateProjectResponse is the Msg/CreateProject request type. */
@@ -434,7 +434,7 @@ export interface MsgCreateBatchAmino {
   origin_tx?: OriginTxAmino;
 }
 export interface MsgCreateBatchAminoMsg {
-  type: "/regen.ecocredit.v1.MsgCreateBatch";
+  type: "regen/MsgCreateBatch";
   value: MsgCreateBatchAmino;
 }
 /** MsgCreateBatch is the Msg/CreateBatch request type. */
@@ -529,7 +529,7 @@ export interface MsgMintBatchCreditsAmino {
   origin_tx?: OriginTxAmino;
 }
 export interface MsgMintBatchCreditsAminoMsg {
-  type: "/regen.ecocredit.v1.MsgMintBatchCredits";
+  type: "regen/MsgMintBatchCredits";
   value: MsgMintBatchCreditsAmino;
 }
 /** MsgMintBatchCredits is the Msg/MintBatchCredits request type. */
@@ -586,7 +586,7 @@ export interface MsgSealBatchAmino {
   batch_denom: string;
 }
 export interface MsgSealBatchAminoMsg {
-  type: "/regen.ecocredit.v1.MsgSealBatch";
+  type: "regen/MsgSealBatch";
   value: MsgSealBatchAmino;
 }
 /** MsgSealBatch is the Msg/MintBatchCredits request type. */
@@ -641,7 +641,7 @@ export interface MsgSendAmino {
   credits: MsgSend_SendCreditsAmino[];
 }
 export interface MsgSendAminoMsg {
-  type: "/regen.ecocredit.v1.MsgSend";
+  type: "regen/MsgSend";
   value: MsgSendAmino;
 }
 /** MsgSend is the Msg/Send request type. */
@@ -838,7 +838,7 @@ export interface MsgRetireAmino {
   reason: string;
 }
 export interface MsgRetireAminoMsg {
-  type: "/regen.ecocredit.v1.MsgRetire";
+  type: "regen/MsgRetire";
   value: MsgRetireAmino;
 }
 /** MsgRetire is the Msg/Retire request type. */
@@ -901,7 +901,7 @@ export interface MsgCancelAmino {
   reason: string;
 }
 export interface MsgCancelAminoMsg {
-  type: "/regen.ecocredit.v1.MsgCancel";
+  type: "regen/MsgCancel";
   value: MsgCancelAmino;
 }
 /** MsgCancel is the Msg/Cancel request type. */
@@ -969,7 +969,7 @@ export interface MsgUpdateClassAdminAmino {
   new_admin: string;
 }
 export interface MsgUpdateClassAdminAminoMsg {
-  type: "/regen.ecocredit.v1.MsgUpdateClassAdmin";
+  type: "regen/MsgUpdateClassAdmin";
   value: MsgUpdateClassAdminAmino;
 }
 /** MsgUpdateClassAdmin is the Msg/UpdateClassAdmin request type. */
@@ -1043,7 +1043,7 @@ export interface MsgUpdateClassIssuersAmino {
   remove_issuers: string[];
 }
 export interface MsgUpdateClassIssuersAminoMsg {
-  type: "/regen.ecocredit.v1.MsgUpdateClassIssuers";
+  type: "regen/MsgUpdateClassIssuers";
   value: MsgUpdateClassIssuersAmino;
 }
 /** MsgUpdateClassIssuers is the Msg/UpdateClassIssuers request type. */
@@ -1108,7 +1108,7 @@ export interface MsgUpdateClassMetadataAmino {
   new_metadata: string;
 }
 export interface MsgUpdateClassMetadataAminoMsg {
-  type: "/regen.ecocredit.v1.MsgUpdateClassMetadata";
+  type: "regen/MsgUpdateClassMetadata";
   value: MsgUpdateClassMetadataAmino;
 }
 /** MsgUpdateClassMetadata is the Msg/UpdateClassMetadata request type. */
@@ -1176,7 +1176,7 @@ export interface MsgUpdateProjectAdminAmino {
   new_admin: string;
 }
 export interface MsgUpdateProjectAdminAminoMsg {
-  type: "/regen.ecocredit.v1.MsgUpdateProjectAdmin";
+  type: "regen/MsgUpdateProjectAdmin";
   value: MsgUpdateProjectAdminAmino;
 }
 /** MsgUpdateProjectAdmin is the Msg/UpdateProjectAdmin request type. */
@@ -1240,7 +1240,7 @@ export interface MsgUpdateProjectMetadataAmino {
   new_metadata: string;
 }
 export interface MsgUpdateProjectMetadataAminoMsg {
-  type: "/regen.ecocredit.v1.MsgUpdateProjectMetadata";
+  type: "regen/MsgUpdateProjectMetadata";
   value: MsgUpdateProjectMetadataAmino;
 }
 /** MsgUpdateProjectMetadata is the Msg/UpdateProjectMetadata request type. */
@@ -1311,7 +1311,7 @@ export interface MsgBridgeAmino {
   credits: CreditsAmino[];
 }
 export interface MsgBridgeAminoMsg {
-  type: "/regen.ecocredit.v1.MsgBridge";
+  type: "regen/MsgBridge";
   value: MsgBridgeAmino;
 }
 /** MsgBridge is the Msg/Bridge request type. */
@@ -1367,7 +1367,7 @@ export interface MsgUpdateBatchMetadataAmino {
   new_metadata: string;
 }
 export interface MsgUpdateBatchMetadataAminoMsg {
-  type: "/regen.ecocredit.v1.MsgUpdateBatchMetadata";
+  type: "regen/MsgUpdateBatchMetadata";
   value: MsgUpdateBatchMetadataAmino;
 }
 /**
@@ -1483,7 +1483,7 @@ export interface MsgBridgeReceiveAmino {
   origin_tx?: OriginTxAmino;
 }
 export interface MsgBridgeReceiveAminoMsg {
-  type: "/regen.ecocredit.v1.MsgBridgeReceive";
+  type: "regen/MsgBridgeReceive";
   value: MsgBridgeReceiveAmino;
 }
 /** MsgBridgeReceive is the Msg/BridgeReceive request type. */
@@ -1698,7 +1698,7 @@ export interface MsgAddClassCreatorAmino {
   creator: string;
 }
 export interface MsgAddClassCreatorAminoMsg {
-  type: "/regen.ecocredit.v1.MsgAddClassCreator";
+  type: "regen/MsgAddClassCreator";
   value: MsgAddClassCreatorAmino;
 }
 /**
@@ -1773,7 +1773,7 @@ export interface MsgSetClassCreatorAllowlistAmino {
   enabled: boolean;
 }
 export interface MsgSetClassCreatorAllowlistAminoMsg {
-  type: "/regen.ecocredit.v1.MsgSetClassCreatorAllowlist";
+  type: "regen/MsgSetClassCreatorAllowlist";
   value: MsgSetClassCreatorAllowlistAmino;
 }
 /**
@@ -1850,7 +1850,7 @@ export interface MsgRemoveClassCreatorAmino {
   creator: string;
 }
 export interface MsgRemoveClassCreatorAminoMsg {
-  type: "/regen.ecocredit.v1.MsgRemoveClassCreator";
+  type: "regen/MsgRemoveClassCreator";
   value: MsgRemoveClassCreatorAmino;
 }
 /**
@@ -1929,7 +1929,7 @@ export interface MsgUpdateClassFeeAmino {
   fee?: CoinAmino;
 }
 export interface MsgUpdateClassFeeAminoMsg {
-  type: "/regen.ecocredit.v1.MsgUpdateClassFee";
+  type: "regen/MsgUpdateClassFee";
   value: MsgUpdateClassFeeAmino;
 }
 /**
@@ -2008,7 +2008,7 @@ export interface MsgAddAllowedBridgeChainAmino {
   chain_name: string;
 }
 export interface MsgAddAllowedBridgeChainAminoMsg {
-  type: "/regen.ecocredit.v1.MsgAddAllowedBridgeChain";
+  type: "regen/MsgAddAllowedBridgeChain";
   value: MsgAddAllowedBridgeChainAmino;
 }
 /**
@@ -2090,7 +2090,7 @@ export interface MsgRemoveAllowedBridgeChainAmino {
   chain_name: string;
 }
 export interface MsgRemoveAllowedBridgeChainAminoMsg {
-  type: "/regen.ecocredit.v1.MsgRemoveAllowedBridgeChain";
+  type: "regen/MsgRemoveAllowedBridgeChain";
   value: MsgRemoveAllowedBridgeChainAmino;
 }
 /**
@@ -2219,6 +2219,13 @@ export const MsgAddCreditType = {
 
   fromAminoMsg(object: MsgAddCreditTypeAminoMsg): MsgAddCreditType {
     return MsgAddCreditType.fromAmino(object.value);
+  },
+
+  toAminoMsg(message: MsgAddCreditType): MsgAddCreditTypeAminoMsg {
+    return {
+      type: "regen/MsgAddCreditType",
+      value: MsgAddCreditType.toAmino(message)
+    };
   },
 
   fromProtoMsg(message: MsgAddCreditTypeProtoMsg): MsgAddCreditType {
@@ -2446,6 +2453,13 @@ export const MsgCreateClass = {
 
   fromAminoMsg(object: MsgCreateClassAminoMsg): MsgCreateClass {
     return MsgCreateClass.fromAmino(object.value);
+  },
+
+  toAminoMsg(message: MsgCreateClass): MsgCreateClassAminoMsg {
+    return {
+      type: "regen/MsgCreateClass",
+      value: MsgCreateClass.toAmino(message)
+    };
   },
 
   fromProtoMsg(message: MsgCreateClassProtoMsg): MsgCreateClass {
@@ -2678,6 +2692,13 @@ export const MsgCreateProject = {
 
   fromAminoMsg(object: MsgCreateProjectAminoMsg): MsgCreateProject {
     return MsgCreateProject.fromAmino(object.value);
+  },
+
+  toAminoMsg(message: MsgCreateProject): MsgCreateProjectAminoMsg {
+    return {
+      type: "regen/MsgCreateProject",
+      value: MsgCreateProject.toAmino(message)
+    };
   },
 
   fromProtoMsg(message: MsgCreateProjectProtoMsg): MsgCreateProject {
@@ -2966,6 +2987,13 @@ export const MsgCreateBatch = {
     return MsgCreateBatch.fromAmino(object.value);
   },
 
+  toAminoMsg(message: MsgCreateBatch): MsgCreateBatchAminoMsg {
+    return {
+      type: "regen/MsgCreateBatch",
+      value: MsgCreateBatch.toAmino(message)
+    };
+  },
+
   fromProtoMsg(message: MsgCreateBatchProtoMsg): MsgCreateBatch {
     return MsgCreateBatch.decode(message.value);
   },
@@ -3196,6 +3224,13 @@ export const MsgMintBatchCredits = {
     return MsgMintBatchCredits.fromAmino(object.value);
   },
 
+  toAminoMsg(message: MsgMintBatchCredits): MsgMintBatchCreditsAminoMsg {
+    return {
+      type: "regen/MsgMintBatchCredits",
+      value: MsgMintBatchCredits.toAmino(message)
+    };
+  },
+
   fromProtoMsg(message: MsgMintBatchCreditsProtoMsg): MsgMintBatchCredits {
     return MsgMintBatchCredits.decode(message.value);
   },
@@ -3367,6 +3402,13 @@ export const MsgSealBatch = {
 
   fromAminoMsg(object: MsgSealBatchAminoMsg): MsgSealBatch {
     return MsgSealBatch.fromAmino(object.value);
+  },
+
+  toAminoMsg(message: MsgSealBatch): MsgSealBatchAminoMsg {
+    return {
+      type: "regen/MsgSealBatch",
+      value: MsgSealBatch.toAmino(message)
+    };
   },
 
   fromProtoMsg(message: MsgSealBatchProtoMsg): MsgSealBatch {
@@ -3566,6 +3608,13 @@ export const MsgSend = {
 
   fromAminoMsg(object: MsgSendAminoMsg): MsgSend {
     return MsgSend.fromAmino(object.value);
+  },
+
+  toAminoMsg(message: MsgSend): MsgSendAminoMsg {
+    return {
+      type: "regen/MsgSend",
+      value: MsgSend.toAmino(message)
+    };
   },
 
   fromProtoMsg(message: MsgSendProtoMsg): MsgSend {
@@ -3925,6 +3974,13 @@ export const MsgRetire = {
     return MsgRetire.fromAmino(object.value);
   },
 
+  toAminoMsg(message: MsgRetire): MsgRetireAminoMsg {
+    return {
+      type: "regen/MsgRetire",
+      value: MsgRetire.toAmino(message)
+    };
+  },
+
   fromProtoMsg(message: MsgRetireProtoMsg): MsgRetire {
     return MsgRetire.decode(message.value);
   },
@@ -4124,6 +4180,13 @@ export const MsgCancel = {
     return MsgCancel.fromAmino(object.value);
   },
 
+  toAminoMsg(message: MsgCancel): MsgCancelAminoMsg {
+    return {
+      type: "regen/MsgCancel",
+      value: MsgCancel.toAmino(message)
+    };
+  },
+
   fromProtoMsg(message: MsgCancelProtoMsg): MsgCancel {
     return MsgCancel.decode(message.value);
   },
@@ -4309,6 +4372,13 @@ export const MsgUpdateClassAdmin = {
 
   fromAminoMsg(object: MsgUpdateClassAdminAminoMsg): MsgUpdateClassAdmin {
     return MsgUpdateClassAdmin.fromAmino(object.value);
+  },
+
+  toAminoMsg(message: MsgUpdateClassAdmin): MsgUpdateClassAdminAminoMsg {
+    return {
+      type: "regen/MsgUpdateClassAdmin",
+      value: MsgUpdateClassAdmin.toAmino(message)
+    };
   },
 
   fromProtoMsg(message: MsgUpdateClassAdminProtoMsg): MsgUpdateClassAdmin {
@@ -4534,6 +4604,13 @@ export const MsgUpdateClassIssuers = {
     return MsgUpdateClassIssuers.fromAmino(object.value);
   },
 
+  toAminoMsg(message: MsgUpdateClassIssuers): MsgUpdateClassIssuersAminoMsg {
+    return {
+      type: "regen/MsgUpdateClassIssuers",
+      value: MsgUpdateClassIssuers.toAmino(message)
+    };
+  },
+
   fromProtoMsg(message: MsgUpdateClassIssuersProtoMsg): MsgUpdateClassIssuers {
     return MsgUpdateClassIssuers.decode(message.value);
   },
@@ -4719,6 +4796,13 @@ export const MsgUpdateClassMetadata = {
 
   fromAminoMsg(object: MsgUpdateClassMetadataAminoMsg): MsgUpdateClassMetadata {
     return MsgUpdateClassMetadata.fromAmino(object.value);
+  },
+
+  toAminoMsg(message: MsgUpdateClassMetadata): MsgUpdateClassMetadataAminoMsg {
+    return {
+      type: "regen/MsgUpdateClassMetadata",
+      value: MsgUpdateClassMetadata.toAmino(message)
+    };
   },
 
   fromProtoMsg(message: MsgUpdateClassMetadataProtoMsg): MsgUpdateClassMetadata {
@@ -4908,6 +4992,13 @@ export const MsgUpdateProjectAdmin = {
     return MsgUpdateProjectAdmin.fromAmino(object.value);
   },
 
+  toAminoMsg(message: MsgUpdateProjectAdmin): MsgUpdateProjectAdminAminoMsg {
+    return {
+      type: "regen/MsgUpdateProjectAdmin",
+      value: MsgUpdateProjectAdmin.toAmino(message)
+    };
+  },
+
   fromProtoMsg(message: MsgUpdateProjectAdminProtoMsg): MsgUpdateProjectAdmin {
     return MsgUpdateProjectAdmin.decode(message.value);
   },
@@ -5093,6 +5184,13 @@ export const MsgUpdateProjectMetadata = {
 
   fromAminoMsg(object: MsgUpdateProjectMetadataAminoMsg): MsgUpdateProjectMetadata {
     return MsgUpdateProjectMetadata.fromAmino(object.value);
+  },
+
+  toAminoMsg(message: MsgUpdateProjectMetadata): MsgUpdateProjectMetadataAminoMsg {
+    return {
+      type: "regen/MsgUpdateProjectMetadata",
+      value: MsgUpdateProjectMetadata.toAmino(message)
+    };
   },
 
   fromProtoMsg(message: MsgUpdateProjectMetadataProtoMsg): MsgUpdateProjectMetadata {
@@ -5308,6 +5406,13 @@ export const MsgBridge = {
     return MsgBridge.fromAmino(object.value);
   },
 
+  toAminoMsg(message: MsgBridge): MsgBridgeAminoMsg {
+    return {
+      type: "regen/MsgBridge",
+      value: MsgBridge.toAmino(message)
+    };
+  },
+
   fromProtoMsg(message: MsgBridgeProtoMsg): MsgBridge {
     return MsgBridge.decode(message.value);
   },
@@ -5422,6 +5527,13 @@ export const MsgUpdateBatchMetadata = {
 
   fromAminoMsg(object: MsgUpdateBatchMetadataAminoMsg): MsgUpdateBatchMetadata {
     return MsgUpdateBatchMetadata.fromAmino(object.value);
+  },
+
+  toAminoMsg(message: MsgUpdateBatchMetadata): MsgUpdateBatchMetadataAminoMsg {
+    return {
+      type: "regen/MsgUpdateBatchMetadata",
+      value: MsgUpdateBatchMetadata.toAmino(message)
+    };
   },
 
   fromProtoMsg(message: MsgUpdateBatchMetadataProtoMsg): MsgUpdateBatchMetadata {
@@ -5708,6 +5820,13 @@ export const MsgBridgeReceive = {
 
   fromAminoMsg(object: MsgBridgeReceiveAminoMsg): MsgBridgeReceive {
     return MsgBridgeReceive.fromAmino(object.value);
+  },
+
+  toAminoMsg(message: MsgBridgeReceive): MsgBridgeReceiveAminoMsg {
+    return {
+      type: "regen/MsgBridgeReceive",
+      value: MsgBridgeReceive.toAmino(message)
+    };
   },
 
   fromProtoMsg(message: MsgBridgeReceiveProtoMsg): MsgBridgeReceive {
@@ -6174,6 +6293,13 @@ export const MsgAddClassCreator = {
     return MsgAddClassCreator.fromAmino(object.value);
   },
 
+  toAminoMsg(message: MsgAddClassCreator): MsgAddClassCreatorAminoMsg {
+    return {
+      type: "regen/MsgAddClassCreator",
+      value: MsgAddClassCreator.toAmino(message)
+    };
+  },
+
   fromProtoMsg(message: MsgAddClassCreatorProtoMsg): MsgAddClassCreator {
     return MsgAddClassCreator.decode(message.value);
   },
@@ -6345,6 +6471,13 @@ export const MsgSetClassCreatorAllowlist = {
 
   fromAminoMsg(object: MsgSetClassCreatorAllowlistAminoMsg): MsgSetClassCreatorAllowlist {
     return MsgSetClassCreatorAllowlist.fromAmino(object.value);
+  },
+
+  toAminoMsg(message: MsgSetClassCreatorAllowlist): MsgSetClassCreatorAllowlistAminoMsg {
+    return {
+      type: "regen/MsgSetClassCreatorAllowlist",
+      value: MsgSetClassCreatorAllowlist.toAmino(message)
+    };
   },
 
   fromProtoMsg(message: MsgSetClassCreatorAllowlistProtoMsg): MsgSetClassCreatorAllowlist {
@@ -6520,6 +6653,13 @@ export const MsgRemoveClassCreator = {
     return MsgRemoveClassCreator.fromAmino(object.value);
   },
 
+  toAminoMsg(message: MsgRemoveClassCreator): MsgRemoveClassCreatorAminoMsg {
+    return {
+      type: "regen/MsgRemoveClassCreator",
+      value: MsgRemoveClassCreator.toAmino(message)
+    };
+  },
+
   fromProtoMsg(message: MsgRemoveClassCreatorProtoMsg): MsgRemoveClassCreator {
     return MsgRemoveClassCreator.decode(message.value);
   },
@@ -6691,6 +6831,13 @@ export const MsgUpdateClassFee = {
 
   fromAminoMsg(object: MsgUpdateClassFeeAminoMsg): MsgUpdateClassFee {
     return MsgUpdateClassFee.fromAmino(object.value);
+  },
+
+  toAminoMsg(message: MsgUpdateClassFee): MsgUpdateClassFeeAminoMsg {
+    return {
+      type: "regen/MsgUpdateClassFee",
+      value: MsgUpdateClassFee.toAmino(message)
+    };
   },
 
   fromProtoMsg(message: MsgUpdateClassFeeProtoMsg): MsgUpdateClassFee {
@@ -6866,6 +7013,13 @@ export const MsgAddAllowedBridgeChain = {
     return MsgAddAllowedBridgeChain.fromAmino(object.value);
   },
 
+  toAminoMsg(message: MsgAddAllowedBridgeChain): MsgAddAllowedBridgeChainAminoMsg {
+    return {
+      type: "regen/MsgAddAllowedBridgeChain",
+      value: MsgAddAllowedBridgeChain.toAmino(message)
+    };
+  },
+
   fromProtoMsg(message: MsgAddAllowedBridgeChainProtoMsg): MsgAddAllowedBridgeChain {
     return MsgAddAllowedBridgeChain.decode(message.value);
   },
@@ -7037,6 +7191,13 @@ export const MsgRemoveAllowedBridgeChain = {
 
   fromAminoMsg(object: MsgRemoveAllowedBridgeChainAminoMsg): MsgRemoveAllowedBridgeChain {
     return MsgRemoveAllowedBridgeChain.fromAmino(object.value);
+  },
+
+  toAminoMsg(message: MsgRemoveAllowedBridgeChain): MsgRemoveAllowedBridgeChainAminoMsg {
+    return {
+      type: "regen/MsgRemoveAllowedBridgeChain",
+      value: MsgRemoveAllowedBridgeChain.toAmino(message)
+    };
   },
 
   fromProtoMsg(message: MsgRemoveAllowedBridgeChainProtoMsg): MsgRemoveAllowedBridgeChain {

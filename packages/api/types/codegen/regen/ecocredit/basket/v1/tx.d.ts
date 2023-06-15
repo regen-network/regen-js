@@ -134,7 +134,7 @@ export interface MsgCreateAmino {
     fee: CoinAmino[];
 }
 export interface MsgCreateAminoMsg {
-    type: "/regen.ecocredit.basket.v1.MsgCreate";
+    type: "regen.basket/MsgCreate";
     value: MsgCreateAmino;
 }
 /** MsgCreateBasket is the Msg/CreateBasket request type. */
@@ -201,7 +201,7 @@ export interface MsgPutAmino {
     credits: BasketCreditAmino[];
 }
 export interface MsgPutAminoMsg {
-    type: "/regen.ecocredit.basket.v1.MsgPut";
+    type: "regen.basket/MsgPut";
     value: MsgPutAmino;
 }
 /** MsgAddToBasket is the Msg/AddToBasket request type. */
@@ -321,7 +321,7 @@ export interface MsgTakeAmino {
     retirement_reason: string;
 }
 export interface MsgTakeAminoMsg {
-    type: "/regen.ecocredit.basket.v1.MsgTake";
+    type: "regen.basket/MsgTake";
     value: MsgTakeAmino;
 }
 /** MsgTakeFromBasket is the Msg/TakeFromBasket request type. */
@@ -390,7 +390,7 @@ export interface MsgUpdateBasketFeeAmino {
     fee?: CoinAmino;
 }
 export interface MsgUpdateBasketFeeAminoMsg {
-    type: "/regen.ecocredit.basket.v1.MsgUpdateBasketFee";
+    type: "regen.basket/MsgUpdateBasketFee";
     value: MsgUpdateBasketFeeAmino;
 }
 /**
@@ -468,7 +468,7 @@ export interface MsgUpdateCuratorAmino {
     new_curator: string;
 }
 export interface MsgUpdateCuratorAminoMsg {
-    type: "/regen.ecocredit.basket.v1.MsgUpdateCurator";
+    type: "regen.basket/MsgUpdateCurator";
     value: MsgUpdateCuratorAmino;
 }
 /**
@@ -547,7 +547,7 @@ export interface MsgUpdateDateCriteriaAmino {
     new_date_criteria?: DateCriteriaAmino;
 }
 export interface MsgUpdateDateCriteriaAminoMsg {
-    type: "/regen.ecocredit.basket.v1.MsgUpdateDateCriteria";
+    type: "regen.basket/MsgUpdateDateCriteria";
     value: MsgUpdateDateCriteriaAmino;
 }
 /**
@@ -598,6 +598,7 @@ export declare const MsgCreate: {
     fromAmino(object: MsgCreateAmino): MsgCreate;
     toAmino(message: MsgCreate): MsgCreateAmino;
     fromAminoMsg(object: MsgCreateAminoMsg): MsgCreate;
+    toAminoMsg(message: MsgCreate): MsgCreateAminoMsg;
     fromProtoMsg(message: MsgCreateProtoMsg): MsgCreate;
     toProto(message: MsgCreate): Uint8Array;
     toProtoMsg(message: MsgCreate): MsgCreateProtoMsg;
@@ -624,6 +625,7 @@ export declare const MsgPut: {
     fromAmino(object: MsgPutAmino): MsgPut;
     toAmino(message: MsgPut): MsgPutAmino;
     fromAminoMsg(object: MsgPutAminoMsg): MsgPut;
+    toAminoMsg(message: MsgPut): MsgPutAminoMsg;
     fromProtoMsg(message: MsgPutProtoMsg): MsgPut;
     toProto(message: MsgPut): Uint8Array;
     toProtoMsg(message: MsgPut): MsgPutProtoMsg;
@@ -650,6 +652,7 @@ export declare const MsgTake: {
     fromAmino(object: MsgTakeAmino): MsgTake;
     toAmino(message: MsgTake): MsgTakeAmino;
     fromAminoMsg(object: MsgTakeAminoMsg): MsgTake;
+    toAminoMsg(message: MsgTake): MsgTakeAminoMsg;
     fromProtoMsg(message: MsgTakeProtoMsg): MsgTake;
     toProto(message: MsgTake): Uint8Array;
     toProtoMsg(message: MsgTake): MsgTakeProtoMsg;
@@ -676,6 +679,7 @@ export declare const MsgUpdateBasketFee: {
     fromAmino(object: MsgUpdateBasketFeeAmino): MsgUpdateBasketFee;
     toAmino(message: MsgUpdateBasketFee): MsgUpdateBasketFeeAmino;
     fromAminoMsg(object: MsgUpdateBasketFeeAminoMsg): MsgUpdateBasketFee;
+    toAminoMsg(message: MsgUpdateBasketFee): MsgUpdateBasketFeeAminoMsg;
     fromProtoMsg(message: MsgUpdateBasketFeeProtoMsg): MsgUpdateBasketFee;
     toProto(message: MsgUpdateBasketFee): Uint8Array;
     toProtoMsg(message: MsgUpdateBasketFee): MsgUpdateBasketFeeProtoMsg;
@@ -702,6 +706,7 @@ export declare const MsgUpdateCurator: {
     fromAmino(object: MsgUpdateCuratorAmino): MsgUpdateCurator;
     toAmino(message: MsgUpdateCurator): MsgUpdateCuratorAmino;
     fromAminoMsg(object: MsgUpdateCuratorAminoMsg): MsgUpdateCurator;
+    toAminoMsg(message: MsgUpdateCurator): MsgUpdateCuratorAminoMsg;
     fromProtoMsg(message: MsgUpdateCuratorProtoMsg): MsgUpdateCurator;
     toProto(message: MsgUpdateCurator): Uint8Array;
     toProtoMsg(message: MsgUpdateCurator): MsgUpdateCuratorProtoMsg;
@@ -728,6 +733,7 @@ export declare const MsgUpdateDateCriteria: {
     fromAmino(object: MsgUpdateDateCriteriaAmino): MsgUpdateDateCriteria;
     toAmino(message: MsgUpdateDateCriteria): MsgUpdateDateCriteriaAmino;
     fromAminoMsg(object: MsgUpdateDateCriteriaAminoMsg): MsgUpdateDateCriteria;
+    toAminoMsg(message: MsgUpdateDateCriteria): MsgUpdateDateCriteriaAminoMsg;
     fromProtoMsg(message: MsgUpdateDateCriteriaProtoMsg): MsgUpdateDateCriteria;
     toProto(message: MsgUpdateDateCriteria): Uint8Array;
     toProtoMsg(message: MsgUpdateDateCriteria): MsgUpdateDateCriteriaProtoMsg;

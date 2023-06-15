@@ -21,7 +21,7 @@ export interface MsgSellAmino {
     orders: MsgSell_OrderAmino[];
 }
 export interface MsgSellAminoMsg {
-    type: "/regen.ecocredit.marketplace.v1.MsgSell";
+    type: "regen.marketplace/MsgSell";
     value: MsgSellAmino;
 }
 /** MsgSell is the Msg/Sell request type. */
@@ -146,7 +146,7 @@ export interface MsgUpdateSellOrdersAmino {
     updates: MsgUpdateSellOrders_UpdateAmino[];
 }
 export interface MsgUpdateSellOrdersAminoMsg {
-    type: "/regen.ecocredit.marketplace.v1.MsgUpdateSellOrders";
+    type: "regen.marketplace/MsgUpdateSellOrders";
     value: MsgUpdateSellOrdersAmino;
 }
 /** MsgUpdateSellOrders is the Msg/UpdateSellOrders request type. */
@@ -250,7 +250,7 @@ export interface MsgCancelSellOrderAmino {
     sell_order_id: string;
 }
 export interface MsgCancelSellOrderAminoMsg {
-    type: "/regen.ecocredit.marketplace.v1.MsgCancelSellOrder";
+    type: "regen.marketplace/MsgCancelSellOrder";
     value: MsgCancelSellOrderAmino;
 }
 /** MsgCancelSellOrder is the Msg/CancelSellOrder request type. */
@@ -294,7 +294,7 @@ export interface MsgBuyDirectAmino {
     orders: MsgBuyDirect_OrderAmino[];
 }
 export interface MsgBuyDirectAminoMsg {
-    type: "/regen.ecocredit.marketplace.v1.MsgBuyDirect";
+    type: "regen.marketplace/MsgBuyDirect";
     value: MsgBuyDirectAmino;
 }
 /** MsgBuyDirect is the Msg/BuyDirect request type. */
@@ -451,7 +451,7 @@ export interface MsgAddAllowedDenomAmino {
     exponent: number;
 }
 export interface MsgAddAllowedDenomAminoMsg {
-    type: "/regen.ecocredit.marketplace.v1.MsgAddAllowedDenom";
+    type: "regen.marketplace/MsgAddAllowedDenom";
     value: MsgAddAllowedDenomAmino;
 }
 /**
@@ -521,7 +521,7 @@ export interface MsgRemoveAllowedDenomAmino {
     denom: string;
 }
 export interface MsgRemoveAllowedDenomAminoMsg {
-    type: "/regen.ecocredit.marketplace.v1.MsgRemoveAllowedDenom";
+    type: "regen.marketplace/MsgRemoveAllowedDenom";
     value: MsgRemoveAllowedDenomAmino;
 }
 /**
@@ -571,6 +571,7 @@ export declare const MsgSell: {
     fromAmino(object: MsgSellAmino): MsgSell;
     toAmino(message: MsgSell): MsgSellAmino;
     fromAminoMsg(object: MsgSellAminoMsg): MsgSell;
+    toAminoMsg(message: MsgSell): MsgSellAminoMsg;
     fromProtoMsg(message: MsgSellProtoMsg): MsgSell;
     toProto(message: MsgSell): Uint8Array;
     toProtoMsg(message: MsgSell): MsgSellProtoMsg;
@@ -610,6 +611,7 @@ export declare const MsgUpdateSellOrders: {
     fromAmino(object: MsgUpdateSellOrdersAmino): MsgUpdateSellOrders;
     toAmino(message: MsgUpdateSellOrders): MsgUpdateSellOrdersAmino;
     fromAminoMsg(object: MsgUpdateSellOrdersAminoMsg): MsgUpdateSellOrders;
+    toAminoMsg(message: MsgUpdateSellOrders): MsgUpdateSellOrdersAminoMsg;
     fromProtoMsg(message: MsgUpdateSellOrdersProtoMsg): MsgUpdateSellOrders;
     toProto(message: MsgUpdateSellOrders): Uint8Array;
     toProtoMsg(message: MsgUpdateSellOrders): MsgUpdateSellOrdersProtoMsg;
@@ -649,6 +651,7 @@ export declare const MsgCancelSellOrder: {
     fromAmino(object: MsgCancelSellOrderAmino): MsgCancelSellOrder;
     toAmino(message: MsgCancelSellOrder): MsgCancelSellOrderAmino;
     fromAminoMsg(object: MsgCancelSellOrderAminoMsg): MsgCancelSellOrder;
+    toAminoMsg(message: MsgCancelSellOrder): MsgCancelSellOrderAminoMsg;
     fromProtoMsg(message: MsgCancelSellOrderProtoMsg): MsgCancelSellOrder;
     toProto(message: MsgCancelSellOrder): Uint8Array;
     toProtoMsg(message: MsgCancelSellOrder): MsgCancelSellOrderProtoMsg;
@@ -675,6 +678,7 @@ export declare const MsgBuyDirect: {
     fromAmino(object: MsgBuyDirectAmino): MsgBuyDirect;
     toAmino(message: MsgBuyDirect): MsgBuyDirectAmino;
     fromAminoMsg(object: MsgBuyDirectAminoMsg): MsgBuyDirect;
+    toAminoMsg(message: MsgBuyDirect): MsgBuyDirectAminoMsg;
     fromProtoMsg(message: MsgBuyDirectProtoMsg): MsgBuyDirect;
     toProto(message: MsgBuyDirect): Uint8Array;
     toProtoMsg(message: MsgBuyDirect): MsgBuyDirectProtoMsg;
@@ -714,6 +718,7 @@ export declare const MsgAddAllowedDenom: {
     fromAmino(object: MsgAddAllowedDenomAmino): MsgAddAllowedDenom;
     toAmino(message: MsgAddAllowedDenom): MsgAddAllowedDenomAmino;
     fromAminoMsg(object: MsgAddAllowedDenomAminoMsg): MsgAddAllowedDenom;
+    toAminoMsg(message: MsgAddAllowedDenom): MsgAddAllowedDenomAminoMsg;
     fromProtoMsg(message: MsgAddAllowedDenomProtoMsg): MsgAddAllowedDenom;
     toProto(message: MsgAddAllowedDenom): Uint8Array;
     toProtoMsg(message: MsgAddAllowedDenom): MsgAddAllowedDenomProtoMsg;
@@ -740,6 +745,7 @@ export declare const MsgRemoveAllowedDenom: {
     fromAmino(object: MsgRemoveAllowedDenomAmino): MsgRemoveAllowedDenom;
     toAmino(message: MsgRemoveAllowedDenom): MsgRemoveAllowedDenomAmino;
     fromAminoMsg(object: MsgRemoveAllowedDenomAminoMsg): MsgRemoveAllowedDenom;
+    toAminoMsg(message: MsgRemoveAllowedDenom): MsgRemoveAllowedDenomAminoMsg;
     fromProtoMsg(message: MsgRemoveAllowedDenomProtoMsg): MsgRemoveAllowedDenom;
     toProto(message: MsgRemoveAllowedDenom): Uint8Array;
     toProtoMsg(message: MsgRemoveAllowedDenom): MsgRemoveAllowedDenomProtoMsg;

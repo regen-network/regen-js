@@ -155,7 +155,7 @@ export interface MsgCreateAmino {
   fee: CoinAmino[];
 }
 export interface MsgCreateAminoMsg {
-  type: "/regen.ecocredit.basket.v1.MsgCreate";
+  type: "regen.basket/MsgCreate";
   value: MsgCreateAmino;
 }
 /** MsgCreateBasket is the Msg/CreateBasket request type. */
@@ -233,7 +233,7 @@ export interface MsgPutAmino {
   credits: BasketCreditAmino[];
 }
 export interface MsgPutAminoMsg {
-  type: "/regen.ecocredit.basket.v1.MsgPut";
+  type: "regen.basket/MsgPut";
   value: MsgPutAmino;
 }
 /** MsgAddToBasket is the Msg/AddToBasket request type. */
@@ -373,7 +373,7 @@ export interface MsgTakeAmino {
   retirement_reason: string;
 }
 export interface MsgTakeAminoMsg {
-  type: "/regen.ecocredit.basket.v1.MsgTake";
+  type: "regen.basket/MsgTake";
   value: MsgTakeAmino;
 }
 /** MsgTakeFromBasket is the Msg/TakeFromBasket request type. */
@@ -451,7 +451,7 @@ export interface MsgUpdateBasketFeeAmino {
   fee?: CoinAmino;
 }
 export interface MsgUpdateBasketFeeAminoMsg {
-  type: "/regen.ecocredit.basket.v1.MsgUpdateBasketFee";
+  type: "regen.basket/MsgUpdateBasketFee";
   value: MsgUpdateBasketFeeAmino;
 }
 /**
@@ -536,7 +536,7 @@ export interface MsgUpdateCuratorAmino {
   new_curator: string;
 }
 export interface MsgUpdateCuratorAminoMsg {
-  type: "/regen.ecocredit.basket.v1.MsgUpdateCurator";
+  type: "regen.basket/MsgUpdateCurator";
   value: MsgUpdateCuratorAmino;
 }
 /**
@@ -622,7 +622,7 @@ export interface MsgUpdateDateCriteriaAmino {
   new_date_criteria?: DateCriteriaAmino;
 }
 export interface MsgUpdateDateCriteriaAminoMsg {
-  type: "/regen.ecocredit.basket.v1.MsgUpdateDateCriteria";
+  type: "regen.basket/MsgUpdateDateCriteria";
   value: MsgUpdateDateCriteriaAmino;
 }
 /**
@@ -873,6 +873,13 @@ export const MsgCreate = {
     return MsgCreate.fromAmino(object.value);
   },
 
+  toAminoMsg(message: MsgCreate): MsgCreateAminoMsg {
+    return {
+      type: "regen.basket/MsgCreate",
+      value: MsgCreate.toAmino(message)
+    };
+  },
+
   fromProtoMsg(message: MsgCreateProtoMsg): MsgCreate {
     return MsgCreate.decode(message.value);
   },
@@ -1087,6 +1094,13 @@ export const MsgPut = {
 
   fromAminoMsg(object: MsgPutAminoMsg): MsgPut {
     return MsgPut.fromAmino(object.value);
+  },
+
+  toAminoMsg(message: MsgPut): MsgPutAminoMsg {
+    return {
+      type: "regen.basket/MsgPut",
+      value: MsgPut.toAmino(message)
+    };
   },
 
   fromProtoMsg(message: MsgPutProtoMsg): MsgPut {
@@ -1349,6 +1363,13 @@ export const MsgTake = {
     return MsgTake.fromAmino(object.value);
   },
 
+  toAminoMsg(message: MsgTake): MsgTakeAminoMsg {
+    return {
+      type: "regen.basket/MsgTake",
+      value: MsgTake.toAmino(message)
+    };
+  },
+
   fromProtoMsg(message: MsgTakeProtoMsg): MsgTake {
     return MsgTake.decode(message.value);
   },
@@ -1551,6 +1572,13 @@ export const MsgUpdateBasketFee = {
     return MsgUpdateBasketFee.fromAmino(object.value);
   },
 
+  toAminoMsg(message: MsgUpdateBasketFee): MsgUpdateBasketFeeAminoMsg {
+    return {
+      type: "regen.basket/MsgUpdateBasketFee",
+      value: MsgUpdateBasketFee.toAmino(message)
+    };
+  },
+
   fromProtoMsg(message: MsgUpdateBasketFeeProtoMsg): MsgUpdateBasketFee {
     return MsgUpdateBasketFee.decode(message.value);
   },
@@ -1738,6 +1766,13 @@ export const MsgUpdateCurator = {
     return MsgUpdateCurator.fromAmino(object.value);
   },
 
+  toAminoMsg(message: MsgUpdateCurator): MsgUpdateCuratorAminoMsg {
+    return {
+      type: "regen.basket/MsgUpdateCurator",
+      value: MsgUpdateCurator.toAmino(message)
+    };
+  },
+
   fromProtoMsg(message: MsgUpdateCuratorProtoMsg): MsgUpdateCurator {
     return MsgUpdateCurator.decode(message.value);
   },
@@ -1923,6 +1958,13 @@ export const MsgUpdateDateCriteria = {
 
   fromAminoMsg(object: MsgUpdateDateCriteriaAminoMsg): MsgUpdateDateCriteria {
     return MsgUpdateDateCriteria.fromAmino(object.value);
+  },
+
+  toAminoMsg(message: MsgUpdateDateCriteria): MsgUpdateDateCriteriaAminoMsg {
+    return {
+      type: "regen.basket/MsgUpdateDateCriteria",
+      value: MsgUpdateDateCriteria.toAmino(message)
+    };
   },
 
   fromProtoMsg(message: MsgUpdateDateCriteriaProtoMsg): MsgUpdateDateCriteria {

@@ -30,7 +30,7 @@ export interface MsgAddCreditTypeAmino {
     credit_type?: CreditTypeAmino;
 }
 export interface MsgAddCreditTypeAminoMsg {
-    type: "/regen.ecocredit.v1.MsgAddCreditType";
+    type: "regen/MsgAddCreditType";
     value: MsgAddCreditTypeAmino;
 }
 /**
@@ -140,7 +140,7 @@ export interface MsgCreateClassAmino {
     fee?: CoinAmino;
 }
 export interface MsgCreateClassAminoMsg {
-    type: "/regen.ecocredit.v1.MsgCreateClass";
+    type: "regen/MsgCreateClass";
     value: MsgCreateClassAmino;
 }
 /** MsgCreateClass is the Msg/CreateClass request type. */
@@ -250,7 +250,7 @@ export interface MsgCreateProjectAmino {
     reference_id: string;
 }
 export interface MsgCreateProjectAminoMsg {
-    type: "/regen.ecocredit.v1.MsgCreateProject";
+    type: "regen/MsgCreateProject";
     value: MsgCreateProjectAmino;
 }
 /** MsgCreateProjectResponse is the Msg/CreateProject request type. */
@@ -384,7 +384,7 @@ export interface MsgCreateBatchAmino {
     origin_tx?: OriginTxAmino;
 }
 export interface MsgCreateBatchAminoMsg {
-    type: "/regen.ecocredit.v1.MsgCreateBatch";
+    type: "regen/MsgCreateBatch";
     value: MsgCreateBatchAmino;
 }
 /** MsgCreateBatch is the Msg/CreateBatch request type. */
@@ -467,7 +467,7 @@ export interface MsgMintBatchCreditsAmino {
     origin_tx?: OriginTxAmino;
 }
 export interface MsgMintBatchCreditsAminoMsg {
-    type: "/regen.ecocredit.v1.MsgMintBatchCredits";
+    type: "regen/MsgMintBatchCredits";
     value: MsgMintBatchCreditsAmino;
 }
 /** MsgMintBatchCredits is the Msg/MintBatchCredits request type. */
@@ -519,7 +519,7 @@ export interface MsgSealBatchAmino {
     batch_denom: string;
 }
 export interface MsgSealBatchAminoMsg {
-    type: "/regen.ecocredit.v1.MsgSealBatch";
+    type: "regen/MsgSealBatch";
     value: MsgSealBatchAmino;
 }
 /** MsgSealBatch is the Msg/MintBatchCredits request type. */
@@ -567,7 +567,7 @@ export interface MsgSendAmino {
     credits: MsgSend_SendCreditsAmino[];
 }
 export interface MsgSendAminoMsg {
-    type: "/regen.ecocredit.v1.MsgSend";
+    type: "regen/MsgSend";
     value: MsgSendAmino;
 }
 /** MsgSend is the Msg/Send request type. */
@@ -744,7 +744,7 @@ export interface MsgRetireAmino {
     reason: string;
 }
 export interface MsgRetireAminoMsg {
-    type: "/regen.ecocredit.v1.MsgRetire";
+    type: "regen/MsgRetire";
     value: MsgRetireAmino;
 }
 /** MsgRetire is the Msg/Retire request type. */
@@ -800,7 +800,7 @@ export interface MsgCancelAmino {
     reason: string;
 }
 export interface MsgCancelAminoMsg {
-    type: "/regen.ecocredit.v1.MsgCancel";
+    type: "regen/MsgCancel";
     value: MsgCancelAmino;
 }
 /** MsgCancel is the Msg/Cancel request type. */
@@ -861,7 +861,7 @@ export interface MsgUpdateClassAdminAmino {
     new_admin: string;
 }
 export interface MsgUpdateClassAdminAminoMsg {
-    type: "/regen.ecocredit.v1.MsgUpdateClassAdmin";
+    type: "regen/MsgUpdateClassAdmin";
     value: MsgUpdateClassAdminAmino;
 }
 /** MsgUpdateClassAdmin is the Msg/UpdateClassAdmin request type. */
@@ -926,7 +926,7 @@ export interface MsgUpdateClassIssuersAmino {
     remove_issuers: string[];
 }
 export interface MsgUpdateClassIssuersAminoMsg {
-    type: "/regen.ecocredit.v1.MsgUpdateClassIssuers";
+    type: "regen/MsgUpdateClassIssuers";
     value: MsgUpdateClassIssuersAmino;
 }
 /** MsgUpdateClassIssuers is the Msg/UpdateClassIssuers request type. */
@@ -984,7 +984,7 @@ export interface MsgUpdateClassMetadataAmino {
     new_metadata: string;
 }
 export interface MsgUpdateClassMetadataAminoMsg {
-    type: "/regen.ecocredit.v1.MsgUpdateClassMetadata";
+    type: "regen/MsgUpdateClassMetadata";
     value: MsgUpdateClassMetadataAmino;
 }
 /** MsgUpdateClassMetadata is the Msg/UpdateClassMetadata request type. */
@@ -1045,7 +1045,7 @@ export interface MsgUpdateProjectAdminAmino {
     new_admin: string;
 }
 export interface MsgUpdateProjectAdminAminoMsg {
-    type: "/regen.ecocredit.v1.MsgUpdateProjectAdmin";
+    type: "regen/MsgUpdateProjectAdmin";
     value: MsgUpdateProjectAdminAmino;
 }
 /** MsgUpdateProjectAdmin is the Msg/UpdateProjectAdmin request type. */
@@ -1102,7 +1102,7 @@ export interface MsgUpdateProjectMetadataAmino {
     new_metadata: string;
 }
 export interface MsgUpdateProjectMetadataAminoMsg {
-    type: "/regen.ecocredit.v1.MsgUpdateProjectMetadata";
+    type: "regen/MsgUpdateProjectMetadata";
     value: MsgUpdateProjectMetadataAmino;
 }
 /** MsgUpdateProjectMetadata is the Msg/UpdateProjectMetadata request type. */
@@ -1164,7 +1164,7 @@ export interface MsgBridgeAmino {
     credits: CreditsAmino[];
 }
 export interface MsgBridgeAminoMsg {
-    type: "/regen.ecocredit.v1.MsgBridge";
+    type: "regen/MsgBridge";
     value: MsgBridgeAmino;
 }
 /** MsgBridge is the Msg/Bridge request type. */
@@ -1213,7 +1213,7 @@ export interface MsgUpdateBatchMetadataAmino {
     new_metadata: string;
 }
 export interface MsgUpdateBatchMetadataAminoMsg {
-    type: "/regen.ecocredit.v1.MsgUpdateBatchMetadata";
+    type: "regen/MsgUpdateBatchMetadata";
     value: MsgUpdateBatchMetadataAmino;
 }
 /**
@@ -1318,7 +1318,7 @@ export interface MsgBridgeReceiveAmino {
     origin_tx?: OriginTxAmino;
 }
 export interface MsgBridgeReceiveAminoMsg {
-    type: "/regen.ecocredit.v1.MsgBridgeReceive";
+    type: "regen/MsgBridgeReceive";
     value: MsgBridgeReceiveAmino;
 }
 /** MsgBridgeReceive is the Msg/BridgeReceive request type. */
@@ -1505,7 +1505,7 @@ export interface MsgAddClassCreatorAmino {
     creator: string;
 }
 export interface MsgAddClassCreatorAminoMsg {
-    type: "/regen.ecocredit.v1.MsgAddClassCreator";
+    type: "regen/MsgAddClassCreator";
     value: MsgAddClassCreatorAmino;
 }
 /**
@@ -1575,7 +1575,7 @@ export interface MsgSetClassCreatorAllowlistAmino {
     enabled: boolean;
 }
 export interface MsgSetClassCreatorAllowlistAminoMsg {
-    type: "/regen.ecocredit.v1.MsgSetClassCreatorAllowlist";
+    type: "regen/MsgSetClassCreatorAllowlist";
     value: MsgSetClassCreatorAllowlistAmino;
 }
 /**
@@ -1647,7 +1647,7 @@ export interface MsgRemoveClassCreatorAmino {
     creator: string;
 }
 export interface MsgRemoveClassCreatorAminoMsg {
-    type: "/regen.ecocredit.v1.MsgRemoveClassCreator";
+    type: "regen/MsgRemoveClassCreator";
     value: MsgRemoveClassCreatorAmino;
 }
 /**
@@ -1721,7 +1721,7 @@ export interface MsgUpdateClassFeeAmino {
     fee?: CoinAmino;
 }
 export interface MsgUpdateClassFeeAminoMsg {
-    type: "/regen.ecocredit.v1.MsgUpdateClassFee";
+    type: "regen/MsgUpdateClassFee";
     value: MsgUpdateClassFeeAmino;
 }
 /**
@@ -1795,7 +1795,7 @@ export interface MsgAddAllowedBridgeChainAmino {
     chain_name: string;
 }
 export interface MsgAddAllowedBridgeChainAminoMsg {
-    type: "/regen.ecocredit.v1.MsgAddAllowedBridgeChain";
+    type: "regen/MsgAddAllowedBridgeChain";
     value: MsgAddAllowedBridgeChainAmino;
 }
 /**
@@ -1872,7 +1872,7 @@ export interface MsgRemoveAllowedBridgeChainAmino {
     chain_name: string;
 }
 export interface MsgRemoveAllowedBridgeChainAminoMsg {
-    type: "/regen.ecocredit.v1.MsgRemoveAllowedBridgeChain";
+    type: "regen/MsgRemoveAllowedBridgeChain";
     value: MsgRemoveAllowedBridgeChainAmino;
 }
 /**
@@ -1925,6 +1925,7 @@ export declare const MsgAddCreditType: {
     fromAmino(object: MsgAddCreditTypeAmino): MsgAddCreditType;
     toAmino(message: MsgAddCreditType): MsgAddCreditTypeAmino;
     fromAminoMsg(object: MsgAddCreditTypeAminoMsg): MsgAddCreditType;
+    toAminoMsg(message: MsgAddCreditType): MsgAddCreditTypeAminoMsg;
     fromProtoMsg(message: MsgAddCreditTypeProtoMsg): MsgAddCreditType;
     toProto(message: MsgAddCreditType): Uint8Array;
     toProtoMsg(message: MsgAddCreditType): MsgAddCreditTypeProtoMsg;
@@ -1951,6 +1952,7 @@ export declare const MsgCreateClass: {
     fromAmino(object: MsgCreateClassAmino): MsgCreateClass;
     toAmino(message: MsgCreateClass): MsgCreateClassAmino;
     fromAminoMsg(object: MsgCreateClassAminoMsg): MsgCreateClass;
+    toAminoMsg(message: MsgCreateClass): MsgCreateClassAminoMsg;
     fromProtoMsg(message: MsgCreateClassProtoMsg): MsgCreateClass;
     toProto(message: MsgCreateClass): Uint8Array;
     toProtoMsg(message: MsgCreateClass): MsgCreateClassProtoMsg;
@@ -1977,6 +1979,7 @@ export declare const MsgCreateProject: {
     fromAmino(object: MsgCreateProjectAmino): MsgCreateProject;
     toAmino(message: MsgCreateProject): MsgCreateProjectAmino;
     fromAminoMsg(object: MsgCreateProjectAminoMsg): MsgCreateProject;
+    toAminoMsg(message: MsgCreateProject): MsgCreateProjectAminoMsg;
     fromProtoMsg(message: MsgCreateProjectProtoMsg): MsgCreateProject;
     toProto(message: MsgCreateProject): Uint8Array;
     toProtoMsg(message: MsgCreateProject): MsgCreateProjectProtoMsg;
@@ -2003,6 +2006,7 @@ export declare const MsgCreateBatch: {
     fromAmino(object: MsgCreateBatchAmino): MsgCreateBatch;
     toAmino(message: MsgCreateBatch): MsgCreateBatchAmino;
     fromAminoMsg(object: MsgCreateBatchAminoMsg): MsgCreateBatch;
+    toAminoMsg(message: MsgCreateBatch): MsgCreateBatchAminoMsg;
     fromProtoMsg(message: MsgCreateBatchProtoMsg): MsgCreateBatch;
     toProto(message: MsgCreateBatch): Uint8Array;
     toProtoMsg(message: MsgCreateBatch): MsgCreateBatchProtoMsg;
@@ -2029,6 +2033,7 @@ export declare const MsgMintBatchCredits: {
     fromAmino(object: MsgMintBatchCreditsAmino): MsgMintBatchCredits;
     toAmino(message: MsgMintBatchCredits): MsgMintBatchCreditsAmino;
     fromAminoMsg(object: MsgMintBatchCreditsAminoMsg): MsgMintBatchCredits;
+    toAminoMsg(message: MsgMintBatchCredits): MsgMintBatchCreditsAminoMsg;
     fromProtoMsg(message: MsgMintBatchCreditsProtoMsg): MsgMintBatchCredits;
     toProto(message: MsgMintBatchCredits): Uint8Array;
     toProtoMsg(message: MsgMintBatchCredits): MsgMintBatchCreditsProtoMsg;
@@ -2055,6 +2060,7 @@ export declare const MsgSealBatch: {
     fromAmino(object: MsgSealBatchAmino): MsgSealBatch;
     toAmino(message: MsgSealBatch): MsgSealBatchAmino;
     fromAminoMsg(object: MsgSealBatchAminoMsg): MsgSealBatch;
+    toAminoMsg(message: MsgSealBatch): MsgSealBatchAminoMsg;
     fromProtoMsg(message: MsgSealBatchProtoMsg): MsgSealBatch;
     toProto(message: MsgSealBatch): Uint8Array;
     toProtoMsg(message: MsgSealBatch): MsgSealBatchProtoMsg;
@@ -2081,6 +2087,7 @@ export declare const MsgSend: {
     fromAmino(object: MsgSendAmino): MsgSend;
     toAmino(message: MsgSend): MsgSendAmino;
     fromAminoMsg(object: MsgSendAminoMsg): MsgSend;
+    toAminoMsg(message: MsgSend): MsgSendAminoMsg;
     fromProtoMsg(message: MsgSendProtoMsg): MsgSend;
     toProto(message: MsgSend): Uint8Array;
     toProtoMsg(message: MsgSend): MsgSendProtoMsg;
@@ -2120,6 +2127,7 @@ export declare const MsgRetire: {
     fromAmino(object: MsgRetireAmino): MsgRetire;
     toAmino(message: MsgRetire): MsgRetireAmino;
     fromAminoMsg(object: MsgRetireAminoMsg): MsgRetire;
+    toAminoMsg(message: MsgRetire): MsgRetireAminoMsg;
     fromProtoMsg(message: MsgRetireProtoMsg): MsgRetire;
     toProto(message: MsgRetire): Uint8Array;
     toProtoMsg(message: MsgRetire): MsgRetireProtoMsg;
@@ -2146,6 +2154,7 @@ export declare const MsgCancel: {
     fromAmino(object: MsgCancelAmino): MsgCancel;
     toAmino(message: MsgCancel): MsgCancelAmino;
     fromAminoMsg(object: MsgCancelAminoMsg): MsgCancel;
+    toAminoMsg(message: MsgCancel): MsgCancelAminoMsg;
     fromProtoMsg(message: MsgCancelProtoMsg): MsgCancel;
     toProto(message: MsgCancel): Uint8Array;
     toProtoMsg(message: MsgCancel): MsgCancelProtoMsg;
@@ -2172,6 +2181,7 @@ export declare const MsgUpdateClassAdmin: {
     fromAmino(object: MsgUpdateClassAdminAmino): MsgUpdateClassAdmin;
     toAmino(message: MsgUpdateClassAdmin): MsgUpdateClassAdminAmino;
     fromAminoMsg(object: MsgUpdateClassAdminAminoMsg): MsgUpdateClassAdmin;
+    toAminoMsg(message: MsgUpdateClassAdmin): MsgUpdateClassAdminAminoMsg;
     fromProtoMsg(message: MsgUpdateClassAdminProtoMsg): MsgUpdateClassAdmin;
     toProto(message: MsgUpdateClassAdmin): Uint8Array;
     toProtoMsg(message: MsgUpdateClassAdmin): MsgUpdateClassAdminProtoMsg;
@@ -2198,6 +2208,7 @@ export declare const MsgUpdateClassIssuers: {
     fromAmino(object: MsgUpdateClassIssuersAmino): MsgUpdateClassIssuers;
     toAmino(message: MsgUpdateClassIssuers): MsgUpdateClassIssuersAmino;
     fromAminoMsg(object: MsgUpdateClassIssuersAminoMsg): MsgUpdateClassIssuers;
+    toAminoMsg(message: MsgUpdateClassIssuers): MsgUpdateClassIssuersAminoMsg;
     fromProtoMsg(message: MsgUpdateClassIssuersProtoMsg): MsgUpdateClassIssuers;
     toProto(message: MsgUpdateClassIssuers): Uint8Array;
     toProtoMsg(message: MsgUpdateClassIssuers): MsgUpdateClassIssuersProtoMsg;
@@ -2224,6 +2235,7 @@ export declare const MsgUpdateClassMetadata: {
     fromAmino(object: MsgUpdateClassMetadataAmino): MsgUpdateClassMetadata;
     toAmino(message: MsgUpdateClassMetadata): MsgUpdateClassMetadataAmino;
     fromAminoMsg(object: MsgUpdateClassMetadataAminoMsg): MsgUpdateClassMetadata;
+    toAminoMsg(message: MsgUpdateClassMetadata): MsgUpdateClassMetadataAminoMsg;
     fromProtoMsg(message: MsgUpdateClassMetadataProtoMsg): MsgUpdateClassMetadata;
     toProto(message: MsgUpdateClassMetadata): Uint8Array;
     toProtoMsg(message: MsgUpdateClassMetadata): MsgUpdateClassMetadataProtoMsg;
@@ -2250,6 +2262,7 @@ export declare const MsgUpdateProjectAdmin: {
     fromAmino(object: MsgUpdateProjectAdminAmino): MsgUpdateProjectAdmin;
     toAmino(message: MsgUpdateProjectAdmin): MsgUpdateProjectAdminAmino;
     fromAminoMsg(object: MsgUpdateProjectAdminAminoMsg): MsgUpdateProjectAdmin;
+    toAminoMsg(message: MsgUpdateProjectAdmin): MsgUpdateProjectAdminAminoMsg;
     fromProtoMsg(message: MsgUpdateProjectAdminProtoMsg): MsgUpdateProjectAdmin;
     toProto(message: MsgUpdateProjectAdmin): Uint8Array;
     toProtoMsg(message: MsgUpdateProjectAdmin): MsgUpdateProjectAdminProtoMsg;
@@ -2276,6 +2289,7 @@ export declare const MsgUpdateProjectMetadata: {
     fromAmino(object: MsgUpdateProjectMetadataAmino): MsgUpdateProjectMetadata;
     toAmino(message: MsgUpdateProjectMetadata): MsgUpdateProjectMetadataAmino;
     fromAminoMsg(object: MsgUpdateProjectMetadataAminoMsg): MsgUpdateProjectMetadata;
+    toAminoMsg(message: MsgUpdateProjectMetadata): MsgUpdateProjectMetadataAminoMsg;
     fromProtoMsg(message: MsgUpdateProjectMetadataProtoMsg): MsgUpdateProjectMetadata;
     toProto(message: MsgUpdateProjectMetadata): Uint8Array;
     toProtoMsg(message: MsgUpdateProjectMetadata): MsgUpdateProjectMetadataProtoMsg;
@@ -2302,6 +2316,7 @@ export declare const MsgBridge: {
     fromAmino(object: MsgBridgeAmino): MsgBridge;
     toAmino(message: MsgBridge): MsgBridgeAmino;
     fromAminoMsg(object: MsgBridgeAminoMsg): MsgBridge;
+    toAminoMsg(message: MsgBridge): MsgBridgeAminoMsg;
     fromProtoMsg(message: MsgBridgeProtoMsg): MsgBridge;
     toProto(message: MsgBridge): Uint8Array;
     toProtoMsg(message: MsgBridge): MsgBridgeProtoMsg;
@@ -2315,6 +2330,7 @@ export declare const MsgUpdateBatchMetadata: {
     fromAmino(object: MsgUpdateBatchMetadataAmino): MsgUpdateBatchMetadata;
     toAmino(message: MsgUpdateBatchMetadata): MsgUpdateBatchMetadataAmino;
     fromAminoMsg(object: MsgUpdateBatchMetadataAminoMsg): MsgUpdateBatchMetadata;
+    toAminoMsg(message: MsgUpdateBatchMetadata): MsgUpdateBatchMetadataAminoMsg;
     fromProtoMsg(message: MsgUpdateBatchMetadataProtoMsg): MsgUpdateBatchMetadata;
     toProto(message: MsgUpdateBatchMetadata): Uint8Array;
     toProtoMsg(message: MsgUpdateBatchMetadata): MsgUpdateBatchMetadataProtoMsg;
@@ -2354,6 +2370,7 @@ export declare const MsgBridgeReceive: {
     fromAmino(object: MsgBridgeReceiveAmino): MsgBridgeReceive;
     toAmino(message: MsgBridgeReceive): MsgBridgeReceiveAmino;
     fromAminoMsg(object: MsgBridgeReceiveAminoMsg): MsgBridgeReceive;
+    toAminoMsg(message: MsgBridgeReceive): MsgBridgeReceiveAminoMsg;
     fromProtoMsg(message: MsgBridgeReceiveProtoMsg): MsgBridgeReceive;
     toProto(message: MsgBridgeReceive): Uint8Array;
     toProtoMsg(message: MsgBridgeReceive): MsgBridgeReceiveProtoMsg;
@@ -2406,6 +2423,7 @@ export declare const MsgAddClassCreator: {
     fromAmino(object: MsgAddClassCreatorAmino): MsgAddClassCreator;
     toAmino(message: MsgAddClassCreator): MsgAddClassCreatorAmino;
     fromAminoMsg(object: MsgAddClassCreatorAminoMsg): MsgAddClassCreator;
+    toAminoMsg(message: MsgAddClassCreator): MsgAddClassCreatorAminoMsg;
     fromProtoMsg(message: MsgAddClassCreatorProtoMsg): MsgAddClassCreator;
     toProto(message: MsgAddClassCreator): Uint8Array;
     toProtoMsg(message: MsgAddClassCreator): MsgAddClassCreatorProtoMsg;
@@ -2432,6 +2450,7 @@ export declare const MsgSetClassCreatorAllowlist: {
     fromAmino(object: MsgSetClassCreatorAllowlistAmino): MsgSetClassCreatorAllowlist;
     toAmino(message: MsgSetClassCreatorAllowlist): MsgSetClassCreatorAllowlistAmino;
     fromAminoMsg(object: MsgSetClassCreatorAllowlistAminoMsg): MsgSetClassCreatorAllowlist;
+    toAminoMsg(message: MsgSetClassCreatorAllowlist): MsgSetClassCreatorAllowlistAminoMsg;
     fromProtoMsg(message: MsgSetClassCreatorAllowlistProtoMsg): MsgSetClassCreatorAllowlist;
     toProto(message: MsgSetClassCreatorAllowlist): Uint8Array;
     toProtoMsg(message: MsgSetClassCreatorAllowlist): MsgSetClassCreatorAllowlistProtoMsg;
@@ -2458,6 +2477,7 @@ export declare const MsgRemoveClassCreator: {
     fromAmino(object: MsgRemoveClassCreatorAmino): MsgRemoveClassCreator;
     toAmino(message: MsgRemoveClassCreator): MsgRemoveClassCreatorAmino;
     fromAminoMsg(object: MsgRemoveClassCreatorAminoMsg): MsgRemoveClassCreator;
+    toAminoMsg(message: MsgRemoveClassCreator): MsgRemoveClassCreatorAminoMsg;
     fromProtoMsg(message: MsgRemoveClassCreatorProtoMsg): MsgRemoveClassCreator;
     toProto(message: MsgRemoveClassCreator): Uint8Array;
     toProtoMsg(message: MsgRemoveClassCreator): MsgRemoveClassCreatorProtoMsg;
@@ -2484,6 +2504,7 @@ export declare const MsgUpdateClassFee: {
     fromAmino(object: MsgUpdateClassFeeAmino): MsgUpdateClassFee;
     toAmino(message: MsgUpdateClassFee): MsgUpdateClassFeeAmino;
     fromAminoMsg(object: MsgUpdateClassFeeAminoMsg): MsgUpdateClassFee;
+    toAminoMsg(message: MsgUpdateClassFee): MsgUpdateClassFeeAminoMsg;
     fromProtoMsg(message: MsgUpdateClassFeeProtoMsg): MsgUpdateClassFee;
     toProto(message: MsgUpdateClassFee): Uint8Array;
     toProtoMsg(message: MsgUpdateClassFee): MsgUpdateClassFeeProtoMsg;
@@ -2510,6 +2531,7 @@ export declare const MsgAddAllowedBridgeChain: {
     fromAmino(object: MsgAddAllowedBridgeChainAmino): MsgAddAllowedBridgeChain;
     toAmino(message: MsgAddAllowedBridgeChain): MsgAddAllowedBridgeChainAmino;
     fromAminoMsg(object: MsgAddAllowedBridgeChainAminoMsg): MsgAddAllowedBridgeChain;
+    toAminoMsg(message: MsgAddAllowedBridgeChain): MsgAddAllowedBridgeChainAminoMsg;
     fromProtoMsg(message: MsgAddAllowedBridgeChainProtoMsg): MsgAddAllowedBridgeChain;
     toProto(message: MsgAddAllowedBridgeChain): Uint8Array;
     toProtoMsg(message: MsgAddAllowedBridgeChain): MsgAddAllowedBridgeChainProtoMsg;
@@ -2536,6 +2558,7 @@ export declare const MsgRemoveAllowedBridgeChain: {
     fromAmino(object: MsgRemoveAllowedBridgeChainAmino): MsgRemoveAllowedBridgeChain;
     toAmino(message: MsgRemoveAllowedBridgeChain): MsgRemoveAllowedBridgeChainAmino;
     fromAminoMsg(object: MsgRemoveAllowedBridgeChainAminoMsg): MsgRemoveAllowedBridgeChain;
+    toAminoMsg(message: MsgRemoveAllowedBridgeChain): MsgRemoveAllowedBridgeChainAminoMsg;
     fromProtoMsg(message: MsgRemoveAllowedBridgeChainProtoMsg): MsgRemoveAllowedBridgeChain;
     toProto(message: MsgRemoveAllowedBridgeChain): Uint8Array;
     toProtoMsg(message: MsgRemoveAllowedBridgeChain): MsgRemoveAllowedBridgeChainProtoMsg;
