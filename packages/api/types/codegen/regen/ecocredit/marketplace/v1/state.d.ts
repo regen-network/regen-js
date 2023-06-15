@@ -1,6 +1,6 @@
-import { Timestamp, TimestampSDKType } from "../../../../google/protobuf/timestamp";
-import * as _m0 from "protobufjs/minimal";
+import { Timestamp, TimestampAmino, TimestampSDKType } from "../../../../google/protobuf/timestamp";
 import { Long } from "../../../../helpers";
+import * as _m0 from "protobufjs/minimal";
 /** SellOrder represents the information for a sell order. */
 export interface SellOrder {
     /** id is the unique ID of sell order. */
@@ -43,24 +43,28 @@ export interface SellOrder {
      */
     maker: boolean;
 }
+export interface SellOrderProtoMsg {
+    typeUrl: "/regen.ecocredit.marketplace.v1.SellOrder";
+    value: Uint8Array;
+}
 /** SellOrder represents the information for a sell order. */
-export interface SellOrderSDKType {
+export interface SellOrderAmino {
     /** id is the unique ID of sell order. */
-    id: Long;
+    id: string;
     /** seller is the address of the account that is selling credits. */
     seller: Uint8Array;
     /**
      * batch_key is the table row identifier of the credit batch used internally
      * for efficient lookups. This links a sell order to a credit batch.
      */
-    batch_key: Long;
+    batch_key: string;
     /** quantity is the decimal quantity of credits being sold. */
     quantity: string;
     /**
      * market_id is the market in which this sell order exists and specifies
      * the bank_denom that ask_amount corresponds to forming the ask_price.
      */
-    market_id: Long;
+    market_id: string;
     /**
      * ask_amount is the integer amount (encoded as a string) that the seller is
      * asking for each credit unit of the batch. Each credit unit of the batch
@@ -78,11 +82,27 @@ export interface SellOrderSDKType {
      * expiration is an optional timestamp when the sell order expires. When the
      * expiration time is reached, the sell order is removed from state.
      */
-    expiration?: TimestampSDKType;
+    expiration?: TimestampAmino;
     /**
      * maker indicates that this is a maker order, meaning that when it hit
      * the order book, there were no matching buy orders.
      */
+    maker: boolean;
+}
+export interface SellOrderAminoMsg {
+    type: "/regen.ecocredit.marketplace.v1.SellOrder";
+    value: SellOrderAmino;
+}
+/** SellOrder represents the information for a sell order. */
+export interface SellOrderSDKType {
+    id: Long;
+    seller: Uint8Array;
+    batch_key: Long;
+    quantity: string;
+    market_id: Long;
+    ask_amount: string;
+    disable_auto_retire: boolean;
+    expiration?: TimestampSDKType;
     maker: boolean;
 }
 /** AllowedDenom represents the information for an allowed ask/bid denom. */
@@ -101,8 +121,12 @@ export interface AllowedDenom {
      */
     exponent: number;
 }
+export interface AllowedDenomProtoMsg {
+    typeUrl: "/regen.ecocredit.marketplace.v1.AllowedDenom";
+    value: Uint8Array;
+}
 /** AllowedDenom represents the information for an allowed ask/bid denom. */
-export interface AllowedDenomSDKType {
+export interface AllowedDenomAmino {
     /** denom is the bank denom to allow (ex. ibc/GLKHDSG423SGS) */
     bank_denom: string;
     /**
@@ -115,6 +139,16 @@ export interface AllowedDenomSDKType {
      * exponent is the exponent that relates the denom to the display_denom and is
      * informational
      */
+    exponent: number;
+}
+export interface AllowedDenomAminoMsg {
+    type: "/regen.ecocredit.marketplace.v1.AllowedDenom";
+    value: AllowedDenomAmino;
+}
+/** AllowedDenom represents the information for an allowed ask/bid denom. */
+export interface AllowedDenomSDKType {
+    bank_denom: string;
+    display_denom: string;
     exponent: number;
 }
 /**
@@ -164,6 +198,10 @@ export interface Market {
      */
     precisionModifier: number;
 }
+export interface MarketProtoMsg {
+    typeUrl: "/regen.ecocredit.marketplace.v1.Market";
+    value: Uint8Array;
+}
 /**
  * Market describes a distinctly processed market between a credit type and
  * allowed bank denom. Each market has its own precision in the order book
@@ -175,9 +213,9 @@ export interface Market {
  * less liquidity and longer settlement times. Such decisions should be taken
  * with care.
  */
-export interface MarketSDKType {
+export interface MarketAmino {
     /** id is the unique ID of the market. */
-    id: Long;
+    id: string;
     /** credit_type_abbrev is the abbreviation of the credit type. */
     credit_type_abbrev: string;
     /** bank_denom is an allowed bank denom. */
@@ -211,12 +249,39 @@ export interface MarketSDKType {
      */
     precision_modifier: number;
 }
+export interface MarketAminoMsg {
+    type: "/regen.ecocredit.marketplace.v1.Market";
+    value: MarketAmino;
+}
+/**
+ * Market describes a distinctly processed market between a credit type and
+ * allowed bank denom. Each market has its own precision in the order book
+ * and is processed independently of other markets. Governance must enable
+ * markets one by one. Every additional enabled market potentially adds more
+ * processing overhead to the blockchain and potentially weakens liquidity in
+ * competing markets. For instance, enabling side by side USD/Carbon and
+ * EUR/Carbon markets may have the end result that each market individually has
+ * less liquidity and longer settlement times. Such decisions should be taken
+ * with care.
+ */
+export interface MarketSDKType {
+    id: Long;
+    credit_type_abbrev: string;
+    bank_denom: string;
+    precision_modifier: number;
+}
 export declare const SellOrder: {
     encode(message: SellOrder, writer?: _m0.Writer): _m0.Writer;
     decode(input: _m0.Reader | Uint8Array, length?: number): SellOrder;
     fromJSON(object: any): SellOrder;
     toJSON(message: SellOrder): unknown;
     fromPartial(object: Partial<SellOrder>): SellOrder;
+    fromAmino(object: SellOrderAmino): SellOrder;
+    toAmino(message: SellOrder): SellOrderAmino;
+    fromAminoMsg(object: SellOrderAminoMsg): SellOrder;
+    fromProtoMsg(message: SellOrderProtoMsg): SellOrder;
+    toProto(message: SellOrder): Uint8Array;
+    toProtoMsg(message: SellOrder): SellOrderProtoMsg;
 };
 export declare const AllowedDenom: {
     encode(message: AllowedDenom, writer?: _m0.Writer): _m0.Writer;
@@ -224,6 +289,12 @@ export declare const AllowedDenom: {
     fromJSON(object: any): AllowedDenom;
     toJSON(message: AllowedDenom): unknown;
     fromPartial(object: Partial<AllowedDenom>): AllowedDenom;
+    fromAmino(object: AllowedDenomAmino): AllowedDenom;
+    toAmino(message: AllowedDenom): AllowedDenomAmino;
+    fromAminoMsg(object: AllowedDenomAminoMsg): AllowedDenom;
+    fromProtoMsg(message: AllowedDenomProtoMsg): AllowedDenom;
+    toProto(message: AllowedDenom): Uint8Array;
+    toProtoMsg(message: AllowedDenom): AllowedDenomProtoMsg;
 };
 export declare const Market: {
     encode(message: Market, writer?: _m0.Writer): _m0.Writer;
@@ -231,4 +302,10 @@ export declare const Market: {
     fromJSON(object: any): Market;
     toJSON(message: Market): unknown;
     fromPartial(object: Partial<Market>): Market;
+    fromAmino(object: MarketAmino): Market;
+    toAmino(message: Market): MarketAmino;
+    fromAminoMsg(object: MarketAminoMsg): Market;
+    fromProtoMsg(message: MarketProtoMsg): Market;
+    toProto(message: Market): Uint8Array;
+    toProtoMsg(message: Market): MarketProtoMsg;
 };

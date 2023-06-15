@@ -5,6 +5,19 @@ import { isSet, bytesFromBase64, base64FromBytes } from "../../../../helpers";
 export interface Pairs {
   pairs: Pair[];
 }
+export interface PairsProtoMsg {
+  typeUrl: "/cosmos.base.kv.v1beta1.Pairs";
+  value: Uint8Array;
+}
+/** Pairs defines a repeated slice of Pair objects. */
+
+export interface PairsAmino {
+  pairs: PairAmino[];
+}
+export interface PairsAminoMsg {
+  type: "cosmos-sdk/Pairs";
+  value: PairsAmino;
+}
 /** Pairs defines a repeated slice of Pair objects. */
 
 export interface PairsSDKType {
@@ -15,6 +28,20 @@ export interface PairsSDKType {
 export interface Pair {
   key: Uint8Array;
   value: Uint8Array;
+}
+export interface PairProtoMsg {
+  typeUrl: "/cosmos.base.kv.v1beta1.Pair";
+  value: Uint8Array;
+}
+/** Pair defines a key/value bytes tuple. */
+
+export interface PairAmino {
+  key: Uint8Array;
+  value: Uint8Array;
+}
+export interface PairAminoMsg {
+  type: "cosmos-sdk/Pair";
+  value: PairAmino;
 }
 /** Pair defines a key/value bytes tuple. */
 
@@ -82,6 +109,50 @@ export const Pairs = {
     const message = createBasePairs();
     message.pairs = object.pairs?.map(e => Pair.fromPartial(e)) || [];
     return message;
+  },
+
+  fromAmino(object: PairsAmino): Pairs {
+    return {
+      pairs: Array.isArray(object?.pairs) ? object.pairs.map((e: any) => Pair.fromAmino(e)) : []
+    };
+  },
+
+  toAmino(message: Pairs): PairsAmino {
+    const obj: any = {};
+
+    if (message.pairs) {
+      obj.pairs = message.pairs.map(e => e ? Pair.toAmino(e) : undefined);
+    } else {
+      obj.pairs = [];
+    }
+
+    return obj;
+  },
+
+  fromAminoMsg(object: PairsAminoMsg): Pairs {
+    return Pairs.fromAmino(object.value);
+  },
+
+  toAminoMsg(message: Pairs): PairsAminoMsg {
+    return {
+      type: "cosmos-sdk/Pairs",
+      value: Pairs.toAmino(message)
+    };
+  },
+
+  fromProtoMsg(message: PairsProtoMsg): Pairs {
+    return Pairs.decode(message.value);
+  },
+
+  toProto(message: Pairs): Uint8Array {
+    return Pairs.encode(message).finish();
+  },
+
+  toProtoMsg(message: Pairs): PairsProtoMsg {
+    return {
+      typeUrl: "/cosmos.base.kv.v1beta1.Pairs",
+      value: Pairs.encode(message).finish()
+    };
   }
 
 };
@@ -151,6 +222,46 @@ export const Pair = {
     message.key = object.key ?? new Uint8Array();
     message.value = object.value ?? new Uint8Array();
     return message;
+  },
+
+  fromAmino(object: PairAmino): Pair {
+    return {
+      key: object.key,
+      value: object.value
+    };
+  },
+
+  toAmino(message: Pair): PairAmino {
+    const obj: any = {};
+    obj.key = message.key;
+    obj.value = message.value;
+    return obj;
+  },
+
+  fromAminoMsg(object: PairAminoMsg): Pair {
+    return Pair.fromAmino(object.value);
+  },
+
+  toAminoMsg(message: Pair): PairAminoMsg {
+    return {
+      type: "cosmos-sdk/Pair",
+      value: Pair.toAmino(message)
+    };
+  },
+
+  fromProtoMsg(message: PairProtoMsg): Pair {
+    return Pair.decode(message.value);
+  },
+
+  toProto(message: Pair): Uint8Array {
+    return Pair.encode(message).finish();
+  },
+
+  toProtoMsg(message: Pair): PairProtoMsg {
+    return {
+      typeUrl: "/cosmos.base.kv.v1beta1.Pair",
+      value: Pair.encode(message).finish()
+    };
   }
 
 };

@@ -1,4 +1,4 @@
-import { BasketCredit, BasketCreditSDKType } from "./types";
+import { BasketCredit, BasketCreditAmino, BasketCreditSDKType } from "./types";
 import * as _m0 from "protobufjs/minimal";
 import { isSet } from "../../../../helpers";
 /** EventCreate is an event emitted when a basket is created. */
@@ -18,9 +18,13 @@ export interface EventCreate {
 
   curator: string;
 }
+export interface EventCreateProtoMsg {
+  typeUrl: "/regen.ecocredit.basket.v1.EventCreate";
+  value: Uint8Array;
+}
 /** EventCreate is an event emitted when a basket is created. */
 
-export interface EventCreateSDKType {
+export interface EventCreateAmino {
   /** basket_denom is the basket bank denom. */
   basket_denom: string;
   /**
@@ -31,6 +35,18 @@ export interface EventCreateSDKType {
    * removed in the next version.
    */
 
+  /** @deprecated */
+
+  curator: string;
+}
+export interface EventCreateAminoMsg {
+  type: "/regen.ecocredit.basket.v1.EventCreate";
+  value: EventCreateAmino;
+}
+/** EventCreate is an event emitted when a basket is created. */
+
+export interface EventCreateSDKType {
+  basket_denom: string;
   /** @deprecated */
 
   curator: string;
@@ -67,12 +83,16 @@ export interface EventPut {
 
   amount: string;
 }
+export interface EventPutProtoMsg {
+  typeUrl: "/regen.ecocredit.basket.v1.EventPut";
+  value: Uint8Array;
+}
 /**
  * EventPut is an event emitted when credits are put into a basket in return for
  * basket tokens.
  */
 
-export interface EventPutSDKType {
+export interface EventPutAmino {
   /** owner is the owner of the credits put into the basket. */
   owner: string;
   /** basket_denom is the basket bank denom that the credits were added to. */
@@ -87,7 +107,7 @@ export interface EventPutSDKType {
 
   /** @deprecated */
 
-  credits: BasketCreditSDKType[];
+  credits: BasketCreditAmino[];
   /**
    * amount is the integer number of basket tokens converted from credits.
    * 
@@ -95,6 +115,25 @@ export interface EventPutSDKType {
    * removed in the next version.
    */
 
+  /** @deprecated */
+
+  amount: string;
+}
+export interface EventPutAminoMsg {
+  type: "/regen.ecocredit.basket.v1.EventPut";
+  value: EventPutAmino;
+}
+/**
+ * EventPut is an event emitted when credits are put into a basket in return for
+ * basket tokens.
+ */
+
+export interface EventPutSDKType {
+  owner: string;
+  basket_denom: string;
+  /** @deprecated */
+
+  credits: BasketCreditSDKType[];
   /** @deprecated */
 
   amount: string;
@@ -131,12 +170,16 @@ export interface EventTake {
 
   amount: string;
 }
+export interface EventTakeProtoMsg {
+  typeUrl: "/regen.ecocredit.basket.v1.EventTake";
+  value: Uint8Array;
+}
 /**
  * EventTake is an event emitted when credits are taken from a basket starting
  * from the oldest credits first.
  */
 
-export interface EventTakeSDKType {
+export interface EventTakeAmino {
   /** owner is the owner of the credits taken from the basket. */
   owner: string;
   /** basket_denom is the basket bank denom that credits were taken from. */
@@ -151,7 +194,7 @@ export interface EventTakeSDKType {
 
   /** @deprecated */
 
-  credits: BasketCreditSDKType[];
+  credits: BasketCreditAmino[];
   /**
    * amount is the integer number of basket tokens converted to credits.
    * 
@@ -159,6 +202,25 @@ export interface EventTakeSDKType {
    * removed in the next version.
    */
 
+  /** @deprecated */
+
+  amount: string;
+}
+export interface EventTakeAminoMsg {
+  type: "/regen.ecocredit.basket.v1.EventTake";
+  value: EventTakeAmino;
+}
+/**
+ * EventTake is an event emitted when credits are taken from a basket starting
+ * from the oldest credits first.
+ */
+
+export interface EventTakeSDKType {
+  owner: string;
+  basket_denom: string;
+  /** @deprecated */
+
+  credits: BasketCreditSDKType[];
   /** @deprecated */
 
   amount: string;
@@ -173,6 +235,24 @@ export interface EventUpdateCurator {
   /** denom is the basket denom. */
   denom: string;
 }
+export interface EventUpdateCuratorProtoMsg {
+  typeUrl: "/regen.ecocredit.basket.v1.EventUpdateCurator";
+  value: Uint8Array;
+}
+/**
+ * EventUpdateCurator is an event emitted when the basket curator is updated.
+ * 
+ * Since Revision 2
+ */
+
+export interface EventUpdateCuratorAmino {
+  /** denom is the basket denom. */
+  denom: string;
+}
+export interface EventUpdateCuratorAminoMsg {
+  type: "/regen.ecocredit.basket.v1.EventUpdateCurator";
+  value: EventUpdateCuratorAmino;
+}
 /**
  * EventUpdateCurator is an event emitted when the basket curator is updated.
  * 
@@ -180,7 +260,6 @@ export interface EventUpdateCurator {
  */
 
 export interface EventUpdateCuratorSDKType {
-  /** denom is the basket denom. */
   denom: string;
 }
 /**
@@ -194,6 +273,25 @@ export interface EventUpdateDateCriteria {
   /** denom is the basket denom. */
   denom: string;
 }
+export interface EventUpdateDateCriteriaProtoMsg {
+  typeUrl: "/regen.ecocredit.basket.v1.EventUpdateDateCriteria";
+  value: Uint8Array;
+}
+/**
+ * EventUpdateDateCriteria is an event emitted when the basket date criteria is
+ * updated.
+ * 
+ * Since Revision 3
+ */
+
+export interface EventUpdateDateCriteriaAmino {
+  /** denom is the basket denom. */
+  denom: string;
+}
+export interface EventUpdateDateCriteriaAminoMsg {
+  type: "/regen.ecocredit.basket.v1.EventUpdateDateCriteria";
+  value: EventUpdateDateCriteriaAmino;
+}
 /**
  * EventUpdateDateCriteria is an event emitted when the basket date criteria is
  * updated.
@@ -202,7 +300,6 @@ export interface EventUpdateDateCriteria {
  */
 
 export interface EventUpdateDateCriteriaSDKType {
-  /** denom is the basket denom. */
   denom: string;
 }
 
@@ -271,6 +368,39 @@ export const EventCreate = {
     message.basketDenom = object.basketDenom ?? "";
     message.curator = object.curator ?? "";
     return message;
+  },
+
+  fromAmino(object: EventCreateAmino): EventCreate {
+    return {
+      basketDenom: object.basket_denom,
+      curator: object.curator
+    };
+  },
+
+  toAmino(message: EventCreate): EventCreateAmino {
+    const obj: any = {};
+    obj.basket_denom = message.basketDenom;
+    obj.curator = message.curator;
+    return obj;
+  },
+
+  fromAminoMsg(object: EventCreateAminoMsg): EventCreate {
+    return EventCreate.fromAmino(object.value);
+  },
+
+  fromProtoMsg(message: EventCreateProtoMsg): EventCreate {
+    return EventCreate.decode(message.value);
+  },
+
+  toProto(message: EventCreate): Uint8Array {
+    return EventCreate.encode(message).finish();
+  },
+
+  toProtoMsg(message: EventCreate): EventCreateProtoMsg {
+    return {
+      typeUrl: "/regen.ecocredit.basket.v1.EventCreate",
+      value: EventCreate.encode(message).finish()
+    };
   }
 
 };
@@ -370,6 +500,49 @@ export const EventPut = {
     message.credits = object.credits?.map(e => BasketCredit.fromPartial(e)) || [];
     message.amount = object.amount ?? "";
     return message;
+  },
+
+  fromAmino(object: EventPutAmino): EventPut {
+    return {
+      owner: object.owner,
+      basketDenom: object.basket_denom,
+      credits: Array.isArray(object?.credits) ? object.credits.map((e: any) => BasketCredit.fromAmino(e)) : [],
+      amount: object.amount
+    };
+  },
+
+  toAmino(message: EventPut): EventPutAmino {
+    const obj: any = {};
+    obj.owner = message.owner;
+    obj.basket_denom = message.basketDenom;
+
+    if (message.credits) {
+      obj.credits = message.credits.map(e => e ? BasketCredit.toAmino(e) : undefined);
+    } else {
+      obj.credits = [];
+    }
+
+    obj.amount = message.amount;
+    return obj;
+  },
+
+  fromAminoMsg(object: EventPutAminoMsg): EventPut {
+    return EventPut.fromAmino(object.value);
+  },
+
+  fromProtoMsg(message: EventPutProtoMsg): EventPut {
+    return EventPut.decode(message.value);
+  },
+
+  toProto(message: EventPut): Uint8Array {
+    return EventPut.encode(message).finish();
+  },
+
+  toProtoMsg(message: EventPut): EventPutProtoMsg {
+    return {
+      typeUrl: "/regen.ecocredit.basket.v1.EventPut",
+      value: EventPut.encode(message).finish()
+    };
   }
 
 };
@@ -469,6 +642,49 @@ export const EventTake = {
     message.credits = object.credits?.map(e => BasketCredit.fromPartial(e)) || [];
     message.amount = object.amount ?? "";
     return message;
+  },
+
+  fromAmino(object: EventTakeAmino): EventTake {
+    return {
+      owner: object.owner,
+      basketDenom: object.basket_denom,
+      credits: Array.isArray(object?.credits) ? object.credits.map((e: any) => BasketCredit.fromAmino(e)) : [],
+      amount: object.amount
+    };
+  },
+
+  toAmino(message: EventTake): EventTakeAmino {
+    const obj: any = {};
+    obj.owner = message.owner;
+    obj.basket_denom = message.basketDenom;
+
+    if (message.credits) {
+      obj.credits = message.credits.map(e => e ? BasketCredit.toAmino(e) : undefined);
+    } else {
+      obj.credits = [];
+    }
+
+    obj.amount = message.amount;
+    return obj;
+  },
+
+  fromAminoMsg(object: EventTakeAminoMsg): EventTake {
+    return EventTake.fromAmino(object.value);
+  },
+
+  fromProtoMsg(message: EventTakeProtoMsg): EventTake {
+    return EventTake.decode(message.value);
+  },
+
+  toProto(message: EventTake): Uint8Array {
+    return EventTake.encode(message).finish();
+  },
+
+  toProtoMsg(message: EventTake): EventTakeProtoMsg {
+    return {
+      typeUrl: "/regen.ecocredit.basket.v1.EventTake",
+      value: EventTake.encode(message).finish()
+    };
   }
 
 };
@@ -526,6 +742,37 @@ export const EventUpdateCurator = {
     const message = createBaseEventUpdateCurator();
     message.denom = object.denom ?? "";
     return message;
+  },
+
+  fromAmino(object: EventUpdateCuratorAmino): EventUpdateCurator {
+    return {
+      denom: object.denom
+    };
+  },
+
+  toAmino(message: EventUpdateCurator): EventUpdateCuratorAmino {
+    const obj: any = {};
+    obj.denom = message.denom;
+    return obj;
+  },
+
+  fromAminoMsg(object: EventUpdateCuratorAminoMsg): EventUpdateCurator {
+    return EventUpdateCurator.fromAmino(object.value);
+  },
+
+  fromProtoMsg(message: EventUpdateCuratorProtoMsg): EventUpdateCurator {
+    return EventUpdateCurator.decode(message.value);
+  },
+
+  toProto(message: EventUpdateCurator): Uint8Array {
+    return EventUpdateCurator.encode(message).finish();
+  },
+
+  toProtoMsg(message: EventUpdateCurator): EventUpdateCuratorProtoMsg {
+    return {
+      typeUrl: "/regen.ecocredit.basket.v1.EventUpdateCurator",
+      value: EventUpdateCurator.encode(message).finish()
+    };
   }
 
 };
@@ -583,6 +830,37 @@ export const EventUpdateDateCriteria = {
     const message = createBaseEventUpdateDateCriteria();
     message.denom = object.denom ?? "";
     return message;
+  },
+
+  fromAmino(object: EventUpdateDateCriteriaAmino): EventUpdateDateCriteria {
+    return {
+      denom: object.denom
+    };
+  },
+
+  toAmino(message: EventUpdateDateCriteria): EventUpdateDateCriteriaAmino {
+    const obj: any = {};
+    obj.denom = message.denom;
+    return obj;
+  },
+
+  fromAminoMsg(object: EventUpdateDateCriteriaAminoMsg): EventUpdateDateCriteria {
+    return EventUpdateDateCriteria.fromAmino(object.value);
+  },
+
+  fromProtoMsg(message: EventUpdateDateCriteriaProtoMsg): EventUpdateDateCriteria {
+    return EventUpdateDateCriteria.decode(message.value);
+  },
+
+  toProto(message: EventUpdateDateCriteria): Uint8Array {
+    return EventUpdateDateCriteria.encode(message).finish();
+  },
+
+  toProtoMsg(message: EventUpdateDateCriteria): EventUpdateDateCriteriaProtoMsg {
+    return {
+      typeUrl: "/regen.ecocredit.basket.v1.EventUpdateDateCriteria",
+      value: EventUpdateDateCriteria.encode(message).finish()
+    };
   }
 
 };

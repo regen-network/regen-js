@@ -1,4 +1,4 @@
-import { BasketCredit, BasketCreditSDKType } from "./types";
+import { BasketCredit, BasketCreditAmino, BasketCreditSDKType } from "./types";
 import * as _m0 from "protobufjs/minimal";
 /** EventCreate is an event emitted when a basket is created. */
 export interface EventCreate {
@@ -14,8 +14,12 @@ export interface EventCreate {
     /** @deprecated */
     curator: string;
 }
+export interface EventCreateProtoMsg {
+    typeUrl: "/regen.ecocredit.basket.v1.EventCreate";
+    value: Uint8Array;
+}
 /** EventCreate is an event emitted when a basket is created. */
-export interface EventCreateSDKType {
+export interface EventCreateAmino {
     /** basket_denom is the basket bank denom. */
     basket_denom: string;
     /**
@@ -25,6 +29,16 @@ export interface EventCreateSDKType {
      * Deprecated (Since Revision 1): This field is still populated and will be
      * removed in the next version.
      */
+    /** @deprecated */
+    curator: string;
+}
+export interface EventCreateAminoMsg {
+    type: "/regen.ecocredit.basket.v1.EventCreate";
+    value: EventCreateAmino;
+}
+/** EventCreate is an event emitted when a basket is created. */
+export interface EventCreateSDKType {
+    basket_denom: string;
     /** @deprecated */
     curator: string;
 }
@@ -54,11 +68,15 @@ export interface EventPut {
     /** @deprecated */
     amount: string;
 }
+export interface EventPutProtoMsg {
+    typeUrl: "/regen.ecocredit.basket.v1.EventPut";
+    value: Uint8Array;
+}
 /**
  * EventPut is an event emitted when credits are put into a basket in return for
  * basket tokens.
  */
-export interface EventPutSDKType {
+export interface EventPutAmino {
     /** owner is the owner of the credits put into the basket. */
     owner: string;
     /** basket_denom is the basket bank denom that the credits were added to. */
@@ -70,13 +88,29 @@ export interface EventPutSDKType {
      * removed in the next version.
      */
     /** @deprecated */
-    credits: BasketCreditSDKType[];
+    credits: BasketCreditAmino[];
     /**
      * amount is the integer number of basket tokens converted from credits.
      *
      * Deprecated (Since Revision 1): This field is still populated and will be
      * removed in the next version.
      */
+    /** @deprecated */
+    amount: string;
+}
+export interface EventPutAminoMsg {
+    type: "/regen.ecocredit.basket.v1.EventPut";
+    value: EventPutAmino;
+}
+/**
+ * EventPut is an event emitted when credits are put into a basket in return for
+ * basket tokens.
+ */
+export interface EventPutSDKType {
+    owner: string;
+    basket_denom: string;
+    /** @deprecated */
+    credits: BasketCreditSDKType[];
     /** @deprecated */
     amount: string;
 }
@@ -106,11 +140,15 @@ export interface EventTake {
     /** @deprecated */
     amount: string;
 }
+export interface EventTakeProtoMsg {
+    typeUrl: "/regen.ecocredit.basket.v1.EventTake";
+    value: Uint8Array;
+}
 /**
  * EventTake is an event emitted when credits are taken from a basket starting
  * from the oldest credits first.
  */
-export interface EventTakeSDKType {
+export interface EventTakeAmino {
     /** owner is the owner of the credits taken from the basket. */
     owner: string;
     /** basket_denom is the basket bank denom that credits were taken from. */
@@ -122,13 +160,29 @@ export interface EventTakeSDKType {
      * removed in the next version.
      */
     /** @deprecated */
-    credits: BasketCreditSDKType[];
+    credits: BasketCreditAmino[];
     /**
      * amount is the integer number of basket tokens converted to credits.
      *
      * Deprecated (Since Revision 1): This field is still populated and will be
      * removed in the next version.
      */
+    /** @deprecated */
+    amount: string;
+}
+export interface EventTakeAminoMsg {
+    type: "/regen.ecocredit.basket.v1.EventTake";
+    value: EventTakeAmino;
+}
+/**
+ * EventTake is an event emitted when credits are taken from a basket starting
+ * from the oldest credits first.
+ */
+export interface EventTakeSDKType {
+    owner: string;
+    basket_denom: string;
+    /** @deprecated */
+    credits: BasketCreditSDKType[];
     /** @deprecated */
     amount: string;
 }
@@ -141,13 +195,29 @@ export interface EventUpdateCurator {
     /** denom is the basket denom. */
     denom: string;
 }
+export interface EventUpdateCuratorProtoMsg {
+    typeUrl: "/regen.ecocredit.basket.v1.EventUpdateCurator";
+    value: Uint8Array;
+}
+/**
+ * EventUpdateCurator is an event emitted when the basket curator is updated.
+ *
+ * Since Revision 2
+ */
+export interface EventUpdateCuratorAmino {
+    /** denom is the basket denom. */
+    denom: string;
+}
+export interface EventUpdateCuratorAminoMsg {
+    type: "/regen.ecocredit.basket.v1.EventUpdateCurator";
+    value: EventUpdateCuratorAmino;
+}
 /**
  * EventUpdateCurator is an event emitted when the basket curator is updated.
  *
  * Since Revision 2
  */
 export interface EventUpdateCuratorSDKType {
-    /** denom is the basket denom. */
     denom: string;
 }
 /**
@@ -160,6 +230,24 @@ export interface EventUpdateDateCriteria {
     /** denom is the basket denom. */
     denom: string;
 }
+export interface EventUpdateDateCriteriaProtoMsg {
+    typeUrl: "/regen.ecocredit.basket.v1.EventUpdateDateCriteria";
+    value: Uint8Array;
+}
+/**
+ * EventUpdateDateCriteria is an event emitted when the basket date criteria is
+ * updated.
+ *
+ * Since Revision 3
+ */
+export interface EventUpdateDateCriteriaAmino {
+    /** denom is the basket denom. */
+    denom: string;
+}
+export interface EventUpdateDateCriteriaAminoMsg {
+    type: "/regen.ecocredit.basket.v1.EventUpdateDateCriteria";
+    value: EventUpdateDateCriteriaAmino;
+}
 /**
  * EventUpdateDateCriteria is an event emitted when the basket date criteria is
  * updated.
@@ -167,7 +255,6 @@ export interface EventUpdateDateCriteria {
  * Since Revision 3
  */
 export interface EventUpdateDateCriteriaSDKType {
-    /** denom is the basket denom. */
     denom: string;
 }
 export declare const EventCreate: {
@@ -176,6 +263,12 @@ export declare const EventCreate: {
     fromJSON(object: any): EventCreate;
     toJSON(message: EventCreate): unknown;
     fromPartial(object: Partial<EventCreate>): EventCreate;
+    fromAmino(object: EventCreateAmino): EventCreate;
+    toAmino(message: EventCreate): EventCreateAmino;
+    fromAminoMsg(object: EventCreateAminoMsg): EventCreate;
+    fromProtoMsg(message: EventCreateProtoMsg): EventCreate;
+    toProto(message: EventCreate): Uint8Array;
+    toProtoMsg(message: EventCreate): EventCreateProtoMsg;
 };
 export declare const EventPut: {
     encode(message: EventPut, writer?: _m0.Writer): _m0.Writer;
@@ -183,6 +276,12 @@ export declare const EventPut: {
     fromJSON(object: any): EventPut;
     toJSON(message: EventPut): unknown;
     fromPartial(object: Partial<EventPut>): EventPut;
+    fromAmino(object: EventPutAmino): EventPut;
+    toAmino(message: EventPut): EventPutAmino;
+    fromAminoMsg(object: EventPutAminoMsg): EventPut;
+    fromProtoMsg(message: EventPutProtoMsg): EventPut;
+    toProto(message: EventPut): Uint8Array;
+    toProtoMsg(message: EventPut): EventPutProtoMsg;
 };
 export declare const EventTake: {
     encode(message: EventTake, writer?: _m0.Writer): _m0.Writer;
@@ -190,6 +289,12 @@ export declare const EventTake: {
     fromJSON(object: any): EventTake;
     toJSON(message: EventTake): unknown;
     fromPartial(object: Partial<EventTake>): EventTake;
+    fromAmino(object: EventTakeAmino): EventTake;
+    toAmino(message: EventTake): EventTakeAmino;
+    fromAminoMsg(object: EventTakeAminoMsg): EventTake;
+    fromProtoMsg(message: EventTakeProtoMsg): EventTake;
+    toProto(message: EventTake): Uint8Array;
+    toProtoMsg(message: EventTake): EventTakeProtoMsg;
 };
 export declare const EventUpdateCurator: {
     encode(message: EventUpdateCurator, writer?: _m0.Writer): _m0.Writer;
@@ -197,6 +302,12 @@ export declare const EventUpdateCurator: {
     fromJSON(object: any): EventUpdateCurator;
     toJSON(message: EventUpdateCurator): unknown;
     fromPartial(object: Partial<EventUpdateCurator>): EventUpdateCurator;
+    fromAmino(object: EventUpdateCuratorAmino): EventUpdateCurator;
+    toAmino(message: EventUpdateCurator): EventUpdateCuratorAmino;
+    fromAminoMsg(object: EventUpdateCuratorAminoMsg): EventUpdateCurator;
+    fromProtoMsg(message: EventUpdateCuratorProtoMsg): EventUpdateCurator;
+    toProto(message: EventUpdateCurator): Uint8Array;
+    toProtoMsg(message: EventUpdateCurator): EventUpdateCuratorProtoMsg;
 };
 export declare const EventUpdateDateCriteria: {
     encode(message: EventUpdateDateCriteria, writer?: _m0.Writer): _m0.Writer;
@@ -204,4 +315,10 @@ export declare const EventUpdateDateCriteria: {
     fromJSON(object: any): EventUpdateDateCriteria;
     toJSON(message: EventUpdateDateCriteria): unknown;
     fromPartial(object: Partial<EventUpdateDateCriteria>): EventUpdateDateCriteria;
+    fromAmino(object: EventUpdateDateCriteriaAmino): EventUpdateDateCriteria;
+    toAmino(message: EventUpdateDateCriteria): EventUpdateDateCriteriaAmino;
+    fromAminoMsg(object: EventUpdateDateCriteriaAminoMsg): EventUpdateDateCriteria;
+    fromProtoMsg(message: EventUpdateDateCriteriaProtoMsg): EventUpdateDateCriteria;
+    toProto(message: EventUpdateDateCriteria): Uint8Array;
+    toProtoMsg(message: EventUpdateDateCriteria): EventUpdateDateCriteriaProtoMsg;
 };

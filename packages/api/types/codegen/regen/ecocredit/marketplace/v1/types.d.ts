@@ -1,4 +1,4 @@
-import { AllowedDenom, AllowedDenomSDKType } from "./state";
+import { AllowedDenom, AllowedDenomAmino, AllowedDenomSDKType } from "./state";
 import * as _m0 from "protobufjs/minimal";
 /**
  * AllowDenomProposal is a gov Content type for approving a denom for use in the
@@ -18,6 +18,10 @@ export interface AllowDenomProposal {
      */
     denom?: AllowedDenom;
 }
+export interface AllowDenomProposalProtoMsg {
+    typeUrl: "/regen.ecocredit.marketplace.v1.AllowDenomProposal";
+    value: Uint8Array;
+}
 /**
  * AllowDenomProposal is a gov Content type for approving a denom for use in the
  * marketplace.
@@ -25,7 +29,7 @@ export interface AllowDenomProposal {
  * Deprecated (Since Revision 1): This message is no longer used and will be
  * removed in the next version. See MsgAddAllowedDenom.
  */
-export interface AllowDenomProposalSDKType {
+export interface AllowDenomProposalAmino {
     /** title is the title of the proposal. */
     title: string;
     /** description is the description of the proposal. */
@@ -34,6 +38,22 @@ export interface AllowDenomProposalSDKType {
      * denom contains coin denom information that will be added to the
      * list of allowed denoms for use in the marketplace.
      */
+    denom?: AllowedDenomAmino;
+}
+export interface AllowDenomProposalAminoMsg {
+    type: "/regen.ecocredit.marketplace.v1.AllowDenomProposal";
+    value: AllowDenomProposalAmino;
+}
+/**
+ * AllowDenomProposal is a gov Content type for approving a denom for use in the
+ * marketplace.
+ *
+ * Deprecated (Since Revision 1): This message is no longer used and will be
+ * removed in the next version. See MsgAddAllowedDenom.
+ */
+export interface AllowDenomProposalSDKType {
+    title: string;
+    description: string;
     denom?: AllowedDenomSDKType;
 }
 export declare const AllowDenomProposal: {
@@ -42,4 +62,10 @@ export declare const AllowDenomProposal: {
     fromJSON(object: any): AllowDenomProposal;
     toJSON(message: AllowDenomProposal): unknown;
     fromPartial(object: Partial<AllowDenomProposal>): AllowDenomProposal;
+    fromAmino(object: AllowDenomProposalAmino): AllowDenomProposal;
+    toAmino(message: AllowDenomProposal): AllowDenomProposalAmino;
+    fromAminoMsg(object: AllowDenomProposalAminoMsg): AllowDenomProposal;
+    fromProtoMsg(message: AllowDenomProposalProtoMsg): AllowDenomProposal;
+    toProto(message: AllowDenomProposal): Uint8Array;
+    toProtoMsg(message: AllowDenomProposal): AllowDenomProposalProtoMsg;
 };

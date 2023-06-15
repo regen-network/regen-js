@@ -1,5 +1,5 @@
-import { Timestamp, TimestampSDKType } from "../../../../google/protobuf/timestamp";
-import { Duration, DurationSDKType } from "../../../../google/protobuf/duration";
+import { Timestamp, TimestampAmino, TimestampSDKType } from "../../../../google/protobuf/timestamp";
+import { Duration, DurationAmino, DurationSDKType } from "../../../../google/protobuf/duration";
 import * as _m0 from "protobufjs/minimal";
 /** BasketCredit represents the information for a credit batch inside a basket. */
 export interface BasketCredit {
@@ -12,8 +12,12 @@ export interface BasketCredit {
      */
     amount: string;
 }
+export interface BasketCreditProtoMsg {
+    typeUrl: "/regen.ecocredit.basket.v1.BasketCredit";
+    value: Uint8Array;
+}
 /** BasketCredit represents the information for a credit batch inside a basket. */
-export interface BasketCreditSDKType {
+export interface BasketCreditAmino {
     /** batch_denom is the unique ID of the credit batch. */
     batch_denom: string;
     /**
@@ -21,6 +25,15 @@ export interface BasketCreditSDKType {
      * Decimal values are acceptable within the precision of the corresponding
      *  credit type for this batch.
      */
+    amount: string;
+}
+export interface BasketCreditAminoMsg {
+    type: "/regen.ecocredit.basket.v1.BasketCredit";
+    value: BasketCreditAmino;
+}
+/** BasketCredit represents the information for a credit batch inside a basket. */
+export interface BasketCreditSDKType {
+    batch_denom: string;
     amount: string;
 }
 /**
@@ -55,17 +68,21 @@ export interface DateCriteria {
      */
     yearsInThePast: number;
 }
+export interface DateCriteriaProtoMsg {
+    typeUrl: "/regen.ecocredit.basket.v1.DateCriteria";
+    value: Uint8Array;
+}
 /**
  * DateCriteria represents the information for credit acceptance in a basket.
  * At most, only one of the values should be set.
  */
-export interface DateCriteriaSDKType {
+export interface DateCriteriaAmino {
     /**
      * min_start_date (optional) is the earliest start date for batches of credits
      * allowed into the basket. At most only one of `start_date_window`,
      * `min_start_date`, and `years_in_the_past` can be set for a basket.
      */
-    min_start_date?: TimestampSDKType;
+    min_start_date?: TimestampAmino;
     /**
      * start_date_window (optional) is a duration of time measured into the past
      * which sets a cutoff for batch start dates when adding new credits to the
@@ -74,7 +91,7 @@ export interface DateCriteriaSDKType {
      * basket. At most only one of `start_date_window`, `min_start_date`, and
      * `years_in_the_past` can be set for a basket.
      */
-    start_date_window?: DurationSDKType;
+    start_date_window?: DurationAmino;
     /**
      * years_in_the_past (optional) is the number of years into the past which
      * sets a cutoff for the batch start dates when adding new credits to the
@@ -87,12 +104,31 @@ export interface DateCriteriaSDKType {
      */
     years_in_the_past: number;
 }
+export interface DateCriteriaAminoMsg {
+    type: "/regen.ecocredit.basket.v1.DateCriteria";
+    value: DateCriteriaAmino;
+}
+/**
+ * DateCriteria represents the information for credit acceptance in a basket.
+ * At most, only one of the values should be set.
+ */
+export interface DateCriteriaSDKType {
+    min_start_date?: TimestampSDKType;
+    start_date_window?: DurationSDKType;
+    years_in_the_past: number;
+}
 export declare const BasketCredit: {
     encode(message: BasketCredit, writer?: _m0.Writer): _m0.Writer;
     decode(input: _m0.Reader | Uint8Array, length?: number): BasketCredit;
     fromJSON(object: any): BasketCredit;
     toJSON(message: BasketCredit): unknown;
     fromPartial(object: Partial<BasketCredit>): BasketCredit;
+    fromAmino(object: BasketCreditAmino): BasketCredit;
+    toAmino(message: BasketCredit): BasketCreditAmino;
+    fromAminoMsg(object: BasketCreditAminoMsg): BasketCredit;
+    fromProtoMsg(message: BasketCreditProtoMsg): BasketCredit;
+    toProto(message: BasketCredit): Uint8Array;
+    toProtoMsg(message: BasketCredit): BasketCreditProtoMsg;
 };
 export declare const DateCriteria: {
     encode(message: DateCriteria, writer?: _m0.Writer): _m0.Writer;
@@ -100,4 +136,10 @@ export declare const DateCriteria: {
     fromJSON(object: any): DateCriteria;
     toJSON(message: DateCriteria): unknown;
     fromPartial(object: Partial<DateCriteria>): DateCriteria;
+    fromAmino(object: DateCriteriaAmino): DateCriteria;
+    toAmino(message: DateCriteria): DateCriteriaAmino;
+    fromAminoMsg(object: DateCriteriaAminoMsg): DateCriteria;
+    fromProtoMsg(message: DateCriteriaProtoMsg): DateCriteria;
+    toProto(message: DateCriteria): Uint8Array;
+    toProtoMsg(message: DateCriteria): DateCriteriaProtoMsg;
 };

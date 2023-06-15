@@ -6,10 +6,23 @@ export interface EventAnchor {
   /** iri is the IRI of the data anchored on chain. */
   iri: string;
 }
+export interface EventAnchorProtoMsg {
+  typeUrl: "/regen.data.v1.EventAnchor";
+  value: Uint8Array;
+}
+/** EventAnchor is an event emitted when data is anchored on chain. */
+
+export interface EventAnchorAmino {
+  /** iri is the IRI of the data anchored on chain. */
+  iri: string;
+}
+export interface EventAnchorAminoMsg {
+  type: "/regen.data.v1.EventAnchor";
+  value: EventAnchorAmino;
+}
 /** EventAnchor is an event emitted when data is anchored on chain. */
 
 export interface EventAnchorSDKType {
-  /** iri is the IRI of the data anchored on chain. */
   iri: string;
 }
 /** EventAttest is an event emitted when data is attested to on chain. */
@@ -24,9 +37,13 @@ export interface EventAttest {
 
   attestor: string;
 }
+export interface EventAttestProtoMsg {
+  typeUrl: "/regen.data.v1.EventAttest";
+  value: Uint8Array;
+}
 /** EventAttest is an event emitted when data is attested to on chain. */
 
-export interface EventAttestSDKType {
+export interface EventAttestAmino {
   /** iri is the IRI of the data attested to. */
   iri: string;
   /**
@@ -36,16 +53,39 @@ export interface EventAttestSDKType {
 
   attestor: string;
 }
+export interface EventAttestAminoMsg {
+  type: "/regen.data.v1.EventAttest";
+  value: EventAttestAmino;
+}
+/** EventAttest is an event emitted when data is attested to on chain. */
+
+export interface EventAttestSDKType {
+  iri: string;
+  attestor: string;
+}
 /** EventDefineResolver is an event emitted when a resolved is defined on chain. */
 
 export interface EventDefineResolver {
   /** id is the ID of the defined resolver. */
   id: Long;
 }
+export interface EventDefineResolverProtoMsg {
+  typeUrl: "/regen.data.v1.EventDefineResolver";
+  value: Uint8Array;
+}
+/** EventDefineResolver is an event emitted when a resolved is defined on chain. */
+
+export interface EventDefineResolverAmino {
+  /** id is the ID of the defined resolver. */
+  id: string;
+}
+export interface EventDefineResolverAminoMsg {
+  type: "/regen.data.v1.EventDefineResolver";
+  value: EventDefineResolverAmino;
+}
 /** EventDefineResolver is an event emitted when a resolved is defined on chain. */
 
 export interface EventDefineResolverSDKType {
-  /** id is the ID of the defined resolver. */
   id: Long;
 }
 /**
@@ -60,16 +100,33 @@ export interface EventRegisterResolver {
 
   iri: string;
 }
+export interface EventRegisterResolverProtoMsg {
+  typeUrl: "/regen.data.v1.EventRegisterResolver";
+  value: Uint8Array;
+}
+/**
+ * EventRegisterResolver is an event emitted when data is registered to a
+ * resolver on chain.
+ */
+
+export interface EventRegisterResolverAmino {
+  /** id is the ID of the resolver that the data was registered to. */
+  id: string;
+  /** iri is the IRI of the data that was registered. */
+
+  iri: string;
+}
+export interface EventRegisterResolverAminoMsg {
+  type: "/regen.data.v1.EventRegisterResolver";
+  value: EventRegisterResolverAmino;
+}
 /**
  * EventRegisterResolver is an event emitted when data is registered to a
  * resolver on chain.
  */
 
 export interface EventRegisterResolverSDKType {
-  /** id is the ID of the resolver that the data was registered to. */
   id: Long;
-  /** iri is the IRI of the data that was registered. */
-
   iri: string;
 }
 
@@ -126,6 +183,37 @@ export const EventAnchor = {
     const message = createBaseEventAnchor();
     message.iri = object.iri ?? "";
     return message;
+  },
+
+  fromAmino(object: EventAnchorAmino): EventAnchor {
+    return {
+      iri: object.iri
+    };
+  },
+
+  toAmino(message: EventAnchor): EventAnchorAmino {
+    const obj: any = {};
+    obj.iri = message.iri;
+    return obj;
+  },
+
+  fromAminoMsg(object: EventAnchorAminoMsg): EventAnchor {
+    return EventAnchor.fromAmino(object.value);
+  },
+
+  fromProtoMsg(message: EventAnchorProtoMsg): EventAnchor {
+    return EventAnchor.decode(message.value);
+  },
+
+  toProto(message: EventAnchor): Uint8Array {
+    return EventAnchor.encode(message).finish();
+  },
+
+  toProtoMsg(message: EventAnchor): EventAnchorProtoMsg {
+    return {
+      typeUrl: "/regen.data.v1.EventAnchor",
+      value: EventAnchor.encode(message).finish()
+    };
   }
 
 };
@@ -195,6 +283,39 @@ export const EventAttest = {
     message.iri = object.iri ?? "";
     message.attestor = object.attestor ?? "";
     return message;
+  },
+
+  fromAmino(object: EventAttestAmino): EventAttest {
+    return {
+      iri: object.iri,
+      attestor: object.attestor
+    };
+  },
+
+  toAmino(message: EventAttest): EventAttestAmino {
+    const obj: any = {};
+    obj.iri = message.iri;
+    obj.attestor = message.attestor;
+    return obj;
+  },
+
+  fromAminoMsg(object: EventAttestAminoMsg): EventAttest {
+    return EventAttest.fromAmino(object.value);
+  },
+
+  fromProtoMsg(message: EventAttestProtoMsg): EventAttest {
+    return EventAttest.decode(message.value);
+  },
+
+  toProto(message: EventAttest): Uint8Array {
+    return EventAttest.encode(message).finish();
+  },
+
+  toProtoMsg(message: EventAttest): EventAttestProtoMsg {
+    return {
+      typeUrl: "/regen.data.v1.EventAttest",
+      value: EventAttest.encode(message).finish()
+    };
   }
 
 };
@@ -252,6 +373,37 @@ export const EventDefineResolver = {
     const message = createBaseEventDefineResolver();
     message.id = object.id !== undefined && object.id !== null ? Long.fromValue(object.id) : Long.UZERO;
     return message;
+  },
+
+  fromAmino(object: EventDefineResolverAmino): EventDefineResolver {
+    return {
+      id: Long.fromString(object.id)
+    };
+  },
+
+  toAmino(message: EventDefineResolver): EventDefineResolverAmino {
+    const obj: any = {};
+    obj.id = message.id ? message.id.toString() : undefined;
+    return obj;
+  },
+
+  fromAminoMsg(object: EventDefineResolverAminoMsg): EventDefineResolver {
+    return EventDefineResolver.fromAmino(object.value);
+  },
+
+  fromProtoMsg(message: EventDefineResolverProtoMsg): EventDefineResolver {
+    return EventDefineResolver.decode(message.value);
+  },
+
+  toProto(message: EventDefineResolver): Uint8Array {
+    return EventDefineResolver.encode(message).finish();
+  },
+
+  toProtoMsg(message: EventDefineResolver): EventDefineResolverProtoMsg {
+    return {
+      typeUrl: "/regen.data.v1.EventDefineResolver",
+      value: EventDefineResolver.encode(message).finish()
+    };
   }
 
 };
@@ -321,6 +473,39 @@ export const EventRegisterResolver = {
     message.id = object.id !== undefined && object.id !== null ? Long.fromValue(object.id) : Long.UZERO;
     message.iri = object.iri ?? "";
     return message;
+  },
+
+  fromAmino(object: EventRegisterResolverAmino): EventRegisterResolver {
+    return {
+      id: Long.fromString(object.id),
+      iri: object.iri
+    };
+  },
+
+  toAmino(message: EventRegisterResolver): EventRegisterResolverAmino {
+    const obj: any = {};
+    obj.id = message.id ? message.id.toString() : undefined;
+    obj.iri = message.iri;
+    return obj;
+  },
+
+  fromAminoMsg(object: EventRegisterResolverAminoMsg): EventRegisterResolver {
+    return EventRegisterResolver.fromAmino(object.value);
+  },
+
+  fromProtoMsg(message: EventRegisterResolverProtoMsg): EventRegisterResolver {
+    return EventRegisterResolver.decode(message.value);
+  },
+
+  toProto(message: EventRegisterResolver): Uint8Array {
+    return EventRegisterResolver.encode(message).finish();
+  },
+
+  toProtoMsg(message: EventRegisterResolver): EventRegisterResolverProtoMsg {
+    return {
+      typeUrl: "/regen.data.v1.EventRegisterResolver",
+      value: EventRegisterResolver.encode(message).finish()
+    };
   }
 
 };

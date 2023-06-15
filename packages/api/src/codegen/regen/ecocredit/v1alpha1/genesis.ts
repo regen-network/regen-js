@@ -1,4 +1,4 @@
-import { Params, ParamsSDKType, ClassInfo, ClassInfoSDKType, BatchInfo, BatchInfoSDKType, CreditTypeSeq, CreditTypeSeqSDKType } from "./types";
+import { Params, ParamsAmino, ParamsSDKType, ClassInfo, ClassInfoAmino, ClassInfoSDKType, BatchInfo, BatchInfoAmino, BatchInfoSDKType, CreditTypeSeq, CreditTypeSeqAmino, CreditTypeSeqSDKType } from "./types";
 import * as _m0 from "protobufjs/minimal";
 import { isSet } from "../../../helpers";
 /** GenesisState defines ecocredit module's genesis state. */
@@ -25,28 +25,46 @@ export interface GenesisState {
 
   supplies: Supply[];
 }
+export interface GenesisStateProtoMsg {
+  typeUrl: "/regen.ecocredit.v1alpha1.GenesisState";
+  value: Uint8Array;
+}
 /** GenesisState defines ecocredit module's genesis state. */
 
-export interface GenesisStateSDKType {
+export interface GenesisStateAmino {
   /**
    * Params contains the updateable global parameters for use with the x/params
    * module
    */
-  params?: ParamsSDKType;
+  params?: ParamsAmino;
   /** class_info is the list of credit class info. */
 
-  class_info: ClassInfoSDKType[];
+  class_info: ClassInfoAmino[];
   /** batch_info is the list of credit batch info. */
 
-  batch_info: BatchInfoSDKType[];
+  batch_info: BatchInfoAmino[];
   /** sequences is the list of credit type sequence. */
 
-  sequences: CreditTypeSeqSDKType[];
+  sequences: CreditTypeSeqAmino[];
   /** balances is the list of credit batch tradable/retired units. */
 
-  balances: BalanceSDKType[];
+  balances: BalanceAmino[];
   /** supplies is the list of credit batch tradable/retired supply. */
 
+  supplies: SupplyAmino[];
+}
+export interface GenesisStateAminoMsg {
+  type: "/regen.ecocredit.v1alpha1.GenesisState";
+  value: GenesisStateAmino;
+}
+/** GenesisState defines ecocredit module's genesis state. */
+
+export interface GenesisStateSDKType {
+  params?: ParamsSDKType;
+  class_info: ClassInfoSDKType[];
+  batch_info: BatchInfoSDKType[];
+  sequences: CreditTypeSeqSDKType[];
+  balances: BalanceSDKType[];
   supplies: SupplySDKType[];
 }
 /**
@@ -67,12 +85,16 @@ export interface Balance {
 
   retiredBalance: string;
 }
+export interface BalanceProtoMsg {
+  typeUrl: "/regen.ecocredit.v1alpha1.Balance";
+  value: Uint8Array;
+}
 /**
  * Balance represents tradable or retired units of a credit batch with an
  * account address, batch_denom, and balance.
  */
 
-export interface BalanceSDKType {
+export interface BalanceAmino {
   /** address is the account address of the account holding credits. */
   address: string;
   /** batch_denom is the unique ID of the credit batch. */
@@ -83,6 +105,21 @@ export interface BalanceSDKType {
   tradable_balance: string;
   /** retired_balance is the retired balance of the credit batch. */
 
+  retired_balance: string;
+}
+export interface BalanceAminoMsg {
+  type: "/regen.ecocredit.v1alpha1.Balance";
+  value: BalanceAmino;
+}
+/**
+ * Balance represents tradable or retired units of a credit batch with an
+ * account address, batch_denom, and balance.
+ */
+
+export interface BalanceSDKType {
+  address: string;
+  batch_denom: string;
+  tradable_balance: string;
   retired_balance: string;
 }
 /** Supply represents a tradable or retired supply of a credit batch. */
@@ -97,9 +134,13 @@ export interface Supply {
 
   retiredSupply: string;
 }
+export interface SupplyProtoMsg {
+  typeUrl: "/regen.ecocredit.v1alpha1.Supply";
+  value: Uint8Array;
+}
 /** Supply represents a tradable or retired supply of a credit batch. */
 
-export interface SupplySDKType {
+export interface SupplyAmino {
   /** batch_denom is the unique ID of the credit batch. */
   batch_denom: string;
   /** tradable_supply is the tradable supply of the credit batch. */
@@ -107,6 +148,17 @@ export interface SupplySDKType {
   tradable_supply: string;
   /** retired_supply is the retired supply of the credit batch. */
 
+  retired_supply: string;
+}
+export interface SupplyAminoMsg {
+  type: "/regen.ecocredit.v1alpha1.Supply";
+  value: SupplyAmino;
+}
+/** Supply represents a tradable or retired supply of a credit batch. */
+
+export interface SupplySDKType {
+  batch_denom: string;
+  tradable_supply: string;
   retired_supply: string;
 }
 
@@ -249,6 +301,73 @@ export const GenesisState = {
     message.balances = object.balances?.map(e => Balance.fromPartial(e)) || [];
     message.supplies = object.supplies?.map(e => Supply.fromPartial(e)) || [];
     return message;
+  },
+
+  fromAmino(object: GenesisStateAmino): GenesisState {
+    return {
+      params: object?.params ? Params.fromAmino(object.params) : undefined,
+      classInfo: Array.isArray(object?.class_info) ? object.class_info.map((e: any) => ClassInfo.fromAmino(e)) : [],
+      batchInfo: Array.isArray(object?.batch_info) ? object.batch_info.map((e: any) => BatchInfo.fromAmino(e)) : [],
+      sequences: Array.isArray(object?.sequences) ? object.sequences.map((e: any) => CreditTypeSeq.fromAmino(e)) : [],
+      balances: Array.isArray(object?.balances) ? object.balances.map((e: any) => Balance.fromAmino(e)) : [],
+      supplies: Array.isArray(object?.supplies) ? object.supplies.map((e: any) => Supply.fromAmino(e)) : []
+    };
+  },
+
+  toAmino(message: GenesisState): GenesisStateAmino {
+    const obj: any = {};
+    obj.params = message.params ? Params.toAmino(message.params) : undefined;
+
+    if (message.classInfo) {
+      obj.class_info = message.classInfo.map(e => e ? ClassInfo.toAmino(e) : undefined);
+    } else {
+      obj.class_info = [];
+    }
+
+    if (message.batchInfo) {
+      obj.batch_info = message.batchInfo.map(e => e ? BatchInfo.toAmino(e) : undefined);
+    } else {
+      obj.batch_info = [];
+    }
+
+    if (message.sequences) {
+      obj.sequences = message.sequences.map(e => e ? CreditTypeSeq.toAmino(e) : undefined);
+    } else {
+      obj.sequences = [];
+    }
+
+    if (message.balances) {
+      obj.balances = message.balances.map(e => e ? Balance.toAmino(e) : undefined);
+    } else {
+      obj.balances = [];
+    }
+
+    if (message.supplies) {
+      obj.supplies = message.supplies.map(e => e ? Supply.toAmino(e) : undefined);
+    } else {
+      obj.supplies = [];
+    }
+
+    return obj;
+  },
+
+  fromAminoMsg(object: GenesisStateAminoMsg): GenesisState {
+    return GenesisState.fromAmino(object.value);
+  },
+
+  fromProtoMsg(message: GenesisStateProtoMsg): GenesisState {
+    return GenesisState.decode(message.value);
+  },
+
+  toProto(message: GenesisState): Uint8Array {
+    return GenesisState.encode(message).finish();
+  },
+
+  toProtoMsg(message: GenesisState): GenesisStateProtoMsg {
+    return {
+      typeUrl: "/regen.ecocredit.v1alpha1.GenesisState",
+      value: GenesisState.encode(message).finish()
+    };
   }
 
 };
@@ -342,6 +461,43 @@ export const Balance = {
     message.tradableBalance = object.tradableBalance ?? "";
     message.retiredBalance = object.retiredBalance ?? "";
     return message;
+  },
+
+  fromAmino(object: BalanceAmino): Balance {
+    return {
+      address: object.address,
+      batchDenom: object.batch_denom,
+      tradableBalance: object.tradable_balance,
+      retiredBalance: object.retired_balance
+    };
+  },
+
+  toAmino(message: Balance): BalanceAmino {
+    const obj: any = {};
+    obj.address = message.address;
+    obj.batch_denom = message.batchDenom;
+    obj.tradable_balance = message.tradableBalance;
+    obj.retired_balance = message.retiredBalance;
+    return obj;
+  },
+
+  fromAminoMsg(object: BalanceAminoMsg): Balance {
+    return Balance.fromAmino(object.value);
+  },
+
+  fromProtoMsg(message: BalanceProtoMsg): Balance {
+    return Balance.decode(message.value);
+  },
+
+  toProto(message: Balance): Uint8Array {
+    return Balance.encode(message).finish();
+  },
+
+  toProtoMsg(message: Balance): BalanceProtoMsg {
+    return {
+      typeUrl: "/regen.ecocredit.v1alpha1.Balance",
+      value: Balance.encode(message).finish()
+    };
   }
 
 };
@@ -423,6 +579,41 @@ export const Supply = {
     message.tradableSupply = object.tradableSupply ?? "";
     message.retiredSupply = object.retiredSupply ?? "";
     return message;
+  },
+
+  fromAmino(object: SupplyAmino): Supply {
+    return {
+      batchDenom: object.batch_denom,
+      tradableSupply: object.tradable_supply,
+      retiredSupply: object.retired_supply
+    };
+  },
+
+  toAmino(message: Supply): SupplyAmino {
+    const obj: any = {};
+    obj.batch_denom = message.batchDenom;
+    obj.tradable_supply = message.tradableSupply;
+    obj.retired_supply = message.retiredSupply;
+    return obj;
+  },
+
+  fromAminoMsg(object: SupplyAminoMsg): Supply {
+    return Supply.fromAmino(object.value);
+  },
+
+  fromProtoMsg(message: SupplyProtoMsg): Supply {
+    return Supply.decode(message.value);
+  },
+
+  toProto(message: Supply): Uint8Array {
+    return Supply.encode(message).finish();
+  },
+
+  toProtoMsg(message: Supply): SupplyProtoMsg {
+    return {
+      typeUrl: "/regen.ecocredit.v1alpha1.Supply",
+      value: Supply.encode(message).finish()
+    };
   }
 
 };

@@ -1,4 +1,4 @@
-import { Timestamp, TimestampSDKType } from "../../../google/protobuf/timestamp";
+import { Timestamp, TimestampAmino, TimestampSDKType } from "../../../google/protobuf/timestamp";
 import * as _m0 from "protobufjs/minimal";
 import { isSet, bytesFromBase64, base64FromBytes, fromJsonTimestamp, fromTimestamp, Long } from "../../../helpers";
 /** DataID stores a compact data ID and its full IRI. */
@@ -10,13 +10,27 @@ export interface DataID {
 
   iri: string;
 }
+export interface DataIDProtoMsg {
+  typeUrl: "/regen.data.v1.DataID";
+  value: Uint8Array;
+}
 /** DataID stores a compact data ID and its full IRI. */
 
-export interface DataIDSDKType {
+export interface DataIDAmino {
   /** id is the compact automatically-generated data ID. */
   id: Uint8Array;
   /** iri is the IRI of the data which contains its full ContentHash. */
 
+  iri: string;
+}
+export interface DataIDAminoMsg {
+  type: "/regen.data.v1.DataID";
+  value: DataIDAmino;
+}
+/** DataID stores a compact data ID and its full IRI. */
+
+export interface DataIDSDKType {
+  id: Uint8Array;
   iri: string;
 }
 /** DataAnchor stores the anchor timestamp for a data object. */
@@ -31,9 +45,13 @@ export interface DataAnchor {
 
   timestamp?: Timestamp;
 }
+export interface DataAnchorProtoMsg {
+  typeUrl: "/regen.data.v1.DataAnchor";
+  value: Uint8Array;
+}
 /** DataAnchor stores the anchor timestamp for a data object. */
 
-export interface DataAnchorSDKType {
+export interface DataAnchorAmino {
   /** id is the compact data ID. */
   id: Uint8Array;
   /**
@@ -41,6 +59,16 @@ export interface DataAnchorSDKType {
    * it was first known to the blockchain.
    */
 
+  timestamp?: TimestampAmino;
+}
+export interface DataAnchorAminoMsg {
+  type: "/regen.data.v1.DataAnchor";
+  value: DataAnchorAmino;
+}
+/** DataAnchor stores the anchor timestamp for a data object. */
+
+export interface DataAnchorSDKType {
+  id: Uint8Array;
   timestamp?: TimestampSDKType;
 }
 /** DataAttestor is a join table for associating data IDs and attestors. */
@@ -55,9 +83,13 @@ export interface DataAttestor {
 
   timestamp?: Timestamp;
 }
+export interface DataAttestorProtoMsg {
+  typeUrl: "/regen.data.v1.DataAttestor";
+  value: Uint8Array;
+}
 /** DataAttestor is a join table for associating data IDs and attestors. */
 
-export interface DataAttestorSDKType {
+export interface DataAttestorAmino {
   /** id is the compact data ID. */
   id: Uint8Array;
   /** attestor is the account address of the attestor. */
@@ -65,6 +97,17 @@ export interface DataAttestorSDKType {
   attestor: Uint8Array;
   /** timestamp is the time at which the attestor signed this data object. */
 
+  timestamp?: TimestampAmino;
+}
+export interface DataAttestorAminoMsg {
+  type: "/regen.data.v1.DataAttestor";
+  value: DataAttestorAmino;
+}
+/** DataAttestor is a join table for associating data IDs and attestors. */
+
+export interface DataAttestorSDKType {
+  id: Uint8Array;
+  attestor: Uint8Array;
   timestamp?: TimestampSDKType;
 }
 /** Resolver describes a data resolver. */
@@ -82,11 +125,15 @@ export interface Resolver {
 
   manager: Uint8Array;
 }
+export interface ResolverProtoMsg {
+  typeUrl: "/regen.data.v1.Resolver";
+  value: Uint8Array;
+}
 /** Resolver describes a data resolver. */
 
-export interface ResolverSDKType {
+export interface ResolverAmino {
   /** id is the ID of the resolver. */
-  id: Long;
+  id: string;
   /** url is the URL of the resolver. */
 
   url: string;
@@ -95,6 +142,17 @@ export interface ResolverSDKType {
    * to make calls to Msg/RegisterResolver for this resolver.
    */
 
+  manager: Uint8Array;
+}
+export interface ResolverAminoMsg {
+  type: "/regen.data.v1.Resolver";
+  value: ResolverAmino;
+}
+/** Resolver describes a data resolver. */
+
+export interface ResolverSDKType {
+  id: Long;
+  url: string;
   manager: Uint8Array;
 }
 /**
@@ -109,16 +167,33 @@ export interface DataResolver {
 
   resolverId: Long;
 }
+export interface DataResolverProtoMsg {
+  typeUrl: "/regen.data.v1.DataResolver";
+  value: Uint8Array;
+}
+/**
+ * DataResolver is a join table between data objects and resolvers and indicates
+ * that a resolver claims to be able to resolve this data object.
+ */
+
+export interface DataResolverAmino {
+  /** id is the compact data ID. */
+  id: Uint8Array;
+  /** resolver_id is the ID of the resolver. */
+
+  resolver_id: string;
+}
+export interface DataResolverAminoMsg {
+  type: "/regen.data.v1.DataResolver";
+  value: DataResolverAmino;
+}
 /**
  * DataResolver is a join table between data objects and resolvers and indicates
  * that a resolver claims to be able to resolve this data object.
  */
 
 export interface DataResolverSDKType {
-  /** id is the compact data ID. */
   id: Uint8Array;
-  /** resolver_id is the ID of the resolver. */
-
   resolver_id: Long;
 }
 
@@ -187,6 +262,39 @@ export const DataID = {
     message.id = object.id ?? new Uint8Array();
     message.iri = object.iri ?? "";
     return message;
+  },
+
+  fromAmino(object: DataIDAmino): DataID {
+    return {
+      id: object.id,
+      iri: object.iri
+    };
+  },
+
+  toAmino(message: DataID): DataIDAmino {
+    const obj: any = {};
+    obj.id = message.id;
+    obj.iri = message.iri;
+    return obj;
+  },
+
+  fromAminoMsg(object: DataIDAminoMsg): DataID {
+    return DataID.fromAmino(object.value);
+  },
+
+  fromProtoMsg(message: DataIDProtoMsg): DataID {
+    return DataID.decode(message.value);
+  },
+
+  toProto(message: DataID): Uint8Array {
+    return DataID.encode(message).finish();
+  },
+
+  toProtoMsg(message: DataID): DataIDProtoMsg {
+    return {
+      typeUrl: "/regen.data.v1.DataID",
+      value: DataID.encode(message).finish()
+    };
   }
 
 };
@@ -256,6 +364,39 @@ export const DataAnchor = {
     message.id = object.id ?? new Uint8Array();
     message.timestamp = object.timestamp !== undefined && object.timestamp !== null ? Timestamp.fromPartial(object.timestamp) : undefined;
     return message;
+  },
+
+  fromAmino(object: DataAnchorAmino): DataAnchor {
+    return {
+      id: object.id,
+      timestamp: object?.timestamp ? Timestamp.fromAmino(object.timestamp) : undefined
+    };
+  },
+
+  toAmino(message: DataAnchor): DataAnchorAmino {
+    const obj: any = {};
+    obj.id = message.id;
+    obj.timestamp = message.timestamp ? Timestamp.toAmino(message.timestamp) : undefined;
+    return obj;
+  },
+
+  fromAminoMsg(object: DataAnchorAminoMsg): DataAnchor {
+    return DataAnchor.fromAmino(object.value);
+  },
+
+  fromProtoMsg(message: DataAnchorProtoMsg): DataAnchor {
+    return DataAnchor.decode(message.value);
+  },
+
+  toProto(message: DataAnchor): Uint8Array {
+    return DataAnchor.encode(message).finish();
+  },
+
+  toProtoMsg(message: DataAnchor): DataAnchorProtoMsg {
+    return {
+      typeUrl: "/regen.data.v1.DataAnchor",
+      value: DataAnchor.encode(message).finish()
+    };
   }
 
 };
@@ -337,6 +478,41 @@ export const DataAttestor = {
     message.attestor = object.attestor ?? new Uint8Array();
     message.timestamp = object.timestamp !== undefined && object.timestamp !== null ? Timestamp.fromPartial(object.timestamp) : undefined;
     return message;
+  },
+
+  fromAmino(object: DataAttestorAmino): DataAttestor {
+    return {
+      id: object.id,
+      attestor: object.attestor,
+      timestamp: object?.timestamp ? Timestamp.fromAmino(object.timestamp) : undefined
+    };
+  },
+
+  toAmino(message: DataAttestor): DataAttestorAmino {
+    const obj: any = {};
+    obj.id = message.id;
+    obj.attestor = message.attestor;
+    obj.timestamp = message.timestamp ? Timestamp.toAmino(message.timestamp) : undefined;
+    return obj;
+  },
+
+  fromAminoMsg(object: DataAttestorAminoMsg): DataAttestor {
+    return DataAttestor.fromAmino(object.value);
+  },
+
+  fromProtoMsg(message: DataAttestorProtoMsg): DataAttestor {
+    return DataAttestor.decode(message.value);
+  },
+
+  toProto(message: DataAttestor): Uint8Array {
+    return DataAttestor.encode(message).finish();
+  },
+
+  toProtoMsg(message: DataAttestor): DataAttestorProtoMsg {
+    return {
+      typeUrl: "/regen.data.v1.DataAttestor",
+      value: DataAttestor.encode(message).finish()
+    };
   }
 
 };
@@ -418,6 +594,41 @@ export const Resolver = {
     message.url = object.url ?? "";
     message.manager = object.manager ?? new Uint8Array();
     return message;
+  },
+
+  fromAmino(object: ResolverAmino): Resolver {
+    return {
+      id: Long.fromString(object.id),
+      url: object.url,
+      manager: object.manager
+    };
+  },
+
+  toAmino(message: Resolver): ResolverAmino {
+    const obj: any = {};
+    obj.id = message.id ? message.id.toString() : undefined;
+    obj.url = message.url;
+    obj.manager = message.manager;
+    return obj;
+  },
+
+  fromAminoMsg(object: ResolverAminoMsg): Resolver {
+    return Resolver.fromAmino(object.value);
+  },
+
+  fromProtoMsg(message: ResolverProtoMsg): Resolver {
+    return Resolver.decode(message.value);
+  },
+
+  toProto(message: Resolver): Uint8Array {
+    return Resolver.encode(message).finish();
+  },
+
+  toProtoMsg(message: Resolver): ResolverProtoMsg {
+    return {
+      typeUrl: "/regen.data.v1.Resolver",
+      value: Resolver.encode(message).finish()
+    };
   }
 
 };
@@ -487,6 +698,39 @@ export const DataResolver = {
     message.id = object.id ?? new Uint8Array();
     message.resolverId = object.resolverId !== undefined && object.resolverId !== null ? Long.fromValue(object.resolverId) : Long.UZERO;
     return message;
+  },
+
+  fromAmino(object: DataResolverAmino): DataResolver {
+    return {
+      id: object.id,
+      resolverId: Long.fromString(object.resolver_id)
+    };
+  },
+
+  toAmino(message: DataResolver): DataResolverAmino {
+    const obj: any = {};
+    obj.id = message.id;
+    obj.resolver_id = message.resolverId ? message.resolverId.toString() : undefined;
+    return obj;
+  },
+
+  fromAminoMsg(object: DataResolverAminoMsg): DataResolver {
+    return DataResolver.fromAmino(object.value);
+  },
+
+  fromProtoMsg(message: DataResolverProtoMsg): DataResolver {
+    return DataResolver.decode(message.value);
+  },
+
+  toProto(message: DataResolver): Uint8Array {
+    return DataResolver.encode(message).finish();
+  },
+
+  toProtoMsg(message: DataResolver): DataResolverProtoMsg {
+    return {
+      typeUrl: "/regen.data.v1.DataResolver",
+      value: DataResolver.encode(message).finish()
+    };
   }
 
 };

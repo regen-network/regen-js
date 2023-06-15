@@ -12,16 +12,33 @@ export interface QueryInterchainAccountRequest {
 
   connectionId: string;
 }
+export interface QueryInterchainAccountRequestProtoMsg {
+  typeUrl: "/regen.intertx.v1.QueryInterchainAccountRequest";
+  value: Uint8Array;
+}
+/**
+ * QueryInterchainAccountRequest is the request type for the
+ * Query/InterchainAccountAddress RPC
+ */
+
+export interface QueryInterchainAccountRequestAmino {
+  /** owner is the address of the account that owns the ICA. */
+  owner: string;
+  /** connection_id is the connection the ICA claimed. */
+
+  connection_id: string;
+}
+export interface QueryInterchainAccountRequestAminoMsg {
+  type: "/regen.intertx.v1.QueryInterchainAccountRequest";
+  value: QueryInterchainAccountRequestAmino;
+}
 /**
  * QueryInterchainAccountRequest is the request type for the
  * Query/InterchainAccountAddress RPC
  */
 
 export interface QueryInterchainAccountRequestSDKType {
-  /** owner is the address of the account that owns the ICA. */
   owner: string;
-  /** connection_id is the connection the ICA claimed. */
-
   connection_id: string;
 }
 /**
@@ -33,13 +50,29 @@ export interface QueryInterchainAccountResponse {
   /** interchain_account_address is the address of the ICA. */
   interchainAccountAddress: string;
 }
+export interface QueryInterchainAccountResponseProtoMsg {
+  typeUrl: "/regen.intertx.v1.QueryInterchainAccountResponse";
+  value: Uint8Array;
+}
+/**
+ * QueryInterchainAccountResponse the response type for the
+ * Query/InterchainAccountAddress RPC
+ */
+
+export interface QueryInterchainAccountResponseAmino {
+  /** interchain_account_address is the address of the ICA. */
+  interchain_account_address: string;
+}
+export interface QueryInterchainAccountResponseAminoMsg {
+  type: "/regen.intertx.v1.QueryInterchainAccountResponse";
+  value: QueryInterchainAccountResponseAmino;
+}
 /**
  * QueryInterchainAccountResponse the response type for the
  * Query/InterchainAccountAddress RPC
  */
 
 export interface QueryInterchainAccountResponseSDKType {
-  /** interchain_account_address is the address of the ICA. */
   interchain_account_address: string;
 }
 
@@ -108,6 +141,39 @@ export const QueryInterchainAccountRequest = {
     message.owner = object.owner ?? "";
     message.connectionId = object.connectionId ?? "";
     return message;
+  },
+
+  fromAmino(object: QueryInterchainAccountRequestAmino): QueryInterchainAccountRequest {
+    return {
+      owner: object.owner,
+      connectionId: object.connection_id
+    };
+  },
+
+  toAmino(message: QueryInterchainAccountRequest): QueryInterchainAccountRequestAmino {
+    const obj: any = {};
+    obj.owner = message.owner;
+    obj.connection_id = message.connectionId;
+    return obj;
+  },
+
+  fromAminoMsg(object: QueryInterchainAccountRequestAminoMsg): QueryInterchainAccountRequest {
+    return QueryInterchainAccountRequest.fromAmino(object.value);
+  },
+
+  fromProtoMsg(message: QueryInterchainAccountRequestProtoMsg): QueryInterchainAccountRequest {
+    return QueryInterchainAccountRequest.decode(message.value);
+  },
+
+  toProto(message: QueryInterchainAccountRequest): Uint8Array {
+    return QueryInterchainAccountRequest.encode(message).finish();
+  },
+
+  toProtoMsg(message: QueryInterchainAccountRequest): QueryInterchainAccountRequestProtoMsg {
+    return {
+      typeUrl: "/regen.intertx.v1.QueryInterchainAccountRequest",
+      value: QueryInterchainAccountRequest.encode(message).finish()
+    };
   }
 
 };
@@ -165,6 +231,37 @@ export const QueryInterchainAccountResponse = {
     const message = createBaseQueryInterchainAccountResponse();
     message.interchainAccountAddress = object.interchainAccountAddress ?? "";
     return message;
+  },
+
+  fromAmino(object: QueryInterchainAccountResponseAmino): QueryInterchainAccountResponse {
+    return {
+      interchainAccountAddress: object.interchain_account_address
+    };
+  },
+
+  toAmino(message: QueryInterchainAccountResponse): QueryInterchainAccountResponseAmino {
+    const obj: any = {};
+    obj.interchain_account_address = message.interchainAccountAddress;
+    return obj;
+  },
+
+  fromAminoMsg(object: QueryInterchainAccountResponseAminoMsg): QueryInterchainAccountResponse {
+    return QueryInterchainAccountResponse.fromAmino(object.value);
+  },
+
+  fromProtoMsg(message: QueryInterchainAccountResponseProtoMsg): QueryInterchainAccountResponse {
+    return QueryInterchainAccountResponse.decode(message.value);
+  },
+
+  toProto(message: QueryInterchainAccountResponse): Uint8Array {
+    return QueryInterchainAccountResponse.encode(message).finish();
+  },
+
+  toProtoMsg(message: QueryInterchainAccountResponse): QueryInterchainAccountResponseProtoMsg {
+    return {
+      typeUrl: "/regen.intertx.v1.QueryInterchainAccountResponse",
+      value: QueryInterchainAccountResponse.encode(message).finish()
+    };
   }
 
 };

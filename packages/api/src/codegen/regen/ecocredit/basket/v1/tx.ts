@@ -1,5 +1,5 @@
-import { DateCriteria, DateCriteriaSDKType, BasketCredit, BasketCreditSDKType } from "./types";
-import { Coin, CoinSDKType } from "../../../../cosmos/base/v1beta1/coin";
+import { DateCriteria, DateCriteriaAmino, DateCriteriaSDKType, BasketCredit, BasketCreditAmino, BasketCreditSDKType } from "./types";
+import { Coin, CoinAmino, CoinSDKType } from "../../../../cosmos/base/v1beta1/coin";
 import * as _m0 from "protobufjs/minimal";
 import { isSet } from "../../../../helpers";
 /** MsgCreateBasket is the Msg/CreateBasket request type. */
@@ -76,9 +76,13 @@ export interface MsgCreate {
 
   fee: Coin[];
 }
+export interface MsgCreateProtoMsg {
+  typeUrl: "/regen.ecocredit.basket.v1.MsgCreate";
+  value: Uint8Array;
+}
 /** MsgCreateBasket is the Msg/CreateBasket request type. */
 
-export interface MsgCreateSDKType {
+export interface MsgCreateAmino {
   /**
    * curator is the address of the basket curator who is able to change certain
    * basket settings.
@@ -134,7 +138,7 @@ export interface MsgCreateSDKType {
    * At most, only one of the date criteria fields can be set.
    */
 
-  date_criteria?: DateCriteriaSDKType;
+  date_criteria?: DateCriteriaAmino;
   /**
    * fee is the basket creation fee. A fee is not required if no fee exists
    * in the basket fee parameter. The fee must be greater than or equal to the
@@ -148,6 +152,25 @@ export interface MsgCreateSDKType {
    * the next version to reflect these requirements.
    */
 
+  fee: CoinAmino[];
+}
+export interface MsgCreateAminoMsg {
+  type: "regen.basket/MsgCreate";
+  value: MsgCreateAmino;
+}
+/** MsgCreateBasket is the Msg/CreateBasket request type. */
+
+export interface MsgCreateSDKType {
+  curator: string;
+  name: string;
+  description: string;
+  /** @deprecated */
+
+  exponent: number;
+  disable_auto_retire: boolean;
+  credit_type_abbrev: string;
+  allowed_classes: string[];
+  date_criteria?: DateCriteriaSDKType;
   fee: CoinSDKType[];
 }
 /** MsgCreateBasketResponse is the Msg/CreateBasket response type. */
@@ -156,10 +179,23 @@ export interface MsgCreateResponse {
   /** basket_denom is the unique denomination ID of the newly created basket. */
   basketDenom: string;
 }
+export interface MsgCreateResponseProtoMsg {
+  typeUrl: "/regen.ecocredit.basket.v1.MsgCreateResponse";
+  value: Uint8Array;
+}
+/** MsgCreateBasketResponse is the Msg/CreateBasket response type. */
+
+export interface MsgCreateResponseAmino {
+  /** basket_denom is the unique denomination ID of the newly created basket. */
+  basket_denom: string;
+}
+export interface MsgCreateResponseAminoMsg {
+  type: "/regen.ecocredit.basket.v1.MsgCreateResponse";
+  value: MsgCreateResponseAmino;
+}
 /** MsgCreateBasketResponse is the Msg/CreateBasket response type. */
 
 export interface MsgCreateResponseSDKType {
-  /** basket_denom is the unique denomination ID of the newly created basket. */
   basket_denom: string;
 }
 /** MsgAddToBasket is the Msg/AddToBasket request type. */
@@ -177,9 +213,13 @@ export interface MsgPut {
 
   credits: BasketCredit[];
 }
+export interface MsgPutProtoMsg {
+  typeUrl: "/regen.ecocredit.basket.v1.MsgPut";
+  value: Uint8Array;
+}
 /** MsgAddToBasket is the Msg/AddToBasket request type. */
 
-export interface MsgPutSDKType {
+export interface MsgPutAmino {
   /** owner is the owner of credits being put into the basket. */
   owner: string;
   /** basket_denom is the basket denom to add credits to. */
@@ -190,6 +230,17 @@ export interface MsgPutSDKType {
    * admission criteria, the operation will fail.
    */
 
+  credits: BasketCreditAmino[];
+}
+export interface MsgPutAminoMsg {
+  type: "regen.basket/MsgPut";
+  value: MsgPutAmino;
+}
+/** MsgAddToBasket is the Msg/AddToBasket request type. */
+
+export interface MsgPutSDKType {
+  owner: string;
+  basket_denom: string;
   credits: BasketCreditSDKType[];
 }
 /** MsgAddToBasketResponse is the Msg/AddToBasket response type. */
@@ -198,10 +249,23 @@ export interface MsgPutResponse {
   /** amount_received is the integer amount of basket tokens received. */
   amountReceived: string;
 }
+export interface MsgPutResponseProtoMsg {
+  typeUrl: "/regen.ecocredit.basket.v1.MsgPutResponse";
+  value: Uint8Array;
+}
+/** MsgAddToBasketResponse is the Msg/AddToBasket response type. */
+
+export interface MsgPutResponseAmino {
+  /** amount_received is the integer amount of basket tokens received. */
+  amount_received: string;
+}
+export interface MsgPutResponseAminoMsg {
+  type: "/regen.ecocredit.basket.v1.MsgPutResponse";
+  value: MsgPutResponseAmino;
+}
 /** MsgAddToBasketResponse is the Msg/AddToBasket response type. */
 
 export interface MsgPutResponseSDKType {
-  /** amount_received is the integer amount of basket tokens received. */
   amount_received: string;
 }
 /** MsgTakeFromBasket is the Msg/TakeFromBasket request type. */
@@ -254,9 +318,13 @@ export interface MsgTake {
 
   retirementReason: string;
 }
+export interface MsgTakeProtoMsg {
+  typeUrl: "/regen.ecocredit.basket.v1.MsgTake";
+  value: Uint8Array;
+}
 /** MsgTakeFromBasket is the Msg/TakeFromBasket request type. */
 
-export interface MsgTakeSDKType {
+export interface MsgTakeAmino {
   /** owner is the owner of the basket tokens. */
   owner: string;
   /** basket_denom is the basket bank denom to take credits from. */
@@ -304,16 +372,46 @@ export interface MsgTakeSDKType {
 
   retirement_reason: string;
 }
+export interface MsgTakeAminoMsg {
+  type: "regen.basket/MsgTake";
+  value: MsgTakeAmino;
+}
+/** MsgTakeFromBasket is the Msg/TakeFromBasket request type. */
+
+export interface MsgTakeSDKType {
+  owner: string;
+  basket_denom: string;
+  amount: string;
+  /** @deprecated */
+
+  retirement_location: string;
+  retire_on_take: boolean;
+  retirement_jurisdiction: string;
+  retirement_reason: string;
+}
 /** MsgTakeFromBasketResponse is the Msg/TakeFromBasket response type. */
 
 export interface MsgTakeResponse {
   /** credits are the credits taken out of the basket. */
   credits: BasketCredit[];
 }
+export interface MsgTakeResponseProtoMsg {
+  typeUrl: "/regen.ecocredit.basket.v1.MsgTakeResponse";
+  value: Uint8Array;
+}
+/** MsgTakeFromBasketResponse is the Msg/TakeFromBasket response type. */
+
+export interface MsgTakeResponseAmino {
+  /** credits are the credits taken out of the basket. */
+  credits: BasketCreditAmino[];
+}
+export interface MsgTakeResponseAminoMsg {
+  type: "/regen.ecocredit.basket.v1.MsgTakeResponse";
+  value: MsgTakeResponseAmino;
+}
 /** MsgTakeFromBasketResponse is the Msg/TakeFromBasket response type. */
 
 export interface MsgTakeResponseSDKType {
-  /** credits are the credits taken out of the basket. */
   credits: BasketCreditSDKType[];
 }
 /**
@@ -332,13 +430,17 @@ export interface MsgUpdateBasketFee {
 
   fee?: Coin;
 }
+export interface MsgUpdateBasketFeeProtoMsg {
+  typeUrl: "/regen.ecocredit.basket.v1.MsgUpdateBasketFee";
+  value: Uint8Array;
+}
 /**
  * MsgUpdateBasketFee is the Msg/UpdateBasketFee request type.
  * 
  * Since Revision 2
  */
 
-export interface MsgUpdateBasketFeeSDKType {
+export interface MsgUpdateBasketFeeAmino {
   /** authority is the address of the governance account. */
   authority: string;
   /**
@@ -346,6 +448,20 @@ export interface MsgUpdateBasketFeeSDKType {
    * removed and no fee will be required to create a basket.
    */
 
+  fee?: CoinAmino;
+}
+export interface MsgUpdateBasketFeeAminoMsg {
+  type: "regen.basket/MsgUpdateBasketFee";
+  value: MsgUpdateBasketFeeAmino;
+}
+/**
+ * MsgUpdateBasketFee is the Msg/UpdateBasketFee request type.
+ * 
+ * Since Revision 2
+ */
+
+export interface MsgUpdateBasketFeeSDKType {
+  authority: string;
   fee?: CoinSDKType;
 }
 /**
@@ -355,6 +471,21 @@ export interface MsgUpdateBasketFeeSDKType {
  */
 
 export interface MsgUpdateBasketFeeResponse {}
+export interface MsgUpdateBasketFeeResponseProtoMsg {
+  typeUrl: "/regen.ecocredit.basket.v1.MsgUpdateBasketFeeResponse";
+  value: Uint8Array;
+}
+/**
+ * MsgUpdateBasketFeeResponse is the Msg/UpdateBasketFee response type.
+ * 
+ * Since Revision 2
+ */
+
+export interface MsgUpdateBasketFeeResponseAmino {}
+export interface MsgUpdateBasketFeeResponseAminoMsg {
+  type: "/regen.ecocredit.basket.v1.MsgUpdateBasketFeeResponse";
+  value: MsgUpdateBasketFeeResponseAmino;
+}
 /**
  * MsgUpdateBasketFeeResponse is the Msg/UpdateBasketFee response type.
  * 
@@ -381,13 +512,17 @@ export interface MsgUpdateCurator {
 
   newCurator: string;
 }
+export interface MsgUpdateCuratorProtoMsg {
+  typeUrl: "/regen.ecocredit.basket.v1.MsgUpdateCurator";
+  value: Uint8Array;
+}
 /**
  * MsgUpdateCurator is the Msg/UpdateCurator request type.
  * 
  * Since Revision 2
  */
 
-export interface MsgUpdateCuratorSDKType {
+export interface MsgUpdateCuratorAmino {
   /** curator is the address of the basket curator. */
   curator: string;
   /** denom is the unique identifier of the basket. */
@@ -400,6 +535,21 @@ export interface MsgUpdateCuratorSDKType {
 
   new_curator: string;
 }
+export interface MsgUpdateCuratorAminoMsg {
+  type: "regen.basket/MsgUpdateCurator";
+  value: MsgUpdateCuratorAmino;
+}
+/**
+ * MsgUpdateCurator is the Msg/UpdateCurator request type.
+ * 
+ * Since Revision 2
+ */
+
+export interface MsgUpdateCuratorSDKType {
+  curator: string;
+  denom: string;
+  new_curator: string;
+}
 /**
  * MsgUpdateCuratorResponse is the Msg/UpdateCurator response type.
  * 
@@ -407,6 +557,21 @@ export interface MsgUpdateCuratorSDKType {
  */
 
 export interface MsgUpdateCuratorResponse {}
+export interface MsgUpdateCuratorResponseProtoMsg {
+  typeUrl: "/regen.ecocredit.basket.v1.MsgUpdateCuratorResponse";
+  value: Uint8Array;
+}
+/**
+ * MsgUpdateCuratorResponse is the Msg/UpdateCurator response type.
+ * 
+ * Since Revision 2
+ */
+
+export interface MsgUpdateCuratorResponseAmino {}
+export interface MsgUpdateCuratorResponseAminoMsg {
+  type: "/regen.ecocredit.basket.v1.MsgUpdateCuratorResponse";
+  value: MsgUpdateCuratorResponseAmino;
+}
 /**
  * MsgUpdateCuratorResponse is the Msg/UpdateCurator response type.
  * 
@@ -433,13 +598,17 @@ export interface MsgUpdateDateCriteria {
 
   newDateCriteria?: DateCriteria;
 }
+export interface MsgUpdateDateCriteriaProtoMsg {
+  typeUrl: "/regen.ecocredit.basket.v1.MsgUpdateDateCriteria";
+  value: Uint8Array;
+}
 /**
  * MsgUpdateDateCriteria is the Msg/UpdateDateCriteria request type.
  * 
  * Since Revision 3
  */
 
-export interface MsgUpdateDateCriteriaSDKType {
+export interface MsgUpdateDateCriteriaAmino {
   /** authority is the address of the governance account. */
   authority: string;
   /** denom is the unique identifier of the basket. */
@@ -450,6 +619,21 @@ export interface MsgUpdateDateCriteriaSDKType {
    * basket. At most, only one of the date criteria fields can be set.
    */
 
+  new_date_criteria?: DateCriteriaAmino;
+}
+export interface MsgUpdateDateCriteriaAminoMsg {
+  type: "regen.basket/MsgUpdateDateCriteria";
+  value: MsgUpdateDateCriteriaAmino;
+}
+/**
+ * MsgUpdateDateCriteria is the Msg/UpdateDateCriteria request type.
+ * 
+ * Since Revision 3
+ */
+
+export interface MsgUpdateDateCriteriaSDKType {
+  authority: string;
+  denom: string;
   new_date_criteria?: DateCriteriaSDKType;
 }
 /**
@@ -459,6 +643,21 @@ export interface MsgUpdateDateCriteriaSDKType {
  */
 
 export interface MsgUpdateDateCriteriaResponse {}
+export interface MsgUpdateDateCriteriaResponseProtoMsg {
+  typeUrl: "/regen.ecocredit.basket.v1.MsgUpdateDateCriteriaResponse";
+  value: Uint8Array;
+}
+/**
+ * MsgUpdateDateCriteriaResponse is the Msg/UpdateDateCriteria response type.
+ * 
+ * Since Revision 3
+ */
+
+export interface MsgUpdateDateCriteriaResponseAmino {}
+export interface MsgUpdateDateCriteriaResponseAminoMsg {
+  type: "/regen.ecocredit.basket.v1.MsgUpdateDateCriteriaResponse";
+  value: MsgUpdateDateCriteriaResponseAmino;
+}
 /**
  * MsgUpdateDateCriteriaResponse is the Msg/UpdateDateCriteria response type.
  * 
@@ -628,6 +827,72 @@ export const MsgCreate = {
     message.dateCriteria = object.dateCriteria !== undefined && object.dateCriteria !== null ? DateCriteria.fromPartial(object.dateCriteria) : undefined;
     message.fee = object.fee?.map(e => Coin.fromPartial(e)) || [];
     return message;
+  },
+
+  fromAmino(object: MsgCreateAmino): MsgCreate {
+    return {
+      curator: object.curator,
+      name: object.name,
+      description: object.description,
+      exponent: object.exponent,
+      disableAutoRetire: object.disable_auto_retire,
+      creditTypeAbbrev: object.credit_type_abbrev,
+      allowedClasses: Array.isArray(object?.allowed_classes) ? object.allowed_classes.map((e: any) => e) : [],
+      dateCriteria: object?.date_criteria ? DateCriteria.fromAmino(object.date_criteria) : undefined,
+      fee: Array.isArray(object?.fee) ? object.fee.map((e: any) => Coin.fromAmino(e)) : []
+    };
+  },
+
+  toAmino(message: MsgCreate): MsgCreateAmino {
+    const obj: any = {};
+    obj.curator = message.curator;
+    obj.name = message.name;
+    obj.description = message.description;
+    obj.exponent = message.exponent;
+    obj.disable_auto_retire = message.disableAutoRetire;
+    obj.credit_type_abbrev = message.creditTypeAbbrev;
+
+    if (message.allowedClasses) {
+      obj.allowed_classes = message.allowedClasses.map(e => e);
+    } else {
+      obj.allowed_classes = [];
+    }
+
+    obj.date_criteria = message.dateCriteria ? DateCriteria.toAmino(message.dateCriteria) : undefined;
+
+    if (message.fee) {
+      obj.fee = message.fee.map(e => e ? Coin.toAmino(e) : undefined);
+    } else {
+      obj.fee = [];
+    }
+
+    return obj;
+  },
+
+  fromAminoMsg(object: MsgCreateAminoMsg): MsgCreate {
+    return MsgCreate.fromAmino(object.value);
+  },
+
+  toAminoMsg(message: MsgCreate): MsgCreateAminoMsg {
+    return {
+      type: "regen.basket/MsgCreate",
+      value: MsgCreate.toAmino(message)
+    };
+  },
+
+  fromProtoMsg(message: MsgCreateProtoMsg): MsgCreate {
+    return MsgCreate.decode(message.value);
+  },
+
+  toProto(message: MsgCreate): Uint8Array {
+    return MsgCreate.encode(message).finish();
+  },
+
+  toProtoMsg(message: MsgCreate): MsgCreateProtoMsg {
+    return {
+      typeUrl: "/regen.ecocredit.basket.v1.MsgCreate",
+      value: MsgCreate.encode(message).finish()
+    };
   }
 
 };
@@ -685,6 +950,37 @@ export const MsgCreateResponse = {
     const message = createBaseMsgCreateResponse();
     message.basketDenom = object.basketDenom ?? "";
     return message;
+  },
+
+  fromAmino(object: MsgCreateResponseAmino): MsgCreateResponse {
+    return {
+      basketDenom: object.basket_denom
+    };
+  },
+
+  toAmino(message: MsgCreateResponse): MsgCreateResponseAmino {
+    const obj: any = {};
+    obj.basket_denom = message.basketDenom;
+    return obj;
+  },
+
+  fromAminoMsg(object: MsgCreateResponseAminoMsg): MsgCreateResponse {
+    return MsgCreateResponse.fromAmino(object.value);
+  },
+
+  fromProtoMsg(message: MsgCreateResponseProtoMsg): MsgCreateResponse {
+    return MsgCreateResponse.decode(message.value);
+  },
+
+  toProto(message: MsgCreateResponse): Uint8Array {
+    return MsgCreateResponse.encode(message).finish();
+  },
+
+  toProtoMsg(message: MsgCreateResponse): MsgCreateResponseProtoMsg {
+    return {
+      typeUrl: "/regen.ecocredit.basket.v1.MsgCreateResponse",
+      value: MsgCreateResponse.encode(message).finish()
+    };
   }
 
 };
@@ -772,6 +1068,54 @@ export const MsgPut = {
     message.basketDenom = object.basketDenom ?? "";
     message.credits = object.credits?.map(e => BasketCredit.fromPartial(e)) || [];
     return message;
+  },
+
+  fromAmino(object: MsgPutAmino): MsgPut {
+    return {
+      owner: object.owner,
+      basketDenom: object.basket_denom,
+      credits: Array.isArray(object?.credits) ? object.credits.map((e: any) => BasketCredit.fromAmino(e)) : []
+    };
+  },
+
+  toAmino(message: MsgPut): MsgPutAmino {
+    const obj: any = {};
+    obj.owner = message.owner;
+    obj.basket_denom = message.basketDenom;
+
+    if (message.credits) {
+      obj.credits = message.credits.map(e => e ? BasketCredit.toAmino(e) : undefined);
+    } else {
+      obj.credits = [];
+    }
+
+    return obj;
+  },
+
+  fromAminoMsg(object: MsgPutAminoMsg): MsgPut {
+    return MsgPut.fromAmino(object.value);
+  },
+
+  toAminoMsg(message: MsgPut): MsgPutAminoMsg {
+    return {
+      type: "regen.basket/MsgPut",
+      value: MsgPut.toAmino(message)
+    };
+  },
+
+  fromProtoMsg(message: MsgPutProtoMsg): MsgPut {
+    return MsgPut.decode(message.value);
+  },
+
+  toProto(message: MsgPut): Uint8Array {
+    return MsgPut.encode(message).finish();
+  },
+
+  toProtoMsg(message: MsgPut): MsgPutProtoMsg {
+    return {
+      typeUrl: "/regen.ecocredit.basket.v1.MsgPut",
+      value: MsgPut.encode(message).finish()
+    };
   }
 
 };
@@ -829,6 +1173,37 @@ export const MsgPutResponse = {
     const message = createBaseMsgPutResponse();
     message.amountReceived = object.amountReceived ?? "";
     return message;
+  },
+
+  fromAmino(object: MsgPutResponseAmino): MsgPutResponse {
+    return {
+      amountReceived: object.amount_received
+    };
+  },
+
+  toAmino(message: MsgPutResponse): MsgPutResponseAmino {
+    const obj: any = {};
+    obj.amount_received = message.amountReceived;
+    return obj;
+  },
+
+  fromAminoMsg(object: MsgPutResponseAminoMsg): MsgPutResponse {
+    return MsgPutResponse.fromAmino(object.value);
+  },
+
+  fromProtoMsg(message: MsgPutResponseProtoMsg): MsgPutResponse {
+    return MsgPutResponse.decode(message.value);
+  },
+
+  toProto(message: MsgPutResponse): Uint8Array {
+    return MsgPutResponse.encode(message).finish();
+  },
+
+  toProtoMsg(message: MsgPutResponse): MsgPutResponseProtoMsg {
+    return {
+      typeUrl: "/regen.ecocredit.basket.v1.MsgPutResponse",
+      value: MsgPutResponse.encode(message).finish()
+    };
   }
 
 };
@@ -958,6 +1333,56 @@ export const MsgTake = {
     message.retirementJurisdiction = object.retirementJurisdiction ?? "";
     message.retirementReason = object.retirementReason ?? "";
     return message;
+  },
+
+  fromAmino(object: MsgTakeAmino): MsgTake {
+    return {
+      owner: object.owner,
+      basketDenom: object.basket_denom,
+      amount: object.amount,
+      retirementLocation: object.retirement_location,
+      retireOnTake: object.retire_on_take,
+      retirementJurisdiction: object.retirement_jurisdiction,
+      retirementReason: object.retirement_reason
+    };
+  },
+
+  toAmino(message: MsgTake): MsgTakeAmino {
+    const obj: any = {};
+    obj.owner = message.owner;
+    obj.basket_denom = message.basketDenom;
+    obj.amount = message.amount;
+    obj.retirement_location = message.retirementLocation;
+    obj.retire_on_take = message.retireOnTake;
+    obj.retirement_jurisdiction = message.retirementJurisdiction;
+    obj.retirement_reason = message.retirementReason;
+    return obj;
+  },
+
+  fromAminoMsg(object: MsgTakeAminoMsg): MsgTake {
+    return MsgTake.fromAmino(object.value);
+  },
+
+  toAminoMsg(message: MsgTake): MsgTakeAminoMsg {
+    return {
+      type: "regen.basket/MsgTake",
+      value: MsgTake.toAmino(message)
+    };
+  },
+
+  fromProtoMsg(message: MsgTakeProtoMsg): MsgTake {
+    return MsgTake.decode(message.value);
+  },
+
+  toProto(message: MsgTake): Uint8Array {
+    return MsgTake.encode(message).finish();
+  },
+
+  toProtoMsg(message: MsgTake): MsgTakeProtoMsg {
+    return {
+      typeUrl: "/regen.ecocredit.basket.v1.MsgTake",
+      value: MsgTake.encode(message).finish()
+    };
   }
 
 };
@@ -1021,6 +1446,43 @@ export const MsgTakeResponse = {
     const message = createBaseMsgTakeResponse();
     message.credits = object.credits?.map(e => BasketCredit.fromPartial(e)) || [];
     return message;
+  },
+
+  fromAmino(object: MsgTakeResponseAmino): MsgTakeResponse {
+    return {
+      credits: Array.isArray(object?.credits) ? object.credits.map((e: any) => BasketCredit.fromAmino(e)) : []
+    };
+  },
+
+  toAmino(message: MsgTakeResponse): MsgTakeResponseAmino {
+    const obj: any = {};
+
+    if (message.credits) {
+      obj.credits = message.credits.map(e => e ? BasketCredit.toAmino(e) : undefined);
+    } else {
+      obj.credits = [];
+    }
+
+    return obj;
+  },
+
+  fromAminoMsg(object: MsgTakeResponseAminoMsg): MsgTakeResponse {
+    return MsgTakeResponse.fromAmino(object.value);
+  },
+
+  fromProtoMsg(message: MsgTakeResponseProtoMsg): MsgTakeResponse {
+    return MsgTakeResponse.decode(message.value);
+  },
+
+  toProto(message: MsgTakeResponse): Uint8Array {
+    return MsgTakeResponse.encode(message).finish();
+  },
+
+  toProtoMsg(message: MsgTakeResponse): MsgTakeResponseProtoMsg {
+    return {
+      typeUrl: "/regen.ecocredit.basket.v1.MsgTakeResponse",
+      value: MsgTakeResponse.encode(message).finish()
+    };
   }
 
 };
@@ -1090,6 +1552,46 @@ export const MsgUpdateBasketFee = {
     message.authority = object.authority ?? "";
     message.fee = object.fee !== undefined && object.fee !== null ? Coin.fromPartial(object.fee) : undefined;
     return message;
+  },
+
+  fromAmino(object: MsgUpdateBasketFeeAmino): MsgUpdateBasketFee {
+    return {
+      authority: object.authority,
+      fee: object?.fee ? Coin.fromAmino(object.fee) : undefined
+    };
+  },
+
+  toAmino(message: MsgUpdateBasketFee): MsgUpdateBasketFeeAmino {
+    const obj: any = {};
+    obj.authority = message.authority;
+    obj.fee = message.fee ? Coin.toAmino(message.fee) : undefined;
+    return obj;
+  },
+
+  fromAminoMsg(object: MsgUpdateBasketFeeAminoMsg): MsgUpdateBasketFee {
+    return MsgUpdateBasketFee.fromAmino(object.value);
+  },
+
+  toAminoMsg(message: MsgUpdateBasketFee): MsgUpdateBasketFeeAminoMsg {
+    return {
+      type: "regen.basket/MsgUpdateBasketFee",
+      value: MsgUpdateBasketFee.toAmino(message)
+    };
+  },
+
+  fromProtoMsg(message: MsgUpdateBasketFeeProtoMsg): MsgUpdateBasketFee {
+    return MsgUpdateBasketFee.decode(message.value);
+  },
+
+  toProto(message: MsgUpdateBasketFee): Uint8Array {
+    return MsgUpdateBasketFee.encode(message).finish();
+  },
+
+  toProtoMsg(message: MsgUpdateBasketFee): MsgUpdateBasketFeeProtoMsg {
+    return {
+      typeUrl: "/regen.ecocredit.basket.v1.MsgUpdateBasketFee",
+      value: MsgUpdateBasketFee.encode(message).finish()
+    };
   }
 
 };
@@ -1133,6 +1635,34 @@ export const MsgUpdateBasketFeeResponse = {
   fromPartial(_: Partial<MsgUpdateBasketFeeResponse>): MsgUpdateBasketFeeResponse {
     const message = createBaseMsgUpdateBasketFeeResponse();
     return message;
+  },
+
+  fromAmino(_: MsgUpdateBasketFeeResponseAmino): MsgUpdateBasketFeeResponse {
+    return {};
+  },
+
+  toAmino(_: MsgUpdateBasketFeeResponse): MsgUpdateBasketFeeResponseAmino {
+    const obj: any = {};
+    return obj;
+  },
+
+  fromAminoMsg(object: MsgUpdateBasketFeeResponseAminoMsg): MsgUpdateBasketFeeResponse {
+    return MsgUpdateBasketFeeResponse.fromAmino(object.value);
+  },
+
+  fromProtoMsg(message: MsgUpdateBasketFeeResponseProtoMsg): MsgUpdateBasketFeeResponse {
+    return MsgUpdateBasketFeeResponse.decode(message.value);
+  },
+
+  toProto(message: MsgUpdateBasketFeeResponse): Uint8Array {
+    return MsgUpdateBasketFeeResponse.encode(message).finish();
+  },
+
+  toProtoMsg(message: MsgUpdateBasketFeeResponse): MsgUpdateBasketFeeResponseProtoMsg {
+    return {
+      typeUrl: "/regen.ecocredit.basket.v1.MsgUpdateBasketFeeResponse",
+      value: MsgUpdateBasketFeeResponse.encode(message).finish()
+    };
   }
 
 };
@@ -1214,6 +1744,48 @@ export const MsgUpdateCurator = {
     message.denom = object.denom ?? "";
     message.newCurator = object.newCurator ?? "";
     return message;
+  },
+
+  fromAmino(object: MsgUpdateCuratorAmino): MsgUpdateCurator {
+    return {
+      curator: object.curator,
+      denom: object.denom,
+      newCurator: object.new_curator
+    };
+  },
+
+  toAmino(message: MsgUpdateCurator): MsgUpdateCuratorAmino {
+    const obj: any = {};
+    obj.curator = message.curator;
+    obj.denom = message.denom;
+    obj.new_curator = message.newCurator;
+    return obj;
+  },
+
+  fromAminoMsg(object: MsgUpdateCuratorAminoMsg): MsgUpdateCurator {
+    return MsgUpdateCurator.fromAmino(object.value);
+  },
+
+  toAminoMsg(message: MsgUpdateCurator): MsgUpdateCuratorAminoMsg {
+    return {
+      type: "regen.basket/MsgUpdateCurator",
+      value: MsgUpdateCurator.toAmino(message)
+    };
+  },
+
+  fromProtoMsg(message: MsgUpdateCuratorProtoMsg): MsgUpdateCurator {
+    return MsgUpdateCurator.decode(message.value);
+  },
+
+  toProto(message: MsgUpdateCurator): Uint8Array {
+    return MsgUpdateCurator.encode(message).finish();
+  },
+
+  toProtoMsg(message: MsgUpdateCurator): MsgUpdateCuratorProtoMsg {
+    return {
+      typeUrl: "/regen.ecocredit.basket.v1.MsgUpdateCurator",
+      value: MsgUpdateCurator.encode(message).finish()
+    };
   }
 
 };
@@ -1257,6 +1829,34 @@ export const MsgUpdateCuratorResponse = {
   fromPartial(_: Partial<MsgUpdateCuratorResponse>): MsgUpdateCuratorResponse {
     const message = createBaseMsgUpdateCuratorResponse();
     return message;
+  },
+
+  fromAmino(_: MsgUpdateCuratorResponseAmino): MsgUpdateCuratorResponse {
+    return {};
+  },
+
+  toAmino(_: MsgUpdateCuratorResponse): MsgUpdateCuratorResponseAmino {
+    const obj: any = {};
+    return obj;
+  },
+
+  fromAminoMsg(object: MsgUpdateCuratorResponseAminoMsg): MsgUpdateCuratorResponse {
+    return MsgUpdateCuratorResponse.fromAmino(object.value);
+  },
+
+  fromProtoMsg(message: MsgUpdateCuratorResponseProtoMsg): MsgUpdateCuratorResponse {
+    return MsgUpdateCuratorResponse.decode(message.value);
+  },
+
+  toProto(message: MsgUpdateCuratorResponse): Uint8Array {
+    return MsgUpdateCuratorResponse.encode(message).finish();
+  },
+
+  toProtoMsg(message: MsgUpdateCuratorResponse): MsgUpdateCuratorResponseProtoMsg {
+    return {
+      typeUrl: "/regen.ecocredit.basket.v1.MsgUpdateCuratorResponse",
+      value: MsgUpdateCuratorResponse.encode(message).finish()
+    };
   }
 
 };
@@ -1338,6 +1938,48 @@ export const MsgUpdateDateCriteria = {
     message.denom = object.denom ?? "";
     message.newDateCriteria = object.newDateCriteria !== undefined && object.newDateCriteria !== null ? DateCriteria.fromPartial(object.newDateCriteria) : undefined;
     return message;
+  },
+
+  fromAmino(object: MsgUpdateDateCriteriaAmino): MsgUpdateDateCriteria {
+    return {
+      authority: object.authority,
+      denom: object.denom,
+      newDateCriteria: object?.new_date_criteria ? DateCriteria.fromAmino(object.new_date_criteria) : undefined
+    };
+  },
+
+  toAmino(message: MsgUpdateDateCriteria): MsgUpdateDateCriteriaAmino {
+    const obj: any = {};
+    obj.authority = message.authority;
+    obj.denom = message.denom;
+    obj.new_date_criteria = message.newDateCriteria ? DateCriteria.toAmino(message.newDateCriteria) : undefined;
+    return obj;
+  },
+
+  fromAminoMsg(object: MsgUpdateDateCriteriaAminoMsg): MsgUpdateDateCriteria {
+    return MsgUpdateDateCriteria.fromAmino(object.value);
+  },
+
+  toAminoMsg(message: MsgUpdateDateCriteria): MsgUpdateDateCriteriaAminoMsg {
+    return {
+      type: "regen.basket/MsgUpdateDateCriteria",
+      value: MsgUpdateDateCriteria.toAmino(message)
+    };
+  },
+
+  fromProtoMsg(message: MsgUpdateDateCriteriaProtoMsg): MsgUpdateDateCriteria {
+    return MsgUpdateDateCriteria.decode(message.value);
+  },
+
+  toProto(message: MsgUpdateDateCriteria): Uint8Array {
+    return MsgUpdateDateCriteria.encode(message).finish();
+  },
+
+  toProtoMsg(message: MsgUpdateDateCriteria): MsgUpdateDateCriteriaProtoMsg {
+    return {
+      typeUrl: "/regen.ecocredit.basket.v1.MsgUpdateDateCriteria",
+      value: MsgUpdateDateCriteria.encode(message).finish()
+    };
   }
 
 };
@@ -1381,6 +2023,34 @@ export const MsgUpdateDateCriteriaResponse = {
   fromPartial(_: Partial<MsgUpdateDateCriteriaResponse>): MsgUpdateDateCriteriaResponse {
     const message = createBaseMsgUpdateDateCriteriaResponse();
     return message;
+  },
+
+  fromAmino(_: MsgUpdateDateCriteriaResponseAmino): MsgUpdateDateCriteriaResponse {
+    return {};
+  },
+
+  toAmino(_: MsgUpdateDateCriteriaResponse): MsgUpdateDateCriteriaResponseAmino {
+    const obj: any = {};
+    return obj;
+  },
+
+  fromAminoMsg(object: MsgUpdateDateCriteriaResponseAminoMsg): MsgUpdateDateCriteriaResponse {
+    return MsgUpdateDateCriteriaResponse.fromAmino(object.value);
+  },
+
+  fromProtoMsg(message: MsgUpdateDateCriteriaResponseProtoMsg): MsgUpdateDateCriteriaResponse {
+    return MsgUpdateDateCriteriaResponse.decode(message.value);
+  },
+
+  toProto(message: MsgUpdateDateCriteriaResponse): Uint8Array {
+    return MsgUpdateDateCriteriaResponse.encode(message).finish();
+  },
+
+  toProtoMsg(message: MsgUpdateDateCriteriaResponse): MsgUpdateDateCriteriaResponseProtoMsg {
+    return {
+      typeUrl: "/regen.ecocredit.basket.v1.MsgUpdateDateCriteriaResponse",
+      value: MsgUpdateDateCriteriaResponse.encode(message).finish()
+    };
   }
 
 };

@@ -1,7 +1,7 @@
-import { Timestamp, TimestampSDKType } from "../../../google/protobuf/timestamp";
-import { Duration, DurationSDKType } from "../../../google/protobuf/duration";
-import * as _m0 from "protobufjs/minimal";
+import { Timestamp, TimestampAmino, TimestampSDKType } from "../../../google/protobuf/timestamp";
+import { Duration, DurationAmino, DurationSDKType } from "../../../google/protobuf/duration";
 import { Long, isSet, fromJsonTimestamp, fromTimestamp, bytesFromBase64, base64FromBytes } from "../../../helpers";
+import * as _m0 from "protobufjs/minimal";
 /**
  * ValidatorSigningInfo defines a validator's signing info for monitoring their
  * liveness activity.
@@ -35,26 +35,30 @@ export interface ValidatorSigningInfo {
 
   missedBlocksCounter: Long;
 }
+export interface ValidatorSigningInfoProtoMsg {
+  typeUrl: "/cosmos.slashing.v1beta1.ValidatorSigningInfo";
+  value: Uint8Array;
+}
 /**
  * ValidatorSigningInfo defines a validator's signing info for monitoring their
  * liveness activity.
  */
 
-export interface ValidatorSigningInfoSDKType {
+export interface ValidatorSigningInfoAmino {
   address: string;
   /** Height at which validator was first a candidate OR was unjailed */
 
-  start_height: Long;
+  start_height: string;
   /**
    * Index which is incremented each time the validator was a bonded
    * in a block and may have signed a precommit or not. This in conjunction with the
    * `SignedBlocksWindow` param determines the index in the `MissedBlocksBitArray`.
    */
 
-  index_offset: Long;
+  index_offset: string;
   /** Timestamp until which the validator is jailed due to liveness downtime. */
 
-  jailed_until?: TimestampSDKType;
+  jailed_until?: TimestampAmino;
   /**
    * Whether or not a validator has been tombstoned (killed out of validator set). It is set
    * once the validator commits an equivocation or for any other configured misbehiavor.
@@ -66,6 +70,23 @@ export interface ValidatorSigningInfoSDKType {
    * Note that `Sum(MissedBlocksBitArray)` always equals `MissedBlocksCounter`.
    */
 
+  missed_blocks_counter: string;
+}
+export interface ValidatorSigningInfoAminoMsg {
+  type: "cosmos-sdk/ValidatorSigningInfo";
+  value: ValidatorSigningInfoAmino;
+}
+/**
+ * ValidatorSigningInfo defines a validator's signing info for monitoring their
+ * liveness activity.
+ */
+
+export interface ValidatorSigningInfoSDKType {
+  address: string;
+  start_height: Long;
+  index_offset: Long;
+  jailed_until?: TimestampSDKType;
+  tombstoned: boolean;
   missed_blocks_counter: Long;
 }
 /** Params represents the parameters used for by the slashing module. */
@@ -76,6 +97,23 @@ export interface Params {
   downtimeJailDuration?: Duration;
   slashFractionDoubleSign: Uint8Array;
   slashFractionDowntime: Uint8Array;
+}
+export interface ParamsProtoMsg {
+  typeUrl: "/cosmos.slashing.v1beta1.Params";
+  value: Uint8Array;
+}
+/** Params represents the parameters used for by the slashing module. */
+
+export interface ParamsAmino {
+  signed_blocks_window: string;
+  min_signed_per_window: Uint8Array;
+  downtime_jail_duration?: DurationAmino;
+  slash_fraction_double_sign: Uint8Array;
+  slash_fraction_downtime: Uint8Array;
+}
+export interface ParamsAminoMsg {
+  type: "cosmos-sdk/Params";
+  value: ParamsAmino;
 }
 /** Params represents the parameters used for by the slashing module. */
 
@@ -200,6 +238,54 @@ export const ValidatorSigningInfo = {
     message.tombstoned = object.tombstoned ?? false;
     message.missedBlocksCounter = object.missedBlocksCounter !== undefined && object.missedBlocksCounter !== null ? Long.fromValue(object.missedBlocksCounter) : Long.ZERO;
     return message;
+  },
+
+  fromAmino(object: ValidatorSigningInfoAmino): ValidatorSigningInfo {
+    return {
+      address: object.address,
+      startHeight: Long.fromString(object.start_height),
+      indexOffset: Long.fromString(object.index_offset),
+      jailedUntil: object?.jailed_until ? Timestamp.fromAmino(object.jailed_until) : undefined,
+      tombstoned: object.tombstoned,
+      missedBlocksCounter: Long.fromString(object.missed_blocks_counter)
+    };
+  },
+
+  toAmino(message: ValidatorSigningInfo): ValidatorSigningInfoAmino {
+    const obj: any = {};
+    obj.address = message.address;
+    obj.start_height = message.startHeight ? message.startHeight.toString() : undefined;
+    obj.index_offset = message.indexOffset ? message.indexOffset.toString() : undefined;
+    obj.jailed_until = message.jailedUntil ? Timestamp.toAmino(message.jailedUntil) : undefined;
+    obj.tombstoned = message.tombstoned;
+    obj.missed_blocks_counter = message.missedBlocksCounter ? message.missedBlocksCounter.toString() : undefined;
+    return obj;
+  },
+
+  fromAminoMsg(object: ValidatorSigningInfoAminoMsg): ValidatorSigningInfo {
+    return ValidatorSigningInfo.fromAmino(object.value);
+  },
+
+  toAminoMsg(message: ValidatorSigningInfo): ValidatorSigningInfoAminoMsg {
+    return {
+      type: "cosmos-sdk/ValidatorSigningInfo",
+      value: ValidatorSigningInfo.toAmino(message)
+    };
+  },
+
+  fromProtoMsg(message: ValidatorSigningInfoProtoMsg): ValidatorSigningInfo {
+    return ValidatorSigningInfo.decode(message.value);
+  },
+
+  toProto(message: ValidatorSigningInfo): Uint8Array {
+    return ValidatorSigningInfo.encode(message).finish();
+  },
+
+  toProtoMsg(message: ValidatorSigningInfo): ValidatorSigningInfoProtoMsg {
+    return {
+      typeUrl: "/cosmos.slashing.v1beta1.ValidatorSigningInfo",
+      value: ValidatorSigningInfo.encode(message).finish()
+    };
   }
 
 };
@@ -305,6 +391,52 @@ export const Params = {
     message.slashFractionDoubleSign = object.slashFractionDoubleSign ?? new Uint8Array();
     message.slashFractionDowntime = object.slashFractionDowntime ?? new Uint8Array();
     return message;
+  },
+
+  fromAmino(object: ParamsAmino): Params {
+    return {
+      signedBlocksWindow: Long.fromString(object.signed_blocks_window),
+      minSignedPerWindow: object.min_signed_per_window,
+      downtimeJailDuration: object?.downtime_jail_duration ? Duration.fromAmino(object.downtime_jail_duration) : undefined,
+      slashFractionDoubleSign: object.slash_fraction_double_sign,
+      slashFractionDowntime: object.slash_fraction_downtime
+    };
+  },
+
+  toAmino(message: Params): ParamsAmino {
+    const obj: any = {};
+    obj.signed_blocks_window = message.signedBlocksWindow ? message.signedBlocksWindow.toString() : undefined;
+    obj.min_signed_per_window = message.minSignedPerWindow;
+    obj.downtime_jail_duration = message.downtimeJailDuration ? Duration.toAmino(message.downtimeJailDuration) : undefined;
+    obj.slash_fraction_double_sign = message.slashFractionDoubleSign;
+    obj.slash_fraction_downtime = message.slashFractionDowntime;
+    return obj;
+  },
+
+  fromAminoMsg(object: ParamsAminoMsg): Params {
+    return Params.fromAmino(object.value);
+  },
+
+  toAminoMsg(message: Params): ParamsAminoMsg {
+    return {
+      type: "cosmos-sdk/Params",
+      value: Params.toAmino(message)
+    };
+  },
+
+  fromProtoMsg(message: ParamsProtoMsg): Params {
+    return Params.decode(message.value);
+  },
+
+  toProto(message: Params): Uint8Array {
+    return Params.encode(message).finish();
+  },
+
+  toProtoMsg(message: Params): ParamsProtoMsg {
+    return {
+      typeUrl: "/cosmos.slashing.v1beta1.Params",
+      value: Params.encode(message).finish()
+    };
   }
 
 };
