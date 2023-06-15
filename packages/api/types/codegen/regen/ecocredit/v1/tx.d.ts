@@ -1,7 +1,7 @@
-import { Coin, CoinSDKType } from "../../../cosmos/base/v1beta1/coin";
-import { BatchIssuance, BatchIssuanceSDKType, OriginTx, OriginTxSDKType, Credits, CreditsSDKType } from "./types";
-import { Timestamp, TimestampSDKType } from "../../../google/protobuf/timestamp";
-import { CreditType, CreditTypeSDKType } from "./state";
+import { Coin, CoinAmino, CoinSDKType } from "../../../cosmos/base/v1beta1/coin";
+import { BatchIssuance, BatchIssuanceAmino, BatchIssuanceSDKType, OriginTx, OriginTxAmino, OriginTxSDKType, Credits, CreditsAmino, CreditsSDKType } from "./types";
+import { Timestamp, TimestampAmino, TimestampSDKType } from "../../../google/protobuf/timestamp";
+import { CreditType, CreditTypeAmino, CreditTypeSDKType } from "./state";
 import * as _m0 from "protobufjs/minimal";
 /**
  * MsgAddCreditType is the Msg/AddCreditType request type.
@@ -14,15 +14,32 @@ export interface MsgAddCreditType {
     /** credit_type defines a credit type to add to the credit types parameter. */
     creditType?: CreditType;
 }
+export interface MsgAddCreditTypeProtoMsg {
+    typeUrl: "/regen.ecocredit.v1.MsgAddCreditType";
+    value: Uint8Array;
+}
+/**
+ * MsgAddCreditType is the Msg/AddCreditType request type.
+ *
+ * Since Revision 2
+ */
+export interface MsgAddCreditTypeAmino {
+    /** authority is the address of the governance account. */
+    authority: string;
+    /** credit_type defines a credit type to add to the credit types parameter. */
+    credit_type?: CreditTypeAmino;
+}
+export interface MsgAddCreditTypeAminoMsg {
+    type: "/regen.ecocredit.v1.MsgAddCreditType";
+    value: MsgAddCreditTypeAmino;
+}
 /**
  * MsgAddCreditType is the Msg/AddCreditType request type.
  *
  * Since Revision 2
  */
 export interface MsgAddCreditTypeSDKType {
-    /** authority is the address of the governance account. */
     authority: string;
-    /** credit_type defines a credit type to add to the credit types parameter. */
     credit_type?: CreditTypeSDKType;
 }
 /**
@@ -31,6 +48,21 @@ export interface MsgAddCreditTypeSDKType {
  * Since Revision 2
  */
 export interface MsgAddCreditTypeResponse {
+}
+export interface MsgAddCreditTypeResponseProtoMsg {
+    typeUrl: "/regen.ecocredit.v1.MsgAddCreditTypeResponse";
+    value: Uint8Array;
+}
+/**
+ * MsgAddCreditTypeResponse is the Msg/AddCreditType response type.
+ *
+ * Since Revision 2
+ */
+export interface MsgAddCreditTypeResponseAmino {
+}
+export interface MsgAddCreditTypeResponseAminoMsg {
+    type: "/regen.ecocredit.v1.MsgAddCreditTypeResponse";
+    value: MsgAddCreditTypeResponseAmino;
 }
 /**
  * MsgAddCreditTypeResponse is the Msg/AddCreditType response type.
@@ -71,8 +103,12 @@ export interface MsgCreateClass {
      */
     fee?: Coin;
 }
+export interface MsgCreateClassProtoMsg {
+    typeUrl: "/regen.ecocredit.v1.MsgCreateClass";
+    value: Uint8Array;
+}
 /** MsgCreateClass is the Msg/CreateClass request type. */
-export interface MsgCreateClassSDKType {
+export interface MsgCreateClassAmino {
     /**
      * admin is the address of the account creating the credit class that will
      * become the admin of the credit class upon creation. The admin will have
@@ -101,6 +137,18 @@ export interface MsgCreateClassSDKType {
      * creation fee parameter is set. The provided fee can be greater than the
      * parameter, but only the amount in the parameter will be charged.
      */
+    fee?: CoinAmino;
+}
+export interface MsgCreateClassAminoMsg {
+    type: "/regen.ecocredit.v1.MsgCreateClass";
+    value: MsgCreateClassAmino;
+}
+/** MsgCreateClass is the Msg/CreateClass request type. */
+export interface MsgCreateClassSDKType {
+    admin: string;
+    issuers: string[];
+    metadata: string;
+    credit_type_abbrev: string;
     fee?: CoinSDKType;
 }
 /** MsgCreateClassResponse is the Msg/CreateClass response type. */
@@ -108,9 +156,21 @@ export interface MsgCreateClassResponse {
     /** class_id is the unique identifier of the credit class. */
     classId: string;
 }
+export interface MsgCreateClassResponseProtoMsg {
+    typeUrl: "/regen.ecocredit.v1.MsgCreateClassResponse";
+    value: Uint8Array;
+}
+/** MsgCreateClassResponse is the Msg/CreateClass response type. */
+export interface MsgCreateClassResponseAmino {
+    /** class_id is the unique identifier of the credit class. */
+    class_id: string;
+}
+export interface MsgCreateClassResponseAminoMsg {
+    type: "/regen.ecocredit.v1.MsgCreateClassResponse";
+    value: MsgCreateClassResponseAmino;
+}
 /** MsgCreateClassResponse is the Msg/CreateClass response type. */
 export interface MsgCreateClassResponseSDKType {
-    /** class_id is the unique identifier of the credit class. */
     class_id: string;
 }
 /** MsgCreateProjectResponse is the Msg/CreateProject request type. */
@@ -149,8 +209,12 @@ export interface MsgCreateProject {
      */
     referenceId: string;
 }
+export interface MsgCreateProjectProtoMsg {
+    typeUrl: "/regen.ecocredit.v1.MsgCreateProject";
+    value: Uint8Array;
+}
 /** MsgCreateProjectResponse is the Msg/CreateProject request type. */
-export interface MsgCreateProjectSDKType {
+export interface MsgCreateProjectAmino {
     /**
      * admin is the address of the account creating the project that will become
      * the admin of the project upon creation. The creator of the project must be
@@ -185,14 +249,38 @@ export interface MsgCreateProjectSDKType {
      */
     reference_id: string;
 }
+export interface MsgCreateProjectAminoMsg {
+    type: "/regen.ecocredit.v1.MsgCreateProject";
+    value: MsgCreateProjectAmino;
+}
+/** MsgCreateProjectResponse is the Msg/CreateProject request type. */
+export interface MsgCreateProjectSDKType {
+    admin: string;
+    class_id: string;
+    metadata: string;
+    jurisdiction: string;
+    reference_id: string;
+}
 /** MsgCreateProjectResponse is the Msg/CreateProject response type. */
 export interface MsgCreateProjectResponse {
     /** project_id is the unique identifier of the project. */
     projectId: string;
 }
+export interface MsgCreateProjectResponseProtoMsg {
+    typeUrl: "/regen.ecocredit.v1.MsgCreateProjectResponse";
+    value: Uint8Array;
+}
+/** MsgCreateProjectResponse is the Msg/CreateProject response type. */
+export interface MsgCreateProjectResponseAmino {
+    /** project_id is the unique identifier of the project. */
+    project_id: string;
+}
+export interface MsgCreateProjectResponseAminoMsg {
+    type: "/regen.ecocredit.v1.MsgCreateProjectResponse";
+    value: MsgCreateProjectResponseAmino;
+}
 /** MsgCreateProjectResponse is the Msg/CreateProject response type. */
 export interface MsgCreateProjectResponseSDKType {
-    /** project_id is the unique identifier of the project. */
     project_id: string;
 }
 /** MsgCreateBatch is the Msg/CreateBatch request type. */
@@ -243,8 +331,12 @@ export interface MsgCreateBatch {
      */
     originTx?: OriginTx;
 }
+export interface MsgCreateBatchProtoMsg {
+    typeUrl: "/regen.ecocredit.v1.MsgCreateBatch";
+    value: Uint8Array;
+}
 /** MsgCreateBatch is the Msg/CreateBatch request type. */
-export interface MsgCreateBatchSDKType {
+export interface MsgCreateBatchAmino {
     /**
      * issuer is the address of the account issuing the credits and must be an
      * approved issuer within the credit class of the project.
@@ -260,7 +352,7 @@ export interface MsgCreateBatchSDKType {
      * issued to each recipient and the jurisdiction in which the credits will be
      * retired if credits are to be retired upon receipt.
      */
-    issuance: BatchIssuanceSDKType[];
+    issuance: BatchIssuanceAmino[];
     /**
      * metadata is any arbitrary string with a maximum length of 256 characters
      * that includes or references metadata to attach to the credit batch.
@@ -270,12 +362,12 @@ export interface MsgCreateBatchSDKType {
      * start_date is the beginning of the period during which this credit batch
      * was quantified and verified.
      */
-    start_date?: TimestampSDKType;
+    start_date?: TimestampAmino;
     /**
      * end_date is the end of the period during which this credit batch was
      * quantified and verified.
      */
-    end_date?: TimestampSDKType;
+    end_date?: TimestampAmino;
     /**
      * open determines whether or not the credits can be dynamically minted to the
      * credit batch following the creation of the credit batch. This field should
@@ -289,6 +381,21 @@ export interface MsgCreateBatchSDKType {
      * issuing credits and should only be set when bridging assets from another
      * chain or registry as a result of a bridge operation.
      */
+    origin_tx?: OriginTxAmino;
+}
+export interface MsgCreateBatchAminoMsg {
+    type: "/regen.ecocredit.v1.MsgCreateBatch";
+    value: MsgCreateBatchAmino;
+}
+/** MsgCreateBatch is the Msg/CreateBatch request type. */
+export interface MsgCreateBatchSDKType {
+    issuer: string;
+    project_id: string;
+    issuance: BatchIssuanceSDKType[];
+    metadata: string;
+    start_date?: TimestampSDKType;
+    end_date?: TimestampSDKType;
+    open: boolean;
     origin_tx?: OriginTxSDKType;
 }
 /** MsgCreateBatchResponse is the Msg/CreateBatch response type. */
@@ -296,9 +403,21 @@ export interface MsgCreateBatchResponse {
     /** batch_denom is the unique identifier of the credit batch. */
     batchDenom: string;
 }
+export interface MsgCreateBatchResponseProtoMsg {
+    typeUrl: "/regen.ecocredit.v1.MsgCreateBatchResponse";
+    value: Uint8Array;
+}
+/** MsgCreateBatchResponse is the Msg/CreateBatch response type. */
+export interface MsgCreateBatchResponseAmino {
+    /** batch_denom is the unique identifier of the credit batch. */
+    batch_denom: string;
+}
+export interface MsgCreateBatchResponseAminoMsg {
+    type: "/regen.ecocredit.v1.MsgCreateBatchResponse";
+    value: MsgCreateBatchResponseAmino;
+}
 /** MsgCreateBatchResponse is the Msg/CreateBatch response type. */
 export interface MsgCreateBatchResponseSDKType {
-    /** batch_denom is the unique identifier of the credit batch. */
     batch_denom: string;
 }
 /** MsgMintBatchCredits is the Msg/MintBatchCredits request type. */
@@ -322,8 +441,12 @@ export interface MsgMintBatchCredits {
      */
     originTx?: OriginTx;
 }
+export interface MsgMintBatchCreditsProtoMsg {
+    typeUrl: "/regen.ecocredit.v1.MsgMintBatchCredits";
+    value: Uint8Array;
+}
 /** MsgMintBatchCredits is the Msg/MintBatchCredits request type. */
-export interface MsgMintBatchCreditsSDKType {
+export interface MsgMintBatchCreditsAmino {
     /**
      * issuer is the address of the account minting the credits and must be the
      * same issuer who created the credit batch.
@@ -336,15 +459,37 @@ export interface MsgMintBatchCreditsSDKType {
      * issued to each recipient and the jurisdiction in which the credits will be
      * retired if credits are to be retired upon receipt.
      */
-    issuance: BatchIssuanceSDKType[];
+    issuance: BatchIssuanceAmino[];
     /**
      * origin_tx is the transaction from another chain or registry that triggered
      * the minting of credits.
      */
+    origin_tx?: OriginTxAmino;
+}
+export interface MsgMintBatchCreditsAminoMsg {
+    type: "/regen.ecocredit.v1.MsgMintBatchCredits";
+    value: MsgMintBatchCreditsAmino;
+}
+/** MsgMintBatchCredits is the Msg/MintBatchCredits request type. */
+export interface MsgMintBatchCreditsSDKType {
+    issuer: string;
+    batch_denom: string;
+    issuance: BatchIssuanceSDKType[];
     origin_tx?: OriginTxSDKType;
 }
 /** MsgMintBatchCreditsResponse is the Msg/MintBatchCredits response type. */
 export interface MsgMintBatchCreditsResponse {
+}
+export interface MsgMintBatchCreditsResponseProtoMsg {
+    typeUrl: "/regen.ecocredit.v1.MsgMintBatchCreditsResponse";
+    value: Uint8Array;
+}
+/** MsgMintBatchCreditsResponse is the Msg/MintBatchCredits response type. */
+export interface MsgMintBatchCreditsResponseAmino {
+}
+export interface MsgMintBatchCreditsResponseAminoMsg {
+    type: "/regen.ecocredit.v1.MsgMintBatchCreditsResponse";
+    value: MsgMintBatchCreditsResponseAmino;
 }
 /** MsgMintBatchCreditsResponse is the Msg/MintBatchCredits response type. */
 export interface MsgMintBatchCreditsResponseSDKType {
@@ -359,8 +504,12 @@ export interface MsgSealBatch {
     /** batch_denom is the unique identifier of the credit batch. */
     batchDenom: string;
 }
+export interface MsgSealBatchProtoMsg {
+    typeUrl: "/regen.ecocredit.v1.MsgSealBatch";
+    value: Uint8Array;
+}
 /** MsgSealBatch is the Msg/MintBatchCredits request type. */
-export interface MsgSealBatchSDKType {
+export interface MsgSealBatchAmino {
     /**
      * issuer is the address of the account that created the credit batch and the
      * only account with permissions to seal the credit batch.
@@ -369,8 +518,28 @@ export interface MsgSealBatchSDKType {
     /** batch_denom is the unique identifier of the credit batch. */
     batch_denom: string;
 }
+export interface MsgSealBatchAminoMsg {
+    type: "/regen.ecocredit.v1.MsgSealBatch";
+    value: MsgSealBatchAmino;
+}
+/** MsgSealBatch is the Msg/MintBatchCredits request type. */
+export interface MsgSealBatchSDKType {
+    issuer: string;
+    batch_denom: string;
+}
 /** MsgSealBatchResponse is the Msg/SealBatch response type. */
 export interface MsgSealBatchResponse {
+}
+export interface MsgSealBatchResponseProtoMsg {
+    typeUrl: "/regen.ecocredit.v1.MsgSealBatchResponse";
+    value: Uint8Array;
+}
+/** MsgSealBatchResponse is the Msg/SealBatch response type. */
+export interface MsgSealBatchResponseAmino {
+}
+export interface MsgSealBatchResponseAminoMsg {
+    type: "/regen.ecocredit.v1.MsgSealBatchResponse";
+    value: MsgSealBatchResponseAmino;
 }
 /** MsgSealBatchResponse is the Msg/SealBatch response type. */
 export interface MsgSealBatchResponseSDKType {
@@ -384,13 +553,27 @@ export interface MsgSend {
     /** credits are the credits being sent to the recipient. */
     credits: MsgSend_SendCredits[];
 }
+export interface MsgSendProtoMsg {
+    typeUrl: "/regen.ecocredit.v1.MsgSend";
+    value: Uint8Array;
+}
 /** MsgSend is the Msg/Send request type. */
-export interface MsgSendSDKType {
+export interface MsgSendAmino {
     /** sender is the address of the account sending credits. */
     sender: string;
     /** recipient is the address of the account receiving credits. */
     recipient: string;
     /** credits are the credits being sent to the recipient. */
+    credits: MsgSend_SendCreditsAmino[];
+}
+export interface MsgSendAminoMsg {
+    type: "/regen.ecocredit.v1.MsgSend";
+    value: MsgSendAmino;
+}
+/** MsgSend is the Msg/Send request type. */
+export interface MsgSendSDKType {
+    sender: string;
+    recipient: string;
     credits: MsgSend_SendCreditsSDKType[];
 }
 /**
@@ -432,12 +615,16 @@ export interface MsgSend_SendCredits {
      */
     retirementReason: string;
 }
+export interface MsgSend_SendCreditsProtoMsg {
+    typeUrl: "/regen.ecocredit.v1.SendCredits";
+    value: Uint8Array;
+}
 /**
  * SendCredits specifies the amount of tradable and retired credits of a
  * credit batch that will be sent to the recipient and the jurisdiction in
  * which the credits will be retired upon receipt.
  */
-export interface MsgSend_SendCreditsSDKType {
+export interface MsgSend_SendCreditsAmino {
     /** batch_denom is the unique identifier of the credit batch. */
     batch_denom: string;
     /**
@@ -471,8 +658,35 @@ export interface MsgSend_SendCreditsSDKType {
      */
     retirement_reason: string;
 }
+export interface MsgSend_SendCreditsAminoMsg {
+    type: "/regen.ecocredit.v1.SendCredits";
+    value: MsgSend_SendCreditsAmino;
+}
+/**
+ * SendCredits specifies the amount of tradable and retired credits of a
+ * credit batch that will be sent to the recipient and the jurisdiction in
+ * which the credits will be retired upon receipt.
+ */
+export interface MsgSend_SendCreditsSDKType {
+    batch_denom: string;
+    tradable_amount: string;
+    retired_amount: string;
+    retirement_jurisdiction: string;
+    retirement_reason: string;
+}
 /** MsgSendResponse is the Msg/Send response type. */
 export interface MsgSendResponse {
+}
+export interface MsgSendResponseProtoMsg {
+    typeUrl: "/regen.ecocredit.v1.MsgSendResponse";
+    value: Uint8Array;
+}
+/** MsgSendResponse is the Msg/Send response type. */
+export interface MsgSendResponseAmino {
+}
+export interface MsgSendResponseAminoMsg {
+    type: "/regen.ecocredit.v1.MsgSendResponse";
+    value: MsgSendResponseAmino;
 }
 /** MsgSendResponse is the Msg/Send response type. */
 export interface MsgSendResponseSDKType {
@@ -501,12 +715,16 @@ export interface MsgRetire {
      */
     reason: string;
 }
+export interface MsgRetireProtoMsg {
+    typeUrl: "/regen.ecocredit.v1.MsgRetire";
+    value: Uint8Array;
+}
 /** MsgRetire is the Msg/Retire request type. */
-export interface MsgRetireSDKType {
+export interface MsgRetireAmino {
     /** owner is the address of the account that owns the credits being retired. */
     owner: string;
     /** credits specifies a credit batch and the number of credits being retired. */
-    credits: CreditsSDKType[];
+    credits: CreditsAmino[];
     /**
      * jurisdiction is the jurisdiction of the credit owner. A jurisdiction has
      * the format: <country-code>[-<sub-national-code>[ <postal-code>]]
@@ -525,8 +743,30 @@ export interface MsgRetireSDKType {
      */
     reason: string;
 }
+export interface MsgRetireAminoMsg {
+    type: "/regen.ecocredit.v1.MsgRetire";
+    value: MsgRetireAmino;
+}
+/** MsgRetire is the Msg/Retire request type. */
+export interface MsgRetireSDKType {
+    owner: string;
+    credits: CreditsSDKType[];
+    jurisdiction: string;
+    reason: string;
+}
 /** MsgRetire is the Msg/Retire response type. */
 export interface MsgRetireResponse {
+}
+export interface MsgRetireResponseProtoMsg {
+    typeUrl: "/regen.ecocredit.v1.MsgRetireResponse";
+    value: Uint8Array;
+}
+/** MsgRetire is the Msg/Retire response type. */
+export interface MsgRetireResponseAmino {
+}
+export interface MsgRetireResponseAminoMsg {
+    type: "/regen.ecocredit.v1.MsgRetireResponse";
+    value: MsgRetireResponseAmino;
 }
 /** MsgRetire is the Msg/Retire response type. */
 export interface MsgRetireResponseSDKType {
@@ -543,20 +783,45 @@ export interface MsgCancel {
      */
     reason: string;
 }
+export interface MsgCancelProtoMsg {
+    typeUrl: "/regen.ecocredit.v1.MsgCancel";
+    value: Uint8Array;
+}
 /** MsgCancel is the Msg/Cancel request type. */
-export interface MsgCancelSDKType {
+export interface MsgCancelAmino {
     /** owner is the address of the account that owns the credits being cancelled. */
     owner: string;
     /** credits specifies a credit batch and the number of credits being cancelled. */
-    credits: CreditsSDKType[];
+    credits: CreditsAmino[];
     /**
      * reason is any arbitrary string that specifies the reason for cancelling
      * credits.
      */
     reason: string;
 }
+export interface MsgCancelAminoMsg {
+    type: "/regen.ecocredit.v1.MsgCancel";
+    value: MsgCancelAmino;
+}
+/** MsgCancel is the Msg/Cancel request type. */
+export interface MsgCancelSDKType {
+    owner: string;
+    credits: CreditsSDKType[];
+    reason: string;
+}
 /** MsgCancelResponse is the Msg/Cancel response type. */
 export interface MsgCancelResponse {
+}
+export interface MsgCancelResponseProtoMsg {
+    typeUrl: "/regen.ecocredit.v1.MsgCancelResponse";
+    value: Uint8Array;
+}
+/** MsgCancelResponse is the Msg/Cancel response type. */
+export interface MsgCancelResponseAmino {
+}
+export interface MsgCancelResponseAminoMsg {
+    type: "/regen.ecocredit.v1.MsgCancelResponse";
+    value: MsgCancelResponseAmino;
 }
 /** MsgCancelResponse is the Msg/Cancel response type. */
 export interface MsgCancelResponseSDKType {
@@ -576,8 +841,12 @@ export interface MsgUpdateClassAdmin {
      */
     newAdmin: string;
 }
+export interface MsgUpdateClassAdminProtoMsg {
+    typeUrl: "/regen.ecocredit.v1.MsgUpdateClassAdmin";
+    value: Uint8Array;
+}
 /** MsgUpdateClassAdmin is the Msg/UpdateClassAdmin request type. */
-export interface MsgUpdateClassAdminSDKType {
+export interface MsgUpdateClassAdminAmino {
     /**
      * admin is the address of the account that is currently the admin of the
      * credit class.
@@ -591,8 +860,29 @@ export interface MsgUpdateClassAdminSDKType {
      */
     new_admin: string;
 }
+export interface MsgUpdateClassAdminAminoMsg {
+    type: "/regen.ecocredit.v1.MsgUpdateClassAdmin";
+    value: MsgUpdateClassAdminAmino;
+}
+/** MsgUpdateClassAdmin is the Msg/UpdateClassAdmin request type. */
+export interface MsgUpdateClassAdminSDKType {
+    admin: string;
+    class_id: string;
+    new_admin: string;
+}
 /** MsgUpdateClassAdminResponse is the MsgUpdateClassAdmin response type. */
 export interface MsgUpdateClassAdminResponse {
+}
+export interface MsgUpdateClassAdminResponseProtoMsg {
+    typeUrl: "/regen.ecocredit.v1.MsgUpdateClassAdminResponse";
+    value: Uint8Array;
+}
+/** MsgUpdateClassAdminResponse is the MsgUpdateClassAdmin response type. */
+export interface MsgUpdateClassAdminResponseAmino {
+}
+export interface MsgUpdateClassAdminResponseAminoMsg {
+    type: "/regen.ecocredit.v1.MsgUpdateClassAdminResponse";
+    value: MsgUpdateClassAdminResponseAmino;
 }
 /** MsgUpdateClassAdminResponse is the MsgUpdateClassAdmin response type. */
 export interface MsgUpdateClassAdminResponseSDKType {
@@ -614,8 +904,12 @@ export interface MsgUpdateClassIssuers {
      */
     removeIssuers: string[];
 }
+export interface MsgUpdateClassIssuersProtoMsg {
+    typeUrl: "/regen.ecocredit.v1.MsgUpdateClassIssuers";
+    value: Uint8Array;
+}
 /** MsgUpdateClassIssuers is the Msg/UpdateClassIssuers request type. */
-export interface MsgUpdateClassIssuersSDKType {
+export interface MsgUpdateClassIssuersAmino {
     /** admin is the address of the account that is the admin of the credit class. */
     admin: string;
     /** class_id is the unique identifier of the credit class. */
@@ -631,8 +925,30 @@ export interface MsgUpdateClassIssuersSDKType {
      */
     remove_issuers: string[];
 }
+export interface MsgUpdateClassIssuersAminoMsg {
+    type: "/regen.ecocredit.v1.MsgUpdateClassIssuers";
+    value: MsgUpdateClassIssuersAmino;
+}
+/** MsgUpdateClassIssuers is the Msg/UpdateClassIssuers request type. */
+export interface MsgUpdateClassIssuersSDKType {
+    admin: string;
+    class_id: string;
+    add_issuers: string[];
+    remove_issuers: string[];
+}
 /** MsgUpdateClassIssuersResponse is the MsgUpdateClassIssuers response type. */
 export interface MsgUpdateClassIssuersResponse {
+}
+export interface MsgUpdateClassIssuersResponseProtoMsg {
+    typeUrl: "/regen.ecocredit.v1.MsgUpdateClassIssuersResponse";
+    value: Uint8Array;
+}
+/** MsgUpdateClassIssuersResponse is the MsgUpdateClassIssuers response type. */
+export interface MsgUpdateClassIssuersResponseAmino {
+}
+export interface MsgUpdateClassIssuersResponseAminoMsg {
+    type: "/regen.ecocredit.v1.MsgUpdateClassIssuersResponse";
+    value: MsgUpdateClassIssuersResponseAmino;
 }
 /** MsgUpdateClassIssuersResponse is the MsgUpdateClassIssuers response type. */
 export interface MsgUpdateClassIssuersResponseSDKType {
@@ -650,8 +966,12 @@ export interface MsgUpdateClassMetadata {
      */
     newMetadata: string;
 }
+export interface MsgUpdateClassMetadataProtoMsg {
+    typeUrl: "/regen.ecocredit.v1.MsgUpdateClassMetadata";
+    value: Uint8Array;
+}
 /** MsgUpdateClassMetadata is the Msg/UpdateClassMetadata request type. */
-export interface MsgUpdateClassMetadataSDKType {
+export interface MsgUpdateClassMetadataAmino {
     /** admin is the address of the account that is the admin of the credit class. */
     admin: string;
     /** class_id is the unique identifier of the credit class. */
@@ -663,8 +983,29 @@ export interface MsgUpdateClassMetadataSDKType {
      */
     new_metadata: string;
 }
+export interface MsgUpdateClassMetadataAminoMsg {
+    type: "/regen.ecocredit.v1.MsgUpdateClassMetadata";
+    value: MsgUpdateClassMetadataAmino;
+}
+/** MsgUpdateClassMetadata is the Msg/UpdateClassMetadata request type. */
+export interface MsgUpdateClassMetadataSDKType {
+    admin: string;
+    class_id: string;
+    new_metadata: string;
+}
 /** MsgUpdateClassMetadataResponse is the Msg/UpdateClassMetadata response type. */
 export interface MsgUpdateClassMetadataResponse {
+}
+export interface MsgUpdateClassMetadataResponseProtoMsg {
+    typeUrl: "/regen.ecocredit.v1.MsgUpdateClassMetadataResponse";
+    value: Uint8Array;
+}
+/** MsgUpdateClassMetadataResponse is the Msg/UpdateClassMetadata response type. */
+export interface MsgUpdateClassMetadataResponseAmino {
+}
+export interface MsgUpdateClassMetadataResponseAminoMsg {
+    type: "/regen.ecocredit.v1.MsgUpdateClassMetadataResponse";
+    value: MsgUpdateClassMetadataResponseAmino;
 }
 /** MsgUpdateClassMetadataResponse is the Msg/UpdateClassMetadata response type. */
 export interface MsgUpdateClassMetadataResponseSDKType {
@@ -684,8 +1025,12 @@ export interface MsgUpdateProjectAdmin {
      */
     newAdmin: string;
 }
+export interface MsgUpdateProjectAdminProtoMsg {
+    typeUrl: "/regen.ecocredit.v1.MsgUpdateProjectAdmin";
+    value: Uint8Array;
+}
 /** MsgUpdateProjectAdmin is the Msg/UpdateProjectAdmin request type. */
-export interface MsgUpdateProjectAdminSDKType {
+export interface MsgUpdateProjectAdminAmino {
     /**
      * admin is the address of the account that is the currently the admin of the
      * project.
@@ -699,8 +1044,29 @@ export interface MsgUpdateProjectAdminSDKType {
      */
     new_admin: string;
 }
+export interface MsgUpdateProjectAdminAminoMsg {
+    type: "/regen.ecocredit.v1.MsgUpdateProjectAdmin";
+    value: MsgUpdateProjectAdminAmino;
+}
+/** MsgUpdateProjectAdmin is the Msg/UpdateProjectAdmin request type. */
+export interface MsgUpdateProjectAdminSDKType {
+    admin: string;
+    project_id: string;
+    new_admin: string;
+}
 /** MsgUpdateProjectAdmin is the Msg/UpdateProjectAdmin response type. */
 export interface MsgUpdateProjectAdminResponse {
+}
+export interface MsgUpdateProjectAdminResponseProtoMsg {
+    typeUrl: "/regen.ecocredit.v1.MsgUpdateProjectAdminResponse";
+    value: Uint8Array;
+}
+/** MsgUpdateProjectAdmin is the Msg/UpdateProjectAdmin response type. */
+export interface MsgUpdateProjectAdminResponseAmino {
+}
+export interface MsgUpdateProjectAdminResponseAminoMsg {
+    type: "/regen.ecocredit.v1.MsgUpdateProjectAdminResponse";
+    value: MsgUpdateProjectAdminResponseAmino;
 }
 /** MsgUpdateProjectAdmin is the Msg/UpdateProjectAdmin response type. */
 export interface MsgUpdateProjectAdminResponseSDKType {
@@ -718,8 +1084,12 @@ export interface MsgUpdateProjectMetadata {
      */
     newMetadata: string;
 }
+export interface MsgUpdateProjectMetadataProtoMsg {
+    typeUrl: "/regen.ecocredit.v1.MsgUpdateProjectMetadata";
+    value: Uint8Array;
+}
 /** MsgUpdateProjectMetadata is the Msg/UpdateProjectMetadata request type. */
-export interface MsgUpdateProjectMetadataSDKType {
+export interface MsgUpdateProjectMetadataAmino {
     /** admin is the address of the account that is the admin of the project. */
     admin: string;
     /** project_id is the unique identifier of the project. */
@@ -731,11 +1101,35 @@ export interface MsgUpdateProjectMetadataSDKType {
      */
     new_metadata: string;
 }
+export interface MsgUpdateProjectMetadataAminoMsg {
+    type: "/regen.ecocredit.v1.MsgUpdateProjectMetadata";
+    value: MsgUpdateProjectMetadataAmino;
+}
+/** MsgUpdateProjectMetadata is the Msg/UpdateProjectMetadata request type. */
+export interface MsgUpdateProjectMetadataSDKType {
+    admin: string;
+    project_id: string;
+    new_metadata: string;
+}
 /**
  * MsgUpdateProjectMetadataResponse is the Msg/UpdateProjectMetadataResponse
  * response type.
  */
 export interface MsgUpdateProjectMetadataResponse {
+}
+export interface MsgUpdateProjectMetadataResponseProtoMsg {
+    typeUrl: "/regen.ecocredit.v1.MsgUpdateProjectMetadataResponse";
+    value: Uint8Array;
+}
+/**
+ * MsgUpdateProjectMetadataResponse is the Msg/UpdateProjectMetadataResponse
+ * response type.
+ */
+export interface MsgUpdateProjectMetadataResponseAmino {
+}
+export interface MsgUpdateProjectMetadataResponseAminoMsg {
+    type: "/regen.ecocredit.v1.MsgUpdateProjectMetadataResponse";
+    value: MsgUpdateProjectMetadataResponseAmino;
 }
 /**
  * MsgUpdateProjectMetadataResponse is the Msg/UpdateProjectMetadataResponse
@@ -754,8 +1148,12 @@ export interface MsgBridge {
     /** credits specifies a credit batch and the number of credits being bridged. */
     credits: Credits[];
 }
+export interface MsgBridgeProtoMsg {
+    typeUrl: "/regen.ecocredit.v1.MsgBridge";
+    value: Uint8Array;
+}
 /** MsgBridge is the Msg/Bridge request type. */
-export interface MsgBridgeSDKType {
+export interface MsgBridgeAmino {
     /** owner is the address of the account that owns the credits being bridged. */
     owner: string;
     /** target is the name of the target chain or registry. */
@@ -763,6 +1161,17 @@ export interface MsgBridgeSDKType {
     /** recipient is the address of the account receiving the bridged credits. */
     recipient: string;
     /** credits specifies a credit batch and the number of credits being bridged. */
+    credits: CreditsAmino[];
+}
+export interface MsgBridgeAminoMsg {
+    type: "/regen.ecocredit.v1.MsgBridge";
+    value: MsgBridgeAmino;
+}
+/** MsgBridge is the Msg/Bridge request type. */
+export interface MsgBridgeSDKType {
+    owner: string;
+    target: string;
+    recipient: string;
     credits: CreditsSDKType[];
 }
 /**
@@ -782,12 +1191,16 @@ export interface MsgUpdateBatchMetadata {
      */
     newMetadata: string;
 }
+export interface MsgUpdateBatchMetadataProtoMsg {
+    typeUrl: "/regen.ecocredit.v1.MsgUpdateBatchMetadata";
+    value: Uint8Array;
+}
 /**
  * MsgUpdateBatchMetadata is the Msg/UpdateBatchMetadata request type.
  *
  * Since Revision 2
  */
-export interface MsgUpdateBatchMetadataSDKType {
+export interface MsgUpdateBatchMetadataAmino {
     /** issuer is the address of the account that is the issuer of the batch. */
     issuer: string;
     /** batch_denom is the unique identifier of the batch. */
@@ -799,6 +1212,20 @@ export interface MsgUpdateBatchMetadataSDKType {
      */
     new_metadata: string;
 }
+export interface MsgUpdateBatchMetadataAminoMsg {
+    type: "/regen.ecocredit.v1.MsgUpdateBatchMetadata";
+    value: MsgUpdateBatchMetadataAmino;
+}
+/**
+ * MsgUpdateBatchMetadata is the Msg/UpdateBatchMetadata request type.
+ *
+ * Since Revision 2
+ */
+export interface MsgUpdateBatchMetadataSDKType {
+    issuer: string;
+    batch_denom: string;
+    new_metadata: string;
+}
 /**
  * MsgUpdateBatchMetadataResponse is the Msg/UpdateBatchMetadataResponse
  * response type.
@@ -806,6 +1233,22 @@ export interface MsgUpdateBatchMetadataSDKType {
  * Since Revision 2
  */
 export interface MsgUpdateBatchMetadataResponse {
+}
+export interface MsgUpdateBatchMetadataResponseProtoMsg {
+    typeUrl: "/regen.ecocredit.v1.MsgUpdateBatchMetadataResponse";
+    value: Uint8Array;
+}
+/**
+ * MsgUpdateBatchMetadataResponse is the Msg/UpdateBatchMetadataResponse
+ * response type.
+ *
+ * Since Revision 2
+ */
+export interface MsgUpdateBatchMetadataResponseAmino {
+}
+export interface MsgUpdateBatchMetadataResponseAminoMsg {
+    type: "/regen.ecocredit.v1.MsgUpdateBatchMetadataResponse";
+    value: MsgUpdateBatchMetadataResponseAmino;
 }
 /**
  * MsgUpdateBatchMetadataResponse is the Msg/UpdateBatchMetadataResponse
@@ -817,6 +1260,17 @@ export interface MsgUpdateBatchMetadataResponseSDKType {
 }
 /** MsgBridgeResponse is the Msg/Bridge response type. */
 export interface MsgBridgeResponse {
+}
+export interface MsgBridgeResponseProtoMsg {
+    typeUrl: "/regen.ecocredit.v1.MsgBridgeResponse";
+    value: Uint8Array;
+}
+/** MsgBridgeResponse is the Msg/Bridge response type. */
+export interface MsgBridgeResponseAmino {
+}
+export interface MsgBridgeResponseAminoMsg {
+    type: "/regen.ecocredit.v1.MsgBridgeResponse";
+    value: MsgBridgeResponseAmino;
 }
 /** MsgBridgeResponse is the Msg/Bridge response type. */
 export interface MsgBridgeResponseSDKType {
@@ -840,8 +1294,12 @@ export interface MsgBridgeReceive {
      */
     originTx?: OriginTx;
 }
+export interface MsgBridgeReceiveProtoMsg {
+    typeUrl: "/regen.ecocredit.v1.MsgBridgeReceive";
+    value: Uint8Array;
+}
 /** MsgBridgeReceive is the Msg/BridgeReceive request type. */
-export interface MsgBridgeReceiveSDKType {
+export interface MsgBridgeReceiveAmino {
     /** issuer is the account address of the service bridging the credits. */
     issuer: string;
     /**
@@ -850,13 +1308,25 @@ export interface MsgBridgeReceiveSDKType {
      */
     class_id: string;
     /** project defines the project information for the bridged credits. */
-    project?: MsgBridgeReceive_ProjectSDKType;
+    project?: MsgBridgeReceive_ProjectAmino;
     /** batch defines the credit batch information for the bridged credits. */
-    batch?: MsgBridgeReceive_BatchSDKType;
+    batch?: MsgBridgeReceive_BatchAmino;
     /**
      * origin_tx is a reference to a transaction which caused the transfer from
      * another chain or registry.
      */
+    origin_tx?: OriginTxAmino;
+}
+export interface MsgBridgeReceiveAminoMsg {
+    type: "/regen.ecocredit.v1.MsgBridgeReceive";
+    value: MsgBridgeReceiveAmino;
+}
+/** MsgBridgeReceive is the Msg/BridgeReceive request type. */
+export interface MsgBridgeReceiveSDKType {
+    issuer: string;
+    class_id: string;
+    project?: MsgBridgeReceive_ProjectSDKType;
+    batch?: MsgBridgeReceive_BatchSDKType;
     origin_tx?: OriginTxSDKType;
 }
 /**
@@ -882,12 +1352,16 @@ export interface MsgBridgeReceive_Batch {
     /** metadata is the metadata for the credit batch. */
     metadata: string;
 }
+export interface MsgBridgeReceive_BatchProtoMsg {
+    typeUrl: "/regen.ecocredit.v1.Batch";
+    value: Uint8Array;
+}
 /**
  * Batch defines the credit batch information for the bridged credits. This
  * information will be used to create a credit batch or to dynamically mint
  * credits to an existing credit batch.
  */
-export interface MsgBridgeReceive_BatchSDKType {
+export interface MsgBridgeReceive_BatchAmino {
     /** recipient is the recipient of the bridged credits. */
     recipient: string;
     /** amount is the amount of credits being bridged. */
@@ -896,13 +1370,29 @@ export interface MsgBridgeReceive_BatchSDKType {
      * start_date is the beginning of the period during which this credit batch
      * was quantified and verified.
      */
-    start_date?: TimestampSDKType;
+    start_date?: TimestampAmino;
     /**
      * end_date is the end of the period during which this credit batch was
      * quantified and verified.
      */
-    end_date?: TimestampSDKType;
+    end_date?: TimestampAmino;
     /** metadata is the metadata for the credit batch. */
+    metadata: string;
+}
+export interface MsgBridgeReceive_BatchAminoMsg {
+    type: "/regen.ecocredit.v1.Batch";
+    value: MsgBridgeReceive_BatchAmino;
+}
+/**
+ * Batch defines the credit batch information for the bridged credits. This
+ * information will be used to create a credit batch or to dynamically mint
+ * credits to an existing credit batch.
+ */
+export interface MsgBridgeReceive_BatchSDKType {
+    recipient: string;
+    amount: string;
+    start_date?: TimestampSDKType;
+    end_date?: TimestampSDKType;
     metadata: string;
 }
 /**
@@ -918,17 +1408,35 @@ export interface MsgBridgeReceive_Project {
     /** metadata is the metadata for the project. */
     metadata: string;
 }
+export interface MsgBridgeReceive_ProjectProtoMsg {
+    typeUrl: "/regen.ecocredit.v1.Project";
+    value: Uint8Array;
+}
+/**
+ * Project defines the project information for the bridged credits. This
+ * information will be used to find an existing project or to create a new
+ * project if a project with the same reference id does not already exist.
+ */
+export interface MsgBridgeReceive_ProjectAmino {
+    /** reference_id is the reference id of the project. */
+    reference_id: string;
+    /** jurisdiction is the project jurisdiction. */
+    jurisdiction: string;
+    /** metadata is the metadata for the project. */
+    metadata: string;
+}
+export interface MsgBridgeReceive_ProjectAminoMsg {
+    type: "/regen.ecocredit.v1.Project";
+    value: MsgBridgeReceive_ProjectAmino;
+}
 /**
  * Project defines the project information for the bridged credits. This
  * information will be used to find an existing project or to create a new
  * project if a project with the same reference id does not already exist.
  */
 export interface MsgBridgeReceive_ProjectSDKType {
-    /** reference_id is the reference id of the project. */
     reference_id: string;
-    /** jurisdiction is the project jurisdiction. */
     jurisdiction: string;
-    /** metadata is the metadata for the project. */
     metadata: string;
 }
 /** MsgBridgeReceiveResponse is the Msg/BridgeReceive response type. */
@@ -944,8 +1452,12 @@ export interface MsgBridgeReceiveResponse {
      */
     projectId: string;
 }
+export interface MsgBridgeReceiveResponseProtoMsg {
+    typeUrl: "/regen.ecocredit.v1.MsgBridgeReceiveResponse";
+    value: Uint8Array;
+}
 /** MsgBridgeReceiveResponse is the Msg/BridgeReceive response type. */
-export interface MsgBridgeReceiveResponseSDKType {
+export interface MsgBridgeReceiveResponseAmino {
     /**
      * batch_denom is the unique identifier of the credit batch either created
      * or within which the credits were dynamically minted.
@@ -955,6 +1467,15 @@ export interface MsgBridgeReceiveResponseSDKType {
      * project_id is the unique identifier of the project that was either created
      * or the existing project within which the credit batch exists.
      */
+    project_id: string;
+}
+export interface MsgBridgeReceiveResponseAminoMsg {
+    type: "/regen.ecocredit.v1.MsgBridgeReceiveResponse";
+    value: MsgBridgeReceiveResponseAmino;
+}
+/** MsgBridgeReceiveResponse is the Msg/BridgeReceive response type. */
+export interface MsgBridgeReceiveResponseSDKType {
+    batch_denom: string;
     project_id: string;
 }
 /**
@@ -968,15 +1489,32 @@ export interface MsgAddClassCreator {
     /** creator is the address to add to the class creator list. */
     creator: string;
 }
+export interface MsgAddClassCreatorProtoMsg {
+    typeUrl: "/regen.ecocredit.v1.MsgAddClassCreator";
+    value: Uint8Array;
+}
+/**
+ * MsgAddClassCreator is the Msg/AddClassCreator request type.
+ *
+ * Since Revision 2
+ */
+export interface MsgAddClassCreatorAmino {
+    /** authority is the address of the governance account. */
+    authority: string;
+    /** creator is the address to add to the class creator list. */
+    creator: string;
+}
+export interface MsgAddClassCreatorAminoMsg {
+    type: "/regen.ecocredit.v1.MsgAddClassCreator";
+    value: MsgAddClassCreatorAmino;
+}
 /**
  * MsgAddClassCreator is the Msg/AddClassCreator request type.
  *
  * Since Revision 2
  */
 export interface MsgAddClassCreatorSDKType {
-    /** authority is the address of the governance account. */
     authority: string;
-    /** creator is the address to add to the class creator list. */
     creator: string;
 }
 /**
@@ -985,6 +1523,21 @@ export interface MsgAddClassCreatorSDKType {
  * Since Revision 2
  */
 export interface MsgAddClassCreatorResponse {
+}
+export interface MsgAddClassCreatorResponseProtoMsg {
+    typeUrl: "/regen.ecocredit.v1.MsgAddClassCreatorResponse";
+    value: Uint8Array;
+}
+/**
+ * MsgAddClassCreatorResponse is the Msg/AddClassCreator response type.
+ *
+ * Since Revision 2
+ */
+export interface MsgAddClassCreatorResponseAmino {
+}
+export interface MsgAddClassCreatorResponseAminoMsg {
+    type: "/regen.ecocredit.v1.MsgAddClassCreatorResponse";
+    value: MsgAddClassCreatorResponseAmino;
 }
 /**
  * MsgAddClassCreatorResponse is the Msg/AddClassCreator response type.
@@ -1005,6 +1558,26 @@ export interface MsgSetClassCreatorAllowlist {
     /** enabled defines the boolean value to set the allowlist on or off. */
     enabled: boolean;
 }
+export interface MsgSetClassCreatorAllowlistProtoMsg {
+    typeUrl: "/regen.ecocredit.v1.MsgSetClassCreatorAllowlist";
+    value: Uint8Array;
+}
+/**
+ * MsgSetClassCreatorAllowlist is the Msg/SetClassCreatorAllowlist request
+ * type.
+ *
+ * Since Revision 2
+ */
+export interface MsgSetClassCreatorAllowlistAmino {
+    /** authority is the address of the governance account. */
+    authority: string;
+    /** enabled defines the boolean value to set the allowlist on or off. */
+    enabled: boolean;
+}
+export interface MsgSetClassCreatorAllowlistAminoMsg {
+    type: "/regen.ecocredit.v1.MsgSetClassCreatorAllowlist";
+    value: MsgSetClassCreatorAllowlistAmino;
+}
 /**
  * MsgSetClassCreatorAllowlist is the Msg/SetClassCreatorAllowlist request
  * type.
@@ -1012,9 +1585,7 @@ export interface MsgSetClassCreatorAllowlist {
  * Since Revision 2
  */
 export interface MsgSetClassCreatorAllowlistSDKType {
-    /** authority is the address of the governance account. */
     authority: string;
-    /** enabled defines the boolean value to set the allowlist on or off. */
     enabled: boolean;
 }
 /**
@@ -1024,6 +1595,22 @@ export interface MsgSetClassCreatorAllowlistSDKType {
  * Since Revision 2
  */
 export interface MsgSetClassCreatorAllowlistResponse {
+}
+export interface MsgSetClassCreatorAllowlistResponseProtoMsg {
+    typeUrl: "/regen.ecocredit.v1.MsgSetClassCreatorAllowlistResponse";
+    value: Uint8Array;
+}
+/**
+ * MsgSetClassCreatorAllowlistResponse is the Msg/SetClassCreatorAllowlist
+ * response type.
+ *
+ * Since Revision 2
+ */
+export interface MsgSetClassCreatorAllowlistResponseAmino {
+}
+export interface MsgSetClassCreatorAllowlistResponseAminoMsg {
+    type: "/regen.ecocredit.v1.MsgSetClassCreatorAllowlistResponse";
+    value: MsgSetClassCreatorAllowlistResponseAmino;
 }
 /**
  * MsgSetClassCreatorAllowlistResponse is the Msg/SetClassCreatorAllowlist
@@ -1044,15 +1631,32 @@ export interface MsgRemoveClassCreator {
     /** creator is the address to remove from the class creator list. */
     creator: string;
 }
+export interface MsgRemoveClassCreatorProtoMsg {
+    typeUrl: "/regen.ecocredit.v1.MsgRemoveClassCreator";
+    value: Uint8Array;
+}
+/**
+ * MsgRemoveClassCreator is the Msg/RemoveClassCreator request type.
+ *
+ * Since Revision 2
+ */
+export interface MsgRemoveClassCreatorAmino {
+    /** authority is the address of the governance account. */
+    authority: string;
+    /** creator is the address to remove from the class creator list. */
+    creator: string;
+}
+export interface MsgRemoveClassCreatorAminoMsg {
+    type: "/regen.ecocredit.v1.MsgRemoveClassCreator";
+    value: MsgRemoveClassCreatorAmino;
+}
 /**
  * MsgRemoveClassCreator is the Msg/RemoveClassCreator request type.
  *
  * Since Revision 2
  */
 export interface MsgRemoveClassCreatorSDKType {
-    /** authority is the address of the governance account. */
     authority: string;
-    /** creator is the address to remove from the class creator list. */
     creator: string;
 }
 /**
@@ -1061,6 +1665,21 @@ export interface MsgRemoveClassCreatorSDKType {
  * Since Revision 2
  */
 export interface MsgRemoveClassCreatorResponse {
+}
+export interface MsgRemoveClassCreatorResponseProtoMsg {
+    typeUrl: "/regen.ecocredit.v1.MsgRemoveClassCreatorResponse";
+    value: Uint8Array;
+}
+/**
+ * MsgRemoveClassCreatorResponse is the Msg/RemoveClasssCreator response type.
+ *
+ * Since Revision 2
+ */
+export interface MsgRemoveClassCreatorResponseAmino {
+}
+export interface MsgRemoveClassCreatorResponseAminoMsg {
+    type: "/regen.ecocredit.v1.MsgRemoveClassCreatorResponse";
+    value: MsgRemoveClassCreatorResponseAmino;
 }
 /**
  * MsgRemoveClassCreatorResponse is the Msg/RemoveClasssCreator response type.
@@ -1083,18 +1702,35 @@ export interface MsgUpdateClassFee {
      */
     fee?: Coin;
 }
+export interface MsgUpdateClassFeeProtoMsg {
+    typeUrl: "/regen.ecocredit.v1.MsgUpdateClassFee";
+    value: Uint8Array;
+}
 /**
  * MsgUpdateClassFee is the Msg/UpdateClassFee request type.
  *
  * Since Revision 2
  */
-export interface MsgUpdateClassFeeSDKType {
+export interface MsgUpdateClassFeeAmino {
     /** authority is the address of the governance account. */
     authority: string;
     /**
      * fee is the credit class creation fee. If not set, the credit class creation
      * fee will be removed and no fee will be required to create a credit class.
      */
+    fee?: CoinAmino;
+}
+export interface MsgUpdateClassFeeAminoMsg {
+    type: "/regen.ecocredit.v1.MsgUpdateClassFee";
+    value: MsgUpdateClassFeeAmino;
+}
+/**
+ * MsgUpdateClassFee is the Msg/UpdateClassFee request type.
+ *
+ * Since Revision 2
+ */
+export interface MsgUpdateClassFeeSDKType {
+    authority: string;
     fee?: CoinSDKType;
 }
 /**
@@ -1103,6 +1739,21 @@ export interface MsgUpdateClassFeeSDKType {
  * Since Revision 2
  */
 export interface MsgUpdateClassFeeResponse {
+}
+export interface MsgUpdateClassFeeResponseProtoMsg {
+    typeUrl: "/regen.ecocredit.v1.MsgUpdateClassFeeResponse";
+    value: Uint8Array;
+}
+/**
+ * MsgUpdateClassFeeResponse is the Msg/UpdateClassFee response type.
+ *
+ * Since Revision 2
+ */
+export interface MsgUpdateClassFeeResponseAmino {
+}
+export interface MsgUpdateClassFeeResponseAminoMsg {
+    type: "/regen.ecocredit.v1.MsgUpdateClassFeeResponse";
+    value: MsgUpdateClassFeeResponseAmino;
 }
 /**
  * MsgUpdateClassFeeResponse is the Msg/UpdateClassFee response type.
@@ -1125,18 +1776,35 @@ export interface MsgAddAllowedBridgeChain {
      */
     chainName: string;
 }
+export interface MsgAddAllowedBridgeChainProtoMsg {
+    typeUrl: "/regen.ecocredit.v1.MsgAddAllowedBridgeChain";
+    value: Uint8Array;
+}
 /**
  * MsgAddAllowedBridgeChain is the Msg/AddAllowedBridgeChain request type.
  *
  * Since Revision 2
  */
-export interface MsgAddAllowedBridgeChainSDKType {
+export interface MsgAddAllowedBridgeChainAmino {
     /** authority is the address of the governance account. */
     authority: string;
     /**
      * chain_name is the name of the chain to allow bridging of ecocredits to
      * (i.e. polygon, ethereum, celo).
      */
+    chain_name: string;
+}
+export interface MsgAddAllowedBridgeChainAminoMsg {
+    type: "/regen.ecocredit.v1.MsgAddAllowedBridgeChain";
+    value: MsgAddAllowedBridgeChainAmino;
+}
+/**
+ * MsgAddAllowedBridgeChain is the Msg/AddAllowedBridgeChain request type.
+ *
+ * Since Revision 2
+ */
+export interface MsgAddAllowedBridgeChainSDKType {
+    authority: string;
     chain_name: string;
 }
 /**
@@ -1146,6 +1814,22 @@ export interface MsgAddAllowedBridgeChainSDKType {
  * Since Revision 2
  */
 export interface MsgAddAllowedBridgeChainResponse {
+}
+export interface MsgAddAllowedBridgeChainResponseProtoMsg {
+    typeUrl: "/regen.ecocredit.v1.MsgAddAllowedBridgeChainResponse";
+    value: Uint8Array;
+}
+/**
+ * MsgAddAllowedBridgeChainResponse is the Msg/AddAllowedBridgeChain response
+ * type.
+ *
+ * Since Revision 2
+ */
+export interface MsgAddAllowedBridgeChainResponseAmino {
+}
+export interface MsgAddAllowedBridgeChainResponseAminoMsg {
+    type: "/regen.ecocredit.v1.MsgAddAllowedBridgeChainResponse";
+    value: MsgAddAllowedBridgeChainResponseAmino;
 }
 /**
  * MsgAddAllowedBridgeChainResponse is the Msg/AddAllowedBridgeChain response
@@ -1169,18 +1853,35 @@ export interface MsgRemoveAllowedBridgeChain {
      */
     chainName: string;
 }
+export interface MsgRemoveAllowedBridgeChainProtoMsg {
+    typeUrl: "/regen.ecocredit.v1.MsgRemoveAllowedBridgeChain";
+    value: Uint8Array;
+}
 /**
  * MsgRemoveAllowedBridgeChain is the Msg/RemoveAllowedBridgeChain request type.
  *
  * Since Revision 2
  */
-export interface MsgRemoveAllowedBridgeChainSDKType {
+export interface MsgRemoveAllowedBridgeChainAmino {
     /** authority is the address of the governance account. */
     authority: string;
     /**
      * chain_name is the name of the chain to remove from the list of allowed
      * chains to bridge ecocredits to (i.e. polygon, ethereum, celo).
      */
+    chain_name: string;
+}
+export interface MsgRemoveAllowedBridgeChainAminoMsg {
+    type: "/regen.ecocredit.v1.MsgRemoveAllowedBridgeChain";
+    value: MsgRemoveAllowedBridgeChainAmino;
+}
+/**
+ * MsgRemoveAllowedBridgeChain is the Msg/RemoveAllowedBridgeChain request type.
+ *
+ * Since Revision 2
+ */
+export interface MsgRemoveAllowedBridgeChainSDKType {
+    authority: string;
     chain_name: string;
 }
 /**
@@ -1190,6 +1891,22 @@ export interface MsgRemoveAllowedBridgeChainSDKType {
  * Since Revision 2
  */
 export interface MsgRemoveAllowedBridgeChainResponse {
+}
+export interface MsgRemoveAllowedBridgeChainResponseProtoMsg {
+    typeUrl: "/regen.ecocredit.v1.MsgRemoveAllowedBridgeChainResponse";
+    value: Uint8Array;
+}
+/**
+ * MsgRemoveAllowedBridgeChainResponse is the Msg/RemoveAllowedBridgeChain
+ * response type.
+ *
+ * Since Revision 2
+ */
+export interface MsgRemoveAllowedBridgeChainResponseAmino {
+}
+export interface MsgRemoveAllowedBridgeChainResponseAminoMsg {
+    type: "/regen.ecocredit.v1.MsgRemoveAllowedBridgeChainResponse";
+    value: MsgRemoveAllowedBridgeChainResponseAmino;
 }
 /**
  * MsgRemoveAllowedBridgeChainResponse is the Msg/RemoveAllowedBridgeChain
@@ -1205,6 +1922,12 @@ export declare const MsgAddCreditType: {
     fromJSON(object: any): MsgAddCreditType;
     toJSON(message: MsgAddCreditType): unknown;
     fromPartial(object: Partial<MsgAddCreditType>): MsgAddCreditType;
+    fromAmino(object: MsgAddCreditTypeAmino): MsgAddCreditType;
+    toAmino(message: MsgAddCreditType): MsgAddCreditTypeAmino;
+    fromAminoMsg(object: MsgAddCreditTypeAminoMsg): MsgAddCreditType;
+    fromProtoMsg(message: MsgAddCreditTypeProtoMsg): MsgAddCreditType;
+    toProto(message: MsgAddCreditType): Uint8Array;
+    toProtoMsg(message: MsgAddCreditType): MsgAddCreditTypeProtoMsg;
 };
 export declare const MsgAddCreditTypeResponse: {
     encode(_: MsgAddCreditTypeResponse, writer?: _m0.Writer): _m0.Writer;
@@ -1212,6 +1935,12 @@ export declare const MsgAddCreditTypeResponse: {
     fromJSON(_: any): MsgAddCreditTypeResponse;
     toJSON(_: MsgAddCreditTypeResponse): unknown;
     fromPartial(_: Partial<MsgAddCreditTypeResponse>): MsgAddCreditTypeResponse;
+    fromAmino(_: MsgAddCreditTypeResponseAmino): MsgAddCreditTypeResponse;
+    toAmino(_: MsgAddCreditTypeResponse): MsgAddCreditTypeResponseAmino;
+    fromAminoMsg(object: MsgAddCreditTypeResponseAminoMsg): MsgAddCreditTypeResponse;
+    fromProtoMsg(message: MsgAddCreditTypeResponseProtoMsg): MsgAddCreditTypeResponse;
+    toProto(message: MsgAddCreditTypeResponse): Uint8Array;
+    toProtoMsg(message: MsgAddCreditTypeResponse): MsgAddCreditTypeResponseProtoMsg;
 };
 export declare const MsgCreateClass: {
     encode(message: MsgCreateClass, writer?: _m0.Writer): _m0.Writer;
@@ -1219,6 +1948,12 @@ export declare const MsgCreateClass: {
     fromJSON(object: any): MsgCreateClass;
     toJSON(message: MsgCreateClass): unknown;
     fromPartial(object: Partial<MsgCreateClass>): MsgCreateClass;
+    fromAmino(object: MsgCreateClassAmino): MsgCreateClass;
+    toAmino(message: MsgCreateClass): MsgCreateClassAmino;
+    fromAminoMsg(object: MsgCreateClassAminoMsg): MsgCreateClass;
+    fromProtoMsg(message: MsgCreateClassProtoMsg): MsgCreateClass;
+    toProto(message: MsgCreateClass): Uint8Array;
+    toProtoMsg(message: MsgCreateClass): MsgCreateClassProtoMsg;
 };
 export declare const MsgCreateClassResponse: {
     encode(message: MsgCreateClassResponse, writer?: _m0.Writer): _m0.Writer;
@@ -1226,6 +1961,12 @@ export declare const MsgCreateClassResponse: {
     fromJSON(object: any): MsgCreateClassResponse;
     toJSON(message: MsgCreateClassResponse): unknown;
     fromPartial(object: Partial<MsgCreateClassResponse>): MsgCreateClassResponse;
+    fromAmino(object: MsgCreateClassResponseAmino): MsgCreateClassResponse;
+    toAmino(message: MsgCreateClassResponse): MsgCreateClassResponseAmino;
+    fromAminoMsg(object: MsgCreateClassResponseAminoMsg): MsgCreateClassResponse;
+    fromProtoMsg(message: MsgCreateClassResponseProtoMsg): MsgCreateClassResponse;
+    toProto(message: MsgCreateClassResponse): Uint8Array;
+    toProtoMsg(message: MsgCreateClassResponse): MsgCreateClassResponseProtoMsg;
 };
 export declare const MsgCreateProject: {
     encode(message: MsgCreateProject, writer?: _m0.Writer): _m0.Writer;
@@ -1233,6 +1974,12 @@ export declare const MsgCreateProject: {
     fromJSON(object: any): MsgCreateProject;
     toJSON(message: MsgCreateProject): unknown;
     fromPartial(object: Partial<MsgCreateProject>): MsgCreateProject;
+    fromAmino(object: MsgCreateProjectAmino): MsgCreateProject;
+    toAmino(message: MsgCreateProject): MsgCreateProjectAmino;
+    fromAminoMsg(object: MsgCreateProjectAminoMsg): MsgCreateProject;
+    fromProtoMsg(message: MsgCreateProjectProtoMsg): MsgCreateProject;
+    toProto(message: MsgCreateProject): Uint8Array;
+    toProtoMsg(message: MsgCreateProject): MsgCreateProjectProtoMsg;
 };
 export declare const MsgCreateProjectResponse: {
     encode(message: MsgCreateProjectResponse, writer?: _m0.Writer): _m0.Writer;
@@ -1240,6 +1987,12 @@ export declare const MsgCreateProjectResponse: {
     fromJSON(object: any): MsgCreateProjectResponse;
     toJSON(message: MsgCreateProjectResponse): unknown;
     fromPartial(object: Partial<MsgCreateProjectResponse>): MsgCreateProjectResponse;
+    fromAmino(object: MsgCreateProjectResponseAmino): MsgCreateProjectResponse;
+    toAmino(message: MsgCreateProjectResponse): MsgCreateProjectResponseAmino;
+    fromAminoMsg(object: MsgCreateProjectResponseAminoMsg): MsgCreateProjectResponse;
+    fromProtoMsg(message: MsgCreateProjectResponseProtoMsg): MsgCreateProjectResponse;
+    toProto(message: MsgCreateProjectResponse): Uint8Array;
+    toProtoMsg(message: MsgCreateProjectResponse): MsgCreateProjectResponseProtoMsg;
 };
 export declare const MsgCreateBatch: {
     encode(message: MsgCreateBatch, writer?: _m0.Writer): _m0.Writer;
@@ -1247,6 +2000,12 @@ export declare const MsgCreateBatch: {
     fromJSON(object: any): MsgCreateBatch;
     toJSON(message: MsgCreateBatch): unknown;
     fromPartial(object: Partial<MsgCreateBatch>): MsgCreateBatch;
+    fromAmino(object: MsgCreateBatchAmino): MsgCreateBatch;
+    toAmino(message: MsgCreateBatch): MsgCreateBatchAmino;
+    fromAminoMsg(object: MsgCreateBatchAminoMsg): MsgCreateBatch;
+    fromProtoMsg(message: MsgCreateBatchProtoMsg): MsgCreateBatch;
+    toProto(message: MsgCreateBatch): Uint8Array;
+    toProtoMsg(message: MsgCreateBatch): MsgCreateBatchProtoMsg;
 };
 export declare const MsgCreateBatchResponse: {
     encode(message: MsgCreateBatchResponse, writer?: _m0.Writer): _m0.Writer;
@@ -1254,6 +2013,12 @@ export declare const MsgCreateBatchResponse: {
     fromJSON(object: any): MsgCreateBatchResponse;
     toJSON(message: MsgCreateBatchResponse): unknown;
     fromPartial(object: Partial<MsgCreateBatchResponse>): MsgCreateBatchResponse;
+    fromAmino(object: MsgCreateBatchResponseAmino): MsgCreateBatchResponse;
+    toAmino(message: MsgCreateBatchResponse): MsgCreateBatchResponseAmino;
+    fromAminoMsg(object: MsgCreateBatchResponseAminoMsg): MsgCreateBatchResponse;
+    fromProtoMsg(message: MsgCreateBatchResponseProtoMsg): MsgCreateBatchResponse;
+    toProto(message: MsgCreateBatchResponse): Uint8Array;
+    toProtoMsg(message: MsgCreateBatchResponse): MsgCreateBatchResponseProtoMsg;
 };
 export declare const MsgMintBatchCredits: {
     encode(message: MsgMintBatchCredits, writer?: _m0.Writer): _m0.Writer;
@@ -1261,6 +2026,12 @@ export declare const MsgMintBatchCredits: {
     fromJSON(object: any): MsgMintBatchCredits;
     toJSON(message: MsgMintBatchCredits): unknown;
     fromPartial(object: Partial<MsgMintBatchCredits>): MsgMintBatchCredits;
+    fromAmino(object: MsgMintBatchCreditsAmino): MsgMintBatchCredits;
+    toAmino(message: MsgMintBatchCredits): MsgMintBatchCreditsAmino;
+    fromAminoMsg(object: MsgMintBatchCreditsAminoMsg): MsgMintBatchCredits;
+    fromProtoMsg(message: MsgMintBatchCreditsProtoMsg): MsgMintBatchCredits;
+    toProto(message: MsgMintBatchCredits): Uint8Array;
+    toProtoMsg(message: MsgMintBatchCredits): MsgMintBatchCreditsProtoMsg;
 };
 export declare const MsgMintBatchCreditsResponse: {
     encode(_: MsgMintBatchCreditsResponse, writer?: _m0.Writer): _m0.Writer;
@@ -1268,6 +2039,12 @@ export declare const MsgMintBatchCreditsResponse: {
     fromJSON(_: any): MsgMintBatchCreditsResponse;
     toJSON(_: MsgMintBatchCreditsResponse): unknown;
     fromPartial(_: Partial<MsgMintBatchCreditsResponse>): MsgMintBatchCreditsResponse;
+    fromAmino(_: MsgMintBatchCreditsResponseAmino): MsgMintBatchCreditsResponse;
+    toAmino(_: MsgMintBatchCreditsResponse): MsgMintBatchCreditsResponseAmino;
+    fromAminoMsg(object: MsgMintBatchCreditsResponseAminoMsg): MsgMintBatchCreditsResponse;
+    fromProtoMsg(message: MsgMintBatchCreditsResponseProtoMsg): MsgMintBatchCreditsResponse;
+    toProto(message: MsgMintBatchCreditsResponse): Uint8Array;
+    toProtoMsg(message: MsgMintBatchCreditsResponse): MsgMintBatchCreditsResponseProtoMsg;
 };
 export declare const MsgSealBatch: {
     encode(message: MsgSealBatch, writer?: _m0.Writer): _m0.Writer;
@@ -1275,6 +2052,12 @@ export declare const MsgSealBatch: {
     fromJSON(object: any): MsgSealBatch;
     toJSON(message: MsgSealBatch): unknown;
     fromPartial(object: Partial<MsgSealBatch>): MsgSealBatch;
+    fromAmino(object: MsgSealBatchAmino): MsgSealBatch;
+    toAmino(message: MsgSealBatch): MsgSealBatchAmino;
+    fromAminoMsg(object: MsgSealBatchAminoMsg): MsgSealBatch;
+    fromProtoMsg(message: MsgSealBatchProtoMsg): MsgSealBatch;
+    toProto(message: MsgSealBatch): Uint8Array;
+    toProtoMsg(message: MsgSealBatch): MsgSealBatchProtoMsg;
 };
 export declare const MsgSealBatchResponse: {
     encode(_: MsgSealBatchResponse, writer?: _m0.Writer): _m0.Writer;
@@ -1282,6 +2065,12 @@ export declare const MsgSealBatchResponse: {
     fromJSON(_: any): MsgSealBatchResponse;
     toJSON(_: MsgSealBatchResponse): unknown;
     fromPartial(_: Partial<MsgSealBatchResponse>): MsgSealBatchResponse;
+    fromAmino(_: MsgSealBatchResponseAmino): MsgSealBatchResponse;
+    toAmino(_: MsgSealBatchResponse): MsgSealBatchResponseAmino;
+    fromAminoMsg(object: MsgSealBatchResponseAminoMsg): MsgSealBatchResponse;
+    fromProtoMsg(message: MsgSealBatchResponseProtoMsg): MsgSealBatchResponse;
+    toProto(message: MsgSealBatchResponse): Uint8Array;
+    toProtoMsg(message: MsgSealBatchResponse): MsgSealBatchResponseProtoMsg;
 };
 export declare const MsgSend: {
     encode(message: MsgSend, writer?: _m0.Writer): _m0.Writer;
@@ -1289,6 +2078,12 @@ export declare const MsgSend: {
     fromJSON(object: any): MsgSend;
     toJSON(message: MsgSend): unknown;
     fromPartial(object: Partial<MsgSend>): MsgSend;
+    fromAmino(object: MsgSendAmino): MsgSend;
+    toAmino(message: MsgSend): MsgSendAmino;
+    fromAminoMsg(object: MsgSendAminoMsg): MsgSend;
+    fromProtoMsg(message: MsgSendProtoMsg): MsgSend;
+    toProto(message: MsgSend): Uint8Array;
+    toProtoMsg(message: MsgSend): MsgSendProtoMsg;
 };
 export declare const MsgSend_SendCredits: {
     encode(message: MsgSend_SendCredits, writer?: _m0.Writer): _m0.Writer;
@@ -1296,6 +2091,12 @@ export declare const MsgSend_SendCredits: {
     fromJSON(object: any): MsgSend_SendCredits;
     toJSON(message: MsgSend_SendCredits): unknown;
     fromPartial(object: Partial<MsgSend_SendCredits>): MsgSend_SendCredits;
+    fromAmino(object: MsgSend_SendCreditsAmino): MsgSend_SendCredits;
+    toAmino(message: MsgSend_SendCredits): MsgSend_SendCreditsAmino;
+    fromAminoMsg(object: MsgSend_SendCreditsAminoMsg): MsgSend_SendCredits;
+    fromProtoMsg(message: MsgSend_SendCreditsProtoMsg): MsgSend_SendCredits;
+    toProto(message: MsgSend_SendCredits): Uint8Array;
+    toProtoMsg(message: MsgSend_SendCredits): MsgSend_SendCreditsProtoMsg;
 };
 export declare const MsgSendResponse: {
     encode(_: MsgSendResponse, writer?: _m0.Writer): _m0.Writer;
@@ -1303,6 +2104,12 @@ export declare const MsgSendResponse: {
     fromJSON(_: any): MsgSendResponse;
     toJSON(_: MsgSendResponse): unknown;
     fromPartial(_: Partial<MsgSendResponse>): MsgSendResponse;
+    fromAmino(_: MsgSendResponseAmino): MsgSendResponse;
+    toAmino(_: MsgSendResponse): MsgSendResponseAmino;
+    fromAminoMsg(object: MsgSendResponseAminoMsg): MsgSendResponse;
+    fromProtoMsg(message: MsgSendResponseProtoMsg): MsgSendResponse;
+    toProto(message: MsgSendResponse): Uint8Array;
+    toProtoMsg(message: MsgSendResponse): MsgSendResponseProtoMsg;
 };
 export declare const MsgRetire: {
     encode(message: MsgRetire, writer?: _m0.Writer): _m0.Writer;
@@ -1310,6 +2117,12 @@ export declare const MsgRetire: {
     fromJSON(object: any): MsgRetire;
     toJSON(message: MsgRetire): unknown;
     fromPartial(object: Partial<MsgRetire>): MsgRetire;
+    fromAmino(object: MsgRetireAmino): MsgRetire;
+    toAmino(message: MsgRetire): MsgRetireAmino;
+    fromAminoMsg(object: MsgRetireAminoMsg): MsgRetire;
+    fromProtoMsg(message: MsgRetireProtoMsg): MsgRetire;
+    toProto(message: MsgRetire): Uint8Array;
+    toProtoMsg(message: MsgRetire): MsgRetireProtoMsg;
 };
 export declare const MsgRetireResponse: {
     encode(_: MsgRetireResponse, writer?: _m0.Writer): _m0.Writer;
@@ -1317,6 +2130,12 @@ export declare const MsgRetireResponse: {
     fromJSON(_: any): MsgRetireResponse;
     toJSON(_: MsgRetireResponse): unknown;
     fromPartial(_: Partial<MsgRetireResponse>): MsgRetireResponse;
+    fromAmino(_: MsgRetireResponseAmino): MsgRetireResponse;
+    toAmino(_: MsgRetireResponse): MsgRetireResponseAmino;
+    fromAminoMsg(object: MsgRetireResponseAminoMsg): MsgRetireResponse;
+    fromProtoMsg(message: MsgRetireResponseProtoMsg): MsgRetireResponse;
+    toProto(message: MsgRetireResponse): Uint8Array;
+    toProtoMsg(message: MsgRetireResponse): MsgRetireResponseProtoMsg;
 };
 export declare const MsgCancel: {
     encode(message: MsgCancel, writer?: _m0.Writer): _m0.Writer;
@@ -1324,6 +2143,12 @@ export declare const MsgCancel: {
     fromJSON(object: any): MsgCancel;
     toJSON(message: MsgCancel): unknown;
     fromPartial(object: Partial<MsgCancel>): MsgCancel;
+    fromAmino(object: MsgCancelAmino): MsgCancel;
+    toAmino(message: MsgCancel): MsgCancelAmino;
+    fromAminoMsg(object: MsgCancelAminoMsg): MsgCancel;
+    fromProtoMsg(message: MsgCancelProtoMsg): MsgCancel;
+    toProto(message: MsgCancel): Uint8Array;
+    toProtoMsg(message: MsgCancel): MsgCancelProtoMsg;
 };
 export declare const MsgCancelResponse: {
     encode(_: MsgCancelResponse, writer?: _m0.Writer): _m0.Writer;
@@ -1331,6 +2156,12 @@ export declare const MsgCancelResponse: {
     fromJSON(_: any): MsgCancelResponse;
     toJSON(_: MsgCancelResponse): unknown;
     fromPartial(_: Partial<MsgCancelResponse>): MsgCancelResponse;
+    fromAmino(_: MsgCancelResponseAmino): MsgCancelResponse;
+    toAmino(_: MsgCancelResponse): MsgCancelResponseAmino;
+    fromAminoMsg(object: MsgCancelResponseAminoMsg): MsgCancelResponse;
+    fromProtoMsg(message: MsgCancelResponseProtoMsg): MsgCancelResponse;
+    toProto(message: MsgCancelResponse): Uint8Array;
+    toProtoMsg(message: MsgCancelResponse): MsgCancelResponseProtoMsg;
 };
 export declare const MsgUpdateClassAdmin: {
     encode(message: MsgUpdateClassAdmin, writer?: _m0.Writer): _m0.Writer;
@@ -1338,6 +2169,12 @@ export declare const MsgUpdateClassAdmin: {
     fromJSON(object: any): MsgUpdateClassAdmin;
     toJSON(message: MsgUpdateClassAdmin): unknown;
     fromPartial(object: Partial<MsgUpdateClassAdmin>): MsgUpdateClassAdmin;
+    fromAmino(object: MsgUpdateClassAdminAmino): MsgUpdateClassAdmin;
+    toAmino(message: MsgUpdateClassAdmin): MsgUpdateClassAdminAmino;
+    fromAminoMsg(object: MsgUpdateClassAdminAminoMsg): MsgUpdateClassAdmin;
+    fromProtoMsg(message: MsgUpdateClassAdminProtoMsg): MsgUpdateClassAdmin;
+    toProto(message: MsgUpdateClassAdmin): Uint8Array;
+    toProtoMsg(message: MsgUpdateClassAdmin): MsgUpdateClassAdminProtoMsg;
 };
 export declare const MsgUpdateClassAdminResponse: {
     encode(_: MsgUpdateClassAdminResponse, writer?: _m0.Writer): _m0.Writer;
@@ -1345,6 +2182,12 @@ export declare const MsgUpdateClassAdminResponse: {
     fromJSON(_: any): MsgUpdateClassAdminResponse;
     toJSON(_: MsgUpdateClassAdminResponse): unknown;
     fromPartial(_: Partial<MsgUpdateClassAdminResponse>): MsgUpdateClassAdminResponse;
+    fromAmino(_: MsgUpdateClassAdminResponseAmino): MsgUpdateClassAdminResponse;
+    toAmino(_: MsgUpdateClassAdminResponse): MsgUpdateClassAdminResponseAmino;
+    fromAminoMsg(object: MsgUpdateClassAdminResponseAminoMsg): MsgUpdateClassAdminResponse;
+    fromProtoMsg(message: MsgUpdateClassAdminResponseProtoMsg): MsgUpdateClassAdminResponse;
+    toProto(message: MsgUpdateClassAdminResponse): Uint8Array;
+    toProtoMsg(message: MsgUpdateClassAdminResponse): MsgUpdateClassAdminResponseProtoMsg;
 };
 export declare const MsgUpdateClassIssuers: {
     encode(message: MsgUpdateClassIssuers, writer?: _m0.Writer): _m0.Writer;
@@ -1352,6 +2195,12 @@ export declare const MsgUpdateClassIssuers: {
     fromJSON(object: any): MsgUpdateClassIssuers;
     toJSON(message: MsgUpdateClassIssuers): unknown;
     fromPartial(object: Partial<MsgUpdateClassIssuers>): MsgUpdateClassIssuers;
+    fromAmino(object: MsgUpdateClassIssuersAmino): MsgUpdateClassIssuers;
+    toAmino(message: MsgUpdateClassIssuers): MsgUpdateClassIssuersAmino;
+    fromAminoMsg(object: MsgUpdateClassIssuersAminoMsg): MsgUpdateClassIssuers;
+    fromProtoMsg(message: MsgUpdateClassIssuersProtoMsg): MsgUpdateClassIssuers;
+    toProto(message: MsgUpdateClassIssuers): Uint8Array;
+    toProtoMsg(message: MsgUpdateClassIssuers): MsgUpdateClassIssuersProtoMsg;
 };
 export declare const MsgUpdateClassIssuersResponse: {
     encode(_: MsgUpdateClassIssuersResponse, writer?: _m0.Writer): _m0.Writer;
@@ -1359,6 +2208,12 @@ export declare const MsgUpdateClassIssuersResponse: {
     fromJSON(_: any): MsgUpdateClassIssuersResponse;
     toJSON(_: MsgUpdateClassIssuersResponse): unknown;
     fromPartial(_: Partial<MsgUpdateClassIssuersResponse>): MsgUpdateClassIssuersResponse;
+    fromAmino(_: MsgUpdateClassIssuersResponseAmino): MsgUpdateClassIssuersResponse;
+    toAmino(_: MsgUpdateClassIssuersResponse): MsgUpdateClassIssuersResponseAmino;
+    fromAminoMsg(object: MsgUpdateClassIssuersResponseAminoMsg): MsgUpdateClassIssuersResponse;
+    fromProtoMsg(message: MsgUpdateClassIssuersResponseProtoMsg): MsgUpdateClassIssuersResponse;
+    toProto(message: MsgUpdateClassIssuersResponse): Uint8Array;
+    toProtoMsg(message: MsgUpdateClassIssuersResponse): MsgUpdateClassIssuersResponseProtoMsg;
 };
 export declare const MsgUpdateClassMetadata: {
     encode(message: MsgUpdateClassMetadata, writer?: _m0.Writer): _m0.Writer;
@@ -1366,6 +2221,12 @@ export declare const MsgUpdateClassMetadata: {
     fromJSON(object: any): MsgUpdateClassMetadata;
     toJSON(message: MsgUpdateClassMetadata): unknown;
     fromPartial(object: Partial<MsgUpdateClassMetadata>): MsgUpdateClassMetadata;
+    fromAmino(object: MsgUpdateClassMetadataAmino): MsgUpdateClassMetadata;
+    toAmino(message: MsgUpdateClassMetadata): MsgUpdateClassMetadataAmino;
+    fromAminoMsg(object: MsgUpdateClassMetadataAminoMsg): MsgUpdateClassMetadata;
+    fromProtoMsg(message: MsgUpdateClassMetadataProtoMsg): MsgUpdateClassMetadata;
+    toProto(message: MsgUpdateClassMetadata): Uint8Array;
+    toProtoMsg(message: MsgUpdateClassMetadata): MsgUpdateClassMetadataProtoMsg;
 };
 export declare const MsgUpdateClassMetadataResponse: {
     encode(_: MsgUpdateClassMetadataResponse, writer?: _m0.Writer): _m0.Writer;
@@ -1373,6 +2234,12 @@ export declare const MsgUpdateClassMetadataResponse: {
     fromJSON(_: any): MsgUpdateClassMetadataResponse;
     toJSON(_: MsgUpdateClassMetadataResponse): unknown;
     fromPartial(_: Partial<MsgUpdateClassMetadataResponse>): MsgUpdateClassMetadataResponse;
+    fromAmino(_: MsgUpdateClassMetadataResponseAmino): MsgUpdateClassMetadataResponse;
+    toAmino(_: MsgUpdateClassMetadataResponse): MsgUpdateClassMetadataResponseAmino;
+    fromAminoMsg(object: MsgUpdateClassMetadataResponseAminoMsg): MsgUpdateClassMetadataResponse;
+    fromProtoMsg(message: MsgUpdateClassMetadataResponseProtoMsg): MsgUpdateClassMetadataResponse;
+    toProto(message: MsgUpdateClassMetadataResponse): Uint8Array;
+    toProtoMsg(message: MsgUpdateClassMetadataResponse): MsgUpdateClassMetadataResponseProtoMsg;
 };
 export declare const MsgUpdateProjectAdmin: {
     encode(message: MsgUpdateProjectAdmin, writer?: _m0.Writer): _m0.Writer;
@@ -1380,6 +2247,12 @@ export declare const MsgUpdateProjectAdmin: {
     fromJSON(object: any): MsgUpdateProjectAdmin;
     toJSON(message: MsgUpdateProjectAdmin): unknown;
     fromPartial(object: Partial<MsgUpdateProjectAdmin>): MsgUpdateProjectAdmin;
+    fromAmino(object: MsgUpdateProjectAdminAmino): MsgUpdateProjectAdmin;
+    toAmino(message: MsgUpdateProjectAdmin): MsgUpdateProjectAdminAmino;
+    fromAminoMsg(object: MsgUpdateProjectAdminAminoMsg): MsgUpdateProjectAdmin;
+    fromProtoMsg(message: MsgUpdateProjectAdminProtoMsg): MsgUpdateProjectAdmin;
+    toProto(message: MsgUpdateProjectAdmin): Uint8Array;
+    toProtoMsg(message: MsgUpdateProjectAdmin): MsgUpdateProjectAdminProtoMsg;
 };
 export declare const MsgUpdateProjectAdminResponse: {
     encode(_: MsgUpdateProjectAdminResponse, writer?: _m0.Writer): _m0.Writer;
@@ -1387,6 +2260,12 @@ export declare const MsgUpdateProjectAdminResponse: {
     fromJSON(_: any): MsgUpdateProjectAdminResponse;
     toJSON(_: MsgUpdateProjectAdminResponse): unknown;
     fromPartial(_: Partial<MsgUpdateProjectAdminResponse>): MsgUpdateProjectAdminResponse;
+    fromAmino(_: MsgUpdateProjectAdminResponseAmino): MsgUpdateProjectAdminResponse;
+    toAmino(_: MsgUpdateProjectAdminResponse): MsgUpdateProjectAdminResponseAmino;
+    fromAminoMsg(object: MsgUpdateProjectAdminResponseAminoMsg): MsgUpdateProjectAdminResponse;
+    fromProtoMsg(message: MsgUpdateProjectAdminResponseProtoMsg): MsgUpdateProjectAdminResponse;
+    toProto(message: MsgUpdateProjectAdminResponse): Uint8Array;
+    toProtoMsg(message: MsgUpdateProjectAdminResponse): MsgUpdateProjectAdminResponseProtoMsg;
 };
 export declare const MsgUpdateProjectMetadata: {
     encode(message: MsgUpdateProjectMetadata, writer?: _m0.Writer): _m0.Writer;
@@ -1394,6 +2273,12 @@ export declare const MsgUpdateProjectMetadata: {
     fromJSON(object: any): MsgUpdateProjectMetadata;
     toJSON(message: MsgUpdateProjectMetadata): unknown;
     fromPartial(object: Partial<MsgUpdateProjectMetadata>): MsgUpdateProjectMetadata;
+    fromAmino(object: MsgUpdateProjectMetadataAmino): MsgUpdateProjectMetadata;
+    toAmino(message: MsgUpdateProjectMetadata): MsgUpdateProjectMetadataAmino;
+    fromAminoMsg(object: MsgUpdateProjectMetadataAminoMsg): MsgUpdateProjectMetadata;
+    fromProtoMsg(message: MsgUpdateProjectMetadataProtoMsg): MsgUpdateProjectMetadata;
+    toProto(message: MsgUpdateProjectMetadata): Uint8Array;
+    toProtoMsg(message: MsgUpdateProjectMetadata): MsgUpdateProjectMetadataProtoMsg;
 };
 export declare const MsgUpdateProjectMetadataResponse: {
     encode(_: MsgUpdateProjectMetadataResponse, writer?: _m0.Writer): _m0.Writer;
@@ -1401,6 +2286,12 @@ export declare const MsgUpdateProjectMetadataResponse: {
     fromJSON(_: any): MsgUpdateProjectMetadataResponse;
     toJSON(_: MsgUpdateProjectMetadataResponse): unknown;
     fromPartial(_: Partial<MsgUpdateProjectMetadataResponse>): MsgUpdateProjectMetadataResponse;
+    fromAmino(_: MsgUpdateProjectMetadataResponseAmino): MsgUpdateProjectMetadataResponse;
+    toAmino(_: MsgUpdateProjectMetadataResponse): MsgUpdateProjectMetadataResponseAmino;
+    fromAminoMsg(object: MsgUpdateProjectMetadataResponseAminoMsg): MsgUpdateProjectMetadataResponse;
+    fromProtoMsg(message: MsgUpdateProjectMetadataResponseProtoMsg): MsgUpdateProjectMetadataResponse;
+    toProto(message: MsgUpdateProjectMetadataResponse): Uint8Array;
+    toProtoMsg(message: MsgUpdateProjectMetadataResponse): MsgUpdateProjectMetadataResponseProtoMsg;
 };
 export declare const MsgBridge: {
     encode(message: MsgBridge, writer?: _m0.Writer): _m0.Writer;
@@ -1408,6 +2299,12 @@ export declare const MsgBridge: {
     fromJSON(object: any): MsgBridge;
     toJSON(message: MsgBridge): unknown;
     fromPartial(object: Partial<MsgBridge>): MsgBridge;
+    fromAmino(object: MsgBridgeAmino): MsgBridge;
+    toAmino(message: MsgBridge): MsgBridgeAmino;
+    fromAminoMsg(object: MsgBridgeAminoMsg): MsgBridge;
+    fromProtoMsg(message: MsgBridgeProtoMsg): MsgBridge;
+    toProto(message: MsgBridge): Uint8Array;
+    toProtoMsg(message: MsgBridge): MsgBridgeProtoMsg;
 };
 export declare const MsgUpdateBatchMetadata: {
     encode(message: MsgUpdateBatchMetadata, writer?: _m0.Writer): _m0.Writer;
@@ -1415,6 +2312,12 @@ export declare const MsgUpdateBatchMetadata: {
     fromJSON(object: any): MsgUpdateBatchMetadata;
     toJSON(message: MsgUpdateBatchMetadata): unknown;
     fromPartial(object: Partial<MsgUpdateBatchMetadata>): MsgUpdateBatchMetadata;
+    fromAmino(object: MsgUpdateBatchMetadataAmino): MsgUpdateBatchMetadata;
+    toAmino(message: MsgUpdateBatchMetadata): MsgUpdateBatchMetadataAmino;
+    fromAminoMsg(object: MsgUpdateBatchMetadataAminoMsg): MsgUpdateBatchMetadata;
+    fromProtoMsg(message: MsgUpdateBatchMetadataProtoMsg): MsgUpdateBatchMetadata;
+    toProto(message: MsgUpdateBatchMetadata): Uint8Array;
+    toProtoMsg(message: MsgUpdateBatchMetadata): MsgUpdateBatchMetadataProtoMsg;
 };
 export declare const MsgUpdateBatchMetadataResponse: {
     encode(_: MsgUpdateBatchMetadataResponse, writer?: _m0.Writer): _m0.Writer;
@@ -1422,6 +2325,12 @@ export declare const MsgUpdateBatchMetadataResponse: {
     fromJSON(_: any): MsgUpdateBatchMetadataResponse;
     toJSON(_: MsgUpdateBatchMetadataResponse): unknown;
     fromPartial(_: Partial<MsgUpdateBatchMetadataResponse>): MsgUpdateBatchMetadataResponse;
+    fromAmino(_: MsgUpdateBatchMetadataResponseAmino): MsgUpdateBatchMetadataResponse;
+    toAmino(_: MsgUpdateBatchMetadataResponse): MsgUpdateBatchMetadataResponseAmino;
+    fromAminoMsg(object: MsgUpdateBatchMetadataResponseAminoMsg): MsgUpdateBatchMetadataResponse;
+    fromProtoMsg(message: MsgUpdateBatchMetadataResponseProtoMsg): MsgUpdateBatchMetadataResponse;
+    toProto(message: MsgUpdateBatchMetadataResponse): Uint8Array;
+    toProtoMsg(message: MsgUpdateBatchMetadataResponse): MsgUpdateBatchMetadataResponseProtoMsg;
 };
 export declare const MsgBridgeResponse: {
     encode(_: MsgBridgeResponse, writer?: _m0.Writer): _m0.Writer;
@@ -1429,6 +2338,12 @@ export declare const MsgBridgeResponse: {
     fromJSON(_: any): MsgBridgeResponse;
     toJSON(_: MsgBridgeResponse): unknown;
     fromPartial(_: Partial<MsgBridgeResponse>): MsgBridgeResponse;
+    fromAmino(_: MsgBridgeResponseAmino): MsgBridgeResponse;
+    toAmino(_: MsgBridgeResponse): MsgBridgeResponseAmino;
+    fromAminoMsg(object: MsgBridgeResponseAminoMsg): MsgBridgeResponse;
+    fromProtoMsg(message: MsgBridgeResponseProtoMsg): MsgBridgeResponse;
+    toProto(message: MsgBridgeResponse): Uint8Array;
+    toProtoMsg(message: MsgBridgeResponse): MsgBridgeResponseProtoMsg;
 };
 export declare const MsgBridgeReceive: {
     encode(message: MsgBridgeReceive, writer?: _m0.Writer): _m0.Writer;
@@ -1436,6 +2351,12 @@ export declare const MsgBridgeReceive: {
     fromJSON(object: any): MsgBridgeReceive;
     toJSON(message: MsgBridgeReceive): unknown;
     fromPartial(object: Partial<MsgBridgeReceive>): MsgBridgeReceive;
+    fromAmino(object: MsgBridgeReceiveAmino): MsgBridgeReceive;
+    toAmino(message: MsgBridgeReceive): MsgBridgeReceiveAmino;
+    fromAminoMsg(object: MsgBridgeReceiveAminoMsg): MsgBridgeReceive;
+    fromProtoMsg(message: MsgBridgeReceiveProtoMsg): MsgBridgeReceive;
+    toProto(message: MsgBridgeReceive): Uint8Array;
+    toProtoMsg(message: MsgBridgeReceive): MsgBridgeReceiveProtoMsg;
 };
 export declare const MsgBridgeReceive_Batch: {
     encode(message: MsgBridgeReceive_Batch, writer?: _m0.Writer): _m0.Writer;
@@ -1443,6 +2364,12 @@ export declare const MsgBridgeReceive_Batch: {
     fromJSON(object: any): MsgBridgeReceive_Batch;
     toJSON(message: MsgBridgeReceive_Batch): unknown;
     fromPartial(object: Partial<MsgBridgeReceive_Batch>): MsgBridgeReceive_Batch;
+    fromAmino(object: MsgBridgeReceive_BatchAmino): MsgBridgeReceive_Batch;
+    toAmino(message: MsgBridgeReceive_Batch): MsgBridgeReceive_BatchAmino;
+    fromAminoMsg(object: MsgBridgeReceive_BatchAminoMsg): MsgBridgeReceive_Batch;
+    fromProtoMsg(message: MsgBridgeReceive_BatchProtoMsg): MsgBridgeReceive_Batch;
+    toProto(message: MsgBridgeReceive_Batch): Uint8Array;
+    toProtoMsg(message: MsgBridgeReceive_Batch): MsgBridgeReceive_BatchProtoMsg;
 };
 export declare const MsgBridgeReceive_Project: {
     encode(message: MsgBridgeReceive_Project, writer?: _m0.Writer): _m0.Writer;
@@ -1450,6 +2377,12 @@ export declare const MsgBridgeReceive_Project: {
     fromJSON(object: any): MsgBridgeReceive_Project;
     toJSON(message: MsgBridgeReceive_Project): unknown;
     fromPartial(object: Partial<MsgBridgeReceive_Project>): MsgBridgeReceive_Project;
+    fromAmino(object: MsgBridgeReceive_ProjectAmino): MsgBridgeReceive_Project;
+    toAmino(message: MsgBridgeReceive_Project): MsgBridgeReceive_ProjectAmino;
+    fromAminoMsg(object: MsgBridgeReceive_ProjectAminoMsg): MsgBridgeReceive_Project;
+    fromProtoMsg(message: MsgBridgeReceive_ProjectProtoMsg): MsgBridgeReceive_Project;
+    toProto(message: MsgBridgeReceive_Project): Uint8Array;
+    toProtoMsg(message: MsgBridgeReceive_Project): MsgBridgeReceive_ProjectProtoMsg;
 };
 export declare const MsgBridgeReceiveResponse: {
     encode(message: MsgBridgeReceiveResponse, writer?: _m0.Writer): _m0.Writer;
@@ -1457,6 +2390,12 @@ export declare const MsgBridgeReceiveResponse: {
     fromJSON(object: any): MsgBridgeReceiveResponse;
     toJSON(message: MsgBridgeReceiveResponse): unknown;
     fromPartial(object: Partial<MsgBridgeReceiveResponse>): MsgBridgeReceiveResponse;
+    fromAmino(object: MsgBridgeReceiveResponseAmino): MsgBridgeReceiveResponse;
+    toAmino(message: MsgBridgeReceiveResponse): MsgBridgeReceiveResponseAmino;
+    fromAminoMsg(object: MsgBridgeReceiveResponseAminoMsg): MsgBridgeReceiveResponse;
+    fromProtoMsg(message: MsgBridgeReceiveResponseProtoMsg): MsgBridgeReceiveResponse;
+    toProto(message: MsgBridgeReceiveResponse): Uint8Array;
+    toProtoMsg(message: MsgBridgeReceiveResponse): MsgBridgeReceiveResponseProtoMsg;
 };
 export declare const MsgAddClassCreator: {
     encode(message: MsgAddClassCreator, writer?: _m0.Writer): _m0.Writer;
@@ -1464,6 +2403,12 @@ export declare const MsgAddClassCreator: {
     fromJSON(object: any): MsgAddClassCreator;
     toJSON(message: MsgAddClassCreator): unknown;
     fromPartial(object: Partial<MsgAddClassCreator>): MsgAddClassCreator;
+    fromAmino(object: MsgAddClassCreatorAmino): MsgAddClassCreator;
+    toAmino(message: MsgAddClassCreator): MsgAddClassCreatorAmino;
+    fromAminoMsg(object: MsgAddClassCreatorAminoMsg): MsgAddClassCreator;
+    fromProtoMsg(message: MsgAddClassCreatorProtoMsg): MsgAddClassCreator;
+    toProto(message: MsgAddClassCreator): Uint8Array;
+    toProtoMsg(message: MsgAddClassCreator): MsgAddClassCreatorProtoMsg;
 };
 export declare const MsgAddClassCreatorResponse: {
     encode(_: MsgAddClassCreatorResponse, writer?: _m0.Writer): _m0.Writer;
@@ -1471,6 +2416,12 @@ export declare const MsgAddClassCreatorResponse: {
     fromJSON(_: any): MsgAddClassCreatorResponse;
     toJSON(_: MsgAddClassCreatorResponse): unknown;
     fromPartial(_: Partial<MsgAddClassCreatorResponse>): MsgAddClassCreatorResponse;
+    fromAmino(_: MsgAddClassCreatorResponseAmino): MsgAddClassCreatorResponse;
+    toAmino(_: MsgAddClassCreatorResponse): MsgAddClassCreatorResponseAmino;
+    fromAminoMsg(object: MsgAddClassCreatorResponseAminoMsg): MsgAddClassCreatorResponse;
+    fromProtoMsg(message: MsgAddClassCreatorResponseProtoMsg): MsgAddClassCreatorResponse;
+    toProto(message: MsgAddClassCreatorResponse): Uint8Array;
+    toProtoMsg(message: MsgAddClassCreatorResponse): MsgAddClassCreatorResponseProtoMsg;
 };
 export declare const MsgSetClassCreatorAllowlist: {
     encode(message: MsgSetClassCreatorAllowlist, writer?: _m0.Writer): _m0.Writer;
@@ -1478,6 +2429,12 @@ export declare const MsgSetClassCreatorAllowlist: {
     fromJSON(object: any): MsgSetClassCreatorAllowlist;
     toJSON(message: MsgSetClassCreatorAllowlist): unknown;
     fromPartial(object: Partial<MsgSetClassCreatorAllowlist>): MsgSetClassCreatorAllowlist;
+    fromAmino(object: MsgSetClassCreatorAllowlistAmino): MsgSetClassCreatorAllowlist;
+    toAmino(message: MsgSetClassCreatorAllowlist): MsgSetClassCreatorAllowlistAmino;
+    fromAminoMsg(object: MsgSetClassCreatorAllowlistAminoMsg): MsgSetClassCreatorAllowlist;
+    fromProtoMsg(message: MsgSetClassCreatorAllowlistProtoMsg): MsgSetClassCreatorAllowlist;
+    toProto(message: MsgSetClassCreatorAllowlist): Uint8Array;
+    toProtoMsg(message: MsgSetClassCreatorAllowlist): MsgSetClassCreatorAllowlistProtoMsg;
 };
 export declare const MsgSetClassCreatorAllowlistResponse: {
     encode(_: MsgSetClassCreatorAllowlistResponse, writer?: _m0.Writer): _m0.Writer;
@@ -1485,6 +2442,12 @@ export declare const MsgSetClassCreatorAllowlistResponse: {
     fromJSON(_: any): MsgSetClassCreatorAllowlistResponse;
     toJSON(_: MsgSetClassCreatorAllowlistResponse): unknown;
     fromPartial(_: Partial<MsgSetClassCreatorAllowlistResponse>): MsgSetClassCreatorAllowlistResponse;
+    fromAmino(_: MsgSetClassCreatorAllowlistResponseAmino): MsgSetClassCreatorAllowlistResponse;
+    toAmino(_: MsgSetClassCreatorAllowlistResponse): MsgSetClassCreatorAllowlistResponseAmino;
+    fromAminoMsg(object: MsgSetClassCreatorAllowlistResponseAminoMsg): MsgSetClassCreatorAllowlistResponse;
+    fromProtoMsg(message: MsgSetClassCreatorAllowlistResponseProtoMsg): MsgSetClassCreatorAllowlistResponse;
+    toProto(message: MsgSetClassCreatorAllowlistResponse): Uint8Array;
+    toProtoMsg(message: MsgSetClassCreatorAllowlistResponse): MsgSetClassCreatorAllowlistResponseProtoMsg;
 };
 export declare const MsgRemoveClassCreator: {
     encode(message: MsgRemoveClassCreator, writer?: _m0.Writer): _m0.Writer;
@@ -1492,6 +2455,12 @@ export declare const MsgRemoveClassCreator: {
     fromJSON(object: any): MsgRemoveClassCreator;
     toJSON(message: MsgRemoveClassCreator): unknown;
     fromPartial(object: Partial<MsgRemoveClassCreator>): MsgRemoveClassCreator;
+    fromAmino(object: MsgRemoveClassCreatorAmino): MsgRemoveClassCreator;
+    toAmino(message: MsgRemoveClassCreator): MsgRemoveClassCreatorAmino;
+    fromAminoMsg(object: MsgRemoveClassCreatorAminoMsg): MsgRemoveClassCreator;
+    fromProtoMsg(message: MsgRemoveClassCreatorProtoMsg): MsgRemoveClassCreator;
+    toProto(message: MsgRemoveClassCreator): Uint8Array;
+    toProtoMsg(message: MsgRemoveClassCreator): MsgRemoveClassCreatorProtoMsg;
 };
 export declare const MsgRemoveClassCreatorResponse: {
     encode(_: MsgRemoveClassCreatorResponse, writer?: _m0.Writer): _m0.Writer;
@@ -1499,6 +2468,12 @@ export declare const MsgRemoveClassCreatorResponse: {
     fromJSON(_: any): MsgRemoveClassCreatorResponse;
     toJSON(_: MsgRemoveClassCreatorResponse): unknown;
     fromPartial(_: Partial<MsgRemoveClassCreatorResponse>): MsgRemoveClassCreatorResponse;
+    fromAmino(_: MsgRemoveClassCreatorResponseAmino): MsgRemoveClassCreatorResponse;
+    toAmino(_: MsgRemoveClassCreatorResponse): MsgRemoveClassCreatorResponseAmino;
+    fromAminoMsg(object: MsgRemoveClassCreatorResponseAminoMsg): MsgRemoveClassCreatorResponse;
+    fromProtoMsg(message: MsgRemoveClassCreatorResponseProtoMsg): MsgRemoveClassCreatorResponse;
+    toProto(message: MsgRemoveClassCreatorResponse): Uint8Array;
+    toProtoMsg(message: MsgRemoveClassCreatorResponse): MsgRemoveClassCreatorResponseProtoMsg;
 };
 export declare const MsgUpdateClassFee: {
     encode(message: MsgUpdateClassFee, writer?: _m0.Writer): _m0.Writer;
@@ -1506,6 +2481,12 @@ export declare const MsgUpdateClassFee: {
     fromJSON(object: any): MsgUpdateClassFee;
     toJSON(message: MsgUpdateClassFee): unknown;
     fromPartial(object: Partial<MsgUpdateClassFee>): MsgUpdateClassFee;
+    fromAmino(object: MsgUpdateClassFeeAmino): MsgUpdateClassFee;
+    toAmino(message: MsgUpdateClassFee): MsgUpdateClassFeeAmino;
+    fromAminoMsg(object: MsgUpdateClassFeeAminoMsg): MsgUpdateClassFee;
+    fromProtoMsg(message: MsgUpdateClassFeeProtoMsg): MsgUpdateClassFee;
+    toProto(message: MsgUpdateClassFee): Uint8Array;
+    toProtoMsg(message: MsgUpdateClassFee): MsgUpdateClassFeeProtoMsg;
 };
 export declare const MsgUpdateClassFeeResponse: {
     encode(_: MsgUpdateClassFeeResponse, writer?: _m0.Writer): _m0.Writer;
@@ -1513,6 +2494,12 @@ export declare const MsgUpdateClassFeeResponse: {
     fromJSON(_: any): MsgUpdateClassFeeResponse;
     toJSON(_: MsgUpdateClassFeeResponse): unknown;
     fromPartial(_: Partial<MsgUpdateClassFeeResponse>): MsgUpdateClassFeeResponse;
+    fromAmino(_: MsgUpdateClassFeeResponseAmino): MsgUpdateClassFeeResponse;
+    toAmino(_: MsgUpdateClassFeeResponse): MsgUpdateClassFeeResponseAmino;
+    fromAminoMsg(object: MsgUpdateClassFeeResponseAminoMsg): MsgUpdateClassFeeResponse;
+    fromProtoMsg(message: MsgUpdateClassFeeResponseProtoMsg): MsgUpdateClassFeeResponse;
+    toProto(message: MsgUpdateClassFeeResponse): Uint8Array;
+    toProtoMsg(message: MsgUpdateClassFeeResponse): MsgUpdateClassFeeResponseProtoMsg;
 };
 export declare const MsgAddAllowedBridgeChain: {
     encode(message: MsgAddAllowedBridgeChain, writer?: _m0.Writer): _m0.Writer;
@@ -1520,6 +2507,12 @@ export declare const MsgAddAllowedBridgeChain: {
     fromJSON(object: any): MsgAddAllowedBridgeChain;
     toJSON(message: MsgAddAllowedBridgeChain): unknown;
     fromPartial(object: Partial<MsgAddAllowedBridgeChain>): MsgAddAllowedBridgeChain;
+    fromAmino(object: MsgAddAllowedBridgeChainAmino): MsgAddAllowedBridgeChain;
+    toAmino(message: MsgAddAllowedBridgeChain): MsgAddAllowedBridgeChainAmino;
+    fromAminoMsg(object: MsgAddAllowedBridgeChainAminoMsg): MsgAddAllowedBridgeChain;
+    fromProtoMsg(message: MsgAddAllowedBridgeChainProtoMsg): MsgAddAllowedBridgeChain;
+    toProto(message: MsgAddAllowedBridgeChain): Uint8Array;
+    toProtoMsg(message: MsgAddAllowedBridgeChain): MsgAddAllowedBridgeChainProtoMsg;
 };
 export declare const MsgAddAllowedBridgeChainResponse: {
     encode(_: MsgAddAllowedBridgeChainResponse, writer?: _m0.Writer): _m0.Writer;
@@ -1527,6 +2520,12 @@ export declare const MsgAddAllowedBridgeChainResponse: {
     fromJSON(_: any): MsgAddAllowedBridgeChainResponse;
     toJSON(_: MsgAddAllowedBridgeChainResponse): unknown;
     fromPartial(_: Partial<MsgAddAllowedBridgeChainResponse>): MsgAddAllowedBridgeChainResponse;
+    fromAmino(_: MsgAddAllowedBridgeChainResponseAmino): MsgAddAllowedBridgeChainResponse;
+    toAmino(_: MsgAddAllowedBridgeChainResponse): MsgAddAllowedBridgeChainResponseAmino;
+    fromAminoMsg(object: MsgAddAllowedBridgeChainResponseAminoMsg): MsgAddAllowedBridgeChainResponse;
+    fromProtoMsg(message: MsgAddAllowedBridgeChainResponseProtoMsg): MsgAddAllowedBridgeChainResponse;
+    toProto(message: MsgAddAllowedBridgeChainResponse): Uint8Array;
+    toProtoMsg(message: MsgAddAllowedBridgeChainResponse): MsgAddAllowedBridgeChainResponseProtoMsg;
 };
 export declare const MsgRemoveAllowedBridgeChain: {
     encode(message: MsgRemoveAllowedBridgeChain, writer?: _m0.Writer): _m0.Writer;
@@ -1534,6 +2533,12 @@ export declare const MsgRemoveAllowedBridgeChain: {
     fromJSON(object: any): MsgRemoveAllowedBridgeChain;
     toJSON(message: MsgRemoveAllowedBridgeChain): unknown;
     fromPartial(object: Partial<MsgRemoveAllowedBridgeChain>): MsgRemoveAllowedBridgeChain;
+    fromAmino(object: MsgRemoveAllowedBridgeChainAmino): MsgRemoveAllowedBridgeChain;
+    toAmino(message: MsgRemoveAllowedBridgeChain): MsgRemoveAllowedBridgeChainAmino;
+    fromAminoMsg(object: MsgRemoveAllowedBridgeChainAminoMsg): MsgRemoveAllowedBridgeChain;
+    fromProtoMsg(message: MsgRemoveAllowedBridgeChainProtoMsg): MsgRemoveAllowedBridgeChain;
+    toProto(message: MsgRemoveAllowedBridgeChain): Uint8Array;
+    toProtoMsg(message: MsgRemoveAllowedBridgeChain): MsgRemoveAllowedBridgeChainProtoMsg;
 };
 export declare const MsgRemoveAllowedBridgeChainResponse: {
     encode(_: MsgRemoveAllowedBridgeChainResponse, writer?: _m0.Writer): _m0.Writer;
@@ -1541,4 +2546,10 @@ export declare const MsgRemoveAllowedBridgeChainResponse: {
     fromJSON(_: any): MsgRemoveAllowedBridgeChainResponse;
     toJSON(_: MsgRemoveAllowedBridgeChainResponse): unknown;
     fromPartial(_: Partial<MsgRemoveAllowedBridgeChainResponse>): MsgRemoveAllowedBridgeChainResponse;
+    fromAmino(_: MsgRemoveAllowedBridgeChainResponseAmino): MsgRemoveAllowedBridgeChainResponse;
+    toAmino(_: MsgRemoveAllowedBridgeChainResponse): MsgRemoveAllowedBridgeChainResponseAmino;
+    fromAminoMsg(object: MsgRemoveAllowedBridgeChainResponseAminoMsg): MsgRemoveAllowedBridgeChainResponse;
+    fromProtoMsg(message: MsgRemoveAllowedBridgeChainResponseProtoMsg): MsgRemoveAllowedBridgeChainResponse;
+    toProto(message: MsgRemoveAllowedBridgeChainResponse): Uint8Array;
+    toProtoMsg(message: MsgRemoveAllowedBridgeChainResponse): MsgRemoveAllowedBridgeChainResponseProtoMsg;
 };

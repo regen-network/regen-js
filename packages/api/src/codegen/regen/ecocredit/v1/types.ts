@@ -1,5 +1,5 @@
-import { Coin, CoinSDKType } from "../../../cosmos/base/v1beta1/coin";
-import { CreditType, CreditTypeSDKType } from "./state";
+import { Coin, CoinAmino, CoinSDKType } from "../../../cosmos/base/v1beta1/coin";
+import { CreditType, CreditTypeAmino, CreditTypeSDKType } from "./state";
 import * as _m0 from "protobufjs/minimal";
 import { isSet } from "../../../helpers";
 /**
@@ -53,25 +53,29 @@ export interface Params {
 
   allowedBridgeChains: string[];
 }
+export interface ParamsProtoMsg {
+  typeUrl: "/regen.ecocredit.v1.Params";
+  value: Uint8Array;
+}
 /**
  * Params defines the updatable global parameters of the ecocredit module for
  * use with the x/params module.
  */
 
-export interface ParamsSDKType {
+export interface ParamsAmino {
   /**
    * credit_class_fee is a list of credit class creation fees accepted when
    * creating a credit class. Any fee listed is accepted and charged to the
    * credit class creator when creating a credit class.
    */
-  credit_class_fee: CoinSDKType[];
+  credit_class_fee: CoinAmino[];
   /**
    * basket_fee is a list of basket creation fees accepted when creating a
    * basket. Any fee listed is accepted and charged to the basket creator when
    * creating a basket.
    */
 
-  basket_fee: CoinSDKType[];
+  basket_fee: CoinAmino[];
   /**
    * allowed_class_creators is an allowlist defining the addresses with the
    * required permissions to create credit classes when allowlist_enabled is set
@@ -94,7 +98,7 @@ export interface ParamsSDKType {
    * Since Revision 2
    */
 
-  allowed_denoms: AllowedDenomSDKType[];
+  allowed_denoms: AllowedDenomAmino[];
   /**
    * AllowedBridgeChains is a list of chain names that are allowed to be used in
    * bridge operations.
@@ -102,6 +106,23 @@ export interface ParamsSDKType {
    * Since Revision 2
    */
 
+  allowed_bridge_chains: string[];
+}
+export interface ParamsAminoMsg {
+  type: "/regen.ecocredit.v1.Params";
+  value: ParamsAmino;
+}
+/**
+ * Params defines the updatable global parameters of the ecocredit module for
+ * use with the x/params module.
+ */
+
+export interface ParamsSDKType {
+  credit_class_fee: CoinSDKType[];
+  basket_fee: CoinSDKType[];
+  allowed_class_creators: string[];
+  allowlist_enabled: boolean;
+  allowed_denoms: AllowedDenomSDKType[];
   allowed_bridge_chains: string[];
 }
 /** Credits represents a simple structure for credits. */
@@ -113,13 +134,27 @@ export interface Credits {
 
   amount: string;
 }
+export interface CreditsProtoMsg {
+  typeUrl: "/regen.ecocredit.v1.Credits";
+  value: Uint8Array;
+}
 /** Credits represents a simple structure for credits. */
 
-export interface CreditsSDKType {
+export interface CreditsAmino {
   /** batch_denom is the denom of the credit batch. */
   batch_denom: string;
   /** amount is the amount of credits. */
 
+  amount: string;
+}
+export interface CreditsAminoMsg {
+  type: "/regen.ecocredit.v1.Credits";
+  value: CreditsAmino;
+}
+/** Credits represents a simple structure for credits. */
+
+export interface CreditsSDKType {
+  batch_denom: string;
   amount: string;
 }
 /** BatchIssuance represents a simple structure for a credit batch issuance. */
@@ -163,9 +198,13 @@ export interface BatchIssuance {
 
   retirementReason: string;
 }
+export interface BatchIssuanceProtoMsg {
+  typeUrl: "/regen.ecocredit.v1.BatchIssuance";
+  value: Uint8Array;
+}
 /** BatchIssuance represents a simple structure for a credit batch issuance. */
 
-export interface BatchIssuanceSDKType {
+export interface BatchIssuanceAmino {
   /** recipient is the address of the account receiving the issued credits. */
   recipient: string;
   /**
@@ -204,6 +243,19 @@ export interface BatchIssuanceSDKType {
 
   retirement_reason: string;
 }
+export interface BatchIssuanceAminoMsg {
+  type: "/regen.ecocredit.v1.BatchIssuance";
+  value: BatchIssuanceAmino;
+}
+/** BatchIssuance represents a simple structure for a credit batch issuance. */
+
+export interface BatchIssuanceSDKType {
+  recipient: string;
+  tradable_amount: string;
+  retired_amount: string;
+  retirement_jurisdiction: string;
+  retirement_reason: string;
+}
 /**
  * OriginTx is the transaction from another chain or registry that triggered
  * the minting of credits.
@@ -237,12 +289,16 @@ export interface OriginTx {
 
   note: string;
 }
+export interface OriginTxProtoMsg {
+  typeUrl: "/regen.ecocredit.v1.OriginTx";
+  value: Uint8Array;
+}
 /**
  * OriginTx is the transaction from another chain or registry that triggered
  * the minting of credits.
  */
 
-export interface OriginTxSDKType {
+export interface OriginTxAmino {
   /**
    * id is the transaction ID of an originating transaction or operation based
    * on a type (i.e. transaction ID, serial number).
@@ -270,6 +326,21 @@ export interface OriginTxSDKType {
 
   note: string;
 }
+export interface OriginTxAminoMsg {
+  type: "/regen.ecocredit.v1.OriginTx";
+  value: OriginTxAmino;
+}
+/**
+ * OriginTx is the transaction from another chain or registry that triggered
+ * the minting of credits.
+ */
+
+export interface OriginTxSDKType {
+  id: string;
+  source: string;
+  contract: string;
+  note: string;
+}
 /**
  * CreditTypeProposal is a gov Content type for adding a credit type.
  * Deprecated (Since Revision 2): This message is no longer used and will be
@@ -289,13 +360,17 @@ export interface CreditTypeProposal {
 
   creditType?: CreditType;
 }
+export interface CreditTypeProposalProtoMsg {
+  typeUrl: "/regen.ecocredit.v1.CreditTypeProposal";
+  value: Uint8Array;
+}
 /**
  * CreditTypeProposal is a gov Content type for adding a credit type.
  * Deprecated (Since Revision 2): This message is no longer used and will be
  * removed in the next version. See MsgAddCreditType.
  */
 
-export interface CreditTypeProposalSDKType {
+export interface CreditTypeProposalAmino {
   /** title is the title of the proposal. */
   title: string;
   /** description is the description of the proposal. */
@@ -306,6 +381,21 @@ export interface CreditTypeProposalSDKType {
    * passes.
    */
 
+  credit_type?: CreditTypeAmino;
+}
+export interface CreditTypeProposalAminoMsg {
+  type: "/regen.ecocredit.v1.CreditTypeProposal";
+  value: CreditTypeProposalAmino;
+}
+/**
+ * CreditTypeProposal is a gov Content type for adding a credit type.
+ * Deprecated (Since Revision 2): This message is no longer used and will be
+ * removed in the next version. See MsgAddCreditType.
+ */
+
+export interface CreditTypeProposalSDKType {
+  title: string;
+  description: string;
   credit_type?: CreditTypeSDKType;
 }
 /**
@@ -334,6 +424,10 @@ export interface AllowedDenom {
 
   exponent: number;
 }
+export interface AllowedDenomProtoMsg {
+  typeUrl: "/regen.ecocredit.v1.AllowedDenom";
+  value: Uint8Array;
+}
 /**
  * AllowedDenom represents the information for an allowed ask denom.
  * 
@@ -343,7 +437,7 @@ export interface AllowedDenom {
  * queries for params but will also be removed in the next version.
  */
 
-export interface AllowedDenomSDKType {
+export interface AllowedDenomAmino {
   /** denom is the bank denom to allow (ex. ibc/GLKHDSG423SGS) */
   bank_denom: string;
   /**
@@ -358,6 +452,24 @@ export interface AllowedDenomSDKType {
    * informational
    */
 
+  exponent: number;
+}
+export interface AllowedDenomAminoMsg {
+  type: "/regen.ecocredit.v1.AllowedDenom";
+  value: AllowedDenomAmino;
+}
+/**
+ * AllowedDenom represents the information for an allowed ask denom.
+ * 
+ * Since Revision 2
+ * 
+ * Deprecated(Since Revision 2): This type was added to support historical
+ * queries for params but will also be removed in the next version.
+ */
+
+export interface AllowedDenomSDKType {
+  bank_denom: string;
+  display_denom: string;
   exponent: number;
 }
 
@@ -501,6 +613,74 @@ export const Params = {
     message.allowedDenoms = object.allowedDenoms?.map(e => AllowedDenom.fromPartial(e)) || [];
     message.allowedBridgeChains = object.allowedBridgeChains?.map(e => e) || [];
     return message;
+  },
+
+  fromAmino(object: ParamsAmino): Params {
+    return {
+      creditClassFee: Array.isArray(object?.credit_class_fee) ? object.credit_class_fee.map((e: any) => Coin.fromAmino(e)) : [],
+      basketFee: Array.isArray(object?.basket_fee) ? object.basket_fee.map((e: any) => Coin.fromAmino(e)) : [],
+      allowedClassCreators: Array.isArray(object?.allowed_class_creators) ? object.allowed_class_creators.map((e: any) => e) : [],
+      allowlistEnabled: object.allowlist_enabled,
+      allowedDenoms: Array.isArray(object?.allowed_denoms) ? object.allowed_denoms.map((e: any) => AllowedDenom.fromAmino(e)) : [],
+      allowedBridgeChains: Array.isArray(object?.allowed_bridge_chains) ? object.allowed_bridge_chains.map((e: any) => e) : []
+    };
+  },
+
+  toAmino(message: Params): ParamsAmino {
+    const obj: any = {};
+
+    if (message.creditClassFee) {
+      obj.credit_class_fee = message.creditClassFee.map(e => e ? Coin.toAmino(e) : undefined);
+    } else {
+      obj.credit_class_fee = [];
+    }
+
+    if (message.basketFee) {
+      obj.basket_fee = message.basketFee.map(e => e ? Coin.toAmino(e) : undefined);
+    } else {
+      obj.basket_fee = [];
+    }
+
+    if (message.allowedClassCreators) {
+      obj.allowed_class_creators = message.allowedClassCreators.map(e => e);
+    } else {
+      obj.allowed_class_creators = [];
+    }
+
+    obj.allowlist_enabled = message.allowlistEnabled;
+
+    if (message.allowedDenoms) {
+      obj.allowed_denoms = message.allowedDenoms.map(e => e ? AllowedDenom.toAmino(e) : undefined);
+    } else {
+      obj.allowed_denoms = [];
+    }
+
+    if (message.allowedBridgeChains) {
+      obj.allowed_bridge_chains = message.allowedBridgeChains.map(e => e);
+    } else {
+      obj.allowed_bridge_chains = [];
+    }
+
+    return obj;
+  },
+
+  fromAminoMsg(object: ParamsAminoMsg): Params {
+    return Params.fromAmino(object.value);
+  },
+
+  fromProtoMsg(message: ParamsProtoMsg): Params {
+    return Params.decode(message.value);
+  },
+
+  toProto(message: Params): Uint8Array {
+    return Params.encode(message).finish();
+  },
+
+  toProtoMsg(message: Params): ParamsProtoMsg {
+    return {
+      typeUrl: "/regen.ecocredit.v1.Params",
+      value: Params.encode(message).finish()
+    };
   }
 
 };
@@ -570,6 +750,39 @@ export const Credits = {
     message.batchDenom = object.batchDenom ?? "";
     message.amount = object.amount ?? "";
     return message;
+  },
+
+  fromAmino(object: CreditsAmino): Credits {
+    return {
+      batchDenom: object.batch_denom,
+      amount: object.amount
+    };
+  },
+
+  toAmino(message: Credits): CreditsAmino {
+    const obj: any = {};
+    obj.batch_denom = message.batchDenom;
+    obj.amount = message.amount;
+    return obj;
+  },
+
+  fromAminoMsg(object: CreditsAminoMsg): Credits {
+    return Credits.fromAmino(object.value);
+  },
+
+  fromProtoMsg(message: CreditsProtoMsg): Credits {
+    return Credits.decode(message.value);
+  },
+
+  toProto(message: Credits): Uint8Array {
+    return Credits.encode(message).finish();
+  },
+
+  toProtoMsg(message: Credits): CreditsProtoMsg {
+    return {
+      typeUrl: "/regen.ecocredit.v1.Credits",
+      value: Credits.encode(message).finish()
+    };
   }
 
 };
@@ -675,6 +888,45 @@ export const BatchIssuance = {
     message.retirementJurisdiction = object.retirementJurisdiction ?? "";
     message.retirementReason = object.retirementReason ?? "";
     return message;
+  },
+
+  fromAmino(object: BatchIssuanceAmino): BatchIssuance {
+    return {
+      recipient: object.recipient,
+      tradableAmount: object.tradable_amount,
+      retiredAmount: object.retired_amount,
+      retirementJurisdiction: object.retirement_jurisdiction,
+      retirementReason: object.retirement_reason
+    };
+  },
+
+  toAmino(message: BatchIssuance): BatchIssuanceAmino {
+    const obj: any = {};
+    obj.recipient = message.recipient;
+    obj.tradable_amount = message.tradableAmount;
+    obj.retired_amount = message.retiredAmount;
+    obj.retirement_jurisdiction = message.retirementJurisdiction;
+    obj.retirement_reason = message.retirementReason;
+    return obj;
+  },
+
+  fromAminoMsg(object: BatchIssuanceAminoMsg): BatchIssuance {
+    return BatchIssuance.fromAmino(object.value);
+  },
+
+  fromProtoMsg(message: BatchIssuanceProtoMsg): BatchIssuance {
+    return BatchIssuance.decode(message.value);
+  },
+
+  toProto(message: BatchIssuance): Uint8Array {
+    return BatchIssuance.encode(message).finish();
+  },
+
+  toProtoMsg(message: BatchIssuance): BatchIssuanceProtoMsg {
+    return {
+      typeUrl: "/regen.ecocredit.v1.BatchIssuance",
+      value: BatchIssuance.encode(message).finish()
+    };
   }
 
 };
@@ -768,6 +1020,43 @@ export const OriginTx = {
     message.contract = object.contract ?? "";
     message.note = object.note ?? "";
     return message;
+  },
+
+  fromAmino(object: OriginTxAmino): OriginTx {
+    return {
+      id: object.id,
+      source: object.source,
+      contract: object.contract,
+      note: object.note
+    };
+  },
+
+  toAmino(message: OriginTx): OriginTxAmino {
+    const obj: any = {};
+    obj.id = message.id;
+    obj.source = message.source;
+    obj.contract = message.contract;
+    obj.note = message.note;
+    return obj;
+  },
+
+  fromAminoMsg(object: OriginTxAminoMsg): OriginTx {
+    return OriginTx.fromAmino(object.value);
+  },
+
+  fromProtoMsg(message: OriginTxProtoMsg): OriginTx {
+    return OriginTx.decode(message.value);
+  },
+
+  toProto(message: OriginTx): Uint8Array {
+    return OriginTx.encode(message).finish();
+  },
+
+  toProtoMsg(message: OriginTx): OriginTxProtoMsg {
+    return {
+      typeUrl: "/regen.ecocredit.v1.OriginTx",
+      value: OriginTx.encode(message).finish()
+    };
   }
 
 };
@@ -849,6 +1138,41 @@ export const CreditTypeProposal = {
     message.description = object.description ?? "";
     message.creditType = object.creditType !== undefined && object.creditType !== null ? CreditType.fromPartial(object.creditType) : undefined;
     return message;
+  },
+
+  fromAmino(object: CreditTypeProposalAmino): CreditTypeProposal {
+    return {
+      title: object.title,
+      description: object.description,
+      creditType: object?.credit_type ? CreditType.fromAmino(object.credit_type) : undefined
+    };
+  },
+
+  toAmino(message: CreditTypeProposal): CreditTypeProposalAmino {
+    const obj: any = {};
+    obj.title = message.title;
+    obj.description = message.description;
+    obj.credit_type = message.creditType ? CreditType.toAmino(message.creditType) : undefined;
+    return obj;
+  },
+
+  fromAminoMsg(object: CreditTypeProposalAminoMsg): CreditTypeProposal {
+    return CreditTypeProposal.fromAmino(object.value);
+  },
+
+  fromProtoMsg(message: CreditTypeProposalProtoMsg): CreditTypeProposal {
+    return CreditTypeProposal.decode(message.value);
+  },
+
+  toProto(message: CreditTypeProposal): Uint8Array {
+    return CreditTypeProposal.encode(message).finish();
+  },
+
+  toProtoMsg(message: CreditTypeProposal): CreditTypeProposalProtoMsg {
+    return {
+      typeUrl: "/regen.ecocredit.v1.CreditTypeProposal",
+      value: CreditTypeProposal.encode(message).finish()
+    };
   }
 
 };
@@ -930,6 +1254,41 @@ export const AllowedDenom = {
     message.displayDenom = object.displayDenom ?? "";
     message.exponent = object.exponent ?? 0;
     return message;
+  },
+
+  fromAmino(object: AllowedDenomAmino): AllowedDenom {
+    return {
+      bankDenom: object.bank_denom,
+      displayDenom: object.display_denom,
+      exponent: object.exponent
+    };
+  },
+
+  toAmino(message: AllowedDenom): AllowedDenomAmino {
+    const obj: any = {};
+    obj.bank_denom = message.bankDenom;
+    obj.display_denom = message.displayDenom;
+    obj.exponent = message.exponent;
+    return obj;
+  },
+
+  fromAminoMsg(object: AllowedDenomAminoMsg): AllowedDenom {
+    return AllowedDenom.fromAmino(object.value);
+  },
+
+  fromProtoMsg(message: AllowedDenomProtoMsg): AllowedDenom {
+    return AllowedDenom.decode(message.value);
+  },
+
+  toProto(message: AllowedDenom): Uint8Array {
+    return AllowedDenom.encode(message).finish();
+  },
+
+  toProtoMsg(message: AllowedDenom): AllowedDenomProtoMsg {
+    return {
+      typeUrl: "/regen.ecocredit.v1.AllowedDenom",
+      value: AllowedDenom.encode(message).finish()
+    };
   }
 
 };

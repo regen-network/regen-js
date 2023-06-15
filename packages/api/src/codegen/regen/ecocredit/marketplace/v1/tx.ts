@@ -1,5 +1,5 @@
-import { Coin, CoinSDKType } from "../../../../cosmos/base/v1beta1/coin";
-import { Timestamp, TimestampSDKType } from "../../../../google/protobuf/timestamp";
+import { Coin, CoinAmino, CoinSDKType } from "../../../../cosmos/base/v1beta1/coin";
+import { Timestamp, TimestampAmino, TimestampSDKType } from "../../../../google/protobuf/timestamp";
 import * as _m0 from "protobufjs/minimal";
 import { isSet, fromJsonTimestamp, fromTimestamp, Long } from "../../../../helpers";
 /** MsgSell is the Msg/Sell request type. */
@@ -11,13 +11,27 @@ export interface MsgSell {
 
   orders: MsgSell_Order[];
 }
+export interface MsgSellProtoMsg {
+  typeUrl: "/regen.ecocredit.marketplace.v1.MsgSell";
+  value: Uint8Array;
+}
 /** MsgSell is the Msg/Sell request type. */
 
-export interface MsgSellSDKType {
+export interface MsgSellAmino {
   /** seller is the address of the account that is selling credits. */
   seller: string;
   /** orders are the sell orders being created. */
 
+  orders: MsgSell_OrderAmino[];
+}
+export interface MsgSellAminoMsg {
+  type: "/regen.ecocredit.marketplace.v1.MsgSell";
+  value: MsgSellAmino;
+}
+/** MsgSell is the Msg/Sell request type. */
+
+export interface MsgSellSDKType {
+  seller: string;
   orders: MsgSell_OrderSDKType[];
 }
 /** Order is the content of a new sell order. */
@@ -55,9 +69,13 @@ export interface MsgSell_Order {
 
   expiration?: Timestamp;
 }
+export interface MsgSell_OrderProtoMsg {
+  typeUrl: "/regen.ecocredit.marketplace.v1.Order";
+  value: Uint8Array;
+}
 /** Order is the content of a new sell order. */
 
-export interface MsgSell_OrderSDKType {
+export interface MsgSell_OrderAmino {
   /** batch_denom is the credit batch being sold. */
   batch_denom: string;
   /**
@@ -75,7 +93,7 @@ export interface MsgSell_OrderSDKType {
    * ask_price or more.
    */
 
-  ask_price?: CoinSDKType;
+  ask_price?: CoinAmino;
   /**
    * disable_auto_retire disables auto-retirement of credits which allows a
    * buyer to disable auto-retirement in their buy order enabling them to
@@ -88,6 +106,19 @@ export interface MsgSell_OrderSDKType {
    * expiration time is reached, the sell order is removed from state.
    */
 
+  expiration?: TimestampAmino;
+}
+export interface MsgSell_OrderAminoMsg {
+  type: "/regen.ecocredit.marketplace.v1.Order";
+  value: MsgSell_OrderAmino;
+}
+/** Order is the content of a new sell order. */
+
+export interface MsgSell_OrderSDKType {
+  batch_denom: string;
+  quantity: string;
+  ask_price?: CoinSDKType;
+  disable_auto_retire: boolean;
   expiration?: TimestampSDKType;
 }
 /** MsgSellResponse is the Msg/Sell response type. */
@@ -96,10 +127,23 @@ export interface MsgSellResponse {
   /** sell_order_ids are the sell order IDs of the newly created sell orders. */
   sellOrderIds: Long[];
 }
+export interface MsgSellResponseProtoMsg {
+  typeUrl: "/regen.ecocredit.marketplace.v1.MsgSellResponse";
+  value: Uint8Array;
+}
+/** MsgSellResponse is the Msg/Sell response type. */
+
+export interface MsgSellResponseAmino {
+  /** sell_order_ids are the sell order IDs of the newly created sell orders. */
+  sell_order_ids: string[];
+}
+export interface MsgSellResponseAminoMsg {
+  type: "/regen.ecocredit.marketplace.v1.MsgSellResponse";
+  value: MsgSellResponseAmino;
+}
 /** MsgSellResponse is the Msg/Sell response type. */
 
 export interface MsgSellResponseSDKType {
-  /** sell_order_ids are the sell order IDs of the newly created sell orders. */
   sell_order_ids: Long[];
 }
 /** MsgUpdateSellOrders is the Msg/UpdateSellOrders request type. */
@@ -111,13 +155,27 @@ export interface MsgUpdateSellOrders {
 
   updates: MsgUpdateSellOrders_Update[];
 }
+export interface MsgUpdateSellOrdersProtoMsg {
+  typeUrl: "/regen.ecocredit.marketplace.v1.MsgUpdateSellOrders";
+  value: Uint8Array;
+}
 /** MsgUpdateSellOrders is the Msg/UpdateSellOrders request type. */
 
-export interface MsgUpdateSellOrdersSDKType {
+export interface MsgUpdateSellOrdersAmino {
   /** seller is the address of the account that is selling credits. */
   seller: string;
   /** updates are updates to existing sell orders. */
 
+  updates: MsgUpdateSellOrders_UpdateAmino[];
+}
+export interface MsgUpdateSellOrdersAminoMsg {
+  type: "/regen.ecocredit.marketplace.v1.MsgUpdateSellOrders";
+  value: MsgUpdateSellOrdersAmino;
+}
+/** MsgUpdateSellOrders is the Msg/UpdateSellOrders request type. */
+
+export interface MsgUpdateSellOrdersSDKType {
+  seller: string;
   updates: MsgUpdateSellOrders_UpdateSDKType[];
 }
 /** Update is an update to an existing sell order. */
@@ -144,17 +202,21 @@ export interface MsgUpdateSellOrders_Update {
 
   newExpiration?: Timestamp;
 }
+export interface MsgUpdateSellOrders_UpdateProtoMsg {
+  typeUrl: "/regen.ecocredit.marketplace.v1.Update";
+  value: Uint8Array;
+}
 /** Update is an update to an existing sell order. */
 
-export interface MsgUpdateSellOrders_UpdateSDKType {
+export interface MsgUpdateSellOrders_UpdateAmino {
   /** sell_order_id is the ID of an existing sell order. */
-  sell_order_id: Long;
+  sell_order_id: string;
   /** new_quantity is the updated quantity of credits available to sell. */
 
   new_quantity: string;
   /** new_ask_price is the new ask price for this sell order */
 
-  new_ask_price?: CoinSDKType;
+  new_ask_price?: CoinAmino;
   /**
    * disable_auto_retire updates the disable_auto_retire field in the sell
    * order.
@@ -166,11 +228,35 @@ export interface MsgUpdateSellOrders_UpdateSDKType {
    * the expiration time is reached, the sell order is removed from state.
    */
 
+  new_expiration?: TimestampAmino;
+}
+export interface MsgUpdateSellOrders_UpdateAminoMsg {
+  type: "/regen.ecocredit.marketplace.v1.Update";
+  value: MsgUpdateSellOrders_UpdateAmino;
+}
+/** Update is an update to an existing sell order. */
+
+export interface MsgUpdateSellOrders_UpdateSDKType {
+  sell_order_id: Long;
+  new_quantity: string;
+  new_ask_price?: CoinSDKType;
+  disable_auto_retire: boolean;
   new_expiration?: TimestampSDKType;
 }
 /** MsgUpdateSellOrdersResponse is the Msg/UpdateSellOrders response type. */
 
 export interface MsgUpdateSellOrdersResponse {}
+export interface MsgUpdateSellOrdersResponseProtoMsg {
+  typeUrl: "/regen.ecocredit.marketplace.v1.MsgUpdateSellOrdersResponse";
+  value: Uint8Array;
+}
+/** MsgUpdateSellOrdersResponse is the Msg/UpdateSellOrders response type. */
+
+export interface MsgUpdateSellOrdersResponseAmino {}
+export interface MsgUpdateSellOrdersResponseAminoMsg {
+  type: "/regen.ecocredit.marketplace.v1.MsgUpdateSellOrdersResponse";
+  value: MsgUpdateSellOrdersResponseAmino;
+}
 /** MsgUpdateSellOrdersResponse is the Msg/UpdateSellOrders response type. */
 
 export interface MsgUpdateSellOrdersResponseSDKType {}
@@ -186,9 +272,13 @@ export interface MsgCancelSellOrder {
 
   sellOrderId: Long;
 }
+export interface MsgCancelSellOrderProtoMsg {
+  typeUrl: "/regen.ecocredit.marketplace.v1.MsgCancelSellOrder";
+  value: Uint8Array;
+}
 /** MsgCancelSellOrder is the Msg/CancelSellOrder request type. */
 
-export interface MsgCancelSellOrderSDKType {
+export interface MsgCancelSellOrderAmino {
   /**
    * seller is the address of the account that created the sell order and is
    * therefore authorized to cancel the sell order.
@@ -196,11 +286,32 @@ export interface MsgCancelSellOrderSDKType {
   seller: string;
   /** sell_order_id is the id of the seller order to cancel. */
 
+  sell_order_id: string;
+}
+export interface MsgCancelSellOrderAminoMsg {
+  type: "/regen.ecocredit.marketplace.v1.MsgCancelSellOrder";
+  value: MsgCancelSellOrderAmino;
+}
+/** MsgCancelSellOrder is the Msg/CancelSellOrder request type. */
+
+export interface MsgCancelSellOrderSDKType {
+  seller: string;
   sell_order_id: Long;
 }
 /** MsgCancelSellOrder is the Msg/CancelSellOrder response type. */
 
 export interface MsgCancelSellOrderResponse {}
+export interface MsgCancelSellOrderResponseProtoMsg {
+  typeUrl: "/regen.ecocredit.marketplace.v1.MsgCancelSellOrderResponse";
+  value: Uint8Array;
+}
+/** MsgCancelSellOrder is the Msg/CancelSellOrder response type. */
+
+export interface MsgCancelSellOrderResponseAmino {}
+export interface MsgCancelSellOrderResponseAminoMsg {
+  type: "/regen.ecocredit.marketplace.v1.MsgCancelSellOrderResponse";
+  value: MsgCancelSellOrderResponseAmino;
+}
 /** MsgCancelSellOrder is the Msg/CancelSellOrder response type. */
 
 export interface MsgCancelSellOrderResponseSDKType {}
@@ -213,13 +324,27 @@ export interface MsgBuyDirect {
 
   orders: MsgBuyDirect_Order[];
 }
+export interface MsgBuyDirectProtoMsg {
+  typeUrl: "/regen.ecocredit.marketplace.v1.MsgBuyDirect";
+  value: Uint8Array;
+}
 /** MsgBuyDirect is the Msg/BuyDirect request type. */
 
-export interface MsgBuyDirectSDKType {
+export interface MsgBuyDirectAmino {
   /** buyer is the address of the account that is buying credits. */
   buyer: string;
   /** orders is a list of orders for ecocredits. */
 
+  orders: MsgBuyDirect_OrderAmino[];
+}
+export interface MsgBuyDirectAminoMsg {
+  type: "/regen.ecocredit.marketplace.v1.MsgBuyDirect";
+  value: MsgBuyDirectAmino;
+}
+/** MsgBuyDirect is the Msg/BuyDirect request type. */
+
+export interface MsgBuyDirectSDKType {
+  buyer: string;
   orders: MsgBuyDirect_OrderSDKType[];
 }
 /** Order contains the information needed to purchase an ecocredit. */
@@ -261,20 +386,24 @@ export interface MsgBuyDirect_Order {
 
   retirementReason: string;
 }
+export interface MsgBuyDirect_OrderProtoMsg {
+  typeUrl: "/regen.ecocredit.marketplace.v1.Order";
+  value: Uint8Array;
+}
 /** Order contains the information needed to purchase an ecocredit. */
 
-export interface MsgBuyDirect_OrderSDKType {
+export interface MsgBuyDirect_OrderAmino {
   /**
    * sell_order_id is the sell order ID against which the buyer is trying
    * to buy.
    */
-  sell_order_id: Long;
+  sell_order_id: string;
   /** quantity is the quantity of credits to buy. */
 
   quantity: string;
   /** bid_price is the price the buyer is willing to pay per credit. */
 
-  bid_price?: CoinSDKType;
+  bid_price?: CoinAmino;
   /**
    * disable_auto_retire allows auto-retirement to be disabled. If it is set
    * to true the credits will not auto-retire and can be resold assuming that
@@ -300,9 +429,34 @@ export interface MsgBuyDirect_OrderSDKType {
 
   retirement_reason: string;
 }
+export interface MsgBuyDirect_OrderAminoMsg {
+  type: "/regen.ecocredit.marketplace.v1.Order";
+  value: MsgBuyDirect_OrderAmino;
+}
+/** Order contains the information needed to purchase an ecocredit. */
+
+export interface MsgBuyDirect_OrderSDKType {
+  sell_order_id: Long;
+  quantity: string;
+  bid_price?: CoinSDKType;
+  disable_auto_retire: boolean;
+  retirement_jurisdiction: string;
+  retirement_reason: string;
+}
 /** MsgBuyDirectResponse is the Msg/BuyDirect response type. */
 
 export interface MsgBuyDirectResponse {}
+export interface MsgBuyDirectResponseProtoMsg {
+  typeUrl: "/regen.ecocredit.marketplace.v1.MsgBuyDirectResponse";
+  value: Uint8Array;
+}
+/** MsgBuyDirectResponse is the Msg/BuyDirect response type. */
+
+export interface MsgBuyDirectResponseAmino {}
+export interface MsgBuyDirectResponseAminoMsg {
+  type: "/regen.ecocredit.marketplace.v1.MsgBuyDirectResponse";
+  value: MsgBuyDirectResponseAmino;
+}
 /** MsgBuyDirectResponse is the Msg/BuyDirect response type. */
 
 export interface MsgBuyDirectResponseSDKType {}
@@ -332,13 +486,17 @@ export interface MsgAddAllowedDenom {
 
   exponent: number;
 }
+export interface MsgAddAllowedDenomProtoMsg {
+  typeUrl: "/regen.ecocredit.marketplace.v1.MsgAddAllowedDenom";
+  value: Uint8Array;
+}
 /**
  * MsgAddAllowedDenom is the Msg/AddAllowedDenom request type.
  * 
  * Since Revision 1
  */
 
-export interface MsgAddAllowedDenomSDKType {
+export interface MsgAddAllowedDenomAmino {
   /** authority is the address of the governance account. */
   authority: string;
   /** denom is the bank denom to allow (ex. ibc/GLKHDSG423SGS) */
@@ -358,6 +516,22 @@ export interface MsgAddAllowedDenomSDKType {
 
   exponent: number;
 }
+export interface MsgAddAllowedDenomAminoMsg {
+  type: "/regen.ecocredit.marketplace.v1.MsgAddAllowedDenom";
+  value: MsgAddAllowedDenomAmino;
+}
+/**
+ * MsgAddAllowedDenom is the Msg/AddAllowedDenom request type.
+ * 
+ * Since Revision 1
+ */
+
+export interface MsgAddAllowedDenomSDKType {
+  authority: string;
+  bank_denom: string;
+  display_denom: string;
+  exponent: number;
+}
 /**
  * MsgAddAllowedDenomResponse is the Msg/AddAllowedDenom response type.
  * 
@@ -365,6 +539,21 @@ export interface MsgAddAllowedDenomSDKType {
  */
 
 export interface MsgAddAllowedDenomResponse {}
+export interface MsgAddAllowedDenomResponseProtoMsg {
+  typeUrl: "/regen.ecocredit.marketplace.v1.MsgAddAllowedDenomResponse";
+  value: Uint8Array;
+}
+/**
+ * MsgAddAllowedDenomResponse is the Msg/AddAllowedDenom response type.
+ * 
+ * Since Revision 1
+ */
+
+export interface MsgAddAllowedDenomResponseAmino {}
+export interface MsgAddAllowedDenomResponseAminoMsg {
+  type: "/regen.ecocredit.marketplace.v1.MsgAddAllowedDenomResponse";
+  value: MsgAddAllowedDenomResponseAmino;
+}
 /**
  * MsgAddAllowedDenomResponse is the Msg/AddAllowedDenom response type.
  * 
@@ -385,6 +574,27 @@ export interface MsgRemoveAllowedDenom {
 
   denom: string;
 }
+export interface MsgRemoveAllowedDenomProtoMsg {
+  typeUrl: "/regen.ecocredit.marketplace.v1.MsgRemoveAllowedDenom";
+  value: Uint8Array;
+}
+/**
+ * MsgRemoveAllowedDenom is the Msg/RemoveAllowedDenom request type.
+ * 
+ * Since Revision 1
+ */
+
+export interface MsgRemoveAllowedDenomAmino {
+  /** authority is the address of the governance account. */
+  authority: string;
+  /** denom is the denom to remove (ex. ibc/GLKHDSG423SGS) */
+
+  denom: string;
+}
+export interface MsgRemoveAllowedDenomAminoMsg {
+  type: "/regen.ecocredit.marketplace.v1.MsgRemoveAllowedDenom";
+  value: MsgRemoveAllowedDenomAmino;
+}
 /**
  * MsgRemoveAllowedDenom is the Msg/RemoveAllowedDenom request type.
  * 
@@ -392,10 +602,7 @@ export interface MsgRemoveAllowedDenom {
  */
 
 export interface MsgRemoveAllowedDenomSDKType {
-  /** authority is the address of the governance account. */
   authority: string;
-  /** denom is the denom to remove (ex. ibc/GLKHDSG423SGS) */
-
   denom: string;
 }
 /**
@@ -405,6 +612,21 @@ export interface MsgRemoveAllowedDenomSDKType {
  */
 
 export interface MsgRemoveAllowedDenomResponse {}
+export interface MsgRemoveAllowedDenomResponseProtoMsg {
+  typeUrl: "/regen.ecocredit.marketplace.v1.MsgRemoveAllowedDenomResponse";
+  value: Uint8Array;
+}
+/**
+ * MsgRemoveAllowedDenomResponse is the Msg/RemoveAllowedDenom response type.
+ * 
+ * Since Revision 1
+ */
+
+export interface MsgRemoveAllowedDenomResponseAmino {}
+export interface MsgRemoveAllowedDenomResponseAminoMsg {
+  type: "/regen.ecocredit.marketplace.v1.MsgRemoveAllowedDenomResponse";
+  value: MsgRemoveAllowedDenomResponseAmino;
+}
 /**
  * MsgRemoveAllowedDenomResponse is the Msg/RemoveAllowedDenom response type.
  * 
@@ -484,6 +706,45 @@ export const MsgSell = {
     message.seller = object.seller ?? "";
     message.orders = object.orders?.map(e => MsgSell_Order.fromPartial(e)) || [];
     return message;
+  },
+
+  fromAmino(object: MsgSellAmino): MsgSell {
+    return {
+      seller: object.seller,
+      orders: Array.isArray(object?.orders) ? object.orders.map((e: any) => MsgSell_Order.fromAmino(e)) : []
+    };
+  },
+
+  toAmino(message: MsgSell): MsgSellAmino {
+    const obj: any = {};
+    obj.seller = message.seller;
+
+    if (message.orders) {
+      obj.orders = message.orders.map(e => e ? MsgSell_Order.toAmino(e) : undefined);
+    } else {
+      obj.orders = [];
+    }
+
+    return obj;
+  },
+
+  fromAminoMsg(object: MsgSellAminoMsg): MsgSell {
+    return MsgSell.fromAmino(object.value);
+  },
+
+  fromProtoMsg(message: MsgSellProtoMsg): MsgSell {
+    return MsgSell.decode(message.value);
+  },
+
+  toProto(message: MsgSell): Uint8Array {
+    return MsgSell.encode(message).finish();
+  },
+
+  toProtoMsg(message: MsgSell): MsgSellProtoMsg {
+    return {
+      typeUrl: "/regen.ecocredit.marketplace.v1.MsgSell",
+      value: MsgSell.encode(message).finish()
+    };
   }
 
 };
@@ -589,6 +850,45 @@ export const MsgSell_Order = {
     message.disableAutoRetire = object.disableAutoRetire ?? false;
     message.expiration = object.expiration !== undefined && object.expiration !== null ? Timestamp.fromPartial(object.expiration) : undefined;
     return message;
+  },
+
+  fromAmino(object: MsgSell_OrderAmino): MsgSell_Order {
+    return {
+      batchDenom: object.batch_denom,
+      quantity: object.quantity,
+      askPrice: object?.ask_price ? Coin.fromAmino(object.ask_price) : undefined,
+      disableAutoRetire: object.disable_auto_retire,
+      expiration: object?.expiration ? Timestamp.fromAmino(object.expiration) : undefined
+    };
+  },
+
+  toAmino(message: MsgSell_Order): MsgSell_OrderAmino {
+    const obj: any = {};
+    obj.batch_denom = message.batchDenom;
+    obj.quantity = message.quantity;
+    obj.ask_price = message.askPrice ? Coin.toAmino(message.askPrice) : undefined;
+    obj.disable_auto_retire = message.disableAutoRetire;
+    obj.expiration = message.expiration ? Timestamp.toAmino(message.expiration) : undefined;
+    return obj;
+  },
+
+  fromAminoMsg(object: MsgSell_OrderAminoMsg): MsgSell_Order {
+    return MsgSell_Order.fromAmino(object.value);
+  },
+
+  fromProtoMsg(message: MsgSell_OrderProtoMsg): MsgSell_Order {
+    return MsgSell_Order.decode(message.value);
+  },
+
+  toProto(message: MsgSell_Order): Uint8Array {
+    return MsgSell_Order.encode(message).finish();
+  },
+
+  toProtoMsg(message: MsgSell_Order): MsgSell_OrderProtoMsg {
+    return {
+      typeUrl: "/regen.ecocredit.marketplace.v1.Order",
+      value: MsgSell_Order.encode(message).finish()
+    };
   }
 
 };
@@ -664,6 +964,43 @@ export const MsgSellResponse = {
     const message = createBaseMsgSellResponse();
     message.sellOrderIds = object.sellOrderIds?.map(e => Long.fromValue(e)) || [];
     return message;
+  },
+
+  fromAmino(object: MsgSellResponseAmino): MsgSellResponse {
+    return {
+      sellOrderIds: Array.isArray(object?.sell_order_ids) ? object.sell_order_ids.map((e: any) => e) : []
+    };
+  },
+
+  toAmino(message: MsgSellResponse): MsgSellResponseAmino {
+    const obj: any = {};
+
+    if (message.sellOrderIds) {
+      obj.sell_order_ids = message.sellOrderIds.map(e => e);
+    } else {
+      obj.sell_order_ids = [];
+    }
+
+    return obj;
+  },
+
+  fromAminoMsg(object: MsgSellResponseAminoMsg): MsgSellResponse {
+    return MsgSellResponse.fromAmino(object.value);
+  },
+
+  fromProtoMsg(message: MsgSellResponseProtoMsg): MsgSellResponse {
+    return MsgSellResponse.decode(message.value);
+  },
+
+  toProto(message: MsgSellResponse): Uint8Array {
+    return MsgSellResponse.encode(message).finish();
+  },
+
+  toProtoMsg(message: MsgSellResponse): MsgSellResponseProtoMsg {
+    return {
+      typeUrl: "/regen.ecocredit.marketplace.v1.MsgSellResponse",
+      value: MsgSellResponse.encode(message).finish()
+    };
   }
 
 };
@@ -739,6 +1076,45 @@ export const MsgUpdateSellOrders = {
     message.seller = object.seller ?? "";
     message.updates = object.updates?.map(e => MsgUpdateSellOrders_Update.fromPartial(e)) || [];
     return message;
+  },
+
+  fromAmino(object: MsgUpdateSellOrdersAmino): MsgUpdateSellOrders {
+    return {
+      seller: object.seller,
+      updates: Array.isArray(object?.updates) ? object.updates.map((e: any) => MsgUpdateSellOrders_Update.fromAmino(e)) : []
+    };
+  },
+
+  toAmino(message: MsgUpdateSellOrders): MsgUpdateSellOrdersAmino {
+    const obj: any = {};
+    obj.seller = message.seller;
+
+    if (message.updates) {
+      obj.updates = message.updates.map(e => e ? MsgUpdateSellOrders_Update.toAmino(e) : undefined);
+    } else {
+      obj.updates = [];
+    }
+
+    return obj;
+  },
+
+  fromAminoMsg(object: MsgUpdateSellOrdersAminoMsg): MsgUpdateSellOrders {
+    return MsgUpdateSellOrders.fromAmino(object.value);
+  },
+
+  fromProtoMsg(message: MsgUpdateSellOrdersProtoMsg): MsgUpdateSellOrders {
+    return MsgUpdateSellOrders.decode(message.value);
+  },
+
+  toProto(message: MsgUpdateSellOrders): Uint8Array {
+    return MsgUpdateSellOrders.encode(message).finish();
+  },
+
+  toProtoMsg(message: MsgUpdateSellOrders): MsgUpdateSellOrdersProtoMsg {
+    return {
+      typeUrl: "/regen.ecocredit.marketplace.v1.MsgUpdateSellOrders",
+      value: MsgUpdateSellOrders.encode(message).finish()
+    };
   }
 
 };
@@ -844,6 +1220,45 @@ export const MsgUpdateSellOrders_Update = {
     message.disableAutoRetire = object.disableAutoRetire ?? false;
     message.newExpiration = object.newExpiration !== undefined && object.newExpiration !== null ? Timestamp.fromPartial(object.newExpiration) : undefined;
     return message;
+  },
+
+  fromAmino(object: MsgUpdateSellOrders_UpdateAmino): MsgUpdateSellOrders_Update {
+    return {
+      sellOrderId: Long.fromString(object.sell_order_id),
+      newQuantity: object.new_quantity,
+      newAskPrice: object?.new_ask_price ? Coin.fromAmino(object.new_ask_price) : undefined,
+      disableAutoRetire: object.disable_auto_retire,
+      newExpiration: object?.new_expiration ? Timestamp.fromAmino(object.new_expiration) : undefined
+    };
+  },
+
+  toAmino(message: MsgUpdateSellOrders_Update): MsgUpdateSellOrders_UpdateAmino {
+    const obj: any = {};
+    obj.sell_order_id = message.sellOrderId ? message.sellOrderId.toString() : undefined;
+    obj.new_quantity = message.newQuantity;
+    obj.new_ask_price = message.newAskPrice ? Coin.toAmino(message.newAskPrice) : undefined;
+    obj.disable_auto_retire = message.disableAutoRetire;
+    obj.new_expiration = message.newExpiration ? Timestamp.toAmino(message.newExpiration) : undefined;
+    return obj;
+  },
+
+  fromAminoMsg(object: MsgUpdateSellOrders_UpdateAminoMsg): MsgUpdateSellOrders_Update {
+    return MsgUpdateSellOrders_Update.fromAmino(object.value);
+  },
+
+  fromProtoMsg(message: MsgUpdateSellOrders_UpdateProtoMsg): MsgUpdateSellOrders_Update {
+    return MsgUpdateSellOrders_Update.decode(message.value);
+  },
+
+  toProto(message: MsgUpdateSellOrders_Update): Uint8Array {
+    return MsgUpdateSellOrders_Update.encode(message).finish();
+  },
+
+  toProtoMsg(message: MsgUpdateSellOrders_Update): MsgUpdateSellOrders_UpdateProtoMsg {
+    return {
+      typeUrl: "/regen.ecocredit.marketplace.v1.Update",
+      value: MsgUpdateSellOrders_Update.encode(message).finish()
+    };
   }
 
 };
@@ -887,6 +1302,34 @@ export const MsgUpdateSellOrdersResponse = {
   fromPartial(_: Partial<MsgUpdateSellOrdersResponse>): MsgUpdateSellOrdersResponse {
     const message = createBaseMsgUpdateSellOrdersResponse();
     return message;
+  },
+
+  fromAmino(_: MsgUpdateSellOrdersResponseAmino): MsgUpdateSellOrdersResponse {
+    return {};
+  },
+
+  toAmino(_: MsgUpdateSellOrdersResponse): MsgUpdateSellOrdersResponseAmino {
+    const obj: any = {};
+    return obj;
+  },
+
+  fromAminoMsg(object: MsgUpdateSellOrdersResponseAminoMsg): MsgUpdateSellOrdersResponse {
+    return MsgUpdateSellOrdersResponse.fromAmino(object.value);
+  },
+
+  fromProtoMsg(message: MsgUpdateSellOrdersResponseProtoMsg): MsgUpdateSellOrdersResponse {
+    return MsgUpdateSellOrdersResponse.decode(message.value);
+  },
+
+  toProto(message: MsgUpdateSellOrdersResponse): Uint8Array {
+    return MsgUpdateSellOrdersResponse.encode(message).finish();
+  },
+
+  toProtoMsg(message: MsgUpdateSellOrdersResponse): MsgUpdateSellOrdersResponseProtoMsg {
+    return {
+      typeUrl: "/regen.ecocredit.marketplace.v1.MsgUpdateSellOrdersResponse",
+      value: MsgUpdateSellOrdersResponse.encode(message).finish()
+    };
   }
 
 };
@@ -956,6 +1399,39 @@ export const MsgCancelSellOrder = {
     message.seller = object.seller ?? "";
     message.sellOrderId = object.sellOrderId !== undefined && object.sellOrderId !== null ? Long.fromValue(object.sellOrderId) : Long.UZERO;
     return message;
+  },
+
+  fromAmino(object: MsgCancelSellOrderAmino): MsgCancelSellOrder {
+    return {
+      seller: object.seller,
+      sellOrderId: Long.fromString(object.sell_order_id)
+    };
+  },
+
+  toAmino(message: MsgCancelSellOrder): MsgCancelSellOrderAmino {
+    const obj: any = {};
+    obj.seller = message.seller;
+    obj.sell_order_id = message.sellOrderId ? message.sellOrderId.toString() : undefined;
+    return obj;
+  },
+
+  fromAminoMsg(object: MsgCancelSellOrderAminoMsg): MsgCancelSellOrder {
+    return MsgCancelSellOrder.fromAmino(object.value);
+  },
+
+  fromProtoMsg(message: MsgCancelSellOrderProtoMsg): MsgCancelSellOrder {
+    return MsgCancelSellOrder.decode(message.value);
+  },
+
+  toProto(message: MsgCancelSellOrder): Uint8Array {
+    return MsgCancelSellOrder.encode(message).finish();
+  },
+
+  toProtoMsg(message: MsgCancelSellOrder): MsgCancelSellOrderProtoMsg {
+    return {
+      typeUrl: "/regen.ecocredit.marketplace.v1.MsgCancelSellOrder",
+      value: MsgCancelSellOrder.encode(message).finish()
+    };
   }
 
 };
@@ -999,6 +1475,34 @@ export const MsgCancelSellOrderResponse = {
   fromPartial(_: Partial<MsgCancelSellOrderResponse>): MsgCancelSellOrderResponse {
     const message = createBaseMsgCancelSellOrderResponse();
     return message;
+  },
+
+  fromAmino(_: MsgCancelSellOrderResponseAmino): MsgCancelSellOrderResponse {
+    return {};
+  },
+
+  toAmino(_: MsgCancelSellOrderResponse): MsgCancelSellOrderResponseAmino {
+    const obj: any = {};
+    return obj;
+  },
+
+  fromAminoMsg(object: MsgCancelSellOrderResponseAminoMsg): MsgCancelSellOrderResponse {
+    return MsgCancelSellOrderResponse.fromAmino(object.value);
+  },
+
+  fromProtoMsg(message: MsgCancelSellOrderResponseProtoMsg): MsgCancelSellOrderResponse {
+    return MsgCancelSellOrderResponse.decode(message.value);
+  },
+
+  toProto(message: MsgCancelSellOrderResponse): Uint8Array {
+    return MsgCancelSellOrderResponse.encode(message).finish();
+  },
+
+  toProtoMsg(message: MsgCancelSellOrderResponse): MsgCancelSellOrderResponseProtoMsg {
+    return {
+      typeUrl: "/regen.ecocredit.marketplace.v1.MsgCancelSellOrderResponse",
+      value: MsgCancelSellOrderResponse.encode(message).finish()
+    };
   }
 
 };
@@ -1074,6 +1578,45 @@ export const MsgBuyDirect = {
     message.buyer = object.buyer ?? "";
     message.orders = object.orders?.map(e => MsgBuyDirect_Order.fromPartial(e)) || [];
     return message;
+  },
+
+  fromAmino(object: MsgBuyDirectAmino): MsgBuyDirect {
+    return {
+      buyer: object.buyer,
+      orders: Array.isArray(object?.orders) ? object.orders.map((e: any) => MsgBuyDirect_Order.fromAmino(e)) : []
+    };
+  },
+
+  toAmino(message: MsgBuyDirect): MsgBuyDirectAmino {
+    const obj: any = {};
+    obj.buyer = message.buyer;
+
+    if (message.orders) {
+      obj.orders = message.orders.map(e => e ? MsgBuyDirect_Order.toAmino(e) : undefined);
+    } else {
+      obj.orders = [];
+    }
+
+    return obj;
+  },
+
+  fromAminoMsg(object: MsgBuyDirectAminoMsg): MsgBuyDirect {
+    return MsgBuyDirect.fromAmino(object.value);
+  },
+
+  fromProtoMsg(message: MsgBuyDirectProtoMsg): MsgBuyDirect {
+    return MsgBuyDirect.decode(message.value);
+  },
+
+  toProto(message: MsgBuyDirect): Uint8Array {
+    return MsgBuyDirect.encode(message).finish();
+  },
+
+  toProtoMsg(message: MsgBuyDirect): MsgBuyDirectProtoMsg {
+    return {
+      typeUrl: "/regen.ecocredit.marketplace.v1.MsgBuyDirect",
+      value: MsgBuyDirect.encode(message).finish()
+    };
   }
 
 };
@@ -1191,6 +1734,47 @@ export const MsgBuyDirect_Order = {
     message.retirementJurisdiction = object.retirementJurisdiction ?? "";
     message.retirementReason = object.retirementReason ?? "";
     return message;
+  },
+
+  fromAmino(object: MsgBuyDirect_OrderAmino): MsgBuyDirect_Order {
+    return {
+      sellOrderId: Long.fromString(object.sell_order_id),
+      quantity: object.quantity,
+      bidPrice: object?.bid_price ? Coin.fromAmino(object.bid_price) : undefined,
+      disableAutoRetire: object.disable_auto_retire,
+      retirementJurisdiction: object.retirement_jurisdiction,
+      retirementReason: object.retirement_reason
+    };
+  },
+
+  toAmino(message: MsgBuyDirect_Order): MsgBuyDirect_OrderAmino {
+    const obj: any = {};
+    obj.sell_order_id = message.sellOrderId ? message.sellOrderId.toString() : undefined;
+    obj.quantity = message.quantity;
+    obj.bid_price = message.bidPrice ? Coin.toAmino(message.bidPrice) : undefined;
+    obj.disable_auto_retire = message.disableAutoRetire;
+    obj.retirement_jurisdiction = message.retirementJurisdiction;
+    obj.retirement_reason = message.retirementReason;
+    return obj;
+  },
+
+  fromAminoMsg(object: MsgBuyDirect_OrderAminoMsg): MsgBuyDirect_Order {
+    return MsgBuyDirect_Order.fromAmino(object.value);
+  },
+
+  fromProtoMsg(message: MsgBuyDirect_OrderProtoMsg): MsgBuyDirect_Order {
+    return MsgBuyDirect_Order.decode(message.value);
+  },
+
+  toProto(message: MsgBuyDirect_Order): Uint8Array {
+    return MsgBuyDirect_Order.encode(message).finish();
+  },
+
+  toProtoMsg(message: MsgBuyDirect_Order): MsgBuyDirect_OrderProtoMsg {
+    return {
+      typeUrl: "/regen.ecocredit.marketplace.v1.Order",
+      value: MsgBuyDirect_Order.encode(message).finish()
+    };
   }
 
 };
@@ -1234,6 +1818,34 @@ export const MsgBuyDirectResponse = {
   fromPartial(_: Partial<MsgBuyDirectResponse>): MsgBuyDirectResponse {
     const message = createBaseMsgBuyDirectResponse();
     return message;
+  },
+
+  fromAmino(_: MsgBuyDirectResponseAmino): MsgBuyDirectResponse {
+    return {};
+  },
+
+  toAmino(_: MsgBuyDirectResponse): MsgBuyDirectResponseAmino {
+    const obj: any = {};
+    return obj;
+  },
+
+  fromAminoMsg(object: MsgBuyDirectResponseAminoMsg): MsgBuyDirectResponse {
+    return MsgBuyDirectResponse.fromAmino(object.value);
+  },
+
+  fromProtoMsg(message: MsgBuyDirectResponseProtoMsg): MsgBuyDirectResponse {
+    return MsgBuyDirectResponse.decode(message.value);
+  },
+
+  toProto(message: MsgBuyDirectResponse): Uint8Array {
+    return MsgBuyDirectResponse.encode(message).finish();
+  },
+
+  toProtoMsg(message: MsgBuyDirectResponse): MsgBuyDirectResponseProtoMsg {
+    return {
+      typeUrl: "/regen.ecocredit.marketplace.v1.MsgBuyDirectResponse",
+      value: MsgBuyDirectResponse.encode(message).finish()
+    };
   }
 
 };
@@ -1327,6 +1939,43 @@ export const MsgAddAllowedDenom = {
     message.displayDenom = object.displayDenom ?? "";
     message.exponent = object.exponent ?? 0;
     return message;
+  },
+
+  fromAmino(object: MsgAddAllowedDenomAmino): MsgAddAllowedDenom {
+    return {
+      authority: object.authority,
+      bankDenom: object.bank_denom,
+      displayDenom: object.display_denom,
+      exponent: object.exponent
+    };
+  },
+
+  toAmino(message: MsgAddAllowedDenom): MsgAddAllowedDenomAmino {
+    const obj: any = {};
+    obj.authority = message.authority;
+    obj.bank_denom = message.bankDenom;
+    obj.display_denom = message.displayDenom;
+    obj.exponent = message.exponent;
+    return obj;
+  },
+
+  fromAminoMsg(object: MsgAddAllowedDenomAminoMsg): MsgAddAllowedDenom {
+    return MsgAddAllowedDenom.fromAmino(object.value);
+  },
+
+  fromProtoMsg(message: MsgAddAllowedDenomProtoMsg): MsgAddAllowedDenom {
+    return MsgAddAllowedDenom.decode(message.value);
+  },
+
+  toProto(message: MsgAddAllowedDenom): Uint8Array {
+    return MsgAddAllowedDenom.encode(message).finish();
+  },
+
+  toProtoMsg(message: MsgAddAllowedDenom): MsgAddAllowedDenomProtoMsg {
+    return {
+      typeUrl: "/regen.ecocredit.marketplace.v1.MsgAddAllowedDenom",
+      value: MsgAddAllowedDenom.encode(message).finish()
+    };
   }
 
 };
@@ -1370,6 +2019,34 @@ export const MsgAddAllowedDenomResponse = {
   fromPartial(_: Partial<MsgAddAllowedDenomResponse>): MsgAddAllowedDenomResponse {
     const message = createBaseMsgAddAllowedDenomResponse();
     return message;
+  },
+
+  fromAmino(_: MsgAddAllowedDenomResponseAmino): MsgAddAllowedDenomResponse {
+    return {};
+  },
+
+  toAmino(_: MsgAddAllowedDenomResponse): MsgAddAllowedDenomResponseAmino {
+    const obj: any = {};
+    return obj;
+  },
+
+  fromAminoMsg(object: MsgAddAllowedDenomResponseAminoMsg): MsgAddAllowedDenomResponse {
+    return MsgAddAllowedDenomResponse.fromAmino(object.value);
+  },
+
+  fromProtoMsg(message: MsgAddAllowedDenomResponseProtoMsg): MsgAddAllowedDenomResponse {
+    return MsgAddAllowedDenomResponse.decode(message.value);
+  },
+
+  toProto(message: MsgAddAllowedDenomResponse): Uint8Array {
+    return MsgAddAllowedDenomResponse.encode(message).finish();
+  },
+
+  toProtoMsg(message: MsgAddAllowedDenomResponse): MsgAddAllowedDenomResponseProtoMsg {
+    return {
+      typeUrl: "/regen.ecocredit.marketplace.v1.MsgAddAllowedDenomResponse",
+      value: MsgAddAllowedDenomResponse.encode(message).finish()
+    };
   }
 
 };
@@ -1439,6 +2116,39 @@ export const MsgRemoveAllowedDenom = {
     message.authority = object.authority ?? "";
     message.denom = object.denom ?? "";
     return message;
+  },
+
+  fromAmino(object: MsgRemoveAllowedDenomAmino): MsgRemoveAllowedDenom {
+    return {
+      authority: object.authority,
+      denom: object.denom
+    };
+  },
+
+  toAmino(message: MsgRemoveAllowedDenom): MsgRemoveAllowedDenomAmino {
+    const obj: any = {};
+    obj.authority = message.authority;
+    obj.denom = message.denom;
+    return obj;
+  },
+
+  fromAminoMsg(object: MsgRemoveAllowedDenomAminoMsg): MsgRemoveAllowedDenom {
+    return MsgRemoveAllowedDenom.fromAmino(object.value);
+  },
+
+  fromProtoMsg(message: MsgRemoveAllowedDenomProtoMsg): MsgRemoveAllowedDenom {
+    return MsgRemoveAllowedDenom.decode(message.value);
+  },
+
+  toProto(message: MsgRemoveAllowedDenom): Uint8Array {
+    return MsgRemoveAllowedDenom.encode(message).finish();
+  },
+
+  toProtoMsg(message: MsgRemoveAllowedDenom): MsgRemoveAllowedDenomProtoMsg {
+    return {
+      typeUrl: "/regen.ecocredit.marketplace.v1.MsgRemoveAllowedDenom",
+      value: MsgRemoveAllowedDenom.encode(message).finish()
+    };
   }
 
 };
@@ -1482,6 +2192,34 @@ export const MsgRemoveAllowedDenomResponse = {
   fromPartial(_: Partial<MsgRemoveAllowedDenomResponse>): MsgRemoveAllowedDenomResponse {
     const message = createBaseMsgRemoveAllowedDenomResponse();
     return message;
+  },
+
+  fromAmino(_: MsgRemoveAllowedDenomResponseAmino): MsgRemoveAllowedDenomResponse {
+    return {};
+  },
+
+  toAmino(_: MsgRemoveAllowedDenomResponse): MsgRemoveAllowedDenomResponseAmino {
+    const obj: any = {};
+    return obj;
+  },
+
+  fromAminoMsg(object: MsgRemoveAllowedDenomResponseAminoMsg): MsgRemoveAllowedDenomResponse {
+    return MsgRemoveAllowedDenomResponse.fromAmino(object.value);
+  },
+
+  fromProtoMsg(message: MsgRemoveAllowedDenomResponseProtoMsg): MsgRemoveAllowedDenomResponse {
+    return MsgRemoveAllowedDenomResponse.decode(message.value);
+  },
+
+  toProto(message: MsgRemoveAllowedDenomResponse): Uint8Array {
+    return MsgRemoveAllowedDenomResponse.encode(message).finish();
+  },
+
+  toProtoMsg(message: MsgRemoveAllowedDenomResponse): MsgRemoveAllowedDenomResponseProtoMsg {
+    return {
+      typeUrl: "/regen.ecocredit.marketplace.v1.MsgRemoveAllowedDenomResponse",
+      value: MsgRemoveAllowedDenomResponse.encode(message).finish()
+    };
   }
 
 };

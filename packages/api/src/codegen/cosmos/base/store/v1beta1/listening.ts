@@ -1,4 +1,4 @@
-import { RequestDeliverTx, RequestDeliverTxSDKType, ResponseDeliverTx, ResponseDeliverTxSDKType, RequestBeginBlock, RequestBeginBlockSDKType, ResponseBeginBlock, ResponseBeginBlockSDKType, RequestEndBlock, RequestEndBlockSDKType, ResponseEndBlock, ResponseEndBlockSDKType, ResponseCommit, ResponseCommitSDKType } from "../../../../tendermint/abci/types";
+import { RequestDeliverTx, RequestDeliverTxAmino, RequestDeliverTxSDKType, ResponseDeliverTx, ResponseDeliverTxAmino, ResponseDeliverTxSDKType, RequestBeginBlock, RequestBeginBlockAmino, RequestBeginBlockSDKType, ResponseBeginBlock, ResponseBeginBlockAmino, ResponseBeginBlockSDKType, RequestEndBlock, RequestEndBlockAmino, RequestEndBlockSDKType, ResponseEndBlock, ResponseEndBlockAmino, ResponseEndBlockSDKType, ResponseCommit, ResponseCommitAmino, ResponseCommitSDKType } from "../../../../tendermint/abci/types";
 import * as _m0 from "protobufjs/minimal";
 import { isSet, bytesFromBase64, base64FromBytes } from "../../../../helpers";
 /**
@@ -18,6 +18,31 @@ export interface StoreKVPair {
   key: Uint8Array;
   value: Uint8Array;
 }
+export interface StoreKVPairProtoMsg {
+  typeUrl: "/cosmos.base.store.v1beta1.StoreKVPair";
+  value: Uint8Array;
+}
+/**
+ * StoreKVPair is a KVStore KVPair used for listening to state changes (Sets and Deletes)
+ * It optionally includes the StoreKey for the originating KVStore and a Boolean flag to distinguish between Sets and
+ * Deletes
+ * 
+ * Since: cosmos-sdk 0.43
+ */
+
+export interface StoreKVPairAmino {
+  /** the store key for the KVStore this pair originates from */
+  store_key: string;
+  /** true indicates a delete operation, false indicates a set operation */
+
+  delete: boolean;
+  key: Uint8Array;
+  value: Uint8Array;
+}
+export interface StoreKVPairAminoMsg {
+  type: "cosmos-sdk/StoreKVPair";
+  value: StoreKVPairAmino;
+}
 /**
  * StoreKVPair is a KVStore KVPair used for listening to state changes (Sets and Deletes)
  * It optionally includes the StoreKey for the originating KVStore and a Boolean flag to distinguish between Sets and
@@ -27,10 +52,7 @@ export interface StoreKVPair {
  */
 
 export interface StoreKVPairSDKType {
-  /** the store key for the KVStore this pair originates from */
   store_key: string;
-  /** true indicates a delete operation, false indicates a set operation */
-
   delete: boolean;
   key: Uint8Array;
   value: Uint8Array;
@@ -47,6 +69,27 @@ export interface BlockMetadata {
   requestEndBlock?: RequestEndBlock;
   responseEndBlock?: ResponseEndBlock;
   responseCommit?: ResponseCommit;
+}
+export interface BlockMetadataProtoMsg {
+  typeUrl: "/cosmos.base.store.v1beta1.BlockMetadata";
+  value: Uint8Array;
+}
+/**
+ * BlockMetadata contains all the abci event data of a block
+ * the file streamer dump them into files together with the state changes.
+ */
+
+export interface BlockMetadataAmino {
+  request_begin_block?: RequestBeginBlockAmino;
+  response_begin_block?: ResponseBeginBlockAmino;
+  deliver_txs: BlockMetadata_DeliverTxAmino[];
+  request_end_block?: RequestEndBlockAmino;
+  response_end_block?: ResponseEndBlockAmino;
+  response_commit?: ResponseCommitAmino;
+}
+export interface BlockMetadataAminoMsg {
+  type: "cosmos-sdk/BlockMetadata";
+  value: BlockMetadataAmino;
 }
 /**
  * BlockMetadata contains all the abci event data of a block
@@ -66,6 +109,20 @@ export interface BlockMetadataSDKType {
 export interface BlockMetadata_DeliverTx {
   request?: RequestDeliverTx;
   response?: ResponseDeliverTx;
+}
+export interface BlockMetadata_DeliverTxProtoMsg {
+  typeUrl: "/cosmos.base.store.v1beta1.DeliverTx";
+  value: Uint8Array;
+}
+/** DeliverTx encapulate deliver tx request and response. */
+
+export interface BlockMetadata_DeliverTxAmino {
+  request?: RequestDeliverTxAmino;
+  response?: ResponseDeliverTxAmino;
+}
+export interface BlockMetadata_DeliverTxAminoMsg {
+  type: "cosmos-sdk/DeliverTx";
+  value: BlockMetadata_DeliverTxAmino;
 }
 /** DeliverTx encapulate deliver tx request and response. */
 
@@ -163,6 +220,50 @@ export const StoreKVPair = {
     message.key = object.key ?? new Uint8Array();
     message.value = object.value ?? new Uint8Array();
     return message;
+  },
+
+  fromAmino(object: StoreKVPairAmino): StoreKVPair {
+    return {
+      storeKey: object.store_key,
+      delete: object.delete,
+      key: object.key,
+      value: object.value
+    };
+  },
+
+  toAmino(message: StoreKVPair): StoreKVPairAmino {
+    const obj: any = {};
+    obj.store_key = message.storeKey;
+    obj.delete = message.delete;
+    obj.key = message.key;
+    obj.value = message.value;
+    return obj;
+  },
+
+  fromAminoMsg(object: StoreKVPairAminoMsg): StoreKVPair {
+    return StoreKVPair.fromAmino(object.value);
+  },
+
+  toAminoMsg(message: StoreKVPair): StoreKVPairAminoMsg {
+    return {
+      type: "cosmos-sdk/StoreKVPair",
+      value: StoreKVPair.toAmino(message)
+    };
+  },
+
+  fromProtoMsg(message: StoreKVPairProtoMsg): StoreKVPair {
+    return StoreKVPair.decode(message.value);
+  },
+
+  toProto(message: StoreKVPair): Uint8Array {
+    return StoreKVPair.encode(message).finish();
+  },
+
+  toProtoMsg(message: StoreKVPair): StoreKVPairProtoMsg {
+    return {
+      typeUrl: "/cosmos.base.store.v1beta1.StoreKVPair",
+      value: StoreKVPair.encode(message).finish()
+    };
   }
 
 };
@@ -286,6 +387,60 @@ export const BlockMetadata = {
     message.responseEndBlock = object.responseEndBlock !== undefined && object.responseEndBlock !== null ? ResponseEndBlock.fromPartial(object.responseEndBlock) : undefined;
     message.responseCommit = object.responseCommit !== undefined && object.responseCommit !== null ? ResponseCommit.fromPartial(object.responseCommit) : undefined;
     return message;
+  },
+
+  fromAmino(object: BlockMetadataAmino): BlockMetadata {
+    return {
+      requestBeginBlock: object?.request_begin_block ? RequestBeginBlock.fromAmino(object.request_begin_block) : undefined,
+      responseBeginBlock: object?.response_begin_block ? ResponseBeginBlock.fromAmino(object.response_begin_block) : undefined,
+      deliverTxs: Array.isArray(object?.deliver_txs) ? object.deliver_txs.map((e: any) => BlockMetadata_DeliverTx.fromAmino(e)) : [],
+      requestEndBlock: object?.request_end_block ? RequestEndBlock.fromAmino(object.request_end_block) : undefined,
+      responseEndBlock: object?.response_end_block ? ResponseEndBlock.fromAmino(object.response_end_block) : undefined,
+      responseCommit: object?.response_commit ? ResponseCommit.fromAmino(object.response_commit) : undefined
+    };
+  },
+
+  toAmino(message: BlockMetadata): BlockMetadataAmino {
+    const obj: any = {};
+    obj.request_begin_block = message.requestBeginBlock ? RequestBeginBlock.toAmino(message.requestBeginBlock) : undefined;
+    obj.response_begin_block = message.responseBeginBlock ? ResponseBeginBlock.toAmino(message.responseBeginBlock) : undefined;
+
+    if (message.deliverTxs) {
+      obj.deliver_txs = message.deliverTxs.map(e => e ? BlockMetadata_DeliverTx.toAmino(e) : undefined);
+    } else {
+      obj.deliver_txs = [];
+    }
+
+    obj.request_end_block = message.requestEndBlock ? RequestEndBlock.toAmino(message.requestEndBlock) : undefined;
+    obj.response_end_block = message.responseEndBlock ? ResponseEndBlock.toAmino(message.responseEndBlock) : undefined;
+    obj.response_commit = message.responseCommit ? ResponseCommit.toAmino(message.responseCommit) : undefined;
+    return obj;
+  },
+
+  fromAminoMsg(object: BlockMetadataAminoMsg): BlockMetadata {
+    return BlockMetadata.fromAmino(object.value);
+  },
+
+  toAminoMsg(message: BlockMetadata): BlockMetadataAminoMsg {
+    return {
+      type: "cosmos-sdk/BlockMetadata",
+      value: BlockMetadata.toAmino(message)
+    };
+  },
+
+  fromProtoMsg(message: BlockMetadataProtoMsg): BlockMetadata {
+    return BlockMetadata.decode(message.value);
+  },
+
+  toProto(message: BlockMetadata): Uint8Array {
+    return BlockMetadata.encode(message).finish();
+  },
+
+  toProtoMsg(message: BlockMetadata): BlockMetadataProtoMsg {
+    return {
+      typeUrl: "/cosmos.base.store.v1beta1.BlockMetadata",
+      value: BlockMetadata.encode(message).finish()
+    };
   }
 
 };
@@ -355,6 +510,46 @@ export const BlockMetadata_DeliverTx = {
     message.request = object.request !== undefined && object.request !== null ? RequestDeliverTx.fromPartial(object.request) : undefined;
     message.response = object.response !== undefined && object.response !== null ? ResponseDeliverTx.fromPartial(object.response) : undefined;
     return message;
+  },
+
+  fromAmino(object: BlockMetadata_DeliverTxAmino): BlockMetadata_DeliverTx {
+    return {
+      request: object?.request ? RequestDeliverTx.fromAmino(object.request) : undefined,
+      response: object?.response ? ResponseDeliverTx.fromAmino(object.response) : undefined
+    };
+  },
+
+  toAmino(message: BlockMetadata_DeliverTx): BlockMetadata_DeliverTxAmino {
+    const obj: any = {};
+    obj.request = message.request ? RequestDeliverTx.toAmino(message.request) : undefined;
+    obj.response = message.response ? ResponseDeliverTx.toAmino(message.response) : undefined;
+    return obj;
+  },
+
+  fromAminoMsg(object: BlockMetadata_DeliverTxAminoMsg): BlockMetadata_DeliverTx {
+    return BlockMetadata_DeliverTx.fromAmino(object.value);
+  },
+
+  toAminoMsg(message: BlockMetadata_DeliverTx): BlockMetadata_DeliverTxAminoMsg {
+    return {
+      type: "cosmos-sdk/DeliverTx",
+      value: BlockMetadata_DeliverTx.toAmino(message)
+    };
+  },
+
+  fromProtoMsg(message: BlockMetadata_DeliverTxProtoMsg): BlockMetadata_DeliverTx {
+    return BlockMetadata_DeliverTx.decode(message.value);
+  },
+
+  toProto(message: BlockMetadata_DeliverTx): Uint8Array {
+    return BlockMetadata_DeliverTx.encode(message).finish();
+  },
+
+  toProtoMsg(message: BlockMetadata_DeliverTx): BlockMetadata_DeliverTxProtoMsg {
+    return {
+      typeUrl: "/cosmos.base.store.v1beta1.DeliverTx",
+      value: BlockMetadata_DeliverTx.encode(message).finish()
+    };
   }
 
 };

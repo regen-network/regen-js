@@ -1,4 +1,4 @@
-import { OriginTx, OriginTxSDKType } from "./types";
+import { OriginTx, OriginTxAmino, OriginTxSDKType } from "./types";
 import * as _m0 from "protobufjs/minimal";
 import { isSet } from "../../../helpers";
 /** EventCreateClass is an event emitted when a credit class is created. */
@@ -7,10 +7,23 @@ export interface EventCreateClass {
   /** class_id is the unique identifier of the credit class. */
   classId: string;
 }
+export interface EventCreateClassProtoMsg {
+  typeUrl: "/regen.ecocredit.v1.EventCreateClass";
+  value: Uint8Array;
+}
+/** EventCreateClass is an event emitted when a credit class is created. */
+
+export interface EventCreateClassAmino {
+  /** class_id is the unique identifier of the credit class. */
+  class_id: string;
+}
+export interface EventCreateClassAminoMsg {
+  type: "/regen.ecocredit.v1.EventCreateClass";
+  value: EventCreateClassAmino;
+}
 /** EventCreateClass is an event emitted when a credit class is created. */
 
 export interface EventCreateClassSDKType {
-  /** class_id is the unique identifier of the credit class. */
   class_id: string;
 }
 /** EventCreateProject is an event emitted when a project is created. */
@@ -19,10 +32,23 @@ export interface EventCreateProject {
   /** project_id is the unique identifier of the project. */
   projectId: string;
 }
+export interface EventCreateProjectProtoMsg {
+  typeUrl: "/regen.ecocredit.v1.EventCreateProject";
+  value: Uint8Array;
+}
+/** EventCreateProject is an event emitted when a project is created. */
+
+export interface EventCreateProjectAmino {
+  /** project_id is the unique identifier of the project. */
+  project_id: string;
+}
+export interface EventCreateProjectAminoMsg {
+  type: "/regen.ecocredit.v1.EventCreateProject";
+  value: EventCreateProjectAmino;
+}
 /** EventCreateProject is an event emitted when a project is created. */
 
 export interface EventCreateProjectSDKType {
-  /** project_id is the unique identifier of the project. */
   project_id: string;
 }
 /** EventCreateBatch is an event emitted when a credit batch is created. */
@@ -37,9 +63,13 @@ export interface EventCreateBatch {
 
   originTx?: OriginTx;
 }
+export interface EventCreateBatchProtoMsg {
+  typeUrl: "/regen.ecocredit.v1.EventCreateBatch";
+  value: Uint8Array;
+}
 /** EventCreateBatch is an event emitted when a credit batch is created. */
 
-export interface EventCreateBatchSDKType {
+export interface EventCreateBatchAmino {
   /** batch_denom is the unique identifier of the credit batch. */
   batch_denom: string;
   /**
@@ -47,6 +77,16 @@ export interface EventCreateBatchSDKType {
    * the creation of the credit batch.
    */
 
+  origin_tx?: OriginTxAmino;
+}
+export interface EventCreateBatchAminoMsg {
+  type: "/regen.ecocredit.v1.EventCreateBatch";
+  value: EventCreateBatchAmino;
+}
+/** EventCreateBatch is an event emitted when a credit batch is created. */
+
+export interface EventCreateBatchSDKType {
+  batch_denom: string;
   origin_tx?: OriginTxSDKType;
 }
 /**
@@ -67,12 +107,16 @@ export interface EventMint {
 
   retiredAmount: string;
 }
+export interface EventMintProtoMsg {
+  typeUrl: "/regen.ecocredit.v1.EventMint";
+  value: Uint8Array;
+}
 /**
  * EventMint is an event emitted when credits are minted either when creating a
  * credit batch or when bridging assets from another chain or registry.
  */
 
-export interface EventMintSDKType {
+export interface EventMintAmino {
   /**
    * batch_denom is the unique identifier of the credit batch within which the
    * credits were minted.
@@ -83,6 +127,20 @@ export interface EventMintSDKType {
   tradable_amount: string;
   /** retired_amount is the amount of retired credits minted. */
 
+  retired_amount: string;
+}
+export interface EventMintAminoMsg {
+  type: "/regen.ecocredit.v1.EventMint";
+  value: EventMintAmino;
+}
+/**
+ * EventMint is an event emitted when credits are minted either when creating a
+ * credit batch or when bridging assets from another chain or registry.
+ */
+
+export interface EventMintSDKType {
+  batch_denom: string;
+  tradable_amount: string;
   retired_amount: string;
 }
 /**
@@ -103,12 +161,16 @@ export interface EventMintBatchCredits {
 
   originTx?: OriginTx;
 }
+export interface EventMintBatchCreditsProtoMsg {
+  typeUrl: "/regen.ecocredit.v1.EventMintBatchCredits";
+  value: Uint8Array;
+}
 /**
  * EventMintBatchCredits is an event emitted when credits are minted to an
  * existing open credit batch.
  */
 
-export interface EventMintBatchCreditsSDKType {
+export interface EventMintBatchCreditsAmino {
   /**
    * batch_denom is the unique identifier of the credit batch within which the
    * credits were minted.
@@ -119,6 +181,19 @@ export interface EventMintBatchCreditsSDKType {
    * the minting of credits within the credit batch.
    */
 
+  origin_tx?: OriginTxAmino;
+}
+export interface EventMintBatchCreditsAminoMsg {
+  type: "/regen.ecocredit.v1.EventMintBatchCredits";
+  value: EventMintBatchCreditsAmino;
+}
+/**
+ * EventMintBatchCredits is an event emitted when credits are minted to an
+ * existing open credit batch.
+ */
+
+export interface EventMintBatchCreditsSDKType {
+  batch_denom: string;
   origin_tx?: OriginTxSDKType;
 }
 /**
@@ -152,12 +227,16 @@ export interface EventTransfer {
 
   retiredAmount: string;
 }
+export interface EventTransferProtoMsg {
+  typeUrl: "/regen.ecocredit.v1.EventTransfer";
+  value: Uint8Array;
+}
 /**
  * EventTransfer is an event emitted when credits are transferred from one
  * account to another including transfers to or from a module account.
  */
 
-export interface EventTransferSDKType {
+export interface EventTransferAmino {
   /**
    * sender is the sender of the credits. In the case that the credits were
    * transferred from a base account, this will be the account address. In the
@@ -181,6 +260,22 @@ export interface EventTransferSDKType {
   tradable_amount: string;
   /** retired_amount is the decimal number of retired credits received. */
 
+  retired_amount: string;
+}
+export interface EventTransferAminoMsg {
+  type: "/regen.ecocredit.v1.EventTransfer";
+  value: EventTransferAmino;
+}
+/**
+ * EventTransfer is an event emitted when credits are transferred from one
+ * account to another including transfers to or from a module account.
+ */
+
+export interface EventTransferSDKType {
+  sender: string;
+  recipient: string;
+  batch_denom: string;
+  tradable_amount: string;
   retired_amount: string;
 }
 /**
@@ -225,13 +320,17 @@ export interface EventRetire {
 
   reason: string;
 }
+export interface EventRetireProtoMsg {
+  typeUrl: "/regen.ecocredit.v1.EventRetire";
+  value: Uint8Array;
+}
 /**
  * EventRetire is an event emitted when credits are retired. When credits are
  * retired from multiple batches in the same transaction, a separate event is
  * emitted for each batch_denom. This allows for easier indexing.
  */
 
-export interface EventRetireSDKType {
+export interface EventRetireAmino {
   /**
    * owner is the address of the account that owns the retired credits. This
    * will be the account receiving credits in the case that credits were retired
@@ -267,6 +366,23 @@ export interface EventRetireSDKType {
 
   reason: string;
 }
+export interface EventRetireAminoMsg {
+  type: "/regen.ecocredit.v1.EventRetire";
+  value: EventRetireAmino;
+}
+/**
+ * EventRetire is an event emitted when credits are retired. When credits are
+ * retired from multiple batches in the same transaction, a separate event is
+ * emitted for each batch_denom. This allows for easier indexing.
+ */
+
+export interface EventRetireSDKType {
+  owner: string;
+  batch_denom: string;
+  amount: string;
+  jurisdiction: string;
+  reason: string;
+}
 /**
  * EventCancel is an event emitted when credits are cancelled. When credits are
  * cancelled from multiple batches in the same transaction, a separate event is
@@ -289,13 +405,17 @@ export interface EventCancel {
 
   reason: string;
 }
+export interface EventCancelProtoMsg {
+  typeUrl: "/regen.ecocredit.v1.EventCancel";
+  value: Uint8Array;
+}
 /**
  * EventCancel is an event emitted when credits are cancelled. When credits are
  * cancelled from multiple batches in the same transaction, a separate event is
  * emitted for each batch_denom. This allows for easier indexing.
  */
 
-export interface EventCancelSDKType {
+export interface EventCancelAmino {
   /** owner is the address of the account that cancelled the credits. */
   owner: string;
   /**
@@ -311,6 +431,22 @@ export interface EventCancelSDKType {
 
   reason: string;
 }
+export interface EventCancelAminoMsg {
+  type: "/regen.ecocredit.v1.EventCancel";
+  value: EventCancelAmino;
+}
+/**
+ * EventCancel is an event emitted when credits are cancelled. When credits are
+ * cancelled from multiple batches in the same transaction, a separate event is
+ * emitted for each batch_denom. This allows for easier indexing.
+ */
+
+export interface EventCancelSDKType {
+  owner: string;
+  batch_denom: string;
+  amount: string;
+  reason: string;
+}
 /**
  * EventUpdateClassAdmin is emitted when the admin address of a credit class is
  * changed.
@@ -320,13 +456,29 @@ export interface EventUpdateClassAdmin {
   /** class_id is the unique identifier of the class that was updated. */
   classId: string;
 }
+export interface EventUpdateClassAdminProtoMsg {
+  typeUrl: "/regen.ecocredit.v1.EventUpdateClassAdmin";
+  value: Uint8Array;
+}
+/**
+ * EventUpdateClassAdmin is emitted when the admin address of a credit class is
+ * changed.
+ */
+
+export interface EventUpdateClassAdminAmino {
+  /** class_id is the unique identifier of the class that was updated. */
+  class_id: string;
+}
+export interface EventUpdateClassAdminAminoMsg {
+  type: "/regen.ecocredit.v1.EventUpdateClassAdmin";
+  value: EventUpdateClassAdminAmino;
+}
 /**
  * EventUpdateClassAdmin is emitted when the admin address of a credit class is
  * changed.
  */
 
 export interface EventUpdateClassAdminSDKType {
-  /** class_id is the unique identifier of the class that was updated. */
   class_id: string;
 }
 /**
@@ -338,13 +490,29 @@ export interface EventUpdateClassIssuers {
   /** class_id is the unique identifier of the class that was updated. */
   classId: string;
 }
+export interface EventUpdateClassIssuersProtoMsg {
+  typeUrl: "/regen.ecocredit.v1.EventUpdateClassIssuers";
+  value: Uint8Array;
+}
+/**
+ * EventUpdateClassIssuers is emitted when the issuer list for a credit class
+ * is updated.
+ */
+
+export interface EventUpdateClassIssuersAmino {
+  /** class_id is the unique identifier of the class that was updated. */
+  class_id: string;
+}
+export interface EventUpdateClassIssuersAminoMsg {
+  type: "/regen.ecocredit.v1.EventUpdateClassIssuers";
+  value: EventUpdateClassIssuersAmino;
+}
 /**
  * EventUpdateClassIssuers is emitted when the issuer list for a credit class
  * is updated.
  */
 
 export interface EventUpdateClassIssuersSDKType {
-  /** class_id is the unique identifier of the class that was updated. */
   class_id: string;
 }
 /**
@@ -356,13 +524,29 @@ export interface EventUpdateClassMetadata {
   /** class_id is the unique identifier of the class that was updated. */
   classId: string;
 }
+export interface EventUpdateClassMetadataProtoMsg {
+  typeUrl: "/regen.ecocredit.v1.EventUpdateClassMetadata";
+  value: Uint8Array;
+}
+/**
+ * EventUpdateClassMetadata is emitted when the credit class metadata is
+ * changed.
+ */
+
+export interface EventUpdateClassMetadataAmino {
+  /** class_id is the unique identifier of the class that was updated. */
+  class_id: string;
+}
+export interface EventUpdateClassMetadataAminoMsg {
+  type: "/regen.ecocredit.v1.EventUpdateClassMetadata";
+  value: EventUpdateClassMetadataAmino;
+}
 /**
  * EventUpdateClassMetadata is emitted when the credit class metadata is
  * changed.
  */
 
 export interface EventUpdateClassMetadataSDKType {
-  /** class_id is the unique identifier of the class that was updated. */
   class_id: string;
 }
 /** EventUpdateProjectAdmin is emitted when the project admin is changed. */
@@ -371,10 +555,23 @@ export interface EventUpdateProjectAdmin {
   /** project_id is the unique identifier of the project that was updated. */
   projectId: string;
 }
+export interface EventUpdateProjectAdminProtoMsg {
+  typeUrl: "/regen.ecocredit.v1.EventUpdateProjectAdmin";
+  value: Uint8Array;
+}
+/** EventUpdateProjectAdmin is emitted when the project admin is changed. */
+
+export interface EventUpdateProjectAdminAmino {
+  /** project_id is the unique identifier of the project that was updated. */
+  project_id: string;
+}
+export interface EventUpdateProjectAdminAminoMsg {
+  type: "/regen.ecocredit.v1.EventUpdateProjectAdmin";
+  value: EventUpdateProjectAdminAmino;
+}
 /** EventUpdateProjectAdmin is emitted when the project admin is changed. */
 
 export interface EventUpdateProjectAdminSDKType {
-  /** project_id is the unique identifier of the project that was updated. */
   project_id: string;
 }
 /** EventUpdateProjectMetadata is emitted when the project metadata is changed. */
@@ -383,10 +580,23 @@ export interface EventUpdateProjectMetadata {
   /** project_id is the unique identifier of the project that was updated. */
   projectId: string;
 }
+export interface EventUpdateProjectMetadataProtoMsg {
+  typeUrl: "/regen.ecocredit.v1.EventUpdateProjectMetadata";
+  value: Uint8Array;
+}
+/** EventUpdateProjectMetadata is emitted when the project metadata is changed. */
+
+export interface EventUpdateProjectMetadataAmino {
+  /** project_id is the unique identifier of the project that was updated. */
+  project_id: string;
+}
+export interface EventUpdateProjectMetadataAminoMsg {
+  type: "/regen.ecocredit.v1.EventUpdateProjectMetadata";
+  value: EventUpdateProjectMetadataAmino;
+}
 /** EventUpdateProjectMetadata is emitted when the project metadata is changed. */
 
 export interface EventUpdateProjectMetadataSDKType {
-  /** project_id is the unique identifier of the project that was updated. */
   project_id: string;
 }
 /**
@@ -400,6 +610,25 @@ export interface EventUpdateBatchMetadata {
   /** batch_denom is the unique identifier of the batch that was updated. */
   batchDenom: string;
 }
+export interface EventUpdateBatchMetadataProtoMsg {
+  typeUrl: "/regen.ecocredit.v1.EventUpdateBatchMetadata";
+  value: Uint8Array;
+}
+/**
+ * EventUpdateBatchMetadata is emitted when the credit batch metadata is
+ * changed.
+ * 
+ * Since Revision 2
+ */
+
+export interface EventUpdateBatchMetadataAmino {
+  /** batch_denom is the unique identifier of the batch that was updated. */
+  batch_denom: string;
+}
+export interface EventUpdateBatchMetadataAminoMsg {
+  type: "/regen.ecocredit.v1.EventUpdateBatchMetadata";
+  value: EventUpdateBatchMetadataAmino;
+}
 /**
  * EventUpdateBatchMetadata is emitted when the credit batch metadata is
  * changed.
@@ -408,7 +637,6 @@ export interface EventUpdateBatchMetadata {
  */
 
 export interface EventUpdateBatchMetadataSDKType {
-  /** batch_denom is the unique identifier of the batch that was updated. */
   batch_denom: string;
 }
 /** EventSealBatch is emitted when a batch is sealed. */
@@ -417,10 +645,23 @@ export interface EventSealBatch {
   /** batch_denom is the denom of the batch that was sealed. */
   batchDenom: string;
 }
+export interface EventSealBatchProtoMsg {
+  typeUrl: "/regen.ecocredit.v1.EventSealBatch";
+  value: Uint8Array;
+}
+/** EventSealBatch is emitted when a batch is sealed. */
+
+export interface EventSealBatchAmino {
+  /** batch_denom is the denom of the batch that was sealed. */
+  batch_denom: string;
+}
+export interface EventSealBatchAminoMsg {
+  type: "/regen.ecocredit.v1.EventSealBatch";
+  value: EventSealBatchAmino;
+}
 /** EventSealBatch is emitted when a batch is sealed. */
 
 export interface EventSealBatchSDKType {
-  /** batch_denom is the denom of the batch that was sealed. */
   batch_denom: string;
 }
 /** EventAddCreditType is emitted when governance approves a new credit type. */
@@ -429,10 +670,23 @@ export interface EventAddCreditType {
   /** abbreviation is the abbreviation of the credit type. */
   abbreviation: string;
 }
+export interface EventAddCreditTypeProtoMsg {
+  typeUrl: "/regen.ecocredit.v1.EventAddCreditType";
+  value: Uint8Array;
+}
+/** EventAddCreditType is emitted when governance approves a new credit type. */
+
+export interface EventAddCreditTypeAmino {
+  /** abbreviation is the abbreviation of the credit type. */
+  abbreviation: string;
+}
+export interface EventAddCreditTypeAminoMsg {
+  type: "/regen.ecocredit.v1.EventAddCreditType";
+  value: EventAddCreditTypeAmino;
+}
 /** EventAddCreditType is emitted when governance approves a new credit type. */
 
 export interface EventAddCreditTypeSDKType {
-  /** abbreviation is the abbreviation of the credit type. */
   abbreviation: string;
 }
 /** EventBridge is emitted when credits are bridged to another chain. */
@@ -464,9 +718,13 @@ export interface EventBridge {
 
   batchDenom: string;
 }
+export interface EventBridgeProtoMsg {
+  typeUrl: "/regen.ecocredit.v1.EventBridge";
+  value: Uint8Array;
+}
 /** EventBridge is emitted when credits are bridged to another chain. */
 
-export interface EventBridgeSDKType {
+export interface EventBridgeAmino {
   /** target is the target chain. */
   target: string;
   /** recipient is the recipient address. */
@@ -491,6 +749,20 @@ export interface EventBridgeSDKType {
    * Since Revision 3
    */
 
+  batch_denom: string;
+}
+export interface EventBridgeAminoMsg {
+  type: "/regen.ecocredit.v1.EventBridge";
+  value: EventBridgeAmino;
+}
+/** EventBridge is emitted when credits are bridged to another chain. */
+
+export interface EventBridgeSDKType {
+  target: string;
+  recipient: string;
+  contract: string;
+  amount: string;
+  owner: string;
   batch_denom: string;
 }
 /** EventBridgeReceive is emitted when credits are bridged from another chain. */
@@ -523,9 +795,13 @@ export interface EventBridgeReceive {
 
   originTx?: OriginTx;
 }
+export interface EventBridgeReceiveProtoMsg {
+  typeUrl: "/regen.ecocredit.v1.EventBridgeReceive";
+  value: Uint8Array;
+}
 /** EventBridgeReceive is emitted when credits are bridged from another chain. */
 
-export interface EventBridgeReceiveSDKType {
+export interface EventBridgeReceiveAmino {
   /**
    * project_id is the unique identifier of the project that was either created
    * or the existing project within which the credit batch exists.
@@ -551,6 +827,18 @@ export interface EventBridgeReceiveSDKType {
    * Since Revision 3
    */
 
+  origin_tx?: OriginTxAmino;
+}
+export interface EventBridgeReceiveAminoMsg {
+  type: "/regen.ecocredit.v1.EventBridgeReceive";
+  value: EventBridgeReceiveAmino;
+}
+/** EventBridgeReceive is emitted when credits are bridged from another chain. */
+
+export interface EventBridgeReceiveSDKType {
+  project_id: string;
+  batch_denom: string;
+  amount: string;
   origin_tx?: OriginTxSDKType;
 }
 
@@ -607,6 +895,37 @@ export const EventCreateClass = {
     const message = createBaseEventCreateClass();
     message.classId = object.classId ?? "";
     return message;
+  },
+
+  fromAmino(object: EventCreateClassAmino): EventCreateClass {
+    return {
+      classId: object.class_id
+    };
+  },
+
+  toAmino(message: EventCreateClass): EventCreateClassAmino {
+    const obj: any = {};
+    obj.class_id = message.classId;
+    return obj;
+  },
+
+  fromAminoMsg(object: EventCreateClassAminoMsg): EventCreateClass {
+    return EventCreateClass.fromAmino(object.value);
+  },
+
+  fromProtoMsg(message: EventCreateClassProtoMsg): EventCreateClass {
+    return EventCreateClass.decode(message.value);
+  },
+
+  toProto(message: EventCreateClass): Uint8Array {
+    return EventCreateClass.encode(message).finish();
+  },
+
+  toProtoMsg(message: EventCreateClass): EventCreateClassProtoMsg {
+    return {
+      typeUrl: "/regen.ecocredit.v1.EventCreateClass",
+      value: EventCreateClass.encode(message).finish()
+    };
   }
 
 };
@@ -664,6 +983,37 @@ export const EventCreateProject = {
     const message = createBaseEventCreateProject();
     message.projectId = object.projectId ?? "";
     return message;
+  },
+
+  fromAmino(object: EventCreateProjectAmino): EventCreateProject {
+    return {
+      projectId: object.project_id
+    };
+  },
+
+  toAmino(message: EventCreateProject): EventCreateProjectAmino {
+    const obj: any = {};
+    obj.project_id = message.projectId;
+    return obj;
+  },
+
+  fromAminoMsg(object: EventCreateProjectAminoMsg): EventCreateProject {
+    return EventCreateProject.fromAmino(object.value);
+  },
+
+  fromProtoMsg(message: EventCreateProjectProtoMsg): EventCreateProject {
+    return EventCreateProject.decode(message.value);
+  },
+
+  toProto(message: EventCreateProject): Uint8Array {
+    return EventCreateProject.encode(message).finish();
+  },
+
+  toProtoMsg(message: EventCreateProject): EventCreateProjectProtoMsg {
+    return {
+      typeUrl: "/regen.ecocredit.v1.EventCreateProject",
+      value: EventCreateProject.encode(message).finish()
+    };
   }
 
 };
@@ -733,6 +1083,39 @@ export const EventCreateBatch = {
     message.batchDenom = object.batchDenom ?? "";
     message.originTx = object.originTx !== undefined && object.originTx !== null ? OriginTx.fromPartial(object.originTx) : undefined;
     return message;
+  },
+
+  fromAmino(object: EventCreateBatchAmino): EventCreateBatch {
+    return {
+      batchDenom: object.batch_denom,
+      originTx: object?.origin_tx ? OriginTx.fromAmino(object.origin_tx) : undefined
+    };
+  },
+
+  toAmino(message: EventCreateBatch): EventCreateBatchAmino {
+    const obj: any = {};
+    obj.batch_denom = message.batchDenom;
+    obj.origin_tx = message.originTx ? OriginTx.toAmino(message.originTx) : undefined;
+    return obj;
+  },
+
+  fromAminoMsg(object: EventCreateBatchAminoMsg): EventCreateBatch {
+    return EventCreateBatch.fromAmino(object.value);
+  },
+
+  fromProtoMsg(message: EventCreateBatchProtoMsg): EventCreateBatch {
+    return EventCreateBatch.decode(message.value);
+  },
+
+  toProto(message: EventCreateBatch): Uint8Array {
+    return EventCreateBatch.encode(message).finish();
+  },
+
+  toProtoMsg(message: EventCreateBatch): EventCreateBatchProtoMsg {
+    return {
+      typeUrl: "/regen.ecocredit.v1.EventCreateBatch",
+      value: EventCreateBatch.encode(message).finish()
+    };
   }
 
 };
@@ -814,6 +1197,41 @@ export const EventMint = {
     message.tradableAmount = object.tradableAmount ?? "";
     message.retiredAmount = object.retiredAmount ?? "";
     return message;
+  },
+
+  fromAmino(object: EventMintAmino): EventMint {
+    return {
+      batchDenom: object.batch_denom,
+      tradableAmount: object.tradable_amount,
+      retiredAmount: object.retired_amount
+    };
+  },
+
+  toAmino(message: EventMint): EventMintAmino {
+    const obj: any = {};
+    obj.batch_denom = message.batchDenom;
+    obj.tradable_amount = message.tradableAmount;
+    obj.retired_amount = message.retiredAmount;
+    return obj;
+  },
+
+  fromAminoMsg(object: EventMintAminoMsg): EventMint {
+    return EventMint.fromAmino(object.value);
+  },
+
+  fromProtoMsg(message: EventMintProtoMsg): EventMint {
+    return EventMint.decode(message.value);
+  },
+
+  toProto(message: EventMint): Uint8Array {
+    return EventMint.encode(message).finish();
+  },
+
+  toProtoMsg(message: EventMint): EventMintProtoMsg {
+    return {
+      typeUrl: "/regen.ecocredit.v1.EventMint",
+      value: EventMint.encode(message).finish()
+    };
   }
 
 };
@@ -883,6 +1301,39 @@ export const EventMintBatchCredits = {
     message.batchDenom = object.batchDenom ?? "";
     message.originTx = object.originTx !== undefined && object.originTx !== null ? OriginTx.fromPartial(object.originTx) : undefined;
     return message;
+  },
+
+  fromAmino(object: EventMintBatchCreditsAmino): EventMintBatchCredits {
+    return {
+      batchDenom: object.batch_denom,
+      originTx: object?.origin_tx ? OriginTx.fromAmino(object.origin_tx) : undefined
+    };
+  },
+
+  toAmino(message: EventMintBatchCredits): EventMintBatchCreditsAmino {
+    const obj: any = {};
+    obj.batch_denom = message.batchDenom;
+    obj.origin_tx = message.originTx ? OriginTx.toAmino(message.originTx) : undefined;
+    return obj;
+  },
+
+  fromAminoMsg(object: EventMintBatchCreditsAminoMsg): EventMintBatchCredits {
+    return EventMintBatchCredits.fromAmino(object.value);
+  },
+
+  fromProtoMsg(message: EventMintBatchCreditsProtoMsg): EventMintBatchCredits {
+    return EventMintBatchCredits.decode(message.value);
+  },
+
+  toProto(message: EventMintBatchCredits): Uint8Array {
+    return EventMintBatchCredits.encode(message).finish();
+  },
+
+  toProtoMsg(message: EventMintBatchCredits): EventMintBatchCreditsProtoMsg {
+    return {
+      typeUrl: "/regen.ecocredit.v1.EventMintBatchCredits",
+      value: EventMintBatchCredits.encode(message).finish()
+    };
   }
 
 };
@@ -988,6 +1439,45 @@ export const EventTransfer = {
     message.tradableAmount = object.tradableAmount ?? "";
     message.retiredAmount = object.retiredAmount ?? "";
     return message;
+  },
+
+  fromAmino(object: EventTransferAmino): EventTransfer {
+    return {
+      sender: object.sender,
+      recipient: object.recipient,
+      batchDenom: object.batch_denom,
+      tradableAmount: object.tradable_amount,
+      retiredAmount: object.retired_amount
+    };
+  },
+
+  toAmino(message: EventTransfer): EventTransferAmino {
+    const obj: any = {};
+    obj.sender = message.sender;
+    obj.recipient = message.recipient;
+    obj.batch_denom = message.batchDenom;
+    obj.tradable_amount = message.tradableAmount;
+    obj.retired_amount = message.retiredAmount;
+    return obj;
+  },
+
+  fromAminoMsg(object: EventTransferAminoMsg): EventTransfer {
+    return EventTransfer.fromAmino(object.value);
+  },
+
+  fromProtoMsg(message: EventTransferProtoMsg): EventTransfer {
+    return EventTransfer.decode(message.value);
+  },
+
+  toProto(message: EventTransfer): Uint8Array {
+    return EventTransfer.encode(message).finish();
+  },
+
+  toProtoMsg(message: EventTransfer): EventTransferProtoMsg {
+    return {
+      typeUrl: "/regen.ecocredit.v1.EventTransfer",
+      value: EventTransfer.encode(message).finish()
+    };
   }
 
 };
@@ -1093,6 +1583,45 @@ export const EventRetire = {
     message.jurisdiction = object.jurisdiction ?? "";
     message.reason = object.reason ?? "";
     return message;
+  },
+
+  fromAmino(object: EventRetireAmino): EventRetire {
+    return {
+      owner: object.owner,
+      batchDenom: object.batch_denom,
+      amount: object.amount,
+      jurisdiction: object.jurisdiction,
+      reason: object.reason
+    };
+  },
+
+  toAmino(message: EventRetire): EventRetireAmino {
+    const obj: any = {};
+    obj.owner = message.owner;
+    obj.batch_denom = message.batchDenom;
+    obj.amount = message.amount;
+    obj.jurisdiction = message.jurisdiction;
+    obj.reason = message.reason;
+    return obj;
+  },
+
+  fromAminoMsg(object: EventRetireAminoMsg): EventRetire {
+    return EventRetire.fromAmino(object.value);
+  },
+
+  fromProtoMsg(message: EventRetireProtoMsg): EventRetire {
+    return EventRetire.decode(message.value);
+  },
+
+  toProto(message: EventRetire): Uint8Array {
+    return EventRetire.encode(message).finish();
+  },
+
+  toProtoMsg(message: EventRetire): EventRetireProtoMsg {
+    return {
+      typeUrl: "/regen.ecocredit.v1.EventRetire",
+      value: EventRetire.encode(message).finish()
+    };
   }
 
 };
@@ -1186,6 +1715,43 @@ export const EventCancel = {
     message.amount = object.amount ?? "";
     message.reason = object.reason ?? "";
     return message;
+  },
+
+  fromAmino(object: EventCancelAmino): EventCancel {
+    return {
+      owner: object.owner,
+      batchDenom: object.batch_denom,
+      amount: object.amount,
+      reason: object.reason
+    };
+  },
+
+  toAmino(message: EventCancel): EventCancelAmino {
+    const obj: any = {};
+    obj.owner = message.owner;
+    obj.batch_denom = message.batchDenom;
+    obj.amount = message.amount;
+    obj.reason = message.reason;
+    return obj;
+  },
+
+  fromAminoMsg(object: EventCancelAminoMsg): EventCancel {
+    return EventCancel.fromAmino(object.value);
+  },
+
+  fromProtoMsg(message: EventCancelProtoMsg): EventCancel {
+    return EventCancel.decode(message.value);
+  },
+
+  toProto(message: EventCancel): Uint8Array {
+    return EventCancel.encode(message).finish();
+  },
+
+  toProtoMsg(message: EventCancel): EventCancelProtoMsg {
+    return {
+      typeUrl: "/regen.ecocredit.v1.EventCancel",
+      value: EventCancel.encode(message).finish()
+    };
   }
 
 };
@@ -1243,6 +1809,37 @@ export const EventUpdateClassAdmin = {
     const message = createBaseEventUpdateClassAdmin();
     message.classId = object.classId ?? "";
     return message;
+  },
+
+  fromAmino(object: EventUpdateClassAdminAmino): EventUpdateClassAdmin {
+    return {
+      classId: object.class_id
+    };
+  },
+
+  toAmino(message: EventUpdateClassAdmin): EventUpdateClassAdminAmino {
+    const obj: any = {};
+    obj.class_id = message.classId;
+    return obj;
+  },
+
+  fromAminoMsg(object: EventUpdateClassAdminAminoMsg): EventUpdateClassAdmin {
+    return EventUpdateClassAdmin.fromAmino(object.value);
+  },
+
+  fromProtoMsg(message: EventUpdateClassAdminProtoMsg): EventUpdateClassAdmin {
+    return EventUpdateClassAdmin.decode(message.value);
+  },
+
+  toProto(message: EventUpdateClassAdmin): Uint8Array {
+    return EventUpdateClassAdmin.encode(message).finish();
+  },
+
+  toProtoMsg(message: EventUpdateClassAdmin): EventUpdateClassAdminProtoMsg {
+    return {
+      typeUrl: "/regen.ecocredit.v1.EventUpdateClassAdmin",
+      value: EventUpdateClassAdmin.encode(message).finish()
+    };
   }
 
 };
@@ -1300,6 +1897,37 @@ export const EventUpdateClassIssuers = {
     const message = createBaseEventUpdateClassIssuers();
     message.classId = object.classId ?? "";
     return message;
+  },
+
+  fromAmino(object: EventUpdateClassIssuersAmino): EventUpdateClassIssuers {
+    return {
+      classId: object.class_id
+    };
+  },
+
+  toAmino(message: EventUpdateClassIssuers): EventUpdateClassIssuersAmino {
+    const obj: any = {};
+    obj.class_id = message.classId;
+    return obj;
+  },
+
+  fromAminoMsg(object: EventUpdateClassIssuersAminoMsg): EventUpdateClassIssuers {
+    return EventUpdateClassIssuers.fromAmino(object.value);
+  },
+
+  fromProtoMsg(message: EventUpdateClassIssuersProtoMsg): EventUpdateClassIssuers {
+    return EventUpdateClassIssuers.decode(message.value);
+  },
+
+  toProto(message: EventUpdateClassIssuers): Uint8Array {
+    return EventUpdateClassIssuers.encode(message).finish();
+  },
+
+  toProtoMsg(message: EventUpdateClassIssuers): EventUpdateClassIssuersProtoMsg {
+    return {
+      typeUrl: "/regen.ecocredit.v1.EventUpdateClassIssuers",
+      value: EventUpdateClassIssuers.encode(message).finish()
+    };
   }
 
 };
@@ -1357,6 +1985,37 @@ export const EventUpdateClassMetadata = {
     const message = createBaseEventUpdateClassMetadata();
     message.classId = object.classId ?? "";
     return message;
+  },
+
+  fromAmino(object: EventUpdateClassMetadataAmino): EventUpdateClassMetadata {
+    return {
+      classId: object.class_id
+    };
+  },
+
+  toAmino(message: EventUpdateClassMetadata): EventUpdateClassMetadataAmino {
+    const obj: any = {};
+    obj.class_id = message.classId;
+    return obj;
+  },
+
+  fromAminoMsg(object: EventUpdateClassMetadataAminoMsg): EventUpdateClassMetadata {
+    return EventUpdateClassMetadata.fromAmino(object.value);
+  },
+
+  fromProtoMsg(message: EventUpdateClassMetadataProtoMsg): EventUpdateClassMetadata {
+    return EventUpdateClassMetadata.decode(message.value);
+  },
+
+  toProto(message: EventUpdateClassMetadata): Uint8Array {
+    return EventUpdateClassMetadata.encode(message).finish();
+  },
+
+  toProtoMsg(message: EventUpdateClassMetadata): EventUpdateClassMetadataProtoMsg {
+    return {
+      typeUrl: "/regen.ecocredit.v1.EventUpdateClassMetadata",
+      value: EventUpdateClassMetadata.encode(message).finish()
+    };
   }
 
 };
@@ -1414,6 +2073,37 @@ export const EventUpdateProjectAdmin = {
     const message = createBaseEventUpdateProjectAdmin();
     message.projectId = object.projectId ?? "";
     return message;
+  },
+
+  fromAmino(object: EventUpdateProjectAdminAmino): EventUpdateProjectAdmin {
+    return {
+      projectId: object.project_id
+    };
+  },
+
+  toAmino(message: EventUpdateProjectAdmin): EventUpdateProjectAdminAmino {
+    const obj: any = {};
+    obj.project_id = message.projectId;
+    return obj;
+  },
+
+  fromAminoMsg(object: EventUpdateProjectAdminAminoMsg): EventUpdateProjectAdmin {
+    return EventUpdateProjectAdmin.fromAmino(object.value);
+  },
+
+  fromProtoMsg(message: EventUpdateProjectAdminProtoMsg): EventUpdateProjectAdmin {
+    return EventUpdateProjectAdmin.decode(message.value);
+  },
+
+  toProto(message: EventUpdateProjectAdmin): Uint8Array {
+    return EventUpdateProjectAdmin.encode(message).finish();
+  },
+
+  toProtoMsg(message: EventUpdateProjectAdmin): EventUpdateProjectAdminProtoMsg {
+    return {
+      typeUrl: "/regen.ecocredit.v1.EventUpdateProjectAdmin",
+      value: EventUpdateProjectAdmin.encode(message).finish()
+    };
   }
 
 };
@@ -1471,6 +2161,37 @@ export const EventUpdateProjectMetadata = {
     const message = createBaseEventUpdateProjectMetadata();
     message.projectId = object.projectId ?? "";
     return message;
+  },
+
+  fromAmino(object: EventUpdateProjectMetadataAmino): EventUpdateProjectMetadata {
+    return {
+      projectId: object.project_id
+    };
+  },
+
+  toAmino(message: EventUpdateProjectMetadata): EventUpdateProjectMetadataAmino {
+    const obj: any = {};
+    obj.project_id = message.projectId;
+    return obj;
+  },
+
+  fromAminoMsg(object: EventUpdateProjectMetadataAminoMsg): EventUpdateProjectMetadata {
+    return EventUpdateProjectMetadata.fromAmino(object.value);
+  },
+
+  fromProtoMsg(message: EventUpdateProjectMetadataProtoMsg): EventUpdateProjectMetadata {
+    return EventUpdateProjectMetadata.decode(message.value);
+  },
+
+  toProto(message: EventUpdateProjectMetadata): Uint8Array {
+    return EventUpdateProjectMetadata.encode(message).finish();
+  },
+
+  toProtoMsg(message: EventUpdateProjectMetadata): EventUpdateProjectMetadataProtoMsg {
+    return {
+      typeUrl: "/regen.ecocredit.v1.EventUpdateProjectMetadata",
+      value: EventUpdateProjectMetadata.encode(message).finish()
+    };
   }
 
 };
@@ -1528,6 +2249,37 @@ export const EventUpdateBatchMetadata = {
     const message = createBaseEventUpdateBatchMetadata();
     message.batchDenom = object.batchDenom ?? "";
     return message;
+  },
+
+  fromAmino(object: EventUpdateBatchMetadataAmino): EventUpdateBatchMetadata {
+    return {
+      batchDenom: object.batch_denom
+    };
+  },
+
+  toAmino(message: EventUpdateBatchMetadata): EventUpdateBatchMetadataAmino {
+    const obj: any = {};
+    obj.batch_denom = message.batchDenom;
+    return obj;
+  },
+
+  fromAminoMsg(object: EventUpdateBatchMetadataAminoMsg): EventUpdateBatchMetadata {
+    return EventUpdateBatchMetadata.fromAmino(object.value);
+  },
+
+  fromProtoMsg(message: EventUpdateBatchMetadataProtoMsg): EventUpdateBatchMetadata {
+    return EventUpdateBatchMetadata.decode(message.value);
+  },
+
+  toProto(message: EventUpdateBatchMetadata): Uint8Array {
+    return EventUpdateBatchMetadata.encode(message).finish();
+  },
+
+  toProtoMsg(message: EventUpdateBatchMetadata): EventUpdateBatchMetadataProtoMsg {
+    return {
+      typeUrl: "/regen.ecocredit.v1.EventUpdateBatchMetadata",
+      value: EventUpdateBatchMetadata.encode(message).finish()
+    };
   }
 
 };
@@ -1585,6 +2337,37 @@ export const EventSealBatch = {
     const message = createBaseEventSealBatch();
     message.batchDenom = object.batchDenom ?? "";
     return message;
+  },
+
+  fromAmino(object: EventSealBatchAmino): EventSealBatch {
+    return {
+      batchDenom: object.batch_denom
+    };
+  },
+
+  toAmino(message: EventSealBatch): EventSealBatchAmino {
+    const obj: any = {};
+    obj.batch_denom = message.batchDenom;
+    return obj;
+  },
+
+  fromAminoMsg(object: EventSealBatchAminoMsg): EventSealBatch {
+    return EventSealBatch.fromAmino(object.value);
+  },
+
+  fromProtoMsg(message: EventSealBatchProtoMsg): EventSealBatch {
+    return EventSealBatch.decode(message.value);
+  },
+
+  toProto(message: EventSealBatch): Uint8Array {
+    return EventSealBatch.encode(message).finish();
+  },
+
+  toProtoMsg(message: EventSealBatch): EventSealBatchProtoMsg {
+    return {
+      typeUrl: "/regen.ecocredit.v1.EventSealBatch",
+      value: EventSealBatch.encode(message).finish()
+    };
   }
 
 };
@@ -1642,6 +2425,37 @@ export const EventAddCreditType = {
     const message = createBaseEventAddCreditType();
     message.abbreviation = object.abbreviation ?? "";
     return message;
+  },
+
+  fromAmino(object: EventAddCreditTypeAmino): EventAddCreditType {
+    return {
+      abbreviation: object.abbreviation
+    };
+  },
+
+  toAmino(message: EventAddCreditType): EventAddCreditTypeAmino {
+    const obj: any = {};
+    obj.abbreviation = message.abbreviation;
+    return obj;
+  },
+
+  fromAminoMsg(object: EventAddCreditTypeAminoMsg): EventAddCreditType {
+    return EventAddCreditType.fromAmino(object.value);
+  },
+
+  fromProtoMsg(message: EventAddCreditTypeProtoMsg): EventAddCreditType {
+    return EventAddCreditType.decode(message.value);
+  },
+
+  toProto(message: EventAddCreditType): Uint8Array {
+    return EventAddCreditType.encode(message).finish();
+  },
+
+  toProtoMsg(message: EventAddCreditType): EventAddCreditTypeProtoMsg {
+    return {
+      typeUrl: "/regen.ecocredit.v1.EventAddCreditType",
+      value: EventAddCreditType.encode(message).finish()
+    };
   }
 
 };
@@ -1759,6 +2573,47 @@ export const EventBridge = {
     message.owner = object.owner ?? "";
     message.batchDenom = object.batchDenom ?? "";
     return message;
+  },
+
+  fromAmino(object: EventBridgeAmino): EventBridge {
+    return {
+      target: object.target,
+      recipient: object.recipient,
+      contract: object.contract,
+      amount: object.amount,
+      owner: object.owner,
+      batchDenom: object.batch_denom
+    };
+  },
+
+  toAmino(message: EventBridge): EventBridgeAmino {
+    const obj: any = {};
+    obj.target = message.target;
+    obj.recipient = message.recipient;
+    obj.contract = message.contract;
+    obj.amount = message.amount;
+    obj.owner = message.owner;
+    obj.batch_denom = message.batchDenom;
+    return obj;
+  },
+
+  fromAminoMsg(object: EventBridgeAminoMsg): EventBridge {
+    return EventBridge.fromAmino(object.value);
+  },
+
+  fromProtoMsg(message: EventBridgeProtoMsg): EventBridge {
+    return EventBridge.decode(message.value);
+  },
+
+  toProto(message: EventBridge): Uint8Array {
+    return EventBridge.encode(message).finish();
+  },
+
+  toProtoMsg(message: EventBridge): EventBridgeProtoMsg {
+    return {
+      typeUrl: "/regen.ecocredit.v1.EventBridge",
+      value: EventBridge.encode(message).finish()
+    };
   }
 
 };
@@ -1852,6 +2707,43 @@ export const EventBridgeReceive = {
     message.amount = object.amount ?? "";
     message.originTx = object.originTx !== undefined && object.originTx !== null ? OriginTx.fromPartial(object.originTx) : undefined;
     return message;
+  },
+
+  fromAmino(object: EventBridgeReceiveAmino): EventBridgeReceive {
+    return {
+      projectId: object.project_id,
+      batchDenom: object.batch_denom,
+      amount: object.amount,
+      originTx: object?.origin_tx ? OriginTx.fromAmino(object.origin_tx) : undefined
+    };
+  },
+
+  toAmino(message: EventBridgeReceive): EventBridgeReceiveAmino {
+    const obj: any = {};
+    obj.project_id = message.projectId;
+    obj.batch_denom = message.batchDenom;
+    obj.amount = message.amount;
+    obj.origin_tx = message.originTx ? OriginTx.toAmino(message.originTx) : undefined;
+    return obj;
+  },
+
+  fromAminoMsg(object: EventBridgeReceiveAminoMsg): EventBridgeReceive {
+    return EventBridgeReceive.fromAmino(object.value);
+  },
+
+  fromProtoMsg(message: EventBridgeReceiveProtoMsg): EventBridgeReceive {
+    return EventBridgeReceive.decode(message.value);
+  },
+
+  toProto(message: EventBridgeReceive): Uint8Array {
+    return EventBridgeReceive.encode(message).finish();
+  },
+
+  toProtoMsg(message: EventBridgeReceive): EventBridgeReceiveProtoMsg {
+    return {
+      typeUrl: "/regen.ecocredit.v1.EventBridgeReceive",
+      value: EventBridgeReceive.encode(message).finish()
+    };
   }
 
 };

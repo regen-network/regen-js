@@ -1,4 +1,4 @@
-import { Any, AnySDKType } from "../../../google/protobuf/any";
+import { Any, AnyAmino, AnySDKType } from "../../../google/protobuf/any";
 import * as _m0 from "protobufjs/minimal";
 /**
  * Config represents the configuration for a Cosmos SDK ABCI app.
@@ -13,6 +13,27 @@ export interface Config {
     /** modules are the module configurations for the app. */
     modules: ModuleConfig[];
 }
+export interface ConfigProtoMsg {
+    typeUrl: "/cosmos.app.v1alpha1.Config";
+    value: Uint8Array;
+}
+/**
+ * Config represents the configuration for a Cosmos SDK ABCI app.
+ * It is intended that all state machine logic including the version of
+ * baseapp and tx handlers (and possibly even Tendermint) that an app needs
+ * can be described in a config object. For compatibility, the framework should
+ * allow a mixture of declarative and imperative app wiring, however, apps
+ * that strive for the maximum ease of maintainability should be able to describe
+ * their state machine with a config object alone.
+ */
+export interface ConfigAmino {
+    /** modules are the module configurations for the app. */
+    modules: ModuleConfigAmino[];
+}
+export interface ConfigAminoMsg {
+    type: "cosmos-sdk/Config";
+    value: ConfigAmino;
+}
 /**
  * Config represents the configuration for a Cosmos SDK ABCI app.
  * It is intended that all state machine logic including the version of
@@ -23,7 +44,6 @@ export interface Config {
  * their state machine with a config object alone.
  */
 export interface ConfigSDKType {
-    /** modules are the module configurations for the app. */
     modules: ModuleConfigSDKType[];
 }
 /** ModuleConfig is a module configuration for an app. */
@@ -47,8 +67,12 @@ export interface ModuleConfig {
      */
     config?: Any;
 }
+export interface ModuleConfigProtoMsg {
+    typeUrl: "/cosmos.app.v1alpha1.ModuleConfig";
+    value: Uint8Array;
+}
 /** ModuleConfig is a module configuration for an app. */
-export interface ModuleConfigSDKType {
+export interface ModuleConfigAmino {
     /**
      * name is the unique name of the module within the app. It should be a name
      * that persists between different versions of a module so that modules
@@ -66,6 +90,15 @@ export interface ModuleConfigSDKType {
      * config is the config object for the module. Module config messages should
      * define a ModuleDescriptor using the cosmos.app.v1alpha1.is_module extension.
      */
+    config?: AnyAmino;
+}
+export interface ModuleConfigAminoMsg {
+    type: "cosmos-sdk/ModuleConfig";
+    value: ModuleConfigAmino;
+}
+/** ModuleConfig is a module configuration for an app. */
+export interface ModuleConfigSDKType {
+    name: string;
     config?: AnySDKType;
 }
 export declare const Config: {
@@ -74,6 +107,13 @@ export declare const Config: {
     fromJSON(object: any): Config;
     toJSON(message: Config): unknown;
     fromPartial(object: Partial<Config>): Config;
+    fromAmino(object: ConfigAmino): Config;
+    toAmino(message: Config): ConfigAmino;
+    fromAminoMsg(object: ConfigAminoMsg): Config;
+    toAminoMsg(message: Config): ConfigAminoMsg;
+    fromProtoMsg(message: ConfigProtoMsg): Config;
+    toProto(message: Config): Uint8Array;
+    toProtoMsg(message: Config): ConfigProtoMsg;
 };
 export declare const ModuleConfig: {
     encode(message: ModuleConfig, writer?: _m0.Writer): _m0.Writer;
@@ -81,4 +121,11 @@ export declare const ModuleConfig: {
     fromJSON(object: any): ModuleConfig;
     toJSON(message: ModuleConfig): unknown;
     fromPartial(object: Partial<ModuleConfig>): ModuleConfig;
+    fromAmino(object: ModuleConfigAmino): ModuleConfig;
+    toAmino(message: ModuleConfig): ModuleConfigAmino;
+    fromAminoMsg(object: ModuleConfigAminoMsg): ModuleConfig;
+    toAminoMsg(message: ModuleConfig): ModuleConfigAminoMsg;
+    fromProtoMsg(message: ModuleConfigProtoMsg): ModuleConfig;
+    toProto(message: ModuleConfig): Uint8Array;
+    toProtoMsg(message: ModuleConfig): ModuleConfigProtoMsg;
 };

@@ -1,5 +1,5 @@
-import { Timestamp, TimestampSDKType } from "../../../../google/protobuf/timestamp";
-import { Duration, DurationSDKType } from "../../../../google/protobuf/duration";
+import { Timestamp, TimestampAmino, TimestampSDKType } from "../../../../google/protobuf/timestamp";
+import { Duration, DurationAmino, DurationSDKType } from "../../../../google/protobuf/duration";
 import * as _m0 from "protobufjs/minimal";
 import { isSet, fromJsonTimestamp, fromTimestamp } from "../../../../helpers";
 /** BasketCredit represents the information for a credit batch inside a basket. */
@@ -15,9 +15,13 @@ export interface BasketCredit {
 
   amount: string;
 }
+export interface BasketCreditProtoMsg {
+  typeUrl: "/regen.ecocredit.basket.v1.BasketCredit";
+  value: Uint8Array;
+}
 /** BasketCredit represents the information for a credit batch inside a basket. */
 
-export interface BasketCreditSDKType {
+export interface BasketCreditAmino {
   /** batch_denom is the unique ID of the credit batch. */
   batch_denom: string;
   /**
@@ -26,6 +30,16 @@ export interface BasketCreditSDKType {
    *  credit type for this batch.
    */
 
+  amount: string;
+}
+export interface BasketCreditAminoMsg {
+  type: "/regen.ecocredit.basket.v1.BasketCredit";
+  value: BasketCreditAmino;
+}
+/** BasketCredit represents the information for a credit batch inside a basket. */
+
+export interface BasketCreditSDKType {
+  batch_denom: string;
   amount: string;
 }
 /**
@@ -63,18 +77,22 @@ export interface DateCriteria {
 
   yearsInThePast: number;
 }
+export interface DateCriteriaProtoMsg {
+  typeUrl: "/regen.ecocredit.basket.v1.DateCriteria";
+  value: Uint8Array;
+}
 /**
  * DateCriteria represents the information for credit acceptance in a basket.
  * At most, only one of the values should be set.
  */
 
-export interface DateCriteriaSDKType {
+export interface DateCriteriaAmino {
   /**
    * min_start_date (optional) is the earliest start date for batches of credits
    * allowed into the basket. At most only one of `start_date_window`,
    * `min_start_date`, and `years_in_the_past` can be set for a basket.
    */
-  min_start_date?: TimestampSDKType;
+  min_start_date?: TimestampAmino;
   /**
    * start_date_window (optional) is a duration of time measured into the past
    * which sets a cutoff for batch start dates when adding new credits to the
@@ -84,7 +102,7 @@ export interface DateCriteriaSDKType {
    * `years_in_the_past` can be set for a basket.
    */
 
-  start_date_window?: DurationSDKType;
+  start_date_window?: DurationAmino;
   /**
    * years_in_the_past (optional) is the number of years into the past which
    * sets a cutoff for the batch start dates when adding new credits to the
@@ -96,6 +114,20 @@ export interface DateCriteriaSDKType {
    * Since Revision 1
    */
 
+  years_in_the_past: number;
+}
+export interface DateCriteriaAminoMsg {
+  type: "/regen.ecocredit.basket.v1.DateCriteria";
+  value: DateCriteriaAmino;
+}
+/**
+ * DateCriteria represents the information for credit acceptance in a basket.
+ * At most, only one of the values should be set.
+ */
+
+export interface DateCriteriaSDKType {
+  min_start_date?: TimestampSDKType;
+  start_date_window?: DurationSDKType;
   years_in_the_past: number;
 }
 
@@ -164,6 +196,39 @@ export const BasketCredit = {
     message.batchDenom = object.batchDenom ?? "";
     message.amount = object.amount ?? "";
     return message;
+  },
+
+  fromAmino(object: BasketCreditAmino): BasketCredit {
+    return {
+      batchDenom: object.batch_denom,
+      amount: object.amount
+    };
+  },
+
+  toAmino(message: BasketCredit): BasketCreditAmino {
+    const obj: any = {};
+    obj.batch_denom = message.batchDenom;
+    obj.amount = message.amount;
+    return obj;
+  },
+
+  fromAminoMsg(object: BasketCreditAminoMsg): BasketCredit {
+    return BasketCredit.fromAmino(object.value);
+  },
+
+  fromProtoMsg(message: BasketCreditProtoMsg): BasketCredit {
+    return BasketCredit.decode(message.value);
+  },
+
+  toProto(message: BasketCredit): Uint8Array {
+    return BasketCredit.encode(message).finish();
+  },
+
+  toProtoMsg(message: BasketCredit): BasketCreditProtoMsg {
+    return {
+      typeUrl: "/regen.ecocredit.basket.v1.BasketCredit",
+      value: BasketCredit.encode(message).finish()
+    };
   }
 
 };
@@ -245,6 +310,41 @@ export const DateCriteria = {
     message.startDateWindow = object.startDateWindow !== undefined && object.startDateWindow !== null ? Duration.fromPartial(object.startDateWindow) : undefined;
     message.yearsInThePast = object.yearsInThePast ?? 0;
     return message;
+  },
+
+  fromAmino(object: DateCriteriaAmino): DateCriteria {
+    return {
+      minStartDate: object?.min_start_date ? Timestamp.fromAmino(object.min_start_date) : undefined,
+      startDateWindow: object?.start_date_window ? Duration.fromAmino(object.start_date_window) : undefined,
+      yearsInThePast: object.years_in_the_past
+    };
+  },
+
+  toAmino(message: DateCriteria): DateCriteriaAmino {
+    const obj: any = {};
+    obj.min_start_date = message.minStartDate ? Timestamp.toAmino(message.minStartDate) : undefined;
+    obj.start_date_window = message.startDateWindow ? Duration.toAmino(message.startDateWindow) : undefined;
+    obj.years_in_the_past = message.yearsInThePast;
+    return obj;
+  },
+
+  fromAminoMsg(object: DateCriteriaAminoMsg): DateCriteria {
+    return DateCriteria.fromAmino(object.value);
+  },
+
+  fromProtoMsg(message: DateCriteriaProtoMsg): DateCriteria {
+    return DateCriteria.decode(message.value);
+  },
+
+  toProto(message: DateCriteria): Uint8Array {
+    return DateCriteria.encode(message).finish();
+  },
+
+  toProtoMsg(message: DateCriteria): DateCriteriaProtoMsg {
+    return {
+      typeUrl: "/regen.ecocredit.basket.v1.DateCriteria",
+      value: DateCriteria.encode(message).finish()
+    };
   }
 
 };

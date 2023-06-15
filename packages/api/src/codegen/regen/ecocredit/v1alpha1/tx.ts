@@ -1,4 +1,4 @@
-import { Timestamp, TimestampSDKType } from "../../../google/protobuf/timestamp";
+import { Timestamp, TimestampAmino, TimestampSDKType } from "../../../google/protobuf/timestamp";
 import * as _m0 from "protobufjs/minimal";
 import { isSet, bytesFromBase64, base64FromBytes, fromJsonTimestamp, fromTimestamp } from "../../../helpers";
 /** MsgCreateClass is the Msg/CreateClass request type. */
@@ -19,9 +19,13 @@ export interface MsgCreateClass {
 
   creditTypeName: string;
 }
+export interface MsgCreateClassProtoMsg {
+  typeUrl: "/regen.ecocredit.v1alpha1.MsgCreateClass";
+  value: Uint8Array;
+}
 /** MsgCreateClass is the Msg/CreateClass request type. */
 
-export interface MsgCreateClassSDKType {
+export interface MsgCreateClassAmino {
   /** admin is the address of the account that created the credit class. */
   admin: string;
   /** issuers are the account addresses of the approved issuers. */
@@ -37,16 +41,41 @@ export interface MsgCreateClassSDKType {
 
   credit_type_name: string;
 }
+export interface MsgCreateClassAminoMsg {
+  type: "/regen.ecocredit.v1alpha1.MsgCreateClass";
+  value: MsgCreateClassAmino;
+}
+/** MsgCreateClass is the Msg/CreateClass request type. */
+
+export interface MsgCreateClassSDKType {
+  admin: string;
+  issuers: string[];
+  metadata: Uint8Array;
+  credit_type_name: string;
+}
 /** MsgCreateClassResponse is the Msg/CreateClass response type. */
 
 export interface MsgCreateClassResponse {
   /** class_id is the unique ID of the newly created credit class. */
   classId: string;
 }
+export interface MsgCreateClassResponseProtoMsg {
+  typeUrl: "/regen.ecocredit.v1alpha1.MsgCreateClassResponse";
+  value: Uint8Array;
+}
+/** MsgCreateClassResponse is the Msg/CreateClass response type. */
+
+export interface MsgCreateClassResponseAmino {
+  /** class_id is the unique ID of the newly created credit class. */
+  class_id: string;
+}
+export interface MsgCreateClassResponseAminoMsg {
+  type: "/regen.ecocredit.v1alpha1.MsgCreateClassResponse";
+  value: MsgCreateClassResponseAmino;
+}
 /** MsgCreateClassResponse is the Msg/CreateClass response type. */
 
 export interface MsgCreateClassResponseSDKType {
-  /** class_id is the unique ID of the newly created credit class. */
   class_id: string;
 }
 /** MsgCreateBatch is the Msg/CreateBatch request type. */
@@ -86,9 +115,13 @@ export interface MsgCreateBatch {
 
   projectLocation: string;
 }
+export interface MsgCreateBatchProtoMsg {
+  typeUrl: "/regen.ecocredit.v1alpha1.MsgCreateBatch";
+  value: Uint8Array;
+}
 /** MsgCreateBatch is the Msg/CreateBatch request type. */
 
-export interface MsgCreateBatchSDKType {
+export interface MsgCreateBatchAmino {
   /** issuer is the address of the batch issuer. */
   issuer: string;
   /** class_id is the unique ID of the class. */
@@ -96,7 +129,7 @@ export interface MsgCreateBatchSDKType {
   class_id: string;
   /** issuance are the credits issued in the batch. */
 
-  issuance: MsgCreateBatch_BatchIssuanceSDKType[];
+  issuance: MsgCreateBatch_BatchIssuanceAmino[];
   /** metadata is any arbitrary metadata attached to the credit batch. */
 
   metadata: Uint8Array;
@@ -105,13 +138,13 @@ export interface MsgCreateBatchSDKType {
    * was quantified and verified.
    */
 
-  start_date?: TimestampSDKType;
+  start_date?: TimestampAmino;
   /**
    * end_date is the end of the period during which this credit batch was
    * quantified and verified.
    */
 
-  end_date?: TimestampSDKType;
+  end_date?: TimestampAmino;
   /**
    * project_location is the location of the project backing the credits in this
    * batch. It is a string of the form
@@ -121,6 +154,21 @@ export interface MsgCreateBatchSDKType {
    * and postal-code can be added for increasing precision.
    */
 
+  project_location: string;
+}
+export interface MsgCreateBatchAminoMsg {
+  type: "/regen.ecocredit.v1alpha1.MsgCreateBatch";
+  value: MsgCreateBatchAmino;
+}
+/** MsgCreateBatch is the Msg/CreateBatch request type. */
+
+export interface MsgCreateBatchSDKType {
+  issuer: string;
+  class_id: string;
+  issuance: MsgCreateBatch_BatchIssuanceSDKType[];
+  metadata: Uint8Array;
+  start_date?: TimestampSDKType;
+  end_date?: TimestampSDKType;
   project_location: string;
 }
 /**
@@ -155,12 +203,16 @@ export interface MsgCreateBatch_BatchIssuance {
 
   retirementLocation: string;
 }
+export interface MsgCreateBatch_BatchIssuanceProtoMsg {
+  typeUrl: "/regen.ecocredit.v1alpha1.BatchIssuance";
+  value: Uint8Array;
+}
 /**
  * BatchIssuance represents the issuance of some credits in a batch to a
  * single recipient.
  */
 
-export interface MsgCreateBatch_BatchIssuanceSDKType {
+export interface MsgCreateBatch_BatchIssuanceAmino {
   /** recipient is the account of the recipient. */
   recipient: string;
   /**
@@ -187,16 +239,44 @@ export interface MsgCreateBatch_BatchIssuanceSDKType {
 
   retirement_location: string;
 }
+export interface MsgCreateBatch_BatchIssuanceAminoMsg {
+  type: "/regen.ecocredit.v1alpha1.BatchIssuance";
+  value: MsgCreateBatch_BatchIssuanceAmino;
+}
+/**
+ * BatchIssuance represents the issuance of some credits in a batch to a
+ * single recipient.
+ */
+
+export interface MsgCreateBatch_BatchIssuanceSDKType {
+  recipient: string;
+  tradable_amount: string;
+  retired_amount: string;
+  retirement_location: string;
+}
 /** MsgCreateBatchResponse is the Msg/CreateBatch response type. */
 
 export interface MsgCreateBatchResponse {
   /** batch_denom is the unique denomination ID of the newly created batch. */
   batchDenom: string;
 }
+export interface MsgCreateBatchResponseProtoMsg {
+  typeUrl: "/regen.ecocredit.v1alpha1.MsgCreateBatchResponse";
+  value: Uint8Array;
+}
+/** MsgCreateBatchResponse is the Msg/CreateBatch response type. */
+
+export interface MsgCreateBatchResponseAmino {
+  /** batch_denom is the unique denomination ID of the newly created batch. */
+  batch_denom: string;
+}
+export interface MsgCreateBatchResponseAminoMsg {
+  type: "/regen.ecocredit.v1alpha1.MsgCreateBatchResponse";
+  value: MsgCreateBatchResponseAmino;
+}
 /** MsgCreateBatchResponse is the Msg/CreateBatch response type. */
 
 export interface MsgCreateBatchResponseSDKType {
-  /** batch_denom is the unique denomination ID of the newly created batch. */
   batch_denom: string;
 }
 /** MsgSend is the Msg/Send request type. */
@@ -211,9 +291,13 @@ export interface MsgSend {
 
   credits: MsgSend_SendCredits[];
 }
+export interface MsgSendProtoMsg {
+  typeUrl: "/regen.ecocredit.v1alpha1.MsgSend";
+  value: Uint8Array;
+}
 /** MsgSend is the Msg/Send request type. */
 
-export interface MsgSendSDKType {
+export interface MsgSendAmino {
   /** sender is the address of the account sending credits. */
   sender: string;
   /** sender is the address of the account receiving credits. */
@@ -221,6 +305,17 @@ export interface MsgSendSDKType {
   recipient: string;
   /** credits are the credits being sent. */
 
+  credits: MsgSend_SendCreditsAmino[];
+}
+export interface MsgSendAminoMsg {
+  type: "/regen.ecocredit.v1alpha1.MsgSend";
+  value: MsgSendAmino;
+}
+/** MsgSend is the Msg/Send request type. */
+
+export interface MsgSendSDKType {
+  sender: string;
+  recipient: string;
   credits: MsgSend_SendCreditsSDKType[];
 }
 /**
@@ -257,13 +352,17 @@ export interface MsgSend_SendCredits {
 
   retirementLocation: string;
 }
+export interface MsgSend_SendCreditsProtoMsg {
+  typeUrl: "/regen.ecocredit.v1alpha1.SendCredits";
+  value: Uint8Array;
+}
 /**
  * SendCredits specifies a batch and the number of credits being transferred.
  * This is split into tradable credits, which will remain tradable on receipt,
  * and retired credits, which will be retired on receipt.
  */
 
-export interface MsgSend_SendCreditsSDKType {
+export interface MsgSend_SendCreditsAmino {
   /** batch_denom is the unique ID of the credit batch. */
   batch_denom: string;
   /**
@@ -291,9 +390,36 @@ export interface MsgSend_SendCreditsSDKType {
 
   retirement_location: string;
 }
+export interface MsgSend_SendCreditsAminoMsg {
+  type: "/regen.ecocredit.v1alpha1.SendCredits";
+  value: MsgSend_SendCreditsAmino;
+}
+/**
+ * SendCredits specifies a batch and the number of credits being transferred.
+ * This is split into tradable credits, which will remain tradable on receipt,
+ * and retired credits, which will be retired on receipt.
+ */
+
+export interface MsgSend_SendCreditsSDKType {
+  batch_denom: string;
+  tradable_amount: string;
+  retired_amount: string;
+  retirement_location: string;
+}
 /** MsgSendResponse is the Msg/Send response type. */
 
 export interface MsgSendResponse {}
+export interface MsgSendResponseProtoMsg {
+  typeUrl: "/regen.ecocredit.v1alpha1.MsgSendResponse";
+  value: Uint8Array;
+}
+/** MsgSendResponse is the Msg/Send response type. */
+
+export interface MsgSendResponseAmino {}
+export interface MsgSendResponseAminoMsg {
+  type: "/regen.ecocredit.v1alpha1.MsgSendResponse";
+  value: MsgSendResponseAmino;
+}
 /** MsgSendResponse is the Msg/Send response type. */
 
 export interface MsgSendResponseSDKType {}
@@ -315,14 +441,18 @@ export interface MsgRetire {
 
   location: string;
 }
+export interface MsgRetireProtoMsg {
+  typeUrl: "/regen.ecocredit.v1alpha1.MsgRetire";
+  value: Uint8Array;
+}
 /** MsgRetire is the Msg/Retire request type. */
 
-export interface MsgRetireSDKType {
+export interface MsgRetireAmino {
   /** holder is the credit holder address. */
   holder: string;
   /** credits are the credits being retired. */
 
-  credits: MsgRetire_RetireCreditsSDKType[];
+  credits: MsgRetire_RetireCreditsAmino[];
   /**
    * location is the location of the beneficiary or buyer of the retired
    * credits. It is a string of the form
@@ -331,6 +461,17 @@ export interface MsgRetireSDKType {
    * alphanumeric characters.
    */
 
+  location: string;
+}
+export interface MsgRetireAminoMsg {
+  type: "/regen.ecocredit.v1alpha1.MsgRetire";
+  value: MsgRetireAmino;
+}
+/** MsgRetire is the Msg/Retire request type. */
+
+export interface MsgRetireSDKType {
+  holder: string;
+  credits: MsgRetire_RetireCreditsSDKType[];
   location: string;
 }
 /** RetireCredits specifies a batch and the number of credits being retired. */
@@ -346,9 +487,13 @@ export interface MsgRetire_RetireCredits {
 
   amount: string;
 }
+export interface MsgRetire_RetireCreditsProtoMsg {
+  typeUrl: "/regen.ecocredit.v1alpha1.RetireCredits";
+  value: Uint8Array;
+}
 /** RetireCredits specifies a batch and the number of credits being retired. */
 
-export interface MsgRetire_RetireCreditsSDKType {
+export interface MsgRetire_RetireCreditsAmino {
   /** batch_denom is the unique ID of the credit batch. */
   batch_denom: string;
   /**
@@ -359,9 +504,30 @@ export interface MsgRetire_RetireCreditsSDKType {
 
   amount: string;
 }
+export interface MsgRetire_RetireCreditsAminoMsg {
+  type: "/regen.ecocredit.v1alpha1.RetireCredits";
+  value: MsgRetire_RetireCreditsAmino;
+}
+/** RetireCredits specifies a batch and the number of credits being retired. */
+
+export interface MsgRetire_RetireCreditsSDKType {
+  batch_denom: string;
+  amount: string;
+}
 /** MsgRetire is the Msg/Retire response type. */
 
 export interface MsgRetireResponse {}
+export interface MsgRetireResponseProtoMsg {
+  typeUrl: "/regen.ecocredit.v1alpha1.MsgRetireResponse";
+  value: Uint8Array;
+}
+/** MsgRetire is the Msg/Retire response type. */
+
+export interface MsgRetireResponseAmino {}
+export interface MsgRetireResponseAminoMsg {
+  type: "/regen.ecocredit.v1alpha1.MsgRetireResponse";
+  value: MsgRetireResponseAmino;
+}
 /** MsgRetire is the Msg/Retire response type. */
 
 export interface MsgRetireResponseSDKType {}
@@ -374,13 +540,27 @@ export interface MsgCancel {
 
   credits: MsgCancel_CancelCredits[];
 }
+export interface MsgCancelProtoMsg {
+  typeUrl: "/regen.ecocredit.v1alpha1.MsgCancel";
+  value: Uint8Array;
+}
 /** MsgCancel is the Msg/Cancel request type. */
 
-export interface MsgCancelSDKType {
+export interface MsgCancelAmino {
   /** holder is the credit holder address. */
   holder: string;
   /** credits are the credits being cancelled. */
 
+  credits: MsgCancel_CancelCreditsAmino[];
+}
+export interface MsgCancelAminoMsg {
+  type: "/regen.ecocredit.v1alpha1.MsgCancel";
+  value: MsgCancelAmino;
+}
+/** MsgCancel is the Msg/Cancel request type. */
+
+export interface MsgCancelSDKType {
+  holder: string;
   credits: MsgCancel_CancelCreditsSDKType[];
 }
 /** CancelCredits specifies a batch and the number of credits being cancelled. */
@@ -396,9 +576,13 @@ export interface MsgCancel_CancelCredits {
 
   amount: string;
 }
+export interface MsgCancel_CancelCreditsProtoMsg {
+  typeUrl: "/regen.ecocredit.v1alpha1.CancelCredits";
+  value: Uint8Array;
+}
 /** CancelCredits specifies a batch and the number of credits being cancelled. */
 
-export interface MsgCancel_CancelCreditsSDKType {
+export interface MsgCancel_CancelCreditsAmino {
   /** batch_denom is the unique ID of the credit batch. */
   batch_denom: string;
   /**
@@ -409,9 +593,30 @@ export interface MsgCancel_CancelCreditsSDKType {
 
   amount: string;
 }
+export interface MsgCancel_CancelCreditsAminoMsg {
+  type: "/regen.ecocredit.v1alpha1.CancelCredits";
+  value: MsgCancel_CancelCreditsAmino;
+}
+/** CancelCredits specifies a batch and the number of credits being cancelled. */
+
+export interface MsgCancel_CancelCreditsSDKType {
+  batch_denom: string;
+  amount: string;
+}
 /** MsgCancelResponse is the Msg/Cancel response type. */
 
 export interface MsgCancelResponse {}
+export interface MsgCancelResponseProtoMsg {
+  typeUrl: "/regen.ecocredit.v1alpha1.MsgCancelResponse";
+  value: Uint8Array;
+}
+/** MsgCancelResponse is the Msg/Cancel response type. */
+
+export interface MsgCancelResponseAmino {}
+export interface MsgCancelResponseAminoMsg {
+  type: "/regen.ecocredit.v1alpha1.MsgCancelResponse";
+  value: MsgCancelResponseAmino;
+}
 /** MsgCancelResponse is the Msg/Cancel response type. */
 
 export interface MsgCancelResponseSDKType {}
@@ -427,9 +632,13 @@ export interface MsgUpdateClassAdmin {
 
   newAdmin: string;
 }
+export interface MsgUpdateClassAdminProtoMsg {
+  typeUrl: "/regen.ecocredit.v1alpha1.MsgUpdateClassAdmin";
+  value: Uint8Array;
+}
 /** MsgUpdateClassAdmin is the Msg/UpdateClassAdmin request type. */
 
-export interface MsgUpdateClassAdminSDKType {
+export interface MsgUpdateClassAdminAmino {
   /** admin is the address of the account that is the admin of the credit class. */
   admin: string;
   /** class_id is the unique ID of the credit class. */
@@ -439,9 +648,31 @@ export interface MsgUpdateClassAdminSDKType {
 
   new_admin: string;
 }
+export interface MsgUpdateClassAdminAminoMsg {
+  type: "/regen.ecocredit.v1alpha1.MsgUpdateClassAdmin";
+  value: MsgUpdateClassAdminAmino;
+}
+/** MsgUpdateClassAdmin is the Msg/UpdateClassAdmin request type. */
+
+export interface MsgUpdateClassAdminSDKType {
+  admin: string;
+  class_id: string;
+  new_admin: string;
+}
 /** MsgUpdateClassAdminResponse is the MsgUpdateClassAdmin response type. */
 
 export interface MsgUpdateClassAdminResponse {}
+export interface MsgUpdateClassAdminResponseProtoMsg {
+  typeUrl: "/regen.ecocredit.v1alpha1.MsgUpdateClassAdminResponse";
+  value: Uint8Array;
+}
+/** MsgUpdateClassAdminResponse is the MsgUpdateClassAdmin response type. */
+
+export interface MsgUpdateClassAdminResponseAmino {}
+export interface MsgUpdateClassAdminResponseAminoMsg {
+  type: "/regen.ecocredit.v1alpha1.MsgUpdateClassAdminResponse";
+  value: MsgUpdateClassAdminResponseAmino;
+}
 /** MsgUpdateClassAdminResponse is the MsgUpdateClassAdmin response type. */
 
 export interface MsgUpdateClassAdminResponseSDKType {}
@@ -457,9 +688,13 @@ export interface MsgUpdateClassIssuers {
 
   issuers: string[];
 }
+export interface MsgUpdateClassIssuersProtoMsg {
+  typeUrl: "/regen.ecocredit.v1alpha1.MsgUpdateClassIssuers";
+  value: Uint8Array;
+}
 /** MsgUpdateClassIssuers is the Msg/UpdateClassIssuers request type. */
 
-export interface MsgUpdateClassIssuersSDKType {
+export interface MsgUpdateClassIssuersAmino {
   /** admin is the address of the account that is the admin of the credit class. */
   admin: string;
   /** class_id is the unique ID of the credit class. */
@@ -469,9 +704,31 @@ export interface MsgUpdateClassIssuersSDKType {
 
   issuers: string[];
 }
+export interface MsgUpdateClassIssuersAminoMsg {
+  type: "/regen.ecocredit.v1alpha1.MsgUpdateClassIssuers";
+  value: MsgUpdateClassIssuersAmino;
+}
+/** MsgUpdateClassIssuers is the Msg/UpdateClassIssuers request type. */
+
+export interface MsgUpdateClassIssuersSDKType {
+  admin: string;
+  class_id: string;
+  issuers: string[];
+}
 /** MsgUpdateClassIssuersResponse is the MsgUpdateClassIssuers response type. */
 
 export interface MsgUpdateClassIssuersResponse {}
+export interface MsgUpdateClassIssuersResponseProtoMsg {
+  typeUrl: "/regen.ecocredit.v1alpha1.MsgUpdateClassIssuersResponse";
+  value: Uint8Array;
+}
+/** MsgUpdateClassIssuersResponse is the MsgUpdateClassIssuers response type. */
+
+export interface MsgUpdateClassIssuersResponseAmino {}
+export interface MsgUpdateClassIssuersResponseAminoMsg {
+  type: "/regen.ecocredit.v1alpha1.MsgUpdateClassIssuersResponse";
+  value: MsgUpdateClassIssuersResponseAmino;
+}
 /** MsgUpdateClassIssuersResponse is the MsgUpdateClassIssuers response type. */
 
 export interface MsgUpdateClassIssuersResponseSDKType {}
@@ -490,9 +747,13 @@ export interface MsgUpdateClassMetadata {
 
   metadata: Uint8Array;
 }
+export interface MsgUpdateClassMetadataProtoMsg {
+  typeUrl: "/regen.ecocredit.v1alpha1.MsgUpdateClassMetadata";
+  value: Uint8Array;
+}
 /** MsgUpdateClassMetadata is the Msg/UpdateClassMetadata request type. */
 
-export interface MsgUpdateClassMetadataSDKType {
+export interface MsgUpdateClassMetadataAmino {
   /** admin is the address of the account that is the admin of the credit class. */
   admin: string;
   /** class_id is the unique ID of the credit class. */
@@ -505,9 +766,31 @@ export interface MsgUpdateClassMetadataSDKType {
 
   metadata: Uint8Array;
 }
+export interface MsgUpdateClassMetadataAminoMsg {
+  type: "/regen.ecocredit.v1alpha1.MsgUpdateClassMetadata";
+  value: MsgUpdateClassMetadataAmino;
+}
+/** MsgUpdateClassMetadata is the Msg/UpdateClassMetadata request type. */
+
+export interface MsgUpdateClassMetadataSDKType {
+  admin: string;
+  class_id: string;
+  metadata: Uint8Array;
+}
 /** MsgUpdateClassMetadataResponse is the MsgUpdateClassMetadata response type. */
 
 export interface MsgUpdateClassMetadataResponse {}
+export interface MsgUpdateClassMetadataResponseProtoMsg {
+  typeUrl: "/regen.ecocredit.v1alpha1.MsgUpdateClassMetadataResponse";
+  value: Uint8Array;
+}
+/** MsgUpdateClassMetadataResponse is the MsgUpdateClassMetadata response type. */
+
+export interface MsgUpdateClassMetadataResponseAmino {}
+export interface MsgUpdateClassMetadataResponseAminoMsg {
+  type: "/regen.ecocredit.v1alpha1.MsgUpdateClassMetadataResponse";
+  value: MsgUpdateClassMetadataResponseAmino;
+}
 /** MsgUpdateClassMetadataResponse is the MsgUpdateClassMetadata response type. */
 
 export interface MsgUpdateClassMetadataResponseSDKType {}
@@ -607,6 +890,49 @@ export const MsgCreateClass = {
     message.metadata = object.metadata ?? new Uint8Array();
     message.creditTypeName = object.creditTypeName ?? "";
     return message;
+  },
+
+  fromAmino(object: MsgCreateClassAmino): MsgCreateClass {
+    return {
+      admin: object.admin,
+      issuers: Array.isArray(object?.issuers) ? object.issuers.map((e: any) => e) : [],
+      metadata: object.metadata,
+      creditTypeName: object.credit_type_name
+    };
+  },
+
+  toAmino(message: MsgCreateClass): MsgCreateClassAmino {
+    const obj: any = {};
+    obj.admin = message.admin;
+
+    if (message.issuers) {
+      obj.issuers = message.issuers.map(e => e);
+    } else {
+      obj.issuers = [];
+    }
+
+    obj.metadata = message.metadata;
+    obj.credit_type_name = message.creditTypeName;
+    return obj;
+  },
+
+  fromAminoMsg(object: MsgCreateClassAminoMsg): MsgCreateClass {
+    return MsgCreateClass.fromAmino(object.value);
+  },
+
+  fromProtoMsg(message: MsgCreateClassProtoMsg): MsgCreateClass {
+    return MsgCreateClass.decode(message.value);
+  },
+
+  toProto(message: MsgCreateClass): Uint8Array {
+    return MsgCreateClass.encode(message).finish();
+  },
+
+  toProtoMsg(message: MsgCreateClass): MsgCreateClassProtoMsg {
+    return {
+      typeUrl: "/regen.ecocredit.v1alpha1.MsgCreateClass",
+      value: MsgCreateClass.encode(message).finish()
+    };
   }
 
 };
@@ -664,6 +990,37 @@ export const MsgCreateClassResponse = {
     const message = createBaseMsgCreateClassResponse();
     message.classId = object.classId ?? "";
     return message;
+  },
+
+  fromAmino(object: MsgCreateClassResponseAmino): MsgCreateClassResponse {
+    return {
+      classId: object.class_id
+    };
+  },
+
+  toAmino(message: MsgCreateClassResponse): MsgCreateClassResponseAmino {
+    const obj: any = {};
+    obj.class_id = message.classId;
+    return obj;
+  },
+
+  fromAminoMsg(object: MsgCreateClassResponseAminoMsg): MsgCreateClassResponse {
+    return MsgCreateClassResponse.fromAmino(object.value);
+  },
+
+  fromProtoMsg(message: MsgCreateClassResponseProtoMsg): MsgCreateClassResponse {
+    return MsgCreateClassResponse.decode(message.value);
+  },
+
+  toProto(message: MsgCreateClassResponse): Uint8Array {
+    return MsgCreateClassResponse.encode(message).finish();
+  },
+
+  toProtoMsg(message: MsgCreateClassResponse): MsgCreateClassResponseProtoMsg {
+    return {
+      typeUrl: "/regen.ecocredit.v1alpha1.MsgCreateClassResponse",
+      value: MsgCreateClassResponse.encode(message).finish()
+    };
   }
 
 };
@@ -799,6 +1156,55 @@ export const MsgCreateBatch = {
     message.endDate = object.endDate !== undefined && object.endDate !== null ? Timestamp.fromPartial(object.endDate) : undefined;
     message.projectLocation = object.projectLocation ?? "";
     return message;
+  },
+
+  fromAmino(object: MsgCreateBatchAmino): MsgCreateBatch {
+    return {
+      issuer: object.issuer,
+      classId: object.class_id,
+      issuance: Array.isArray(object?.issuance) ? object.issuance.map((e: any) => MsgCreateBatch_BatchIssuance.fromAmino(e)) : [],
+      metadata: object.metadata,
+      startDate: object?.start_date ? Timestamp.fromAmino(object.start_date) : undefined,
+      endDate: object?.end_date ? Timestamp.fromAmino(object.end_date) : undefined,
+      projectLocation: object.project_location
+    };
+  },
+
+  toAmino(message: MsgCreateBatch): MsgCreateBatchAmino {
+    const obj: any = {};
+    obj.issuer = message.issuer;
+    obj.class_id = message.classId;
+
+    if (message.issuance) {
+      obj.issuance = message.issuance.map(e => e ? MsgCreateBatch_BatchIssuance.toAmino(e) : undefined);
+    } else {
+      obj.issuance = [];
+    }
+
+    obj.metadata = message.metadata;
+    obj.start_date = message.startDate ? Timestamp.toAmino(message.startDate) : undefined;
+    obj.end_date = message.endDate ? Timestamp.toAmino(message.endDate) : undefined;
+    obj.project_location = message.projectLocation;
+    return obj;
+  },
+
+  fromAminoMsg(object: MsgCreateBatchAminoMsg): MsgCreateBatch {
+    return MsgCreateBatch.fromAmino(object.value);
+  },
+
+  fromProtoMsg(message: MsgCreateBatchProtoMsg): MsgCreateBatch {
+    return MsgCreateBatch.decode(message.value);
+  },
+
+  toProto(message: MsgCreateBatch): Uint8Array {
+    return MsgCreateBatch.encode(message).finish();
+  },
+
+  toProtoMsg(message: MsgCreateBatch): MsgCreateBatchProtoMsg {
+    return {
+      typeUrl: "/regen.ecocredit.v1alpha1.MsgCreateBatch",
+      value: MsgCreateBatch.encode(message).finish()
+    };
   }
 
 };
@@ -892,6 +1298,43 @@ export const MsgCreateBatch_BatchIssuance = {
     message.retiredAmount = object.retiredAmount ?? "";
     message.retirementLocation = object.retirementLocation ?? "";
     return message;
+  },
+
+  fromAmino(object: MsgCreateBatch_BatchIssuanceAmino): MsgCreateBatch_BatchIssuance {
+    return {
+      recipient: object.recipient,
+      tradableAmount: object.tradable_amount,
+      retiredAmount: object.retired_amount,
+      retirementLocation: object.retirement_location
+    };
+  },
+
+  toAmino(message: MsgCreateBatch_BatchIssuance): MsgCreateBatch_BatchIssuanceAmino {
+    const obj: any = {};
+    obj.recipient = message.recipient;
+    obj.tradable_amount = message.tradableAmount;
+    obj.retired_amount = message.retiredAmount;
+    obj.retirement_location = message.retirementLocation;
+    return obj;
+  },
+
+  fromAminoMsg(object: MsgCreateBatch_BatchIssuanceAminoMsg): MsgCreateBatch_BatchIssuance {
+    return MsgCreateBatch_BatchIssuance.fromAmino(object.value);
+  },
+
+  fromProtoMsg(message: MsgCreateBatch_BatchIssuanceProtoMsg): MsgCreateBatch_BatchIssuance {
+    return MsgCreateBatch_BatchIssuance.decode(message.value);
+  },
+
+  toProto(message: MsgCreateBatch_BatchIssuance): Uint8Array {
+    return MsgCreateBatch_BatchIssuance.encode(message).finish();
+  },
+
+  toProtoMsg(message: MsgCreateBatch_BatchIssuance): MsgCreateBatch_BatchIssuanceProtoMsg {
+    return {
+      typeUrl: "/regen.ecocredit.v1alpha1.BatchIssuance",
+      value: MsgCreateBatch_BatchIssuance.encode(message).finish()
+    };
   }
 
 };
@@ -949,6 +1392,37 @@ export const MsgCreateBatchResponse = {
     const message = createBaseMsgCreateBatchResponse();
     message.batchDenom = object.batchDenom ?? "";
     return message;
+  },
+
+  fromAmino(object: MsgCreateBatchResponseAmino): MsgCreateBatchResponse {
+    return {
+      batchDenom: object.batch_denom
+    };
+  },
+
+  toAmino(message: MsgCreateBatchResponse): MsgCreateBatchResponseAmino {
+    const obj: any = {};
+    obj.batch_denom = message.batchDenom;
+    return obj;
+  },
+
+  fromAminoMsg(object: MsgCreateBatchResponseAminoMsg): MsgCreateBatchResponse {
+    return MsgCreateBatchResponse.fromAmino(object.value);
+  },
+
+  fromProtoMsg(message: MsgCreateBatchResponseProtoMsg): MsgCreateBatchResponse {
+    return MsgCreateBatchResponse.decode(message.value);
+  },
+
+  toProto(message: MsgCreateBatchResponse): Uint8Array {
+    return MsgCreateBatchResponse.encode(message).finish();
+  },
+
+  toProtoMsg(message: MsgCreateBatchResponse): MsgCreateBatchResponseProtoMsg {
+    return {
+      typeUrl: "/regen.ecocredit.v1alpha1.MsgCreateBatchResponse",
+      value: MsgCreateBatchResponse.encode(message).finish()
+    };
   }
 
 };
@@ -1036,6 +1510,47 @@ export const MsgSend = {
     message.recipient = object.recipient ?? "";
     message.credits = object.credits?.map(e => MsgSend_SendCredits.fromPartial(e)) || [];
     return message;
+  },
+
+  fromAmino(object: MsgSendAmino): MsgSend {
+    return {
+      sender: object.sender,
+      recipient: object.recipient,
+      credits: Array.isArray(object?.credits) ? object.credits.map((e: any) => MsgSend_SendCredits.fromAmino(e)) : []
+    };
+  },
+
+  toAmino(message: MsgSend): MsgSendAmino {
+    const obj: any = {};
+    obj.sender = message.sender;
+    obj.recipient = message.recipient;
+
+    if (message.credits) {
+      obj.credits = message.credits.map(e => e ? MsgSend_SendCredits.toAmino(e) : undefined);
+    } else {
+      obj.credits = [];
+    }
+
+    return obj;
+  },
+
+  fromAminoMsg(object: MsgSendAminoMsg): MsgSend {
+    return MsgSend.fromAmino(object.value);
+  },
+
+  fromProtoMsg(message: MsgSendProtoMsg): MsgSend {
+    return MsgSend.decode(message.value);
+  },
+
+  toProto(message: MsgSend): Uint8Array {
+    return MsgSend.encode(message).finish();
+  },
+
+  toProtoMsg(message: MsgSend): MsgSendProtoMsg {
+    return {
+      typeUrl: "/regen.ecocredit.v1alpha1.MsgSend",
+      value: MsgSend.encode(message).finish()
+    };
   }
 
 };
@@ -1129,6 +1644,43 @@ export const MsgSend_SendCredits = {
     message.retiredAmount = object.retiredAmount ?? "";
     message.retirementLocation = object.retirementLocation ?? "";
     return message;
+  },
+
+  fromAmino(object: MsgSend_SendCreditsAmino): MsgSend_SendCredits {
+    return {
+      batchDenom: object.batch_denom,
+      tradableAmount: object.tradable_amount,
+      retiredAmount: object.retired_amount,
+      retirementLocation: object.retirement_location
+    };
+  },
+
+  toAmino(message: MsgSend_SendCredits): MsgSend_SendCreditsAmino {
+    const obj: any = {};
+    obj.batch_denom = message.batchDenom;
+    obj.tradable_amount = message.tradableAmount;
+    obj.retired_amount = message.retiredAmount;
+    obj.retirement_location = message.retirementLocation;
+    return obj;
+  },
+
+  fromAminoMsg(object: MsgSend_SendCreditsAminoMsg): MsgSend_SendCredits {
+    return MsgSend_SendCredits.fromAmino(object.value);
+  },
+
+  fromProtoMsg(message: MsgSend_SendCreditsProtoMsg): MsgSend_SendCredits {
+    return MsgSend_SendCredits.decode(message.value);
+  },
+
+  toProto(message: MsgSend_SendCredits): Uint8Array {
+    return MsgSend_SendCredits.encode(message).finish();
+  },
+
+  toProtoMsg(message: MsgSend_SendCredits): MsgSend_SendCreditsProtoMsg {
+    return {
+      typeUrl: "/regen.ecocredit.v1alpha1.SendCredits",
+      value: MsgSend_SendCredits.encode(message).finish()
+    };
   }
 
 };
@@ -1172,6 +1724,34 @@ export const MsgSendResponse = {
   fromPartial(_: Partial<MsgSendResponse>): MsgSendResponse {
     const message = createBaseMsgSendResponse();
     return message;
+  },
+
+  fromAmino(_: MsgSendResponseAmino): MsgSendResponse {
+    return {};
+  },
+
+  toAmino(_: MsgSendResponse): MsgSendResponseAmino {
+    const obj: any = {};
+    return obj;
+  },
+
+  fromAminoMsg(object: MsgSendResponseAminoMsg): MsgSendResponse {
+    return MsgSendResponse.fromAmino(object.value);
+  },
+
+  fromProtoMsg(message: MsgSendResponseProtoMsg): MsgSendResponse {
+    return MsgSendResponse.decode(message.value);
+  },
+
+  toProto(message: MsgSendResponse): Uint8Array {
+    return MsgSendResponse.encode(message).finish();
+  },
+
+  toProtoMsg(message: MsgSendResponse): MsgSendResponseProtoMsg {
+    return {
+      typeUrl: "/regen.ecocredit.v1alpha1.MsgSendResponse",
+      value: MsgSendResponse.encode(message).finish()
+    };
   }
 
 };
@@ -1259,6 +1839,47 @@ export const MsgRetire = {
     message.credits = object.credits?.map(e => MsgRetire_RetireCredits.fromPartial(e)) || [];
     message.location = object.location ?? "";
     return message;
+  },
+
+  fromAmino(object: MsgRetireAmino): MsgRetire {
+    return {
+      holder: object.holder,
+      credits: Array.isArray(object?.credits) ? object.credits.map((e: any) => MsgRetire_RetireCredits.fromAmino(e)) : [],
+      location: object.location
+    };
+  },
+
+  toAmino(message: MsgRetire): MsgRetireAmino {
+    const obj: any = {};
+    obj.holder = message.holder;
+
+    if (message.credits) {
+      obj.credits = message.credits.map(e => e ? MsgRetire_RetireCredits.toAmino(e) : undefined);
+    } else {
+      obj.credits = [];
+    }
+
+    obj.location = message.location;
+    return obj;
+  },
+
+  fromAminoMsg(object: MsgRetireAminoMsg): MsgRetire {
+    return MsgRetire.fromAmino(object.value);
+  },
+
+  fromProtoMsg(message: MsgRetireProtoMsg): MsgRetire {
+    return MsgRetire.decode(message.value);
+  },
+
+  toProto(message: MsgRetire): Uint8Array {
+    return MsgRetire.encode(message).finish();
+  },
+
+  toProtoMsg(message: MsgRetire): MsgRetireProtoMsg {
+    return {
+      typeUrl: "/regen.ecocredit.v1alpha1.MsgRetire",
+      value: MsgRetire.encode(message).finish()
+    };
   }
 
 };
@@ -1328,6 +1949,39 @@ export const MsgRetire_RetireCredits = {
     message.batchDenom = object.batchDenom ?? "";
     message.amount = object.amount ?? "";
     return message;
+  },
+
+  fromAmino(object: MsgRetire_RetireCreditsAmino): MsgRetire_RetireCredits {
+    return {
+      batchDenom: object.batch_denom,
+      amount: object.amount
+    };
+  },
+
+  toAmino(message: MsgRetire_RetireCredits): MsgRetire_RetireCreditsAmino {
+    const obj: any = {};
+    obj.batch_denom = message.batchDenom;
+    obj.amount = message.amount;
+    return obj;
+  },
+
+  fromAminoMsg(object: MsgRetire_RetireCreditsAminoMsg): MsgRetire_RetireCredits {
+    return MsgRetire_RetireCredits.fromAmino(object.value);
+  },
+
+  fromProtoMsg(message: MsgRetire_RetireCreditsProtoMsg): MsgRetire_RetireCredits {
+    return MsgRetire_RetireCredits.decode(message.value);
+  },
+
+  toProto(message: MsgRetire_RetireCredits): Uint8Array {
+    return MsgRetire_RetireCredits.encode(message).finish();
+  },
+
+  toProtoMsg(message: MsgRetire_RetireCredits): MsgRetire_RetireCreditsProtoMsg {
+    return {
+      typeUrl: "/regen.ecocredit.v1alpha1.RetireCredits",
+      value: MsgRetire_RetireCredits.encode(message).finish()
+    };
   }
 
 };
@@ -1371,6 +2025,34 @@ export const MsgRetireResponse = {
   fromPartial(_: Partial<MsgRetireResponse>): MsgRetireResponse {
     const message = createBaseMsgRetireResponse();
     return message;
+  },
+
+  fromAmino(_: MsgRetireResponseAmino): MsgRetireResponse {
+    return {};
+  },
+
+  toAmino(_: MsgRetireResponse): MsgRetireResponseAmino {
+    const obj: any = {};
+    return obj;
+  },
+
+  fromAminoMsg(object: MsgRetireResponseAminoMsg): MsgRetireResponse {
+    return MsgRetireResponse.fromAmino(object.value);
+  },
+
+  fromProtoMsg(message: MsgRetireResponseProtoMsg): MsgRetireResponse {
+    return MsgRetireResponse.decode(message.value);
+  },
+
+  toProto(message: MsgRetireResponse): Uint8Array {
+    return MsgRetireResponse.encode(message).finish();
+  },
+
+  toProtoMsg(message: MsgRetireResponse): MsgRetireResponseProtoMsg {
+    return {
+      typeUrl: "/regen.ecocredit.v1alpha1.MsgRetireResponse",
+      value: MsgRetireResponse.encode(message).finish()
+    };
   }
 
 };
@@ -1446,6 +2128,45 @@ export const MsgCancel = {
     message.holder = object.holder ?? "";
     message.credits = object.credits?.map(e => MsgCancel_CancelCredits.fromPartial(e)) || [];
     return message;
+  },
+
+  fromAmino(object: MsgCancelAmino): MsgCancel {
+    return {
+      holder: object.holder,
+      credits: Array.isArray(object?.credits) ? object.credits.map((e: any) => MsgCancel_CancelCredits.fromAmino(e)) : []
+    };
+  },
+
+  toAmino(message: MsgCancel): MsgCancelAmino {
+    const obj: any = {};
+    obj.holder = message.holder;
+
+    if (message.credits) {
+      obj.credits = message.credits.map(e => e ? MsgCancel_CancelCredits.toAmino(e) : undefined);
+    } else {
+      obj.credits = [];
+    }
+
+    return obj;
+  },
+
+  fromAminoMsg(object: MsgCancelAminoMsg): MsgCancel {
+    return MsgCancel.fromAmino(object.value);
+  },
+
+  fromProtoMsg(message: MsgCancelProtoMsg): MsgCancel {
+    return MsgCancel.decode(message.value);
+  },
+
+  toProto(message: MsgCancel): Uint8Array {
+    return MsgCancel.encode(message).finish();
+  },
+
+  toProtoMsg(message: MsgCancel): MsgCancelProtoMsg {
+    return {
+      typeUrl: "/regen.ecocredit.v1alpha1.MsgCancel",
+      value: MsgCancel.encode(message).finish()
+    };
   }
 
 };
@@ -1515,6 +2236,39 @@ export const MsgCancel_CancelCredits = {
     message.batchDenom = object.batchDenom ?? "";
     message.amount = object.amount ?? "";
     return message;
+  },
+
+  fromAmino(object: MsgCancel_CancelCreditsAmino): MsgCancel_CancelCredits {
+    return {
+      batchDenom: object.batch_denom,
+      amount: object.amount
+    };
+  },
+
+  toAmino(message: MsgCancel_CancelCredits): MsgCancel_CancelCreditsAmino {
+    const obj: any = {};
+    obj.batch_denom = message.batchDenom;
+    obj.amount = message.amount;
+    return obj;
+  },
+
+  fromAminoMsg(object: MsgCancel_CancelCreditsAminoMsg): MsgCancel_CancelCredits {
+    return MsgCancel_CancelCredits.fromAmino(object.value);
+  },
+
+  fromProtoMsg(message: MsgCancel_CancelCreditsProtoMsg): MsgCancel_CancelCredits {
+    return MsgCancel_CancelCredits.decode(message.value);
+  },
+
+  toProto(message: MsgCancel_CancelCredits): Uint8Array {
+    return MsgCancel_CancelCredits.encode(message).finish();
+  },
+
+  toProtoMsg(message: MsgCancel_CancelCredits): MsgCancel_CancelCreditsProtoMsg {
+    return {
+      typeUrl: "/regen.ecocredit.v1alpha1.CancelCredits",
+      value: MsgCancel_CancelCredits.encode(message).finish()
+    };
   }
 
 };
@@ -1558,6 +2312,34 @@ export const MsgCancelResponse = {
   fromPartial(_: Partial<MsgCancelResponse>): MsgCancelResponse {
     const message = createBaseMsgCancelResponse();
     return message;
+  },
+
+  fromAmino(_: MsgCancelResponseAmino): MsgCancelResponse {
+    return {};
+  },
+
+  toAmino(_: MsgCancelResponse): MsgCancelResponseAmino {
+    const obj: any = {};
+    return obj;
+  },
+
+  fromAminoMsg(object: MsgCancelResponseAminoMsg): MsgCancelResponse {
+    return MsgCancelResponse.fromAmino(object.value);
+  },
+
+  fromProtoMsg(message: MsgCancelResponseProtoMsg): MsgCancelResponse {
+    return MsgCancelResponse.decode(message.value);
+  },
+
+  toProto(message: MsgCancelResponse): Uint8Array {
+    return MsgCancelResponse.encode(message).finish();
+  },
+
+  toProtoMsg(message: MsgCancelResponse): MsgCancelResponseProtoMsg {
+    return {
+      typeUrl: "/regen.ecocredit.v1alpha1.MsgCancelResponse",
+      value: MsgCancelResponse.encode(message).finish()
+    };
   }
 
 };
@@ -1639,6 +2421,41 @@ export const MsgUpdateClassAdmin = {
     message.classId = object.classId ?? "";
     message.newAdmin = object.newAdmin ?? "";
     return message;
+  },
+
+  fromAmino(object: MsgUpdateClassAdminAmino): MsgUpdateClassAdmin {
+    return {
+      admin: object.admin,
+      classId: object.class_id,
+      newAdmin: object.new_admin
+    };
+  },
+
+  toAmino(message: MsgUpdateClassAdmin): MsgUpdateClassAdminAmino {
+    const obj: any = {};
+    obj.admin = message.admin;
+    obj.class_id = message.classId;
+    obj.new_admin = message.newAdmin;
+    return obj;
+  },
+
+  fromAminoMsg(object: MsgUpdateClassAdminAminoMsg): MsgUpdateClassAdmin {
+    return MsgUpdateClassAdmin.fromAmino(object.value);
+  },
+
+  fromProtoMsg(message: MsgUpdateClassAdminProtoMsg): MsgUpdateClassAdmin {
+    return MsgUpdateClassAdmin.decode(message.value);
+  },
+
+  toProto(message: MsgUpdateClassAdmin): Uint8Array {
+    return MsgUpdateClassAdmin.encode(message).finish();
+  },
+
+  toProtoMsg(message: MsgUpdateClassAdmin): MsgUpdateClassAdminProtoMsg {
+    return {
+      typeUrl: "/regen.ecocredit.v1alpha1.MsgUpdateClassAdmin",
+      value: MsgUpdateClassAdmin.encode(message).finish()
+    };
   }
 
 };
@@ -1682,6 +2499,34 @@ export const MsgUpdateClassAdminResponse = {
   fromPartial(_: Partial<MsgUpdateClassAdminResponse>): MsgUpdateClassAdminResponse {
     const message = createBaseMsgUpdateClassAdminResponse();
     return message;
+  },
+
+  fromAmino(_: MsgUpdateClassAdminResponseAmino): MsgUpdateClassAdminResponse {
+    return {};
+  },
+
+  toAmino(_: MsgUpdateClassAdminResponse): MsgUpdateClassAdminResponseAmino {
+    const obj: any = {};
+    return obj;
+  },
+
+  fromAminoMsg(object: MsgUpdateClassAdminResponseAminoMsg): MsgUpdateClassAdminResponse {
+    return MsgUpdateClassAdminResponse.fromAmino(object.value);
+  },
+
+  fromProtoMsg(message: MsgUpdateClassAdminResponseProtoMsg): MsgUpdateClassAdminResponse {
+    return MsgUpdateClassAdminResponse.decode(message.value);
+  },
+
+  toProto(message: MsgUpdateClassAdminResponse): Uint8Array {
+    return MsgUpdateClassAdminResponse.encode(message).finish();
+  },
+
+  toProtoMsg(message: MsgUpdateClassAdminResponse): MsgUpdateClassAdminResponseProtoMsg {
+    return {
+      typeUrl: "/regen.ecocredit.v1alpha1.MsgUpdateClassAdminResponse",
+      value: MsgUpdateClassAdminResponse.encode(message).finish()
+    };
   }
 
 };
@@ -1769,6 +2614,47 @@ export const MsgUpdateClassIssuers = {
     message.classId = object.classId ?? "";
     message.issuers = object.issuers?.map(e => e) || [];
     return message;
+  },
+
+  fromAmino(object: MsgUpdateClassIssuersAmino): MsgUpdateClassIssuers {
+    return {
+      admin: object.admin,
+      classId: object.class_id,
+      issuers: Array.isArray(object?.issuers) ? object.issuers.map((e: any) => e) : []
+    };
+  },
+
+  toAmino(message: MsgUpdateClassIssuers): MsgUpdateClassIssuersAmino {
+    const obj: any = {};
+    obj.admin = message.admin;
+    obj.class_id = message.classId;
+
+    if (message.issuers) {
+      obj.issuers = message.issuers.map(e => e);
+    } else {
+      obj.issuers = [];
+    }
+
+    return obj;
+  },
+
+  fromAminoMsg(object: MsgUpdateClassIssuersAminoMsg): MsgUpdateClassIssuers {
+    return MsgUpdateClassIssuers.fromAmino(object.value);
+  },
+
+  fromProtoMsg(message: MsgUpdateClassIssuersProtoMsg): MsgUpdateClassIssuers {
+    return MsgUpdateClassIssuers.decode(message.value);
+  },
+
+  toProto(message: MsgUpdateClassIssuers): Uint8Array {
+    return MsgUpdateClassIssuers.encode(message).finish();
+  },
+
+  toProtoMsg(message: MsgUpdateClassIssuers): MsgUpdateClassIssuersProtoMsg {
+    return {
+      typeUrl: "/regen.ecocredit.v1alpha1.MsgUpdateClassIssuers",
+      value: MsgUpdateClassIssuers.encode(message).finish()
+    };
   }
 
 };
@@ -1812,6 +2698,34 @@ export const MsgUpdateClassIssuersResponse = {
   fromPartial(_: Partial<MsgUpdateClassIssuersResponse>): MsgUpdateClassIssuersResponse {
     const message = createBaseMsgUpdateClassIssuersResponse();
     return message;
+  },
+
+  fromAmino(_: MsgUpdateClassIssuersResponseAmino): MsgUpdateClassIssuersResponse {
+    return {};
+  },
+
+  toAmino(_: MsgUpdateClassIssuersResponse): MsgUpdateClassIssuersResponseAmino {
+    const obj: any = {};
+    return obj;
+  },
+
+  fromAminoMsg(object: MsgUpdateClassIssuersResponseAminoMsg): MsgUpdateClassIssuersResponse {
+    return MsgUpdateClassIssuersResponse.fromAmino(object.value);
+  },
+
+  fromProtoMsg(message: MsgUpdateClassIssuersResponseProtoMsg): MsgUpdateClassIssuersResponse {
+    return MsgUpdateClassIssuersResponse.decode(message.value);
+  },
+
+  toProto(message: MsgUpdateClassIssuersResponse): Uint8Array {
+    return MsgUpdateClassIssuersResponse.encode(message).finish();
+  },
+
+  toProtoMsg(message: MsgUpdateClassIssuersResponse): MsgUpdateClassIssuersResponseProtoMsg {
+    return {
+      typeUrl: "/regen.ecocredit.v1alpha1.MsgUpdateClassIssuersResponse",
+      value: MsgUpdateClassIssuersResponse.encode(message).finish()
+    };
   }
 
 };
@@ -1893,6 +2807,41 @@ export const MsgUpdateClassMetadata = {
     message.classId = object.classId ?? "";
     message.metadata = object.metadata ?? new Uint8Array();
     return message;
+  },
+
+  fromAmino(object: MsgUpdateClassMetadataAmino): MsgUpdateClassMetadata {
+    return {
+      admin: object.admin,
+      classId: object.class_id,
+      metadata: object.metadata
+    };
+  },
+
+  toAmino(message: MsgUpdateClassMetadata): MsgUpdateClassMetadataAmino {
+    const obj: any = {};
+    obj.admin = message.admin;
+    obj.class_id = message.classId;
+    obj.metadata = message.metadata;
+    return obj;
+  },
+
+  fromAminoMsg(object: MsgUpdateClassMetadataAminoMsg): MsgUpdateClassMetadata {
+    return MsgUpdateClassMetadata.fromAmino(object.value);
+  },
+
+  fromProtoMsg(message: MsgUpdateClassMetadataProtoMsg): MsgUpdateClassMetadata {
+    return MsgUpdateClassMetadata.decode(message.value);
+  },
+
+  toProto(message: MsgUpdateClassMetadata): Uint8Array {
+    return MsgUpdateClassMetadata.encode(message).finish();
+  },
+
+  toProtoMsg(message: MsgUpdateClassMetadata): MsgUpdateClassMetadataProtoMsg {
+    return {
+      typeUrl: "/regen.ecocredit.v1alpha1.MsgUpdateClassMetadata",
+      value: MsgUpdateClassMetadata.encode(message).finish()
+    };
   }
 
 };
@@ -1936,6 +2885,34 @@ export const MsgUpdateClassMetadataResponse = {
   fromPartial(_: Partial<MsgUpdateClassMetadataResponse>): MsgUpdateClassMetadataResponse {
     const message = createBaseMsgUpdateClassMetadataResponse();
     return message;
+  },
+
+  fromAmino(_: MsgUpdateClassMetadataResponseAmino): MsgUpdateClassMetadataResponse {
+    return {};
+  },
+
+  toAmino(_: MsgUpdateClassMetadataResponse): MsgUpdateClassMetadataResponseAmino {
+    const obj: any = {};
+    return obj;
+  },
+
+  fromAminoMsg(object: MsgUpdateClassMetadataResponseAminoMsg): MsgUpdateClassMetadataResponse {
+    return MsgUpdateClassMetadataResponse.fromAmino(object.value);
+  },
+
+  fromProtoMsg(message: MsgUpdateClassMetadataResponseProtoMsg): MsgUpdateClassMetadataResponse {
+    return MsgUpdateClassMetadataResponse.decode(message.value);
+  },
+
+  toProto(message: MsgUpdateClassMetadataResponse): Uint8Array {
+    return MsgUpdateClassMetadataResponse.encode(message).finish();
+  },
+
+  toProtoMsg(message: MsgUpdateClassMetadataResponse): MsgUpdateClassMetadataResponseProtoMsg {
+    return {
+      typeUrl: "/regen.ecocredit.v1alpha1.MsgUpdateClassMetadataResponse",
+      value: MsgUpdateClassMetadataResponse.encode(message).finish()
+    };
   }
 
 };
