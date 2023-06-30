@@ -63,9 +63,9 @@ node --inspect-brk node_modules/.bin/jest -c packages/api/jest.config.js --runIn
 Regen-JS consists of smaller npm packages within the [@regen-network namespace](https://www.npmjs.com/org/regennetwork), a so called monorepo. Here is the list of all packages.
 
 | Package                                        | Description                                         | Latest                                                                                                                  |
-| ---------------------------------------------- | --------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------- |
+|------------------------------------------------| --------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------- |
 | [`@regen-network/api`](packages/api)           | A client library interacting with the Regen Ledger. | [![npm version](https://img.shields.io/npm/v/@regen-network/api.svg)](https://www.npmjs.com/package/@regen-network/api) |
-| [`@regen-network/demo-app`](packages/demo-app) | A demo React app using `@regen-network/api`.        | Not published on npm.                                                                                                   |
+| [`@regen-network/api-demo`](packages/api-demo) | A demo React app using `@regen-network/api`.        | Not published on npm.                                                                                                   |
 
 ## Build the packages from source
 

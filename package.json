@@ -15,7 +15,7 @@
 		"format": "yarn lint --fix",
 		"lerna:deploy": "yarn build && lerna version --conventional-commits && lerna publish from-git",
 		"lint": "eslint --ext js,ts,tsx .",
-		"start": "yarn workspace @regen-network/demo-app start",
+		"start": "yarn workspace @regen-network/api-demo start",
 		"test": "lerna run test"
 	},
 	"devDependencies": {
