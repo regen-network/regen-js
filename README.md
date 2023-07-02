@@ -20,6 +20,7 @@ This API is still under heavy construction, be ready for unexpected breaking cha
 ## Get Started
 
 ### Install and build
+
 ```bash
 # Clone the repo.
 git clone https://github.com/regen-network/regen-js
@@ -34,6 +35,7 @@ yarn build:api
 ```
 
 ### Starting the demo app
+
 Then, to run the React app, just run the following command:
 
 ```bash

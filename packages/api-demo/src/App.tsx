@@ -1,89 +1,65 @@
-import { RegenApi } from '@regen-network/api';
-import { useEffect, useState } from 'react';
-import * as React from 'react';
-import { DirectSecp256k1HdWallet } from '@cosmjs/proto-signing';
+import { cosmos } from '@regen-network/api';
+import React, { useEffect, useState } from 'react';
 
 import { MyBalance } from './MyBalance';
 
-const DEVNET_NODE_TM_URL = 'http://devnet.regen.network:26657'; // CORS not enabled on this one yet.
-const REDWOOD_NODE_TM_URL = 'http://209.182.218.23:26657';
-const HAMBACH_NODE_TM_URL = 'http://hambach.regen.network:26657';
+const REGEN_MAINNET_REST_ENDPOINT = 'http://regen.regen.network:1317';
+const REGEN_REDWOOD_REST_ENDPOINT = 'http://redwood.regen.network:1317';
 
 export function App(): React.ReactElement {
-  const [tmUrl, setTmUrl] = useState(REDWOOD_NODE_TM_URL);
-  const [tmError, setTmError] = useState<Error | undefined>();
-  const [api, setApi] = useState<RegenApi | undefined>(undefined);
+  const [rest, setRest] = useState(REGEN_REDWOOD_REST_ENDPOINT);
+  const [client, setClient] = useState<any | undefined>(undefined);
+  const [error, setError] = useState<Error | undefined>(undefined);
 
   useEffect(() => {
-    setApi(undefined);
-    setTmError(undefined);
+    setClient(undefined);
+    setError(undefined);
 
     const connect = async (): Promise<void> => {
-      const mnemonic = // mnemonic for TEST_ADDRESS_HAMBACH
-        'coast scheme approve soccer juice wealth bunker state fetch warrior inmate belt';
-
-      // Inside an async function...
-      const signer = await DirectSecp256k1HdWallet.fromMnemonic(
-        mnemonic,
-        { prefix: 'regen' }, // Replace with your own Bech32 address prefix
-      );
-      RegenApi.connect({
-        connection: {
-          type: 'tendermint',
-          endpoint: tmUrl,
-          signer,
-        },
-      })
-        .then(setApi)
-        .catch((err: Error) => {
-          /* eslint-disable */
-          console.error(err);
-          setTmError(err);
-        });
+      await cosmos.ClientFactory.createLCDClient({ restEndpoint: rest })
+        .then(setClient)
+        .catch(setError);
     };
 
     connect();
-  }, [tmUrl]);
+  }, [rest]);
 
   return (
     <div>
-      <h1>
-        Regen Network Demo App using <code>@regen-network/api</code>
-      </h1>
-
-      {api ? (
+      <h1>{'api-demo'}</h1>
+      <h3>
+        {'A demo application using '}
+        <code>{'@regen-network/api'}</code>
+      </h3>
+      {client ? (
         <div>
-          <MyBalance api={api} />
+          <MyBalance client={client} />
         </div>
       ) : (
-        <p>Loading RegenApi...</p>
+        <p>{'loading...'}</p>
       )}
-
-			<div>
-				<h2>Settings</h2>
-				<label htmlFor="tm">
-					The current Tendermint RPC endpoint we&apos;re using:
-				</label>
-				<input
-					name="tmUrl"
-					value={tmUrl}
-					onChange={({ target: { value } }) => setTmUrl(value)}
-				/>
-				<p>
-					Switch to a known public endpoint:
-					<button onClick={() => setTmUrl(DEVNET_NODE_TM_URL)}>
-						Official Regen Devnet node
-					</button>
-					<button onClick={() => setTmUrl(REDWOOD_NODE_TM_URL)}>
-						Redwood Testnet node
-					</button>
-					<button onClick={() => setTmUrl(HAMBACH_NODE_TM_URL)}>
-						Hambach Testnet node
-					</button>
-				</p>
+      <div>
+        <h2>Network Settings</h2>
+        <label htmlFor="rest">
+          {'The current REST endpoint we are using: '}
+        </label>
+        <input
+          name="rest"
+          value={rest}
+          onChange={({ target: { value } }) => setRest(value)}
+        />
         <p>
-          Tendermint Client Status:{" "}
-          {tmError?.message ? tmError?.message : api ? "ok" : "loading..."}
+          {'Switch to another network by switching the node endpoint: '}
+          <button onClick={() => setRest(REGEN_MAINNET_REST_ENDPOINT)}>
+            {'Regen Mainnet'}
+          </button>
+          <button onClick={() => setRest(REGEN_REDWOOD_REST_ENDPOINT)}>
+            {'Redwood Testnet'}
+          </button>
+        </p>
+        <p>
+          Client Status:{' '}
+          {error?.message ? error?.message : client ? 'ok' : 'loading...'}
         </p>
       </div>
     </div>

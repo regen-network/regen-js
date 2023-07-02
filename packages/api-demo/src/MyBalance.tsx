@@ -1,45 +1,45 @@
-import { RegenApi } from '@regen-network/api';
-import {
-  QueryAllBalancesResponse,
-  QueryClientImpl,
-} from '@regen-network/api/lib/generated/cosmos/bank/v1beta1/query';
-import React, { useEffect, useState } from 'react';
+import { QueryAllBalancesResponseSDKType } from '@regen-network/api/types/codegen/cosmos/bank/v1beta1/query';
+import React, { useState } from 'react';
 
-interface MyBalanceProps {
-  api: RegenApi;
-}
-
-export function MyBalance(props: MyBalanceProps): React.ReactElement {
-  const { api } = props;
-
+export function MyBalance({ client }: { client: any }): React.ReactElement {
   const [address, setAddress] = useState(
     'regen1df675r9vnf7pdedn4sf26svdsem3ugavgxmy46',
   );
   const [balance, setBalance] = useState<
-    QueryAllBalancesResponse | undefined
+    QueryAllBalancesResponseSDKType | undefined
   >();
-
-  useEffect(() => {
-    const queryClient: QueryClientImpl = new QueryClientImpl(api.queryClient);
-    queryClient
-      .AllBalances({ address })
+  const [error, setError] = useState<string | undefined>(undefined);
+  const handleSubmit = async (): Promise<any> => {
+    setError(undefined);
+    setBalance(undefined);
+    await client.cosmos.bank.v1beta1
+      .allBalances({ address })
       .then(setBalance)
-      /* eslint-disable */
-      .catch(console.error);
-  }, [address, api.queryClient]);
+      .catch((err: any) => setError(err.message));
+  };
 
   return (
     <div>
-      <h2>Balance Checker</h2>
-      <label htmlFor="tm">My address:</label>
+      <h2>{'My Balance'}</h2>
+      <label htmlFor="address">{'My address: '}</label>
       <input
-        name="tmUrl"
+        name="address"
         value={address}
         onChange={({ target: { value } }) => setAddress(value)}
       />
+      <button onClick={() => handleSubmit()}>submit</button>
       <br />
-      My balance is:{' '}
-      <code>{balance ? JSON.stringify(balance) : '(loading...)'}</code>
+      <br />
+      {'My balance: '}
+      <code>
+        {balance ? (
+          JSON.stringify(balance)
+        ) : error ? (
+          <span>{error}</span>
+        ) : (
+          '...'
+        )}
+      </code>
     </div>
   );
 }
