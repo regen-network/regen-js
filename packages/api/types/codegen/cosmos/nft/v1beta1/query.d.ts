@@ -1,7 +1,7 @@
 import { PageRequest, PageRequestAmino, PageRequestSDKType, PageResponse, PageResponseAmino, PageResponseSDKType } from "../../base/query/v1beta1/pagination";
 import { NFT, NFTAmino, NFTSDKType, Class, ClassAmino, ClassSDKType } from "./nft";
-import * as _m0 from "protobufjs/minimal";
 import { Long } from "../../../helpers";
+import * as _m0 from "protobufjs/minimal";
 /** QueryBalanceRequest is the request type for the Query/Balance RPC method */
 export interface QueryBalanceRequest {
     classId: string;
@@ -132,7 +132,7 @@ export interface QuerySupplyResponseSDKType {
 export interface QueryNFTsRequest {
     classId: string;
     owner: string;
-    pagination?: PageRequest;
+    pagination: PageRequest;
 }
 export interface QueryNFTsRequestProtoMsg {
     typeUrl: "/cosmos.nft.v1beta1.QueryNFTsRequest";
@@ -152,12 +152,12 @@ export interface QueryNFTsRequestAminoMsg {
 export interface QueryNFTsRequestSDKType {
     class_id: string;
     owner: string;
-    pagination?: PageRequestSDKType;
+    pagination: PageRequestSDKType;
 }
 /** QueryNFTsResponse is the response type for the Query/NFTs RPC methods */
 export interface QueryNFTsResponse {
     nfts: NFT[];
-    pagination?: PageResponse;
+    pagination: PageResponse;
 }
 export interface QueryNFTsResponseProtoMsg {
     typeUrl: "/cosmos.nft.v1beta1.QueryNFTsResponse";
@@ -175,7 +175,7 @@ export interface QueryNFTsResponseAminoMsg {
 /** QueryNFTsResponse is the response type for the Query/NFTs RPC methods */
 export interface QueryNFTsResponseSDKType {
     nfts: NFTSDKType[];
-    pagination?: PageResponseSDKType;
+    pagination: PageResponseSDKType;
 }
 /** QueryNFTRequest is the request type for the Query/NFT RPC method */
 export interface QueryNFTRequest {
@@ -202,7 +202,7 @@ export interface QueryNFTRequestSDKType {
 }
 /** QueryNFTResponse is the response type for the Query/NFT RPC method */
 export interface QueryNFTResponse {
-    nft?: NFT;
+    nft: NFT;
 }
 export interface QueryNFTResponseProtoMsg {
     typeUrl: "/cosmos.nft.v1beta1.QueryNFTResponse";
@@ -218,7 +218,7 @@ export interface QueryNFTResponseAminoMsg {
 }
 /** QueryNFTResponse is the response type for the Query/NFT RPC method */
 export interface QueryNFTResponseSDKType {
-    nft?: NFTSDKType;
+    nft: NFTSDKType;
 }
 /** QueryClassRequest is the request type for the Query/Class RPC method */
 export interface QueryClassRequest {
@@ -242,7 +242,7 @@ export interface QueryClassRequestSDKType {
 }
 /** QueryClassResponse is the response type for the Query/Class RPC method */
 export interface QueryClassResponse {
-    class?: Class;
+    class: Class;
 }
 export interface QueryClassResponseProtoMsg {
     typeUrl: "/cosmos.nft.v1beta1.QueryClassResponse";
@@ -258,12 +258,12 @@ export interface QueryClassResponseAminoMsg {
 }
 /** QueryClassResponse is the response type for the Query/Class RPC method */
 export interface QueryClassResponseSDKType {
-    class?: ClassSDKType;
+    class: ClassSDKType;
 }
 /** QueryClassesRequest is the request type for the Query/Classes RPC method */
 export interface QueryClassesRequest {
     /** pagination defines an optional pagination for the request. */
-    pagination?: PageRequest;
+    pagination: PageRequest;
 }
 export interface QueryClassesRequestProtoMsg {
     typeUrl: "/cosmos.nft.v1beta1.QueryClassesRequest";
@@ -280,12 +280,12 @@ export interface QueryClassesRequestAminoMsg {
 }
 /** QueryClassesRequest is the request type for the Query/Classes RPC method */
 export interface QueryClassesRequestSDKType {
-    pagination?: PageRequestSDKType;
+    pagination: PageRequestSDKType;
 }
 /** QueryClassesResponse is the response type for the Query/Classes RPC method */
 export interface QueryClassesResponse {
     classes: Class[];
-    pagination?: PageResponse;
+    pagination: PageResponse;
 }
 export interface QueryClassesResponseProtoMsg {
     typeUrl: "/cosmos.nft.v1beta1.QueryClassesResponse";
@@ -303,7 +303,7 @@ export interface QueryClassesResponseAminoMsg {
 /** QueryClassesResponse is the response type for the Query/Classes RPC method */
 export interface QueryClassesResponseSDKType {
     classes: ClassSDKType[];
-    pagination?: PageResponseSDKType;
+    pagination: PageResponseSDKType;
 }
 export declare const QueryBalanceRequest: {
     encode(message: QueryBalanceRequest, writer?: _m0.Writer): _m0.Writer;

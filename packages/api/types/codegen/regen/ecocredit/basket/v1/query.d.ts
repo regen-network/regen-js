@@ -35,7 +35,7 @@ export interface QueryBasketResponse {
      * basket_info is available using BasketInfo.
      */
     /** @deprecated */
-    basket?: Basket;
+    basket: Basket;
     /** classes are the credit classes that can be deposited in the basket. */
     classes: string[];
     /**
@@ -43,7 +43,7 @@ export interface QueryBasketResponse {
      *
      * Since Revision 1
      */
-    basketInfo?: BasketInfo;
+    basketInfo: BasketInfo;
 }
 export interface QueryBasketResponseProtoMsg {
     typeUrl: "/regen.ecocredit.basket.v1.QueryBasketResponse";
@@ -76,14 +76,14 @@ export interface QueryBasketResponseAminoMsg {
 /** QueryBasketResponse is the Query/Basket response type. */
 export interface QueryBasketResponseSDKType {
     /** @deprecated */
-    basket?: BasketSDKType;
+    basket: BasketSDKType;
     classes: string[];
-    basket_info?: BasketInfoSDKType;
+    basket_info: BasketInfoSDKType;
 }
 /** QueryBasketsRequest is the Query/Baskets request type. */
 export interface QueryBasketsRequest {
     /** pagination defines an optional pagination for the request. */
-    pagination?: PageRequest;
+    pagination: PageRequest;
 }
 export interface QueryBasketsRequestProtoMsg {
     typeUrl: "/regen.ecocredit.basket.v1.QueryBasketsRequest";
@@ -100,7 +100,7 @@ export interface QueryBasketsRequestAminoMsg {
 }
 /** QueryBasketsRequest is the Query/Baskets request type. */
 export interface QueryBasketsRequestSDKType {
-    pagination?: PageRequestSDKType;
+    pagination: PageRequestSDKType;
 }
 /** QueryBasketsResponse is the Query/Baskets response type. */
 export interface QueryBasketsResponse {
@@ -114,7 +114,7 @@ export interface QueryBasketsResponse {
     /** @deprecated */
     baskets: Basket[];
     /** pagination defines the pagination in the response. */
-    pagination?: PageResponse;
+    pagination: PageResponse;
     /**
      * baskets_info are the fetched baskets.
      *
@@ -154,7 +154,7 @@ export interface QueryBasketsResponseAminoMsg {
 export interface QueryBasketsResponseSDKType {
     /** @deprecated */
     baskets: BasketSDKType[];
-    pagination?: PageResponseSDKType;
+    pagination: PageResponseSDKType;
     baskets_info: BasketInfoSDKType[];
 }
 /** QueryBasketBalancesRequest is the Query/BasketBalances request type. */
@@ -162,7 +162,7 @@ export interface QueryBasketBalancesRequest {
     /** basket_denom is the denom of the basket. */
     basketDenom: string;
     /** pagination defines an optional pagination for the request. */
-    pagination?: PageRequest;
+    pagination: PageRequest;
 }
 export interface QueryBasketBalancesRequestProtoMsg {
     typeUrl: "/regen.ecocredit.basket.v1.QueryBasketBalancesRequest";
@@ -182,7 +182,7 @@ export interface QueryBasketBalancesRequestAminoMsg {
 /** QueryBasketBalancesRequest is the Query/BasketBalances request type. */
 export interface QueryBasketBalancesRequestSDKType {
     basket_denom: string;
-    pagination?: PageRequestSDKType;
+    pagination: PageRequestSDKType;
 }
 /** QueryBasketBalancesResponse is the Query/BasketBalances response type. */
 export interface QueryBasketBalancesResponse {
@@ -196,7 +196,7 @@ export interface QueryBasketBalancesResponse {
     /** @deprecated */
     balances: BasketBalance[];
     /** pagination defines the pagination in the response. */
-    pagination?: PageResponse;
+    pagination: PageResponse;
     /**
      * balances_info is a list of credit balances in the basket.
      *
@@ -236,7 +236,7 @@ export interface QueryBasketBalancesResponseAminoMsg {
 export interface QueryBasketBalancesResponseSDKType {
     /** @deprecated */
     balances: BasketBalanceSDKType[];
-    pagination?: PageResponseSDKType;
+    pagination: PageResponseSDKType;
     balances_info: BasketBalanceInfoSDKType[];
 }
 /** QueryBasketBalanceRequest is the Query/BasketBalance request type. */
@@ -309,7 +309,7 @@ export interface BasketInfo {
      */
     creditTypeAbbrev: string;
     /** date_criteria is the date criteria for batches admitted to the basket. */
-    dateCriteria?: DateCriteria;
+    dateCriteria: DateCriteria;
     /** exponent is the exponent for converting credits to/from basket tokens. */
     exponent: number;
     /**
@@ -362,7 +362,7 @@ export interface BasketInfoSDKType {
     name: string;
     disable_auto_retire: boolean;
     credit_type_abbrev: string;
-    date_criteria?: DateCriteriaSDKType;
+    date_criteria: DateCriteriaSDKType;
     exponent: number;
     curator: string;
 }
@@ -432,7 +432,7 @@ export interface QueryBasketFeeResponse {
      * fee is the basket creation fee. If not set, a basket creation fee is not
      * required.
      */
-    fee?: Coin;
+    fee: Coin;
 }
 export interface QueryBasketFeeResponseProtoMsg {
     typeUrl: "/regen.ecocredit.basket.v1.QueryBasketFeeResponse";
@@ -460,7 +460,7 @@ export interface QueryBasketFeeResponseAminoMsg {
  * Since Revision 2
  */
 export interface QueryBasketFeeResponseSDKType {
-    fee?: CoinSDKType;
+    fee: CoinSDKType;
 }
 export declare const QueryBasketRequest: {
     encode(message: QueryBasketRequest, writer?: _m0.Writer): _m0.Writer;

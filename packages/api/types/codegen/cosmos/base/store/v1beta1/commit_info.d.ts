@@ -38,7 +38,7 @@ export interface CommitInfoSDKType {
  */
 export interface StoreInfo {
     name: string;
-    commitId?: CommitID;
+    commitId: CommitID;
 }
 export interface StoreInfoProtoMsg {
     typeUrl: "/cosmos.base.store.v1beta1.StoreInfo";
@@ -62,7 +62,7 @@ export interface StoreInfoAminoMsg {
  */
 export interface StoreInfoSDKType {
     name: string;
-    commit_id?: CommitIDSDKType;
+    commit_id: CommitIDSDKType;
 }
 /**
  * CommitID defines the committment information when a specific store is

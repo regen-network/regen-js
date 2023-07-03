@@ -1,5 +1,5 @@
-import * as _m0 from "protobufjs/minimal";
 import { Long } from "../../helpers";
+import * as _m0 from "protobufjs/minimal";
 export interface NetAddress {
     id: string;
     ip: string;
@@ -47,14 +47,14 @@ export interface ProtocolVersionSDKType {
     app: Long;
 }
 export interface DefaultNodeInfo {
-    protocolVersion?: ProtocolVersion;
+    protocolVersion: ProtocolVersion;
     defaultNodeId: string;
     listenAddr: string;
     network: string;
     version: string;
     channels: Uint8Array;
     moniker: string;
-    other?: DefaultNodeInfoOther;
+    other: DefaultNodeInfoOther;
 }
 export interface DefaultNodeInfoProtoMsg {
     typeUrl: "/tendermint.p2p.DefaultNodeInfo";
@@ -75,14 +75,14 @@ export interface DefaultNodeInfoAminoMsg {
     value: DefaultNodeInfoAmino;
 }
 export interface DefaultNodeInfoSDKType {
-    protocol_version?: ProtocolVersionSDKType;
+    protocol_version: ProtocolVersionSDKType;
     default_node_id: string;
     listen_addr: string;
     network: string;
     version: string;
     channels: Uint8Array;
     moniker: string;
-    other?: DefaultNodeInfoOtherSDKType;
+    other: DefaultNodeInfoOtherSDKType;
 }
 export interface DefaultNodeInfoOther {
     txIndex: string;

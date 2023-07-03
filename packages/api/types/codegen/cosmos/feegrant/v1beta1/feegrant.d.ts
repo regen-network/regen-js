@@ -16,7 +16,7 @@ export interface BasicAllowance {
      */
     spendLimit: Coin[];
     /** expiration specifies an optional time when this allowance expires */
-    expiration?: Timestamp;
+    expiration: Timestamp;
 }
 export interface BasicAllowanceProtoMsg {
     typeUrl: "/cosmos.feegrant.v1beta1.BasicAllowance";
@@ -47,7 +47,7 @@ export interface BasicAllowanceAminoMsg {
 export interface BasicAllowanceSDKType {
     $typeUrl?: string;
     spend_limit: CoinSDKType[];
-    expiration?: TimestampSDKType;
+    expiration: TimestampSDKType;
 }
 /**
  * PeriodicAllowance extends Allowance to allow for both a maximum cap,
@@ -56,12 +56,12 @@ export interface BasicAllowanceSDKType {
 export interface PeriodicAllowance {
     $typeUrl?: string;
     /** basic specifies a struct of `BasicAllowance` */
-    basic?: BasicAllowance;
+    basic: BasicAllowance;
     /**
      * period specifies the time duration in which period_spend_limit coins can
      * be spent before that allowance is reset
      */
-    period?: Duration;
+    period: Duration;
     /**
      * period_spend_limit specifies the maximum number of coins that can be spent
      * in the period
@@ -74,7 +74,7 @@ export interface PeriodicAllowance {
      * it is calculated from the start time of the first transaction after the
      * last period ended
      */
-    periodReset?: Timestamp;
+    periodReset: Timestamp;
 }
 export interface PeriodicAllowanceProtoMsg {
     typeUrl: "/cosmos.feegrant.v1beta1.PeriodicAllowance";
@@ -116,17 +116,17 @@ export interface PeriodicAllowanceAminoMsg {
  */
 export interface PeriodicAllowanceSDKType {
     $typeUrl?: string;
-    basic?: BasicAllowanceSDKType;
-    period?: DurationSDKType;
+    basic: BasicAllowanceSDKType;
+    period: DurationSDKType;
     period_spend_limit: CoinSDKType[];
     period_can_spend: CoinSDKType[];
-    period_reset?: TimestampSDKType;
+    period_reset: TimestampSDKType;
 }
 /** AllowedMsgAllowance creates allowance only for specified message types. */
 export interface AllowedMsgAllowance {
     $typeUrl?: string;
     /** allowance can be any of basic and periodic fee allowance. */
-    allowance?: (BasicAllowance & PeriodicAllowance & AllowedMsgAllowance & Any) | undefined;
+    allowance: (BasicAllowance & PeriodicAllowance & AllowedMsgAllowance & Any) | undefined;
     /** allowed_messages are the messages for which the grantee has the access. */
     allowedMessages: string[];
 }
@@ -135,8 +135,7 @@ export interface AllowedMsgAllowanceProtoMsg {
     value: Uint8Array;
 }
 export type AllowedMsgAllowanceEncoded = Omit<AllowedMsgAllowance, "allowance"> & {
-    /** allowance can be any of basic and periodic fee allowance. */
-    allowance?: BasicAllowanceProtoMsg | PeriodicAllowanceProtoMsg | AllowedMsgAllowanceProtoMsg | AnyProtoMsg | undefined;
+    /** allowance can be any of basic and periodic fee allowance. */ allowance?: BasicAllowanceProtoMsg | PeriodicAllowanceProtoMsg | AllowedMsgAllowanceProtoMsg | AnyProtoMsg | undefined;
 };
 /** AllowedMsgAllowance creates allowance only for specified message types. */
 export interface AllowedMsgAllowanceAmino {
@@ -152,7 +151,7 @@ export interface AllowedMsgAllowanceAminoMsg {
 /** AllowedMsgAllowance creates allowance only for specified message types. */
 export interface AllowedMsgAllowanceSDKType {
     $typeUrl?: string;
-    allowance?: BasicAllowanceSDKType | PeriodicAllowanceSDKType | AllowedMsgAllowanceSDKType | AnySDKType | undefined;
+    allowance: BasicAllowanceSDKType | PeriodicAllowanceSDKType | AllowedMsgAllowanceSDKType | AnySDKType | undefined;
     allowed_messages: string[];
 }
 /** Grant is stored in the KVStore to record a grant with full context */
@@ -162,15 +161,14 @@ export interface Grant {
     /** grantee is the address of the user being granted an allowance of another user's funds. */
     grantee: string;
     /** allowance can be any of basic, periodic, allowed fee allowance. */
-    allowance?: (BasicAllowance & PeriodicAllowance & AllowedMsgAllowance & Any) | undefined;
+    allowance: (BasicAllowance & PeriodicAllowance & AllowedMsgAllowance & Any) | undefined;
 }
 export interface GrantProtoMsg {
     typeUrl: "/cosmos.feegrant.v1beta1.Grant";
     value: Uint8Array;
 }
 export type GrantEncoded = Omit<Grant, "allowance"> & {
-    /** allowance can be any of basic, periodic, allowed fee allowance. */
-    allowance?: BasicAllowanceProtoMsg | PeriodicAllowanceProtoMsg | AllowedMsgAllowanceProtoMsg | AnyProtoMsg | undefined;
+    /** allowance can be any of basic, periodic, allowed fee allowance. */ allowance?: BasicAllowanceProtoMsg | PeriodicAllowanceProtoMsg | AllowedMsgAllowanceProtoMsg | AnyProtoMsg | undefined;
 };
 /** Grant is stored in the KVStore to record a grant with full context */
 export interface GrantAmino {
@@ -189,7 +187,7 @@ export interface GrantAminoMsg {
 export interface GrantSDKType {
     granter: string;
     grantee: string;
-    allowance?: BasicAllowanceSDKType | PeriodicAllowanceSDKType | AllowedMsgAllowanceSDKType | AnySDKType | undefined;
+    allowance: BasicAllowanceSDKType | PeriodicAllowanceSDKType | AllowedMsgAllowanceSDKType | AnySDKType | undefined;
 }
 export declare const BasicAllowance: {
     encode(message: BasicAllowance, writer?: _m0.Writer): _m0.Writer;

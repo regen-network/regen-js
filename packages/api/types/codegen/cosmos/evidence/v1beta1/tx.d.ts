@@ -6,7 +6,7 @@ import * as _m0 from "protobufjs/minimal";
  */
 export interface MsgSubmitEvidence {
     submitter: string;
-    evidence?: (Any) | undefined;
+    evidence: (Any) | undefined;
 }
 export interface MsgSubmitEvidenceProtoMsg {
     typeUrl: "/cosmos.evidence.v1beta1.MsgSubmitEvidence";
@@ -33,7 +33,7 @@ export interface MsgSubmitEvidenceAminoMsg {
  */
 export interface MsgSubmitEvidenceSDKType {
     submitter: string;
-    evidence?: AnySDKType | undefined;
+    evidence: AnySDKType | undefined;
 }
 /** MsgSubmitEvidenceResponse defines the Msg/SubmitEvidence response type. */
 export interface MsgSubmitEvidenceResponse {

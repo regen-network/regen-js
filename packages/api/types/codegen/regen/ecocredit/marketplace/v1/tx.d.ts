@@ -1,7 +1,7 @@
 import { Coin, CoinAmino, CoinSDKType } from "../../../../cosmos/base/v1beta1/coin";
 import { Timestamp, TimestampAmino, TimestampSDKType } from "../../../../google/protobuf/timestamp";
-import * as _m0 from "protobufjs/minimal";
 import { Long } from "../../../../helpers";
+import * as _m0 from "protobufjs/minimal";
 /** MsgSell is the Msg/Sell request type. */
 export interface MsgSell {
     /** seller is the address of the account that is selling credits. */
@@ -46,7 +46,7 @@ export interface MsgSell_Order {
      * batch_denom. Each credit unit of the batch will be sold for at least the
      * ask_price or more.
      */
-    askPrice?: Coin;
+    askPrice: Coin;
     /**
      * disable_auto_retire disables auto-retirement of credits which allows a
      * buyer to disable auto-retirement in their buy order enabling them to
@@ -57,7 +57,7 @@ export interface MsgSell_Order {
      * expiration is an optional timestamp when the sell order expires. When the
      * expiration time is reached, the sell order is removed from state.
      */
-    expiration?: Timestamp;
+    expiration: Timestamp;
 }
 export interface MsgSell_OrderProtoMsg {
     typeUrl: "/regen.ecocredit.marketplace.v1.Order";
@@ -101,9 +101,9 @@ export interface MsgSell_OrderAminoMsg {
 export interface MsgSell_OrderSDKType {
     batch_denom: string;
     quantity: string;
-    ask_price?: CoinSDKType;
+    ask_price: CoinSDKType;
     disable_auto_retire: boolean;
-    expiration?: TimestampSDKType;
+    expiration: TimestampSDKType;
 }
 /** MsgSellResponse is the Msg/Sell response type. */
 export interface MsgSellResponse {
@@ -161,7 +161,7 @@ export interface MsgUpdateSellOrders_Update {
     /** new_quantity is the updated quantity of credits available to sell. */
     newQuantity: string;
     /** new_ask_price is the new ask price for this sell order */
-    newAskPrice?: Coin;
+    newAskPrice: Coin;
     /**
      * disable_auto_retire updates the disable_auto_retire field in the sell
      * order.
@@ -171,7 +171,7 @@ export interface MsgUpdateSellOrders_Update {
      * new_expiration is an optional timestamp when the sell order expires. When
      * the expiration time is reached, the sell order is removed from state.
      */
-    newExpiration?: Timestamp;
+    newExpiration: Timestamp;
 }
 export interface MsgUpdateSellOrders_UpdateProtoMsg {
     typeUrl: "/regen.ecocredit.marketplace.v1.Update";
@@ -204,9 +204,9 @@ export interface MsgUpdateSellOrders_UpdateAminoMsg {
 export interface MsgUpdateSellOrders_UpdateSDKType {
     sell_order_id: Long;
     new_quantity: string;
-    new_ask_price?: CoinSDKType;
+    new_ask_price: CoinSDKType;
     disable_auto_retire: boolean;
-    new_expiration?: TimestampSDKType;
+    new_expiration: TimestampSDKType;
 }
 /** MsgUpdateSellOrdersResponse is the Msg/UpdateSellOrders response type. */
 export interface MsgUpdateSellOrdersResponse {
@@ -312,7 +312,7 @@ export interface MsgBuyDirect_Order {
     /** quantity is the quantity of credits to buy. */
     quantity: string;
     /** bid_price is the price the buyer is willing to pay per credit. */
-    bidPrice?: Coin;
+    bidPrice: Coin;
     /**
      * disable_auto_retire allows auto-retirement to be disabled. If it is set
      * to true the credits will not auto-retire and can be resold assuming that
@@ -380,7 +380,7 @@ export interface MsgBuyDirect_OrderAminoMsg {
 export interface MsgBuyDirect_OrderSDKType {
     sell_order_id: Long;
     quantity: string;
-    bid_price?: CoinSDKType;
+    bid_price: CoinSDKType;
     disable_auto_retire: boolean;
     retirement_jurisdiction: string;
     retirement_reason: string;

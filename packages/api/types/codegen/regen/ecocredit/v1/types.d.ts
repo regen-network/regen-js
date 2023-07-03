@@ -316,7 +316,7 @@ export interface CreditTypeProposal {
      * credit_type is the credit type to be added to the network if the proposal
      * passes.
      */
-    creditType?: CreditType;
+    creditType: CreditType;
 }
 export interface CreditTypeProposalProtoMsg {
     typeUrl: "/regen.ecocredit.v1.CreditTypeProposal";
@@ -350,7 +350,7 @@ export interface CreditTypeProposalAminoMsg {
 export interface CreditTypeProposalSDKType {
     title: string;
     description: string;
-    credit_type?: CreditTypeSDKType;
+    credit_type: CreditTypeSDKType;
 }
 /**
  * AllowedDenom represents the information for an allowed ask denom.

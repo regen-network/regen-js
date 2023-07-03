@@ -6,7 +6,7 @@ export interface Snapshot {
     format: number;
     chunks: number;
     hash: Uint8Array;
-    metadata?: Metadata;
+    metadata: Metadata;
 }
 export interface SnapshotProtoMsg {
     typeUrl: "/cosmos.base.snapshots.v1beta1.Snapshot";
@@ -30,7 +30,7 @@ export interface SnapshotSDKType {
     format: number;
     chunks: number;
     hash: Uint8Array;
-    metadata?: MetadataSDKType;
+    metadata: MetadataSDKType;
 }
 /** Metadata contains SDK-specific snapshot metadata. */
 export interface Metadata {

@@ -52,7 +52,7 @@ export interface EventCreateBatch {
      * origin_tx is the transaction from another chain or registry that triggered
      * the creation of the credit batch.
      */
-    originTx?: OriginTx;
+    originTx: OriginTx;
 }
 export interface EventCreateBatchProtoMsg {
     typeUrl: "/regen.ecocredit.v1.EventCreateBatch";
@@ -75,7 +75,7 @@ export interface EventCreateBatchAminoMsg {
 /** EventCreateBatch is an event emitted when a credit batch is created. */
 export interface EventCreateBatchSDKType {
     batch_denom: string;
-    origin_tx?: OriginTxSDKType;
+    origin_tx: OriginTxSDKType;
 }
 /**
  * EventMint is an event emitted when credits are minted either when creating a
@@ -138,7 +138,7 @@ export interface EventMintBatchCredits {
      * origin_tx is the transaction from another chain or registry that triggered
      * the minting of credits within the credit batch.
      */
-    originTx?: OriginTx;
+    originTx: OriginTx;
 }
 export interface EventMintBatchCreditsProtoMsg {
     typeUrl: "/regen.ecocredit.v1.EventMintBatchCredits";
@@ -170,7 +170,7 @@ export interface EventMintBatchCreditsAminoMsg {
  */
 export interface EventMintBatchCreditsSDKType {
     batch_denom: string;
-    origin_tx?: OriginTxSDKType;
+    origin_tx: OriginTxSDKType;
 }
 /**
  * EventTransfer is an event emitted when credits are transferred from one
@@ -697,7 +697,7 @@ export interface EventBridgeReceive {
      *
      * Since Revision 3
      */
-    originTx?: OriginTx;
+    originTx: OriginTx;
 }
 export interface EventBridgeReceiveProtoMsg {
     typeUrl: "/regen.ecocredit.v1.EventBridgeReceive";
@@ -738,7 +738,7 @@ export interface EventBridgeReceiveSDKType {
     project_id: string;
     batch_denom: string;
     amount: string;
-    origin_tx?: OriginTxSDKType;
+    origin_tx: OriginTxSDKType;
 }
 export declare const EventCreateClass: {
     encode(message: EventCreateClass, writer?: _m0.Writer): _m0.Writer;

@@ -3,8 +3,8 @@ import { ConsensusParams, ConsensusParamsAmino, ConsensusParamsSDKType } from ".
 import { Header, HeaderAmino, HeaderSDKType } from "../types/types";
 import { ProofOps, ProofOpsAmino, ProofOpsSDKType } from "../crypto/proof";
 import { PublicKey, PublicKeyAmino, PublicKeySDKType } from "../crypto/keys";
-import * as _m0 from "protobufjs/minimal";
 import { Long } from "../../helpers";
+import * as _m0 from "protobufjs/minimal";
 export declare enum CheckTxType {
     NEW = 0,
     RECHECK = 1,
@@ -192,9 +192,9 @@ export interface RequestInfoSDKType {
     abci_version: string;
 }
 export interface RequestInitChain {
-    time?: Timestamp;
+    time: Timestamp;
     chainId: string;
-    consensusParams?: ConsensusParams;
+    consensusParams: ConsensusParams;
     validators: ValidatorUpdate[];
     appStateBytes: Uint8Array;
     initialHeight: Long;
@@ -216,9 +216,9 @@ export interface RequestInitChainAminoMsg {
     value: RequestInitChainAmino;
 }
 export interface RequestInitChainSDKType {
-    time?: TimestampSDKType;
+    time: TimestampSDKType;
     chain_id: string;
-    consensus_params?: ConsensusParamsSDKType;
+    consensus_params: ConsensusParamsSDKType;
     validators: ValidatorUpdateSDKType[];
     app_state_bytes: Uint8Array;
     initial_height: Long;
@@ -251,8 +251,8 @@ export interface RequestQuerySDKType {
 }
 export interface RequestBeginBlock {
     hash: Uint8Array;
-    header?: Header;
-    lastCommitInfo?: CommitInfo;
+    header: Header;
+    lastCommitInfo: CommitInfo;
     byzantineValidators: Misbehavior[];
 }
 export interface RequestBeginBlockProtoMsg {
@@ -271,8 +271,8 @@ export interface RequestBeginBlockAminoMsg {
 }
 export interface RequestBeginBlockSDKType {
     hash: Uint8Array;
-    header?: HeaderSDKType;
-    last_commit_info?: CommitInfoSDKType;
+    header: HeaderSDKType;
+    last_commit_info: CommitInfoSDKType;
     byzantine_validators: MisbehaviorSDKType[];
 }
 export interface RequestCheckTx {
@@ -363,7 +363,7 @@ export interface RequestListSnapshotsSDKType {
 /** offers a snapshot to the application */
 export interface RequestOfferSnapshot {
     /** snapshot offered by peers */
-    snapshot?: Snapshot;
+    snapshot: Snapshot;
     /** light client-verified app hash for snapshot height */
     appHash: Uint8Array;
 }
@@ -384,7 +384,7 @@ export interface RequestOfferSnapshotAminoMsg {
 }
 /** offers a snapshot to the application */
 export interface RequestOfferSnapshotSDKType {
-    snapshot?: SnapshotSDKType;
+    snapshot: SnapshotSDKType;
     app_hash: Uint8Array;
 }
 /** loads a snapshot chunk */
@@ -447,10 +447,10 @@ export interface RequestPrepareProposal {
      * sent to the app for possible modifications.
      */
     txs: Uint8Array[];
-    localLastCommit?: ExtendedCommitInfo;
+    localLastCommit: ExtendedCommitInfo;
     misbehavior: Misbehavior[];
     height: Long;
-    time?: Timestamp;
+    time: Timestamp;
     nextValidatorsHash: Uint8Array;
     /** address of the public key of the validator proposing the block. */
     proposerAddress: Uint8Array;
@@ -482,21 +482,21 @@ export interface RequestPrepareProposalAminoMsg {
 export interface RequestPrepareProposalSDKType {
     max_tx_bytes: Long;
     txs: Uint8Array[];
-    local_last_commit?: ExtendedCommitInfoSDKType;
+    local_last_commit: ExtendedCommitInfoSDKType;
     misbehavior: MisbehaviorSDKType[];
     height: Long;
-    time?: TimestampSDKType;
+    time: TimestampSDKType;
     next_validators_hash: Uint8Array;
     proposer_address: Uint8Array;
 }
 export interface RequestProcessProposal {
     txs: Uint8Array[];
-    proposedLastCommit?: CommitInfo;
+    proposedLastCommit: CommitInfo;
     misbehavior: Misbehavior[];
     /** hash is the merkle root hash of the fields of the proposed block. */
     hash: Uint8Array;
     height: Long;
-    time?: Timestamp;
+    time: Timestamp;
     nextValidatorsHash: Uint8Array;
     /** address of the public key of the original proposer of the block. */
     proposerAddress: Uint8Array;
@@ -523,11 +523,11 @@ export interface RequestProcessProposalAminoMsg {
 }
 export interface RequestProcessProposalSDKType {
     txs: Uint8Array[];
-    proposed_last_commit?: CommitInfoSDKType;
+    proposed_last_commit: CommitInfoSDKType;
     misbehavior: MisbehaviorSDKType[];
     hash: Uint8Array;
     height: Long;
-    time?: TimestampSDKType;
+    time: TimestampSDKType;
     next_validators_hash: Uint8Array;
     proposer_address: Uint8Array;
 }
@@ -677,7 +677,7 @@ export interface ResponseInfoSDKType {
     last_block_app_hash: Uint8Array;
 }
 export interface ResponseInitChain {
-    consensusParams?: ConsensusParams;
+    consensusParams: ConsensusParams;
     validators: ValidatorUpdate[];
     appHash: Uint8Array;
 }
@@ -695,7 +695,7 @@ export interface ResponseInitChainAminoMsg {
     value: ResponseInitChainAmino;
 }
 export interface ResponseInitChainSDKType {
-    consensus_params?: ConsensusParamsSDKType;
+    consensus_params: ConsensusParamsSDKType;
     validators: ValidatorUpdateSDKType[];
     app_hash: Uint8Array;
 }
@@ -708,7 +708,7 @@ export interface ResponseQuery {
     index: Long;
     key: Uint8Array;
     value: Uint8Array;
-    proofOps?: ProofOps;
+    proofOps: ProofOps;
     height: Long;
     codespace: string;
 }
@@ -740,7 +740,7 @@ export interface ResponseQuerySDKType {
     index: Long;
     key: Uint8Array;
     value: Uint8Array;
-    proof_ops?: ProofOpsSDKType;
+    proof_ops: ProofOpsSDKType;
     height: Long;
     codespace: string;
 }
@@ -864,7 +864,7 @@ export interface ResponseDeliverTxSDKType {
 }
 export interface ResponseEndBlock {
     validatorUpdates: ValidatorUpdate[];
-    consensusParamUpdates?: ConsensusParams;
+    consensusParamUpdates: ConsensusParams;
     events: Event[];
 }
 export interface ResponseEndBlockProtoMsg {
@@ -882,7 +882,7 @@ export interface ResponseEndBlockAminoMsg {
 }
 export interface ResponseEndBlockSDKType {
     validator_updates: ValidatorUpdateSDKType[];
-    consensus_param_updates?: ConsensusParamsSDKType;
+    consensus_param_updates: ConsensusParamsSDKType;
     events: EventSDKType[];
 }
 export interface ResponseCommit {
@@ -1141,7 +1141,7 @@ export interface TxResult {
     height: Long;
     index: number;
     tx: Uint8Array;
-    result?: ResponseDeliverTx;
+    result: ResponseDeliverTx;
 }
 export interface TxResultProtoMsg {
     typeUrl: "/tendermint.abci.TxResult";
@@ -1171,7 +1171,7 @@ export interface TxResultSDKType {
     height: Long;
     index: number;
     tx: Uint8Array;
-    result?: ResponseDeliverTxSDKType;
+    result: ResponseDeliverTxSDKType;
 }
 /** Validator */
 export interface Validator {
@@ -1208,7 +1208,7 @@ export interface ValidatorSDKType {
 }
 /** ValidatorUpdate */
 export interface ValidatorUpdate {
-    pubKey?: PublicKey;
+    pubKey: PublicKey;
     power: Long;
 }
 export interface ValidatorUpdateProtoMsg {
@@ -1226,12 +1226,12 @@ export interface ValidatorUpdateAminoMsg {
 }
 /** ValidatorUpdate */
 export interface ValidatorUpdateSDKType {
-    pub_key?: PublicKeySDKType;
+    pub_key: PublicKeySDKType;
     power: Long;
 }
 /** VoteInfo */
 export interface VoteInfo {
-    validator?: Validator;
+    validator: Validator;
     signedLastBlock: boolean;
 }
 export interface VoteInfoProtoMsg {
@@ -1249,11 +1249,11 @@ export interface VoteInfoAminoMsg {
 }
 /** VoteInfo */
 export interface VoteInfoSDKType {
-    validator?: ValidatorSDKType;
+    validator: ValidatorSDKType;
     signed_last_block: boolean;
 }
 export interface ExtendedVoteInfo {
-    validator?: Validator;
+    validator: Validator;
     signedLastBlock: boolean;
     /** Reserved for future use */
     voteExtension: Uint8Array;
@@ -1273,18 +1273,18 @@ export interface ExtendedVoteInfoAminoMsg {
     value: ExtendedVoteInfoAmino;
 }
 export interface ExtendedVoteInfoSDKType {
-    validator?: ValidatorSDKType;
+    validator: ValidatorSDKType;
     signed_last_block: boolean;
     vote_extension: Uint8Array;
 }
 export interface Misbehavior {
     type: MisbehaviorType;
     /** The offending validator */
-    validator?: Validator;
+    validator: Validator;
     /** The height when the offense occurred */
     height: Long;
     /** The corresponding time where the offense occurred */
-    time?: Timestamp;
+    time: Timestamp;
     /**
      * Total voting power of the validator set in case the ABCI application does
      * not store historical validators.
@@ -1317,9 +1317,9 @@ export interface MisbehaviorAminoMsg {
 }
 export interface MisbehaviorSDKType {
     type: MisbehaviorType;
-    validator?: ValidatorSDKType;
+    validator: ValidatorSDKType;
     height: Long;
-    time?: TimestampSDKType;
+    time: TimestampSDKType;
     total_voting_power: Long;
 }
 export interface Snapshot {

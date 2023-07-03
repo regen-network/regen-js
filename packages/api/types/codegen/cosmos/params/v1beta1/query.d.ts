@@ -30,7 +30,7 @@ export interface QueryParamsRequestSDKType {
 /** QueryParamsResponse is response type for the Query/Params RPC method. */
 export interface QueryParamsResponse {
     /** param defines the queried parameter. */
-    param?: ParamChange;
+    param: ParamChange;
 }
 export interface QueryParamsResponseProtoMsg {
     typeUrl: "/cosmos.params.v1beta1.QueryParamsResponse";
@@ -47,7 +47,7 @@ export interface QueryParamsResponseAminoMsg {
 }
 /** QueryParamsResponse is response type for the Query/Params RPC method. */
 export interface QueryParamsResponseSDKType {
-    param?: ParamChangeSDKType;
+    param: ParamChangeSDKType;
 }
 /**
  * QuerySubspacesRequest defines a request type for querying for all registered

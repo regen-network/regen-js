@@ -46,7 +46,7 @@ export interface DateCriteria {
      * allowed into the basket. At most only one of `start_date_window`,
      * `min_start_date`, and `years_in_the_past` can be set for a basket.
      */
-    minStartDate?: Timestamp;
+    minStartDate: Timestamp;
     /**
      * start_date_window (optional) is a duration of time measured into the past
      * which sets a cutoff for batch start dates when adding new credits to the
@@ -55,7 +55,7 @@ export interface DateCriteria {
      * basket. At most only one of `start_date_window`, `min_start_date`, and
      * `years_in_the_past` can be set for a basket.
      */
-    startDateWindow?: Duration;
+    startDateWindow: Duration;
     /**
      * years_in_the_past (optional) is the number of years into the past which
      * sets a cutoff for the batch start dates when adding new credits to the
@@ -113,8 +113,8 @@ export interface DateCriteriaAminoMsg {
  * At most, only one of the values should be set.
  */
 export interface DateCriteriaSDKType {
-    min_start_date?: TimestampSDKType;
-    start_date_window?: DurationSDKType;
+    min_start_date: TimestampSDKType;
+    start_date_window: DurationSDKType;
     years_in_the_past: number;
 }
 export declare const BasketCredit: {

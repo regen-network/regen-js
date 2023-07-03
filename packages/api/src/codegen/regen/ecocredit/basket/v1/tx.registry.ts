@@ -14,42 +14,36 @@ export const MessageComposer = {
         value: MsgCreate.encode(value).finish()
       };
     },
-
     put(value: MsgPut) {
       return {
         typeUrl: "/regen.ecocredit.basket.v1.MsgPut",
         value: MsgPut.encode(value).finish()
       };
     },
-
     take(value: MsgTake) {
       return {
         typeUrl: "/regen.ecocredit.basket.v1.MsgTake",
         value: MsgTake.encode(value).finish()
       };
     },
-
     updateBasketFee(value: MsgUpdateBasketFee) {
       return {
         typeUrl: "/regen.ecocredit.basket.v1.MsgUpdateBasketFee",
         value: MsgUpdateBasketFee.encode(value).finish()
       };
     },
-
     updateCurator(value: MsgUpdateCurator) {
       return {
         typeUrl: "/regen.ecocredit.basket.v1.MsgUpdateCurator",
         value: MsgUpdateCurator.encode(value).finish()
       };
     },
-
     updateDateCriteria(value: MsgUpdateDateCriteria) {
       return {
         typeUrl: "/regen.ecocredit.basket.v1.MsgUpdateDateCriteria",
         value: MsgUpdateDateCriteria.encode(value).finish()
       };
     }
-
   },
   withTypeUrl: {
     create(value: MsgCreate) {
@@ -58,42 +52,36 @@ export const MessageComposer = {
         value
       };
     },
-
     put(value: MsgPut) {
       return {
         typeUrl: "/regen.ecocredit.basket.v1.MsgPut",
         value
       };
     },
-
     take(value: MsgTake) {
       return {
         typeUrl: "/regen.ecocredit.basket.v1.MsgTake",
         value
       };
     },
-
     updateBasketFee(value: MsgUpdateBasketFee) {
       return {
         typeUrl: "/regen.ecocredit.basket.v1.MsgUpdateBasketFee",
         value
       };
     },
-
     updateCurator(value: MsgUpdateCurator) {
       return {
         typeUrl: "/regen.ecocredit.basket.v1.MsgUpdateCurator",
         value
       };
     },
-
     updateDateCriteria(value: MsgUpdateDateCriteria) {
       return {
         typeUrl: "/regen.ecocredit.basket.v1.MsgUpdateDateCriteria",
         value
       };
     }
-
   },
   toJSON: {
     create(value: MsgCreate) {
@@ -102,42 +90,36 @@ export const MessageComposer = {
         value: MsgCreate.toJSON(value)
       };
     },
-
     put(value: MsgPut) {
       return {
         typeUrl: "/regen.ecocredit.basket.v1.MsgPut",
         value: MsgPut.toJSON(value)
       };
     },
-
     take(value: MsgTake) {
       return {
         typeUrl: "/regen.ecocredit.basket.v1.MsgTake",
         value: MsgTake.toJSON(value)
       };
     },
-
     updateBasketFee(value: MsgUpdateBasketFee) {
       return {
         typeUrl: "/regen.ecocredit.basket.v1.MsgUpdateBasketFee",
         value: MsgUpdateBasketFee.toJSON(value)
       };
     },
-
     updateCurator(value: MsgUpdateCurator) {
       return {
         typeUrl: "/regen.ecocredit.basket.v1.MsgUpdateCurator",
         value: MsgUpdateCurator.toJSON(value)
       };
     },
-
     updateDateCriteria(value: MsgUpdateDateCriteria) {
       return {
         typeUrl: "/regen.ecocredit.basket.v1.MsgUpdateDateCriteria",
         value: MsgUpdateDateCriteria.toJSON(value)
       };
     }
-
   },
   fromJSON: {
     create(value: any) {
@@ -146,42 +128,36 @@ export const MessageComposer = {
         value: MsgCreate.fromJSON(value)
       };
     },
-
     put(value: any) {
       return {
         typeUrl: "/regen.ecocredit.basket.v1.MsgPut",
         value: MsgPut.fromJSON(value)
       };
     },
-
     take(value: any) {
       return {
         typeUrl: "/regen.ecocredit.basket.v1.MsgTake",
         value: MsgTake.fromJSON(value)
       };
     },
-
     updateBasketFee(value: any) {
       return {
         typeUrl: "/regen.ecocredit.basket.v1.MsgUpdateBasketFee",
         value: MsgUpdateBasketFee.fromJSON(value)
       };
     },
-
     updateCurator(value: any) {
       return {
         typeUrl: "/regen.ecocredit.basket.v1.MsgUpdateCurator",
         value: MsgUpdateCurator.fromJSON(value)
       };
     },
-
     updateDateCriteria(value: any) {
       return {
         typeUrl: "/regen.ecocredit.basket.v1.MsgUpdateDateCriteria",
         value: MsgUpdateDateCriteria.fromJSON(value)
       };
     }
-
   },
   fromPartial: {
     create(value: MsgCreate) {
@@ -190,41 +166,35 @@ export const MessageComposer = {
         value: MsgCreate.fromPartial(value)
       };
     },
-
     put(value: MsgPut) {
       return {
         typeUrl: "/regen.ecocredit.basket.v1.MsgPut",
         value: MsgPut.fromPartial(value)
       };
     },
-
     take(value: MsgTake) {
       return {
         typeUrl: "/regen.ecocredit.basket.v1.MsgTake",
         value: MsgTake.fromPartial(value)
       };
     },
-
     updateBasketFee(value: MsgUpdateBasketFee) {
       return {
         typeUrl: "/regen.ecocredit.basket.v1.MsgUpdateBasketFee",
         value: MsgUpdateBasketFee.fromPartial(value)
       };
     },
-
     updateCurator(value: MsgUpdateCurator) {
       return {
         typeUrl: "/regen.ecocredit.basket.v1.MsgUpdateCurator",
         value: MsgUpdateCurator.fromPartial(value)
       };
     },
-
     updateDateCriteria(value: MsgUpdateDateCriteria) {
       return {
         typeUrl: "/regen.ecocredit.basket.v1.MsgUpdateDateCriteria",
         value: MsgUpdateDateCriteria.fromPartial(value)
       };
     }
-
   }
 };

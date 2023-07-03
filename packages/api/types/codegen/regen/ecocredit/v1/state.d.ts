@@ -1,7 +1,7 @@
 import { Timestamp, TimestampAmino, TimestampSDKType } from "../../../google/protobuf/timestamp";
 import { Coin, CoinAmino, CoinSDKType } from "../../../cosmos/base/v1beta1/coin";
-import * as _m0 from "protobufjs/minimal";
 import { Long } from "../../../helpers";
+import * as _m0 from "protobufjs/minimal";
 /**
  * CreditType defines the measurement unit/precision of a certain credit type
  * (e.g. carbon, biodiversity...)
@@ -255,14 +255,14 @@ export interface Batch {
      * start_date is the beginning of the period during which this credit batch
      * was quantified and verified.
      */
-    startDate?: Timestamp;
+    startDate: Timestamp;
     /**
      * end_date is the end of the period during which this credit batch was
      * quantified and verified.
      */
-    endDate?: Timestamp;
+    endDate: Timestamp;
     /** issuance_date is the timestamp when the credit batch was issued. */
-    issuanceDate?: Timestamp;
+    issuanceDate: Timestamp;
     /**
      * open tells if it's possible to mint new credits in the future.
      * Once `open` is set to false, it can't be toggled any more.
@@ -327,9 +327,9 @@ export interface BatchSDKType {
     project_key: Long;
     denom: string;
     metadata: string;
-    start_date?: TimestampSDKType;
-    end_date?: TimestampSDKType;
-    issuance_date?: TimestampSDKType;
+    start_date: TimestampSDKType;
+    end_date: TimestampSDKType;
+    issuance_date: TimestampSDKType;
     open: boolean;
 }
 /**
@@ -843,7 +843,7 @@ export interface ClassFee {
      * fee is the credit class creation fee. If not set, a credit class creation
      * fee is not required.
      */
-    fee?: Coin;
+    fee: Coin;
 }
 export interface ClassFeeProtoMsg {
     typeUrl: "/regen.ecocredit.v1.ClassFee";
@@ -873,7 +873,7 @@ export interface ClassFeeAminoMsg {
  * Since Revision 2
  */
 export interface ClassFeeSDKType {
-    fee?: CoinSDKType;
+    fee: CoinSDKType;
 }
 /**
  * AllowedBridgeChain is a list of chains that are allowed to be used in

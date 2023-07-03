@@ -6,7 +6,6 @@ import { isSet } from "../../../helpers";
  * Params defines the updatable global parameters of the ecocredit module for
  * use with the x/params module.
  */
-
 export interface Params {
   /**
    * credit_class_fee is a list of credit class creation fees accepted when
@@ -19,14 +18,12 @@ export interface Params {
    * basket. Any fee listed is accepted and charged to the basket creator when
    * creating a basket.
    */
-
   basketFee: Coin[];
   /**
    * allowed_class_creators is an allowlist defining the addresses with the
    * required permissions to create credit classes when allowlist_enabled is set
    * to true. If allowlist_enabled is set to false, this list has no effect.
    */
-
   allowedClassCreators: string[];
   /**
    * allowlist_enabled determines whether or not the allowlist for creating
@@ -34,7 +31,6 @@ export interface Params {
    * allowed_class_creators can create credit classes. When set to false, any
    * address can create credit classes.
    */
-
   allowlistEnabled: boolean;
   /**
    * allowed_denoms is a list of bank denoms allowed to be used in the ask price
@@ -42,7 +38,6 @@ export interface Params {
    * 
    * Since Revision 2
    */
-
   allowedDenoms: AllowedDenom[];
   /**
    * AllowedBridgeChains is a list of chain names that are allowed to be used in
@@ -50,7 +45,6 @@ export interface Params {
    * 
    * Since Revision 2
    */
-
   allowedBridgeChains: string[];
 }
 export interface ParamsProtoMsg {
@@ -61,7 +55,6 @@ export interface ParamsProtoMsg {
  * Params defines the updatable global parameters of the ecocredit module for
  * use with the x/params module.
  */
-
 export interface ParamsAmino {
   /**
    * credit_class_fee is a list of credit class creation fees accepted when
@@ -74,14 +67,12 @@ export interface ParamsAmino {
    * basket. Any fee listed is accepted and charged to the basket creator when
    * creating a basket.
    */
-
   basket_fee: CoinAmino[];
   /**
    * allowed_class_creators is an allowlist defining the addresses with the
    * required permissions to create credit classes when allowlist_enabled is set
    * to true. If allowlist_enabled is set to false, this list has no effect.
    */
-
   allowed_class_creators: string[];
   /**
    * allowlist_enabled determines whether or not the allowlist for creating
@@ -89,7 +80,6 @@ export interface ParamsAmino {
    * allowed_class_creators can create credit classes. When set to false, any
    * address can create credit classes.
    */
-
   allowlist_enabled: boolean;
   /**
    * allowed_denoms is a list of bank denoms allowed to be used in the ask price
@@ -97,7 +87,6 @@ export interface ParamsAmino {
    * 
    * Since Revision 2
    */
-
   allowed_denoms: AllowedDenomAmino[];
   /**
    * AllowedBridgeChains is a list of chain names that are allowed to be used in
@@ -105,7 +94,6 @@ export interface ParamsAmino {
    * 
    * Since Revision 2
    */
-
   allowed_bridge_chains: string[];
 }
 export interface ParamsAminoMsg {
@@ -116,7 +104,6 @@ export interface ParamsAminoMsg {
  * Params defines the updatable global parameters of the ecocredit module for
  * use with the x/params module.
  */
-
 export interface ParamsSDKType {
   credit_class_fee: CoinSDKType[];
   basket_fee: CoinSDKType[];
@@ -126,12 +113,10 @@ export interface ParamsSDKType {
   allowed_bridge_chains: string[];
 }
 /** Credits represents a simple structure for credits. */
-
 export interface Credits {
   /** batch_denom is the denom of the credit batch. */
   batchDenom: string;
   /** amount is the amount of credits. */
-
   amount: string;
 }
 export interface CreditsProtoMsg {
@@ -139,12 +124,10 @@ export interface CreditsProtoMsg {
   value: Uint8Array;
 }
 /** Credits represents a simple structure for credits. */
-
 export interface CreditsAmino {
   /** batch_denom is the denom of the credit batch. */
   batch_denom: string;
   /** amount is the amount of credits. */
-
   amount: string;
 }
 export interface CreditsAminoMsg {
@@ -152,13 +135,11 @@ export interface CreditsAminoMsg {
   value: CreditsAmino;
 }
 /** Credits represents a simple structure for credits. */
-
 export interface CreditsSDKType {
   batch_denom: string;
   amount: string;
 }
 /** BatchIssuance represents a simple structure for a credit batch issuance. */
-
 export interface BatchIssuance {
   /** recipient is the address of the account receiving the issued credits. */
   recipient: string;
@@ -167,14 +148,12 @@ export interface BatchIssuance {
    * a tradable state. The number of decimal places must be less than or equal
    * to the credit type precision.
    */
-
   tradableAmount: string;
   /**
    * retired_amount is the amount of credits that the recipient will receive in
    * a retired state. The number of decimal places must be less than or equal to
    * the credit type precision.
    */
-
   retiredAmount: string;
   /**
    * retirement_jurisdiction is the jurisdiction of the recipient and is only
@@ -186,7 +165,6 @@ export interface BatchIssuance {
    * sub-national-code and postal-code are optional and can be added for
    * increased precision.
    */
-
   retirementJurisdiction: string;
   /**
    * retirement_reason is any arbitrary string that specifies the reason for
@@ -195,7 +173,6 @@ export interface BatchIssuance {
    * 
    * Since Revision 2
    */
-
   retirementReason: string;
 }
 export interface BatchIssuanceProtoMsg {
@@ -203,7 +180,6 @@ export interface BatchIssuanceProtoMsg {
   value: Uint8Array;
 }
 /** BatchIssuance represents a simple structure for a credit batch issuance. */
-
 export interface BatchIssuanceAmino {
   /** recipient is the address of the account receiving the issued credits. */
   recipient: string;
@@ -212,14 +188,12 @@ export interface BatchIssuanceAmino {
    * a tradable state. The number of decimal places must be less than or equal
    * to the credit type precision.
    */
-
   tradable_amount: string;
   /**
    * retired_amount is the amount of credits that the recipient will receive in
    * a retired state. The number of decimal places must be less than or equal to
    * the credit type precision.
    */
-
   retired_amount: string;
   /**
    * retirement_jurisdiction is the jurisdiction of the recipient and is only
@@ -231,7 +205,6 @@ export interface BatchIssuanceAmino {
    * sub-national-code and postal-code are optional and can be added for
    * increased precision.
    */
-
   retirement_jurisdiction: string;
   /**
    * retirement_reason is any arbitrary string that specifies the reason for
@@ -240,7 +213,6 @@ export interface BatchIssuanceAmino {
    * 
    * Since Revision 2
    */
-
   retirement_reason: string;
 }
 export interface BatchIssuanceAminoMsg {
@@ -248,7 +220,6 @@ export interface BatchIssuanceAminoMsg {
   value: BatchIssuanceAmino;
 }
 /** BatchIssuance represents a simple structure for a credit batch issuance. */
-
 export interface BatchIssuanceSDKType {
   recipient: string;
   tradable_amount: string;
@@ -260,7 +231,6 @@ export interface BatchIssuanceSDKType {
  * OriginTx is the transaction from another chain or registry that triggered
  * the minting of credits.
  */
-
 export interface OriginTx {
   /**
    * id is the transaction ID of an originating transaction or operation based
@@ -271,7 +241,6 @@ export interface OriginTx {
    * source is the source chain or registry of the transaction originating the
    * mint process (e.g. polygon, ethereum, verra).
    */
-
   source: string;
   /**
    * contract is the address of the contract on the source chain that was
@@ -280,13 +249,11 @@ export interface OriginTx {
    * used when sending credits back to the source chain. This field can be left
    * blank if credits are bridged from a non-contract-based source.
    */
-
   contract: string;
   /**
    * note is a reference note for accounting that will be included in an event
    * emitted from either Msg/CreateBatch or Msg/MintBatchCredits.
    */
-
   note: string;
 }
 export interface OriginTxProtoMsg {
@@ -297,7 +264,6 @@ export interface OriginTxProtoMsg {
  * OriginTx is the transaction from another chain or registry that triggered
  * the minting of credits.
  */
-
 export interface OriginTxAmino {
   /**
    * id is the transaction ID of an originating transaction or operation based
@@ -308,7 +274,6 @@ export interface OriginTxAmino {
    * source is the source chain or registry of the transaction originating the
    * mint process (e.g. polygon, ethereum, verra).
    */
-
   source: string;
   /**
    * contract is the address of the contract on the source chain that was
@@ -317,13 +282,11 @@ export interface OriginTxAmino {
    * used when sending credits back to the source chain. This field can be left
    * blank if credits are bridged from a non-contract-based source.
    */
-
   contract: string;
   /**
    * note is a reference note for accounting that will be included in an event
    * emitted from either Msg/CreateBatch or Msg/MintBatchCredits.
    */
-
   note: string;
 }
 export interface OriginTxAminoMsg {
@@ -334,7 +297,6 @@ export interface OriginTxAminoMsg {
  * OriginTx is the transaction from another chain or registry that triggered
  * the minting of credits.
  */
-
 export interface OriginTxSDKType {
   id: string;
   source: string;
@@ -346,19 +308,16 @@ export interface OriginTxSDKType {
  * Deprecated (Since Revision 2): This message is no longer used and will be
  * removed in the next version. See MsgAddCreditType.
  */
-
 export interface CreditTypeProposal {
   /** title is the title of the proposal. */
   title: string;
   /** description is the description of the proposal. */
-
   description: string;
   /**
    * credit_type is the credit type to be added to the network if the proposal
    * passes.
    */
-
-  creditType?: CreditType;
+  creditType: CreditType;
 }
 export interface CreditTypeProposalProtoMsg {
   typeUrl: "/regen.ecocredit.v1.CreditTypeProposal";
@@ -369,18 +328,15 @@ export interface CreditTypeProposalProtoMsg {
  * Deprecated (Since Revision 2): This message is no longer used and will be
  * removed in the next version. See MsgAddCreditType.
  */
-
 export interface CreditTypeProposalAmino {
   /** title is the title of the proposal. */
   title: string;
   /** description is the description of the proposal. */
-
   description: string;
   /**
    * credit_type is the credit type to be added to the network if the proposal
    * passes.
    */
-
   credit_type?: CreditTypeAmino;
 }
 export interface CreditTypeProposalAminoMsg {
@@ -392,11 +348,10 @@ export interface CreditTypeProposalAminoMsg {
  * Deprecated (Since Revision 2): This message is no longer used and will be
  * removed in the next version. See MsgAddCreditType.
  */
-
 export interface CreditTypeProposalSDKType {
   title: string;
   description: string;
-  credit_type?: CreditTypeSDKType;
+  credit_type: CreditTypeSDKType;
 }
 /**
  * AllowedDenom represents the information for an allowed ask denom.
@@ -406,7 +361,6 @@ export interface CreditTypeProposalSDKType {
  * Deprecated(Since Revision 2): This type was added to support historical
  * queries for params but will also be removed in the next version.
  */
-
 export interface AllowedDenom {
   /** denom is the bank denom to allow (ex. ibc/GLKHDSG423SGS) */
   bankDenom: string;
@@ -415,13 +369,11 @@ export interface AllowedDenom {
    * Because the denom is likely an IBC denom, this should be chosen by
    * governance to represent the consensus trusted name of the denom.
    */
-
   displayDenom: string;
   /**
    * exponent is the exponent that relates the denom to the display_denom and is
    * informational
    */
-
   exponent: number;
 }
 export interface AllowedDenomProtoMsg {
@@ -436,7 +388,6 @@ export interface AllowedDenomProtoMsg {
  * Deprecated(Since Revision 2): This type was added to support historical
  * queries for params but will also be removed in the next version.
  */
-
 export interface AllowedDenomAmino {
   /** denom is the bank denom to allow (ex. ibc/GLKHDSG423SGS) */
   bank_denom: string;
@@ -445,13 +396,11 @@ export interface AllowedDenomAmino {
    * Because the denom is likely an IBC denom, this should be chosen by
    * governance to represent the consensus trusted name of the denom.
    */
-
   display_denom: string;
   /**
    * exponent is the exponent that relates the denom to the display_denom and is
    * informational
    */
-
   exponent: number;
 }
 export interface AllowedDenomAminoMsg {
@@ -466,13 +415,11 @@ export interface AllowedDenomAminoMsg {
  * Deprecated(Since Revision 2): This type was added to support historical
  * queries for params but will also be removed in the next version.
  */
-
 export interface AllowedDenomSDKType {
   bank_denom: string;
   display_denom: string;
   exponent: number;
 }
-
 function createBaseParams(): Params {
   return {
     creditClassFee: [],
@@ -483,78 +430,60 @@ function createBaseParams(): Params {
     allowedBridgeChains: []
   };
 }
-
 export const Params = {
   encode(message: Params, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     for (const v of message.creditClassFee) {
       Coin.encode(v!, writer.uint32(10).fork()).ldelim();
     }
-
     for (const v of message.basketFee) {
       Coin.encode(v!, writer.uint32(18).fork()).ldelim();
     }
-
     for (const v of message.allowedClassCreators) {
       writer.uint32(26).string(v!);
     }
-
     if (message.allowlistEnabled === true) {
       writer.uint32(32).bool(message.allowlistEnabled);
     }
-
     for (const v of message.allowedDenoms) {
       AllowedDenom.encode(v!, writer.uint32(42).fork()).ldelim();
     }
-
     for (const v of message.allowedBridgeChains) {
       writer.uint32(50).string(v!);
     }
-
     return writer;
   },
-
   decode(input: _m0.Reader | Uint8Array, length?: number): Params {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseParams();
-
     while (reader.pos < end) {
       const tag = reader.uint32();
-
       switch (tag >>> 3) {
         case 1:
           message.creditClassFee.push(Coin.decode(reader, reader.uint32()));
           break;
-
         case 2:
           message.basketFee.push(Coin.decode(reader, reader.uint32()));
           break;
-
         case 3:
           message.allowedClassCreators.push(reader.string());
           break;
-
         case 4:
           message.allowlistEnabled = reader.bool();
           break;
-
         case 5:
           message.allowedDenoms.push(AllowedDenom.decode(reader, reader.uint32()));
           break;
-
         case 6:
           message.allowedBridgeChains.push(reader.string());
           break;
-
         default:
           reader.skipType(tag & 7);
           break;
       }
     }
-
     return message;
   },
-
   fromJSON(object: any): Params {
     return {
       creditClassFee: Array.isArray(object?.creditClassFee) ? object.creditClassFee.map((e: any) => Coin.fromJSON(e)) : [],
@@ -565,45 +494,36 @@ export const Params = {
       allowedBridgeChains: Array.isArray(object?.allowedBridgeChains) ? object.allowedBridgeChains.map((e: any) => String(e)) : []
     };
   },
-
   toJSON(message: Params): unknown {
     const obj: any = {};
-
     if (message.creditClassFee) {
       obj.creditClassFee = message.creditClassFee.map(e => e ? Coin.toJSON(e) : undefined);
     } else {
       obj.creditClassFee = [];
     }
-
     if (message.basketFee) {
       obj.basketFee = message.basketFee.map(e => e ? Coin.toJSON(e) : undefined);
     } else {
       obj.basketFee = [];
     }
-
     if (message.allowedClassCreators) {
       obj.allowedClassCreators = message.allowedClassCreators.map(e => e);
     } else {
       obj.allowedClassCreators = [];
     }
-
     message.allowlistEnabled !== undefined && (obj.allowlistEnabled = message.allowlistEnabled);
-
     if (message.allowedDenoms) {
       obj.allowedDenoms = message.allowedDenoms.map(e => e ? AllowedDenom.toJSON(e) : undefined);
     } else {
       obj.allowedDenoms = [];
     }
-
     if (message.allowedBridgeChains) {
       obj.allowedBridgeChains = message.allowedBridgeChains.map(e => e);
     } else {
       obj.allowedBridgeChains = [];
     }
-
     return obj;
   },
-
   fromPartial(object: Partial<Params>): Params {
     const message = createBaseParams();
     message.creditClassFee = object.creditClassFee?.map(e => Coin.fromPartial(e)) || [];
@@ -614,7 +534,6 @@ export const Params = {
     message.allowedBridgeChains = object.allowedBridgeChains?.map(e => e) || [];
     return message;
   },
-
   fromAmino(object: ParamsAmino): Params {
     return {
       creditClassFee: Array.isArray(object?.credit_class_fee) ? object.credit_class_fee.map((e: any) => Coin.fromAmino(e)) : [],
@@ -625,168 +544,134 @@ export const Params = {
       allowedBridgeChains: Array.isArray(object?.allowed_bridge_chains) ? object.allowed_bridge_chains.map((e: any) => e) : []
     };
   },
-
   toAmino(message: Params): ParamsAmino {
     const obj: any = {};
-
     if (message.creditClassFee) {
       obj.credit_class_fee = message.creditClassFee.map(e => e ? Coin.toAmino(e) : undefined);
     } else {
       obj.credit_class_fee = [];
     }
-
     if (message.basketFee) {
       obj.basket_fee = message.basketFee.map(e => e ? Coin.toAmino(e) : undefined);
     } else {
       obj.basket_fee = [];
     }
-
     if (message.allowedClassCreators) {
       obj.allowed_class_creators = message.allowedClassCreators.map(e => e);
     } else {
       obj.allowed_class_creators = [];
     }
-
     obj.allowlist_enabled = message.allowlistEnabled;
-
     if (message.allowedDenoms) {
       obj.allowed_denoms = message.allowedDenoms.map(e => e ? AllowedDenom.toAmino(e) : undefined);
     } else {
       obj.allowed_denoms = [];
     }
-
     if (message.allowedBridgeChains) {
       obj.allowed_bridge_chains = message.allowedBridgeChains.map(e => e);
     } else {
       obj.allowed_bridge_chains = [];
     }
-
     return obj;
   },
-
   fromAminoMsg(object: ParamsAminoMsg): Params {
     return Params.fromAmino(object.value);
   },
-
   fromProtoMsg(message: ParamsProtoMsg): Params {
     return Params.decode(message.value);
   },
-
   toProto(message: Params): Uint8Array {
     return Params.encode(message).finish();
   },
-
   toProtoMsg(message: Params): ParamsProtoMsg {
     return {
       typeUrl: "/regen.ecocredit.v1.Params",
       value: Params.encode(message).finish()
     };
   }
-
 };
-
 function createBaseCredits(): Credits {
   return {
     batchDenom: "",
     amount: ""
   };
 }
-
 export const Credits = {
   encode(message: Credits, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.batchDenom !== "") {
       writer.uint32(10).string(message.batchDenom);
     }
-
     if (message.amount !== "") {
       writer.uint32(18).string(message.amount);
     }
-
     return writer;
   },
-
   decode(input: _m0.Reader | Uint8Array, length?: number): Credits {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseCredits();
-
     while (reader.pos < end) {
       const tag = reader.uint32();
-
       switch (tag >>> 3) {
         case 1:
           message.batchDenom = reader.string();
           break;
-
         case 2:
           message.amount = reader.string();
           break;
-
         default:
           reader.skipType(tag & 7);
           break;
       }
     }
-
     return message;
   },
-
   fromJSON(object: any): Credits {
     return {
       batchDenom: isSet(object.batchDenom) ? String(object.batchDenom) : "",
       amount: isSet(object.amount) ? String(object.amount) : ""
     };
   },
-
   toJSON(message: Credits): unknown {
     const obj: any = {};
     message.batchDenom !== undefined && (obj.batchDenom = message.batchDenom);
     message.amount !== undefined && (obj.amount = message.amount);
     return obj;
   },
-
   fromPartial(object: Partial<Credits>): Credits {
     const message = createBaseCredits();
     message.batchDenom = object.batchDenom ?? "";
     message.amount = object.amount ?? "";
     return message;
   },
-
   fromAmino(object: CreditsAmino): Credits {
     return {
       batchDenom: object.batch_denom,
       amount: object.amount
     };
   },
-
   toAmino(message: Credits): CreditsAmino {
     const obj: any = {};
     obj.batch_denom = message.batchDenom;
     obj.amount = message.amount;
     return obj;
   },
-
   fromAminoMsg(object: CreditsAminoMsg): Credits {
     return Credits.fromAmino(object.value);
   },
-
   fromProtoMsg(message: CreditsProtoMsg): Credits {
     return Credits.decode(message.value);
   },
-
   toProto(message: Credits): Uint8Array {
     return Credits.encode(message).finish();
   },
-
   toProtoMsg(message: Credits): CreditsProtoMsg {
     return {
       typeUrl: "/regen.ecocredit.v1.Credits",
       value: Credits.encode(message).finish()
     };
   }
-
 };
-
 function createBaseBatchIssuance(): BatchIssuance {
   return {
     recipient: "",
@@ -796,70 +681,54 @@ function createBaseBatchIssuance(): BatchIssuance {
     retirementReason: ""
   };
 }
-
 export const BatchIssuance = {
   encode(message: BatchIssuance, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.recipient !== "") {
       writer.uint32(10).string(message.recipient);
     }
-
     if (message.tradableAmount !== "") {
       writer.uint32(18).string(message.tradableAmount);
     }
-
     if (message.retiredAmount !== "") {
       writer.uint32(26).string(message.retiredAmount);
     }
-
     if (message.retirementJurisdiction !== "") {
       writer.uint32(34).string(message.retirementJurisdiction);
     }
-
     if (message.retirementReason !== "") {
       writer.uint32(42).string(message.retirementReason);
     }
-
     return writer;
   },
-
   decode(input: _m0.Reader | Uint8Array, length?: number): BatchIssuance {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseBatchIssuance();
-
     while (reader.pos < end) {
       const tag = reader.uint32();
-
       switch (tag >>> 3) {
         case 1:
           message.recipient = reader.string();
           break;
-
         case 2:
           message.tradableAmount = reader.string();
           break;
-
         case 3:
           message.retiredAmount = reader.string();
           break;
-
         case 4:
           message.retirementJurisdiction = reader.string();
           break;
-
         case 5:
           message.retirementReason = reader.string();
           break;
-
         default:
           reader.skipType(tag & 7);
           break;
       }
     }
-
     return message;
   },
-
   fromJSON(object: any): BatchIssuance {
     return {
       recipient: isSet(object.recipient) ? String(object.recipient) : "",
@@ -869,7 +738,6 @@ export const BatchIssuance = {
       retirementReason: isSet(object.retirementReason) ? String(object.retirementReason) : ""
     };
   },
-
   toJSON(message: BatchIssuance): unknown {
     const obj: any = {};
     message.recipient !== undefined && (obj.recipient = message.recipient);
@@ -879,7 +747,6 @@ export const BatchIssuance = {
     message.retirementReason !== undefined && (obj.retirementReason = message.retirementReason);
     return obj;
   },
-
   fromPartial(object: Partial<BatchIssuance>): BatchIssuance {
     const message = createBaseBatchIssuance();
     message.recipient = object.recipient ?? "";
@@ -889,7 +756,6 @@ export const BatchIssuance = {
     message.retirementReason = object.retirementReason ?? "";
     return message;
   },
-
   fromAmino(object: BatchIssuanceAmino): BatchIssuance {
     return {
       recipient: object.recipient,
@@ -899,7 +765,6 @@ export const BatchIssuance = {
       retirementReason: object.retirement_reason
     };
   },
-
   toAmino(message: BatchIssuance): BatchIssuanceAmino {
     const obj: any = {};
     obj.recipient = message.recipient;
@@ -909,28 +774,22 @@ export const BatchIssuance = {
     obj.retirement_reason = message.retirementReason;
     return obj;
   },
-
   fromAminoMsg(object: BatchIssuanceAminoMsg): BatchIssuance {
     return BatchIssuance.fromAmino(object.value);
   },
-
   fromProtoMsg(message: BatchIssuanceProtoMsg): BatchIssuance {
     return BatchIssuance.decode(message.value);
   },
-
   toProto(message: BatchIssuance): Uint8Array {
     return BatchIssuance.encode(message).finish();
   },
-
   toProtoMsg(message: BatchIssuance): BatchIssuanceProtoMsg {
     return {
       typeUrl: "/regen.ecocredit.v1.BatchIssuance",
       value: BatchIssuance.encode(message).finish()
     };
   }
-
 };
-
 function createBaseOriginTx(): OriginTx {
   return {
     id: "",
@@ -939,62 +798,48 @@ function createBaseOriginTx(): OriginTx {
     note: ""
   };
 }
-
 export const OriginTx = {
   encode(message: OriginTx, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.id !== "") {
       writer.uint32(10).string(message.id);
     }
-
     if (message.source !== "") {
       writer.uint32(18).string(message.source);
     }
-
     if (message.contract !== "") {
       writer.uint32(26).string(message.contract);
     }
-
     if (message.note !== "") {
       writer.uint32(34).string(message.note);
     }
-
     return writer;
   },
-
   decode(input: _m0.Reader | Uint8Array, length?: number): OriginTx {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseOriginTx();
-
     while (reader.pos < end) {
       const tag = reader.uint32();
-
       switch (tag >>> 3) {
         case 1:
           message.id = reader.string();
           break;
-
         case 2:
           message.source = reader.string();
           break;
-
         case 3:
           message.contract = reader.string();
           break;
-
         case 4:
           message.note = reader.string();
           break;
-
         default:
           reader.skipType(tag & 7);
           break;
       }
     }
-
     return message;
   },
-
   fromJSON(object: any): OriginTx {
     return {
       id: isSet(object.id) ? String(object.id) : "",
@@ -1003,7 +848,6 @@ export const OriginTx = {
       note: isSet(object.note) ? String(object.note) : ""
     };
   },
-
   toJSON(message: OriginTx): unknown {
     const obj: any = {};
     message.id !== undefined && (obj.id = message.id);
@@ -1012,7 +856,6 @@ export const OriginTx = {
     message.note !== undefined && (obj.note = message.note);
     return obj;
   },
-
   fromPartial(object: Partial<OriginTx>): OriginTx {
     const message = createBaseOriginTx();
     message.id = object.id ?? "";
@@ -1021,7 +864,6 @@ export const OriginTx = {
     message.note = object.note ?? "";
     return message;
   },
-
   fromAmino(object: OriginTxAmino): OriginTx {
     return {
       id: object.id,
@@ -1030,7 +872,6 @@ export const OriginTx = {
       note: object.note
     };
   },
-
   toAmino(message: OriginTx): OriginTxAmino {
     const obj: any = {};
     obj.id = message.id;
@@ -1039,83 +880,65 @@ export const OriginTx = {
     obj.note = message.note;
     return obj;
   },
-
   fromAminoMsg(object: OriginTxAminoMsg): OriginTx {
     return OriginTx.fromAmino(object.value);
   },
-
   fromProtoMsg(message: OriginTxProtoMsg): OriginTx {
     return OriginTx.decode(message.value);
   },
-
   toProto(message: OriginTx): Uint8Array {
     return OriginTx.encode(message).finish();
   },
-
   toProtoMsg(message: OriginTx): OriginTxProtoMsg {
     return {
       typeUrl: "/regen.ecocredit.v1.OriginTx",
       value: OriginTx.encode(message).finish()
     };
   }
-
 };
-
 function createBaseCreditTypeProposal(): CreditTypeProposal {
   return {
     title: "",
     description: "",
-    creditType: undefined
+    creditType: CreditType.fromPartial({})
   };
 }
-
 export const CreditTypeProposal = {
   encode(message: CreditTypeProposal, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.title !== "") {
       writer.uint32(10).string(message.title);
     }
-
     if (message.description !== "") {
       writer.uint32(18).string(message.description);
     }
-
     if (message.creditType !== undefined) {
       CreditType.encode(message.creditType, writer.uint32(26).fork()).ldelim();
     }
-
     return writer;
   },
-
   decode(input: _m0.Reader | Uint8Array, length?: number): CreditTypeProposal {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseCreditTypeProposal();
-
     while (reader.pos < end) {
       const tag = reader.uint32();
-
       switch (tag >>> 3) {
         case 1:
           message.title = reader.string();
           break;
-
         case 2:
           message.description = reader.string();
           break;
-
         case 3:
           message.creditType = CreditType.decode(reader, reader.uint32());
           break;
-
         default:
           reader.skipType(tag & 7);
           break;
       }
     }
-
     return message;
   },
-
   fromJSON(object: any): CreditTypeProposal {
     return {
       title: isSet(object.title) ? String(object.title) : "",
@@ -1123,7 +946,6 @@ export const CreditTypeProposal = {
       creditType: isSet(object.creditType) ? CreditType.fromJSON(object.creditType) : undefined
     };
   },
-
   toJSON(message: CreditTypeProposal): unknown {
     const obj: any = {};
     message.title !== undefined && (obj.title = message.title);
@@ -1131,7 +953,6 @@ export const CreditTypeProposal = {
     message.creditType !== undefined && (obj.creditType = message.creditType ? CreditType.toJSON(message.creditType) : undefined);
     return obj;
   },
-
   fromPartial(object: Partial<CreditTypeProposal>): CreditTypeProposal {
     const message = createBaseCreditTypeProposal();
     message.title = object.title ?? "";
@@ -1139,7 +960,6 @@ export const CreditTypeProposal = {
     message.creditType = object.creditType !== undefined && object.creditType !== null ? CreditType.fromPartial(object.creditType) : undefined;
     return message;
   },
-
   fromAmino(object: CreditTypeProposalAmino): CreditTypeProposal {
     return {
       title: object.title,
@@ -1147,7 +967,6 @@ export const CreditTypeProposal = {
       creditType: object?.credit_type ? CreditType.fromAmino(object.credit_type) : undefined
     };
   },
-
   toAmino(message: CreditTypeProposal): CreditTypeProposalAmino {
     const obj: any = {};
     obj.title = message.title;
@@ -1155,28 +974,22 @@ export const CreditTypeProposal = {
     obj.credit_type = message.creditType ? CreditType.toAmino(message.creditType) : undefined;
     return obj;
   },
-
   fromAminoMsg(object: CreditTypeProposalAminoMsg): CreditTypeProposal {
     return CreditTypeProposal.fromAmino(object.value);
   },
-
   fromProtoMsg(message: CreditTypeProposalProtoMsg): CreditTypeProposal {
     return CreditTypeProposal.decode(message.value);
   },
-
   toProto(message: CreditTypeProposal): Uint8Array {
     return CreditTypeProposal.encode(message).finish();
   },
-
   toProtoMsg(message: CreditTypeProposal): CreditTypeProposalProtoMsg {
     return {
       typeUrl: "/regen.ecocredit.v1.CreditTypeProposal",
       value: CreditTypeProposal.encode(message).finish()
     };
   }
-
 };
-
 function createBaseAllowedDenom(): AllowedDenom {
   return {
     bankDenom: "",
@@ -1184,54 +997,42 @@ function createBaseAllowedDenom(): AllowedDenom {
     exponent: 0
   };
 }
-
 export const AllowedDenom = {
   encode(message: AllowedDenom, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.bankDenom !== "") {
       writer.uint32(10).string(message.bankDenom);
     }
-
     if (message.displayDenom !== "") {
       writer.uint32(18).string(message.displayDenom);
     }
-
     if (message.exponent !== 0) {
       writer.uint32(24).uint32(message.exponent);
     }
-
     return writer;
   },
-
   decode(input: _m0.Reader | Uint8Array, length?: number): AllowedDenom {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseAllowedDenom();
-
     while (reader.pos < end) {
       const tag = reader.uint32();
-
       switch (tag >>> 3) {
         case 1:
           message.bankDenom = reader.string();
           break;
-
         case 2:
           message.displayDenom = reader.string();
           break;
-
         case 3:
           message.exponent = reader.uint32();
           break;
-
         default:
           reader.skipType(tag & 7);
           break;
       }
     }
-
     return message;
   },
-
   fromJSON(object: any): AllowedDenom {
     return {
       bankDenom: isSet(object.bankDenom) ? String(object.bankDenom) : "",
@@ -1239,7 +1040,6 @@ export const AllowedDenom = {
       exponent: isSet(object.exponent) ? Number(object.exponent) : 0
     };
   },
-
   toJSON(message: AllowedDenom): unknown {
     const obj: any = {};
     message.bankDenom !== undefined && (obj.bankDenom = message.bankDenom);
@@ -1247,7 +1047,6 @@ export const AllowedDenom = {
     message.exponent !== undefined && (obj.exponent = Math.round(message.exponent));
     return obj;
   },
-
   fromPartial(object: Partial<AllowedDenom>): AllowedDenom {
     const message = createBaseAllowedDenom();
     message.bankDenom = object.bankDenom ?? "";
@@ -1255,7 +1054,6 @@ export const AllowedDenom = {
     message.exponent = object.exponent ?? 0;
     return message;
   },
-
   fromAmino(object: AllowedDenomAmino): AllowedDenom {
     return {
       bankDenom: object.bank_denom,
@@ -1263,7 +1061,6 @@ export const AllowedDenom = {
       exponent: object.exponent
     };
   },
-
   toAmino(message: AllowedDenom): AllowedDenomAmino {
     const obj: any = {};
     obj.bank_denom = message.bankDenom;
@@ -1271,24 +1068,19 @@ export const AllowedDenom = {
     obj.exponent = message.exponent;
     return obj;
   },
-
   fromAminoMsg(object: AllowedDenomAminoMsg): AllowedDenom {
     return AllowedDenom.fromAmino(object.value);
   },
-
   fromProtoMsg(message: AllowedDenomProtoMsg): AllowedDenom {
     return AllowedDenom.decode(message.value);
   },
-
   toProto(message: AllowedDenom): Uint8Array {
     return AllowedDenom.encode(message).finish();
   },
-
   toProtoMsg(message: AllowedDenom): AllowedDenomProtoMsg {
     return {
       typeUrl: "/regen.ecocredit.v1.AllowedDenom",
       value: AllowedDenom.encode(message).finish()
     };
   }
-
 };

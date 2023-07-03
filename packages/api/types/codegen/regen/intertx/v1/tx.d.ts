@@ -64,7 +64,7 @@ export interface MsgSubmitTx {
     /** connection_id is the id of the connection. */
     connectionId: string;
     /** msg is the bytes of the transaction msg to send. */
-    msg?: Any;
+    msg: Any;
 }
 export interface MsgSubmitTxProtoMsg {
     typeUrl: "/regen.intertx.v1.MsgSubmitTx";
@@ -87,7 +87,7 @@ export interface MsgSubmitTxAminoMsg {
 export interface MsgSubmitTxSDKType {
     owner: string;
     connection_id: string;
-    msg?: AnySDKType;
+    msg: AnySDKType;
 }
 /** MsgSubmitTxResponse defines the response for Msg/SubmitTx */
 export interface MsgSubmitTxResponse {

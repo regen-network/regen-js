@@ -36,7 +36,7 @@ export interface SellOrder {
      * expiration is an optional timestamp when the sell order expires. When the
      * expiration time is reached, the sell order is removed from state.
      */
-    expiration?: Timestamp;
+    expiration: Timestamp;
     /**
      * maker indicates that this is a maker order, meaning that when it hit
      * the order book, there were no matching buy orders.
@@ -102,7 +102,7 @@ export interface SellOrderSDKType {
     market_id: Long;
     ask_amount: string;
     disable_auto_retire: boolean;
-    expiration?: TimestampSDKType;
+    expiration: TimestampSDKType;
     maker: boolean;
 }
 /** AllowedDenom represents the information for an allowed ask/bid denom. */

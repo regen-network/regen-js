@@ -56,12 +56,12 @@ export interface StoreKVPairSDKType {
  * the file streamer dump them into files together with the state changes.
  */
 export interface BlockMetadata {
-    requestBeginBlock?: RequestBeginBlock;
-    responseBeginBlock?: ResponseBeginBlock;
+    requestBeginBlock: RequestBeginBlock;
+    responseBeginBlock: ResponseBeginBlock;
     deliverTxs: BlockMetadata_DeliverTx[];
-    requestEndBlock?: RequestEndBlock;
-    responseEndBlock?: ResponseEndBlock;
-    responseCommit?: ResponseCommit;
+    requestEndBlock: RequestEndBlock;
+    responseEndBlock: ResponseEndBlock;
+    responseCommit: ResponseCommit;
 }
 export interface BlockMetadataProtoMsg {
     typeUrl: "/cosmos.base.store.v1beta1.BlockMetadata";
@@ -88,17 +88,17 @@ export interface BlockMetadataAminoMsg {
  * the file streamer dump them into files together with the state changes.
  */
 export interface BlockMetadataSDKType {
-    request_begin_block?: RequestBeginBlockSDKType;
-    response_begin_block?: ResponseBeginBlockSDKType;
+    request_begin_block: RequestBeginBlockSDKType;
+    response_begin_block: ResponseBeginBlockSDKType;
     deliver_txs: BlockMetadata_DeliverTxSDKType[];
-    request_end_block?: RequestEndBlockSDKType;
-    response_end_block?: ResponseEndBlockSDKType;
-    response_commit?: ResponseCommitSDKType;
+    request_end_block: RequestEndBlockSDKType;
+    response_end_block: ResponseEndBlockSDKType;
+    response_commit: ResponseCommitSDKType;
 }
 /** DeliverTx encapulate deliver tx request and response. */
 export interface BlockMetadata_DeliverTx {
-    request?: RequestDeliverTx;
-    response?: ResponseDeliverTx;
+    request: RequestDeliverTx;
+    response: ResponseDeliverTx;
 }
 export interface BlockMetadata_DeliverTxProtoMsg {
     typeUrl: "/cosmos.base.store.v1beta1.DeliverTx";
@@ -115,8 +115,8 @@ export interface BlockMetadata_DeliverTxAminoMsg {
 }
 /** DeliverTx encapulate deliver tx request and response. */
 export interface BlockMetadata_DeliverTxSDKType {
-    request?: RequestDeliverTxSDKType;
-    response?: ResponseDeliverTxSDKType;
+    request: RequestDeliverTxSDKType;
+    response: ResponseDeliverTxSDKType;
 }
 export declare const StoreKVPair: {
     encode(message: StoreKVPair, writer?: _m0.Writer): _m0.Writer;

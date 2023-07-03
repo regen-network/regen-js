@@ -79,12 +79,12 @@ export interface MsgCreateBatch {
      * start_date is the beginning of the period during which this credit batch
      * was quantified and verified.
      */
-    startDate?: Timestamp;
+    startDate: Timestamp;
     /**
      * end_date is the end of the period during which this credit batch was
      * quantified and verified.
      */
-    endDate?: Timestamp;
+    endDate: Timestamp;
     /**
      * project_location is the location of the project backing the credits in this
      * batch. It is a string of the form
@@ -139,8 +139,8 @@ export interface MsgCreateBatchSDKType {
     class_id: string;
     issuance: MsgCreateBatch_BatchIssuanceSDKType[];
     metadata: Uint8Array;
-    start_date?: TimestampSDKType;
-    end_date?: TimestampSDKType;
+    start_date: TimestampSDKType;
+    end_date: TimestampSDKType;
     project_location: string;
 }
 /**

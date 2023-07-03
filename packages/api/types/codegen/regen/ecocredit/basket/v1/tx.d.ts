@@ -50,7 +50,7 @@ export interface MsgCreate {
      * date_criteria is the date criteria for batches admitted to the basket.
      * At most, only one of the date criteria fields can be set.
      */
-    dateCriteria?: DateCriteria;
+    dateCriteria: DateCriteria;
     /**
      * fee is the basket creation fee. A fee is not required if no fee exists
      * in the basket fee parameter. The fee must be greater than or equal to the
@@ -147,7 +147,7 @@ export interface MsgCreateSDKType {
     disable_auto_retire: boolean;
     credit_type_abbrev: string;
     allowed_classes: string[];
-    date_criteria?: DateCriteriaSDKType;
+    date_criteria: DateCriteriaSDKType;
     fee: CoinSDKType[];
 }
 /** MsgCreateBasketResponse is the Msg/CreateBasket response type. */
@@ -369,7 +369,7 @@ export interface MsgUpdateBasketFee {
      * fee is the basket creation fee. If not set, the basket creation fee will be
      * removed and no fee will be required to create a basket.
      */
-    fee?: Coin;
+    fee: Coin;
 }
 export interface MsgUpdateBasketFeeProtoMsg {
     typeUrl: "/regen.ecocredit.basket.v1.MsgUpdateBasketFee";
@@ -400,7 +400,7 @@ export interface MsgUpdateBasketFeeAminoMsg {
  */
 export interface MsgUpdateBasketFeeSDKType {
     authority: string;
-    fee?: CoinSDKType;
+    fee: CoinSDKType;
 }
 /**
  * MsgUpdateBasketFeeResponse is the Msg/UpdateBasketFee response type.
@@ -524,7 +524,7 @@ export interface MsgUpdateDateCriteria {
      * new_date_criteria is the new date criteria for batches admitted to the
      * basket. At most, only one of the date criteria fields can be set.
      */
-    newDateCriteria?: DateCriteria;
+    newDateCriteria: DateCriteria;
 }
 export interface MsgUpdateDateCriteriaProtoMsg {
     typeUrl: "/regen.ecocredit.basket.v1.MsgUpdateDateCriteria";
@@ -558,7 +558,7 @@ export interface MsgUpdateDateCriteriaAminoMsg {
 export interface MsgUpdateDateCriteriaSDKType {
     authority: string;
     denom: string;
-    new_date_criteria?: DateCriteriaSDKType;
+    new_date_criteria: DateCriteriaSDKType;
 }
 /**
  * MsgUpdateDateCriteriaResponse is the Msg/UpdateDateCriteria response type.
