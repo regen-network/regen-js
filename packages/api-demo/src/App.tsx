@@ -3,6 +3,7 @@ import React, { useEffect, useState } from 'react';
 
 import { MyBalance } from './MyBalance';
 
+const REGEN_LOCAL_REST_ENDPOINT = 'http://localhost:1317';
 const REGEN_MAINNET_REST_ENDPOINT = 'http://regen.regen.network:1317';
 const REGEN_REDWOOD_REST_ENDPOINT = 'http://redwood.regen.network:1317';
 
@@ -50,6 +51,9 @@ export function App(): React.ReactElement {
         />
         <p>
           {'Switch to another network by switching the node endpoint: '}
+          <button onClick={() => setRest(REGEN_LOCAL_REST_ENDPOINT)}>
+            {'Regen Local'}
+          </button>
           <button onClick={() => setRest(REGEN_MAINNET_REST_ENDPOINT)}>
             {'Regen Mainnet'}
           </button>
