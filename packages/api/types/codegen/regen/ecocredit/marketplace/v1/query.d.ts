@@ -28,7 +28,7 @@ export interface QuerySellOrderRequestSDKType {
 /** QuerySellOrderResponse is the Query/SellOrder response type. */
 export interface QuerySellOrderResponse {
     /** sell_order contains all information related to a sell order. */
-    sellOrder?: SellOrderInfo;
+    sellOrder: SellOrderInfo;
 }
 export interface QuerySellOrderResponseProtoMsg {
     typeUrl: "/regen.ecocredit.marketplace.v1.QuerySellOrderResponse";
@@ -45,12 +45,12 @@ export interface QuerySellOrderResponseAminoMsg {
 }
 /** QuerySellOrderResponse is the Query/SellOrder response type. */
 export interface QuerySellOrderResponseSDKType {
-    sell_order?: SellOrderInfoSDKType;
+    sell_order: SellOrderInfoSDKType;
 }
 /** QuerySellOrdersRequest is the Query/SellOrders request type. */
 export interface QuerySellOrdersRequest {
     /** pagination defines an optional pagination for the request. */
-    pagination?: PageRequest;
+    pagination: PageRequest;
 }
 export interface QuerySellOrdersRequestProtoMsg {
     typeUrl: "/regen.ecocredit.marketplace.v1.QuerySellOrdersRequest";
@@ -67,14 +67,14 @@ export interface QuerySellOrdersRequestAminoMsg {
 }
 /** QuerySellOrdersRequest is the Query/SellOrders request type. */
 export interface QuerySellOrdersRequestSDKType {
-    pagination?: PageRequestSDKType;
+    pagination: PageRequestSDKType;
 }
 /** QuerySellOrdersResponse is the Query/SellOrders response type. */
 export interface QuerySellOrdersResponse {
     /** sell_orders is a list of sell orders. */
     sellOrders: SellOrderInfo[];
     /** pagination defines the pagination in the response. */
-    pagination?: PageResponse;
+    pagination: PageResponse;
 }
 export interface QuerySellOrdersResponseProtoMsg {
     typeUrl: "/regen.ecocredit.marketplace.v1.QuerySellOrdersResponse";
@@ -94,7 +94,7 @@ export interface QuerySellOrdersResponseAminoMsg {
 /** QuerySellOrdersResponse is the Query/SellOrders response type. */
 export interface QuerySellOrdersResponseSDKType {
     sell_orders: SellOrderInfoSDKType[];
-    pagination?: PageResponseSDKType;
+    pagination: PageResponseSDKType;
 }
 /**
  * QuerySellOrdersByBatchRequest is the Query/SellOrdersByBatch
@@ -104,7 +104,7 @@ export interface QuerySellOrdersByBatchRequest {
     /** batch_denom is an ecocredit denom */
     batchDenom: string;
     /** pagination defines an optional pagination for the request. */
-    pagination?: PageRequest;
+    pagination: PageRequest;
 }
 export interface QuerySellOrdersByBatchRequestProtoMsg {
     typeUrl: "/regen.ecocredit.marketplace.v1.QuerySellOrdersByBatchRequest";
@@ -130,7 +130,7 @@ export interface QuerySellOrdersByBatchRequestAminoMsg {
  */
 export interface QuerySellOrdersByBatchRequestSDKType {
     batch_denom: string;
-    pagination?: PageRequestSDKType;
+    pagination: PageRequestSDKType;
 }
 /**
  * QuerySellOrdersByBatchResponse is the Query/SellOrdersByBatch
@@ -140,7 +140,7 @@ export interface QuerySellOrdersByBatchResponse {
     /** sell_orders is a list of sell orders. */
     sellOrders: SellOrderInfo[];
     /** pagination defines an optional pagination for the response. */
-    pagination?: PageResponse;
+    pagination: PageResponse;
 }
 export interface QuerySellOrdersByBatchResponseProtoMsg {
     typeUrl: "/regen.ecocredit.marketplace.v1.QuerySellOrdersByBatchResponse";
@@ -166,7 +166,7 @@ export interface QuerySellOrdersByBatchResponseAminoMsg {
  */
 export interface QuerySellOrdersByBatchResponseSDKType {
     sell_orders: SellOrderInfoSDKType[];
-    pagination?: PageResponseSDKType;
+    pagination: PageResponseSDKType;
 }
 /**
  * QuerySellOrdersBySellerRequest is the Query/SellOrdersBySeller request
@@ -176,7 +176,7 @@ export interface QuerySellOrdersBySellerRequest {
     /** seller is the address of the account that is selling credits. */
     seller: string;
     /** pagination defines an optional pagination for the request. */
-    pagination?: PageRequest;
+    pagination: PageRequest;
 }
 export interface QuerySellOrdersBySellerRequestProtoMsg {
     typeUrl: "/regen.ecocredit.marketplace.v1.QuerySellOrdersBySellerRequest";
@@ -202,7 +202,7 @@ export interface QuerySellOrdersBySellerRequestAminoMsg {
  */
 export interface QuerySellOrdersBySellerRequestSDKType {
     seller: string;
-    pagination?: PageRequestSDKType;
+    pagination: PageRequestSDKType;
 }
 /**
  * QuerySellOrdersBySellerResponse is the Query/SellOrdersBySellerResponse
@@ -212,7 +212,7 @@ export interface QuerySellOrdersBySellerResponse {
     /** sell_orders is a list of sell orders. */
     sellOrders: SellOrderInfo[];
     /** pagination defines an optional pagination for the response. */
-    pagination?: PageResponse;
+    pagination: PageResponse;
 }
 export interface QuerySellOrdersBySellerResponseProtoMsg {
     typeUrl: "/regen.ecocredit.marketplace.v1.QuerySellOrdersBySellerResponse";
@@ -238,12 +238,12 @@ export interface QuerySellOrdersBySellerResponseAminoMsg {
  */
 export interface QuerySellOrdersBySellerResponseSDKType {
     sell_orders: SellOrderInfoSDKType[];
-    pagination?: PageResponseSDKType;
+    pagination: PageResponseSDKType;
 }
 /** QueryAllowedDenomsRequest is the Query/AllowedDenoms request type. */
 export interface QueryAllowedDenomsRequest {
     /** pagination defines an optional pagination for the request. */
-    pagination?: PageRequest;
+    pagination: PageRequest;
 }
 export interface QueryAllowedDenomsRequestProtoMsg {
     typeUrl: "/regen.ecocredit.marketplace.v1.QueryAllowedDenomsRequest";
@@ -260,7 +260,7 @@ export interface QueryAllowedDenomsRequestAminoMsg {
 }
 /** QueryAllowedDenomsRequest is the Query/AllowedDenoms request type. */
 export interface QueryAllowedDenomsRequestSDKType {
-    pagination?: PageRequestSDKType;
+    pagination: PageRequestSDKType;
 }
 /** QueryAllowedDenomsResponse is the Query/AllowedDenoms response type. */
 export interface QueryAllowedDenomsResponse {
@@ -270,7 +270,7 @@ export interface QueryAllowedDenomsResponse {
      */
     allowedDenoms: AllowedDenom[];
     /** pagination defines an optional pagination for the response. */
-    pagination?: PageResponse;
+    pagination: PageResponse;
 }
 export interface QueryAllowedDenomsResponseProtoMsg {
     typeUrl: "/regen.ecocredit.marketplace.v1.QueryAllowedDenomsResponse";
@@ -293,7 +293,7 @@ export interface QueryAllowedDenomsResponseAminoMsg {
 /** QueryAllowedDenomsResponse is the Query/AllowedDenoms response type. */
 export interface QueryAllowedDenomsResponseSDKType {
     allowed_denoms: AllowedDenomSDKType[];
-    pagination?: PageResponseSDKType;
+    pagination: PageResponseSDKType;
 }
 /** SellOrderInfo is the human-readable sell order information. */
 export interface SellOrderInfo {
@@ -323,7 +323,7 @@ export interface SellOrderInfo {
      * expiration is an optional timestamp when the sell order expires. When the
      * expiration time is reached, the sell order is removed from state.
      */
-    expiration?: Timestamp;
+    expiration: Timestamp;
 }
 export interface SellOrderInfoProtoMsg {
     typeUrl: "/regen.ecocredit.marketplace.v1.SellOrderInfo";
@@ -372,7 +372,7 @@ export interface SellOrderInfoSDKType {
     ask_denom: string;
     ask_amount: string;
     disable_auto_retire: boolean;
-    expiration?: TimestampSDKType;
+    expiration: TimestampSDKType;
 }
 export declare const QuerySellOrderRequest: {
     encode(message: QuerySellOrderRequest, writer?: _m0.Writer): _m0.Writer;

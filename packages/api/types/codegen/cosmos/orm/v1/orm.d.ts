@@ -2,7 +2,7 @@ import * as _m0 from "protobufjs/minimal";
 /** TableDescriptor describes an ORM table. */
 export interface TableDescriptor {
     /** primary_key defines the primary key for the table. */
-    primaryKey?: PrimaryKeyDescriptor;
+    primaryKey: PrimaryKeyDescriptor;
     /** index defines one or more secondary indexes. */
     index: SecondaryIndexDescriptor[];
     /**
@@ -35,7 +35,7 @@ export interface TableDescriptorAminoMsg {
 }
 /** TableDescriptor describes an ORM table. */
 export interface TableDescriptorSDKType {
-    primary_key?: PrimaryKeyDescriptorSDKType;
+    primary_key: PrimaryKeyDescriptorSDKType;
     index: SecondaryIndexDescriptorSDKType[];
     id: number;
 }

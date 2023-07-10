@@ -8,7 +8,7 @@ import * as _m0 from "protobufjs/minimal";
 export interface MsgGrant {
     granter: string;
     grantee: string;
-    grant?: Grant;
+    grant: Grant;
 }
 export interface MsgGrantProtoMsg {
     typeUrl: "/cosmos.authz.v1beta1.MsgGrant";
@@ -34,7 +34,7 @@ export interface MsgGrantAminoMsg {
 export interface MsgGrantSDKType {
     granter: string;
     grantee: string;
-    grant?: GrantSDKType;
+    grant: GrantSDKType;
 }
 /** MsgExecResponse defines the Msg/MsgExecResponse response type. */
 export interface MsgExecResponse {

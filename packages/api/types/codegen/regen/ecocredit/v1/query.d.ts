@@ -7,7 +7,7 @@ import * as _m0 from "protobufjs/minimal";
 /** QueryClassesRequest is the Query/Classes request type. */
 export interface QueryClassesRequest {
     /** pagination defines an optional pagination for the request. */
-    pagination?: PageRequest;
+    pagination: PageRequest;
 }
 export interface QueryClassesRequestProtoMsg {
     typeUrl: "/regen.ecocredit.v1.QueryClassesRequest";
@@ -24,14 +24,14 @@ export interface QueryClassesRequestAminoMsg {
 }
 /** QueryClassesRequest is the Query/Classes request type. */
 export interface QueryClassesRequestSDKType {
-    pagination?: PageRequestSDKType;
+    pagination: PageRequestSDKType;
 }
 /** QueryClassesResponse is the Query/Classes response type. */
 export interface QueryClassesResponse {
     /** classes are the fetched credit classes. */
     classes: ClassInfo[];
     /** pagination defines the pagination in the response. */
-    pagination?: PageResponse;
+    pagination: PageResponse;
 }
 export interface QueryClassesResponseProtoMsg {
     typeUrl: "/regen.ecocredit.v1.QueryClassesResponse";
@@ -51,14 +51,14 @@ export interface QueryClassesResponseAminoMsg {
 /** QueryClassesResponse is the Query/Classes response type. */
 export interface QueryClassesResponseSDKType {
     classes: ClassInfoSDKType[];
-    pagination?: PageResponseSDKType;
+    pagination: PageResponseSDKType;
 }
 /** QueryClassesByAdminRequest is the Query/ClassesByAdmin request type. */
 export interface QueryClassesByAdminRequest {
     /** admin is the address of the admin of the class. */
     admin: string;
     /** pagination defines an optional pagination for the request. */
-    pagination?: PageRequest;
+    pagination: PageRequest;
 }
 export interface QueryClassesByAdminRequestProtoMsg {
     typeUrl: "/regen.ecocredit.v1.QueryClassesByAdminRequest";
@@ -78,14 +78,14 @@ export interface QueryClassesByAdminRequestAminoMsg {
 /** QueryClassesByAdminRequest is the Query/ClassesByAdmin request type. */
 export interface QueryClassesByAdminRequestSDKType {
     admin: string;
-    pagination?: PageRequestSDKType;
+    pagination: PageRequestSDKType;
 }
 /** QueryClassesByAdminResponse is the Query/ClassesByAdmin response type. */
 export interface QueryClassesByAdminResponse {
     /** classes are the fetched credit classes. */
     classes: ClassInfo[];
     /** pagination defines the pagination in the response. */
-    pagination?: PageResponse;
+    pagination: PageResponse;
 }
 export interface QueryClassesByAdminResponseProtoMsg {
     typeUrl: "/regen.ecocredit.v1.QueryClassesByAdminResponse";
@@ -105,7 +105,7 @@ export interface QueryClassesByAdminResponseAminoMsg {
 /** QueryClassesByAdminResponse is the Query/ClassesByAdmin response type. */
 export interface QueryClassesByAdminResponseSDKType {
     classes: ClassInfoSDKType[];
-    pagination?: PageResponseSDKType;
+    pagination: PageResponseSDKType;
 }
 /** QueryClassRequest is the Query/Class request type. */
 export interface QueryClassRequest {
@@ -132,7 +132,7 @@ export interface QueryClassRequestSDKType {
 /** QueryClassResponse is the Query/Class request type. */
 export interface QueryClassResponse {
     /** class is the fetched credit class. */
-    class?: ClassInfo;
+    class: ClassInfo;
 }
 export interface QueryClassResponseProtoMsg {
     typeUrl: "/regen.ecocredit.v1.QueryClassResponse";
@@ -149,14 +149,14 @@ export interface QueryClassResponseAminoMsg {
 }
 /** QueryClassResponse is the Query/Class request type. */
 export interface QueryClassResponseSDKType {
-    class?: ClassInfoSDKType;
+    class: ClassInfoSDKType;
 }
 /** QueryClassIssuersRequest is the Query/ClassIssuers request type. */
 export interface QueryClassIssuersRequest {
     /** class_id is the unique identifier of the credit class to query. */
     classId: string;
     /** pagination defines an optional pagination for the request. */
-    pagination?: PageRequest;
+    pagination: PageRequest;
 }
 export interface QueryClassIssuersRequestProtoMsg {
     typeUrl: "/regen.ecocredit.v1.QueryClassIssuersRequest";
@@ -176,14 +176,14 @@ export interface QueryClassIssuersRequestAminoMsg {
 /** QueryClassIssuersRequest is the Query/ClassIssuers request type. */
 export interface QueryClassIssuersRequestSDKType {
     class_id: string;
-    pagination?: PageRequestSDKType;
+    pagination: PageRequestSDKType;
 }
 /** QueryClassIssuersRequest is the Query/ClassIssuers response type. */
 export interface QueryClassIssuersResponse {
     /** issuers is a list of issuers for the credit class */
     issuers: string[];
     /** pagination defines the pagination in the response. */
-    pagination?: PageResponse;
+    pagination: PageResponse;
 }
 export interface QueryClassIssuersResponseProtoMsg {
     typeUrl: "/regen.ecocredit.v1.QueryClassIssuersResponse";
@@ -203,12 +203,12 @@ export interface QueryClassIssuersResponseAminoMsg {
 /** QueryClassIssuersRequest is the Query/ClassIssuers response type. */
 export interface QueryClassIssuersResponseSDKType {
     issuers: string[];
-    pagination?: PageResponseSDKType;
+    pagination: PageResponseSDKType;
 }
 /** QueryProjectsRequest is the Query/Projects request type. */
 export interface QueryProjectsRequest {
     /** pagination defines an optional pagination for the request. */
-    pagination?: PageRequest;
+    pagination: PageRequest;
 }
 export interface QueryProjectsRequestProtoMsg {
     typeUrl: "/regen.ecocredit.v1.QueryProjectsRequest";
@@ -225,14 +225,14 @@ export interface QueryProjectsRequestAminoMsg {
 }
 /** QueryProjectsRequest is the Query/Projects request type. */
 export interface QueryProjectsRequestSDKType {
-    pagination?: PageRequestSDKType;
+    pagination: PageRequestSDKType;
 }
 /** QueryProjectsResponse is the Query/Projects response type. */
 export interface QueryProjectsResponse {
     /** projects are the fetched projects. */
     projects: ProjectInfo[];
     /** pagination defines the pagination in the response. */
-    pagination?: PageResponse;
+    pagination: PageResponse;
 }
 export interface QueryProjectsResponseProtoMsg {
     typeUrl: "/regen.ecocredit.v1.QueryProjectsResponse";
@@ -252,14 +252,14 @@ export interface QueryProjectsResponseAminoMsg {
 /** QueryProjectsResponse is the Query/Projects response type. */
 export interface QueryProjectsResponseSDKType {
     projects: ProjectInfoSDKType[];
-    pagination?: PageResponseSDKType;
+    pagination: PageResponseSDKType;
 }
 /** QueryProjectsByClassRequest is the Query/ProjectsByClass request type. */
 export interface QueryProjectsByClassRequest {
     /** class_id is the unique identifier of the credit class to query. */
     classId: string;
     /** pagination defines an optional pagination for the request. */
-    pagination?: PageRequest;
+    pagination: PageRequest;
 }
 export interface QueryProjectsByClassRequestProtoMsg {
     typeUrl: "/regen.ecocredit.v1.QueryProjectsByClassRequest";
@@ -279,14 +279,14 @@ export interface QueryProjectsByClassRequestAminoMsg {
 /** QueryProjectsByClassRequest is the Query/ProjectsByClass request type. */
 export interface QueryProjectsByClassRequestSDKType {
     class_id: string;
-    pagination?: PageRequestSDKType;
+    pagination: PageRequestSDKType;
 }
 /** QueryProjectsByClassResponse is the Query/ProjectsByClass response type. */
 export interface QueryProjectsByClassResponse {
     /** projects are the fetched projects. */
     projects: ProjectInfo[];
     /** pagination defines the pagination in the response. */
-    pagination?: PageResponse;
+    pagination: PageResponse;
 }
 export interface QueryProjectsByClassResponseProtoMsg {
     typeUrl: "/regen.ecocredit.v1.QueryProjectsByClassResponse";
@@ -306,7 +306,7 @@ export interface QueryProjectsByClassResponseAminoMsg {
 /** QueryProjectsByClassResponse is the Query/ProjectsByClass response type. */
 export interface QueryProjectsByClassResponseSDKType {
     projects: ProjectInfoSDKType[];
-    pagination?: PageResponseSDKType;
+    pagination: PageResponseSDKType;
 }
 /**
  * QueryProjectsByReferenceIdRequest is the Query/ProjectsByReferenceId request
@@ -316,7 +316,7 @@ export interface QueryProjectsByReferenceIdRequest {
     /** reference_id is the project reference id. */
     referenceId: string;
     /** pagination defines an optional pagination for the request. */
-    pagination?: PageRequest;
+    pagination: PageRequest;
 }
 export interface QueryProjectsByReferenceIdRequestProtoMsg {
     typeUrl: "/regen.ecocredit.v1.QueryProjectsByReferenceIdRequest";
@@ -342,7 +342,7 @@ export interface QueryProjectsByReferenceIdRequestAminoMsg {
  */
 export interface QueryProjectsByReferenceIdRequestSDKType {
     reference_id: string;
-    pagination?: PageRequestSDKType;
+    pagination: PageRequestSDKType;
 }
 /**
  * QueryProjectsByReferenceIdResponse is the Query/ProjectsByReferenceId
@@ -352,7 +352,7 @@ export interface QueryProjectsByReferenceIdResponse {
     /** projects are the fetched projects. */
     projects: ProjectInfo[];
     /** pagination defines the pagination in the response. */
-    pagination?: PageResponse;
+    pagination: PageResponse;
 }
 export interface QueryProjectsByReferenceIdResponseProtoMsg {
     typeUrl: "/regen.ecocredit.v1.QueryProjectsByReferenceIdResponse";
@@ -378,14 +378,14 @@ export interface QueryProjectsByReferenceIdResponseAminoMsg {
  */
 export interface QueryProjectsByReferenceIdResponseSDKType {
     projects: ProjectInfoSDKType[];
-    pagination?: PageResponseSDKType;
+    pagination: PageResponseSDKType;
 }
 /** QueryProjectsByAdminRequest is the Query/ProjectByAdmin request type. */
 export interface QueryProjectsByAdminRequest {
     /** admin is the account address of project admin. */
     admin: string;
     /** pagination defines an optional pagination for the request. */
-    pagination?: PageRequest;
+    pagination: PageRequest;
 }
 export interface QueryProjectsByAdminRequestProtoMsg {
     typeUrl: "/regen.ecocredit.v1.QueryProjectsByAdminRequest";
@@ -405,14 +405,14 @@ export interface QueryProjectsByAdminRequestAminoMsg {
 /** QueryProjectsByAdminRequest is the Query/ProjectByAdmin request type. */
 export interface QueryProjectsByAdminRequestSDKType {
     admin: string;
-    pagination?: PageRequestSDKType;
+    pagination: PageRequestSDKType;
 }
 /** QueryProjectsByAdminResponse is the Query/ProjectByAdmin response type. */
 export interface QueryProjectsByAdminResponse {
     /** projects are the fetched projects. */
     projects: ProjectInfo[];
     /** pagination defines the pagination in the response. */
-    pagination?: PageResponse;
+    pagination: PageResponse;
 }
 export interface QueryProjectsByAdminResponseProtoMsg {
     typeUrl: "/regen.ecocredit.v1.QueryProjectsByAdminResponse";
@@ -432,7 +432,7 @@ export interface QueryProjectsByAdminResponseAminoMsg {
 /** QueryProjectsByAdminResponse is the Query/ProjectByAdmin response type. */
 export interface QueryProjectsByAdminResponseSDKType {
     projects: ProjectInfoSDKType[];
-    pagination?: PageResponseSDKType;
+    pagination: PageResponseSDKType;
 }
 /** QueryProjectRequest is the Query/Project request type. */
 export interface QueryProjectRequest {
@@ -459,7 +459,7 @@ export interface QueryProjectRequestSDKType {
 /** QueryProjectResponse is the Query/Project response type. */
 export interface QueryProjectResponse {
     /** project is the fetched project. */
-    project?: ProjectInfo;
+    project: ProjectInfo;
 }
 export interface QueryProjectResponseProtoMsg {
     typeUrl: "/regen.ecocredit.v1.QueryProjectResponse";
@@ -476,12 +476,12 @@ export interface QueryProjectResponseAminoMsg {
 }
 /** QueryProjectResponse is the Query/Project response type. */
 export interface QueryProjectResponseSDKType {
-    project?: ProjectInfoSDKType;
+    project: ProjectInfoSDKType;
 }
 /** QueryBatchesRequest is the Query/Batches request type. */
 export interface QueryBatchesRequest {
     /** pagination defines an optional pagination for the request. */
-    pagination?: PageRequest;
+    pagination: PageRequest;
 }
 export interface QueryBatchesRequestProtoMsg {
     typeUrl: "/regen.ecocredit.v1.QueryBatchesRequest";
@@ -498,14 +498,14 @@ export interface QueryBatchesRequestAminoMsg {
 }
 /** QueryBatchesRequest is the Query/Batches request type. */
 export interface QueryBatchesRequestSDKType {
-    pagination?: PageRequestSDKType;
+    pagination: PageRequestSDKType;
 }
 /** QueryBatchesResponse is the Query/Batches response type. */
 export interface QueryBatchesResponse {
     /** batches are the fetched credit batches. */
     batches: BatchInfo[];
     /** pagination defines the pagination in the response. */
-    pagination?: PageResponse;
+    pagination: PageResponse;
 }
 export interface QueryBatchesResponseProtoMsg {
     typeUrl: "/regen.ecocredit.v1.QueryBatchesResponse";
@@ -525,14 +525,14 @@ export interface QueryBatchesResponseAminoMsg {
 /** QueryBatchesResponse is the Query/Batches response type. */
 export interface QueryBatchesResponseSDKType {
     batches: BatchInfoSDKType[];
-    pagination?: PageResponseSDKType;
+    pagination: PageResponseSDKType;
 }
 /** QueryBatchesByIssuerRequest is the Query/BatchesByIssuer request type. */
 export interface QueryBatchesByIssuerRequest {
     /** issuer is the address that issued the batch */
     issuer: string;
     /** pagination defines an optional pagination for the request. */
-    pagination?: PageRequest;
+    pagination: PageRequest;
 }
 export interface QueryBatchesByIssuerRequestProtoMsg {
     typeUrl: "/regen.ecocredit.v1.QueryBatchesByIssuerRequest";
@@ -552,14 +552,14 @@ export interface QueryBatchesByIssuerRequestAminoMsg {
 /** QueryBatchesByIssuerRequest is the Query/BatchesByIssuer request type. */
 export interface QueryBatchesByIssuerRequestSDKType {
     issuer: string;
-    pagination?: PageRequestSDKType;
+    pagination: PageRequestSDKType;
 }
 /** QueryBatchesByIssuerResponse is the Query/BatchesByIssuer response type. */
 export interface QueryBatchesByIssuerResponse {
     /** batches are the fetched credit batches. */
     batches: BatchInfo[];
     /** pagination defines the pagination in the response. */
-    pagination?: PageResponse;
+    pagination: PageResponse;
 }
 export interface QueryBatchesByIssuerResponseProtoMsg {
     typeUrl: "/regen.ecocredit.v1.QueryBatchesByIssuerResponse";
@@ -579,14 +579,14 @@ export interface QueryBatchesByIssuerResponseAminoMsg {
 /** QueryBatchesByIssuerResponse is the Query/BatchesByIssuer response type. */
 export interface QueryBatchesByIssuerResponseSDKType {
     batches: BatchInfoSDKType[];
-    pagination?: PageResponseSDKType;
+    pagination: PageResponseSDKType;
 }
 /** QueryBatchesByClassRequest is the Query/BatchesByClass request type. */
 export interface QueryBatchesByClassRequest {
     /** class_id is the unique identifier of the credit class to query. */
     classId: string;
     /** pagination defines an optional pagination for the request. */
-    pagination?: PageRequest;
+    pagination: PageRequest;
 }
 export interface QueryBatchesByClassRequestProtoMsg {
     typeUrl: "/regen.ecocredit.v1.QueryBatchesByClassRequest";
@@ -606,14 +606,14 @@ export interface QueryBatchesByClassRequestAminoMsg {
 /** QueryBatchesByClassRequest is the Query/BatchesByClass request type. */
 export interface QueryBatchesByClassRequestSDKType {
     class_id: string;
-    pagination?: PageRequestSDKType;
+    pagination: PageRequestSDKType;
 }
 /** QueryBatchesByProjectRequest is the Query/BatchesByProject request type. */
 export interface QueryBatchesByProjectRequest {
     /** project_id is the unique identifier of the project to query. */
     projectId: string;
     /** pagination defines an optional pagination for the request. */
-    pagination?: PageRequest;
+    pagination: PageRequest;
 }
 export interface QueryBatchesByProjectRequestProtoMsg {
     typeUrl: "/regen.ecocredit.v1.QueryBatchesByProjectRequest";
@@ -633,14 +633,14 @@ export interface QueryBatchesByProjectRequestAminoMsg {
 /** QueryBatchesByProjectRequest is the Query/BatchesByProject request type. */
 export interface QueryBatchesByProjectRequestSDKType {
     project_id: string;
-    pagination?: PageRequestSDKType;
+    pagination: PageRequestSDKType;
 }
 /** QueryBatchesByProjectResponse is the Query/BatchesByProject response type. */
 export interface QueryBatchesByProjectResponse {
     /** batches are the fetched credit batches. */
     batches: BatchInfo[];
     /** pagination defines the pagination in the response. */
-    pagination?: PageResponse;
+    pagination: PageResponse;
 }
 export interface QueryBatchesByProjectResponseProtoMsg {
     typeUrl: "/regen.ecocredit.v1.QueryBatchesByProjectResponse";
@@ -660,14 +660,14 @@ export interface QueryBatchesByProjectResponseAminoMsg {
 /** QueryBatchesByProjectResponse is the Query/BatchesByProject response type. */
 export interface QueryBatchesByProjectResponseSDKType {
     batches: BatchInfoSDKType[];
-    pagination?: PageResponseSDKType;
+    pagination: PageResponseSDKType;
 }
 /** QueryBatchesByClassResponse is the Query/BatchesByClass response type. */
 export interface QueryBatchesByClassResponse {
     /** batches are the fetched credit batches. */
     batches: BatchInfo[];
     /** pagination defines the pagination in the response. */
-    pagination?: PageResponse;
+    pagination: PageResponse;
 }
 export interface QueryBatchesByClassResponseProtoMsg {
     typeUrl: "/regen.ecocredit.v1.QueryBatchesByClassResponse";
@@ -687,7 +687,7 @@ export interface QueryBatchesByClassResponseAminoMsg {
 /** QueryBatchesByClassResponse is the Query/BatchesByClass response type. */
 export interface QueryBatchesByClassResponseSDKType {
     batches: BatchInfoSDKType[];
-    pagination?: PageResponseSDKType;
+    pagination: PageResponseSDKType;
 }
 /** QueryBatchRequest is the Query/Batch request type. */
 export interface QueryBatchRequest {
@@ -714,7 +714,7 @@ export interface QueryBatchRequestSDKType {
 /** QueryBatchResponse is the Query/Batch response type. */
 export interface QueryBatchResponse {
     /** batch is the fetched credit batch. */
-    batch?: BatchInfo;
+    batch: BatchInfo;
 }
 export interface QueryBatchResponseProtoMsg {
     typeUrl: "/regen.ecocredit.v1.QueryBatchResponse";
@@ -731,7 +731,7 @@ export interface QueryBatchResponseAminoMsg {
 }
 /** QueryBatchResponse is the Query/Batch response type. */
 export interface QueryBatchResponseSDKType {
-    batch?: BatchInfoSDKType;
+    batch: BatchInfoSDKType;
 }
 /** QueryBalanceRequest is the Query/Balance request type. */
 export interface QueryBalanceRequest {
@@ -763,7 +763,7 @@ export interface QueryBalanceRequestSDKType {
 /** QueryBalanceResponse is the Query/Balance response type. */
 export interface QueryBalanceResponse {
     /** balance is the balance of the given account. */
-    balance?: BatchBalanceInfo;
+    balance: BatchBalanceInfo;
 }
 export interface QueryBalanceResponseProtoMsg {
     typeUrl: "/regen.ecocredit.v1.QueryBalanceResponse";
@@ -780,14 +780,14 @@ export interface QueryBalanceResponseAminoMsg {
 }
 /** QueryBalanceResponse is the Query/Balance response type. */
 export interface QueryBalanceResponseSDKType {
-    balance?: BatchBalanceInfoSDKType;
+    balance: BatchBalanceInfoSDKType;
 }
 /** QueryBalancesRequest is the Query/Balances request type. */
 export interface QueryBalancesRequest {
     /** address is the address of the account whose balance is being queried. */
     address: string;
     /** pagination defines an optional pagination for the request. */
-    pagination?: PageRequest;
+    pagination: PageRequest;
 }
 export interface QueryBalancesRequestProtoMsg {
     typeUrl: "/regen.ecocredit.v1.QueryBalancesRequest";
@@ -807,7 +807,7 @@ export interface QueryBalancesRequestAminoMsg {
 /** QueryBalancesRequest is the Query/Balances request type. */
 export interface QueryBalancesRequestSDKType {
     address: string;
-    pagination?: PageRequestSDKType;
+    pagination: PageRequestSDKType;
 }
 /** QueryBalancesResponse is the Query/Balances response type. */
 export interface QueryBalancesResponse {
@@ -817,7 +817,7 @@ export interface QueryBalancesResponse {
      */
     balances: BatchBalanceInfo[];
     /** pagination defines the pagination in the response. */
-    pagination?: PageResponse;
+    pagination: PageResponse;
 }
 export interface QueryBalancesResponseProtoMsg {
     typeUrl: "/regen.ecocredit.v1.QueryBalancesResponse";
@@ -840,7 +840,7 @@ export interface QueryBalancesResponseAminoMsg {
 /** QueryBalancesResponse is the Query/Balances response type. */
 export interface QueryBalancesResponseSDKType {
     balances: BatchBalanceInfoSDKType[];
-    pagination?: PageResponseSDKType;
+    pagination: PageResponseSDKType;
 }
 /**
  * QueryBalancesByBatchRequest is the Query/BalancesByBatch request type.
@@ -851,7 +851,7 @@ export interface QueryBalancesByBatchRequest {
     /** batch_denom is the denom of the batch to query by. */
     batchDenom: string;
     /** pagination defines an optional pagination for the request. */
-    pagination?: PageRequest;
+    pagination: PageRequest;
 }
 export interface QueryBalancesByBatchRequestProtoMsg {
     typeUrl: "/regen.ecocredit.v1.QueryBalancesByBatchRequest";
@@ -879,7 +879,7 @@ export interface QueryBalancesByBatchRequestAminoMsg {
  */
 export interface QueryBalancesByBatchRequestSDKType {
     batch_denom: string;
-    pagination?: PageRequestSDKType;
+    pagination: PageRequestSDKType;
 }
 /**
  * QueryBalancesByBatchResponse is the Query/BalancesByBatch response type.
@@ -893,7 +893,7 @@ export interface QueryBalancesByBatchResponse {
      */
     balances: BatchBalanceInfo[];
     /** pagination defines the pagination in the response. */
-    pagination?: PageResponse;
+    pagination: PageResponse;
 }
 export interface QueryBalancesByBatchResponseProtoMsg {
     typeUrl: "/regen.ecocredit.v1.QueryBalancesByBatchResponse";
@@ -924,7 +924,7 @@ export interface QueryBalancesByBatchResponseAminoMsg {
  */
 export interface QueryBalancesByBatchResponseSDKType {
     balances: BatchBalanceInfoSDKType[];
-    pagination?: PageResponseSDKType;
+    pagination: PageResponseSDKType;
 }
 /**
  * QueryAllBalancesRequest is the Query/AllBalances request type.
@@ -933,7 +933,7 @@ export interface QueryBalancesByBatchResponseSDKType {
  */
 export interface QueryAllBalancesRequest {
     /** pagination defines an optional pagination for the request. */
-    pagination?: PageRequest;
+    pagination: PageRequest;
 }
 export interface QueryAllBalancesRequestProtoMsg {
     typeUrl: "/regen.ecocredit.v1.QueryAllBalancesRequest";
@@ -958,7 +958,7 @@ export interface QueryAllBalancesRequestAminoMsg {
  * Since Revision 2
  */
 export interface QueryAllBalancesRequestSDKType {
-    pagination?: PageRequestSDKType;
+    pagination: PageRequestSDKType;
 }
 /**
  * QueryAllBalancesResponse is the Query/AllBalances response type.
@@ -972,7 +972,7 @@ export interface QueryAllBalancesResponse {
      */
     balances: BatchBalanceInfo[];
     /** pagination defines the pagination in the response. */
-    pagination?: PageResponse;
+    pagination: PageResponse;
 }
 export interface QueryAllBalancesResponseProtoMsg {
     typeUrl: "/regen.ecocredit.v1.QueryAllBalancesResponse";
@@ -1003,7 +1003,7 @@ export interface QueryAllBalancesResponseAminoMsg {
  */
 export interface QueryAllBalancesResponseSDKType {
     balances: BatchBalanceInfoSDKType[];
-    pagination?: PageResponseSDKType;
+    pagination: PageResponseSDKType;
 }
 /** QuerySupplyRequest is the Query/Supply request type. */
 export interface QuerySupplyRequest {
@@ -1136,7 +1136,7 @@ export interface QueryParamsRequestSDKType {
 /** QueryParamsResponse is the Query/Params response type. */
 export interface QueryParamsResponse {
     /** params defines the parameters of the ecocredit module. */
-    params?: Params;
+    params: Params;
 }
 export interface QueryParamsResponseProtoMsg {
     typeUrl: "/regen.ecocredit.v1.QueryParamsResponse";
@@ -1153,7 +1153,7 @@ export interface QueryParamsResponseAminoMsg {
 }
 /** QueryParamsResponse is the Query/Params response type. */
 export interface QueryParamsResponseSDKType {
-    params?: ParamsSDKType;
+    params: ParamsSDKType;
 }
 /** QueryCreditTypeRequest is the Query/CreditType request type */
 export interface QueryCreditTypeRequest {
@@ -1180,7 +1180,7 @@ export interface QueryCreditTypeRequestSDKType {
 /** QueryCreditTypeResponse is the Query/CreditType response type */
 export interface QueryCreditTypeResponse {
     /** credit_type is the fetched credit type. */
-    creditType?: CreditType;
+    creditType: CreditType;
 }
 export interface QueryCreditTypeResponseProtoMsg {
     typeUrl: "/regen.ecocredit.v1.QueryCreditTypeResponse";
@@ -1197,7 +1197,7 @@ export interface QueryCreditTypeResponseAminoMsg {
 }
 /** QueryCreditTypeResponse is the Query/CreditType response type */
 export interface QueryCreditTypeResponseSDKType {
-    credit_type?: CreditTypeSDKType;
+    credit_type: CreditTypeSDKType;
 }
 /** ClassInfo is the human-readable credit class information. */
 export interface ClassInfo {
@@ -1324,14 +1324,14 @@ export interface BatchInfo {
      * start_date is the beginning of the period during which this credit batch
      * was quantified and verified.
      */
-    startDate?: Timestamp;
+    startDate: Timestamp;
     /**
      * end_date is the end of the period during which this credit batch was
      * quantified and verified.
      */
-    endDate?: Timestamp;
+    endDate: Timestamp;
     /** issuance_date is the timestamp when the credit batch was issued. */
-    issuanceDate?: Timestamp;
+    issuanceDate: Timestamp;
     /**
      * open determines whether or not the credit batch is open, i.e. whether or
      * not new credits can be minted to the credit batch.
@@ -1389,9 +1389,9 @@ export interface BatchInfoSDKType {
     project_id: string;
     denom: string;
     metadata: string;
-    start_date?: TimestampSDKType;
-    end_date?: TimestampSDKType;
-    issuance_date?: TimestampSDKType;
+    start_date: TimestampSDKType;
+    end_date: TimestampSDKType;
+    issuance_date: TimestampSDKType;
     open: boolean;
 }
 /** BatchBalanceInfo is the human-readable batch balance information. */
@@ -1529,7 +1529,7 @@ export interface QueryClassCreatorAllowlistResponseSDKType {
  */
 export interface QueryAllowedClassCreatorsRequest {
     /** pagination defines an optional pagination for the request. */
-    pagination?: PageRequest;
+    pagination: PageRequest;
 }
 export interface QueryAllowedClassCreatorsRequestProtoMsg {
     typeUrl: "/regen.ecocredit.v1.QueryAllowedClassCreatorsRequest";
@@ -1556,7 +1556,7 @@ export interface QueryAllowedClassCreatorsRequestAminoMsg {
  * Since Revision 2
  */
 export interface QueryAllowedClassCreatorsRequestSDKType {
-    pagination?: PageRequestSDKType;
+    pagination: PageRequestSDKType;
 }
 /**
  * QueryAllowedClassCreatorsResponse is the Query/AllowedClassCreators response
@@ -1568,7 +1568,7 @@ export interface QueryAllowedClassCreatorsResponse {
     /** class_creators is the list of allowed credit class creators. */
     classCreators: string[];
     /** pagination defines the pagination in the response. */
-    pagination?: PageResponse;
+    pagination: PageResponse;
 }
 export interface QueryAllowedClassCreatorsResponseProtoMsg {
     typeUrl: "/regen.ecocredit.v1.QueryAllowedClassCreatorsResponse";
@@ -1598,7 +1598,7 @@ export interface QueryAllowedClassCreatorsResponseAminoMsg {
  */
 export interface QueryAllowedClassCreatorsResponseSDKType {
     class_creators: string[];
-    pagination?: PageResponseSDKType;
+    pagination: PageResponseSDKType;
 }
 /**
  * QueryClassFeeRequest is the Query/ClassFee request type.
@@ -1639,7 +1639,7 @@ export interface QueryClassFeeResponse {
      * fee is the credit class creation fee. If not set, a credit class creation
      * fee is not required.
      */
-    fee?: Coin;
+    fee: Coin;
 }
 export interface QueryClassFeeResponseProtoMsg {
     typeUrl: "/regen.ecocredit.v1.QueryClassFeeResponse";
@@ -1667,7 +1667,7 @@ export interface QueryClassFeeResponseAminoMsg {
  * Since Revision 2
  */
 export interface QueryClassFeeResponseSDKType {
-    fee?: CoinSDKType;
+    fee: CoinSDKType;
 }
 /**
  * QueryAllowedBridgeChainsRequest is the Query/AllowedBridgeChains request

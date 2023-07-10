@@ -45,7 +45,7 @@ export interface Basket {
      */
     creditTypeAbbrev: string;
     /** date_criteria is the date criteria for batches admitted to the basket. */
-    dateCriteria?: DateCriteria;
+    dateCriteria: DateCriteria;
     /**
      * Deprecated (Since Revision 1): This field is no longer used and will be
      * removed in the next version. The value of credit type precision is always
@@ -136,7 +136,7 @@ export interface BasketSDKType {
     name: string;
     disable_auto_retire: boolean;
     credit_type_abbrev: string;
-    date_criteria?: DateCriteriaSDKType;
+    date_criteria: DateCriteriaSDKType;
     /** @deprecated */
     exponent: number;
     curator: Uint8Array;
@@ -186,7 +186,7 @@ export interface BasketBalance {
      * batch_start_date is the start date of the batch. This field is used
      * to create an index which is used to remove the oldest credits first.
      */
-    batchStartDate?: Timestamp;
+    batchStartDate: Timestamp;
 }
 export interface BasketBalanceProtoMsg {
     typeUrl: "/regen.ecocredit.basket.v1.BasketBalance";
@@ -215,7 +215,7 @@ export interface BasketBalanceSDKType {
     basket_id: Long;
     batch_denom: string;
     balance: string;
-    batch_start_date?: TimestampSDKType;
+    batch_start_date: TimestampSDKType;
 }
 /**
  * BasketFee is the basket creation fee. If not set, a basket creation fee is
@@ -228,7 +228,7 @@ export interface BasketFee {
      * fee is the basket creation fee. If not set, a basket creation fee is not
      * required.
      */
-    fee?: Coin;
+    fee: Coin;
 }
 export interface BasketFeeProtoMsg {
     typeUrl: "/regen.ecocredit.basket.v1.BasketFee";
@@ -258,7 +258,7 @@ export interface BasketFeeAminoMsg {
  * Since Revision 2
  */
 export interface BasketFeeSDKType {
-    fee?: CoinSDKType;
+    fee: CoinSDKType;
 }
 export declare const Basket: {
     encode(message: Basket, writer?: _m0.Writer): _m0.Writer;

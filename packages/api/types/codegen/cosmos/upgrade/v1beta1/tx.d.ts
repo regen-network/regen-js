@@ -9,7 +9,7 @@ export interface MsgSoftwareUpgrade {
     /** authority is the address of the governance account. */
     authority: string;
     /** plan is the upgrade plan. */
-    plan?: Plan;
+    plan: Plan;
 }
 export interface MsgSoftwareUpgradeProtoMsg {
     typeUrl: "/cosmos.upgrade.v1beta1.MsgSoftwareUpgrade";
@@ -37,7 +37,7 @@ export interface MsgSoftwareUpgradeAminoMsg {
  */
 export interface MsgSoftwareUpgradeSDKType {
     authority: string;
-    plan?: PlanSDKType;
+    plan: PlanSDKType;
 }
 /**
  * MsgSoftwareUpgradeResponse is the Msg/SoftwareUpgrade response type.

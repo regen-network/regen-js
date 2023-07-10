@@ -77,9 +77,9 @@ export interface BuyOrderClassSelector {
     /** project_location is the project location in the selector's criteria. */
     projectLocation: string;
     /** min_start_date is the minimum start date in the selector's criteria. */
-    minStartDate?: Timestamp;
+    minStartDate: Timestamp;
     /** max_end_date is the maximum end date in the selector's criteria. */
-    maxEndDate?: Timestamp;
+    maxEndDate: Timestamp;
 }
 export interface BuyOrderClassSelectorProtoMsg {
     typeUrl: "/regen.ecocredit.orderbook.v1alpha1.BuyOrderClassSelector";
@@ -107,8 +107,8 @@ export interface BuyOrderClassSelectorSDKType {
     buy_order_id: Long;
     class_id: Long;
     project_location: string;
-    min_start_date?: TimestampSDKType;
-    max_end_date?: TimestampSDKType;
+    min_start_date: TimestampSDKType;
+    max_end_date: TimestampSDKType;
 }
 /** BuyOrderProjectSelector indexes a buy order with project selector. */
 export interface BuyOrderProjectSelector {
@@ -117,9 +117,9 @@ export interface BuyOrderProjectSelector {
     /** project_id is the project ID. */
     projectId: Long;
     /** min_start_date is the minimum start date in the selector's criteria. */
-    minStartDate?: Timestamp;
+    minStartDate: Timestamp;
     /** max_end_date is the maximum end date in the selector's criteria. */
-    maxEndDate?: Timestamp;
+    maxEndDate: Timestamp;
 }
 export interface BuyOrderProjectSelectorProtoMsg {
     typeUrl: "/regen.ecocredit.orderbook.v1alpha1.BuyOrderProjectSelector";
@@ -144,8 +144,8 @@ export interface BuyOrderProjectSelectorAminoMsg {
 export interface BuyOrderProjectSelectorSDKType {
     buy_order_id: Long;
     project_id: Long;
-    min_start_date?: TimestampSDKType;
-    max_end_date?: TimestampSDKType;
+    min_start_date: TimestampSDKType;
+    max_end_date: TimestampSDKType;
 }
 /** BuyOrderBatchSelector indexes a buy order with batch selector. */
 export interface BuyOrderBatchSelector {

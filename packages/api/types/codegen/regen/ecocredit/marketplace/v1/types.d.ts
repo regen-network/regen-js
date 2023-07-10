@@ -16,7 +16,7 @@ export interface AllowDenomProposal {
      * denom contains coin denom information that will be added to the
      * list of allowed denoms for use in the marketplace.
      */
-    denom?: AllowedDenom;
+    denom: AllowedDenom;
 }
 export interface AllowDenomProposalProtoMsg {
     typeUrl: "/regen.ecocredit.marketplace.v1.AllowDenomProposal";
@@ -54,7 +54,7 @@ export interface AllowDenomProposalAminoMsg {
 export interface AllowDenomProposalSDKType {
     title: string;
     description: string;
-    denom?: AllowedDenomSDKType;
+    denom: AllowedDenomSDKType;
 }
 export declare const AllowDenomProposal: {
     encode(message: AllowDenomProposal, writer?: _m0.Writer): _m0.Writer;

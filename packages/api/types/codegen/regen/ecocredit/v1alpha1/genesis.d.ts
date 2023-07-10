@@ -6,7 +6,7 @@ export interface GenesisState {
      * Params contains the updateable global parameters for use with the x/params
      * module
      */
-    params?: Params;
+    params: Params;
     /** class_info is the list of credit class info. */
     classInfo: ClassInfo[];
     /** batch_info is the list of credit batch info. */
@@ -46,7 +46,7 @@ export interface GenesisStateAminoMsg {
 }
 /** GenesisState defines ecocredit module's genesis state. */
 export interface GenesisStateSDKType {
-    params?: ParamsSDKType;
+    params: ParamsSDKType;
     class_info: ClassInfoSDKType[];
     batch_info: BatchInfoSDKType[];
     sequences: CreditTypeSeqSDKType[];

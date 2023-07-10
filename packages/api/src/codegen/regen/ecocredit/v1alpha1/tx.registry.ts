@@ -14,56 +14,48 @@ export const MessageComposer = {
         value: MsgCreateClass.encode(value).finish()
       };
     },
-
     createBatch(value: MsgCreateBatch) {
       return {
         typeUrl: "/regen.ecocredit.v1alpha1.MsgCreateBatch",
         value: MsgCreateBatch.encode(value).finish()
       };
     },
-
     send(value: MsgSend) {
       return {
         typeUrl: "/regen.ecocredit.v1alpha1.MsgSend",
         value: MsgSend.encode(value).finish()
       };
     },
-
     retire(value: MsgRetire) {
       return {
         typeUrl: "/regen.ecocredit.v1alpha1.MsgRetire",
         value: MsgRetire.encode(value).finish()
       };
     },
-
     cancel(value: MsgCancel) {
       return {
         typeUrl: "/regen.ecocredit.v1alpha1.MsgCancel",
         value: MsgCancel.encode(value).finish()
       };
     },
-
     updateClassAdmin(value: MsgUpdateClassAdmin) {
       return {
         typeUrl: "/regen.ecocredit.v1alpha1.MsgUpdateClassAdmin",
         value: MsgUpdateClassAdmin.encode(value).finish()
       };
     },
-
     updateClassIssuers(value: MsgUpdateClassIssuers) {
       return {
         typeUrl: "/regen.ecocredit.v1alpha1.MsgUpdateClassIssuers",
         value: MsgUpdateClassIssuers.encode(value).finish()
       };
     },
-
     updateClassMetadata(value: MsgUpdateClassMetadata) {
       return {
         typeUrl: "/regen.ecocredit.v1alpha1.MsgUpdateClassMetadata",
         value: MsgUpdateClassMetadata.encode(value).finish()
       };
     }
-
   },
   withTypeUrl: {
     createClass(value: MsgCreateClass) {
@@ -72,56 +64,48 @@ export const MessageComposer = {
         value
       };
     },
-
     createBatch(value: MsgCreateBatch) {
       return {
         typeUrl: "/regen.ecocredit.v1alpha1.MsgCreateBatch",
         value
       };
     },
-
     send(value: MsgSend) {
       return {
         typeUrl: "/regen.ecocredit.v1alpha1.MsgSend",
         value
       };
     },
-
     retire(value: MsgRetire) {
       return {
         typeUrl: "/regen.ecocredit.v1alpha1.MsgRetire",
         value
       };
     },
-
     cancel(value: MsgCancel) {
       return {
         typeUrl: "/regen.ecocredit.v1alpha1.MsgCancel",
         value
       };
     },
-
     updateClassAdmin(value: MsgUpdateClassAdmin) {
       return {
         typeUrl: "/regen.ecocredit.v1alpha1.MsgUpdateClassAdmin",
         value
       };
     },
-
     updateClassIssuers(value: MsgUpdateClassIssuers) {
       return {
         typeUrl: "/regen.ecocredit.v1alpha1.MsgUpdateClassIssuers",
         value
       };
     },
-
     updateClassMetadata(value: MsgUpdateClassMetadata) {
       return {
         typeUrl: "/regen.ecocredit.v1alpha1.MsgUpdateClassMetadata",
         value
       };
     }
-
   },
   toJSON: {
     createClass(value: MsgCreateClass) {
@@ -130,56 +114,48 @@ export const MessageComposer = {
         value: MsgCreateClass.toJSON(value)
       };
     },
-
     createBatch(value: MsgCreateBatch) {
       return {
         typeUrl: "/regen.ecocredit.v1alpha1.MsgCreateBatch",
         value: MsgCreateBatch.toJSON(value)
       };
     },
-
     send(value: MsgSend) {
       return {
         typeUrl: "/regen.ecocredit.v1alpha1.MsgSend",
         value: MsgSend.toJSON(value)
       };
     },
-
     retire(value: MsgRetire) {
       return {
         typeUrl: "/regen.ecocredit.v1alpha1.MsgRetire",
         value: MsgRetire.toJSON(value)
       };
     },
-
     cancel(value: MsgCancel) {
       return {
         typeUrl: "/regen.ecocredit.v1alpha1.MsgCancel",
         value: MsgCancel.toJSON(value)
       };
     },
-
     updateClassAdmin(value: MsgUpdateClassAdmin) {
       return {
         typeUrl: "/regen.ecocredit.v1alpha1.MsgUpdateClassAdmin",
         value: MsgUpdateClassAdmin.toJSON(value)
       };
     },
-
     updateClassIssuers(value: MsgUpdateClassIssuers) {
       return {
         typeUrl: "/regen.ecocredit.v1alpha1.MsgUpdateClassIssuers",
         value: MsgUpdateClassIssuers.toJSON(value)
       };
     },
-
     updateClassMetadata(value: MsgUpdateClassMetadata) {
       return {
         typeUrl: "/regen.ecocredit.v1alpha1.MsgUpdateClassMetadata",
         value: MsgUpdateClassMetadata.toJSON(value)
       };
     }
-
   },
   fromJSON: {
     createClass(value: any) {
@@ -188,56 +164,48 @@ export const MessageComposer = {
         value: MsgCreateClass.fromJSON(value)
       };
     },
-
     createBatch(value: any) {
       return {
         typeUrl: "/regen.ecocredit.v1alpha1.MsgCreateBatch",
         value: MsgCreateBatch.fromJSON(value)
       };
     },
-
     send(value: any) {
       return {
         typeUrl: "/regen.ecocredit.v1alpha1.MsgSend",
         value: MsgSend.fromJSON(value)
       };
     },
-
     retire(value: any) {
       return {
         typeUrl: "/regen.ecocredit.v1alpha1.MsgRetire",
         value: MsgRetire.fromJSON(value)
       };
     },
-
     cancel(value: any) {
       return {
         typeUrl: "/regen.ecocredit.v1alpha1.MsgCancel",
         value: MsgCancel.fromJSON(value)
       };
     },
-
     updateClassAdmin(value: any) {
       return {
         typeUrl: "/regen.ecocredit.v1alpha1.MsgUpdateClassAdmin",
         value: MsgUpdateClassAdmin.fromJSON(value)
       };
     },
-
     updateClassIssuers(value: any) {
       return {
         typeUrl: "/regen.ecocredit.v1alpha1.MsgUpdateClassIssuers",
         value: MsgUpdateClassIssuers.fromJSON(value)
       };
     },
-
     updateClassMetadata(value: any) {
       return {
         typeUrl: "/regen.ecocredit.v1alpha1.MsgUpdateClassMetadata",
         value: MsgUpdateClassMetadata.fromJSON(value)
       };
     }
-
   },
   fromPartial: {
     createClass(value: MsgCreateClass) {
@@ -246,55 +214,47 @@ export const MessageComposer = {
         value: MsgCreateClass.fromPartial(value)
       };
     },
-
     createBatch(value: MsgCreateBatch) {
       return {
         typeUrl: "/regen.ecocredit.v1alpha1.MsgCreateBatch",
         value: MsgCreateBatch.fromPartial(value)
       };
     },
-
     send(value: MsgSend) {
       return {
         typeUrl: "/regen.ecocredit.v1alpha1.MsgSend",
         value: MsgSend.fromPartial(value)
       };
     },
-
     retire(value: MsgRetire) {
       return {
         typeUrl: "/regen.ecocredit.v1alpha1.MsgRetire",
         value: MsgRetire.fromPartial(value)
       };
     },
-
     cancel(value: MsgCancel) {
       return {
         typeUrl: "/regen.ecocredit.v1alpha1.MsgCancel",
         value: MsgCancel.fromPartial(value)
       };
     },
-
     updateClassAdmin(value: MsgUpdateClassAdmin) {
       return {
         typeUrl: "/regen.ecocredit.v1alpha1.MsgUpdateClassAdmin",
         value: MsgUpdateClassAdmin.fromPartial(value)
       };
     },
-
     updateClassIssuers(value: MsgUpdateClassIssuers) {
       return {
         typeUrl: "/regen.ecocredit.v1alpha1.MsgUpdateClassIssuers",
         value: MsgUpdateClassIssuers.fromPartial(value)
       };
     },
-
     updateClassMetadata(value: MsgUpdateClassMetadata) {
       return {
         typeUrl: "/regen.ecocredit.v1alpha1.MsgUpdateClassMetadata",
         value: MsgUpdateClassMetadata.fromPartial(value)
       };
     }
-
   }
 };

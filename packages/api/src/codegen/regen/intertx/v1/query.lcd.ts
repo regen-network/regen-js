@@ -2,7 +2,6 @@ import { LCDClient } from "@osmonauts/lcd";
 import { QueryInterchainAccountRequest, QueryInterchainAccountResponseSDKType } from "./query";
 export class LCDQueryClient {
   req: LCDClient;
-
   constructor({
     requestClient
   }: {
@@ -13,11 +12,8 @@ export class LCDQueryClient {
   }
   /* QueryInterchainAccount returns the interchain account for given owner
    address on a given connection pair */
-
-
   async interchainAccount(params: QueryInterchainAccountRequest): Promise<QueryInterchainAccountResponseSDKType> {
     const endpoint = `regen/intertx/v1/interchain-account/${params.owner}/${params.connectionId}`;
     return await this.req.get<QueryInterchainAccountResponseSDKType>(endpoint);
   }
-
 }

@@ -13,7 +13,8 @@ import * as regenEcocreditMarketplaceV1TxAmino from "./ecocredit/marketplace/v1/
 import * as regenEcocreditV1TxAmino from "./ecocredit/v1/tx.amino";
 import * as regenEcocreditV1alpha1TxAmino from "./ecocredit/v1alpha1/tx.amino";
 import * as regenIntertxV1TxAmino from "./intertx/v1/tx.amino";
-export const regenAminoConverters = { ...regenDataV1TxAmino.AminoConverter,
+export const regenAminoConverters = {
+  ...regenDataV1TxAmino.AminoConverter,
   ...regenEcocreditBasketV1TxAmino.AminoConverter,
   ...regenEcocreditMarketplaceV1TxAmino.AminoConverter,
   ...regenEcocreditV1TxAmino.AminoConverter,
@@ -30,7 +31,8 @@ export const getSigningRegenClientOptions = ({
   aminoTypes: AminoTypes;
 } => {
   const registry = new Registry([...defaultTypes, ...regenProtoRegistry]);
-  const aminoTypes = new AminoTypes({ ...regenAminoConverters
+  const aminoTypes = new AminoTypes({
+    ...regenAminoConverters
   });
   return {
     registry,

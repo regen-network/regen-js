@@ -1,5 +1,5 @@
-import * as _m0 from "protobufjs/minimal";
 import { Long } from "../../../helpers";
+import * as _m0 from "protobufjs/minimal";
 /** EventAnchor is an event emitted when data is anchored on chain. */
 export interface EventAnchor {
     /** iri is the IRI of the data anchored on chain. */

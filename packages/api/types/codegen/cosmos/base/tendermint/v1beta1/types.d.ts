@@ -2,17 +2,17 @@ import { Data, DataAmino, DataSDKType, Commit, CommitAmino, CommitSDKType, Block
 import { EvidenceList, EvidenceListAmino, EvidenceListSDKType } from "../../../../tendermint/types/evidence";
 import { Consensus, ConsensusAmino, ConsensusSDKType } from "../../../../tendermint/version/types";
 import { Timestamp, TimestampAmino, TimestampSDKType } from "../../../../google/protobuf/timestamp";
-import * as _m0 from "protobufjs/minimal";
 import { Long } from "../../../../helpers";
+import * as _m0 from "protobufjs/minimal";
 /**
  * Block is tendermint type Block, with the Header proposer address
  * field converted to bech32 string.
  */
 export interface Block {
-    header?: Header;
-    data?: Data;
-    evidence?: EvidenceList;
-    lastCommit?: Commit;
+    header: Header;
+    data: Data;
+    evidence: EvidenceList;
+    lastCommit: Commit;
 }
 export interface BlockProtoMsg {
     typeUrl: "/cosmos.base.tendermint.v1beta1.Block";
@@ -37,20 +37,20 @@ export interface BlockAminoMsg {
  * field converted to bech32 string.
  */
 export interface BlockSDKType {
-    header?: HeaderSDKType;
-    data?: DataSDKType;
-    evidence?: EvidenceListSDKType;
-    last_commit?: CommitSDKType;
+    header: HeaderSDKType;
+    data: DataSDKType;
+    evidence: EvidenceListSDKType;
+    last_commit: CommitSDKType;
 }
 /** Header defines the structure of a Tendermint block header. */
 export interface Header {
     /** basic block info */
-    version?: Consensus;
+    version: Consensus;
     chainId: string;
     height: Long;
-    time?: Timestamp;
+    time: Timestamp;
     /** prev block info */
-    lastBlockId?: BlockID;
+    lastBlockId: BlockID;
     /** hashes of block data */
     lastCommitHash: Uint8Array;
     dataHash: Uint8Array;
@@ -112,11 +112,11 @@ export interface HeaderAminoMsg {
 }
 /** Header defines the structure of a Tendermint block header. */
 export interface HeaderSDKType {
-    version?: ConsensusSDKType;
+    version: ConsensusSDKType;
     chain_id: string;
     height: Long;
-    time?: TimestampSDKType;
-    last_block_id?: BlockIDSDKType;
+    time: TimestampSDKType;
+    last_block_id: BlockIDSDKType;
     last_commit_hash: Uint8Array;
     data_hash: Uint8Array;
     validators_hash: Uint8Array;

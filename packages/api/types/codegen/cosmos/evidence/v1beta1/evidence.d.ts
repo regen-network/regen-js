@@ -7,7 +7,7 @@ import * as _m0 from "protobufjs/minimal";
  */
 export interface Equivocation {
     height: Long;
-    time?: Timestamp;
+    time: Timestamp;
     power: Long;
     consensusAddress: string;
 }
@@ -35,7 +35,7 @@ export interface EquivocationAminoMsg {
  */
 export interface EquivocationSDKType {
     height: Long;
-    time?: TimestampSDKType;
+    time: TimestampSDKType;
     power: Long;
     consensus_address: string;
 }

@@ -14,14 +14,12 @@ export const MessageComposer = {
         value: MsgRegisterAccount.encode(value).finish()
       };
     },
-
     submitTx(value: MsgSubmitTx) {
       return {
         typeUrl: "/regen.intertx.v1.MsgSubmitTx",
         value: MsgSubmitTx.encode(value).finish()
       };
     }
-
   },
   withTypeUrl: {
     registerAccount(value: MsgRegisterAccount) {
@@ -30,14 +28,12 @@ export const MessageComposer = {
         value
       };
     },
-
     submitTx(value: MsgSubmitTx) {
       return {
         typeUrl: "/regen.intertx.v1.MsgSubmitTx",
         value
       };
     }
-
   },
   toJSON: {
     registerAccount(value: MsgRegisterAccount) {
@@ -46,14 +42,12 @@ export const MessageComposer = {
         value: MsgRegisterAccount.toJSON(value)
       };
     },
-
     submitTx(value: MsgSubmitTx) {
       return {
         typeUrl: "/regen.intertx.v1.MsgSubmitTx",
         value: MsgSubmitTx.toJSON(value)
       };
     }
-
   },
   fromJSON: {
     registerAccount(value: any) {
@@ -62,14 +56,12 @@ export const MessageComposer = {
         value: MsgRegisterAccount.fromJSON(value)
       };
     },
-
     submitTx(value: any) {
       return {
         typeUrl: "/regen.intertx.v1.MsgSubmitTx",
         value: MsgSubmitTx.fromJSON(value)
       };
     }
-
   },
   fromPartial: {
     registerAccount(value: MsgRegisterAccount) {
@@ -78,13 +70,11 @@ export const MessageComposer = {
         value: MsgRegisterAccount.fromPartial(value)
       };
     },
-
     submitTx(value: MsgSubmitTx) {
       return {
         typeUrl: "/regen.intertx.v1.MsgSubmitTx",
         value: MsgSubmitTx.fromPartial(value)
       };
     }
-
   }
 };

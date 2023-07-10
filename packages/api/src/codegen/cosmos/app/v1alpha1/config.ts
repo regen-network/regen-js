@@ -10,7 +10,6 @@ import { isSet } from "../../../helpers";
  * that strive for the maximum ease of maintainability should be able to describe
  * their state machine with a config object alone.
  */
-
 export interface Config {
   /** modules are the module configurations for the app. */
   modules: ModuleConfig[];
@@ -28,7 +27,6 @@ export interface ConfigProtoMsg {
  * that strive for the maximum ease of maintainability should be able to describe
  * their state machine with a config object alone.
  */
-
 export interface ConfigAmino {
   /** modules are the module configurations for the app. */
   modules: ModuleConfigAmino[];
@@ -46,12 +44,10 @@ export interface ConfigAminoMsg {
  * that strive for the maximum ease of maintainability should be able to describe
  * their state machine with a config object alone.
  */
-
 export interface ConfigSDKType {
   modules: ModuleConfigSDKType[];
 }
 /** ModuleConfig is a module configuration for an app. */
-
 export interface ModuleConfig {
   /**
    * name is the unique name of the module within the app. It should be a name
@@ -70,15 +66,13 @@ export interface ModuleConfig {
    * config is the config object for the module. Module config messages should
    * define a ModuleDescriptor using the cosmos.app.v1alpha1.is_module extension.
    */
-
-  config?: Any;
+  config: Any;
 }
 export interface ModuleConfigProtoMsg {
   typeUrl: "/cosmos.app.v1alpha1.ModuleConfig";
   value: Uint8Array;
 }
 /** ModuleConfig is a module configuration for an app. */
-
 export interface ModuleConfigAmino {
   /**
    * name is the unique name of the module within the app. It should be a name
@@ -97,7 +91,6 @@ export interface ModuleConfigAmino {
    * config is the config object for the module. Module config messages should
    * define a ModuleDescriptor using the cosmos.app.v1alpha1.is_module extension.
    */
-
   config?: AnyAmino;
 }
 export interface ModuleConfigAminoMsg {
@@ -105,224 +98,179 @@ export interface ModuleConfigAminoMsg {
   value: ModuleConfigAmino;
 }
 /** ModuleConfig is a module configuration for an app. */
-
 export interface ModuleConfigSDKType {
   name: string;
-  config?: AnySDKType;
+  config: AnySDKType;
 }
-
 function createBaseConfig(): Config {
   return {
     modules: []
   };
 }
-
 export const Config = {
   encode(message: Config, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     for (const v of message.modules) {
       ModuleConfig.encode(v!, writer.uint32(10).fork()).ldelim();
     }
-
     return writer;
   },
-
   decode(input: _m0.Reader | Uint8Array, length?: number): Config {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseConfig();
-
     while (reader.pos < end) {
       const tag = reader.uint32();
-
       switch (tag >>> 3) {
         case 1:
           message.modules.push(ModuleConfig.decode(reader, reader.uint32()));
           break;
-
         default:
           reader.skipType(tag & 7);
           break;
       }
     }
-
     return message;
   },
-
   fromJSON(object: any): Config {
     return {
       modules: Array.isArray(object?.modules) ? object.modules.map((e: any) => ModuleConfig.fromJSON(e)) : []
     };
   },
-
   toJSON(message: Config): unknown {
     const obj: any = {};
-
     if (message.modules) {
       obj.modules = message.modules.map(e => e ? ModuleConfig.toJSON(e) : undefined);
     } else {
       obj.modules = [];
     }
-
     return obj;
   },
-
   fromPartial(object: Partial<Config>): Config {
     const message = createBaseConfig();
     message.modules = object.modules?.map(e => ModuleConfig.fromPartial(e)) || [];
     return message;
   },
-
   fromAmino(object: ConfigAmino): Config {
     return {
       modules: Array.isArray(object?.modules) ? object.modules.map((e: any) => ModuleConfig.fromAmino(e)) : []
     };
   },
-
   toAmino(message: Config): ConfigAmino {
     const obj: any = {};
-
     if (message.modules) {
       obj.modules = message.modules.map(e => e ? ModuleConfig.toAmino(e) : undefined);
     } else {
       obj.modules = [];
     }
-
     return obj;
   },
-
   fromAminoMsg(object: ConfigAminoMsg): Config {
     return Config.fromAmino(object.value);
   },
-
   toAminoMsg(message: Config): ConfigAminoMsg {
     return {
       type: "cosmos-sdk/Config",
       value: Config.toAmino(message)
     };
   },
-
   fromProtoMsg(message: ConfigProtoMsg): Config {
     return Config.decode(message.value);
   },
-
   toProto(message: Config): Uint8Array {
     return Config.encode(message).finish();
   },
-
   toProtoMsg(message: Config): ConfigProtoMsg {
     return {
       typeUrl: "/cosmos.app.v1alpha1.Config",
       value: Config.encode(message).finish()
     };
   }
-
 };
-
 function createBaseModuleConfig(): ModuleConfig {
   return {
     name: "",
     config: undefined
   };
 }
-
 export const ModuleConfig = {
   encode(message: ModuleConfig, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
     if (message.name !== "") {
       writer.uint32(10).string(message.name);
     }
-
     if (message.config !== undefined) {
       Any.encode(message.config, writer.uint32(18).fork()).ldelim();
     }
-
     return writer;
   },
-
   decode(input: _m0.Reader | Uint8Array, length?: number): ModuleConfig {
     const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseModuleConfig();
-
     while (reader.pos < end) {
       const tag = reader.uint32();
-
       switch (tag >>> 3) {
         case 1:
           message.name = reader.string();
           break;
-
         case 2:
           message.config = Any.decode(reader, reader.uint32());
           break;
-
         default:
           reader.skipType(tag & 7);
           break;
       }
     }
-
     return message;
   },
-
   fromJSON(object: any): ModuleConfig {
     return {
       name: isSet(object.name) ? String(object.name) : "",
       config: isSet(object.config) ? Any.fromJSON(object.config) : undefined
     };
   },
-
   toJSON(message: ModuleConfig): unknown {
     const obj: any = {};
     message.name !== undefined && (obj.name = message.name);
     message.config !== undefined && (obj.config = message.config ? Any.toJSON(message.config) : undefined);
     return obj;
   },
-
   fromPartial(object: Partial<ModuleConfig>): ModuleConfig {
     const message = createBaseModuleConfig();
     message.name = object.name ?? "";
     message.config = object.config !== undefined && object.config !== null ? Any.fromPartial(object.config) : undefined;
     return message;
   },
-
   fromAmino(object: ModuleConfigAmino): ModuleConfig {
     return {
       name: object.name,
       config: object?.config ? Any.fromAmino(object.config) : undefined
     };
   },
-
   toAmino(message: ModuleConfig): ModuleConfigAmino {
     const obj: any = {};
     obj.name = message.name;
     obj.config = message.config ? Any.toAmino(message.config) : undefined;
     return obj;
   },
-
   fromAminoMsg(object: ModuleConfigAminoMsg): ModuleConfig {
     return ModuleConfig.fromAmino(object.value);
   },
-
   toAminoMsg(message: ModuleConfig): ModuleConfigAminoMsg {
     return {
       type: "cosmos-sdk/ModuleConfig",
       value: ModuleConfig.toAmino(message)
     };
   },
-
   fromProtoMsg(message: ModuleConfigProtoMsg): ModuleConfig {
     return ModuleConfig.decode(message.value);
   },
-
   toProto(message: ModuleConfig): Uint8Array {
     return ModuleConfig.encode(message).finish();
   },
-
   toProtoMsg(message: ModuleConfig): ModuleConfigProtoMsg {
     return {
       typeUrl: "/cosmos.app.v1alpha1.ModuleConfig",
       value: ModuleConfig.encode(message).finish()
     };
   }
-
 };

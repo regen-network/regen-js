@@ -1,6 +1,6 @@
 import { Plan, PlanAmino, PlanSDKType, ModuleVersion, ModuleVersionAmino, ModuleVersionSDKType } from "./upgrade";
-import * as _m0 from "protobufjs/minimal";
 import { Long } from "../../../helpers";
+import * as _m0 from "protobufjs/minimal";
 /**
  * QueryCurrentPlanRequest is the request type for the Query/CurrentPlan RPC
  * method.
@@ -33,7 +33,7 @@ export interface QueryCurrentPlanRequestSDKType {
  */
 export interface QueryCurrentPlanResponse {
     /** plan is the current upgrade plan. */
-    plan?: Plan;
+    plan: Plan;
 }
 export interface QueryCurrentPlanResponseProtoMsg {
     typeUrl: "/cosmos.upgrade.v1beta1.QueryCurrentPlanResponse";
@@ -56,7 +56,7 @@ export interface QueryCurrentPlanResponseAminoMsg {
  * method.
  */
 export interface QueryCurrentPlanResponseSDKType {
-    plan?: PlanSDKType;
+    plan: PlanSDKType;
 }
 /**
  * QueryCurrentPlanRequest is the request type for the Query/AppliedPlan RPC

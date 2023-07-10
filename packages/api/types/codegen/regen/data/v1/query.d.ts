@@ -1,8 +1,8 @@
 import { ContentHash, ContentHashAmino, ContentHashSDKType } from "./types";
 import { PageRequest, PageRequestAmino, PageRequestSDKType, PageResponse, PageResponseAmino, PageResponseSDKType } from "../../../cosmos/base/query/v1beta1/pagination";
 import { Timestamp, TimestampAmino, TimestampSDKType } from "../../../google/protobuf/timestamp";
-import * as _m0 from "protobufjs/minimal";
 import { Long } from "../../../helpers";
+import * as _m0 from "protobufjs/minimal";
 /** QueryAnchorByIRIRequest is the Query/AnchorByIRI request type. */
 export interface QueryAnchorByIRIRequest {
     /** iri is the IRI of the anchored data. */
@@ -28,7 +28,7 @@ export interface QueryAnchorByIRIRequestSDKType {
 /** QueryAnchorByIRIResponse is the Query/AnchorByIRI response type. */
 export interface QueryAnchorByIRIResponse {
     /** anchor is information about the data anchor. */
-    anchor?: AnchorInfo;
+    anchor: AnchorInfo;
 }
 export interface QueryAnchorByIRIResponseProtoMsg {
     typeUrl: "/regen.data.v1.QueryAnchorByIRIResponse";
@@ -45,12 +45,12 @@ export interface QueryAnchorByIRIResponseAminoMsg {
 }
 /** QueryAnchorByIRIResponse is the Query/AnchorByIRI response type. */
 export interface QueryAnchorByIRIResponseSDKType {
-    anchor?: AnchorInfoSDKType;
+    anchor: AnchorInfoSDKType;
 }
 /** QueryAnchorByHashRequest is the Query/AnchorByHash request type. */
 export interface QueryAnchorByHashRequest {
     /** content_hash is the ContentHash of the anchored data. */
-    contentHash?: ContentHash;
+    contentHash: ContentHash;
 }
 export interface QueryAnchorByHashRequestProtoMsg {
     typeUrl: "/regen.data.v1.QueryAnchorByHashRequest";
@@ -67,12 +67,12 @@ export interface QueryAnchorByHashRequestAminoMsg {
 }
 /** QueryAnchorByHashRequest is the Query/AnchorByHash request type. */
 export interface QueryAnchorByHashRequestSDKType {
-    content_hash?: ContentHashSDKType;
+    content_hash: ContentHashSDKType;
 }
 /** QueryAnchorByHashResponse is the Query/AnchorByHash response type. */
 export interface QueryAnchorByHashResponse {
     /** anchor is information about the data anchor. */
-    anchor?: AnchorInfo;
+    anchor: AnchorInfo;
 }
 export interface QueryAnchorByHashResponseProtoMsg {
     typeUrl: "/regen.data.v1.QueryAnchorByHashResponse";
@@ -89,7 +89,7 @@ export interface QueryAnchorByHashResponseAminoMsg {
 }
 /** QueryAnchorByHashResponse is the Query/AnchorByHash response type. */
 export interface QueryAnchorByHashResponseSDKType {
-    anchor?: AnchorInfoSDKType;
+    anchor: AnchorInfoSDKType;
 }
 /**
  * QueryAttestationsByAttestorRequest is the Query/AttestationsByAttestor
@@ -99,7 +99,7 @@ export interface QueryAttestationsByAttestorRequest {
     /** attestor is the address of the attestor. */
     attestor: string;
     /** pagination is the PageRequest to use for pagination. */
-    pagination?: PageRequest;
+    pagination: PageRequest;
 }
 export interface QueryAttestationsByAttestorRequestProtoMsg {
     typeUrl: "/regen.data.v1.QueryAttestationsByAttestorRequest";
@@ -125,7 +125,7 @@ export interface QueryAttestationsByAttestorRequestAminoMsg {
  */
 export interface QueryAttestationsByAttestorRequestSDKType {
     attestor: string;
-    pagination?: PageRequestSDKType;
+    pagination: PageRequestSDKType;
 }
 /**
  * QueryAttestationsByAttestorResponse is the Query/AttestationsByAttestor
@@ -135,7 +135,7 @@ export interface QueryAttestationsByAttestorResponse {
     /** attestations are the attestations by the attestor. */
     attestations: AttestationInfo[];
     /** pagination is the pagination PageResponse. */
-    pagination?: PageResponse;
+    pagination: PageResponse;
 }
 export interface QueryAttestationsByAttestorResponseProtoMsg {
     typeUrl: "/regen.data.v1.QueryAttestationsByAttestorResponse";
@@ -161,14 +161,14 @@ export interface QueryAttestationsByAttestorResponseAminoMsg {
  */
 export interface QueryAttestationsByAttestorResponseSDKType {
     attestations: AttestationInfoSDKType[];
-    pagination?: PageResponseSDKType;
+    pagination: PageResponseSDKType;
 }
 /** QueryAttestationsByIRIRequest is the Query/AttestationsByIRI request type. */
 export interface QueryAttestationsByIRIRequest {
     /** iri is the IRI of the anchored data. */
     iri: string;
     /** pagination is the PageRequest to use for pagination. */
-    pagination?: PageRequest;
+    pagination: PageRequest;
 }
 export interface QueryAttestationsByIRIRequestProtoMsg {
     typeUrl: "/regen.data.v1.QueryAttestationsByIRIRequest";
@@ -188,14 +188,14 @@ export interface QueryAttestationsByIRIRequestAminoMsg {
 /** QueryAttestationsByIRIRequest is the Query/AttestationsByIRI request type. */
 export interface QueryAttestationsByIRIRequestSDKType {
     iri: string;
-    pagination?: PageRequestSDKType;
+    pagination: PageRequestSDKType;
 }
 /** QueryAttestationsByIRIResponse is the Query/AttestationsByIRI response type. */
 export interface QueryAttestationsByIRIResponse {
     /** attestations are the attestations that have been made to the anchored data. */
     attestations: AttestationInfo[];
     /** pagination is the pagination PageResponse. */
-    pagination?: PageResponse;
+    pagination: PageResponse;
 }
 export interface QueryAttestationsByIRIResponseProtoMsg {
     typeUrl: "/regen.data.v1.QueryAttestationsByIRIResponse";
@@ -215,14 +215,14 @@ export interface QueryAttestationsByIRIResponseAminoMsg {
 /** QueryAttestationsByIRIResponse is the Query/AttestationsByIRI response type. */
 export interface QueryAttestationsByIRIResponseSDKType {
     attestations: AttestationInfoSDKType[];
-    pagination?: PageResponseSDKType;
+    pagination: PageResponseSDKType;
 }
 /** QueryAttestationsByHashRequest is the Query/AttestationsByHash request type. */
 export interface QueryAttestationsByHashRequest {
     /** content_hash is the ContentHash of the anchored data. */
-    contentHash?: ContentHash;
+    contentHash: ContentHash;
     /** pagination is the PageRequest to use for pagination. */
-    pagination?: PageRequest;
+    pagination: PageRequest;
 }
 export interface QueryAttestationsByHashRequestProtoMsg {
     typeUrl: "/regen.data.v1.QueryAttestationsByHashRequest";
@@ -241,8 +241,8 @@ export interface QueryAttestationsByHashRequestAminoMsg {
 }
 /** QueryAttestationsByHashRequest is the Query/AttestationsByHash request type. */
 export interface QueryAttestationsByHashRequestSDKType {
-    content_hash?: ContentHashSDKType;
-    pagination?: PageRequestSDKType;
+    content_hash: ContentHashSDKType;
+    pagination: PageRequestSDKType;
 }
 /**
  * QueryAttestationsByHashResponse is the Query/AttestationsByHash response
@@ -252,7 +252,7 @@ export interface QueryAttestationsByHashResponse {
     /** attestations are the attestations that have been made to the anchored data. */
     attestations: AttestationInfo[];
     /** pagination is the pagination PageResponse. */
-    pagination?: PageResponse;
+    pagination: PageResponse;
 }
 export interface QueryAttestationsByHashResponseProtoMsg {
     typeUrl: "/regen.data.v1.QueryAttestationsByHashResponse";
@@ -278,7 +278,7 @@ export interface QueryAttestationsByHashResponseAminoMsg {
  */
 export interface QueryAttestationsByHashResponseSDKType {
     attestations: AttestationInfoSDKType[];
-    pagination?: PageResponseSDKType;
+    pagination: PageResponseSDKType;
 }
 /** QueryResolverRequest is the Query/Resolver request type. */
 export interface QueryResolverRequest {
@@ -305,7 +305,7 @@ export interface QueryResolverRequestSDKType {
 /** QueryResolverResponse is the Query/Resolver response type. */
 export interface QueryResolverResponse {
     /** resolver is information about the resolver. */
-    resolver?: ResolverInfo;
+    resolver: ResolverInfo;
 }
 export interface QueryResolverResponseProtoMsg {
     typeUrl: "/regen.data.v1.QueryResolverResponse";
@@ -322,14 +322,14 @@ export interface QueryResolverResponseAminoMsg {
 }
 /** QueryResolverResponse is the Query/Resolver response type. */
 export interface QueryResolverResponseSDKType {
-    resolver?: ResolverInfoSDKType;
+    resolver: ResolverInfoSDKType;
 }
 /** QueryResolversByIRIRequest is the Query/ResolversByIRI request type. */
 export interface QueryResolversByIRIRequest {
     /** iri is the IRI of the anchored data. */
     iri: string;
     /** pagination is the PageRequest to use for pagination. */
-    pagination?: PageRequest;
+    pagination: PageRequest;
 }
 export interface QueryResolversByIRIRequestProtoMsg {
     typeUrl: "/regen.data.v1.QueryResolversByIRIRequest";
@@ -349,14 +349,14 @@ export interface QueryResolversByIRIRequestAminoMsg {
 /** QueryResolversByIRIRequest is the Query/ResolversByIRI request type. */
 export interface QueryResolversByIRIRequestSDKType {
     iri: string;
-    pagination?: PageRequestSDKType;
+    pagination: PageRequestSDKType;
 }
 /** QueryResolversByIRIResponse is the Query/ResolversByIRI response type. */
 export interface QueryResolversByIRIResponse {
     /** resolvers are the resolvers that have registered the anchored data. */
     resolvers: ResolverInfo[];
     /** pagination is the PageResponse to use for pagination. */
-    pagination?: PageResponse;
+    pagination: PageResponse;
 }
 export interface QueryResolversByIRIResponseProtoMsg {
     typeUrl: "/regen.data.v1.QueryResolversByIRIResponse";
@@ -376,14 +376,14 @@ export interface QueryResolversByIRIResponseAminoMsg {
 /** QueryResolversByIRIResponse is the Query/ResolversByIRI response type. */
 export interface QueryResolversByIRIResponseSDKType {
     resolvers: ResolverInfoSDKType[];
-    pagination?: PageResponseSDKType;
+    pagination: PageResponseSDKType;
 }
 /** QueryResolversByHashRequest is the Query/ResolversByHash request type. */
 export interface QueryResolversByHashRequest {
     /** content_hash is the ContentHash of the anchored data. */
-    contentHash?: ContentHash;
+    contentHash: ContentHash;
     /** pagination is the PageRequest to use for pagination. */
-    pagination?: PageRequest;
+    pagination: PageRequest;
 }
 export interface QueryResolversByHashRequestProtoMsg {
     typeUrl: "/regen.data.v1.QueryResolversByHashRequest";
@@ -402,15 +402,15 @@ export interface QueryResolversByHashRequestAminoMsg {
 }
 /** QueryResolversByHashRequest is the Query/ResolversByHash request type. */
 export interface QueryResolversByHashRequestSDKType {
-    content_hash?: ContentHashSDKType;
-    pagination?: PageRequestSDKType;
+    content_hash: ContentHashSDKType;
+    pagination: PageRequestSDKType;
 }
 /** QueryResolversByHashResponse is the Query/ResolversByHash response type. */
 export interface QueryResolversByHashResponse {
     /** resolvers are the resolvers that have registered the data. */
     resolvers: ResolverInfo[];
     /** pagination is the PageResponse to use for pagination. */
-    pagination?: PageResponse;
+    pagination: PageResponse;
 }
 export interface QueryResolversByHashResponseProtoMsg {
     typeUrl: "/regen.data.v1.QueryResolversByHashResponse";
@@ -430,14 +430,14 @@ export interface QueryResolversByHashResponseAminoMsg {
 /** QueryResolversByHashResponse is the Query/ResolversByHash response type. */
 export interface QueryResolversByHashResponseSDKType {
     resolvers: ResolverInfoSDKType[];
-    pagination?: PageResponseSDKType;
+    pagination: PageResponseSDKType;
 }
 /** QueryResolversByURLRequest is the Query/ResolversByURL request type. */
 export interface QueryResolversByURLRequest {
     /** url is the URL of the resolver. */
     url: string;
     /** pagination is the PageRequest to use for pagination. */
-    pagination?: PageRequest;
+    pagination: PageRequest;
 }
 export interface QueryResolversByURLRequestProtoMsg {
     typeUrl: "/regen.data.v1.QueryResolversByURLRequest";
@@ -457,14 +457,14 @@ export interface QueryResolversByURLRequestAminoMsg {
 /** QueryResolversByURLRequest is the Query/ResolversByURL request type. */
 export interface QueryResolversByURLRequestSDKType {
     url: string;
-    pagination?: PageRequestSDKType;
+    pagination: PageRequestSDKType;
 }
 /** QueryResolversByURLResponse is the Query/ResolversByURL response type. */
 export interface QueryResolversByURLResponse {
     /** resolvers are the resolvers that have a matching URL. */
     resolvers: ResolverInfo[];
     /** pagination is the PageResponse to use for pagination. */
-    pagination?: PageResponse;
+    pagination: PageResponse;
 }
 export interface QueryResolversByURLResponseProtoMsg {
     typeUrl: "/regen.data.v1.QueryResolversByURLResponse";
@@ -484,7 +484,7 @@ export interface QueryResolversByURLResponseAminoMsg {
 /** QueryResolversByURLResponse is the Query/ResolversByURL response type. */
 export interface QueryResolversByURLResponseSDKType {
     resolvers: ResolverInfoSDKType[];
-    pagination?: PageResponseSDKType;
+    pagination: PageResponseSDKType;
 }
 /** ConvertIRIToHashRequest is the Query/ConvertIRIToHash request type. */
 export interface ConvertIRIToHashRequest {
@@ -511,7 +511,7 @@ export interface ConvertIRIToHashRequestSDKType {
 /** ConvertIRIToHashResponse is the Query/ConvertIRIToHash response type. */
 export interface ConvertIRIToHashResponse {
     /** content_hash is the ContentHash converted from the IRI. */
-    contentHash?: ContentHash;
+    contentHash: ContentHash;
 }
 export interface ConvertIRIToHashResponseProtoMsg {
     typeUrl: "/regen.data.v1.ConvertIRIToHashResponse";
@@ -528,12 +528,12 @@ export interface ConvertIRIToHashResponseAminoMsg {
 }
 /** ConvertIRIToHashResponse is the Query/ConvertIRIToHash response type. */
 export interface ConvertIRIToHashResponseSDKType {
-    content_hash?: ContentHashSDKType;
+    content_hash: ContentHashSDKType;
 }
 /** ConvertHashToIRIRequest is the Query/ConvertHashToIRI request type. */
 export interface ConvertHashToIRIRequest {
     /** content_hash is the ContentHash to convert to an IRI. */
-    contentHash?: ContentHash;
+    contentHash: ContentHash;
 }
 export interface ConvertHashToIRIRequestProtoMsg {
     typeUrl: "/regen.data.v1.ConvertHashToIRIRequest";
@@ -550,7 +550,7 @@ export interface ConvertHashToIRIRequestAminoMsg {
 }
 /** ConvertHashToIRIRequest is the Query/ConvertHashToIRI request type. */
 export interface ConvertHashToIRIRequestSDKType {
-    content_hash?: ContentHashSDKType;
+    content_hash: ContentHashSDKType;
 }
 /** ConvertHashToIRIResponse is the Query/ConvertHashToIRI response type. */
 export interface ConvertHashToIRIResponse {
@@ -579,9 +579,9 @@ export interface AnchorInfo {
     /** iri is the IRI of the anchored data. */
     iri: string;
     /** content_hash is the ContentHash of the anchored data. */
-    contentHash?: ContentHash;
+    contentHash: ContentHash;
     /** timestamp is the time at which the data was anchored. */
-    timestamp?: Timestamp;
+    timestamp: Timestamp;
 }
 export interface AnchorInfoProtoMsg {
     typeUrl: "/regen.data.v1.AnchorInfo";
@@ -603,8 +603,8 @@ export interface AnchorInfoAminoMsg {
 /** AnchorInfo is the information for a data anchor. */
 export interface AnchorInfoSDKType {
     iri: string;
-    content_hash?: ContentHashSDKType;
-    timestamp?: TimestampSDKType;
+    content_hash: ContentHashSDKType;
+    timestamp: TimestampSDKType;
 }
 /** AttestationInfo is the information for an attestation. */
 export interface AttestationInfo {
@@ -613,7 +613,7 @@ export interface AttestationInfo {
     /** attestor is the address of the account that attested to the anchored data. */
     attestor: string;
     /** timestamp is the time at which the data was attested to. */
-    timestamp?: Timestamp;
+    timestamp: Timestamp;
 }
 export interface AttestationInfoProtoMsg {
     typeUrl: "/regen.data.v1.AttestationInfo";
@@ -636,7 +636,7 @@ export interface AttestationInfoAminoMsg {
 export interface AttestationInfoSDKType {
     iri: string;
     attestor: string;
-    timestamp?: TimestampSDKType;
+    timestamp: TimestampSDKType;
 }
 /** ResolverInfo is the information for a resolver. */
 export interface ResolverInfo {

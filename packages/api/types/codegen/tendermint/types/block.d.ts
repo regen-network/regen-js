@@ -2,10 +2,10 @@ import { Header, HeaderAmino, HeaderSDKType, Data, DataAmino, DataSDKType, Commi
 import { EvidenceList, EvidenceListAmino, EvidenceListSDKType } from "./evidence";
 import * as _m0 from "protobufjs/minimal";
 export interface Block {
-    header?: Header;
-    data?: Data;
-    evidence?: EvidenceList;
-    lastCommit?: Commit;
+    header: Header;
+    data: Data;
+    evidence: EvidenceList;
+    lastCommit: Commit;
 }
 export interface BlockProtoMsg {
     typeUrl: "/tendermint.types.Block";
@@ -22,10 +22,10 @@ export interface BlockAminoMsg {
     value: BlockAmino;
 }
 export interface BlockSDKType {
-    header?: HeaderSDKType;
-    data?: DataSDKType;
-    evidence?: EvidenceListSDKType;
-    last_commit?: CommitSDKType;
+    header: HeaderSDKType;
+    data: DataSDKType;
+    evidence: EvidenceListSDKType;
+    last_commit: CommitSDKType;
 }
 export declare const Block: {
     encode(message: Block, writer?: _m0.Writer): _m0.Writer;

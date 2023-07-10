@@ -16,7 +16,8 @@ import * as _222 from "./lcd";
 export namespace ibc {
   export namespace applications {
     export namespace transfer {
-      export const v1 = { ..._104,
+      export const v1 = {
+        ..._104,
         ..._105,
         ..._106,
         ..._107,
@@ -28,7 +29,8 @@ export namespace ibc {
   }
   export namespace core {
     export namespace client {
-      export const v1 = { ..._108,
+      export const v1 = {
+        ..._108,
         ..._109,
         ..._110,
         ..._111,
@@ -38,6 +40,7 @@ export namespace ibc {
       };
     }
   }
-  export const ClientFactory = { ..._222
+  export const ClientFactory = {
+    ..._222
   };
 }

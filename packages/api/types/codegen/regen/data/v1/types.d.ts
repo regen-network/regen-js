@@ -88,13 +88,13 @@ export interface ContentHash {
      * the guarantee that the canonical hash will not change. The media type for
      * "raw" data is defined by the MediaType enum.
      */
-    raw?: ContentHash_Raw;
+    raw: ContentHash_Raw;
     /**
      * Graph specifies graph data that conforms to the RDF data model.
      * The canonicalization algorithm used for an RDF graph is specified by
      * GraphCanonicalizationAlgorithm.
      */
-    graph?: ContentHash_Graph;
+    graph: ContentHash_Graph;
 }
 export interface ContentHashProtoMsg {
     typeUrl: "/regen.data.v1.ContentHash";
@@ -125,8 +125,8 @@ export interface ContentHashAminoMsg {
 }
 /** ContentHash specifies a hash-based content identifier for a piece of data. */
 export interface ContentHashSDKType {
-    raw?: ContentHash_RawSDKType;
-    graph?: ContentHash_GraphSDKType;
+    raw: ContentHash_RawSDKType;
+    graph: ContentHash_GraphSDKType;
 }
 /** Raw is the content hash type used for raw data. */
 export interface ContentHash_Raw {

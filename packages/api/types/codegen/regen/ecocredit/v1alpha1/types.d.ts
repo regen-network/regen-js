@@ -16,7 +16,7 @@ export interface ClassInfo {
      * credit_type describes the type of credit (e.g. carbon, biodiversity), as
      * well as unit and precision.
      */
-    creditType?: CreditType;
+    creditType: CreditType;
     /** The number of batches issued in this credit class. */
     numBatches: Long;
 }
@@ -52,7 +52,7 @@ export interface ClassInfoSDKType {
     admin: string;
     issuers: string[];
     metadata: Uint8Array;
-    credit_type?: CreditTypeSDKType;
+    credit_type: CreditTypeSDKType;
     num_batches: Long;
 }
 /** BatchInfo represents the high-level on-chain information for a credit batch. */
@@ -84,12 +84,12 @@ export interface BatchInfo {
      * start_date is the beginning of the period during which this credit batch
      * was quantified and verified.
      */
-    startDate?: Timestamp;
+    startDate: Timestamp;
     /**
      * end_date is the end of the period during which this credit batch was
      * quantified and verified.
      */
-    endDate?: Timestamp;
+    endDate: Timestamp;
     /**
      * project_location is the location of the project backing the credits in this
      * batch. Full documentation can be found in MsgCreateBatch.project_location.
@@ -153,8 +153,8 @@ export interface BatchInfoSDKType {
     total_amount: string;
     metadata: Uint8Array;
     amount_cancelled: string;
-    start_date?: TimestampSDKType;
-    end_date?: TimestampSDKType;
+    start_date: TimestampSDKType;
+    end_date: TimestampSDKType;
     project_location: string;
 }
 /**

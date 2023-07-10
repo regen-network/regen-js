@@ -1,6 +1,6 @@
 import { Timestamp, TimestampAmino, TimestampSDKType } from "../../../google/protobuf/timestamp";
-import * as _m0 from "protobufjs/minimal";
 import { Long } from "../../../helpers";
+import * as _m0 from "protobufjs/minimal";
 /** DataID stores a compact data ID and its full IRI. */
 export interface DataID {
     /** id is the compact automatically-generated data ID. */
@@ -36,7 +36,7 @@ export interface DataAnchor {
      * timestamp is the anchor timestamp for this object - the time at which
      * it was first known to the blockchain.
      */
-    timestamp?: Timestamp;
+    timestamp: Timestamp;
 }
 export interface DataAnchorProtoMsg {
     typeUrl: "/regen.data.v1.DataAnchor";
@@ -59,7 +59,7 @@ export interface DataAnchorAminoMsg {
 /** DataAnchor stores the anchor timestamp for a data object. */
 export interface DataAnchorSDKType {
     id: Uint8Array;
-    timestamp?: TimestampSDKType;
+    timestamp: TimestampSDKType;
 }
 /** DataAttestor is a join table for associating data IDs and attestors. */
 export interface DataAttestor {
@@ -68,7 +68,7 @@ export interface DataAttestor {
     /** attestor is the account address of the attestor. */
     attestor: Uint8Array;
     /** timestamp is the time at which the attestor signed this data object. */
-    timestamp?: Timestamp;
+    timestamp: Timestamp;
 }
 export interface DataAttestorProtoMsg {
     typeUrl: "/regen.data.v1.DataAttestor";
@@ -91,7 +91,7 @@ export interface DataAttestorAminoMsg {
 export interface DataAttestorSDKType {
     id: Uint8Array;
     attestor: Uint8Array;
-    timestamp?: TimestampSDKType;
+    timestamp: TimestampSDKType;
 }
 /** Resolver describes a data resolver. */
 export interface Resolver {

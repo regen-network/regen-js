@@ -4,7 +4,7 @@ import * as _m0 from "protobufjs/minimal";
 export interface GenesisState {
     portId: string;
     denomTraces: DenomTrace[];
-    params?: Params;
+    params: Params;
 }
 export interface GenesisStateProtoMsg {
     typeUrl: "/ibc.applications.transfer.v1.GenesisState";
@@ -24,7 +24,7 @@ export interface GenesisStateAminoMsg {
 export interface GenesisStateSDKType {
     port_id: string;
     denom_traces: DenomTraceSDKType[];
-    params?: ParamsSDKType;
+    params: ParamsSDKType;
 }
 export declare const GenesisState: {
     encode(message: GenesisState, writer?: _m0.Writer): _m0.Writer;

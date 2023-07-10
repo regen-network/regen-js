@@ -21,7 +21,7 @@ export interface QueryParamsRequestSDKType {
 /** QueryParamsResponse is the Query/Params response type. */
 export interface QueryParamsResponse {
     /** params defines the parameters of the ecocredit module. */
-    params?: Params;
+    params: Params;
 }
 export interface QueryParamsResponseProtoMsg {
     typeUrl: "/regen.ecocredit.v1alpha1.QueryParamsResponse";
@@ -38,12 +38,12 @@ export interface QueryParamsResponseAminoMsg {
 }
 /** QueryParamsResponse is the Query/Params response type. */
 export interface QueryParamsResponseSDKType {
-    params?: ParamsSDKType;
+    params: ParamsSDKType;
 }
 /** QueryClassesRequest is the Query/Classes request type. */
 export interface QueryClassesRequest {
     /** pagination defines an optional pagination for the request. */
-    pagination?: PageRequest;
+    pagination: PageRequest;
 }
 export interface QueryClassesRequestProtoMsg {
     typeUrl: "/regen.ecocredit.v1alpha1.QueryClassesRequest";
@@ -60,14 +60,14 @@ export interface QueryClassesRequestAminoMsg {
 }
 /** QueryClassesRequest is the Query/Classes request type. */
 export interface QueryClassesRequestSDKType {
-    pagination?: PageRequestSDKType;
+    pagination: PageRequestSDKType;
 }
 /** QueryClassesResponse is the Query/Classes response type. */
 export interface QueryClassesResponse {
     /** classes are the fetched credit classes. */
     classes: ClassInfo[];
     /** pagination defines the pagination in the response. */
-    pagination?: PageResponse;
+    pagination: PageResponse;
 }
 export interface QueryClassesResponseProtoMsg {
     typeUrl: "/regen.ecocredit.v1alpha1.QueryClassesResponse";
@@ -87,7 +87,7 @@ export interface QueryClassesResponseAminoMsg {
 /** QueryClassesResponse is the Query/Classes response type. */
 export interface QueryClassesResponseSDKType {
     classes: ClassInfoSDKType[];
-    pagination?: PageResponseSDKType;
+    pagination: PageResponseSDKType;
 }
 /** QueryClassInfoRequest is the Query/ClassInfo request type. */
 export interface QueryClassInfoRequest {
@@ -114,7 +114,7 @@ export interface QueryClassInfoRequestSDKType {
 /** QueryClassInfoResponse is the Query/ClassInfo request type. */
 export interface QueryClassInfoResponse {
     /** info is the ClassInfo for the credit class. */
-    info?: ClassInfo;
+    info: ClassInfo;
 }
 export interface QueryClassInfoResponseProtoMsg {
     typeUrl: "/regen.ecocredit.v1alpha1.QueryClassInfoResponse";
@@ -131,14 +131,14 @@ export interface QueryClassInfoResponseAminoMsg {
 }
 /** QueryClassInfoResponse is the Query/ClassInfo request type. */
 export interface QueryClassInfoResponseSDKType {
-    info?: ClassInfoSDKType;
+    info: ClassInfoSDKType;
 }
 /** QueryBatchesRequest is the Query/Batches request type. */
 export interface QueryBatchesRequest {
     /** class_id is the unique ID of the credit class to query. */
     classId: string;
     /** pagination defines an optional pagination for the request. */
-    pagination?: PageRequest;
+    pagination: PageRequest;
 }
 export interface QueryBatchesRequestProtoMsg {
     typeUrl: "/regen.ecocredit.v1alpha1.QueryBatchesRequest";
@@ -158,14 +158,14 @@ export interface QueryBatchesRequestAminoMsg {
 /** QueryBatchesRequest is the Query/Batches request type. */
 export interface QueryBatchesRequestSDKType {
     class_id: string;
-    pagination?: PageRequestSDKType;
+    pagination: PageRequestSDKType;
 }
 /** QueryBatchesResponse is the Query/Batches response type. */
 export interface QueryBatchesResponse {
     /** batches are the fetched credit batches within the class. */
     batches: BatchInfo[];
     /** pagination defines the pagination in the response. */
-    pagination?: PageResponse;
+    pagination: PageResponse;
 }
 export interface QueryBatchesResponseProtoMsg {
     typeUrl: "/regen.ecocredit.v1alpha1.QueryBatchesResponse";
@@ -185,7 +185,7 @@ export interface QueryBatchesResponseAminoMsg {
 /** QueryBatchesResponse is the Query/Batches response type. */
 export interface QueryBatchesResponseSDKType {
     batches: BatchInfoSDKType[];
-    pagination?: PageResponseSDKType;
+    pagination: PageResponseSDKType;
 }
 /** QueryBatchInfoRequest is the Query/BatchInfo request type. */
 export interface QueryBatchInfoRequest {
@@ -212,7 +212,7 @@ export interface QueryBatchInfoRequestSDKType {
 /** QueryBatchInfoResponse is the Query/BatchInfo response type. */
 export interface QueryBatchInfoResponse {
     /** info is the BatchInfo for the credit batch. */
-    info?: BatchInfo;
+    info: BatchInfo;
 }
 export interface QueryBatchInfoResponseProtoMsg {
     typeUrl: "/regen.ecocredit.v1alpha1.QueryBatchInfoResponse";
@@ -229,7 +229,7 @@ export interface QueryBatchInfoResponseAminoMsg {
 }
 /** QueryBatchInfoResponse is the Query/BatchInfo response type. */
 export interface QueryBatchInfoResponseSDKType {
-    info?: BatchInfoSDKType;
+    info: BatchInfoSDKType;
 }
 /** QueryBalanceRequest is the Query/Balance request type. */
 export interface QueryBalanceRequest {

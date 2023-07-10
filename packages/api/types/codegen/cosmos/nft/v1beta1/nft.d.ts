@@ -15,7 +15,7 @@ export interface Class {
     /** uri_hash is a hash of the document pointed by uri. Optional */
     uriHash: string;
     /** data is the app specific metadata of the NFT class. Optional */
-    data?: Any;
+    data: Any;
 }
 export interface ClassProtoMsg {
     typeUrl: "/cosmos.nft.v1beta1.Class";
@@ -50,7 +50,7 @@ export interface ClassSDKType {
     description: string;
     uri: string;
     uri_hash: string;
-    data?: AnySDKType;
+    data: AnySDKType;
 }
 /** NFT defines the NFT. */
 export interface NFT {
@@ -63,7 +63,7 @@ export interface NFT {
     /** uri_hash is a hash of the document pointed by uri */
     uriHash: string;
     /** data is an app specific data of the NFT. Optional */
-    data?: Any;
+    data: Any;
 }
 export interface NFTProtoMsg {
     typeUrl: "/cosmos.nft.v1beta1.NFT";
@@ -92,7 +92,7 @@ export interface NFTSDKType {
     id: string;
     uri: string;
     uri_hash: string;
-    data?: AnySDKType;
+    data: AnySDKType;
 }
 export declare const Class: {
     encode(message: Class, writer?: _m0.Writer): _m0.Writer;

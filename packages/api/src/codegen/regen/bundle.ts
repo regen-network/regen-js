@@ -47,7 +47,8 @@ import * as _220 from "./intertx/v1/query.lcd";
 import * as _223 from "./lcd";
 export namespace regen {
   export namespace data {
-    export const v1 = { ..._112,
+    export const v1 = {
+      ..._112,
       ..._113,
       ..._114,
       ..._115,
@@ -59,7 +60,8 @@ export namespace regen {
   }
   export namespace ecocredit {
     export namespace basket {
-      export const v1 = { ..._117,
+      export const v1 = {
+        ..._117,
         ..._118,
         ..._119,
         ..._120,
@@ -70,7 +72,8 @@ export namespace regen {
       };
     }
     export namespace marketplace {
-      export const v1 = { ..._122,
+      export const v1 = {
+        ..._122,
         ..._123,
         ..._124,
         ..._125,
@@ -81,10 +84,12 @@ export namespace regen {
       };
     }
     export namespace orderbook {
-      export const v1alpha1 = { ..._127
+      export const v1alpha1 = {
+        ..._127
       };
     }
-    export const v1 = { ..._128,
+    export const v1 = {
+      ..._128,
       ..._129,
       ..._130,
       ..._131,
@@ -93,7 +98,8 @@ export namespace regen {
       ..._212,
       ..._218
     };
-    export const v1alpha1 = { ..._133,
+    export const v1alpha1 = {
+      ..._133,
       ..._134,
       ..._135,
       ..._136,
@@ -104,13 +110,15 @@ export namespace regen {
     };
   }
   export namespace intertx {
-    export const v1 = { ..._138,
+    export const v1 = {
+      ..._138,
       ..._139,
       ..._208,
       ..._214,
       ..._220
     };
   }
-  export const ClientFactory = { ..._223
+  export const ClientFactory = {
+    ..._223
   };
 }

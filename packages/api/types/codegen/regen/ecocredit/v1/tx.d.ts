@@ -12,7 +12,7 @@ export interface MsgAddCreditType {
     /** authority is the address of the governance account. */
     authority: string;
     /** credit_type defines a credit type to add to the credit types parameter. */
-    creditType?: CreditType;
+    creditType: CreditType;
 }
 export interface MsgAddCreditTypeProtoMsg {
     typeUrl: "/regen.ecocredit.v1.MsgAddCreditType";
@@ -40,7 +40,7 @@ export interface MsgAddCreditTypeAminoMsg {
  */
 export interface MsgAddCreditTypeSDKType {
     authority: string;
-    credit_type?: CreditTypeSDKType;
+    credit_type: CreditTypeSDKType;
 }
 /**
  * MsgAddCreditTypeResponse is the Msg/AddCreditType response type.
@@ -101,7 +101,7 @@ export interface MsgCreateClass {
      * creation fee parameter is set. The provided fee can be greater than the
      * parameter, but only the amount in the parameter will be charged.
      */
-    fee?: Coin;
+    fee: Coin;
 }
 export interface MsgCreateClassProtoMsg {
     typeUrl: "/regen.ecocredit.v1.MsgCreateClass";
@@ -149,7 +149,7 @@ export interface MsgCreateClassSDKType {
     issuers: string[];
     metadata: string;
     credit_type_abbrev: string;
-    fee?: CoinSDKType;
+    fee: CoinSDKType;
 }
 /** MsgCreateClassResponse is the Msg/CreateClass response type. */
 export interface MsgCreateClassResponse {
@@ -310,12 +310,12 @@ export interface MsgCreateBatch {
      * start_date is the beginning of the period during which this credit batch
      * was quantified and verified.
      */
-    startDate?: Timestamp;
+    startDate: Timestamp;
     /**
      * end_date is the end of the period during which this credit batch was
      * quantified and verified.
      */
-    endDate?: Timestamp;
+    endDate: Timestamp;
     /**
      * open determines whether or not the credits can be dynamically minted to the
      * credit batch following the creation of the credit batch. This field should
@@ -329,7 +329,7 @@ export interface MsgCreateBatch {
      * issuing credits and should only be set when bridging assets from another
      * chain or registry as a result of a bridge operation.
      */
-    originTx?: OriginTx;
+    originTx: OriginTx;
 }
 export interface MsgCreateBatchProtoMsg {
     typeUrl: "/regen.ecocredit.v1.MsgCreateBatch";
@@ -393,10 +393,10 @@ export interface MsgCreateBatchSDKType {
     project_id: string;
     issuance: BatchIssuanceSDKType[];
     metadata: string;
-    start_date?: TimestampSDKType;
-    end_date?: TimestampSDKType;
+    start_date: TimestampSDKType;
+    end_date: TimestampSDKType;
     open: boolean;
-    origin_tx?: OriginTxSDKType;
+    origin_tx: OriginTxSDKType;
 }
 /** MsgCreateBatchResponse is the Msg/CreateBatch response type. */
 export interface MsgCreateBatchResponse {
@@ -439,7 +439,7 @@ export interface MsgMintBatchCredits {
      * origin_tx is the transaction from another chain or registry that triggered
      * the minting of credits.
      */
-    originTx?: OriginTx;
+    originTx: OriginTx;
 }
 export interface MsgMintBatchCreditsProtoMsg {
     typeUrl: "/regen.ecocredit.v1.MsgMintBatchCredits";
@@ -475,7 +475,7 @@ export interface MsgMintBatchCreditsSDKType {
     issuer: string;
     batch_denom: string;
     issuance: BatchIssuanceSDKType[];
-    origin_tx?: OriginTxSDKType;
+    origin_tx: OriginTxSDKType;
 }
 /** MsgMintBatchCreditsResponse is the Msg/MintBatchCredits response type. */
 export interface MsgMintBatchCreditsResponse {
@@ -1285,14 +1285,14 @@ export interface MsgBridgeReceive {
      */
     classId: string;
     /** project defines the project information for the bridged credits. */
-    project?: MsgBridgeReceive_Project;
+    project: MsgBridgeReceive_Project;
     /** batch defines the credit batch information for the bridged credits. */
-    batch?: MsgBridgeReceive_Batch;
+    batch: MsgBridgeReceive_Batch;
     /**
      * origin_tx is a reference to a transaction which caused the transfer from
      * another chain or registry.
      */
-    originTx?: OriginTx;
+    originTx: OriginTx;
 }
 export interface MsgBridgeReceiveProtoMsg {
     typeUrl: "/regen.ecocredit.v1.MsgBridgeReceive";
@@ -1325,9 +1325,9 @@ export interface MsgBridgeReceiveAminoMsg {
 export interface MsgBridgeReceiveSDKType {
     issuer: string;
     class_id: string;
-    project?: MsgBridgeReceive_ProjectSDKType;
-    batch?: MsgBridgeReceive_BatchSDKType;
-    origin_tx?: OriginTxSDKType;
+    project: MsgBridgeReceive_ProjectSDKType;
+    batch: MsgBridgeReceive_BatchSDKType;
+    origin_tx: OriginTxSDKType;
 }
 /**
  * Batch defines the credit batch information for the bridged credits. This
@@ -1343,12 +1343,12 @@ export interface MsgBridgeReceive_Batch {
      * start_date is the beginning of the period during which this credit batch
      * was quantified and verified.
      */
-    startDate?: Timestamp;
+    startDate: Timestamp;
     /**
      * end_date is the end of the period during which this credit batch was
      * quantified and verified.
      */
-    endDate?: Timestamp;
+    endDate: Timestamp;
     /** metadata is the metadata for the credit batch. */
     metadata: string;
 }
@@ -1391,8 +1391,8 @@ export interface MsgBridgeReceive_BatchAminoMsg {
 export interface MsgBridgeReceive_BatchSDKType {
     recipient: string;
     amount: string;
-    start_date?: TimestampSDKType;
-    end_date?: TimestampSDKType;
+    start_date: TimestampSDKType;
+    end_date: TimestampSDKType;
     metadata: string;
 }
 /**
@@ -1700,7 +1700,7 @@ export interface MsgUpdateClassFee {
      * fee is the credit class creation fee. If not set, the credit class creation
      * fee will be removed and no fee will be required to create a credit class.
      */
-    fee?: Coin;
+    fee: Coin;
 }
 export interface MsgUpdateClassFeeProtoMsg {
     typeUrl: "/regen.ecocredit.v1.MsgUpdateClassFee";
@@ -1731,7 +1731,7 @@ export interface MsgUpdateClassFeeAminoMsg {
  */
 export interface MsgUpdateClassFeeSDKType {
     authority: string;
-    fee?: CoinSDKType;
+    fee: CoinSDKType;
 }
 /**
  * MsgUpdateClassFeeResponse is the Msg/UpdateClassFee response type.

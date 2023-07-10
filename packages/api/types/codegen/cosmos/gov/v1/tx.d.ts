@@ -2,8 +2,8 @@ import { Any, AnyProtoMsg, AnyAmino, AnySDKType } from "../../../google/protobuf
 import { Coin, CoinAmino, CoinSDKType } from "../../base/v1beta1/coin";
 import { VoteOption, WeightedVoteOption, WeightedVoteOptionAmino, WeightedVoteOptionSDKType } from "./gov";
 import { TextProposal, TextProposalProtoMsg, TextProposalSDKType } from "../v1beta1/gov";
-import * as _m0 from "protobufjs/minimal";
 import { Long } from "../../../helpers";
+import * as _m0 from "protobufjs/minimal";
 /**
  * MsgSubmitProposal defines an sdk.Msg type that supports submitting arbitrary
  * proposal Content.
@@ -70,7 +70,7 @@ export interface MsgSubmitProposalResponseSDKType {
  */
 export interface MsgExecLegacyContent {
     /** content is the proposal's content. */
-    content?: (TextProposal & Any) | undefined;
+    content: (TextProposal & Any) | undefined;
     /** authority must be the gov module address. */
     authority: string;
 }
@@ -79,8 +79,7 @@ export interface MsgExecLegacyContentProtoMsg {
     value: Uint8Array;
 }
 export type MsgExecLegacyContentEncoded = Omit<MsgExecLegacyContent, "content"> & {
-    /** content is the proposal's content. */
-    content?: TextProposalProtoMsg | AnyProtoMsg | undefined;
+    /** content is the proposal's content. */ content?: TextProposalProtoMsg | AnyProtoMsg | undefined;
 };
 /**
  * MsgExecLegacyContent is used to wrap the legacy content field into a message.
@@ -101,7 +100,7 @@ export interface MsgExecLegacyContentAminoMsg {
  * This ensures backwards compatibility with v1beta1.MsgSubmitProposal.
  */
 export interface MsgExecLegacyContentSDKType {
-    content?: TextProposalSDKType | AnySDKType | undefined;
+    content: TextProposalSDKType | AnySDKType | undefined;
     authority: string;
 }
 /** MsgExecLegacyContentResponse defines the Msg/ExecLegacyContent response type. */
