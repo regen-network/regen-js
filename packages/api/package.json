@@ -2,7 +2,7 @@
   "name": "@regen-network/api",
   "version": "v1.0.0-alpha2",
   "author": "admin@regen.network",
-  "description": "A client library for the Regen Ledger",
+  "description": "Javascript API for Regen Ledger",
   "license": "Apache-2.0",
   "repository": {
     "type": "git",
