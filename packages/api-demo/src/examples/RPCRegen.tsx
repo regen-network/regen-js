@@ -1,0 +1,53 @@
+import Long from 'long';
+import React, { useEffect, useState } from 'react';
+
+import { regen } from '@regen-network/api';
+import { QueryProjectsByClassResponse } from '@regen-network/api/types/codegen/regen/ecocredit/v1/query';
+import { PageRequest } from '@regen-network/api/types/codegen/helpers';
+
+export function RPCRegen(): React.ReactElement {
+  const [result, setResult] = useState<
+    QueryProjectsByClassResponse | undefined
+  >(undefined);
+  const [error, setError] = useState<{ message: string } | undefined>(
+    undefined,
+  );
+
+  useEffect(() => {
+    if (!result && !error) executeExample();
+  }, [result, error]);
+
+  const executeExample = async (): Promise<void> => {
+    const client = await regen.ClientFactory.createRPCQueryClient({
+      rpcEndpoint: 'redwood.regen.network:26657',
+    });
+
+    await client.regen.ecocredit.v1
+      .projectsByClass({
+        classId: 'C01',
+        pagination: {
+          key: new Uint8Array(0),
+          limit: Long.fromNumber(0),
+          offset: Long.fromNumber(0),
+        } as PageRequest,
+      })
+      .then(setResult)
+      .catch(setError);
+  };
+
+  return (
+    <div>
+      <h3>{'RPC Queries > regen ecocredit projects'}</h3>
+      {'Response: '}
+      <code>
+        {result ? (
+          JSON.stringify(result)
+        ) : error ? (
+          <span>{error.message}</span>
+        ) : (
+          '...'
+        )}
+      </code>
+    </div>
+  );
+}

@@ -4,7 +4,8 @@
 
 - [Install](#install)
 - [Usage](#usage)
-  - [Queries](#queries)
+  - [LCD Queries](#lcd-queries)
+  - [RPC Queries](#rpc-queries)
   - [Composing Messages](#composing-messages)
   - [Signing Messages](#signing-messages)
 - [Development](#development)
@@ -21,31 +22,79 @@ yarn add @regen-network/api@v1.0.0-alpha3
 
 ## Usage
 
-### Queries
+### LCD Queries
 
 Example query using a cosmos module:
 
-```js
+```ts
 import { cosmos } from "@regen-network/api"
+import { PageRequest } from "@regen-network/api/types/codegen/helpers"
 
-const { createRPCQueryClient } = cosmos.ClientFactory
-const client = await createRPCQueryClient({ rpcEndpoint: RPC_ENDPOINT })
+const { createLCDClient } = cosmos.ClientFactory
+const client = await createLCDClient({ restEndpoint: REST_ENDPOINT })
 
 const balance = await client.cosmos.bank.v1beta1.allBalances({
-  address: "regen1nzh226hxrsvf4k69sa8v0nfuzx5vgwkczk8j68",
+  address: "regen1df675r9vnf7pdedn4sf26svdsem3ugavgxmy46",
+  pagination: { countTotal: true } as PageRequest,
 })
 ```
 
 Example query using a regen module:
 
-```js
+```ts
 import { regen } from "@regen-network/api"
+import { PageRequest } from "@regen-network/api/types/codegen/helpers"
+
+const { createLCDClient } = regen.ClientFactory
+const client = await createLCDClient({ restEndpoint: REST_ENDPOINT })
+
+const balance = await client.regen.ecocredit.v1.projectByClass({
+  classId: "C01",
+  pagination: { countTotal: true } as PageRequest,
+})
+```
+
+### RPC Queries
+
+Example query using a cosmos module:
+
+```ts
+import { cosmos } from "@regen-network/api"
+import { PageRequest } from "@regen-network/api/types/codegen/helpers"
+
+import Long from "long"
+
+const { createRPCQueryClient } = cosmos.ClientFactory
+const client = await createRPCQueryClient({ rpcEndpoint: RPC_ENDPOINT })
+
+const balance = await client.cosmos.bank.v1beta1.allBalances({
+  address: "regen1df675r9vnf7pdedn4sf26svdsem3ugavgxmy46",
+  pagination: {
+    key: new Uint8Array(0),
+    limit: Long.fromNumber(0),
+    offset: Long.fromNumber(0),
+  } as PageRequest,
+})
+```
+
+Example query using a regen module:
+
+```ts
+import { regen } from "@regen-network/api"
+import { PageRequest } from "@regen-network/api/types/codegen/helpers"
+
+import Long from "long"
 
 const { createRPCQueryClient } = regen.ClientFactory
 const client = await createRPCQueryClient({ rpcEndpoint: RPC_ENDPOINT })
 
 const balance = await client.regen.ecocredit.v1.projectByClass({
-  classId: "C01-001",
+  classId: "C01",
+  pagination: {
+    key: new Uint8Array(0),
+    limit: Long.fromNumber(0),
+    offset: Long.fromNumber(0),
+  } as PageRequest,
 })
 ```
 
@@ -53,7 +102,7 @@ const balance = await client.regen.ecocredit.v1.projectByClass({
 
 Example message using a cosmos module:
 
-```js
+```ts
 import { cosmos, getSigningCosmosClient } from "@regen-network/api"
 
 const { send } = cosmos.bank.v1beta1.MessageComposer.withTypeUrl
@@ -66,20 +115,20 @@ const msg = send({
     },
   ],
   toAddress: "regen156d26rl52y3wl865pr5x9q2vqetuw9kf0642sa",
-  fromAddress: "regen1nzh226hxrsvf4k69sa8v0nfuzx5vgwkczk8j68",
+  fromAddress: "regen1df675r9vnf7pdedn4sf26svdsem3ugavgxmy46",
 })
 ```
 
 Example message using a regen module:
 
-```js
+```ts
 import { regen, getSigningCosmosClient } from "@regen-network/api"
 
 const { createProject } = regen.ecocredit.v1.MessageComposer.withTypeUrl
 
 const msg = createProject({
-  admin: "regen1nzh226hxrsvf4k69sa8v0nfuzx5vgwkczk8j68",
-  classId: "C01-001",
+  admin: "regen1df675r9vnf7pdedn4sf26svdsem3ugavgxmy46",
+  classId: "C01",
   metadata: "regen:13toVgf5UjYBz6J29x28pLQyjKz5FpcW3f4bT5uRKGxGREWGKjEdXYG.rdf",
   jurisdiction: "US-WA",
 })
@@ -87,7 +136,7 @@ const msg = createProject({
 
 ### Signing Messages
 
-```js
+```ts
 const offlineSigner = keplr.getOfflineSigner("regen-local")
 
 const signingClient = await getSigningCosmosClient({
@@ -105,7 +154,7 @@ const fee: StdFee = {
   gas: "100000",
 }
 
-await signingClient.signAndBroadcast("regen1nzh226hxrsvf4k69sa8v0nfuzx5vgwkczk8j68", [msg], fee)
+await signingClient.signAndBroadcast("regen1df675r9vnf7pdedn4sf26svdsem3ugavgxmy46", [msg], fee)
 ```
 
 ## Development
