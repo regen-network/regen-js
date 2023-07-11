@@ -44,7 +44,7 @@ telescope({
       enabled: true,
     },
     rpcClients: {
-      enabled: false,
+      enabled: true,
       camelCase: true,
     },
   },

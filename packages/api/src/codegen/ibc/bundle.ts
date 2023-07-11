@@ -6,13 +6,19 @@ import * as _108 from "./core/client/v1/client";
 import * as _109 from "./core/client/v1/genesis";
 import * as _110 from "./core/client/v1/query";
 import * as _111 from "./core/client/v1/tx";
-import * as _197 from "./applications/transfer/v1/tx.amino";
-import * as _198 from "./core/client/v1/tx.amino";
-import * as _199 from "./applications/transfer/v1/tx.registry";
-import * as _200 from "./core/client/v1/tx.registry";
-import * as _201 from "./applications/transfer/v1/query.lcd";
-import * as _202 from "./core/client/v1/query.lcd";
-import * as _222 from "./lcd";
+import * as _230 from "./applications/transfer/v1/tx.amino";
+import * as _231 from "./core/client/v1/tx.amino";
+import * as _232 from "./applications/transfer/v1/tx.registry";
+import * as _233 from "./core/client/v1/tx.registry";
+import * as _234 from "./applications/transfer/v1/query.lcd";
+import * as _235 from "./core/client/v1/query.lcd";
+import * as _236 from "./applications/transfer/v1/query.rpc.Query";
+import * as _237 from "./core/client/v1/query.rpc.Query";
+import * as _238 from "./applications/transfer/v1/tx.rpc.msg";
+import * as _239 from "./core/client/v1/tx.rpc.msg";
+import * as _273 from "./lcd";
+import * as _274 from "./rpc.query";
+import * as _275 from "./rpc.tx";
 export namespace ibc {
   export namespace applications {
     export namespace transfer {
@@ -21,9 +27,11 @@ export namespace ibc {
         ..._105,
         ..._106,
         ..._107,
-        ..._197,
-        ..._199,
-        ..._201
+        ..._230,
+        ..._232,
+        ..._234,
+        ..._236,
+        ..._238
       };
     }
   }
@@ -34,13 +42,17 @@ export namespace ibc {
         ..._109,
         ..._110,
         ..._111,
-        ..._198,
-        ..._200,
-        ..._202
+        ..._231,
+        ..._233,
+        ..._235,
+        ..._237,
+        ..._239
       };
     }
   }
   export const ClientFactory = {
-    ..._222
+    ..._273,
+    ..._274,
+    ..._275
   };
 }
