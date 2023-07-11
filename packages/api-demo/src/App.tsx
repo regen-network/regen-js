@@ -76,10 +76,10 @@ export function App(): React.ReactElement {
         <h2>{'README Examples'}</h2>
         <LCDCosmos />
         <LCDRegen />
-        <MsgCosmos />
-        <MsgRegen />
         <RPCCosmos />
         <RPCRegen />
+        <MsgCosmos />
+        <MsgRegen />
       </div>
     </div>
   );

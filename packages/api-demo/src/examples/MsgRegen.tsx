@@ -37,7 +37,7 @@ export function MsgRegen(): React.ReactElement {
       metadata:
         'regen:13toVgf5UjYBz6J29x28pLQyjKz5FpcW3f4bT5uRKGxGREWGKjEdXYG.rdf',
       jurisdiction: 'US-WA',
-      referenceId: 'ABC-123',
+      referenceId: 'VCS-001',
     });
 
     // define default fee
