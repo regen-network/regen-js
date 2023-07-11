@@ -31,9 +31,12 @@ import { cosmos } from "@regen-network/api"
 import { PageRequest } from "@regen-network/api/types/codegen/helpers"
 
 const { createLCDClient } = cosmos.ClientFactory
-const client = await createLCDClient({ restEndpoint: REST_ENDPOINT })
 
-const balance = await client.cosmos.bank.v1beta1.allBalances({
+const client = await createLCDClient({
+  restEndpoint: "http://localhost:1317",
+})
+
+const response = await client.cosmos.bank.v1beta1.allBalances({
   address: "regen1df675r9vnf7pdedn4sf26svdsem3ugavgxmy46",
   pagination: { countTotal: true } as PageRequest,
 })
@@ -46,9 +49,12 @@ import { regen } from "@regen-network/api"
 import { PageRequest } from "@regen-network/api/types/codegen/helpers"
 
 const { createLCDClient } = regen.ClientFactory
-const client = await createLCDClient({ restEndpoint: REST_ENDPOINT })
 
-const balance = await client.regen.ecocredit.v1.projectByClass({
+const client = await createLCDClient({
+  restEndpoint: "http://localhost:1317",
+})
+
+const response = await client.regen.ecocredit.v1.projectByClass({
   classId: "C01",
   pagination: { countTotal: true } as PageRequest,
 })
@@ -65,9 +71,12 @@ import { PageRequest } from "@regen-network/api/types/codegen/helpers"
 import Long from "long"
 
 const { createRPCQueryClient } = cosmos.ClientFactory
-const client = await createRPCQueryClient({ rpcEndpoint: RPC_ENDPOINT })
 
-const balance = await client.cosmos.bank.v1beta1.allBalances({
+const client = await createRPCQueryClient({
+  rpcEndpoint: "http://localhost:26657",
+})
+
+const response = await client.cosmos.bank.v1beta1.allBalances({
   address: "regen1df675r9vnf7pdedn4sf26svdsem3ugavgxmy46",
   pagination: {
     key: new Uint8Array(0),
@@ -86,9 +95,12 @@ import { PageRequest } from "@regen-network/api/types/codegen/helpers"
 import Long from "long"
 
 const { createRPCQueryClient } = regen.ClientFactory
-const client = await createRPCQueryClient({ rpcEndpoint: RPC_ENDPOINT })
 
-const balance = await client.regen.ecocredit.v1.projectByClass({
+const client = await createRPCQueryClient({
+  rpcEndpoint: "http://localhost:26657",
+})
+
+const response = await client.regen.ecocredit.v1.projectByClass({
   classId: "C01",
   pagination: {
     key: new Uint8Array(0),
@@ -139,12 +151,14 @@ const msg = createProject({
 ```ts
 const offlineSigner = keplr.getOfflineSigner("regen-local")
 
+const [account] = await offlineSigner.getAccounts()
+
 const signingClient = await getSigningCosmosClient({
   rpcEndpoint: "http://localhost:26657",
   signer: offlineSigner,
 })
 
-const fee: StdFee = {
+const fee = {
   amount: [
     {
       denom: "uregen",
@@ -154,7 +168,7 @@ const fee: StdFee = {
   gas: "100000",
 }
 
-await signingClient.signAndBroadcast("regen1df675r9vnf7pdedn4sf26svdsem3ugavgxmy46", [msg], fee)
+await signingClient.signAndBroadcast(account.address, [msg], fee)
 ```
 
 ## Development
