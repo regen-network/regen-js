@@ -26,16 +26,43 @@ import * as _136 from "./ecocredit/v1alpha1/tx";
 import * as _137 from "./ecocredit/v1alpha1/types";
 import * as _138 from "./intertx/v1/query";
 import * as _139 from "./intertx/v1/tx";
-import * as _215 from "./data/v1/query.lcd";
-import * as _216 from "./ecocredit/basket/v1/query.lcd";
-import * as _217 from "./ecocredit/marketplace/v1/query.lcd";
-import * as _218 from "./ecocredit/v1/query.lcd";
-import * as _219 from "./ecocredit/v1alpha1/query.lcd";
-import * as _220 from "./intertx/v1/query.lcd";
+import * as _252 from "./data/v1/query.lcd";
+import * as _253 from "./ecocredit/basket/v1/query.lcd";
+import * as _254 from "./ecocredit/marketplace/v1/query.lcd";
+import * as _255 from "./ecocredit/v1/query.lcd";
+import * as _256 from "./ecocredit/v1alpha1/query.lcd";
+import * as _257 from "./intertx/v1/query.lcd";
+import * as _258 from "./data/v1/query.rpc.Query";
+import * as _259 from "./ecocredit/basket/v1/query.rpc.Query";
+import * as _260 from "./ecocredit/marketplace/v1/query.rpc.Query";
+import * as _261 from "./ecocredit/v1/query.rpc.Query";
+import * as _262 from "./ecocredit/v1alpha1/query.rpc.Query";
+import * as _263 from "./intertx/v1/query.rpc.Query";
+import * as _264 from "./data/v1/tx.rpc.msg";
+import * as _265 from "./ecocredit/basket/v1/tx.rpc.msg";
+import * as _266 from "./ecocredit/marketplace/v1/tx.rpc.msg";
+import * as _267 from "./ecocredit/v1/tx.rpc.msg";
+import * as _268 from "./ecocredit/v1alpha1/tx.rpc.msg";
+import * as _269 from "./intertx/v1/tx.rpc.msg";
 export declare namespace regen {
     namespace data {
         const v1: {
-            LCDQueryClient: typeof _215.LCDQueryClient;
+            MsgClientImpl: typeof _264.MsgClientImpl;
+            QueryClientImpl: typeof _258.QueryClientImpl;
+            createRpcQueryExtension: (base: import("@cosmjs/stargate").QueryClient) => {
+                anchorByIRI(request: _113.QueryAnchorByIRIRequest): Promise<_113.QueryAnchorByIRIResponse>;
+                anchorByHash(request: _113.QueryAnchorByHashRequest): Promise<_113.QueryAnchorByHashResponse>;
+                attestationsByAttestor(request: _113.QueryAttestationsByAttestorRequest): Promise<_113.QueryAttestationsByAttestorResponse>;
+                attestationsByIRI(request: _113.QueryAttestationsByIRIRequest): Promise<_113.QueryAttestationsByIRIResponse>;
+                attestationsByHash(request: _113.QueryAttestationsByHashRequest): Promise<_113.QueryAttestationsByHashResponse>;
+                resolver(request: _113.QueryResolverRequest): Promise<_113.QueryResolverResponse>;
+                resolversByIRI(request: _113.QueryResolversByIRIRequest): Promise<_113.QueryResolversByIRIResponse>;
+                resolversByHash(request: _113.QueryResolversByHashRequest): Promise<_113.QueryResolversByHashResponse>;
+                resolversByURL(request: _113.QueryResolversByURLRequest): Promise<_113.QueryResolversByURLResponse>;
+                convertIRIToHash(request: _113.ConvertIRIToHashRequest): Promise<_113.ConvertIRIToHashResponse>;
+                convertHashToIRI(request: _113.ConvertHashToIRIRequest): Promise<_113.ConvertHashToIRIResponse>;
+            };
+            LCDQueryClient: typeof _252.LCDQueryClient;
             registry: readonly [string, import("@cosmjs/proto-signing").GeneratedType][];
             load: (protoRegistry: import("@cosmjs/proto-signing").Registry) => void;
             MessageComposer: {
@@ -779,7 +806,16 @@ export declare namespace regen {
     namespace ecocredit {
         namespace basket {
             const v1: {
-                LCDQueryClient: typeof _216.LCDQueryClient;
+                MsgClientImpl: typeof _265.MsgClientImpl;
+                QueryClientImpl: typeof _259.QueryClientImpl;
+                createRpcQueryExtension: (base: import("@cosmjs/stargate").QueryClient) => {
+                    basket(request: _118.QueryBasketRequest): Promise<_118.QueryBasketResponse>;
+                    baskets(request?: _118.QueryBasketsRequest | undefined): Promise<_118.QueryBasketsResponse>;
+                    basketBalances(request: _118.QueryBasketBalancesRequest): Promise<_118.QueryBasketBalancesResponse>;
+                    basketBalance(request: _118.QueryBasketBalanceRequest): Promise<_118.QueryBasketBalanceResponse>;
+                    basketFee(request?: _118.QueryBasketFeeRequest | undefined): Promise<_118.QueryBasketFeeResponse>;
+                };
+                LCDQueryClient: typeof _253.LCDQueryClient;
                 registry: readonly [string, import("@cosmjs/proto-signing").GeneratedType][];
                 load: (protoRegistry: import("@cosmjs/proto-signing").Registry) => void;
                 MessageComposer: {
@@ -1411,7 +1447,16 @@ export declare namespace regen {
         }
         namespace marketplace {
             const v1: {
-                LCDQueryClient: typeof _217.LCDQueryClient;
+                MsgClientImpl: typeof _266.MsgClientImpl;
+                QueryClientImpl: typeof _260.QueryClientImpl;
+                createRpcQueryExtension: (base: import("@cosmjs/stargate").QueryClient) => {
+                    sellOrder(request: _123.QuerySellOrderRequest): Promise<_123.QuerySellOrderResponse>;
+                    sellOrders(request?: _123.QuerySellOrdersRequest | undefined): Promise<_123.QuerySellOrdersResponse>;
+                    sellOrdersByBatch(request: _123.QuerySellOrdersByBatchRequest): Promise<_123.QuerySellOrdersByBatchResponse>;
+                    sellOrdersBySeller(request: _123.QuerySellOrdersBySellerRequest): Promise<_123.QuerySellOrdersBySellerResponse>;
+                    allowedDenoms(request?: _123.QueryAllowedDenomsRequest | undefined): Promise<_123.QueryAllowedDenomsResponse>;
+                };
+                LCDQueryClient: typeof _254.LCDQueryClient;
                 registry: readonly [string, import("@cosmjs/proto-signing").GeneratedType][];
                 load: (protoRegistry: import("@cosmjs/proto-signing").Registry) => void;
                 MessageComposer: {
@@ -2111,7 +2156,37 @@ export declare namespace regen {
             };
         }
         const v1: {
-            LCDQueryClient: typeof _218.LCDQueryClient;
+            MsgClientImpl: typeof _267.MsgClientImpl;
+            QueryClientImpl: typeof _261.QueryClientImpl;
+            createRpcQueryExtension: (base: import("@cosmjs/stargate").QueryClient) => {
+                classes(request?: _129.QueryClassesRequest | undefined): Promise<_129.QueryClassesResponse>;
+                classesByAdmin(request: _129.QueryClassesByAdminRequest): Promise<_129.QueryClassesByAdminResponse>;
+                class(request: _129.QueryClassRequest): Promise<_129.QueryClassResponse>;
+                classIssuers(request: _129.QueryClassIssuersRequest): Promise<_129.QueryClassIssuersResponse>;
+                projects(request?: _129.QueryProjectsRequest | undefined): Promise<_129.QueryProjectsResponse>;
+                projectsByClass(request: _129.QueryProjectsByClassRequest): Promise<_129.QueryProjectsByClassResponse>;
+                projectsByReferenceId(request: _129.QueryProjectsByReferenceIdRequest): Promise<_129.QueryProjectsByReferenceIdResponse>;
+                projectsByAdmin(request: _129.QueryProjectsByAdminRequest): Promise<_129.QueryProjectsByAdminResponse>;
+                project(request: _129.QueryProjectRequest): Promise<_129.QueryProjectResponse>;
+                batches(request?: _129.QueryBatchesRequest | undefined): Promise<_129.QueryBatchesResponse>;
+                batchesByIssuer(request: _129.QueryBatchesByIssuerRequest): Promise<_129.QueryBatchesByIssuerResponse>;
+                batchesByClass(request: _129.QueryBatchesByClassRequest): Promise<_129.QueryBatchesByClassResponse>;
+                batchesByProject(request: _129.QueryBatchesByProjectRequest): Promise<_129.QueryBatchesByProjectResponse>;
+                batch(request: _129.QueryBatchRequest): Promise<_129.QueryBatchResponse>;
+                balance(request: _129.QueryBalanceRequest): Promise<_129.QueryBalanceResponse>;
+                balances(request: _129.QueryBalancesRequest): Promise<_129.QueryBalancesResponse>;
+                balancesByBatch(request: _129.QueryBalancesByBatchRequest): Promise<_129.QueryBalancesByBatchResponse>;
+                allBalances(request?: _129.QueryAllBalancesRequest | undefined): Promise<_129.QueryAllBalancesResponse>;
+                supply(request: _129.QuerySupplyRequest): Promise<_129.QuerySupplyResponse>;
+                creditTypes(request?: _129.QueryCreditTypesRequest | undefined): Promise<_129.QueryCreditTypesResponse>;
+                params(request?: _129.QueryParamsRequest | undefined): Promise<_129.QueryParamsResponse>;
+                creditType(request: _129.QueryCreditTypeRequest): Promise<_129.QueryCreditTypeResponse>;
+                classCreatorAllowlist(request?: _129.QueryClassCreatorAllowlistRequest | undefined): Promise<_129.QueryClassCreatorAllowlistResponse>;
+                allowedClassCreators(request?: _129.QueryAllowedClassCreatorsRequest | undefined): Promise<_129.QueryAllowedClassCreatorsResponse>;
+                classFee(request?: _129.QueryClassFeeRequest | undefined): Promise<_129.QueryClassFeeResponse>;
+                allowedBridgeChains(request?: _129.QueryAllowedBridgeChainsRequest | undefined): Promise<_129.QueryAllowedBridgeChainsResponse>;
+            };
+            LCDQueryClient: typeof _255.LCDQueryClient;
             registry: readonly [string, import("@cosmjs/proto-signing").GeneratedType][];
             load: (protoRegistry: import("@cosmjs/proto-signing").Registry) => void;
             MessageComposer: {
@@ -4613,7 +4688,19 @@ export declare namespace regen {
             };
         };
         const v1alpha1: {
-            LCDQueryClient: typeof _219.LCDQueryClient;
+            MsgClientImpl: typeof _268.MsgClientImpl;
+            QueryClientImpl: typeof _262.QueryClientImpl;
+            createRpcQueryExtension: (base: import("@cosmjs/stargate").QueryClient) => {
+                classes(request?: _135.QueryClassesRequest | undefined): Promise<_135.QueryClassesResponse>;
+                classInfo(request: _135.QueryClassInfoRequest): Promise<_135.QueryClassInfoResponse>;
+                batches(request: _135.QueryBatchesRequest): Promise<_135.QueryBatchesResponse>;
+                batchInfo(request: _135.QueryBatchInfoRequest): Promise<_135.QueryBatchInfoResponse>;
+                balance(request: _135.QueryBalanceRequest): Promise<_135.QueryBalanceResponse>;
+                supply(request: _135.QuerySupplyRequest): Promise<_135.QuerySupplyResponse>;
+                creditTypes(request?: _135.QueryCreditTypesRequest | undefined): Promise<_135.QueryCreditTypesResponse>;
+                params(request?: _135.QueryParamsRequest | undefined): Promise<_135.QueryParamsResponse>;
+            };
+            LCDQueryClient: typeof _256.LCDQueryClient;
             registry: readonly [string, import("@cosmjs/proto-signing").GeneratedType][];
             load: (protoRegistry: import("@cosmjs/proto-signing").Registry) => void;
             MessageComposer: {
@@ -5471,7 +5558,12 @@ export declare namespace regen {
     }
     namespace intertx {
         const v1: {
-            LCDQueryClient: typeof _220.LCDQueryClient;
+            MsgClientImpl: typeof _269.MsgClientImpl;
+            QueryClientImpl: typeof _263.QueryClientImpl;
+            createRpcQueryExtension: (base: import("@cosmjs/stargate").QueryClient) => {
+                interchainAccount(request: _138.QueryInterchainAccountRequest): Promise<_138.QueryInterchainAccountResponse>;
+            };
+            LCDQueryClient: typeof _257.LCDQueryClient;
             registry: readonly [string, import("@cosmjs/proto-signing").GeneratedType][];
             load: (protoRegistry: import("@cosmjs/proto-signing").Registry) => void;
             MessageComposer: {
@@ -5619,6 +5711,344 @@ export declare namespace regen {
         };
     }
     const ClientFactory: {
+        createRPCMsgClient: ({ rpc }: {
+            rpc: import("../helpers").Rpc;
+        }) => Promise<{
+            cosmos: {
+                authz: {
+                    v1beta1: import("../cosmos/authz/v1beta1/tx.rpc.msg").MsgClientImpl;
+                };
+                bank: {
+                    v1beta1: import("../cosmos/bank/v1beta1/tx.rpc.msg").MsgClientImpl;
+                };
+                crisis: {
+                    v1beta1: import("../cosmos/crisis/v1beta1/tx.rpc.msg").MsgClientImpl;
+                };
+                distribution: {
+                    v1beta1: import("../cosmos/distribution/v1beta1/tx.rpc.msg").MsgClientImpl;
+                };
+                evidence: {
+                    v1beta1: import("../cosmos/evidence/v1beta1/tx.rpc.msg").MsgClientImpl;
+                };
+                feegrant: {
+                    v1beta1: import("../cosmos/feegrant/v1beta1/tx.rpc.msg").MsgClientImpl;
+                };
+                gov: {
+                    v1: import("../cosmos/gov/v1/tx.rpc.msg").MsgClientImpl;
+                    v1beta1: import("../cosmos/gov/v1beta1/tx.rpc.msg").MsgClientImpl;
+                };
+                group: {
+                    v1: import("../cosmos/group/v1/tx.rpc.msg").MsgClientImpl;
+                };
+                nft: {
+                    v1beta1: import("../cosmos/nft/v1beta1/tx.rpc.msg").MsgClientImpl;
+                };
+                slashing: {
+                    v1beta1: import("../cosmos/slashing/v1beta1/tx.rpc.msg").MsgClientImpl;
+                };
+                staking: {
+                    v1beta1: import("../cosmos/staking/v1beta1/tx.rpc.msg").MsgClientImpl;
+                };
+                upgrade: {
+                    v1beta1: import("../cosmos/upgrade/v1beta1/tx.rpc.msg").MsgClientImpl;
+                };
+                vesting: {
+                    v1beta1: import("../cosmos/vesting/v1beta1/tx.rpc.msg").MsgClientImpl;
+                };
+            };
+            regen: {
+                data: {
+                    v1: _264.MsgClientImpl;
+                };
+                ecocredit: {
+                    basket: {
+                        v1: _265.MsgClientImpl;
+                    };
+                    marketplace: {
+                        v1: _266.MsgClientImpl;
+                    };
+                    v1: _267.MsgClientImpl;
+                    v1alpha1: _268.MsgClientImpl;
+                };
+                intertx: {
+                    v1: _269.MsgClientImpl;
+                };
+            };
+        }>;
+        createRPCQueryClient: ({ rpcEndpoint }: {
+            rpcEndpoint: string | import("@cosmjs/tendermint-rpc").HttpEndpoint;
+        }) => Promise<{
+            cosmos: {
+                app: {
+                    v1alpha1: {
+                        config(request?: import("../cosmos/app/v1alpha1/query").QueryConfigRequest | undefined): Promise<import("../cosmos/app/v1alpha1/query").QueryConfigResponse>;
+                    };
+                };
+                auth: {
+                    v1beta1: {
+                        accounts(request?: import("../cosmos/auth/v1beta1/query").QueryAccountsRequest | undefined): Promise<import("../cosmos/auth/v1beta1/query").QueryAccountsResponse>;
+                        account(request: import("../cosmos/auth/v1beta1/query").QueryAccountRequest): Promise<import("../cosmos/auth/v1beta1/query").QueryAccountResponse>;
+                        accountAddressByID(request: import("../cosmos/auth/v1beta1/query").QueryAccountAddressByIDRequest): Promise<import("../cosmos/auth/v1beta1/query").QueryAccountAddressByIDResponse>;
+                        params(request?: import("../cosmos/auth/v1beta1/query").QueryParamsRequest | undefined): Promise<import("../cosmos/auth/v1beta1/query").QueryParamsResponse>;
+                        moduleAccounts(request?: import("../cosmos/auth/v1beta1/query").QueryModuleAccountsRequest | undefined): Promise<import("../cosmos/auth/v1beta1/query").QueryModuleAccountsResponse>;
+                        moduleAccountByName(request: import("../cosmos/auth/v1beta1/query").QueryModuleAccountByNameRequest): Promise<import("../cosmos/auth/v1beta1/query").QueryModuleAccountByNameResponse>;
+                        bech32Prefix(request?: import("../cosmos/auth/v1beta1/query").Bech32PrefixRequest | undefined): Promise<import("../cosmos/auth/v1beta1/query").Bech32PrefixResponse>;
+                        addressBytesToString(request: import("../cosmos/auth/v1beta1/query").AddressBytesToStringRequest): Promise<import("../cosmos/auth/v1beta1/query").AddressBytesToStringResponse>;
+                        addressStringToBytes(request: import("../cosmos/auth/v1beta1/query").AddressStringToBytesRequest): Promise<import("../cosmos/auth/v1beta1/query").AddressStringToBytesResponse>;
+                    };
+                };
+                authz: {
+                    v1beta1: {
+                        grants(request: import("../cosmos/authz/v1beta1/query").QueryGrantsRequest): Promise<import("../cosmos/authz/v1beta1/query").QueryGrantsResponse>;
+                        granterGrants(request: import("../cosmos/authz/v1beta1/query").QueryGranterGrantsRequest): Promise<import("../cosmos/authz/v1beta1/query").QueryGranterGrantsResponse>;
+                        granteeGrants(request: import("../cosmos/authz/v1beta1/query").QueryGranteeGrantsRequest): Promise<import("../cosmos/authz/v1beta1/query").QueryGranteeGrantsResponse>;
+                    };
+                };
+                bank: {
+                    v1beta1: {
+                        balance(request: import("../cosmos/bank/v1beta1/query").QueryBalanceRequest): Promise<import("../cosmos/bank/v1beta1/query").QueryBalanceResponse>;
+                        allBalances(request: import("../cosmos/bank/v1beta1/query").QueryAllBalancesRequest): Promise<import("../cosmos/bank/v1beta1/query").QueryAllBalancesResponse>;
+                        spendableBalances(request: import("../cosmos/bank/v1beta1/query").QuerySpendableBalancesRequest): Promise<import("../cosmos/bank/v1beta1/query").QuerySpendableBalancesResponse>;
+                        totalSupply(request?: import("../cosmos/bank/v1beta1/query").QueryTotalSupplyRequest | undefined): Promise<import("../cosmos/bank/v1beta1/query").QueryTotalSupplyResponse>;
+                        supplyOf(request: import("../cosmos/bank/v1beta1/query").QuerySupplyOfRequest): Promise<import("../cosmos/bank/v1beta1/query").QuerySupplyOfResponse>;
+                        params(request?: import("../cosmos/bank/v1beta1/query").QueryParamsRequest | undefined): Promise<import("../cosmos/bank/v1beta1/query").QueryParamsResponse>;
+                        denomMetadata(request: import("../cosmos/bank/v1beta1/query").QueryDenomMetadataRequest): Promise<import("../cosmos/bank/v1beta1/query").QueryDenomMetadataResponse>;
+                        denomsMetadata(request?: import("../cosmos/bank/v1beta1/query").QueryDenomsMetadataRequest | undefined): Promise<import("../cosmos/bank/v1beta1/query").QueryDenomsMetadataResponse>;
+                        denomOwners(request: import("../cosmos/bank/v1beta1/query").QueryDenomOwnersRequest): Promise<import("../cosmos/bank/v1beta1/query").QueryDenomOwnersResponse>;
+                    };
+                };
+                base: {
+                    node: {
+                        v1beta1: {
+                            config(request?: import("../cosmos/base/node/v1beta1/query").ConfigRequest | undefined): Promise<import("../cosmos/base/node/v1beta1/query").ConfigResponse>;
+                        };
+                    };
+                    tendermint: {
+                        v1beta1: {
+                            getNodeInfo(request?: import("../cosmos/base/tendermint/v1beta1/query").GetNodeInfoRequest | undefined): Promise<import("../cosmos/base/tendermint/v1beta1/query").GetNodeInfoResponse>;
+                            getSyncing(request?: import("../cosmos/base/tendermint/v1beta1/query").GetSyncingRequest | undefined): Promise<import("../cosmos/base/tendermint/v1beta1/query").GetSyncingResponse>;
+                            getLatestBlock(request?: import("../cosmos/base/tendermint/v1beta1/query").GetLatestBlockRequest | undefined): Promise<import("../cosmos/base/tendermint/v1beta1/query").GetLatestBlockResponse>;
+                            getBlockByHeight(request: import("../cosmos/base/tendermint/v1beta1/query").GetBlockByHeightRequest): Promise<import("../cosmos/base/tendermint/v1beta1/query").GetBlockByHeightResponse>;
+                            getLatestValidatorSet(request?: import("../cosmos/base/tendermint/v1beta1/query").GetLatestValidatorSetRequest | undefined): Promise<import("../cosmos/base/tendermint/v1beta1/query").GetLatestValidatorSetResponse>;
+                            getValidatorSetByHeight(request: import("../cosmos/base/tendermint/v1beta1/query").GetValidatorSetByHeightRequest): Promise<import("../cosmos/base/tendermint/v1beta1/query").GetValidatorSetByHeightResponse>;
+                            aBCIQuery(request: import("../cosmos/base/tendermint/v1beta1/query").ABCIQueryRequest): Promise<import("../cosmos/base/tendermint/v1beta1/query").ABCIQueryResponse>;
+                        };
+                    };
+                };
+                distribution: {
+                    v1beta1: {
+                        params(request?: import("../cosmos/distribution/v1beta1/query").QueryParamsRequest | undefined): Promise<import("../cosmos/distribution/v1beta1/query").QueryParamsResponse>;
+                        validatorOutstandingRewards(request: import("../cosmos/distribution/v1beta1/query").QueryValidatorOutstandingRewardsRequest): Promise<import("../cosmos/distribution/v1beta1/query").QueryValidatorOutstandingRewardsResponse>;
+                        validatorCommission(request: import("../cosmos/distribution/v1beta1/query").QueryValidatorCommissionRequest): Promise<import("../cosmos/distribution/v1beta1/query").QueryValidatorCommissionResponse>;
+                        validatorSlashes(request: import("../cosmos/distribution/v1beta1/query").QueryValidatorSlashesRequest): Promise<import("../cosmos/distribution/v1beta1/query").QueryValidatorSlashesResponse>;
+                        delegationRewards(request: import("../cosmos/distribution/v1beta1/query").QueryDelegationRewardsRequest): Promise<import("../cosmos/distribution/v1beta1/query").QueryDelegationRewardsResponse>;
+                        delegationTotalRewards(request: import("../cosmos/distribution/v1beta1/query").QueryDelegationTotalRewardsRequest): Promise<import("../cosmos/distribution/v1beta1/query").QueryDelegationTotalRewardsResponse>;
+                        delegatorValidators(request: import("../cosmos/distribution/v1beta1/query").QueryDelegatorValidatorsRequest): Promise<import("../cosmos/distribution/v1beta1/query").QueryDelegatorValidatorsResponse>;
+                        delegatorWithdrawAddress(request: import("../cosmos/distribution/v1beta1/query").QueryDelegatorWithdrawAddressRequest): Promise<import("../cosmos/distribution/v1beta1/query").QueryDelegatorWithdrawAddressResponse>;
+                        communityPool(request?: import("../cosmos/distribution/v1beta1/query").QueryCommunityPoolRequest | undefined): Promise<import("../cosmos/distribution/v1beta1/query").QueryCommunityPoolResponse>;
+                    };
+                };
+                evidence: {
+                    v1beta1: {
+                        evidence(request: import("../cosmos/evidence/v1beta1/query").QueryEvidenceRequest): Promise<import("../cosmos/evidence/v1beta1/query").QueryEvidenceResponse>;
+                        allEvidence(request?: import("../cosmos/evidence/v1beta1/query").QueryAllEvidenceRequest | undefined): Promise<import("../cosmos/evidence/v1beta1/query").QueryAllEvidenceResponse>;
+                    };
+                };
+                feegrant: {
+                    v1beta1: {
+                        allowance(request: import("../cosmos/feegrant/v1beta1/query").QueryAllowanceRequest): Promise<import("../cosmos/feegrant/v1beta1/query").QueryAllowanceResponse>;
+                        allowances(request: import("../cosmos/feegrant/v1beta1/query").QueryAllowancesRequest): Promise<import("../cosmos/feegrant/v1beta1/query").QueryAllowancesResponse>;
+                        allowancesByGranter(request: import("../cosmos/feegrant/v1beta1/query").QueryAllowancesByGranterRequest): Promise<import("../cosmos/feegrant/v1beta1/query").QueryAllowancesByGranterResponse>;
+                    };
+                };
+                gov: {
+                    v1: {
+                        proposal(request: import("../cosmos/gov/v1/query").QueryProposalRequest): Promise<import("../cosmos/gov/v1/query").QueryProposalResponse>;
+                        proposals(request: import("../cosmos/gov/v1/query").QueryProposalsRequest): Promise<import("../cosmos/gov/v1/query").QueryProposalsResponse>;
+                        vote(request: import("../cosmos/gov/v1/query").QueryVoteRequest): Promise<import("../cosmos/gov/v1/query").QueryVoteResponse>;
+                        votes(request: import("../cosmos/gov/v1/query").QueryVotesRequest): Promise<import("../cosmos/gov/v1/query").QueryVotesResponse>;
+                        params(request: import("../cosmos/gov/v1/query").QueryParamsRequest): Promise<import("../cosmos/gov/v1/query").QueryParamsResponse>;
+                        deposit(request: import("../cosmos/gov/v1/query").QueryDepositRequest): Promise<import("../cosmos/gov/v1/query").QueryDepositResponse>;
+                        deposits(request: import("../cosmos/gov/v1/query").QueryDepositsRequest): Promise<import("../cosmos/gov/v1/query").QueryDepositsResponse>;
+                        tallyResult(request: import("../cosmos/gov/v1/query").QueryTallyResultRequest): Promise<import("../cosmos/gov/v1/query").QueryTallyResultResponse>;
+                    };
+                    v1beta1: {
+                        proposal(request: import("../cosmos/gov/v1beta1/query").QueryProposalRequest): Promise<import("../cosmos/gov/v1beta1/query").QueryProposalResponse>;
+                        proposals(request: import("../cosmos/gov/v1beta1/query").QueryProposalsRequest): Promise<import("../cosmos/gov/v1beta1/query").QueryProposalsResponse>;
+                        vote(request: import("../cosmos/gov/v1beta1/query").QueryVoteRequest): Promise<import("../cosmos/gov/v1beta1/query").QueryVoteResponse>;
+                        votes(request: import("../cosmos/gov/v1beta1/query").QueryVotesRequest): Promise<import("../cosmos/gov/v1beta1/query").QueryVotesResponse>;
+                        params(request: import("../cosmos/gov/v1beta1/query").QueryParamsRequest): Promise<import("../cosmos/gov/v1beta1/query").QueryParamsResponse>;
+                        deposit(request: import("../cosmos/gov/v1beta1/query").QueryDepositRequest): Promise<import("../cosmos/gov/v1beta1/query").QueryDepositResponse>;
+                        deposits(request: import("../cosmos/gov/v1beta1/query").QueryDepositsRequest): Promise<import("../cosmos/gov/v1beta1/query").QueryDepositsResponse>;
+                        tallyResult(request: import("../cosmos/gov/v1beta1/query").QueryTallyResultRequest): Promise<import("../cosmos/gov/v1beta1/query").QueryTallyResultResponse>;
+                    };
+                };
+                group: {
+                    v1: {
+                        groupInfo(request: import("../cosmos/group/v1/query").QueryGroupInfoRequest): Promise<import("../cosmos/group/v1/query").QueryGroupInfoResponse>;
+                        groupPolicyInfo(request: import("../cosmos/group/v1/query").QueryGroupPolicyInfoRequest): Promise<import("../cosmos/group/v1/query").QueryGroupPolicyInfoResponse>;
+                        groupMembers(request: import("../cosmos/group/v1/query").QueryGroupMembersRequest): Promise<import("../cosmos/group/v1/query").QueryGroupMembersResponse>;
+                        groupsByAdmin(request: import("../cosmos/group/v1/query").QueryGroupsByAdminRequest): Promise<import("../cosmos/group/v1/query").QueryGroupsByAdminResponse>;
+                        groupPoliciesByGroup(request: import("../cosmos/group/v1/query").QueryGroupPoliciesByGroupRequest): Promise<import("../cosmos/group/v1/query").QueryGroupPoliciesByGroupResponse>;
+                        groupPoliciesByAdmin(request: import("../cosmos/group/v1/query").QueryGroupPoliciesByAdminRequest): Promise<import("../cosmos/group/v1/query").QueryGroupPoliciesByAdminResponse>;
+                        proposal(request: import("../cosmos/group/v1/query").QueryProposalRequest): Promise<import("../cosmos/group/v1/query").QueryProposalResponse>;
+                        proposalsByGroupPolicy(request: import("../cosmos/group/v1/query").QueryProposalsByGroupPolicyRequest): Promise<import("../cosmos/group/v1/query").QueryProposalsByGroupPolicyResponse>;
+                        voteByProposalVoter(request: import("../cosmos/group/v1/query").QueryVoteByProposalVoterRequest): Promise<import("../cosmos/group/v1/query").QueryVoteByProposalVoterResponse>;
+                        votesByProposal(request: import("../cosmos/group/v1/query").QueryVotesByProposalRequest): Promise<import("../cosmos/group/v1/query").QueryVotesByProposalResponse>;
+                        votesByVoter(request: import("../cosmos/group/v1/query").QueryVotesByVoterRequest): Promise<import("../cosmos/group/v1/query").QueryVotesByVoterResponse>;
+                        groupsByMember(request: import("../cosmos/group/v1/query").QueryGroupsByMemberRequest): Promise<import("../cosmos/group/v1/query").QueryGroupsByMemberResponse>;
+                        tallyResult(request: import("../cosmos/group/v1/query").QueryTallyResultRequest): Promise<import("../cosmos/group/v1/query").QueryTallyResultResponse>;
+                    };
+                };
+                mint: {
+                    v1beta1: {
+                        params(request?: import("../cosmos/mint/v1beta1/query").QueryParamsRequest | undefined): Promise<import("../cosmos/mint/v1beta1/query").QueryParamsResponse>;
+                        inflation(request?: import("../cosmos/mint/v1beta1/query").QueryInflationRequest | undefined): Promise<import("../cosmos/mint/v1beta1/query").QueryInflationResponse>;
+                        annualProvisions(request?: import("../cosmos/mint/v1beta1/query").QueryAnnualProvisionsRequest | undefined): Promise<import("../cosmos/mint/v1beta1/query").QueryAnnualProvisionsResponse>;
+                    };
+                };
+                nft: {
+                    v1beta1: {
+                        balance(request: import("../cosmos/nft/v1beta1/query").QueryBalanceRequest): Promise<import("../cosmos/nft/v1beta1/query").QueryBalanceResponse>;
+                        owner(request: import("../cosmos/nft/v1beta1/query").QueryOwnerRequest): Promise<import("../cosmos/nft/v1beta1/query").QueryOwnerResponse>;
+                        supply(request: import("../cosmos/nft/v1beta1/query").QuerySupplyRequest): Promise<import("../cosmos/nft/v1beta1/query").QuerySupplyResponse>;
+                        nFTs(request: import("../cosmos/nft/v1beta1/query").QueryNFTsRequest): Promise<import("../cosmos/nft/v1beta1/query").QueryNFTsResponse>;
+                        nFT(request: import("../cosmos/nft/v1beta1/query").QueryNFTRequest): Promise<import("../cosmos/nft/v1beta1/query").QueryNFTResponse>;
+                        class(request: import("../cosmos/nft/v1beta1/query").QueryClassRequest): Promise<import("../cosmos/nft/v1beta1/query").QueryClassResponse>;
+                        classes(request?: import("../cosmos/nft/v1beta1/query").QueryClassesRequest | undefined): Promise<import("../cosmos/nft/v1beta1/query").QueryClassesResponse>;
+                    };
+                };
+                params: {
+                    v1beta1: {
+                        params(request: import("../cosmos/params/v1beta1/query").QueryParamsRequest): Promise<import("../cosmos/params/v1beta1/query").QueryParamsResponse>;
+                        subspaces(request?: import("../cosmos/params/v1beta1/query").QuerySubspacesRequest | undefined): Promise<import("../cosmos/params/v1beta1/query").QuerySubspacesResponse>;
+                    };
+                };
+                slashing: {
+                    v1beta1: {
+                        params(request?: import("../cosmos/slashing/v1beta1/query").QueryParamsRequest | undefined): Promise<import("../cosmos/slashing/v1beta1/query").QueryParamsResponse>;
+                        signingInfo(request: import("../cosmos/slashing/v1beta1/query").QuerySigningInfoRequest): Promise<import("../cosmos/slashing/v1beta1/query").QuerySigningInfoResponse>;
+                        signingInfos(request?: import("../cosmos/slashing/v1beta1/query").QuerySigningInfosRequest | undefined): Promise<import("../cosmos/slashing/v1beta1/query").QuerySigningInfosResponse>;
+                    };
+                };
+                staking: {
+                    v1beta1: {
+                        validators(request: import("../cosmos/staking/v1beta1/query").QueryValidatorsRequest): Promise<import("../cosmos/staking/v1beta1/query").QueryValidatorsResponse>;
+                        validator(request: import("../cosmos/staking/v1beta1/query").QueryValidatorRequest): Promise<import("../cosmos/staking/v1beta1/query").QueryValidatorResponse>;
+                        validatorDelegations(request: import("../cosmos/staking/v1beta1/query").QueryValidatorDelegationsRequest): Promise<import("../cosmos/staking/v1beta1/query").QueryValidatorDelegationsResponse>;
+                        validatorUnbondingDelegations(request: import("../cosmos/staking/v1beta1/query").QueryValidatorUnbondingDelegationsRequest): Promise<import("../cosmos/staking/v1beta1/query").QueryValidatorUnbondingDelegationsResponse>;
+                        delegation(request: import("../cosmos/staking/v1beta1/query").QueryDelegationRequest): Promise<import("../cosmos/staking/v1beta1/query").QueryDelegationResponse>;
+                        unbondingDelegation(request: import("../cosmos/staking/v1beta1/query").QueryUnbondingDelegationRequest): Promise<import("../cosmos/staking/v1beta1/query").QueryUnbondingDelegationResponse>;
+                        delegatorDelegations(request: import("../cosmos/staking/v1beta1/query").QueryDelegatorDelegationsRequest): Promise<import("../cosmos/staking/v1beta1/query").QueryDelegatorDelegationsResponse>;
+                        delegatorUnbondingDelegations(request: import("../cosmos/staking/v1beta1/query").QueryDelegatorUnbondingDelegationsRequest): Promise<import("../cosmos/staking/v1beta1/query").QueryDelegatorUnbondingDelegationsResponse>;
+                        redelegations(request: import("../cosmos/staking/v1beta1/query").QueryRedelegationsRequest): Promise<import("../cosmos/staking/v1beta1/query").QueryRedelegationsResponse>;
+                        delegatorValidators(request: import("../cosmos/staking/v1beta1/query").QueryDelegatorValidatorsRequest): Promise<import("../cosmos/staking/v1beta1/query").QueryDelegatorValidatorsResponse>;
+                        delegatorValidator(request: import("../cosmos/staking/v1beta1/query").QueryDelegatorValidatorRequest): Promise<import("../cosmos/staking/v1beta1/query").QueryDelegatorValidatorResponse>;
+                        historicalInfo(request: import("../cosmos/staking/v1beta1/query").QueryHistoricalInfoRequest): Promise<import("../cosmos/staking/v1beta1/query").QueryHistoricalInfoResponse>;
+                        pool(request?: import("../cosmos/staking/v1beta1/query").QueryPoolRequest | undefined): Promise<import("../cosmos/staking/v1beta1/query").QueryPoolResponse>;
+                        params(request?: import("../cosmos/staking/v1beta1/query").QueryParamsRequest | undefined): Promise<import("../cosmos/staking/v1beta1/query").QueryParamsResponse>;
+                    };
+                };
+                tx: {
+                    v1beta1: {
+                        simulate(request: import("../cosmos/tx/v1beta1/service").SimulateRequest): Promise<import("../cosmos/tx/v1beta1/service").SimulateResponse>;
+                        getTx(request: import("../cosmos/tx/v1beta1/service").GetTxRequest): Promise<import("../cosmos/tx/v1beta1/service").GetTxResponse>;
+                        broadcastTx(request: import("../cosmos/tx/v1beta1/service").BroadcastTxRequest): Promise<import("../cosmos/tx/v1beta1/service").BroadcastTxResponse>;
+                        getTxsEvent(request: import("../cosmos/tx/v1beta1/service").GetTxsEventRequest): Promise<import("../cosmos/tx/v1beta1/service").GetTxsEventResponse>;
+                        getBlockWithTxs(request: import("../cosmos/tx/v1beta1/service").GetBlockWithTxsRequest): Promise<import("../cosmos/tx/v1beta1/service").GetBlockWithTxsResponse>;
+                    };
+                };
+                upgrade: {
+                    v1beta1: {
+                        currentPlan(request?: import("../cosmos/upgrade/v1beta1/query").QueryCurrentPlanRequest | undefined): Promise<import("../cosmos/upgrade/v1beta1/query").QueryCurrentPlanResponse>;
+                        appliedPlan(request: import("../cosmos/upgrade/v1beta1/query").QueryAppliedPlanRequest): Promise<import("../cosmos/upgrade/v1beta1/query").QueryAppliedPlanResponse>;
+                        upgradedConsensusState(request: import("../cosmos/upgrade/v1beta1/query").QueryUpgradedConsensusStateRequest): Promise<import("../cosmos/upgrade/v1beta1/query").QueryUpgradedConsensusStateResponse>;
+                        moduleVersions(request: import("../cosmos/upgrade/v1beta1/query").QueryModuleVersionsRequest): Promise<import("../cosmos/upgrade/v1beta1/query").QueryModuleVersionsResponse>;
+                        authority(request?: import("../cosmos/upgrade/v1beta1/query").QueryAuthorityRequest | undefined): Promise<import("../cosmos/upgrade/v1beta1/query").QueryAuthorityResponse>;
+                    };
+                };
+            };
+            regen: {
+                data: {
+                    v1: {
+                        anchorByIRI(request: _113.QueryAnchorByIRIRequest): Promise<_113.QueryAnchorByIRIResponse>;
+                        anchorByHash(request: _113.QueryAnchorByHashRequest): Promise<_113.QueryAnchorByHashResponse>;
+                        attestationsByAttestor(request: _113.QueryAttestationsByAttestorRequest): Promise<_113.QueryAttestationsByAttestorResponse>;
+                        attestationsByIRI(request: _113.QueryAttestationsByIRIRequest): Promise<_113.QueryAttestationsByIRIResponse>;
+                        attestationsByHash(request: _113.QueryAttestationsByHashRequest): Promise<_113.QueryAttestationsByHashResponse>;
+                        resolver(request: _113.QueryResolverRequest): Promise<_113.QueryResolverResponse>;
+                        resolversByIRI(request: _113.QueryResolversByIRIRequest): Promise<_113.QueryResolversByIRIResponse>;
+                        resolversByHash(request: _113.QueryResolversByHashRequest): Promise<_113.QueryResolversByHashResponse>;
+                        resolversByURL(request: _113.QueryResolversByURLRequest): Promise<_113.QueryResolversByURLResponse>;
+                        convertIRIToHash(request: _113.ConvertIRIToHashRequest): Promise<_113.ConvertIRIToHashResponse>;
+                        convertHashToIRI(request: _113.ConvertHashToIRIRequest): Promise<_113.ConvertHashToIRIResponse>;
+                    };
+                };
+                ecocredit: {
+                    basket: {
+                        v1: {
+                            basket(request: _118.QueryBasketRequest): Promise<_118.QueryBasketResponse>;
+                            baskets(request?: _118.QueryBasketsRequest | undefined): Promise<_118.QueryBasketsResponse>;
+                            basketBalances(request: _118.QueryBasketBalancesRequest): Promise<_118.QueryBasketBalancesResponse>;
+                            basketBalance(request: _118.QueryBasketBalanceRequest): Promise<_118.QueryBasketBalanceResponse>;
+                            basketFee(request?: _118.QueryBasketFeeRequest | undefined): Promise<_118.QueryBasketFeeResponse>;
+                        };
+                    };
+                    marketplace: {
+                        v1: {
+                            sellOrder(request: _123.QuerySellOrderRequest): Promise<_123.QuerySellOrderResponse>;
+                            sellOrders(request?: _123.QuerySellOrdersRequest | undefined): Promise<_123.QuerySellOrdersResponse>;
+                            sellOrdersByBatch(request: _123.QuerySellOrdersByBatchRequest): Promise<_123.QuerySellOrdersByBatchResponse>;
+                            sellOrdersBySeller(request: _123.QuerySellOrdersBySellerRequest): Promise<_123.QuerySellOrdersBySellerResponse>;
+                            allowedDenoms(request?: _123.QueryAllowedDenomsRequest | undefined): Promise<_123.QueryAllowedDenomsResponse>;
+                        };
+                    };
+                    v1: {
+                        classes(request?: _129.QueryClassesRequest | undefined): Promise<_129.QueryClassesResponse>;
+                        classesByAdmin(request: _129.QueryClassesByAdminRequest): Promise<_129.QueryClassesByAdminResponse>;
+                        class(request: _129.QueryClassRequest): Promise<_129.QueryClassResponse>;
+                        classIssuers(request: _129.QueryClassIssuersRequest): Promise<_129.QueryClassIssuersResponse>;
+                        projects(request?: _129.QueryProjectsRequest | undefined): Promise<_129.QueryProjectsResponse>;
+                        projectsByClass(request: _129.QueryProjectsByClassRequest): Promise<_129.QueryProjectsByClassResponse>;
+                        projectsByReferenceId(request: _129.QueryProjectsByReferenceIdRequest): Promise<_129.QueryProjectsByReferenceIdResponse>;
+                        projectsByAdmin(request: _129.QueryProjectsByAdminRequest): Promise<_129.QueryProjectsByAdminResponse>;
+                        project(request: _129.QueryProjectRequest): Promise<_129.QueryProjectResponse>;
+                        batches(request?: _129.QueryBatchesRequest | undefined): Promise<_129.QueryBatchesResponse>;
+                        batchesByIssuer(request: _129.QueryBatchesByIssuerRequest): Promise<_129.QueryBatchesByIssuerResponse>;
+                        batchesByClass(request: _129.QueryBatchesByClassRequest): Promise<_129.QueryBatchesByClassResponse>;
+                        batchesByProject(request: _129.QueryBatchesByProjectRequest): Promise<_129.QueryBatchesByProjectResponse>;
+                        batch(request: _129.QueryBatchRequest): Promise<_129.QueryBatchResponse>;
+                        balance(request: _129.QueryBalanceRequest): Promise<_129.QueryBalanceResponse>;
+                        balances(request: _129.QueryBalancesRequest): Promise<_129.QueryBalancesResponse>;
+                        balancesByBatch(request: _129.QueryBalancesByBatchRequest): Promise<_129.QueryBalancesByBatchResponse>;
+                        allBalances(request?: _129.QueryAllBalancesRequest | undefined): Promise<_129.QueryAllBalancesResponse>;
+                        supply(request: _129.QuerySupplyRequest): Promise<_129.QuerySupplyResponse>;
+                        creditTypes(request?: _129.QueryCreditTypesRequest | undefined): Promise<_129.QueryCreditTypesResponse>;
+                        params(request?: _129.QueryParamsRequest | undefined): Promise<_129.QueryParamsResponse>;
+                        creditType(request: _129.QueryCreditTypeRequest): Promise<_129.QueryCreditTypeResponse>;
+                        classCreatorAllowlist(request?: _129.QueryClassCreatorAllowlistRequest | undefined): Promise<_129.QueryClassCreatorAllowlistResponse>;
+                        allowedClassCreators(request?: _129.QueryAllowedClassCreatorsRequest | undefined): Promise<_129.QueryAllowedClassCreatorsResponse>;
+                        classFee(request?: _129.QueryClassFeeRequest | undefined): Promise<_129.QueryClassFeeResponse>;
+                        allowedBridgeChains(request?: _129.QueryAllowedBridgeChainsRequest | undefined): Promise<_129.QueryAllowedBridgeChainsResponse>;
+                    };
+                    v1alpha1: {
+                        classes(request?: _135.QueryClassesRequest | undefined): Promise<_135.QueryClassesResponse>;
+                        classInfo(request: _135.QueryClassInfoRequest): Promise<_135.QueryClassInfoResponse>;
+                        batches(request: _135.QueryBatchesRequest): Promise<_135.QueryBatchesResponse>;
+                        batchInfo(request: _135.QueryBatchInfoRequest): Promise<_135.QueryBatchInfoResponse>;
+                        balance(request: _135.QueryBalanceRequest): Promise<_135.QueryBalanceResponse>;
+                        supply(request: _135.QuerySupplyRequest): Promise<_135.QuerySupplyResponse>;
+                        creditTypes(request?: _135.QueryCreditTypesRequest | undefined): Promise<_135.QueryCreditTypesResponse>;
+                        params(request?: _135.QueryParamsRequest | undefined): Promise<_135.QueryParamsResponse>;
+                    };
+                };
+                intertx: {
+                    v1: {
+                        interchainAccount(request: _138.QueryInterchainAccountRequest): Promise<_138.QueryInterchainAccountResponse>;
+                    };
+                };
+            };
+        }>;
         createLCDClient: ({ restEndpoint }: {
             restEndpoint: string;
         }) => Promise<{
@@ -5680,20 +6110,20 @@ export declare namespace regen {
             };
             regen: {
                 data: {
-                    v1: _215.LCDQueryClient;
+                    v1: _252.LCDQueryClient;
                 };
                 ecocredit: {
                     basket: {
-                        v1: _216.LCDQueryClient;
+                        v1: _253.LCDQueryClient;
                     };
                     marketplace: {
-                        v1: _217.LCDQueryClient;
+                        v1: _254.LCDQueryClient;
                     };
-                    v1: _218.LCDQueryClient;
-                    v1alpha1: _219.LCDQueryClient;
+                    v1: _255.LCDQueryClient;
+                    v1alpha1: _256.LCDQueryClient;
                 };
                 intertx: {
-                    v1: _220.LCDQueryClient;
+                    v1: _257.LCDQueryClient;
                 };
             };
         }>;
