@@ -7,6 +7,7 @@
 	"private": true,
 	"repository": "https://github.com/regen-network/regen-js",
 	"dependencies": {
+		"@keplr-wallet/types": "^0.12.15",
 		"@regen-network/api": "^1.0.0-alpha3",
 		"@testing-library/jest-dom": "^5.16.5",
 		"@testing-library/react": "^14.0.0",

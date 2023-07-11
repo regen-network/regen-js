@@ -4,6 +4,7 @@ import React, { useEffect, useState } from 'react';
 import { MyBalance } from './MyBalance';
 import { LCDCosmos } from './examples/LCDCosmos';
 import { LCDRegen } from './examples/LCDRegen';
+import { MsgCosmos } from './examples/MsgCosmos';
 import { RPCCosmos } from './examples/RPCCosmos';
 import { RPCRegen } from './examples/RPCRegen';
 
@@ -74,6 +75,7 @@ export function App(): React.ReactElement {
         <h2>{'README Examples'}</h2>
         <LCDCosmos />
         <LCDRegen />
+        <MsgCosmos />
         <RPCCosmos />
         <RPCRegen />
       </div>

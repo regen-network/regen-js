@@ -111,7 +111,7 @@ const msg = send({
   amount: [
     {
       denom: "uregen",
-      amount: "1000000000",
+      amount: "10000",
     },
   ],
   toAddress: "regen156d26rl52y3wl865pr5x9q2vqetuw9kf0642sa",
@@ -148,7 +148,7 @@ const fee: StdFee = {
   amount: [
     {
       denom: "uregen",
-      amount: "500",
+      amount: "5000",
     },
   ],
   gas: "100000",
