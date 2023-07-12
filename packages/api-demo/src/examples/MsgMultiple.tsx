@@ -3,11 +3,11 @@ import React, { useState } from 'react';
 import { Registry } from '@cosmjs/proto-signing';
 import { AminoTypes, SigningStargateClient } from '@cosmjs/stargate';
 import {
+  cosmos,
   cosmosAminoConverters,
   cosmosProtoRegistry,
   regenAminoConverters,
   regenProtoRegistry,
-  cosmos,
   regen,
 } from '@regen-network/api';
 
