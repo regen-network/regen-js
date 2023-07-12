@@ -2,6 +2,13 @@ import { cosmos } from '@regen-network/api';
 import React, { useEffect, useState } from 'react';
 
 import { MyBalance } from './MyBalance';
+import { LCDCosmos } from './examples/LCDCosmos';
+import { LCDRegen } from './examples/LCDRegen';
+import { MsgCosmos } from './examples/MsgCosmos';
+import { MsgMultiple } from './examples/MsgMultiple';
+import { MsgRegen } from './examples/MsgRegen';
+import { RPCCosmos } from './examples/RPCCosmos';
+import { RPCRegen } from './examples/RPCRegen';
 
 const REGEN_LOCAL_REST_ENDPOINT = 'http://localhost:1317';
 const REGEN_MAINNET_REST_ENDPOINT = 'http://regen.regen.network:1317';
@@ -65,6 +72,16 @@ export function App(): React.ReactElement {
           Client Status:{' '}
           {error?.message ? error?.message : client ? 'ok' : 'loading...'}
         </p>
+      </div>
+      <div>
+        <h2>{'README Examples'}</h2>
+        <LCDCosmos />
+        <LCDRegen />
+        <RPCCosmos />
+        <RPCRegen />
+        <MsgCosmos />
+        <MsgRegen />
+        <MsgMultiple />
       </div>
     </div>
   );
