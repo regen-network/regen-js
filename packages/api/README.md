@@ -267,6 +267,8 @@ const fee = {
 await signingClient.signAndBroadcast(account.address, [msg], fee)
 ```
 
+See [MsgMultiple.tsx](../api-demo/src/examples/MsgMultiple.tsx) for an example within the `api-demo` application.
+
 ## Development
 
 Install dependencies:
@@ -287,7 +289,8 @@ Compile and build library:
 yarn build
 ```
 
-Build types:
+Compile and build `src` code:
+
 ```sh
 yarn build:ts
 ```
