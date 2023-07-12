@@ -1,15 +1,15 @@
 import React, { useState } from 'react';
 
-import { Registry } from "@cosmjs/proto-signing"
-import { AminoTypes, SigningStargateClient } from "@cosmjs/stargate"
+import { Registry } from '@cosmjs/proto-signing';
+import { AminoTypes, SigningStargateClient } from '@cosmjs/stargate';
 import {
   cosmosAminoConverters,
   cosmosProtoRegistry,
   regenAminoConverters,
   regenProtoRegistry,
-} from "@regen-network/api"
-
-import { cosmos, regen } from '@regen-network/api';
+  cosmos,
+  regen,
+} from '@regen-network/api';
 
 export function MsgMultiple(): React.ReactElement {
   const [result, setResult] = useState<any | undefined>(undefined);
@@ -34,11 +34,14 @@ export function MsgMultiple(): React.ReactElement {
     const [account] = await offlineSigner.getAccounts();
 
     // declare registry and include both cosmos and regen protobuf types
-    const registry = new Registry({ ...cosmosProtoRegistry, ...regenProtoRegistry })
+    const registry = new Registry([
+      ...cosmosProtoRegistry,
+      ...regenProtoRegistry,
+    ]);
 
     // initialize signing client and include both cosmos and regen amino types
     const signingClient = await SigningStargateClient.connectWithSigner(
-      "http://redwood.regen.network:26657",
+      'http://redwood.regen.network:26657',
       offlineSigner,
       {
         registry,
@@ -47,7 +50,7 @@ export function MsgMultiple(): React.ReactElement {
           ...regenAminoConverters,
         }),
       },
-    )
+    );
 
     // compose message using cosmos client from @regen-network/api
     const msg1 = cosmos.bank.v1beta1.MessageComposer.withTypeUrl.send({

@@ -5,6 +5,7 @@ import { MyBalance } from './MyBalance';
 import { LCDCosmos } from './examples/LCDCosmos';
 import { LCDRegen } from './examples/LCDRegen';
 import { MsgCosmos } from './examples/MsgCosmos';
+import { MsgMultiple } from './examples/MsgMultiple';
 import { MsgRegen } from './examples/MsgRegen';
 import { RPCCosmos } from './examples/RPCCosmos';
 import { RPCRegen } from './examples/RPCRegen';
@@ -80,6 +81,7 @@ export function App(): React.ReactElement {
         <RPCRegen />
         <MsgCosmos />
         <MsgRegen />
+        <MsgMultiple />
       </div>
     </div>
   );
