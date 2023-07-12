@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 
-import { regen, getSigningCosmosClient } from '@regen-network/api';
+import { regen, getSigningRegenClient } from '@regen-network/api';
 
 export function MsgRegen(): React.ReactElement {
   const [result, setResult] = useState<any | undefined>(undefined);
@@ -25,7 +25,7 @@ export function MsgRegen(): React.ReactElement {
     const [account] = await offlineSigner.getAccounts();
 
     // initialize signing client for signing transactions
-    const signingClient = await getSigningCosmosClient({
+    const signingClient = await getSigningRegenClient({
       rpcEndpoint: 'http://redwood.regen.network:26657',
       signer: offlineSigner,
     });
@@ -37,7 +37,7 @@ export function MsgRegen(): React.ReactElement {
       metadata:
         'regen:13toVgf5UjYBz6J29x28pLQyjKz5FpcW3f4bT5uRKGxGREWGKjEdXYG.rdf',
       jurisdiction: 'US-WA',
-      referenceId: 'VCS-001',
+      referenceId: 'ABC-123',
     });
 
     // define default fee

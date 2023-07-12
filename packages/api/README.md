@@ -148,7 +148,13 @@ const msg = createProject({
 
 ### Signing Messages
 
+Example using a cosmos client (includes encoding for cosmos modules):
+
 ```ts
+import { getSigningCosmosClient } from "@regen-network/api"
+
+const { keplr } = window
+
 const offlineSigner = keplr.getOfflineSigner("regen-local")
 
 const [account] = await offlineSigner.getAccounts()
@@ -157,6 +163,81 @@ const signingClient = await getSigningCosmosClient({
   rpcEndpoint: "http://localhost:26657",
   signer: offlineSigner,
 })
+
+const fee = {
+  amount: [
+    {
+      denom: "uregen",
+      amount: "5000",
+    },
+  ],
+  gas: "100000",
+}
+
+await signingClient.signAndBroadcast(account.address, [msg], fee)
+```
+
+Example using a regen client (includes encoding for regen modules):
+
+```ts
+import { getSigningRegenClient } from "@regen-network/api"
+
+const { keplr } = window
+
+const offlineSigner = keplr.getOfflineSigner("regen-local")
+
+const [account] = await offlineSigner.getAccounts()
+
+const signingClient = await getSigningRegenClient({
+  rpcEndpoint: "http://localhost:26657",
+  signer: offlineSigner,
+})
+
+const fee = {
+  amount: [
+    {
+      denom: "uregen",
+      amount: "5000",
+    },
+  ],
+  gas: "100000",
+}
+
+await signingClient.signAndBroadcast(account.address, [msg], fee)
+```
+
+Example using cosmjs and support for both cosmos and regen modules:
+
+```ts
+import { Registry } from "@cosmjs/proto-signing"
+import { AminoTypes, SigningStargateClient } from "@cosmjs/stargate"
+import {
+  cosmosAminoConverters,
+  cosmosProtoRegistry,
+  getSigningRegenClient,
+  regenAminoConverters,
+  regenProtoRegistry,
+} from "@regen-network/api"
+
+const { keplr } = window
+
+const offlineSigner = keplr.getOfflineSigner("regen-local")
+
+const [account] = await offlineSigner.getAccounts()
+
+const registry = new Registry({ ...cosmosProtoRegistry, ...regenProtoRegistry })
+
+const signingClient = await SigningStargateClient.connectWithSigner(
+  "http://localhost:26657",
+  offlineSigner,
+  {
+    registry,
+    aminoTypes: new AminoTypes({
+      ...cosmosAminoConverters,
+      ...regenAminoConverters,
+    }),
+  },
+)
 
 const fee = {
   amount: [
