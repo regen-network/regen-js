@@ -460,10 +460,10 @@ export const MsgCreateValidator = {
       minSelfDelegation: object.min_self_delegation,
       delegatorAddress: object.delegator_address,
       validatorAddress: object.validator_address,
-      pubkey: encodeBech32Pubkey({
-        type: "tendermint/PubKeySecp256k1",
-        value: toBase64(object.pubkey.value)
-      }, "cosmos"),
+      pubkey: {
+        typeUrl: "tendermint/PubKeySecp256k1",
+        value: object.pubkey?.value,
+      },
       value: object?.value ? Coin.fromAmino(object.value) : undefined
     };
   },
@@ -476,7 +476,7 @@ export const MsgCreateValidator = {
     obj.validator_address = message.validatorAddress;
     obj.pubkey = message.pubkey ? {
       typeUrl: "/cosmos.crypto.secp256k1.PubKey",
-      value: fromBase64(decodeBech32Pubkey(message.pubkey).value)
+      value: message.pubkey.value
     } : undefined;
     obj.value = message.value ? Coin.toAmino(message.value) : undefined;
     return obj;
@@ -1452,6 +1452,6 @@ export const Cosmos_cryptoPubKey_FromAmino = (content: AnyAmino) => {
 export const Cosmos_cryptoPubKey_ToAmino = (content: Any) => {
   return {
     typeUrl: "/cosmos.crypto.secp256k1.PubKey",
-    value: fromBase64(decodeBech32Pubkey(content).value)
+    value: content.value
   };
 };

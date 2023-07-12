@@ -382,7 +382,7 @@ export const Any = {
   },
   fromAmino(object: AnyAmino): Any {
     return {
-      typeUrl: object.type_url,
+      typeUrl: object.type,
       value: object.value
     };
   },
