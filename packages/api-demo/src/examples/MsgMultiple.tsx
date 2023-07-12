@@ -6,9 +6,9 @@ import {
   cosmos,
   cosmosAminoConverters,
   cosmosProtoRegistry,
+  regen,
   regenAminoConverters,
   regenProtoRegistry,
-  regen,
 } from '@regen-network/api';
 
 export function MsgMultiple(): React.ReactElement {
