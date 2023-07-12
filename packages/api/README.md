@@ -42,6 +42,8 @@ const response = await client.cosmos.bank.v1beta1.allBalances({
 })
 ```
 
+See [LCDCosmos.tsx](../api-demo/src/examples/LCDCosmos.tsx) for an example within the `api-demo` application.
+
 Example query using a regen module:
 
 ```ts
@@ -59,6 +61,8 @@ const response = await client.regen.ecocredit.v1.projectByClass({
   pagination: { countTotal: true } as PageRequest,
 })
 ```
+
+See [LCDRegen.tsx](../api-demo/src/examples/LCDRegen.tsx) for an example within the `api-demo` application.
 
 ### RPC Queries
 
@@ -86,6 +90,8 @@ const response = await client.cosmos.bank.v1beta1.allBalances({
 })
 ```
 
+See [RPCCosmos.tsx](../api-demo/src/examples/RPCCosmos.tsx) for an example within the `api-demo` application.
+
 Example query using a regen module:
 
 ```ts
@@ -110,6 +116,8 @@ const response = await client.regen.ecocredit.v1.projectByClass({
 })
 ```
 
+See [RPCRegen.tsx](../api-demo/src/examples/RPCRegen.tsx) for an example within the `api-demo` application.
+
 ### Composing Messages
 
 Example message using a cosmos module:
@@ -131,6 +139,8 @@ const msg = send({
 })
 ```
 
+See [MsgCosmos.tsx](../api-demo/src/examples/MsgCosmos.tsx) for an example within the `api-demo` application.
+
 Example message using a regen module:
 
 ```ts
@@ -145,6 +155,8 @@ const msg = createProject({
   jurisdiction: "US-WA",
 })
 ```
+
+See [MsgRegen.tsx](../api-demo/src/examples/MsgRegen.tsx) for an example within the `api-demo` application.
 
 ### Signing Messages
 
@@ -177,6 +189,8 @@ const fee = {
 await signingClient.signAndBroadcast(account.address, [msg], fee)
 ```
 
+See [MsgCosmos.tsx](../api-demo/src/examples/MsgCosmos.tsx) for an example within the `api-demo` application.
+
 Example using a regen client (includes encoding for regen modules):
 
 ```ts
@@ -206,6 +220,8 @@ const fee = {
 await signingClient.signAndBroadcast(account.address, [msg], fee)
 ```
 
+See [MsgRegen.tsx](../api-demo/src/examples/MsgRegen.tsx) for an example within the `api-demo` application.
+
 Example using cosmjs and support for both cosmos and regen modules:
 
 ```ts
@@ -214,7 +230,6 @@ import { AminoTypes, SigningStargateClient } from "@cosmjs/stargate"
 import {
   cosmosAminoConverters,
   cosmosProtoRegistry,
-  getSigningRegenClient,
   regenAminoConverters,
   regenProtoRegistry,
 } from "@regen-network/api"
