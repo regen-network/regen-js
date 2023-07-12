@@ -14,26 +14,26 @@ export function RPCCosmos(): React.ReactElement {
   );
 
   useEffect(() => {
+    const executeExample = async (): Promise<void> => {
+      const client = await cosmos.ClientFactory.createRPCQueryClient({
+        rpcEndpoint: 'redwood.regen.network:26657',
+      });
+
+      await client.cosmos.bank.v1beta1
+        .allBalances({
+          address: 'regen1df675r9vnf7pdedn4sf26svdsem3ugavgxmy46',
+          pagination: {
+            key: new Uint8Array(0),
+            limit: Long.fromNumber(0),
+            offset: Long.fromNumber(0),
+          } as PageRequest,
+        })
+        .then(setResult)
+        .catch(setError);
+    };
+
     if (!result && !error) executeExample();
   }, [result, error]);
-
-  const executeExample = async (): Promise<void> => {
-    const client = await cosmos.ClientFactory.createRPCQueryClient({
-      rpcEndpoint: 'redwood.regen.network:26657',
-    });
-
-    await client.cosmos.bank.v1beta1
-      .allBalances({
-        address: 'regen1df675r9vnf7pdedn4sf26svdsem3ugavgxmy46',
-        pagination: {
-          key: new Uint8Array(0),
-          limit: Long.fromNumber(0),
-          offset: Long.fromNumber(0),
-        } as PageRequest,
-      })
-      .then(setResult)
-      .catch(setError);
-  };
 
   return (
     <div>

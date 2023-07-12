@@ -13,22 +13,22 @@ export function LCDCosmos(): React.ReactElement {
   );
 
   useEffect(() => {
+    const executeExample = async (): Promise<void> => {
+      const client = await cosmos.ClientFactory.createLCDClient({
+        restEndpoint: 'http://redwood.regen.network:1317',
+      });
+
+      await client.cosmos.bank.v1beta1
+        .allBalances({
+          address: 'regen1df675r9vnf7pdedn4sf26svdsem3ugavgxmy46',
+          pagination: { countTotal: true } as PageRequest,
+        })
+        .then(setResult)
+        .catch(setError);
+    };
+
     if (!result && !error) executeExample();
   }, [result, error]);
-
-  const executeExample = async (): Promise<void> => {
-    const client = await cosmos.ClientFactory.createLCDClient({
-      restEndpoint: 'http://redwood.regen.network:1317',
-    });
-
-    await client.cosmos.bank.v1beta1
-      .allBalances({
-        address: 'regen1df675r9vnf7pdedn4sf26svdsem3ugavgxmy46',
-        pagination: { countTotal: true } as PageRequest,
-      })
-      .then(setResult)
-      .catch(setError);
-  };
 
   return (
     <div>

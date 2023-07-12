@@ -13,22 +13,22 @@ export function LCDRegen(): React.ReactElement {
   );
 
   useEffect(() => {
+    const executeExample = async (): Promise<void> => {
+      const client = await regen.ClientFactory.createLCDClient({
+        restEndpoint: 'http://redwood.regen.network:1317',
+      });
+
+      await client.regen.ecocredit.v1
+        .projectsByClass({
+          classId: 'C01',
+          pagination: { countTotal: true } as PageRequest,
+        })
+        .then(setResult)
+        .catch(setError);
+    };
+
     if (!result && !error) executeExample();
   }, [result, error]);
-
-  const executeExample = async (): Promise<void> => {
-    const client = await regen.ClientFactory.createLCDClient({
-      restEndpoint: 'http://redwood.regen.network:1317',
-    });
-
-    await client.regen.ecocredit.v1
-      .projectsByClass({
-        classId: 'C01',
-        pagination: { countTotal: true } as PageRequest,
-      })
-      .then(setResult)
-      .catch(setError);
-  };
 
   return (
     <div>
