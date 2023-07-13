@@ -17,7 +17,7 @@
 ## Install
 
 ```sh
-yarn add @regen-network/api@v1.0.0-alpha3
+yarn add @regen-network/api@v1.0.0-alpha4
 ```
 
 ## Usage
