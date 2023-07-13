@@ -336,8 +336,8 @@ export const Timestamp = {
   },
   fromAmino(object: TimestampAmino): Timestamp {
     return {
-      seconds: Long.fromString(object.seconds),
-      nanos: object.nanos
+      seconds: Long.fromNumber(new Date(object).getSeconds()),
+      nanos: 0
     };
   },
   toAmino(message: Timestamp): TimestampAmino {

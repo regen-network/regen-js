@@ -1560,7 +1560,7 @@ export const GroupPolicyInfo = {
           message.version = (reader.uint64() as Long);
           break;
         case 6:
-          message.decisionPolicy = (DecisionPolicy_InterfaceDecoder(reader) as Any);
+          message.decisionPolicy = (DecisionPolicy_InterfaceDecoder(reader) as ThresholdDecisionPolicy & PercentageDecisionPolicy & Any);
           break;
         case 7:
           message.createdAt = Timestamp.decode(reader, reader.uint32());
@@ -1579,7 +1579,9 @@ export const GroupPolicyInfo = {
       admin: isSet(object.admin) ? String(object.admin) : "",
       metadata: isSet(object.metadata) ? String(object.metadata) : "",
       version: isSet(object.version) ? Long.fromValue(object.version) : Long.UZERO,
-      decisionPolicy: isSet(object.decisionPolicy) ? Any.fromJSON(object.decisionPolicy) : undefined,
+      decisionPolicy: isSet(object.decisionPolicy)
+          ? Any.fromJSON(object.decisionPolicy) as (ThresholdDecisionPolicy & PercentageDecisionPolicy & Any)
+          : undefined,
       createdAt: isSet(object.createdAt) ? fromJsonTimestamp(object.createdAt) : undefined
     };
   },
@@ -1601,7 +1603,9 @@ export const GroupPolicyInfo = {
     message.admin = object.admin ?? "";
     message.metadata = object.metadata ?? "";
     message.version = object.version !== undefined && object.version !== null ? Long.fromValue(object.version) : Long.UZERO;
-    message.decisionPolicy = object.decisionPolicy !== undefined && object.decisionPolicy !== null ? Any.fromPartial(object.decisionPolicy) : undefined;
+    message.decisionPolicy = object.decisionPolicy !== undefined && object.decisionPolicy !== null
+        ? Any.fromPartial(object.decisionPolicy) as (ThresholdDecisionPolicy & PercentageDecisionPolicy & Any)
+        : undefined;
     message.createdAt = object.createdAt !== undefined && object.createdAt !== null ? Timestamp.fromPartial(object.createdAt) : undefined;
     return message;
   },
@@ -1612,7 +1616,9 @@ export const GroupPolicyInfo = {
       admin: object.admin,
       metadata: object.metadata,
       version: Long.fromString(object.version),
-      decisionPolicy: object?.decision_policy ? DecisionPolicy_FromAmino(object.decision_policy) : undefined,
+      decisionPolicy: object?.decision_policy
+          ? DecisionPolicy_FromAmino(object.decision_policy) as (ThresholdDecisionPolicy & PercentageDecisionPolicy & Any)
+          : undefined,
       createdAt: object?.created_at ? Timestamp.fromAmino(object.created_at) : undefined
     };
   },
