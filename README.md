@@ -17,10 +17,6 @@
 
 This API is still under heavy construction, be ready for unexpected breaking changes.
 
-### v1.0.0-alpha4
-
-The `v1.0.0-alpha4` release tag includes a manual override of some generated code in `src` in order to resolve a downstream issue within [regen-network/groups-ui](https://github.com/regen-network/groups-ui). For more information, see [#79](https://github.com/regen-network/regen-js/pull/79) and [regen-network/groups-ui#69](https://github.com/regen-network/groups-ui/pull/69).
-
 ## Get Started
 
 ### Install and build
