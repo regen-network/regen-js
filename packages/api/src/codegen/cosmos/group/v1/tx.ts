@@ -1516,7 +1516,7 @@ export const MsgCreateGroupPolicy = {
           message.metadata = reader.string();
           break;
         case 4:
-          message.decisionPolicy = (DecisionPolicy_InterfaceDecoder(reader) as Any);
+          message.decisionPolicy = (DecisionPolicy_InterfaceDecoder(reader) as ThresholdDecisionPolicy & PercentageDecisionPolicy & Any);
           break;
         default:
           reader.skipType(tag & 7);
@@ -1530,7 +1530,7 @@ export const MsgCreateGroupPolicy = {
       admin: isSet(object.admin) ? String(object.admin) : "",
       groupId: isSet(object.groupId) ? Long.fromValue(object.groupId) : Long.UZERO,
       metadata: isSet(object.metadata) ? String(object.metadata) : "",
-      decisionPolicy: isSet(object.decisionPolicy) ? Any.fromJSON(object.decisionPolicy) : undefined
+      decisionPolicy: isSet(object.decisionPolicy) ? Any.fromJSON(object.decisionPolicy) as ThresholdDecisionPolicy & PercentageDecisionPolicy & Any: undefined
     };
   },
   toJSON(message: MsgCreateGroupPolicy): unknown {
@@ -1546,7 +1546,7 @@ export const MsgCreateGroupPolicy = {
     message.admin = object.admin ?? "";
     message.groupId = object.groupId !== undefined && object.groupId !== null ? Long.fromValue(object.groupId) : Long.UZERO;
     message.metadata = object.metadata ?? "";
-    message.decisionPolicy = object.decisionPolicy !== undefined && object.decisionPolicy !== null ? Any.fromPartial(object.decisionPolicy) : undefined;
+    message.decisionPolicy = object.decisionPolicy !== undefined && object.decisionPolicy !== null ? Any.fromPartial(object.decisionPolicy) as ThresholdDecisionPolicy & PercentageDecisionPolicy & Any: undefined;
     return message;
   },
   fromAmino(object: MsgCreateGroupPolicyAmino): MsgCreateGroupPolicy {
@@ -1554,7 +1554,7 @@ export const MsgCreateGroupPolicy = {
       admin: object.admin,
       groupId: Long.fromString(object.group_id),
       metadata: object.metadata,
-      decisionPolicy: object?.decision_policy ? DecisionPolicy_FromAmino(object.decision_policy) : undefined
+      decisionPolicy: object?.decision_policy ? DecisionPolicy_FromAmino(object.decision_policy) as ThresholdDecisionPolicy & PercentageDecisionPolicy & Any : undefined
     };
   },
   toAmino(message: MsgCreateGroupPolicy): MsgCreateGroupPolicyAmino {
@@ -1879,7 +1879,7 @@ export const MsgCreateGroupWithPolicy = {
           message.groupPolicyAsAdmin = reader.bool();
           break;
         case 6:
-          message.decisionPolicy = (DecisionPolicy_InterfaceDecoder(reader) as Any);
+          message.decisionPolicy = (DecisionPolicy_InterfaceDecoder(reader) as ThresholdDecisionPolicy & PercentageDecisionPolicy & Any);
           break;
         default:
           reader.skipType(tag & 7);
@@ -1895,7 +1895,7 @@ export const MsgCreateGroupWithPolicy = {
       groupMetadata: isSet(object.groupMetadata) ? String(object.groupMetadata) : "",
       groupPolicyMetadata: isSet(object.groupPolicyMetadata) ? String(object.groupPolicyMetadata) : "",
       groupPolicyAsAdmin: isSet(object.groupPolicyAsAdmin) ? Boolean(object.groupPolicyAsAdmin) : false,
-      decisionPolicy: isSet(object.decisionPolicy) ? Any.fromJSON(object.decisionPolicy) : undefined
+      decisionPolicy: isSet(object.decisionPolicy) ? Any.fromJSON(object.decisionPolicy) as ThresholdDecisionPolicy & PercentageDecisionPolicy & Any: undefined
     };
   },
   toJSON(message: MsgCreateGroupWithPolicy): unknown {
@@ -1919,7 +1919,7 @@ export const MsgCreateGroupWithPolicy = {
     message.groupMetadata = object.groupMetadata ?? "";
     message.groupPolicyMetadata = object.groupPolicyMetadata ?? "";
     message.groupPolicyAsAdmin = object.groupPolicyAsAdmin ?? false;
-    message.decisionPolicy = object.decisionPolicy !== undefined && object.decisionPolicy !== null ? Any.fromPartial(object.decisionPolicy) : undefined;
+    message.decisionPolicy = object.decisionPolicy !== undefined && object.decisionPolicy !== null ? Any.fromPartial(object.decisionPolicy) as ThresholdDecisionPolicy & PercentageDecisionPolicy & Any: undefined;
     return message;
   },
   fromAmino(object: MsgCreateGroupWithPolicyAmino): MsgCreateGroupWithPolicy {
@@ -1929,7 +1929,7 @@ export const MsgCreateGroupWithPolicy = {
       groupMetadata: object.group_metadata,
       groupPolicyMetadata: object.group_policy_metadata,
       groupPolicyAsAdmin: object.group_policy_as_admin,
-      decisionPolicy: object?.decision_policy ? DecisionPolicy_FromAmino(object.decision_policy) : undefined
+      decisionPolicy: object?.decision_policy ? DecisionPolicy_FromAmino(object.decision_policy) as ThresholdDecisionPolicy & PercentageDecisionPolicy & Any: undefined
     };
   },
   toAmino(message: MsgCreateGroupWithPolicy): MsgCreateGroupWithPolicyAmino {
@@ -2090,7 +2090,7 @@ export const MsgUpdateGroupPolicyDecisionPolicy = {
           message.groupPolicyAddress = reader.string();
           break;
         case 3:
-          message.decisionPolicy = (DecisionPolicy_InterfaceDecoder(reader) as Any);
+          message.decisionPolicy = (DecisionPolicy_InterfaceDecoder(reader) as ThresholdDecisionPolicy & PercentageDecisionPolicy & Any);
           break;
         default:
           reader.skipType(tag & 7);
@@ -2103,7 +2103,7 @@ export const MsgUpdateGroupPolicyDecisionPolicy = {
     return {
       admin: isSet(object.admin) ? String(object.admin) : "",
       groupPolicyAddress: isSet(object.groupPolicyAddress) ? String(object.groupPolicyAddress) : "",
-      decisionPolicy: isSet(object.decisionPolicy) ? Any.fromJSON(object.decisionPolicy) : undefined
+      decisionPolicy: isSet(object.decisionPolicy) ? Any.fromJSON(object.decisionPolicy) as ThresholdDecisionPolicy & PercentageDecisionPolicy & Any : undefined
     };
   },
   toJSON(message: MsgUpdateGroupPolicyDecisionPolicy): unknown {
@@ -2117,14 +2117,14 @@ export const MsgUpdateGroupPolicyDecisionPolicy = {
     const message = createBaseMsgUpdateGroupPolicyDecisionPolicy();
     message.admin = object.admin ?? "";
     message.groupPolicyAddress = object.groupPolicyAddress ?? "";
-    message.decisionPolicy = object.decisionPolicy !== undefined && object.decisionPolicy !== null ? Any.fromPartial(object.decisionPolicy) : undefined;
+    message.decisionPolicy = object.decisionPolicy !== undefined && object.decisionPolicy !== null ? Any.fromPartial(object.decisionPolicy) as ThresholdDecisionPolicy & PercentageDecisionPolicy & Any : undefined;
     return message;
   },
   fromAmino(object: MsgUpdateGroupPolicyDecisionPolicyAmino): MsgUpdateGroupPolicyDecisionPolicy {
     return {
       admin: object.admin,
       groupPolicyAddress: object.group_policy_address,
-      decisionPolicy: object?.decision_policy ? DecisionPolicy_FromAmino(object.decision_policy) : undefined
+      decisionPolicy: object?.decision_policy ? DecisionPolicy_FromAmino(object.decision_policy) as ThresholdDecisionPolicy & PercentageDecisionPolicy & Any : undefined
     };
   },
   toAmino(message: MsgUpdateGroupPolicyDecisionPolicy): MsgUpdateGroupPolicyDecisionPolicyAmino {
