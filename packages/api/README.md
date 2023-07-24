@@ -1,5 +1,12 @@
 # @regen-network/api
 
+
+## 🚧 Warning
+
+This API is still under heavy construction, be ready for unexpected breaking changes.
+
+The `v1.0.0-alpha4` and `v1.0.0-alpha5` release tags include manual overrides of generated code in `src` in order to resolve a downstream issue within [regen-network/groups-ui](https://github.com/regen-network/groups-ui). For more information, see [#84](https://github.com/regen-network/regen-js/pull/84).
+
 ## Table of Contents
 
 - [Install](#install)
@@ -17,7 +24,7 @@
 ## Install
 
 ```sh
-yarn add @regen-network/api@v1.0.0-alpha4
+yarn add @regen-network/api@v1.0.0-alpha5
 ```
 
 ## Usage
