@@ -39,7 +39,7 @@
     "@cosmjs/proto-signing": "^0.31.0",
     "@cosmjs/stargate": "^0.31.0",
     "@cosmjs/tendermint-rpc": "^0.31.0",
-    "@osmonauts/lcd": "^0.11.1",
+    "@cosmology/lcd": "^0.13.3",
     "protobufjs": "^7.2.4"
   },
   "devDependencies": {
