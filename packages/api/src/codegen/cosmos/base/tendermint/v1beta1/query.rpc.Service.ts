@@ -1,5 +1,5 @@
 import { Rpc } from "../../../../helpers";
-import * as _m0 from "protobufjs/minimal";
+import { BinaryReader } from "../../../../binary";
 import { QueryClient, createProtobufRpcClient } from "@cosmjs/stargate";
 import { GetNodeInfoRequest, GetNodeInfoResponse, GetSyncingRequest, GetSyncingResponse, GetLatestBlockRequest, GetLatestBlockResponse, GetBlockByHeightRequest, GetBlockByHeightResponse, GetLatestValidatorSetRequest, GetLatestValidatorSetResponse, GetValidatorSetByHeightRequest, GetValidatorSetByHeightResponse, ABCIQueryRequest, ABCIQueryResponse } from "./query";
 /** Service defines the gRPC querier service for tendermint queries. */
@@ -40,39 +40,39 @@ export class ServiceClientImpl implements Service {
   getNodeInfo(request: GetNodeInfoRequest = {}): Promise<GetNodeInfoResponse> {
     const data = GetNodeInfoRequest.encode(request).finish();
     const promise = this.rpc.request("cosmos.base.tendermint.v1beta1.Service", "GetNodeInfo", data);
-    return promise.then(data => GetNodeInfoResponse.decode(new _m0.Reader(data)));
+    return promise.then(data => GetNodeInfoResponse.decode(new BinaryReader(data)));
   }
   getSyncing(request: GetSyncingRequest = {}): Promise<GetSyncingResponse> {
     const data = GetSyncingRequest.encode(request).finish();
     const promise = this.rpc.request("cosmos.base.tendermint.v1beta1.Service", "GetSyncing", data);
-    return promise.then(data => GetSyncingResponse.decode(new _m0.Reader(data)));
+    return promise.then(data => GetSyncingResponse.decode(new BinaryReader(data)));
   }
   getLatestBlock(request: GetLatestBlockRequest = {}): Promise<GetLatestBlockResponse> {
     const data = GetLatestBlockRequest.encode(request).finish();
     const promise = this.rpc.request("cosmos.base.tendermint.v1beta1.Service", "GetLatestBlock", data);
-    return promise.then(data => GetLatestBlockResponse.decode(new _m0.Reader(data)));
+    return promise.then(data => GetLatestBlockResponse.decode(new BinaryReader(data)));
   }
   getBlockByHeight(request: GetBlockByHeightRequest): Promise<GetBlockByHeightResponse> {
     const data = GetBlockByHeightRequest.encode(request).finish();
     const promise = this.rpc.request("cosmos.base.tendermint.v1beta1.Service", "GetBlockByHeight", data);
-    return promise.then(data => GetBlockByHeightResponse.decode(new _m0.Reader(data)));
+    return promise.then(data => GetBlockByHeightResponse.decode(new BinaryReader(data)));
   }
   getLatestValidatorSet(request: GetLatestValidatorSetRequest = {
     pagination: undefined
   }): Promise<GetLatestValidatorSetResponse> {
     const data = GetLatestValidatorSetRequest.encode(request).finish();
     const promise = this.rpc.request("cosmos.base.tendermint.v1beta1.Service", "GetLatestValidatorSet", data);
-    return promise.then(data => GetLatestValidatorSetResponse.decode(new _m0.Reader(data)));
+    return promise.then(data => GetLatestValidatorSetResponse.decode(new BinaryReader(data)));
   }
   getValidatorSetByHeight(request: GetValidatorSetByHeightRequest): Promise<GetValidatorSetByHeightResponse> {
     const data = GetValidatorSetByHeightRequest.encode(request).finish();
     const promise = this.rpc.request("cosmos.base.tendermint.v1beta1.Service", "GetValidatorSetByHeight", data);
-    return promise.then(data => GetValidatorSetByHeightResponse.decode(new _m0.Reader(data)));
+    return promise.then(data => GetValidatorSetByHeightResponse.decode(new BinaryReader(data)));
   }
   aBCIQuery(request: ABCIQueryRequest): Promise<ABCIQueryResponse> {
     const data = ABCIQueryRequest.encode(request).finish();
     const promise = this.rpc.request("cosmos.base.tendermint.v1beta1.Service", "ABCIQuery", data);
-    return promise.then(data => ABCIQueryResponse.decode(new _m0.Reader(data)));
+    return promise.then(data => ABCIQueryResponse.decode(new BinaryReader(data)));
   }
 }
 export const createRpcQueryExtension = (base: QueryClient) => {

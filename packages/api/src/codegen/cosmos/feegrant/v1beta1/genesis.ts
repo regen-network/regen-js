@@ -1,5 +1,5 @@
 import { Grant, GrantAmino, GrantSDKType } from "./feegrant";
-import * as _m0 from "protobufjs/minimal";
+import { BinaryReader, BinaryWriter } from "../../../binary";
 /** GenesisState contains a set of fee allowances, persisted from the store */
 export interface GenesisState {
   allowances: Grant[];
@@ -10,7 +10,7 @@ export interface GenesisStateProtoMsg {
 }
 /** GenesisState contains a set of fee allowances, persisted from the store */
 export interface GenesisStateAmino {
-  allowances: GrantAmino[];
+  allowances?: GrantAmino[];
 }
 export interface GenesisStateAminoMsg {
   type: "cosmos-sdk/GenesisState";
@@ -26,14 +26,15 @@ function createBaseGenesisState(): GenesisState {
   };
 }
 export const GenesisState = {
-  encode(message: GenesisState, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  typeUrl: "/cosmos.feegrant.v1beta1.GenesisState",
+  encode(message: GenesisState, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     for (const v of message.allowances) {
       Grant.encode(v!, writer.uint32(10).fork()).ldelim();
     }
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): GenesisState {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): GenesisState {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseGenesisState();
     while (reader.pos < end) {
@@ -69,16 +70,16 @@ export const GenesisState = {
     return message;
   },
   fromAmino(object: GenesisStateAmino): GenesisState {
-    return {
-      allowances: Array.isArray(object?.allowances) ? object.allowances.map((e: any) => Grant.fromAmino(e)) : []
-    };
+    const message = createBaseGenesisState();
+    message.allowances = object.allowances?.map(e => Grant.fromAmino(e)) || [];
+    return message;
   },
   toAmino(message: GenesisState): GenesisStateAmino {
     const obj: any = {};
     if (message.allowances) {
       obj.allowances = message.allowances.map(e => e ? Grant.toAmino(e) : undefined);
     } else {
-      obj.allowances = [];
+      obj.allowances = message.allowances;
     }
     return obj;
   },

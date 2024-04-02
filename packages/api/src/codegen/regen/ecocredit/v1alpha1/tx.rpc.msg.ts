@@ -1,5 +1,5 @@
 import { Rpc } from "../../../helpers";
-import * as _m0 from "protobufjs/minimal";
+import { BinaryReader } from "../../../binary";
 import { MsgCreateClass, MsgCreateClassResponse, MsgCreateBatch, MsgCreateBatchResponse, MsgSend, MsgSendResponse, MsgRetire, MsgRetireResponse, MsgCancel, MsgCancelResponse, MsgUpdateClassAdmin, MsgUpdateClassAdminResponse, MsgUpdateClassIssuers, MsgUpdateClassIssuersResponse, MsgUpdateClassMetadata, MsgUpdateClassMetadataResponse } from "./tx";
 /** Msg is the regen.ecocredit.v1alpha1 Msg service. */
 export interface Msg {
@@ -50,41 +50,41 @@ export class MsgClientImpl implements Msg {
   createClass(request: MsgCreateClass): Promise<MsgCreateClassResponse> {
     const data = MsgCreateClass.encode(request).finish();
     const promise = this.rpc.request("regen.ecocredit.v1alpha1.Msg", "CreateClass", data);
-    return promise.then(data => MsgCreateClassResponse.decode(new _m0.Reader(data)));
+    return promise.then(data => MsgCreateClassResponse.decode(new BinaryReader(data)));
   }
   createBatch(request: MsgCreateBatch): Promise<MsgCreateBatchResponse> {
     const data = MsgCreateBatch.encode(request).finish();
     const promise = this.rpc.request("regen.ecocredit.v1alpha1.Msg", "CreateBatch", data);
-    return promise.then(data => MsgCreateBatchResponse.decode(new _m0.Reader(data)));
+    return promise.then(data => MsgCreateBatchResponse.decode(new BinaryReader(data)));
   }
   send(request: MsgSend): Promise<MsgSendResponse> {
     const data = MsgSend.encode(request).finish();
     const promise = this.rpc.request("regen.ecocredit.v1alpha1.Msg", "Send", data);
-    return promise.then(data => MsgSendResponse.decode(new _m0.Reader(data)));
+    return promise.then(data => MsgSendResponse.decode(new BinaryReader(data)));
   }
   retire(request: MsgRetire): Promise<MsgRetireResponse> {
     const data = MsgRetire.encode(request).finish();
     const promise = this.rpc.request("regen.ecocredit.v1alpha1.Msg", "Retire", data);
-    return promise.then(data => MsgRetireResponse.decode(new _m0.Reader(data)));
+    return promise.then(data => MsgRetireResponse.decode(new BinaryReader(data)));
   }
   cancel(request: MsgCancel): Promise<MsgCancelResponse> {
     const data = MsgCancel.encode(request).finish();
     const promise = this.rpc.request("regen.ecocredit.v1alpha1.Msg", "Cancel", data);
-    return promise.then(data => MsgCancelResponse.decode(new _m0.Reader(data)));
+    return promise.then(data => MsgCancelResponse.decode(new BinaryReader(data)));
   }
   updateClassAdmin(request: MsgUpdateClassAdmin): Promise<MsgUpdateClassAdminResponse> {
     const data = MsgUpdateClassAdmin.encode(request).finish();
     const promise = this.rpc.request("regen.ecocredit.v1alpha1.Msg", "UpdateClassAdmin", data);
-    return promise.then(data => MsgUpdateClassAdminResponse.decode(new _m0.Reader(data)));
+    return promise.then(data => MsgUpdateClassAdminResponse.decode(new BinaryReader(data)));
   }
   updateClassIssuers(request: MsgUpdateClassIssuers): Promise<MsgUpdateClassIssuersResponse> {
     const data = MsgUpdateClassIssuers.encode(request).finish();
     const promise = this.rpc.request("regen.ecocredit.v1alpha1.Msg", "UpdateClassIssuers", data);
-    return promise.then(data => MsgUpdateClassIssuersResponse.decode(new _m0.Reader(data)));
+    return promise.then(data => MsgUpdateClassIssuersResponse.decode(new BinaryReader(data)));
   }
   updateClassMetadata(request: MsgUpdateClassMetadata): Promise<MsgUpdateClassMetadataResponse> {
     const data = MsgUpdateClassMetadata.encode(request).finish();
     const promise = this.rpc.request("regen.ecocredit.v1alpha1.Msg", "UpdateClassMetadata", data);
-    return promise.then(data => MsgUpdateClassMetadataResponse.decode(new _m0.Reader(data)));
+    return promise.then(data => MsgUpdateClassMetadataResponse.decode(new BinaryReader(data)));
   }
 }

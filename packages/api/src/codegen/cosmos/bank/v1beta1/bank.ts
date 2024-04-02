@@ -1,5 +1,5 @@
 import { Coin, CoinAmino, CoinSDKType } from "../../base/v1beta1/coin";
-import * as _m0 from "protobufjs/minimal";
+import { BinaryReader, BinaryWriter } from "../../../binary";
 import { isSet } from "../../../helpers";
 /** Params defines the parameters for the bank module. */
 export interface Params {
@@ -12,8 +12,8 @@ export interface ParamsProtoMsg {
 }
 /** Params defines the parameters for the bank module. */
 export interface ParamsAmino {
-  send_enabled: SendEnabledAmino[];
-  default_send_enabled: boolean;
+  send_enabled?: SendEnabledAmino[];
+  default_send_enabled?: boolean;
 }
 export interface ParamsAminoMsg {
   type: "cosmos-sdk/Params";
@@ -41,8 +41,8 @@ export interface SendEnabledProtoMsg {
  * sendable).
  */
 export interface SendEnabledAmino {
-  denom: string;
-  enabled: boolean;
+  denom?: string;
+  enabled?: boolean;
 }
 export interface SendEnabledAminoMsg {
   type: "cosmos-sdk/SendEnabled";
@@ -67,8 +67,8 @@ export interface InputProtoMsg {
 }
 /** Input models transaction input. */
 export interface InputAmino {
-  address: string;
-  coins: CoinAmino[];
+  address?: string;
+  coins?: CoinAmino[];
 }
 export interface InputAminoMsg {
   type: "cosmos-sdk/Input";
@@ -90,8 +90,8 @@ export interface OutputProtoMsg {
 }
 /** Output models transaction outputs. */
 export interface OutputAmino {
-  address: string;
-  coins: CoinAmino[];
+  address?: string;
+  coins?: CoinAmino[];
 }
 export interface OutputAminoMsg {
   type: "cosmos-sdk/Output";
@@ -109,7 +109,7 @@ export interface OutputSDKType {
  */
 /** @deprecated */
 export interface Supply {
-  $typeUrl?: string;
+  $typeUrl?: "/cosmos.bank.v1beta1.Supply";
   total: Coin[];
 }
 export interface SupplyProtoMsg {
@@ -123,7 +123,7 @@ export interface SupplyProtoMsg {
  */
 /** @deprecated */
 export interface SupplyAmino {
-  total: CoinAmino[];
+  total?: CoinAmino[];
 }
 export interface SupplyAminoMsg {
   type: "cosmos-sdk/Supply";
@@ -136,7 +136,7 @@ export interface SupplyAminoMsg {
  */
 /** @deprecated */
 export interface SupplySDKType {
-  $typeUrl?: string;
+  $typeUrl?: "/cosmos.bank.v1beta1.Supply";
   total: CoinSDKType[];
 }
 /**
@@ -167,7 +167,7 @@ export interface DenomUnitProtoMsg {
  */
 export interface DenomUnitAmino {
   /** denom represents the string name of the given denom unit (e.g uatom). */
-  denom: string;
+  denom?: string;
   /**
    * exponent represents power of 10 exponent that one must
    * raise the base_denom to in order to equal the given DenomUnit's denom
@@ -175,9 +175,9 @@ export interface DenomUnitAmino {
    * (e.g. with a base_denom of uatom, one can create a DenomUnit of 'atom' with
    * exponent = 6, thus: 1 atom = 10^6 uatom).
    */
-  exponent: number;
+  exponent?: number;
   /** aliases is a list of string aliases for the given denom */
-  aliases: string[];
+  aliases?: string[];
 }
 export interface DenomUnitAminoMsg {
   type: "cosmos-sdk/DenomUnit";
@@ -243,42 +243,42 @@ export interface MetadataProtoMsg {
  * a basic token.
  */
 export interface MetadataAmino {
-  description: string;
+  description?: string;
   /** denom_units represents the list of DenomUnit's for a given coin */
-  denom_units: DenomUnitAmino[];
+  denom_units?: DenomUnitAmino[];
   /** base represents the base denom (should be the DenomUnit with exponent = 0). */
-  base: string;
+  base?: string;
   /**
    * display indicates the suggested denom that should be
    * displayed in clients.
    */
-  display: string;
+  display?: string;
   /**
    * name defines the name of the token (eg: Cosmos Atom)
    * 
    * Since: cosmos-sdk 0.43
    */
-  name: string;
+  name?: string;
   /**
    * symbol is the token symbol usually shown on exchanges (eg: ATOM). This can
    * be the same as the display.
    * 
    * Since: cosmos-sdk 0.43
    */
-  symbol: string;
+  symbol?: string;
   /**
    * URI to a document (on or off-chain) that contains additional information. Optional.
    * 
    * Since: cosmos-sdk 0.46
    */
-  uri: string;
+  uri?: string;
   /**
    * URIHash is a sha256 hash of a document pointed by URI. It's used to verify that
    * the document didn't change. Optional.
    * 
    * Since: cosmos-sdk 0.46
    */
-  uri_hash: string;
+  uri_hash?: string;
 }
 export interface MetadataAminoMsg {
   type: "cosmos-sdk/Metadata";
@@ -305,7 +305,8 @@ function createBaseParams(): Params {
   };
 }
 export const Params = {
-  encode(message: Params, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  typeUrl: "/cosmos.bank.v1beta1.Params",
+  encode(message: Params, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     for (const v of message.sendEnabled) {
       SendEnabled.encode(v!, writer.uint32(10).fork()).ldelim();
     }
@@ -314,8 +315,8 @@ export const Params = {
     }
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): Params {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): Params {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseParams();
     while (reader.pos < end) {
@@ -357,19 +358,21 @@ export const Params = {
     return message;
   },
   fromAmino(object: ParamsAmino): Params {
-    return {
-      sendEnabled: Array.isArray(object?.send_enabled) ? object.send_enabled.map((e: any) => SendEnabled.fromAmino(e)) : [],
-      defaultSendEnabled: object.default_send_enabled
-    };
+    const message = createBaseParams();
+    message.sendEnabled = object.send_enabled?.map(e => SendEnabled.fromAmino(e)) || [];
+    if (object.default_send_enabled !== undefined && object.default_send_enabled !== null) {
+      message.defaultSendEnabled = object.default_send_enabled;
+    }
+    return message;
   },
   toAmino(message: Params): ParamsAmino {
     const obj: any = {};
     if (message.sendEnabled) {
       obj.send_enabled = message.sendEnabled.map(e => e ? SendEnabled.toAmino(e) : undefined);
     } else {
-      obj.send_enabled = [];
+      obj.send_enabled = message.sendEnabled;
     }
-    obj.default_send_enabled = message.defaultSendEnabled;
+    obj.default_send_enabled = message.defaultSendEnabled === false ? undefined : message.defaultSendEnabled;
     return obj;
   },
   fromAminoMsg(object: ParamsAminoMsg): Params {
@@ -401,7 +404,8 @@ function createBaseSendEnabled(): SendEnabled {
   };
 }
 export const SendEnabled = {
-  encode(message: SendEnabled, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  typeUrl: "/cosmos.bank.v1beta1.SendEnabled",
+  encode(message: SendEnabled, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.denom !== "") {
       writer.uint32(10).string(message.denom);
     }
@@ -410,8 +414,8 @@ export const SendEnabled = {
     }
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): SendEnabled {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): SendEnabled {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseSendEnabled();
     while (reader.pos < end) {
@@ -449,15 +453,19 @@ export const SendEnabled = {
     return message;
   },
   fromAmino(object: SendEnabledAmino): SendEnabled {
-    return {
-      denom: object.denom,
-      enabled: object.enabled
-    };
+    const message = createBaseSendEnabled();
+    if (object.denom !== undefined && object.denom !== null) {
+      message.denom = object.denom;
+    }
+    if (object.enabled !== undefined && object.enabled !== null) {
+      message.enabled = object.enabled;
+    }
+    return message;
   },
   toAmino(message: SendEnabled): SendEnabledAmino {
     const obj: any = {};
-    obj.denom = message.denom;
-    obj.enabled = message.enabled;
+    obj.denom = message.denom === "" ? undefined : message.denom;
+    obj.enabled = message.enabled === false ? undefined : message.enabled;
     return obj;
   },
   fromAminoMsg(object: SendEnabledAminoMsg): SendEnabled {
@@ -489,7 +497,8 @@ function createBaseInput(): Input {
   };
 }
 export const Input = {
-  encode(message: Input, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  typeUrl: "/cosmos.bank.v1beta1.Input",
+  encode(message: Input, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.address !== "") {
       writer.uint32(10).string(message.address);
     }
@@ -498,8 +507,8 @@ export const Input = {
     }
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): Input {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): Input {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseInput();
     while (reader.pos < end) {
@@ -541,18 +550,20 @@ export const Input = {
     return message;
   },
   fromAmino(object: InputAmino): Input {
-    return {
-      address: object.address,
-      coins: Array.isArray(object?.coins) ? object.coins.map((e: any) => Coin.fromAmino(e)) : []
-    };
+    const message = createBaseInput();
+    if (object.address !== undefined && object.address !== null) {
+      message.address = object.address;
+    }
+    message.coins = object.coins?.map(e => Coin.fromAmino(e)) || [];
+    return message;
   },
   toAmino(message: Input): InputAmino {
     const obj: any = {};
-    obj.address = message.address;
+    obj.address = message.address === "" ? undefined : message.address;
     if (message.coins) {
       obj.coins = message.coins.map(e => e ? Coin.toAmino(e) : undefined);
     } else {
-      obj.coins = [];
+      obj.coins = message.coins;
     }
     return obj;
   },
@@ -585,7 +596,8 @@ function createBaseOutput(): Output {
   };
 }
 export const Output = {
-  encode(message: Output, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  typeUrl: "/cosmos.bank.v1beta1.Output",
+  encode(message: Output, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.address !== "") {
       writer.uint32(10).string(message.address);
     }
@@ -594,8 +606,8 @@ export const Output = {
     }
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): Output {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): Output {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseOutput();
     while (reader.pos < end) {
@@ -637,18 +649,20 @@ export const Output = {
     return message;
   },
   fromAmino(object: OutputAmino): Output {
-    return {
-      address: object.address,
-      coins: Array.isArray(object?.coins) ? object.coins.map((e: any) => Coin.fromAmino(e)) : []
-    };
+    const message = createBaseOutput();
+    if (object.address !== undefined && object.address !== null) {
+      message.address = object.address;
+    }
+    message.coins = object.coins?.map(e => Coin.fromAmino(e)) || [];
+    return message;
   },
   toAmino(message: Output): OutputAmino {
     const obj: any = {};
-    obj.address = message.address;
+    obj.address = message.address === "" ? undefined : message.address;
     if (message.coins) {
       obj.coins = message.coins.map(e => e ? Coin.toAmino(e) : undefined);
     } else {
-      obj.coins = [];
+      obj.coins = message.coins;
     }
     return obj;
   },
@@ -681,14 +695,15 @@ function createBaseSupply(): Supply {
   };
 }
 export const Supply = {
-  encode(message: Supply, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  typeUrl: "/cosmos.bank.v1beta1.Supply",
+  encode(message: Supply, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     for (const v of message.total) {
       Coin.encode(v!, writer.uint32(10).fork()).ldelim();
     }
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): Supply {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): Supply {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseSupply();
     while (reader.pos < end) {
@@ -724,16 +739,16 @@ export const Supply = {
     return message;
   },
   fromAmino(object: SupplyAmino): Supply {
-    return {
-      total: Array.isArray(object?.total) ? object.total.map((e: any) => Coin.fromAmino(e)) : []
-    };
+    const message = createBaseSupply();
+    message.total = object.total?.map(e => Coin.fromAmino(e)) || [];
+    return message;
   },
   toAmino(message: Supply): SupplyAmino {
     const obj: any = {};
     if (message.total) {
       obj.total = message.total.map(e => e ? Coin.toAmino(e) : undefined);
     } else {
-      obj.total = [];
+      obj.total = message.total;
     }
     return obj;
   },
@@ -767,7 +782,8 @@ function createBaseDenomUnit(): DenomUnit {
   };
 }
 export const DenomUnit = {
-  encode(message: DenomUnit, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  typeUrl: "/cosmos.bank.v1beta1.DenomUnit",
+  encode(message: DenomUnit, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.denom !== "") {
       writer.uint32(10).string(message.denom);
     }
@@ -779,8 +795,8 @@ export const DenomUnit = {
     }
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): DenomUnit {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): DenomUnit {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseDenomUnit();
     while (reader.pos < end) {
@@ -828,20 +844,24 @@ export const DenomUnit = {
     return message;
   },
   fromAmino(object: DenomUnitAmino): DenomUnit {
-    return {
-      denom: object.denom,
-      exponent: object.exponent,
-      aliases: Array.isArray(object?.aliases) ? object.aliases.map((e: any) => e) : []
-    };
+    const message = createBaseDenomUnit();
+    if (object.denom !== undefined && object.denom !== null) {
+      message.denom = object.denom;
+    }
+    if (object.exponent !== undefined && object.exponent !== null) {
+      message.exponent = object.exponent;
+    }
+    message.aliases = object.aliases?.map(e => e) || [];
+    return message;
   },
   toAmino(message: DenomUnit): DenomUnitAmino {
     const obj: any = {};
-    obj.denom = message.denom;
-    obj.exponent = message.exponent;
+    obj.denom = message.denom === "" ? undefined : message.denom;
+    obj.exponent = message.exponent === 0 ? undefined : message.exponent;
     if (message.aliases) {
       obj.aliases = message.aliases.map(e => e);
     } else {
-      obj.aliases = [];
+      obj.aliases = message.aliases;
     }
     return obj;
   },
@@ -880,7 +900,8 @@ function createBaseMetadata(): Metadata {
   };
 }
 export const Metadata = {
-  encode(message: Metadata, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  typeUrl: "/cosmos.bank.v1beta1.Metadata",
+  encode(message: Metadata, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.description !== "") {
       writer.uint32(10).string(message.description);
     }
@@ -907,8 +928,8 @@ export const Metadata = {
     }
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): Metadata {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): Metadata {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMetadata();
     while (reader.pos < end) {
@@ -986,31 +1007,45 @@ export const Metadata = {
     return message;
   },
   fromAmino(object: MetadataAmino): Metadata {
-    return {
-      description: object.description,
-      denomUnits: Array.isArray(object?.denom_units) ? object.denom_units.map((e: any) => DenomUnit.fromAmino(e)) : [],
-      base: object.base,
-      display: object.display,
-      name: object.name,
-      symbol: object.symbol,
-      uri: object.uri,
-      uriHash: object.uri_hash
-    };
+    const message = createBaseMetadata();
+    if (object.description !== undefined && object.description !== null) {
+      message.description = object.description;
+    }
+    message.denomUnits = object.denom_units?.map(e => DenomUnit.fromAmino(e)) || [];
+    if (object.base !== undefined && object.base !== null) {
+      message.base = object.base;
+    }
+    if (object.display !== undefined && object.display !== null) {
+      message.display = object.display;
+    }
+    if (object.name !== undefined && object.name !== null) {
+      message.name = object.name;
+    }
+    if (object.symbol !== undefined && object.symbol !== null) {
+      message.symbol = object.symbol;
+    }
+    if (object.uri !== undefined && object.uri !== null) {
+      message.uri = object.uri;
+    }
+    if (object.uri_hash !== undefined && object.uri_hash !== null) {
+      message.uriHash = object.uri_hash;
+    }
+    return message;
   },
   toAmino(message: Metadata): MetadataAmino {
     const obj: any = {};
-    obj.description = message.description;
+    obj.description = message.description === "" ? undefined : message.description;
     if (message.denomUnits) {
       obj.denom_units = message.denomUnits.map(e => e ? DenomUnit.toAmino(e) : undefined);
     } else {
-      obj.denom_units = [];
+      obj.denom_units = message.denomUnits;
     }
-    obj.base = message.base;
-    obj.display = message.display;
-    obj.name = message.name;
-    obj.symbol = message.symbol;
-    obj.uri = message.uri;
-    obj.uri_hash = message.uriHash;
+    obj.base = message.base === "" ? undefined : message.base;
+    obj.display = message.display === "" ? undefined : message.display;
+    obj.name = message.name === "" ? undefined : message.name;
+    obj.symbol = message.symbol === "" ? undefined : message.symbol;
+    obj.uri = message.uri === "" ? undefined : message.uri;
+    obj.uri_hash = message.uriHash === "" ? undefined : message.uriHash;
     return obj;
   },
   fromAminoMsg(object: MetadataAminoMsg): Metadata {

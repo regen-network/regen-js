@@ -1,5 +1,5 @@
 import { Any, AnyAmino, AnySDKType } from "../../../google/protobuf/any";
-import * as _m0 from "protobufjs/minimal";
+import { BinaryReader, BinaryWriter } from "../../../binary";
 import { isSet } from "../../../helpers";
 /** Class defines the class of the nft type. */
 export interface Class {
@@ -16,7 +16,7 @@ export interface Class {
   /** uri_hash is a hash of the document pointed by uri. Optional */
   uriHash: string;
   /** data is the app specific metadata of the NFT class. Optional */
-  data: Any;
+  data?: Any;
 }
 export interface ClassProtoMsg {
   typeUrl: "/cosmos.nft.v1beta1.Class";
@@ -25,17 +25,17 @@ export interface ClassProtoMsg {
 /** Class defines the class of the nft type. */
 export interface ClassAmino {
   /** id defines the unique identifier of the NFT classification, similar to the contract address of ERC721 */
-  id: string;
+  id?: string;
   /** name defines the human-readable name of the NFT classification. Optional */
-  name: string;
+  name?: string;
   /** symbol is an abbreviated name for nft classification. Optional */
-  symbol: string;
+  symbol?: string;
   /** description is a brief description of nft classification. Optional */
-  description: string;
+  description?: string;
   /** uri for the class metadata stored off chain. It can define schema for Class and NFT `Data` attributes. Optional */
-  uri: string;
+  uri?: string;
   /** uri_hash is a hash of the document pointed by uri. Optional */
-  uri_hash: string;
+  uri_hash?: string;
   /** data is the app specific metadata of the NFT class. Optional */
   data?: AnyAmino;
 }
@@ -51,7 +51,7 @@ export interface ClassSDKType {
   description: string;
   uri: string;
   uri_hash: string;
-  data: AnySDKType;
+  data?: AnySDKType;
 }
 /** NFT defines the NFT. */
 export interface NFT {
@@ -64,7 +64,7 @@ export interface NFT {
   /** uri_hash is a hash of the document pointed by uri */
   uriHash: string;
   /** data is an app specific data of the NFT. Optional */
-  data: Any;
+  data?: Any;
 }
 export interface NFTProtoMsg {
   typeUrl: "/cosmos.nft.v1beta1.NFT";
@@ -73,13 +73,13 @@ export interface NFTProtoMsg {
 /** NFT defines the NFT. */
 export interface NFTAmino {
   /** class_id associated with the NFT, similar to the contract address of ERC721 */
-  class_id: string;
+  class_id?: string;
   /** id is a unique identifier of the NFT */
-  id: string;
+  id?: string;
   /** uri for the NFT metadata stored off chain */
-  uri: string;
+  uri?: string;
   /** uri_hash is a hash of the document pointed by uri */
-  uri_hash: string;
+  uri_hash?: string;
   /** data is an app specific data of the NFT. Optional */
   data?: AnyAmino;
 }
@@ -93,7 +93,7 @@ export interface NFTSDKType {
   id: string;
   uri: string;
   uri_hash: string;
-  data: AnySDKType;
+  data?: AnySDKType;
 }
 function createBaseClass(): Class {
   return {
@@ -107,7 +107,8 @@ function createBaseClass(): Class {
   };
 }
 export const Class = {
-  encode(message: Class, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  typeUrl: "/cosmos.nft.v1beta1.Class",
+  encode(message: Class, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.id !== "") {
       writer.uint32(10).string(message.id);
     }
@@ -131,8 +132,8 @@ export const Class = {
     }
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): Class {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): Class {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseClass();
     while (reader.pos < end) {
@@ -200,24 +201,38 @@ export const Class = {
     return message;
   },
   fromAmino(object: ClassAmino): Class {
-    return {
-      id: object.id,
-      name: object.name,
-      symbol: object.symbol,
-      description: object.description,
-      uri: object.uri,
-      uriHash: object.uri_hash,
-      data: object?.data ? Any.fromAmino(object.data) : undefined
-    };
+    const message = createBaseClass();
+    if (object.id !== undefined && object.id !== null) {
+      message.id = object.id;
+    }
+    if (object.name !== undefined && object.name !== null) {
+      message.name = object.name;
+    }
+    if (object.symbol !== undefined && object.symbol !== null) {
+      message.symbol = object.symbol;
+    }
+    if (object.description !== undefined && object.description !== null) {
+      message.description = object.description;
+    }
+    if (object.uri !== undefined && object.uri !== null) {
+      message.uri = object.uri;
+    }
+    if (object.uri_hash !== undefined && object.uri_hash !== null) {
+      message.uriHash = object.uri_hash;
+    }
+    if (object.data !== undefined && object.data !== null) {
+      message.data = Any.fromAmino(object.data);
+    }
+    return message;
   },
   toAmino(message: Class): ClassAmino {
     const obj: any = {};
-    obj.id = message.id;
-    obj.name = message.name;
-    obj.symbol = message.symbol;
-    obj.description = message.description;
-    obj.uri = message.uri;
-    obj.uri_hash = message.uriHash;
+    obj.id = message.id === "" ? undefined : message.id;
+    obj.name = message.name === "" ? undefined : message.name;
+    obj.symbol = message.symbol === "" ? undefined : message.symbol;
+    obj.description = message.description === "" ? undefined : message.description;
+    obj.uri = message.uri === "" ? undefined : message.uri;
+    obj.uri_hash = message.uriHash === "" ? undefined : message.uriHash;
     obj.data = message.data ? Any.toAmino(message.data) : undefined;
     return obj;
   },
@@ -253,7 +268,8 @@ function createBaseNFT(): NFT {
   };
 }
 export const NFT = {
-  encode(message: NFT, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  typeUrl: "/cosmos.nft.v1beta1.NFT",
+  encode(message: NFT, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.classId !== "") {
       writer.uint32(10).string(message.classId);
     }
@@ -271,8 +287,8 @@ export const NFT = {
     }
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): NFT {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): NFT {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseNFT();
     while (reader.pos < end) {
@@ -328,20 +344,30 @@ export const NFT = {
     return message;
   },
   fromAmino(object: NFTAmino): NFT {
-    return {
-      classId: object.class_id,
-      id: object.id,
-      uri: object.uri,
-      uriHash: object.uri_hash,
-      data: object?.data ? Any.fromAmino(object.data) : undefined
-    };
+    const message = createBaseNFT();
+    if (object.class_id !== undefined && object.class_id !== null) {
+      message.classId = object.class_id;
+    }
+    if (object.id !== undefined && object.id !== null) {
+      message.id = object.id;
+    }
+    if (object.uri !== undefined && object.uri !== null) {
+      message.uri = object.uri;
+    }
+    if (object.uri_hash !== undefined && object.uri_hash !== null) {
+      message.uriHash = object.uri_hash;
+    }
+    if (object.data !== undefined && object.data !== null) {
+      message.data = Any.fromAmino(object.data);
+    }
+    return message;
   },
   toAmino(message: NFT): NFTAmino {
     const obj: any = {};
-    obj.class_id = message.classId;
-    obj.id = message.id;
-    obj.uri = message.uri;
-    obj.uri_hash = message.uriHash;
+    obj.class_id = message.classId === "" ? undefined : message.classId;
+    obj.id = message.id === "" ? undefined : message.id;
+    obj.uri = message.uri === "" ? undefined : message.uri;
+    obj.uri_hash = message.uriHash === "" ? undefined : message.uriHash;
     obj.data = message.data ? Any.toAmino(message.data) : undefined;
     return obj;
   },

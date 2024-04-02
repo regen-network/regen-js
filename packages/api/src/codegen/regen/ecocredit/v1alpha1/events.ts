@@ -1,4 +1,4 @@
-import * as _m0 from "protobufjs/minimal";
+import { BinaryReader, BinaryWriter } from "../../../binary";
 import { isSet } from "../../../helpers";
 /** EventCreateClass is an event emitted when a credit class is created. */
 export interface EventCreateClass {
@@ -14,9 +14,9 @@ export interface EventCreateClassProtoMsg {
 /** EventCreateClass is an event emitted when a credit class is created. */
 export interface EventCreateClassAmino {
   /** class_id is the unique ID of credit class. */
-  class_id: string;
+  class_id?: string;
   /** admin is the admin of the credit class. */
-  admin: string;
+  admin?: string;
 }
 export interface EventCreateClassAminoMsg {
   type: "/regen.ecocredit.v1alpha1.EventCreateClass";
@@ -60,28 +60,28 @@ export interface EventCreateBatchProtoMsg {
 /** EventCreateBatch is an event emitted when a credit batch is created. */
 export interface EventCreateBatchAmino {
   /** class_id is the unique ID of credit class. */
-  class_id: string;
+  class_id?: string;
   /** batch_denom is the unique ID of credit batch. */
-  batch_denom: string;
+  batch_denom?: string;
   /** issuer is the account address of the issuer of the credit batch. */
-  issuer: string;
+  issuer?: string;
   /** total_amount is the total number of credits in the credit batch. */
-  total_amount: string;
+  total_amount?: string;
   /**
    * start_date is the beginning of the period during which this credit batch
    * was quantified and verified.
    */
-  start_date: string;
+  start_date?: string;
   /**
    * end_date is the end of the period during which this credit batch was
    * quantified and verified.
    */
-  end_date: string;
+  end_date?: string;
   /**
    * project_location is the location of the project backing the credits in this
    * batch. Full documentation can be found in MsgCreateBatch.project_location.
    */
-  project_location: string;
+  project_location?: string;
 }
 export interface EventCreateBatchAminoMsg {
   type: "/regen.ecocredit.v1alpha1.EventCreateBatch";
@@ -142,22 +142,22 @@ export interface EventReceiveAmino {
    * result of a transfer. It will not be set when credits are received at
    * initial issuance or taken from a basket.
    */
-  sender: string;
+  sender?: string;
   /** recipient is the recipient of the credits. */
-  recipient: string;
+  recipient?: string;
   /** batch_denom is the unique ID of credit batch. */
-  batch_denom: string;
+  batch_denom?: string;
   /** tradable_amount is the decimal number of tradable credits received. */
-  tradable_amount: string;
+  tradable_amount?: string;
   /** retired_amount is the decimal number of retired credits received. */
-  retired_amount: string;
+  retired_amount?: string;
   /**
    * basket_denom is the denom of the basket. when the basket_denom field is
    * set, it indicates that this event was triggered by the transfer of credits
    * from a basket. It will not be set if the credits were sent by a user, or by
    * initial issuance.
    */
-  basket_denom: string;
+  basket_denom?: string;
 }
 export interface EventReceiveAminoMsg {
   type: "/regen.ecocredit.v1alpha1.EventReceive";
@@ -217,11 +217,11 @@ export interface EventRetireAmino {
    * account receiving credits in the case that credits were retired upon
    * issuance using Msg/CreateBatch or retired upon transfer using Msg/Send.
    */
-  retirer: string;
+  retirer?: string;
   /** batch_denom is the unique ID of credit batch. */
-  batch_denom: string;
+  batch_denom?: string;
   /** amount is the decimal number of credits that have been retired. */
-  amount: string;
+  amount?: string;
   /**
    * location is the location of the beneficiary or buyer of the retired
    * credits. It is a string of the form
@@ -229,7 +229,7 @@ export interface EventRetireAmino {
    * fields conforming to ISO 3166-2, and postal-code being up to 64
    * alphanumeric characters.
    */
-  location: string;
+  location?: string;
 }
 export interface EventRetireAminoMsg {
   type: "/regen.ecocredit.v1alpha1.EventRetire";
@@ -276,11 +276,11 @@ export interface EventCancelAmino {
    * canceller is the account which has cancelled the credits, which should be
    * the holder of the credits.
    */
-  canceller: string;
+  canceller?: string;
   /** batch_denom is the unique ID of credit batch. */
-  batch_denom: string;
+  batch_denom?: string;
   /** amount is the decimal number of credits that have been cancelled. */
-  amount: string;
+  amount?: string;
 }
 export interface EventCancelAminoMsg {
   type: "/regen.ecocredit.v1alpha1.EventCancel";
@@ -303,7 +303,8 @@ function createBaseEventCreateClass(): EventCreateClass {
   };
 }
 export const EventCreateClass = {
-  encode(message: EventCreateClass, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  typeUrl: "/regen.ecocredit.v1alpha1.EventCreateClass",
+  encode(message: EventCreateClass, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.classId !== "") {
       writer.uint32(10).string(message.classId);
     }
@@ -312,8 +313,8 @@ export const EventCreateClass = {
     }
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): EventCreateClass {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): EventCreateClass {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseEventCreateClass();
     while (reader.pos < end) {
@@ -351,15 +352,19 @@ export const EventCreateClass = {
     return message;
   },
   fromAmino(object: EventCreateClassAmino): EventCreateClass {
-    return {
-      classId: object.class_id,
-      admin: object.admin
-    };
+    const message = createBaseEventCreateClass();
+    if (object.class_id !== undefined && object.class_id !== null) {
+      message.classId = object.class_id;
+    }
+    if (object.admin !== undefined && object.admin !== null) {
+      message.admin = object.admin;
+    }
+    return message;
   },
   toAmino(message: EventCreateClass): EventCreateClassAmino {
     const obj: any = {};
-    obj.class_id = message.classId;
-    obj.admin = message.admin;
+    obj.class_id = message.classId === "" ? undefined : message.classId;
+    obj.admin = message.admin === "" ? undefined : message.admin;
     return obj;
   },
   fromAminoMsg(object: EventCreateClassAminoMsg): EventCreateClass {
@@ -390,7 +395,8 @@ function createBaseEventCreateBatch(): EventCreateBatch {
   };
 }
 export const EventCreateBatch = {
-  encode(message: EventCreateBatch, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  typeUrl: "/regen.ecocredit.v1alpha1.EventCreateBatch",
+  encode(message: EventCreateBatch, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.classId !== "") {
       writer.uint32(10).string(message.classId);
     }
@@ -414,8 +420,8 @@ export const EventCreateBatch = {
     }
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): EventCreateBatch {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): EventCreateBatch {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseEventCreateBatch();
     while (reader.pos < end) {
@@ -483,25 +489,39 @@ export const EventCreateBatch = {
     return message;
   },
   fromAmino(object: EventCreateBatchAmino): EventCreateBatch {
-    return {
-      classId: object.class_id,
-      batchDenom: object.batch_denom,
-      issuer: object.issuer,
-      totalAmount: object.total_amount,
-      startDate: object.start_date,
-      endDate: object.end_date,
-      projectLocation: object.project_location
-    };
+    const message = createBaseEventCreateBatch();
+    if (object.class_id !== undefined && object.class_id !== null) {
+      message.classId = object.class_id;
+    }
+    if (object.batch_denom !== undefined && object.batch_denom !== null) {
+      message.batchDenom = object.batch_denom;
+    }
+    if (object.issuer !== undefined && object.issuer !== null) {
+      message.issuer = object.issuer;
+    }
+    if (object.total_amount !== undefined && object.total_amount !== null) {
+      message.totalAmount = object.total_amount;
+    }
+    if (object.start_date !== undefined && object.start_date !== null) {
+      message.startDate = object.start_date;
+    }
+    if (object.end_date !== undefined && object.end_date !== null) {
+      message.endDate = object.end_date;
+    }
+    if (object.project_location !== undefined && object.project_location !== null) {
+      message.projectLocation = object.project_location;
+    }
+    return message;
   },
   toAmino(message: EventCreateBatch): EventCreateBatchAmino {
     const obj: any = {};
-    obj.class_id = message.classId;
-    obj.batch_denom = message.batchDenom;
-    obj.issuer = message.issuer;
-    obj.total_amount = message.totalAmount;
-    obj.start_date = message.startDate;
-    obj.end_date = message.endDate;
-    obj.project_location = message.projectLocation;
+    obj.class_id = message.classId === "" ? undefined : message.classId;
+    obj.batch_denom = message.batchDenom === "" ? undefined : message.batchDenom;
+    obj.issuer = message.issuer === "" ? undefined : message.issuer;
+    obj.total_amount = message.totalAmount === "" ? undefined : message.totalAmount;
+    obj.start_date = message.startDate === "" ? undefined : message.startDate;
+    obj.end_date = message.endDate === "" ? undefined : message.endDate;
+    obj.project_location = message.projectLocation === "" ? undefined : message.projectLocation;
     return obj;
   },
   fromAminoMsg(object: EventCreateBatchAminoMsg): EventCreateBatch {
@@ -531,7 +551,8 @@ function createBaseEventReceive(): EventReceive {
   };
 }
 export const EventReceive = {
-  encode(message: EventReceive, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  typeUrl: "/regen.ecocredit.v1alpha1.EventReceive",
+  encode(message: EventReceive, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.sender !== "") {
       writer.uint32(10).string(message.sender);
     }
@@ -552,8 +573,8 @@ export const EventReceive = {
     }
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): EventReceive {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): EventReceive {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseEventReceive();
     while (reader.pos < end) {
@@ -615,23 +636,35 @@ export const EventReceive = {
     return message;
   },
   fromAmino(object: EventReceiveAmino): EventReceive {
-    return {
-      sender: object.sender,
-      recipient: object.recipient,
-      batchDenom: object.batch_denom,
-      tradableAmount: object.tradable_amount,
-      retiredAmount: object.retired_amount,
-      basketDenom: object.basket_denom
-    };
+    const message = createBaseEventReceive();
+    if (object.sender !== undefined && object.sender !== null) {
+      message.sender = object.sender;
+    }
+    if (object.recipient !== undefined && object.recipient !== null) {
+      message.recipient = object.recipient;
+    }
+    if (object.batch_denom !== undefined && object.batch_denom !== null) {
+      message.batchDenom = object.batch_denom;
+    }
+    if (object.tradable_amount !== undefined && object.tradable_amount !== null) {
+      message.tradableAmount = object.tradable_amount;
+    }
+    if (object.retired_amount !== undefined && object.retired_amount !== null) {
+      message.retiredAmount = object.retired_amount;
+    }
+    if (object.basket_denom !== undefined && object.basket_denom !== null) {
+      message.basketDenom = object.basket_denom;
+    }
+    return message;
   },
   toAmino(message: EventReceive): EventReceiveAmino {
     const obj: any = {};
-    obj.sender = message.sender;
-    obj.recipient = message.recipient;
-    obj.batch_denom = message.batchDenom;
-    obj.tradable_amount = message.tradableAmount;
-    obj.retired_amount = message.retiredAmount;
-    obj.basket_denom = message.basketDenom;
+    obj.sender = message.sender === "" ? undefined : message.sender;
+    obj.recipient = message.recipient === "" ? undefined : message.recipient;
+    obj.batch_denom = message.batchDenom === "" ? undefined : message.batchDenom;
+    obj.tradable_amount = message.tradableAmount === "" ? undefined : message.tradableAmount;
+    obj.retired_amount = message.retiredAmount === "" ? undefined : message.retiredAmount;
+    obj.basket_denom = message.basketDenom === "" ? undefined : message.basketDenom;
     return obj;
   },
   fromAminoMsg(object: EventReceiveAminoMsg): EventReceive {
@@ -659,7 +692,8 @@ function createBaseEventRetire(): EventRetire {
   };
 }
 export const EventRetire = {
-  encode(message: EventRetire, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  typeUrl: "/regen.ecocredit.v1alpha1.EventRetire",
+  encode(message: EventRetire, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.retirer !== "") {
       writer.uint32(10).string(message.retirer);
     }
@@ -674,8 +708,8 @@ export const EventRetire = {
     }
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): EventRetire {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): EventRetire {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseEventRetire();
     while (reader.pos < end) {
@@ -725,19 +759,27 @@ export const EventRetire = {
     return message;
   },
   fromAmino(object: EventRetireAmino): EventRetire {
-    return {
-      retirer: object.retirer,
-      batchDenom: object.batch_denom,
-      amount: object.amount,
-      location: object.location
-    };
+    const message = createBaseEventRetire();
+    if (object.retirer !== undefined && object.retirer !== null) {
+      message.retirer = object.retirer;
+    }
+    if (object.batch_denom !== undefined && object.batch_denom !== null) {
+      message.batchDenom = object.batch_denom;
+    }
+    if (object.amount !== undefined && object.amount !== null) {
+      message.amount = object.amount;
+    }
+    if (object.location !== undefined && object.location !== null) {
+      message.location = object.location;
+    }
+    return message;
   },
   toAmino(message: EventRetire): EventRetireAmino {
     const obj: any = {};
-    obj.retirer = message.retirer;
-    obj.batch_denom = message.batchDenom;
-    obj.amount = message.amount;
-    obj.location = message.location;
+    obj.retirer = message.retirer === "" ? undefined : message.retirer;
+    obj.batch_denom = message.batchDenom === "" ? undefined : message.batchDenom;
+    obj.amount = message.amount === "" ? undefined : message.amount;
+    obj.location = message.location === "" ? undefined : message.location;
     return obj;
   },
   fromAminoMsg(object: EventRetireAminoMsg): EventRetire {
@@ -764,7 +806,8 @@ function createBaseEventCancel(): EventCancel {
   };
 }
 export const EventCancel = {
-  encode(message: EventCancel, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  typeUrl: "/regen.ecocredit.v1alpha1.EventCancel",
+  encode(message: EventCancel, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.canceller !== "") {
       writer.uint32(10).string(message.canceller);
     }
@@ -776,8 +819,8 @@ export const EventCancel = {
     }
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): EventCancel {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): EventCancel {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseEventCancel();
     while (reader.pos < end) {
@@ -821,17 +864,23 @@ export const EventCancel = {
     return message;
   },
   fromAmino(object: EventCancelAmino): EventCancel {
-    return {
-      canceller: object.canceller,
-      batchDenom: object.batch_denom,
-      amount: object.amount
-    };
+    const message = createBaseEventCancel();
+    if (object.canceller !== undefined && object.canceller !== null) {
+      message.canceller = object.canceller;
+    }
+    if (object.batch_denom !== undefined && object.batch_denom !== null) {
+      message.batchDenom = object.batch_denom;
+    }
+    if (object.amount !== undefined && object.amount !== null) {
+      message.amount = object.amount;
+    }
+    return message;
   },
   toAmino(message: EventCancel): EventCancelAmino {
     const obj: any = {};
-    obj.canceller = message.canceller;
-    obj.batch_denom = message.batchDenom;
-    obj.amount = message.amount;
+    obj.canceller = message.canceller === "" ? undefined : message.canceller;
+    obj.batch_denom = message.batchDenom === "" ? undefined : message.batchDenom;
+    obj.amount = message.amount === "" ? undefined : message.amount;
     return obj;
   },
   fromAminoMsg(object: EventCancelAminoMsg): EventCancel {

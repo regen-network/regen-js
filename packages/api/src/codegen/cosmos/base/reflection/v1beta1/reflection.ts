@@ -1,4 +1,4 @@
-import * as _m0 from "protobufjs/minimal";
+import { BinaryReader, BinaryWriter } from "../../../../binary";
 import { isSet } from "../../../../helpers";
 /** ListAllInterfacesRequest is the request type of the ListAllInterfaces RPC. */
 export interface ListAllInterfacesRequest {}
@@ -26,7 +26,7 @@ export interface ListAllInterfacesResponseProtoMsg {
 /** ListAllInterfacesResponse is the response type of the ListAllInterfaces RPC. */
 export interface ListAllInterfacesResponseAmino {
   /** interface_names is an array of all the registered interfaces. */
-  interface_names: string[];
+  interface_names?: string[];
 }
 export interface ListAllInterfacesResponseAminoMsg {
   type: "cosmos-sdk/ListAllInterfacesResponse";
@@ -54,7 +54,7 @@ export interface ListImplementationsRequestProtoMsg {
  */
 export interface ListImplementationsRequestAmino {
   /** interface_name defines the interface to query the implementations for. */
-  interface_name: string;
+  interface_name?: string;
 }
 export interface ListImplementationsRequestAminoMsg {
   type: "cosmos-sdk/ListImplementationsRequest";
@@ -83,7 +83,7 @@ export interface ListImplementationsResponseProtoMsg {
  * RPC.
  */
 export interface ListImplementationsResponseAmino {
-  implementation_message_names: string[];
+  implementation_message_names?: string[];
 }
 export interface ListImplementationsResponseAminoMsg {
   type: "cosmos-sdk/ListImplementationsResponse";
@@ -100,11 +100,12 @@ function createBaseListAllInterfacesRequest(): ListAllInterfacesRequest {
   return {};
 }
 export const ListAllInterfacesRequest = {
-  encode(_: ListAllInterfacesRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  typeUrl: "/cosmos.base.reflection.v1beta1.ListAllInterfacesRequest",
+  encode(_: ListAllInterfacesRequest, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): ListAllInterfacesRequest {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): ListAllInterfacesRequest {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseListAllInterfacesRequest();
     while (reader.pos < end) {
@@ -129,7 +130,8 @@ export const ListAllInterfacesRequest = {
     return message;
   },
   fromAmino(_: ListAllInterfacesRequestAmino): ListAllInterfacesRequest {
-    return {};
+    const message = createBaseListAllInterfacesRequest();
+    return message;
   },
   toAmino(_: ListAllInterfacesRequest): ListAllInterfacesRequestAmino {
     const obj: any = {};
@@ -163,14 +165,15 @@ function createBaseListAllInterfacesResponse(): ListAllInterfacesResponse {
   };
 }
 export const ListAllInterfacesResponse = {
-  encode(message: ListAllInterfacesResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  typeUrl: "/cosmos.base.reflection.v1beta1.ListAllInterfacesResponse",
+  encode(message: ListAllInterfacesResponse, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     for (const v of message.interfaceNames) {
       writer.uint32(10).string(v!);
     }
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): ListAllInterfacesResponse {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): ListAllInterfacesResponse {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseListAllInterfacesResponse();
     while (reader.pos < end) {
@@ -206,16 +209,16 @@ export const ListAllInterfacesResponse = {
     return message;
   },
   fromAmino(object: ListAllInterfacesResponseAmino): ListAllInterfacesResponse {
-    return {
-      interfaceNames: Array.isArray(object?.interface_names) ? object.interface_names.map((e: any) => e) : []
-    };
+    const message = createBaseListAllInterfacesResponse();
+    message.interfaceNames = object.interface_names?.map(e => e) || [];
+    return message;
   },
   toAmino(message: ListAllInterfacesResponse): ListAllInterfacesResponseAmino {
     const obj: any = {};
     if (message.interfaceNames) {
       obj.interface_names = message.interfaceNames.map(e => e);
     } else {
-      obj.interface_names = [];
+      obj.interface_names = message.interfaceNames;
     }
     return obj;
   },
@@ -247,14 +250,15 @@ function createBaseListImplementationsRequest(): ListImplementationsRequest {
   };
 }
 export const ListImplementationsRequest = {
-  encode(message: ListImplementationsRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  typeUrl: "/cosmos.base.reflection.v1beta1.ListImplementationsRequest",
+  encode(message: ListImplementationsRequest, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.interfaceName !== "") {
       writer.uint32(10).string(message.interfaceName);
     }
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): ListImplementationsRequest {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): ListImplementationsRequest {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseListImplementationsRequest();
     while (reader.pos < end) {
@@ -286,13 +290,15 @@ export const ListImplementationsRequest = {
     return message;
   },
   fromAmino(object: ListImplementationsRequestAmino): ListImplementationsRequest {
-    return {
-      interfaceName: object.interface_name
-    };
+    const message = createBaseListImplementationsRequest();
+    if (object.interface_name !== undefined && object.interface_name !== null) {
+      message.interfaceName = object.interface_name;
+    }
+    return message;
   },
   toAmino(message: ListImplementationsRequest): ListImplementationsRequestAmino {
     const obj: any = {};
-    obj.interface_name = message.interfaceName;
+    obj.interface_name = message.interfaceName === "" ? undefined : message.interfaceName;
     return obj;
   },
   fromAminoMsg(object: ListImplementationsRequestAminoMsg): ListImplementationsRequest {
@@ -323,14 +329,15 @@ function createBaseListImplementationsResponse(): ListImplementationsResponse {
   };
 }
 export const ListImplementationsResponse = {
-  encode(message: ListImplementationsResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  typeUrl: "/cosmos.base.reflection.v1beta1.ListImplementationsResponse",
+  encode(message: ListImplementationsResponse, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     for (const v of message.implementationMessageNames) {
       writer.uint32(10).string(v!);
     }
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): ListImplementationsResponse {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): ListImplementationsResponse {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseListImplementationsResponse();
     while (reader.pos < end) {
@@ -366,16 +373,16 @@ export const ListImplementationsResponse = {
     return message;
   },
   fromAmino(object: ListImplementationsResponseAmino): ListImplementationsResponse {
-    return {
-      implementationMessageNames: Array.isArray(object?.implementation_message_names) ? object.implementation_message_names.map((e: any) => e) : []
-    };
+    const message = createBaseListImplementationsResponse();
+    message.implementationMessageNames = object.implementation_message_names?.map(e => e) || [];
+    return message;
   },
   toAmino(message: ListImplementationsResponse): ListImplementationsResponseAmino {
     const obj: any = {};
     if (message.implementationMessageNames) {
       obj.implementation_message_names = message.implementationMessageNames.map(e => e);
     } else {
-      obj.implementation_message_names = [];
+      obj.implementation_message_names = message.implementationMessageNames;
     }
     return obj;
   },

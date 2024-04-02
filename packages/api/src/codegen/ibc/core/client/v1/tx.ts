@@ -1,15 +1,15 @@
 import { Any, AnyAmino, AnySDKType } from "../../../../google/protobuf/any";
-import * as _m0 from "protobufjs/minimal";
+import { BinaryReader, BinaryWriter } from "../../../../binary";
 import { isSet, bytesFromBase64, base64FromBytes } from "../../../../helpers";
 /** MsgCreateClient defines a message to create an IBC client */
 export interface MsgCreateClient {
   /** light client state */
-  clientState: Any;
+  clientState?: Any;
   /**
    * consensus state associated with the client that corresponds to a given
    * height.
    */
-  consensusState: Any;
+  consensusState?: Any;
   /** signer address */
   signer: string;
 }
@@ -27,7 +27,7 @@ export interface MsgCreateClientAmino {
    */
   consensus_state?: AnyAmino;
   /** signer address */
-  signer: string;
+  signer?: string;
 }
 export interface MsgCreateClientAminoMsg {
   type: "cosmos-sdk/MsgCreateClient";
@@ -35,8 +35,8 @@ export interface MsgCreateClientAminoMsg {
 }
 /** MsgCreateClient defines a message to create an IBC client */
 export interface MsgCreateClientSDKType {
-  client_state: AnySDKType;
-  consensus_state: AnySDKType;
+  client_state?: AnySDKType;
+  consensus_state?: AnySDKType;
   signer: string;
 }
 /** MsgCreateClientResponse defines the Msg/CreateClient response type. */
@@ -61,7 +61,7 @@ export interface MsgUpdateClient {
   /** client unique identifier */
   clientId: string;
   /** client message to update the light client */
-  clientMessage: Any;
+  clientMessage?: Any;
   /** signer address */
   signer: string;
 }
@@ -75,11 +75,11 @@ export interface MsgUpdateClientProtoMsg {
  */
 export interface MsgUpdateClientAmino {
   /** client unique identifier */
-  client_id: string;
+  client_id?: string;
   /** client message to update the light client */
   client_message?: AnyAmino;
   /** signer address */
-  signer: string;
+  signer?: string;
 }
 export interface MsgUpdateClientAminoMsg {
   type: "cosmos-sdk/MsgUpdateClient";
@@ -91,7 +91,7 @@ export interface MsgUpdateClientAminoMsg {
  */
 export interface MsgUpdateClientSDKType {
   client_id: string;
-  client_message: AnySDKType;
+  client_message?: AnySDKType;
   signer: string;
 }
 /** MsgUpdateClientResponse defines the Msg/UpdateClient response type. */
@@ -116,12 +116,12 @@ export interface MsgUpgradeClient {
   /** client unique identifier */
   clientId: string;
   /** upgraded client state */
-  clientState: Any;
+  clientState?: Any;
   /**
    * upgraded consensus state, only contains enough information to serve as a
    * basis of trust in update logic
    */
-  consensusState: Any;
+  consensusState?: Any;
   /** proof that old chain committed to new client */
   proofUpgradeClient: Uint8Array;
   /** proof that old chain committed to new consensus state */
@@ -139,7 +139,7 @@ export interface MsgUpgradeClientProtoMsg {
  */
 export interface MsgUpgradeClientAmino {
   /** client unique identifier */
-  client_id: string;
+  client_id?: string;
   /** upgraded client state */
   client_state?: AnyAmino;
   /**
@@ -148,11 +148,11 @@ export interface MsgUpgradeClientAmino {
    */
   consensus_state?: AnyAmino;
   /** proof that old chain committed to new client */
-  proof_upgrade_client: Uint8Array;
+  proof_upgrade_client?: string;
   /** proof that old chain committed to new consensus state */
-  proof_upgrade_consensus_state: Uint8Array;
+  proof_upgrade_consensus_state?: string;
   /** signer address */
-  signer: string;
+  signer?: string;
 }
 export interface MsgUpgradeClientAminoMsg {
   type: "cosmos-sdk/MsgUpgradeClient";
@@ -164,8 +164,8 @@ export interface MsgUpgradeClientAminoMsg {
  */
 export interface MsgUpgradeClientSDKType {
   client_id: string;
-  client_state: AnySDKType;
-  consensus_state: AnySDKType;
+  client_state?: AnySDKType;
+  consensus_state?: AnySDKType;
   proof_upgrade_client: Uint8Array;
   proof_upgrade_consensus_state: Uint8Array;
   signer: string;
@@ -195,7 +195,7 @@ export interface MsgSubmitMisbehaviour {
   clientId: string;
   /** misbehaviour used for freezing the light client */
   /** @deprecated */
-  misbehaviour: Any;
+  misbehaviour?: Any;
   /** signer address */
   /** @deprecated */
   signer: string;
@@ -212,13 +212,13 @@ export interface MsgSubmitMisbehaviourProtoMsg {
 export interface MsgSubmitMisbehaviourAmino {
   /** client unique identifier */
   /** @deprecated */
-  client_id: string;
+  client_id?: string;
   /** misbehaviour used for freezing the light client */
   /** @deprecated */
   misbehaviour?: AnyAmino;
   /** signer address */
   /** @deprecated */
-  signer: string;
+  signer?: string;
 }
 export interface MsgSubmitMisbehaviourAminoMsg {
   type: "cosmos-sdk/MsgSubmitMisbehaviour";
@@ -233,7 +233,7 @@ export interface MsgSubmitMisbehaviourSDKType {
   /** @deprecated */
   client_id: string;
   /** @deprecated */
-  misbehaviour: AnySDKType;
+  misbehaviour?: AnySDKType;
   /** @deprecated */
   signer: string;
 }
@@ -268,7 +268,8 @@ function createBaseMsgCreateClient(): MsgCreateClient {
   };
 }
 export const MsgCreateClient = {
-  encode(message: MsgCreateClient, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  typeUrl: "/ibc.core.client.v1.MsgCreateClient",
+  encode(message: MsgCreateClient, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.clientState !== undefined) {
       Any.encode(message.clientState, writer.uint32(10).fork()).ldelim();
     }
@@ -280,8 +281,8 @@ export const MsgCreateClient = {
     }
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): MsgCreateClient {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): MsgCreateClient {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMsgCreateClient();
     while (reader.pos < end) {
@@ -325,17 +326,23 @@ export const MsgCreateClient = {
     return message;
   },
   fromAmino(object: MsgCreateClientAmino): MsgCreateClient {
-    return {
-      clientState: object?.client_state ? Any.fromAmino(object.client_state) : undefined,
-      consensusState: object?.consensus_state ? Any.fromAmino(object.consensus_state) : undefined,
-      signer: object.signer
-    };
+    const message = createBaseMsgCreateClient();
+    if (object.client_state !== undefined && object.client_state !== null) {
+      message.clientState = Any.fromAmino(object.client_state);
+    }
+    if (object.consensus_state !== undefined && object.consensus_state !== null) {
+      message.consensusState = Any.fromAmino(object.consensus_state);
+    }
+    if (object.signer !== undefined && object.signer !== null) {
+      message.signer = object.signer;
+    }
+    return message;
   },
   toAmino(message: MsgCreateClient): MsgCreateClientAmino {
     const obj: any = {};
     obj.client_state = message.clientState ? Any.toAmino(message.clientState) : undefined;
     obj.consensus_state = message.consensusState ? Any.toAmino(message.consensusState) : undefined;
-    obj.signer = message.signer;
+    obj.signer = message.signer === "" ? undefined : message.signer;
     return obj;
   },
   fromAminoMsg(object: MsgCreateClientAminoMsg): MsgCreateClient {
@@ -364,11 +371,12 @@ function createBaseMsgCreateClientResponse(): MsgCreateClientResponse {
   return {};
 }
 export const MsgCreateClientResponse = {
-  encode(_: MsgCreateClientResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  typeUrl: "/ibc.core.client.v1.MsgCreateClientResponse",
+  encode(_: MsgCreateClientResponse, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): MsgCreateClientResponse {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): MsgCreateClientResponse {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMsgCreateClientResponse();
     while (reader.pos < end) {
@@ -393,7 +401,8 @@ export const MsgCreateClientResponse = {
     return message;
   },
   fromAmino(_: MsgCreateClientResponseAmino): MsgCreateClientResponse {
-    return {};
+    const message = createBaseMsgCreateClientResponse();
+    return message;
   },
   toAmino(_: MsgCreateClientResponse): MsgCreateClientResponseAmino {
     const obj: any = {};
@@ -429,7 +438,8 @@ function createBaseMsgUpdateClient(): MsgUpdateClient {
   };
 }
 export const MsgUpdateClient = {
-  encode(message: MsgUpdateClient, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  typeUrl: "/ibc.core.client.v1.MsgUpdateClient",
+  encode(message: MsgUpdateClient, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.clientId !== "") {
       writer.uint32(10).string(message.clientId);
     }
@@ -441,8 +451,8 @@ export const MsgUpdateClient = {
     }
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): MsgUpdateClient {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): MsgUpdateClient {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMsgUpdateClient();
     while (reader.pos < end) {
@@ -486,17 +496,23 @@ export const MsgUpdateClient = {
     return message;
   },
   fromAmino(object: MsgUpdateClientAmino): MsgUpdateClient {
-    return {
-      clientId: object.client_id,
-      clientMessage: object?.client_message ? Any.fromAmino(object.client_message) : undefined,
-      signer: object.signer
-    };
+    const message = createBaseMsgUpdateClient();
+    if (object.client_id !== undefined && object.client_id !== null) {
+      message.clientId = object.client_id;
+    }
+    if (object.client_message !== undefined && object.client_message !== null) {
+      message.clientMessage = Any.fromAmino(object.client_message);
+    }
+    if (object.signer !== undefined && object.signer !== null) {
+      message.signer = object.signer;
+    }
+    return message;
   },
   toAmino(message: MsgUpdateClient): MsgUpdateClientAmino {
     const obj: any = {};
-    obj.client_id = message.clientId;
+    obj.client_id = message.clientId === "" ? undefined : message.clientId;
     obj.client_message = message.clientMessage ? Any.toAmino(message.clientMessage) : undefined;
-    obj.signer = message.signer;
+    obj.signer = message.signer === "" ? undefined : message.signer;
     return obj;
   },
   fromAminoMsg(object: MsgUpdateClientAminoMsg): MsgUpdateClient {
@@ -525,11 +541,12 @@ function createBaseMsgUpdateClientResponse(): MsgUpdateClientResponse {
   return {};
 }
 export const MsgUpdateClientResponse = {
-  encode(_: MsgUpdateClientResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  typeUrl: "/ibc.core.client.v1.MsgUpdateClientResponse",
+  encode(_: MsgUpdateClientResponse, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): MsgUpdateClientResponse {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): MsgUpdateClientResponse {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMsgUpdateClientResponse();
     while (reader.pos < end) {
@@ -554,7 +571,8 @@ export const MsgUpdateClientResponse = {
     return message;
   },
   fromAmino(_: MsgUpdateClientResponseAmino): MsgUpdateClientResponse {
-    return {};
+    const message = createBaseMsgUpdateClientResponse();
+    return message;
   },
   toAmino(_: MsgUpdateClientResponse): MsgUpdateClientResponseAmino {
     const obj: any = {};
@@ -593,7 +611,8 @@ function createBaseMsgUpgradeClient(): MsgUpgradeClient {
   };
 }
 export const MsgUpgradeClient = {
-  encode(message: MsgUpgradeClient, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  typeUrl: "/ibc.core.client.v1.MsgUpgradeClient",
+  encode(message: MsgUpgradeClient, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.clientId !== "") {
       writer.uint32(10).string(message.clientId);
     }
@@ -614,8 +633,8 @@ export const MsgUpgradeClient = {
     }
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): MsgUpgradeClient {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): MsgUpgradeClient {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMsgUpgradeClient();
     while (reader.pos < end) {
@@ -677,23 +696,35 @@ export const MsgUpgradeClient = {
     return message;
   },
   fromAmino(object: MsgUpgradeClientAmino): MsgUpgradeClient {
-    return {
-      clientId: object.client_id,
-      clientState: object?.client_state ? Any.fromAmino(object.client_state) : undefined,
-      consensusState: object?.consensus_state ? Any.fromAmino(object.consensus_state) : undefined,
-      proofUpgradeClient: object.proof_upgrade_client,
-      proofUpgradeConsensusState: object.proof_upgrade_consensus_state,
-      signer: object.signer
-    };
+    const message = createBaseMsgUpgradeClient();
+    if (object.client_id !== undefined && object.client_id !== null) {
+      message.clientId = object.client_id;
+    }
+    if (object.client_state !== undefined && object.client_state !== null) {
+      message.clientState = Any.fromAmino(object.client_state);
+    }
+    if (object.consensus_state !== undefined && object.consensus_state !== null) {
+      message.consensusState = Any.fromAmino(object.consensus_state);
+    }
+    if (object.proof_upgrade_client !== undefined && object.proof_upgrade_client !== null) {
+      message.proofUpgradeClient = bytesFromBase64(object.proof_upgrade_client);
+    }
+    if (object.proof_upgrade_consensus_state !== undefined && object.proof_upgrade_consensus_state !== null) {
+      message.proofUpgradeConsensusState = bytesFromBase64(object.proof_upgrade_consensus_state);
+    }
+    if (object.signer !== undefined && object.signer !== null) {
+      message.signer = object.signer;
+    }
+    return message;
   },
   toAmino(message: MsgUpgradeClient): MsgUpgradeClientAmino {
     const obj: any = {};
-    obj.client_id = message.clientId;
+    obj.client_id = message.clientId === "" ? undefined : message.clientId;
     obj.client_state = message.clientState ? Any.toAmino(message.clientState) : undefined;
     obj.consensus_state = message.consensusState ? Any.toAmino(message.consensusState) : undefined;
-    obj.proof_upgrade_client = message.proofUpgradeClient;
-    obj.proof_upgrade_consensus_state = message.proofUpgradeConsensusState;
-    obj.signer = message.signer;
+    obj.proof_upgrade_client = message.proofUpgradeClient ? base64FromBytes(message.proofUpgradeClient) : undefined;
+    obj.proof_upgrade_consensus_state = message.proofUpgradeConsensusState ? base64FromBytes(message.proofUpgradeConsensusState) : undefined;
+    obj.signer = message.signer === "" ? undefined : message.signer;
     return obj;
   },
   fromAminoMsg(object: MsgUpgradeClientAminoMsg): MsgUpgradeClient {
@@ -722,11 +753,12 @@ function createBaseMsgUpgradeClientResponse(): MsgUpgradeClientResponse {
   return {};
 }
 export const MsgUpgradeClientResponse = {
-  encode(_: MsgUpgradeClientResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  typeUrl: "/ibc.core.client.v1.MsgUpgradeClientResponse",
+  encode(_: MsgUpgradeClientResponse, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): MsgUpgradeClientResponse {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): MsgUpgradeClientResponse {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMsgUpgradeClientResponse();
     while (reader.pos < end) {
@@ -751,7 +783,8 @@ export const MsgUpgradeClientResponse = {
     return message;
   },
   fromAmino(_: MsgUpgradeClientResponseAmino): MsgUpgradeClientResponse {
-    return {};
+    const message = createBaseMsgUpgradeClientResponse();
+    return message;
   },
   toAmino(_: MsgUpgradeClientResponse): MsgUpgradeClientResponseAmino {
     const obj: any = {};
@@ -787,7 +820,8 @@ function createBaseMsgSubmitMisbehaviour(): MsgSubmitMisbehaviour {
   };
 }
 export const MsgSubmitMisbehaviour = {
-  encode(message: MsgSubmitMisbehaviour, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  typeUrl: "/ibc.core.client.v1.MsgSubmitMisbehaviour",
+  encode(message: MsgSubmitMisbehaviour, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.clientId !== "") {
       writer.uint32(10).string(message.clientId);
     }
@@ -799,8 +833,8 @@ export const MsgSubmitMisbehaviour = {
     }
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): MsgSubmitMisbehaviour {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): MsgSubmitMisbehaviour {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMsgSubmitMisbehaviour();
     while (reader.pos < end) {
@@ -844,17 +878,23 @@ export const MsgSubmitMisbehaviour = {
     return message;
   },
   fromAmino(object: MsgSubmitMisbehaviourAmino): MsgSubmitMisbehaviour {
-    return {
-      clientId: object.client_id,
-      misbehaviour: object?.misbehaviour ? Any.fromAmino(object.misbehaviour) : undefined,
-      signer: object.signer
-    };
+    const message = createBaseMsgSubmitMisbehaviour();
+    if (object.client_id !== undefined && object.client_id !== null) {
+      message.clientId = object.client_id;
+    }
+    if (object.misbehaviour !== undefined && object.misbehaviour !== null) {
+      message.misbehaviour = Any.fromAmino(object.misbehaviour);
+    }
+    if (object.signer !== undefined && object.signer !== null) {
+      message.signer = object.signer;
+    }
+    return message;
   },
   toAmino(message: MsgSubmitMisbehaviour): MsgSubmitMisbehaviourAmino {
     const obj: any = {};
-    obj.client_id = message.clientId;
+    obj.client_id = message.clientId === "" ? undefined : message.clientId;
     obj.misbehaviour = message.misbehaviour ? Any.toAmino(message.misbehaviour) : undefined;
-    obj.signer = message.signer;
+    obj.signer = message.signer === "" ? undefined : message.signer;
     return obj;
   },
   fromAminoMsg(object: MsgSubmitMisbehaviourAminoMsg): MsgSubmitMisbehaviour {
@@ -883,11 +923,12 @@ function createBaseMsgSubmitMisbehaviourResponse(): MsgSubmitMisbehaviourRespons
   return {};
 }
 export const MsgSubmitMisbehaviourResponse = {
-  encode(_: MsgSubmitMisbehaviourResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  typeUrl: "/ibc.core.client.v1.MsgSubmitMisbehaviourResponse",
+  encode(_: MsgSubmitMisbehaviourResponse, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): MsgSubmitMisbehaviourResponse {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): MsgSubmitMisbehaviourResponse {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMsgSubmitMisbehaviourResponse();
     while (reader.pos < end) {
@@ -912,7 +953,8 @@ export const MsgSubmitMisbehaviourResponse = {
     return message;
   },
   fromAmino(_: MsgSubmitMisbehaviourResponseAmino): MsgSubmitMisbehaviourResponse {
-    return {};
+    const message = createBaseMsgSubmitMisbehaviourResponse();
+    return message;
   },
   toAmino(_: MsgSubmitMisbehaviourResponse): MsgSubmitMisbehaviourResponseAmino {
     const obj: any = {};

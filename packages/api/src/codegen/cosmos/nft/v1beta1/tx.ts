@@ -1,4 +1,4 @@
-import * as _m0 from "protobufjs/minimal";
+import { BinaryReader, BinaryWriter } from "../../../binary";
 import { isSet } from "../../../helpers";
 /** MsgSend represents a message to send a nft from one account to another account. */
 export interface MsgSend {
@@ -18,13 +18,13 @@ export interface MsgSendProtoMsg {
 /** MsgSend represents a message to send a nft from one account to another account. */
 export interface MsgSendAmino {
   /** class_id defines the unique identifier of the nft classification, similar to the contract address of ERC721 */
-  class_id: string;
+  class_id?: string;
   /** id defines the unique identification of nft */
-  id: string;
+  id?: string;
   /** sender is the address of the owner of nft */
-  sender: string;
+  sender?: string;
   /** receiver is the receiver address of nft */
-  receiver: string;
+  receiver?: string;
 }
 export interface MsgSendAminoMsg {
   type: "cosmos-sdk/MsgNFTSend";
@@ -60,7 +60,8 @@ function createBaseMsgSend(): MsgSend {
   };
 }
 export const MsgSend = {
-  encode(message: MsgSend, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  typeUrl: "/cosmos.nft.v1beta1.MsgSend",
+  encode(message: MsgSend, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.classId !== "") {
       writer.uint32(10).string(message.classId);
     }
@@ -75,8 +76,8 @@ export const MsgSend = {
     }
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): MsgSend {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): MsgSend {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMsgSend();
     while (reader.pos < end) {
@@ -126,19 +127,27 @@ export const MsgSend = {
     return message;
   },
   fromAmino(object: MsgSendAmino): MsgSend {
-    return {
-      classId: object.class_id,
-      id: object.id,
-      sender: object.sender,
-      receiver: object.receiver
-    };
+    const message = createBaseMsgSend();
+    if (object.class_id !== undefined && object.class_id !== null) {
+      message.classId = object.class_id;
+    }
+    if (object.id !== undefined && object.id !== null) {
+      message.id = object.id;
+    }
+    if (object.sender !== undefined && object.sender !== null) {
+      message.sender = object.sender;
+    }
+    if (object.receiver !== undefined && object.receiver !== null) {
+      message.receiver = object.receiver;
+    }
+    return message;
   },
   toAmino(message: MsgSend): MsgSendAmino {
     const obj: any = {};
-    obj.class_id = message.classId;
-    obj.id = message.id;
-    obj.sender = message.sender;
-    obj.receiver = message.receiver;
+    obj.class_id = message.classId === "" ? undefined : message.classId;
+    obj.id = message.id === "" ? undefined : message.id;
+    obj.sender = message.sender === "" ? undefined : message.sender;
+    obj.receiver = message.receiver === "" ? undefined : message.receiver;
     return obj;
   },
   fromAminoMsg(object: MsgSendAminoMsg): MsgSend {
@@ -167,11 +176,12 @@ function createBaseMsgSendResponse(): MsgSendResponse {
   return {};
 }
 export const MsgSendResponse = {
-  encode(_: MsgSendResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  typeUrl: "/cosmos.nft.v1beta1.MsgSendResponse",
+  encode(_: MsgSendResponse, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): MsgSendResponse {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): MsgSendResponse {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMsgSendResponse();
     while (reader.pos < end) {
@@ -196,7 +206,8 @@ export const MsgSendResponse = {
     return message;
   },
   fromAmino(_: MsgSendResponseAmino): MsgSendResponse {
-    return {};
+    const message = createBaseMsgSendResponse();
+    return message;
   },
   toAmino(_: MsgSendResponse): MsgSendResponseAmino {
     const obj: any = {};

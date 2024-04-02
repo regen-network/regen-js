@@ -1,5 +1,5 @@
 import { Any, AnyAmino, AnySDKType } from "../../../google/protobuf/any";
-import * as _m0 from "protobufjs/minimal";
+import { BinaryReader, BinaryWriter } from "../../../binary";
 import { isSet } from "../../../helpers";
 /**
  * Config represents the configuration for a Cosmos SDK ABCI app.
@@ -29,7 +29,7 @@ export interface ConfigProtoMsg {
  */
 export interface ConfigAmino {
   /** modules are the module configurations for the app. */
-  modules: ModuleConfigAmino[];
+  modules?: ModuleConfigAmino[];
 }
 export interface ConfigAminoMsg {
   type: "cosmos-sdk/Config";
@@ -66,7 +66,7 @@ export interface ModuleConfig {
    * config is the config object for the module. Module config messages should
    * define a ModuleDescriptor using the cosmos.app.v1alpha1.is_module extension.
    */
-  config: Any;
+  config?: Any;
 }
 export interface ModuleConfigProtoMsg {
   typeUrl: "/cosmos.app.v1alpha1.ModuleConfig";
@@ -86,7 +86,7 @@ export interface ModuleConfigAmino {
    * that the v1 module had. Note: modules should provide info on which versions
    * they can migrate from in the ModuleDescriptor.can_migration_from field.
    */
-  name: string;
+  name?: string;
   /**
    * config is the config object for the module. Module config messages should
    * define a ModuleDescriptor using the cosmos.app.v1alpha1.is_module extension.
@@ -100,7 +100,7 @@ export interface ModuleConfigAminoMsg {
 /** ModuleConfig is a module configuration for an app. */
 export interface ModuleConfigSDKType {
   name: string;
-  config: AnySDKType;
+  config?: AnySDKType;
 }
 function createBaseConfig(): Config {
   return {
@@ -108,14 +108,15 @@ function createBaseConfig(): Config {
   };
 }
 export const Config = {
-  encode(message: Config, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  typeUrl: "/cosmos.app.v1alpha1.Config",
+  encode(message: Config, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     for (const v of message.modules) {
       ModuleConfig.encode(v!, writer.uint32(10).fork()).ldelim();
     }
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): Config {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): Config {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseConfig();
     while (reader.pos < end) {
@@ -151,16 +152,16 @@ export const Config = {
     return message;
   },
   fromAmino(object: ConfigAmino): Config {
-    return {
-      modules: Array.isArray(object?.modules) ? object.modules.map((e: any) => ModuleConfig.fromAmino(e)) : []
-    };
+    const message = createBaseConfig();
+    message.modules = object.modules?.map(e => ModuleConfig.fromAmino(e)) || [];
+    return message;
   },
   toAmino(message: Config): ConfigAmino {
     const obj: any = {};
     if (message.modules) {
       obj.modules = message.modules.map(e => e ? ModuleConfig.toAmino(e) : undefined);
     } else {
-      obj.modules = [];
+      obj.modules = message.modules;
     }
     return obj;
   },
@@ -193,7 +194,8 @@ function createBaseModuleConfig(): ModuleConfig {
   };
 }
 export const ModuleConfig = {
-  encode(message: ModuleConfig, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  typeUrl: "/cosmos.app.v1alpha1.ModuleConfig",
+  encode(message: ModuleConfig, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.name !== "") {
       writer.uint32(10).string(message.name);
     }
@@ -202,8 +204,8 @@ export const ModuleConfig = {
     }
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): ModuleConfig {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): ModuleConfig {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseModuleConfig();
     while (reader.pos < end) {
@@ -241,14 +243,18 @@ export const ModuleConfig = {
     return message;
   },
   fromAmino(object: ModuleConfigAmino): ModuleConfig {
-    return {
-      name: object.name,
-      config: object?.config ? Any.fromAmino(object.config) : undefined
-    };
+    const message = createBaseModuleConfig();
+    if (object.name !== undefined && object.name !== null) {
+      message.name = object.name;
+    }
+    if (object.config !== undefined && object.config !== null) {
+      message.config = Any.fromAmino(object.config);
+    }
+    return message;
   },
   toAmino(message: ModuleConfig): ModuleConfigAmino {
     const obj: any = {};
-    obj.name = message.name;
+    obj.name = message.name === "" ? undefined : message.name;
     obj.config = message.config ? Any.toAmino(message.config) : undefined;
     return obj;
   },

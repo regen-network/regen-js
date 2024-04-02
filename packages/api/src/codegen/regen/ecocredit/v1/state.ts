@@ -1,7 +1,7 @@
-import { Timestamp, TimestampAmino, TimestampSDKType } from "../../../google/protobuf/timestamp";
+import { Timestamp, TimestampSDKType } from "../../../google/protobuf/timestamp";
 import { Coin, CoinAmino, CoinSDKType } from "../../../cosmos/base/v1beta1/coin";
-import { Long, isSet, bytesFromBase64, base64FromBytes, fromJsonTimestamp, fromTimestamp } from "../../../helpers";
-import * as _m0 from "protobufjs/minimal";
+import { BinaryReader, BinaryWriter } from "../../../binary";
+import { isSet, bytesFromBase64, base64FromBytes, fromJsonTimestamp, fromTimestamp } from "../../../helpers";
 /**
  * CreditType defines the measurement unit/precision of a certain credit type
  * (e.g. carbon, biodiversity...)
@@ -32,13 +32,13 @@ export interface CreditTypeAmino {
    * abbreviation is a 1-3 character uppercase abbreviation of the CreditType
    * name, used in batch denominations within the CreditType. It must be unique.
    */
-  abbreviation: string;
+  abbreviation?: string;
   /** name is the name of the credit type (e.g. carbon, biodiversity). */
-  name: string;
+  name?: string;
   /** unit is the measurement unit of the credit type (e.g. kg, ton). */
-  unit: string;
+  unit?: string;
   /** precision is the decimal precision of the credit type. */
-  precision: number;
+  precision?: number;
 }
 export interface CreditTypeAminoMsg {
   type: "/regen.ecocredit.v1.CreditType";
@@ -60,7 +60,7 @@ export interface Class {
    * key is the table row identifier of the credit class used internally for
    * efficient lookups. This identifier is auto-incrementing.
    */
-  key: Long;
+  key: bigint;
   /**
    * id is the unique identifier of the credit class auto-generated from the
    * credit type abbreviation and the credit class sequence number.
@@ -83,18 +83,18 @@ export interface ClassAmino {
    * key is the table row identifier of the credit class used internally for
    * efficient lookups. This identifier is auto-incrementing.
    */
-  key: string;
+  key?: string;
   /**
    * id is the unique identifier of the credit class auto-generated from the
    * credit type abbreviation and the credit class sequence number.
    */
-  id: string;
+  id?: string;
   /** admin is the admin of the credit class. */
-  admin: Uint8Array;
+  admin?: string;
   /** metadata is any arbitrary metadata to attached to the credit class. */
-  metadata: string;
+  metadata?: string;
   /** credit_type_abbrev is the abbreviation of the credit type. */
-  credit_type_abbrev: string;
+  credit_type_abbrev?: string;
 }
 export interface ClassAminoMsg {
   type: "/regen.ecocredit.v1.Class";
@@ -102,7 +102,7 @@ export interface ClassAminoMsg {
 }
 /** Class represents the high-level on-chain information for a credit class. */
 export interface ClassSDKType {
-  key: Long;
+  key: bigint;
   id: string;
   admin: Uint8Array;
   metadata: string;
@@ -117,7 +117,7 @@ export interface ClassIssuer {
    * class_key is the table row identifier of the credit class used internally
    * for efficient lookups. This links a class issuer to a credit class.
    */
-  classKey: Long;
+  classKey: bigint;
   /** issuer is the approved issuer of the credit class. */
   issuer: Uint8Array;
 }
@@ -134,9 +134,9 @@ export interface ClassIssuerAmino {
    * class_key is the table row identifier of the credit class used internally
    * for efficient lookups. This links a class issuer to a credit class.
    */
-  class_key: string;
+  class_key?: string;
   /** issuer is the approved issuer of the credit class. */
-  issuer: Uint8Array;
+  issuer?: string;
 }
 export interface ClassIssuerAminoMsg {
   type: "/regen.ecocredit.v1.ClassIssuer";
@@ -147,7 +147,7 @@ export interface ClassIssuerAminoMsg {
  * issuers
  */
 export interface ClassIssuerSDKType {
-  class_key: Long;
+  class_key: bigint;
   issuer: Uint8Array;
 }
 /** Project represents the high-level on-chain information for a project. */
@@ -156,7 +156,7 @@ export interface Project {
    * key is the table row identifier of the project used internally for
    * efficient lookups. This identifier is auto-incrementing.
    */
-  key: Long;
+  key: bigint;
   /**
    * id is the unique identifier of the project either auto-generated from the
    * credit class id and project sequence number or provided upon creation.
@@ -168,7 +168,7 @@ export interface Project {
    * class_key is the table row identifier of the credit class used internally
    * for efficient lookups. This links a project to a credit class.
    */
-  classKey: Long;
+  classKey: bigint;
   /**
    * jurisdiction is the jurisdiction of the project.
    * Full documentation can be found in MsgCreateProject.jurisdiction.
@@ -189,28 +189,28 @@ export interface ProjectAmino {
    * key is the table row identifier of the project used internally for
    * efficient lookups. This identifier is auto-incrementing.
    */
-  key: string;
+  key?: string;
   /**
    * id is the unique identifier of the project either auto-generated from the
    * credit class id and project sequence number or provided upon creation.
    */
-  id: string;
+  id?: string;
   /** admin is the admin of the project. */
-  admin: Uint8Array;
+  admin?: string;
   /**
    * class_key is the table row identifier of the credit class used internally
    * for efficient lookups. This links a project to a credit class.
    */
-  class_key: string;
+  class_key?: string;
   /**
    * jurisdiction is the jurisdiction of the project.
    * Full documentation can be found in MsgCreateProject.jurisdiction.
    */
-  jurisdiction: string;
+  jurisdiction?: string;
   /** metadata is any arbitrary metadata attached to the project. */
-  metadata: string;
+  metadata?: string;
   /** reference_id is any arbitrary string used to reference the project. */
-  reference_id: string;
+  reference_id?: string;
 }
 export interface ProjectAminoMsg {
   type: "/regen.ecocredit.v1.Project";
@@ -218,10 +218,10 @@ export interface ProjectAminoMsg {
 }
 /** Project represents the high-level on-chain information for a project. */
 export interface ProjectSDKType {
-  key: Long;
+  key: bigint;
   id: string;
   admin: Uint8Array;
-  class_key: Long;
+  class_key: bigint;
   jurisdiction: string;
   metadata: string;
   reference_id: string;
@@ -232,7 +232,7 @@ export interface Batch {
    * key is the table row identifier of the credit batch used internally for
    * efficient lookups. This identifier is auto-incrementing.
    */
-  key: Long;
+  key: bigint;
   /**
    * issuer is the address that created the batch and which is
    * authorized to mint more credits if open=true.
@@ -242,7 +242,7 @@ export interface Batch {
    * project_key is the table row identifier of the credit class used internally
    * for efficient lookups. This links a credit batch to a project.
    */
-  projectKey: Long;
+  projectKey: bigint;
   /**
    * denom is the unique identifier of the credit batch formed from the
    * project id, the batch sequence number, and the start and end date of the
@@ -255,14 +255,14 @@ export interface Batch {
    * start_date is the beginning of the period during which this credit batch
    * was quantified and verified.
    */
-  startDate: Timestamp;
+  startDate?: Timestamp;
   /**
    * end_date is the end of the period during which this credit batch was
    * quantified and verified.
    */
-  endDate: Timestamp;
+  endDate?: Timestamp;
   /** issuance_date is the timestamp when the credit batch was issued. */
-  issuanceDate: Timestamp;
+  issuanceDate?: Timestamp;
   /**
    * open tells if it's possible to mint new credits in the future.
    * Once `open` is set to false, it can't be toggled any more.
@@ -279,42 +279,42 @@ export interface BatchAmino {
    * key is the table row identifier of the credit batch used internally for
    * efficient lookups. This identifier is auto-incrementing.
    */
-  key: string;
+  key?: string;
   /**
    * issuer is the address that created the batch and which is
    * authorized to mint more credits if open=true.
    */
-  issuer: Uint8Array;
+  issuer?: string;
   /**
    * project_key is the table row identifier of the credit class used internally
    * for efficient lookups. This links a credit batch to a project.
    */
-  project_key: string;
+  project_key?: string;
   /**
    * denom is the unique identifier of the credit batch formed from the
    * project id, the batch sequence number, and the start and end date of the
    * credit batch.
    */
-  denom: string;
+  denom?: string;
   /** metadata is any arbitrary metadata attached to the credit batch. */
-  metadata: string;
+  metadata?: string;
   /**
    * start_date is the beginning of the period during which this credit batch
    * was quantified and verified.
    */
-  start_date?: TimestampAmino;
+  start_date?: string;
   /**
    * end_date is the end of the period during which this credit batch was
    * quantified and verified.
    */
-  end_date?: TimestampAmino;
+  end_date?: string;
   /** issuance_date is the timestamp when the credit batch was issued. */
-  issuance_date?: TimestampAmino;
+  issuance_date?: string;
   /**
    * open tells if it's possible to mint new credits in the future.
    * Once `open` is set to false, it can't be toggled any more.
    */
-  open: boolean;
+  open?: boolean;
 }
 export interface BatchAminoMsg {
   type: "/regen.ecocredit.v1.Batch";
@@ -322,14 +322,14 @@ export interface BatchAminoMsg {
 }
 /** Batch represents the high-level on-chain information for a credit batch. */
 export interface BatchSDKType {
-  key: Long;
+  key: bigint;
   issuer: Uint8Array;
-  project_key: Long;
+  project_key: bigint;
   denom: string;
   metadata: string;
-  start_date: TimestampSDKType;
-  end_date: TimestampSDKType;
-  issuance_date: TimestampSDKType;
+  start_date?: TimestampSDKType;
+  end_date?: TimestampSDKType;
+  issuance_date?: TimestampSDKType;
   open: boolean;
 }
 /**
@@ -346,7 +346,7 @@ export interface ClassSequence {
    * next_sequence is the next sequence number for a credit class within the
    * credit type. The sequence number is used to generate a class id.
    */
-  nextSequence: Long;
+  nextSequence: bigint;
 }
 export interface ClassSequenceProtoMsg {
   typeUrl: "/regen.ecocredit.v1.ClassSequence";
@@ -361,12 +361,12 @@ export interface ClassSequenceAmino {
    * credit_type_abbrev is the credit type abbreviation. This links a class
    * sequence to a credit type.
    */
-  credit_type_abbrev: string;
+  credit_type_abbrev?: string;
   /**
    * next_sequence is the next sequence number for a credit class within the
    * credit type. The sequence number is used to generate a class id.
    */
-  next_sequence: string;
+  next_sequence?: string;
 }
 export interface ClassSequenceAminoMsg {
   type: "/regen.ecocredit.v1.ClassSequence";
@@ -378,7 +378,7 @@ export interface ClassSequenceAminoMsg {
  */
 export interface ClassSequenceSDKType {
   credit_type_abbrev: string;
-  next_sequence: Long;
+  next_sequence: bigint;
 }
 /**
  * ProjectSequence stores and increments the sequence number for projects within
@@ -389,12 +389,12 @@ export interface ProjectSequence {
    * class_key is the table row identifier of the credit class used internally
    * for efficient lookups. This links a project sequence to a credit class.
    */
-  classKey: Long;
+  classKey: bigint;
   /**
    * next_sequence is the next sequence number for a project within the credit
    * class. The sequence number is used to generate a project id.
    */
-  nextSequence: Long;
+  nextSequence: bigint;
 }
 export interface ProjectSequenceProtoMsg {
   typeUrl: "/regen.ecocredit.v1.ProjectSequence";
@@ -409,12 +409,12 @@ export interface ProjectSequenceAmino {
    * class_key is the table row identifier of the credit class used internally
    * for efficient lookups. This links a project sequence to a credit class.
    */
-  class_key: string;
+  class_key?: string;
   /**
    * next_sequence is the next sequence number for a project within the credit
    * class. The sequence number is used to generate a project id.
    */
-  next_sequence: string;
+  next_sequence?: string;
 }
 export interface ProjectSequenceAminoMsg {
   type: "/regen.ecocredit.v1.ProjectSequence";
@@ -425,8 +425,8 @@ export interface ProjectSequenceAminoMsg {
  * a credit class.
  */
 export interface ProjectSequenceSDKType {
-  class_key: Long;
-  next_sequence: Long;
+  class_key: bigint;
+  next_sequence: bigint;
 }
 /**
  * BatchSequence stores and increments the sequence number for credit batches
@@ -437,12 +437,12 @@ export interface BatchSequence {
    * project_key is the table row identifier of the project used internally for
    * efficient lookups. This links a batch sequence to a project.
    */
-  projectKey: Long;
+  projectKey: bigint;
   /**
    * next_sequence is the next sequence number for a credit batch within the
    * project. The sequence number is used to generate a batch denom.
    */
-  nextSequence: Long;
+  nextSequence: bigint;
 }
 export interface BatchSequenceProtoMsg {
   typeUrl: "/regen.ecocredit.v1.BatchSequence";
@@ -457,12 +457,12 @@ export interface BatchSequenceAmino {
    * project_key is the table row identifier of the project used internally for
    * efficient lookups. This links a batch sequence to a project.
    */
-  project_key: string;
+  project_key?: string;
   /**
    * next_sequence is the next sequence number for a credit batch within the
    * project. The sequence number is used to generate a batch denom.
    */
-  next_sequence: string;
+  next_sequence?: string;
 }
 export interface BatchSequenceAminoMsg {
   type: "/regen.ecocredit.v1.BatchSequence";
@@ -473,8 +473,8 @@ export interface BatchSequenceAminoMsg {
  * within a project.
  */
 export interface BatchSequenceSDKType {
-  project_key: Long;
-  next_sequence: Long;
+  project_key: bigint;
+  next_sequence: bigint;
 }
 /** BatchBalance stores each accounts credit balance. */
 export interface BatchBalance {
@@ -482,7 +482,7 @@ export interface BatchBalance {
    * batch_key is the table row identifier of the credit batch used internally
    * for efficient lookups. This links a batch balance to a credit batch.
    */
-  batchKey: Long;
+  batchKey: bigint;
   /** address is the address of the account that owns the credits. */
   address: Uint8Array;
   /** tradable_amount is the total number of tradable credits owned by address. */
@@ -507,20 +507,20 @@ export interface BatchBalanceAmino {
    * batch_key is the table row identifier of the credit batch used internally
    * for efficient lookups. This links a batch balance to a credit batch.
    */
-  batch_key: string;
+  batch_key?: string;
   /** address is the address of the account that owns the credits. */
-  address: Uint8Array;
+  address?: string;
   /** tradable_amount is the total number of tradable credits owned by address. */
-  tradable_amount: string;
+  tradable_amount?: string;
   /** retired_amount is the total number of retired credits owned by address. */
-  retired_amount: string;
+  retired_amount?: string;
   /**
    * escrowed_amount is the total number of escrowed credits owned by address
    * and held in escrow by the marketplace. Credits are held in escrow when a
    * sell order is created and taken out of escrow when the sell order is either
    * cancelled, updated with a reduced quantity, or processed.
    */
-  escrowed_amount: string;
+  escrowed_amount?: string;
 }
 export interface BatchBalanceAminoMsg {
   type: "/regen.ecocredit.v1.BatchBalance";
@@ -528,7 +528,7 @@ export interface BatchBalanceAminoMsg {
 }
 /** BatchBalance stores each accounts credit balance. */
 export interface BatchBalanceSDKType {
-  batch_key: Long;
+  batch_key: bigint;
   address: Uint8Array;
   tradable_amount: string;
   retired_amount: string;
@@ -540,7 +540,7 @@ export interface BatchSupply {
    * batch_key is the table row identifier of the credit batch used internally
    * for efficient lookups. This links a batch supply to a credit batch.
    */
-  batchKey: Long;
+  batchKey: bigint;
   /**
    * tradable_amount is the total number of tradable credits in the credit
    * batch. Tradable credits may be retired in which case they will be removed
@@ -574,7 +574,7 @@ export interface BatchSupplyAmino {
    * batch_key is the table row identifier of the credit batch used internally
    * for efficient lookups. This links a batch supply to a credit batch.
    */
-  batch_key: string;
+  batch_key?: string;
   /**
    * tradable_amount is the total number of tradable credits in the credit
    * batch. Tradable credits may be retired in which case they will be removed
@@ -583,20 +583,20 @@ export interface BatchSupplyAmino {
    * and tracked in cancelled_amount. The sum of the tradable, retired, and
    * cancelled amounts will always equal the original credit issuance amount.
    */
-  tradable_amount: string;
+  tradable_amount?: string;
   /**
    * retired_amount is the total amount of credits that have been retired in the
    * credit batch. The sum of the tradable, retired, and cancelled amounts will
    * always equal the original credit issuance amount.
    */
-  retired_amount: string;
+  retired_amount?: string;
   /**
    * cancelled_amount is the number of credits in the batch that have been
    * cancelled, effectively undoing the issuance. The sum of the tradable,
    * retired, and cancelled amounts will always equal the original credit
    * issuance amount.
    */
-  cancelled_amount: string;
+  cancelled_amount?: string;
 }
 export interface BatchSupplyAminoMsg {
   type: "/regen.ecocredit.v1.BatchSupply";
@@ -604,7 +604,7 @@ export interface BatchSupplyAminoMsg {
 }
 /** BatchSupply stores the supply of credits for a credit batch. */
 export interface BatchSupplySDKType {
-  batch_key: Long;
+  batch_key: bigint;
   tradable_amount: string;
   retired_amount: string;
   cancelled_amount: string;
@@ -623,7 +623,7 @@ export interface OriginTxIndex {
    * to prevent malicious credit class issuers from blocking bridge operations
    * taking place within another credit class.
    */
-  classKey: Long;
+  classKey: bigint;
   /**
    * id is the transaction ID of an originating transaction or operation
    * based on a type (i.e. transaction ID, serial number).
@@ -653,17 +653,17 @@ export interface OriginTxIndexAmino {
    * to prevent malicious credit class issuers from blocking bridge operations
    * taking place within another credit class.
    */
-  class_key: string;
+  class_key?: string;
   /**
    * id is the transaction ID of an originating transaction or operation
    * based on a type (i.e. transaction ID, serial number).
    */
-  id: string;
+  id?: string;
   /**
    * source is the source chain or registry of the transaction originating
    * the mint process (e.g. polygon, ethereum, verra).
    */
-  source: string;
+  source?: string;
 }
 export interface OriginTxIndexAminoMsg {
   type: "/regen.ecocredit.v1.OriginTxIndex";
@@ -677,7 +677,7 @@ export interface OriginTxIndexAminoMsg {
  * bridge operations taking place within another credit class.
  */
 export interface OriginTxIndexSDKType {
-  class_key: Long;
+  class_key: bigint;
   id: string;
   source: string;
 }
@@ -692,14 +692,14 @@ export interface BatchContract {
    * batch_key is the table row identifier of the credit batch used internally
    * for efficient lookups. This links an external contract to a credit batch.
    */
-  batchKey: Long;
+  batchKey: bigint;
   /**
    * class_key is the table row identifier of the credit class within which the
    * credit batch exists. A contract is unique within the scope of a credit
    * class to prevent malicious credit class issuers from blocking bridge
    * operations taking place within another credit class.
    */
-  classKey: Long;
+  classKey: bigint;
   /**
    * contract is the address of the contract on the source chain that was
    * executed when creating the transaction. This address will be used when
@@ -722,20 +722,20 @@ export interface BatchContractAmino {
    * batch_key is the table row identifier of the credit batch used internally
    * for efficient lookups. This links an external contract to a credit batch.
    */
-  batch_key: string;
+  batch_key?: string;
   /**
    * class_key is the table row identifier of the credit class within which the
    * credit batch exists. A contract is unique within the scope of a credit
    * class to prevent malicious credit class issuers from blocking bridge
    * operations taking place within another credit class.
    */
-  class_key: string;
+  class_key?: string;
   /**
    * contract is the address of the contract on the source chain that was
    * executed when creating the transaction. This address will be used when
    * sending credits back to the source chain.
    */
-  contract: string;
+  contract?: string;
 }
 export interface BatchContractAminoMsg {
   type: "/regen.ecocredit.v1.BatchContract";
@@ -748,8 +748,8 @@ export interface BatchContractAminoMsg {
  * have been bridged will always be bridged back to the original contract.
  */
 export interface BatchContractSDKType {
-  batch_key: Long;
-  class_key: Long;
+  batch_key: bigint;
+  class_key: bigint;
   contract: string;
 }
 /**
@@ -778,7 +778,7 @@ export interface ClassCreatorAllowlistProtoMsg {
  */
 export interface ClassCreatorAllowlistAmino {
   /** enabled is whether or not the allow list is enabled. */
-  enabled: boolean;
+  enabled?: boolean;
 }
 export interface ClassCreatorAllowlistAminoMsg {
   type: "/regen.ecocredit.v1.ClassCreatorAllowlist";
@@ -817,7 +817,7 @@ export interface AllowedClassCreatorProtoMsg {
  */
 export interface AllowedClassCreatorAmino {
   /** address is the address that is allowed to create credit classes */
-  address: Uint8Array;
+  address?: string;
 }
 export interface AllowedClassCreatorAminoMsg {
   type: "/regen.ecocredit.v1.AllowedClassCreator";
@@ -843,7 +843,7 @@ export interface ClassFee {
    * fee is the credit class creation fee. If not set, a credit class creation
    * fee is not required.
    */
-  fee: Coin;
+  fee?: Coin;
 }
 export interface ClassFeeProtoMsg {
   typeUrl: "/regen.ecocredit.v1.ClassFee";
@@ -873,7 +873,7 @@ export interface ClassFeeAminoMsg {
  * Since Revision 2
  */
 export interface ClassFeeSDKType {
-  fee: CoinSDKType;
+  fee?: CoinSDKType;
 }
 /**
  * AllowedBridgeChain is a list of chains that are allowed to be used in
@@ -901,7 +901,7 @@ export interface AllowedBridgeChainProtoMsg {
  */
 export interface AllowedBridgeChainAmino {
   /** chain_name is the name of the chain allowed to bridge ecocredits to. */
-  chain_name: string;
+  chain_name?: string;
 }
 export interface AllowedBridgeChainAminoMsg {
   type: "/regen.ecocredit.v1.AllowedBridgeChain";
@@ -927,7 +927,8 @@ function createBaseCreditType(): CreditType {
   };
 }
 export const CreditType = {
-  encode(message: CreditType, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  typeUrl: "/regen.ecocredit.v1.CreditType",
+  encode(message: CreditType, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.abbreviation !== "") {
       writer.uint32(10).string(message.abbreviation);
     }
@@ -942,8 +943,8 @@ export const CreditType = {
     }
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): CreditType {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): CreditType {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseCreditType();
     while (reader.pos < end) {
@@ -993,19 +994,27 @@ export const CreditType = {
     return message;
   },
   fromAmino(object: CreditTypeAmino): CreditType {
-    return {
-      abbreviation: object.abbreviation,
-      name: object.name,
-      unit: object.unit,
-      precision: object.precision
-    };
+    const message = createBaseCreditType();
+    if (object.abbreviation !== undefined && object.abbreviation !== null) {
+      message.abbreviation = object.abbreviation;
+    }
+    if (object.name !== undefined && object.name !== null) {
+      message.name = object.name;
+    }
+    if (object.unit !== undefined && object.unit !== null) {
+      message.unit = object.unit;
+    }
+    if (object.precision !== undefined && object.precision !== null) {
+      message.precision = object.precision;
+    }
+    return message;
   },
   toAmino(message: CreditType): CreditTypeAmino {
     const obj: any = {};
-    obj.abbreviation = message.abbreviation;
-    obj.name = message.name;
-    obj.unit = message.unit;
-    obj.precision = message.precision;
+    obj.abbreviation = message.abbreviation === "" ? undefined : message.abbreviation;
+    obj.name = message.name === "" ? undefined : message.name;
+    obj.unit = message.unit === "" ? undefined : message.unit;
+    obj.precision = message.precision === 0 ? undefined : message.precision;
     return obj;
   },
   fromAminoMsg(object: CreditTypeAminoMsg): CreditType {
@@ -1026,7 +1035,7 @@ export const CreditType = {
 };
 function createBaseClass(): Class {
   return {
-    key: Long.UZERO,
+    key: BigInt(0),
     id: "",
     admin: new Uint8Array(),
     metadata: "",
@@ -1034,8 +1043,9 @@ function createBaseClass(): Class {
   };
 }
 export const Class = {
-  encode(message: Class, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
-    if (!message.key.isZero()) {
+  typeUrl: "/regen.ecocredit.v1.Class",
+  encode(message: Class, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
+    if (message.key !== BigInt(0)) {
       writer.uint32(8).uint64(message.key);
     }
     if (message.id !== "") {
@@ -1052,15 +1062,15 @@ export const Class = {
     }
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): Class {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): Class {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseClass();
     while (reader.pos < end) {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          message.key = (reader.uint64() as Long);
+          message.key = reader.uint64();
           break;
         case 2:
           message.id = reader.string();
@@ -1083,7 +1093,7 @@ export const Class = {
   },
   fromJSON(object: any): Class {
     return {
-      key: isSet(object.key) ? Long.fromValue(object.key) : Long.UZERO,
+      key: isSet(object.key) ? BigInt(object.key.toString()) : BigInt(0),
       id: isSet(object.id) ? String(object.id) : "",
       admin: isSet(object.admin) ? bytesFromBase64(object.admin) : new Uint8Array(),
       metadata: isSet(object.metadata) ? String(object.metadata) : "",
@@ -1092,7 +1102,7 @@ export const Class = {
   },
   toJSON(message: Class): unknown {
     const obj: any = {};
-    message.key !== undefined && (obj.key = (message.key || Long.UZERO).toString());
+    message.key !== undefined && (obj.key = (message.key || BigInt(0)).toString());
     message.id !== undefined && (obj.id = message.id);
     message.admin !== undefined && (obj.admin = base64FromBytes(message.admin !== undefined ? message.admin : new Uint8Array()));
     message.metadata !== undefined && (obj.metadata = message.metadata);
@@ -1101,7 +1111,7 @@ export const Class = {
   },
   fromPartial(object: Partial<Class>): Class {
     const message = createBaseClass();
-    message.key = object.key !== undefined && object.key !== null ? Long.fromValue(object.key) : Long.UZERO;
+    message.key = object.key !== undefined && object.key !== null ? BigInt(object.key.toString()) : BigInt(0);
     message.id = object.id ?? "";
     message.admin = object.admin ?? new Uint8Array();
     message.metadata = object.metadata ?? "";
@@ -1109,21 +1119,31 @@ export const Class = {
     return message;
   },
   fromAmino(object: ClassAmino): Class {
-    return {
-      key: Long.fromString(object.key),
-      id: object.id,
-      admin: object.admin,
-      metadata: object.metadata,
-      creditTypeAbbrev: object.credit_type_abbrev
-    };
+    const message = createBaseClass();
+    if (object.key !== undefined && object.key !== null) {
+      message.key = BigInt(object.key);
+    }
+    if (object.id !== undefined && object.id !== null) {
+      message.id = object.id;
+    }
+    if (object.admin !== undefined && object.admin !== null) {
+      message.admin = bytesFromBase64(object.admin);
+    }
+    if (object.metadata !== undefined && object.metadata !== null) {
+      message.metadata = object.metadata;
+    }
+    if (object.credit_type_abbrev !== undefined && object.credit_type_abbrev !== null) {
+      message.creditTypeAbbrev = object.credit_type_abbrev;
+    }
+    return message;
   },
   toAmino(message: Class): ClassAmino {
     const obj: any = {};
-    obj.key = message.key ? message.key.toString() : undefined;
-    obj.id = message.id;
-    obj.admin = message.admin;
-    obj.metadata = message.metadata;
-    obj.credit_type_abbrev = message.creditTypeAbbrev;
+    obj.key = message.key !== BigInt(0) ? message.key.toString() : undefined;
+    obj.id = message.id === "" ? undefined : message.id;
+    obj.admin = message.admin ? base64FromBytes(message.admin) : undefined;
+    obj.metadata = message.metadata === "" ? undefined : message.metadata;
+    obj.credit_type_abbrev = message.creditTypeAbbrev === "" ? undefined : message.creditTypeAbbrev;
     return obj;
   },
   fromAminoMsg(object: ClassAminoMsg): Class {
@@ -1144,13 +1164,14 @@ export const Class = {
 };
 function createBaseClassIssuer(): ClassIssuer {
   return {
-    classKey: Long.UZERO,
+    classKey: BigInt(0),
     issuer: new Uint8Array()
   };
 }
 export const ClassIssuer = {
-  encode(message: ClassIssuer, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
-    if (!message.classKey.isZero()) {
+  typeUrl: "/regen.ecocredit.v1.ClassIssuer",
+  encode(message: ClassIssuer, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
+    if (message.classKey !== BigInt(0)) {
       writer.uint32(8).uint64(message.classKey);
     }
     if (message.issuer.length !== 0) {
@@ -1158,15 +1179,15 @@ export const ClassIssuer = {
     }
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): ClassIssuer {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): ClassIssuer {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseClassIssuer();
     while (reader.pos < end) {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          message.classKey = (reader.uint64() as Long);
+          message.classKey = reader.uint64();
           break;
         case 2:
           message.issuer = reader.bytes();
@@ -1180,32 +1201,36 @@ export const ClassIssuer = {
   },
   fromJSON(object: any): ClassIssuer {
     return {
-      classKey: isSet(object.classKey) ? Long.fromValue(object.classKey) : Long.UZERO,
+      classKey: isSet(object.classKey) ? BigInt(object.classKey.toString()) : BigInt(0),
       issuer: isSet(object.issuer) ? bytesFromBase64(object.issuer) : new Uint8Array()
     };
   },
   toJSON(message: ClassIssuer): unknown {
     const obj: any = {};
-    message.classKey !== undefined && (obj.classKey = (message.classKey || Long.UZERO).toString());
+    message.classKey !== undefined && (obj.classKey = (message.classKey || BigInt(0)).toString());
     message.issuer !== undefined && (obj.issuer = base64FromBytes(message.issuer !== undefined ? message.issuer : new Uint8Array()));
     return obj;
   },
   fromPartial(object: Partial<ClassIssuer>): ClassIssuer {
     const message = createBaseClassIssuer();
-    message.classKey = object.classKey !== undefined && object.classKey !== null ? Long.fromValue(object.classKey) : Long.UZERO;
+    message.classKey = object.classKey !== undefined && object.classKey !== null ? BigInt(object.classKey.toString()) : BigInt(0);
     message.issuer = object.issuer ?? new Uint8Array();
     return message;
   },
   fromAmino(object: ClassIssuerAmino): ClassIssuer {
-    return {
-      classKey: Long.fromString(object.class_key),
-      issuer: object.issuer
-    };
+    const message = createBaseClassIssuer();
+    if (object.class_key !== undefined && object.class_key !== null) {
+      message.classKey = BigInt(object.class_key);
+    }
+    if (object.issuer !== undefined && object.issuer !== null) {
+      message.issuer = bytesFromBase64(object.issuer);
+    }
+    return message;
   },
   toAmino(message: ClassIssuer): ClassIssuerAmino {
     const obj: any = {};
-    obj.class_key = message.classKey ? message.classKey.toString() : undefined;
-    obj.issuer = message.issuer;
+    obj.class_key = message.classKey !== BigInt(0) ? message.classKey.toString() : undefined;
+    obj.issuer = message.issuer ? base64FromBytes(message.issuer) : undefined;
     return obj;
   },
   fromAminoMsg(object: ClassIssuerAminoMsg): ClassIssuer {
@@ -1226,18 +1251,19 @@ export const ClassIssuer = {
 };
 function createBaseProject(): Project {
   return {
-    key: Long.UZERO,
+    key: BigInt(0),
     id: "",
     admin: new Uint8Array(),
-    classKey: Long.UZERO,
+    classKey: BigInt(0),
     jurisdiction: "",
     metadata: "",
     referenceId: ""
   };
 }
 export const Project = {
-  encode(message: Project, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
-    if (!message.key.isZero()) {
+  typeUrl: "/regen.ecocredit.v1.Project",
+  encode(message: Project, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
+    if (message.key !== BigInt(0)) {
       writer.uint32(8).uint64(message.key);
     }
     if (message.id !== "") {
@@ -1246,7 +1272,7 @@ export const Project = {
     if (message.admin.length !== 0) {
       writer.uint32(26).bytes(message.admin);
     }
-    if (!message.classKey.isZero()) {
+    if (message.classKey !== BigInt(0)) {
       writer.uint32(32).uint64(message.classKey);
     }
     if (message.jurisdiction !== "") {
@@ -1260,15 +1286,15 @@ export const Project = {
     }
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): Project {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): Project {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseProject();
     while (reader.pos < end) {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          message.key = (reader.uint64() as Long);
+          message.key = reader.uint64();
           break;
         case 2:
           message.id = reader.string();
@@ -1277,7 +1303,7 @@ export const Project = {
           message.admin = reader.bytes();
           break;
         case 4:
-          message.classKey = (reader.uint64() as Long);
+          message.classKey = reader.uint64();
           break;
         case 5:
           message.jurisdiction = reader.string();
@@ -1297,10 +1323,10 @@ export const Project = {
   },
   fromJSON(object: any): Project {
     return {
-      key: isSet(object.key) ? Long.fromValue(object.key) : Long.UZERO,
+      key: isSet(object.key) ? BigInt(object.key.toString()) : BigInt(0),
       id: isSet(object.id) ? String(object.id) : "",
       admin: isSet(object.admin) ? bytesFromBase64(object.admin) : new Uint8Array(),
-      classKey: isSet(object.classKey) ? Long.fromValue(object.classKey) : Long.UZERO,
+      classKey: isSet(object.classKey) ? BigInt(object.classKey.toString()) : BigInt(0),
       jurisdiction: isSet(object.jurisdiction) ? String(object.jurisdiction) : "",
       metadata: isSet(object.metadata) ? String(object.metadata) : "",
       referenceId: isSet(object.referenceId) ? String(object.referenceId) : ""
@@ -1308,10 +1334,10 @@ export const Project = {
   },
   toJSON(message: Project): unknown {
     const obj: any = {};
-    message.key !== undefined && (obj.key = (message.key || Long.UZERO).toString());
+    message.key !== undefined && (obj.key = (message.key || BigInt(0)).toString());
     message.id !== undefined && (obj.id = message.id);
     message.admin !== undefined && (obj.admin = base64FromBytes(message.admin !== undefined ? message.admin : new Uint8Array()));
-    message.classKey !== undefined && (obj.classKey = (message.classKey || Long.UZERO).toString());
+    message.classKey !== undefined && (obj.classKey = (message.classKey || BigInt(0)).toString());
     message.jurisdiction !== undefined && (obj.jurisdiction = message.jurisdiction);
     message.metadata !== undefined && (obj.metadata = message.metadata);
     message.referenceId !== undefined && (obj.referenceId = message.referenceId);
@@ -1319,35 +1345,49 @@ export const Project = {
   },
   fromPartial(object: Partial<Project>): Project {
     const message = createBaseProject();
-    message.key = object.key !== undefined && object.key !== null ? Long.fromValue(object.key) : Long.UZERO;
+    message.key = object.key !== undefined && object.key !== null ? BigInt(object.key.toString()) : BigInt(0);
     message.id = object.id ?? "";
     message.admin = object.admin ?? new Uint8Array();
-    message.classKey = object.classKey !== undefined && object.classKey !== null ? Long.fromValue(object.classKey) : Long.UZERO;
+    message.classKey = object.classKey !== undefined && object.classKey !== null ? BigInt(object.classKey.toString()) : BigInt(0);
     message.jurisdiction = object.jurisdiction ?? "";
     message.metadata = object.metadata ?? "";
     message.referenceId = object.referenceId ?? "";
     return message;
   },
   fromAmino(object: ProjectAmino): Project {
-    return {
-      key: Long.fromString(object.key),
-      id: object.id,
-      admin: object.admin,
-      classKey: Long.fromString(object.class_key),
-      jurisdiction: object.jurisdiction,
-      metadata: object.metadata,
-      referenceId: object.reference_id
-    };
+    const message = createBaseProject();
+    if (object.key !== undefined && object.key !== null) {
+      message.key = BigInt(object.key);
+    }
+    if (object.id !== undefined && object.id !== null) {
+      message.id = object.id;
+    }
+    if (object.admin !== undefined && object.admin !== null) {
+      message.admin = bytesFromBase64(object.admin);
+    }
+    if (object.class_key !== undefined && object.class_key !== null) {
+      message.classKey = BigInt(object.class_key);
+    }
+    if (object.jurisdiction !== undefined && object.jurisdiction !== null) {
+      message.jurisdiction = object.jurisdiction;
+    }
+    if (object.metadata !== undefined && object.metadata !== null) {
+      message.metadata = object.metadata;
+    }
+    if (object.reference_id !== undefined && object.reference_id !== null) {
+      message.referenceId = object.reference_id;
+    }
+    return message;
   },
   toAmino(message: Project): ProjectAmino {
     const obj: any = {};
-    obj.key = message.key ? message.key.toString() : undefined;
-    obj.id = message.id;
-    obj.admin = message.admin;
-    obj.class_key = message.classKey ? message.classKey.toString() : undefined;
-    obj.jurisdiction = message.jurisdiction;
-    obj.metadata = message.metadata;
-    obj.reference_id = message.referenceId;
+    obj.key = message.key !== BigInt(0) ? message.key.toString() : undefined;
+    obj.id = message.id === "" ? undefined : message.id;
+    obj.admin = message.admin ? base64FromBytes(message.admin) : undefined;
+    obj.class_key = message.classKey !== BigInt(0) ? message.classKey.toString() : undefined;
+    obj.jurisdiction = message.jurisdiction === "" ? undefined : message.jurisdiction;
+    obj.metadata = message.metadata === "" ? undefined : message.metadata;
+    obj.reference_id = message.referenceId === "" ? undefined : message.referenceId;
     return obj;
   },
   fromAminoMsg(object: ProjectAminoMsg): Project {
@@ -1368,9 +1408,9 @@ export const Project = {
 };
 function createBaseBatch(): Batch {
   return {
-    key: Long.UZERO,
+    key: BigInt(0),
     issuer: new Uint8Array(),
-    projectKey: Long.UZERO,
+    projectKey: BigInt(0),
     denom: "",
     metadata: "",
     startDate: undefined,
@@ -1380,14 +1420,15 @@ function createBaseBatch(): Batch {
   };
 }
 export const Batch = {
-  encode(message: Batch, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
-    if (!message.key.isZero()) {
+  typeUrl: "/regen.ecocredit.v1.Batch",
+  encode(message: Batch, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
+    if (message.key !== BigInt(0)) {
       writer.uint32(8).uint64(message.key);
     }
     if (message.issuer.length !== 0) {
       writer.uint32(18).bytes(message.issuer);
     }
-    if (!message.projectKey.isZero()) {
+    if (message.projectKey !== BigInt(0)) {
       writer.uint32(24).uint64(message.projectKey);
     }
     if (message.denom !== "") {
@@ -1410,21 +1451,21 @@ export const Batch = {
     }
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): Batch {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): Batch {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseBatch();
     while (reader.pos < end) {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          message.key = (reader.uint64() as Long);
+          message.key = reader.uint64();
           break;
         case 2:
           message.issuer = reader.bytes();
           break;
         case 3:
-          message.projectKey = (reader.uint64() as Long);
+          message.projectKey = reader.uint64();
           break;
         case 4:
           message.denom = reader.string();
@@ -1453,9 +1494,9 @@ export const Batch = {
   },
   fromJSON(object: any): Batch {
     return {
-      key: isSet(object.key) ? Long.fromValue(object.key) : Long.UZERO,
+      key: isSet(object.key) ? BigInt(object.key.toString()) : BigInt(0),
       issuer: isSet(object.issuer) ? bytesFromBase64(object.issuer) : new Uint8Array(),
-      projectKey: isSet(object.projectKey) ? Long.fromValue(object.projectKey) : Long.UZERO,
+      projectKey: isSet(object.projectKey) ? BigInt(object.projectKey.toString()) : BigInt(0),
       denom: isSet(object.denom) ? String(object.denom) : "",
       metadata: isSet(object.metadata) ? String(object.metadata) : "",
       startDate: isSet(object.startDate) ? fromJsonTimestamp(object.startDate) : undefined,
@@ -1466,9 +1507,9 @@ export const Batch = {
   },
   toJSON(message: Batch): unknown {
     const obj: any = {};
-    message.key !== undefined && (obj.key = (message.key || Long.UZERO).toString());
+    message.key !== undefined && (obj.key = (message.key || BigInt(0)).toString());
     message.issuer !== undefined && (obj.issuer = base64FromBytes(message.issuer !== undefined ? message.issuer : new Uint8Array()));
-    message.projectKey !== undefined && (obj.projectKey = (message.projectKey || Long.UZERO).toString());
+    message.projectKey !== undefined && (obj.projectKey = (message.projectKey || BigInt(0)).toString());
     message.denom !== undefined && (obj.denom = message.denom);
     message.metadata !== undefined && (obj.metadata = message.metadata);
     message.startDate !== undefined && (obj.startDate = fromTimestamp(message.startDate).toISOString());
@@ -1479,9 +1520,9 @@ export const Batch = {
   },
   fromPartial(object: Partial<Batch>): Batch {
     const message = createBaseBatch();
-    message.key = object.key !== undefined && object.key !== null ? Long.fromValue(object.key) : Long.UZERO;
+    message.key = object.key !== undefined && object.key !== null ? BigInt(object.key.toString()) : BigInt(0);
     message.issuer = object.issuer ?? new Uint8Array();
-    message.projectKey = object.projectKey !== undefined && object.projectKey !== null ? Long.fromValue(object.projectKey) : Long.UZERO;
+    message.projectKey = object.projectKey !== undefined && object.projectKey !== null ? BigInt(object.projectKey.toString()) : BigInt(0);
     message.denom = object.denom ?? "";
     message.metadata = object.metadata ?? "";
     message.startDate = object.startDate !== undefined && object.startDate !== null ? Timestamp.fromPartial(object.startDate) : undefined;
@@ -1491,29 +1532,47 @@ export const Batch = {
     return message;
   },
   fromAmino(object: BatchAmino): Batch {
-    return {
-      key: Long.fromString(object.key),
-      issuer: object.issuer,
-      projectKey: Long.fromString(object.project_key),
-      denom: object.denom,
-      metadata: object.metadata,
-      startDate: object?.start_date ? Timestamp.fromAmino(object.start_date) : undefined,
-      endDate: object?.end_date ? Timestamp.fromAmino(object.end_date) : undefined,
-      issuanceDate: object?.issuance_date ? Timestamp.fromAmino(object.issuance_date) : undefined,
-      open: object.open
-    };
+    const message = createBaseBatch();
+    if (object.key !== undefined && object.key !== null) {
+      message.key = BigInt(object.key);
+    }
+    if (object.issuer !== undefined && object.issuer !== null) {
+      message.issuer = bytesFromBase64(object.issuer);
+    }
+    if (object.project_key !== undefined && object.project_key !== null) {
+      message.projectKey = BigInt(object.project_key);
+    }
+    if (object.denom !== undefined && object.denom !== null) {
+      message.denom = object.denom;
+    }
+    if (object.metadata !== undefined && object.metadata !== null) {
+      message.metadata = object.metadata;
+    }
+    if (object.start_date !== undefined && object.start_date !== null) {
+      message.startDate = Timestamp.fromAmino(object.start_date);
+    }
+    if (object.end_date !== undefined && object.end_date !== null) {
+      message.endDate = Timestamp.fromAmino(object.end_date);
+    }
+    if (object.issuance_date !== undefined && object.issuance_date !== null) {
+      message.issuanceDate = Timestamp.fromAmino(object.issuance_date);
+    }
+    if (object.open !== undefined && object.open !== null) {
+      message.open = object.open;
+    }
+    return message;
   },
   toAmino(message: Batch): BatchAmino {
     const obj: any = {};
-    obj.key = message.key ? message.key.toString() : undefined;
-    obj.issuer = message.issuer;
-    obj.project_key = message.projectKey ? message.projectKey.toString() : undefined;
-    obj.denom = message.denom;
-    obj.metadata = message.metadata;
+    obj.key = message.key !== BigInt(0) ? message.key.toString() : undefined;
+    obj.issuer = message.issuer ? base64FromBytes(message.issuer) : undefined;
+    obj.project_key = message.projectKey !== BigInt(0) ? message.projectKey.toString() : undefined;
+    obj.denom = message.denom === "" ? undefined : message.denom;
+    obj.metadata = message.metadata === "" ? undefined : message.metadata;
     obj.start_date = message.startDate ? Timestamp.toAmino(message.startDate) : undefined;
     obj.end_date = message.endDate ? Timestamp.toAmino(message.endDate) : undefined;
     obj.issuance_date = message.issuanceDate ? Timestamp.toAmino(message.issuanceDate) : undefined;
-    obj.open = message.open;
+    obj.open = message.open === false ? undefined : message.open;
     return obj;
   },
   fromAminoMsg(object: BatchAminoMsg): Batch {
@@ -1535,21 +1594,22 @@ export const Batch = {
 function createBaseClassSequence(): ClassSequence {
   return {
     creditTypeAbbrev: "",
-    nextSequence: Long.UZERO
+    nextSequence: BigInt(0)
   };
 }
 export const ClassSequence = {
-  encode(message: ClassSequence, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  typeUrl: "/regen.ecocredit.v1.ClassSequence",
+  encode(message: ClassSequence, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.creditTypeAbbrev !== "") {
       writer.uint32(10).string(message.creditTypeAbbrev);
     }
-    if (!message.nextSequence.isZero()) {
+    if (message.nextSequence !== BigInt(0)) {
       writer.uint32(16).uint64(message.nextSequence);
     }
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): ClassSequence {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): ClassSequence {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseClassSequence();
     while (reader.pos < end) {
@@ -1559,7 +1619,7 @@ export const ClassSequence = {
           message.creditTypeAbbrev = reader.string();
           break;
         case 2:
-          message.nextSequence = (reader.uint64() as Long);
+          message.nextSequence = reader.uint64();
           break;
         default:
           reader.skipType(tag & 7);
@@ -1571,31 +1631,35 @@ export const ClassSequence = {
   fromJSON(object: any): ClassSequence {
     return {
       creditTypeAbbrev: isSet(object.creditTypeAbbrev) ? String(object.creditTypeAbbrev) : "",
-      nextSequence: isSet(object.nextSequence) ? Long.fromValue(object.nextSequence) : Long.UZERO
+      nextSequence: isSet(object.nextSequence) ? BigInt(object.nextSequence.toString()) : BigInt(0)
     };
   },
   toJSON(message: ClassSequence): unknown {
     const obj: any = {};
     message.creditTypeAbbrev !== undefined && (obj.creditTypeAbbrev = message.creditTypeAbbrev);
-    message.nextSequence !== undefined && (obj.nextSequence = (message.nextSequence || Long.UZERO).toString());
+    message.nextSequence !== undefined && (obj.nextSequence = (message.nextSequence || BigInt(0)).toString());
     return obj;
   },
   fromPartial(object: Partial<ClassSequence>): ClassSequence {
     const message = createBaseClassSequence();
     message.creditTypeAbbrev = object.creditTypeAbbrev ?? "";
-    message.nextSequence = object.nextSequence !== undefined && object.nextSequence !== null ? Long.fromValue(object.nextSequence) : Long.UZERO;
+    message.nextSequence = object.nextSequence !== undefined && object.nextSequence !== null ? BigInt(object.nextSequence.toString()) : BigInt(0);
     return message;
   },
   fromAmino(object: ClassSequenceAmino): ClassSequence {
-    return {
-      creditTypeAbbrev: object.credit_type_abbrev,
-      nextSequence: Long.fromString(object.next_sequence)
-    };
+    const message = createBaseClassSequence();
+    if (object.credit_type_abbrev !== undefined && object.credit_type_abbrev !== null) {
+      message.creditTypeAbbrev = object.credit_type_abbrev;
+    }
+    if (object.next_sequence !== undefined && object.next_sequence !== null) {
+      message.nextSequence = BigInt(object.next_sequence);
+    }
+    return message;
   },
   toAmino(message: ClassSequence): ClassSequenceAmino {
     const obj: any = {};
-    obj.credit_type_abbrev = message.creditTypeAbbrev;
-    obj.next_sequence = message.nextSequence ? message.nextSequence.toString() : undefined;
+    obj.credit_type_abbrev = message.creditTypeAbbrev === "" ? undefined : message.creditTypeAbbrev;
+    obj.next_sequence = message.nextSequence !== BigInt(0) ? message.nextSequence.toString() : undefined;
     return obj;
   },
   fromAminoMsg(object: ClassSequenceAminoMsg): ClassSequence {
@@ -1616,32 +1680,33 @@ export const ClassSequence = {
 };
 function createBaseProjectSequence(): ProjectSequence {
   return {
-    classKey: Long.UZERO,
-    nextSequence: Long.UZERO
+    classKey: BigInt(0),
+    nextSequence: BigInt(0)
   };
 }
 export const ProjectSequence = {
-  encode(message: ProjectSequence, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
-    if (!message.classKey.isZero()) {
+  typeUrl: "/regen.ecocredit.v1.ProjectSequence",
+  encode(message: ProjectSequence, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
+    if (message.classKey !== BigInt(0)) {
       writer.uint32(8).uint64(message.classKey);
     }
-    if (!message.nextSequence.isZero()) {
+    if (message.nextSequence !== BigInt(0)) {
       writer.uint32(16).uint64(message.nextSequence);
     }
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): ProjectSequence {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): ProjectSequence {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseProjectSequence();
     while (reader.pos < end) {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          message.classKey = (reader.uint64() as Long);
+          message.classKey = reader.uint64();
           break;
         case 2:
-          message.nextSequence = (reader.uint64() as Long);
+          message.nextSequence = reader.uint64();
           break;
         default:
           reader.skipType(tag & 7);
@@ -1652,32 +1717,36 @@ export const ProjectSequence = {
   },
   fromJSON(object: any): ProjectSequence {
     return {
-      classKey: isSet(object.classKey) ? Long.fromValue(object.classKey) : Long.UZERO,
-      nextSequence: isSet(object.nextSequence) ? Long.fromValue(object.nextSequence) : Long.UZERO
+      classKey: isSet(object.classKey) ? BigInt(object.classKey.toString()) : BigInt(0),
+      nextSequence: isSet(object.nextSequence) ? BigInt(object.nextSequence.toString()) : BigInt(0)
     };
   },
   toJSON(message: ProjectSequence): unknown {
     const obj: any = {};
-    message.classKey !== undefined && (obj.classKey = (message.classKey || Long.UZERO).toString());
-    message.nextSequence !== undefined && (obj.nextSequence = (message.nextSequence || Long.UZERO).toString());
+    message.classKey !== undefined && (obj.classKey = (message.classKey || BigInt(0)).toString());
+    message.nextSequence !== undefined && (obj.nextSequence = (message.nextSequence || BigInt(0)).toString());
     return obj;
   },
   fromPartial(object: Partial<ProjectSequence>): ProjectSequence {
     const message = createBaseProjectSequence();
-    message.classKey = object.classKey !== undefined && object.classKey !== null ? Long.fromValue(object.classKey) : Long.UZERO;
-    message.nextSequence = object.nextSequence !== undefined && object.nextSequence !== null ? Long.fromValue(object.nextSequence) : Long.UZERO;
+    message.classKey = object.classKey !== undefined && object.classKey !== null ? BigInt(object.classKey.toString()) : BigInt(0);
+    message.nextSequence = object.nextSequence !== undefined && object.nextSequence !== null ? BigInt(object.nextSequence.toString()) : BigInt(0);
     return message;
   },
   fromAmino(object: ProjectSequenceAmino): ProjectSequence {
-    return {
-      classKey: Long.fromString(object.class_key),
-      nextSequence: Long.fromString(object.next_sequence)
-    };
+    const message = createBaseProjectSequence();
+    if (object.class_key !== undefined && object.class_key !== null) {
+      message.classKey = BigInt(object.class_key);
+    }
+    if (object.next_sequence !== undefined && object.next_sequence !== null) {
+      message.nextSequence = BigInt(object.next_sequence);
+    }
+    return message;
   },
   toAmino(message: ProjectSequence): ProjectSequenceAmino {
     const obj: any = {};
-    obj.class_key = message.classKey ? message.classKey.toString() : undefined;
-    obj.next_sequence = message.nextSequence ? message.nextSequence.toString() : undefined;
+    obj.class_key = message.classKey !== BigInt(0) ? message.classKey.toString() : undefined;
+    obj.next_sequence = message.nextSequence !== BigInt(0) ? message.nextSequence.toString() : undefined;
     return obj;
   },
   fromAminoMsg(object: ProjectSequenceAminoMsg): ProjectSequence {
@@ -1698,32 +1767,33 @@ export const ProjectSequence = {
 };
 function createBaseBatchSequence(): BatchSequence {
   return {
-    projectKey: Long.UZERO,
-    nextSequence: Long.UZERO
+    projectKey: BigInt(0),
+    nextSequence: BigInt(0)
   };
 }
 export const BatchSequence = {
-  encode(message: BatchSequence, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
-    if (!message.projectKey.isZero()) {
+  typeUrl: "/regen.ecocredit.v1.BatchSequence",
+  encode(message: BatchSequence, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
+    if (message.projectKey !== BigInt(0)) {
       writer.uint32(8).uint64(message.projectKey);
     }
-    if (!message.nextSequence.isZero()) {
+    if (message.nextSequence !== BigInt(0)) {
       writer.uint32(16).uint64(message.nextSequence);
     }
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): BatchSequence {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): BatchSequence {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseBatchSequence();
     while (reader.pos < end) {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          message.projectKey = (reader.uint64() as Long);
+          message.projectKey = reader.uint64();
           break;
         case 2:
-          message.nextSequence = (reader.uint64() as Long);
+          message.nextSequence = reader.uint64();
           break;
         default:
           reader.skipType(tag & 7);
@@ -1734,32 +1804,36 @@ export const BatchSequence = {
   },
   fromJSON(object: any): BatchSequence {
     return {
-      projectKey: isSet(object.projectKey) ? Long.fromValue(object.projectKey) : Long.UZERO,
-      nextSequence: isSet(object.nextSequence) ? Long.fromValue(object.nextSequence) : Long.UZERO
+      projectKey: isSet(object.projectKey) ? BigInt(object.projectKey.toString()) : BigInt(0),
+      nextSequence: isSet(object.nextSequence) ? BigInt(object.nextSequence.toString()) : BigInt(0)
     };
   },
   toJSON(message: BatchSequence): unknown {
     const obj: any = {};
-    message.projectKey !== undefined && (obj.projectKey = (message.projectKey || Long.UZERO).toString());
-    message.nextSequence !== undefined && (obj.nextSequence = (message.nextSequence || Long.UZERO).toString());
+    message.projectKey !== undefined && (obj.projectKey = (message.projectKey || BigInt(0)).toString());
+    message.nextSequence !== undefined && (obj.nextSequence = (message.nextSequence || BigInt(0)).toString());
     return obj;
   },
   fromPartial(object: Partial<BatchSequence>): BatchSequence {
     const message = createBaseBatchSequence();
-    message.projectKey = object.projectKey !== undefined && object.projectKey !== null ? Long.fromValue(object.projectKey) : Long.UZERO;
-    message.nextSequence = object.nextSequence !== undefined && object.nextSequence !== null ? Long.fromValue(object.nextSequence) : Long.UZERO;
+    message.projectKey = object.projectKey !== undefined && object.projectKey !== null ? BigInt(object.projectKey.toString()) : BigInt(0);
+    message.nextSequence = object.nextSequence !== undefined && object.nextSequence !== null ? BigInt(object.nextSequence.toString()) : BigInt(0);
     return message;
   },
   fromAmino(object: BatchSequenceAmino): BatchSequence {
-    return {
-      projectKey: Long.fromString(object.project_key),
-      nextSequence: Long.fromString(object.next_sequence)
-    };
+    const message = createBaseBatchSequence();
+    if (object.project_key !== undefined && object.project_key !== null) {
+      message.projectKey = BigInt(object.project_key);
+    }
+    if (object.next_sequence !== undefined && object.next_sequence !== null) {
+      message.nextSequence = BigInt(object.next_sequence);
+    }
+    return message;
   },
   toAmino(message: BatchSequence): BatchSequenceAmino {
     const obj: any = {};
-    obj.project_key = message.projectKey ? message.projectKey.toString() : undefined;
-    obj.next_sequence = message.nextSequence ? message.nextSequence.toString() : undefined;
+    obj.project_key = message.projectKey !== BigInt(0) ? message.projectKey.toString() : undefined;
+    obj.next_sequence = message.nextSequence !== BigInt(0) ? message.nextSequence.toString() : undefined;
     return obj;
   },
   fromAminoMsg(object: BatchSequenceAminoMsg): BatchSequence {
@@ -1780,7 +1854,7 @@ export const BatchSequence = {
 };
 function createBaseBatchBalance(): BatchBalance {
   return {
-    batchKey: Long.UZERO,
+    batchKey: BigInt(0),
     address: new Uint8Array(),
     tradableAmount: "",
     retiredAmount: "",
@@ -1788,8 +1862,9 @@ function createBaseBatchBalance(): BatchBalance {
   };
 }
 export const BatchBalance = {
-  encode(message: BatchBalance, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
-    if (!message.batchKey.isZero()) {
+  typeUrl: "/regen.ecocredit.v1.BatchBalance",
+  encode(message: BatchBalance, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
+    if (message.batchKey !== BigInt(0)) {
       writer.uint32(8).uint64(message.batchKey);
     }
     if (message.address.length !== 0) {
@@ -1806,15 +1881,15 @@ export const BatchBalance = {
     }
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): BatchBalance {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): BatchBalance {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseBatchBalance();
     while (reader.pos < end) {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          message.batchKey = (reader.uint64() as Long);
+          message.batchKey = reader.uint64();
           break;
         case 2:
           message.address = reader.bytes();
@@ -1837,7 +1912,7 @@ export const BatchBalance = {
   },
   fromJSON(object: any): BatchBalance {
     return {
-      batchKey: isSet(object.batchKey) ? Long.fromValue(object.batchKey) : Long.UZERO,
+      batchKey: isSet(object.batchKey) ? BigInt(object.batchKey.toString()) : BigInt(0),
       address: isSet(object.address) ? bytesFromBase64(object.address) : new Uint8Array(),
       tradableAmount: isSet(object.tradableAmount) ? String(object.tradableAmount) : "",
       retiredAmount: isSet(object.retiredAmount) ? String(object.retiredAmount) : "",
@@ -1846,7 +1921,7 @@ export const BatchBalance = {
   },
   toJSON(message: BatchBalance): unknown {
     const obj: any = {};
-    message.batchKey !== undefined && (obj.batchKey = (message.batchKey || Long.UZERO).toString());
+    message.batchKey !== undefined && (obj.batchKey = (message.batchKey || BigInt(0)).toString());
     message.address !== undefined && (obj.address = base64FromBytes(message.address !== undefined ? message.address : new Uint8Array()));
     message.tradableAmount !== undefined && (obj.tradableAmount = message.tradableAmount);
     message.retiredAmount !== undefined && (obj.retiredAmount = message.retiredAmount);
@@ -1855,7 +1930,7 @@ export const BatchBalance = {
   },
   fromPartial(object: Partial<BatchBalance>): BatchBalance {
     const message = createBaseBatchBalance();
-    message.batchKey = object.batchKey !== undefined && object.batchKey !== null ? Long.fromValue(object.batchKey) : Long.UZERO;
+    message.batchKey = object.batchKey !== undefined && object.batchKey !== null ? BigInt(object.batchKey.toString()) : BigInt(0);
     message.address = object.address ?? new Uint8Array();
     message.tradableAmount = object.tradableAmount ?? "";
     message.retiredAmount = object.retiredAmount ?? "";
@@ -1863,21 +1938,31 @@ export const BatchBalance = {
     return message;
   },
   fromAmino(object: BatchBalanceAmino): BatchBalance {
-    return {
-      batchKey: Long.fromString(object.batch_key),
-      address: object.address,
-      tradableAmount: object.tradable_amount,
-      retiredAmount: object.retired_amount,
-      escrowedAmount: object.escrowed_amount
-    };
+    const message = createBaseBatchBalance();
+    if (object.batch_key !== undefined && object.batch_key !== null) {
+      message.batchKey = BigInt(object.batch_key);
+    }
+    if (object.address !== undefined && object.address !== null) {
+      message.address = bytesFromBase64(object.address);
+    }
+    if (object.tradable_amount !== undefined && object.tradable_amount !== null) {
+      message.tradableAmount = object.tradable_amount;
+    }
+    if (object.retired_amount !== undefined && object.retired_amount !== null) {
+      message.retiredAmount = object.retired_amount;
+    }
+    if (object.escrowed_amount !== undefined && object.escrowed_amount !== null) {
+      message.escrowedAmount = object.escrowed_amount;
+    }
+    return message;
   },
   toAmino(message: BatchBalance): BatchBalanceAmino {
     const obj: any = {};
-    obj.batch_key = message.batchKey ? message.batchKey.toString() : undefined;
-    obj.address = message.address;
-    obj.tradable_amount = message.tradableAmount;
-    obj.retired_amount = message.retiredAmount;
-    obj.escrowed_amount = message.escrowedAmount;
+    obj.batch_key = message.batchKey !== BigInt(0) ? message.batchKey.toString() : undefined;
+    obj.address = message.address ? base64FromBytes(message.address) : undefined;
+    obj.tradable_amount = message.tradableAmount === "" ? undefined : message.tradableAmount;
+    obj.retired_amount = message.retiredAmount === "" ? undefined : message.retiredAmount;
+    obj.escrowed_amount = message.escrowedAmount === "" ? undefined : message.escrowedAmount;
     return obj;
   },
   fromAminoMsg(object: BatchBalanceAminoMsg): BatchBalance {
@@ -1898,15 +1983,16 @@ export const BatchBalance = {
 };
 function createBaseBatchSupply(): BatchSupply {
   return {
-    batchKey: Long.UZERO,
+    batchKey: BigInt(0),
     tradableAmount: "",
     retiredAmount: "",
     cancelledAmount: ""
   };
 }
 export const BatchSupply = {
-  encode(message: BatchSupply, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
-    if (!message.batchKey.isZero()) {
+  typeUrl: "/regen.ecocredit.v1.BatchSupply",
+  encode(message: BatchSupply, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
+    if (message.batchKey !== BigInt(0)) {
       writer.uint32(8).uint64(message.batchKey);
     }
     if (message.tradableAmount !== "") {
@@ -1920,15 +2006,15 @@ export const BatchSupply = {
     }
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): BatchSupply {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): BatchSupply {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseBatchSupply();
     while (reader.pos < end) {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          message.batchKey = (reader.uint64() as Long);
+          message.batchKey = reader.uint64();
           break;
         case 2:
           message.tradableAmount = reader.string();
@@ -1948,7 +2034,7 @@ export const BatchSupply = {
   },
   fromJSON(object: any): BatchSupply {
     return {
-      batchKey: isSet(object.batchKey) ? Long.fromValue(object.batchKey) : Long.UZERO,
+      batchKey: isSet(object.batchKey) ? BigInt(object.batchKey.toString()) : BigInt(0),
       tradableAmount: isSet(object.tradableAmount) ? String(object.tradableAmount) : "",
       retiredAmount: isSet(object.retiredAmount) ? String(object.retiredAmount) : "",
       cancelledAmount: isSet(object.cancelledAmount) ? String(object.cancelledAmount) : ""
@@ -1956,7 +2042,7 @@ export const BatchSupply = {
   },
   toJSON(message: BatchSupply): unknown {
     const obj: any = {};
-    message.batchKey !== undefined && (obj.batchKey = (message.batchKey || Long.UZERO).toString());
+    message.batchKey !== undefined && (obj.batchKey = (message.batchKey || BigInt(0)).toString());
     message.tradableAmount !== undefined && (obj.tradableAmount = message.tradableAmount);
     message.retiredAmount !== undefined && (obj.retiredAmount = message.retiredAmount);
     message.cancelledAmount !== undefined && (obj.cancelledAmount = message.cancelledAmount);
@@ -1964,26 +2050,34 @@ export const BatchSupply = {
   },
   fromPartial(object: Partial<BatchSupply>): BatchSupply {
     const message = createBaseBatchSupply();
-    message.batchKey = object.batchKey !== undefined && object.batchKey !== null ? Long.fromValue(object.batchKey) : Long.UZERO;
+    message.batchKey = object.batchKey !== undefined && object.batchKey !== null ? BigInt(object.batchKey.toString()) : BigInt(0);
     message.tradableAmount = object.tradableAmount ?? "";
     message.retiredAmount = object.retiredAmount ?? "";
     message.cancelledAmount = object.cancelledAmount ?? "";
     return message;
   },
   fromAmino(object: BatchSupplyAmino): BatchSupply {
-    return {
-      batchKey: Long.fromString(object.batch_key),
-      tradableAmount: object.tradable_amount,
-      retiredAmount: object.retired_amount,
-      cancelledAmount: object.cancelled_amount
-    };
+    const message = createBaseBatchSupply();
+    if (object.batch_key !== undefined && object.batch_key !== null) {
+      message.batchKey = BigInt(object.batch_key);
+    }
+    if (object.tradable_amount !== undefined && object.tradable_amount !== null) {
+      message.tradableAmount = object.tradable_amount;
+    }
+    if (object.retired_amount !== undefined && object.retired_amount !== null) {
+      message.retiredAmount = object.retired_amount;
+    }
+    if (object.cancelled_amount !== undefined && object.cancelled_amount !== null) {
+      message.cancelledAmount = object.cancelled_amount;
+    }
+    return message;
   },
   toAmino(message: BatchSupply): BatchSupplyAmino {
     const obj: any = {};
-    obj.batch_key = message.batchKey ? message.batchKey.toString() : undefined;
-    obj.tradable_amount = message.tradableAmount;
-    obj.retired_amount = message.retiredAmount;
-    obj.cancelled_amount = message.cancelledAmount;
+    obj.batch_key = message.batchKey !== BigInt(0) ? message.batchKey.toString() : undefined;
+    obj.tradable_amount = message.tradableAmount === "" ? undefined : message.tradableAmount;
+    obj.retired_amount = message.retiredAmount === "" ? undefined : message.retiredAmount;
+    obj.cancelled_amount = message.cancelledAmount === "" ? undefined : message.cancelledAmount;
     return obj;
   },
   fromAminoMsg(object: BatchSupplyAminoMsg): BatchSupply {
@@ -2004,14 +2098,15 @@ export const BatchSupply = {
 };
 function createBaseOriginTxIndex(): OriginTxIndex {
   return {
-    classKey: Long.UZERO,
+    classKey: BigInt(0),
     id: "",
     source: ""
   };
 }
 export const OriginTxIndex = {
-  encode(message: OriginTxIndex, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
-    if (!message.classKey.isZero()) {
+  typeUrl: "/regen.ecocredit.v1.OriginTxIndex",
+  encode(message: OriginTxIndex, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
+    if (message.classKey !== BigInt(0)) {
       writer.uint32(8).uint64(message.classKey);
     }
     if (message.id !== "") {
@@ -2022,15 +2117,15 @@ export const OriginTxIndex = {
     }
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): OriginTxIndex {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): OriginTxIndex {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseOriginTxIndex();
     while (reader.pos < end) {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          message.classKey = (reader.uint64() as Long);
+          message.classKey = reader.uint64();
           break;
         case 2:
           message.id = reader.string();
@@ -2047,37 +2142,43 @@ export const OriginTxIndex = {
   },
   fromJSON(object: any): OriginTxIndex {
     return {
-      classKey: isSet(object.classKey) ? Long.fromValue(object.classKey) : Long.UZERO,
+      classKey: isSet(object.classKey) ? BigInt(object.classKey.toString()) : BigInt(0),
       id: isSet(object.id) ? String(object.id) : "",
       source: isSet(object.source) ? String(object.source) : ""
     };
   },
   toJSON(message: OriginTxIndex): unknown {
     const obj: any = {};
-    message.classKey !== undefined && (obj.classKey = (message.classKey || Long.UZERO).toString());
+    message.classKey !== undefined && (obj.classKey = (message.classKey || BigInt(0)).toString());
     message.id !== undefined && (obj.id = message.id);
     message.source !== undefined && (obj.source = message.source);
     return obj;
   },
   fromPartial(object: Partial<OriginTxIndex>): OriginTxIndex {
     const message = createBaseOriginTxIndex();
-    message.classKey = object.classKey !== undefined && object.classKey !== null ? Long.fromValue(object.classKey) : Long.UZERO;
+    message.classKey = object.classKey !== undefined && object.classKey !== null ? BigInt(object.classKey.toString()) : BigInt(0);
     message.id = object.id ?? "";
     message.source = object.source ?? "";
     return message;
   },
   fromAmino(object: OriginTxIndexAmino): OriginTxIndex {
-    return {
-      classKey: Long.fromString(object.class_key),
-      id: object.id,
-      source: object.source
-    };
+    const message = createBaseOriginTxIndex();
+    if (object.class_key !== undefined && object.class_key !== null) {
+      message.classKey = BigInt(object.class_key);
+    }
+    if (object.id !== undefined && object.id !== null) {
+      message.id = object.id;
+    }
+    if (object.source !== undefined && object.source !== null) {
+      message.source = object.source;
+    }
+    return message;
   },
   toAmino(message: OriginTxIndex): OriginTxIndexAmino {
     const obj: any = {};
-    obj.class_key = message.classKey ? message.classKey.toString() : undefined;
-    obj.id = message.id;
-    obj.source = message.source;
+    obj.class_key = message.classKey !== BigInt(0) ? message.classKey.toString() : undefined;
+    obj.id = message.id === "" ? undefined : message.id;
+    obj.source = message.source === "" ? undefined : message.source;
     return obj;
   },
   fromAminoMsg(object: OriginTxIndexAminoMsg): OriginTxIndex {
@@ -2098,17 +2199,18 @@ export const OriginTxIndex = {
 };
 function createBaseBatchContract(): BatchContract {
   return {
-    batchKey: Long.UZERO,
-    classKey: Long.UZERO,
+    batchKey: BigInt(0),
+    classKey: BigInt(0),
     contract: ""
   };
 }
 export const BatchContract = {
-  encode(message: BatchContract, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
-    if (!message.batchKey.isZero()) {
+  typeUrl: "/regen.ecocredit.v1.BatchContract",
+  encode(message: BatchContract, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
+    if (message.batchKey !== BigInt(0)) {
       writer.uint32(8).uint64(message.batchKey);
     }
-    if (!message.classKey.isZero()) {
+    if (message.classKey !== BigInt(0)) {
       writer.uint32(16).uint64(message.classKey);
     }
     if (message.contract !== "") {
@@ -2116,18 +2218,18 @@ export const BatchContract = {
     }
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): BatchContract {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): BatchContract {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseBatchContract();
     while (reader.pos < end) {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          message.batchKey = (reader.uint64() as Long);
+          message.batchKey = reader.uint64();
           break;
         case 2:
-          message.classKey = (reader.uint64() as Long);
+          message.classKey = reader.uint64();
           break;
         case 3:
           message.contract = reader.string();
@@ -2141,37 +2243,43 @@ export const BatchContract = {
   },
   fromJSON(object: any): BatchContract {
     return {
-      batchKey: isSet(object.batchKey) ? Long.fromValue(object.batchKey) : Long.UZERO,
-      classKey: isSet(object.classKey) ? Long.fromValue(object.classKey) : Long.UZERO,
+      batchKey: isSet(object.batchKey) ? BigInt(object.batchKey.toString()) : BigInt(0),
+      classKey: isSet(object.classKey) ? BigInt(object.classKey.toString()) : BigInt(0),
       contract: isSet(object.contract) ? String(object.contract) : ""
     };
   },
   toJSON(message: BatchContract): unknown {
     const obj: any = {};
-    message.batchKey !== undefined && (obj.batchKey = (message.batchKey || Long.UZERO).toString());
-    message.classKey !== undefined && (obj.classKey = (message.classKey || Long.UZERO).toString());
+    message.batchKey !== undefined && (obj.batchKey = (message.batchKey || BigInt(0)).toString());
+    message.classKey !== undefined && (obj.classKey = (message.classKey || BigInt(0)).toString());
     message.contract !== undefined && (obj.contract = message.contract);
     return obj;
   },
   fromPartial(object: Partial<BatchContract>): BatchContract {
     const message = createBaseBatchContract();
-    message.batchKey = object.batchKey !== undefined && object.batchKey !== null ? Long.fromValue(object.batchKey) : Long.UZERO;
-    message.classKey = object.classKey !== undefined && object.classKey !== null ? Long.fromValue(object.classKey) : Long.UZERO;
+    message.batchKey = object.batchKey !== undefined && object.batchKey !== null ? BigInt(object.batchKey.toString()) : BigInt(0);
+    message.classKey = object.classKey !== undefined && object.classKey !== null ? BigInt(object.classKey.toString()) : BigInt(0);
     message.contract = object.contract ?? "";
     return message;
   },
   fromAmino(object: BatchContractAmino): BatchContract {
-    return {
-      batchKey: Long.fromString(object.batch_key),
-      classKey: Long.fromString(object.class_key),
-      contract: object.contract
-    };
+    const message = createBaseBatchContract();
+    if (object.batch_key !== undefined && object.batch_key !== null) {
+      message.batchKey = BigInt(object.batch_key);
+    }
+    if (object.class_key !== undefined && object.class_key !== null) {
+      message.classKey = BigInt(object.class_key);
+    }
+    if (object.contract !== undefined && object.contract !== null) {
+      message.contract = object.contract;
+    }
+    return message;
   },
   toAmino(message: BatchContract): BatchContractAmino {
     const obj: any = {};
-    obj.batch_key = message.batchKey ? message.batchKey.toString() : undefined;
-    obj.class_key = message.classKey ? message.classKey.toString() : undefined;
-    obj.contract = message.contract;
+    obj.batch_key = message.batchKey !== BigInt(0) ? message.batchKey.toString() : undefined;
+    obj.class_key = message.classKey !== BigInt(0) ? message.classKey.toString() : undefined;
+    obj.contract = message.contract === "" ? undefined : message.contract;
     return obj;
   },
   fromAminoMsg(object: BatchContractAminoMsg): BatchContract {
@@ -2196,14 +2304,15 @@ function createBaseClassCreatorAllowlist(): ClassCreatorAllowlist {
   };
 }
 export const ClassCreatorAllowlist = {
-  encode(message: ClassCreatorAllowlist, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  typeUrl: "/regen.ecocredit.v1.ClassCreatorAllowlist",
+  encode(message: ClassCreatorAllowlist, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.enabled === true) {
       writer.uint32(8).bool(message.enabled);
     }
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): ClassCreatorAllowlist {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): ClassCreatorAllowlist {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseClassCreatorAllowlist();
     while (reader.pos < end) {
@@ -2235,13 +2344,15 @@ export const ClassCreatorAllowlist = {
     return message;
   },
   fromAmino(object: ClassCreatorAllowlistAmino): ClassCreatorAllowlist {
-    return {
-      enabled: object.enabled
-    };
+    const message = createBaseClassCreatorAllowlist();
+    if (object.enabled !== undefined && object.enabled !== null) {
+      message.enabled = object.enabled;
+    }
+    return message;
   },
   toAmino(message: ClassCreatorAllowlist): ClassCreatorAllowlistAmino {
     const obj: any = {};
-    obj.enabled = message.enabled;
+    obj.enabled = message.enabled === false ? undefined : message.enabled;
     return obj;
   },
   fromAminoMsg(object: ClassCreatorAllowlistAminoMsg): ClassCreatorAllowlist {
@@ -2266,14 +2377,15 @@ function createBaseAllowedClassCreator(): AllowedClassCreator {
   };
 }
 export const AllowedClassCreator = {
-  encode(message: AllowedClassCreator, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  typeUrl: "/regen.ecocredit.v1.AllowedClassCreator",
+  encode(message: AllowedClassCreator, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.address.length !== 0) {
       writer.uint32(10).bytes(message.address);
     }
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): AllowedClassCreator {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): AllowedClassCreator {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseAllowedClassCreator();
     while (reader.pos < end) {
@@ -2305,13 +2417,15 @@ export const AllowedClassCreator = {
     return message;
   },
   fromAmino(object: AllowedClassCreatorAmino): AllowedClassCreator {
-    return {
-      address: object.address
-    };
+    const message = createBaseAllowedClassCreator();
+    if (object.address !== undefined && object.address !== null) {
+      message.address = bytesFromBase64(object.address);
+    }
+    return message;
   },
   toAmino(message: AllowedClassCreator): AllowedClassCreatorAmino {
     const obj: any = {};
-    obj.address = message.address;
+    obj.address = message.address ? base64FromBytes(message.address) : undefined;
     return obj;
   },
   fromAminoMsg(object: AllowedClassCreatorAminoMsg): AllowedClassCreator {
@@ -2336,14 +2450,15 @@ function createBaseClassFee(): ClassFee {
   };
 }
 export const ClassFee = {
-  encode(message: ClassFee, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  typeUrl: "/regen.ecocredit.v1.ClassFee",
+  encode(message: ClassFee, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.fee !== undefined) {
       Coin.encode(message.fee, writer.uint32(10).fork()).ldelim();
     }
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): ClassFee {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): ClassFee {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseClassFee();
     while (reader.pos < end) {
@@ -2375,9 +2490,11 @@ export const ClassFee = {
     return message;
   },
   fromAmino(object: ClassFeeAmino): ClassFee {
-    return {
-      fee: object?.fee ? Coin.fromAmino(object.fee) : undefined
-    };
+    const message = createBaseClassFee();
+    if (object.fee !== undefined && object.fee !== null) {
+      message.fee = Coin.fromAmino(object.fee);
+    }
+    return message;
   },
   toAmino(message: ClassFee): ClassFeeAmino {
     const obj: any = {};
@@ -2406,14 +2523,15 @@ function createBaseAllowedBridgeChain(): AllowedBridgeChain {
   };
 }
 export const AllowedBridgeChain = {
-  encode(message: AllowedBridgeChain, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  typeUrl: "/regen.ecocredit.v1.AllowedBridgeChain",
+  encode(message: AllowedBridgeChain, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.chainName !== "") {
       writer.uint32(10).string(message.chainName);
     }
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): AllowedBridgeChain {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): AllowedBridgeChain {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseAllowedBridgeChain();
     while (reader.pos < end) {
@@ -2445,13 +2563,15 @@ export const AllowedBridgeChain = {
     return message;
   },
   fromAmino(object: AllowedBridgeChainAmino): AllowedBridgeChain {
-    return {
-      chainName: object.chain_name
-    };
+    const message = createBaseAllowedBridgeChain();
+    if (object.chain_name !== undefined && object.chain_name !== null) {
+      message.chainName = object.chain_name;
+    }
+    return message;
   },
   toAmino(message: AllowedBridgeChain): AllowedBridgeChainAmino {
     const obj: any = {};
-    obj.chain_name = message.chainName;
+    obj.chain_name = message.chainName === "" ? undefined : message.chainName;
     return obj;
   },
   fromAminoMsg(object: AllowedBridgeChainAminoMsg): AllowedBridgeChain {

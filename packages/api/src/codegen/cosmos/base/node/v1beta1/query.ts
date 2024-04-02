@@ -1,4 +1,4 @@
-import * as _m0 from "protobufjs/minimal";
+import { BinaryReader, BinaryWriter } from "../../../../binary";
 import { isSet } from "../../../../helpers";
 /** ConfigRequest defines the request structure for the Config gRPC query. */
 export interface ConfigRequest {}
@@ -24,7 +24,7 @@ export interface ConfigResponseProtoMsg {
 }
 /** ConfigResponse defines the response structure for the Config gRPC query. */
 export interface ConfigResponseAmino {
-  minimum_gas_price: string;
+  minimum_gas_price?: string;
 }
 export interface ConfigResponseAminoMsg {
   type: "cosmos-sdk/ConfigResponse";
@@ -38,11 +38,12 @@ function createBaseConfigRequest(): ConfigRequest {
   return {};
 }
 export const ConfigRequest = {
-  encode(_: ConfigRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  typeUrl: "/cosmos.base.node.v1beta1.ConfigRequest",
+  encode(_: ConfigRequest, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): ConfigRequest {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): ConfigRequest {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseConfigRequest();
     while (reader.pos < end) {
@@ -67,7 +68,8 @@ export const ConfigRequest = {
     return message;
   },
   fromAmino(_: ConfigRequestAmino): ConfigRequest {
-    return {};
+    const message = createBaseConfigRequest();
+    return message;
   },
   toAmino(_: ConfigRequest): ConfigRequestAmino {
     const obj: any = {};
@@ -101,14 +103,15 @@ function createBaseConfigResponse(): ConfigResponse {
   };
 }
 export const ConfigResponse = {
-  encode(message: ConfigResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  typeUrl: "/cosmos.base.node.v1beta1.ConfigResponse",
+  encode(message: ConfigResponse, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.minimumGasPrice !== "") {
       writer.uint32(10).string(message.minimumGasPrice);
     }
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): ConfigResponse {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): ConfigResponse {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseConfigResponse();
     while (reader.pos < end) {
@@ -140,13 +143,15 @@ export const ConfigResponse = {
     return message;
   },
   fromAmino(object: ConfigResponseAmino): ConfigResponse {
-    return {
-      minimumGasPrice: object.minimum_gas_price
-    };
+    const message = createBaseConfigResponse();
+    if (object.minimum_gas_price !== undefined && object.minimum_gas_price !== null) {
+      message.minimumGasPrice = object.minimum_gas_price;
+    }
+    return message;
   },
   toAmino(message: ConfigResponse): ConfigResponseAmino {
     const obj: any = {};
-    obj.minimum_gas_price = message.minimumGasPrice;
+    obj.minimum_gas_price = message.minimumGasPrice === "" ? undefined : message.minimumGasPrice;
     return obj;
   },
   fromAminoMsg(object: ConfigResponseAminoMsg): ConfigResponse {

@@ -8,16 +8,16 @@ import { Block as Block2 } from "./types";
 import { BlockAmino as Block2Amino } from "./types";
 import { BlockSDKType as Block2SDKType } from "./types";
 import { DefaultNodeInfo, DefaultNodeInfoAmino, DefaultNodeInfoSDKType } from "../../../../tendermint/p2p/types";
-import { Long, isSet, bytesFromBase64, base64FromBytes } from "../../../../helpers";
-import * as _m0 from "protobufjs/minimal";
+import { BinaryReader, BinaryWriter } from "../../../../binary";
+import { isSet, bytesFromBase64, base64FromBytes } from "../../../../helpers";
 /**
  * GetValidatorSetByHeightRequest is the request type for the
  * Query/GetValidatorSetByHeight RPC method.
  */
 export interface GetValidatorSetByHeightRequest {
-  height: Long;
+  height: bigint;
   /** pagination defines an pagination for the request. */
-  pagination: PageRequest;
+  pagination?: PageRequest;
 }
 export interface GetValidatorSetByHeightRequestProtoMsg {
   typeUrl: "/cosmos.base.tendermint.v1beta1.GetValidatorSetByHeightRequest";
@@ -28,7 +28,7 @@ export interface GetValidatorSetByHeightRequestProtoMsg {
  * Query/GetValidatorSetByHeight RPC method.
  */
 export interface GetValidatorSetByHeightRequestAmino {
-  height: string;
+  height?: string;
   /** pagination defines an pagination for the request. */
   pagination?: PageRequestAmino;
 }
@@ -41,18 +41,18 @@ export interface GetValidatorSetByHeightRequestAminoMsg {
  * Query/GetValidatorSetByHeight RPC method.
  */
 export interface GetValidatorSetByHeightRequestSDKType {
-  height: Long;
-  pagination: PageRequestSDKType;
+  height: bigint;
+  pagination?: PageRequestSDKType;
 }
 /**
  * GetValidatorSetByHeightResponse is the response type for the
  * Query/GetValidatorSetByHeight RPC method.
  */
 export interface GetValidatorSetByHeightResponse {
-  blockHeight: Long;
+  blockHeight: bigint;
   validators: Validator[];
   /** pagination defines an pagination for the response. */
-  pagination: PageResponse;
+  pagination?: PageResponse;
 }
 export interface GetValidatorSetByHeightResponseProtoMsg {
   typeUrl: "/cosmos.base.tendermint.v1beta1.GetValidatorSetByHeightResponse";
@@ -63,8 +63,8 @@ export interface GetValidatorSetByHeightResponseProtoMsg {
  * Query/GetValidatorSetByHeight RPC method.
  */
 export interface GetValidatorSetByHeightResponseAmino {
-  block_height: string;
-  validators: ValidatorAmino[];
+  block_height?: string;
+  validators?: ValidatorAmino[];
   /** pagination defines an pagination for the response. */
   pagination?: PageResponseAmino;
 }
@@ -77,9 +77,9 @@ export interface GetValidatorSetByHeightResponseAminoMsg {
  * Query/GetValidatorSetByHeight RPC method.
  */
 export interface GetValidatorSetByHeightResponseSDKType {
-  block_height: Long;
+  block_height: bigint;
   validators: ValidatorSDKType[];
-  pagination: PageResponseSDKType;
+  pagination?: PageResponseSDKType;
 }
 /**
  * GetLatestValidatorSetRequest is the request type for the
@@ -87,7 +87,7 @@ export interface GetValidatorSetByHeightResponseSDKType {
  */
 export interface GetLatestValidatorSetRequest {
   /** pagination defines an pagination for the request. */
-  pagination: PageRequest;
+  pagination?: PageRequest;
 }
 export interface GetLatestValidatorSetRequestProtoMsg {
   typeUrl: "/cosmos.base.tendermint.v1beta1.GetLatestValidatorSetRequest";
@@ -110,17 +110,17 @@ export interface GetLatestValidatorSetRequestAminoMsg {
  * Query/GetValidatorSetByHeight RPC method.
  */
 export interface GetLatestValidatorSetRequestSDKType {
-  pagination: PageRequestSDKType;
+  pagination?: PageRequestSDKType;
 }
 /**
  * GetLatestValidatorSetResponse is the response type for the
  * Query/GetValidatorSetByHeight RPC method.
  */
 export interface GetLatestValidatorSetResponse {
-  blockHeight: Long;
+  blockHeight: bigint;
   validators: Validator[];
   /** pagination defines an pagination for the response. */
-  pagination: PageResponse;
+  pagination?: PageResponse;
 }
 export interface GetLatestValidatorSetResponseProtoMsg {
   typeUrl: "/cosmos.base.tendermint.v1beta1.GetLatestValidatorSetResponse";
@@ -131,8 +131,8 @@ export interface GetLatestValidatorSetResponseProtoMsg {
  * Query/GetValidatorSetByHeight RPC method.
  */
 export interface GetLatestValidatorSetResponseAmino {
-  block_height: string;
-  validators: ValidatorAmino[];
+  block_height?: string;
+  validators?: ValidatorAmino[];
   /** pagination defines an pagination for the response. */
   pagination?: PageResponseAmino;
 }
@@ -145,16 +145,16 @@ export interface GetLatestValidatorSetResponseAminoMsg {
  * Query/GetValidatorSetByHeight RPC method.
  */
 export interface GetLatestValidatorSetResponseSDKType {
-  block_height: Long;
+  block_height: bigint;
   validators: ValidatorSDKType[];
-  pagination: PageResponseSDKType;
+  pagination?: PageResponseSDKType;
 }
 /** Validator is the type for the validator-set. */
 export interface Validator {
   address: string;
-  pubKey: Any;
-  votingPower: Long;
-  proposerPriority: Long;
+  pubKey?: Any;
+  votingPower: bigint;
+  proposerPriority: bigint;
 }
 export interface ValidatorProtoMsg {
   typeUrl: "/cosmos.base.tendermint.v1beta1.Validator";
@@ -162,10 +162,10 @@ export interface ValidatorProtoMsg {
 }
 /** Validator is the type for the validator-set. */
 export interface ValidatorAmino {
-  address: string;
+  address?: string;
   pub_key?: AnyAmino;
-  voting_power: string;
-  proposer_priority: string;
+  voting_power?: string;
+  proposer_priority?: string;
 }
 export interface ValidatorAminoMsg {
   type: "cosmos-sdk/Validator";
@@ -174,16 +174,16 @@ export interface ValidatorAminoMsg {
 /** Validator is the type for the validator-set. */
 export interface ValidatorSDKType {
   address: string;
-  pub_key: AnySDKType;
-  voting_power: Long;
-  proposer_priority: Long;
+  pub_key?: AnySDKType;
+  voting_power: bigint;
+  proposer_priority: bigint;
 }
 /**
  * GetBlockByHeightRequest is the request type for the Query/GetBlockByHeight
  * RPC method.
  */
 export interface GetBlockByHeightRequest {
-  height: Long;
+  height: bigint;
 }
 export interface GetBlockByHeightRequestProtoMsg {
   typeUrl: "/cosmos.base.tendermint.v1beta1.GetBlockByHeightRequest";
@@ -194,7 +194,7 @@ export interface GetBlockByHeightRequestProtoMsg {
  * RPC method.
  */
 export interface GetBlockByHeightRequestAmino {
-  height: string;
+  height?: string;
 }
 export interface GetBlockByHeightRequestAminoMsg {
   type: "cosmos-sdk/GetBlockByHeightRequest";
@@ -205,18 +205,18 @@ export interface GetBlockByHeightRequestAminoMsg {
  * RPC method.
  */
 export interface GetBlockByHeightRequestSDKType {
-  height: Long;
+  height: bigint;
 }
 /**
  * GetBlockByHeightResponse is the response type for the Query/GetBlockByHeight
  * RPC method.
  */
 export interface GetBlockByHeightResponse {
-  blockId: BlockID;
+  blockId?: BlockID;
   /** Deprecated: please use `sdk_block` instead */
-  block: Block1;
+  block?: Block1;
   /** Since: cosmos-sdk 0.47 */
-  sdkBlock: Block2;
+  sdkBlock?: Block2;
 }
 export interface GetBlockByHeightResponseProtoMsg {
   typeUrl: "/cosmos.base.tendermint.v1beta1.GetBlockByHeightResponse";
@@ -242,9 +242,9 @@ export interface GetBlockByHeightResponseAminoMsg {
  * RPC method.
  */
 export interface GetBlockByHeightResponseSDKType {
-  block_id: BlockIDSDKType;
-  block: Block1SDKType;
-  sdk_block: Block2SDKType;
+  block_id?: BlockIDSDKType;
+  block?: Block1SDKType;
+  sdk_block?: Block2SDKType;
 }
 /**
  * GetLatestBlockRequest is the request type for the Query/GetLatestBlock RPC
@@ -274,11 +274,11 @@ export interface GetLatestBlockRequestSDKType {}
  * method.
  */
 export interface GetLatestBlockResponse {
-  blockId: BlockID;
+  blockId?: BlockID;
   /** Deprecated: please use `sdk_block` instead */
-  block: Block1;
+  block?: Block1;
   /** Since: cosmos-sdk 0.47 */
-  sdkBlock: Block2;
+  sdkBlock?: Block2;
 }
 export interface GetLatestBlockResponseProtoMsg {
   typeUrl: "/cosmos.base.tendermint.v1beta1.GetLatestBlockResponse";
@@ -304,9 +304,9 @@ export interface GetLatestBlockResponseAminoMsg {
  * method.
  */
 export interface GetLatestBlockResponseSDKType {
-  block_id: BlockIDSDKType;
-  block: Block1SDKType;
-  sdk_block: Block2SDKType;
+  block_id?: BlockIDSDKType;
+  block?: Block1SDKType;
+  sdk_block?: Block2SDKType;
 }
 /** GetSyncingRequest is the request type for the Query/GetSyncing RPC method. */
 export interface GetSyncingRequest {}
@@ -332,7 +332,7 @@ export interface GetSyncingResponseProtoMsg {
 }
 /** GetSyncingResponse is the response type for the Query/GetSyncing RPC method. */
 export interface GetSyncingResponseAmino {
-  syncing: boolean;
+  syncing?: boolean;
 }
 export interface GetSyncingResponseAminoMsg {
   type: "cosmos-sdk/GetSyncingResponse";
@@ -361,8 +361,8 @@ export interface GetNodeInfoRequestSDKType {}
  * method.
  */
 export interface GetNodeInfoResponse {
-  defaultNodeInfo: DefaultNodeInfo;
-  applicationVersion: VersionInfo;
+  defaultNodeInfo?: DefaultNodeInfo;
+  applicationVersion?: VersionInfo;
 }
 export interface GetNodeInfoResponseProtoMsg {
   typeUrl: "/cosmos.base.tendermint.v1beta1.GetNodeInfoResponse";
@@ -385,8 +385,8 @@ export interface GetNodeInfoResponseAminoMsg {
  * method.
  */
 export interface GetNodeInfoResponseSDKType {
-  default_node_info: DefaultNodeInfoSDKType;
-  application_version: VersionInfoSDKType;
+  default_node_info?: DefaultNodeInfoSDKType;
+  application_version?: VersionInfoSDKType;
 }
 /** VersionInfo is the type for the GetNodeInfoResponse message. */
 export interface VersionInfo {
@@ -406,15 +406,15 @@ export interface VersionInfoProtoMsg {
 }
 /** VersionInfo is the type for the GetNodeInfoResponse message. */
 export interface VersionInfoAmino {
-  name: string;
-  app_name: string;
-  version: string;
-  git_commit: string;
-  build_tags: string;
-  go_version: string;
-  build_deps: ModuleAmino[];
+  name?: string;
+  app_name?: string;
+  version?: string;
+  git_commit?: string;
+  build_tags?: string;
+  go_version?: string;
+  build_deps?: ModuleAmino[];
   /** Since: cosmos-sdk 0.43 */
-  cosmos_sdk_version: string;
+  cosmos_sdk_version?: string;
 }
 export interface VersionInfoAminoMsg {
   type: "cosmos-sdk/VersionInfo";
@@ -447,11 +447,11 @@ export interface ModuleProtoMsg {
 /** Module is the type for VersionInfo */
 export interface ModuleAmino {
   /** module path */
-  path: string;
+  path?: string;
   /** module version */
-  version: string;
+  version?: string;
   /** checksum */
-  sum: string;
+  sum?: string;
 }
 export interface ModuleAminoMsg {
   type: "cosmos-sdk/Module";
@@ -467,7 +467,7 @@ export interface ModuleSDKType {
 export interface ABCIQueryRequest {
   data: Uint8Array;
   path: string;
-  height: Long;
+  height: bigint;
   prove: boolean;
 }
 export interface ABCIQueryRequestProtoMsg {
@@ -476,10 +476,10 @@ export interface ABCIQueryRequestProtoMsg {
 }
 /** ABCIQueryRequest defines the request structure for the ABCIQuery gRPC query. */
 export interface ABCIQueryRequestAmino {
-  data: Uint8Array;
-  path: string;
-  height: string;
-  prove: boolean;
+  data?: string;
+  path?: string;
+  height?: string;
+  prove?: boolean;
 }
 export interface ABCIQueryRequestAminoMsg {
   type: "cosmos-sdk/ABCIQueryRequest";
@@ -489,7 +489,7 @@ export interface ABCIQueryRequestAminoMsg {
 export interface ABCIQueryRequestSDKType {
   data: Uint8Array;
   path: string;
-  height: Long;
+  height: bigint;
   prove: boolean;
 }
 /**
@@ -505,11 +505,11 @@ export interface ABCIQueryResponse {
   log: string;
   /** nondeterministic */
   info: string;
-  index: Long;
+  index: bigint;
   key: Uint8Array;
   value: Uint8Array;
-  proofOps: ProofOps;
-  height: Long;
+  proofOps?: ProofOps;
+  height: bigint;
   codespace: string;
 }
 export interface ABCIQueryResponseProtoMsg {
@@ -524,17 +524,17 @@ export interface ABCIQueryResponseProtoMsg {
  * Tendermint.
  */
 export interface ABCIQueryResponseAmino {
-  code: number;
+  code?: number;
   /** nondeterministic */
-  log: string;
+  log?: string;
   /** nondeterministic */
-  info: string;
-  index: string;
-  key: Uint8Array;
-  value: Uint8Array;
+  info?: string;
+  index?: string;
+  key?: string;
+  value?: string;
   proof_ops?: ProofOpsAmino;
-  height: string;
-  codespace: string;
+  height?: string;
+  codespace?: string;
 }
 export interface ABCIQueryResponseAminoMsg {
   type: "cosmos-sdk/ABCIQueryResponse";
@@ -551,11 +551,11 @@ export interface ABCIQueryResponseSDKType {
   code: number;
   log: string;
   info: string;
-  index: Long;
+  index: bigint;
   key: Uint8Array;
   value: Uint8Array;
-  proof_ops: ProofOpsSDKType;
-  height: Long;
+  proof_ops?: ProofOpsSDKType;
+  height: bigint;
   codespace: string;
 }
 /**
@@ -584,9 +584,9 @@ export interface ProofOpProtoMsg {
  * Tendermint.
  */
 export interface ProofOpAmino {
-  type: string;
-  key: Uint8Array;
-  data: Uint8Array;
+  type?: string;
+  key?: string;
+  data?: string;
 }
 export interface ProofOpAminoMsg {
   type: "cosmos-sdk/ProofOp";
@@ -625,7 +625,7 @@ export interface ProofOpsProtoMsg {
  * Tendermint.
  */
 export interface ProofOpsAmino {
-  ops: ProofOpAmino[];
+  ops?: ProofOpAmino[];
 }
 export interface ProofOpsAminoMsg {
   type: "cosmos-sdk/ProofOps";
@@ -642,13 +642,14 @@ export interface ProofOpsSDKType {
 }
 function createBaseGetValidatorSetByHeightRequest(): GetValidatorSetByHeightRequest {
   return {
-    height: Long.ZERO,
-    pagination: PageRequest.fromPartial({})
+    height: BigInt(0),
+    pagination: undefined
   };
 }
 export const GetValidatorSetByHeightRequest = {
-  encode(message: GetValidatorSetByHeightRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
-    if (!message.height.isZero()) {
+  typeUrl: "/cosmos.base.tendermint.v1beta1.GetValidatorSetByHeightRequest",
+  encode(message: GetValidatorSetByHeightRequest, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
+    if (message.height !== BigInt(0)) {
       writer.uint32(8).int64(message.height);
     }
     if (message.pagination !== undefined) {
@@ -656,15 +657,15 @@ export const GetValidatorSetByHeightRequest = {
     }
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): GetValidatorSetByHeightRequest {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): GetValidatorSetByHeightRequest {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseGetValidatorSetByHeightRequest();
     while (reader.pos < end) {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          message.height = (reader.int64() as Long);
+          message.height = reader.int64();
           break;
         case 2:
           message.pagination = PageRequest.decode(reader, reader.uint32());
@@ -678,31 +679,35 @@ export const GetValidatorSetByHeightRequest = {
   },
   fromJSON(object: any): GetValidatorSetByHeightRequest {
     return {
-      height: isSet(object.height) ? Long.fromValue(object.height) : Long.ZERO,
+      height: isSet(object.height) ? BigInt(object.height.toString()) : BigInt(0),
       pagination: isSet(object.pagination) ? PageRequest.fromJSON(object.pagination) : undefined
     };
   },
   toJSON(message: GetValidatorSetByHeightRequest): unknown {
     const obj: any = {};
-    message.height !== undefined && (obj.height = (message.height || Long.ZERO).toString());
+    message.height !== undefined && (obj.height = (message.height || BigInt(0)).toString());
     message.pagination !== undefined && (obj.pagination = message.pagination ? PageRequest.toJSON(message.pagination) : undefined);
     return obj;
   },
   fromPartial(object: Partial<GetValidatorSetByHeightRequest>): GetValidatorSetByHeightRequest {
     const message = createBaseGetValidatorSetByHeightRequest();
-    message.height = object.height !== undefined && object.height !== null ? Long.fromValue(object.height) : Long.ZERO;
+    message.height = object.height !== undefined && object.height !== null ? BigInt(object.height.toString()) : BigInt(0);
     message.pagination = object.pagination !== undefined && object.pagination !== null ? PageRequest.fromPartial(object.pagination) : undefined;
     return message;
   },
   fromAmino(object: GetValidatorSetByHeightRequestAmino): GetValidatorSetByHeightRequest {
-    return {
-      height: Long.fromString(object.height),
-      pagination: object?.pagination ? PageRequest.fromAmino(object.pagination) : undefined
-    };
+    const message = createBaseGetValidatorSetByHeightRequest();
+    if (object.height !== undefined && object.height !== null) {
+      message.height = BigInt(object.height);
+    }
+    if (object.pagination !== undefined && object.pagination !== null) {
+      message.pagination = PageRequest.fromAmino(object.pagination);
+    }
+    return message;
   },
   toAmino(message: GetValidatorSetByHeightRequest): GetValidatorSetByHeightRequestAmino {
     const obj: any = {};
-    obj.height = message.height ? message.height.toString() : undefined;
+    obj.height = message.height !== BigInt(0) ? message.height.toString() : undefined;
     obj.pagination = message.pagination ? PageRequest.toAmino(message.pagination) : undefined;
     return obj;
   },
@@ -730,14 +735,15 @@ export const GetValidatorSetByHeightRequest = {
 };
 function createBaseGetValidatorSetByHeightResponse(): GetValidatorSetByHeightResponse {
   return {
-    blockHeight: Long.ZERO,
+    blockHeight: BigInt(0),
     validators: [],
-    pagination: PageResponse.fromPartial({})
+    pagination: undefined
   };
 }
 export const GetValidatorSetByHeightResponse = {
-  encode(message: GetValidatorSetByHeightResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
-    if (!message.blockHeight.isZero()) {
+  typeUrl: "/cosmos.base.tendermint.v1beta1.GetValidatorSetByHeightResponse",
+  encode(message: GetValidatorSetByHeightResponse, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
+    if (message.blockHeight !== BigInt(0)) {
       writer.uint32(8).int64(message.blockHeight);
     }
     for (const v of message.validators) {
@@ -748,15 +754,15 @@ export const GetValidatorSetByHeightResponse = {
     }
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): GetValidatorSetByHeightResponse {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): GetValidatorSetByHeightResponse {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseGetValidatorSetByHeightResponse();
     while (reader.pos < end) {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          message.blockHeight = (reader.int64() as Long);
+          message.blockHeight = reader.int64();
           break;
         case 2:
           message.validators.push(Validator.decode(reader, reader.uint32()));
@@ -773,14 +779,14 @@ export const GetValidatorSetByHeightResponse = {
   },
   fromJSON(object: any): GetValidatorSetByHeightResponse {
     return {
-      blockHeight: isSet(object.blockHeight) ? Long.fromValue(object.blockHeight) : Long.ZERO,
+      blockHeight: isSet(object.blockHeight) ? BigInt(object.blockHeight.toString()) : BigInt(0),
       validators: Array.isArray(object?.validators) ? object.validators.map((e: any) => Validator.fromJSON(e)) : [],
       pagination: isSet(object.pagination) ? PageResponse.fromJSON(object.pagination) : undefined
     };
   },
   toJSON(message: GetValidatorSetByHeightResponse): unknown {
     const obj: any = {};
-    message.blockHeight !== undefined && (obj.blockHeight = (message.blockHeight || Long.ZERO).toString());
+    message.blockHeight !== undefined && (obj.blockHeight = (message.blockHeight || BigInt(0)).toString());
     if (message.validators) {
       obj.validators = message.validators.map(e => e ? Validator.toJSON(e) : undefined);
     } else {
@@ -791,25 +797,29 @@ export const GetValidatorSetByHeightResponse = {
   },
   fromPartial(object: Partial<GetValidatorSetByHeightResponse>): GetValidatorSetByHeightResponse {
     const message = createBaseGetValidatorSetByHeightResponse();
-    message.blockHeight = object.blockHeight !== undefined && object.blockHeight !== null ? Long.fromValue(object.blockHeight) : Long.ZERO;
+    message.blockHeight = object.blockHeight !== undefined && object.blockHeight !== null ? BigInt(object.blockHeight.toString()) : BigInt(0);
     message.validators = object.validators?.map(e => Validator.fromPartial(e)) || [];
     message.pagination = object.pagination !== undefined && object.pagination !== null ? PageResponse.fromPartial(object.pagination) : undefined;
     return message;
   },
   fromAmino(object: GetValidatorSetByHeightResponseAmino): GetValidatorSetByHeightResponse {
-    return {
-      blockHeight: Long.fromString(object.block_height),
-      validators: Array.isArray(object?.validators) ? object.validators.map((e: any) => Validator.fromAmino(e)) : [],
-      pagination: object?.pagination ? PageResponse.fromAmino(object.pagination) : undefined
-    };
+    const message = createBaseGetValidatorSetByHeightResponse();
+    if (object.block_height !== undefined && object.block_height !== null) {
+      message.blockHeight = BigInt(object.block_height);
+    }
+    message.validators = object.validators?.map(e => Validator.fromAmino(e)) || [];
+    if (object.pagination !== undefined && object.pagination !== null) {
+      message.pagination = PageResponse.fromAmino(object.pagination);
+    }
+    return message;
   },
   toAmino(message: GetValidatorSetByHeightResponse): GetValidatorSetByHeightResponseAmino {
     const obj: any = {};
-    obj.block_height = message.blockHeight ? message.blockHeight.toString() : undefined;
+    obj.block_height = message.blockHeight !== BigInt(0) ? message.blockHeight.toString() : undefined;
     if (message.validators) {
       obj.validators = message.validators.map(e => e ? Validator.toAmino(e) : undefined);
     } else {
-      obj.validators = [];
+      obj.validators = message.validators;
     }
     obj.pagination = message.pagination ? PageResponse.toAmino(message.pagination) : undefined;
     return obj;
@@ -838,18 +848,19 @@ export const GetValidatorSetByHeightResponse = {
 };
 function createBaseGetLatestValidatorSetRequest(): GetLatestValidatorSetRequest {
   return {
-    pagination: PageRequest.fromPartial({})
+    pagination: undefined
   };
 }
 export const GetLatestValidatorSetRequest = {
-  encode(message: GetLatestValidatorSetRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  typeUrl: "/cosmos.base.tendermint.v1beta1.GetLatestValidatorSetRequest",
+  encode(message: GetLatestValidatorSetRequest, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.pagination !== undefined) {
       PageRequest.encode(message.pagination, writer.uint32(10).fork()).ldelim();
     }
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): GetLatestValidatorSetRequest {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): GetLatestValidatorSetRequest {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseGetLatestValidatorSetRequest();
     while (reader.pos < end) {
@@ -881,9 +892,11 @@ export const GetLatestValidatorSetRequest = {
     return message;
   },
   fromAmino(object: GetLatestValidatorSetRequestAmino): GetLatestValidatorSetRequest {
-    return {
-      pagination: object?.pagination ? PageRequest.fromAmino(object.pagination) : undefined
-    };
+    const message = createBaseGetLatestValidatorSetRequest();
+    if (object.pagination !== undefined && object.pagination !== null) {
+      message.pagination = PageRequest.fromAmino(object.pagination);
+    }
+    return message;
   },
   toAmino(message: GetLatestValidatorSetRequest): GetLatestValidatorSetRequestAmino {
     const obj: any = {};
@@ -914,14 +927,15 @@ export const GetLatestValidatorSetRequest = {
 };
 function createBaseGetLatestValidatorSetResponse(): GetLatestValidatorSetResponse {
   return {
-    blockHeight: Long.ZERO,
+    blockHeight: BigInt(0),
     validators: [],
-    pagination: PageResponse.fromPartial({})
+    pagination: undefined
   };
 }
 export const GetLatestValidatorSetResponse = {
-  encode(message: GetLatestValidatorSetResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
-    if (!message.blockHeight.isZero()) {
+  typeUrl: "/cosmos.base.tendermint.v1beta1.GetLatestValidatorSetResponse",
+  encode(message: GetLatestValidatorSetResponse, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
+    if (message.blockHeight !== BigInt(0)) {
       writer.uint32(8).int64(message.blockHeight);
     }
     for (const v of message.validators) {
@@ -932,15 +946,15 @@ export const GetLatestValidatorSetResponse = {
     }
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): GetLatestValidatorSetResponse {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): GetLatestValidatorSetResponse {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseGetLatestValidatorSetResponse();
     while (reader.pos < end) {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          message.blockHeight = (reader.int64() as Long);
+          message.blockHeight = reader.int64();
           break;
         case 2:
           message.validators.push(Validator.decode(reader, reader.uint32()));
@@ -957,14 +971,14 @@ export const GetLatestValidatorSetResponse = {
   },
   fromJSON(object: any): GetLatestValidatorSetResponse {
     return {
-      blockHeight: isSet(object.blockHeight) ? Long.fromValue(object.blockHeight) : Long.ZERO,
+      blockHeight: isSet(object.blockHeight) ? BigInt(object.blockHeight.toString()) : BigInt(0),
       validators: Array.isArray(object?.validators) ? object.validators.map((e: any) => Validator.fromJSON(e)) : [],
       pagination: isSet(object.pagination) ? PageResponse.fromJSON(object.pagination) : undefined
     };
   },
   toJSON(message: GetLatestValidatorSetResponse): unknown {
     const obj: any = {};
-    message.blockHeight !== undefined && (obj.blockHeight = (message.blockHeight || Long.ZERO).toString());
+    message.blockHeight !== undefined && (obj.blockHeight = (message.blockHeight || BigInt(0)).toString());
     if (message.validators) {
       obj.validators = message.validators.map(e => e ? Validator.toJSON(e) : undefined);
     } else {
@@ -975,25 +989,29 @@ export const GetLatestValidatorSetResponse = {
   },
   fromPartial(object: Partial<GetLatestValidatorSetResponse>): GetLatestValidatorSetResponse {
     const message = createBaseGetLatestValidatorSetResponse();
-    message.blockHeight = object.blockHeight !== undefined && object.blockHeight !== null ? Long.fromValue(object.blockHeight) : Long.ZERO;
+    message.blockHeight = object.blockHeight !== undefined && object.blockHeight !== null ? BigInt(object.blockHeight.toString()) : BigInt(0);
     message.validators = object.validators?.map(e => Validator.fromPartial(e)) || [];
     message.pagination = object.pagination !== undefined && object.pagination !== null ? PageResponse.fromPartial(object.pagination) : undefined;
     return message;
   },
   fromAmino(object: GetLatestValidatorSetResponseAmino): GetLatestValidatorSetResponse {
-    return {
-      blockHeight: Long.fromString(object.block_height),
-      validators: Array.isArray(object?.validators) ? object.validators.map((e: any) => Validator.fromAmino(e)) : [],
-      pagination: object?.pagination ? PageResponse.fromAmino(object.pagination) : undefined
-    };
+    const message = createBaseGetLatestValidatorSetResponse();
+    if (object.block_height !== undefined && object.block_height !== null) {
+      message.blockHeight = BigInt(object.block_height);
+    }
+    message.validators = object.validators?.map(e => Validator.fromAmino(e)) || [];
+    if (object.pagination !== undefined && object.pagination !== null) {
+      message.pagination = PageResponse.fromAmino(object.pagination);
+    }
+    return message;
   },
   toAmino(message: GetLatestValidatorSetResponse): GetLatestValidatorSetResponseAmino {
     const obj: any = {};
-    obj.block_height = message.blockHeight ? message.blockHeight.toString() : undefined;
+    obj.block_height = message.blockHeight !== BigInt(0) ? message.blockHeight.toString() : undefined;
     if (message.validators) {
       obj.validators = message.validators.map(e => e ? Validator.toAmino(e) : undefined);
     } else {
-      obj.validators = [];
+      obj.validators = message.validators;
     }
     obj.pagination = message.pagination ? PageResponse.toAmino(message.pagination) : undefined;
     return obj;
@@ -1024,28 +1042,29 @@ function createBaseValidator(): Validator {
   return {
     address: "",
     pubKey: undefined,
-    votingPower: Long.ZERO,
-    proposerPriority: Long.ZERO
+    votingPower: BigInt(0),
+    proposerPriority: BigInt(0)
   };
 }
 export const Validator = {
-  encode(message: Validator, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  typeUrl: "/cosmos.base.tendermint.v1beta1.Validator",
+  encode(message: Validator, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.address !== "") {
       writer.uint32(10).string(message.address);
     }
     if (message.pubKey !== undefined) {
       Any.encode(message.pubKey, writer.uint32(18).fork()).ldelim();
     }
-    if (!message.votingPower.isZero()) {
+    if (message.votingPower !== BigInt(0)) {
       writer.uint32(24).int64(message.votingPower);
     }
-    if (!message.proposerPriority.isZero()) {
+    if (message.proposerPriority !== BigInt(0)) {
       writer.uint32(32).int64(message.proposerPriority);
     }
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): Validator {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): Validator {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseValidator();
     while (reader.pos < end) {
@@ -1058,10 +1077,10 @@ export const Validator = {
           message.pubKey = Any.decode(reader, reader.uint32());
           break;
         case 3:
-          message.votingPower = (reader.int64() as Long);
+          message.votingPower = reader.int64();
           break;
         case 4:
-          message.proposerPriority = (reader.int64() as Long);
+          message.proposerPriority = reader.int64();
           break;
         default:
           reader.skipType(tag & 7);
@@ -1074,40 +1093,48 @@ export const Validator = {
     return {
       address: isSet(object.address) ? String(object.address) : "",
       pubKey: isSet(object.pubKey) ? Any.fromJSON(object.pubKey) : undefined,
-      votingPower: isSet(object.votingPower) ? Long.fromValue(object.votingPower) : Long.ZERO,
-      proposerPriority: isSet(object.proposerPriority) ? Long.fromValue(object.proposerPriority) : Long.ZERO
+      votingPower: isSet(object.votingPower) ? BigInt(object.votingPower.toString()) : BigInt(0),
+      proposerPriority: isSet(object.proposerPriority) ? BigInt(object.proposerPriority.toString()) : BigInt(0)
     };
   },
   toJSON(message: Validator): unknown {
     const obj: any = {};
     message.address !== undefined && (obj.address = message.address);
     message.pubKey !== undefined && (obj.pubKey = message.pubKey ? Any.toJSON(message.pubKey) : undefined);
-    message.votingPower !== undefined && (obj.votingPower = (message.votingPower || Long.ZERO).toString());
-    message.proposerPriority !== undefined && (obj.proposerPriority = (message.proposerPriority || Long.ZERO).toString());
+    message.votingPower !== undefined && (obj.votingPower = (message.votingPower || BigInt(0)).toString());
+    message.proposerPriority !== undefined && (obj.proposerPriority = (message.proposerPriority || BigInt(0)).toString());
     return obj;
   },
   fromPartial(object: Partial<Validator>): Validator {
     const message = createBaseValidator();
     message.address = object.address ?? "";
     message.pubKey = object.pubKey !== undefined && object.pubKey !== null ? Any.fromPartial(object.pubKey) : undefined;
-    message.votingPower = object.votingPower !== undefined && object.votingPower !== null ? Long.fromValue(object.votingPower) : Long.ZERO;
-    message.proposerPriority = object.proposerPriority !== undefined && object.proposerPriority !== null ? Long.fromValue(object.proposerPriority) : Long.ZERO;
+    message.votingPower = object.votingPower !== undefined && object.votingPower !== null ? BigInt(object.votingPower.toString()) : BigInt(0);
+    message.proposerPriority = object.proposerPriority !== undefined && object.proposerPriority !== null ? BigInt(object.proposerPriority.toString()) : BigInt(0);
     return message;
   },
   fromAmino(object: ValidatorAmino): Validator {
-    return {
-      address: object.address,
-      pubKey: object?.pub_key ? Any.fromAmino(object.pub_key) : undefined,
-      votingPower: Long.fromString(object.voting_power),
-      proposerPriority: Long.fromString(object.proposer_priority)
-    };
+    const message = createBaseValidator();
+    if (object.address !== undefined && object.address !== null) {
+      message.address = object.address;
+    }
+    if (object.pub_key !== undefined && object.pub_key !== null) {
+      message.pubKey = Any.fromAmino(object.pub_key);
+    }
+    if (object.voting_power !== undefined && object.voting_power !== null) {
+      message.votingPower = BigInt(object.voting_power);
+    }
+    if (object.proposer_priority !== undefined && object.proposer_priority !== null) {
+      message.proposerPriority = BigInt(object.proposer_priority);
+    }
+    return message;
   },
   toAmino(message: Validator): ValidatorAmino {
     const obj: any = {};
-    obj.address = message.address;
+    obj.address = message.address === "" ? undefined : message.address;
     obj.pub_key = message.pubKey ? Any.toAmino(message.pubKey) : undefined;
-    obj.voting_power = message.votingPower ? message.votingPower.toString() : undefined;
-    obj.proposer_priority = message.proposerPriority ? message.proposerPriority.toString() : undefined;
+    obj.voting_power = message.votingPower !== BigInt(0) ? message.votingPower.toString() : undefined;
+    obj.proposer_priority = message.proposerPriority !== BigInt(0) ? message.proposerPriority.toString() : undefined;
     return obj;
   },
   fromAminoMsg(object: ValidatorAminoMsg): Validator {
@@ -1134,25 +1161,26 @@ export const Validator = {
 };
 function createBaseGetBlockByHeightRequest(): GetBlockByHeightRequest {
   return {
-    height: Long.ZERO
+    height: BigInt(0)
   };
 }
 export const GetBlockByHeightRequest = {
-  encode(message: GetBlockByHeightRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
-    if (!message.height.isZero()) {
+  typeUrl: "/cosmos.base.tendermint.v1beta1.GetBlockByHeightRequest",
+  encode(message: GetBlockByHeightRequest, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
+    if (message.height !== BigInt(0)) {
       writer.uint32(8).int64(message.height);
     }
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): GetBlockByHeightRequest {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): GetBlockByHeightRequest {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseGetBlockByHeightRequest();
     while (reader.pos < end) {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          message.height = (reader.int64() as Long);
+          message.height = reader.int64();
           break;
         default:
           reader.skipType(tag & 7);
@@ -1163,27 +1191,29 @@ export const GetBlockByHeightRequest = {
   },
   fromJSON(object: any): GetBlockByHeightRequest {
     return {
-      height: isSet(object.height) ? Long.fromValue(object.height) : Long.ZERO
+      height: isSet(object.height) ? BigInt(object.height.toString()) : BigInt(0)
     };
   },
   toJSON(message: GetBlockByHeightRequest): unknown {
     const obj: any = {};
-    message.height !== undefined && (obj.height = (message.height || Long.ZERO).toString());
+    message.height !== undefined && (obj.height = (message.height || BigInt(0)).toString());
     return obj;
   },
   fromPartial(object: Partial<GetBlockByHeightRequest>): GetBlockByHeightRequest {
     const message = createBaseGetBlockByHeightRequest();
-    message.height = object.height !== undefined && object.height !== null ? Long.fromValue(object.height) : Long.ZERO;
+    message.height = object.height !== undefined && object.height !== null ? BigInt(object.height.toString()) : BigInt(0);
     return message;
   },
   fromAmino(object: GetBlockByHeightRequestAmino): GetBlockByHeightRequest {
-    return {
-      height: Long.fromString(object.height)
-    };
+    const message = createBaseGetBlockByHeightRequest();
+    if (object.height !== undefined && object.height !== null) {
+      message.height = BigInt(object.height);
+    }
+    return message;
   },
   toAmino(message: GetBlockByHeightRequest): GetBlockByHeightRequestAmino {
     const obj: any = {};
-    obj.height = message.height ? message.height.toString() : undefined;
+    obj.height = message.height !== BigInt(0) ? message.height.toString() : undefined;
     return obj;
   },
   fromAminoMsg(object: GetBlockByHeightRequestAminoMsg): GetBlockByHeightRequest {
@@ -1210,13 +1240,14 @@ export const GetBlockByHeightRequest = {
 };
 function createBaseGetBlockByHeightResponse(): GetBlockByHeightResponse {
   return {
-    blockId: BlockID.fromPartial({}),
-    block: Block.fromPartial({}),
-    sdkBlock: Block.fromPartial({})
+    blockId: undefined,
+    block: undefined,
+    sdkBlock: undefined
   };
 }
 export const GetBlockByHeightResponse = {
-  encode(message: GetBlockByHeightResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  typeUrl: "/cosmos.base.tendermint.v1beta1.GetBlockByHeightResponse",
+  encode(message: GetBlockByHeightResponse, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.blockId !== undefined) {
       BlockID.encode(message.blockId, writer.uint32(10).fork()).ldelim();
     }
@@ -1228,8 +1259,8 @@ export const GetBlockByHeightResponse = {
     }
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): GetBlockByHeightResponse {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): GetBlockByHeightResponse {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseGetBlockByHeightResponse();
     while (reader.pos < end) {
@@ -1273,11 +1304,17 @@ export const GetBlockByHeightResponse = {
     return message;
   },
   fromAmino(object: GetBlockByHeightResponseAmino): GetBlockByHeightResponse {
-    return {
-      blockId: object?.block_id ? BlockID.fromAmino(object.block_id) : undefined,
-      block: object?.block ? Block1.fromAmino(object.block) : undefined,
-      sdkBlock: object?.sdk_block ? Block2.fromAmino(object.sdk_block) : undefined
-    };
+    const message = createBaseGetBlockByHeightResponse();
+    if (object.block_id !== undefined && object.block_id !== null) {
+      message.blockId = BlockID.fromAmino(object.block_id);
+    }
+    if (object.block !== undefined && object.block !== null) {
+      message.block = Block1.fromAmino(object.block);
+    }
+    if (object.sdk_block !== undefined && object.sdk_block !== null) {
+      message.sdkBlock = Block2.fromAmino(object.sdk_block);
+    }
+    return message;
   },
   toAmino(message: GetBlockByHeightResponse): GetBlockByHeightResponseAmino {
     const obj: any = {};
@@ -1312,11 +1349,12 @@ function createBaseGetLatestBlockRequest(): GetLatestBlockRequest {
   return {};
 }
 export const GetLatestBlockRequest = {
-  encode(_: GetLatestBlockRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  typeUrl: "/cosmos.base.tendermint.v1beta1.GetLatestBlockRequest",
+  encode(_: GetLatestBlockRequest, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): GetLatestBlockRequest {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): GetLatestBlockRequest {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseGetLatestBlockRequest();
     while (reader.pos < end) {
@@ -1341,7 +1379,8 @@ export const GetLatestBlockRequest = {
     return message;
   },
   fromAmino(_: GetLatestBlockRequestAmino): GetLatestBlockRequest {
-    return {};
+    const message = createBaseGetLatestBlockRequest();
+    return message;
   },
   toAmino(_: GetLatestBlockRequest): GetLatestBlockRequestAmino {
     const obj: any = {};
@@ -1371,13 +1410,14 @@ export const GetLatestBlockRequest = {
 };
 function createBaseGetLatestBlockResponse(): GetLatestBlockResponse {
   return {
-    blockId: BlockID.fromPartial({}),
-    block: Block.fromPartial({}),
-    sdkBlock: Block.fromPartial({})
+    blockId: undefined,
+    block: undefined,
+    sdkBlock: undefined
   };
 }
 export const GetLatestBlockResponse = {
-  encode(message: GetLatestBlockResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  typeUrl: "/cosmos.base.tendermint.v1beta1.GetLatestBlockResponse",
+  encode(message: GetLatestBlockResponse, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.blockId !== undefined) {
       BlockID.encode(message.blockId, writer.uint32(10).fork()).ldelim();
     }
@@ -1389,8 +1429,8 @@ export const GetLatestBlockResponse = {
     }
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): GetLatestBlockResponse {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): GetLatestBlockResponse {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseGetLatestBlockResponse();
     while (reader.pos < end) {
@@ -1434,11 +1474,17 @@ export const GetLatestBlockResponse = {
     return message;
   },
   fromAmino(object: GetLatestBlockResponseAmino): GetLatestBlockResponse {
-    return {
-      blockId: object?.block_id ? BlockID.fromAmino(object.block_id) : undefined,
-      block: object?.block ? Block1.fromAmino(object.block) : undefined,
-      sdkBlock: object?.sdk_block ? Block2.fromAmino(object.sdk_block) : undefined
-    };
+    const message = createBaseGetLatestBlockResponse();
+    if (object.block_id !== undefined && object.block_id !== null) {
+      message.blockId = BlockID.fromAmino(object.block_id);
+    }
+    if (object.block !== undefined && object.block !== null) {
+      message.block = Block1.fromAmino(object.block);
+    }
+    if (object.sdk_block !== undefined && object.sdk_block !== null) {
+      message.sdkBlock = Block2.fromAmino(object.sdk_block);
+    }
+    return message;
   },
   toAmino(message: GetLatestBlockResponse): GetLatestBlockResponseAmino {
     const obj: any = {};
@@ -1473,11 +1519,12 @@ function createBaseGetSyncingRequest(): GetSyncingRequest {
   return {};
 }
 export const GetSyncingRequest = {
-  encode(_: GetSyncingRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  typeUrl: "/cosmos.base.tendermint.v1beta1.GetSyncingRequest",
+  encode(_: GetSyncingRequest, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): GetSyncingRequest {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): GetSyncingRequest {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseGetSyncingRequest();
     while (reader.pos < end) {
@@ -1502,7 +1549,8 @@ export const GetSyncingRequest = {
     return message;
   },
   fromAmino(_: GetSyncingRequestAmino): GetSyncingRequest {
-    return {};
+    const message = createBaseGetSyncingRequest();
+    return message;
   },
   toAmino(_: GetSyncingRequest): GetSyncingRequestAmino {
     const obj: any = {};
@@ -1536,14 +1584,15 @@ function createBaseGetSyncingResponse(): GetSyncingResponse {
   };
 }
 export const GetSyncingResponse = {
-  encode(message: GetSyncingResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  typeUrl: "/cosmos.base.tendermint.v1beta1.GetSyncingResponse",
+  encode(message: GetSyncingResponse, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.syncing === true) {
       writer.uint32(8).bool(message.syncing);
     }
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): GetSyncingResponse {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): GetSyncingResponse {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseGetSyncingResponse();
     while (reader.pos < end) {
@@ -1575,13 +1624,15 @@ export const GetSyncingResponse = {
     return message;
   },
   fromAmino(object: GetSyncingResponseAmino): GetSyncingResponse {
-    return {
-      syncing: object.syncing
-    };
+    const message = createBaseGetSyncingResponse();
+    if (object.syncing !== undefined && object.syncing !== null) {
+      message.syncing = object.syncing;
+    }
+    return message;
   },
   toAmino(message: GetSyncingResponse): GetSyncingResponseAmino {
     const obj: any = {};
-    obj.syncing = message.syncing;
+    obj.syncing = message.syncing === false ? undefined : message.syncing;
     return obj;
   },
   fromAminoMsg(object: GetSyncingResponseAminoMsg): GetSyncingResponse {
@@ -1610,11 +1661,12 @@ function createBaseGetNodeInfoRequest(): GetNodeInfoRequest {
   return {};
 }
 export const GetNodeInfoRequest = {
-  encode(_: GetNodeInfoRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  typeUrl: "/cosmos.base.tendermint.v1beta1.GetNodeInfoRequest",
+  encode(_: GetNodeInfoRequest, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): GetNodeInfoRequest {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): GetNodeInfoRequest {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseGetNodeInfoRequest();
     while (reader.pos < end) {
@@ -1639,7 +1691,8 @@ export const GetNodeInfoRequest = {
     return message;
   },
   fromAmino(_: GetNodeInfoRequestAmino): GetNodeInfoRequest {
-    return {};
+    const message = createBaseGetNodeInfoRequest();
+    return message;
   },
   toAmino(_: GetNodeInfoRequest): GetNodeInfoRequestAmino {
     const obj: any = {};
@@ -1669,12 +1722,13 @@ export const GetNodeInfoRequest = {
 };
 function createBaseGetNodeInfoResponse(): GetNodeInfoResponse {
   return {
-    defaultNodeInfo: DefaultNodeInfo.fromPartial({}),
-    applicationVersion: VersionInfo.fromPartial({})
+    defaultNodeInfo: undefined,
+    applicationVersion: undefined
   };
 }
 export const GetNodeInfoResponse = {
-  encode(message: GetNodeInfoResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  typeUrl: "/cosmos.base.tendermint.v1beta1.GetNodeInfoResponse",
+  encode(message: GetNodeInfoResponse, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.defaultNodeInfo !== undefined) {
       DefaultNodeInfo.encode(message.defaultNodeInfo, writer.uint32(10).fork()).ldelim();
     }
@@ -1683,8 +1737,8 @@ export const GetNodeInfoResponse = {
     }
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): GetNodeInfoResponse {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): GetNodeInfoResponse {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseGetNodeInfoResponse();
     while (reader.pos < end) {
@@ -1722,10 +1776,14 @@ export const GetNodeInfoResponse = {
     return message;
   },
   fromAmino(object: GetNodeInfoResponseAmino): GetNodeInfoResponse {
-    return {
-      defaultNodeInfo: object?.default_node_info ? DefaultNodeInfo.fromAmino(object.default_node_info) : undefined,
-      applicationVersion: object?.application_version ? VersionInfo.fromAmino(object.application_version) : undefined
-    };
+    const message = createBaseGetNodeInfoResponse();
+    if (object.default_node_info !== undefined && object.default_node_info !== null) {
+      message.defaultNodeInfo = DefaultNodeInfo.fromAmino(object.default_node_info);
+    }
+    if (object.application_version !== undefined && object.application_version !== null) {
+      message.applicationVersion = VersionInfo.fromAmino(object.application_version);
+    }
+    return message;
   },
   toAmino(message: GetNodeInfoResponse): GetNodeInfoResponseAmino {
     const obj: any = {};
@@ -1768,7 +1826,8 @@ function createBaseVersionInfo(): VersionInfo {
   };
 }
 export const VersionInfo = {
-  encode(message: VersionInfo, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  typeUrl: "/cosmos.base.tendermint.v1beta1.VersionInfo",
+  encode(message: VersionInfo, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.name !== "") {
       writer.uint32(10).string(message.name);
     }
@@ -1795,8 +1854,8 @@ export const VersionInfo = {
     }
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): VersionInfo {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): VersionInfo {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseVersionInfo();
     while (reader.pos < end) {
@@ -1874,31 +1933,45 @@ export const VersionInfo = {
     return message;
   },
   fromAmino(object: VersionInfoAmino): VersionInfo {
-    return {
-      name: object.name,
-      appName: object.app_name,
-      version: object.version,
-      gitCommit: object.git_commit,
-      buildTags: object.build_tags,
-      goVersion: object.go_version,
-      buildDeps: Array.isArray(object?.build_deps) ? object.build_deps.map((e: any) => Module.fromAmino(e)) : [],
-      cosmosSdkVersion: object.cosmos_sdk_version
-    };
+    const message = createBaseVersionInfo();
+    if (object.name !== undefined && object.name !== null) {
+      message.name = object.name;
+    }
+    if (object.app_name !== undefined && object.app_name !== null) {
+      message.appName = object.app_name;
+    }
+    if (object.version !== undefined && object.version !== null) {
+      message.version = object.version;
+    }
+    if (object.git_commit !== undefined && object.git_commit !== null) {
+      message.gitCommit = object.git_commit;
+    }
+    if (object.build_tags !== undefined && object.build_tags !== null) {
+      message.buildTags = object.build_tags;
+    }
+    if (object.go_version !== undefined && object.go_version !== null) {
+      message.goVersion = object.go_version;
+    }
+    message.buildDeps = object.build_deps?.map(e => Module.fromAmino(e)) || [];
+    if (object.cosmos_sdk_version !== undefined && object.cosmos_sdk_version !== null) {
+      message.cosmosSdkVersion = object.cosmos_sdk_version;
+    }
+    return message;
   },
   toAmino(message: VersionInfo): VersionInfoAmino {
     const obj: any = {};
-    obj.name = message.name;
-    obj.app_name = message.appName;
-    obj.version = message.version;
-    obj.git_commit = message.gitCommit;
-    obj.build_tags = message.buildTags;
-    obj.go_version = message.goVersion;
+    obj.name = message.name === "" ? undefined : message.name;
+    obj.app_name = message.appName === "" ? undefined : message.appName;
+    obj.version = message.version === "" ? undefined : message.version;
+    obj.git_commit = message.gitCommit === "" ? undefined : message.gitCommit;
+    obj.build_tags = message.buildTags === "" ? undefined : message.buildTags;
+    obj.go_version = message.goVersion === "" ? undefined : message.goVersion;
     if (message.buildDeps) {
       obj.build_deps = message.buildDeps.map(e => e ? Module.toAmino(e) : undefined);
     } else {
-      obj.build_deps = [];
+      obj.build_deps = message.buildDeps;
     }
-    obj.cosmos_sdk_version = message.cosmosSdkVersion;
+    obj.cosmos_sdk_version = message.cosmosSdkVersion === "" ? undefined : message.cosmosSdkVersion;
     return obj;
   },
   fromAminoMsg(object: VersionInfoAminoMsg): VersionInfo {
@@ -1931,7 +2004,8 @@ function createBaseModule(): Module {
   };
 }
 export const Module = {
-  encode(message: Module, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  typeUrl: "/cosmos.base.tendermint.v1beta1.Module",
+  encode(message: Module, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.path !== "") {
       writer.uint32(10).string(message.path);
     }
@@ -1943,8 +2017,8 @@ export const Module = {
     }
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): Module {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): Module {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseModule();
     while (reader.pos < end) {
@@ -1988,17 +2062,23 @@ export const Module = {
     return message;
   },
   fromAmino(object: ModuleAmino): Module {
-    return {
-      path: object.path,
-      version: object.version,
-      sum: object.sum
-    };
+    const message = createBaseModule();
+    if (object.path !== undefined && object.path !== null) {
+      message.path = object.path;
+    }
+    if (object.version !== undefined && object.version !== null) {
+      message.version = object.version;
+    }
+    if (object.sum !== undefined && object.sum !== null) {
+      message.sum = object.sum;
+    }
+    return message;
   },
   toAmino(message: Module): ModuleAmino {
     const obj: any = {};
-    obj.path = message.path;
-    obj.version = message.version;
-    obj.sum = message.sum;
+    obj.path = message.path === "" ? undefined : message.path;
+    obj.version = message.version === "" ? undefined : message.version;
+    obj.sum = message.sum === "" ? undefined : message.sum;
     return obj;
   },
   fromAminoMsg(object: ModuleAminoMsg): Module {
@@ -2027,19 +2107,20 @@ function createBaseABCIQueryRequest(): ABCIQueryRequest {
   return {
     data: new Uint8Array(),
     path: "",
-    height: Long.ZERO,
+    height: BigInt(0),
     prove: false
   };
 }
 export const ABCIQueryRequest = {
-  encode(message: ABCIQueryRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  typeUrl: "/cosmos.base.tendermint.v1beta1.ABCIQueryRequest",
+  encode(message: ABCIQueryRequest, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.data.length !== 0) {
       writer.uint32(10).bytes(message.data);
     }
     if (message.path !== "") {
       writer.uint32(18).string(message.path);
     }
-    if (!message.height.isZero()) {
+    if (message.height !== BigInt(0)) {
       writer.uint32(24).int64(message.height);
     }
     if (message.prove === true) {
@@ -2047,8 +2128,8 @@ export const ABCIQueryRequest = {
     }
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): ABCIQueryRequest {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): ABCIQueryRequest {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseABCIQueryRequest();
     while (reader.pos < end) {
@@ -2061,7 +2142,7 @@ export const ABCIQueryRequest = {
           message.path = reader.string();
           break;
         case 3:
-          message.height = (reader.int64() as Long);
+          message.height = reader.int64();
           break;
         case 4:
           message.prove = reader.bool();
@@ -2077,7 +2158,7 @@ export const ABCIQueryRequest = {
     return {
       data: isSet(object.data) ? bytesFromBase64(object.data) : new Uint8Array(),
       path: isSet(object.path) ? String(object.path) : "",
-      height: isSet(object.height) ? Long.fromValue(object.height) : Long.ZERO,
+      height: isSet(object.height) ? BigInt(object.height.toString()) : BigInt(0),
       prove: isSet(object.prove) ? Boolean(object.prove) : false
     };
   },
@@ -2085,7 +2166,7 @@ export const ABCIQueryRequest = {
     const obj: any = {};
     message.data !== undefined && (obj.data = base64FromBytes(message.data !== undefined ? message.data : new Uint8Array()));
     message.path !== undefined && (obj.path = message.path);
-    message.height !== undefined && (obj.height = (message.height || Long.ZERO).toString());
+    message.height !== undefined && (obj.height = (message.height || BigInt(0)).toString());
     message.prove !== undefined && (obj.prove = message.prove);
     return obj;
   },
@@ -2093,24 +2174,32 @@ export const ABCIQueryRequest = {
     const message = createBaseABCIQueryRequest();
     message.data = object.data ?? new Uint8Array();
     message.path = object.path ?? "";
-    message.height = object.height !== undefined && object.height !== null ? Long.fromValue(object.height) : Long.ZERO;
+    message.height = object.height !== undefined && object.height !== null ? BigInt(object.height.toString()) : BigInt(0);
     message.prove = object.prove ?? false;
     return message;
   },
   fromAmino(object: ABCIQueryRequestAmino): ABCIQueryRequest {
-    return {
-      data: object.data,
-      path: object.path,
-      height: Long.fromString(object.height),
-      prove: object.prove
-    };
+    const message = createBaseABCIQueryRequest();
+    if (object.data !== undefined && object.data !== null) {
+      message.data = bytesFromBase64(object.data);
+    }
+    if (object.path !== undefined && object.path !== null) {
+      message.path = object.path;
+    }
+    if (object.height !== undefined && object.height !== null) {
+      message.height = BigInt(object.height);
+    }
+    if (object.prove !== undefined && object.prove !== null) {
+      message.prove = object.prove;
+    }
+    return message;
   },
   toAmino(message: ABCIQueryRequest): ABCIQueryRequestAmino {
     const obj: any = {};
-    obj.data = message.data;
-    obj.path = message.path;
-    obj.height = message.height ? message.height.toString() : undefined;
-    obj.prove = message.prove;
+    obj.data = message.data ? base64FromBytes(message.data) : undefined;
+    obj.path = message.path === "" ? undefined : message.path;
+    obj.height = message.height !== BigInt(0) ? message.height.toString() : undefined;
+    obj.prove = message.prove === false ? undefined : message.prove;
     return obj;
   },
   fromAminoMsg(object: ABCIQueryRequestAminoMsg): ABCIQueryRequest {
@@ -2140,16 +2229,17 @@ function createBaseABCIQueryResponse(): ABCIQueryResponse {
     code: 0,
     log: "",
     info: "",
-    index: Long.ZERO,
+    index: BigInt(0),
     key: new Uint8Array(),
     value: new Uint8Array(),
-    proofOps: ProofOps.fromPartial({}),
-    height: Long.ZERO,
+    proofOps: undefined,
+    height: BigInt(0),
     codespace: ""
   };
 }
 export const ABCIQueryResponse = {
-  encode(message: ABCIQueryResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  typeUrl: "/cosmos.base.tendermint.v1beta1.ABCIQueryResponse",
+  encode(message: ABCIQueryResponse, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.code !== 0) {
       writer.uint32(8).uint32(message.code);
     }
@@ -2159,7 +2249,7 @@ export const ABCIQueryResponse = {
     if (message.info !== "") {
       writer.uint32(34).string(message.info);
     }
-    if (!message.index.isZero()) {
+    if (message.index !== BigInt(0)) {
       writer.uint32(40).int64(message.index);
     }
     if (message.key.length !== 0) {
@@ -2171,7 +2261,7 @@ export const ABCIQueryResponse = {
     if (message.proofOps !== undefined) {
       ProofOps.encode(message.proofOps, writer.uint32(66).fork()).ldelim();
     }
-    if (!message.height.isZero()) {
+    if (message.height !== BigInt(0)) {
       writer.uint32(72).int64(message.height);
     }
     if (message.codespace !== "") {
@@ -2179,8 +2269,8 @@ export const ABCIQueryResponse = {
     }
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): ABCIQueryResponse {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): ABCIQueryResponse {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseABCIQueryResponse();
     while (reader.pos < end) {
@@ -2196,7 +2286,7 @@ export const ABCIQueryResponse = {
           message.info = reader.string();
           break;
         case 5:
-          message.index = (reader.int64() as Long);
+          message.index = reader.int64();
           break;
         case 6:
           message.key = reader.bytes();
@@ -2208,7 +2298,7 @@ export const ABCIQueryResponse = {
           message.proofOps = ProofOps.decode(reader, reader.uint32());
           break;
         case 9:
-          message.height = (reader.int64() as Long);
+          message.height = reader.int64();
           break;
         case 10:
           message.codespace = reader.string();
@@ -2225,11 +2315,11 @@ export const ABCIQueryResponse = {
       code: isSet(object.code) ? Number(object.code) : 0,
       log: isSet(object.log) ? String(object.log) : "",
       info: isSet(object.info) ? String(object.info) : "",
-      index: isSet(object.index) ? Long.fromValue(object.index) : Long.ZERO,
+      index: isSet(object.index) ? BigInt(object.index.toString()) : BigInt(0),
       key: isSet(object.key) ? bytesFromBase64(object.key) : new Uint8Array(),
       value: isSet(object.value) ? bytesFromBase64(object.value) : new Uint8Array(),
       proofOps: isSet(object.proofOps) ? ProofOps.fromJSON(object.proofOps) : undefined,
-      height: isSet(object.height) ? Long.fromValue(object.height) : Long.ZERO,
+      height: isSet(object.height) ? BigInt(object.height.toString()) : BigInt(0),
       codespace: isSet(object.codespace) ? String(object.codespace) : ""
     };
   },
@@ -2238,11 +2328,11 @@ export const ABCIQueryResponse = {
     message.code !== undefined && (obj.code = Math.round(message.code));
     message.log !== undefined && (obj.log = message.log);
     message.info !== undefined && (obj.info = message.info);
-    message.index !== undefined && (obj.index = (message.index || Long.ZERO).toString());
+    message.index !== undefined && (obj.index = (message.index || BigInt(0)).toString());
     message.key !== undefined && (obj.key = base64FromBytes(message.key !== undefined ? message.key : new Uint8Array()));
     message.value !== undefined && (obj.value = base64FromBytes(message.value !== undefined ? message.value : new Uint8Array()));
     message.proofOps !== undefined && (obj.proofOps = message.proofOps ? ProofOps.toJSON(message.proofOps) : undefined);
-    message.height !== undefined && (obj.height = (message.height || Long.ZERO).toString());
+    message.height !== undefined && (obj.height = (message.height || BigInt(0)).toString());
     message.codespace !== undefined && (obj.codespace = message.codespace);
     return obj;
   },
@@ -2251,38 +2341,56 @@ export const ABCIQueryResponse = {
     message.code = object.code ?? 0;
     message.log = object.log ?? "";
     message.info = object.info ?? "";
-    message.index = object.index !== undefined && object.index !== null ? Long.fromValue(object.index) : Long.ZERO;
+    message.index = object.index !== undefined && object.index !== null ? BigInt(object.index.toString()) : BigInt(0);
     message.key = object.key ?? new Uint8Array();
     message.value = object.value ?? new Uint8Array();
     message.proofOps = object.proofOps !== undefined && object.proofOps !== null ? ProofOps.fromPartial(object.proofOps) : undefined;
-    message.height = object.height !== undefined && object.height !== null ? Long.fromValue(object.height) : Long.ZERO;
+    message.height = object.height !== undefined && object.height !== null ? BigInt(object.height.toString()) : BigInt(0);
     message.codespace = object.codespace ?? "";
     return message;
   },
   fromAmino(object: ABCIQueryResponseAmino): ABCIQueryResponse {
-    return {
-      code: object.code,
-      log: object.log,
-      info: object.info,
-      index: Long.fromString(object.index),
-      key: object.key,
-      value: object.value,
-      proofOps: object?.proof_ops ? ProofOps.fromAmino(object.proof_ops) : undefined,
-      height: Long.fromString(object.height),
-      codespace: object.codespace
-    };
+    const message = createBaseABCIQueryResponse();
+    if (object.code !== undefined && object.code !== null) {
+      message.code = object.code;
+    }
+    if (object.log !== undefined && object.log !== null) {
+      message.log = object.log;
+    }
+    if (object.info !== undefined && object.info !== null) {
+      message.info = object.info;
+    }
+    if (object.index !== undefined && object.index !== null) {
+      message.index = BigInt(object.index);
+    }
+    if (object.key !== undefined && object.key !== null) {
+      message.key = bytesFromBase64(object.key);
+    }
+    if (object.value !== undefined && object.value !== null) {
+      message.value = bytesFromBase64(object.value);
+    }
+    if (object.proof_ops !== undefined && object.proof_ops !== null) {
+      message.proofOps = ProofOps.fromAmino(object.proof_ops);
+    }
+    if (object.height !== undefined && object.height !== null) {
+      message.height = BigInt(object.height);
+    }
+    if (object.codespace !== undefined && object.codespace !== null) {
+      message.codespace = object.codespace;
+    }
+    return message;
   },
   toAmino(message: ABCIQueryResponse): ABCIQueryResponseAmino {
     const obj: any = {};
-    obj.code = message.code;
-    obj.log = message.log;
-    obj.info = message.info;
-    obj.index = message.index ? message.index.toString() : undefined;
-    obj.key = message.key;
-    obj.value = message.value;
+    obj.code = message.code === 0 ? undefined : message.code;
+    obj.log = message.log === "" ? undefined : message.log;
+    obj.info = message.info === "" ? undefined : message.info;
+    obj.index = message.index !== BigInt(0) ? message.index.toString() : undefined;
+    obj.key = message.key ? base64FromBytes(message.key) : undefined;
+    obj.value = message.value ? base64FromBytes(message.value) : undefined;
     obj.proof_ops = message.proofOps ? ProofOps.toAmino(message.proofOps) : undefined;
-    obj.height = message.height ? message.height.toString() : undefined;
-    obj.codespace = message.codespace;
+    obj.height = message.height !== BigInt(0) ? message.height.toString() : undefined;
+    obj.codespace = message.codespace === "" ? undefined : message.codespace;
     return obj;
   },
   fromAminoMsg(object: ABCIQueryResponseAminoMsg): ABCIQueryResponse {
@@ -2315,7 +2423,8 @@ function createBaseProofOp(): ProofOp {
   };
 }
 export const ProofOp = {
-  encode(message: ProofOp, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  typeUrl: "/cosmos.base.tendermint.v1beta1.ProofOp",
+  encode(message: ProofOp, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.type !== "") {
       writer.uint32(10).string(message.type);
     }
@@ -2327,8 +2436,8 @@ export const ProofOp = {
     }
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): ProofOp {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): ProofOp {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseProofOp();
     while (reader.pos < end) {
@@ -2372,17 +2481,23 @@ export const ProofOp = {
     return message;
   },
   fromAmino(object: ProofOpAmino): ProofOp {
-    return {
-      type: object.type,
-      key: object.key,
-      data: object.data
-    };
+    const message = createBaseProofOp();
+    if (object.type !== undefined && object.type !== null) {
+      message.type = object.type;
+    }
+    if (object.key !== undefined && object.key !== null) {
+      message.key = bytesFromBase64(object.key);
+    }
+    if (object.data !== undefined && object.data !== null) {
+      message.data = bytesFromBase64(object.data);
+    }
+    return message;
   },
   toAmino(message: ProofOp): ProofOpAmino {
     const obj: any = {};
-    obj.type = message.type;
-    obj.key = message.key;
-    obj.data = message.data;
+    obj.type = message.type === "" ? undefined : message.type;
+    obj.key = message.key ? base64FromBytes(message.key) : undefined;
+    obj.data = message.data ? base64FromBytes(message.data) : undefined;
     return obj;
   },
   fromAminoMsg(object: ProofOpAminoMsg): ProofOp {
@@ -2413,14 +2528,15 @@ function createBaseProofOps(): ProofOps {
   };
 }
 export const ProofOps = {
-  encode(message: ProofOps, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  typeUrl: "/cosmos.base.tendermint.v1beta1.ProofOps",
+  encode(message: ProofOps, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     for (const v of message.ops) {
       ProofOp.encode(v!, writer.uint32(10).fork()).ldelim();
     }
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): ProofOps {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): ProofOps {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseProofOps();
     while (reader.pos < end) {
@@ -2456,16 +2572,16 @@ export const ProofOps = {
     return message;
   },
   fromAmino(object: ProofOpsAmino): ProofOps {
-    return {
-      ops: Array.isArray(object?.ops) ? object.ops.map((e: any) => ProofOp.fromAmino(e)) : []
-    };
+    const message = createBaseProofOps();
+    message.ops = object.ops?.map(e => ProofOp.fromAmino(e)) || [];
+    return message;
   },
   toAmino(message: ProofOps): ProofOpsAmino {
     const obj: any = {};
     if (message.ops) {
       obj.ops = message.ops.map(e => e ? ProofOp.toAmino(e) : undefined);
     } else {
-      obj.ops = [];
+      obj.ops = message.ops;
     }
     return obj;
   },

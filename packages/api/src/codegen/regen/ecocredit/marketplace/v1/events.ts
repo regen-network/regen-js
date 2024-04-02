@@ -1,9 +1,9 @@
-import { Long, isSet } from "../../../../helpers";
-import * as _m0 from "protobufjs/minimal";
+import { BinaryReader, BinaryWriter } from "../../../../binary";
+import { isSet } from "../../../../helpers";
 /** EventSell is an event emitted when a sell order is created. */
 export interface EventSell {
   /** sell_order_id is the unique identifier of the sell order that was created. */
-  sellOrderId: Long;
+  sellOrderId: bigint;
 }
 export interface EventSellProtoMsg {
   typeUrl: "/regen.ecocredit.marketplace.v1.EventSell";
@@ -12,7 +12,7 @@ export interface EventSellProtoMsg {
 /** EventSell is an event emitted when a sell order is created. */
 export interface EventSellAmino {
   /** sell_order_id is the unique identifier of the sell order that was created. */
-  sell_order_id: string;
+  sell_order_id?: string;
 }
 export interface EventSellAminoMsg {
   type: "/regen.ecocredit.marketplace.v1.EventSell";
@@ -20,7 +20,7 @@ export interface EventSellAminoMsg {
 }
 /** EventSell is an event emitted when a sell order is created. */
 export interface EventSellSDKType {
-  sell_order_id: Long;
+  sell_order_id: bigint;
 }
 /** EventBuyDirect is an event emitted when a direct buy order is processed. */
 export interface EventBuyDirect {
@@ -28,7 +28,7 @@ export interface EventBuyDirect {
    * sell_order_id is the unique identifier of the sell order that credits were
    * purchased from.
    */
-  sellOrderId: Long;
+  sellOrderId: bigint;
 }
 export interface EventBuyDirectProtoMsg {
   typeUrl: "/regen.ecocredit.marketplace.v1.EventBuyDirect";
@@ -40,7 +40,7 @@ export interface EventBuyDirectAmino {
    * sell_order_id is the unique identifier of the sell order that credits were
    * purchased from.
    */
-  sell_order_id: string;
+  sell_order_id?: string;
 }
 export interface EventBuyDirectAminoMsg {
   type: "/regen.ecocredit.marketplace.v1.EventBuyDirect";
@@ -48,12 +48,12 @@ export interface EventBuyDirectAminoMsg {
 }
 /** EventBuyDirect is an event emitted when a direct buy order is processed. */
 export interface EventBuyDirectSDKType {
-  sell_order_id: Long;
+  sell_order_id: bigint;
 }
 /** EventUpdateSellOrder is an event emitted when a sell order is updated. */
 export interface EventUpdateSellOrder {
   /** sell_order_id is the unique identifier of the sell order that was updated. */
-  sellOrderId: Long;
+  sellOrderId: bigint;
 }
 export interface EventUpdateSellOrderProtoMsg {
   typeUrl: "/regen.ecocredit.marketplace.v1.EventUpdateSellOrder";
@@ -62,7 +62,7 @@ export interface EventUpdateSellOrderProtoMsg {
 /** EventUpdateSellOrder is an event emitted when a sell order is updated. */
 export interface EventUpdateSellOrderAmino {
   /** sell_order_id is the unique identifier of the sell order that was updated. */
-  sell_order_id: string;
+  sell_order_id?: string;
 }
 export interface EventUpdateSellOrderAminoMsg {
   type: "/regen.ecocredit.marketplace.v1.EventUpdateSellOrder";
@@ -70,7 +70,7 @@ export interface EventUpdateSellOrderAminoMsg {
 }
 /** EventUpdateSellOrder is an event emitted when a sell order is updated. */
 export interface EventUpdateSellOrderSDKType {
-  sell_order_id: Long;
+  sell_order_id: bigint;
 }
 /** EventCancelSellOrder is an event emitted when a sell order is cancelled. */
 export interface EventCancelSellOrder {
@@ -78,7 +78,7 @@ export interface EventCancelSellOrder {
    * sell_order_id is the unique identifier of the sell order that was
    * cancelled.
    */
-  sellOrderId: Long;
+  sellOrderId: bigint;
 }
 export interface EventCancelSellOrderProtoMsg {
   typeUrl: "/regen.ecocredit.marketplace.v1.EventCancelSellOrder";
@@ -90,7 +90,7 @@ export interface EventCancelSellOrderAmino {
    * sell_order_id is the unique identifier of the sell order that was
    * cancelled.
    */
-  sell_order_id: string;
+  sell_order_id?: string;
 }
 export interface EventCancelSellOrderAminoMsg {
   type: "/regen.ecocredit.marketplace.v1.EventCancelSellOrder";
@@ -98,7 +98,7 @@ export interface EventCancelSellOrderAminoMsg {
 }
 /** EventCancelSellOrder is an event emitted when a sell order is cancelled. */
 export interface EventCancelSellOrderSDKType {
-  sell_order_id: Long;
+  sell_order_id: bigint;
 }
 /**
  * EventAllowDenom is an event emitted when a new denom is added for use in the
@@ -124,7 +124,7 @@ export interface EventAllowDenomAmino {
    * denom is the bank denom (e.g. ibc/GLKHDSG423SGS) added to the list of
    * allowed denoms for use in the marketplace.
    */
-  denom: string;
+  denom?: string;
 }
 export interface EventAllowDenomAminoMsg {
   type: "/regen.ecocredit.marketplace.v1.EventAllowDenom";
@@ -165,7 +165,7 @@ export interface EventRemoveAllowedDenomAmino {
    * denom is the bank denom (e.g. ibc/GLKHDSG423SGS) removed from the list of
    * allowed denoms for use in the marketplace.
    */
-  denom: string;
+  denom?: string;
 }
 export interface EventRemoveAllowedDenomAminoMsg {
   type: "/regen.ecocredit.marketplace.v1.EventRemoveAllowedDenom";
@@ -182,25 +182,26 @@ export interface EventRemoveAllowedDenomSDKType {
 }
 function createBaseEventSell(): EventSell {
   return {
-    sellOrderId: Long.UZERO
+    sellOrderId: BigInt(0)
   };
 }
 export const EventSell = {
-  encode(message: EventSell, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
-    if (!message.sellOrderId.isZero()) {
+  typeUrl: "/regen.ecocredit.marketplace.v1.EventSell",
+  encode(message: EventSell, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
+    if (message.sellOrderId !== BigInt(0)) {
       writer.uint32(8).uint64(message.sellOrderId);
     }
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): EventSell {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): EventSell {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseEventSell();
     while (reader.pos < end) {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          message.sellOrderId = (reader.uint64() as Long);
+          message.sellOrderId = reader.uint64();
           break;
         default:
           reader.skipType(tag & 7);
@@ -211,27 +212,29 @@ export const EventSell = {
   },
   fromJSON(object: any): EventSell {
     return {
-      sellOrderId: isSet(object.sellOrderId) ? Long.fromValue(object.sellOrderId) : Long.UZERO
+      sellOrderId: isSet(object.sellOrderId) ? BigInt(object.sellOrderId.toString()) : BigInt(0)
     };
   },
   toJSON(message: EventSell): unknown {
     const obj: any = {};
-    message.sellOrderId !== undefined && (obj.sellOrderId = (message.sellOrderId || Long.UZERO).toString());
+    message.sellOrderId !== undefined && (obj.sellOrderId = (message.sellOrderId || BigInt(0)).toString());
     return obj;
   },
   fromPartial(object: Partial<EventSell>): EventSell {
     const message = createBaseEventSell();
-    message.sellOrderId = object.sellOrderId !== undefined && object.sellOrderId !== null ? Long.fromValue(object.sellOrderId) : Long.UZERO;
+    message.sellOrderId = object.sellOrderId !== undefined && object.sellOrderId !== null ? BigInt(object.sellOrderId.toString()) : BigInt(0);
     return message;
   },
   fromAmino(object: EventSellAmino): EventSell {
-    return {
-      sellOrderId: Long.fromString(object.sell_order_id)
-    };
+    const message = createBaseEventSell();
+    if (object.sell_order_id !== undefined && object.sell_order_id !== null) {
+      message.sellOrderId = BigInt(object.sell_order_id);
+    }
+    return message;
   },
   toAmino(message: EventSell): EventSellAmino {
     const obj: any = {};
-    obj.sell_order_id = message.sellOrderId ? message.sellOrderId.toString() : undefined;
+    obj.sell_order_id = message.sellOrderId !== BigInt(0) ? message.sellOrderId.toString() : undefined;
     return obj;
   },
   fromAminoMsg(object: EventSellAminoMsg): EventSell {
@@ -252,25 +255,26 @@ export const EventSell = {
 };
 function createBaseEventBuyDirect(): EventBuyDirect {
   return {
-    sellOrderId: Long.UZERO
+    sellOrderId: BigInt(0)
   };
 }
 export const EventBuyDirect = {
-  encode(message: EventBuyDirect, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
-    if (!message.sellOrderId.isZero()) {
+  typeUrl: "/regen.ecocredit.marketplace.v1.EventBuyDirect",
+  encode(message: EventBuyDirect, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
+    if (message.sellOrderId !== BigInt(0)) {
       writer.uint32(8).uint64(message.sellOrderId);
     }
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): EventBuyDirect {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): EventBuyDirect {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseEventBuyDirect();
     while (reader.pos < end) {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          message.sellOrderId = (reader.uint64() as Long);
+          message.sellOrderId = reader.uint64();
           break;
         default:
           reader.skipType(tag & 7);
@@ -281,27 +285,29 @@ export const EventBuyDirect = {
   },
   fromJSON(object: any): EventBuyDirect {
     return {
-      sellOrderId: isSet(object.sellOrderId) ? Long.fromValue(object.sellOrderId) : Long.UZERO
+      sellOrderId: isSet(object.sellOrderId) ? BigInt(object.sellOrderId.toString()) : BigInt(0)
     };
   },
   toJSON(message: EventBuyDirect): unknown {
     const obj: any = {};
-    message.sellOrderId !== undefined && (obj.sellOrderId = (message.sellOrderId || Long.UZERO).toString());
+    message.sellOrderId !== undefined && (obj.sellOrderId = (message.sellOrderId || BigInt(0)).toString());
     return obj;
   },
   fromPartial(object: Partial<EventBuyDirect>): EventBuyDirect {
     const message = createBaseEventBuyDirect();
-    message.sellOrderId = object.sellOrderId !== undefined && object.sellOrderId !== null ? Long.fromValue(object.sellOrderId) : Long.UZERO;
+    message.sellOrderId = object.sellOrderId !== undefined && object.sellOrderId !== null ? BigInt(object.sellOrderId.toString()) : BigInt(0);
     return message;
   },
   fromAmino(object: EventBuyDirectAmino): EventBuyDirect {
-    return {
-      sellOrderId: Long.fromString(object.sell_order_id)
-    };
+    const message = createBaseEventBuyDirect();
+    if (object.sell_order_id !== undefined && object.sell_order_id !== null) {
+      message.sellOrderId = BigInt(object.sell_order_id);
+    }
+    return message;
   },
   toAmino(message: EventBuyDirect): EventBuyDirectAmino {
     const obj: any = {};
-    obj.sell_order_id = message.sellOrderId ? message.sellOrderId.toString() : undefined;
+    obj.sell_order_id = message.sellOrderId !== BigInt(0) ? message.sellOrderId.toString() : undefined;
     return obj;
   },
   fromAminoMsg(object: EventBuyDirectAminoMsg): EventBuyDirect {
@@ -322,25 +328,26 @@ export const EventBuyDirect = {
 };
 function createBaseEventUpdateSellOrder(): EventUpdateSellOrder {
   return {
-    sellOrderId: Long.UZERO
+    sellOrderId: BigInt(0)
   };
 }
 export const EventUpdateSellOrder = {
-  encode(message: EventUpdateSellOrder, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
-    if (!message.sellOrderId.isZero()) {
+  typeUrl: "/regen.ecocredit.marketplace.v1.EventUpdateSellOrder",
+  encode(message: EventUpdateSellOrder, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
+    if (message.sellOrderId !== BigInt(0)) {
       writer.uint32(8).uint64(message.sellOrderId);
     }
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): EventUpdateSellOrder {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): EventUpdateSellOrder {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseEventUpdateSellOrder();
     while (reader.pos < end) {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          message.sellOrderId = (reader.uint64() as Long);
+          message.sellOrderId = reader.uint64();
           break;
         default:
           reader.skipType(tag & 7);
@@ -351,27 +358,29 @@ export const EventUpdateSellOrder = {
   },
   fromJSON(object: any): EventUpdateSellOrder {
     return {
-      sellOrderId: isSet(object.sellOrderId) ? Long.fromValue(object.sellOrderId) : Long.UZERO
+      sellOrderId: isSet(object.sellOrderId) ? BigInt(object.sellOrderId.toString()) : BigInt(0)
     };
   },
   toJSON(message: EventUpdateSellOrder): unknown {
     const obj: any = {};
-    message.sellOrderId !== undefined && (obj.sellOrderId = (message.sellOrderId || Long.UZERO).toString());
+    message.sellOrderId !== undefined && (obj.sellOrderId = (message.sellOrderId || BigInt(0)).toString());
     return obj;
   },
   fromPartial(object: Partial<EventUpdateSellOrder>): EventUpdateSellOrder {
     const message = createBaseEventUpdateSellOrder();
-    message.sellOrderId = object.sellOrderId !== undefined && object.sellOrderId !== null ? Long.fromValue(object.sellOrderId) : Long.UZERO;
+    message.sellOrderId = object.sellOrderId !== undefined && object.sellOrderId !== null ? BigInt(object.sellOrderId.toString()) : BigInt(0);
     return message;
   },
   fromAmino(object: EventUpdateSellOrderAmino): EventUpdateSellOrder {
-    return {
-      sellOrderId: Long.fromString(object.sell_order_id)
-    };
+    const message = createBaseEventUpdateSellOrder();
+    if (object.sell_order_id !== undefined && object.sell_order_id !== null) {
+      message.sellOrderId = BigInt(object.sell_order_id);
+    }
+    return message;
   },
   toAmino(message: EventUpdateSellOrder): EventUpdateSellOrderAmino {
     const obj: any = {};
-    obj.sell_order_id = message.sellOrderId ? message.sellOrderId.toString() : undefined;
+    obj.sell_order_id = message.sellOrderId !== BigInt(0) ? message.sellOrderId.toString() : undefined;
     return obj;
   },
   fromAminoMsg(object: EventUpdateSellOrderAminoMsg): EventUpdateSellOrder {
@@ -392,25 +401,26 @@ export const EventUpdateSellOrder = {
 };
 function createBaseEventCancelSellOrder(): EventCancelSellOrder {
   return {
-    sellOrderId: Long.UZERO
+    sellOrderId: BigInt(0)
   };
 }
 export const EventCancelSellOrder = {
-  encode(message: EventCancelSellOrder, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
-    if (!message.sellOrderId.isZero()) {
+  typeUrl: "/regen.ecocredit.marketplace.v1.EventCancelSellOrder",
+  encode(message: EventCancelSellOrder, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
+    if (message.sellOrderId !== BigInt(0)) {
       writer.uint32(8).uint64(message.sellOrderId);
     }
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): EventCancelSellOrder {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): EventCancelSellOrder {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseEventCancelSellOrder();
     while (reader.pos < end) {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          message.sellOrderId = (reader.uint64() as Long);
+          message.sellOrderId = reader.uint64();
           break;
         default:
           reader.skipType(tag & 7);
@@ -421,27 +431,29 @@ export const EventCancelSellOrder = {
   },
   fromJSON(object: any): EventCancelSellOrder {
     return {
-      sellOrderId: isSet(object.sellOrderId) ? Long.fromValue(object.sellOrderId) : Long.UZERO
+      sellOrderId: isSet(object.sellOrderId) ? BigInt(object.sellOrderId.toString()) : BigInt(0)
     };
   },
   toJSON(message: EventCancelSellOrder): unknown {
     const obj: any = {};
-    message.sellOrderId !== undefined && (obj.sellOrderId = (message.sellOrderId || Long.UZERO).toString());
+    message.sellOrderId !== undefined && (obj.sellOrderId = (message.sellOrderId || BigInt(0)).toString());
     return obj;
   },
   fromPartial(object: Partial<EventCancelSellOrder>): EventCancelSellOrder {
     const message = createBaseEventCancelSellOrder();
-    message.sellOrderId = object.sellOrderId !== undefined && object.sellOrderId !== null ? Long.fromValue(object.sellOrderId) : Long.UZERO;
+    message.sellOrderId = object.sellOrderId !== undefined && object.sellOrderId !== null ? BigInt(object.sellOrderId.toString()) : BigInt(0);
     return message;
   },
   fromAmino(object: EventCancelSellOrderAmino): EventCancelSellOrder {
-    return {
-      sellOrderId: Long.fromString(object.sell_order_id)
-    };
+    const message = createBaseEventCancelSellOrder();
+    if (object.sell_order_id !== undefined && object.sell_order_id !== null) {
+      message.sellOrderId = BigInt(object.sell_order_id);
+    }
+    return message;
   },
   toAmino(message: EventCancelSellOrder): EventCancelSellOrderAmino {
     const obj: any = {};
-    obj.sell_order_id = message.sellOrderId ? message.sellOrderId.toString() : undefined;
+    obj.sell_order_id = message.sellOrderId !== BigInt(0) ? message.sellOrderId.toString() : undefined;
     return obj;
   },
   fromAminoMsg(object: EventCancelSellOrderAminoMsg): EventCancelSellOrder {
@@ -466,14 +478,15 @@ function createBaseEventAllowDenom(): EventAllowDenom {
   };
 }
 export const EventAllowDenom = {
-  encode(message: EventAllowDenom, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  typeUrl: "/regen.ecocredit.marketplace.v1.EventAllowDenom",
+  encode(message: EventAllowDenom, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.denom !== "") {
       writer.uint32(10).string(message.denom);
     }
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): EventAllowDenom {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): EventAllowDenom {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseEventAllowDenom();
     while (reader.pos < end) {
@@ -505,13 +518,15 @@ export const EventAllowDenom = {
     return message;
   },
   fromAmino(object: EventAllowDenomAmino): EventAllowDenom {
-    return {
-      denom: object.denom
-    };
+    const message = createBaseEventAllowDenom();
+    if (object.denom !== undefined && object.denom !== null) {
+      message.denom = object.denom;
+    }
+    return message;
   },
   toAmino(message: EventAllowDenom): EventAllowDenomAmino {
     const obj: any = {};
-    obj.denom = message.denom;
+    obj.denom = message.denom === "" ? undefined : message.denom;
     return obj;
   },
   fromAminoMsg(object: EventAllowDenomAminoMsg): EventAllowDenom {
@@ -536,14 +551,15 @@ function createBaseEventRemoveAllowedDenom(): EventRemoveAllowedDenom {
   };
 }
 export const EventRemoveAllowedDenom = {
-  encode(message: EventRemoveAllowedDenom, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  typeUrl: "/regen.ecocredit.marketplace.v1.EventRemoveAllowedDenom",
+  encode(message: EventRemoveAllowedDenom, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.denom !== "") {
       writer.uint32(10).string(message.denom);
     }
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): EventRemoveAllowedDenom {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): EventRemoveAllowedDenom {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseEventRemoveAllowedDenom();
     while (reader.pos < end) {
@@ -575,13 +591,15 @@ export const EventRemoveAllowedDenom = {
     return message;
   },
   fromAmino(object: EventRemoveAllowedDenomAmino): EventRemoveAllowedDenom {
-    return {
-      denom: object.denom
-    };
+    const message = createBaseEventRemoveAllowedDenom();
+    if (object.denom !== undefined && object.denom !== null) {
+      message.denom = object.denom;
+    }
+    return message;
   },
   toAmino(message: EventRemoveAllowedDenom): EventRemoveAllowedDenomAmino {
     const obj: any = {};
-    obj.denom = message.denom;
+    obj.denom = message.denom === "" ? undefined : message.denom;
     return obj;
   },
   fromAminoMsg(object: EventRemoveAllowedDenomAminoMsg): EventRemoveAllowedDenom {

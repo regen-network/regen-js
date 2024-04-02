@@ -1,7 +1,7 @@
 import { PageRequest, PageRequestAmino, PageRequestSDKType, PageResponse, PageResponseAmino, PageResponseSDKType } from "../../base/query/v1beta1/pagination";
 import { Coin, CoinAmino, CoinSDKType } from "../../base/v1beta1/coin";
 import { Params, ParamsAmino, ParamsSDKType, Metadata, MetadataAmino, MetadataSDKType } from "./bank";
-import * as _m0 from "protobufjs/minimal";
+import { BinaryReader, BinaryWriter } from "../../../binary";
 import { isSet } from "../../../helpers";
 /** QueryBalanceRequest is the request type for the Query/Balance RPC method. */
 export interface QueryBalanceRequest {
@@ -17,9 +17,9 @@ export interface QueryBalanceRequestProtoMsg {
 /** QueryBalanceRequest is the request type for the Query/Balance RPC method. */
 export interface QueryBalanceRequestAmino {
   /** address is the address to query balances for. */
-  address: string;
+  address?: string;
   /** denom is the coin denom to query balances for. */
-  denom: string;
+  denom?: string;
 }
 export interface QueryBalanceRequestAminoMsg {
   type: "cosmos-sdk/QueryBalanceRequest";
@@ -33,7 +33,7 @@ export interface QueryBalanceRequestSDKType {
 /** QueryBalanceResponse is the response type for the Query/Balance RPC method. */
 export interface QueryBalanceResponse {
   /** balance is the balance of the coin. */
-  balance: Coin;
+  balance?: Coin;
 }
 export interface QueryBalanceResponseProtoMsg {
   typeUrl: "/cosmos.bank.v1beta1.QueryBalanceResponse";
@@ -50,14 +50,14 @@ export interface QueryBalanceResponseAminoMsg {
 }
 /** QueryBalanceResponse is the response type for the Query/Balance RPC method. */
 export interface QueryBalanceResponseSDKType {
-  balance: CoinSDKType;
+  balance?: CoinSDKType;
 }
 /** QueryBalanceRequest is the request type for the Query/AllBalances RPC method. */
 export interface QueryAllBalancesRequest {
   /** address is the address to query balances for. */
   address: string;
   /** pagination defines an optional pagination for the request. */
-  pagination: PageRequest;
+  pagination?: PageRequest;
 }
 export interface QueryAllBalancesRequestProtoMsg {
   typeUrl: "/cosmos.bank.v1beta1.QueryAllBalancesRequest";
@@ -66,7 +66,7 @@ export interface QueryAllBalancesRequestProtoMsg {
 /** QueryBalanceRequest is the request type for the Query/AllBalances RPC method. */
 export interface QueryAllBalancesRequestAmino {
   /** address is the address to query balances for. */
-  address: string;
+  address?: string;
   /** pagination defines an optional pagination for the request. */
   pagination?: PageRequestAmino;
 }
@@ -77,7 +77,7 @@ export interface QueryAllBalancesRequestAminoMsg {
 /** QueryBalanceRequest is the request type for the Query/AllBalances RPC method. */
 export interface QueryAllBalancesRequestSDKType {
   address: string;
-  pagination: PageRequestSDKType;
+  pagination?: PageRequestSDKType;
 }
 /**
  * QueryAllBalancesResponse is the response type for the Query/AllBalances RPC
@@ -87,7 +87,7 @@ export interface QueryAllBalancesResponse {
   /** balances is the balances of all the coins. */
   balances: Coin[];
   /** pagination defines the pagination in the response. */
-  pagination: PageResponse;
+  pagination?: PageResponse;
 }
 export interface QueryAllBalancesResponseProtoMsg {
   typeUrl: "/cosmos.bank.v1beta1.QueryAllBalancesResponse";
@@ -99,7 +99,7 @@ export interface QueryAllBalancesResponseProtoMsg {
  */
 export interface QueryAllBalancesResponseAmino {
   /** balances is the balances of all the coins. */
-  balances: CoinAmino[];
+  balances?: CoinAmino[];
   /** pagination defines the pagination in the response. */
   pagination?: PageResponseAmino;
 }
@@ -113,7 +113,7 @@ export interface QueryAllBalancesResponseAminoMsg {
  */
 export interface QueryAllBalancesResponseSDKType {
   balances: CoinSDKType[];
-  pagination: PageResponseSDKType;
+  pagination?: PageResponseSDKType;
 }
 /**
  * QuerySpendableBalancesRequest defines the gRPC request structure for querying
@@ -125,7 +125,7 @@ export interface QuerySpendableBalancesRequest {
   /** address is the address to query spendable balances for. */
   address: string;
   /** pagination defines an optional pagination for the request. */
-  pagination: PageRequest;
+  pagination?: PageRequest;
 }
 export interface QuerySpendableBalancesRequestProtoMsg {
   typeUrl: "/cosmos.bank.v1beta1.QuerySpendableBalancesRequest";
@@ -139,7 +139,7 @@ export interface QuerySpendableBalancesRequestProtoMsg {
  */
 export interface QuerySpendableBalancesRequestAmino {
   /** address is the address to query spendable balances for. */
-  address: string;
+  address?: string;
   /** pagination defines an optional pagination for the request. */
   pagination?: PageRequestAmino;
 }
@@ -155,7 +155,7 @@ export interface QuerySpendableBalancesRequestAminoMsg {
  */
 export interface QuerySpendableBalancesRequestSDKType {
   address: string;
-  pagination: PageRequestSDKType;
+  pagination?: PageRequestSDKType;
 }
 /**
  * QuerySpendableBalancesResponse defines the gRPC response structure for querying
@@ -167,7 +167,7 @@ export interface QuerySpendableBalancesResponse {
   /** balances is the spendable balances of all the coins. */
   balances: Coin[];
   /** pagination defines the pagination in the response. */
-  pagination: PageResponse;
+  pagination?: PageResponse;
 }
 export interface QuerySpendableBalancesResponseProtoMsg {
   typeUrl: "/cosmos.bank.v1beta1.QuerySpendableBalancesResponse";
@@ -181,7 +181,7 @@ export interface QuerySpendableBalancesResponseProtoMsg {
  */
 export interface QuerySpendableBalancesResponseAmino {
   /** balances is the spendable balances of all the coins. */
-  balances: CoinAmino[];
+  balances?: CoinAmino[];
   /** pagination defines the pagination in the response. */
   pagination?: PageResponseAmino;
 }
@@ -197,7 +197,7 @@ export interface QuerySpendableBalancesResponseAminoMsg {
  */
 export interface QuerySpendableBalancesResponseSDKType {
   balances: CoinSDKType[];
-  pagination: PageResponseSDKType;
+  pagination?: PageResponseSDKType;
 }
 /**
  * QueryTotalSupplyRequest is the request type for the Query/TotalSupply RPC
@@ -209,7 +209,7 @@ export interface QueryTotalSupplyRequest {
    * 
    * Since: cosmos-sdk 0.43
    */
-  pagination: PageRequest;
+  pagination?: PageRequest;
 }
 export interface QueryTotalSupplyRequestProtoMsg {
   typeUrl: "/cosmos.bank.v1beta1.QueryTotalSupplyRequest";
@@ -236,7 +236,7 @@ export interface QueryTotalSupplyRequestAminoMsg {
  * method.
  */
 export interface QueryTotalSupplyRequestSDKType {
-  pagination: PageRequestSDKType;
+  pagination?: PageRequestSDKType;
 }
 /**
  * QueryTotalSupplyResponse is the response type for the Query/TotalSupply RPC
@@ -250,7 +250,7 @@ export interface QueryTotalSupplyResponse {
    * 
    * Since: cosmos-sdk 0.43
    */
-  pagination: PageResponse;
+  pagination?: PageResponse;
 }
 export interface QueryTotalSupplyResponseProtoMsg {
   typeUrl: "/cosmos.bank.v1beta1.QueryTotalSupplyResponse";
@@ -262,7 +262,7 @@ export interface QueryTotalSupplyResponseProtoMsg {
  */
 export interface QueryTotalSupplyResponseAmino {
   /** supply is the supply of the coins */
-  supply: CoinAmino[];
+  supply?: CoinAmino[];
   /**
    * pagination defines the pagination in the response.
    * 
@@ -280,7 +280,7 @@ export interface QueryTotalSupplyResponseAminoMsg {
  */
 export interface QueryTotalSupplyResponseSDKType {
   supply: CoinSDKType[];
-  pagination: PageResponseSDKType;
+  pagination?: PageResponseSDKType;
 }
 /** QuerySupplyOfRequest is the request type for the Query/SupplyOf RPC method. */
 export interface QuerySupplyOfRequest {
@@ -294,7 +294,7 @@ export interface QuerySupplyOfRequestProtoMsg {
 /** QuerySupplyOfRequest is the request type for the Query/SupplyOf RPC method. */
 export interface QuerySupplyOfRequestAmino {
   /** denom is the coin denom to query balances for. */
-  denom: string;
+  denom?: string;
 }
 export interface QuerySupplyOfRequestAminoMsg {
   type: "cosmos-sdk/QuerySupplyOfRequest";
@@ -363,7 +363,7 @@ export interface QueryParamsResponseSDKType {
 /** QueryDenomsMetadataRequest is the request type for the Query/DenomsMetadata RPC method. */
 export interface QueryDenomsMetadataRequest {
   /** pagination defines an optional pagination for the request. */
-  pagination: PageRequest;
+  pagination?: PageRequest;
 }
 export interface QueryDenomsMetadataRequestProtoMsg {
   typeUrl: "/cosmos.bank.v1beta1.QueryDenomsMetadataRequest";
@@ -380,7 +380,7 @@ export interface QueryDenomsMetadataRequestAminoMsg {
 }
 /** QueryDenomsMetadataRequest is the request type for the Query/DenomsMetadata RPC method. */
 export interface QueryDenomsMetadataRequestSDKType {
-  pagination: PageRequestSDKType;
+  pagination?: PageRequestSDKType;
 }
 /**
  * QueryDenomsMetadataResponse is the response type for the Query/DenomsMetadata RPC
@@ -390,7 +390,7 @@ export interface QueryDenomsMetadataResponse {
   /** metadata provides the client information for all the registered tokens. */
   metadatas: Metadata[];
   /** pagination defines the pagination in the response. */
-  pagination: PageResponse;
+  pagination?: PageResponse;
 }
 export interface QueryDenomsMetadataResponseProtoMsg {
   typeUrl: "/cosmos.bank.v1beta1.QueryDenomsMetadataResponse";
@@ -402,7 +402,7 @@ export interface QueryDenomsMetadataResponseProtoMsg {
  */
 export interface QueryDenomsMetadataResponseAmino {
   /** metadata provides the client information for all the registered tokens. */
-  metadatas: MetadataAmino[];
+  metadatas?: MetadataAmino[];
   /** pagination defines the pagination in the response. */
   pagination?: PageResponseAmino;
 }
@@ -416,7 +416,7 @@ export interface QueryDenomsMetadataResponseAminoMsg {
  */
 export interface QueryDenomsMetadataResponseSDKType {
   metadatas: MetadataSDKType[];
-  pagination: PageResponseSDKType;
+  pagination?: PageResponseSDKType;
 }
 /** QueryDenomMetadataRequest is the request type for the Query/DenomMetadata RPC method. */
 export interface QueryDenomMetadataRequest {
@@ -430,7 +430,7 @@ export interface QueryDenomMetadataRequestProtoMsg {
 /** QueryDenomMetadataRequest is the request type for the Query/DenomMetadata RPC method. */
 export interface QueryDenomMetadataRequestAmino {
   /** denom is the coin denom to query the metadata for. */
-  denom: string;
+  denom?: string;
 }
 export interface QueryDenomMetadataRequestAminoMsg {
   type: "cosmos-sdk/QueryDenomMetadataRequest";
@@ -480,7 +480,7 @@ export interface QueryDenomOwnersRequest {
   /** denom defines the coin denomination to query all account holders for. */
   denom: string;
   /** pagination defines an optional pagination for the request. */
-  pagination: PageRequest;
+  pagination?: PageRequest;
 }
 export interface QueryDenomOwnersRequestProtoMsg {
   typeUrl: "/cosmos.bank.v1beta1.QueryDenomOwnersRequest";
@@ -493,7 +493,7 @@ export interface QueryDenomOwnersRequestProtoMsg {
  */
 export interface QueryDenomOwnersRequestAmino {
   /** denom defines the coin denomination to query all account holders for. */
-  denom: string;
+  denom?: string;
   /** pagination defines an optional pagination for the request. */
   pagination?: PageRequestAmino;
 }
@@ -508,7 +508,7 @@ export interface QueryDenomOwnersRequestAminoMsg {
  */
 export interface QueryDenomOwnersRequestSDKType {
   denom: string;
-  pagination: PageRequestSDKType;
+  pagination?: PageRequestSDKType;
 }
 /**
  * DenomOwner defines structure representing an account that owns or holds a
@@ -536,7 +536,7 @@ export interface DenomOwnerProtoMsg {
  */
 export interface DenomOwnerAmino {
   /** address defines the address that owns a particular denomination. */
-  address: string;
+  address?: string;
   /** balance is the balance of the denominated coin for an account. */
   balance?: CoinAmino;
 }
@@ -563,7 +563,7 @@ export interface DenomOwnerSDKType {
 export interface QueryDenomOwnersResponse {
   denomOwners: DenomOwner[];
   /** pagination defines the pagination in the response. */
-  pagination: PageResponse;
+  pagination?: PageResponse;
 }
 export interface QueryDenomOwnersResponseProtoMsg {
   typeUrl: "/cosmos.bank.v1beta1.QueryDenomOwnersResponse";
@@ -575,7 +575,7 @@ export interface QueryDenomOwnersResponseProtoMsg {
  * Since: cosmos-sdk 0.46
  */
 export interface QueryDenomOwnersResponseAmino {
-  denom_owners: DenomOwnerAmino[];
+  denom_owners?: DenomOwnerAmino[];
   /** pagination defines the pagination in the response. */
   pagination?: PageResponseAmino;
 }
@@ -590,7 +590,7 @@ export interface QueryDenomOwnersResponseAminoMsg {
  */
 export interface QueryDenomOwnersResponseSDKType {
   denom_owners: DenomOwnerSDKType[];
-  pagination: PageResponseSDKType;
+  pagination?: PageResponseSDKType;
 }
 function createBaseQueryBalanceRequest(): QueryBalanceRequest {
   return {
@@ -599,7 +599,8 @@ function createBaseQueryBalanceRequest(): QueryBalanceRequest {
   };
 }
 export const QueryBalanceRequest = {
-  encode(message: QueryBalanceRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  typeUrl: "/cosmos.bank.v1beta1.QueryBalanceRequest",
+  encode(message: QueryBalanceRequest, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.address !== "") {
       writer.uint32(10).string(message.address);
     }
@@ -608,8 +609,8 @@ export const QueryBalanceRequest = {
     }
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): QueryBalanceRequest {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): QueryBalanceRequest {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryBalanceRequest();
     while (reader.pos < end) {
@@ -647,15 +648,19 @@ export const QueryBalanceRequest = {
     return message;
   },
   fromAmino(object: QueryBalanceRequestAmino): QueryBalanceRequest {
-    return {
-      address: object.address,
-      denom: object.denom
-    };
+    const message = createBaseQueryBalanceRequest();
+    if (object.address !== undefined && object.address !== null) {
+      message.address = object.address;
+    }
+    if (object.denom !== undefined && object.denom !== null) {
+      message.denom = object.denom;
+    }
+    return message;
   },
   toAmino(message: QueryBalanceRequest): QueryBalanceRequestAmino {
     const obj: any = {};
-    obj.address = message.address;
-    obj.denom = message.denom;
+    obj.address = message.address === "" ? undefined : message.address;
+    obj.denom = message.denom === "" ? undefined : message.denom;
     return obj;
   },
   fromAminoMsg(object: QueryBalanceRequestAminoMsg): QueryBalanceRequest {
@@ -686,14 +691,15 @@ function createBaseQueryBalanceResponse(): QueryBalanceResponse {
   };
 }
 export const QueryBalanceResponse = {
-  encode(message: QueryBalanceResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  typeUrl: "/cosmos.bank.v1beta1.QueryBalanceResponse",
+  encode(message: QueryBalanceResponse, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.balance !== undefined) {
       Coin.encode(message.balance, writer.uint32(10).fork()).ldelim();
     }
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): QueryBalanceResponse {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): QueryBalanceResponse {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryBalanceResponse();
     while (reader.pos < end) {
@@ -725,9 +731,11 @@ export const QueryBalanceResponse = {
     return message;
   },
   fromAmino(object: QueryBalanceResponseAmino): QueryBalanceResponse {
-    return {
-      balance: object?.balance ? Coin.fromAmino(object.balance) : undefined
-    };
+    const message = createBaseQueryBalanceResponse();
+    if (object.balance !== undefined && object.balance !== null) {
+      message.balance = Coin.fromAmino(object.balance);
+    }
+    return message;
   },
   toAmino(message: QueryBalanceResponse): QueryBalanceResponseAmino {
     const obj: any = {};
@@ -759,11 +767,12 @@ export const QueryBalanceResponse = {
 function createBaseQueryAllBalancesRequest(): QueryAllBalancesRequest {
   return {
     address: "",
-    pagination: PageRequest.fromPartial({})
+    pagination: undefined
   };
 }
 export const QueryAllBalancesRequest = {
-  encode(message: QueryAllBalancesRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  typeUrl: "/cosmos.bank.v1beta1.QueryAllBalancesRequest",
+  encode(message: QueryAllBalancesRequest, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.address !== "") {
       writer.uint32(10).string(message.address);
     }
@@ -772,8 +781,8 @@ export const QueryAllBalancesRequest = {
     }
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): QueryAllBalancesRequest {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): QueryAllBalancesRequest {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryAllBalancesRequest();
     while (reader.pos < end) {
@@ -811,14 +820,18 @@ export const QueryAllBalancesRequest = {
     return message;
   },
   fromAmino(object: QueryAllBalancesRequestAmino): QueryAllBalancesRequest {
-    return {
-      address: object.address,
-      pagination: object?.pagination ? PageRequest.fromAmino(object.pagination) : undefined
-    };
+    const message = createBaseQueryAllBalancesRequest();
+    if (object.address !== undefined && object.address !== null) {
+      message.address = object.address;
+    }
+    if (object.pagination !== undefined && object.pagination !== null) {
+      message.pagination = PageRequest.fromAmino(object.pagination);
+    }
+    return message;
   },
   toAmino(message: QueryAllBalancesRequest): QueryAllBalancesRequestAmino {
     const obj: any = {};
-    obj.address = message.address;
+    obj.address = message.address === "" ? undefined : message.address;
     obj.pagination = message.pagination ? PageRequest.toAmino(message.pagination) : undefined;
     return obj;
   },
@@ -847,11 +860,12 @@ export const QueryAllBalancesRequest = {
 function createBaseQueryAllBalancesResponse(): QueryAllBalancesResponse {
   return {
     balances: [],
-    pagination: PageResponse.fromPartial({})
+    pagination: undefined
   };
 }
 export const QueryAllBalancesResponse = {
-  encode(message: QueryAllBalancesResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  typeUrl: "/cosmos.bank.v1beta1.QueryAllBalancesResponse",
+  encode(message: QueryAllBalancesResponse, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     for (const v of message.balances) {
       Coin.encode(v!, writer.uint32(10).fork()).ldelim();
     }
@@ -860,8 +874,8 @@ export const QueryAllBalancesResponse = {
     }
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): QueryAllBalancesResponse {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): QueryAllBalancesResponse {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryAllBalancesResponse();
     while (reader.pos < end) {
@@ -903,17 +917,19 @@ export const QueryAllBalancesResponse = {
     return message;
   },
   fromAmino(object: QueryAllBalancesResponseAmino): QueryAllBalancesResponse {
-    return {
-      balances: Array.isArray(object?.balances) ? object.balances.map((e: any) => Coin.fromAmino(e)) : [],
-      pagination: object?.pagination ? PageResponse.fromAmino(object.pagination) : undefined
-    };
+    const message = createBaseQueryAllBalancesResponse();
+    message.balances = object.balances?.map(e => Coin.fromAmino(e)) || [];
+    if (object.pagination !== undefined && object.pagination !== null) {
+      message.pagination = PageResponse.fromAmino(object.pagination);
+    }
+    return message;
   },
   toAmino(message: QueryAllBalancesResponse): QueryAllBalancesResponseAmino {
     const obj: any = {};
     if (message.balances) {
       obj.balances = message.balances.map(e => e ? Coin.toAmino(e) : undefined);
     } else {
-      obj.balances = [];
+      obj.balances = message.balances;
     }
     obj.pagination = message.pagination ? PageResponse.toAmino(message.pagination) : undefined;
     return obj;
@@ -943,11 +959,12 @@ export const QueryAllBalancesResponse = {
 function createBaseQuerySpendableBalancesRequest(): QuerySpendableBalancesRequest {
   return {
     address: "",
-    pagination: PageRequest.fromPartial({})
+    pagination: undefined
   };
 }
 export const QuerySpendableBalancesRequest = {
-  encode(message: QuerySpendableBalancesRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  typeUrl: "/cosmos.bank.v1beta1.QuerySpendableBalancesRequest",
+  encode(message: QuerySpendableBalancesRequest, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.address !== "") {
       writer.uint32(10).string(message.address);
     }
@@ -956,8 +973,8 @@ export const QuerySpendableBalancesRequest = {
     }
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): QuerySpendableBalancesRequest {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): QuerySpendableBalancesRequest {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQuerySpendableBalancesRequest();
     while (reader.pos < end) {
@@ -995,14 +1012,18 @@ export const QuerySpendableBalancesRequest = {
     return message;
   },
   fromAmino(object: QuerySpendableBalancesRequestAmino): QuerySpendableBalancesRequest {
-    return {
-      address: object.address,
-      pagination: object?.pagination ? PageRequest.fromAmino(object.pagination) : undefined
-    };
+    const message = createBaseQuerySpendableBalancesRequest();
+    if (object.address !== undefined && object.address !== null) {
+      message.address = object.address;
+    }
+    if (object.pagination !== undefined && object.pagination !== null) {
+      message.pagination = PageRequest.fromAmino(object.pagination);
+    }
+    return message;
   },
   toAmino(message: QuerySpendableBalancesRequest): QuerySpendableBalancesRequestAmino {
     const obj: any = {};
-    obj.address = message.address;
+    obj.address = message.address === "" ? undefined : message.address;
     obj.pagination = message.pagination ? PageRequest.toAmino(message.pagination) : undefined;
     return obj;
   },
@@ -1031,11 +1052,12 @@ export const QuerySpendableBalancesRequest = {
 function createBaseQuerySpendableBalancesResponse(): QuerySpendableBalancesResponse {
   return {
     balances: [],
-    pagination: PageResponse.fromPartial({})
+    pagination: undefined
   };
 }
 export const QuerySpendableBalancesResponse = {
-  encode(message: QuerySpendableBalancesResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  typeUrl: "/cosmos.bank.v1beta1.QuerySpendableBalancesResponse",
+  encode(message: QuerySpendableBalancesResponse, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     for (const v of message.balances) {
       Coin.encode(v!, writer.uint32(10).fork()).ldelim();
     }
@@ -1044,8 +1066,8 @@ export const QuerySpendableBalancesResponse = {
     }
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): QuerySpendableBalancesResponse {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): QuerySpendableBalancesResponse {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQuerySpendableBalancesResponse();
     while (reader.pos < end) {
@@ -1087,17 +1109,19 @@ export const QuerySpendableBalancesResponse = {
     return message;
   },
   fromAmino(object: QuerySpendableBalancesResponseAmino): QuerySpendableBalancesResponse {
-    return {
-      balances: Array.isArray(object?.balances) ? object.balances.map((e: any) => Coin.fromAmino(e)) : [],
-      pagination: object?.pagination ? PageResponse.fromAmino(object.pagination) : undefined
-    };
+    const message = createBaseQuerySpendableBalancesResponse();
+    message.balances = object.balances?.map(e => Coin.fromAmino(e)) || [];
+    if (object.pagination !== undefined && object.pagination !== null) {
+      message.pagination = PageResponse.fromAmino(object.pagination);
+    }
+    return message;
   },
   toAmino(message: QuerySpendableBalancesResponse): QuerySpendableBalancesResponseAmino {
     const obj: any = {};
     if (message.balances) {
       obj.balances = message.balances.map(e => e ? Coin.toAmino(e) : undefined);
     } else {
-      obj.balances = [];
+      obj.balances = message.balances;
     }
     obj.pagination = message.pagination ? PageResponse.toAmino(message.pagination) : undefined;
     return obj;
@@ -1126,18 +1150,19 @@ export const QuerySpendableBalancesResponse = {
 };
 function createBaseQueryTotalSupplyRequest(): QueryTotalSupplyRequest {
   return {
-    pagination: PageRequest.fromPartial({})
+    pagination: undefined
   };
 }
 export const QueryTotalSupplyRequest = {
-  encode(message: QueryTotalSupplyRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  typeUrl: "/cosmos.bank.v1beta1.QueryTotalSupplyRequest",
+  encode(message: QueryTotalSupplyRequest, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.pagination !== undefined) {
       PageRequest.encode(message.pagination, writer.uint32(10).fork()).ldelim();
     }
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): QueryTotalSupplyRequest {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): QueryTotalSupplyRequest {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryTotalSupplyRequest();
     while (reader.pos < end) {
@@ -1169,9 +1194,11 @@ export const QueryTotalSupplyRequest = {
     return message;
   },
   fromAmino(object: QueryTotalSupplyRequestAmino): QueryTotalSupplyRequest {
-    return {
-      pagination: object?.pagination ? PageRequest.fromAmino(object.pagination) : undefined
-    };
+    const message = createBaseQueryTotalSupplyRequest();
+    if (object.pagination !== undefined && object.pagination !== null) {
+      message.pagination = PageRequest.fromAmino(object.pagination);
+    }
+    return message;
   },
   toAmino(message: QueryTotalSupplyRequest): QueryTotalSupplyRequestAmino {
     const obj: any = {};
@@ -1203,11 +1230,12 @@ export const QueryTotalSupplyRequest = {
 function createBaseQueryTotalSupplyResponse(): QueryTotalSupplyResponse {
   return {
     supply: [],
-    pagination: PageResponse.fromPartial({})
+    pagination: undefined
   };
 }
 export const QueryTotalSupplyResponse = {
-  encode(message: QueryTotalSupplyResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  typeUrl: "/cosmos.bank.v1beta1.QueryTotalSupplyResponse",
+  encode(message: QueryTotalSupplyResponse, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     for (const v of message.supply) {
       Coin.encode(v!, writer.uint32(10).fork()).ldelim();
     }
@@ -1216,8 +1244,8 @@ export const QueryTotalSupplyResponse = {
     }
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): QueryTotalSupplyResponse {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): QueryTotalSupplyResponse {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryTotalSupplyResponse();
     while (reader.pos < end) {
@@ -1259,17 +1287,19 @@ export const QueryTotalSupplyResponse = {
     return message;
   },
   fromAmino(object: QueryTotalSupplyResponseAmino): QueryTotalSupplyResponse {
-    return {
-      supply: Array.isArray(object?.supply) ? object.supply.map((e: any) => Coin.fromAmino(e)) : [],
-      pagination: object?.pagination ? PageResponse.fromAmino(object.pagination) : undefined
-    };
+    const message = createBaseQueryTotalSupplyResponse();
+    message.supply = object.supply?.map(e => Coin.fromAmino(e)) || [];
+    if (object.pagination !== undefined && object.pagination !== null) {
+      message.pagination = PageResponse.fromAmino(object.pagination);
+    }
+    return message;
   },
   toAmino(message: QueryTotalSupplyResponse): QueryTotalSupplyResponseAmino {
     const obj: any = {};
     if (message.supply) {
       obj.supply = message.supply.map(e => e ? Coin.toAmino(e) : undefined);
     } else {
-      obj.supply = [];
+      obj.supply = message.supply;
     }
     obj.pagination = message.pagination ? PageResponse.toAmino(message.pagination) : undefined;
     return obj;
@@ -1302,14 +1332,15 @@ function createBaseQuerySupplyOfRequest(): QuerySupplyOfRequest {
   };
 }
 export const QuerySupplyOfRequest = {
-  encode(message: QuerySupplyOfRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  typeUrl: "/cosmos.bank.v1beta1.QuerySupplyOfRequest",
+  encode(message: QuerySupplyOfRequest, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.denom !== "") {
       writer.uint32(10).string(message.denom);
     }
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): QuerySupplyOfRequest {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): QuerySupplyOfRequest {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQuerySupplyOfRequest();
     while (reader.pos < end) {
@@ -1341,13 +1372,15 @@ export const QuerySupplyOfRequest = {
     return message;
   },
   fromAmino(object: QuerySupplyOfRequestAmino): QuerySupplyOfRequest {
-    return {
-      denom: object.denom
-    };
+    const message = createBaseQuerySupplyOfRequest();
+    if (object.denom !== undefined && object.denom !== null) {
+      message.denom = object.denom;
+    }
+    return message;
   },
   toAmino(message: QuerySupplyOfRequest): QuerySupplyOfRequestAmino {
     const obj: any = {};
-    obj.denom = message.denom;
+    obj.denom = message.denom === "" ? undefined : message.denom;
     return obj;
   },
   fromAminoMsg(object: QuerySupplyOfRequestAminoMsg): QuerySupplyOfRequest {
@@ -1374,18 +1407,19 @@ export const QuerySupplyOfRequest = {
 };
 function createBaseQuerySupplyOfResponse(): QuerySupplyOfResponse {
   return {
-    amount: undefined
+    amount: Coin.fromPartial({})
   };
 }
 export const QuerySupplyOfResponse = {
-  encode(message: QuerySupplyOfResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  typeUrl: "/cosmos.bank.v1beta1.QuerySupplyOfResponse",
+  encode(message: QuerySupplyOfResponse, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.amount !== undefined) {
       Coin.encode(message.amount, writer.uint32(10).fork()).ldelim();
     }
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): QuerySupplyOfResponse {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): QuerySupplyOfResponse {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQuerySupplyOfResponse();
     while (reader.pos < end) {
@@ -1417,9 +1451,11 @@ export const QuerySupplyOfResponse = {
     return message;
   },
   fromAmino(object: QuerySupplyOfResponseAmino): QuerySupplyOfResponse {
-    return {
-      amount: object?.amount ? Coin.fromAmino(object.amount) : undefined
-    };
+    const message = createBaseQuerySupplyOfResponse();
+    if (object.amount !== undefined && object.amount !== null) {
+      message.amount = Coin.fromAmino(object.amount);
+    }
+    return message;
   },
   toAmino(message: QuerySupplyOfResponse): QuerySupplyOfResponseAmino {
     const obj: any = {};
@@ -1452,11 +1488,12 @@ function createBaseQueryParamsRequest(): QueryParamsRequest {
   return {};
 }
 export const QueryParamsRequest = {
-  encode(_: QueryParamsRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  typeUrl: "/cosmos.bank.v1beta1.QueryParamsRequest",
+  encode(_: QueryParamsRequest, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): QueryParamsRequest {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): QueryParamsRequest {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryParamsRequest();
     while (reader.pos < end) {
@@ -1481,7 +1518,8 @@ export const QueryParamsRequest = {
     return message;
   },
   fromAmino(_: QueryParamsRequestAmino): QueryParamsRequest {
-    return {};
+    const message = createBaseQueryParamsRequest();
+    return message;
   },
   toAmino(_: QueryParamsRequest): QueryParamsRequestAmino {
     const obj: any = {};
@@ -1515,14 +1553,15 @@ function createBaseQueryParamsResponse(): QueryParamsResponse {
   };
 }
 export const QueryParamsResponse = {
-  encode(message: QueryParamsResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  typeUrl: "/cosmos.bank.v1beta1.QueryParamsResponse",
+  encode(message: QueryParamsResponse, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.params !== undefined) {
       Params.encode(message.params, writer.uint32(10).fork()).ldelim();
     }
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): QueryParamsResponse {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): QueryParamsResponse {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryParamsResponse();
     while (reader.pos < end) {
@@ -1554,9 +1593,11 @@ export const QueryParamsResponse = {
     return message;
   },
   fromAmino(object: QueryParamsResponseAmino): QueryParamsResponse {
-    return {
-      params: object?.params ? Params.fromAmino(object.params) : undefined
-    };
+    const message = createBaseQueryParamsResponse();
+    if (object.params !== undefined && object.params !== null) {
+      message.params = Params.fromAmino(object.params);
+    }
+    return message;
   },
   toAmino(message: QueryParamsResponse): QueryParamsResponseAmino {
     const obj: any = {};
@@ -1587,18 +1628,19 @@ export const QueryParamsResponse = {
 };
 function createBaseQueryDenomsMetadataRequest(): QueryDenomsMetadataRequest {
   return {
-    pagination: PageRequest.fromPartial({})
+    pagination: undefined
   };
 }
 export const QueryDenomsMetadataRequest = {
-  encode(message: QueryDenomsMetadataRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  typeUrl: "/cosmos.bank.v1beta1.QueryDenomsMetadataRequest",
+  encode(message: QueryDenomsMetadataRequest, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.pagination !== undefined) {
       PageRequest.encode(message.pagination, writer.uint32(10).fork()).ldelim();
     }
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): QueryDenomsMetadataRequest {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): QueryDenomsMetadataRequest {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryDenomsMetadataRequest();
     while (reader.pos < end) {
@@ -1630,9 +1672,11 @@ export const QueryDenomsMetadataRequest = {
     return message;
   },
   fromAmino(object: QueryDenomsMetadataRequestAmino): QueryDenomsMetadataRequest {
-    return {
-      pagination: object?.pagination ? PageRequest.fromAmino(object.pagination) : undefined
-    };
+    const message = createBaseQueryDenomsMetadataRequest();
+    if (object.pagination !== undefined && object.pagination !== null) {
+      message.pagination = PageRequest.fromAmino(object.pagination);
+    }
+    return message;
   },
   toAmino(message: QueryDenomsMetadataRequest): QueryDenomsMetadataRequestAmino {
     const obj: any = {};
@@ -1664,11 +1708,12 @@ export const QueryDenomsMetadataRequest = {
 function createBaseQueryDenomsMetadataResponse(): QueryDenomsMetadataResponse {
   return {
     metadatas: [],
-    pagination: PageResponse.fromPartial({})
+    pagination: undefined
   };
 }
 export const QueryDenomsMetadataResponse = {
-  encode(message: QueryDenomsMetadataResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  typeUrl: "/cosmos.bank.v1beta1.QueryDenomsMetadataResponse",
+  encode(message: QueryDenomsMetadataResponse, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     for (const v of message.metadatas) {
       Metadata.encode(v!, writer.uint32(10).fork()).ldelim();
     }
@@ -1677,8 +1722,8 @@ export const QueryDenomsMetadataResponse = {
     }
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): QueryDenomsMetadataResponse {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): QueryDenomsMetadataResponse {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryDenomsMetadataResponse();
     while (reader.pos < end) {
@@ -1720,17 +1765,19 @@ export const QueryDenomsMetadataResponse = {
     return message;
   },
   fromAmino(object: QueryDenomsMetadataResponseAmino): QueryDenomsMetadataResponse {
-    return {
-      metadatas: Array.isArray(object?.metadatas) ? object.metadatas.map((e: any) => Metadata.fromAmino(e)) : [],
-      pagination: object?.pagination ? PageResponse.fromAmino(object.pagination) : undefined
-    };
+    const message = createBaseQueryDenomsMetadataResponse();
+    message.metadatas = object.metadatas?.map(e => Metadata.fromAmino(e)) || [];
+    if (object.pagination !== undefined && object.pagination !== null) {
+      message.pagination = PageResponse.fromAmino(object.pagination);
+    }
+    return message;
   },
   toAmino(message: QueryDenomsMetadataResponse): QueryDenomsMetadataResponseAmino {
     const obj: any = {};
     if (message.metadatas) {
       obj.metadatas = message.metadatas.map(e => e ? Metadata.toAmino(e) : undefined);
     } else {
-      obj.metadatas = [];
+      obj.metadatas = message.metadatas;
     }
     obj.pagination = message.pagination ? PageResponse.toAmino(message.pagination) : undefined;
     return obj;
@@ -1763,14 +1810,15 @@ function createBaseQueryDenomMetadataRequest(): QueryDenomMetadataRequest {
   };
 }
 export const QueryDenomMetadataRequest = {
-  encode(message: QueryDenomMetadataRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  typeUrl: "/cosmos.bank.v1beta1.QueryDenomMetadataRequest",
+  encode(message: QueryDenomMetadataRequest, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.denom !== "") {
       writer.uint32(10).string(message.denom);
     }
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): QueryDenomMetadataRequest {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): QueryDenomMetadataRequest {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryDenomMetadataRequest();
     while (reader.pos < end) {
@@ -1802,13 +1850,15 @@ export const QueryDenomMetadataRequest = {
     return message;
   },
   fromAmino(object: QueryDenomMetadataRequestAmino): QueryDenomMetadataRequest {
-    return {
-      denom: object.denom
-    };
+    const message = createBaseQueryDenomMetadataRequest();
+    if (object.denom !== undefined && object.denom !== null) {
+      message.denom = object.denom;
+    }
+    return message;
   },
   toAmino(message: QueryDenomMetadataRequest): QueryDenomMetadataRequestAmino {
     const obj: any = {};
-    obj.denom = message.denom;
+    obj.denom = message.denom === "" ? undefined : message.denom;
     return obj;
   },
   fromAminoMsg(object: QueryDenomMetadataRequestAminoMsg): QueryDenomMetadataRequest {
@@ -1839,14 +1889,15 @@ function createBaseQueryDenomMetadataResponse(): QueryDenomMetadataResponse {
   };
 }
 export const QueryDenomMetadataResponse = {
-  encode(message: QueryDenomMetadataResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  typeUrl: "/cosmos.bank.v1beta1.QueryDenomMetadataResponse",
+  encode(message: QueryDenomMetadataResponse, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.metadata !== undefined) {
       Metadata.encode(message.metadata, writer.uint32(10).fork()).ldelim();
     }
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): QueryDenomMetadataResponse {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): QueryDenomMetadataResponse {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryDenomMetadataResponse();
     while (reader.pos < end) {
@@ -1878,9 +1929,11 @@ export const QueryDenomMetadataResponse = {
     return message;
   },
   fromAmino(object: QueryDenomMetadataResponseAmino): QueryDenomMetadataResponse {
-    return {
-      metadata: object?.metadata ? Metadata.fromAmino(object.metadata) : undefined
-    };
+    const message = createBaseQueryDenomMetadataResponse();
+    if (object.metadata !== undefined && object.metadata !== null) {
+      message.metadata = Metadata.fromAmino(object.metadata);
+    }
+    return message;
   },
   toAmino(message: QueryDenomMetadataResponse): QueryDenomMetadataResponseAmino {
     const obj: any = {};
@@ -1912,11 +1965,12 @@ export const QueryDenomMetadataResponse = {
 function createBaseQueryDenomOwnersRequest(): QueryDenomOwnersRequest {
   return {
     denom: "",
-    pagination: PageRequest.fromPartial({})
+    pagination: undefined
   };
 }
 export const QueryDenomOwnersRequest = {
-  encode(message: QueryDenomOwnersRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  typeUrl: "/cosmos.bank.v1beta1.QueryDenomOwnersRequest",
+  encode(message: QueryDenomOwnersRequest, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.denom !== "") {
       writer.uint32(10).string(message.denom);
     }
@@ -1925,8 +1979,8 @@ export const QueryDenomOwnersRequest = {
     }
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): QueryDenomOwnersRequest {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): QueryDenomOwnersRequest {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryDenomOwnersRequest();
     while (reader.pos < end) {
@@ -1964,14 +2018,18 @@ export const QueryDenomOwnersRequest = {
     return message;
   },
   fromAmino(object: QueryDenomOwnersRequestAmino): QueryDenomOwnersRequest {
-    return {
-      denom: object.denom,
-      pagination: object?.pagination ? PageRequest.fromAmino(object.pagination) : undefined
-    };
+    const message = createBaseQueryDenomOwnersRequest();
+    if (object.denom !== undefined && object.denom !== null) {
+      message.denom = object.denom;
+    }
+    if (object.pagination !== undefined && object.pagination !== null) {
+      message.pagination = PageRequest.fromAmino(object.pagination);
+    }
+    return message;
   },
   toAmino(message: QueryDenomOwnersRequest): QueryDenomOwnersRequestAmino {
     const obj: any = {};
-    obj.denom = message.denom;
+    obj.denom = message.denom === "" ? undefined : message.denom;
     obj.pagination = message.pagination ? PageRequest.toAmino(message.pagination) : undefined;
     return obj;
   },
@@ -2000,11 +2058,12 @@ export const QueryDenomOwnersRequest = {
 function createBaseDenomOwner(): DenomOwner {
   return {
     address: "",
-    balance: undefined
+    balance: Coin.fromPartial({})
   };
 }
 export const DenomOwner = {
-  encode(message: DenomOwner, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  typeUrl: "/cosmos.bank.v1beta1.DenomOwner",
+  encode(message: DenomOwner, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.address !== "") {
       writer.uint32(10).string(message.address);
     }
@@ -2013,8 +2072,8 @@ export const DenomOwner = {
     }
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): DenomOwner {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): DenomOwner {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseDenomOwner();
     while (reader.pos < end) {
@@ -2052,14 +2111,18 @@ export const DenomOwner = {
     return message;
   },
   fromAmino(object: DenomOwnerAmino): DenomOwner {
-    return {
-      address: object.address,
-      balance: object?.balance ? Coin.fromAmino(object.balance) : undefined
-    };
+    const message = createBaseDenomOwner();
+    if (object.address !== undefined && object.address !== null) {
+      message.address = object.address;
+    }
+    if (object.balance !== undefined && object.balance !== null) {
+      message.balance = Coin.fromAmino(object.balance);
+    }
+    return message;
   },
   toAmino(message: DenomOwner): DenomOwnerAmino {
     const obj: any = {};
-    obj.address = message.address;
+    obj.address = message.address === "" ? undefined : message.address;
     obj.balance = message.balance ? Coin.toAmino(message.balance) : undefined;
     return obj;
   },
@@ -2088,11 +2151,12 @@ export const DenomOwner = {
 function createBaseQueryDenomOwnersResponse(): QueryDenomOwnersResponse {
   return {
     denomOwners: [],
-    pagination: PageResponse.fromPartial({})
+    pagination: undefined
   };
 }
 export const QueryDenomOwnersResponse = {
-  encode(message: QueryDenomOwnersResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  typeUrl: "/cosmos.bank.v1beta1.QueryDenomOwnersResponse",
+  encode(message: QueryDenomOwnersResponse, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     for (const v of message.denomOwners) {
       DenomOwner.encode(v!, writer.uint32(10).fork()).ldelim();
     }
@@ -2101,8 +2165,8 @@ export const QueryDenomOwnersResponse = {
     }
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): QueryDenomOwnersResponse {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): QueryDenomOwnersResponse {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryDenomOwnersResponse();
     while (reader.pos < end) {
@@ -2144,17 +2208,19 @@ export const QueryDenomOwnersResponse = {
     return message;
   },
   fromAmino(object: QueryDenomOwnersResponseAmino): QueryDenomOwnersResponse {
-    return {
-      denomOwners: Array.isArray(object?.denom_owners) ? object.denom_owners.map((e: any) => DenomOwner.fromAmino(e)) : [],
-      pagination: object?.pagination ? PageResponse.fromAmino(object.pagination) : undefined
-    };
+    const message = createBaseQueryDenomOwnersResponse();
+    message.denomOwners = object.denom_owners?.map(e => DenomOwner.fromAmino(e)) || [];
+    if (object.pagination !== undefined && object.pagination !== null) {
+      message.pagination = PageResponse.fromAmino(object.pagination);
+    }
+    return message;
   },
   toAmino(message: QueryDenomOwnersResponse): QueryDenomOwnersResponseAmino {
     const obj: any = {};
     if (message.denomOwners) {
       obj.denom_owners = message.denomOwners.map(e => e ? DenomOwner.toAmino(e) : undefined);
     } else {
-      obj.denom_owners = [];
+      obj.denom_owners = message.denomOwners;
     }
     obj.pagination = message.pagination ? PageResponse.toAmino(message.pagination) : undefined;
     return obj;

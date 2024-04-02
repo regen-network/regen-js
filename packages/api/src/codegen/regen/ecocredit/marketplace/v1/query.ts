@@ -1,12 +1,12 @@
 import { PageRequest, PageRequestAmino, PageRequestSDKType, PageResponse, PageResponseAmino, PageResponseSDKType } from "../../../../cosmos/base/query/v1beta1/pagination";
 import { AllowedDenom, AllowedDenomAmino, AllowedDenomSDKType } from "./state";
-import { Timestamp, TimestampAmino, TimestampSDKType } from "../../../../google/protobuf/timestamp";
-import { Long, isSet, fromJsonTimestamp, fromTimestamp } from "../../../../helpers";
-import * as _m0 from "protobufjs/minimal";
+import { Timestamp, TimestampSDKType } from "../../../../google/protobuf/timestamp";
+import { BinaryReader, BinaryWriter } from "../../../../binary";
+import { isSet, fromJsonTimestamp, fromTimestamp } from "../../../../helpers";
 /** QuerySellOrderRequest is the Query/SellOrder request type. */
 export interface QuerySellOrderRequest {
   /** sell_order_id is the id of the requested sell order. */
-  sellOrderId: Long;
+  sellOrderId: bigint;
 }
 export interface QuerySellOrderRequestProtoMsg {
   typeUrl: "/regen.ecocredit.marketplace.v1.QuerySellOrderRequest";
@@ -15,7 +15,7 @@ export interface QuerySellOrderRequestProtoMsg {
 /** QuerySellOrderRequest is the Query/SellOrder request type. */
 export interface QuerySellOrderRequestAmino {
   /** sell_order_id is the id of the requested sell order. */
-  sell_order_id: string;
+  sell_order_id?: string;
 }
 export interface QuerySellOrderRequestAminoMsg {
   type: "/regen.ecocredit.marketplace.v1.QuerySellOrderRequest";
@@ -23,12 +23,12 @@ export interface QuerySellOrderRequestAminoMsg {
 }
 /** QuerySellOrderRequest is the Query/SellOrder request type. */
 export interface QuerySellOrderRequestSDKType {
-  sell_order_id: Long;
+  sell_order_id: bigint;
 }
 /** QuerySellOrderResponse is the Query/SellOrder response type. */
 export interface QuerySellOrderResponse {
   /** sell_order contains all information related to a sell order. */
-  sellOrder: SellOrderInfo;
+  sellOrder?: SellOrderInfo;
 }
 export interface QuerySellOrderResponseProtoMsg {
   typeUrl: "/regen.ecocredit.marketplace.v1.QuerySellOrderResponse";
@@ -45,12 +45,12 @@ export interface QuerySellOrderResponseAminoMsg {
 }
 /** QuerySellOrderResponse is the Query/SellOrder response type. */
 export interface QuerySellOrderResponseSDKType {
-  sell_order: SellOrderInfoSDKType;
+  sell_order?: SellOrderInfoSDKType;
 }
 /** QuerySellOrdersRequest is the Query/SellOrders request type. */
 export interface QuerySellOrdersRequest {
   /** pagination defines an optional pagination for the request. */
-  pagination: PageRequest;
+  pagination?: PageRequest;
 }
 export interface QuerySellOrdersRequestProtoMsg {
   typeUrl: "/regen.ecocredit.marketplace.v1.QuerySellOrdersRequest";
@@ -67,14 +67,14 @@ export interface QuerySellOrdersRequestAminoMsg {
 }
 /** QuerySellOrdersRequest is the Query/SellOrders request type. */
 export interface QuerySellOrdersRequestSDKType {
-  pagination: PageRequestSDKType;
+  pagination?: PageRequestSDKType;
 }
 /** QuerySellOrdersResponse is the Query/SellOrders response type. */
 export interface QuerySellOrdersResponse {
   /** sell_orders is a list of sell orders. */
   sellOrders: SellOrderInfo[];
   /** pagination defines the pagination in the response. */
-  pagination: PageResponse;
+  pagination?: PageResponse;
 }
 export interface QuerySellOrdersResponseProtoMsg {
   typeUrl: "/regen.ecocredit.marketplace.v1.QuerySellOrdersResponse";
@@ -83,7 +83,7 @@ export interface QuerySellOrdersResponseProtoMsg {
 /** QuerySellOrdersResponse is the Query/SellOrders response type. */
 export interface QuerySellOrdersResponseAmino {
   /** sell_orders is a list of sell orders. */
-  sell_orders: SellOrderInfoAmino[];
+  sell_orders?: SellOrderInfoAmino[];
   /** pagination defines the pagination in the response. */
   pagination?: PageResponseAmino;
 }
@@ -94,7 +94,7 @@ export interface QuerySellOrdersResponseAminoMsg {
 /** QuerySellOrdersResponse is the Query/SellOrders response type. */
 export interface QuerySellOrdersResponseSDKType {
   sell_orders: SellOrderInfoSDKType[];
-  pagination: PageResponseSDKType;
+  pagination?: PageResponseSDKType;
 }
 /**
  * QuerySellOrdersByBatchRequest is the Query/SellOrdersByBatch
@@ -104,7 +104,7 @@ export interface QuerySellOrdersByBatchRequest {
   /** batch_denom is an ecocredit denom */
   batchDenom: string;
   /** pagination defines an optional pagination for the request. */
-  pagination: PageRequest;
+  pagination?: PageRequest;
 }
 export interface QuerySellOrdersByBatchRequestProtoMsg {
   typeUrl: "/regen.ecocredit.marketplace.v1.QuerySellOrdersByBatchRequest";
@@ -116,7 +116,7 @@ export interface QuerySellOrdersByBatchRequestProtoMsg {
  */
 export interface QuerySellOrdersByBatchRequestAmino {
   /** batch_denom is an ecocredit denom */
-  batch_denom: string;
+  batch_denom?: string;
   /** pagination defines an optional pagination for the request. */
   pagination?: PageRequestAmino;
 }
@@ -130,7 +130,7 @@ export interface QuerySellOrdersByBatchRequestAminoMsg {
  */
 export interface QuerySellOrdersByBatchRequestSDKType {
   batch_denom: string;
-  pagination: PageRequestSDKType;
+  pagination?: PageRequestSDKType;
 }
 /**
  * QuerySellOrdersByBatchResponse is the Query/SellOrdersByBatch
@@ -140,7 +140,7 @@ export interface QuerySellOrdersByBatchResponse {
   /** sell_orders is a list of sell orders. */
   sellOrders: SellOrderInfo[];
   /** pagination defines an optional pagination for the response. */
-  pagination: PageResponse;
+  pagination?: PageResponse;
 }
 export interface QuerySellOrdersByBatchResponseProtoMsg {
   typeUrl: "/regen.ecocredit.marketplace.v1.QuerySellOrdersByBatchResponse";
@@ -152,7 +152,7 @@ export interface QuerySellOrdersByBatchResponseProtoMsg {
  */
 export interface QuerySellOrdersByBatchResponseAmino {
   /** sell_orders is a list of sell orders. */
-  sell_orders: SellOrderInfoAmino[];
+  sell_orders?: SellOrderInfoAmino[];
   /** pagination defines an optional pagination for the response. */
   pagination?: PageResponseAmino;
 }
@@ -166,7 +166,7 @@ export interface QuerySellOrdersByBatchResponseAminoMsg {
  */
 export interface QuerySellOrdersByBatchResponseSDKType {
   sell_orders: SellOrderInfoSDKType[];
-  pagination: PageResponseSDKType;
+  pagination?: PageResponseSDKType;
 }
 /**
  * QuerySellOrdersBySellerRequest is the Query/SellOrdersBySeller request
@@ -176,7 +176,7 @@ export interface QuerySellOrdersBySellerRequest {
   /** seller is the address of the account that is selling credits. */
   seller: string;
   /** pagination defines an optional pagination for the request. */
-  pagination: PageRequest;
+  pagination?: PageRequest;
 }
 export interface QuerySellOrdersBySellerRequestProtoMsg {
   typeUrl: "/regen.ecocredit.marketplace.v1.QuerySellOrdersBySellerRequest";
@@ -188,7 +188,7 @@ export interface QuerySellOrdersBySellerRequestProtoMsg {
  */
 export interface QuerySellOrdersBySellerRequestAmino {
   /** seller is the address of the account that is selling credits. */
-  seller: string;
+  seller?: string;
   /** pagination defines an optional pagination for the request. */
   pagination?: PageRequestAmino;
 }
@@ -202,7 +202,7 @@ export interface QuerySellOrdersBySellerRequestAminoMsg {
  */
 export interface QuerySellOrdersBySellerRequestSDKType {
   seller: string;
-  pagination: PageRequestSDKType;
+  pagination?: PageRequestSDKType;
 }
 /**
  * QuerySellOrdersBySellerResponse is the Query/SellOrdersBySellerResponse
@@ -212,7 +212,7 @@ export interface QuerySellOrdersBySellerResponse {
   /** sell_orders is a list of sell orders. */
   sellOrders: SellOrderInfo[];
   /** pagination defines an optional pagination for the response. */
-  pagination: PageResponse;
+  pagination?: PageResponse;
 }
 export interface QuerySellOrdersBySellerResponseProtoMsg {
   typeUrl: "/regen.ecocredit.marketplace.v1.QuerySellOrdersBySellerResponse";
@@ -224,7 +224,7 @@ export interface QuerySellOrdersBySellerResponseProtoMsg {
  */
 export interface QuerySellOrdersBySellerResponseAmino {
   /** sell_orders is a list of sell orders. */
-  sell_orders: SellOrderInfoAmino[];
+  sell_orders?: SellOrderInfoAmino[];
   /** pagination defines an optional pagination for the response. */
   pagination?: PageResponseAmino;
 }
@@ -238,12 +238,12 @@ export interface QuerySellOrdersBySellerResponseAminoMsg {
  */
 export interface QuerySellOrdersBySellerResponseSDKType {
   sell_orders: SellOrderInfoSDKType[];
-  pagination: PageResponseSDKType;
+  pagination?: PageResponseSDKType;
 }
 /** QueryAllowedDenomsRequest is the Query/AllowedDenoms request type. */
 export interface QueryAllowedDenomsRequest {
   /** pagination defines an optional pagination for the request. */
-  pagination: PageRequest;
+  pagination?: PageRequest;
 }
 export interface QueryAllowedDenomsRequestProtoMsg {
   typeUrl: "/regen.ecocredit.marketplace.v1.QueryAllowedDenomsRequest";
@@ -260,7 +260,7 @@ export interface QueryAllowedDenomsRequestAminoMsg {
 }
 /** QueryAllowedDenomsRequest is the Query/AllowedDenoms request type. */
 export interface QueryAllowedDenomsRequestSDKType {
-  pagination: PageRequestSDKType;
+  pagination?: PageRequestSDKType;
 }
 /** QueryAllowedDenomsResponse is the Query/AllowedDenoms response type. */
 export interface QueryAllowedDenomsResponse {
@@ -270,7 +270,7 @@ export interface QueryAllowedDenomsResponse {
    */
   allowedDenoms: AllowedDenom[];
   /** pagination defines an optional pagination for the response. */
-  pagination: PageResponse;
+  pagination?: PageResponse;
 }
 export interface QueryAllowedDenomsResponseProtoMsg {
   typeUrl: "/regen.ecocredit.marketplace.v1.QueryAllowedDenomsResponse";
@@ -282,7 +282,7 @@ export interface QueryAllowedDenomsResponseAmino {
    * allowed_denoms is a list of coin denoms allowed to use in the ask price of
    * sell orders.
    */
-  allowed_denoms: AllowedDenomAmino[];
+  allowed_denoms?: AllowedDenomAmino[];
   /** pagination defines an optional pagination for the response. */
   pagination?: PageResponseAmino;
 }
@@ -293,12 +293,12 @@ export interface QueryAllowedDenomsResponseAminoMsg {
 /** QueryAllowedDenomsResponse is the Query/AllowedDenoms response type. */
 export interface QueryAllowedDenomsResponseSDKType {
   allowed_denoms: AllowedDenomSDKType[];
-  pagination: PageResponseSDKType;
+  pagination?: PageResponseSDKType;
 }
 /** SellOrderInfo is the human-readable sell order information. */
 export interface SellOrderInfo {
   /** id is the unique ID of sell order. */
-  id: Long;
+  id: bigint;
   /** seller is the address of the account that is selling credits. */
   seller: string;
   /** batch_denom is denom of the credit batch being sold. */
@@ -323,7 +323,7 @@ export interface SellOrderInfo {
    * expiration is an optional timestamp when the sell order expires. When the
    * expiration time is reached, the sell order is removed from state.
    */
-  expiration: Timestamp;
+  expiration?: Timestamp;
 }
 export interface SellOrderInfoProtoMsg {
   typeUrl: "/regen.ecocredit.marketplace.v1.SellOrderInfo";
@@ -332,32 +332,32 @@ export interface SellOrderInfoProtoMsg {
 /** SellOrderInfo is the human-readable sell order information. */
 export interface SellOrderInfoAmino {
   /** id is the unique ID of sell order. */
-  id: string;
+  id?: string;
   /** seller is the address of the account that is selling credits. */
-  seller: string;
+  seller?: string;
   /** batch_denom is denom of the credit batch being sold. */
-  batch_denom: string;
+  batch_denom?: string;
   /** quantity is the decimal quantity of credits being sold. */
-  quantity: string;
+  quantity?: string;
   /** ask_denom is the denom used in the ask price of the sell order. */
-  ask_denom: string;
+  ask_denom?: string;
   /**
    * ask_amount is the amount that the seller is asking for each credit unit of
    * the batch. Each credit unit of the batch will be sold for at least the
    * ask_amount.
    */
-  ask_amount: string;
+  ask_amount?: string;
   /**
    * disable_auto_retire disables auto-retirement of credits which allows a
    * buyer to disable auto-retirement in their buy order enabling them to
    * resell the credits to another buyer.
    */
-  disable_auto_retire: boolean;
+  disable_auto_retire?: boolean;
   /**
    * expiration is an optional timestamp when the sell order expires. When the
    * expiration time is reached, the sell order is removed from state.
    */
-  expiration?: TimestampAmino;
+  expiration?: string;
 }
 export interface SellOrderInfoAminoMsg {
   type: "/regen.ecocredit.marketplace.v1.SellOrderInfo";
@@ -365,36 +365,37 @@ export interface SellOrderInfoAminoMsg {
 }
 /** SellOrderInfo is the human-readable sell order information. */
 export interface SellOrderInfoSDKType {
-  id: Long;
+  id: bigint;
   seller: string;
   batch_denom: string;
   quantity: string;
   ask_denom: string;
   ask_amount: string;
   disable_auto_retire: boolean;
-  expiration: TimestampSDKType;
+  expiration?: TimestampSDKType;
 }
 function createBaseQuerySellOrderRequest(): QuerySellOrderRequest {
   return {
-    sellOrderId: Long.UZERO
+    sellOrderId: BigInt(0)
   };
 }
 export const QuerySellOrderRequest = {
-  encode(message: QuerySellOrderRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
-    if (!message.sellOrderId.isZero()) {
+  typeUrl: "/regen.ecocredit.marketplace.v1.QuerySellOrderRequest",
+  encode(message: QuerySellOrderRequest, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
+    if (message.sellOrderId !== BigInt(0)) {
       writer.uint32(8).uint64(message.sellOrderId);
     }
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): QuerySellOrderRequest {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): QuerySellOrderRequest {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQuerySellOrderRequest();
     while (reader.pos < end) {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          message.sellOrderId = (reader.uint64() as Long);
+          message.sellOrderId = reader.uint64();
           break;
         default:
           reader.skipType(tag & 7);
@@ -405,27 +406,29 @@ export const QuerySellOrderRequest = {
   },
   fromJSON(object: any): QuerySellOrderRequest {
     return {
-      sellOrderId: isSet(object.sellOrderId) ? Long.fromValue(object.sellOrderId) : Long.UZERO
+      sellOrderId: isSet(object.sellOrderId) ? BigInt(object.sellOrderId.toString()) : BigInt(0)
     };
   },
   toJSON(message: QuerySellOrderRequest): unknown {
     const obj: any = {};
-    message.sellOrderId !== undefined && (obj.sellOrderId = (message.sellOrderId || Long.UZERO).toString());
+    message.sellOrderId !== undefined && (obj.sellOrderId = (message.sellOrderId || BigInt(0)).toString());
     return obj;
   },
   fromPartial(object: Partial<QuerySellOrderRequest>): QuerySellOrderRequest {
     const message = createBaseQuerySellOrderRequest();
-    message.sellOrderId = object.sellOrderId !== undefined && object.sellOrderId !== null ? Long.fromValue(object.sellOrderId) : Long.UZERO;
+    message.sellOrderId = object.sellOrderId !== undefined && object.sellOrderId !== null ? BigInt(object.sellOrderId.toString()) : BigInt(0);
     return message;
   },
   fromAmino(object: QuerySellOrderRequestAmino): QuerySellOrderRequest {
-    return {
-      sellOrderId: Long.fromString(object.sell_order_id)
-    };
+    const message = createBaseQuerySellOrderRequest();
+    if (object.sell_order_id !== undefined && object.sell_order_id !== null) {
+      message.sellOrderId = BigInt(object.sell_order_id);
+    }
+    return message;
   },
   toAmino(message: QuerySellOrderRequest): QuerySellOrderRequestAmino {
     const obj: any = {};
-    obj.sell_order_id = message.sellOrderId ? message.sellOrderId.toString() : undefined;
+    obj.sell_order_id = message.sellOrderId !== BigInt(0) ? message.sellOrderId.toString() : undefined;
     return obj;
   },
   fromAminoMsg(object: QuerySellOrderRequestAminoMsg): QuerySellOrderRequest {
@@ -446,18 +449,19 @@ export const QuerySellOrderRequest = {
 };
 function createBaseQuerySellOrderResponse(): QuerySellOrderResponse {
   return {
-    sellOrder: SellOrderInfo.fromPartial({})
+    sellOrder: undefined
   };
 }
 export const QuerySellOrderResponse = {
-  encode(message: QuerySellOrderResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  typeUrl: "/regen.ecocredit.marketplace.v1.QuerySellOrderResponse",
+  encode(message: QuerySellOrderResponse, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.sellOrder !== undefined) {
       SellOrderInfo.encode(message.sellOrder, writer.uint32(10).fork()).ldelim();
     }
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): QuerySellOrderResponse {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): QuerySellOrderResponse {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQuerySellOrderResponse();
     while (reader.pos < end) {
@@ -489,9 +493,11 @@ export const QuerySellOrderResponse = {
     return message;
   },
   fromAmino(object: QuerySellOrderResponseAmino): QuerySellOrderResponse {
-    return {
-      sellOrder: object?.sell_order ? SellOrderInfo.fromAmino(object.sell_order) : undefined
-    };
+    const message = createBaseQuerySellOrderResponse();
+    if (object.sell_order !== undefined && object.sell_order !== null) {
+      message.sellOrder = SellOrderInfo.fromAmino(object.sell_order);
+    }
+    return message;
   },
   toAmino(message: QuerySellOrderResponse): QuerySellOrderResponseAmino {
     const obj: any = {};
@@ -516,18 +522,19 @@ export const QuerySellOrderResponse = {
 };
 function createBaseQuerySellOrdersRequest(): QuerySellOrdersRequest {
   return {
-    pagination: PageRequest.fromPartial({})
+    pagination: undefined
   };
 }
 export const QuerySellOrdersRequest = {
-  encode(message: QuerySellOrdersRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  typeUrl: "/regen.ecocredit.marketplace.v1.QuerySellOrdersRequest",
+  encode(message: QuerySellOrdersRequest, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.pagination !== undefined) {
       PageRequest.encode(message.pagination, writer.uint32(10).fork()).ldelim();
     }
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): QuerySellOrdersRequest {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): QuerySellOrdersRequest {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQuerySellOrdersRequest();
     while (reader.pos < end) {
@@ -559,9 +566,11 @@ export const QuerySellOrdersRequest = {
     return message;
   },
   fromAmino(object: QuerySellOrdersRequestAmino): QuerySellOrdersRequest {
-    return {
-      pagination: object?.pagination ? PageRequest.fromAmino(object.pagination) : undefined
-    };
+    const message = createBaseQuerySellOrdersRequest();
+    if (object.pagination !== undefined && object.pagination !== null) {
+      message.pagination = PageRequest.fromAmino(object.pagination);
+    }
+    return message;
   },
   toAmino(message: QuerySellOrdersRequest): QuerySellOrdersRequestAmino {
     const obj: any = {};
@@ -587,11 +596,12 @@ export const QuerySellOrdersRequest = {
 function createBaseQuerySellOrdersResponse(): QuerySellOrdersResponse {
   return {
     sellOrders: [],
-    pagination: PageResponse.fromPartial({})
+    pagination: undefined
   };
 }
 export const QuerySellOrdersResponse = {
-  encode(message: QuerySellOrdersResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  typeUrl: "/regen.ecocredit.marketplace.v1.QuerySellOrdersResponse",
+  encode(message: QuerySellOrdersResponse, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     for (const v of message.sellOrders) {
       SellOrderInfo.encode(v!, writer.uint32(10).fork()).ldelim();
     }
@@ -600,8 +610,8 @@ export const QuerySellOrdersResponse = {
     }
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): QuerySellOrdersResponse {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): QuerySellOrdersResponse {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQuerySellOrdersResponse();
     while (reader.pos < end) {
@@ -643,17 +653,19 @@ export const QuerySellOrdersResponse = {
     return message;
   },
   fromAmino(object: QuerySellOrdersResponseAmino): QuerySellOrdersResponse {
-    return {
-      sellOrders: Array.isArray(object?.sell_orders) ? object.sell_orders.map((e: any) => SellOrderInfo.fromAmino(e)) : [],
-      pagination: object?.pagination ? PageResponse.fromAmino(object.pagination) : undefined
-    };
+    const message = createBaseQuerySellOrdersResponse();
+    message.sellOrders = object.sell_orders?.map(e => SellOrderInfo.fromAmino(e)) || [];
+    if (object.pagination !== undefined && object.pagination !== null) {
+      message.pagination = PageResponse.fromAmino(object.pagination);
+    }
+    return message;
   },
   toAmino(message: QuerySellOrdersResponse): QuerySellOrdersResponseAmino {
     const obj: any = {};
     if (message.sellOrders) {
       obj.sell_orders = message.sellOrders.map(e => e ? SellOrderInfo.toAmino(e) : undefined);
     } else {
-      obj.sell_orders = [];
+      obj.sell_orders = message.sellOrders;
     }
     obj.pagination = message.pagination ? PageResponse.toAmino(message.pagination) : undefined;
     return obj;
@@ -677,11 +689,12 @@ export const QuerySellOrdersResponse = {
 function createBaseQuerySellOrdersByBatchRequest(): QuerySellOrdersByBatchRequest {
   return {
     batchDenom: "",
-    pagination: PageRequest.fromPartial({})
+    pagination: undefined
   };
 }
 export const QuerySellOrdersByBatchRequest = {
-  encode(message: QuerySellOrdersByBatchRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  typeUrl: "/regen.ecocredit.marketplace.v1.QuerySellOrdersByBatchRequest",
+  encode(message: QuerySellOrdersByBatchRequest, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.batchDenom !== "") {
       writer.uint32(10).string(message.batchDenom);
     }
@@ -690,8 +703,8 @@ export const QuerySellOrdersByBatchRequest = {
     }
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): QuerySellOrdersByBatchRequest {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): QuerySellOrdersByBatchRequest {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQuerySellOrdersByBatchRequest();
     while (reader.pos < end) {
@@ -729,14 +742,18 @@ export const QuerySellOrdersByBatchRequest = {
     return message;
   },
   fromAmino(object: QuerySellOrdersByBatchRequestAmino): QuerySellOrdersByBatchRequest {
-    return {
-      batchDenom: object.batch_denom,
-      pagination: object?.pagination ? PageRequest.fromAmino(object.pagination) : undefined
-    };
+    const message = createBaseQuerySellOrdersByBatchRequest();
+    if (object.batch_denom !== undefined && object.batch_denom !== null) {
+      message.batchDenom = object.batch_denom;
+    }
+    if (object.pagination !== undefined && object.pagination !== null) {
+      message.pagination = PageRequest.fromAmino(object.pagination);
+    }
+    return message;
   },
   toAmino(message: QuerySellOrdersByBatchRequest): QuerySellOrdersByBatchRequestAmino {
     const obj: any = {};
-    obj.batch_denom = message.batchDenom;
+    obj.batch_denom = message.batchDenom === "" ? undefined : message.batchDenom;
     obj.pagination = message.pagination ? PageRequest.toAmino(message.pagination) : undefined;
     return obj;
   },
@@ -759,11 +776,12 @@ export const QuerySellOrdersByBatchRequest = {
 function createBaseQuerySellOrdersByBatchResponse(): QuerySellOrdersByBatchResponse {
   return {
     sellOrders: [],
-    pagination: PageResponse.fromPartial({})
+    pagination: undefined
   };
 }
 export const QuerySellOrdersByBatchResponse = {
-  encode(message: QuerySellOrdersByBatchResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  typeUrl: "/regen.ecocredit.marketplace.v1.QuerySellOrdersByBatchResponse",
+  encode(message: QuerySellOrdersByBatchResponse, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     for (const v of message.sellOrders) {
       SellOrderInfo.encode(v!, writer.uint32(10).fork()).ldelim();
     }
@@ -772,8 +790,8 @@ export const QuerySellOrdersByBatchResponse = {
     }
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): QuerySellOrdersByBatchResponse {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): QuerySellOrdersByBatchResponse {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQuerySellOrdersByBatchResponse();
     while (reader.pos < end) {
@@ -815,17 +833,19 @@ export const QuerySellOrdersByBatchResponse = {
     return message;
   },
   fromAmino(object: QuerySellOrdersByBatchResponseAmino): QuerySellOrdersByBatchResponse {
-    return {
-      sellOrders: Array.isArray(object?.sell_orders) ? object.sell_orders.map((e: any) => SellOrderInfo.fromAmino(e)) : [],
-      pagination: object?.pagination ? PageResponse.fromAmino(object.pagination) : undefined
-    };
+    const message = createBaseQuerySellOrdersByBatchResponse();
+    message.sellOrders = object.sell_orders?.map(e => SellOrderInfo.fromAmino(e)) || [];
+    if (object.pagination !== undefined && object.pagination !== null) {
+      message.pagination = PageResponse.fromAmino(object.pagination);
+    }
+    return message;
   },
   toAmino(message: QuerySellOrdersByBatchResponse): QuerySellOrdersByBatchResponseAmino {
     const obj: any = {};
     if (message.sellOrders) {
       obj.sell_orders = message.sellOrders.map(e => e ? SellOrderInfo.toAmino(e) : undefined);
     } else {
-      obj.sell_orders = [];
+      obj.sell_orders = message.sellOrders;
     }
     obj.pagination = message.pagination ? PageResponse.toAmino(message.pagination) : undefined;
     return obj;
@@ -849,11 +869,12 @@ export const QuerySellOrdersByBatchResponse = {
 function createBaseQuerySellOrdersBySellerRequest(): QuerySellOrdersBySellerRequest {
   return {
     seller: "",
-    pagination: PageRequest.fromPartial({})
+    pagination: undefined
   };
 }
 export const QuerySellOrdersBySellerRequest = {
-  encode(message: QuerySellOrdersBySellerRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  typeUrl: "/regen.ecocredit.marketplace.v1.QuerySellOrdersBySellerRequest",
+  encode(message: QuerySellOrdersBySellerRequest, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.seller !== "") {
       writer.uint32(10).string(message.seller);
     }
@@ -862,8 +883,8 @@ export const QuerySellOrdersBySellerRequest = {
     }
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): QuerySellOrdersBySellerRequest {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): QuerySellOrdersBySellerRequest {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQuerySellOrdersBySellerRequest();
     while (reader.pos < end) {
@@ -901,14 +922,18 @@ export const QuerySellOrdersBySellerRequest = {
     return message;
   },
   fromAmino(object: QuerySellOrdersBySellerRequestAmino): QuerySellOrdersBySellerRequest {
-    return {
-      seller: object.seller,
-      pagination: object?.pagination ? PageRequest.fromAmino(object.pagination) : undefined
-    };
+    const message = createBaseQuerySellOrdersBySellerRequest();
+    if (object.seller !== undefined && object.seller !== null) {
+      message.seller = object.seller;
+    }
+    if (object.pagination !== undefined && object.pagination !== null) {
+      message.pagination = PageRequest.fromAmino(object.pagination);
+    }
+    return message;
   },
   toAmino(message: QuerySellOrdersBySellerRequest): QuerySellOrdersBySellerRequestAmino {
     const obj: any = {};
-    obj.seller = message.seller;
+    obj.seller = message.seller === "" ? undefined : message.seller;
     obj.pagination = message.pagination ? PageRequest.toAmino(message.pagination) : undefined;
     return obj;
   },
@@ -931,11 +956,12 @@ export const QuerySellOrdersBySellerRequest = {
 function createBaseQuerySellOrdersBySellerResponse(): QuerySellOrdersBySellerResponse {
   return {
     sellOrders: [],
-    pagination: PageResponse.fromPartial({})
+    pagination: undefined
   };
 }
 export const QuerySellOrdersBySellerResponse = {
-  encode(message: QuerySellOrdersBySellerResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  typeUrl: "/regen.ecocredit.marketplace.v1.QuerySellOrdersBySellerResponse",
+  encode(message: QuerySellOrdersBySellerResponse, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     for (const v of message.sellOrders) {
       SellOrderInfo.encode(v!, writer.uint32(10).fork()).ldelim();
     }
@@ -944,8 +970,8 @@ export const QuerySellOrdersBySellerResponse = {
     }
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): QuerySellOrdersBySellerResponse {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): QuerySellOrdersBySellerResponse {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQuerySellOrdersBySellerResponse();
     while (reader.pos < end) {
@@ -987,17 +1013,19 @@ export const QuerySellOrdersBySellerResponse = {
     return message;
   },
   fromAmino(object: QuerySellOrdersBySellerResponseAmino): QuerySellOrdersBySellerResponse {
-    return {
-      sellOrders: Array.isArray(object?.sell_orders) ? object.sell_orders.map((e: any) => SellOrderInfo.fromAmino(e)) : [],
-      pagination: object?.pagination ? PageResponse.fromAmino(object.pagination) : undefined
-    };
+    const message = createBaseQuerySellOrdersBySellerResponse();
+    message.sellOrders = object.sell_orders?.map(e => SellOrderInfo.fromAmino(e)) || [];
+    if (object.pagination !== undefined && object.pagination !== null) {
+      message.pagination = PageResponse.fromAmino(object.pagination);
+    }
+    return message;
   },
   toAmino(message: QuerySellOrdersBySellerResponse): QuerySellOrdersBySellerResponseAmino {
     const obj: any = {};
     if (message.sellOrders) {
       obj.sell_orders = message.sellOrders.map(e => e ? SellOrderInfo.toAmino(e) : undefined);
     } else {
-      obj.sell_orders = [];
+      obj.sell_orders = message.sellOrders;
     }
     obj.pagination = message.pagination ? PageResponse.toAmino(message.pagination) : undefined;
     return obj;
@@ -1020,18 +1048,19 @@ export const QuerySellOrdersBySellerResponse = {
 };
 function createBaseQueryAllowedDenomsRequest(): QueryAllowedDenomsRequest {
   return {
-    pagination: PageRequest.fromPartial({})
+    pagination: undefined
   };
 }
 export const QueryAllowedDenomsRequest = {
-  encode(message: QueryAllowedDenomsRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  typeUrl: "/regen.ecocredit.marketplace.v1.QueryAllowedDenomsRequest",
+  encode(message: QueryAllowedDenomsRequest, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.pagination !== undefined) {
       PageRequest.encode(message.pagination, writer.uint32(10).fork()).ldelim();
     }
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): QueryAllowedDenomsRequest {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): QueryAllowedDenomsRequest {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryAllowedDenomsRequest();
     while (reader.pos < end) {
@@ -1063,9 +1092,11 @@ export const QueryAllowedDenomsRequest = {
     return message;
   },
   fromAmino(object: QueryAllowedDenomsRequestAmino): QueryAllowedDenomsRequest {
-    return {
-      pagination: object?.pagination ? PageRequest.fromAmino(object.pagination) : undefined
-    };
+    const message = createBaseQueryAllowedDenomsRequest();
+    if (object.pagination !== undefined && object.pagination !== null) {
+      message.pagination = PageRequest.fromAmino(object.pagination);
+    }
+    return message;
   },
   toAmino(message: QueryAllowedDenomsRequest): QueryAllowedDenomsRequestAmino {
     const obj: any = {};
@@ -1091,11 +1122,12 @@ export const QueryAllowedDenomsRequest = {
 function createBaseQueryAllowedDenomsResponse(): QueryAllowedDenomsResponse {
   return {
     allowedDenoms: [],
-    pagination: PageResponse.fromPartial({})
+    pagination: undefined
   };
 }
 export const QueryAllowedDenomsResponse = {
-  encode(message: QueryAllowedDenomsResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  typeUrl: "/regen.ecocredit.marketplace.v1.QueryAllowedDenomsResponse",
+  encode(message: QueryAllowedDenomsResponse, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     for (const v of message.allowedDenoms) {
       AllowedDenom.encode(v!, writer.uint32(10).fork()).ldelim();
     }
@@ -1104,8 +1136,8 @@ export const QueryAllowedDenomsResponse = {
     }
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): QueryAllowedDenomsResponse {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): QueryAllowedDenomsResponse {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryAllowedDenomsResponse();
     while (reader.pos < end) {
@@ -1147,17 +1179,19 @@ export const QueryAllowedDenomsResponse = {
     return message;
   },
   fromAmino(object: QueryAllowedDenomsResponseAmino): QueryAllowedDenomsResponse {
-    return {
-      allowedDenoms: Array.isArray(object?.allowed_denoms) ? object.allowed_denoms.map((e: any) => AllowedDenom.fromAmino(e)) : [],
-      pagination: object?.pagination ? PageResponse.fromAmino(object.pagination) : undefined
-    };
+    const message = createBaseQueryAllowedDenomsResponse();
+    message.allowedDenoms = object.allowed_denoms?.map(e => AllowedDenom.fromAmino(e)) || [];
+    if (object.pagination !== undefined && object.pagination !== null) {
+      message.pagination = PageResponse.fromAmino(object.pagination);
+    }
+    return message;
   },
   toAmino(message: QueryAllowedDenomsResponse): QueryAllowedDenomsResponseAmino {
     const obj: any = {};
     if (message.allowedDenoms) {
       obj.allowed_denoms = message.allowedDenoms.map(e => e ? AllowedDenom.toAmino(e) : undefined);
     } else {
-      obj.allowed_denoms = [];
+      obj.allowed_denoms = message.allowedDenoms;
     }
     obj.pagination = message.pagination ? PageResponse.toAmino(message.pagination) : undefined;
     return obj;
@@ -1180,7 +1214,7 @@ export const QueryAllowedDenomsResponse = {
 };
 function createBaseSellOrderInfo(): SellOrderInfo {
   return {
-    id: Long.UZERO,
+    id: BigInt(0),
     seller: "",
     batchDenom: "",
     quantity: "",
@@ -1191,8 +1225,9 @@ function createBaseSellOrderInfo(): SellOrderInfo {
   };
 }
 export const SellOrderInfo = {
-  encode(message: SellOrderInfo, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
-    if (!message.id.isZero()) {
+  typeUrl: "/regen.ecocredit.marketplace.v1.SellOrderInfo",
+  encode(message: SellOrderInfo, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
+    if (message.id !== BigInt(0)) {
       writer.uint32(8).uint64(message.id);
     }
     if (message.seller !== "") {
@@ -1218,15 +1253,15 @@ export const SellOrderInfo = {
     }
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): SellOrderInfo {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): SellOrderInfo {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseSellOrderInfo();
     while (reader.pos < end) {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          message.id = (reader.uint64() as Long);
+          message.id = reader.uint64();
           break;
         case 2:
           message.seller = reader.string();
@@ -1258,7 +1293,7 @@ export const SellOrderInfo = {
   },
   fromJSON(object: any): SellOrderInfo {
     return {
-      id: isSet(object.id) ? Long.fromValue(object.id) : Long.UZERO,
+      id: isSet(object.id) ? BigInt(object.id.toString()) : BigInt(0),
       seller: isSet(object.seller) ? String(object.seller) : "",
       batchDenom: isSet(object.batchDenom) ? String(object.batchDenom) : "",
       quantity: isSet(object.quantity) ? String(object.quantity) : "",
@@ -1270,7 +1305,7 @@ export const SellOrderInfo = {
   },
   toJSON(message: SellOrderInfo): unknown {
     const obj: any = {};
-    message.id !== undefined && (obj.id = (message.id || Long.UZERO).toString());
+    message.id !== undefined && (obj.id = (message.id || BigInt(0)).toString());
     message.seller !== undefined && (obj.seller = message.seller);
     message.batchDenom !== undefined && (obj.batchDenom = message.batchDenom);
     message.quantity !== undefined && (obj.quantity = message.quantity);
@@ -1282,7 +1317,7 @@ export const SellOrderInfo = {
   },
   fromPartial(object: Partial<SellOrderInfo>): SellOrderInfo {
     const message = createBaseSellOrderInfo();
-    message.id = object.id !== undefined && object.id !== null ? Long.fromValue(object.id) : Long.UZERO;
+    message.id = object.id !== undefined && object.id !== null ? BigInt(object.id.toString()) : BigInt(0);
     message.seller = object.seller ?? "";
     message.batchDenom = object.batchDenom ?? "";
     message.quantity = object.quantity ?? "";
@@ -1293,26 +1328,42 @@ export const SellOrderInfo = {
     return message;
   },
   fromAmino(object: SellOrderInfoAmino): SellOrderInfo {
-    return {
-      id: Long.fromString(object.id),
-      seller: object.seller,
-      batchDenom: object.batch_denom,
-      quantity: object.quantity,
-      askDenom: object.ask_denom,
-      askAmount: object.ask_amount,
-      disableAutoRetire: object.disable_auto_retire,
-      expiration: object?.expiration ? Timestamp.fromAmino(object.expiration) : undefined
-    };
+    const message = createBaseSellOrderInfo();
+    if (object.id !== undefined && object.id !== null) {
+      message.id = BigInt(object.id);
+    }
+    if (object.seller !== undefined && object.seller !== null) {
+      message.seller = object.seller;
+    }
+    if (object.batch_denom !== undefined && object.batch_denom !== null) {
+      message.batchDenom = object.batch_denom;
+    }
+    if (object.quantity !== undefined && object.quantity !== null) {
+      message.quantity = object.quantity;
+    }
+    if (object.ask_denom !== undefined && object.ask_denom !== null) {
+      message.askDenom = object.ask_denom;
+    }
+    if (object.ask_amount !== undefined && object.ask_amount !== null) {
+      message.askAmount = object.ask_amount;
+    }
+    if (object.disable_auto_retire !== undefined && object.disable_auto_retire !== null) {
+      message.disableAutoRetire = object.disable_auto_retire;
+    }
+    if (object.expiration !== undefined && object.expiration !== null) {
+      message.expiration = Timestamp.fromAmino(object.expiration);
+    }
+    return message;
   },
   toAmino(message: SellOrderInfo): SellOrderInfoAmino {
     const obj: any = {};
-    obj.id = message.id ? message.id.toString() : undefined;
-    obj.seller = message.seller;
-    obj.batch_denom = message.batchDenom;
-    obj.quantity = message.quantity;
-    obj.ask_denom = message.askDenom;
-    obj.ask_amount = message.askAmount;
-    obj.disable_auto_retire = message.disableAutoRetire;
+    obj.id = message.id !== BigInt(0) ? message.id.toString() : undefined;
+    obj.seller = message.seller === "" ? undefined : message.seller;
+    obj.batch_denom = message.batchDenom === "" ? undefined : message.batchDenom;
+    obj.quantity = message.quantity === "" ? undefined : message.quantity;
+    obj.ask_denom = message.askDenom === "" ? undefined : message.askDenom;
+    obj.ask_amount = message.askAmount === "" ? undefined : message.askAmount;
+    obj.disable_auto_retire = message.disableAutoRetire === false ? undefined : message.disableAutoRetire;
     obj.expiration = message.expiration ? Timestamp.toAmino(message.expiration) : undefined;
     return obj;
   },

@@ -1,6 +1,6 @@
 import { DateCriteria, DateCriteriaAmino, DateCriteriaSDKType, BasketCredit, BasketCreditAmino, BasketCreditSDKType } from "./types";
 import { Coin, CoinAmino, CoinSDKType } from "../../../../cosmos/base/v1beta1/coin";
-import * as _m0 from "protobufjs/minimal";
+import { BinaryReader, BinaryWriter } from "../../../../binary";
 import { isSet } from "../../../../helpers";
 /** MsgCreateBasket is the Msg/CreateBasket request type. */
 export interface MsgCreate {
@@ -51,7 +51,7 @@ export interface MsgCreate {
    * date_criteria is the date criteria for batches admitted to the basket.
    * At most, only one of the date criteria fields can be set.
    */
-  dateCriteria: DateCriteria;
+  dateCriteria?: DateCriteria;
   /**
    * fee is the basket creation fee. A fee is not required if no fee exists
    * in the basket fee parameter. The fee must be greater than or equal to the
@@ -76,7 +76,7 @@ export interface MsgCreateAmino {
    * curator is the address of the basket curator who is able to change certain
    * basket settings.
    */
-  curator: string;
+  curator?: string;
   /**
    * name will be used to together with prefix to create a bank denom for this
    * basket token. It can be between 3-8 alphanumeric characters, with the
@@ -86,12 +86,12 @@ export interface MsgCreateAmino {
    * `eco.<prefix><credit_type_abbrev>.<name>` where prefix is the prefix of
    * a standard SI unit derived from credit type precision.
    */
-  name: string;
+  name?: string;
   /**
    * description is a human-readable description of the basket denom that should
    * be at most 256 characters.
    */
-  description: string;
+  description?: string;
   /**
    * Deprecated (Since Revision 1): This field is no longer used and will be
    * removed in the next version. The value of credit type precision is always
@@ -99,7 +99,7 @@ export interface MsgCreateAmino {
    * bank denom metadata, and converting credits to/from basket tokens.
    */
   /** @deprecated */
-  exponent: number;
+  exponent?: number;
   /**
    * disable_auto_retire allows auto-retirement to be disabled.
    * The credits will be auto-retired if disable_auto_retire is
@@ -107,14 +107,14 @@ export interface MsgCreateAmino {
    * address picking them from the basket, in which case they will remain
    * tradable.
    */
-  disable_auto_retire: boolean;
+  disable_auto_retire?: boolean;
   /**
    * credit_type_abbrev is the abbreviation of the credit type this basket is
    * able to hold.
    */
-  credit_type_abbrev: string;
+  credit_type_abbrev?: string;
   /** allowed_classes are the credit classes allowed to be put in the basket */
-  allowed_classes: string[];
+  allowed_classes?: string[];
   /**
    * date_criteria is the date criteria for batches admitted to the basket.
    * At most, only one of the date criteria fields can be set.
@@ -132,7 +132,7 @@ export interface MsgCreateAmino {
    * This field will be updated to a single fee rather than a list of fees in
    * the next version to reflect these requirements.
    */
-  fee: CoinAmino[];
+  fee?: CoinAmino[];
 }
 export interface MsgCreateAminoMsg {
   type: "regen.basket/MsgCreate";
@@ -148,7 +148,7 @@ export interface MsgCreateSDKType {
   disable_auto_retire: boolean;
   credit_type_abbrev: string;
   allowed_classes: string[];
-  date_criteria: DateCriteriaSDKType;
+  date_criteria?: DateCriteriaSDKType;
   fee: CoinSDKType[];
 }
 /** MsgCreateBasketResponse is the Msg/CreateBasket response type. */
@@ -163,7 +163,7 @@ export interface MsgCreateResponseProtoMsg {
 /** MsgCreateBasketResponse is the Msg/CreateBasket response type. */
 export interface MsgCreateResponseAmino {
   /** basket_denom is the unique denomination ID of the newly created basket. */
-  basket_denom: string;
+  basket_denom?: string;
 }
 export interface MsgCreateResponseAminoMsg {
   type: "/regen.ecocredit.basket.v1.MsgCreateResponse";
@@ -192,14 +192,14 @@ export interface MsgPutProtoMsg {
 /** MsgAddToBasket is the Msg/AddToBasket request type. */
 export interface MsgPutAmino {
   /** owner is the owner of credits being put into the basket. */
-  owner: string;
+  owner?: string;
   /** basket_denom is the basket denom to add credits to. */
-  basket_denom: string;
+  basket_denom?: string;
   /**
    * credits are credits to add to the basket. If they do not match the basket's
    * admission criteria, the operation will fail.
    */
-  credits: BasketCreditAmino[];
+  credits?: BasketCreditAmino[];
 }
 export interface MsgPutAminoMsg {
   type: "regen.basket/MsgPut";
@@ -223,7 +223,7 @@ export interface MsgPutResponseProtoMsg {
 /** MsgAddToBasketResponse is the Msg/AddToBasket response type. */
 export interface MsgPutResponseAmino {
   /** amount_received is the integer amount of basket tokens received. */
-  amount_received: string;
+  amount_received?: string;
 }
 export interface MsgPutResponseAminoMsg {
   type: "/regen.ecocredit.basket.v1.MsgPutResponse";
@@ -282,11 +282,11 @@ export interface MsgTakeProtoMsg {
 /** MsgTakeFromBasket is the Msg/TakeFromBasket request type. */
 export interface MsgTakeAmino {
   /** owner is the owner of the basket tokens. */
-  owner: string;
+  owner?: string;
   /** basket_denom is the basket bank denom to take credits from. */
-  basket_denom: string;
+  basket_denom?: string;
   /** amount is the integer number of basket tokens to convert into credits. */
-  amount: string;
+  amount?: string;
   /**
    * retirement_location is the optional retirement jurisdiction for the
    * credits which will be used only if retire_on_take is true.
@@ -296,7 +296,7 @@ export interface MsgTakeAmino {
    * set and retirement_jurisdiction will be used if both are set.
    */
   /** @deprecated */
-  retirement_location: string;
+  retirement_location?: string;
   /**
    * retire_on_take is a boolean that dictates whether the ecocredits
    * received in exchange for the basket tokens will be received as
@@ -304,14 +304,14 @@ export interface MsgTakeAmino {
    * false, retire_on_take MUST be set to true, and a retirement jurisdiction
    * must be provided.
    */
-  retire_on_take: boolean;
+  retire_on_take?: boolean;
   /**
    * retirement_jurisdiction is the optional retirement jurisdiction for the
    * credits which will be used only if retire_on_take is true.
    * 
    * Since Revision 1
    */
-  retirement_jurisdiction: string;
+  retirement_jurisdiction?: string;
   /**
    * retirement_reason is any arbitrary string that specifies the reason for
    * retiring credits. The reason will be included in EventRetire and is not
@@ -319,7 +319,7 @@ export interface MsgTakeAmino {
    * 
    * Since Revision 2
    */
-  retirement_reason: string;
+  retirement_reason?: string;
 }
 export interface MsgTakeAminoMsg {
   type: "regen.basket/MsgTake";
@@ -348,7 +348,7 @@ export interface MsgTakeResponseProtoMsg {
 /** MsgTakeFromBasketResponse is the Msg/TakeFromBasket response type. */
 export interface MsgTakeResponseAmino {
   /** credits are the credits taken out of the basket. */
-  credits: BasketCreditAmino[];
+  credits?: BasketCreditAmino[];
 }
 export interface MsgTakeResponseAminoMsg {
   type: "/regen.ecocredit.basket.v1.MsgTakeResponse";
@@ -370,7 +370,7 @@ export interface MsgUpdateBasketFee {
    * fee is the basket creation fee. If not set, the basket creation fee will be
    * removed and no fee will be required to create a basket.
    */
-  fee: Coin;
+  fee?: Coin;
 }
 export interface MsgUpdateBasketFeeProtoMsg {
   typeUrl: "/regen.ecocredit.basket.v1.MsgUpdateBasketFee";
@@ -383,7 +383,7 @@ export interface MsgUpdateBasketFeeProtoMsg {
  */
 export interface MsgUpdateBasketFeeAmino {
   /** authority is the address of the governance account. */
-  authority: string;
+  authority?: string;
   /**
    * fee is the basket creation fee. If not set, the basket creation fee will be
    * removed and no fee will be required to create a basket.
@@ -401,7 +401,7 @@ export interface MsgUpdateBasketFeeAminoMsg {
  */
 export interface MsgUpdateBasketFeeSDKType {
   authority: string;
-  fee: CoinSDKType;
+  fee?: CoinSDKType;
 }
 /**
  * MsgUpdateBasketFeeResponse is the Msg/UpdateBasketFee response type.
@@ -456,14 +456,14 @@ export interface MsgUpdateCuratorProtoMsg {
  */
 export interface MsgUpdateCuratorAmino {
   /** curator is the address of the basket curator. */
-  curator: string;
+  curator?: string;
   /** denom is the unique identifier of the basket. */
-  denom: string;
+  denom?: string;
   /**
    * new_curator is the address of the account that will become the
    * new curator of the basket.
    */
-  new_curator: string;
+  new_curator?: string;
 }
 export interface MsgUpdateCuratorAminoMsg {
   type: "regen.basket/MsgUpdateCurator";
@@ -519,7 +519,7 @@ export interface MsgUpdateDateCriteria {
    * new_date_criteria is the new date criteria for batches admitted to the
    * basket. At most, only one of the date criteria fields can be set.
    */
-  newDateCriteria: DateCriteria;
+  newDateCriteria?: DateCriteria;
 }
 export interface MsgUpdateDateCriteriaProtoMsg {
   typeUrl: "/regen.ecocredit.basket.v1.MsgUpdateDateCriteria";
@@ -532,9 +532,9 @@ export interface MsgUpdateDateCriteriaProtoMsg {
  */
 export interface MsgUpdateDateCriteriaAmino {
   /** authority is the address of the governance account. */
-  authority: string;
+  authority?: string;
   /** denom is the unique identifier of the basket. */
-  denom: string;
+  denom?: string;
   /**
    * new_date_criteria is the new date criteria for batches admitted to the
    * basket. At most, only one of the date criteria fields can be set.
@@ -553,7 +553,7 @@ export interface MsgUpdateDateCriteriaAminoMsg {
 export interface MsgUpdateDateCriteriaSDKType {
   authority: string;
   denom: string;
-  new_date_criteria: DateCriteriaSDKType;
+  new_date_criteria?: DateCriteriaSDKType;
 }
 /**
  * MsgUpdateDateCriteriaResponse is the Msg/UpdateDateCriteria response type.
@@ -590,12 +590,13 @@ function createBaseMsgCreate(): MsgCreate {
     disableAutoRetire: false,
     creditTypeAbbrev: "",
     allowedClasses: [],
-    dateCriteria: DateCriteria.fromPartial({}),
+    dateCriteria: undefined,
     fee: []
   };
 }
 export const MsgCreate = {
-  encode(message: MsgCreate, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  typeUrl: "/regen.ecocredit.basket.v1.MsgCreate",
+  encode(message: MsgCreate, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.curator !== "") {
       writer.uint32(10).string(message.curator);
     }
@@ -625,8 +626,8 @@ export const MsgCreate = {
     }
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): MsgCreate {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): MsgCreate {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMsgCreate();
     while (reader.pos < end) {
@@ -714,36 +715,50 @@ export const MsgCreate = {
     return message;
   },
   fromAmino(object: MsgCreateAmino): MsgCreate {
-    return {
-      curator: object.curator,
-      name: object.name,
-      description: object.description,
-      exponent: object.exponent,
-      disableAutoRetire: object.disable_auto_retire,
-      creditTypeAbbrev: object.credit_type_abbrev,
-      allowedClasses: Array.isArray(object?.allowed_classes) ? object.allowed_classes.map((e: any) => e) : [],
-      dateCriteria: object?.date_criteria ? DateCriteria.fromAmino(object.date_criteria) : undefined,
-      fee: Array.isArray(object?.fee) ? object.fee.map((e: any) => Coin.fromAmino(e)) : []
-    };
+    const message = createBaseMsgCreate();
+    if (object.curator !== undefined && object.curator !== null) {
+      message.curator = object.curator;
+    }
+    if (object.name !== undefined && object.name !== null) {
+      message.name = object.name;
+    }
+    if (object.description !== undefined && object.description !== null) {
+      message.description = object.description;
+    }
+    if (object.exponent !== undefined && object.exponent !== null) {
+      message.exponent = object.exponent;
+    }
+    if (object.disable_auto_retire !== undefined && object.disable_auto_retire !== null) {
+      message.disableAutoRetire = object.disable_auto_retire;
+    }
+    if (object.credit_type_abbrev !== undefined && object.credit_type_abbrev !== null) {
+      message.creditTypeAbbrev = object.credit_type_abbrev;
+    }
+    message.allowedClasses = object.allowed_classes?.map(e => e) || [];
+    if (object.date_criteria !== undefined && object.date_criteria !== null) {
+      message.dateCriteria = DateCriteria.fromAmino(object.date_criteria);
+    }
+    message.fee = object.fee?.map(e => Coin.fromAmino(e)) || [];
+    return message;
   },
   toAmino(message: MsgCreate): MsgCreateAmino {
     const obj: any = {};
-    obj.curator = message.curator;
-    obj.name = message.name;
-    obj.description = message.description;
-    obj.exponent = message.exponent;
-    obj.disable_auto_retire = message.disableAutoRetire;
-    obj.credit_type_abbrev = message.creditTypeAbbrev;
+    obj.curator = message.curator === "" ? undefined : message.curator;
+    obj.name = message.name === "" ? undefined : message.name;
+    obj.description = message.description === "" ? undefined : message.description;
+    obj.exponent = message.exponent === 0 ? undefined : message.exponent;
+    obj.disable_auto_retire = message.disableAutoRetire === false ? undefined : message.disableAutoRetire;
+    obj.credit_type_abbrev = message.creditTypeAbbrev === "" ? undefined : message.creditTypeAbbrev;
     if (message.allowedClasses) {
       obj.allowed_classes = message.allowedClasses.map(e => e);
     } else {
-      obj.allowed_classes = [];
+      obj.allowed_classes = message.allowedClasses;
     }
     obj.date_criteria = message.dateCriteria ? DateCriteria.toAmino(message.dateCriteria) : undefined;
     if (message.fee) {
       obj.fee = message.fee.map(e => e ? Coin.toAmino(e) : undefined);
     } else {
-      obj.fee = [];
+      obj.fee = message.fee;
     }
     return obj;
   },
@@ -775,14 +790,15 @@ function createBaseMsgCreateResponse(): MsgCreateResponse {
   };
 }
 export const MsgCreateResponse = {
-  encode(message: MsgCreateResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  typeUrl: "/regen.ecocredit.basket.v1.MsgCreateResponse",
+  encode(message: MsgCreateResponse, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.basketDenom !== "") {
       writer.uint32(10).string(message.basketDenom);
     }
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): MsgCreateResponse {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): MsgCreateResponse {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMsgCreateResponse();
     while (reader.pos < end) {
@@ -814,13 +830,15 @@ export const MsgCreateResponse = {
     return message;
   },
   fromAmino(object: MsgCreateResponseAmino): MsgCreateResponse {
-    return {
-      basketDenom: object.basket_denom
-    };
+    const message = createBaseMsgCreateResponse();
+    if (object.basket_denom !== undefined && object.basket_denom !== null) {
+      message.basketDenom = object.basket_denom;
+    }
+    return message;
   },
   toAmino(message: MsgCreateResponse): MsgCreateResponseAmino {
     const obj: any = {};
-    obj.basket_denom = message.basketDenom;
+    obj.basket_denom = message.basketDenom === "" ? undefined : message.basketDenom;
     return obj;
   },
   fromAminoMsg(object: MsgCreateResponseAminoMsg): MsgCreateResponse {
@@ -847,7 +865,8 @@ function createBaseMsgPut(): MsgPut {
   };
 }
 export const MsgPut = {
-  encode(message: MsgPut, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  typeUrl: "/regen.ecocredit.basket.v1.MsgPut",
+  encode(message: MsgPut, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.owner !== "") {
       writer.uint32(10).string(message.owner);
     }
@@ -859,8 +878,8 @@ export const MsgPut = {
     }
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): MsgPut {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): MsgPut {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMsgPut();
     while (reader.pos < end) {
@@ -908,20 +927,24 @@ export const MsgPut = {
     return message;
   },
   fromAmino(object: MsgPutAmino): MsgPut {
-    return {
-      owner: object.owner,
-      basketDenom: object.basket_denom,
-      credits: Array.isArray(object?.credits) ? object.credits.map((e: any) => BasketCredit.fromAmino(e)) : []
-    };
+    const message = createBaseMsgPut();
+    if (object.owner !== undefined && object.owner !== null) {
+      message.owner = object.owner;
+    }
+    if (object.basket_denom !== undefined && object.basket_denom !== null) {
+      message.basketDenom = object.basket_denom;
+    }
+    message.credits = object.credits?.map(e => BasketCredit.fromAmino(e)) || [];
+    return message;
   },
   toAmino(message: MsgPut): MsgPutAmino {
     const obj: any = {};
-    obj.owner = message.owner;
-    obj.basket_denom = message.basketDenom;
+    obj.owner = message.owner === "" ? undefined : message.owner;
+    obj.basket_denom = message.basketDenom === "" ? undefined : message.basketDenom;
     if (message.credits) {
       obj.credits = message.credits.map(e => e ? BasketCredit.toAmino(e) : undefined);
     } else {
-      obj.credits = [];
+      obj.credits = message.credits;
     }
     return obj;
   },
@@ -953,14 +976,15 @@ function createBaseMsgPutResponse(): MsgPutResponse {
   };
 }
 export const MsgPutResponse = {
-  encode(message: MsgPutResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  typeUrl: "/regen.ecocredit.basket.v1.MsgPutResponse",
+  encode(message: MsgPutResponse, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.amountReceived !== "") {
       writer.uint32(10).string(message.amountReceived);
     }
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): MsgPutResponse {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): MsgPutResponse {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMsgPutResponse();
     while (reader.pos < end) {
@@ -992,13 +1016,15 @@ export const MsgPutResponse = {
     return message;
   },
   fromAmino(object: MsgPutResponseAmino): MsgPutResponse {
-    return {
-      amountReceived: object.amount_received
-    };
+    const message = createBaseMsgPutResponse();
+    if (object.amount_received !== undefined && object.amount_received !== null) {
+      message.amountReceived = object.amount_received;
+    }
+    return message;
   },
   toAmino(message: MsgPutResponse): MsgPutResponseAmino {
     const obj: any = {};
-    obj.amount_received = message.amountReceived;
+    obj.amount_received = message.amountReceived === "" ? undefined : message.amountReceived;
     return obj;
   },
   fromAminoMsg(object: MsgPutResponseAminoMsg): MsgPutResponse {
@@ -1029,7 +1055,8 @@ function createBaseMsgTake(): MsgTake {
   };
 }
 export const MsgTake = {
-  encode(message: MsgTake, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  typeUrl: "/regen.ecocredit.basket.v1.MsgTake",
+  encode(message: MsgTake, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.owner !== "") {
       writer.uint32(10).string(message.owner);
     }
@@ -1053,8 +1080,8 @@ export const MsgTake = {
     }
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): MsgTake {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): MsgTake {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMsgTake();
     while (reader.pos < end) {
@@ -1122,25 +1149,39 @@ export const MsgTake = {
     return message;
   },
   fromAmino(object: MsgTakeAmino): MsgTake {
-    return {
-      owner: object.owner,
-      basketDenom: object.basket_denom,
-      amount: object.amount,
-      retirementLocation: object.retirement_location,
-      retireOnTake: object.retire_on_take,
-      retirementJurisdiction: object.retirement_jurisdiction,
-      retirementReason: object.retirement_reason
-    };
+    const message = createBaseMsgTake();
+    if (object.owner !== undefined && object.owner !== null) {
+      message.owner = object.owner;
+    }
+    if (object.basket_denom !== undefined && object.basket_denom !== null) {
+      message.basketDenom = object.basket_denom;
+    }
+    if (object.amount !== undefined && object.amount !== null) {
+      message.amount = object.amount;
+    }
+    if (object.retirement_location !== undefined && object.retirement_location !== null) {
+      message.retirementLocation = object.retirement_location;
+    }
+    if (object.retire_on_take !== undefined && object.retire_on_take !== null) {
+      message.retireOnTake = object.retire_on_take;
+    }
+    if (object.retirement_jurisdiction !== undefined && object.retirement_jurisdiction !== null) {
+      message.retirementJurisdiction = object.retirement_jurisdiction;
+    }
+    if (object.retirement_reason !== undefined && object.retirement_reason !== null) {
+      message.retirementReason = object.retirement_reason;
+    }
+    return message;
   },
   toAmino(message: MsgTake): MsgTakeAmino {
     const obj: any = {};
-    obj.owner = message.owner;
-    obj.basket_denom = message.basketDenom;
-    obj.amount = message.amount;
-    obj.retirement_location = message.retirementLocation;
-    obj.retire_on_take = message.retireOnTake;
-    obj.retirement_jurisdiction = message.retirementJurisdiction;
-    obj.retirement_reason = message.retirementReason;
+    obj.owner = message.owner === "" ? undefined : message.owner;
+    obj.basket_denom = message.basketDenom === "" ? undefined : message.basketDenom;
+    obj.amount = message.amount === "" ? undefined : message.amount;
+    obj.retirement_location = message.retirementLocation === "" ? undefined : message.retirementLocation;
+    obj.retire_on_take = message.retireOnTake === false ? undefined : message.retireOnTake;
+    obj.retirement_jurisdiction = message.retirementJurisdiction === "" ? undefined : message.retirementJurisdiction;
+    obj.retirement_reason = message.retirementReason === "" ? undefined : message.retirementReason;
     return obj;
   },
   fromAminoMsg(object: MsgTakeAminoMsg): MsgTake {
@@ -1171,14 +1212,15 @@ function createBaseMsgTakeResponse(): MsgTakeResponse {
   };
 }
 export const MsgTakeResponse = {
-  encode(message: MsgTakeResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  typeUrl: "/regen.ecocredit.basket.v1.MsgTakeResponse",
+  encode(message: MsgTakeResponse, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     for (const v of message.credits) {
       BasketCredit.encode(v!, writer.uint32(10).fork()).ldelim();
     }
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): MsgTakeResponse {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): MsgTakeResponse {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMsgTakeResponse();
     while (reader.pos < end) {
@@ -1214,16 +1256,16 @@ export const MsgTakeResponse = {
     return message;
   },
   fromAmino(object: MsgTakeResponseAmino): MsgTakeResponse {
-    return {
-      credits: Array.isArray(object?.credits) ? object.credits.map((e: any) => BasketCredit.fromAmino(e)) : []
-    };
+    const message = createBaseMsgTakeResponse();
+    message.credits = object.credits?.map(e => BasketCredit.fromAmino(e)) || [];
+    return message;
   },
   toAmino(message: MsgTakeResponse): MsgTakeResponseAmino {
     const obj: any = {};
     if (message.credits) {
       obj.credits = message.credits.map(e => e ? BasketCredit.toAmino(e) : undefined);
     } else {
-      obj.credits = [];
+      obj.credits = message.credits;
     }
     return obj;
   },
@@ -1250,7 +1292,8 @@ function createBaseMsgUpdateBasketFee(): MsgUpdateBasketFee {
   };
 }
 export const MsgUpdateBasketFee = {
-  encode(message: MsgUpdateBasketFee, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  typeUrl: "/regen.ecocredit.basket.v1.MsgUpdateBasketFee",
+  encode(message: MsgUpdateBasketFee, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.authority !== "") {
       writer.uint32(10).string(message.authority);
     }
@@ -1259,8 +1302,8 @@ export const MsgUpdateBasketFee = {
     }
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): MsgUpdateBasketFee {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): MsgUpdateBasketFee {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMsgUpdateBasketFee();
     while (reader.pos < end) {
@@ -1298,14 +1341,18 @@ export const MsgUpdateBasketFee = {
     return message;
   },
   fromAmino(object: MsgUpdateBasketFeeAmino): MsgUpdateBasketFee {
-    return {
-      authority: object.authority,
-      fee: object?.fee ? Coin.fromAmino(object.fee) : undefined
-    };
+    const message = createBaseMsgUpdateBasketFee();
+    if (object.authority !== undefined && object.authority !== null) {
+      message.authority = object.authority;
+    }
+    if (object.fee !== undefined && object.fee !== null) {
+      message.fee = Coin.fromAmino(object.fee);
+    }
+    return message;
   },
   toAmino(message: MsgUpdateBasketFee): MsgUpdateBasketFeeAmino {
     const obj: any = {};
-    obj.authority = message.authority;
+    obj.authority = message.authority === "" ? undefined : message.authority;
     obj.fee = message.fee ? Coin.toAmino(message.fee) : undefined;
     return obj;
   },
@@ -1335,11 +1382,12 @@ function createBaseMsgUpdateBasketFeeResponse(): MsgUpdateBasketFeeResponse {
   return {};
 }
 export const MsgUpdateBasketFeeResponse = {
-  encode(_: MsgUpdateBasketFeeResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  typeUrl: "/regen.ecocredit.basket.v1.MsgUpdateBasketFeeResponse",
+  encode(_: MsgUpdateBasketFeeResponse, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): MsgUpdateBasketFeeResponse {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): MsgUpdateBasketFeeResponse {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMsgUpdateBasketFeeResponse();
     while (reader.pos < end) {
@@ -1364,7 +1412,8 @@ export const MsgUpdateBasketFeeResponse = {
     return message;
   },
   fromAmino(_: MsgUpdateBasketFeeResponseAmino): MsgUpdateBasketFeeResponse {
-    return {};
+    const message = createBaseMsgUpdateBasketFeeResponse();
+    return message;
   },
   toAmino(_: MsgUpdateBasketFeeResponse): MsgUpdateBasketFeeResponseAmino {
     const obj: any = {};
@@ -1394,7 +1443,8 @@ function createBaseMsgUpdateCurator(): MsgUpdateCurator {
   };
 }
 export const MsgUpdateCurator = {
-  encode(message: MsgUpdateCurator, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  typeUrl: "/regen.ecocredit.basket.v1.MsgUpdateCurator",
+  encode(message: MsgUpdateCurator, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.curator !== "") {
       writer.uint32(10).string(message.curator);
     }
@@ -1406,8 +1456,8 @@ export const MsgUpdateCurator = {
     }
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): MsgUpdateCurator {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): MsgUpdateCurator {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMsgUpdateCurator();
     while (reader.pos < end) {
@@ -1451,17 +1501,23 @@ export const MsgUpdateCurator = {
     return message;
   },
   fromAmino(object: MsgUpdateCuratorAmino): MsgUpdateCurator {
-    return {
-      curator: object.curator,
-      denom: object.denom,
-      newCurator: object.new_curator
-    };
+    const message = createBaseMsgUpdateCurator();
+    if (object.curator !== undefined && object.curator !== null) {
+      message.curator = object.curator;
+    }
+    if (object.denom !== undefined && object.denom !== null) {
+      message.denom = object.denom;
+    }
+    if (object.new_curator !== undefined && object.new_curator !== null) {
+      message.newCurator = object.new_curator;
+    }
+    return message;
   },
   toAmino(message: MsgUpdateCurator): MsgUpdateCuratorAmino {
     const obj: any = {};
-    obj.curator = message.curator;
-    obj.denom = message.denom;
-    obj.new_curator = message.newCurator;
+    obj.curator = message.curator === "" ? undefined : message.curator;
+    obj.denom = message.denom === "" ? undefined : message.denom;
+    obj.new_curator = message.newCurator === "" ? undefined : message.newCurator;
     return obj;
   },
   fromAminoMsg(object: MsgUpdateCuratorAminoMsg): MsgUpdateCurator {
@@ -1490,11 +1546,12 @@ function createBaseMsgUpdateCuratorResponse(): MsgUpdateCuratorResponse {
   return {};
 }
 export const MsgUpdateCuratorResponse = {
-  encode(_: MsgUpdateCuratorResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  typeUrl: "/regen.ecocredit.basket.v1.MsgUpdateCuratorResponse",
+  encode(_: MsgUpdateCuratorResponse, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): MsgUpdateCuratorResponse {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): MsgUpdateCuratorResponse {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMsgUpdateCuratorResponse();
     while (reader.pos < end) {
@@ -1519,7 +1576,8 @@ export const MsgUpdateCuratorResponse = {
     return message;
   },
   fromAmino(_: MsgUpdateCuratorResponseAmino): MsgUpdateCuratorResponse {
-    return {};
+    const message = createBaseMsgUpdateCuratorResponse();
+    return message;
   },
   toAmino(_: MsgUpdateCuratorResponse): MsgUpdateCuratorResponseAmino {
     const obj: any = {};
@@ -1545,11 +1603,12 @@ function createBaseMsgUpdateDateCriteria(): MsgUpdateDateCriteria {
   return {
     authority: "",
     denom: "",
-    newDateCriteria: DateCriteria.fromPartial({})
+    newDateCriteria: undefined
   };
 }
 export const MsgUpdateDateCriteria = {
-  encode(message: MsgUpdateDateCriteria, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  typeUrl: "/regen.ecocredit.basket.v1.MsgUpdateDateCriteria",
+  encode(message: MsgUpdateDateCriteria, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.authority !== "") {
       writer.uint32(10).string(message.authority);
     }
@@ -1561,8 +1620,8 @@ export const MsgUpdateDateCriteria = {
     }
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): MsgUpdateDateCriteria {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): MsgUpdateDateCriteria {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMsgUpdateDateCriteria();
     while (reader.pos < end) {
@@ -1606,16 +1665,22 @@ export const MsgUpdateDateCriteria = {
     return message;
   },
   fromAmino(object: MsgUpdateDateCriteriaAmino): MsgUpdateDateCriteria {
-    return {
-      authority: object.authority,
-      denom: object.denom,
-      newDateCriteria: object?.new_date_criteria ? DateCriteria.fromAmino(object.new_date_criteria) : undefined
-    };
+    const message = createBaseMsgUpdateDateCriteria();
+    if (object.authority !== undefined && object.authority !== null) {
+      message.authority = object.authority;
+    }
+    if (object.denom !== undefined && object.denom !== null) {
+      message.denom = object.denom;
+    }
+    if (object.new_date_criteria !== undefined && object.new_date_criteria !== null) {
+      message.newDateCriteria = DateCriteria.fromAmino(object.new_date_criteria);
+    }
+    return message;
   },
   toAmino(message: MsgUpdateDateCriteria): MsgUpdateDateCriteriaAmino {
     const obj: any = {};
-    obj.authority = message.authority;
-    obj.denom = message.denom;
+    obj.authority = message.authority === "" ? undefined : message.authority;
+    obj.denom = message.denom === "" ? undefined : message.denom;
     obj.new_date_criteria = message.newDateCriteria ? DateCriteria.toAmino(message.newDateCriteria) : undefined;
     return obj;
   },
@@ -1645,11 +1710,12 @@ function createBaseMsgUpdateDateCriteriaResponse(): MsgUpdateDateCriteriaRespons
   return {};
 }
 export const MsgUpdateDateCriteriaResponse = {
-  encode(_: MsgUpdateDateCriteriaResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  typeUrl: "/regen.ecocredit.basket.v1.MsgUpdateDateCriteriaResponse",
+  encode(_: MsgUpdateDateCriteriaResponse, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): MsgUpdateDateCriteriaResponse {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): MsgUpdateDateCriteriaResponse {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMsgUpdateDateCriteriaResponse();
     while (reader.pos < end) {
@@ -1674,7 +1740,8 @@ export const MsgUpdateDateCriteriaResponse = {
     return message;
   },
   fromAmino(_: MsgUpdateDateCriteriaResponseAmino): MsgUpdateDateCriteriaResponse {
-    return {};
+    const message = createBaseMsgUpdateDateCriteriaResponse();
+    return message;
   },
   toAmino(_: MsgUpdateDateCriteriaResponse): MsgUpdateDateCriteriaResponseAmino {
     const obj: any = {};

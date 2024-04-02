@@ -1,5 +1,5 @@
 import { Rpc } from "../../../../helpers";
-import * as _m0 from "protobufjs/minimal";
+import { BinaryReader } from "../../../../binary";
 import { MsgCreate, MsgCreateResponse, MsgPut, MsgPutResponse, MsgTake, MsgTakeResponse, MsgUpdateBasketFee, MsgUpdateBasketFeeResponse, MsgUpdateCurator, MsgUpdateCuratorResponse, MsgUpdateDateCriteria, MsgUpdateDateCriteriaResponse } from "./tx";
 /** Msg is the regen.ecocredit.basket.v1 Msg service. */
 export interface Msg {
@@ -77,31 +77,31 @@ export class MsgClientImpl implements Msg {
   create(request: MsgCreate): Promise<MsgCreateResponse> {
     const data = MsgCreate.encode(request).finish();
     const promise = this.rpc.request("regen.ecocredit.basket.v1.Msg", "Create", data);
-    return promise.then(data => MsgCreateResponse.decode(new _m0.Reader(data)));
+    return promise.then(data => MsgCreateResponse.decode(new BinaryReader(data)));
   }
   put(request: MsgPut): Promise<MsgPutResponse> {
     const data = MsgPut.encode(request).finish();
     const promise = this.rpc.request("regen.ecocredit.basket.v1.Msg", "Put", data);
-    return promise.then(data => MsgPutResponse.decode(new _m0.Reader(data)));
+    return promise.then(data => MsgPutResponse.decode(new BinaryReader(data)));
   }
   take(request: MsgTake): Promise<MsgTakeResponse> {
     const data = MsgTake.encode(request).finish();
     const promise = this.rpc.request("regen.ecocredit.basket.v1.Msg", "Take", data);
-    return promise.then(data => MsgTakeResponse.decode(new _m0.Reader(data)));
+    return promise.then(data => MsgTakeResponse.decode(new BinaryReader(data)));
   }
   updateBasketFee(request: MsgUpdateBasketFee): Promise<MsgUpdateBasketFeeResponse> {
     const data = MsgUpdateBasketFee.encode(request).finish();
     const promise = this.rpc.request("regen.ecocredit.basket.v1.Msg", "UpdateBasketFee", data);
-    return promise.then(data => MsgUpdateBasketFeeResponse.decode(new _m0.Reader(data)));
+    return promise.then(data => MsgUpdateBasketFeeResponse.decode(new BinaryReader(data)));
   }
   updateCurator(request: MsgUpdateCurator): Promise<MsgUpdateCuratorResponse> {
     const data = MsgUpdateCurator.encode(request).finish();
     const promise = this.rpc.request("regen.ecocredit.basket.v1.Msg", "UpdateCurator", data);
-    return promise.then(data => MsgUpdateCuratorResponse.decode(new _m0.Reader(data)));
+    return promise.then(data => MsgUpdateCuratorResponse.decode(new BinaryReader(data)));
   }
   updateDateCriteria(request: MsgUpdateDateCriteria): Promise<MsgUpdateDateCriteriaResponse> {
     const data = MsgUpdateDateCriteria.encode(request).finish();
     const promise = this.rpc.request("regen.ecocredit.basket.v1.Msg", "UpdateDateCriteria", data);
-    return promise.then(data => MsgUpdateDateCriteriaResponse.decode(new _m0.Reader(data)));
+    return promise.then(data => MsgUpdateDateCriteriaResponse.decode(new BinaryReader(data)));
   }
 }

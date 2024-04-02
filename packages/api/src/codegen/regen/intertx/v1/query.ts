@@ -1,4 +1,4 @@
-import * as _m0 from "protobufjs/minimal";
+import { BinaryReader, BinaryWriter } from "../../../binary";
 import { isSet } from "../../../helpers";
 /**
  * QueryInterchainAccountRequest is the request type for the
@@ -20,9 +20,9 @@ export interface QueryInterchainAccountRequestProtoMsg {
  */
 export interface QueryInterchainAccountRequestAmino {
   /** owner is the address of the account that owns the ICA. */
-  owner: string;
+  owner?: string;
   /** connection_id is the connection the ICA claimed. */
-  connection_id: string;
+  connection_id?: string;
 }
 export interface QueryInterchainAccountRequestAminoMsg {
   type: "/regen.intertx.v1.QueryInterchainAccountRequest";
@@ -54,7 +54,7 @@ export interface QueryInterchainAccountResponseProtoMsg {
  */
 export interface QueryInterchainAccountResponseAmino {
   /** interchain_account_address is the address of the ICA. */
-  interchain_account_address: string;
+  interchain_account_address?: string;
 }
 export interface QueryInterchainAccountResponseAminoMsg {
   type: "/regen.intertx.v1.QueryInterchainAccountResponse";
@@ -74,7 +74,8 @@ function createBaseQueryInterchainAccountRequest(): QueryInterchainAccountReques
   };
 }
 export const QueryInterchainAccountRequest = {
-  encode(message: QueryInterchainAccountRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  typeUrl: "/regen.intertx.v1.QueryInterchainAccountRequest",
+  encode(message: QueryInterchainAccountRequest, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.owner !== "") {
       writer.uint32(10).string(message.owner);
     }
@@ -83,8 +84,8 @@ export const QueryInterchainAccountRequest = {
     }
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): QueryInterchainAccountRequest {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): QueryInterchainAccountRequest {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryInterchainAccountRequest();
     while (reader.pos < end) {
@@ -122,15 +123,19 @@ export const QueryInterchainAccountRequest = {
     return message;
   },
   fromAmino(object: QueryInterchainAccountRequestAmino): QueryInterchainAccountRequest {
-    return {
-      owner: object.owner,
-      connectionId: object.connection_id
-    };
+    const message = createBaseQueryInterchainAccountRequest();
+    if (object.owner !== undefined && object.owner !== null) {
+      message.owner = object.owner;
+    }
+    if (object.connection_id !== undefined && object.connection_id !== null) {
+      message.connectionId = object.connection_id;
+    }
+    return message;
   },
   toAmino(message: QueryInterchainAccountRequest): QueryInterchainAccountRequestAmino {
     const obj: any = {};
-    obj.owner = message.owner;
-    obj.connection_id = message.connectionId;
+    obj.owner = message.owner === "" ? undefined : message.owner;
+    obj.connection_id = message.connectionId === "" ? undefined : message.connectionId;
     return obj;
   },
   fromAminoMsg(object: QueryInterchainAccountRequestAminoMsg): QueryInterchainAccountRequest {
@@ -155,14 +160,15 @@ function createBaseQueryInterchainAccountResponse(): QueryInterchainAccountRespo
   };
 }
 export const QueryInterchainAccountResponse = {
-  encode(message: QueryInterchainAccountResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  typeUrl: "/regen.intertx.v1.QueryInterchainAccountResponse",
+  encode(message: QueryInterchainAccountResponse, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.interchainAccountAddress !== "") {
       writer.uint32(10).string(message.interchainAccountAddress);
     }
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): QueryInterchainAccountResponse {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): QueryInterchainAccountResponse {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryInterchainAccountResponse();
     while (reader.pos < end) {
@@ -194,13 +200,15 @@ export const QueryInterchainAccountResponse = {
     return message;
   },
   fromAmino(object: QueryInterchainAccountResponseAmino): QueryInterchainAccountResponse {
-    return {
-      interchainAccountAddress: object.interchain_account_address
-    };
+    const message = createBaseQueryInterchainAccountResponse();
+    if (object.interchain_account_address !== undefined && object.interchain_account_address !== null) {
+      message.interchainAccountAddress = object.interchain_account_address;
+    }
+    return message;
   },
   toAmino(message: QueryInterchainAccountResponse): QueryInterchainAccountResponseAmino {
     const obj: any = {};
-    obj.interchain_account_address = message.interchainAccountAddress;
+    obj.interchain_account_address = message.interchainAccountAddress === "" ? undefined : message.interchainAccountAddress;
     return obj;
   },
   fromAminoMsg(object: QueryInterchainAccountResponseAminoMsg): QueryInterchainAccountResponse {

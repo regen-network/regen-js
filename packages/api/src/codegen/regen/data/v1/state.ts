@@ -1,6 +1,6 @@
-import { Timestamp, TimestampAmino, TimestampSDKType } from "../../../google/protobuf/timestamp";
-import { Long, isSet, bytesFromBase64, base64FromBytes, fromJsonTimestamp, fromTimestamp } from "../../../helpers";
-import * as _m0 from "protobufjs/minimal";
+import { Timestamp, TimestampSDKType } from "../../../google/protobuf/timestamp";
+import { BinaryReader, BinaryWriter } from "../../../binary";
+import { isSet, bytesFromBase64, base64FromBytes, fromJsonTimestamp, fromTimestamp } from "../../../helpers";
 /** DataID stores a compact data ID and its full IRI. */
 export interface DataID {
   /** id is the compact automatically-generated data ID. */
@@ -15,9 +15,9 @@ export interface DataIDProtoMsg {
 /** DataID stores a compact data ID and its full IRI. */
 export interface DataIDAmino {
   /** id is the compact automatically-generated data ID. */
-  id: Uint8Array;
+  id?: string;
   /** iri is the IRI of the data which contains its full ContentHash. */
-  iri: string;
+  iri?: string;
 }
 export interface DataIDAminoMsg {
   type: "/regen.data.v1.DataID";
@@ -36,7 +36,7 @@ export interface DataAnchor {
    * timestamp is the anchor timestamp for this object - the time at which
    * it was first known to the blockchain.
    */
-  timestamp: Timestamp;
+  timestamp?: Timestamp;
 }
 export interface DataAnchorProtoMsg {
   typeUrl: "/regen.data.v1.DataAnchor";
@@ -45,12 +45,12 @@ export interface DataAnchorProtoMsg {
 /** DataAnchor stores the anchor timestamp for a data object. */
 export interface DataAnchorAmino {
   /** id is the compact data ID. */
-  id: Uint8Array;
+  id?: string;
   /**
    * timestamp is the anchor timestamp for this object - the time at which
    * it was first known to the blockchain.
    */
-  timestamp?: TimestampAmino;
+  timestamp?: string;
 }
 export interface DataAnchorAminoMsg {
   type: "/regen.data.v1.DataAnchor";
@@ -59,7 +59,7 @@ export interface DataAnchorAminoMsg {
 /** DataAnchor stores the anchor timestamp for a data object. */
 export interface DataAnchorSDKType {
   id: Uint8Array;
-  timestamp: TimestampSDKType;
+  timestamp?: TimestampSDKType;
 }
 /** DataAttestor is a join table for associating data IDs and attestors. */
 export interface DataAttestor {
@@ -68,7 +68,7 @@ export interface DataAttestor {
   /** attestor is the account address of the attestor. */
   attestor: Uint8Array;
   /** timestamp is the time at which the attestor signed this data object. */
-  timestamp: Timestamp;
+  timestamp?: Timestamp;
 }
 export interface DataAttestorProtoMsg {
   typeUrl: "/regen.data.v1.DataAttestor";
@@ -77,11 +77,11 @@ export interface DataAttestorProtoMsg {
 /** DataAttestor is a join table for associating data IDs and attestors. */
 export interface DataAttestorAmino {
   /** id is the compact data ID. */
-  id: Uint8Array;
+  id?: string;
   /** attestor is the account address of the attestor. */
-  attestor: Uint8Array;
+  attestor?: string;
   /** timestamp is the time at which the attestor signed this data object. */
-  timestamp?: TimestampAmino;
+  timestamp?: string;
 }
 export interface DataAttestorAminoMsg {
   type: "/regen.data.v1.DataAttestor";
@@ -91,12 +91,12 @@ export interface DataAttestorAminoMsg {
 export interface DataAttestorSDKType {
   id: Uint8Array;
   attestor: Uint8Array;
-  timestamp: TimestampSDKType;
+  timestamp?: TimestampSDKType;
 }
 /** Resolver describes a data resolver. */
 export interface Resolver {
   /** id is the ID of the resolver. */
-  id: Long;
+  id: bigint;
   /** url is the URL of the resolver. */
   url: string;
   /**
@@ -112,14 +112,14 @@ export interface ResolverProtoMsg {
 /** Resolver describes a data resolver. */
 export interface ResolverAmino {
   /** id is the ID of the resolver. */
-  id: string;
+  id?: string;
   /** url is the URL of the resolver. */
-  url: string;
+  url?: string;
   /**
    * manager is the bytes address of the resolver manager who is allowed
    * to make calls to Msg/RegisterResolver for this resolver.
    */
-  manager: Uint8Array;
+  manager?: string;
 }
 export interface ResolverAminoMsg {
   type: "/regen.data.v1.Resolver";
@@ -127,7 +127,7 @@ export interface ResolverAminoMsg {
 }
 /** Resolver describes a data resolver. */
 export interface ResolverSDKType {
-  id: Long;
+  id: bigint;
   url: string;
   manager: Uint8Array;
 }
@@ -139,7 +139,7 @@ export interface DataResolver {
   /** id is the compact data ID. */
   id: Uint8Array;
   /** resolver_id is the ID of the resolver. */
-  resolverId: Long;
+  resolverId: bigint;
 }
 export interface DataResolverProtoMsg {
   typeUrl: "/regen.data.v1.DataResolver";
@@ -151,9 +151,9 @@ export interface DataResolverProtoMsg {
  */
 export interface DataResolverAmino {
   /** id is the compact data ID. */
-  id: Uint8Array;
+  id?: string;
   /** resolver_id is the ID of the resolver. */
-  resolver_id: string;
+  resolver_id?: string;
 }
 export interface DataResolverAminoMsg {
   type: "/regen.data.v1.DataResolver";
@@ -165,7 +165,7 @@ export interface DataResolverAminoMsg {
  */
 export interface DataResolverSDKType {
   id: Uint8Array;
-  resolver_id: Long;
+  resolver_id: bigint;
 }
 function createBaseDataID(): DataID {
   return {
@@ -174,7 +174,8 @@ function createBaseDataID(): DataID {
   };
 }
 export const DataID = {
-  encode(message: DataID, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  typeUrl: "/regen.data.v1.DataID",
+  encode(message: DataID, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.id.length !== 0) {
       writer.uint32(10).bytes(message.id);
     }
@@ -183,8 +184,8 @@ export const DataID = {
     }
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): DataID {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): DataID {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseDataID();
     while (reader.pos < end) {
@@ -222,15 +223,19 @@ export const DataID = {
     return message;
   },
   fromAmino(object: DataIDAmino): DataID {
-    return {
-      id: object.id,
-      iri: object.iri
-    };
+    const message = createBaseDataID();
+    if (object.id !== undefined && object.id !== null) {
+      message.id = bytesFromBase64(object.id);
+    }
+    if (object.iri !== undefined && object.iri !== null) {
+      message.iri = object.iri;
+    }
+    return message;
   },
   toAmino(message: DataID): DataIDAmino {
     const obj: any = {};
-    obj.id = message.id;
-    obj.iri = message.iri;
+    obj.id = message.id ? base64FromBytes(message.id) : undefined;
+    obj.iri = message.iri === "" ? undefined : message.iri;
     return obj;
   },
   fromAminoMsg(object: DataIDAminoMsg): DataID {
@@ -256,7 +261,8 @@ function createBaseDataAnchor(): DataAnchor {
   };
 }
 export const DataAnchor = {
-  encode(message: DataAnchor, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  typeUrl: "/regen.data.v1.DataAnchor",
+  encode(message: DataAnchor, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.id.length !== 0) {
       writer.uint32(10).bytes(message.id);
     }
@@ -265,8 +271,8 @@ export const DataAnchor = {
     }
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): DataAnchor {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): DataAnchor {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseDataAnchor();
     while (reader.pos < end) {
@@ -304,14 +310,18 @@ export const DataAnchor = {
     return message;
   },
   fromAmino(object: DataAnchorAmino): DataAnchor {
-    return {
-      id: object.id,
-      timestamp: object?.timestamp ? Timestamp.fromAmino(object.timestamp) : undefined
-    };
+    const message = createBaseDataAnchor();
+    if (object.id !== undefined && object.id !== null) {
+      message.id = bytesFromBase64(object.id);
+    }
+    if (object.timestamp !== undefined && object.timestamp !== null) {
+      message.timestamp = Timestamp.fromAmino(object.timestamp);
+    }
+    return message;
   },
   toAmino(message: DataAnchor): DataAnchorAmino {
     const obj: any = {};
-    obj.id = message.id;
+    obj.id = message.id ? base64FromBytes(message.id) : undefined;
     obj.timestamp = message.timestamp ? Timestamp.toAmino(message.timestamp) : undefined;
     return obj;
   },
@@ -339,7 +349,8 @@ function createBaseDataAttestor(): DataAttestor {
   };
 }
 export const DataAttestor = {
-  encode(message: DataAttestor, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  typeUrl: "/regen.data.v1.DataAttestor",
+  encode(message: DataAttestor, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.id.length !== 0) {
       writer.uint32(10).bytes(message.id);
     }
@@ -351,8 +362,8 @@ export const DataAttestor = {
     }
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): DataAttestor {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): DataAttestor {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseDataAttestor();
     while (reader.pos < end) {
@@ -396,16 +407,22 @@ export const DataAttestor = {
     return message;
   },
   fromAmino(object: DataAttestorAmino): DataAttestor {
-    return {
-      id: object.id,
-      attestor: object.attestor,
-      timestamp: object?.timestamp ? Timestamp.fromAmino(object.timestamp) : undefined
-    };
+    const message = createBaseDataAttestor();
+    if (object.id !== undefined && object.id !== null) {
+      message.id = bytesFromBase64(object.id);
+    }
+    if (object.attestor !== undefined && object.attestor !== null) {
+      message.attestor = bytesFromBase64(object.attestor);
+    }
+    if (object.timestamp !== undefined && object.timestamp !== null) {
+      message.timestamp = Timestamp.fromAmino(object.timestamp);
+    }
+    return message;
   },
   toAmino(message: DataAttestor): DataAttestorAmino {
     const obj: any = {};
-    obj.id = message.id;
-    obj.attestor = message.attestor;
+    obj.id = message.id ? base64FromBytes(message.id) : undefined;
+    obj.attestor = message.attestor ? base64FromBytes(message.attestor) : undefined;
     obj.timestamp = message.timestamp ? Timestamp.toAmino(message.timestamp) : undefined;
     return obj;
   },
@@ -427,14 +444,15 @@ export const DataAttestor = {
 };
 function createBaseResolver(): Resolver {
   return {
-    id: Long.UZERO,
+    id: BigInt(0),
     url: "",
     manager: new Uint8Array()
   };
 }
 export const Resolver = {
-  encode(message: Resolver, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
-    if (!message.id.isZero()) {
+  typeUrl: "/regen.data.v1.Resolver",
+  encode(message: Resolver, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
+    if (message.id !== BigInt(0)) {
       writer.uint32(8).uint64(message.id);
     }
     if (message.url !== "") {
@@ -445,15 +463,15 @@ export const Resolver = {
     }
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): Resolver {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): Resolver {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseResolver();
     while (reader.pos < end) {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          message.id = (reader.uint64() as Long);
+          message.id = reader.uint64();
           break;
         case 2:
           message.url = reader.string();
@@ -470,37 +488,43 @@ export const Resolver = {
   },
   fromJSON(object: any): Resolver {
     return {
-      id: isSet(object.id) ? Long.fromValue(object.id) : Long.UZERO,
+      id: isSet(object.id) ? BigInt(object.id.toString()) : BigInt(0),
       url: isSet(object.url) ? String(object.url) : "",
       manager: isSet(object.manager) ? bytesFromBase64(object.manager) : new Uint8Array()
     };
   },
   toJSON(message: Resolver): unknown {
     const obj: any = {};
-    message.id !== undefined && (obj.id = (message.id || Long.UZERO).toString());
+    message.id !== undefined && (obj.id = (message.id || BigInt(0)).toString());
     message.url !== undefined && (obj.url = message.url);
     message.manager !== undefined && (obj.manager = base64FromBytes(message.manager !== undefined ? message.manager : new Uint8Array()));
     return obj;
   },
   fromPartial(object: Partial<Resolver>): Resolver {
     const message = createBaseResolver();
-    message.id = object.id !== undefined && object.id !== null ? Long.fromValue(object.id) : Long.UZERO;
+    message.id = object.id !== undefined && object.id !== null ? BigInt(object.id.toString()) : BigInt(0);
     message.url = object.url ?? "";
     message.manager = object.manager ?? new Uint8Array();
     return message;
   },
   fromAmino(object: ResolverAmino): Resolver {
-    return {
-      id: Long.fromString(object.id),
-      url: object.url,
-      manager: object.manager
-    };
+    const message = createBaseResolver();
+    if (object.id !== undefined && object.id !== null) {
+      message.id = BigInt(object.id);
+    }
+    if (object.url !== undefined && object.url !== null) {
+      message.url = object.url;
+    }
+    if (object.manager !== undefined && object.manager !== null) {
+      message.manager = bytesFromBase64(object.manager);
+    }
+    return message;
   },
   toAmino(message: Resolver): ResolverAmino {
     const obj: any = {};
-    obj.id = message.id ? message.id.toString() : undefined;
-    obj.url = message.url;
-    obj.manager = message.manager;
+    obj.id = message.id !== BigInt(0) ? message.id.toString() : undefined;
+    obj.url = message.url === "" ? undefined : message.url;
+    obj.manager = message.manager ? base64FromBytes(message.manager) : undefined;
     return obj;
   },
   fromAminoMsg(object: ResolverAminoMsg): Resolver {
@@ -522,21 +546,22 @@ export const Resolver = {
 function createBaseDataResolver(): DataResolver {
   return {
     id: new Uint8Array(),
-    resolverId: Long.UZERO
+    resolverId: BigInt(0)
   };
 }
 export const DataResolver = {
-  encode(message: DataResolver, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  typeUrl: "/regen.data.v1.DataResolver",
+  encode(message: DataResolver, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.id.length !== 0) {
       writer.uint32(10).bytes(message.id);
     }
-    if (!message.resolverId.isZero()) {
+    if (message.resolverId !== BigInt(0)) {
       writer.uint32(16).uint64(message.resolverId);
     }
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): DataResolver {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): DataResolver {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseDataResolver();
     while (reader.pos < end) {
@@ -546,7 +571,7 @@ export const DataResolver = {
           message.id = reader.bytes();
           break;
         case 2:
-          message.resolverId = (reader.uint64() as Long);
+          message.resolverId = reader.uint64();
           break;
         default:
           reader.skipType(tag & 7);
@@ -558,31 +583,35 @@ export const DataResolver = {
   fromJSON(object: any): DataResolver {
     return {
       id: isSet(object.id) ? bytesFromBase64(object.id) : new Uint8Array(),
-      resolverId: isSet(object.resolverId) ? Long.fromValue(object.resolverId) : Long.UZERO
+      resolverId: isSet(object.resolverId) ? BigInt(object.resolverId.toString()) : BigInt(0)
     };
   },
   toJSON(message: DataResolver): unknown {
     const obj: any = {};
     message.id !== undefined && (obj.id = base64FromBytes(message.id !== undefined ? message.id : new Uint8Array()));
-    message.resolverId !== undefined && (obj.resolverId = (message.resolverId || Long.UZERO).toString());
+    message.resolverId !== undefined && (obj.resolverId = (message.resolverId || BigInt(0)).toString());
     return obj;
   },
   fromPartial(object: Partial<DataResolver>): DataResolver {
     const message = createBaseDataResolver();
     message.id = object.id ?? new Uint8Array();
-    message.resolverId = object.resolverId !== undefined && object.resolverId !== null ? Long.fromValue(object.resolverId) : Long.UZERO;
+    message.resolverId = object.resolverId !== undefined && object.resolverId !== null ? BigInt(object.resolverId.toString()) : BigInt(0);
     return message;
   },
   fromAmino(object: DataResolverAmino): DataResolver {
-    return {
-      id: object.id,
-      resolverId: Long.fromString(object.resolver_id)
-    };
+    const message = createBaseDataResolver();
+    if (object.id !== undefined && object.id !== null) {
+      message.id = bytesFromBase64(object.id);
+    }
+    if (object.resolver_id !== undefined && object.resolver_id !== null) {
+      message.resolverId = BigInt(object.resolver_id);
+    }
+    return message;
   },
   toAmino(message: DataResolver): DataResolverAmino {
     const obj: any = {};
-    obj.id = message.id;
-    obj.resolver_id = message.resolverId ? message.resolverId.toString() : undefined;
+    obj.id = message.id ? base64FromBytes(message.id) : undefined;
+    obj.resolver_id = message.resolverId !== BigInt(0) ? message.resolverId.toString() : undefined;
     return obj;
   },
   fromAminoMsg(object: DataResolverAminoMsg): DataResolver {
