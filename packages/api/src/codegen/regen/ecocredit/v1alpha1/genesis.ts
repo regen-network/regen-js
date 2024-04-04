@@ -1,5 +1,5 @@
 import { Params, ParamsAmino, ParamsSDKType, ClassInfo, ClassInfoAmino, ClassInfoSDKType, BatchInfo, BatchInfoAmino, BatchInfoSDKType, CreditTypeSeq, CreditTypeSeqAmino, CreditTypeSeqSDKType } from "./types";
-import * as _m0 from "protobufjs/minimal";
+import { BinaryReader, BinaryWriter } from "../../../binary";
 import { isSet } from "../../../helpers";
 /** GenesisState defines ecocredit module's genesis state. */
 export interface GenesisState {
@@ -31,15 +31,15 @@ export interface GenesisStateAmino {
    */
   params?: ParamsAmino;
   /** class_info is the list of credit class info. */
-  class_info: ClassInfoAmino[];
+  class_info?: ClassInfoAmino[];
   /** batch_info is the list of credit batch info. */
-  batch_info: BatchInfoAmino[];
+  batch_info?: BatchInfoAmino[];
   /** sequences is the list of credit type sequence. */
-  sequences: CreditTypeSeqAmino[];
+  sequences?: CreditTypeSeqAmino[];
   /** balances is the list of credit batch tradable/retired units. */
-  balances: BalanceAmino[];
+  balances?: BalanceAmino[];
   /** supplies is the list of credit batch tradable/retired supply. */
-  supplies: SupplyAmino[];
+  supplies?: SupplyAmino[];
 }
 export interface GenesisStateAminoMsg {
   type: "/regen.ecocredit.v1alpha1.GenesisState";
@@ -78,13 +78,13 @@ export interface BalanceProtoMsg {
  */
 export interface BalanceAmino {
   /** address is the account address of the account holding credits. */
-  address: string;
+  address?: string;
   /** batch_denom is the unique ID of the credit batch. */
-  batch_denom: string;
+  batch_denom?: string;
   /** tradable_balance is the tradable balance of the credit batch. */
-  tradable_balance: string;
+  tradable_balance?: string;
   /** retired_balance is the retired balance of the credit batch. */
-  retired_balance: string;
+  retired_balance?: string;
 }
 export interface BalanceAminoMsg {
   type: "/regen.ecocredit.v1alpha1.Balance";
@@ -116,11 +116,11 @@ export interface SupplyProtoMsg {
 /** Supply represents a tradable or retired supply of a credit batch. */
 export interface SupplyAmino {
   /** batch_denom is the unique ID of the credit batch. */
-  batch_denom: string;
+  batch_denom?: string;
   /** tradable_supply is the tradable supply of the credit batch. */
-  tradable_supply: string;
+  tradable_supply?: string;
   /** retired_supply is the retired supply of the credit batch. */
-  retired_supply: string;
+  retired_supply?: string;
 }
 export interface SupplyAminoMsg {
   type: "/regen.ecocredit.v1alpha1.Supply";
@@ -143,7 +143,8 @@ function createBaseGenesisState(): GenesisState {
   };
 }
 export const GenesisState = {
-  encode(message: GenesisState, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  typeUrl: "/regen.ecocredit.v1alpha1.GenesisState",
+  encode(message: GenesisState, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.params !== undefined) {
       Params.encode(message.params, writer.uint32(10).fork()).ldelim();
     }
@@ -164,8 +165,8 @@ export const GenesisState = {
     }
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): GenesisState {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): GenesisState {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseGenesisState();
     while (reader.pos < end) {
@@ -247,14 +248,16 @@ export const GenesisState = {
     return message;
   },
   fromAmino(object: GenesisStateAmino): GenesisState {
-    return {
-      params: object?.params ? Params.fromAmino(object.params) : undefined,
-      classInfo: Array.isArray(object?.class_info) ? object.class_info.map((e: any) => ClassInfo.fromAmino(e)) : [],
-      batchInfo: Array.isArray(object?.batch_info) ? object.batch_info.map((e: any) => BatchInfo.fromAmino(e)) : [],
-      sequences: Array.isArray(object?.sequences) ? object.sequences.map((e: any) => CreditTypeSeq.fromAmino(e)) : [],
-      balances: Array.isArray(object?.balances) ? object.balances.map((e: any) => Balance.fromAmino(e)) : [],
-      supplies: Array.isArray(object?.supplies) ? object.supplies.map((e: any) => Supply.fromAmino(e)) : []
-    };
+    const message = createBaseGenesisState();
+    if (object.params !== undefined && object.params !== null) {
+      message.params = Params.fromAmino(object.params);
+    }
+    message.classInfo = object.class_info?.map(e => ClassInfo.fromAmino(e)) || [];
+    message.batchInfo = object.batch_info?.map(e => BatchInfo.fromAmino(e)) || [];
+    message.sequences = object.sequences?.map(e => CreditTypeSeq.fromAmino(e)) || [];
+    message.balances = object.balances?.map(e => Balance.fromAmino(e)) || [];
+    message.supplies = object.supplies?.map(e => Supply.fromAmino(e)) || [];
+    return message;
   },
   toAmino(message: GenesisState): GenesisStateAmino {
     const obj: any = {};
@@ -262,27 +265,27 @@ export const GenesisState = {
     if (message.classInfo) {
       obj.class_info = message.classInfo.map(e => e ? ClassInfo.toAmino(e) : undefined);
     } else {
-      obj.class_info = [];
+      obj.class_info = message.classInfo;
     }
     if (message.batchInfo) {
       obj.batch_info = message.batchInfo.map(e => e ? BatchInfo.toAmino(e) : undefined);
     } else {
-      obj.batch_info = [];
+      obj.batch_info = message.batchInfo;
     }
     if (message.sequences) {
       obj.sequences = message.sequences.map(e => e ? CreditTypeSeq.toAmino(e) : undefined);
     } else {
-      obj.sequences = [];
+      obj.sequences = message.sequences;
     }
     if (message.balances) {
       obj.balances = message.balances.map(e => e ? Balance.toAmino(e) : undefined);
     } else {
-      obj.balances = [];
+      obj.balances = message.balances;
     }
     if (message.supplies) {
       obj.supplies = message.supplies.map(e => e ? Supply.toAmino(e) : undefined);
     } else {
-      obj.supplies = [];
+      obj.supplies = message.supplies;
     }
     return obj;
   },
@@ -311,7 +314,8 @@ function createBaseBalance(): Balance {
   };
 }
 export const Balance = {
-  encode(message: Balance, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  typeUrl: "/regen.ecocredit.v1alpha1.Balance",
+  encode(message: Balance, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.address !== "") {
       writer.uint32(10).string(message.address);
     }
@@ -326,8 +330,8 @@ export const Balance = {
     }
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): Balance {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): Balance {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseBalance();
     while (reader.pos < end) {
@@ -377,19 +381,27 @@ export const Balance = {
     return message;
   },
   fromAmino(object: BalanceAmino): Balance {
-    return {
-      address: object.address,
-      batchDenom: object.batch_denom,
-      tradableBalance: object.tradable_balance,
-      retiredBalance: object.retired_balance
-    };
+    const message = createBaseBalance();
+    if (object.address !== undefined && object.address !== null) {
+      message.address = object.address;
+    }
+    if (object.batch_denom !== undefined && object.batch_denom !== null) {
+      message.batchDenom = object.batch_denom;
+    }
+    if (object.tradable_balance !== undefined && object.tradable_balance !== null) {
+      message.tradableBalance = object.tradable_balance;
+    }
+    if (object.retired_balance !== undefined && object.retired_balance !== null) {
+      message.retiredBalance = object.retired_balance;
+    }
+    return message;
   },
   toAmino(message: Balance): BalanceAmino {
     const obj: any = {};
-    obj.address = message.address;
-    obj.batch_denom = message.batchDenom;
-    obj.tradable_balance = message.tradableBalance;
-    obj.retired_balance = message.retiredBalance;
+    obj.address = message.address === "" ? undefined : message.address;
+    obj.batch_denom = message.batchDenom === "" ? undefined : message.batchDenom;
+    obj.tradable_balance = message.tradableBalance === "" ? undefined : message.tradableBalance;
+    obj.retired_balance = message.retiredBalance === "" ? undefined : message.retiredBalance;
     return obj;
   },
   fromAminoMsg(object: BalanceAminoMsg): Balance {
@@ -416,7 +428,8 @@ function createBaseSupply(): Supply {
   };
 }
 export const Supply = {
-  encode(message: Supply, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  typeUrl: "/regen.ecocredit.v1alpha1.Supply",
+  encode(message: Supply, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.batchDenom !== "") {
       writer.uint32(10).string(message.batchDenom);
     }
@@ -428,8 +441,8 @@ export const Supply = {
     }
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): Supply {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): Supply {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseSupply();
     while (reader.pos < end) {
@@ -473,17 +486,23 @@ export const Supply = {
     return message;
   },
   fromAmino(object: SupplyAmino): Supply {
-    return {
-      batchDenom: object.batch_denom,
-      tradableSupply: object.tradable_supply,
-      retiredSupply: object.retired_supply
-    };
+    const message = createBaseSupply();
+    if (object.batch_denom !== undefined && object.batch_denom !== null) {
+      message.batchDenom = object.batch_denom;
+    }
+    if (object.tradable_supply !== undefined && object.tradable_supply !== null) {
+      message.tradableSupply = object.tradable_supply;
+    }
+    if (object.retired_supply !== undefined && object.retired_supply !== null) {
+      message.retiredSupply = object.retired_supply;
+    }
+    return message;
   },
   toAmino(message: Supply): SupplyAmino {
     const obj: any = {};
-    obj.batch_denom = message.batchDenom;
-    obj.tradable_supply = message.tradableSupply;
-    obj.retired_supply = message.retiredSupply;
+    obj.batch_denom = message.batchDenom === "" ? undefined : message.batchDenom;
+    obj.tradable_supply = message.tradableSupply === "" ? undefined : message.tradableSupply;
+    obj.retired_supply = message.retiredSupply === "" ? undefined : message.retiredSupply;
     return obj;
   },
   fromAminoMsg(object: SupplyAminoMsg): Supply {

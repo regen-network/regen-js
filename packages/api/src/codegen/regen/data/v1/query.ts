@@ -1,8 +1,8 @@
 import { ContentHash, ContentHashAmino, ContentHashSDKType } from "./types";
 import { PageRequest, PageRequestAmino, PageRequestSDKType, PageResponse, PageResponseAmino, PageResponseSDKType } from "../../../cosmos/base/query/v1beta1/pagination";
-import { Timestamp, TimestampAmino, TimestampSDKType } from "../../../google/protobuf/timestamp";
-import { Long, isSet, fromJsonTimestamp, fromTimestamp } from "../../../helpers";
-import * as _m0 from "protobufjs/minimal";
+import { Timestamp, TimestampSDKType } from "../../../google/protobuf/timestamp";
+import { BinaryReader, BinaryWriter } from "../../../binary";
+import { isSet, fromJsonTimestamp, fromTimestamp } from "../../../helpers";
 /** QueryAnchorByIRIRequest is the Query/AnchorByIRI request type. */
 export interface QueryAnchorByIRIRequest {
   /** iri is the IRI of the anchored data. */
@@ -15,7 +15,7 @@ export interface QueryAnchorByIRIRequestProtoMsg {
 /** QueryAnchorByIRIRequest is the Query/AnchorByIRI request type. */
 export interface QueryAnchorByIRIRequestAmino {
   /** iri is the IRI of the anchored data. */
-  iri: string;
+  iri?: string;
 }
 export interface QueryAnchorByIRIRequestAminoMsg {
   type: "/regen.data.v1.QueryAnchorByIRIRequest";
@@ -28,7 +28,7 @@ export interface QueryAnchorByIRIRequestSDKType {
 /** QueryAnchorByIRIResponse is the Query/AnchorByIRI response type. */
 export interface QueryAnchorByIRIResponse {
   /** anchor is information about the data anchor. */
-  anchor: AnchorInfo;
+  anchor?: AnchorInfo;
 }
 export interface QueryAnchorByIRIResponseProtoMsg {
   typeUrl: "/regen.data.v1.QueryAnchorByIRIResponse";
@@ -45,12 +45,12 @@ export interface QueryAnchorByIRIResponseAminoMsg {
 }
 /** QueryAnchorByIRIResponse is the Query/AnchorByIRI response type. */
 export interface QueryAnchorByIRIResponseSDKType {
-  anchor: AnchorInfoSDKType;
+  anchor?: AnchorInfoSDKType;
 }
 /** QueryAnchorByHashRequest is the Query/AnchorByHash request type. */
 export interface QueryAnchorByHashRequest {
   /** content_hash is the ContentHash of the anchored data. */
-  contentHash: ContentHash;
+  contentHash?: ContentHash;
 }
 export interface QueryAnchorByHashRequestProtoMsg {
   typeUrl: "/regen.data.v1.QueryAnchorByHashRequest";
@@ -67,12 +67,12 @@ export interface QueryAnchorByHashRequestAminoMsg {
 }
 /** QueryAnchorByHashRequest is the Query/AnchorByHash request type. */
 export interface QueryAnchorByHashRequestSDKType {
-  content_hash: ContentHashSDKType;
+  content_hash?: ContentHashSDKType;
 }
 /** QueryAnchorByHashResponse is the Query/AnchorByHash response type. */
 export interface QueryAnchorByHashResponse {
   /** anchor is information about the data anchor. */
-  anchor: AnchorInfo;
+  anchor?: AnchorInfo;
 }
 export interface QueryAnchorByHashResponseProtoMsg {
   typeUrl: "/regen.data.v1.QueryAnchorByHashResponse";
@@ -89,7 +89,7 @@ export interface QueryAnchorByHashResponseAminoMsg {
 }
 /** QueryAnchorByHashResponse is the Query/AnchorByHash response type. */
 export interface QueryAnchorByHashResponseSDKType {
-  anchor: AnchorInfoSDKType;
+  anchor?: AnchorInfoSDKType;
 }
 /**
  * QueryAttestationsByAttestorRequest is the Query/AttestationsByAttestor
@@ -99,7 +99,7 @@ export interface QueryAttestationsByAttestorRequest {
   /** attestor is the address of the attestor. */
   attestor: string;
   /** pagination is the PageRequest to use for pagination. */
-  pagination: PageRequest;
+  pagination?: PageRequest;
 }
 export interface QueryAttestationsByAttestorRequestProtoMsg {
   typeUrl: "/regen.data.v1.QueryAttestationsByAttestorRequest";
@@ -111,7 +111,7 @@ export interface QueryAttestationsByAttestorRequestProtoMsg {
  */
 export interface QueryAttestationsByAttestorRequestAmino {
   /** attestor is the address of the attestor. */
-  attestor: string;
+  attestor?: string;
   /** pagination is the PageRequest to use for pagination. */
   pagination?: PageRequestAmino;
 }
@@ -125,7 +125,7 @@ export interface QueryAttestationsByAttestorRequestAminoMsg {
  */
 export interface QueryAttestationsByAttestorRequestSDKType {
   attestor: string;
-  pagination: PageRequestSDKType;
+  pagination?: PageRequestSDKType;
 }
 /**
  * QueryAttestationsByAttestorResponse is the Query/AttestationsByAttestor
@@ -135,7 +135,7 @@ export interface QueryAttestationsByAttestorResponse {
   /** attestations are the attestations by the attestor. */
   attestations: AttestationInfo[];
   /** pagination is the pagination PageResponse. */
-  pagination: PageResponse;
+  pagination?: PageResponse;
 }
 export interface QueryAttestationsByAttestorResponseProtoMsg {
   typeUrl: "/regen.data.v1.QueryAttestationsByAttestorResponse";
@@ -147,7 +147,7 @@ export interface QueryAttestationsByAttestorResponseProtoMsg {
  */
 export interface QueryAttestationsByAttestorResponseAmino {
   /** attestations are the attestations by the attestor. */
-  attestations: AttestationInfoAmino[];
+  attestations?: AttestationInfoAmino[];
   /** pagination is the pagination PageResponse. */
   pagination?: PageResponseAmino;
 }
@@ -161,14 +161,14 @@ export interface QueryAttestationsByAttestorResponseAminoMsg {
  */
 export interface QueryAttestationsByAttestorResponseSDKType {
   attestations: AttestationInfoSDKType[];
-  pagination: PageResponseSDKType;
+  pagination?: PageResponseSDKType;
 }
 /** QueryAttestationsByIRIRequest is the Query/AttestationsByIRI request type. */
 export interface QueryAttestationsByIRIRequest {
   /** iri is the IRI of the anchored data. */
   iri: string;
   /** pagination is the PageRequest to use for pagination. */
-  pagination: PageRequest;
+  pagination?: PageRequest;
 }
 export interface QueryAttestationsByIRIRequestProtoMsg {
   typeUrl: "/regen.data.v1.QueryAttestationsByIRIRequest";
@@ -177,7 +177,7 @@ export interface QueryAttestationsByIRIRequestProtoMsg {
 /** QueryAttestationsByIRIRequest is the Query/AttestationsByIRI request type. */
 export interface QueryAttestationsByIRIRequestAmino {
   /** iri is the IRI of the anchored data. */
-  iri: string;
+  iri?: string;
   /** pagination is the PageRequest to use for pagination. */
   pagination?: PageRequestAmino;
 }
@@ -188,14 +188,14 @@ export interface QueryAttestationsByIRIRequestAminoMsg {
 /** QueryAttestationsByIRIRequest is the Query/AttestationsByIRI request type. */
 export interface QueryAttestationsByIRIRequestSDKType {
   iri: string;
-  pagination: PageRequestSDKType;
+  pagination?: PageRequestSDKType;
 }
 /** QueryAttestationsByIRIResponse is the Query/AttestationsByIRI response type. */
 export interface QueryAttestationsByIRIResponse {
   /** attestations are the attestations that have been made to the anchored data. */
   attestations: AttestationInfo[];
   /** pagination is the pagination PageResponse. */
-  pagination: PageResponse;
+  pagination?: PageResponse;
 }
 export interface QueryAttestationsByIRIResponseProtoMsg {
   typeUrl: "/regen.data.v1.QueryAttestationsByIRIResponse";
@@ -204,7 +204,7 @@ export interface QueryAttestationsByIRIResponseProtoMsg {
 /** QueryAttestationsByIRIResponse is the Query/AttestationsByIRI response type. */
 export interface QueryAttestationsByIRIResponseAmino {
   /** attestations are the attestations that have been made to the anchored data. */
-  attestations: AttestationInfoAmino[];
+  attestations?: AttestationInfoAmino[];
   /** pagination is the pagination PageResponse. */
   pagination?: PageResponseAmino;
 }
@@ -215,14 +215,14 @@ export interface QueryAttestationsByIRIResponseAminoMsg {
 /** QueryAttestationsByIRIResponse is the Query/AttestationsByIRI response type. */
 export interface QueryAttestationsByIRIResponseSDKType {
   attestations: AttestationInfoSDKType[];
-  pagination: PageResponseSDKType;
+  pagination?: PageResponseSDKType;
 }
 /** QueryAttestationsByHashRequest is the Query/AttestationsByHash request type. */
 export interface QueryAttestationsByHashRequest {
   /** content_hash is the ContentHash of the anchored data. */
-  contentHash: ContentHash;
+  contentHash?: ContentHash;
   /** pagination is the PageRequest to use for pagination. */
-  pagination: PageRequest;
+  pagination?: PageRequest;
 }
 export interface QueryAttestationsByHashRequestProtoMsg {
   typeUrl: "/regen.data.v1.QueryAttestationsByHashRequest";
@@ -241,8 +241,8 @@ export interface QueryAttestationsByHashRequestAminoMsg {
 }
 /** QueryAttestationsByHashRequest is the Query/AttestationsByHash request type. */
 export interface QueryAttestationsByHashRequestSDKType {
-  content_hash: ContentHashSDKType;
-  pagination: PageRequestSDKType;
+  content_hash?: ContentHashSDKType;
+  pagination?: PageRequestSDKType;
 }
 /**
  * QueryAttestationsByHashResponse is the Query/AttestationsByHash response
@@ -252,7 +252,7 @@ export interface QueryAttestationsByHashResponse {
   /** attestations are the attestations that have been made to the anchored data. */
   attestations: AttestationInfo[];
   /** pagination is the pagination PageResponse. */
-  pagination: PageResponse;
+  pagination?: PageResponse;
 }
 export interface QueryAttestationsByHashResponseProtoMsg {
   typeUrl: "/regen.data.v1.QueryAttestationsByHashResponse";
@@ -264,7 +264,7 @@ export interface QueryAttestationsByHashResponseProtoMsg {
  */
 export interface QueryAttestationsByHashResponseAmino {
   /** attestations are the attestations that have been made to the anchored data. */
-  attestations: AttestationInfoAmino[];
+  attestations?: AttestationInfoAmino[];
   /** pagination is the pagination PageResponse. */
   pagination?: PageResponseAmino;
 }
@@ -278,12 +278,12 @@ export interface QueryAttestationsByHashResponseAminoMsg {
  */
 export interface QueryAttestationsByHashResponseSDKType {
   attestations: AttestationInfoSDKType[];
-  pagination: PageResponseSDKType;
+  pagination?: PageResponseSDKType;
 }
 /** QueryResolverRequest is the Query/Resolver request type. */
 export interface QueryResolverRequest {
   /** id is the ID of the resolver. */
-  id: Long;
+  id: bigint;
 }
 export interface QueryResolverRequestProtoMsg {
   typeUrl: "/regen.data.v1.QueryResolverRequest";
@@ -292,7 +292,7 @@ export interface QueryResolverRequestProtoMsg {
 /** QueryResolverRequest is the Query/Resolver request type. */
 export interface QueryResolverRequestAmino {
   /** id is the ID of the resolver. */
-  id: string;
+  id?: string;
 }
 export interface QueryResolverRequestAminoMsg {
   type: "/regen.data.v1.QueryResolverRequest";
@@ -300,12 +300,12 @@ export interface QueryResolverRequestAminoMsg {
 }
 /** QueryResolverRequest is the Query/Resolver request type. */
 export interface QueryResolverRequestSDKType {
-  id: Long;
+  id: bigint;
 }
 /** QueryResolverResponse is the Query/Resolver response type. */
 export interface QueryResolverResponse {
   /** resolver is information about the resolver. */
-  resolver: ResolverInfo;
+  resolver?: ResolverInfo;
 }
 export interface QueryResolverResponseProtoMsg {
   typeUrl: "/regen.data.v1.QueryResolverResponse";
@@ -322,14 +322,14 @@ export interface QueryResolverResponseAminoMsg {
 }
 /** QueryResolverResponse is the Query/Resolver response type. */
 export interface QueryResolverResponseSDKType {
-  resolver: ResolverInfoSDKType;
+  resolver?: ResolverInfoSDKType;
 }
 /** QueryResolversByIRIRequest is the Query/ResolversByIRI request type. */
 export interface QueryResolversByIRIRequest {
   /** iri is the IRI of the anchored data. */
   iri: string;
   /** pagination is the PageRequest to use for pagination. */
-  pagination: PageRequest;
+  pagination?: PageRequest;
 }
 export interface QueryResolversByIRIRequestProtoMsg {
   typeUrl: "/regen.data.v1.QueryResolversByIRIRequest";
@@ -338,7 +338,7 @@ export interface QueryResolversByIRIRequestProtoMsg {
 /** QueryResolversByIRIRequest is the Query/ResolversByIRI request type. */
 export interface QueryResolversByIRIRequestAmino {
   /** iri is the IRI of the anchored data. */
-  iri: string;
+  iri?: string;
   /** pagination is the PageRequest to use for pagination. */
   pagination?: PageRequestAmino;
 }
@@ -349,14 +349,14 @@ export interface QueryResolversByIRIRequestAminoMsg {
 /** QueryResolversByIRIRequest is the Query/ResolversByIRI request type. */
 export interface QueryResolversByIRIRequestSDKType {
   iri: string;
-  pagination: PageRequestSDKType;
+  pagination?: PageRequestSDKType;
 }
 /** QueryResolversByIRIResponse is the Query/ResolversByIRI response type. */
 export interface QueryResolversByIRIResponse {
   /** resolvers are the resolvers that have registered the anchored data. */
   resolvers: ResolverInfo[];
   /** pagination is the PageResponse to use for pagination. */
-  pagination: PageResponse;
+  pagination?: PageResponse;
 }
 export interface QueryResolversByIRIResponseProtoMsg {
   typeUrl: "/regen.data.v1.QueryResolversByIRIResponse";
@@ -365,7 +365,7 @@ export interface QueryResolversByIRIResponseProtoMsg {
 /** QueryResolversByIRIResponse is the Query/ResolversByIRI response type. */
 export interface QueryResolversByIRIResponseAmino {
   /** resolvers are the resolvers that have registered the anchored data. */
-  resolvers: ResolverInfoAmino[];
+  resolvers?: ResolverInfoAmino[];
   /** pagination is the PageResponse to use for pagination. */
   pagination?: PageResponseAmino;
 }
@@ -376,14 +376,14 @@ export interface QueryResolversByIRIResponseAminoMsg {
 /** QueryResolversByIRIResponse is the Query/ResolversByIRI response type. */
 export interface QueryResolversByIRIResponseSDKType {
   resolvers: ResolverInfoSDKType[];
-  pagination: PageResponseSDKType;
+  pagination?: PageResponseSDKType;
 }
 /** QueryResolversByHashRequest is the Query/ResolversByHash request type. */
 export interface QueryResolversByHashRequest {
   /** content_hash is the ContentHash of the anchored data. */
-  contentHash: ContentHash;
+  contentHash?: ContentHash;
   /** pagination is the PageRequest to use for pagination. */
-  pagination: PageRequest;
+  pagination?: PageRequest;
 }
 export interface QueryResolversByHashRequestProtoMsg {
   typeUrl: "/regen.data.v1.QueryResolversByHashRequest";
@@ -402,15 +402,15 @@ export interface QueryResolversByHashRequestAminoMsg {
 }
 /** QueryResolversByHashRequest is the Query/ResolversByHash request type. */
 export interface QueryResolversByHashRequestSDKType {
-  content_hash: ContentHashSDKType;
-  pagination: PageRequestSDKType;
+  content_hash?: ContentHashSDKType;
+  pagination?: PageRequestSDKType;
 }
 /** QueryResolversByHashResponse is the Query/ResolversByHash response type. */
 export interface QueryResolversByHashResponse {
   /** resolvers are the resolvers that have registered the data. */
   resolvers: ResolverInfo[];
   /** pagination is the PageResponse to use for pagination. */
-  pagination: PageResponse;
+  pagination?: PageResponse;
 }
 export interface QueryResolversByHashResponseProtoMsg {
   typeUrl: "/regen.data.v1.QueryResolversByHashResponse";
@@ -419,7 +419,7 @@ export interface QueryResolversByHashResponseProtoMsg {
 /** QueryResolversByHashResponse is the Query/ResolversByHash response type. */
 export interface QueryResolversByHashResponseAmino {
   /** resolvers are the resolvers that have registered the data. */
-  resolvers: ResolverInfoAmino[];
+  resolvers?: ResolverInfoAmino[];
   /** pagination is the PageResponse to use for pagination. */
   pagination?: PageResponseAmino;
 }
@@ -430,14 +430,14 @@ export interface QueryResolversByHashResponseAminoMsg {
 /** QueryResolversByHashResponse is the Query/ResolversByHash response type. */
 export interface QueryResolversByHashResponseSDKType {
   resolvers: ResolverInfoSDKType[];
-  pagination: PageResponseSDKType;
+  pagination?: PageResponseSDKType;
 }
 /** QueryResolversByURLRequest is the Query/ResolversByURL request type. */
 export interface QueryResolversByURLRequest {
   /** url is the URL of the resolver. */
   url: string;
   /** pagination is the PageRequest to use for pagination. */
-  pagination: PageRequest;
+  pagination?: PageRequest;
 }
 export interface QueryResolversByURLRequestProtoMsg {
   typeUrl: "/regen.data.v1.QueryResolversByURLRequest";
@@ -446,7 +446,7 @@ export interface QueryResolversByURLRequestProtoMsg {
 /** QueryResolversByURLRequest is the Query/ResolversByURL request type. */
 export interface QueryResolversByURLRequestAmino {
   /** url is the URL of the resolver. */
-  url: string;
+  url?: string;
   /** pagination is the PageRequest to use for pagination. */
   pagination?: PageRequestAmino;
 }
@@ -457,14 +457,14 @@ export interface QueryResolversByURLRequestAminoMsg {
 /** QueryResolversByURLRequest is the Query/ResolversByURL request type. */
 export interface QueryResolversByURLRequestSDKType {
   url: string;
-  pagination: PageRequestSDKType;
+  pagination?: PageRequestSDKType;
 }
 /** QueryResolversByURLResponse is the Query/ResolversByURL response type. */
 export interface QueryResolversByURLResponse {
   /** resolvers are the resolvers that have a matching URL. */
   resolvers: ResolverInfo[];
   /** pagination is the PageResponse to use for pagination. */
-  pagination: PageResponse;
+  pagination?: PageResponse;
 }
 export interface QueryResolversByURLResponseProtoMsg {
   typeUrl: "/regen.data.v1.QueryResolversByURLResponse";
@@ -473,7 +473,7 @@ export interface QueryResolversByURLResponseProtoMsg {
 /** QueryResolversByURLResponse is the Query/ResolversByURL response type. */
 export interface QueryResolversByURLResponseAmino {
   /** resolvers are the resolvers that have a matching URL. */
-  resolvers: ResolverInfoAmino[];
+  resolvers?: ResolverInfoAmino[];
   /** pagination is the PageResponse to use for pagination. */
   pagination?: PageResponseAmino;
 }
@@ -484,7 +484,7 @@ export interface QueryResolversByURLResponseAminoMsg {
 /** QueryResolversByURLResponse is the Query/ResolversByURL response type. */
 export interface QueryResolversByURLResponseSDKType {
   resolvers: ResolverInfoSDKType[];
-  pagination: PageResponseSDKType;
+  pagination?: PageResponseSDKType;
 }
 /** ConvertIRIToHashRequest is the Query/ConvertIRIToHash request type. */
 export interface ConvertIRIToHashRequest {
@@ -498,7 +498,7 @@ export interface ConvertIRIToHashRequestProtoMsg {
 /** ConvertIRIToHashRequest is the Query/ConvertIRIToHash request type. */
 export interface ConvertIRIToHashRequestAmino {
   /** iri is the IRI to convert to a ContentHash. */
-  iri: string;
+  iri?: string;
 }
 export interface ConvertIRIToHashRequestAminoMsg {
   type: "/regen.data.v1.ConvertIRIToHashRequest";
@@ -511,7 +511,7 @@ export interface ConvertIRIToHashRequestSDKType {
 /** ConvertIRIToHashResponse is the Query/ConvertIRIToHash response type. */
 export interface ConvertIRIToHashResponse {
   /** content_hash is the ContentHash converted from the IRI. */
-  contentHash: ContentHash;
+  contentHash?: ContentHash;
 }
 export interface ConvertIRIToHashResponseProtoMsg {
   typeUrl: "/regen.data.v1.ConvertIRIToHashResponse";
@@ -528,12 +528,12 @@ export interface ConvertIRIToHashResponseAminoMsg {
 }
 /** ConvertIRIToHashResponse is the Query/ConvertIRIToHash response type. */
 export interface ConvertIRIToHashResponseSDKType {
-  content_hash: ContentHashSDKType;
+  content_hash?: ContentHashSDKType;
 }
 /** ConvertHashToIRIRequest is the Query/ConvertHashToIRI request type. */
 export interface ConvertHashToIRIRequest {
   /** content_hash is the ContentHash to convert to an IRI. */
-  contentHash: ContentHash;
+  contentHash?: ContentHash;
 }
 export interface ConvertHashToIRIRequestProtoMsg {
   typeUrl: "/regen.data.v1.ConvertHashToIRIRequest";
@@ -550,7 +550,7 @@ export interface ConvertHashToIRIRequestAminoMsg {
 }
 /** ConvertHashToIRIRequest is the Query/ConvertHashToIRI request type. */
 export interface ConvertHashToIRIRequestSDKType {
-  content_hash: ContentHashSDKType;
+  content_hash?: ContentHashSDKType;
 }
 /** ConvertHashToIRIResponse is the Query/ConvertHashToIRI response type. */
 export interface ConvertHashToIRIResponse {
@@ -564,7 +564,7 @@ export interface ConvertHashToIRIResponseProtoMsg {
 /** ConvertHashToIRIResponse is the Query/ConvertHashToIRI response type. */
 export interface ConvertHashToIRIResponseAmino {
   /** iri is the IRI converted from the ContentHash. */
-  iri: string;
+  iri?: string;
 }
 export interface ConvertHashToIRIResponseAminoMsg {
   type: "/regen.data.v1.ConvertHashToIRIResponse";
@@ -579,9 +579,9 @@ export interface AnchorInfo {
   /** iri is the IRI of the anchored data. */
   iri: string;
   /** content_hash is the ContentHash of the anchored data. */
-  contentHash: ContentHash;
+  contentHash?: ContentHash;
   /** timestamp is the time at which the data was anchored. */
-  timestamp: Timestamp;
+  timestamp?: Timestamp;
 }
 export interface AnchorInfoProtoMsg {
   typeUrl: "/regen.data.v1.AnchorInfo";
@@ -590,11 +590,11 @@ export interface AnchorInfoProtoMsg {
 /** AnchorInfo is the information for a data anchor. */
 export interface AnchorInfoAmino {
   /** iri is the IRI of the anchored data. */
-  iri: string;
+  iri?: string;
   /** content_hash is the ContentHash of the anchored data. */
   content_hash?: ContentHashAmino;
   /** timestamp is the time at which the data was anchored. */
-  timestamp?: TimestampAmino;
+  timestamp?: string;
 }
 export interface AnchorInfoAminoMsg {
   type: "/regen.data.v1.AnchorInfo";
@@ -603,8 +603,8 @@ export interface AnchorInfoAminoMsg {
 /** AnchorInfo is the information for a data anchor. */
 export interface AnchorInfoSDKType {
   iri: string;
-  content_hash: ContentHashSDKType;
-  timestamp: TimestampSDKType;
+  content_hash?: ContentHashSDKType;
+  timestamp?: TimestampSDKType;
 }
 /** AttestationInfo is the information for an attestation. */
 export interface AttestationInfo {
@@ -613,7 +613,7 @@ export interface AttestationInfo {
   /** attestor is the address of the account that attested to the anchored data. */
   attestor: string;
   /** timestamp is the time at which the data was attested to. */
-  timestamp: Timestamp;
+  timestamp?: Timestamp;
 }
 export interface AttestationInfoProtoMsg {
   typeUrl: "/regen.data.v1.AttestationInfo";
@@ -622,11 +622,11 @@ export interface AttestationInfoProtoMsg {
 /** AttestationInfo is the information for an attestation. */
 export interface AttestationInfoAmino {
   /** iri is the IRI of the anchored data. */
-  iri: string;
+  iri?: string;
   /** attestor is the address of the account that attested to the anchored data. */
-  attestor: string;
+  attestor?: string;
   /** timestamp is the time at which the data was attested to. */
-  timestamp?: TimestampAmino;
+  timestamp?: string;
 }
 export interface AttestationInfoAminoMsg {
   type: "/regen.data.v1.AttestationInfo";
@@ -636,12 +636,12 @@ export interface AttestationInfoAminoMsg {
 export interface AttestationInfoSDKType {
   iri: string;
   attestor: string;
-  timestamp: TimestampSDKType;
+  timestamp?: TimestampSDKType;
 }
 /** ResolverInfo is the information for a resolver. */
 export interface ResolverInfo {
   /** id is the ID of the resolver. */
-  id: Long;
+  id: bigint;
   /** url is the URL of the resolver. */
   url: string;
   /** manager is the address of the account that manages the resolver. */
@@ -654,11 +654,11 @@ export interface ResolverInfoProtoMsg {
 /** ResolverInfo is the information for a resolver. */
 export interface ResolverInfoAmino {
   /** id is the ID of the resolver. */
-  id: string;
+  id?: string;
   /** url is the URL of the resolver. */
-  url: string;
+  url?: string;
   /** manager is the address of the account that manages the resolver. */
-  manager: string;
+  manager?: string;
 }
 export interface ResolverInfoAminoMsg {
   type: "/regen.data.v1.ResolverInfo";
@@ -666,7 +666,7 @@ export interface ResolverInfoAminoMsg {
 }
 /** ResolverInfo is the information for a resolver. */
 export interface ResolverInfoSDKType {
-  id: Long;
+  id: bigint;
   url: string;
   manager: string;
 }
@@ -676,14 +676,15 @@ function createBaseQueryAnchorByIRIRequest(): QueryAnchorByIRIRequest {
   };
 }
 export const QueryAnchorByIRIRequest = {
-  encode(message: QueryAnchorByIRIRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  typeUrl: "/regen.data.v1.QueryAnchorByIRIRequest",
+  encode(message: QueryAnchorByIRIRequest, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.iri !== "") {
       writer.uint32(10).string(message.iri);
     }
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): QueryAnchorByIRIRequest {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): QueryAnchorByIRIRequest {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryAnchorByIRIRequest();
     while (reader.pos < end) {
@@ -715,13 +716,15 @@ export const QueryAnchorByIRIRequest = {
     return message;
   },
   fromAmino(object: QueryAnchorByIRIRequestAmino): QueryAnchorByIRIRequest {
-    return {
-      iri: object.iri
-    };
+    const message = createBaseQueryAnchorByIRIRequest();
+    if (object.iri !== undefined && object.iri !== null) {
+      message.iri = object.iri;
+    }
+    return message;
   },
   toAmino(message: QueryAnchorByIRIRequest): QueryAnchorByIRIRequestAmino {
     const obj: any = {};
-    obj.iri = message.iri;
+    obj.iri = message.iri === "" ? undefined : message.iri;
     return obj;
   },
   fromAminoMsg(object: QueryAnchorByIRIRequestAminoMsg): QueryAnchorByIRIRequest {
@@ -742,18 +745,19 @@ export const QueryAnchorByIRIRequest = {
 };
 function createBaseQueryAnchorByIRIResponse(): QueryAnchorByIRIResponse {
   return {
-    anchor: AnchorInfo.fromPartial({})
+    anchor: undefined
   };
 }
 export const QueryAnchorByIRIResponse = {
-  encode(message: QueryAnchorByIRIResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  typeUrl: "/regen.data.v1.QueryAnchorByIRIResponse",
+  encode(message: QueryAnchorByIRIResponse, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.anchor !== undefined) {
       AnchorInfo.encode(message.anchor, writer.uint32(10).fork()).ldelim();
     }
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): QueryAnchorByIRIResponse {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): QueryAnchorByIRIResponse {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryAnchorByIRIResponse();
     while (reader.pos < end) {
@@ -785,9 +789,11 @@ export const QueryAnchorByIRIResponse = {
     return message;
   },
   fromAmino(object: QueryAnchorByIRIResponseAmino): QueryAnchorByIRIResponse {
-    return {
-      anchor: object?.anchor ? AnchorInfo.fromAmino(object.anchor) : undefined
-    };
+    const message = createBaseQueryAnchorByIRIResponse();
+    if (object.anchor !== undefined && object.anchor !== null) {
+      message.anchor = AnchorInfo.fromAmino(object.anchor);
+    }
+    return message;
   },
   toAmino(message: QueryAnchorByIRIResponse): QueryAnchorByIRIResponseAmino {
     const obj: any = {};
@@ -812,18 +818,19 @@ export const QueryAnchorByIRIResponse = {
 };
 function createBaseQueryAnchorByHashRequest(): QueryAnchorByHashRequest {
   return {
-    contentHash: ContentHash.fromPartial({})
+    contentHash: undefined
   };
 }
 export const QueryAnchorByHashRequest = {
-  encode(message: QueryAnchorByHashRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  typeUrl: "/regen.data.v1.QueryAnchorByHashRequest",
+  encode(message: QueryAnchorByHashRequest, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.contentHash !== undefined) {
       ContentHash.encode(message.contentHash, writer.uint32(10).fork()).ldelim();
     }
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): QueryAnchorByHashRequest {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): QueryAnchorByHashRequest {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryAnchorByHashRequest();
     while (reader.pos < end) {
@@ -855,9 +862,11 @@ export const QueryAnchorByHashRequest = {
     return message;
   },
   fromAmino(object: QueryAnchorByHashRequestAmino): QueryAnchorByHashRequest {
-    return {
-      contentHash: object?.content_hash ? ContentHash.fromAmino(object.content_hash) : undefined
-    };
+    const message = createBaseQueryAnchorByHashRequest();
+    if (object.content_hash !== undefined && object.content_hash !== null) {
+      message.contentHash = ContentHash.fromAmino(object.content_hash);
+    }
+    return message;
   },
   toAmino(message: QueryAnchorByHashRequest): QueryAnchorByHashRequestAmino {
     const obj: any = {};
@@ -882,18 +891,19 @@ export const QueryAnchorByHashRequest = {
 };
 function createBaseQueryAnchorByHashResponse(): QueryAnchorByHashResponse {
   return {
-    anchor: AnchorInfo.fromPartial({})
+    anchor: undefined
   };
 }
 export const QueryAnchorByHashResponse = {
-  encode(message: QueryAnchorByHashResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  typeUrl: "/regen.data.v1.QueryAnchorByHashResponse",
+  encode(message: QueryAnchorByHashResponse, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.anchor !== undefined) {
       AnchorInfo.encode(message.anchor, writer.uint32(10).fork()).ldelim();
     }
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): QueryAnchorByHashResponse {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): QueryAnchorByHashResponse {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryAnchorByHashResponse();
     while (reader.pos < end) {
@@ -925,9 +935,11 @@ export const QueryAnchorByHashResponse = {
     return message;
   },
   fromAmino(object: QueryAnchorByHashResponseAmino): QueryAnchorByHashResponse {
-    return {
-      anchor: object?.anchor ? AnchorInfo.fromAmino(object.anchor) : undefined
-    };
+    const message = createBaseQueryAnchorByHashResponse();
+    if (object.anchor !== undefined && object.anchor !== null) {
+      message.anchor = AnchorInfo.fromAmino(object.anchor);
+    }
+    return message;
   },
   toAmino(message: QueryAnchorByHashResponse): QueryAnchorByHashResponseAmino {
     const obj: any = {};
@@ -953,11 +965,12 @@ export const QueryAnchorByHashResponse = {
 function createBaseQueryAttestationsByAttestorRequest(): QueryAttestationsByAttestorRequest {
   return {
     attestor: "",
-    pagination: PageRequest.fromPartial({})
+    pagination: undefined
   };
 }
 export const QueryAttestationsByAttestorRequest = {
-  encode(message: QueryAttestationsByAttestorRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  typeUrl: "/regen.data.v1.QueryAttestationsByAttestorRequest",
+  encode(message: QueryAttestationsByAttestorRequest, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.attestor !== "") {
       writer.uint32(10).string(message.attestor);
     }
@@ -966,8 +979,8 @@ export const QueryAttestationsByAttestorRequest = {
     }
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): QueryAttestationsByAttestorRequest {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): QueryAttestationsByAttestorRequest {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryAttestationsByAttestorRequest();
     while (reader.pos < end) {
@@ -1005,14 +1018,18 @@ export const QueryAttestationsByAttestorRequest = {
     return message;
   },
   fromAmino(object: QueryAttestationsByAttestorRequestAmino): QueryAttestationsByAttestorRequest {
-    return {
-      attestor: object.attestor,
-      pagination: object?.pagination ? PageRequest.fromAmino(object.pagination) : undefined
-    };
+    const message = createBaseQueryAttestationsByAttestorRequest();
+    if (object.attestor !== undefined && object.attestor !== null) {
+      message.attestor = object.attestor;
+    }
+    if (object.pagination !== undefined && object.pagination !== null) {
+      message.pagination = PageRequest.fromAmino(object.pagination);
+    }
+    return message;
   },
   toAmino(message: QueryAttestationsByAttestorRequest): QueryAttestationsByAttestorRequestAmino {
     const obj: any = {};
-    obj.attestor = message.attestor;
+    obj.attestor = message.attestor === "" ? undefined : message.attestor;
     obj.pagination = message.pagination ? PageRequest.toAmino(message.pagination) : undefined;
     return obj;
   },
@@ -1035,11 +1052,12 @@ export const QueryAttestationsByAttestorRequest = {
 function createBaseQueryAttestationsByAttestorResponse(): QueryAttestationsByAttestorResponse {
   return {
     attestations: [],
-    pagination: PageResponse.fromPartial({})
+    pagination: undefined
   };
 }
 export const QueryAttestationsByAttestorResponse = {
-  encode(message: QueryAttestationsByAttestorResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  typeUrl: "/regen.data.v1.QueryAttestationsByAttestorResponse",
+  encode(message: QueryAttestationsByAttestorResponse, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     for (const v of message.attestations) {
       AttestationInfo.encode(v!, writer.uint32(10).fork()).ldelim();
     }
@@ -1048,8 +1066,8 @@ export const QueryAttestationsByAttestorResponse = {
     }
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): QueryAttestationsByAttestorResponse {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): QueryAttestationsByAttestorResponse {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryAttestationsByAttestorResponse();
     while (reader.pos < end) {
@@ -1091,17 +1109,19 @@ export const QueryAttestationsByAttestorResponse = {
     return message;
   },
   fromAmino(object: QueryAttestationsByAttestorResponseAmino): QueryAttestationsByAttestorResponse {
-    return {
-      attestations: Array.isArray(object?.attestations) ? object.attestations.map((e: any) => AttestationInfo.fromAmino(e)) : [],
-      pagination: object?.pagination ? PageResponse.fromAmino(object.pagination) : undefined
-    };
+    const message = createBaseQueryAttestationsByAttestorResponse();
+    message.attestations = object.attestations?.map(e => AttestationInfo.fromAmino(e)) || [];
+    if (object.pagination !== undefined && object.pagination !== null) {
+      message.pagination = PageResponse.fromAmino(object.pagination);
+    }
+    return message;
   },
   toAmino(message: QueryAttestationsByAttestorResponse): QueryAttestationsByAttestorResponseAmino {
     const obj: any = {};
     if (message.attestations) {
       obj.attestations = message.attestations.map(e => e ? AttestationInfo.toAmino(e) : undefined);
     } else {
-      obj.attestations = [];
+      obj.attestations = message.attestations;
     }
     obj.pagination = message.pagination ? PageResponse.toAmino(message.pagination) : undefined;
     return obj;
@@ -1125,11 +1145,12 @@ export const QueryAttestationsByAttestorResponse = {
 function createBaseQueryAttestationsByIRIRequest(): QueryAttestationsByIRIRequest {
   return {
     iri: "",
-    pagination: PageRequest.fromPartial({})
+    pagination: undefined
   };
 }
 export const QueryAttestationsByIRIRequest = {
-  encode(message: QueryAttestationsByIRIRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  typeUrl: "/regen.data.v1.QueryAttestationsByIRIRequest",
+  encode(message: QueryAttestationsByIRIRequest, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.iri !== "") {
       writer.uint32(10).string(message.iri);
     }
@@ -1138,8 +1159,8 @@ export const QueryAttestationsByIRIRequest = {
     }
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): QueryAttestationsByIRIRequest {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): QueryAttestationsByIRIRequest {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryAttestationsByIRIRequest();
     while (reader.pos < end) {
@@ -1177,14 +1198,18 @@ export const QueryAttestationsByIRIRequest = {
     return message;
   },
   fromAmino(object: QueryAttestationsByIRIRequestAmino): QueryAttestationsByIRIRequest {
-    return {
-      iri: object.iri,
-      pagination: object?.pagination ? PageRequest.fromAmino(object.pagination) : undefined
-    };
+    const message = createBaseQueryAttestationsByIRIRequest();
+    if (object.iri !== undefined && object.iri !== null) {
+      message.iri = object.iri;
+    }
+    if (object.pagination !== undefined && object.pagination !== null) {
+      message.pagination = PageRequest.fromAmino(object.pagination);
+    }
+    return message;
   },
   toAmino(message: QueryAttestationsByIRIRequest): QueryAttestationsByIRIRequestAmino {
     const obj: any = {};
-    obj.iri = message.iri;
+    obj.iri = message.iri === "" ? undefined : message.iri;
     obj.pagination = message.pagination ? PageRequest.toAmino(message.pagination) : undefined;
     return obj;
   },
@@ -1207,11 +1232,12 @@ export const QueryAttestationsByIRIRequest = {
 function createBaseQueryAttestationsByIRIResponse(): QueryAttestationsByIRIResponse {
   return {
     attestations: [],
-    pagination: PageResponse.fromPartial({})
+    pagination: undefined
   };
 }
 export const QueryAttestationsByIRIResponse = {
-  encode(message: QueryAttestationsByIRIResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  typeUrl: "/regen.data.v1.QueryAttestationsByIRIResponse",
+  encode(message: QueryAttestationsByIRIResponse, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     for (const v of message.attestations) {
       AttestationInfo.encode(v!, writer.uint32(10).fork()).ldelim();
     }
@@ -1220,8 +1246,8 @@ export const QueryAttestationsByIRIResponse = {
     }
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): QueryAttestationsByIRIResponse {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): QueryAttestationsByIRIResponse {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryAttestationsByIRIResponse();
     while (reader.pos < end) {
@@ -1263,17 +1289,19 @@ export const QueryAttestationsByIRIResponse = {
     return message;
   },
   fromAmino(object: QueryAttestationsByIRIResponseAmino): QueryAttestationsByIRIResponse {
-    return {
-      attestations: Array.isArray(object?.attestations) ? object.attestations.map((e: any) => AttestationInfo.fromAmino(e)) : [],
-      pagination: object?.pagination ? PageResponse.fromAmino(object.pagination) : undefined
-    };
+    const message = createBaseQueryAttestationsByIRIResponse();
+    message.attestations = object.attestations?.map(e => AttestationInfo.fromAmino(e)) || [];
+    if (object.pagination !== undefined && object.pagination !== null) {
+      message.pagination = PageResponse.fromAmino(object.pagination);
+    }
+    return message;
   },
   toAmino(message: QueryAttestationsByIRIResponse): QueryAttestationsByIRIResponseAmino {
     const obj: any = {};
     if (message.attestations) {
       obj.attestations = message.attestations.map(e => e ? AttestationInfo.toAmino(e) : undefined);
     } else {
-      obj.attestations = [];
+      obj.attestations = message.attestations;
     }
     obj.pagination = message.pagination ? PageResponse.toAmino(message.pagination) : undefined;
     return obj;
@@ -1296,12 +1324,13 @@ export const QueryAttestationsByIRIResponse = {
 };
 function createBaseQueryAttestationsByHashRequest(): QueryAttestationsByHashRequest {
   return {
-    contentHash: ContentHash.fromPartial({}),
-    pagination: PageRequest.fromPartial({})
+    contentHash: undefined,
+    pagination: undefined
   };
 }
 export const QueryAttestationsByHashRequest = {
-  encode(message: QueryAttestationsByHashRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  typeUrl: "/regen.data.v1.QueryAttestationsByHashRequest",
+  encode(message: QueryAttestationsByHashRequest, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.contentHash !== undefined) {
       ContentHash.encode(message.contentHash, writer.uint32(10).fork()).ldelim();
     }
@@ -1310,8 +1339,8 @@ export const QueryAttestationsByHashRequest = {
     }
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): QueryAttestationsByHashRequest {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): QueryAttestationsByHashRequest {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryAttestationsByHashRequest();
     while (reader.pos < end) {
@@ -1349,10 +1378,14 @@ export const QueryAttestationsByHashRequest = {
     return message;
   },
   fromAmino(object: QueryAttestationsByHashRequestAmino): QueryAttestationsByHashRequest {
-    return {
-      contentHash: object?.content_hash ? ContentHash.fromAmino(object.content_hash) : undefined,
-      pagination: object?.pagination ? PageRequest.fromAmino(object.pagination) : undefined
-    };
+    const message = createBaseQueryAttestationsByHashRequest();
+    if (object.content_hash !== undefined && object.content_hash !== null) {
+      message.contentHash = ContentHash.fromAmino(object.content_hash);
+    }
+    if (object.pagination !== undefined && object.pagination !== null) {
+      message.pagination = PageRequest.fromAmino(object.pagination);
+    }
+    return message;
   },
   toAmino(message: QueryAttestationsByHashRequest): QueryAttestationsByHashRequestAmino {
     const obj: any = {};
@@ -1379,11 +1412,12 @@ export const QueryAttestationsByHashRequest = {
 function createBaseQueryAttestationsByHashResponse(): QueryAttestationsByHashResponse {
   return {
     attestations: [],
-    pagination: PageResponse.fromPartial({})
+    pagination: undefined
   };
 }
 export const QueryAttestationsByHashResponse = {
-  encode(message: QueryAttestationsByHashResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  typeUrl: "/regen.data.v1.QueryAttestationsByHashResponse",
+  encode(message: QueryAttestationsByHashResponse, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     for (const v of message.attestations) {
       AttestationInfo.encode(v!, writer.uint32(10).fork()).ldelim();
     }
@@ -1392,8 +1426,8 @@ export const QueryAttestationsByHashResponse = {
     }
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): QueryAttestationsByHashResponse {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): QueryAttestationsByHashResponse {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryAttestationsByHashResponse();
     while (reader.pos < end) {
@@ -1435,17 +1469,19 @@ export const QueryAttestationsByHashResponse = {
     return message;
   },
   fromAmino(object: QueryAttestationsByHashResponseAmino): QueryAttestationsByHashResponse {
-    return {
-      attestations: Array.isArray(object?.attestations) ? object.attestations.map((e: any) => AttestationInfo.fromAmino(e)) : [],
-      pagination: object?.pagination ? PageResponse.fromAmino(object.pagination) : undefined
-    };
+    const message = createBaseQueryAttestationsByHashResponse();
+    message.attestations = object.attestations?.map(e => AttestationInfo.fromAmino(e)) || [];
+    if (object.pagination !== undefined && object.pagination !== null) {
+      message.pagination = PageResponse.fromAmino(object.pagination);
+    }
+    return message;
   },
   toAmino(message: QueryAttestationsByHashResponse): QueryAttestationsByHashResponseAmino {
     const obj: any = {};
     if (message.attestations) {
       obj.attestations = message.attestations.map(e => e ? AttestationInfo.toAmino(e) : undefined);
     } else {
-      obj.attestations = [];
+      obj.attestations = message.attestations;
     }
     obj.pagination = message.pagination ? PageResponse.toAmino(message.pagination) : undefined;
     return obj;
@@ -1468,25 +1504,26 @@ export const QueryAttestationsByHashResponse = {
 };
 function createBaseQueryResolverRequest(): QueryResolverRequest {
   return {
-    id: Long.UZERO
+    id: BigInt(0)
   };
 }
 export const QueryResolverRequest = {
-  encode(message: QueryResolverRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
-    if (!message.id.isZero()) {
+  typeUrl: "/regen.data.v1.QueryResolverRequest",
+  encode(message: QueryResolverRequest, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
+    if (message.id !== BigInt(0)) {
       writer.uint32(8).uint64(message.id);
     }
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): QueryResolverRequest {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): QueryResolverRequest {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryResolverRequest();
     while (reader.pos < end) {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          message.id = (reader.uint64() as Long);
+          message.id = reader.uint64();
           break;
         default:
           reader.skipType(tag & 7);
@@ -1497,27 +1534,29 @@ export const QueryResolverRequest = {
   },
   fromJSON(object: any): QueryResolverRequest {
     return {
-      id: isSet(object.id) ? Long.fromValue(object.id) : Long.UZERO
+      id: isSet(object.id) ? BigInt(object.id.toString()) : BigInt(0)
     };
   },
   toJSON(message: QueryResolverRequest): unknown {
     const obj: any = {};
-    message.id !== undefined && (obj.id = (message.id || Long.UZERO).toString());
+    message.id !== undefined && (obj.id = (message.id || BigInt(0)).toString());
     return obj;
   },
   fromPartial(object: Partial<QueryResolverRequest>): QueryResolverRequest {
     const message = createBaseQueryResolverRequest();
-    message.id = object.id !== undefined && object.id !== null ? Long.fromValue(object.id) : Long.UZERO;
+    message.id = object.id !== undefined && object.id !== null ? BigInt(object.id.toString()) : BigInt(0);
     return message;
   },
   fromAmino(object: QueryResolverRequestAmino): QueryResolverRequest {
-    return {
-      id: Long.fromString(object.id)
-    };
+    const message = createBaseQueryResolverRequest();
+    if (object.id !== undefined && object.id !== null) {
+      message.id = BigInt(object.id);
+    }
+    return message;
   },
   toAmino(message: QueryResolverRequest): QueryResolverRequestAmino {
     const obj: any = {};
-    obj.id = message.id ? message.id.toString() : undefined;
+    obj.id = message.id !== BigInt(0) ? message.id.toString() : undefined;
     return obj;
   },
   fromAminoMsg(object: QueryResolverRequestAminoMsg): QueryResolverRequest {
@@ -1538,18 +1577,19 @@ export const QueryResolverRequest = {
 };
 function createBaseQueryResolverResponse(): QueryResolverResponse {
   return {
-    resolver: ResolverInfo.fromPartial({})
+    resolver: undefined
   };
 }
 export const QueryResolverResponse = {
-  encode(message: QueryResolverResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  typeUrl: "/regen.data.v1.QueryResolverResponse",
+  encode(message: QueryResolverResponse, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.resolver !== undefined) {
       ResolverInfo.encode(message.resolver, writer.uint32(10).fork()).ldelim();
     }
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): QueryResolverResponse {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): QueryResolverResponse {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryResolverResponse();
     while (reader.pos < end) {
@@ -1581,9 +1621,11 @@ export const QueryResolverResponse = {
     return message;
   },
   fromAmino(object: QueryResolverResponseAmino): QueryResolverResponse {
-    return {
-      resolver: object?.resolver ? ResolverInfo.fromAmino(object.resolver) : undefined
-    };
+    const message = createBaseQueryResolverResponse();
+    if (object.resolver !== undefined && object.resolver !== null) {
+      message.resolver = ResolverInfo.fromAmino(object.resolver);
+    }
+    return message;
   },
   toAmino(message: QueryResolverResponse): QueryResolverResponseAmino {
     const obj: any = {};
@@ -1609,11 +1651,12 @@ export const QueryResolverResponse = {
 function createBaseQueryResolversByIRIRequest(): QueryResolversByIRIRequest {
   return {
     iri: "",
-    pagination: PageRequest.fromPartial({})
+    pagination: undefined
   };
 }
 export const QueryResolversByIRIRequest = {
-  encode(message: QueryResolversByIRIRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  typeUrl: "/regen.data.v1.QueryResolversByIRIRequest",
+  encode(message: QueryResolversByIRIRequest, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.iri !== "") {
       writer.uint32(10).string(message.iri);
     }
@@ -1622,8 +1665,8 @@ export const QueryResolversByIRIRequest = {
     }
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): QueryResolversByIRIRequest {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): QueryResolversByIRIRequest {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryResolversByIRIRequest();
     while (reader.pos < end) {
@@ -1661,14 +1704,18 @@ export const QueryResolversByIRIRequest = {
     return message;
   },
   fromAmino(object: QueryResolversByIRIRequestAmino): QueryResolversByIRIRequest {
-    return {
-      iri: object.iri,
-      pagination: object?.pagination ? PageRequest.fromAmino(object.pagination) : undefined
-    };
+    const message = createBaseQueryResolversByIRIRequest();
+    if (object.iri !== undefined && object.iri !== null) {
+      message.iri = object.iri;
+    }
+    if (object.pagination !== undefined && object.pagination !== null) {
+      message.pagination = PageRequest.fromAmino(object.pagination);
+    }
+    return message;
   },
   toAmino(message: QueryResolversByIRIRequest): QueryResolversByIRIRequestAmino {
     const obj: any = {};
-    obj.iri = message.iri;
+    obj.iri = message.iri === "" ? undefined : message.iri;
     obj.pagination = message.pagination ? PageRequest.toAmino(message.pagination) : undefined;
     return obj;
   },
@@ -1691,11 +1738,12 @@ export const QueryResolversByIRIRequest = {
 function createBaseQueryResolversByIRIResponse(): QueryResolversByIRIResponse {
   return {
     resolvers: [],
-    pagination: PageResponse.fromPartial({})
+    pagination: undefined
   };
 }
 export const QueryResolversByIRIResponse = {
-  encode(message: QueryResolversByIRIResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  typeUrl: "/regen.data.v1.QueryResolversByIRIResponse",
+  encode(message: QueryResolversByIRIResponse, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     for (const v of message.resolvers) {
       ResolverInfo.encode(v!, writer.uint32(10).fork()).ldelim();
     }
@@ -1704,8 +1752,8 @@ export const QueryResolversByIRIResponse = {
     }
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): QueryResolversByIRIResponse {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): QueryResolversByIRIResponse {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryResolversByIRIResponse();
     while (reader.pos < end) {
@@ -1747,17 +1795,19 @@ export const QueryResolversByIRIResponse = {
     return message;
   },
   fromAmino(object: QueryResolversByIRIResponseAmino): QueryResolversByIRIResponse {
-    return {
-      resolvers: Array.isArray(object?.resolvers) ? object.resolvers.map((e: any) => ResolverInfo.fromAmino(e)) : [],
-      pagination: object?.pagination ? PageResponse.fromAmino(object.pagination) : undefined
-    };
+    const message = createBaseQueryResolversByIRIResponse();
+    message.resolvers = object.resolvers?.map(e => ResolverInfo.fromAmino(e)) || [];
+    if (object.pagination !== undefined && object.pagination !== null) {
+      message.pagination = PageResponse.fromAmino(object.pagination);
+    }
+    return message;
   },
   toAmino(message: QueryResolversByIRIResponse): QueryResolversByIRIResponseAmino {
     const obj: any = {};
     if (message.resolvers) {
       obj.resolvers = message.resolvers.map(e => e ? ResolverInfo.toAmino(e) : undefined);
     } else {
-      obj.resolvers = [];
+      obj.resolvers = message.resolvers;
     }
     obj.pagination = message.pagination ? PageResponse.toAmino(message.pagination) : undefined;
     return obj;
@@ -1780,12 +1830,13 @@ export const QueryResolversByIRIResponse = {
 };
 function createBaseQueryResolversByHashRequest(): QueryResolversByHashRequest {
   return {
-    contentHash: ContentHash.fromPartial({}),
-    pagination: PageRequest.fromPartial({})
+    contentHash: undefined,
+    pagination: undefined
   };
 }
 export const QueryResolversByHashRequest = {
-  encode(message: QueryResolversByHashRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  typeUrl: "/regen.data.v1.QueryResolversByHashRequest",
+  encode(message: QueryResolversByHashRequest, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.contentHash !== undefined) {
       ContentHash.encode(message.contentHash, writer.uint32(10).fork()).ldelim();
     }
@@ -1794,8 +1845,8 @@ export const QueryResolversByHashRequest = {
     }
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): QueryResolversByHashRequest {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): QueryResolversByHashRequest {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryResolversByHashRequest();
     while (reader.pos < end) {
@@ -1833,10 +1884,14 @@ export const QueryResolversByHashRequest = {
     return message;
   },
   fromAmino(object: QueryResolversByHashRequestAmino): QueryResolversByHashRequest {
-    return {
-      contentHash: object?.content_hash ? ContentHash.fromAmino(object.content_hash) : undefined,
-      pagination: object?.pagination ? PageRequest.fromAmino(object.pagination) : undefined
-    };
+    const message = createBaseQueryResolversByHashRequest();
+    if (object.content_hash !== undefined && object.content_hash !== null) {
+      message.contentHash = ContentHash.fromAmino(object.content_hash);
+    }
+    if (object.pagination !== undefined && object.pagination !== null) {
+      message.pagination = PageRequest.fromAmino(object.pagination);
+    }
+    return message;
   },
   toAmino(message: QueryResolversByHashRequest): QueryResolversByHashRequestAmino {
     const obj: any = {};
@@ -1863,11 +1918,12 @@ export const QueryResolversByHashRequest = {
 function createBaseQueryResolversByHashResponse(): QueryResolversByHashResponse {
   return {
     resolvers: [],
-    pagination: PageResponse.fromPartial({})
+    pagination: undefined
   };
 }
 export const QueryResolversByHashResponse = {
-  encode(message: QueryResolversByHashResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  typeUrl: "/regen.data.v1.QueryResolversByHashResponse",
+  encode(message: QueryResolversByHashResponse, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     for (const v of message.resolvers) {
       ResolverInfo.encode(v!, writer.uint32(10).fork()).ldelim();
     }
@@ -1876,8 +1932,8 @@ export const QueryResolversByHashResponse = {
     }
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): QueryResolversByHashResponse {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): QueryResolversByHashResponse {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryResolversByHashResponse();
     while (reader.pos < end) {
@@ -1919,17 +1975,19 @@ export const QueryResolversByHashResponse = {
     return message;
   },
   fromAmino(object: QueryResolversByHashResponseAmino): QueryResolversByHashResponse {
-    return {
-      resolvers: Array.isArray(object?.resolvers) ? object.resolvers.map((e: any) => ResolverInfo.fromAmino(e)) : [],
-      pagination: object?.pagination ? PageResponse.fromAmino(object.pagination) : undefined
-    };
+    const message = createBaseQueryResolversByHashResponse();
+    message.resolvers = object.resolvers?.map(e => ResolverInfo.fromAmino(e)) || [];
+    if (object.pagination !== undefined && object.pagination !== null) {
+      message.pagination = PageResponse.fromAmino(object.pagination);
+    }
+    return message;
   },
   toAmino(message: QueryResolversByHashResponse): QueryResolversByHashResponseAmino {
     const obj: any = {};
     if (message.resolvers) {
       obj.resolvers = message.resolvers.map(e => e ? ResolverInfo.toAmino(e) : undefined);
     } else {
-      obj.resolvers = [];
+      obj.resolvers = message.resolvers;
     }
     obj.pagination = message.pagination ? PageResponse.toAmino(message.pagination) : undefined;
     return obj;
@@ -1953,11 +2011,12 @@ export const QueryResolversByHashResponse = {
 function createBaseQueryResolversByURLRequest(): QueryResolversByURLRequest {
   return {
     url: "",
-    pagination: PageRequest.fromPartial({})
+    pagination: undefined
   };
 }
 export const QueryResolversByURLRequest = {
-  encode(message: QueryResolversByURLRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  typeUrl: "/regen.data.v1.QueryResolversByURLRequest",
+  encode(message: QueryResolversByURLRequest, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.url !== "") {
       writer.uint32(10).string(message.url);
     }
@@ -1966,8 +2025,8 @@ export const QueryResolversByURLRequest = {
     }
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): QueryResolversByURLRequest {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): QueryResolversByURLRequest {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryResolversByURLRequest();
     while (reader.pos < end) {
@@ -2005,14 +2064,18 @@ export const QueryResolversByURLRequest = {
     return message;
   },
   fromAmino(object: QueryResolversByURLRequestAmino): QueryResolversByURLRequest {
-    return {
-      url: object.url,
-      pagination: object?.pagination ? PageRequest.fromAmino(object.pagination) : undefined
-    };
+    const message = createBaseQueryResolversByURLRequest();
+    if (object.url !== undefined && object.url !== null) {
+      message.url = object.url;
+    }
+    if (object.pagination !== undefined && object.pagination !== null) {
+      message.pagination = PageRequest.fromAmino(object.pagination);
+    }
+    return message;
   },
   toAmino(message: QueryResolversByURLRequest): QueryResolversByURLRequestAmino {
     const obj: any = {};
-    obj.url = message.url;
+    obj.url = message.url === "" ? undefined : message.url;
     obj.pagination = message.pagination ? PageRequest.toAmino(message.pagination) : undefined;
     return obj;
   },
@@ -2035,11 +2098,12 @@ export const QueryResolversByURLRequest = {
 function createBaseQueryResolversByURLResponse(): QueryResolversByURLResponse {
   return {
     resolvers: [],
-    pagination: PageResponse.fromPartial({})
+    pagination: undefined
   };
 }
 export const QueryResolversByURLResponse = {
-  encode(message: QueryResolversByURLResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  typeUrl: "/regen.data.v1.QueryResolversByURLResponse",
+  encode(message: QueryResolversByURLResponse, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     for (const v of message.resolvers) {
       ResolverInfo.encode(v!, writer.uint32(10).fork()).ldelim();
     }
@@ -2048,8 +2112,8 @@ export const QueryResolversByURLResponse = {
     }
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): QueryResolversByURLResponse {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): QueryResolversByURLResponse {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryResolversByURLResponse();
     while (reader.pos < end) {
@@ -2091,17 +2155,19 @@ export const QueryResolversByURLResponse = {
     return message;
   },
   fromAmino(object: QueryResolversByURLResponseAmino): QueryResolversByURLResponse {
-    return {
-      resolvers: Array.isArray(object?.resolvers) ? object.resolvers.map((e: any) => ResolverInfo.fromAmino(e)) : [],
-      pagination: object?.pagination ? PageResponse.fromAmino(object.pagination) : undefined
-    };
+    const message = createBaseQueryResolversByURLResponse();
+    message.resolvers = object.resolvers?.map(e => ResolverInfo.fromAmino(e)) || [];
+    if (object.pagination !== undefined && object.pagination !== null) {
+      message.pagination = PageResponse.fromAmino(object.pagination);
+    }
+    return message;
   },
   toAmino(message: QueryResolversByURLResponse): QueryResolversByURLResponseAmino {
     const obj: any = {};
     if (message.resolvers) {
       obj.resolvers = message.resolvers.map(e => e ? ResolverInfo.toAmino(e) : undefined);
     } else {
-      obj.resolvers = [];
+      obj.resolvers = message.resolvers;
     }
     obj.pagination = message.pagination ? PageResponse.toAmino(message.pagination) : undefined;
     return obj;
@@ -2128,14 +2194,15 @@ function createBaseConvertIRIToHashRequest(): ConvertIRIToHashRequest {
   };
 }
 export const ConvertIRIToHashRequest = {
-  encode(message: ConvertIRIToHashRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  typeUrl: "/regen.data.v1.ConvertIRIToHashRequest",
+  encode(message: ConvertIRIToHashRequest, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.iri !== "") {
       writer.uint32(10).string(message.iri);
     }
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): ConvertIRIToHashRequest {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): ConvertIRIToHashRequest {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseConvertIRIToHashRequest();
     while (reader.pos < end) {
@@ -2167,13 +2234,15 @@ export const ConvertIRIToHashRequest = {
     return message;
   },
   fromAmino(object: ConvertIRIToHashRequestAmino): ConvertIRIToHashRequest {
-    return {
-      iri: object.iri
-    };
+    const message = createBaseConvertIRIToHashRequest();
+    if (object.iri !== undefined && object.iri !== null) {
+      message.iri = object.iri;
+    }
+    return message;
   },
   toAmino(message: ConvertIRIToHashRequest): ConvertIRIToHashRequestAmino {
     const obj: any = {};
-    obj.iri = message.iri;
+    obj.iri = message.iri === "" ? undefined : message.iri;
     return obj;
   },
   fromAminoMsg(object: ConvertIRIToHashRequestAminoMsg): ConvertIRIToHashRequest {
@@ -2194,18 +2263,19 @@ export const ConvertIRIToHashRequest = {
 };
 function createBaseConvertIRIToHashResponse(): ConvertIRIToHashResponse {
   return {
-    contentHash: ContentHash.fromPartial({})
+    contentHash: undefined
   };
 }
 export const ConvertIRIToHashResponse = {
-  encode(message: ConvertIRIToHashResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  typeUrl: "/regen.data.v1.ConvertIRIToHashResponse",
+  encode(message: ConvertIRIToHashResponse, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.contentHash !== undefined) {
       ContentHash.encode(message.contentHash, writer.uint32(10).fork()).ldelim();
     }
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): ConvertIRIToHashResponse {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): ConvertIRIToHashResponse {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseConvertIRIToHashResponse();
     while (reader.pos < end) {
@@ -2237,9 +2307,11 @@ export const ConvertIRIToHashResponse = {
     return message;
   },
   fromAmino(object: ConvertIRIToHashResponseAmino): ConvertIRIToHashResponse {
-    return {
-      contentHash: object?.content_hash ? ContentHash.fromAmino(object.content_hash) : undefined
-    };
+    const message = createBaseConvertIRIToHashResponse();
+    if (object.content_hash !== undefined && object.content_hash !== null) {
+      message.contentHash = ContentHash.fromAmino(object.content_hash);
+    }
+    return message;
   },
   toAmino(message: ConvertIRIToHashResponse): ConvertIRIToHashResponseAmino {
     const obj: any = {};
@@ -2264,18 +2336,19 @@ export const ConvertIRIToHashResponse = {
 };
 function createBaseConvertHashToIRIRequest(): ConvertHashToIRIRequest {
   return {
-    contentHash: ContentHash.fromPartial({})
+    contentHash: undefined
   };
 }
 export const ConvertHashToIRIRequest = {
-  encode(message: ConvertHashToIRIRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  typeUrl: "/regen.data.v1.ConvertHashToIRIRequest",
+  encode(message: ConvertHashToIRIRequest, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.contentHash !== undefined) {
       ContentHash.encode(message.contentHash, writer.uint32(10).fork()).ldelim();
     }
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): ConvertHashToIRIRequest {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): ConvertHashToIRIRequest {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseConvertHashToIRIRequest();
     while (reader.pos < end) {
@@ -2307,9 +2380,11 @@ export const ConvertHashToIRIRequest = {
     return message;
   },
   fromAmino(object: ConvertHashToIRIRequestAmino): ConvertHashToIRIRequest {
-    return {
-      contentHash: object?.content_hash ? ContentHash.fromAmino(object.content_hash) : undefined
-    };
+    const message = createBaseConvertHashToIRIRequest();
+    if (object.content_hash !== undefined && object.content_hash !== null) {
+      message.contentHash = ContentHash.fromAmino(object.content_hash);
+    }
+    return message;
   },
   toAmino(message: ConvertHashToIRIRequest): ConvertHashToIRIRequestAmino {
     const obj: any = {};
@@ -2338,14 +2413,15 @@ function createBaseConvertHashToIRIResponse(): ConvertHashToIRIResponse {
   };
 }
 export const ConvertHashToIRIResponse = {
-  encode(message: ConvertHashToIRIResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  typeUrl: "/regen.data.v1.ConvertHashToIRIResponse",
+  encode(message: ConvertHashToIRIResponse, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.iri !== "") {
       writer.uint32(10).string(message.iri);
     }
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): ConvertHashToIRIResponse {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): ConvertHashToIRIResponse {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseConvertHashToIRIResponse();
     while (reader.pos < end) {
@@ -2377,13 +2453,15 @@ export const ConvertHashToIRIResponse = {
     return message;
   },
   fromAmino(object: ConvertHashToIRIResponseAmino): ConvertHashToIRIResponse {
-    return {
-      iri: object.iri
-    };
+    const message = createBaseConvertHashToIRIResponse();
+    if (object.iri !== undefined && object.iri !== null) {
+      message.iri = object.iri;
+    }
+    return message;
   },
   toAmino(message: ConvertHashToIRIResponse): ConvertHashToIRIResponseAmino {
     const obj: any = {};
-    obj.iri = message.iri;
+    obj.iri = message.iri === "" ? undefined : message.iri;
     return obj;
   },
   fromAminoMsg(object: ConvertHashToIRIResponseAminoMsg): ConvertHashToIRIResponse {
@@ -2405,12 +2483,13 @@ export const ConvertHashToIRIResponse = {
 function createBaseAnchorInfo(): AnchorInfo {
   return {
     iri: "",
-    contentHash: ContentHash.fromPartial({}),
+    contentHash: undefined,
     timestamp: undefined
   };
 }
 export const AnchorInfo = {
-  encode(message: AnchorInfo, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  typeUrl: "/regen.data.v1.AnchorInfo",
+  encode(message: AnchorInfo, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.iri !== "") {
       writer.uint32(10).string(message.iri);
     }
@@ -2422,8 +2501,8 @@ export const AnchorInfo = {
     }
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): AnchorInfo {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): AnchorInfo {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseAnchorInfo();
     while (reader.pos < end) {
@@ -2467,15 +2546,21 @@ export const AnchorInfo = {
     return message;
   },
   fromAmino(object: AnchorInfoAmino): AnchorInfo {
-    return {
-      iri: object.iri,
-      contentHash: object?.content_hash ? ContentHash.fromAmino(object.content_hash) : undefined,
-      timestamp: object?.timestamp ? Timestamp.fromAmino(object.timestamp) : undefined
-    };
+    const message = createBaseAnchorInfo();
+    if (object.iri !== undefined && object.iri !== null) {
+      message.iri = object.iri;
+    }
+    if (object.content_hash !== undefined && object.content_hash !== null) {
+      message.contentHash = ContentHash.fromAmino(object.content_hash);
+    }
+    if (object.timestamp !== undefined && object.timestamp !== null) {
+      message.timestamp = Timestamp.fromAmino(object.timestamp);
+    }
+    return message;
   },
   toAmino(message: AnchorInfo): AnchorInfoAmino {
     const obj: any = {};
-    obj.iri = message.iri;
+    obj.iri = message.iri === "" ? undefined : message.iri;
     obj.content_hash = message.contentHash ? ContentHash.toAmino(message.contentHash) : undefined;
     obj.timestamp = message.timestamp ? Timestamp.toAmino(message.timestamp) : undefined;
     return obj;
@@ -2504,7 +2589,8 @@ function createBaseAttestationInfo(): AttestationInfo {
   };
 }
 export const AttestationInfo = {
-  encode(message: AttestationInfo, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  typeUrl: "/regen.data.v1.AttestationInfo",
+  encode(message: AttestationInfo, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.iri !== "") {
       writer.uint32(10).string(message.iri);
     }
@@ -2516,8 +2602,8 @@ export const AttestationInfo = {
     }
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): AttestationInfo {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): AttestationInfo {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseAttestationInfo();
     while (reader.pos < end) {
@@ -2561,16 +2647,22 @@ export const AttestationInfo = {
     return message;
   },
   fromAmino(object: AttestationInfoAmino): AttestationInfo {
-    return {
-      iri: object.iri,
-      attestor: object.attestor,
-      timestamp: object?.timestamp ? Timestamp.fromAmino(object.timestamp) : undefined
-    };
+    const message = createBaseAttestationInfo();
+    if (object.iri !== undefined && object.iri !== null) {
+      message.iri = object.iri;
+    }
+    if (object.attestor !== undefined && object.attestor !== null) {
+      message.attestor = object.attestor;
+    }
+    if (object.timestamp !== undefined && object.timestamp !== null) {
+      message.timestamp = Timestamp.fromAmino(object.timestamp);
+    }
+    return message;
   },
   toAmino(message: AttestationInfo): AttestationInfoAmino {
     const obj: any = {};
-    obj.iri = message.iri;
-    obj.attestor = message.attestor;
+    obj.iri = message.iri === "" ? undefined : message.iri;
+    obj.attestor = message.attestor === "" ? undefined : message.attestor;
     obj.timestamp = message.timestamp ? Timestamp.toAmino(message.timestamp) : undefined;
     return obj;
   },
@@ -2592,14 +2684,15 @@ export const AttestationInfo = {
 };
 function createBaseResolverInfo(): ResolverInfo {
   return {
-    id: Long.UZERO,
+    id: BigInt(0),
     url: "",
     manager: ""
   };
 }
 export const ResolverInfo = {
-  encode(message: ResolverInfo, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
-    if (!message.id.isZero()) {
+  typeUrl: "/regen.data.v1.ResolverInfo",
+  encode(message: ResolverInfo, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
+    if (message.id !== BigInt(0)) {
       writer.uint32(8).uint64(message.id);
     }
     if (message.url !== "") {
@@ -2610,15 +2703,15 @@ export const ResolverInfo = {
     }
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): ResolverInfo {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): ResolverInfo {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseResolverInfo();
     while (reader.pos < end) {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          message.id = (reader.uint64() as Long);
+          message.id = reader.uint64();
           break;
         case 2:
           message.url = reader.string();
@@ -2635,37 +2728,43 @@ export const ResolverInfo = {
   },
   fromJSON(object: any): ResolverInfo {
     return {
-      id: isSet(object.id) ? Long.fromValue(object.id) : Long.UZERO,
+      id: isSet(object.id) ? BigInt(object.id.toString()) : BigInt(0),
       url: isSet(object.url) ? String(object.url) : "",
       manager: isSet(object.manager) ? String(object.manager) : ""
     };
   },
   toJSON(message: ResolverInfo): unknown {
     const obj: any = {};
-    message.id !== undefined && (obj.id = (message.id || Long.UZERO).toString());
+    message.id !== undefined && (obj.id = (message.id || BigInt(0)).toString());
     message.url !== undefined && (obj.url = message.url);
     message.manager !== undefined && (obj.manager = message.manager);
     return obj;
   },
   fromPartial(object: Partial<ResolverInfo>): ResolverInfo {
     const message = createBaseResolverInfo();
-    message.id = object.id !== undefined && object.id !== null ? Long.fromValue(object.id) : Long.UZERO;
+    message.id = object.id !== undefined && object.id !== null ? BigInt(object.id.toString()) : BigInt(0);
     message.url = object.url ?? "";
     message.manager = object.manager ?? "";
     return message;
   },
   fromAmino(object: ResolverInfoAmino): ResolverInfo {
-    return {
-      id: Long.fromString(object.id),
-      url: object.url,
-      manager: object.manager
-    };
+    const message = createBaseResolverInfo();
+    if (object.id !== undefined && object.id !== null) {
+      message.id = BigInt(object.id);
+    }
+    if (object.url !== undefined && object.url !== null) {
+      message.url = object.url;
+    }
+    if (object.manager !== undefined && object.manager !== null) {
+      message.manager = object.manager;
+    }
+    return message;
   },
   toAmino(message: ResolverInfo): ResolverInfoAmino {
     const obj: any = {};
-    obj.id = message.id ? message.id.toString() : undefined;
-    obj.url = message.url;
-    obj.manager = message.manager;
+    obj.id = message.id !== BigInt(0) ? message.id.toString() : undefined;
+    obj.url = message.url === "" ? undefined : message.url;
+    obj.manager = message.manager === "" ? undefined : message.manager;
     return obj;
   },
   fromAminoMsg(object: ResolverInfoAminoMsg): ResolverInfo {

@@ -1,4 +1,4 @@
-import * as _m0 from "protobufjs/minimal";
+import { BinaryReader, BinaryWriter } from "../../../binary";
 import { isSet } from "../../../helpers";
 /** EventSend is emitted on Msg/Send */
 export interface EventSend {
@@ -13,10 +13,10 @@ export interface EventSendProtoMsg {
 }
 /** EventSend is emitted on Msg/Send */
 export interface EventSendAmino {
-  class_id: string;
-  id: string;
-  sender: string;
-  receiver: string;
+  class_id?: string;
+  id?: string;
+  sender?: string;
+  receiver?: string;
 }
 export interface EventSendAminoMsg {
   type: "cosmos-sdk/EventSend";
@@ -41,9 +41,9 @@ export interface EventMintProtoMsg {
 }
 /** EventMint is emitted on Mint */
 export interface EventMintAmino {
-  class_id: string;
-  id: string;
-  owner: string;
+  class_id?: string;
+  id?: string;
+  owner?: string;
 }
 export interface EventMintAminoMsg {
   type: "cosmos-sdk/EventMint";
@@ -67,9 +67,9 @@ export interface EventBurnProtoMsg {
 }
 /** EventBurn is emitted on Burn */
 export interface EventBurnAmino {
-  class_id: string;
-  id: string;
-  owner: string;
+  class_id?: string;
+  id?: string;
+  owner?: string;
 }
 export interface EventBurnAminoMsg {
   type: "cosmos-sdk/EventBurn";
@@ -90,7 +90,8 @@ function createBaseEventSend(): EventSend {
   };
 }
 export const EventSend = {
-  encode(message: EventSend, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  typeUrl: "/cosmos.nft.v1beta1.EventSend",
+  encode(message: EventSend, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.classId !== "") {
       writer.uint32(10).string(message.classId);
     }
@@ -105,8 +106,8 @@ export const EventSend = {
     }
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): EventSend {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): EventSend {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseEventSend();
     while (reader.pos < end) {
@@ -156,19 +157,27 @@ export const EventSend = {
     return message;
   },
   fromAmino(object: EventSendAmino): EventSend {
-    return {
-      classId: object.class_id,
-      id: object.id,
-      sender: object.sender,
-      receiver: object.receiver
-    };
+    const message = createBaseEventSend();
+    if (object.class_id !== undefined && object.class_id !== null) {
+      message.classId = object.class_id;
+    }
+    if (object.id !== undefined && object.id !== null) {
+      message.id = object.id;
+    }
+    if (object.sender !== undefined && object.sender !== null) {
+      message.sender = object.sender;
+    }
+    if (object.receiver !== undefined && object.receiver !== null) {
+      message.receiver = object.receiver;
+    }
+    return message;
   },
   toAmino(message: EventSend): EventSendAmino {
     const obj: any = {};
-    obj.class_id = message.classId;
-    obj.id = message.id;
-    obj.sender = message.sender;
-    obj.receiver = message.receiver;
+    obj.class_id = message.classId === "" ? undefined : message.classId;
+    obj.id = message.id === "" ? undefined : message.id;
+    obj.sender = message.sender === "" ? undefined : message.sender;
+    obj.receiver = message.receiver === "" ? undefined : message.receiver;
     return obj;
   },
   fromAminoMsg(object: EventSendAminoMsg): EventSend {
@@ -201,7 +210,8 @@ function createBaseEventMint(): EventMint {
   };
 }
 export const EventMint = {
-  encode(message: EventMint, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  typeUrl: "/cosmos.nft.v1beta1.EventMint",
+  encode(message: EventMint, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.classId !== "") {
       writer.uint32(10).string(message.classId);
     }
@@ -213,8 +223,8 @@ export const EventMint = {
     }
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): EventMint {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): EventMint {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseEventMint();
     while (reader.pos < end) {
@@ -258,17 +268,23 @@ export const EventMint = {
     return message;
   },
   fromAmino(object: EventMintAmino): EventMint {
-    return {
-      classId: object.class_id,
-      id: object.id,
-      owner: object.owner
-    };
+    const message = createBaseEventMint();
+    if (object.class_id !== undefined && object.class_id !== null) {
+      message.classId = object.class_id;
+    }
+    if (object.id !== undefined && object.id !== null) {
+      message.id = object.id;
+    }
+    if (object.owner !== undefined && object.owner !== null) {
+      message.owner = object.owner;
+    }
+    return message;
   },
   toAmino(message: EventMint): EventMintAmino {
     const obj: any = {};
-    obj.class_id = message.classId;
-    obj.id = message.id;
-    obj.owner = message.owner;
+    obj.class_id = message.classId === "" ? undefined : message.classId;
+    obj.id = message.id === "" ? undefined : message.id;
+    obj.owner = message.owner === "" ? undefined : message.owner;
     return obj;
   },
   fromAminoMsg(object: EventMintAminoMsg): EventMint {
@@ -301,7 +317,8 @@ function createBaseEventBurn(): EventBurn {
   };
 }
 export const EventBurn = {
-  encode(message: EventBurn, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  typeUrl: "/cosmos.nft.v1beta1.EventBurn",
+  encode(message: EventBurn, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.classId !== "") {
       writer.uint32(10).string(message.classId);
     }
@@ -313,8 +330,8 @@ export const EventBurn = {
     }
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): EventBurn {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): EventBurn {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseEventBurn();
     while (reader.pos < end) {
@@ -358,17 +375,23 @@ export const EventBurn = {
     return message;
   },
   fromAmino(object: EventBurnAmino): EventBurn {
-    return {
-      classId: object.class_id,
-      id: object.id,
-      owner: object.owner
-    };
+    const message = createBaseEventBurn();
+    if (object.class_id !== undefined && object.class_id !== null) {
+      message.classId = object.class_id;
+    }
+    if (object.id !== undefined && object.id !== null) {
+      message.id = object.id;
+    }
+    if (object.owner !== undefined && object.owner !== null) {
+      message.owner = object.owner;
+    }
+    return message;
   },
   toAmino(message: EventBurn): EventBurnAmino {
     const obj: any = {};
-    obj.class_id = message.classId;
-    obj.id = message.id;
-    obj.owner = message.owner;
+    obj.class_id = message.classId === "" ? undefined : message.classId;
+    obj.id = message.id === "" ? undefined : message.id;
+    obj.owner = message.owner === "" ? undefined : message.owner;
     return obj;
   },
   fromAminoMsg(object: EventBurnAminoMsg): EventBurn {

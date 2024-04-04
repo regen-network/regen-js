@@ -1,5 +1,5 @@
 import { Rpc } from "../../../../helpers";
-import * as _m0 from "protobufjs/minimal";
+import { BinaryReader } from "../../../../binary";
 import { MsgSell, MsgSellResponse, MsgUpdateSellOrders, MsgUpdateSellOrdersResponse, MsgCancelSellOrder, MsgCancelSellOrderResponse, MsgBuyDirect, MsgBuyDirectResponse, MsgAddAllowedDenom, MsgAddAllowedDenomResponse, MsgRemoveAllowedDenom, MsgRemoveAllowedDenomResponse } from "./tx";
 /** Msg is the regen.ecocredit.marketplace.v1 Msg service. */
 export interface Msg {
@@ -39,31 +39,31 @@ export class MsgClientImpl implements Msg {
   sell(request: MsgSell): Promise<MsgSellResponse> {
     const data = MsgSell.encode(request).finish();
     const promise = this.rpc.request("regen.ecocredit.marketplace.v1.Msg", "Sell", data);
-    return promise.then(data => MsgSellResponse.decode(new _m0.Reader(data)));
+    return promise.then(data => MsgSellResponse.decode(new BinaryReader(data)));
   }
   updateSellOrders(request: MsgUpdateSellOrders): Promise<MsgUpdateSellOrdersResponse> {
     const data = MsgUpdateSellOrders.encode(request).finish();
     const promise = this.rpc.request("regen.ecocredit.marketplace.v1.Msg", "UpdateSellOrders", data);
-    return promise.then(data => MsgUpdateSellOrdersResponse.decode(new _m0.Reader(data)));
+    return promise.then(data => MsgUpdateSellOrdersResponse.decode(new BinaryReader(data)));
   }
   cancelSellOrder(request: MsgCancelSellOrder): Promise<MsgCancelSellOrderResponse> {
     const data = MsgCancelSellOrder.encode(request).finish();
     const promise = this.rpc.request("regen.ecocredit.marketplace.v1.Msg", "CancelSellOrder", data);
-    return promise.then(data => MsgCancelSellOrderResponse.decode(new _m0.Reader(data)));
+    return promise.then(data => MsgCancelSellOrderResponse.decode(new BinaryReader(data)));
   }
   buyDirect(request: MsgBuyDirect): Promise<MsgBuyDirectResponse> {
     const data = MsgBuyDirect.encode(request).finish();
     const promise = this.rpc.request("regen.ecocredit.marketplace.v1.Msg", "BuyDirect", data);
-    return promise.then(data => MsgBuyDirectResponse.decode(new _m0.Reader(data)));
+    return promise.then(data => MsgBuyDirectResponse.decode(new BinaryReader(data)));
   }
   addAllowedDenom(request: MsgAddAllowedDenom): Promise<MsgAddAllowedDenomResponse> {
     const data = MsgAddAllowedDenom.encode(request).finish();
     const promise = this.rpc.request("regen.ecocredit.marketplace.v1.Msg", "AddAllowedDenom", data);
-    return promise.then(data => MsgAddAllowedDenomResponse.decode(new _m0.Reader(data)));
+    return promise.then(data => MsgAddAllowedDenomResponse.decode(new BinaryReader(data)));
   }
   removeAllowedDenom(request: MsgRemoveAllowedDenom): Promise<MsgRemoveAllowedDenomResponse> {
     const data = MsgRemoveAllowedDenom.encode(request).finish();
     const promise = this.rpc.request("regen.ecocredit.marketplace.v1.Msg", "RemoveAllowedDenom", data);
-    return promise.then(data => MsgRemoveAllowedDenomResponse.decode(new _m0.Reader(data)));
+    return promise.then(data => MsgRemoveAllowedDenomResponse.decode(new BinaryReader(data)));
   }
 }

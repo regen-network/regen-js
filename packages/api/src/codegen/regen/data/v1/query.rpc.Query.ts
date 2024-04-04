@@ -1,5 +1,5 @@
 import { Rpc } from "../../../helpers";
-import * as _m0 from "protobufjs/minimal";
+import { BinaryReader } from "../../../binary";
 import { QueryClient, createProtobufRpcClient } from "@cosmjs/stargate";
 import { QueryAnchorByIRIRequest, QueryAnchorByIRIResponse, QueryAnchorByHashRequest, QueryAnchorByHashResponse, QueryAttestationsByAttestorRequest, QueryAttestationsByAttestorResponse, QueryAttestationsByIRIRequest, QueryAttestationsByIRIResponse, QueryAttestationsByHashRequest, QueryAttestationsByHashResponse, QueryResolverRequest, QueryResolverResponse, QueryResolversByIRIRequest, QueryResolversByIRIResponse, QueryResolversByHashRequest, QueryResolversByHashResponse, QueryResolversByURLRequest, QueryResolversByURLResponse, ConvertIRIToHashRequest, ConvertIRIToHashResponse, ConvertHashToIRIRequest, ConvertHashToIRIResponse } from "./query";
 /** Query is the regen.data.v1 Query service */
@@ -55,57 +55,57 @@ export class QueryClientImpl implements Query {
   anchorByIRI(request: QueryAnchorByIRIRequest): Promise<QueryAnchorByIRIResponse> {
     const data = QueryAnchorByIRIRequest.encode(request).finish();
     const promise = this.rpc.request("regen.data.v1.Query", "AnchorByIRI", data);
-    return promise.then(data => QueryAnchorByIRIResponse.decode(new _m0.Reader(data)));
+    return promise.then(data => QueryAnchorByIRIResponse.decode(new BinaryReader(data)));
   }
   anchorByHash(request: QueryAnchorByHashRequest): Promise<QueryAnchorByHashResponse> {
     const data = QueryAnchorByHashRequest.encode(request).finish();
     const promise = this.rpc.request("regen.data.v1.Query", "AnchorByHash", data);
-    return promise.then(data => QueryAnchorByHashResponse.decode(new _m0.Reader(data)));
+    return promise.then(data => QueryAnchorByHashResponse.decode(new BinaryReader(data)));
   }
   attestationsByAttestor(request: QueryAttestationsByAttestorRequest): Promise<QueryAttestationsByAttestorResponse> {
     const data = QueryAttestationsByAttestorRequest.encode(request).finish();
     const promise = this.rpc.request("regen.data.v1.Query", "AttestationsByAttestor", data);
-    return promise.then(data => QueryAttestationsByAttestorResponse.decode(new _m0.Reader(data)));
+    return promise.then(data => QueryAttestationsByAttestorResponse.decode(new BinaryReader(data)));
   }
   attestationsByIRI(request: QueryAttestationsByIRIRequest): Promise<QueryAttestationsByIRIResponse> {
     const data = QueryAttestationsByIRIRequest.encode(request).finish();
     const promise = this.rpc.request("regen.data.v1.Query", "AttestationsByIRI", data);
-    return promise.then(data => QueryAttestationsByIRIResponse.decode(new _m0.Reader(data)));
+    return promise.then(data => QueryAttestationsByIRIResponse.decode(new BinaryReader(data)));
   }
   attestationsByHash(request: QueryAttestationsByHashRequest): Promise<QueryAttestationsByHashResponse> {
     const data = QueryAttestationsByHashRequest.encode(request).finish();
     const promise = this.rpc.request("regen.data.v1.Query", "AttestationsByHash", data);
-    return promise.then(data => QueryAttestationsByHashResponse.decode(new _m0.Reader(data)));
+    return promise.then(data => QueryAttestationsByHashResponse.decode(new BinaryReader(data)));
   }
   resolver(request: QueryResolverRequest): Promise<QueryResolverResponse> {
     const data = QueryResolverRequest.encode(request).finish();
     const promise = this.rpc.request("regen.data.v1.Query", "Resolver", data);
-    return promise.then(data => QueryResolverResponse.decode(new _m0.Reader(data)));
+    return promise.then(data => QueryResolverResponse.decode(new BinaryReader(data)));
   }
   resolversByIRI(request: QueryResolversByIRIRequest): Promise<QueryResolversByIRIResponse> {
     const data = QueryResolversByIRIRequest.encode(request).finish();
     const promise = this.rpc.request("regen.data.v1.Query", "ResolversByIRI", data);
-    return promise.then(data => QueryResolversByIRIResponse.decode(new _m0.Reader(data)));
+    return promise.then(data => QueryResolversByIRIResponse.decode(new BinaryReader(data)));
   }
   resolversByHash(request: QueryResolversByHashRequest): Promise<QueryResolversByHashResponse> {
     const data = QueryResolversByHashRequest.encode(request).finish();
     const promise = this.rpc.request("regen.data.v1.Query", "ResolversByHash", data);
-    return promise.then(data => QueryResolversByHashResponse.decode(new _m0.Reader(data)));
+    return promise.then(data => QueryResolversByHashResponse.decode(new BinaryReader(data)));
   }
   resolversByURL(request: QueryResolversByURLRequest): Promise<QueryResolversByURLResponse> {
     const data = QueryResolversByURLRequest.encode(request).finish();
     const promise = this.rpc.request("regen.data.v1.Query", "ResolversByURL", data);
-    return promise.then(data => QueryResolversByURLResponse.decode(new _m0.Reader(data)));
+    return promise.then(data => QueryResolversByURLResponse.decode(new BinaryReader(data)));
   }
   convertIRIToHash(request: ConvertIRIToHashRequest): Promise<ConvertIRIToHashResponse> {
     const data = ConvertIRIToHashRequest.encode(request).finish();
     const promise = this.rpc.request("regen.data.v1.Query", "ConvertIRIToHash", data);
-    return promise.then(data => ConvertIRIToHashResponse.decode(new _m0.Reader(data)));
+    return promise.then(data => ConvertIRIToHashResponse.decode(new BinaryReader(data)));
   }
   convertHashToIRI(request: ConvertHashToIRIRequest): Promise<ConvertHashToIRIResponse> {
     const data = ConvertHashToIRIRequest.encode(request).finish();
     const promise = this.rpc.request("regen.data.v1.Query", "ConvertHashToIRI", data);
-    return promise.then(data => ConvertHashToIRIResponse.decode(new _m0.Reader(data)));
+    return promise.then(data => ConvertHashToIRIResponse.decode(new BinaryReader(data)));
   }
 }
 export const createRpcQueryExtension = (base: QueryClient) => {

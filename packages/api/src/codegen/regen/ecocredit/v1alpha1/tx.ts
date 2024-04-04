@@ -1,5 +1,5 @@
-import { Timestamp, TimestampAmino, TimestampSDKType } from "../../../google/protobuf/timestamp";
-import * as _m0 from "protobufjs/minimal";
+import { Timestamp, TimestampSDKType } from "../../../google/protobuf/timestamp";
+import { BinaryReader, BinaryWriter } from "../../../binary";
 import { isSet, bytesFromBase64, base64FromBytes, fromJsonTimestamp, fromTimestamp } from "../../../helpers";
 /** MsgCreateClass is the Msg/CreateClass request type. */
 export interface MsgCreateClass {
@@ -22,16 +22,16 @@ export interface MsgCreateClassProtoMsg {
 /** MsgCreateClass is the Msg/CreateClass request type. */
 export interface MsgCreateClassAmino {
   /** admin is the address of the account that created the credit class. */
-  admin: string;
+  admin?: string;
   /** issuers are the account addresses of the approved issuers. */
-  issuers: string[];
+  issuers?: string[];
   /** metadata is any arbitrary metadata to attached to the credit class. */
-  metadata: Uint8Array;
+  metadata?: string;
   /**
    * credit_type_name describes the type of credit (e.g. "carbon",
    * "biodiversity").
    */
-  credit_type_name: string;
+  credit_type_name?: string;
 }
 export interface MsgCreateClassAminoMsg {
   type: "/regen.ecocredit.v1alpha1.MsgCreateClass";
@@ -56,7 +56,7 @@ export interface MsgCreateClassResponseProtoMsg {
 /** MsgCreateClassResponse is the Msg/CreateClass response type. */
 export interface MsgCreateClassResponseAmino {
   /** class_id is the unique ID of the newly created credit class. */
-  class_id: string;
+  class_id?: string;
 }
 export interface MsgCreateClassResponseAminoMsg {
   type: "/regen.ecocredit.v1alpha1.MsgCreateClassResponse";
@@ -80,12 +80,12 @@ export interface MsgCreateBatch {
    * start_date is the beginning of the period during which this credit batch
    * was quantified and verified.
    */
-  startDate: Timestamp;
+  startDate?: Timestamp;
   /**
    * end_date is the end of the period during which this credit batch was
    * quantified and verified.
    */
-  endDate: Timestamp;
+  endDate?: Timestamp;
   /**
    * project_location is the location of the project backing the credits in this
    * batch. It is a string of the form
@@ -103,23 +103,23 @@ export interface MsgCreateBatchProtoMsg {
 /** MsgCreateBatch is the Msg/CreateBatch request type. */
 export interface MsgCreateBatchAmino {
   /** issuer is the address of the batch issuer. */
-  issuer: string;
+  issuer?: string;
   /** class_id is the unique ID of the class. */
-  class_id: string;
+  class_id?: string;
   /** issuance are the credits issued in the batch. */
-  issuance: MsgCreateBatch_BatchIssuanceAmino[];
+  issuance?: MsgCreateBatch_BatchIssuanceAmino[];
   /** metadata is any arbitrary metadata attached to the credit batch. */
-  metadata: Uint8Array;
+  metadata?: string;
   /**
    * start_date is the beginning of the period during which this credit batch
    * was quantified and verified.
    */
-  start_date?: TimestampAmino;
+  start_date?: string;
   /**
    * end_date is the end of the period during which this credit batch was
    * quantified and verified.
    */
-  end_date?: TimestampAmino;
+  end_date?: string;
   /**
    * project_location is the location of the project backing the credits in this
    * batch. It is a string of the form
@@ -128,7 +128,7 @@ export interface MsgCreateBatchAmino {
    * alphanumeric characters. country-code is required, while sub-national-code
    * and postal-code can be added for increasing precision.
    */
-  project_location: string;
+  project_location?: string;
 }
 export interface MsgCreateBatchAminoMsg {
   type: "/regen.ecocredit.v1alpha1.MsgCreateBatch";
@@ -140,8 +140,8 @@ export interface MsgCreateBatchSDKType {
   class_id: string;
   issuance: MsgCreateBatch_BatchIssuanceSDKType[];
   metadata: Uint8Array;
-  start_date: TimestampSDKType;
-  end_date: TimestampSDKType;
+  start_date?: TimestampSDKType;
+  end_date?: TimestampSDKType;
   project_location: string;
 }
 /**
@@ -182,18 +182,18 @@ export interface MsgCreateBatch_BatchIssuanceProtoMsg {
  */
 export interface MsgCreateBatch_BatchIssuanceAmino {
   /** recipient is the account of the recipient. */
-  recipient: string;
+  recipient?: string;
   /**
    * tradable_amount is the number of credits in this issuance that can be
    * traded by this recipient. Decimal values are acceptable.
    */
-  tradable_amount: string;
+  tradable_amount?: string;
   /**
    * retired_amount is the number of credits in this issuance that are
    * effectively retired by the issuer on receipt. Decimal values are
    * acceptable.
    */
-  retired_amount: string;
+  retired_amount?: string;
   /**
    * retirement_location is the location of the beneficiary or buyer of the
    * retired credits. This must be provided if retired_amount is positive. It
@@ -202,7 +202,7 @@ export interface MsgCreateBatch_BatchIssuanceAmino {
    * fields conforming to ISO 3166-2, and postal-code being up to 64
    * alphanumeric characters.
    */
-  retirement_location: string;
+  retirement_location?: string;
 }
 export interface MsgCreateBatch_BatchIssuanceAminoMsg {
   type: "/regen.ecocredit.v1alpha1.BatchIssuance";
@@ -230,7 +230,7 @@ export interface MsgCreateBatchResponseProtoMsg {
 /** MsgCreateBatchResponse is the Msg/CreateBatch response type. */
 export interface MsgCreateBatchResponseAmino {
   /** batch_denom is the unique denomination ID of the newly created batch. */
-  batch_denom: string;
+  batch_denom?: string;
 }
 export interface MsgCreateBatchResponseAminoMsg {
   type: "/regen.ecocredit.v1alpha1.MsgCreateBatchResponse";
@@ -256,11 +256,11 @@ export interface MsgSendProtoMsg {
 /** MsgSend is the Msg/Send request type. */
 export interface MsgSendAmino {
   /** sender is the address of the account sending credits. */
-  sender: string;
+  sender?: string;
   /** sender is the address of the account receiving credits. */
-  recipient: string;
+  recipient?: string;
   /** credits are the credits being sent. */
-  credits: MsgSend_SendCreditsAmino[];
+  credits?: MsgSend_SendCreditsAmino[];
 }
 export interface MsgSendAminoMsg {
   type: "/regen.ecocredit.v1alpha1.MsgSend";
@@ -313,19 +313,19 @@ export interface MsgSend_SendCreditsProtoMsg {
  */
 export interface MsgSend_SendCreditsAmino {
   /** batch_denom is the unique ID of the credit batch. */
-  batch_denom: string;
+  batch_denom?: string;
   /**
    * tradable_amount is the number of credits in this transfer that can be
    * traded by the recipient. Decimal values are acceptable within the
    * precision returned by Query/Precision.
    */
-  tradable_amount: string;
+  tradable_amount?: string;
   /**
    * retired_amount is the number of credits in this transfer that are
    * effectively retired by the issuer on receipt. Decimal values are
    * acceptable within the precision returned by Query/Precision.
    */
-  retired_amount: string;
+  retired_amount?: string;
   /**
    * retirement_location is the location of the beneficiary or buyer of the
    * retired credits. This must be provided if retired_amount is positive. It
@@ -334,7 +334,7 @@ export interface MsgSend_SendCreditsAmino {
    * fields conforming to ISO 3166-2, and postal-code being up to 64
    * alphanumeric characters.
    */
-  retirement_location: string;
+  retirement_location?: string;
 }
 export interface MsgSend_SendCreditsAminoMsg {
   type: "/regen.ecocredit.v1alpha1.SendCredits";
@@ -387,9 +387,9 @@ export interface MsgRetireProtoMsg {
 /** MsgRetire is the Msg/Retire request type. */
 export interface MsgRetireAmino {
   /** holder is the credit holder address. */
-  holder: string;
+  holder?: string;
   /** credits are the credits being retired. */
-  credits: MsgRetire_RetireCreditsAmino[];
+  credits?: MsgRetire_RetireCreditsAmino[];
   /**
    * location is the location of the beneficiary or buyer of the retired
    * credits. It is a string of the form
@@ -397,7 +397,7 @@ export interface MsgRetireAmino {
    * fields conforming to ISO 3166-2, and postal-code being up to 64
    * alphanumeric characters.
    */
-  location: string;
+  location?: string;
 }
 export interface MsgRetireAminoMsg {
   type: "/regen.ecocredit.v1alpha1.MsgRetire";
@@ -427,13 +427,13 @@ export interface MsgRetire_RetireCreditsProtoMsg {
 /** RetireCredits specifies a batch and the number of credits being retired. */
 export interface MsgRetire_RetireCreditsAmino {
   /** batch_denom is the unique ID of the credit batch. */
-  batch_denom: string;
+  batch_denom?: string;
   /**
    * amount is the number of credits being retired.
    * Decimal values are acceptable within the precision returned by
    * Query/Precision.
    */
-  amount: string;
+  amount?: string;
 }
 export interface MsgRetire_RetireCreditsAminoMsg {
   type: "/regen.ecocredit.v1alpha1.RetireCredits";
@@ -472,9 +472,9 @@ export interface MsgCancelProtoMsg {
 /** MsgCancel is the Msg/Cancel request type. */
 export interface MsgCancelAmino {
   /** holder is the credit holder address. */
-  holder: string;
+  holder?: string;
   /** credits are the credits being cancelled. */
-  credits: MsgCancel_CancelCreditsAmino[];
+  credits?: MsgCancel_CancelCreditsAmino[];
 }
 export interface MsgCancelAminoMsg {
   type: "/regen.ecocredit.v1alpha1.MsgCancel";
@@ -503,13 +503,13 @@ export interface MsgCancel_CancelCreditsProtoMsg {
 /** CancelCredits specifies a batch and the number of credits being cancelled. */
 export interface MsgCancel_CancelCreditsAmino {
   /** batch_denom is the unique ID of the credit batch. */
-  batch_denom: string;
+  batch_denom?: string;
   /**
    * amount is the number of credits being cancelled.
    * Decimal values are acceptable within the precision returned by
    * Query/Precision.
    */
-  amount: string;
+  amount?: string;
 }
 export interface MsgCancel_CancelCreditsAminoMsg {
   type: "/regen.ecocredit.v1alpha1.CancelCredits";
@@ -550,11 +550,11 @@ export interface MsgUpdateClassAdminProtoMsg {
 /** MsgUpdateClassAdmin is the Msg/UpdateClassAdmin request type. */
 export interface MsgUpdateClassAdminAmino {
   /** admin is the address of the account that is the admin of the credit class. */
-  admin: string;
+  admin?: string;
   /** class_id is the unique ID of the credit class. */
-  class_id: string;
+  class_id?: string;
   /** new_admin is the address of the new admin of the credit class. */
-  new_admin: string;
+  new_admin?: string;
 }
 export interface MsgUpdateClassAdminAminoMsg {
   type: "/regen.ecocredit.v1alpha1.MsgUpdateClassAdmin";
@@ -596,11 +596,11 @@ export interface MsgUpdateClassIssuersProtoMsg {
 /** MsgUpdateClassIssuers is the Msg/UpdateClassIssuers request type. */
 export interface MsgUpdateClassIssuersAmino {
   /** admin is the address of the account that is the admin of the credit class. */
-  admin: string;
+  admin?: string;
   /** class_id is the unique ID of the credit class. */
-  class_id: string;
+  class_id?: string;
   /** issuers are the updated account addresses of the approved issuers. */
-  issuers: string[];
+  issuers?: string[];
 }
 export interface MsgUpdateClassIssuersAminoMsg {
   type: "/regen.ecocredit.v1alpha1.MsgUpdateClassIssuers";
@@ -645,14 +645,14 @@ export interface MsgUpdateClassMetadataProtoMsg {
 /** MsgUpdateClassMetadata is the Msg/UpdateClassMetadata request type. */
 export interface MsgUpdateClassMetadataAmino {
   /** admin is the address of the account that is the admin of the credit class. */
-  admin: string;
+  admin?: string;
   /** class_id is the unique ID of the credit class. */
-  class_id: string;
+  class_id?: string;
   /**
    * metadata is the updated arbitrary metadata to be attached to the credit
    * class.
    */
-  metadata: Uint8Array;
+  metadata?: string;
 }
 export interface MsgUpdateClassMetadataAminoMsg {
   type: "/regen.ecocredit.v1alpha1.MsgUpdateClassMetadata";
@@ -687,7 +687,8 @@ function createBaseMsgCreateClass(): MsgCreateClass {
   };
 }
 export const MsgCreateClass = {
-  encode(message: MsgCreateClass, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  typeUrl: "/regen.ecocredit.v1alpha1.MsgCreateClass",
+  encode(message: MsgCreateClass, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.admin !== "") {
       writer.uint32(10).string(message.admin);
     }
@@ -702,8 +703,8 @@ export const MsgCreateClass = {
     }
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): MsgCreateClass {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): MsgCreateClass {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMsgCreateClass();
     while (reader.pos < end) {
@@ -757,23 +758,29 @@ export const MsgCreateClass = {
     return message;
   },
   fromAmino(object: MsgCreateClassAmino): MsgCreateClass {
-    return {
-      admin: object.admin,
-      issuers: Array.isArray(object?.issuers) ? object.issuers.map((e: any) => e) : [],
-      metadata: object.metadata,
-      creditTypeName: object.credit_type_name
-    };
+    const message = createBaseMsgCreateClass();
+    if (object.admin !== undefined && object.admin !== null) {
+      message.admin = object.admin;
+    }
+    message.issuers = object.issuers?.map(e => e) || [];
+    if (object.metadata !== undefined && object.metadata !== null) {
+      message.metadata = bytesFromBase64(object.metadata);
+    }
+    if (object.credit_type_name !== undefined && object.credit_type_name !== null) {
+      message.creditTypeName = object.credit_type_name;
+    }
+    return message;
   },
   toAmino(message: MsgCreateClass): MsgCreateClassAmino {
     const obj: any = {};
-    obj.admin = message.admin;
+    obj.admin = message.admin === "" ? undefined : message.admin;
     if (message.issuers) {
       obj.issuers = message.issuers.map(e => e);
     } else {
-      obj.issuers = [];
+      obj.issuers = message.issuers;
     }
-    obj.metadata = message.metadata;
-    obj.credit_type_name = message.creditTypeName;
+    obj.metadata = message.metadata ? base64FromBytes(message.metadata) : undefined;
+    obj.credit_type_name = message.creditTypeName === "" ? undefined : message.creditTypeName;
     return obj;
   },
   fromAminoMsg(object: MsgCreateClassAminoMsg): MsgCreateClass {
@@ -798,14 +805,15 @@ function createBaseMsgCreateClassResponse(): MsgCreateClassResponse {
   };
 }
 export const MsgCreateClassResponse = {
-  encode(message: MsgCreateClassResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  typeUrl: "/regen.ecocredit.v1alpha1.MsgCreateClassResponse",
+  encode(message: MsgCreateClassResponse, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.classId !== "") {
       writer.uint32(10).string(message.classId);
     }
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): MsgCreateClassResponse {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): MsgCreateClassResponse {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMsgCreateClassResponse();
     while (reader.pos < end) {
@@ -837,13 +845,15 @@ export const MsgCreateClassResponse = {
     return message;
   },
   fromAmino(object: MsgCreateClassResponseAmino): MsgCreateClassResponse {
-    return {
-      classId: object.class_id
-    };
+    const message = createBaseMsgCreateClassResponse();
+    if (object.class_id !== undefined && object.class_id !== null) {
+      message.classId = object.class_id;
+    }
+    return message;
   },
   toAmino(message: MsgCreateClassResponse): MsgCreateClassResponseAmino {
     const obj: any = {};
-    obj.class_id = message.classId;
+    obj.class_id = message.classId === "" ? undefined : message.classId;
     return obj;
   },
   fromAminoMsg(object: MsgCreateClassResponseAminoMsg): MsgCreateClassResponse {
@@ -874,7 +884,8 @@ function createBaseMsgCreateBatch(): MsgCreateBatch {
   };
 }
 export const MsgCreateBatch = {
-  encode(message: MsgCreateBatch, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  typeUrl: "/regen.ecocredit.v1alpha1.MsgCreateBatch",
+  encode(message: MsgCreateBatch, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.issuer !== "") {
       writer.uint32(10).string(message.issuer);
     }
@@ -898,8 +909,8 @@ export const MsgCreateBatch = {
     }
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): MsgCreateBatch {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): MsgCreateBatch {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMsgCreateBatch();
     while (reader.pos < end) {
@@ -971,29 +982,41 @@ export const MsgCreateBatch = {
     return message;
   },
   fromAmino(object: MsgCreateBatchAmino): MsgCreateBatch {
-    return {
-      issuer: object.issuer,
-      classId: object.class_id,
-      issuance: Array.isArray(object?.issuance) ? object.issuance.map((e: any) => MsgCreateBatch_BatchIssuance.fromAmino(e)) : [],
-      metadata: object.metadata,
-      startDate: object?.start_date ? Timestamp.fromAmino(object.start_date) : undefined,
-      endDate: object?.end_date ? Timestamp.fromAmino(object.end_date) : undefined,
-      projectLocation: object.project_location
-    };
+    const message = createBaseMsgCreateBatch();
+    if (object.issuer !== undefined && object.issuer !== null) {
+      message.issuer = object.issuer;
+    }
+    if (object.class_id !== undefined && object.class_id !== null) {
+      message.classId = object.class_id;
+    }
+    message.issuance = object.issuance?.map(e => MsgCreateBatch_BatchIssuance.fromAmino(e)) || [];
+    if (object.metadata !== undefined && object.metadata !== null) {
+      message.metadata = bytesFromBase64(object.metadata);
+    }
+    if (object.start_date !== undefined && object.start_date !== null) {
+      message.startDate = Timestamp.fromAmino(object.start_date);
+    }
+    if (object.end_date !== undefined && object.end_date !== null) {
+      message.endDate = Timestamp.fromAmino(object.end_date);
+    }
+    if (object.project_location !== undefined && object.project_location !== null) {
+      message.projectLocation = object.project_location;
+    }
+    return message;
   },
   toAmino(message: MsgCreateBatch): MsgCreateBatchAmino {
     const obj: any = {};
-    obj.issuer = message.issuer;
-    obj.class_id = message.classId;
+    obj.issuer = message.issuer === "" ? undefined : message.issuer;
+    obj.class_id = message.classId === "" ? undefined : message.classId;
     if (message.issuance) {
       obj.issuance = message.issuance.map(e => e ? MsgCreateBatch_BatchIssuance.toAmino(e) : undefined);
     } else {
-      obj.issuance = [];
+      obj.issuance = message.issuance;
     }
-    obj.metadata = message.metadata;
+    obj.metadata = message.metadata ? base64FromBytes(message.metadata) : undefined;
     obj.start_date = message.startDate ? Timestamp.toAmino(message.startDate) : undefined;
     obj.end_date = message.endDate ? Timestamp.toAmino(message.endDate) : undefined;
-    obj.project_location = message.projectLocation;
+    obj.project_location = message.projectLocation === "" ? undefined : message.projectLocation;
     return obj;
   },
   fromAminoMsg(object: MsgCreateBatchAminoMsg): MsgCreateBatch {
@@ -1021,7 +1044,8 @@ function createBaseMsgCreateBatch_BatchIssuance(): MsgCreateBatch_BatchIssuance 
   };
 }
 export const MsgCreateBatch_BatchIssuance = {
-  encode(message: MsgCreateBatch_BatchIssuance, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  typeUrl: "/regen.ecocredit.v1alpha1.BatchIssuance",
+  encode(message: MsgCreateBatch_BatchIssuance, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.recipient !== "") {
       writer.uint32(10).string(message.recipient);
     }
@@ -1036,8 +1060,8 @@ export const MsgCreateBatch_BatchIssuance = {
     }
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): MsgCreateBatch_BatchIssuance {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): MsgCreateBatch_BatchIssuance {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMsgCreateBatch_BatchIssuance();
     while (reader.pos < end) {
@@ -1087,19 +1111,27 @@ export const MsgCreateBatch_BatchIssuance = {
     return message;
   },
   fromAmino(object: MsgCreateBatch_BatchIssuanceAmino): MsgCreateBatch_BatchIssuance {
-    return {
-      recipient: object.recipient,
-      tradableAmount: object.tradable_amount,
-      retiredAmount: object.retired_amount,
-      retirementLocation: object.retirement_location
-    };
+    const message = createBaseMsgCreateBatch_BatchIssuance();
+    if (object.recipient !== undefined && object.recipient !== null) {
+      message.recipient = object.recipient;
+    }
+    if (object.tradable_amount !== undefined && object.tradable_amount !== null) {
+      message.tradableAmount = object.tradable_amount;
+    }
+    if (object.retired_amount !== undefined && object.retired_amount !== null) {
+      message.retiredAmount = object.retired_amount;
+    }
+    if (object.retirement_location !== undefined && object.retirement_location !== null) {
+      message.retirementLocation = object.retirement_location;
+    }
+    return message;
   },
   toAmino(message: MsgCreateBatch_BatchIssuance): MsgCreateBatch_BatchIssuanceAmino {
     const obj: any = {};
-    obj.recipient = message.recipient;
-    obj.tradable_amount = message.tradableAmount;
-    obj.retired_amount = message.retiredAmount;
-    obj.retirement_location = message.retirementLocation;
+    obj.recipient = message.recipient === "" ? undefined : message.recipient;
+    obj.tradable_amount = message.tradableAmount === "" ? undefined : message.tradableAmount;
+    obj.retired_amount = message.retiredAmount === "" ? undefined : message.retiredAmount;
+    obj.retirement_location = message.retirementLocation === "" ? undefined : message.retirementLocation;
     return obj;
   },
   fromAminoMsg(object: MsgCreateBatch_BatchIssuanceAminoMsg): MsgCreateBatch_BatchIssuance {
@@ -1124,14 +1156,15 @@ function createBaseMsgCreateBatchResponse(): MsgCreateBatchResponse {
   };
 }
 export const MsgCreateBatchResponse = {
-  encode(message: MsgCreateBatchResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  typeUrl: "/regen.ecocredit.v1alpha1.MsgCreateBatchResponse",
+  encode(message: MsgCreateBatchResponse, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.batchDenom !== "") {
       writer.uint32(10).string(message.batchDenom);
     }
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): MsgCreateBatchResponse {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): MsgCreateBatchResponse {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMsgCreateBatchResponse();
     while (reader.pos < end) {
@@ -1163,13 +1196,15 @@ export const MsgCreateBatchResponse = {
     return message;
   },
   fromAmino(object: MsgCreateBatchResponseAmino): MsgCreateBatchResponse {
-    return {
-      batchDenom: object.batch_denom
-    };
+    const message = createBaseMsgCreateBatchResponse();
+    if (object.batch_denom !== undefined && object.batch_denom !== null) {
+      message.batchDenom = object.batch_denom;
+    }
+    return message;
   },
   toAmino(message: MsgCreateBatchResponse): MsgCreateBatchResponseAmino {
     const obj: any = {};
-    obj.batch_denom = message.batchDenom;
+    obj.batch_denom = message.batchDenom === "" ? undefined : message.batchDenom;
     return obj;
   },
   fromAminoMsg(object: MsgCreateBatchResponseAminoMsg): MsgCreateBatchResponse {
@@ -1196,7 +1231,8 @@ function createBaseMsgSend(): MsgSend {
   };
 }
 export const MsgSend = {
-  encode(message: MsgSend, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  typeUrl: "/regen.ecocredit.v1alpha1.MsgSend",
+  encode(message: MsgSend, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.sender !== "") {
       writer.uint32(10).string(message.sender);
     }
@@ -1208,8 +1244,8 @@ export const MsgSend = {
     }
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): MsgSend {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): MsgSend {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMsgSend();
     while (reader.pos < end) {
@@ -1257,20 +1293,24 @@ export const MsgSend = {
     return message;
   },
   fromAmino(object: MsgSendAmino): MsgSend {
-    return {
-      sender: object.sender,
-      recipient: object.recipient,
-      credits: Array.isArray(object?.credits) ? object.credits.map((e: any) => MsgSend_SendCredits.fromAmino(e)) : []
-    };
+    const message = createBaseMsgSend();
+    if (object.sender !== undefined && object.sender !== null) {
+      message.sender = object.sender;
+    }
+    if (object.recipient !== undefined && object.recipient !== null) {
+      message.recipient = object.recipient;
+    }
+    message.credits = object.credits?.map(e => MsgSend_SendCredits.fromAmino(e)) || [];
+    return message;
   },
   toAmino(message: MsgSend): MsgSendAmino {
     const obj: any = {};
-    obj.sender = message.sender;
-    obj.recipient = message.recipient;
+    obj.sender = message.sender === "" ? undefined : message.sender;
+    obj.recipient = message.recipient === "" ? undefined : message.recipient;
     if (message.credits) {
       obj.credits = message.credits.map(e => e ? MsgSend_SendCredits.toAmino(e) : undefined);
     } else {
-      obj.credits = [];
+      obj.credits = message.credits;
     }
     return obj;
   },
@@ -1299,7 +1339,8 @@ function createBaseMsgSend_SendCredits(): MsgSend_SendCredits {
   };
 }
 export const MsgSend_SendCredits = {
-  encode(message: MsgSend_SendCredits, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  typeUrl: "/regen.ecocredit.v1alpha1.SendCredits",
+  encode(message: MsgSend_SendCredits, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.batchDenom !== "") {
       writer.uint32(10).string(message.batchDenom);
     }
@@ -1314,8 +1355,8 @@ export const MsgSend_SendCredits = {
     }
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): MsgSend_SendCredits {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): MsgSend_SendCredits {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMsgSend_SendCredits();
     while (reader.pos < end) {
@@ -1365,19 +1406,27 @@ export const MsgSend_SendCredits = {
     return message;
   },
   fromAmino(object: MsgSend_SendCreditsAmino): MsgSend_SendCredits {
-    return {
-      batchDenom: object.batch_denom,
-      tradableAmount: object.tradable_amount,
-      retiredAmount: object.retired_amount,
-      retirementLocation: object.retirement_location
-    };
+    const message = createBaseMsgSend_SendCredits();
+    if (object.batch_denom !== undefined && object.batch_denom !== null) {
+      message.batchDenom = object.batch_denom;
+    }
+    if (object.tradable_amount !== undefined && object.tradable_amount !== null) {
+      message.tradableAmount = object.tradable_amount;
+    }
+    if (object.retired_amount !== undefined && object.retired_amount !== null) {
+      message.retiredAmount = object.retired_amount;
+    }
+    if (object.retirement_location !== undefined && object.retirement_location !== null) {
+      message.retirementLocation = object.retirement_location;
+    }
+    return message;
   },
   toAmino(message: MsgSend_SendCredits): MsgSend_SendCreditsAmino {
     const obj: any = {};
-    obj.batch_denom = message.batchDenom;
-    obj.tradable_amount = message.tradableAmount;
-    obj.retired_amount = message.retiredAmount;
-    obj.retirement_location = message.retirementLocation;
+    obj.batch_denom = message.batchDenom === "" ? undefined : message.batchDenom;
+    obj.tradable_amount = message.tradableAmount === "" ? undefined : message.tradableAmount;
+    obj.retired_amount = message.retiredAmount === "" ? undefined : message.retiredAmount;
+    obj.retirement_location = message.retirementLocation === "" ? undefined : message.retirementLocation;
     return obj;
   },
   fromAminoMsg(object: MsgSend_SendCreditsAminoMsg): MsgSend_SendCredits {
@@ -1400,11 +1449,12 @@ function createBaseMsgSendResponse(): MsgSendResponse {
   return {};
 }
 export const MsgSendResponse = {
-  encode(_: MsgSendResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  typeUrl: "/regen.ecocredit.v1alpha1.MsgSendResponse",
+  encode(_: MsgSendResponse, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): MsgSendResponse {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): MsgSendResponse {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMsgSendResponse();
     while (reader.pos < end) {
@@ -1429,7 +1479,8 @@ export const MsgSendResponse = {
     return message;
   },
   fromAmino(_: MsgSendResponseAmino): MsgSendResponse {
-    return {};
+    const message = createBaseMsgSendResponse();
+    return message;
   },
   toAmino(_: MsgSendResponse): MsgSendResponseAmino {
     const obj: any = {};
@@ -1459,7 +1510,8 @@ function createBaseMsgRetire(): MsgRetire {
   };
 }
 export const MsgRetire = {
-  encode(message: MsgRetire, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  typeUrl: "/regen.ecocredit.v1alpha1.MsgRetire",
+  encode(message: MsgRetire, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.holder !== "") {
       writer.uint32(10).string(message.holder);
     }
@@ -1471,8 +1523,8 @@ export const MsgRetire = {
     }
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): MsgRetire {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): MsgRetire {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMsgRetire();
     while (reader.pos < end) {
@@ -1520,21 +1572,25 @@ export const MsgRetire = {
     return message;
   },
   fromAmino(object: MsgRetireAmino): MsgRetire {
-    return {
-      holder: object.holder,
-      credits: Array.isArray(object?.credits) ? object.credits.map((e: any) => MsgRetire_RetireCredits.fromAmino(e)) : [],
-      location: object.location
-    };
+    const message = createBaseMsgRetire();
+    if (object.holder !== undefined && object.holder !== null) {
+      message.holder = object.holder;
+    }
+    message.credits = object.credits?.map(e => MsgRetire_RetireCredits.fromAmino(e)) || [];
+    if (object.location !== undefined && object.location !== null) {
+      message.location = object.location;
+    }
+    return message;
   },
   toAmino(message: MsgRetire): MsgRetireAmino {
     const obj: any = {};
-    obj.holder = message.holder;
+    obj.holder = message.holder === "" ? undefined : message.holder;
     if (message.credits) {
       obj.credits = message.credits.map(e => e ? MsgRetire_RetireCredits.toAmino(e) : undefined);
     } else {
-      obj.credits = [];
+      obj.credits = message.credits;
     }
-    obj.location = message.location;
+    obj.location = message.location === "" ? undefined : message.location;
     return obj;
   },
   fromAminoMsg(object: MsgRetireAminoMsg): MsgRetire {
@@ -1560,7 +1616,8 @@ function createBaseMsgRetire_RetireCredits(): MsgRetire_RetireCredits {
   };
 }
 export const MsgRetire_RetireCredits = {
-  encode(message: MsgRetire_RetireCredits, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  typeUrl: "/regen.ecocredit.v1alpha1.RetireCredits",
+  encode(message: MsgRetire_RetireCredits, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.batchDenom !== "") {
       writer.uint32(10).string(message.batchDenom);
     }
@@ -1569,8 +1626,8 @@ export const MsgRetire_RetireCredits = {
     }
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): MsgRetire_RetireCredits {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): MsgRetire_RetireCredits {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMsgRetire_RetireCredits();
     while (reader.pos < end) {
@@ -1608,15 +1665,19 @@ export const MsgRetire_RetireCredits = {
     return message;
   },
   fromAmino(object: MsgRetire_RetireCreditsAmino): MsgRetire_RetireCredits {
-    return {
-      batchDenom: object.batch_denom,
-      amount: object.amount
-    };
+    const message = createBaseMsgRetire_RetireCredits();
+    if (object.batch_denom !== undefined && object.batch_denom !== null) {
+      message.batchDenom = object.batch_denom;
+    }
+    if (object.amount !== undefined && object.amount !== null) {
+      message.amount = object.amount;
+    }
+    return message;
   },
   toAmino(message: MsgRetire_RetireCredits): MsgRetire_RetireCreditsAmino {
     const obj: any = {};
-    obj.batch_denom = message.batchDenom;
-    obj.amount = message.amount;
+    obj.batch_denom = message.batchDenom === "" ? undefined : message.batchDenom;
+    obj.amount = message.amount === "" ? undefined : message.amount;
     return obj;
   },
   fromAminoMsg(object: MsgRetire_RetireCreditsAminoMsg): MsgRetire_RetireCredits {
@@ -1639,11 +1700,12 @@ function createBaseMsgRetireResponse(): MsgRetireResponse {
   return {};
 }
 export const MsgRetireResponse = {
-  encode(_: MsgRetireResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  typeUrl: "/regen.ecocredit.v1alpha1.MsgRetireResponse",
+  encode(_: MsgRetireResponse, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): MsgRetireResponse {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): MsgRetireResponse {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMsgRetireResponse();
     while (reader.pos < end) {
@@ -1668,7 +1730,8 @@ export const MsgRetireResponse = {
     return message;
   },
   fromAmino(_: MsgRetireResponseAmino): MsgRetireResponse {
-    return {};
+    const message = createBaseMsgRetireResponse();
+    return message;
   },
   toAmino(_: MsgRetireResponse): MsgRetireResponseAmino {
     const obj: any = {};
@@ -1697,7 +1760,8 @@ function createBaseMsgCancel(): MsgCancel {
   };
 }
 export const MsgCancel = {
-  encode(message: MsgCancel, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  typeUrl: "/regen.ecocredit.v1alpha1.MsgCancel",
+  encode(message: MsgCancel, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.holder !== "") {
       writer.uint32(10).string(message.holder);
     }
@@ -1706,8 +1770,8 @@ export const MsgCancel = {
     }
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): MsgCancel {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): MsgCancel {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMsgCancel();
     while (reader.pos < end) {
@@ -1749,18 +1813,20 @@ export const MsgCancel = {
     return message;
   },
   fromAmino(object: MsgCancelAmino): MsgCancel {
-    return {
-      holder: object.holder,
-      credits: Array.isArray(object?.credits) ? object.credits.map((e: any) => MsgCancel_CancelCredits.fromAmino(e)) : []
-    };
+    const message = createBaseMsgCancel();
+    if (object.holder !== undefined && object.holder !== null) {
+      message.holder = object.holder;
+    }
+    message.credits = object.credits?.map(e => MsgCancel_CancelCredits.fromAmino(e)) || [];
+    return message;
   },
   toAmino(message: MsgCancel): MsgCancelAmino {
     const obj: any = {};
-    obj.holder = message.holder;
+    obj.holder = message.holder === "" ? undefined : message.holder;
     if (message.credits) {
       obj.credits = message.credits.map(e => e ? MsgCancel_CancelCredits.toAmino(e) : undefined);
     } else {
-      obj.credits = [];
+      obj.credits = message.credits;
     }
     return obj;
   },
@@ -1787,7 +1853,8 @@ function createBaseMsgCancel_CancelCredits(): MsgCancel_CancelCredits {
   };
 }
 export const MsgCancel_CancelCredits = {
-  encode(message: MsgCancel_CancelCredits, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  typeUrl: "/regen.ecocredit.v1alpha1.CancelCredits",
+  encode(message: MsgCancel_CancelCredits, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.batchDenom !== "") {
       writer.uint32(10).string(message.batchDenom);
     }
@@ -1796,8 +1863,8 @@ export const MsgCancel_CancelCredits = {
     }
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): MsgCancel_CancelCredits {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): MsgCancel_CancelCredits {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMsgCancel_CancelCredits();
     while (reader.pos < end) {
@@ -1835,15 +1902,19 @@ export const MsgCancel_CancelCredits = {
     return message;
   },
   fromAmino(object: MsgCancel_CancelCreditsAmino): MsgCancel_CancelCredits {
-    return {
-      batchDenom: object.batch_denom,
-      amount: object.amount
-    };
+    const message = createBaseMsgCancel_CancelCredits();
+    if (object.batch_denom !== undefined && object.batch_denom !== null) {
+      message.batchDenom = object.batch_denom;
+    }
+    if (object.amount !== undefined && object.amount !== null) {
+      message.amount = object.amount;
+    }
+    return message;
   },
   toAmino(message: MsgCancel_CancelCredits): MsgCancel_CancelCreditsAmino {
     const obj: any = {};
-    obj.batch_denom = message.batchDenom;
-    obj.amount = message.amount;
+    obj.batch_denom = message.batchDenom === "" ? undefined : message.batchDenom;
+    obj.amount = message.amount === "" ? undefined : message.amount;
     return obj;
   },
   fromAminoMsg(object: MsgCancel_CancelCreditsAminoMsg): MsgCancel_CancelCredits {
@@ -1866,11 +1937,12 @@ function createBaseMsgCancelResponse(): MsgCancelResponse {
   return {};
 }
 export const MsgCancelResponse = {
-  encode(_: MsgCancelResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  typeUrl: "/regen.ecocredit.v1alpha1.MsgCancelResponse",
+  encode(_: MsgCancelResponse, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): MsgCancelResponse {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): MsgCancelResponse {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMsgCancelResponse();
     while (reader.pos < end) {
@@ -1895,7 +1967,8 @@ export const MsgCancelResponse = {
     return message;
   },
   fromAmino(_: MsgCancelResponseAmino): MsgCancelResponse {
-    return {};
+    const message = createBaseMsgCancelResponse();
+    return message;
   },
   toAmino(_: MsgCancelResponse): MsgCancelResponseAmino {
     const obj: any = {};
@@ -1925,7 +1998,8 @@ function createBaseMsgUpdateClassAdmin(): MsgUpdateClassAdmin {
   };
 }
 export const MsgUpdateClassAdmin = {
-  encode(message: MsgUpdateClassAdmin, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  typeUrl: "/regen.ecocredit.v1alpha1.MsgUpdateClassAdmin",
+  encode(message: MsgUpdateClassAdmin, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.admin !== "") {
       writer.uint32(10).string(message.admin);
     }
@@ -1937,8 +2011,8 @@ export const MsgUpdateClassAdmin = {
     }
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): MsgUpdateClassAdmin {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): MsgUpdateClassAdmin {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMsgUpdateClassAdmin();
     while (reader.pos < end) {
@@ -1982,17 +2056,23 @@ export const MsgUpdateClassAdmin = {
     return message;
   },
   fromAmino(object: MsgUpdateClassAdminAmino): MsgUpdateClassAdmin {
-    return {
-      admin: object.admin,
-      classId: object.class_id,
-      newAdmin: object.new_admin
-    };
+    const message = createBaseMsgUpdateClassAdmin();
+    if (object.admin !== undefined && object.admin !== null) {
+      message.admin = object.admin;
+    }
+    if (object.class_id !== undefined && object.class_id !== null) {
+      message.classId = object.class_id;
+    }
+    if (object.new_admin !== undefined && object.new_admin !== null) {
+      message.newAdmin = object.new_admin;
+    }
+    return message;
   },
   toAmino(message: MsgUpdateClassAdmin): MsgUpdateClassAdminAmino {
     const obj: any = {};
-    obj.admin = message.admin;
-    obj.class_id = message.classId;
-    obj.new_admin = message.newAdmin;
+    obj.admin = message.admin === "" ? undefined : message.admin;
+    obj.class_id = message.classId === "" ? undefined : message.classId;
+    obj.new_admin = message.newAdmin === "" ? undefined : message.newAdmin;
     return obj;
   },
   fromAminoMsg(object: MsgUpdateClassAdminAminoMsg): MsgUpdateClassAdmin {
@@ -2015,11 +2095,12 @@ function createBaseMsgUpdateClassAdminResponse(): MsgUpdateClassAdminResponse {
   return {};
 }
 export const MsgUpdateClassAdminResponse = {
-  encode(_: MsgUpdateClassAdminResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  typeUrl: "/regen.ecocredit.v1alpha1.MsgUpdateClassAdminResponse",
+  encode(_: MsgUpdateClassAdminResponse, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): MsgUpdateClassAdminResponse {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): MsgUpdateClassAdminResponse {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMsgUpdateClassAdminResponse();
     while (reader.pos < end) {
@@ -2044,7 +2125,8 @@ export const MsgUpdateClassAdminResponse = {
     return message;
   },
   fromAmino(_: MsgUpdateClassAdminResponseAmino): MsgUpdateClassAdminResponse {
-    return {};
+    const message = createBaseMsgUpdateClassAdminResponse();
+    return message;
   },
   toAmino(_: MsgUpdateClassAdminResponse): MsgUpdateClassAdminResponseAmino {
     const obj: any = {};
@@ -2074,7 +2156,8 @@ function createBaseMsgUpdateClassIssuers(): MsgUpdateClassIssuers {
   };
 }
 export const MsgUpdateClassIssuers = {
-  encode(message: MsgUpdateClassIssuers, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  typeUrl: "/regen.ecocredit.v1alpha1.MsgUpdateClassIssuers",
+  encode(message: MsgUpdateClassIssuers, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.admin !== "") {
       writer.uint32(10).string(message.admin);
     }
@@ -2086,8 +2169,8 @@ export const MsgUpdateClassIssuers = {
     }
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): MsgUpdateClassIssuers {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): MsgUpdateClassIssuers {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMsgUpdateClassIssuers();
     while (reader.pos < end) {
@@ -2135,20 +2218,24 @@ export const MsgUpdateClassIssuers = {
     return message;
   },
   fromAmino(object: MsgUpdateClassIssuersAmino): MsgUpdateClassIssuers {
-    return {
-      admin: object.admin,
-      classId: object.class_id,
-      issuers: Array.isArray(object?.issuers) ? object.issuers.map((e: any) => e) : []
-    };
+    const message = createBaseMsgUpdateClassIssuers();
+    if (object.admin !== undefined && object.admin !== null) {
+      message.admin = object.admin;
+    }
+    if (object.class_id !== undefined && object.class_id !== null) {
+      message.classId = object.class_id;
+    }
+    message.issuers = object.issuers?.map(e => e) || [];
+    return message;
   },
   toAmino(message: MsgUpdateClassIssuers): MsgUpdateClassIssuersAmino {
     const obj: any = {};
-    obj.admin = message.admin;
-    obj.class_id = message.classId;
+    obj.admin = message.admin === "" ? undefined : message.admin;
+    obj.class_id = message.classId === "" ? undefined : message.classId;
     if (message.issuers) {
       obj.issuers = message.issuers.map(e => e);
     } else {
-      obj.issuers = [];
+      obj.issuers = message.issuers;
     }
     return obj;
   },
@@ -2172,11 +2259,12 @@ function createBaseMsgUpdateClassIssuersResponse(): MsgUpdateClassIssuersRespons
   return {};
 }
 export const MsgUpdateClassIssuersResponse = {
-  encode(_: MsgUpdateClassIssuersResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  typeUrl: "/regen.ecocredit.v1alpha1.MsgUpdateClassIssuersResponse",
+  encode(_: MsgUpdateClassIssuersResponse, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): MsgUpdateClassIssuersResponse {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): MsgUpdateClassIssuersResponse {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMsgUpdateClassIssuersResponse();
     while (reader.pos < end) {
@@ -2201,7 +2289,8 @@ export const MsgUpdateClassIssuersResponse = {
     return message;
   },
   fromAmino(_: MsgUpdateClassIssuersResponseAmino): MsgUpdateClassIssuersResponse {
-    return {};
+    const message = createBaseMsgUpdateClassIssuersResponse();
+    return message;
   },
   toAmino(_: MsgUpdateClassIssuersResponse): MsgUpdateClassIssuersResponseAmino {
     const obj: any = {};
@@ -2231,7 +2320,8 @@ function createBaseMsgUpdateClassMetadata(): MsgUpdateClassMetadata {
   };
 }
 export const MsgUpdateClassMetadata = {
-  encode(message: MsgUpdateClassMetadata, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  typeUrl: "/regen.ecocredit.v1alpha1.MsgUpdateClassMetadata",
+  encode(message: MsgUpdateClassMetadata, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.admin !== "") {
       writer.uint32(10).string(message.admin);
     }
@@ -2243,8 +2333,8 @@ export const MsgUpdateClassMetadata = {
     }
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): MsgUpdateClassMetadata {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): MsgUpdateClassMetadata {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMsgUpdateClassMetadata();
     while (reader.pos < end) {
@@ -2288,17 +2378,23 @@ export const MsgUpdateClassMetadata = {
     return message;
   },
   fromAmino(object: MsgUpdateClassMetadataAmino): MsgUpdateClassMetadata {
-    return {
-      admin: object.admin,
-      classId: object.class_id,
-      metadata: object.metadata
-    };
+    const message = createBaseMsgUpdateClassMetadata();
+    if (object.admin !== undefined && object.admin !== null) {
+      message.admin = object.admin;
+    }
+    if (object.class_id !== undefined && object.class_id !== null) {
+      message.classId = object.class_id;
+    }
+    if (object.metadata !== undefined && object.metadata !== null) {
+      message.metadata = bytesFromBase64(object.metadata);
+    }
+    return message;
   },
   toAmino(message: MsgUpdateClassMetadata): MsgUpdateClassMetadataAmino {
     const obj: any = {};
-    obj.admin = message.admin;
-    obj.class_id = message.classId;
-    obj.metadata = message.metadata;
+    obj.admin = message.admin === "" ? undefined : message.admin;
+    obj.class_id = message.classId === "" ? undefined : message.classId;
+    obj.metadata = message.metadata ? base64FromBytes(message.metadata) : undefined;
     return obj;
   },
   fromAminoMsg(object: MsgUpdateClassMetadataAminoMsg): MsgUpdateClassMetadata {
@@ -2321,11 +2417,12 @@ function createBaseMsgUpdateClassMetadataResponse(): MsgUpdateClassMetadataRespo
   return {};
 }
 export const MsgUpdateClassMetadataResponse = {
-  encode(_: MsgUpdateClassMetadataResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  typeUrl: "/regen.ecocredit.v1alpha1.MsgUpdateClassMetadataResponse",
+  encode(_: MsgUpdateClassMetadataResponse, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): MsgUpdateClassMetadataResponse {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): MsgUpdateClassMetadataResponse {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMsgUpdateClassMetadataResponse();
     while (reader.pos < end) {
@@ -2350,7 +2447,8 @@ export const MsgUpdateClassMetadataResponse = {
     return message;
   },
   fromAmino(_: MsgUpdateClassMetadataResponseAmino): MsgUpdateClassMetadataResponse {
-    return {};
+    const message = createBaseMsgUpdateClassMetadataResponse();
+    return message;
   },
   toAmino(_: MsgUpdateClassMetadataResponse): MsgUpdateClassMetadataResponseAmino {
     const obj: any = {};

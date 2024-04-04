@@ -1,4 +1,4 @@
-import * as _m0 from "protobufjs/minimal";
+import { BinaryReader, BinaryWriter } from "../../../../binary";
 /** Module is the module config object for the cosmos.app v1 app module. */
 export interface Module {}
 export interface ModuleProtoMsg {
@@ -17,11 +17,12 @@ function createBaseModule(): Module {
   return {};
 }
 export const Module = {
-  encode(_: Module, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  typeUrl: "/cosmos.app.module.v1alpha1.Module",
+  encode(_: Module, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): Module {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): Module {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseModule();
     while (reader.pos < end) {
@@ -46,7 +47,8 @@ export const Module = {
     return message;
   },
   fromAmino(_: ModuleAmino): Module {
-    return {};
+    const message = createBaseModule();
+    return message;
   },
   toAmino(_: Module): ModuleAmino {
     const obj: any = {};

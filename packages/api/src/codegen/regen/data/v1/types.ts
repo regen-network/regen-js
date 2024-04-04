@@ -1,4 +1,4 @@
-import * as _m0 from "protobufjs/minimal";
+import { BinaryReader, BinaryWriter } from "../../../binary";
 import { isSet, bytesFromBase64, base64FromBytes } from "../../../helpers";
 /** DigestAlgorithm is the hash digest algorithm */
 export enum DigestAlgorithm {
@@ -256,13 +256,13 @@ export interface ContentHash {
    * the guarantee that the canonical hash will not change. The media type for
    * "raw" data is defined by the MediaType enum.
    */
-  raw: ContentHash_Raw;
+  raw?: ContentHash_Raw;
   /**
    * Graph specifies graph data that conforms to the RDF data model.
    * The canonicalization algorithm used for an RDF graph is specified by
    * GraphCanonicalizationAlgorithm.
    */
-  graph: ContentHash_Graph;
+  graph?: ContentHash_Graph;
 }
 export interface ContentHashProtoMsg {
   typeUrl: "/regen.data.v1.ContentHash";
@@ -293,8 +293,8 @@ export interface ContentHashAminoMsg {
 }
 /** ContentHash specifies a hash-based content identifier for a piece of data. */
 export interface ContentHashSDKType {
-  raw: ContentHash_RawSDKType;
-  graph: ContentHash_GraphSDKType;
+  raw?: ContentHash_RawSDKType;
+  graph?: ContentHash_GraphSDKType;
 }
 /** Raw is the content hash type used for raw data. */
 export interface ContentHash_Raw {
@@ -318,11 +318,11 @@ export interface ContentHash_RawAmino {
    * hash represents the hash of the data based on the specified
    * digest_algorithm.
    */
-  hash: Uint8Array;
+  hash?: string;
   /** digest_algorithm represents the hash digest algorithm. */
-  digest_algorithm: DigestAlgorithm;
+  digest_algorithm?: DigestAlgorithm;
   /** media_type represents the media type for raw data. */
-  media_type: RawMediaType;
+  media_type?: RawMediaType;
 }
 export interface ContentHash_RawAminoMsg {
   type: "/regen.data.v1.Raw";
@@ -361,16 +361,16 @@ export interface ContentHash_GraphAmino {
    * hash represents the hash of the data based on the specified
    * digest_algorithm.
    */
-  hash: Uint8Array;
+  hash?: string;
   /** digest_algorithm represents the hash digest algorithm. */
-  digest_algorithm: DigestAlgorithm;
+  digest_algorithm?: DigestAlgorithm;
   /**
    * graph_canonicalization_algorithm represents the RDF graph
    * canonicalization algorithm.
    */
-  canonicalization_algorithm: GraphCanonicalizationAlgorithm;
+  canonicalization_algorithm?: GraphCanonicalizationAlgorithm;
   /** merkle_tree is the merkle tree type used for the graph hash, if any. */
-  merkle_tree: GraphMerkleTree;
+  merkle_tree?: GraphMerkleTree;
 }
 export interface ContentHash_GraphAminoMsg {
   type: "/regen.data.v1.Graph";
@@ -395,7 +395,7 @@ export interface ContentHashesProtoMsg {
 /** ContentHashes contains list of content ContentHash. */
 export interface ContentHashesAmino {
   /** data is a list of content hashes which the resolver claims to serve. */
-  content_hashes: ContentHashAmino[];
+  content_hashes?: ContentHashAmino[];
 }
 export interface ContentHashesAminoMsg {
   type: "/regen.data.v1.ContentHashes";
@@ -407,12 +407,13 @@ export interface ContentHashesSDKType {
 }
 function createBaseContentHash(): ContentHash {
   return {
-    raw: Raw.fromPartial({}),
-    graph: Graph.fromPartial({})
+    raw: undefined,
+    graph: undefined
   };
 }
 export const ContentHash = {
-  encode(message: ContentHash, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  typeUrl: "/regen.data.v1.ContentHash",
+  encode(message: ContentHash, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.raw !== undefined) {
       ContentHash_Raw.encode(message.raw, writer.uint32(10).fork()).ldelim();
     }
@@ -421,8 +422,8 @@ export const ContentHash = {
     }
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): ContentHash {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): ContentHash {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseContentHash();
     while (reader.pos < end) {
@@ -460,10 +461,14 @@ export const ContentHash = {
     return message;
   },
   fromAmino(object: ContentHashAmino): ContentHash {
-    return {
-      raw: object?.raw ? ContentHash_Raw.fromAmino(object.raw) : undefined,
-      graph: object?.graph ? ContentHash_Graph.fromAmino(object.graph) : undefined
-    };
+    const message = createBaseContentHash();
+    if (object.raw !== undefined && object.raw !== null) {
+      message.raw = ContentHash_Raw.fromAmino(object.raw);
+    }
+    if (object.graph !== undefined && object.graph !== null) {
+      message.graph = ContentHash_Graph.fromAmino(object.graph);
+    }
+    return message;
   },
   toAmino(message: ContentHash): ContentHashAmino {
     const obj: any = {};
@@ -495,7 +500,8 @@ function createBaseContentHash_Raw(): ContentHash_Raw {
   };
 }
 export const ContentHash_Raw = {
-  encode(message: ContentHash_Raw, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  typeUrl: "/regen.data.v1.Raw",
+  encode(message: ContentHash_Raw, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.hash.length !== 0) {
       writer.uint32(10).bytes(message.hash);
     }
@@ -507,8 +513,8 @@ export const ContentHash_Raw = {
     }
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): ContentHash_Raw {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): ContentHash_Raw {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseContentHash_Raw();
     while (reader.pos < end) {
@@ -533,8 +539,8 @@ export const ContentHash_Raw = {
   fromJSON(object: any): ContentHash_Raw {
     return {
       hash: isSet(object.hash) ? bytesFromBase64(object.hash) : new Uint8Array(),
-      digestAlgorithm: isSet(object.digestAlgorithm) ? digestAlgorithmFromJSON(object.digestAlgorithm) : 0,
-      mediaType: isSet(object.mediaType) ? rawMediaTypeFromJSON(object.mediaType) : 0
+      digestAlgorithm: isSet(object.digestAlgorithm) ? digestAlgorithmFromJSON(object.digestAlgorithm) : -1,
+      mediaType: isSet(object.mediaType) ? rawMediaTypeFromJSON(object.mediaType) : -1
     };
   },
   toJSON(message: ContentHash_Raw): unknown {
@@ -552,17 +558,23 @@ export const ContentHash_Raw = {
     return message;
   },
   fromAmino(object: ContentHash_RawAmino): ContentHash_Raw {
-    return {
-      hash: object.hash,
-      digestAlgorithm: isSet(object.digest_algorithm) ? digestAlgorithmFromJSON(object.digest_algorithm) : 0,
-      mediaType: isSet(object.media_type) ? rawMediaTypeFromJSON(object.media_type) : 0
-    };
+    const message = createBaseContentHash_Raw();
+    if (object.hash !== undefined && object.hash !== null) {
+      message.hash = bytesFromBase64(object.hash);
+    }
+    if (object.digest_algorithm !== undefined && object.digest_algorithm !== null) {
+      message.digestAlgorithm = object.digest_algorithm;
+    }
+    if (object.media_type !== undefined && object.media_type !== null) {
+      message.mediaType = object.media_type;
+    }
+    return message;
   },
   toAmino(message: ContentHash_Raw): ContentHash_RawAmino {
     const obj: any = {};
-    obj.hash = message.hash;
-    obj.digest_algorithm = message.digestAlgorithm;
-    obj.media_type = message.mediaType;
+    obj.hash = message.hash ? base64FromBytes(message.hash) : undefined;
+    obj.digest_algorithm = message.digestAlgorithm === 0 ? undefined : message.digestAlgorithm;
+    obj.media_type = message.mediaType === 0 ? undefined : message.mediaType;
     return obj;
   },
   fromAminoMsg(object: ContentHash_RawAminoMsg): ContentHash_Raw {
@@ -590,7 +602,8 @@ function createBaseContentHash_Graph(): ContentHash_Graph {
   };
 }
 export const ContentHash_Graph = {
-  encode(message: ContentHash_Graph, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  typeUrl: "/regen.data.v1.Graph",
+  encode(message: ContentHash_Graph, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.hash.length !== 0) {
       writer.uint32(10).bytes(message.hash);
     }
@@ -605,8 +618,8 @@ export const ContentHash_Graph = {
     }
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): ContentHash_Graph {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): ContentHash_Graph {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseContentHash_Graph();
     while (reader.pos < end) {
@@ -634,9 +647,9 @@ export const ContentHash_Graph = {
   fromJSON(object: any): ContentHash_Graph {
     return {
       hash: isSet(object.hash) ? bytesFromBase64(object.hash) : new Uint8Array(),
-      digestAlgorithm: isSet(object.digestAlgorithm) ? digestAlgorithmFromJSON(object.digestAlgorithm) : 0,
-      canonicalizationAlgorithm: isSet(object.canonicalizationAlgorithm) ? graphCanonicalizationAlgorithmFromJSON(object.canonicalizationAlgorithm) : 0,
-      merkleTree: isSet(object.merkleTree) ? graphMerkleTreeFromJSON(object.merkleTree) : 0
+      digestAlgorithm: isSet(object.digestAlgorithm) ? digestAlgorithmFromJSON(object.digestAlgorithm) : -1,
+      canonicalizationAlgorithm: isSet(object.canonicalizationAlgorithm) ? graphCanonicalizationAlgorithmFromJSON(object.canonicalizationAlgorithm) : -1,
+      merkleTree: isSet(object.merkleTree) ? graphMerkleTreeFromJSON(object.merkleTree) : -1
     };
   },
   toJSON(message: ContentHash_Graph): unknown {
@@ -656,19 +669,27 @@ export const ContentHash_Graph = {
     return message;
   },
   fromAmino(object: ContentHash_GraphAmino): ContentHash_Graph {
-    return {
-      hash: object.hash,
-      digestAlgorithm: isSet(object.digest_algorithm) ? digestAlgorithmFromJSON(object.digest_algorithm) : 0,
-      canonicalizationAlgorithm: isSet(object.canonicalization_algorithm) ? graphCanonicalizationAlgorithmFromJSON(object.canonicalization_algorithm) : 0,
-      merkleTree: isSet(object.merkle_tree) ? graphMerkleTreeFromJSON(object.merkle_tree) : 0
-    };
+    const message = createBaseContentHash_Graph();
+    if (object.hash !== undefined && object.hash !== null) {
+      message.hash = bytesFromBase64(object.hash);
+    }
+    if (object.digest_algorithm !== undefined && object.digest_algorithm !== null) {
+      message.digestAlgorithm = object.digest_algorithm;
+    }
+    if (object.canonicalization_algorithm !== undefined && object.canonicalization_algorithm !== null) {
+      message.canonicalizationAlgorithm = object.canonicalization_algorithm;
+    }
+    if (object.merkle_tree !== undefined && object.merkle_tree !== null) {
+      message.merkleTree = object.merkle_tree;
+    }
+    return message;
   },
   toAmino(message: ContentHash_Graph): ContentHash_GraphAmino {
     const obj: any = {};
-    obj.hash = message.hash;
-    obj.digest_algorithm = message.digestAlgorithm;
-    obj.canonicalization_algorithm = message.canonicalizationAlgorithm;
-    obj.merkle_tree = message.merkleTree;
+    obj.hash = message.hash ? base64FromBytes(message.hash) : undefined;
+    obj.digest_algorithm = message.digestAlgorithm === 0 ? undefined : message.digestAlgorithm;
+    obj.canonicalization_algorithm = message.canonicalizationAlgorithm === 0 ? undefined : message.canonicalizationAlgorithm;
+    obj.merkle_tree = message.merkleTree === 0 ? undefined : message.merkleTree;
     return obj;
   },
   fromAminoMsg(object: ContentHash_GraphAminoMsg): ContentHash_Graph {
@@ -693,14 +714,15 @@ function createBaseContentHashes(): ContentHashes {
   };
 }
 export const ContentHashes = {
-  encode(message: ContentHashes, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  typeUrl: "/regen.data.v1.ContentHashes",
+  encode(message: ContentHashes, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     for (const v of message.contentHashes) {
       ContentHash.encode(v!, writer.uint32(10).fork()).ldelim();
     }
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): ContentHashes {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): ContentHashes {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseContentHashes();
     while (reader.pos < end) {
@@ -736,16 +758,16 @@ export const ContentHashes = {
     return message;
   },
   fromAmino(object: ContentHashesAmino): ContentHashes {
-    return {
-      contentHashes: Array.isArray(object?.content_hashes) ? object.content_hashes.map((e: any) => ContentHash.fromAmino(e)) : []
-    };
+    const message = createBaseContentHashes();
+    message.contentHashes = object.content_hashes?.map(e => ContentHash.fromAmino(e)) || [];
+    return message;
   },
   toAmino(message: ContentHashes): ContentHashesAmino {
     const obj: any = {};
     if (message.contentHashes) {
       obj.content_hashes = message.contentHashes.map(e => e ? ContentHash.toAmino(e) : undefined);
     } else {
-      obj.content_hashes = [];
+      obj.content_hashes = message.contentHashes;
     }
     return obj;
   },

@@ -1,5 +1,5 @@
 import { Rpc } from "../../../helpers";
-import * as _m0 from "protobufjs/minimal";
+import { BinaryReader } from "../../../binary";
 import { MsgAnchor, MsgAnchorResponse, MsgAttest, MsgAttestResponse, MsgDefineResolver, MsgDefineResolverResponse, MsgRegisterResolver, MsgRegisterResolverResponse } from "./tx";
 /** Msg is the regen.data.v1 Msg service */
 export interface Msg {
@@ -58,21 +58,21 @@ export class MsgClientImpl implements Msg {
   anchor(request: MsgAnchor): Promise<MsgAnchorResponse> {
     const data = MsgAnchor.encode(request).finish();
     const promise = this.rpc.request("regen.data.v1.Msg", "Anchor", data);
-    return promise.then(data => MsgAnchorResponse.decode(new _m0.Reader(data)));
+    return promise.then(data => MsgAnchorResponse.decode(new BinaryReader(data)));
   }
   attest(request: MsgAttest): Promise<MsgAttestResponse> {
     const data = MsgAttest.encode(request).finish();
     const promise = this.rpc.request("regen.data.v1.Msg", "Attest", data);
-    return promise.then(data => MsgAttestResponse.decode(new _m0.Reader(data)));
+    return promise.then(data => MsgAttestResponse.decode(new BinaryReader(data)));
   }
   defineResolver(request: MsgDefineResolver): Promise<MsgDefineResolverResponse> {
     const data = MsgDefineResolver.encode(request).finish();
     const promise = this.rpc.request("regen.data.v1.Msg", "DefineResolver", data);
-    return promise.then(data => MsgDefineResolverResponse.decode(new _m0.Reader(data)));
+    return promise.then(data => MsgDefineResolverResponse.decode(new BinaryReader(data)));
   }
   registerResolver(request: MsgRegisterResolver): Promise<MsgRegisterResolverResponse> {
     const data = MsgRegisterResolver.encode(request).finish();
     const promise = this.rpc.request("regen.data.v1.Msg", "RegisterResolver", data);
-    return promise.then(data => MsgRegisterResolverResponse.decode(new _m0.Reader(data)));
+    return promise.then(data => MsgRegisterResolverResponse.decode(new BinaryReader(data)));
   }
 }

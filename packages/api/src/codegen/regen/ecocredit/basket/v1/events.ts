@@ -1,5 +1,5 @@
 import { BasketCredit, BasketCreditAmino, BasketCreditSDKType } from "./types";
-import * as _m0 from "protobufjs/minimal";
+import { BinaryReader, BinaryWriter } from "../../../../binary";
 import { isSet } from "../../../../helpers";
 /** EventCreate is an event emitted when a basket is created. */
 export interface EventCreate {
@@ -22,7 +22,7 @@ export interface EventCreateProtoMsg {
 /** EventCreate is an event emitted when a basket is created. */
 export interface EventCreateAmino {
   /** basket_denom is the basket bank denom. */
-  basket_denom: string;
+  basket_denom?: string;
   /**
    * curator is the address of the basket curator who is able to change certain
    * basket settings.
@@ -31,7 +31,7 @@ export interface EventCreateAmino {
    * removed in the next version.
    */
   /** @deprecated */
-  curator: string;
+  curator?: string;
 }
 export interface EventCreateAminoMsg {
   type: "/regen.ecocredit.basket.v1.EventCreate";
@@ -79,9 +79,9 @@ export interface EventPutProtoMsg {
  */
 export interface EventPutAmino {
   /** owner is the owner of the credits put into the basket. */
-  owner: string;
+  owner?: string;
   /** basket_denom is the basket bank denom that the credits were added to. */
-  basket_denom: string;
+  basket_denom?: string;
   /**
    * credits are the credits that were added to the basket.
    * 
@@ -89,7 +89,7 @@ export interface EventPutAmino {
    * removed in the next version.
    */
   /** @deprecated */
-  credits: BasketCreditAmino[];
+  credits?: BasketCreditAmino[];
   /**
    * amount is the integer number of basket tokens converted from credits.
    * 
@@ -97,7 +97,7 @@ export interface EventPutAmino {
    * removed in the next version.
    */
   /** @deprecated */
-  amount: string;
+  amount?: string;
 }
 export interface EventPutAminoMsg {
   type: "/regen.ecocredit.basket.v1.EventPut";
@@ -151,9 +151,9 @@ export interface EventTakeProtoMsg {
  */
 export interface EventTakeAmino {
   /** owner is the owner of the credits taken from the basket. */
-  owner: string;
+  owner?: string;
   /** basket_denom is the basket bank denom that credits were taken from. */
-  basket_denom: string;
+  basket_denom?: string;
   /**
    * credits are the credits that were taken from the basket.
    * 
@@ -161,7 +161,7 @@ export interface EventTakeAmino {
    * removed in the next version.
    */
   /** @deprecated */
-  credits: BasketCreditAmino[];
+  credits?: BasketCreditAmino[];
   /**
    * amount is the integer number of basket tokens converted to credits.
    * 
@@ -169,7 +169,7 @@ export interface EventTakeAmino {
    * removed in the next version.
    */
   /** @deprecated */
-  amount: string;
+  amount?: string;
 }
 export interface EventTakeAminoMsg {
   type: "/regen.ecocredit.basket.v1.EventTake";
@@ -207,7 +207,7 @@ export interface EventUpdateCuratorProtoMsg {
  */
 export interface EventUpdateCuratorAmino {
   /** denom is the basket denom. */
-  denom: string;
+  denom?: string;
 }
 export interface EventUpdateCuratorAminoMsg {
   type: "/regen.ecocredit.basket.v1.EventUpdateCurator";
@@ -243,7 +243,7 @@ export interface EventUpdateDateCriteriaProtoMsg {
  */
 export interface EventUpdateDateCriteriaAmino {
   /** denom is the basket denom. */
-  denom: string;
+  denom?: string;
 }
 export interface EventUpdateDateCriteriaAminoMsg {
   type: "/regen.ecocredit.basket.v1.EventUpdateDateCriteria";
@@ -265,7 +265,8 @@ function createBaseEventCreate(): EventCreate {
   };
 }
 export const EventCreate = {
-  encode(message: EventCreate, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  typeUrl: "/regen.ecocredit.basket.v1.EventCreate",
+  encode(message: EventCreate, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.basketDenom !== "") {
       writer.uint32(10).string(message.basketDenom);
     }
@@ -274,8 +275,8 @@ export const EventCreate = {
     }
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): EventCreate {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): EventCreate {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseEventCreate();
     while (reader.pos < end) {
@@ -313,15 +314,19 @@ export const EventCreate = {
     return message;
   },
   fromAmino(object: EventCreateAmino): EventCreate {
-    return {
-      basketDenom: object.basket_denom,
-      curator: object.curator
-    };
+    const message = createBaseEventCreate();
+    if (object.basket_denom !== undefined && object.basket_denom !== null) {
+      message.basketDenom = object.basket_denom;
+    }
+    if (object.curator !== undefined && object.curator !== null) {
+      message.curator = object.curator;
+    }
+    return message;
   },
   toAmino(message: EventCreate): EventCreateAmino {
     const obj: any = {};
-    obj.basket_denom = message.basketDenom;
-    obj.curator = message.curator;
+    obj.basket_denom = message.basketDenom === "" ? undefined : message.basketDenom;
+    obj.curator = message.curator === "" ? undefined : message.curator;
     return obj;
   },
   fromAminoMsg(object: EventCreateAminoMsg): EventCreate {
@@ -349,7 +354,8 @@ function createBaseEventPut(): EventPut {
   };
 }
 export const EventPut = {
-  encode(message: EventPut, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  typeUrl: "/regen.ecocredit.basket.v1.EventPut",
+  encode(message: EventPut, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.owner !== "") {
       writer.uint32(10).string(message.owner);
     }
@@ -364,8 +370,8 @@ export const EventPut = {
     }
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): EventPut {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): EventPut {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseEventPut();
     while (reader.pos < end) {
@@ -419,23 +425,29 @@ export const EventPut = {
     return message;
   },
   fromAmino(object: EventPutAmino): EventPut {
-    return {
-      owner: object.owner,
-      basketDenom: object.basket_denom,
-      credits: Array.isArray(object?.credits) ? object.credits.map((e: any) => BasketCredit.fromAmino(e)) : [],
-      amount: object.amount
-    };
+    const message = createBaseEventPut();
+    if (object.owner !== undefined && object.owner !== null) {
+      message.owner = object.owner;
+    }
+    if (object.basket_denom !== undefined && object.basket_denom !== null) {
+      message.basketDenom = object.basket_denom;
+    }
+    message.credits = object.credits?.map(e => BasketCredit.fromAmino(e)) || [];
+    if (object.amount !== undefined && object.amount !== null) {
+      message.amount = object.amount;
+    }
+    return message;
   },
   toAmino(message: EventPut): EventPutAmino {
     const obj: any = {};
-    obj.owner = message.owner;
-    obj.basket_denom = message.basketDenom;
+    obj.owner = message.owner === "" ? undefined : message.owner;
+    obj.basket_denom = message.basketDenom === "" ? undefined : message.basketDenom;
     if (message.credits) {
       obj.credits = message.credits.map(e => e ? BasketCredit.toAmino(e) : undefined);
     } else {
-      obj.credits = [];
+      obj.credits = message.credits;
     }
-    obj.amount = message.amount;
+    obj.amount = message.amount === "" ? undefined : message.amount;
     return obj;
   },
   fromAminoMsg(object: EventPutAminoMsg): EventPut {
@@ -463,7 +475,8 @@ function createBaseEventTake(): EventTake {
   };
 }
 export const EventTake = {
-  encode(message: EventTake, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  typeUrl: "/regen.ecocredit.basket.v1.EventTake",
+  encode(message: EventTake, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.owner !== "") {
       writer.uint32(10).string(message.owner);
     }
@@ -478,8 +491,8 @@ export const EventTake = {
     }
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): EventTake {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): EventTake {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseEventTake();
     while (reader.pos < end) {
@@ -533,23 +546,29 @@ export const EventTake = {
     return message;
   },
   fromAmino(object: EventTakeAmino): EventTake {
-    return {
-      owner: object.owner,
-      basketDenom: object.basket_denom,
-      credits: Array.isArray(object?.credits) ? object.credits.map((e: any) => BasketCredit.fromAmino(e)) : [],
-      amount: object.amount
-    };
+    const message = createBaseEventTake();
+    if (object.owner !== undefined && object.owner !== null) {
+      message.owner = object.owner;
+    }
+    if (object.basket_denom !== undefined && object.basket_denom !== null) {
+      message.basketDenom = object.basket_denom;
+    }
+    message.credits = object.credits?.map(e => BasketCredit.fromAmino(e)) || [];
+    if (object.amount !== undefined && object.amount !== null) {
+      message.amount = object.amount;
+    }
+    return message;
   },
   toAmino(message: EventTake): EventTakeAmino {
     const obj: any = {};
-    obj.owner = message.owner;
-    obj.basket_denom = message.basketDenom;
+    obj.owner = message.owner === "" ? undefined : message.owner;
+    obj.basket_denom = message.basketDenom === "" ? undefined : message.basketDenom;
     if (message.credits) {
       obj.credits = message.credits.map(e => e ? BasketCredit.toAmino(e) : undefined);
     } else {
-      obj.credits = [];
+      obj.credits = message.credits;
     }
-    obj.amount = message.amount;
+    obj.amount = message.amount === "" ? undefined : message.amount;
     return obj;
   },
   fromAminoMsg(object: EventTakeAminoMsg): EventTake {
@@ -574,14 +593,15 @@ function createBaseEventUpdateCurator(): EventUpdateCurator {
   };
 }
 export const EventUpdateCurator = {
-  encode(message: EventUpdateCurator, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  typeUrl: "/regen.ecocredit.basket.v1.EventUpdateCurator",
+  encode(message: EventUpdateCurator, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.denom !== "") {
       writer.uint32(10).string(message.denom);
     }
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): EventUpdateCurator {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): EventUpdateCurator {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseEventUpdateCurator();
     while (reader.pos < end) {
@@ -613,13 +633,15 @@ export const EventUpdateCurator = {
     return message;
   },
   fromAmino(object: EventUpdateCuratorAmino): EventUpdateCurator {
-    return {
-      denom: object.denom
-    };
+    const message = createBaseEventUpdateCurator();
+    if (object.denom !== undefined && object.denom !== null) {
+      message.denom = object.denom;
+    }
+    return message;
   },
   toAmino(message: EventUpdateCurator): EventUpdateCuratorAmino {
     const obj: any = {};
-    obj.denom = message.denom;
+    obj.denom = message.denom === "" ? undefined : message.denom;
     return obj;
   },
   fromAminoMsg(object: EventUpdateCuratorAminoMsg): EventUpdateCurator {
@@ -644,14 +666,15 @@ function createBaseEventUpdateDateCriteria(): EventUpdateDateCriteria {
   };
 }
 export const EventUpdateDateCriteria = {
-  encode(message: EventUpdateDateCriteria, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  typeUrl: "/regen.ecocredit.basket.v1.EventUpdateDateCriteria",
+  encode(message: EventUpdateDateCriteria, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.denom !== "") {
       writer.uint32(10).string(message.denom);
     }
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): EventUpdateDateCriteria {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): EventUpdateDateCriteria {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseEventUpdateDateCriteria();
     while (reader.pos < end) {
@@ -683,13 +706,15 @@ export const EventUpdateDateCriteria = {
     return message;
   },
   fromAmino(object: EventUpdateDateCriteriaAmino): EventUpdateDateCriteria {
-    return {
-      denom: object.denom
-    };
+    const message = createBaseEventUpdateDateCriteria();
+    if (object.denom !== undefined && object.denom !== null) {
+      message.denom = object.denom;
+    }
+    return message;
   },
   toAmino(message: EventUpdateDateCriteria): EventUpdateDateCriteriaAmino {
     const obj: any = {};
-    obj.denom = message.denom;
+    obj.denom = message.denom === "" ? undefined : message.denom;
     return obj;
   },
   fromAminoMsg(object: EventUpdateDateCriteriaAminoMsg): EventUpdateDateCriteria {

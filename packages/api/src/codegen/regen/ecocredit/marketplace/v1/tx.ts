@@ -1,7 +1,7 @@
 import { Coin, CoinAmino, CoinSDKType } from "../../../../cosmos/base/v1beta1/coin";
-import { Timestamp, TimestampAmino, TimestampSDKType } from "../../../../google/protobuf/timestamp";
-import { Long, isSet, fromJsonTimestamp, fromTimestamp } from "../../../../helpers";
-import * as _m0 from "protobufjs/minimal";
+import { Timestamp, TimestampSDKType } from "../../../../google/protobuf/timestamp";
+import { BinaryReader, BinaryWriter } from "../../../../binary";
+import { isSet, fromJsonTimestamp, fromTimestamp } from "../../../../helpers";
 /** MsgSell is the Msg/Sell request type. */
 export interface MsgSell {
   /** seller is the address of the account that is selling credits. */
@@ -16,9 +16,9 @@ export interface MsgSellProtoMsg {
 /** MsgSell is the Msg/Sell request type. */
 export interface MsgSellAmino {
   /** seller is the address of the account that is selling credits. */
-  seller: string;
+  seller?: string;
   /** orders are the sell orders being created. */
-  orders: MsgSell_OrderAmino[];
+  orders?: MsgSell_OrderAmino[];
 }
 export interface MsgSellAminoMsg {
   type: "regen.marketplace/MsgSell";
@@ -46,7 +46,7 @@ export interface MsgSell_Order {
    * batch_denom. Each credit unit of the batch will be sold for at least the
    * ask_price or more.
    */
-  askPrice: Coin;
+  askPrice?: Coin;
   /**
    * disable_auto_retire disables auto-retirement of credits which allows a
    * buyer to disable auto-retirement in their buy order enabling them to
@@ -57,7 +57,7 @@ export interface MsgSell_Order {
    * expiration is an optional timestamp when the sell order expires. When the
    * expiration time is reached, the sell order is removed from state.
    */
-  expiration: Timestamp;
+  expiration?: Timestamp;
 }
 export interface MsgSell_OrderProtoMsg {
   typeUrl: "/regen.ecocredit.marketplace.v1.Order";
@@ -66,7 +66,7 @@ export interface MsgSell_OrderProtoMsg {
 /** Order is the content of a new sell order. */
 export interface MsgSell_OrderAmino {
   /** batch_denom is the credit batch being sold. */
-  batch_denom: string;
+  batch_denom?: string;
   /**
    * quantity is the quantity of credits being sold from this batch. If it is
    * less then the balance of credits the owner has available at the time this
@@ -74,7 +74,7 @@ export interface MsgSell_OrderAmino {
    * owner's balance. However, if the balance of credits is less than this
    * quantity at the time the sell order is created, the operation will fail.
    */
-  quantity: string;
+  quantity?: string;
   /**
    * ask_price is the price the seller is asking for each unit of the
    * batch_denom. Each credit unit of the batch will be sold for at least the
@@ -86,12 +86,12 @@ export interface MsgSell_OrderAmino {
    * buyer to disable auto-retirement in their buy order enabling them to
    * resell the credits to another buyer.
    */
-  disable_auto_retire: boolean;
+  disable_auto_retire?: boolean;
   /**
    * expiration is an optional timestamp when the sell order expires. When the
    * expiration time is reached, the sell order is removed from state.
    */
-  expiration?: TimestampAmino;
+  expiration?: string;
 }
 export interface MsgSell_OrderAminoMsg {
   type: "/regen.ecocredit.marketplace.v1.Order";
@@ -101,14 +101,14 @@ export interface MsgSell_OrderAminoMsg {
 export interface MsgSell_OrderSDKType {
   batch_denom: string;
   quantity: string;
-  ask_price: CoinSDKType;
+  ask_price?: CoinSDKType;
   disable_auto_retire: boolean;
-  expiration: TimestampSDKType;
+  expiration?: TimestampSDKType;
 }
 /** MsgSellResponse is the Msg/Sell response type. */
 export interface MsgSellResponse {
   /** sell_order_ids are the sell order IDs of the newly created sell orders. */
-  sellOrderIds: Long[];
+  sellOrderIds: bigint[];
 }
 export interface MsgSellResponseProtoMsg {
   typeUrl: "/regen.ecocredit.marketplace.v1.MsgSellResponse";
@@ -117,7 +117,7 @@ export interface MsgSellResponseProtoMsg {
 /** MsgSellResponse is the Msg/Sell response type. */
 export interface MsgSellResponseAmino {
   /** sell_order_ids are the sell order IDs of the newly created sell orders. */
-  sell_order_ids: string[];
+  sell_order_ids?: string[];
 }
 export interface MsgSellResponseAminoMsg {
   type: "/regen.ecocredit.marketplace.v1.MsgSellResponse";
@@ -125,7 +125,7 @@ export interface MsgSellResponseAminoMsg {
 }
 /** MsgSellResponse is the Msg/Sell response type. */
 export interface MsgSellResponseSDKType {
-  sell_order_ids: Long[];
+  sell_order_ids: bigint[];
 }
 /** MsgUpdateSellOrders is the Msg/UpdateSellOrders request type. */
 export interface MsgUpdateSellOrders {
@@ -141,9 +141,9 @@ export interface MsgUpdateSellOrdersProtoMsg {
 /** MsgUpdateSellOrders is the Msg/UpdateSellOrders request type. */
 export interface MsgUpdateSellOrdersAmino {
   /** seller is the address of the account that is selling credits. */
-  seller: string;
+  seller?: string;
   /** updates are updates to existing sell orders. */
-  updates: MsgUpdateSellOrders_UpdateAmino[];
+  updates?: MsgUpdateSellOrders_UpdateAmino[];
 }
 export interface MsgUpdateSellOrdersAminoMsg {
   type: "regen.marketplace/MsgUpdateSellOrders";
@@ -157,11 +157,11 @@ export interface MsgUpdateSellOrdersSDKType {
 /** Update is an update to an existing sell order. */
 export interface MsgUpdateSellOrders_Update {
   /** sell_order_id is the ID of an existing sell order. */
-  sellOrderId: Long;
+  sellOrderId: bigint;
   /** new_quantity is the updated quantity of credits available to sell. */
   newQuantity: string;
   /** new_ask_price is the new ask price for this sell order */
-  newAskPrice: Coin;
+  newAskPrice?: Coin;
   /**
    * disable_auto_retire updates the disable_auto_retire field in the sell
    * order.
@@ -171,7 +171,7 @@ export interface MsgUpdateSellOrders_Update {
    * new_expiration is an optional timestamp when the sell order expires. When
    * the expiration time is reached, the sell order is removed from state.
    */
-  newExpiration: Timestamp;
+  newExpiration?: Timestamp;
 }
 export interface MsgUpdateSellOrders_UpdateProtoMsg {
   typeUrl: "/regen.ecocredit.marketplace.v1.Update";
@@ -180,21 +180,21 @@ export interface MsgUpdateSellOrders_UpdateProtoMsg {
 /** Update is an update to an existing sell order. */
 export interface MsgUpdateSellOrders_UpdateAmino {
   /** sell_order_id is the ID of an existing sell order. */
-  sell_order_id: string;
+  sell_order_id?: string;
   /** new_quantity is the updated quantity of credits available to sell. */
-  new_quantity: string;
+  new_quantity?: string;
   /** new_ask_price is the new ask price for this sell order */
   new_ask_price?: CoinAmino;
   /**
    * disable_auto_retire updates the disable_auto_retire field in the sell
    * order.
    */
-  disable_auto_retire: boolean;
+  disable_auto_retire?: boolean;
   /**
    * new_expiration is an optional timestamp when the sell order expires. When
    * the expiration time is reached, the sell order is removed from state.
    */
-  new_expiration?: TimestampAmino;
+  new_expiration?: string;
 }
 export interface MsgUpdateSellOrders_UpdateAminoMsg {
   type: "/regen.ecocredit.marketplace.v1.Update";
@@ -202,11 +202,11 @@ export interface MsgUpdateSellOrders_UpdateAminoMsg {
 }
 /** Update is an update to an existing sell order. */
 export interface MsgUpdateSellOrders_UpdateSDKType {
-  sell_order_id: Long;
+  sell_order_id: bigint;
   new_quantity: string;
-  new_ask_price: CoinSDKType;
+  new_ask_price?: CoinSDKType;
   disable_auto_retire: boolean;
-  new_expiration: TimestampSDKType;
+  new_expiration?: TimestampSDKType;
 }
 /** MsgUpdateSellOrdersResponse is the Msg/UpdateSellOrders response type. */
 export interface MsgUpdateSellOrdersResponse {}
@@ -230,7 +230,7 @@ export interface MsgCancelSellOrder {
    */
   seller: string;
   /** sell_order_id is the id of the seller order to cancel. */
-  sellOrderId: Long;
+  sellOrderId: bigint;
 }
 export interface MsgCancelSellOrderProtoMsg {
   typeUrl: "/regen.ecocredit.marketplace.v1.MsgCancelSellOrder";
@@ -242,9 +242,9 @@ export interface MsgCancelSellOrderAmino {
    * seller is the address of the account that created the sell order and is
    * therefore authorized to cancel the sell order.
    */
-  seller: string;
+  seller?: string;
   /** sell_order_id is the id of the seller order to cancel. */
-  sell_order_id: string;
+  sell_order_id?: string;
 }
 export interface MsgCancelSellOrderAminoMsg {
   type: "regen.marketplace/MsgCancelSellOrder";
@@ -253,7 +253,7 @@ export interface MsgCancelSellOrderAminoMsg {
 /** MsgCancelSellOrder is the Msg/CancelSellOrder request type. */
 export interface MsgCancelSellOrderSDKType {
   seller: string;
-  sell_order_id: Long;
+  sell_order_id: bigint;
 }
 /** MsgCancelSellOrder is the Msg/CancelSellOrder response type. */
 export interface MsgCancelSellOrderResponse {}
@@ -283,9 +283,9 @@ export interface MsgBuyDirectProtoMsg {
 /** MsgBuyDirect is the Msg/BuyDirect request type. */
 export interface MsgBuyDirectAmino {
   /** buyer is the address of the account that is buying credits. */
-  buyer: string;
+  buyer?: string;
   /** orders is a list of orders for ecocredits. */
-  orders: MsgBuyDirect_OrderAmino[];
+  orders?: MsgBuyDirect_OrderAmino[];
 }
 export interface MsgBuyDirectAminoMsg {
   type: "regen.marketplace/MsgBuyDirect";
@@ -302,11 +302,11 @@ export interface MsgBuyDirect_Order {
    * sell_order_id is the sell order ID against which the buyer is trying
    * to buy.
    */
-  sellOrderId: Long;
+  sellOrderId: bigint;
   /** quantity is the quantity of credits to buy. */
   quantity: string;
   /** bid_price is the price the buyer is willing to pay per credit. */
-  bidPrice: Coin;
+  bidPrice?: Coin;
   /**
    * disable_auto_retire allows auto-retirement to be disabled. If it is set
    * to true the credits will not auto-retire and can be resold assuming that
@@ -339,9 +339,9 @@ export interface MsgBuyDirect_OrderAmino {
    * sell_order_id is the sell order ID against which the buyer is trying
    * to buy.
    */
-  sell_order_id: string;
+  sell_order_id?: string;
   /** quantity is the quantity of credits to buy. */
-  quantity: string;
+  quantity?: string;
   /** bid_price is the price the buyer is willing to pay per credit. */
   bid_price?: CoinAmino;
   /**
@@ -351,12 +351,12 @@ export interface MsgBuyDirect_OrderAmino {
    * order hasn't disabled auto-retirement and the buy order tries to disable
    * it, that buy order will fail.
    */
-  disable_auto_retire: boolean;
+  disable_auto_retire?: boolean;
   /**
    * retirement_jurisdiction is the optional retirement jurisdiction for the
    * credits which will be used only if disable_auto_retire is false.
    */
-  retirement_jurisdiction: string;
+  retirement_jurisdiction?: string;
   /**
    * retirement_reason is any arbitrary string that specifies the reason for
    * retiring credits. The reason will be included in EventRetire and is not
@@ -364,7 +364,7 @@ export interface MsgBuyDirect_OrderAmino {
    * 
    * Since Revision 1
    */
-  retirement_reason: string;
+  retirement_reason?: string;
 }
 export interface MsgBuyDirect_OrderAminoMsg {
   type: "/regen.ecocredit.marketplace.v1.Order";
@@ -372,9 +372,9 @@ export interface MsgBuyDirect_OrderAminoMsg {
 }
 /** Order contains the information needed to purchase an ecocredit. */
 export interface MsgBuyDirect_OrderSDKType {
-  sell_order_id: Long;
+  sell_order_id: bigint;
   quantity: string;
-  bid_price: CoinSDKType;
+  bid_price?: CoinSDKType;
   disable_auto_retire: boolean;
   retirement_jurisdiction: string;
   retirement_reason: string;
@@ -426,20 +426,20 @@ export interface MsgAddAllowedDenomProtoMsg {
  */
 export interface MsgAddAllowedDenomAmino {
   /** authority is the address of the governance account. */
-  authority: string;
+  authority?: string;
   /** denom is the bank denom to allow (ex. ibc/GLKHDSG423SGS) */
-  bank_denom: string;
+  bank_denom?: string;
   /**
    * display_denom is the denom to display to the user and is informational.
    * Because the denom is likely an IBC denom, this should be chosen by
    * governance to represent the consensus trusted name of the denom.
    */
-  display_denom: string;
+  display_denom?: string;
   /**
    * exponent is the exponent that relates the denom to the display_denom and is
    * informational
    */
-  exponent: number;
+  exponent?: number;
 }
 export interface MsgAddAllowedDenomAminoMsg {
   type: "regen.marketplace/MsgAddAllowedDenom";
@@ -504,9 +504,9 @@ export interface MsgRemoveAllowedDenomProtoMsg {
  */
 export interface MsgRemoveAllowedDenomAmino {
   /** authority is the address of the governance account. */
-  authority: string;
+  authority?: string;
   /** denom is the denom to remove (ex. ibc/GLKHDSG423SGS) */
-  denom: string;
+  denom?: string;
 }
 export interface MsgRemoveAllowedDenomAminoMsg {
   type: "regen.marketplace/MsgRemoveAllowedDenom";
@@ -554,7 +554,8 @@ function createBaseMsgSell(): MsgSell {
   };
 }
 export const MsgSell = {
-  encode(message: MsgSell, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  typeUrl: "/regen.ecocredit.marketplace.v1.MsgSell",
+  encode(message: MsgSell, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.seller !== "") {
       writer.uint32(10).string(message.seller);
     }
@@ -563,8 +564,8 @@ export const MsgSell = {
     }
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): MsgSell {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): MsgSell {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMsgSell();
     while (reader.pos < end) {
@@ -606,18 +607,20 @@ export const MsgSell = {
     return message;
   },
   fromAmino(object: MsgSellAmino): MsgSell {
-    return {
-      seller: object.seller,
-      orders: Array.isArray(object?.orders) ? object.orders.map((e: any) => MsgSell_Order.fromAmino(e)) : []
-    };
+    const message = createBaseMsgSell();
+    if (object.seller !== undefined && object.seller !== null) {
+      message.seller = object.seller;
+    }
+    message.orders = object.orders?.map(e => MsgSell_Order.fromAmino(e)) || [];
+    return message;
   },
   toAmino(message: MsgSell): MsgSellAmino {
     const obj: any = {};
-    obj.seller = message.seller;
+    obj.seller = message.seller === "" ? undefined : message.seller;
     if (message.orders) {
       obj.orders = message.orders.map(e => e ? MsgSell_Order.toAmino(e) : undefined);
     } else {
-      obj.orders = [];
+      obj.orders = message.orders;
     }
     return obj;
   },
@@ -653,7 +656,8 @@ function createBaseMsgSell_Order(): MsgSell_Order {
   };
 }
 export const MsgSell_Order = {
-  encode(message: MsgSell_Order, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  typeUrl: "/regen.ecocredit.marketplace.v1.Order",
+  encode(message: MsgSell_Order, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.batchDenom !== "") {
       writer.uint32(10).string(message.batchDenom);
     }
@@ -671,8 +675,8 @@ export const MsgSell_Order = {
     }
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): MsgSell_Order {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): MsgSell_Order {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMsgSell_Order();
     while (reader.pos < end) {
@@ -728,20 +732,30 @@ export const MsgSell_Order = {
     return message;
   },
   fromAmino(object: MsgSell_OrderAmino): MsgSell_Order {
-    return {
-      batchDenom: object.batch_denom,
-      quantity: object.quantity,
-      askPrice: object?.ask_price ? Coin.fromAmino(object.ask_price) : undefined,
-      disableAutoRetire: object.disable_auto_retire,
-      expiration: object?.expiration ? Timestamp.fromAmino(object.expiration) : undefined
-    };
+    const message = createBaseMsgSell_Order();
+    if (object.batch_denom !== undefined && object.batch_denom !== null) {
+      message.batchDenom = object.batch_denom;
+    }
+    if (object.quantity !== undefined && object.quantity !== null) {
+      message.quantity = object.quantity;
+    }
+    if (object.ask_price !== undefined && object.ask_price !== null) {
+      message.askPrice = Coin.fromAmino(object.ask_price);
+    }
+    if (object.disable_auto_retire !== undefined && object.disable_auto_retire !== null) {
+      message.disableAutoRetire = object.disable_auto_retire;
+    }
+    if (object.expiration !== undefined && object.expiration !== null) {
+      message.expiration = Timestamp.fromAmino(object.expiration);
+    }
+    return message;
   },
   toAmino(message: MsgSell_Order): MsgSell_OrderAmino {
     const obj: any = {};
-    obj.batch_denom = message.batchDenom;
-    obj.quantity = message.quantity;
+    obj.batch_denom = message.batchDenom === "" ? undefined : message.batchDenom;
+    obj.quantity = message.quantity === "" ? undefined : message.quantity;
     obj.ask_price = message.askPrice ? Coin.toAmino(message.askPrice) : undefined;
-    obj.disable_auto_retire = message.disableAutoRetire;
+    obj.disable_auto_retire = message.disableAutoRetire === false ? undefined : message.disableAutoRetire;
     obj.expiration = message.expiration ? Timestamp.toAmino(message.expiration) : undefined;
     return obj;
   },
@@ -767,7 +781,8 @@ function createBaseMsgSellResponse(): MsgSellResponse {
   };
 }
 export const MsgSellResponse = {
-  encode(message: MsgSellResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  typeUrl: "/regen.ecocredit.marketplace.v1.MsgSellResponse",
+  encode(message: MsgSellResponse, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     writer.uint32(10).fork();
     for (const v of message.sellOrderIds) {
       writer.uint64(v);
@@ -775,8 +790,8 @@ export const MsgSellResponse = {
     writer.ldelim();
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): MsgSellResponse {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): MsgSellResponse {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMsgSellResponse();
     while (reader.pos < end) {
@@ -786,10 +801,10 @@ export const MsgSellResponse = {
           if ((tag & 7) === 2) {
             const end2 = reader.uint32() + reader.pos;
             while (reader.pos < end2) {
-              message.sellOrderIds.push((reader.uint64() as Long));
+              message.sellOrderIds.push(reader.uint64());
             }
           } else {
-            message.sellOrderIds.push((reader.uint64() as Long));
+            message.sellOrderIds.push(reader.uint64());
           }
           break;
         default:
@@ -801,13 +816,13 @@ export const MsgSellResponse = {
   },
   fromJSON(object: any): MsgSellResponse {
     return {
-      sellOrderIds: Array.isArray(object?.sellOrderIds) ? object.sellOrderIds.map((e: any) => Long.fromValue(e)) : []
+      sellOrderIds: Array.isArray(object?.sellOrderIds) ? object.sellOrderIds.map((e: any) => BigInt(e.toString())) : []
     };
   },
   toJSON(message: MsgSellResponse): unknown {
     const obj: any = {};
     if (message.sellOrderIds) {
-      obj.sellOrderIds = message.sellOrderIds.map(e => (e || Long.UZERO).toString());
+      obj.sellOrderIds = message.sellOrderIds.map(e => (e || BigInt(0)).toString());
     } else {
       obj.sellOrderIds = [];
     }
@@ -815,20 +830,20 @@ export const MsgSellResponse = {
   },
   fromPartial(object: Partial<MsgSellResponse>): MsgSellResponse {
     const message = createBaseMsgSellResponse();
-    message.sellOrderIds = object.sellOrderIds?.map(e => Long.fromValue(e)) || [];
+    message.sellOrderIds = object.sellOrderIds?.map(e => BigInt(e.toString())) || [];
     return message;
   },
   fromAmino(object: MsgSellResponseAmino): MsgSellResponse {
-    return {
-      sellOrderIds: Array.isArray(object?.sell_order_ids) ? object.sell_order_ids.map((e: any) => e) : []
-    };
+    const message = createBaseMsgSellResponse();
+    message.sellOrderIds = object.sell_order_ids?.map(e => BigInt(e)) || [];
+    return message;
   },
   toAmino(message: MsgSellResponse): MsgSellResponseAmino {
     const obj: any = {};
     if (message.sellOrderIds) {
-      obj.sell_order_ids = message.sellOrderIds.map(e => e);
+      obj.sell_order_ids = message.sellOrderIds.map(e => e.toString());
     } else {
-      obj.sell_order_ids = [];
+      obj.sell_order_ids = message.sellOrderIds;
     }
     return obj;
   },
@@ -855,7 +870,8 @@ function createBaseMsgUpdateSellOrders(): MsgUpdateSellOrders {
   };
 }
 export const MsgUpdateSellOrders = {
-  encode(message: MsgUpdateSellOrders, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  typeUrl: "/regen.ecocredit.marketplace.v1.MsgUpdateSellOrders",
+  encode(message: MsgUpdateSellOrders, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.seller !== "") {
       writer.uint32(10).string(message.seller);
     }
@@ -864,8 +880,8 @@ export const MsgUpdateSellOrders = {
     }
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): MsgUpdateSellOrders {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): MsgUpdateSellOrders {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMsgUpdateSellOrders();
     while (reader.pos < end) {
@@ -907,18 +923,20 @@ export const MsgUpdateSellOrders = {
     return message;
   },
   fromAmino(object: MsgUpdateSellOrdersAmino): MsgUpdateSellOrders {
-    return {
-      seller: object.seller,
-      updates: Array.isArray(object?.updates) ? object.updates.map((e: any) => MsgUpdateSellOrders_Update.fromAmino(e)) : []
-    };
+    const message = createBaseMsgUpdateSellOrders();
+    if (object.seller !== undefined && object.seller !== null) {
+      message.seller = object.seller;
+    }
+    message.updates = object.updates?.map(e => MsgUpdateSellOrders_Update.fromAmino(e)) || [];
+    return message;
   },
   toAmino(message: MsgUpdateSellOrders): MsgUpdateSellOrdersAmino {
     const obj: any = {};
-    obj.seller = message.seller;
+    obj.seller = message.seller === "" ? undefined : message.seller;
     if (message.updates) {
       obj.updates = message.updates.map(e => e ? MsgUpdateSellOrders_Update.toAmino(e) : undefined);
     } else {
-      obj.updates = [];
+      obj.updates = message.updates;
     }
     return obj;
   },
@@ -946,7 +964,7 @@ export const MsgUpdateSellOrders = {
 };
 function createBaseMsgUpdateSellOrders_Update(): MsgUpdateSellOrders_Update {
   return {
-    sellOrderId: Long.UZERO,
+    sellOrderId: BigInt(0),
     newQuantity: "",
     newAskPrice: undefined,
     disableAutoRetire: false,
@@ -954,8 +972,9 @@ function createBaseMsgUpdateSellOrders_Update(): MsgUpdateSellOrders_Update {
   };
 }
 export const MsgUpdateSellOrders_Update = {
-  encode(message: MsgUpdateSellOrders_Update, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
-    if (!message.sellOrderId.isZero()) {
+  typeUrl: "/regen.ecocredit.marketplace.v1.Update",
+  encode(message: MsgUpdateSellOrders_Update, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
+    if (message.sellOrderId !== BigInt(0)) {
       writer.uint32(8).uint64(message.sellOrderId);
     }
     if (message.newQuantity !== "") {
@@ -972,15 +991,15 @@ export const MsgUpdateSellOrders_Update = {
     }
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): MsgUpdateSellOrders_Update {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): MsgUpdateSellOrders_Update {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMsgUpdateSellOrders_Update();
     while (reader.pos < end) {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          message.sellOrderId = (reader.uint64() as Long);
+          message.sellOrderId = reader.uint64();
           break;
         case 2:
           message.newQuantity = reader.string();
@@ -1003,7 +1022,7 @@ export const MsgUpdateSellOrders_Update = {
   },
   fromJSON(object: any): MsgUpdateSellOrders_Update {
     return {
-      sellOrderId: isSet(object.sellOrderId) ? Long.fromValue(object.sellOrderId) : Long.UZERO,
+      sellOrderId: isSet(object.sellOrderId) ? BigInt(object.sellOrderId.toString()) : BigInt(0),
       newQuantity: isSet(object.newQuantity) ? String(object.newQuantity) : "",
       newAskPrice: isSet(object.newAskPrice) ? Coin.fromJSON(object.newAskPrice) : undefined,
       disableAutoRetire: isSet(object.disableAutoRetire) ? Boolean(object.disableAutoRetire) : false,
@@ -1012,7 +1031,7 @@ export const MsgUpdateSellOrders_Update = {
   },
   toJSON(message: MsgUpdateSellOrders_Update): unknown {
     const obj: any = {};
-    message.sellOrderId !== undefined && (obj.sellOrderId = (message.sellOrderId || Long.UZERO).toString());
+    message.sellOrderId !== undefined && (obj.sellOrderId = (message.sellOrderId || BigInt(0)).toString());
     message.newQuantity !== undefined && (obj.newQuantity = message.newQuantity);
     message.newAskPrice !== undefined && (obj.newAskPrice = message.newAskPrice ? Coin.toJSON(message.newAskPrice) : undefined);
     message.disableAutoRetire !== undefined && (obj.disableAutoRetire = message.disableAutoRetire);
@@ -1021,7 +1040,7 @@ export const MsgUpdateSellOrders_Update = {
   },
   fromPartial(object: Partial<MsgUpdateSellOrders_Update>): MsgUpdateSellOrders_Update {
     const message = createBaseMsgUpdateSellOrders_Update();
-    message.sellOrderId = object.sellOrderId !== undefined && object.sellOrderId !== null ? Long.fromValue(object.sellOrderId) : Long.UZERO;
+    message.sellOrderId = object.sellOrderId !== undefined && object.sellOrderId !== null ? BigInt(object.sellOrderId.toString()) : BigInt(0);
     message.newQuantity = object.newQuantity ?? "";
     message.newAskPrice = object.newAskPrice !== undefined && object.newAskPrice !== null ? Coin.fromPartial(object.newAskPrice) : undefined;
     message.disableAutoRetire = object.disableAutoRetire ?? false;
@@ -1029,20 +1048,30 @@ export const MsgUpdateSellOrders_Update = {
     return message;
   },
   fromAmino(object: MsgUpdateSellOrders_UpdateAmino): MsgUpdateSellOrders_Update {
-    return {
-      sellOrderId: Long.fromString(object.sell_order_id),
-      newQuantity: object.new_quantity,
-      newAskPrice: object?.new_ask_price ? Coin.fromAmino(object.new_ask_price) : undefined,
-      disableAutoRetire: object.disable_auto_retire,
-      newExpiration: object?.new_expiration ? Timestamp.fromAmino(object.new_expiration) : undefined
-    };
+    const message = createBaseMsgUpdateSellOrders_Update();
+    if (object.sell_order_id !== undefined && object.sell_order_id !== null) {
+      message.sellOrderId = BigInt(object.sell_order_id);
+    }
+    if (object.new_quantity !== undefined && object.new_quantity !== null) {
+      message.newQuantity = object.new_quantity;
+    }
+    if (object.new_ask_price !== undefined && object.new_ask_price !== null) {
+      message.newAskPrice = Coin.fromAmino(object.new_ask_price);
+    }
+    if (object.disable_auto_retire !== undefined && object.disable_auto_retire !== null) {
+      message.disableAutoRetire = object.disable_auto_retire;
+    }
+    if (object.new_expiration !== undefined && object.new_expiration !== null) {
+      message.newExpiration = Timestamp.fromAmino(object.new_expiration);
+    }
+    return message;
   },
   toAmino(message: MsgUpdateSellOrders_Update): MsgUpdateSellOrders_UpdateAmino {
     const obj: any = {};
-    obj.sell_order_id = message.sellOrderId ? message.sellOrderId.toString() : undefined;
-    obj.new_quantity = message.newQuantity;
+    obj.sell_order_id = message.sellOrderId !== BigInt(0) ? message.sellOrderId.toString() : undefined;
+    obj.new_quantity = message.newQuantity === "" ? undefined : message.newQuantity;
     obj.new_ask_price = message.newAskPrice ? Coin.toAmino(message.newAskPrice) : undefined;
-    obj.disable_auto_retire = message.disableAutoRetire;
+    obj.disable_auto_retire = message.disableAutoRetire === false ? undefined : message.disableAutoRetire;
     obj.new_expiration = message.newExpiration ? Timestamp.toAmino(message.newExpiration) : undefined;
     return obj;
   },
@@ -1066,11 +1095,12 @@ function createBaseMsgUpdateSellOrdersResponse(): MsgUpdateSellOrdersResponse {
   return {};
 }
 export const MsgUpdateSellOrdersResponse = {
-  encode(_: MsgUpdateSellOrdersResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  typeUrl: "/regen.ecocredit.marketplace.v1.MsgUpdateSellOrdersResponse",
+  encode(_: MsgUpdateSellOrdersResponse, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): MsgUpdateSellOrdersResponse {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): MsgUpdateSellOrdersResponse {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMsgUpdateSellOrdersResponse();
     while (reader.pos < end) {
@@ -1095,7 +1125,8 @@ export const MsgUpdateSellOrdersResponse = {
     return message;
   },
   fromAmino(_: MsgUpdateSellOrdersResponseAmino): MsgUpdateSellOrdersResponse {
-    return {};
+    const message = createBaseMsgUpdateSellOrdersResponse();
+    return message;
   },
   toAmino(_: MsgUpdateSellOrdersResponse): MsgUpdateSellOrdersResponseAmino {
     const obj: any = {};
@@ -1120,21 +1151,22 @@ export const MsgUpdateSellOrdersResponse = {
 function createBaseMsgCancelSellOrder(): MsgCancelSellOrder {
   return {
     seller: "",
-    sellOrderId: Long.UZERO
+    sellOrderId: BigInt(0)
   };
 }
 export const MsgCancelSellOrder = {
-  encode(message: MsgCancelSellOrder, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  typeUrl: "/regen.ecocredit.marketplace.v1.MsgCancelSellOrder",
+  encode(message: MsgCancelSellOrder, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.seller !== "") {
       writer.uint32(10).string(message.seller);
     }
-    if (!message.sellOrderId.isZero()) {
+    if (message.sellOrderId !== BigInt(0)) {
       writer.uint32(16).uint64(message.sellOrderId);
     }
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): MsgCancelSellOrder {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): MsgCancelSellOrder {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMsgCancelSellOrder();
     while (reader.pos < end) {
@@ -1144,7 +1176,7 @@ export const MsgCancelSellOrder = {
           message.seller = reader.string();
           break;
         case 2:
-          message.sellOrderId = (reader.uint64() as Long);
+          message.sellOrderId = reader.uint64();
           break;
         default:
           reader.skipType(tag & 7);
@@ -1156,31 +1188,35 @@ export const MsgCancelSellOrder = {
   fromJSON(object: any): MsgCancelSellOrder {
     return {
       seller: isSet(object.seller) ? String(object.seller) : "",
-      sellOrderId: isSet(object.sellOrderId) ? Long.fromValue(object.sellOrderId) : Long.UZERO
+      sellOrderId: isSet(object.sellOrderId) ? BigInt(object.sellOrderId.toString()) : BigInt(0)
     };
   },
   toJSON(message: MsgCancelSellOrder): unknown {
     const obj: any = {};
     message.seller !== undefined && (obj.seller = message.seller);
-    message.sellOrderId !== undefined && (obj.sellOrderId = (message.sellOrderId || Long.UZERO).toString());
+    message.sellOrderId !== undefined && (obj.sellOrderId = (message.sellOrderId || BigInt(0)).toString());
     return obj;
   },
   fromPartial(object: Partial<MsgCancelSellOrder>): MsgCancelSellOrder {
     const message = createBaseMsgCancelSellOrder();
     message.seller = object.seller ?? "";
-    message.sellOrderId = object.sellOrderId !== undefined && object.sellOrderId !== null ? Long.fromValue(object.sellOrderId) : Long.UZERO;
+    message.sellOrderId = object.sellOrderId !== undefined && object.sellOrderId !== null ? BigInt(object.sellOrderId.toString()) : BigInt(0);
     return message;
   },
   fromAmino(object: MsgCancelSellOrderAmino): MsgCancelSellOrder {
-    return {
-      seller: object.seller,
-      sellOrderId: Long.fromString(object.sell_order_id)
-    };
+    const message = createBaseMsgCancelSellOrder();
+    if (object.seller !== undefined && object.seller !== null) {
+      message.seller = object.seller;
+    }
+    if (object.sell_order_id !== undefined && object.sell_order_id !== null) {
+      message.sellOrderId = BigInt(object.sell_order_id);
+    }
+    return message;
   },
   toAmino(message: MsgCancelSellOrder): MsgCancelSellOrderAmino {
     const obj: any = {};
-    obj.seller = message.seller;
-    obj.sell_order_id = message.sellOrderId ? message.sellOrderId.toString() : undefined;
+    obj.seller = message.seller === "" ? undefined : message.seller;
+    obj.sell_order_id = message.sellOrderId !== BigInt(0) ? message.sellOrderId.toString() : undefined;
     return obj;
   },
   fromAminoMsg(object: MsgCancelSellOrderAminoMsg): MsgCancelSellOrder {
@@ -1209,11 +1245,12 @@ function createBaseMsgCancelSellOrderResponse(): MsgCancelSellOrderResponse {
   return {};
 }
 export const MsgCancelSellOrderResponse = {
-  encode(_: MsgCancelSellOrderResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  typeUrl: "/regen.ecocredit.marketplace.v1.MsgCancelSellOrderResponse",
+  encode(_: MsgCancelSellOrderResponse, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): MsgCancelSellOrderResponse {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): MsgCancelSellOrderResponse {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMsgCancelSellOrderResponse();
     while (reader.pos < end) {
@@ -1238,7 +1275,8 @@ export const MsgCancelSellOrderResponse = {
     return message;
   },
   fromAmino(_: MsgCancelSellOrderResponseAmino): MsgCancelSellOrderResponse {
-    return {};
+    const message = createBaseMsgCancelSellOrderResponse();
+    return message;
   },
   toAmino(_: MsgCancelSellOrderResponse): MsgCancelSellOrderResponseAmino {
     const obj: any = {};
@@ -1267,7 +1305,8 @@ function createBaseMsgBuyDirect(): MsgBuyDirect {
   };
 }
 export const MsgBuyDirect = {
-  encode(message: MsgBuyDirect, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  typeUrl: "/regen.ecocredit.marketplace.v1.MsgBuyDirect",
+  encode(message: MsgBuyDirect, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.buyer !== "") {
       writer.uint32(10).string(message.buyer);
     }
@@ -1276,8 +1315,8 @@ export const MsgBuyDirect = {
     }
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): MsgBuyDirect {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): MsgBuyDirect {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMsgBuyDirect();
     while (reader.pos < end) {
@@ -1319,18 +1358,20 @@ export const MsgBuyDirect = {
     return message;
   },
   fromAmino(object: MsgBuyDirectAmino): MsgBuyDirect {
-    return {
-      buyer: object.buyer,
-      orders: Array.isArray(object?.orders) ? object.orders.map((e: any) => MsgBuyDirect_Order.fromAmino(e)) : []
-    };
+    const message = createBaseMsgBuyDirect();
+    if (object.buyer !== undefined && object.buyer !== null) {
+      message.buyer = object.buyer;
+    }
+    message.orders = object.orders?.map(e => MsgBuyDirect_Order.fromAmino(e)) || [];
+    return message;
   },
   toAmino(message: MsgBuyDirect): MsgBuyDirectAmino {
     const obj: any = {};
-    obj.buyer = message.buyer;
+    obj.buyer = message.buyer === "" ? undefined : message.buyer;
     if (message.orders) {
       obj.orders = message.orders.map(e => e ? MsgBuyDirect_Order.toAmino(e) : undefined);
     } else {
-      obj.orders = [];
+      obj.orders = message.orders;
     }
     return obj;
   },
@@ -1358,7 +1399,7 @@ export const MsgBuyDirect = {
 };
 function createBaseMsgBuyDirect_Order(): MsgBuyDirect_Order {
   return {
-    sellOrderId: Long.UZERO,
+    sellOrderId: BigInt(0),
     quantity: "",
     bidPrice: undefined,
     disableAutoRetire: false,
@@ -1367,8 +1408,9 @@ function createBaseMsgBuyDirect_Order(): MsgBuyDirect_Order {
   };
 }
 export const MsgBuyDirect_Order = {
-  encode(message: MsgBuyDirect_Order, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
-    if (!message.sellOrderId.isZero()) {
+  typeUrl: "/regen.ecocredit.marketplace.v1.Order",
+  encode(message: MsgBuyDirect_Order, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
+    if (message.sellOrderId !== BigInt(0)) {
       writer.uint32(16).uint64(message.sellOrderId);
     }
     if (message.quantity !== "") {
@@ -1388,15 +1430,15 @@ export const MsgBuyDirect_Order = {
     }
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): MsgBuyDirect_Order {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): MsgBuyDirect_Order {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMsgBuyDirect_Order();
     while (reader.pos < end) {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 2:
-          message.sellOrderId = (reader.uint64() as Long);
+          message.sellOrderId = reader.uint64();
           break;
         case 3:
           message.quantity = reader.string();
@@ -1422,7 +1464,7 @@ export const MsgBuyDirect_Order = {
   },
   fromJSON(object: any): MsgBuyDirect_Order {
     return {
-      sellOrderId: isSet(object.sellOrderId) ? Long.fromValue(object.sellOrderId) : Long.UZERO,
+      sellOrderId: isSet(object.sellOrderId) ? BigInt(object.sellOrderId.toString()) : BigInt(0),
       quantity: isSet(object.quantity) ? String(object.quantity) : "",
       bidPrice: isSet(object.bidPrice) ? Coin.fromJSON(object.bidPrice) : undefined,
       disableAutoRetire: isSet(object.disableAutoRetire) ? Boolean(object.disableAutoRetire) : false,
@@ -1432,7 +1474,7 @@ export const MsgBuyDirect_Order = {
   },
   toJSON(message: MsgBuyDirect_Order): unknown {
     const obj: any = {};
-    message.sellOrderId !== undefined && (obj.sellOrderId = (message.sellOrderId || Long.UZERO).toString());
+    message.sellOrderId !== undefined && (obj.sellOrderId = (message.sellOrderId || BigInt(0)).toString());
     message.quantity !== undefined && (obj.quantity = message.quantity);
     message.bidPrice !== undefined && (obj.bidPrice = message.bidPrice ? Coin.toJSON(message.bidPrice) : undefined);
     message.disableAutoRetire !== undefined && (obj.disableAutoRetire = message.disableAutoRetire);
@@ -1442,7 +1484,7 @@ export const MsgBuyDirect_Order = {
   },
   fromPartial(object: Partial<MsgBuyDirect_Order>): MsgBuyDirect_Order {
     const message = createBaseMsgBuyDirect_Order();
-    message.sellOrderId = object.sellOrderId !== undefined && object.sellOrderId !== null ? Long.fromValue(object.sellOrderId) : Long.UZERO;
+    message.sellOrderId = object.sellOrderId !== undefined && object.sellOrderId !== null ? BigInt(object.sellOrderId.toString()) : BigInt(0);
     message.quantity = object.quantity ?? "";
     message.bidPrice = object.bidPrice !== undefined && object.bidPrice !== null ? Coin.fromPartial(object.bidPrice) : undefined;
     message.disableAutoRetire = object.disableAutoRetire ?? false;
@@ -1451,23 +1493,35 @@ export const MsgBuyDirect_Order = {
     return message;
   },
   fromAmino(object: MsgBuyDirect_OrderAmino): MsgBuyDirect_Order {
-    return {
-      sellOrderId: Long.fromString(object.sell_order_id),
-      quantity: object.quantity,
-      bidPrice: object?.bid_price ? Coin.fromAmino(object.bid_price) : undefined,
-      disableAutoRetire: object.disable_auto_retire,
-      retirementJurisdiction: object.retirement_jurisdiction,
-      retirementReason: object.retirement_reason
-    };
+    const message = createBaseMsgBuyDirect_Order();
+    if (object.sell_order_id !== undefined && object.sell_order_id !== null) {
+      message.sellOrderId = BigInt(object.sell_order_id);
+    }
+    if (object.quantity !== undefined && object.quantity !== null) {
+      message.quantity = object.quantity;
+    }
+    if (object.bid_price !== undefined && object.bid_price !== null) {
+      message.bidPrice = Coin.fromAmino(object.bid_price);
+    }
+    if (object.disable_auto_retire !== undefined && object.disable_auto_retire !== null) {
+      message.disableAutoRetire = object.disable_auto_retire;
+    }
+    if (object.retirement_jurisdiction !== undefined && object.retirement_jurisdiction !== null) {
+      message.retirementJurisdiction = object.retirement_jurisdiction;
+    }
+    if (object.retirement_reason !== undefined && object.retirement_reason !== null) {
+      message.retirementReason = object.retirement_reason;
+    }
+    return message;
   },
   toAmino(message: MsgBuyDirect_Order): MsgBuyDirect_OrderAmino {
     const obj: any = {};
-    obj.sell_order_id = message.sellOrderId ? message.sellOrderId.toString() : undefined;
-    obj.quantity = message.quantity;
+    obj.sell_order_id = message.sellOrderId !== BigInt(0) ? message.sellOrderId.toString() : undefined;
+    obj.quantity = message.quantity === "" ? undefined : message.quantity;
     obj.bid_price = message.bidPrice ? Coin.toAmino(message.bidPrice) : undefined;
-    obj.disable_auto_retire = message.disableAutoRetire;
-    obj.retirement_jurisdiction = message.retirementJurisdiction;
-    obj.retirement_reason = message.retirementReason;
+    obj.disable_auto_retire = message.disableAutoRetire === false ? undefined : message.disableAutoRetire;
+    obj.retirement_jurisdiction = message.retirementJurisdiction === "" ? undefined : message.retirementJurisdiction;
+    obj.retirement_reason = message.retirementReason === "" ? undefined : message.retirementReason;
     return obj;
   },
   fromAminoMsg(object: MsgBuyDirect_OrderAminoMsg): MsgBuyDirect_Order {
@@ -1490,11 +1544,12 @@ function createBaseMsgBuyDirectResponse(): MsgBuyDirectResponse {
   return {};
 }
 export const MsgBuyDirectResponse = {
-  encode(_: MsgBuyDirectResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  typeUrl: "/regen.ecocredit.marketplace.v1.MsgBuyDirectResponse",
+  encode(_: MsgBuyDirectResponse, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): MsgBuyDirectResponse {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): MsgBuyDirectResponse {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMsgBuyDirectResponse();
     while (reader.pos < end) {
@@ -1519,7 +1574,8 @@ export const MsgBuyDirectResponse = {
     return message;
   },
   fromAmino(_: MsgBuyDirectResponseAmino): MsgBuyDirectResponse {
-    return {};
+    const message = createBaseMsgBuyDirectResponse();
+    return message;
   },
   toAmino(_: MsgBuyDirectResponse): MsgBuyDirectResponseAmino {
     const obj: any = {};
@@ -1550,7 +1606,8 @@ function createBaseMsgAddAllowedDenom(): MsgAddAllowedDenom {
   };
 }
 export const MsgAddAllowedDenom = {
-  encode(message: MsgAddAllowedDenom, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  typeUrl: "/regen.ecocredit.marketplace.v1.MsgAddAllowedDenom",
+  encode(message: MsgAddAllowedDenom, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.authority !== "") {
       writer.uint32(10).string(message.authority);
     }
@@ -1565,8 +1622,8 @@ export const MsgAddAllowedDenom = {
     }
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): MsgAddAllowedDenom {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): MsgAddAllowedDenom {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMsgAddAllowedDenom();
     while (reader.pos < end) {
@@ -1616,19 +1673,27 @@ export const MsgAddAllowedDenom = {
     return message;
   },
   fromAmino(object: MsgAddAllowedDenomAmino): MsgAddAllowedDenom {
-    return {
-      authority: object.authority,
-      bankDenom: object.bank_denom,
-      displayDenom: object.display_denom,
-      exponent: object.exponent
-    };
+    const message = createBaseMsgAddAllowedDenom();
+    if (object.authority !== undefined && object.authority !== null) {
+      message.authority = object.authority;
+    }
+    if (object.bank_denom !== undefined && object.bank_denom !== null) {
+      message.bankDenom = object.bank_denom;
+    }
+    if (object.display_denom !== undefined && object.display_denom !== null) {
+      message.displayDenom = object.display_denom;
+    }
+    if (object.exponent !== undefined && object.exponent !== null) {
+      message.exponent = object.exponent;
+    }
+    return message;
   },
   toAmino(message: MsgAddAllowedDenom): MsgAddAllowedDenomAmino {
     const obj: any = {};
-    obj.authority = message.authority;
-    obj.bank_denom = message.bankDenom;
-    obj.display_denom = message.displayDenom;
-    obj.exponent = message.exponent;
+    obj.authority = message.authority === "" ? undefined : message.authority;
+    obj.bank_denom = message.bankDenom === "" ? undefined : message.bankDenom;
+    obj.display_denom = message.displayDenom === "" ? undefined : message.displayDenom;
+    obj.exponent = message.exponent === 0 ? undefined : message.exponent;
     return obj;
   },
   fromAminoMsg(object: MsgAddAllowedDenomAminoMsg): MsgAddAllowedDenom {
@@ -1657,11 +1722,12 @@ function createBaseMsgAddAllowedDenomResponse(): MsgAddAllowedDenomResponse {
   return {};
 }
 export const MsgAddAllowedDenomResponse = {
-  encode(_: MsgAddAllowedDenomResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  typeUrl: "/regen.ecocredit.marketplace.v1.MsgAddAllowedDenomResponse",
+  encode(_: MsgAddAllowedDenomResponse, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): MsgAddAllowedDenomResponse {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): MsgAddAllowedDenomResponse {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMsgAddAllowedDenomResponse();
     while (reader.pos < end) {
@@ -1686,7 +1752,8 @@ export const MsgAddAllowedDenomResponse = {
     return message;
   },
   fromAmino(_: MsgAddAllowedDenomResponseAmino): MsgAddAllowedDenomResponse {
-    return {};
+    const message = createBaseMsgAddAllowedDenomResponse();
+    return message;
   },
   toAmino(_: MsgAddAllowedDenomResponse): MsgAddAllowedDenomResponseAmino {
     const obj: any = {};
@@ -1715,7 +1782,8 @@ function createBaseMsgRemoveAllowedDenom(): MsgRemoveAllowedDenom {
   };
 }
 export const MsgRemoveAllowedDenom = {
-  encode(message: MsgRemoveAllowedDenom, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  typeUrl: "/regen.ecocredit.marketplace.v1.MsgRemoveAllowedDenom",
+  encode(message: MsgRemoveAllowedDenom, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.authority !== "") {
       writer.uint32(10).string(message.authority);
     }
@@ -1724,8 +1792,8 @@ export const MsgRemoveAllowedDenom = {
     }
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): MsgRemoveAllowedDenom {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): MsgRemoveAllowedDenom {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMsgRemoveAllowedDenom();
     while (reader.pos < end) {
@@ -1763,15 +1831,19 @@ export const MsgRemoveAllowedDenom = {
     return message;
   },
   fromAmino(object: MsgRemoveAllowedDenomAmino): MsgRemoveAllowedDenom {
-    return {
-      authority: object.authority,
-      denom: object.denom
-    };
+    const message = createBaseMsgRemoveAllowedDenom();
+    if (object.authority !== undefined && object.authority !== null) {
+      message.authority = object.authority;
+    }
+    if (object.denom !== undefined && object.denom !== null) {
+      message.denom = object.denom;
+    }
+    return message;
   },
   toAmino(message: MsgRemoveAllowedDenom): MsgRemoveAllowedDenomAmino {
     const obj: any = {};
-    obj.authority = message.authority;
-    obj.denom = message.denom;
+    obj.authority = message.authority === "" ? undefined : message.authority;
+    obj.denom = message.denom === "" ? undefined : message.denom;
     return obj;
   },
   fromAminoMsg(object: MsgRemoveAllowedDenomAminoMsg): MsgRemoveAllowedDenom {
@@ -1800,11 +1872,12 @@ function createBaseMsgRemoveAllowedDenomResponse(): MsgRemoveAllowedDenomRespons
   return {};
 }
 export const MsgRemoveAllowedDenomResponse = {
-  encode(_: MsgRemoveAllowedDenomResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  typeUrl: "/regen.ecocredit.marketplace.v1.MsgRemoveAllowedDenomResponse",
+  encode(_: MsgRemoveAllowedDenomResponse, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): MsgRemoveAllowedDenomResponse {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): MsgRemoveAllowedDenomResponse {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMsgRemoveAllowedDenomResponse();
     while (reader.pos < end) {
@@ -1829,7 +1902,8 @@ export const MsgRemoveAllowedDenomResponse = {
     return message;
   },
   fromAmino(_: MsgRemoveAllowedDenomResponseAmino): MsgRemoveAllowedDenomResponse {
-    return {};
+    const message = createBaseMsgRemoveAllowedDenomResponse();
+    return message;
   },
   toAmino(_: MsgRemoveAllowedDenomResponse): MsgRemoveAllowedDenomResponseAmino {
     const obj: any = {};

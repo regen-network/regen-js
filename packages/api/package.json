@@ -39,7 +39,7 @@
     "@cosmjs/proto-signing": "^0.31.0",
     "@cosmjs/stargate": "^0.31.0",
     "@cosmjs/tendermint-rpc": "^0.31.0",
-    "@osmonauts/lcd": "^0.11.1",
+    "@cosmology/lcd": "^0.13.3",
     "protobufjs": "^7.2.4"
   },
   "devDependencies": {
@@ -55,7 +55,7 @@
     "@babel/plugin-transform-runtime": "^7.22.5",
     "@babel/preset-env": "^7.22.5",
     "@babel/preset-typescript": "^7.22.5",
-    "@osmonauts/telescope": "^0.99.0",
+    "@cosmology/telescope": "^1.5.2",
     "babel-core": "7.0.0-bridge.0",
     "babel-watch": "^7.8.0",
     "cross-env": "^7.0.3",

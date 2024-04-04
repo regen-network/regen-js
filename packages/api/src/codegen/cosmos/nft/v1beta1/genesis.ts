@@ -1,5 +1,5 @@
 import { Class, ClassAmino, ClassSDKType, NFT, NFTAmino, NFTSDKType } from "./nft";
-import * as _m0 from "protobufjs/minimal";
+import { BinaryReader, BinaryWriter } from "../../../binary";
 import { isSet } from "../../../helpers";
 /** GenesisState defines the nft module's genesis state. */
 export interface GenesisState {
@@ -14,8 +14,8 @@ export interface GenesisStateProtoMsg {
 /** GenesisState defines the nft module's genesis state. */
 export interface GenesisStateAmino {
   /** class defines the class of the nft type. */
-  classes: ClassAmino[];
-  entries: EntryAmino[];
+  classes?: ClassAmino[];
+  entries?: EntryAmino[];
 }
 export interface GenesisStateAminoMsg {
   type: "cosmos-sdk/GenesisState";
@@ -40,9 +40,9 @@ export interface EntryProtoMsg {
 /** Entry Defines all nft owned by a person */
 export interface EntryAmino {
   /** owner is the owner address of the following nft */
-  owner: string;
+  owner?: string;
   /** nfts is a group of nfts of the same owner */
-  nfts: NFTAmino[];
+  nfts?: NFTAmino[];
 }
 export interface EntryAminoMsg {
   type: "cosmos-sdk/Entry";
@@ -60,7 +60,8 @@ function createBaseGenesisState(): GenesisState {
   };
 }
 export const GenesisState = {
-  encode(message: GenesisState, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  typeUrl: "/cosmos.nft.v1beta1.GenesisState",
+  encode(message: GenesisState, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     for (const v of message.classes) {
       Class.encode(v!, writer.uint32(10).fork()).ldelim();
     }
@@ -69,8 +70,8 @@ export const GenesisState = {
     }
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): GenesisState {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): GenesisState {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseGenesisState();
     while (reader.pos < end) {
@@ -116,22 +117,22 @@ export const GenesisState = {
     return message;
   },
   fromAmino(object: GenesisStateAmino): GenesisState {
-    return {
-      classes: Array.isArray(object?.classes) ? object.classes.map((e: any) => Class.fromAmino(e)) : [],
-      entries: Array.isArray(object?.entries) ? object.entries.map((e: any) => Entry.fromAmino(e)) : []
-    };
+    const message = createBaseGenesisState();
+    message.classes = object.classes?.map(e => Class.fromAmino(e)) || [];
+    message.entries = object.entries?.map(e => Entry.fromAmino(e)) || [];
+    return message;
   },
   toAmino(message: GenesisState): GenesisStateAmino {
     const obj: any = {};
     if (message.classes) {
       obj.classes = message.classes.map(e => e ? Class.toAmino(e) : undefined);
     } else {
-      obj.classes = [];
+      obj.classes = message.classes;
     }
     if (message.entries) {
       obj.entries = message.entries.map(e => e ? Entry.toAmino(e) : undefined);
     } else {
-      obj.entries = [];
+      obj.entries = message.entries;
     }
     return obj;
   },
@@ -164,7 +165,8 @@ function createBaseEntry(): Entry {
   };
 }
 export const Entry = {
-  encode(message: Entry, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  typeUrl: "/cosmos.nft.v1beta1.Entry",
+  encode(message: Entry, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.owner !== "") {
       writer.uint32(10).string(message.owner);
     }
@@ -173,8 +175,8 @@ export const Entry = {
     }
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): Entry {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): Entry {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseEntry();
     while (reader.pos < end) {
@@ -216,18 +218,20 @@ export const Entry = {
     return message;
   },
   fromAmino(object: EntryAmino): Entry {
-    return {
-      owner: object.owner,
-      nfts: Array.isArray(object?.nfts) ? object.nfts.map((e: any) => NFT.fromAmino(e)) : []
-    };
+    const message = createBaseEntry();
+    if (object.owner !== undefined && object.owner !== null) {
+      message.owner = object.owner;
+    }
+    message.nfts = object.nfts?.map(e => NFT.fromAmino(e)) || [];
+    return message;
   },
   toAmino(message: Entry): EntryAmino {
     const obj: any = {};
-    obj.owner = message.owner;
+    obj.owner = message.owner === "" ? undefined : message.owner;
     if (message.nfts) {
       obj.nfts = message.nfts.map(e => e ? NFT.toAmino(e) : undefined);
     } else {
-      obj.nfts = [];
+      obj.nfts = message.nfts;
     }
     return obj;
   },

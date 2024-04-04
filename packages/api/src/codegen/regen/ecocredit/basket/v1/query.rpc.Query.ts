@@ -1,5 +1,5 @@
 import { Rpc } from "../../../../helpers";
-import * as _m0 from "protobufjs/minimal";
+import { BinaryReader } from "../../../../binary";
 import { QueryClient, createProtobufRpcClient } from "@cosmjs/stargate";
 import { QueryBasketRequest, QueryBasketResponse, QueryBasketsRequest, QueryBasketsResponse, QueryBasketBalancesRequest, QueryBasketBalancesResponse, QueryBasketBalanceRequest, QueryBasketBalanceResponse, QueryBasketFeeRequest, QueryBasketFeeResponse } from "./query";
 /** Msg is the regen.ecocredit.basket.v1 Query service. */
@@ -33,29 +33,29 @@ export class QueryClientImpl implements Query {
   basket(request: QueryBasketRequest): Promise<QueryBasketResponse> {
     const data = QueryBasketRequest.encode(request).finish();
     const promise = this.rpc.request("regen.ecocredit.basket.v1.Query", "Basket", data);
-    return promise.then(data => QueryBasketResponse.decode(new _m0.Reader(data)));
+    return promise.then(data => QueryBasketResponse.decode(new BinaryReader(data)));
   }
   baskets(request: QueryBasketsRequest = {
     pagination: undefined
   }): Promise<QueryBasketsResponse> {
     const data = QueryBasketsRequest.encode(request).finish();
     const promise = this.rpc.request("regen.ecocredit.basket.v1.Query", "Baskets", data);
-    return promise.then(data => QueryBasketsResponse.decode(new _m0.Reader(data)));
+    return promise.then(data => QueryBasketsResponse.decode(new BinaryReader(data)));
   }
   basketBalances(request: QueryBasketBalancesRequest): Promise<QueryBasketBalancesResponse> {
     const data = QueryBasketBalancesRequest.encode(request).finish();
     const promise = this.rpc.request("regen.ecocredit.basket.v1.Query", "BasketBalances", data);
-    return promise.then(data => QueryBasketBalancesResponse.decode(new _m0.Reader(data)));
+    return promise.then(data => QueryBasketBalancesResponse.decode(new BinaryReader(data)));
   }
   basketBalance(request: QueryBasketBalanceRequest): Promise<QueryBasketBalanceResponse> {
     const data = QueryBasketBalanceRequest.encode(request).finish();
     const promise = this.rpc.request("regen.ecocredit.basket.v1.Query", "BasketBalance", data);
-    return promise.then(data => QueryBasketBalanceResponse.decode(new _m0.Reader(data)));
+    return promise.then(data => QueryBasketBalanceResponse.decode(new BinaryReader(data)));
   }
   basketFee(request: QueryBasketFeeRequest = {}): Promise<QueryBasketFeeResponse> {
     const data = QueryBasketFeeRequest.encode(request).finish();
     const promise = this.rpc.request("regen.ecocredit.basket.v1.Query", "BasketFee", data);
-    return promise.then(data => QueryBasketFeeResponse.decode(new _m0.Reader(data)));
+    return promise.then(data => QueryBasketFeeResponse.decode(new BinaryReader(data)));
   }
 }
 export const createRpcQueryExtension = (base: QueryClient) => {

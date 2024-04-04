@@ -1,7 +1,7 @@
-import { Timestamp, TimestampAmino, TimestampSDKType } from "../../../google/protobuf/timestamp";
+import { Timestamp, TimestampSDKType } from "../../../google/protobuf/timestamp";
 import { Coin, CoinAmino, CoinSDKType } from "../../../cosmos/base/v1beta1/coin";
-import { Long, isSet, bytesFromBase64, base64FromBytes, fromJsonTimestamp, fromTimestamp } from "../../../helpers";
-import * as _m0 from "protobufjs/minimal";
+import { BinaryReader, BinaryWriter } from "../../../binary";
+import { isSet, bytesFromBase64, base64FromBytes, fromJsonTimestamp, fromTimestamp } from "../../../helpers";
 /** ClassInfo represents the high-level on-chain information for a credit class. */
 export interface ClassInfo {
   /** class_id is the unique ID of credit class. */
@@ -16,9 +16,9 @@ export interface ClassInfo {
    * credit_type describes the type of credit (e.g. carbon, biodiversity), as
    * well as unit and precision.
    */
-  creditType: CreditType;
+  creditType?: CreditType;
   /** The number of batches issued in this credit class. */
-  numBatches: Long;
+  numBatches: bigint;
 }
 export interface ClassInfoProtoMsg {
   typeUrl: "/regen.ecocredit.v1alpha1.ClassInfo";
@@ -27,20 +27,20 @@ export interface ClassInfoProtoMsg {
 /** ClassInfo represents the high-level on-chain information for a credit class. */
 export interface ClassInfoAmino {
   /** class_id is the unique ID of credit class. */
-  class_id: string;
+  class_id?: string;
   /** admin is the admin of the credit class. */
-  admin: string;
+  admin?: string;
   /** issuers are the approved issuers of the credit class. */
-  issuers: string[];
+  issuers?: string[];
   /** metadata is any arbitrary metadata to attached to the credit class. */
-  metadata: Uint8Array;
+  metadata?: string;
   /**
    * credit_type describes the type of credit (e.g. carbon, biodiversity), as
    * well as unit and precision.
    */
   credit_type?: CreditTypeAmino;
   /** The number of batches issued in this credit class. */
-  num_batches: string;
+  num_batches?: string;
 }
 export interface ClassInfoAminoMsg {
   type: "/regen.ecocredit.v1alpha1.ClassInfo";
@@ -52,8 +52,8 @@ export interface ClassInfoSDKType {
   admin: string;
   issuers: string[];
   metadata: Uint8Array;
-  credit_type: CreditTypeSDKType;
-  num_batches: Long;
+  credit_type?: CreditTypeSDKType;
+  num_batches: bigint;
 }
 /** BatchInfo represents the high-level on-chain information for a credit batch. */
 export interface BatchInfo {
@@ -84,12 +84,12 @@ export interface BatchInfo {
    * start_date is the beginning of the period during which this credit batch
    * was quantified and verified.
    */
-  startDate: Timestamp;
+  startDate?: Timestamp;
   /**
    * end_date is the end of the period during which this credit batch was
    * quantified and verified.
    */
-  endDate: Timestamp;
+  endDate?: Timestamp;
   /**
    * project_location is the location of the project backing the credits in this
    * batch. Full documentation can be found in MsgCreateBatch.project_location.
@@ -103,11 +103,11 @@ export interface BatchInfoProtoMsg {
 /** BatchInfo represents the high-level on-chain information for a credit batch. */
 export interface BatchInfoAmino {
   /** class_id is the unique ID of credit class. */
-  class_id: string;
+  class_id?: string;
   /** batch_denom is the unique ID of credit batch. */
-  batch_denom: string;
+  batch_denom?: string;
   /** issuer is the issuer of the credit batch. */
-  issuer: string;
+  issuer?: string;
   /**
    * total_amount is the total number of active credits in the credit batch.
    * Some of the issued credits may be cancelled and will be removed from
@@ -115,31 +115,31 @@ export interface BatchInfoAmino {
    * amount_cancelled will always sum to the original amount of credits that
    * were issued.
    */
-  total_amount: string;
+  total_amount?: string;
   /** metadata is any arbitrary metadata attached to the credit batch. */
-  metadata: Uint8Array;
+  metadata?: string;
   /**
    * amount_cancelled is the number of credits in the batch that have been
    * cancelled, effectively undoing there issuance. The sum of total_amount and
    * amount_cancelled will always sum to the original amount of credits that
    * were issued.
    */
-  amount_cancelled: string;
+  amount_cancelled?: string;
   /**
    * start_date is the beginning of the period during which this credit batch
    * was quantified and verified.
    */
-  start_date?: TimestampAmino;
+  start_date?: string;
   /**
    * end_date is the end of the period during which this credit batch was
    * quantified and verified.
    */
-  end_date?: TimestampAmino;
+  end_date?: string;
   /**
    * project_location is the location of the project backing the credits in this
    * batch. Full documentation can be found in MsgCreateBatch.project_location.
    */
-  project_location: string;
+  project_location?: string;
 }
 export interface BatchInfoAminoMsg {
   type: "/regen.ecocredit.v1alpha1.BatchInfo";
@@ -153,8 +153,8 @@ export interface BatchInfoSDKType {
   total_amount: string;
   metadata: Uint8Array;
   amount_cancelled: string;
-  start_date: TimestampSDKType;
-  end_date: TimestampSDKType;
+  start_date?: TimestampSDKType;
+  end_date?: TimestampSDKType;
   project_location: string;
 }
 /**
@@ -189,21 +189,21 @@ export interface ParamsProtoMsg {
  */
 export interface ParamsAmino {
   /** credit_class_fee is the fixed fee charged on creation of a new credit class */
-  credit_class_fee: CoinAmino[];
+  credit_class_fee?: CoinAmino[];
   /**
    * allowed_class_creators is an allowlist defining the addresses with
    * the required permissions to create credit classes
    */
-  allowed_class_creators: string[];
+  allowed_class_creators?: string[];
   /**
    * allowlist_enabled is a param that enables/disables the allowlist for credit
    * creation
    */
-  allowlist_enabled: boolean;
+  allowlist_enabled?: boolean;
   /** credit_types is a list of definitions for credit types */
-  credit_types: CreditTypeAmino[];
+  credit_types?: CreditTypeAmino[];
   /** basket_creation_fee is the fee to create a new basket denom. */
-  basket_creation_fee: CoinAmino[];
+  basket_creation_fee?: CoinAmino[];
 }
 export interface ParamsAminoMsg {
   type: "/regen.ecocredit.v1alpha1.Params";
@@ -247,16 +247,16 @@ export interface CreditTypeProtoMsg {
  */
 export interface CreditTypeAmino {
   /** the type of credit (e.g. carbon, biodiversity, etc) */
-  name: string;
+  name?: string;
   /**
    * abbreviation is a 1-3 character uppercase abbreviation of the CreditType
    * name, used in batch denominations within the CreditType. It must be unique.
    */
-  abbreviation: string;
+  abbreviation?: string;
   /** the measurement unit (e.g. kg, ton, etc) */
-  unit: string;
+  unit?: string;
   /** the decimal precision */
-  precision: number;
+  precision?: number;
 }
 export interface CreditTypeAminoMsg {
   type: "/regen.ecocredit.v1alpha1.CreditType";
@@ -280,7 +280,7 @@ export interface CreditTypeSeq {
   /** The credit type abbreviation */
   abbreviation: string;
   /** The sequence number of classes of the credit type */
-  seqNumber: Long;
+  seqNumber: bigint;
 }
 export interface CreditTypeSeqProtoMsg {
   typeUrl: "/regen.ecocredit.v1alpha1.CreditTypeSeq";
@@ -292,9 +292,9 @@ export interface CreditTypeSeqProtoMsg {
  */
 export interface CreditTypeSeqAmino {
   /** The credit type abbreviation */
-  abbreviation: string;
+  abbreviation?: string;
   /** The sequence number of classes of the credit type */
-  seq_number: string;
+  seq_number?: string;
 }
 export interface CreditTypeSeqAminoMsg {
   type: "/regen.ecocredit.v1alpha1.CreditTypeSeq";
@@ -306,7 +306,7 @@ export interface CreditTypeSeqAminoMsg {
  */
 export interface CreditTypeSeqSDKType {
   abbreviation: string;
-  seq_number: Long;
+  seq_number: bigint;
 }
 function createBaseClassInfo(): ClassInfo {
   return {
@@ -314,12 +314,13 @@ function createBaseClassInfo(): ClassInfo {
     admin: "",
     issuers: [],
     metadata: new Uint8Array(),
-    creditType: CreditType.fromPartial({}),
-    numBatches: Long.UZERO
+    creditType: undefined,
+    numBatches: BigInt(0)
   };
 }
 export const ClassInfo = {
-  encode(message: ClassInfo, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  typeUrl: "/regen.ecocredit.v1alpha1.ClassInfo",
+  encode(message: ClassInfo, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.classId !== "") {
       writer.uint32(10).string(message.classId);
     }
@@ -335,13 +336,13 @@ export const ClassInfo = {
     if (message.creditType !== undefined) {
       CreditType.encode(message.creditType, writer.uint32(42).fork()).ldelim();
     }
-    if (!message.numBatches.isZero()) {
+    if (message.numBatches !== BigInt(0)) {
       writer.uint32(48).uint64(message.numBatches);
     }
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): ClassInfo {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): ClassInfo {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseClassInfo();
     while (reader.pos < end) {
@@ -363,7 +364,7 @@ export const ClassInfo = {
           message.creditType = CreditType.decode(reader, reader.uint32());
           break;
         case 6:
-          message.numBatches = (reader.uint64() as Long);
+          message.numBatches = reader.uint64();
           break;
         default:
           reader.skipType(tag & 7);
@@ -379,7 +380,7 @@ export const ClassInfo = {
       issuers: Array.isArray(object?.issuers) ? object.issuers.map((e: any) => String(e)) : [],
       metadata: isSet(object.metadata) ? bytesFromBase64(object.metadata) : new Uint8Array(),
       creditType: isSet(object.creditType) ? CreditType.fromJSON(object.creditType) : undefined,
-      numBatches: isSet(object.numBatches) ? Long.fromValue(object.numBatches) : Long.UZERO
+      numBatches: isSet(object.numBatches) ? BigInt(object.numBatches.toString()) : BigInt(0)
     };
   },
   toJSON(message: ClassInfo): unknown {
@@ -393,7 +394,7 @@ export const ClassInfo = {
     }
     message.metadata !== undefined && (obj.metadata = base64FromBytes(message.metadata !== undefined ? message.metadata : new Uint8Array()));
     message.creditType !== undefined && (obj.creditType = message.creditType ? CreditType.toJSON(message.creditType) : undefined);
-    message.numBatches !== undefined && (obj.numBatches = (message.numBatches || Long.UZERO).toString());
+    message.numBatches !== undefined && (obj.numBatches = (message.numBatches || BigInt(0)).toString());
     return obj;
   },
   fromPartial(object: Partial<ClassInfo>): ClassInfo {
@@ -403,31 +404,41 @@ export const ClassInfo = {
     message.issuers = object.issuers?.map(e => e) || [];
     message.metadata = object.metadata ?? new Uint8Array();
     message.creditType = object.creditType !== undefined && object.creditType !== null ? CreditType.fromPartial(object.creditType) : undefined;
-    message.numBatches = object.numBatches !== undefined && object.numBatches !== null ? Long.fromValue(object.numBatches) : Long.UZERO;
+    message.numBatches = object.numBatches !== undefined && object.numBatches !== null ? BigInt(object.numBatches.toString()) : BigInt(0);
     return message;
   },
   fromAmino(object: ClassInfoAmino): ClassInfo {
-    return {
-      classId: object.class_id,
-      admin: object.admin,
-      issuers: Array.isArray(object?.issuers) ? object.issuers.map((e: any) => e) : [],
-      metadata: object.metadata,
-      creditType: object?.credit_type ? CreditType.fromAmino(object.credit_type) : undefined,
-      numBatches: Long.fromString(object.num_batches)
-    };
+    const message = createBaseClassInfo();
+    if (object.class_id !== undefined && object.class_id !== null) {
+      message.classId = object.class_id;
+    }
+    if (object.admin !== undefined && object.admin !== null) {
+      message.admin = object.admin;
+    }
+    message.issuers = object.issuers?.map(e => e) || [];
+    if (object.metadata !== undefined && object.metadata !== null) {
+      message.metadata = bytesFromBase64(object.metadata);
+    }
+    if (object.credit_type !== undefined && object.credit_type !== null) {
+      message.creditType = CreditType.fromAmino(object.credit_type);
+    }
+    if (object.num_batches !== undefined && object.num_batches !== null) {
+      message.numBatches = BigInt(object.num_batches);
+    }
+    return message;
   },
   toAmino(message: ClassInfo): ClassInfoAmino {
     const obj: any = {};
-    obj.class_id = message.classId;
-    obj.admin = message.admin;
+    obj.class_id = message.classId === "" ? undefined : message.classId;
+    obj.admin = message.admin === "" ? undefined : message.admin;
     if (message.issuers) {
       obj.issuers = message.issuers.map(e => e);
     } else {
-      obj.issuers = [];
+      obj.issuers = message.issuers;
     }
-    obj.metadata = message.metadata;
+    obj.metadata = message.metadata ? base64FromBytes(message.metadata) : undefined;
     obj.credit_type = message.creditType ? CreditType.toAmino(message.creditType) : undefined;
-    obj.num_batches = message.numBatches ? message.numBatches.toString() : undefined;
+    obj.num_batches = message.numBatches !== BigInt(0) ? message.numBatches.toString() : undefined;
     return obj;
   },
   fromAminoMsg(object: ClassInfoAminoMsg): ClassInfo {
@@ -460,7 +471,8 @@ function createBaseBatchInfo(): BatchInfo {
   };
 }
 export const BatchInfo = {
-  encode(message: BatchInfo, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  typeUrl: "/regen.ecocredit.v1alpha1.BatchInfo",
+  encode(message: BatchInfo, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.classId !== "") {
       writer.uint32(10).string(message.classId);
     }
@@ -490,8 +502,8 @@ export const BatchInfo = {
     }
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): BatchInfo {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): BatchInfo {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseBatchInfo();
     while (reader.pos < end) {
@@ -571,29 +583,47 @@ export const BatchInfo = {
     return message;
   },
   fromAmino(object: BatchInfoAmino): BatchInfo {
-    return {
-      classId: object.class_id,
-      batchDenom: object.batch_denom,
-      issuer: object.issuer,
-      totalAmount: object.total_amount,
-      metadata: object.metadata,
-      amountCancelled: object.amount_cancelled,
-      startDate: object?.start_date ? Timestamp.fromAmino(object.start_date) : undefined,
-      endDate: object?.end_date ? Timestamp.fromAmino(object.end_date) : undefined,
-      projectLocation: object.project_location
-    };
+    const message = createBaseBatchInfo();
+    if (object.class_id !== undefined && object.class_id !== null) {
+      message.classId = object.class_id;
+    }
+    if (object.batch_denom !== undefined && object.batch_denom !== null) {
+      message.batchDenom = object.batch_denom;
+    }
+    if (object.issuer !== undefined && object.issuer !== null) {
+      message.issuer = object.issuer;
+    }
+    if (object.total_amount !== undefined && object.total_amount !== null) {
+      message.totalAmount = object.total_amount;
+    }
+    if (object.metadata !== undefined && object.metadata !== null) {
+      message.metadata = bytesFromBase64(object.metadata);
+    }
+    if (object.amount_cancelled !== undefined && object.amount_cancelled !== null) {
+      message.amountCancelled = object.amount_cancelled;
+    }
+    if (object.start_date !== undefined && object.start_date !== null) {
+      message.startDate = Timestamp.fromAmino(object.start_date);
+    }
+    if (object.end_date !== undefined && object.end_date !== null) {
+      message.endDate = Timestamp.fromAmino(object.end_date);
+    }
+    if (object.project_location !== undefined && object.project_location !== null) {
+      message.projectLocation = object.project_location;
+    }
+    return message;
   },
   toAmino(message: BatchInfo): BatchInfoAmino {
     const obj: any = {};
-    obj.class_id = message.classId;
-    obj.batch_denom = message.batchDenom;
-    obj.issuer = message.issuer;
-    obj.total_amount = message.totalAmount;
-    obj.metadata = message.metadata;
-    obj.amount_cancelled = message.amountCancelled;
+    obj.class_id = message.classId === "" ? undefined : message.classId;
+    obj.batch_denom = message.batchDenom === "" ? undefined : message.batchDenom;
+    obj.issuer = message.issuer === "" ? undefined : message.issuer;
+    obj.total_amount = message.totalAmount === "" ? undefined : message.totalAmount;
+    obj.metadata = message.metadata ? base64FromBytes(message.metadata) : undefined;
+    obj.amount_cancelled = message.amountCancelled === "" ? undefined : message.amountCancelled;
     obj.start_date = message.startDate ? Timestamp.toAmino(message.startDate) : undefined;
     obj.end_date = message.endDate ? Timestamp.toAmino(message.endDate) : undefined;
-    obj.project_location = message.projectLocation;
+    obj.project_location = message.projectLocation === "" ? undefined : message.projectLocation;
     return obj;
   },
   fromAminoMsg(object: BatchInfoAminoMsg): BatchInfo {
@@ -622,7 +652,8 @@ function createBaseParams(): Params {
   };
 }
 export const Params = {
-  encode(message: Params, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  typeUrl: "/regen.ecocredit.v1alpha1.Params",
+  encode(message: Params, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     for (const v of message.creditClassFee) {
       Coin.encode(v!, writer.uint32(10).fork()).ldelim();
     }
@@ -640,8 +671,8 @@ export const Params = {
     }
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): Params {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): Params {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseParams();
     while (reader.pos < end) {
@@ -713,36 +744,38 @@ export const Params = {
     return message;
   },
   fromAmino(object: ParamsAmino): Params {
-    return {
-      creditClassFee: Array.isArray(object?.credit_class_fee) ? object.credit_class_fee.map((e: any) => Coin.fromAmino(e)) : [],
-      allowedClassCreators: Array.isArray(object?.allowed_class_creators) ? object.allowed_class_creators.map((e: any) => e) : [],
-      allowlistEnabled: object.allowlist_enabled,
-      creditTypes: Array.isArray(object?.credit_types) ? object.credit_types.map((e: any) => CreditType.fromAmino(e)) : [],
-      basketCreationFee: Array.isArray(object?.basket_creation_fee) ? object.basket_creation_fee.map((e: any) => Coin.fromAmino(e)) : []
-    };
+    const message = createBaseParams();
+    message.creditClassFee = object.credit_class_fee?.map(e => Coin.fromAmino(e)) || [];
+    message.allowedClassCreators = object.allowed_class_creators?.map(e => e) || [];
+    if (object.allowlist_enabled !== undefined && object.allowlist_enabled !== null) {
+      message.allowlistEnabled = object.allowlist_enabled;
+    }
+    message.creditTypes = object.credit_types?.map(e => CreditType.fromAmino(e)) || [];
+    message.basketCreationFee = object.basket_creation_fee?.map(e => Coin.fromAmino(e)) || [];
+    return message;
   },
   toAmino(message: Params): ParamsAmino {
     const obj: any = {};
     if (message.creditClassFee) {
       obj.credit_class_fee = message.creditClassFee.map(e => e ? Coin.toAmino(e) : undefined);
     } else {
-      obj.credit_class_fee = [];
+      obj.credit_class_fee = message.creditClassFee;
     }
     if (message.allowedClassCreators) {
       obj.allowed_class_creators = message.allowedClassCreators.map(e => e);
     } else {
-      obj.allowed_class_creators = [];
+      obj.allowed_class_creators = message.allowedClassCreators;
     }
-    obj.allowlist_enabled = message.allowlistEnabled;
+    obj.allowlist_enabled = message.allowlistEnabled === false ? undefined : message.allowlistEnabled;
     if (message.creditTypes) {
       obj.credit_types = message.creditTypes.map(e => e ? CreditType.toAmino(e) : undefined);
     } else {
-      obj.credit_types = [];
+      obj.credit_types = message.creditTypes;
     }
     if (message.basketCreationFee) {
       obj.basket_creation_fee = message.basketCreationFee.map(e => e ? Coin.toAmino(e) : undefined);
     } else {
-      obj.basket_creation_fee = [];
+      obj.basket_creation_fee = message.basketCreationFee;
     }
     return obj;
   },
@@ -771,7 +804,8 @@ function createBaseCreditType(): CreditType {
   };
 }
 export const CreditType = {
-  encode(message: CreditType, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  typeUrl: "/regen.ecocredit.v1alpha1.CreditType",
+  encode(message: CreditType, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.name !== "") {
       writer.uint32(10).string(message.name);
     }
@@ -786,8 +820,8 @@ export const CreditType = {
     }
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): CreditType {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): CreditType {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseCreditType();
     while (reader.pos < end) {
@@ -837,19 +871,27 @@ export const CreditType = {
     return message;
   },
   fromAmino(object: CreditTypeAmino): CreditType {
-    return {
-      name: object.name,
-      abbreviation: object.abbreviation,
-      unit: object.unit,
-      precision: object.precision
-    };
+    const message = createBaseCreditType();
+    if (object.name !== undefined && object.name !== null) {
+      message.name = object.name;
+    }
+    if (object.abbreviation !== undefined && object.abbreviation !== null) {
+      message.abbreviation = object.abbreviation;
+    }
+    if (object.unit !== undefined && object.unit !== null) {
+      message.unit = object.unit;
+    }
+    if (object.precision !== undefined && object.precision !== null) {
+      message.precision = object.precision;
+    }
+    return message;
   },
   toAmino(message: CreditType): CreditTypeAmino {
     const obj: any = {};
-    obj.name = message.name;
-    obj.abbreviation = message.abbreviation;
-    obj.unit = message.unit;
-    obj.precision = message.precision;
+    obj.name = message.name === "" ? undefined : message.name;
+    obj.abbreviation = message.abbreviation === "" ? undefined : message.abbreviation;
+    obj.unit = message.unit === "" ? undefined : message.unit;
+    obj.precision = message.precision === 0 ? undefined : message.precision;
     return obj;
   },
   fromAminoMsg(object: CreditTypeAminoMsg): CreditType {
@@ -871,21 +913,22 @@ export const CreditType = {
 function createBaseCreditTypeSeq(): CreditTypeSeq {
   return {
     abbreviation: "",
-    seqNumber: Long.UZERO
+    seqNumber: BigInt(0)
   };
 }
 export const CreditTypeSeq = {
-  encode(message: CreditTypeSeq, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  typeUrl: "/regen.ecocredit.v1alpha1.CreditTypeSeq",
+  encode(message: CreditTypeSeq, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.abbreviation !== "") {
       writer.uint32(10).string(message.abbreviation);
     }
-    if (!message.seqNumber.isZero()) {
+    if (message.seqNumber !== BigInt(0)) {
       writer.uint32(16).uint64(message.seqNumber);
     }
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): CreditTypeSeq {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): CreditTypeSeq {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseCreditTypeSeq();
     while (reader.pos < end) {
@@ -895,7 +938,7 @@ export const CreditTypeSeq = {
           message.abbreviation = reader.string();
           break;
         case 2:
-          message.seqNumber = (reader.uint64() as Long);
+          message.seqNumber = reader.uint64();
           break;
         default:
           reader.skipType(tag & 7);
@@ -907,31 +950,35 @@ export const CreditTypeSeq = {
   fromJSON(object: any): CreditTypeSeq {
     return {
       abbreviation: isSet(object.abbreviation) ? String(object.abbreviation) : "",
-      seqNumber: isSet(object.seqNumber) ? Long.fromValue(object.seqNumber) : Long.UZERO
+      seqNumber: isSet(object.seqNumber) ? BigInt(object.seqNumber.toString()) : BigInt(0)
     };
   },
   toJSON(message: CreditTypeSeq): unknown {
     const obj: any = {};
     message.abbreviation !== undefined && (obj.abbreviation = message.abbreviation);
-    message.seqNumber !== undefined && (obj.seqNumber = (message.seqNumber || Long.UZERO).toString());
+    message.seqNumber !== undefined && (obj.seqNumber = (message.seqNumber || BigInt(0)).toString());
     return obj;
   },
   fromPartial(object: Partial<CreditTypeSeq>): CreditTypeSeq {
     const message = createBaseCreditTypeSeq();
     message.abbreviation = object.abbreviation ?? "";
-    message.seqNumber = object.seqNumber !== undefined && object.seqNumber !== null ? Long.fromValue(object.seqNumber) : Long.UZERO;
+    message.seqNumber = object.seqNumber !== undefined && object.seqNumber !== null ? BigInt(object.seqNumber.toString()) : BigInt(0);
     return message;
   },
   fromAmino(object: CreditTypeSeqAmino): CreditTypeSeq {
-    return {
-      abbreviation: object.abbreviation,
-      seqNumber: Long.fromString(object.seq_number)
-    };
+    const message = createBaseCreditTypeSeq();
+    if (object.abbreviation !== undefined && object.abbreviation !== null) {
+      message.abbreviation = object.abbreviation;
+    }
+    if (object.seq_number !== undefined && object.seq_number !== null) {
+      message.seqNumber = BigInt(object.seq_number);
+    }
+    return message;
   },
   toAmino(message: CreditTypeSeq): CreditTypeSeqAmino {
     const obj: any = {};
-    obj.abbreviation = message.abbreviation;
-    obj.seq_number = message.seqNumber ? message.seqNumber.toString() : undefined;
+    obj.abbreviation = message.abbreviation === "" ? undefined : message.abbreviation;
+    obj.seq_number = message.seqNumber !== BigInt(0) ? message.seqNumber.toString() : undefined;
     return obj;
   },
   fromAminoMsg(object: CreditTypeSeqAminoMsg): CreditTypeSeq {

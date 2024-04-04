@@ -1,6 +1,6 @@
 import { PageRequest, PageRequestAmino, PageRequestSDKType, PageResponse, PageResponseAmino, PageResponseSDKType } from "../../../cosmos/base/query/v1beta1/pagination";
 import { Params, ParamsAmino, ParamsSDKType, ClassInfo, ClassInfoAmino, ClassInfoSDKType, BatchInfo, BatchInfoAmino, BatchInfoSDKType, CreditType, CreditTypeAmino, CreditTypeSDKType } from "./types";
-import * as _m0 from "protobufjs/minimal";
+import { BinaryReader, BinaryWriter } from "../../../binary";
 import { isSet } from "../../../helpers";
 /** QueryParamsRequest is the Query/Params request type. */
 export interface QueryParamsRequest {}
@@ -19,7 +19,7 @@ export interface QueryParamsRequestSDKType {}
 /** QueryParamsResponse is the Query/Params response type. */
 export interface QueryParamsResponse {
   /** params defines the parameters of the ecocredit module. */
-  params: Params;
+  params?: Params;
 }
 export interface QueryParamsResponseProtoMsg {
   typeUrl: "/regen.ecocredit.v1alpha1.QueryParamsResponse";
@@ -36,12 +36,12 @@ export interface QueryParamsResponseAminoMsg {
 }
 /** QueryParamsResponse is the Query/Params response type. */
 export interface QueryParamsResponseSDKType {
-  params: ParamsSDKType;
+  params?: ParamsSDKType;
 }
 /** QueryClassesRequest is the Query/Classes request type. */
 export interface QueryClassesRequest {
   /** pagination defines an optional pagination for the request. */
-  pagination: PageRequest;
+  pagination?: PageRequest;
 }
 export interface QueryClassesRequestProtoMsg {
   typeUrl: "/regen.ecocredit.v1alpha1.QueryClassesRequest";
@@ -58,14 +58,14 @@ export interface QueryClassesRequestAminoMsg {
 }
 /** QueryClassesRequest is the Query/Classes request type. */
 export interface QueryClassesRequestSDKType {
-  pagination: PageRequestSDKType;
+  pagination?: PageRequestSDKType;
 }
 /** QueryClassesResponse is the Query/Classes response type. */
 export interface QueryClassesResponse {
   /** classes are the fetched credit classes. */
   classes: ClassInfo[];
   /** pagination defines the pagination in the response. */
-  pagination: PageResponse;
+  pagination?: PageResponse;
 }
 export interface QueryClassesResponseProtoMsg {
   typeUrl: "/regen.ecocredit.v1alpha1.QueryClassesResponse";
@@ -74,7 +74,7 @@ export interface QueryClassesResponseProtoMsg {
 /** QueryClassesResponse is the Query/Classes response type. */
 export interface QueryClassesResponseAmino {
   /** classes are the fetched credit classes. */
-  classes: ClassInfoAmino[];
+  classes?: ClassInfoAmino[];
   /** pagination defines the pagination in the response. */
   pagination?: PageResponseAmino;
 }
@@ -85,7 +85,7 @@ export interface QueryClassesResponseAminoMsg {
 /** QueryClassesResponse is the Query/Classes response type. */
 export interface QueryClassesResponseSDKType {
   classes: ClassInfoSDKType[];
-  pagination: PageResponseSDKType;
+  pagination?: PageResponseSDKType;
 }
 /** QueryClassInfoRequest is the Query/ClassInfo request type. */
 export interface QueryClassInfoRequest {
@@ -99,7 +99,7 @@ export interface QueryClassInfoRequestProtoMsg {
 /** QueryClassInfoRequest is the Query/ClassInfo request type. */
 export interface QueryClassInfoRequestAmino {
   /** class_id is the unique ID of credit class to query. */
-  class_id: string;
+  class_id?: string;
 }
 export interface QueryClassInfoRequestAminoMsg {
   type: "/regen.ecocredit.v1alpha1.QueryClassInfoRequest";
@@ -112,7 +112,7 @@ export interface QueryClassInfoRequestSDKType {
 /** QueryClassInfoResponse is the Query/ClassInfo request type. */
 export interface QueryClassInfoResponse {
   /** info is the ClassInfo for the credit class. */
-  info: ClassInfo;
+  info?: ClassInfo;
 }
 export interface QueryClassInfoResponseProtoMsg {
   typeUrl: "/regen.ecocredit.v1alpha1.QueryClassInfoResponse";
@@ -129,14 +129,14 @@ export interface QueryClassInfoResponseAminoMsg {
 }
 /** QueryClassInfoResponse is the Query/ClassInfo request type. */
 export interface QueryClassInfoResponseSDKType {
-  info: ClassInfoSDKType;
+  info?: ClassInfoSDKType;
 }
 /** QueryBatchesRequest is the Query/Batches request type. */
 export interface QueryBatchesRequest {
   /** class_id is the unique ID of the credit class to query. */
   classId: string;
   /** pagination defines an optional pagination for the request. */
-  pagination: PageRequest;
+  pagination?: PageRequest;
 }
 export interface QueryBatchesRequestProtoMsg {
   typeUrl: "/regen.ecocredit.v1alpha1.QueryBatchesRequest";
@@ -145,7 +145,7 @@ export interface QueryBatchesRequestProtoMsg {
 /** QueryBatchesRequest is the Query/Batches request type. */
 export interface QueryBatchesRequestAmino {
   /** class_id is the unique ID of the credit class to query. */
-  class_id: string;
+  class_id?: string;
   /** pagination defines an optional pagination for the request. */
   pagination?: PageRequestAmino;
 }
@@ -156,14 +156,14 @@ export interface QueryBatchesRequestAminoMsg {
 /** QueryBatchesRequest is the Query/Batches request type. */
 export interface QueryBatchesRequestSDKType {
   class_id: string;
-  pagination: PageRequestSDKType;
+  pagination?: PageRequestSDKType;
 }
 /** QueryBatchesResponse is the Query/Batches response type. */
 export interface QueryBatchesResponse {
   /** batches are the fetched credit batches within the class. */
   batches: BatchInfo[];
   /** pagination defines the pagination in the response. */
-  pagination: PageResponse;
+  pagination?: PageResponse;
 }
 export interface QueryBatchesResponseProtoMsg {
   typeUrl: "/regen.ecocredit.v1alpha1.QueryBatchesResponse";
@@ -172,7 +172,7 @@ export interface QueryBatchesResponseProtoMsg {
 /** QueryBatchesResponse is the Query/Batches response type. */
 export interface QueryBatchesResponseAmino {
   /** batches are the fetched credit batches within the class. */
-  batches: BatchInfoAmino[];
+  batches?: BatchInfoAmino[];
   /** pagination defines the pagination in the response. */
   pagination?: PageResponseAmino;
 }
@@ -183,7 +183,7 @@ export interface QueryBatchesResponseAminoMsg {
 /** QueryBatchesResponse is the Query/Batches response type. */
 export interface QueryBatchesResponseSDKType {
   batches: BatchInfoSDKType[];
-  pagination: PageResponseSDKType;
+  pagination?: PageResponseSDKType;
 }
 /** QueryBatchInfoRequest is the Query/BatchInfo request type. */
 export interface QueryBatchInfoRequest {
@@ -197,7 +197,7 @@ export interface QueryBatchInfoRequestProtoMsg {
 /** QueryBatchInfoRequest is the Query/BatchInfo request type. */
 export interface QueryBatchInfoRequestAmino {
   /** batch_denom is the unique ID of credit batch to query. */
-  batch_denom: string;
+  batch_denom?: string;
 }
 export interface QueryBatchInfoRequestAminoMsg {
   type: "/regen.ecocredit.v1alpha1.QueryBatchInfoRequest";
@@ -210,7 +210,7 @@ export interface QueryBatchInfoRequestSDKType {
 /** QueryBatchInfoResponse is the Query/BatchInfo response type. */
 export interface QueryBatchInfoResponse {
   /** info is the BatchInfo for the credit batch. */
-  info: BatchInfo;
+  info?: BatchInfo;
 }
 export interface QueryBatchInfoResponseProtoMsg {
   typeUrl: "/regen.ecocredit.v1alpha1.QueryBatchInfoResponse";
@@ -227,7 +227,7 @@ export interface QueryBatchInfoResponseAminoMsg {
 }
 /** QueryBatchInfoResponse is the Query/BatchInfo response type. */
 export interface QueryBatchInfoResponseSDKType {
-  info: BatchInfoSDKType;
+  info?: BatchInfoSDKType;
 }
 /** QueryBalanceRequest is the Query/Balance request type. */
 export interface QueryBalanceRequest {
@@ -243,9 +243,9 @@ export interface QueryBalanceRequestProtoMsg {
 /** QueryBalanceRequest is the Query/Balance request type. */
 export interface QueryBalanceRequestAmino {
   /** account is the address of the account whose balance is being queried. */
-  account: string;
+  account?: string;
   /** batch_denom is the unique ID of credit batch balance to query. */
-  batch_denom: string;
+  batch_denom?: string;
 }
 export interface QueryBalanceRequestAminoMsg {
   type: "/regen.ecocredit.v1alpha1.QueryBalanceRequest";
@@ -270,9 +270,9 @@ export interface QueryBalanceResponseProtoMsg {
 /** QueryBalanceResponse is the Query/Balance response type. */
 export interface QueryBalanceResponseAmino {
   /** tradable_amount is the decimal number of tradable credits. */
-  tradable_amount: string;
+  tradable_amount?: string;
   /** retired_amount is the decimal number of retired credits. */
-  retired_amount: string;
+  retired_amount?: string;
 }
 export interface QueryBalanceResponseAminoMsg {
   type: "/regen.ecocredit.v1alpha1.QueryBalanceResponse";
@@ -295,7 +295,7 @@ export interface QuerySupplyRequestProtoMsg {
 /** QuerySupplyRequest is the Query/Supply request type. */
 export interface QuerySupplyRequestAmino {
   /** batch_denom is the unique ID of credit batch to query. */
-  batch_denom: string;
+  batch_denom?: string;
 }
 export interface QuerySupplyRequestAminoMsg {
   type: "/regen.ecocredit.v1alpha1.QuerySupplyRequest";
@@ -328,12 +328,12 @@ export interface QuerySupplyResponseAmino {
    * tradable_supply is the decimal number of tradable credits in the batch
    * supply.
    */
-  tradable_supply: string;
+  tradable_supply?: string;
   /**
    * retired_supply is the decimal number of retired credits in the batch
    * supply.
    */
-  retired_supply: string;
+  retired_supply?: string;
 }
 export interface QuerySupplyResponseAminoMsg {
   type: "/regen.ecocredit.v1alpha1.QuerySupplyResponse";
@@ -370,7 +370,7 @@ export interface QueryCreditTypesResponseProtoMsg {
 /** QueryCreditTypesRequest is the Query/Credit_Types response type */
 export interface QueryCreditTypesResponseAmino {
   /** list of credit types */
-  credit_types: CreditTypeAmino[];
+  credit_types?: CreditTypeAmino[];
 }
 export interface QueryCreditTypesResponseAminoMsg {
   type: "/regen.ecocredit.v1alpha1.QueryCreditTypesResponse";
@@ -384,11 +384,12 @@ function createBaseQueryParamsRequest(): QueryParamsRequest {
   return {};
 }
 export const QueryParamsRequest = {
-  encode(_: QueryParamsRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  typeUrl: "/regen.ecocredit.v1alpha1.QueryParamsRequest",
+  encode(_: QueryParamsRequest, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): QueryParamsRequest {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): QueryParamsRequest {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryParamsRequest();
     while (reader.pos < end) {
@@ -413,7 +414,8 @@ export const QueryParamsRequest = {
     return message;
   },
   fromAmino(_: QueryParamsRequestAmino): QueryParamsRequest {
-    return {};
+    const message = createBaseQueryParamsRequest();
+    return message;
   },
   toAmino(_: QueryParamsRequest): QueryParamsRequestAmino {
     const obj: any = {};
@@ -437,18 +439,19 @@ export const QueryParamsRequest = {
 };
 function createBaseQueryParamsResponse(): QueryParamsResponse {
   return {
-    params: Params.fromPartial({})
+    params: undefined
   };
 }
 export const QueryParamsResponse = {
-  encode(message: QueryParamsResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  typeUrl: "/regen.ecocredit.v1alpha1.QueryParamsResponse",
+  encode(message: QueryParamsResponse, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.params !== undefined) {
       Params.encode(message.params, writer.uint32(10).fork()).ldelim();
     }
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): QueryParamsResponse {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): QueryParamsResponse {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryParamsResponse();
     while (reader.pos < end) {
@@ -480,9 +483,11 @@ export const QueryParamsResponse = {
     return message;
   },
   fromAmino(object: QueryParamsResponseAmino): QueryParamsResponse {
-    return {
-      params: object?.params ? Params.fromAmino(object.params) : undefined
-    };
+    const message = createBaseQueryParamsResponse();
+    if (object.params !== undefined && object.params !== null) {
+      message.params = Params.fromAmino(object.params);
+    }
+    return message;
   },
   toAmino(message: QueryParamsResponse): QueryParamsResponseAmino {
     const obj: any = {};
@@ -507,18 +512,19 @@ export const QueryParamsResponse = {
 };
 function createBaseQueryClassesRequest(): QueryClassesRequest {
   return {
-    pagination: PageRequest.fromPartial({})
+    pagination: undefined
   };
 }
 export const QueryClassesRequest = {
-  encode(message: QueryClassesRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  typeUrl: "/regen.ecocredit.v1alpha1.QueryClassesRequest",
+  encode(message: QueryClassesRequest, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.pagination !== undefined) {
       PageRequest.encode(message.pagination, writer.uint32(10).fork()).ldelim();
     }
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): QueryClassesRequest {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): QueryClassesRequest {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryClassesRequest();
     while (reader.pos < end) {
@@ -550,9 +556,11 @@ export const QueryClassesRequest = {
     return message;
   },
   fromAmino(object: QueryClassesRequestAmino): QueryClassesRequest {
-    return {
-      pagination: object?.pagination ? PageRequest.fromAmino(object.pagination) : undefined
-    };
+    const message = createBaseQueryClassesRequest();
+    if (object.pagination !== undefined && object.pagination !== null) {
+      message.pagination = PageRequest.fromAmino(object.pagination);
+    }
+    return message;
   },
   toAmino(message: QueryClassesRequest): QueryClassesRequestAmino {
     const obj: any = {};
@@ -578,11 +586,12 @@ export const QueryClassesRequest = {
 function createBaseQueryClassesResponse(): QueryClassesResponse {
   return {
     classes: [],
-    pagination: PageResponse.fromPartial({})
+    pagination: undefined
   };
 }
 export const QueryClassesResponse = {
-  encode(message: QueryClassesResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  typeUrl: "/regen.ecocredit.v1alpha1.QueryClassesResponse",
+  encode(message: QueryClassesResponse, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     for (const v of message.classes) {
       ClassInfo.encode(v!, writer.uint32(10).fork()).ldelim();
     }
@@ -591,8 +600,8 @@ export const QueryClassesResponse = {
     }
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): QueryClassesResponse {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): QueryClassesResponse {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryClassesResponse();
     while (reader.pos < end) {
@@ -634,17 +643,19 @@ export const QueryClassesResponse = {
     return message;
   },
   fromAmino(object: QueryClassesResponseAmino): QueryClassesResponse {
-    return {
-      classes: Array.isArray(object?.classes) ? object.classes.map((e: any) => ClassInfo.fromAmino(e)) : [],
-      pagination: object?.pagination ? PageResponse.fromAmino(object.pagination) : undefined
-    };
+    const message = createBaseQueryClassesResponse();
+    message.classes = object.classes?.map(e => ClassInfo.fromAmino(e)) || [];
+    if (object.pagination !== undefined && object.pagination !== null) {
+      message.pagination = PageResponse.fromAmino(object.pagination);
+    }
+    return message;
   },
   toAmino(message: QueryClassesResponse): QueryClassesResponseAmino {
     const obj: any = {};
     if (message.classes) {
       obj.classes = message.classes.map(e => e ? ClassInfo.toAmino(e) : undefined);
     } else {
-      obj.classes = [];
+      obj.classes = message.classes;
     }
     obj.pagination = message.pagination ? PageResponse.toAmino(message.pagination) : undefined;
     return obj;
@@ -671,14 +682,15 @@ function createBaseQueryClassInfoRequest(): QueryClassInfoRequest {
   };
 }
 export const QueryClassInfoRequest = {
-  encode(message: QueryClassInfoRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  typeUrl: "/regen.ecocredit.v1alpha1.QueryClassInfoRequest",
+  encode(message: QueryClassInfoRequest, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.classId !== "") {
       writer.uint32(10).string(message.classId);
     }
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): QueryClassInfoRequest {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): QueryClassInfoRequest {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryClassInfoRequest();
     while (reader.pos < end) {
@@ -710,13 +722,15 @@ export const QueryClassInfoRequest = {
     return message;
   },
   fromAmino(object: QueryClassInfoRequestAmino): QueryClassInfoRequest {
-    return {
-      classId: object.class_id
-    };
+    const message = createBaseQueryClassInfoRequest();
+    if (object.class_id !== undefined && object.class_id !== null) {
+      message.classId = object.class_id;
+    }
+    return message;
   },
   toAmino(message: QueryClassInfoRequest): QueryClassInfoRequestAmino {
     const obj: any = {};
-    obj.class_id = message.classId;
+    obj.class_id = message.classId === "" ? undefined : message.classId;
     return obj;
   },
   fromAminoMsg(object: QueryClassInfoRequestAminoMsg): QueryClassInfoRequest {
@@ -737,18 +751,19 @@ export const QueryClassInfoRequest = {
 };
 function createBaseQueryClassInfoResponse(): QueryClassInfoResponse {
   return {
-    info: ClassInfo.fromPartial({})
+    info: undefined
   };
 }
 export const QueryClassInfoResponse = {
-  encode(message: QueryClassInfoResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  typeUrl: "/regen.ecocredit.v1alpha1.QueryClassInfoResponse",
+  encode(message: QueryClassInfoResponse, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.info !== undefined) {
       ClassInfo.encode(message.info, writer.uint32(10).fork()).ldelim();
     }
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): QueryClassInfoResponse {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): QueryClassInfoResponse {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryClassInfoResponse();
     while (reader.pos < end) {
@@ -780,9 +795,11 @@ export const QueryClassInfoResponse = {
     return message;
   },
   fromAmino(object: QueryClassInfoResponseAmino): QueryClassInfoResponse {
-    return {
-      info: object?.info ? ClassInfo.fromAmino(object.info) : undefined
-    };
+    const message = createBaseQueryClassInfoResponse();
+    if (object.info !== undefined && object.info !== null) {
+      message.info = ClassInfo.fromAmino(object.info);
+    }
+    return message;
   },
   toAmino(message: QueryClassInfoResponse): QueryClassInfoResponseAmino {
     const obj: any = {};
@@ -808,11 +825,12 @@ export const QueryClassInfoResponse = {
 function createBaseQueryBatchesRequest(): QueryBatchesRequest {
   return {
     classId: "",
-    pagination: PageRequest.fromPartial({})
+    pagination: undefined
   };
 }
 export const QueryBatchesRequest = {
-  encode(message: QueryBatchesRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  typeUrl: "/regen.ecocredit.v1alpha1.QueryBatchesRequest",
+  encode(message: QueryBatchesRequest, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.classId !== "") {
       writer.uint32(10).string(message.classId);
     }
@@ -821,8 +839,8 @@ export const QueryBatchesRequest = {
     }
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): QueryBatchesRequest {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): QueryBatchesRequest {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryBatchesRequest();
     while (reader.pos < end) {
@@ -860,14 +878,18 @@ export const QueryBatchesRequest = {
     return message;
   },
   fromAmino(object: QueryBatchesRequestAmino): QueryBatchesRequest {
-    return {
-      classId: object.class_id,
-      pagination: object?.pagination ? PageRequest.fromAmino(object.pagination) : undefined
-    };
+    const message = createBaseQueryBatchesRequest();
+    if (object.class_id !== undefined && object.class_id !== null) {
+      message.classId = object.class_id;
+    }
+    if (object.pagination !== undefined && object.pagination !== null) {
+      message.pagination = PageRequest.fromAmino(object.pagination);
+    }
+    return message;
   },
   toAmino(message: QueryBatchesRequest): QueryBatchesRequestAmino {
     const obj: any = {};
-    obj.class_id = message.classId;
+    obj.class_id = message.classId === "" ? undefined : message.classId;
     obj.pagination = message.pagination ? PageRequest.toAmino(message.pagination) : undefined;
     return obj;
   },
@@ -890,11 +912,12 @@ export const QueryBatchesRequest = {
 function createBaseQueryBatchesResponse(): QueryBatchesResponse {
   return {
     batches: [],
-    pagination: PageResponse.fromPartial({})
+    pagination: undefined
   };
 }
 export const QueryBatchesResponse = {
-  encode(message: QueryBatchesResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  typeUrl: "/regen.ecocredit.v1alpha1.QueryBatchesResponse",
+  encode(message: QueryBatchesResponse, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     for (const v of message.batches) {
       BatchInfo.encode(v!, writer.uint32(10).fork()).ldelim();
     }
@@ -903,8 +926,8 @@ export const QueryBatchesResponse = {
     }
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): QueryBatchesResponse {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): QueryBatchesResponse {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryBatchesResponse();
     while (reader.pos < end) {
@@ -946,17 +969,19 @@ export const QueryBatchesResponse = {
     return message;
   },
   fromAmino(object: QueryBatchesResponseAmino): QueryBatchesResponse {
-    return {
-      batches: Array.isArray(object?.batches) ? object.batches.map((e: any) => BatchInfo.fromAmino(e)) : [],
-      pagination: object?.pagination ? PageResponse.fromAmino(object.pagination) : undefined
-    };
+    const message = createBaseQueryBatchesResponse();
+    message.batches = object.batches?.map(e => BatchInfo.fromAmino(e)) || [];
+    if (object.pagination !== undefined && object.pagination !== null) {
+      message.pagination = PageResponse.fromAmino(object.pagination);
+    }
+    return message;
   },
   toAmino(message: QueryBatchesResponse): QueryBatchesResponseAmino {
     const obj: any = {};
     if (message.batches) {
       obj.batches = message.batches.map(e => e ? BatchInfo.toAmino(e) : undefined);
     } else {
-      obj.batches = [];
+      obj.batches = message.batches;
     }
     obj.pagination = message.pagination ? PageResponse.toAmino(message.pagination) : undefined;
     return obj;
@@ -983,14 +1008,15 @@ function createBaseQueryBatchInfoRequest(): QueryBatchInfoRequest {
   };
 }
 export const QueryBatchInfoRequest = {
-  encode(message: QueryBatchInfoRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  typeUrl: "/regen.ecocredit.v1alpha1.QueryBatchInfoRequest",
+  encode(message: QueryBatchInfoRequest, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.batchDenom !== "") {
       writer.uint32(10).string(message.batchDenom);
     }
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): QueryBatchInfoRequest {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): QueryBatchInfoRequest {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryBatchInfoRequest();
     while (reader.pos < end) {
@@ -1022,13 +1048,15 @@ export const QueryBatchInfoRequest = {
     return message;
   },
   fromAmino(object: QueryBatchInfoRequestAmino): QueryBatchInfoRequest {
-    return {
-      batchDenom: object.batch_denom
-    };
+    const message = createBaseQueryBatchInfoRequest();
+    if (object.batch_denom !== undefined && object.batch_denom !== null) {
+      message.batchDenom = object.batch_denom;
+    }
+    return message;
   },
   toAmino(message: QueryBatchInfoRequest): QueryBatchInfoRequestAmino {
     const obj: any = {};
-    obj.batch_denom = message.batchDenom;
+    obj.batch_denom = message.batchDenom === "" ? undefined : message.batchDenom;
     return obj;
   },
   fromAminoMsg(object: QueryBatchInfoRequestAminoMsg): QueryBatchInfoRequest {
@@ -1049,18 +1077,19 @@ export const QueryBatchInfoRequest = {
 };
 function createBaseQueryBatchInfoResponse(): QueryBatchInfoResponse {
   return {
-    info: BatchInfo.fromPartial({})
+    info: undefined
   };
 }
 export const QueryBatchInfoResponse = {
-  encode(message: QueryBatchInfoResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  typeUrl: "/regen.ecocredit.v1alpha1.QueryBatchInfoResponse",
+  encode(message: QueryBatchInfoResponse, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.info !== undefined) {
       BatchInfo.encode(message.info, writer.uint32(10).fork()).ldelim();
     }
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): QueryBatchInfoResponse {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): QueryBatchInfoResponse {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryBatchInfoResponse();
     while (reader.pos < end) {
@@ -1092,9 +1121,11 @@ export const QueryBatchInfoResponse = {
     return message;
   },
   fromAmino(object: QueryBatchInfoResponseAmino): QueryBatchInfoResponse {
-    return {
-      info: object?.info ? BatchInfo.fromAmino(object.info) : undefined
-    };
+    const message = createBaseQueryBatchInfoResponse();
+    if (object.info !== undefined && object.info !== null) {
+      message.info = BatchInfo.fromAmino(object.info);
+    }
+    return message;
   },
   toAmino(message: QueryBatchInfoResponse): QueryBatchInfoResponseAmino {
     const obj: any = {};
@@ -1124,7 +1155,8 @@ function createBaseQueryBalanceRequest(): QueryBalanceRequest {
   };
 }
 export const QueryBalanceRequest = {
-  encode(message: QueryBalanceRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  typeUrl: "/regen.ecocredit.v1alpha1.QueryBalanceRequest",
+  encode(message: QueryBalanceRequest, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.account !== "") {
       writer.uint32(10).string(message.account);
     }
@@ -1133,8 +1165,8 @@ export const QueryBalanceRequest = {
     }
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): QueryBalanceRequest {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): QueryBalanceRequest {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryBalanceRequest();
     while (reader.pos < end) {
@@ -1172,15 +1204,19 @@ export const QueryBalanceRequest = {
     return message;
   },
   fromAmino(object: QueryBalanceRequestAmino): QueryBalanceRequest {
-    return {
-      account: object.account,
-      batchDenom: object.batch_denom
-    };
+    const message = createBaseQueryBalanceRequest();
+    if (object.account !== undefined && object.account !== null) {
+      message.account = object.account;
+    }
+    if (object.batch_denom !== undefined && object.batch_denom !== null) {
+      message.batchDenom = object.batch_denom;
+    }
+    return message;
   },
   toAmino(message: QueryBalanceRequest): QueryBalanceRequestAmino {
     const obj: any = {};
-    obj.account = message.account;
-    obj.batch_denom = message.batchDenom;
+    obj.account = message.account === "" ? undefined : message.account;
+    obj.batch_denom = message.batchDenom === "" ? undefined : message.batchDenom;
     return obj;
   },
   fromAminoMsg(object: QueryBalanceRequestAminoMsg): QueryBalanceRequest {
@@ -1206,7 +1242,8 @@ function createBaseQueryBalanceResponse(): QueryBalanceResponse {
   };
 }
 export const QueryBalanceResponse = {
-  encode(message: QueryBalanceResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  typeUrl: "/regen.ecocredit.v1alpha1.QueryBalanceResponse",
+  encode(message: QueryBalanceResponse, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.tradableAmount !== "") {
       writer.uint32(10).string(message.tradableAmount);
     }
@@ -1215,8 +1252,8 @@ export const QueryBalanceResponse = {
     }
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): QueryBalanceResponse {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): QueryBalanceResponse {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryBalanceResponse();
     while (reader.pos < end) {
@@ -1254,15 +1291,19 @@ export const QueryBalanceResponse = {
     return message;
   },
   fromAmino(object: QueryBalanceResponseAmino): QueryBalanceResponse {
-    return {
-      tradableAmount: object.tradable_amount,
-      retiredAmount: object.retired_amount
-    };
+    const message = createBaseQueryBalanceResponse();
+    if (object.tradable_amount !== undefined && object.tradable_amount !== null) {
+      message.tradableAmount = object.tradable_amount;
+    }
+    if (object.retired_amount !== undefined && object.retired_amount !== null) {
+      message.retiredAmount = object.retired_amount;
+    }
+    return message;
   },
   toAmino(message: QueryBalanceResponse): QueryBalanceResponseAmino {
     const obj: any = {};
-    obj.tradable_amount = message.tradableAmount;
-    obj.retired_amount = message.retiredAmount;
+    obj.tradable_amount = message.tradableAmount === "" ? undefined : message.tradableAmount;
+    obj.retired_amount = message.retiredAmount === "" ? undefined : message.retiredAmount;
     return obj;
   },
   fromAminoMsg(object: QueryBalanceResponseAminoMsg): QueryBalanceResponse {
@@ -1287,14 +1328,15 @@ function createBaseQuerySupplyRequest(): QuerySupplyRequest {
   };
 }
 export const QuerySupplyRequest = {
-  encode(message: QuerySupplyRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  typeUrl: "/regen.ecocredit.v1alpha1.QuerySupplyRequest",
+  encode(message: QuerySupplyRequest, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.batchDenom !== "") {
       writer.uint32(10).string(message.batchDenom);
     }
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): QuerySupplyRequest {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): QuerySupplyRequest {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQuerySupplyRequest();
     while (reader.pos < end) {
@@ -1326,13 +1368,15 @@ export const QuerySupplyRequest = {
     return message;
   },
   fromAmino(object: QuerySupplyRequestAmino): QuerySupplyRequest {
-    return {
-      batchDenom: object.batch_denom
-    };
+    const message = createBaseQuerySupplyRequest();
+    if (object.batch_denom !== undefined && object.batch_denom !== null) {
+      message.batchDenom = object.batch_denom;
+    }
+    return message;
   },
   toAmino(message: QuerySupplyRequest): QuerySupplyRequestAmino {
     const obj: any = {};
-    obj.batch_denom = message.batchDenom;
+    obj.batch_denom = message.batchDenom === "" ? undefined : message.batchDenom;
     return obj;
   },
   fromAminoMsg(object: QuerySupplyRequestAminoMsg): QuerySupplyRequest {
@@ -1358,7 +1402,8 @@ function createBaseQuerySupplyResponse(): QuerySupplyResponse {
   };
 }
 export const QuerySupplyResponse = {
-  encode(message: QuerySupplyResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  typeUrl: "/regen.ecocredit.v1alpha1.QuerySupplyResponse",
+  encode(message: QuerySupplyResponse, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.tradableSupply !== "") {
       writer.uint32(10).string(message.tradableSupply);
     }
@@ -1367,8 +1412,8 @@ export const QuerySupplyResponse = {
     }
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): QuerySupplyResponse {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): QuerySupplyResponse {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQuerySupplyResponse();
     while (reader.pos < end) {
@@ -1406,15 +1451,19 @@ export const QuerySupplyResponse = {
     return message;
   },
   fromAmino(object: QuerySupplyResponseAmino): QuerySupplyResponse {
-    return {
-      tradableSupply: object.tradable_supply,
-      retiredSupply: object.retired_supply
-    };
+    const message = createBaseQuerySupplyResponse();
+    if (object.tradable_supply !== undefined && object.tradable_supply !== null) {
+      message.tradableSupply = object.tradable_supply;
+    }
+    if (object.retired_supply !== undefined && object.retired_supply !== null) {
+      message.retiredSupply = object.retired_supply;
+    }
+    return message;
   },
   toAmino(message: QuerySupplyResponse): QuerySupplyResponseAmino {
     const obj: any = {};
-    obj.tradable_supply = message.tradableSupply;
-    obj.retired_supply = message.retiredSupply;
+    obj.tradable_supply = message.tradableSupply === "" ? undefined : message.tradableSupply;
+    obj.retired_supply = message.retiredSupply === "" ? undefined : message.retiredSupply;
     return obj;
   },
   fromAminoMsg(object: QuerySupplyResponseAminoMsg): QuerySupplyResponse {
@@ -1437,11 +1486,12 @@ function createBaseQueryCreditTypesRequest(): QueryCreditTypesRequest {
   return {};
 }
 export const QueryCreditTypesRequest = {
-  encode(_: QueryCreditTypesRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  typeUrl: "/regen.ecocredit.v1alpha1.QueryCreditTypesRequest",
+  encode(_: QueryCreditTypesRequest, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): QueryCreditTypesRequest {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): QueryCreditTypesRequest {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryCreditTypesRequest();
     while (reader.pos < end) {
@@ -1466,7 +1516,8 @@ export const QueryCreditTypesRequest = {
     return message;
   },
   fromAmino(_: QueryCreditTypesRequestAmino): QueryCreditTypesRequest {
-    return {};
+    const message = createBaseQueryCreditTypesRequest();
+    return message;
   },
   toAmino(_: QueryCreditTypesRequest): QueryCreditTypesRequestAmino {
     const obj: any = {};
@@ -1494,14 +1545,15 @@ function createBaseQueryCreditTypesResponse(): QueryCreditTypesResponse {
   };
 }
 export const QueryCreditTypesResponse = {
-  encode(message: QueryCreditTypesResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  typeUrl: "/regen.ecocredit.v1alpha1.QueryCreditTypesResponse",
+  encode(message: QueryCreditTypesResponse, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     for (const v of message.creditTypes) {
       CreditType.encode(v!, writer.uint32(10).fork()).ldelim();
     }
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): QueryCreditTypesResponse {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): QueryCreditTypesResponse {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryCreditTypesResponse();
     while (reader.pos < end) {
@@ -1537,16 +1589,16 @@ export const QueryCreditTypesResponse = {
     return message;
   },
   fromAmino(object: QueryCreditTypesResponseAmino): QueryCreditTypesResponse {
-    return {
-      creditTypes: Array.isArray(object?.credit_types) ? object.credit_types.map((e: any) => CreditType.fromAmino(e)) : []
-    };
+    const message = createBaseQueryCreditTypesResponse();
+    message.creditTypes = object.credit_types?.map(e => CreditType.fromAmino(e)) || [];
+    return message;
   },
   toAmino(message: QueryCreditTypesResponse): QueryCreditTypesResponseAmino {
     const obj: any = {};
     if (message.creditTypes) {
       obj.credit_types = message.creditTypes.map(e => e ? CreditType.toAmino(e) : undefined);
     } else {
-      obj.credit_types = [];
+      obj.credit_types = message.creditTypes;
     }
     return obj;
   },

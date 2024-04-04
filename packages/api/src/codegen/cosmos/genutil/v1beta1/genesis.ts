@@ -1,4 +1,4 @@
-import * as _m0 from "protobufjs/minimal";
+import { BinaryReader, BinaryWriter } from "../../../binary";
 import { bytesFromBase64, base64FromBytes } from "../../../helpers";
 /** GenesisState defines the raw genesis transaction in JSON. */
 export interface GenesisState {
@@ -12,7 +12,7 @@ export interface GenesisStateProtoMsg {
 /** GenesisState defines the raw genesis transaction in JSON. */
 export interface GenesisStateAmino {
   /** gen_txs defines the genesis transactions. */
-  gen_txs: Uint8Array[];
+  gen_txs: string[];
 }
 export interface GenesisStateAminoMsg {
   type: "cosmos-sdk/GenesisState";
@@ -28,14 +28,15 @@ function createBaseGenesisState(): GenesisState {
   };
 }
 export const GenesisState = {
-  encode(message: GenesisState, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  typeUrl: "/cosmos.genutil.v1beta1.GenesisState",
+  encode(message: GenesisState, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     for (const v of message.genTxs) {
       writer.uint32(10).bytes(v!);
     }
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): GenesisState {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): GenesisState {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseGenesisState();
     while (reader.pos < end) {
@@ -71,16 +72,16 @@ export const GenesisState = {
     return message;
   },
   fromAmino(object: GenesisStateAmino): GenesisState {
-    return {
-      genTxs: Array.isArray(object?.gen_txs) ? object.gen_txs.map((e: any) => e) : []
-    };
+    const message = createBaseGenesisState();
+    message.genTxs = object.gen_txs?.map(e => bytesFromBase64(e)) || [];
+    return message;
   },
   toAmino(message: GenesisState): GenesisStateAmino {
     const obj: any = {};
     if (message.genTxs) {
-      obj.gen_txs = message.genTxs.map(e => e);
+      obj.gen_txs = message.genTxs.map(e => base64FromBytes(e));
     } else {
-      obj.gen_txs = [];
+      obj.gen_txs = message.genTxs;
     }
     return obj;
   },

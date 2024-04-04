@@ -2,7 +2,7 @@ import { PageRequest, PageRequestAmino, PageRequestSDKType, PageResponse, PageRe
 import { Basket, BasketAmino, BasketSDKType, BasketBalance, BasketBalanceAmino, BasketBalanceSDKType } from "./state";
 import { DateCriteria, DateCriteriaAmino, DateCriteriaSDKType } from "./types";
 import { Coin, CoinAmino, CoinSDKType } from "../../../../cosmos/base/v1beta1/coin";
-import * as _m0 from "protobufjs/minimal";
+import { BinaryReader, BinaryWriter } from "../../../../binary";
 import { isSet } from "../../../../helpers";
 /** QueryBasketRequest is the Query/Basket request type. */
 export interface QueryBasketRequest {
@@ -16,7 +16,7 @@ export interface QueryBasketRequestProtoMsg {
 /** QueryBasketRequest is the Query/Basket request type. */
 export interface QueryBasketRequestAmino {
   /** basket_denom represents the denom of the basket to query. */
-  basket_denom: string;
+  basket_denom?: string;
 }
 export interface QueryBasketRequestAminoMsg {
   type: "/regen.ecocredit.basket.v1.QueryBasketRequest";
@@ -36,7 +36,7 @@ export interface QueryBasketResponse {
    * basket_info is available using BasketInfo.
    */
   /** @deprecated */
-  basket: Basket;
+  basket?: Basket;
   /** classes are the credit classes that can be deposited in the basket. */
   classes: string[];
   /**
@@ -44,7 +44,7 @@ export interface QueryBasketResponse {
    * 
    * Since Revision 1
    */
-  basketInfo: BasketInfo;
+  basketInfo?: BasketInfo;
 }
 export interface QueryBasketResponseProtoMsg {
   typeUrl: "/regen.ecocredit.basket.v1.QueryBasketResponse";
@@ -62,7 +62,7 @@ export interface QueryBasketResponseAmino {
   /** @deprecated */
   basket?: BasketAmino;
   /** classes are the credit classes that can be deposited in the basket. */
-  classes: string[];
+  classes?: string[];
   /**
    * basket_info is the queried basket.
    * 
@@ -77,14 +77,14 @@ export interface QueryBasketResponseAminoMsg {
 /** QueryBasketResponse is the Query/Basket response type. */
 export interface QueryBasketResponseSDKType {
   /** @deprecated */
-  basket: BasketSDKType;
+  basket?: BasketSDKType;
   classes: string[];
-  basket_info: BasketInfoSDKType;
+  basket_info?: BasketInfoSDKType;
 }
 /** QueryBasketsRequest is the Query/Baskets request type. */
 export interface QueryBasketsRequest {
   /** pagination defines an optional pagination for the request. */
-  pagination: PageRequest;
+  pagination?: PageRequest;
 }
 export interface QueryBasketsRequestProtoMsg {
   typeUrl: "/regen.ecocredit.basket.v1.QueryBasketsRequest";
@@ -101,7 +101,7 @@ export interface QueryBasketsRequestAminoMsg {
 }
 /** QueryBasketsRequest is the Query/Baskets request type. */
 export interface QueryBasketsRequestSDKType {
-  pagination: PageRequestSDKType;
+  pagination?: PageRequestSDKType;
 }
 /** QueryBasketsResponse is the Query/Baskets response type. */
 export interface QueryBasketsResponse {
@@ -115,7 +115,7 @@ export interface QueryBasketsResponse {
   /** @deprecated */
   baskets: Basket[];
   /** pagination defines the pagination in the response. */
-  pagination: PageResponse;
+  pagination?: PageResponse;
   /**
    * baskets_info are the fetched baskets.
    * 
@@ -137,7 +137,7 @@ export interface QueryBasketsResponseAmino {
    * baskets_info is available using BasketInfo.
    */
   /** @deprecated */
-  baskets: BasketAmino[];
+  baskets?: BasketAmino[];
   /** pagination defines the pagination in the response. */
   pagination?: PageResponseAmino;
   /**
@@ -145,7 +145,7 @@ export interface QueryBasketsResponseAmino {
    * 
    * Since Revision 1
    */
-  baskets_info: BasketInfoAmino[];
+  baskets_info?: BasketInfoAmino[];
 }
 export interface QueryBasketsResponseAminoMsg {
   type: "/regen.ecocredit.basket.v1.QueryBasketsResponse";
@@ -155,7 +155,7 @@ export interface QueryBasketsResponseAminoMsg {
 export interface QueryBasketsResponseSDKType {
   /** @deprecated */
   baskets: BasketSDKType[];
-  pagination: PageResponseSDKType;
+  pagination?: PageResponseSDKType;
   baskets_info: BasketInfoSDKType[];
 }
 /** QueryBasketBalancesRequest is the Query/BasketBalances request type. */
@@ -163,7 +163,7 @@ export interface QueryBasketBalancesRequest {
   /** basket_denom is the denom of the basket. */
   basketDenom: string;
   /** pagination defines an optional pagination for the request. */
-  pagination: PageRequest;
+  pagination?: PageRequest;
 }
 export interface QueryBasketBalancesRequestProtoMsg {
   typeUrl: "/regen.ecocredit.basket.v1.QueryBasketBalancesRequest";
@@ -172,7 +172,7 @@ export interface QueryBasketBalancesRequestProtoMsg {
 /** QueryBasketBalancesRequest is the Query/BasketBalances request type. */
 export interface QueryBasketBalancesRequestAmino {
   /** basket_denom is the denom of the basket. */
-  basket_denom: string;
+  basket_denom?: string;
   /** pagination defines an optional pagination for the request. */
   pagination?: PageRequestAmino;
 }
@@ -183,7 +183,7 @@ export interface QueryBasketBalancesRequestAminoMsg {
 /** QueryBasketBalancesRequest is the Query/BasketBalances request type. */
 export interface QueryBasketBalancesRequestSDKType {
   basket_denom: string;
-  pagination: PageRequestSDKType;
+  pagination?: PageRequestSDKType;
 }
 /** QueryBasketBalancesResponse is the Query/BasketBalances response type. */
 export interface QueryBasketBalancesResponse {
@@ -197,7 +197,7 @@ export interface QueryBasketBalancesResponse {
   /** @deprecated */
   balances: BasketBalance[];
   /** pagination defines the pagination in the response. */
-  pagination: PageResponse;
+  pagination?: PageResponse;
   /**
    * balances_info is a list of credit balances in the basket.
    * 
@@ -219,7 +219,7 @@ export interface QueryBasketBalancesResponseAmino {
    * version. In the meantime baskets_info is available using BasketBalanceInfo.
    */
   /** @deprecated */
-  balances: BasketBalanceAmino[];
+  balances?: BasketBalanceAmino[];
   /** pagination defines the pagination in the response. */
   pagination?: PageResponseAmino;
   /**
@@ -227,7 +227,7 @@ export interface QueryBasketBalancesResponseAmino {
    * 
    * Since Revision 1
    */
-  balances_info: BasketBalanceInfoAmino[];
+  balances_info?: BasketBalanceInfoAmino[];
 }
 export interface QueryBasketBalancesResponseAminoMsg {
   type: "/regen.ecocredit.basket.v1.QueryBasketBalancesResponse";
@@ -237,7 +237,7 @@ export interface QueryBasketBalancesResponseAminoMsg {
 export interface QueryBasketBalancesResponseSDKType {
   /** @deprecated */
   balances: BasketBalanceSDKType[];
-  pagination: PageResponseSDKType;
+  pagination?: PageResponseSDKType;
   balances_info: BasketBalanceInfoSDKType[];
 }
 /** QueryBasketBalanceRequest is the Query/BasketBalance request type. */
@@ -254,9 +254,9 @@ export interface QueryBasketBalanceRequestProtoMsg {
 /** QueryBasketBalanceRequest is the Query/BasketBalance request type. */
 export interface QueryBasketBalanceRequestAmino {
   /** basket_denom is the denom of the basket. */
-  basket_denom: string;
+  basket_denom?: string;
   /** batch_denom is the denom of the credit batch. */
-  batch_denom: string;
+  batch_denom?: string;
 }
 export interface QueryBasketBalanceRequestAminoMsg {
   type: "/regen.ecocredit.basket.v1.QueryBasketBalanceRequest";
@@ -279,7 +279,7 @@ export interface QueryBasketBalanceResponseProtoMsg {
 /** QueryBasketBalanceResponse is the Query/BasketBalance response type. */
 export interface QueryBasketBalanceResponseAmino {
   /** balance is the amount of the queried credit batch in the basket. */
-  balance: string;
+  balance?: string;
 }
 export interface QueryBasketBalanceResponseAminoMsg {
   type: "/regen.ecocredit.basket.v1.QueryBasketBalanceResponse";
@@ -310,7 +310,7 @@ export interface BasketInfo {
    */
   creditTypeAbbrev: string;
   /** date_criteria is the date criteria for batches admitted to the basket. */
-  dateCriteria: DateCriteria;
+  dateCriteria?: DateCriteria;
   /** exponent is the exponent for converting credits to/from basket tokens. */
   exponent: number;
   /**
@@ -326,32 +326,32 @@ export interface BasketInfoProtoMsg {
 /** BasketInfo is the human-readable basket information. */
 export interface BasketInfoAmino {
   /** basket_denom is the basket bank denom. */
-  basket_denom: string;
+  basket_denom?: string;
   /**
    * name is the unique name of the basket specified in MsgCreate. Basket
    * names must be unique across all credit types and choices of exponent
    * above and beyond the uniqueness constraint on basket_denom.
    */
-  name: string;
+  name?: string;
   /**
    * disable_auto_retire indicates whether or not the credits will be retired
    * upon withdraw from the basket.
    */
-  disable_auto_retire: boolean;
+  disable_auto_retire?: boolean;
   /**
    * credit_type_abbrev is the abbreviation of the credit type this basket is
    * able to hold.
    */
-  credit_type_abbrev: string;
+  credit_type_abbrev?: string;
   /** date_criteria is the date criteria for batches admitted to the basket. */
   date_criteria?: DateCriteriaAmino;
   /** exponent is the exponent for converting credits to/from basket tokens. */
-  exponent: number;
+  exponent?: number;
   /**
    * curator is the address of the basket curator who is able to change certain
    * basket settings.
    */
-  curator: string;
+  curator?: string;
 }
 export interface BasketInfoAminoMsg {
   type: "/regen.ecocredit.basket.v1.BasketInfo";
@@ -363,7 +363,7 @@ export interface BasketInfoSDKType {
   name: string;
   disable_auto_retire: boolean;
   credit_type_abbrev: string;
-  date_criteria: DateCriteriaSDKType;
+  date_criteria?: DateCriteriaSDKType;
   exponent: number;
   curator: string;
 }
@@ -381,9 +381,9 @@ export interface BasketBalanceInfoProtoMsg {
 /** BasketBalanceInfo is the human-readable basket balance information. */
 export interface BasketBalanceInfoAmino {
   /** batch_denom is the denom of the credit batch */
-  batch_denom: string;
+  batch_denom?: string;
   /** balance is the amount of ecocredits held in the basket */
-  balance: string;
+  balance?: string;
 }
 export interface BasketBalanceInfoAminoMsg {
   type: "/regen.ecocredit.basket.v1.BasketBalanceInfo";
@@ -430,7 +430,7 @@ export interface QueryBasketFeeResponse {
    * fee is the basket creation fee. If not set, a basket creation fee is not
    * required.
    */
-  fee: Coin;
+  fee?: Coin;
 }
 export interface QueryBasketFeeResponseProtoMsg {
   typeUrl: "/regen.ecocredit.basket.v1.QueryBasketFeeResponse";
@@ -458,7 +458,7 @@ export interface QueryBasketFeeResponseAminoMsg {
  * Since Revision 2
  */
 export interface QueryBasketFeeResponseSDKType {
-  fee: CoinSDKType;
+  fee?: CoinSDKType;
 }
 function createBaseQueryBasketRequest(): QueryBasketRequest {
   return {
@@ -466,14 +466,15 @@ function createBaseQueryBasketRequest(): QueryBasketRequest {
   };
 }
 export const QueryBasketRequest = {
-  encode(message: QueryBasketRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  typeUrl: "/regen.ecocredit.basket.v1.QueryBasketRequest",
+  encode(message: QueryBasketRequest, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.basketDenom !== "") {
       writer.uint32(10).string(message.basketDenom);
     }
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): QueryBasketRequest {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): QueryBasketRequest {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryBasketRequest();
     while (reader.pos < end) {
@@ -505,13 +506,15 @@ export const QueryBasketRequest = {
     return message;
   },
   fromAmino(object: QueryBasketRequestAmino): QueryBasketRequest {
-    return {
-      basketDenom: object.basket_denom
-    };
+    const message = createBaseQueryBasketRequest();
+    if (object.basket_denom !== undefined && object.basket_denom !== null) {
+      message.basketDenom = object.basket_denom;
+    }
+    return message;
   },
   toAmino(message: QueryBasketRequest): QueryBasketRequestAmino {
     const obj: any = {};
-    obj.basket_denom = message.basketDenom;
+    obj.basket_denom = message.basketDenom === "" ? undefined : message.basketDenom;
     return obj;
   },
   fromAminoMsg(object: QueryBasketRequestAminoMsg): QueryBasketRequest {
@@ -532,13 +535,14 @@ export const QueryBasketRequest = {
 };
 function createBaseQueryBasketResponse(): QueryBasketResponse {
   return {
-    basket: Basket.fromPartial({}),
+    basket: undefined,
     classes: [],
-    basketInfo: BasketInfo.fromPartial({})
+    basketInfo: undefined
   };
 }
 export const QueryBasketResponse = {
-  encode(message: QueryBasketResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  typeUrl: "/regen.ecocredit.basket.v1.QueryBasketResponse",
+  encode(message: QueryBasketResponse, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.basket !== undefined) {
       Basket.encode(message.basket, writer.uint32(10).fork()).ldelim();
     }
@@ -550,8 +554,8 @@ export const QueryBasketResponse = {
     }
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): QueryBasketResponse {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): QueryBasketResponse {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryBasketResponse();
     while (reader.pos < end) {
@@ -599,11 +603,15 @@ export const QueryBasketResponse = {
     return message;
   },
   fromAmino(object: QueryBasketResponseAmino): QueryBasketResponse {
-    return {
-      basket: object?.basket ? Basket.fromAmino(object.basket) : undefined,
-      classes: Array.isArray(object?.classes) ? object.classes.map((e: any) => e) : [],
-      basketInfo: object?.basket_info ? BasketInfo.fromAmino(object.basket_info) : undefined
-    };
+    const message = createBaseQueryBasketResponse();
+    if (object.basket !== undefined && object.basket !== null) {
+      message.basket = Basket.fromAmino(object.basket);
+    }
+    message.classes = object.classes?.map(e => e) || [];
+    if (object.basket_info !== undefined && object.basket_info !== null) {
+      message.basketInfo = BasketInfo.fromAmino(object.basket_info);
+    }
+    return message;
   },
   toAmino(message: QueryBasketResponse): QueryBasketResponseAmino {
     const obj: any = {};
@@ -611,7 +619,7 @@ export const QueryBasketResponse = {
     if (message.classes) {
       obj.classes = message.classes.map(e => e);
     } else {
-      obj.classes = [];
+      obj.classes = message.classes;
     }
     obj.basket_info = message.basketInfo ? BasketInfo.toAmino(message.basketInfo) : undefined;
     return obj;
@@ -634,18 +642,19 @@ export const QueryBasketResponse = {
 };
 function createBaseQueryBasketsRequest(): QueryBasketsRequest {
   return {
-    pagination: PageRequest.fromPartial({})
+    pagination: undefined
   };
 }
 export const QueryBasketsRequest = {
-  encode(message: QueryBasketsRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  typeUrl: "/regen.ecocredit.basket.v1.QueryBasketsRequest",
+  encode(message: QueryBasketsRequest, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.pagination !== undefined) {
       PageRequest.encode(message.pagination, writer.uint32(10).fork()).ldelim();
     }
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): QueryBasketsRequest {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): QueryBasketsRequest {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryBasketsRequest();
     while (reader.pos < end) {
@@ -677,9 +686,11 @@ export const QueryBasketsRequest = {
     return message;
   },
   fromAmino(object: QueryBasketsRequestAmino): QueryBasketsRequest {
-    return {
-      pagination: object?.pagination ? PageRequest.fromAmino(object.pagination) : undefined
-    };
+    const message = createBaseQueryBasketsRequest();
+    if (object.pagination !== undefined && object.pagination !== null) {
+      message.pagination = PageRequest.fromAmino(object.pagination);
+    }
+    return message;
   },
   toAmino(message: QueryBasketsRequest): QueryBasketsRequestAmino {
     const obj: any = {};
@@ -705,12 +716,13 @@ export const QueryBasketsRequest = {
 function createBaseQueryBasketsResponse(): QueryBasketsResponse {
   return {
     baskets: [],
-    pagination: PageResponse.fromPartial({}),
+    pagination: undefined,
     basketsInfo: []
   };
 }
 export const QueryBasketsResponse = {
-  encode(message: QueryBasketsResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  typeUrl: "/regen.ecocredit.basket.v1.QueryBasketsResponse",
+  encode(message: QueryBasketsResponse, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     for (const v of message.baskets) {
       Basket.encode(v!, writer.uint32(10).fork()).ldelim();
     }
@@ -722,8 +734,8 @@ export const QueryBasketsResponse = {
     }
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): QueryBasketsResponse {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): QueryBasketsResponse {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryBasketsResponse();
     while (reader.pos < end) {
@@ -775,24 +787,26 @@ export const QueryBasketsResponse = {
     return message;
   },
   fromAmino(object: QueryBasketsResponseAmino): QueryBasketsResponse {
-    return {
-      baskets: Array.isArray(object?.baskets) ? object.baskets.map((e: any) => Basket.fromAmino(e)) : [],
-      pagination: object?.pagination ? PageResponse.fromAmino(object.pagination) : undefined,
-      basketsInfo: Array.isArray(object?.baskets_info) ? object.baskets_info.map((e: any) => BasketInfo.fromAmino(e)) : []
-    };
+    const message = createBaseQueryBasketsResponse();
+    message.baskets = object.baskets?.map(e => Basket.fromAmino(e)) || [];
+    if (object.pagination !== undefined && object.pagination !== null) {
+      message.pagination = PageResponse.fromAmino(object.pagination);
+    }
+    message.basketsInfo = object.baskets_info?.map(e => BasketInfo.fromAmino(e)) || [];
+    return message;
   },
   toAmino(message: QueryBasketsResponse): QueryBasketsResponseAmino {
     const obj: any = {};
     if (message.baskets) {
       obj.baskets = message.baskets.map(e => e ? Basket.toAmino(e) : undefined);
     } else {
-      obj.baskets = [];
+      obj.baskets = message.baskets;
     }
     obj.pagination = message.pagination ? PageResponse.toAmino(message.pagination) : undefined;
     if (message.basketsInfo) {
       obj.baskets_info = message.basketsInfo.map(e => e ? BasketInfo.toAmino(e) : undefined);
     } else {
-      obj.baskets_info = [];
+      obj.baskets_info = message.basketsInfo;
     }
     return obj;
   },
@@ -815,11 +829,12 @@ export const QueryBasketsResponse = {
 function createBaseQueryBasketBalancesRequest(): QueryBasketBalancesRequest {
   return {
     basketDenom: "",
-    pagination: PageRequest.fromPartial({})
+    pagination: undefined
   };
 }
 export const QueryBasketBalancesRequest = {
-  encode(message: QueryBasketBalancesRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  typeUrl: "/regen.ecocredit.basket.v1.QueryBasketBalancesRequest",
+  encode(message: QueryBasketBalancesRequest, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.basketDenom !== "") {
       writer.uint32(10).string(message.basketDenom);
     }
@@ -828,8 +843,8 @@ export const QueryBasketBalancesRequest = {
     }
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): QueryBasketBalancesRequest {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): QueryBasketBalancesRequest {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryBasketBalancesRequest();
     while (reader.pos < end) {
@@ -867,14 +882,18 @@ export const QueryBasketBalancesRequest = {
     return message;
   },
   fromAmino(object: QueryBasketBalancesRequestAmino): QueryBasketBalancesRequest {
-    return {
-      basketDenom: object.basket_denom,
-      pagination: object?.pagination ? PageRequest.fromAmino(object.pagination) : undefined
-    };
+    const message = createBaseQueryBasketBalancesRequest();
+    if (object.basket_denom !== undefined && object.basket_denom !== null) {
+      message.basketDenom = object.basket_denom;
+    }
+    if (object.pagination !== undefined && object.pagination !== null) {
+      message.pagination = PageRequest.fromAmino(object.pagination);
+    }
+    return message;
   },
   toAmino(message: QueryBasketBalancesRequest): QueryBasketBalancesRequestAmino {
     const obj: any = {};
-    obj.basket_denom = message.basketDenom;
+    obj.basket_denom = message.basketDenom === "" ? undefined : message.basketDenom;
     obj.pagination = message.pagination ? PageRequest.toAmino(message.pagination) : undefined;
     return obj;
   },
@@ -897,12 +916,13 @@ export const QueryBasketBalancesRequest = {
 function createBaseQueryBasketBalancesResponse(): QueryBasketBalancesResponse {
   return {
     balances: [],
-    pagination: PageResponse.fromPartial({}),
+    pagination: undefined,
     balancesInfo: []
   };
 }
 export const QueryBasketBalancesResponse = {
-  encode(message: QueryBasketBalancesResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  typeUrl: "/regen.ecocredit.basket.v1.QueryBasketBalancesResponse",
+  encode(message: QueryBasketBalancesResponse, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     for (const v of message.balances) {
       BasketBalance.encode(v!, writer.uint32(10).fork()).ldelim();
     }
@@ -914,8 +934,8 @@ export const QueryBasketBalancesResponse = {
     }
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): QueryBasketBalancesResponse {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): QueryBasketBalancesResponse {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryBasketBalancesResponse();
     while (reader.pos < end) {
@@ -967,24 +987,26 @@ export const QueryBasketBalancesResponse = {
     return message;
   },
   fromAmino(object: QueryBasketBalancesResponseAmino): QueryBasketBalancesResponse {
-    return {
-      balances: Array.isArray(object?.balances) ? object.balances.map((e: any) => BasketBalance.fromAmino(e)) : [],
-      pagination: object?.pagination ? PageResponse.fromAmino(object.pagination) : undefined,
-      balancesInfo: Array.isArray(object?.balances_info) ? object.balances_info.map((e: any) => BasketBalanceInfo.fromAmino(e)) : []
-    };
+    const message = createBaseQueryBasketBalancesResponse();
+    message.balances = object.balances?.map(e => BasketBalance.fromAmino(e)) || [];
+    if (object.pagination !== undefined && object.pagination !== null) {
+      message.pagination = PageResponse.fromAmino(object.pagination);
+    }
+    message.balancesInfo = object.balances_info?.map(e => BasketBalanceInfo.fromAmino(e)) || [];
+    return message;
   },
   toAmino(message: QueryBasketBalancesResponse): QueryBasketBalancesResponseAmino {
     const obj: any = {};
     if (message.balances) {
       obj.balances = message.balances.map(e => e ? BasketBalance.toAmino(e) : undefined);
     } else {
-      obj.balances = [];
+      obj.balances = message.balances;
     }
     obj.pagination = message.pagination ? PageResponse.toAmino(message.pagination) : undefined;
     if (message.balancesInfo) {
       obj.balances_info = message.balancesInfo.map(e => e ? BasketBalanceInfo.toAmino(e) : undefined);
     } else {
-      obj.balances_info = [];
+      obj.balances_info = message.balancesInfo;
     }
     return obj;
   },
@@ -1011,7 +1033,8 @@ function createBaseQueryBasketBalanceRequest(): QueryBasketBalanceRequest {
   };
 }
 export const QueryBasketBalanceRequest = {
-  encode(message: QueryBasketBalanceRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  typeUrl: "/regen.ecocredit.basket.v1.QueryBasketBalanceRequest",
+  encode(message: QueryBasketBalanceRequest, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.basketDenom !== "") {
       writer.uint32(10).string(message.basketDenom);
     }
@@ -1020,8 +1043,8 @@ export const QueryBasketBalanceRequest = {
     }
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): QueryBasketBalanceRequest {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): QueryBasketBalanceRequest {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryBasketBalanceRequest();
     while (reader.pos < end) {
@@ -1059,15 +1082,19 @@ export const QueryBasketBalanceRequest = {
     return message;
   },
   fromAmino(object: QueryBasketBalanceRequestAmino): QueryBasketBalanceRequest {
-    return {
-      basketDenom: object.basket_denom,
-      batchDenom: object.batch_denom
-    };
+    const message = createBaseQueryBasketBalanceRequest();
+    if (object.basket_denom !== undefined && object.basket_denom !== null) {
+      message.basketDenom = object.basket_denom;
+    }
+    if (object.batch_denom !== undefined && object.batch_denom !== null) {
+      message.batchDenom = object.batch_denom;
+    }
+    return message;
   },
   toAmino(message: QueryBasketBalanceRequest): QueryBasketBalanceRequestAmino {
     const obj: any = {};
-    obj.basket_denom = message.basketDenom;
-    obj.batch_denom = message.batchDenom;
+    obj.basket_denom = message.basketDenom === "" ? undefined : message.basketDenom;
+    obj.batch_denom = message.batchDenom === "" ? undefined : message.batchDenom;
     return obj;
   },
   fromAminoMsg(object: QueryBasketBalanceRequestAminoMsg): QueryBasketBalanceRequest {
@@ -1092,14 +1119,15 @@ function createBaseQueryBasketBalanceResponse(): QueryBasketBalanceResponse {
   };
 }
 export const QueryBasketBalanceResponse = {
-  encode(message: QueryBasketBalanceResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  typeUrl: "/regen.ecocredit.basket.v1.QueryBasketBalanceResponse",
+  encode(message: QueryBasketBalanceResponse, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.balance !== "") {
       writer.uint32(10).string(message.balance);
     }
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): QueryBasketBalanceResponse {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): QueryBasketBalanceResponse {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryBasketBalanceResponse();
     while (reader.pos < end) {
@@ -1131,13 +1159,15 @@ export const QueryBasketBalanceResponse = {
     return message;
   },
   fromAmino(object: QueryBasketBalanceResponseAmino): QueryBasketBalanceResponse {
-    return {
-      balance: object.balance
-    };
+    const message = createBaseQueryBasketBalanceResponse();
+    if (object.balance !== undefined && object.balance !== null) {
+      message.balance = object.balance;
+    }
+    return message;
   },
   toAmino(message: QueryBasketBalanceResponse): QueryBasketBalanceResponseAmino {
     const obj: any = {};
-    obj.balance = message.balance;
+    obj.balance = message.balance === "" ? undefined : message.balance;
     return obj;
   },
   fromAminoMsg(object: QueryBasketBalanceResponseAminoMsg): QueryBasketBalanceResponse {
@@ -1162,13 +1192,14 @@ function createBaseBasketInfo(): BasketInfo {
     name: "",
     disableAutoRetire: false,
     creditTypeAbbrev: "",
-    dateCriteria: DateCriteria.fromPartial({}),
+    dateCriteria: undefined,
     exponent: 0,
     curator: ""
   };
 }
 export const BasketInfo = {
-  encode(message: BasketInfo, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  typeUrl: "/regen.ecocredit.basket.v1.BasketInfo",
+  encode(message: BasketInfo, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.basketDenom !== "") {
       writer.uint32(10).string(message.basketDenom);
     }
@@ -1192,8 +1223,8 @@ export const BasketInfo = {
     }
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): BasketInfo {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): BasketInfo {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseBasketInfo();
     while (reader.pos < end) {
@@ -1261,25 +1292,39 @@ export const BasketInfo = {
     return message;
   },
   fromAmino(object: BasketInfoAmino): BasketInfo {
-    return {
-      basketDenom: object.basket_denom,
-      name: object.name,
-      disableAutoRetire: object.disable_auto_retire,
-      creditTypeAbbrev: object.credit_type_abbrev,
-      dateCriteria: object?.date_criteria ? DateCriteria.fromAmino(object.date_criteria) : undefined,
-      exponent: object.exponent,
-      curator: object.curator
-    };
+    const message = createBaseBasketInfo();
+    if (object.basket_denom !== undefined && object.basket_denom !== null) {
+      message.basketDenom = object.basket_denom;
+    }
+    if (object.name !== undefined && object.name !== null) {
+      message.name = object.name;
+    }
+    if (object.disable_auto_retire !== undefined && object.disable_auto_retire !== null) {
+      message.disableAutoRetire = object.disable_auto_retire;
+    }
+    if (object.credit_type_abbrev !== undefined && object.credit_type_abbrev !== null) {
+      message.creditTypeAbbrev = object.credit_type_abbrev;
+    }
+    if (object.date_criteria !== undefined && object.date_criteria !== null) {
+      message.dateCriteria = DateCriteria.fromAmino(object.date_criteria);
+    }
+    if (object.exponent !== undefined && object.exponent !== null) {
+      message.exponent = object.exponent;
+    }
+    if (object.curator !== undefined && object.curator !== null) {
+      message.curator = object.curator;
+    }
+    return message;
   },
   toAmino(message: BasketInfo): BasketInfoAmino {
     const obj: any = {};
-    obj.basket_denom = message.basketDenom;
-    obj.name = message.name;
-    obj.disable_auto_retire = message.disableAutoRetire;
-    obj.credit_type_abbrev = message.creditTypeAbbrev;
+    obj.basket_denom = message.basketDenom === "" ? undefined : message.basketDenom;
+    obj.name = message.name === "" ? undefined : message.name;
+    obj.disable_auto_retire = message.disableAutoRetire === false ? undefined : message.disableAutoRetire;
+    obj.credit_type_abbrev = message.creditTypeAbbrev === "" ? undefined : message.creditTypeAbbrev;
     obj.date_criteria = message.dateCriteria ? DateCriteria.toAmino(message.dateCriteria) : undefined;
-    obj.exponent = message.exponent;
-    obj.curator = message.curator;
+    obj.exponent = message.exponent === 0 ? undefined : message.exponent;
+    obj.curator = message.curator === "" ? undefined : message.curator;
     return obj;
   },
   fromAminoMsg(object: BasketInfoAminoMsg): BasketInfo {
@@ -1305,7 +1350,8 @@ function createBaseBasketBalanceInfo(): BasketBalanceInfo {
   };
 }
 export const BasketBalanceInfo = {
-  encode(message: BasketBalanceInfo, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  typeUrl: "/regen.ecocredit.basket.v1.BasketBalanceInfo",
+  encode(message: BasketBalanceInfo, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.batchDenom !== "") {
       writer.uint32(10).string(message.batchDenom);
     }
@@ -1314,8 +1360,8 @@ export const BasketBalanceInfo = {
     }
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): BasketBalanceInfo {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): BasketBalanceInfo {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseBasketBalanceInfo();
     while (reader.pos < end) {
@@ -1353,15 +1399,19 @@ export const BasketBalanceInfo = {
     return message;
   },
   fromAmino(object: BasketBalanceInfoAmino): BasketBalanceInfo {
-    return {
-      batchDenom: object.batch_denom,
-      balance: object.balance
-    };
+    const message = createBaseBasketBalanceInfo();
+    if (object.batch_denom !== undefined && object.batch_denom !== null) {
+      message.batchDenom = object.batch_denom;
+    }
+    if (object.balance !== undefined && object.balance !== null) {
+      message.balance = object.balance;
+    }
+    return message;
   },
   toAmino(message: BasketBalanceInfo): BasketBalanceInfoAmino {
     const obj: any = {};
-    obj.batch_denom = message.batchDenom;
-    obj.balance = message.balance;
+    obj.batch_denom = message.batchDenom === "" ? undefined : message.batchDenom;
+    obj.balance = message.balance === "" ? undefined : message.balance;
     return obj;
   },
   fromAminoMsg(object: BasketBalanceInfoAminoMsg): BasketBalanceInfo {
@@ -1384,11 +1434,12 @@ function createBaseQueryBasketFeeRequest(): QueryBasketFeeRequest {
   return {};
 }
 export const QueryBasketFeeRequest = {
-  encode(_: QueryBasketFeeRequest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  typeUrl: "/regen.ecocredit.basket.v1.QueryBasketFeeRequest",
+  encode(_: QueryBasketFeeRequest, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): QueryBasketFeeRequest {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): QueryBasketFeeRequest {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryBasketFeeRequest();
     while (reader.pos < end) {
@@ -1413,7 +1464,8 @@ export const QueryBasketFeeRequest = {
     return message;
   },
   fromAmino(_: QueryBasketFeeRequestAmino): QueryBasketFeeRequest {
-    return {};
+    const message = createBaseQueryBasketFeeRequest();
+    return message;
   },
   toAmino(_: QueryBasketFeeRequest): QueryBasketFeeRequestAmino {
     const obj: any = {};
@@ -1441,14 +1493,15 @@ function createBaseQueryBasketFeeResponse(): QueryBasketFeeResponse {
   };
 }
 export const QueryBasketFeeResponse = {
-  encode(message: QueryBasketFeeResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  typeUrl: "/regen.ecocredit.basket.v1.QueryBasketFeeResponse",
+  encode(message: QueryBasketFeeResponse, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.fee !== undefined) {
       Coin.encode(message.fee, writer.uint32(10).fork()).ldelim();
     }
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): QueryBasketFeeResponse {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): QueryBasketFeeResponse {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryBasketFeeResponse();
     while (reader.pos < end) {
@@ -1480,9 +1533,11 @@ export const QueryBasketFeeResponse = {
     return message;
   },
   fromAmino(object: QueryBasketFeeResponseAmino): QueryBasketFeeResponse {
-    return {
-      fee: object?.fee ? Coin.fromAmino(object.fee) : undefined
-    };
+    const message = createBaseQueryBasketFeeResponse();
+    if (object.fee !== undefined && object.fee !== null) {
+      message.fee = Coin.fromAmino(object.fee);
+    }
+    return message;
   },
   toAmino(message: QueryBasketFeeResponse): QueryBasketFeeResponseAmino {
     const obj: any = {};

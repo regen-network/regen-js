@@ -1,5 +1,5 @@
 import { Rpc } from "../../../helpers";
-import * as _m0 from "protobufjs/minimal";
+import { BinaryReader } from "../../../binary";
 import { QueryClient, createProtobufRpcClient } from "@cosmjs/stargate";
 import { QueryClassesRequest, QueryClassesResponse, QueryClassInfoRequest, QueryClassInfoResponse, QueryBatchesRequest, QueryBatchesResponse, QueryBatchInfoRequest, QueryBatchInfoResponse, QueryBalanceRequest, QueryBalanceResponse, QuerySupplyRequest, QuerySupplyResponse, QueryCreditTypesRequest, QueryCreditTypesResponse, QueryParamsRequest, QueryParamsResponse } from "./query";
 /** Msg is the regen.ecocredit.v1alpha1 Query service. */
@@ -45,42 +45,42 @@ export class QueryClientImpl implements Query {
   }): Promise<QueryClassesResponse> {
     const data = QueryClassesRequest.encode(request).finish();
     const promise = this.rpc.request("regen.ecocredit.v1alpha1.Query", "Classes", data);
-    return promise.then(data => QueryClassesResponse.decode(new _m0.Reader(data)));
+    return promise.then(data => QueryClassesResponse.decode(new BinaryReader(data)));
   }
   classInfo(request: QueryClassInfoRequest): Promise<QueryClassInfoResponse> {
     const data = QueryClassInfoRequest.encode(request).finish();
     const promise = this.rpc.request("regen.ecocredit.v1alpha1.Query", "ClassInfo", data);
-    return promise.then(data => QueryClassInfoResponse.decode(new _m0.Reader(data)));
+    return promise.then(data => QueryClassInfoResponse.decode(new BinaryReader(data)));
   }
   batches(request: QueryBatchesRequest): Promise<QueryBatchesResponse> {
     const data = QueryBatchesRequest.encode(request).finish();
     const promise = this.rpc.request("regen.ecocredit.v1alpha1.Query", "Batches", data);
-    return promise.then(data => QueryBatchesResponse.decode(new _m0.Reader(data)));
+    return promise.then(data => QueryBatchesResponse.decode(new BinaryReader(data)));
   }
   batchInfo(request: QueryBatchInfoRequest): Promise<QueryBatchInfoResponse> {
     const data = QueryBatchInfoRequest.encode(request).finish();
     const promise = this.rpc.request("regen.ecocredit.v1alpha1.Query", "BatchInfo", data);
-    return promise.then(data => QueryBatchInfoResponse.decode(new _m0.Reader(data)));
+    return promise.then(data => QueryBatchInfoResponse.decode(new BinaryReader(data)));
   }
   balance(request: QueryBalanceRequest): Promise<QueryBalanceResponse> {
     const data = QueryBalanceRequest.encode(request).finish();
     const promise = this.rpc.request("regen.ecocredit.v1alpha1.Query", "Balance", data);
-    return promise.then(data => QueryBalanceResponse.decode(new _m0.Reader(data)));
+    return promise.then(data => QueryBalanceResponse.decode(new BinaryReader(data)));
   }
   supply(request: QuerySupplyRequest): Promise<QuerySupplyResponse> {
     const data = QuerySupplyRequest.encode(request).finish();
     const promise = this.rpc.request("regen.ecocredit.v1alpha1.Query", "Supply", data);
-    return promise.then(data => QuerySupplyResponse.decode(new _m0.Reader(data)));
+    return promise.then(data => QuerySupplyResponse.decode(new BinaryReader(data)));
   }
   creditTypes(request: QueryCreditTypesRequest = {}): Promise<QueryCreditTypesResponse> {
     const data = QueryCreditTypesRequest.encode(request).finish();
     const promise = this.rpc.request("regen.ecocredit.v1alpha1.Query", "CreditTypes", data);
-    return promise.then(data => QueryCreditTypesResponse.decode(new _m0.Reader(data)));
+    return promise.then(data => QueryCreditTypesResponse.decode(new BinaryReader(data)));
   }
   params(request: QueryParamsRequest = {}): Promise<QueryParamsResponse> {
     const data = QueryParamsRequest.encode(request).finish();
     const promise = this.rpc.request("regen.ecocredit.v1alpha1.Query", "Params", data);
-    return promise.then(data => QueryParamsResponse.decode(new _m0.Reader(data)));
+    return promise.then(data => QueryParamsResponse.decode(new BinaryReader(data)));
   }
 }
 export const createRpcQueryExtension = (base: QueryClient) => {

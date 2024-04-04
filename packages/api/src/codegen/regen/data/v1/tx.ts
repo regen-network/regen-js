@@ -1,7 +1,7 @@
 import { ContentHash, ContentHashAmino, ContentHashSDKType, ContentHash_Graph } from "./types";
-import { Timestamp, TimestampAmino, TimestampSDKType } from "../../../google/protobuf/timestamp";
-import { Long, isSet, fromJsonTimestamp, fromTimestamp } from "../../../helpers";
-import * as _m0 from "protobufjs/minimal";
+import { Timestamp, TimestampSDKType } from "../../../google/protobuf/timestamp";
+import { BinaryReader, BinaryWriter } from "../../../binary";
+import { isSet, fromJsonTimestamp, fromTimestamp } from "../../../helpers";
 /** MsgAnchor is the Msg/Anchor request type. */
 export interface MsgAnchor {
   /**
@@ -11,7 +11,7 @@ export interface MsgAnchor {
    */
   sender: string;
   /** content_hash is the content hash for the data to anchor. */
-  contentHash: ContentHash;
+  contentHash?: ContentHash;
 }
 export interface MsgAnchorProtoMsg {
   typeUrl: "/regen.data.v1.MsgAnchor";
@@ -24,7 +24,7 @@ export interface MsgAnchorAmino {
    * Anchor is not attesting to the veracity of the underlying data. They
    * can simply be an intermediary providing services.
    */
-  sender: string;
+  sender?: string;
   /** content_hash is the content hash for the data to anchor. */
   content_hash?: ContentHashAmino;
 }
@@ -35,14 +35,14 @@ export interface MsgAnchorAminoMsg {
 /** MsgAnchor is the Msg/Anchor request type. */
 export interface MsgAnchorSDKType {
   sender: string;
-  content_hash: ContentHashSDKType;
+  content_hash?: ContentHashSDKType;
 }
 /** MsgAnchor is the Msg/Anchor response type. */
 export interface MsgAnchorResponse {
   /** iri is the IRI of the data that was anchored. */
   iri: string;
   /** timestamp is the time at which the data was anchored. */
-  timestamp: Timestamp;
+  timestamp?: Timestamp;
 }
 export interface MsgAnchorResponseProtoMsg {
   typeUrl: "/regen.data.v1.MsgAnchorResponse";
@@ -51,9 +51,9 @@ export interface MsgAnchorResponseProtoMsg {
 /** MsgAnchor is the Msg/Anchor response type. */
 export interface MsgAnchorResponseAmino {
   /** iri is the IRI of the data that was anchored. */
-  iri: string;
+  iri?: string;
   /** timestamp is the time at which the data was anchored. */
-  timestamp?: TimestampAmino;
+  timestamp?: string;
 }
 export interface MsgAnchorResponseAminoMsg {
   type: "/regen.data.v1.MsgAnchorResponse";
@@ -62,7 +62,7 @@ export interface MsgAnchorResponseAminoMsg {
 /** MsgAnchor is the Msg/Anchor response type. */
 export interface MsgAnchorResponseSDKType {
   iri: string;
-  timestamp: TimestampSDKType;
+  timestamp?: TimestampSDKType;
 }
 /** MsgAttest is the Msg/Attest request type. */
 export interface MsgAttest {
@@ -92,13 +92,13 @@ export interface MsgAttestAmino {
    * veracity of the data referenced by the IRI. The precise meaning of this may
    * vary depending on the underlying data.
    */
-  attestor: string;
+  attestor?: string;
   /**
    * content_hashes are the content hashes for anchored data. Only RDF graph
    * data can be signed as its data model is intended to specifically convey
    * semantic meaning.
    */
-  content_hashes: ContentHash_GraphAmino[];
+  content_hashes?: ContentHash_GraphAmino[];
 }
 export interface MsgAttestAminoMsg {
   type: "regen-ledger/MsgAttest";
@@ -118,7 +118,7 @@ export interface MsgAttestResponse {
    */
   iris: string[];
   /** timestamp is the time at which any new attestations were made. */
-  timestamp: Timestamp;
+  timestamp?: Timestamp;
 }
 export interface MsgAttestResponseProtoMsg {
   typeUrl: "/regen.data.v1.MsgAttestResponse";
@@ -131,9 +131,9 @@ export interface MsgAttestResponseAmino {
    * to the same piece of data, the previous attestation will not be updated and
    * the IRI will not be included in this list.
    */
-  iris: string[];
+  iris?: string[];
   /** timestamp is the time at which any new attestations were made. */
-  timestamp?: TimestampAmino;
+  timestamp?: string;
 }
 export interface MsgAttestResponseAminoMsg {
   type: "/regen.data.v1.MsgAttestResponse";
@@ -142,7 +142,7 @@ export interface MsgAttestResponseAminoMsg {
 /** MsgAttestResponse is the Msg/Attest response type. */
 export interface MsgAttestResponseSDKType {
   iris: string[];
-  timestamp: TimestampSDKType;
+  timestamp?: TimestampSDKType;
 }
 /** MsgDefineResolver is the Msg/DefineResolver request type. */
 export interface MsgDefineResolver {
@@ -174,7 +174,7 @@ export interface MsgDefineResolverAmino {
    * Msg/RegisterResolver. To authorize other accounts to register resolvers,
    * the manager should make use of cosmos.authz.
    */
-  manager: string;
+  manager?: string;
   /**
    * resolver_url is a resolver URL which should refer to an HTTP service
    * which will respond to a GET request with the IRI of a ContentHash
@@ -182,7 +182,7 @@ export interface MsgDefineResolverAmino {
    * should use the HTTP Accept header to negotiate the RDF serialization
    * format.
    */
-  resolver_url: string;
+  resolver_url?: string;
 }
 export interface MsgDefineResolverAminoMsg {
   type: "regen-ledger/MsgDefineResolver";
@@ -199,7 +199,7 @@ export interface MsgDefineResolverResponse {
    * resolver_id is the integer ID of the resolver to be used in
    * MsgRegisterResolver.
    */
-  resolverId: Long;
+  resolverId: bigint;
 }
 export interface MsgDefineResolverResponseProtoMsg {
   typeUrl: "/regen.data.v1.MsgDefineResolverResponse";
@@ -211,7 +211,7 @@ export interface MsgDefineResolverResponseAmino {
    * resolver_id is the integer ID of the resolver to be used in
    * MsgRegisterResolver.
    */
-  resolver_id: string;
+  resolver_id?: string;
 }
 export interface MsgDefineResolverResponseAminoMsg {
   type: "/regen.data.v1.MsgDefineResolverResponse";
@@ -219,7 +219,7 @@ export interface MsgDefineResolverResponseAminoMsg {
 }
 /** MsgDefineResolverResponse is the Msg/DefineResolver response type. */
 export interface MsgDefineResolverResponseSDKType {
-  resolver_id: Long;
+  resolver_id: bigint;
 }
 /** MsgRegisterResolver is the Msg/RegisterResolver request type. */
 export interface MsgRegisterResolver {
@@ -229,7 +229,7 @@ export interface MsgRegisterResolver {
    */
   manager: string;
   /** resolver_id is the ID of a resolver defined with Msg/DefineResolver. */
-  resolverId: Long;
+  resolverId: bigint;
   /**
    * content_hashes is a list of content hashes which the resolver claims to
    * serve.
@@ -246,14 +246,14 @@ export interface MsgRegisterResolverAmino {
    * manager is the address of the resolver manager who registered this
    * resolver with Msg/DefinedResolver.
    */
-  manager: string;
+  manager?: string;
   /** resolver_id is the ID of a resolver defined with Msg/DefineResolver. */
-  resolver_id: string;
+  resolver_id?: string;
   /**
    * content_hashes is a list of content hashes which the resolver claims to
    * serve.
    */
-  content_hashes: ContentHashAmino[];
+  content_hashes?: ContentHashAmino[];
 }
 export interface MsgRegisterResolverAminoMsg {
   type: "regen-ledger/MsgRegisterResolver";
@@ -262,7 +262,7 @@ export interface MsgRegisterResolverAminoMsg {
 /** MsgRegisterResolver is the Msg/RegisterResolver request type. */
 export interface MsgRegisterResolverSDKType {
   manager: string;
-  resolver_id: Long;
+  resolver_id: bigint;
   content_hashes: ContentHashSDKType[];
 }
 /** MsgRegisterResolverResponse is the Msg/RegisterResolver response type. */
@@ -282,11 +282,12 @@ export interface MsgRegisterResolverResponseSDKType {}
 function createBaseMsgAnchor(): MsgAnchor {
   return {
     sender: "",
-    contentHash: ContentHash.fromPartial({})
+    contentHash: undefined
   };
 }
 export const MsgAnchor = {
-  encode(message: MsgAnchor, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  typeUrl: "/regen.data.v1.MsgAnchor",
+  encode(message: MsgAnchor, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.sender !== "") {
       writer.uint32(10).string(message.sender);
     }
@@ -295,8 +296,8 @@ export const MsgAnchor = {
     }
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): MsgAnchor {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): MsgAnchor {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMsgAnchor();
     while (reader.pos < end) {
@@ -334,14 +335,18 @@ export const MsgAnchor = {
     return message;
   },
   fromAmino(object: MsgAnchorAmino): MsgAnchor {
-    return {
-      sender: object.sender,
-      contentHash: object?.content_hash ? ContentHash.fromAmino(object.content_hash) : undefined
-    };
+    const message = createBaseMsgAnchor();
+    if (object.sender !== undefined && object.sender !== null) {
+      message.sender = object.sender;
+    }
+    if (object.content_hash !== undefined && object.content_hash !== null) {
+      message.contentHash = ContentHash.fromAmino(object.content_hash);
+    }
+    return message;
   },
   toAmino(message: MsgAnchor): MsgAnchorAmino {
     const obj: any = {};
-    obj.sender = message.sender;
+    obj.sender = message.sender === "" ? undefined : message.sender;
     obj.content_hash = message.contentHash ? ContentHash.toAmino(message.contentHash) : undefined;
     return obj;
   },
@@ -374,7 +379,8 @@ function createBaseMsgAnchorResponse(): MsgAnchorResponse {
   };
 }
 export const MsgAnchorResponse = {
-  encode(message: MsgAnchorResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  typeUrl: "/regen.data.v1.MsgAnchorResponse",
+  encode(message: MsgAnchorResponse, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.iri !== "") {
       writer.uint32(10).string(message.iri);
     }
@@ -383,8 +389,8 @@ export const MsgAnchorResponse = {
     }
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): MsgAnchorResponse {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): MsgAnchorResponse {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMsgAnchorResponse();
     while (reader.pos < end) {
@@ -422,14 +428,18 @@ export const MsgAnchorResponse = {
     return message;
   },
   fromAmino(object: MsgAnchorResponseAmino): MsgAnchorResponse {
-    return {
-      iri: object.iri,
-      timestamp: object?.timestamp ? Timestamp.fromAmino(object.timestamp) : undefined
-    };
+    const message = createBaseMsgAnchorResponse();
+    if (object.iri !== undefined && object.iri !== null) {
+      message.iri = object.iri;
+    }
+    if (object.timestamp !== undefined && object.timestamp !== null) {
+      message.timestamp = Timestamp.fromAmino(object.timestamp);
+    }
+    return message;
   },
   toAmino(message: MsgAnchorResponse): MsgAnchorResponseAmino {
     const obj: any = {};
-    obj.iri = message.iri;
+    obj.iri = message.iri === "" ? undefined : message.iri;
     obj.timestamp = message.timestamp ? Timestamp.toAmino(message.timestamp) : undefined;
     return obj;
   },
@@ -456,7 +466,8 @@ function createBaseMsgAttest(): MsgAttest {
   };
 }
 export const MsgAttest = {
-  encode(message: MsgAttest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  typeUrl: "/regen.data.v1.MsgAttest",
+  encode(message: MsgAttest, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.attestor !== "") {
       writer.uint32(10).string(message.attestor);
     }
@@ -465,8 +476,8 @@ export const MsgAttest = {
     }
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): MsgAttest {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): MsgAttest {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMsgAttest();
     while (reader.pos < end) {
@@ -508,18 +519,20 @@ export const MsgAttest = {
     return message;
   },
   fromAmino(object: MsgAttestAmino): MsgAttest {
-    return {
-      attestor: object.attestor,
-      contentHashes: Array.isArray(object?.content_hashes) ? object.content_hashes.map((e: any) => ContentHash_Graph.fromAmino(e)) : []
-    };
+    const message = createBaseMsgAttest();
+    if (object.attestor !== undefined && object.attestor !== null) {
+      message.attestor = object.attestor;
+    }
+    message.contentHashes = object.content_hashes?.map(e => ContentHash_Graph.fromAmino(e)) || [];
+    return message;
   },
   toAmino(message: MsgAttest): MsgAttestAmino {
     const obj: any = {};
-    obj.attestor = message.attestor;
+    obj.attestor = message.attestor === "" ? undefined : message.attestor;
     if (message.contentHashes) {
       obj.content_hashes = message.contentHashes.map(e => e ? ContentHash_Graph.toAmino(e) : undefined);
     } else {
-      obj.content_hashes = [];
+      obj.content_hashes = message.contentHashes;
     }
     return obj;
   },
@@ -552,7 +565,8 @@ function createBaseMsgAttestResponse(): MsgAttestResponse {
   };
 }
 export const MsgAttestResponse = {
-  encode(message: MsgAttestResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  typeUrl: "/regen.data.v1.MsgAttestResponse",
+  encode(message: MsgAttestResponse, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     for (const v of message.iris) {
       writer.uint32(10).string(v!);
     }
@@ -561,8 +575,8 @@ export const MsgAttestResponse = {
     }
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): MsgAttestResponse {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): MsgAttestResponse {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMsgAttestResponse();
     while (reader.pos < end) {
@@ -604,17 +618,19 @@ export const MsgAttestResponse = {
     return message;
   },
   fromAmino(object: MsgAttestResponseAmino): MsgAttestResponse {
-    return {
-      iris: Array.isArray(object?.iris) ? object.iris.map((e: any) => e) : [],
-      timestamp: object?.timestamp ? Timestamp.fromAmino(object.timestamp) : undefined
-    };
+    const message = createBaseMsgAttestResponse();
+    message.iris = object.iris?.map(e => e) || [];
+    if (object.timestamp !== undefined && object.timestamp !== null) {
+      message.timestamp = Timestamp.fromAmino(object.timestamp);
+    }
+    return message;
   },
   toAmino(message: MsgAttestResponse): MsgAttestResponseAmino {
     const obj: any = {};
     if (message.iris) {
       obj.iris = message.iris.map(e => e);
     } else {
-      obj.iris = [];
+      obj.iris = message.iris;
     }
     obj.timestamp = message.timestamp ? Timestamp.toAmino(message.timestamp) : undefined;
     return obj;
@@ -642,7 +658,8 @@ function createBaseMsgDefineResolver(): MsgDefineResolver {
   };
 }
 export const MsgDefineResolver = {
-  encode(message: MsgDefineResolver, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  typeUrl: "/regen.data.v1.MsgDefineResolver",
+  encode(message: MsgDefineResolver, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.manager !== "") {
       writer.uint32(10).string(message.manager);
     }
@@ -651,8 +668,8 @@ export const MsgDefineResolver = {
     }
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): MsgDefineResolver {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): MsgDefineResolver {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMsgDefineResolver();
     while (reader.pos < end) {
@@ -690,15 +707,19 @@ export const MsgDefineResolver = {
     return message;
   },
   fromAmino(object: MsgDefineResolverAmino): MsgDefineResolver {
-    return {
-      manager: object.manager,
-      resolverUrl: object.resolver_url
-    };
+    const message = createBaseMsgDefineResolver();
+    if (object.manager !== undefined && object.manager !== null) {
+      message.manager = object.manager;
+    }
+    if (object.resolver_url !== undefined && object.resolver_url !== null) {
+      message.resolverUrl = object.resolver_url;
+    }
+    return message;
   },
   toAmino(message: MsgDefineResolver): MsgDefineResolverAmino {
     const obj: any = {};
-    obj.manager = message.manager;
-    obj.resolver_url = message.resolverUrl;
+    obj.manager = message.manager === "" ? undefined : message.manager;
+    obj.resolver_url = message.resolverUrl === "" ? undefined : message.resolverUrl;
     return obj;
   },
   fromAminoMsg(object: MsgDefineResolverAminoMsg): MsgDefineResolver {
@@ -725,25 +746,26 @@ export const MsgDefineResolver = {
 };
 function createBaseMsgDefineResolverResponse(): MsgDefineResolverResponse {
   return {
-    resolverId: Long.UZERO
+    resolverId: BigInt(0)
   };
 }
 export const MsgDefineResolverResponse = {
-  encode(message: MsgDefineResolverResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
-    if (!message.resolverId.isZero()) {
+  typeUrl: "/regen.data.v1.MsgDefineResolverResponse",
+  encode(message: MsgDefineResolverResponse, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
+    if (message.resolverId !== BigInt(0)) {
       writer.uint32(8).uint64(message.resolverId);
     }
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): MsgDefineResolverResponse {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): MsgDefineResolverResponse {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMsgDefineResolverResponse();
     while (reader.pos < end) {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          message.resolverId = (reader.uint64() as Long);
+          message.resolverId = reader.uint64();
           break;
         default:
           reader.skipType(tag & 7);
@@ -754,27 +776,29 @@ export const MsgDefineResolverResponse = {
   },
   fromJSON(object: any): MsgDefineResolverResponse {
     return {
-      resolverId: isSet(object.resolverId) ? Long.fromValue(object.resolverId) : Long.UZERO
+      resolverId: isSet(object.resolverId) ? BigInt(object.resolverId.toString()) : BigInt(0)
     };
   },
   toJSON(message: MsgDefineResolverResponse): unknown {
     const obj: any = {};
-    message.resolverId !== undefined && (obj.resolverId = (message.resolverId || Long.UZERO).toString());
+    message.resolverId !== undefined && (obj.resolverId = (message.resolverId || BigInt(0)).toString());
     return obj;
   },
   fromPartial(object: Partial<MsgDefineResolverResponse>): MsgDefineResolverResponse {
     const message = createBaseMsgDefineResolverResponse();
-    message.resolverId = object.resolverId !== undefined && object.resolverId !== null ? Long.fromValue(object.resolverId) : Long.UZERO;
+    message.resolverId = object.resolverId !== undefined && object.resolverId !== null ? BigInt(object.resolverId.toString()) : BigInt(0);
     return message;
   },
   fromAmino(object: MsgDefineResolverResponseAmino): MsgDefineResolverResponse {
-    return {
-      resolverId: Long.fromString(object.resolver_id)
-    };
+    const message = createBaseMsgDefineResolverResponse();
+    if (object.resolver_id !== undefined && object.resolver_id !== null) {
+      message.resolverId = BigInt(object.resolver_id);
+    }
+    return message;
   },
   toAmino(message: MsgDefineResolverResponse): MsgDefineResolverResponseAmino {
     const obj: any = {};
-    obj.resolver_id = message.resolverId ? message.resolverId.toString() : undefined;
+    obj.resolver_id = message.resolverId !== BigInt(0) ? message.resolverId.toString() : undefined;
     return obj;
   },
   fromAminoMsg(object: MsgDefineResolverResponseAminoMsg): MsgDefineResolverResponse {
@@ -796,16 +820,17 @@ export const MsgDefineResolverResponse = {
 function createBaseMsgRegisterResolver(): MsgRegisterResolver {
   return {
     manager: "",
-    resolverId: Long.UZERO,
+    resolverId: BigInt(0),
     contentHashes: []
   };
 }
 export const MsgRegisterResolver = {
-  encode(message: MsgRegisterResolver, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  typeUrl: "/regen.data.v1.MsgRegisterResolver",
+  encode(message: MsgRegisterResolver, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.manager !== "") {
       writer.uint32(10).string(message.manager);
     }
-    if (!message.resolverId.isZero()) {
+    if (message.resolverId !== BigInt(0)) {
       writer.uint32(16).uint64(message.resolverId);
     }
     for (const v of message.contentHashes) {
@@ -813,8 +838,8 @@ export const MsgRegisterResolver = {
     }
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): MsgRegisterResolver {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): MsgRegisterResolver {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMsgRegisterResolver();
     while (reader.pos < end) {
@@ -824,7 +849,7 @@ export const MsgRegisterResolver = {
           message.manager = reader.string();
           break;
         case 2:
-          message.resolverId = (reader.uint64() as Long);
+          message.resolverId = reader.uint64();
           break;
         case 3:
           message.contentHashes.push(ContentHash.decode(reader, reader.uint32()));
@@ -839,14 +864,14 @@ export const MsgRegisterResolver = {
   fromJSON(object: any): MsgRegisterResolver {
     return {
       manager: isSet(object.manager) ? String(object.manager) : "",
-      resolverId: isSet(object.resolverId) ? Long.fromValue(object.resolverId) : Long.UZERO,
+      resolverId: isSet(object.resolverId) ? BigInt(object.resolverId.toString()) : BigInt(0),
       contentHashes: Array.isArray(object?.contentHashes) ? object.contentHashes.map((e: any) => ContentHash.fromJSON(e)) : []
     };
   },
   toJSON(message: MsgRegisterResolver): unknown {
     const obj: any = {};
     message.manager !== undefined && (obj.manager = message.manager);
-    message.resolverId !== undefined && (obj.resolverId = (message.resolverId || Long.UZERO).toString());
+    message.resolverId !== undefined && (obj.resolverId = (message.resolverId || BigInt(0)).toString());
     if (message.contentHashes) {
       obj.contentHashes = message.contentHashes.map(e => e ? ContentHash.toJSON(e) : undefined);
     } else {
@@ -857,25 +882,29 @@ export const MsgRegisterResolver = {
   fromPartial(object: Partial<MsgRegisterResolver>): MsgRegisterResolver {
     const message = createBaseMsgRegisterResolver();
     message.manager = object.manager ?? "";
-    message.resolverId = object.resolverId !== undefined && object.resolverId !== null ? Long.fromValue(object.resolverId) : Long.UZERO;
+    message.resolverId = object.resolverId !== undefined && object.resolverId !== null ? BigInt(object.resolverId.toString()) : BigInt(0);
     message.contentHashes = object.contentHashes?.map(e => ContentHash.fromPartial(e)) || [];
     return message;
   },
   fromAmino(object: MsgRegisterResolverAmino): MsgRegisterResolver {
-    return {
-      manager: object.manager,
-      resolverId: Long.fromString(object.resolver_id),
-      contentHashes: Array.isArray(object?.content_hashes) ? object.content_hashes.map((e: any) => ContentHash.fromAmino(e)) : []
-    };
+    const message = createBaseMsgRegisterResolver();
+    if (object.manager !== undefined && object.manager !== null) {
+      message.manager = object.manager;
+    }
+    if (object.resolver_id !== undefined && object.resolver_id !== null) {
+      message.resolverId = BigInt(object.resolver_id);
+    }
+    message.contentHashes = object.content_hashes?.map(e => ContentHash.fromAmino(e)) || [];
+    return message;
   },
   toAmino(message: MsgRegisterResolver): MsgRegisterResolverAmino {
     const obj: any = {};
-    obj.manager = message.manager;
-    obj.resolver_id = message.resolverId ? message.resolverId.toString() : undefined;
+    obj.manager = message.manager === "" ? undefined : message.manager;
+    obj.resolver_id = message.resolverId !== BigInt(0) ? message.resolverId.toString() : undefined;
     if (message.contentHashes) {
       obj.content_hashes = message.contentHashes.map(e => e ? ContentHash.toAmino(e) : undefined);
     } else {
-      obj.content_hashes = [];
+      obj.content_hashes = message.contentHashes;
     }
     return obj;
   },
@@ -905,11 +934,12 @@ function createBaseMsgRegisterResolverResponse(): MsgRegisterResolverResponse {
   return {};
 }
 export const MsgRegisterResolverResponse = {
-  encode(_: MsgRegisterResolverResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  typeUrl: "/regen.data.v1.MsgRegisterResolverResponse",
+  encode(_: MsgRegisterResolverResponse, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): MsgRegisterResolverResponse {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): MsgRegisterResolverResponse {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMsgRegisterResolverResponse();
     while (reader.pos < end) {
@@ -934,7 +964,8 @@ export const MsgRegisterResolverResponse = {
     return message;
   },
   fromAmino(_: MsgRegisterResolverResponseAmino): MsgRegisterResolverResponse {
-    return {};
+    const message = createBaseMsgRegisterResolverResponse();
+    return message;
   },
   toAmino(_: MsgRegisterResolverResponse): MsgRegisterResolverResponseAmino {
     const obj: any = {};

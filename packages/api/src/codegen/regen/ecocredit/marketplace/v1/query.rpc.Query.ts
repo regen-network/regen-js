@@ -1,5 +1,5 @@
 import { Rpc } from "../../../../helpers";
-import * as _m0 from "protobufjs/minimal";
+import { BinaryReader } from "../../../../binary";
 import { QueryClient, createProtobufRpcClient } from "@cosmjs/stargate";
 import { QuerySellOrderRequest, QuerySellOrderResponse, QuerySellOrdersRequest, QuerySellOrdersResponse, QuerySellOrdersByBatchRequest, QuerySellOrdersByBatchResponse, QuerySellOrdersBySellerRequest, QuerySellOrdersBySellerResponse, QueryAllowedDenomsRequest, QueryAllowedDenomsResponse } from "./query";
 /** Msg is the regen.ecocredit.marketplace.v1 Query service. */
@@ -37,31 +37,31 @@ export class QueryClientImpl implements Query {
   sellOrder(request: QuerySellOrderRequest): Promise<QuerySellOrderResponse> {
     const data = QuerySellOrderRequest.encode(request).finish();
     const promise = this.rpc.request("regen.ecocredit.marketplace.v1.Query", "SellOrder", data);
-    return promise.then(data => QuerySellOrderResponse.decode(new _m0.Reader(data)));
+    return promise.then(data => QuerySellOrderResponse.decode(new BinaryReader(data)));
   }
   sellOrders(request: QuerySellOrdersRequest = {
     pagination: undefined
   }): Promise<QuerySellOrdersResponse> {
     const data = QuerySellOrdersRequest.encode(request).finish();
     const promise = this.rpc.request("regen.ecocredit.marketplace.v1.Query", "SellOrders", data);
-    return promise.then(data => QuerySellOrdersResponse.decode(new _m0.Reader(data)));
+    return promise.then(data => QuerySellOrdersResponse.decode(new BinaryReader(data)));
   }
   sellOrdersByBatch(request: QuerySellOrdersByBatchRequest): Promise<QuerySellOrdersByBatchResponse> {
     const data = QuerySellOrdersByBatchRequest.encode(request).finish();
     const promise = this.rpc.request("regen.ecocredit.marketplace.v1.Query", "SellOrdersByBatch", data);
-    return promise.then(data => QuerySellOrdersByBatchResponse.decode(new _m0.Reader(data)));
+    return promise.then(data => QuerySellOrdersByBatchResponse.decode(new BinaryReader(data)));
   }
   sellOrdersBySeller(request: QuerySellOrdersBySellerRequest): Promise<QuerySellOrdersBySellerResponse> {
     const data = QuerySellOrdersBySellerRequest.encode(request).finish();
     const promise = this.rpc.request("regen.ecocredit.marketplace.v1.Query", "SellOrdersBySeller", data);
-    return promise.then(data => QuerySellOrdersBySellerResponse.decode(new _m0.Reader(data)));
+    return promise.then(data => QuerySellOrdersBySellerResponse.decode(new BinaryReader(data)));
   }
   allowedDenoms(request: QueryAllowedDenomsRequest = {
     pagination: undefined
   }): Promise<QueryAllowedDenomsResponse> {
     const data = QueryAllowedDenomsRequest.encode(request).finish();
     const promise = this.rpc.request("regen.ecocredit.marketplace.v1.Query", "AllowedDenoms", data);
-    return promise.then(data => QueryAllowedDenomsResponse.decode(new _m0.Reader(data)));
+    return promise.then(data => QueryAllowedDenomsResponse.decode(new BinaryReader(data)));
   }
 }
 export const createRpcQueryExtension = (base: QueryClient) => {

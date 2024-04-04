@@ -1,5 +1,5 @@
 import { Rpc } from "../../../helpers";
-import * as _m0 from "protobufjs/minimal";
+import { BinaryReader } from "../../../binary";
 import { QueryClient, createProtobufRpcClient } from "@cosmjs/stargate";
 import { QueryInterchainAccountRequest, QueryInterchainAccountResponse } from "./query";
 /** Query defines the gRPC querier service. */
@@ -19,7 +19,7 @@ export class QueryClientImpl implements Query {
   interchainAccount(request: QueryInterchainAccountRequest): Promise<QueryInterchainAccountResponse> {
     const data = QueryInterchainAccountRequest.encode(request).finish();
     const promise = this.rpc.request("regen.intertx.v1.Query", "InterchainAccount", data);
-    return promise.then(data => QueryInterchainAccountResponse.decode(new _m0.Reader(data)));
+    return promise.then(data => QueryInterchainAccountResponse.decode(new BinaryReader(data)));
   }
 }
 export const createRpcQueryExtension = (base: QueryClient) => {

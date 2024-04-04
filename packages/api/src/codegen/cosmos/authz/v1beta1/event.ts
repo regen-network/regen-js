@@ -1,4 +1,4 @@
-import * as _m0 from "protobufjs/minimal";
+import { BinaryReader, BinaryWriter } from "../../../binary";
 import { isSet } from "../../../helpers";
 /** EventGrant is emitted on Msg/Grant */
 export interface EventGrant {
@@ -16,11 +16,11 @@ export interface EventGrantProtoMsg {
 /** EventGrant is emitted on Msg/Grant */
 export interface EventGrantAmino {
   /** Msg type URL for which an autorization is granted */
-  msg_type_url: string;
+  msg_type_url?: string;
   /** Granter account address */
-  granter: string;
+  granter?: string;
   /** Grantee account address */
-  grantee: string;
+  grantee?: string;
 }
 export interface EventGrantAminoMsg {
   type: "cosmos-sdk/EventGrant";
@@ -48,11 +48,11 @@ export interface EventRevokeProtoMsg {
 /** EventRevoke is emitted on Msg/Revoke */
 export interface EventRevokeAmino {
   /** Msg type URL for which an autorization is revoked */
-  msg_type_url: string;
+  msg_type_url?: string;
   /** Granter account address */
-  granter: string;
+  granter?: string;
   /** Grantee account address */
-  grantee: string;
+  grantee?: string;
 }
 export interface EventRevokeAminoMsg {
   type: "cosmos-sdk/EventRevoke";
@@ -72,7 +72,8 @@ function createBaseEventGrant(): EventGrant {
   };
 }
 export const EventGrant = {
-  encode(message: EventGrant, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  typeUrl: "/cosmos.authz.v1beta1.EventGrant",
+  encode(message: EventGrant, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.msgTypeUrl !== "") {
       writer.uint32(18).string(message.msgTypeUrl);
     }
@@ -84,8 +85,8 @@ export const EventGrant = {
     }
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): EventGrant {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): EventGrant {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseEventGrant();
     while (reader.pos < end) {
@@ -129,17 +130,23 @@ export const EventGrant = {
     return message;
   },
   fromAmino(object: EventGrantAmino): EventGrant {
-    return {
-      msgTypeUrl: object.msg_type_url,
-      granter: object.granter,
-      grantee: object.grantee
-    };
+    const message = createBaseEventGrant();
+    if (object.msg_type_url !== undefined && object.msg_type_url !== null) {
+      message.msgTypeUrl = object.msg_type_url;
+    }
+    if (object.granter !== undefined && object.granter !== null) {
+      message.granter = object.granter;
+    }
+    if (object.grantee !== undefined && object.grantee !== null) {
+      message.grantee = object.grantee;
+    }
+    return message;
   },
   toAmino(message: EventGrant): EventGrantAmino {
     const obj: any = {};
-    obj.msg_type_url = message.msgTypeUrl;
-    obj.granter = message.granter;
-    obj.grantee = message.grantee;
+    obj.msg_type_url = message.msgTypeUrl === "" ? undefined : message.msgTypeUrl;
+    obj.granter = message.granter === "" ? undefined : message.granter;
+    obj.grantee = message.grantee === "" ? undefined : message.grantee;
     return obj;
   },
   fromAminoMsg(object: EventGrantAminoMsg): EventGrant {
@@ -172,7 +179,8 @@ function createBaseEventRevoke(): EventRevoke {
   };
 }
 export const EventRevoke = {
-  encode(message: EventRevoke, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  typeUrl: "/cosmos.authz.v1beta1.EventRevoke",
+  encode(message: EventRevoke, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.msgTypeUrl !== "") {
       writer.uint32(18).string(message.msgTypeUrl);
     }
@@ -184,8 +192,8 @@ export const EventRevoke = {
     }
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): EventRevoke {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): EventRevoke {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseEventRevoke();
     while (reader.pos < end) {
@@ -229,17 +237,23 @@ export const EventRevoke = {
     return message;
   },
   fromAmino(object: EventRevokeAmino): EventRevoke {
-    return {
-      msgTypeUrl: object.msg_type_url,
-      granter: object.granter,
-      grantee: object.grantee
-    };
+    const message = createBaseEventRevoke();
+    if (object.msg_type_url !== undefined && object.msg_type_url !== null) {
+      message.msgTypeUrl = object.msg_type_url;
+    }
+    if (object.granter !== undefined && object.granter !== null) {
+      message.granter = object.granter;
+    }
+    if (object.grantee !== undefined && object.grantee !== null) {
+      message.grantee = object.grantee;
+    }
+    return message;
   },
   toAmino(message: EventRevoke): EventRevokeAmino {
     const obj: any = {};
-    obj.msg_type_url = message.msgTypeUrl;
-    obj.granter = message.granter;
-    obj.grantee = message.grantee;
+    obj.msg_type_url = message.msgTypeUrl === "" ? undefined : message.msgTypeUrl;
+    obj.granter = message.granter === "" ? undefined : message.granter;
+    obj.grantee = message.grantee === "" ? undefined : message.grantee;
     return obj;
   },
   fromAminoMsg(object: EventRevokeAminoMsg): EventRevoke {

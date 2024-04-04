@@ -1,24 +1,24 @@
-import { Timestamp, TimestampAmino, TimestampSDKType } from "../../../../google/protobuf/timestamp";
-import { Long, isSet, bytesFromBase64, fromJsonTimestamp, base64FromBytes, fromTimestamp } from "../../../../helpers";
-import * as _m0 from "protobufjs/minimal";
+import { Timestamp, TimestampSDKType } from "../../../../google/protobuf/timestamp";
+import { BinaryReader, BinaryWriter } from "../../../../binary";
+import { isSet, bytesFromBase64, fromJsonTimestamp, base64FromBytes, fromTimestamp } from "../../../../helpers";
 /** SellOrder represents the information for a sell order. */
 export interface SellOrder {
   /** id is the unique ID of sell order. */
-  id: Long;
+  id: bigint;
   /** seller is the address of the account that is selling credits. */
   seller: Uint8Array;
   /**
    * batch_key is the table row identifier of the credit batch used internally
    * for efficient lookups. This links a sell order to a credit batch.
    */
-  batchKey: Long;
+  batchKey: bigint;
   /** quantity is the decimal quantity of credits being sold. */
   quantity: string;
   /**
    * market_id is the market in which this sell order exists and specifies
    * the bank_denom that ask_amount corresponds to forming the ask_price.
    */
-  marketId: Long;
+  marketId: bigint;
   /**
    * ask_amount is the integer amount (encoded as a string) that the seller is
    * asking for each credit unit of the batch. Each credit unit of the batch
@@ -36,7 +36,7 @@ export interface SellOrder {
    * expiration is an optional timestamp when the sell order expires. When the
    * expiration time is reached, the sell order is removed from state.
    */
-  expiration: Timestamp;
+  expiration?: Timestamp;
   /**
    * maker indicates that this is a maker order, meaning that when it hit
    * the order book, there were no matching buy orders.
@@ -50,44 +50,44 @@ export interface SellOrderProtoMsg {
 /** SellOrder represents the information for a sell order. */
 export interface SellOrderAmino {
   /** id is the unique ID of sell order. */
-  id: string;
+  id?: string;
   /** seller is the address of the account that is selling credits. */
-  seller: Uint8Array;
+  seller?: string;
   /**
    * batch_key is the table row identifier of the credit batch used internally
    * for efficient lookups. This links a sell order to a credit batch.
    */
-  batch_key: string;
+  batch_key?: string;
   /** quantity is the decimal quantity of credits being sold. */
-  quantity: string;
+  quantity?: string;
   /**
    * market_id is the market in which this sell order exists and specifies
    * the bank_denom that ask_amount corresponds to forming the ask_price.
    */
-  market_id: string;
+  market_id?: string;
   /**
    * ask_amount is the integer amount (encoded as a string) that the seller is
    * asking for each credit unit of the batch. Each credit unit of the batch
    * will be sold for at least the ask_amount. The ask_amount corresponds to the
    * Market.denom to form the ask price.
    */
-  ask_amount: string;
+  ask_amount?: string;
   /**
    * disable_auto_retire disables auto-retirement of credits which allows a
    * buyer to disable auto-retirement in their buy order enabling them to
    * resell the credits to another buyer.
    */
-  disable_auto_retire: boolean;
+  disable_auto_retire?: boolean;
   /**
    * expiration is an optional timestamp when the sell order expires. When the
    * expiration time is reached, the sell order is removed from state.
    */
-  expiration?: TimestampAmino;
+  expiration?: string;
   /**
    * maker indicates that this is a maker order, meaning that when it hit
    * the order book, there were no matching buy orders.
    */
-  maker: boolean;
+  maker?: boolean;
 }
 export interface SellOrderAminoMsg {
   type: "/regen.ecocredit.marketplace.v1.SellOrder";
@@ -95,14 +95,14 @@ export interface SellOrderAminoMsg {
 }
 /** SellOrder represents the information for a sell order. */
 export interface SellOrderSDKType {
-  id: Long;
+  id: bigint;
   seller: Uint8Array;
-  batch_key: Long;
+  batch_key: bigint;
   quantity: string;
-  market_id: Long;
+  market_id: bigint;
   ask_amount: string;
   disable_auto_retire: boolean;
-  expiration: TimestampSDKType;
+  expiration?: TimestampSDKType;
   maker: boolean;
 }
 /** AllowedDenom represents the information for an allowed ask/bid denom. */
@@ -128,18 +128,18 @@ export interface AllowedDenomProtoMsg {
 /** AllowedDenom represents the information for an allowed ask/bid denom. */
 export interface AllowedDenomAmino {
   /** denom is the bank denom to allow (ex. ibc/GLKHDSG423SGS) */
-  bank_denom: string;
+  bank_denom?: string;
   /**
    * display_denom is the denom to display to the user and is informational.
    * Because the denom is likely an IBC denom, this should be chosen by
    * governance to represent the consensus trusted name of the denom.
    */
-  display_denom: string;
+  display_denom?: string;
   /**
    * exponent is the exponent that relates the denom to the display_denom and is
    * informational
    */
-  exponent: number;
+  exponent?: number;
 }
 export interface AllowedDenomAminoMsg {
   type: "/regen.ecocredit.marketplace.v1.AllowedDenom";
@@ -164,7 +164,7 @@ export interface AllowedDenomSDKType {
  */
 export interface Market {
   /** id is the unique ID of the market. */
-  id: Long;
+  id: bigint;
   /** credit_type_abbrev is the abbreviation of the credit type. */
   creditTypeAbbrev: string;
   /** bank_denom is an allowed bank denom. */
@@ -215,11 +215,11 @@ export interface MarketProtoMsg {
  */
 export interface MarketAmino {
   /** id is the unique ID of the market. */
-  id: string;
+  id?: string;
   /** credit_type_abbrev is the abbreviation of the credit type. */
-  credit_type_abbrev: string;
+  credit_type_abbrev?: string;
   /** bank_denom is an allowed bank denom. */
-  bank_denom: string;
+  bank_denom?: string;
   /**
    * precision_modifier is an optional modifier used to convert arbitrary
    * precision integer bank amounts to uint32 values used for sorting in the
@@ -247,7 +247,7 @@ export interface MarketAmino {
    * will need to adjust precision_modifier to allow for higher prices in
    * exchange for less precision at the lower end.
    */
-  precision_modifier: number;
+  precision_modifier?: number;
 }
 export interface MarketAminoMsg {
   type: "/regen.ecocredit.marketplace.v1.Market";
@@ -265,18 +265,18 @@ export interface MarketAminoMsg {
  * with care.
  */
 export interface MarketSDKType {
-  id: Long;
+  id: bigint;
   credit_type_abbrev: string;
   bank_denom: string;
   precision_modifier: number;
 }
 function createBaseSellOrder(): SellOrder {
   return {
-    id: Long.UZERO,
+    id: BigInt(0),
     seller: new Uint8Array(),
-    batchKey: Long.UZERO,
+    batchKey: BigInt(0),
     quantity: "",
-    marketId: Long.UZERO,
+    marketId: BigInt(0),
     askAmount: "",
     disableAutoRetire: false,
     expiration: undefined,
@@ -284,20 +284,21 @@ function createBaseSellOrder(): SellOrder {
   };
 }
 export const SellOrder = {
-  encode(message: SellOrder, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
-    if (!message.id.isZero()) {
+  typeUrl: "/regen.ecocredit.marketplace.v1.SellOrder",
+  encode(message: SellOrder, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
+    if (message.id !== BigInt(0)) {
       writer.uint32(8).uint64(message.id);
     }
     if (message.seller.length !== 0) {
       writer.uint32(18).bytes(message.seller);
     }
-    if (!message.batchKey.isZero()) {
+    if (message.batchKey !== BigInt(0)) {
       writer.uint32(24).uint64(message.batchKey);
     }
     if (message.quantity !== "") {
       writer.uint32(34).string(message.quantity);
     }
-    if (!message.marketId.isZero()) {
+    if (message.marketId !== BigInt(0)) {
       writer.uint32(40).uint64(message.marketId);
     }
     if (message.askAmount !== "") {
@@ -314,27 +315,27 @@ export const SellOrder = {
     }
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): SellOrder {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): SellOrder {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseSellOrder();
     while (reader.pos < end) {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          message.id = (reader.uint64() as Long);
+          message.id = reader.uint64();
           break;
         case 2:
           message.seller = reader.bytes();
           break;
         case 3:
-          message.batchKey = (reader.uint64() as Long);
+          message.batchKey = reader.uint64();
           break;
         case 4:
           message.quantity = reader.string();
           break;
         case 5:
-          message.marketId = (reader.uint64() as Long);
+          message.marketId = reader.uint64();
           break;
         case 6:
           message.askAmount = reader.string();
@@ -357,11 +358,11 @@ export const SellOrder = {
   },
   fromJSON(object: any): SellOrder {
     return {
-      id: isSet(object.id) ? Long.fromValue(object.id) : Long.UZERO,
+      id: isSet(object.id) ? BigInt(object.id.toString()) : BigInt(0),
       seller: isSet(object.seller) ? bytesFromBase64(object.seller) : new Uint8Array(),
-      batchKey: isSet(object.batchKey) ? Long.fromValue(object.batchKey) : Long.UZERO,
+      batchKey: isSet(object.batchKey) ? BigInt(object.batchKey.toString()) : BigInt(0),
       quantity: isSet(object.quantity) ? String(object.quantity) : "",
-      marketId: isSet(object.marketId) ? Long.fromValue(object.marketId) : Long.UZERO,
+      marketId: isSet(object.marketId) ? BigInt(object.marketId.toString()) : BigInt(0),
       askAmount: isSet(object.askAmount) ? String(object.askAmount) : "",
       disableAutoRetire: isSet(object.disableAutoRetire) ? Boolean(object.disableAutoRetire) : false,
       expiration: isSet(object.expiration) ? fromJsonTimestamp(object.expiration) : undefined,
@@ -370,11 +371,11 @@ export const SellOrder = {
   },
   toJSON(message: SellOrder): unknown {
     const obj: any = {};
-    message.id !== undefined && (obj.id = (message.id || Long.UZERO).toString());
+    message.id !== undefined && (obj.id = (message.id || BigInt(0)).toString());
     message.seller !== undefined && (obj.seller = base64FromBytes(message.seller !== undefined ? message.seller : new Uint8Array()));
-    message.batchKey !== undefined && (obj.batchKey = (message.batchKey || Long.UZERO).toString());
+    message.batchKey !== undefined && (obj.batchKey = (message.batchKey || BigInt(0)).toString());
     message.quantity !== undefined && (obj.quantity = message.quantity);
-    message.marketId !== undefined && (obj.marketId = (message.marketId || Long.UZERO).toString());
+    message.marketId !== undefined && (obj.marketId = (message.marketId || BigInt(0)).toString());
     message.askAmount !== undefined && (obj.askAmount = message.askAmount);
     message.disableAutoRetire !== undefined && (obj.disableAutoRetire = message.disableAutoRetire);
     message.expiration !== undefined && (obj.expiration = fromTimestamp(message.expiration).toISOString());
@@ -383,11 +384,11 @@ export const SellOrder = {
   },
   fromPartial(object: Partial<SellOrder>): SellOrder {
     const message = createBaseSellOrder();
-    message.id = object.id !== undefined && object.id !== null ? Long.fromValue(object.id) : Long.UZERO;
+    message.id = object.id !== undefined && object.id !== null ? BigInt(object.id.toString()) : BigInt(0);
     message.seller = object.seller ?? new Uint8Array();
-    message.batchKey = object.batchKey !== undefined && object.batchKey !== null ? Long.fromValue(object.batchKey) : Long.UZERO;
+    message.batchKey = object.batchKey !== undefined && object.batchKey !== null ? BigInt(object.batchKey.toString()) : BigInt(0);
     message.quantity = object.quantity ?? "";
-    message.marketId = object.marketId !== undefined && object.marketId !== null ? Long.fromValue(object.marketId) : Long.UZERO;
+    message.marketId = object.marketId !== undefined && object.marketId !== null ? BigInt(object.marketId.toString()) : BigInt(0);
     message.askAmount = object.askAmount ?? "";
     message.disableAutoRetire = object.disableAutoRetire ?? false;
     message.expiration = object.expiration !== undefined && object.expiration !== null ? Timestamp.fromPartial(object.expiration) : undefined;
@@ -395,29 +396,47 @@ export const SellOrder = {
     return message;
   },
   fromAmino(object: SellOrderAmino): SellOrder {
-    return {
-      id: Long.fromString(object.id),
-      seller: object.seller,
-      batchKey: Long.fromString(object.batch_key),
-      quantity: object.quantity,
-      marketId: Long.fromString(object.market_id),
-      askAmount: object.ask_amount,
-      disableAutoRetire: object.disable_auto_retire,
-      expiration: object?.expiration ? Timestamp.fromAmino(object.expiration) : undefined,
-      maker: object.maker
-    };
+    const message = createBaseSellOrder();
+    if (object.id !== undefined && object.id !== null) {
+      message.id = BigInt(object.id);
+    }
+    if (object.seller !== undefined && object.seller !== null) {
+      message.seller = bytesFromBase64(object.seller);
+    }
+    if (object.batch_key !== undefined && object.batch_key !== null) {
+      message.batchKey = BigInt(object.batch_key);
+    }
+    if (object.quantity !== undefined && object.quantity !== null) {
+      message.quantity = object.quantity;
+    }
+    if (object.market_id !== undefined && object.market_id !== null) {
+      message.marketId = BigInt(object.market_id);
+    }
+    if (object.ask_amount !== undefined && object.ask_amount !== null) {
+      message.askAmount = object.ask_amount;
+    }
+    if (object.disable_auto_retire !== undefined && object.disable_auto_retire !== null) {
+      message.disableAutoRetire = object.disable_auto_retire;
+    }
+    if (object.expiration !== undefined && object.expiration !== null) {
+      message.expiration = Timestamp.fromAmino(object.expiration);
+    }
+    if (object.maker !== undefined && object.maker !== null) {
+      message.maker = object.maker;
+    }
+    return message;
   },
   toAmino(message: SellOrder): SellOrderAmino {
     const obj: any = {};
-    obj.id = message.id ? message.id.toString() : undefined;
-    obj.seller = message.seller;
-    obj.batch_key = message.batchKey ? message.batchKey.toString() : undefined;
-    obj.quantity = message.quantity;
-    obj.market_id = message.marketId ? message.marketId.toString() : undefined;
-    obj.ask_amount = message.askAmount;
-    obj.disable_auto_retire = message.disableAutoRetire;
+    obj.id = message.id !== BigInt(0) ? message.id.toString() : undefined;
+    obj.seller = message.seller ? base64FromBytes(message.seller) : undefined;
+    obj.batch_key = message.batchKey !== BigInt(0) ? message.batchKey.toString() : undefined;
+    obj.quantity = message.quantity === "" ? undefined : message.quantity;
+    obj.market_id = message.marketId !== BigInt(0) ? message.marketId.toString() : undefined;
+    obj.ask_amount = message.askAmount === "" ? undefined : message.askAmount;
+    obj.disable_auto_retire = message.disableAutoRetire === false ? undefined : message.disableAutoRetire;
     obj.expiration = message.expiration ? Timestamp.toAmino(message.expiration) : undefined;
-    obj.maker = message.maker;
+    obj.maker = message.maker === false ? undefined : message.maker;
     return obj;
   },
   fromAminoMsg(object: SellOrderAminoMsg): SellOrder {
@@ -444,7 +463,8 @@ function createBaseAllowedDenom(): AllowedDenom {
   };
 }
 export const AllowedDenom = {
-  encode(message: AllowedDenom, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  typeUrl: "/regen.ecocredit.marketplace.v1.AllowedDenom",
+  encode(message: AllowedDenom, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.bankDenom !== "") {
       writer.uint32(10).string(message.bankDenom);
     }
@@ -456,8 +476,8 @@ export const AllowedDenom = {
     }
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): AllowedDenom {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): AllowedDenom {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseAllowedDenom();
     while (reader.pos < end) {
@@ -501,17 +521,23 @@ export const AllowedDenom = {
     return message;
   },
   fromAmino(object: AllowedDenomAmino): AllowedDenom {
-    return {
-      bankDenom: object.bank_denom,
-      displayDenom: object.display_denom,
-      exponent: object.exponent
-    };
+    const message = createBaseAllowedDenom();
+    if (object.bank_denom !== undefined && object.bank_denom !== null) {
+      message.bankDenom = object.bank_denom;
+    }
+    if (object.display_denom !== undefined && object.display_denom !== null) {
+      message.displayDenom = object.display_denom;
+    }
+    if (object.exponent !== undefined && object.exponent !== null) {
+      message.exponent = object.exponent;
+    }
+    return message;
   },
   toAmino(message: AllowedDenom): AllowedDenomAmino {
     const obj: any = {};
-    obj.bank_denom = message.bankDenom;
-    obj.display_denom = message.displayDenom;
-    obj.exponent = message.exponent;
+    obj.bank_denom = message.bankDenom === "" ? undefined : message.bankDenom;
+    obj.display_denom = message.displayDenom === "" ? undefined : message.displayDenom;
+    obj.exponent = message.exponent === 0 ? undefined : message.exponent;
     return obj;
   },
   fromAminoMsg(object: AllowedDenomAminoMsg): AllowedDenom {
@@ -532,15 +558,16 @@ export const AllowedDenom = {
 };
 function createBaseMarket(): Market {
   return {
-    id: Long.UZERO,
+    id: BigInt(0),
     creditTypeAbbrev: "",
     bankDenom: "",
     precisionModifier: 0
   };
 }
 export const Market = {
-  encode(message: Market, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
-    if (!message.id.isZero()) {
+  typeUrl: "/regen.ecocredit.marketplace.v1.Market",
+  encode(message: Market, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
+    if (message.id !== BigInt(0)) {
       writer.uint32(8).uint64(message.id);
     }
     if (message.creditTypeAbbrev !== "") {
@@ -554,15 +581,15 @@ export const Market = {
     }
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): Market {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): Market {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMarket();
     while (reader.pos < end) {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          message.id = (reader.uint64() as Long);
+          message.id = reader.uint64();
           break;
         case 2:
           message.creditTypeAbbrev = reader.string();
@@ -582,7 +609,7 @@ export const Market = {
   },
   fromJSON(object: any): Market {
     return {
-      id: isSet(object.id) ? Long.fromValue(object.id) : Long.UZERO,
+      id: isSet(object.id) ? BigInt(object.id.toString()) : BigInt(0),
       creditTypeAbbrev: isSet(object.creditTypeAbbrev) ? String(object.creditTypeAbbrev) : "",
       bankDenom: isSet(object.bankDenom) ? String(object.bankDenom) : "",
       precisionModifier: isSet(object.precisionModifier) ? Number(object.precisionModifier) : 0
@@ -590,7 +617,7 @@ export const Market = {
   },
   toJSON(message: Market): unknown {
     const obj: any = {};
-    message.id !== undefined && (obj.id = (message.id || Long.UZERO).toString());
+    message.id !== undefined && (obj.id = (message.id || BigInt(0)).toString());
     message.creditTypeAbbrev !== undefined && (obj.creditTypeAbbrev = message.creditTypeAbbrev);
     message.bankDenom !== undefined && (obj.bankDenom = message.bankDenom);
     message.precisionModifier !== undefined && (obj.precisionModifier = Math.round(message.precisionModifier));
@@ -598,26 +625,34 @@ export const Market = {
   },
   fromPartial(object: Partial<Market>): Market {
     const message = createBaseMarket();
-    message.id = object.id !== undefined && object.id !== null ? Long.fromValue(object.id) : Long.UZERO;
+    message.id = object.id !== undefined && object.id !== null ? BigInt(object.id.toString()) : BigInt(0);
     message.creditTypeAbbrev = object.creditTypeAbbrev ?? "";
     message.bankDenom = object.bankDenom ?? "";
     message.precisionModifier = object.precisionModifier ?? 0;
     return message;
   },
   fromAmino(object: MarketAmino): Market {
-    return {
-      id: Long.fromString(object.id),
-      creditTypeAbbrev: object.credit_type_abbrev,
-      bankDenom: object.bank_denom,
-      precisionModifier: object.precision_modifier
-    };
+    const message = createBaseMarket();
+    if (object.id !== undefined && object.id !== null) {
+      message.id = BigInt(object.id);
+    }
+    if (object.credit_type_abbrev !== undefined && object.credit_type_abbrev !== null) {
+      message.creditTypeAbbrev = object.credit_type_abbrev;
+    }
+    if (object.bank_denom !== undefined && object.bank_denom !== null) {
+      message.bankDenom = object.bank_denom;
+    }
+    if (object.precision_modifier !== undefined && object.precision_modifier !== null) {
+      message.precisionModifier = object.precision_modifier;
+    }
+    return message;
   },
   toAmino(message: Market): MarketAmino {
     const obj: any = {};
-    obj.id = message.id ? message.id.toString() : undefined;
-    obj.credit_type_abbrev = message.creditTypeAbbrev;
-    obj.bank_denom = message.bankDenom;
-    obj.precision_modifier = message.precisionModifier;
+    obj.id = message.id !== BigInt(0) ? message.id.toString() : undefined;
+    obj.credit_type_abbrev = message.creditTypeAbbrev === "" ? undefined : message.creditTypeAbbrev;
+    obj.bank_denom = message.bankDenom === "" ? undefined : message.bankDenom;
+    obj.precision_modifier = message.precisionModifier === 0 ? undefined : message.precisionModifier;
     return obj;
   },
   fromAminoMsg(object: MarketAminoMsg): Market {

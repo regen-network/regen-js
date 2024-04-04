@@ -1,6 +1,6 @@
-import { Timestamp, TimestampAmino, TimestampSDKType } from "../../../../google/protobuf/timestamp";
+import { Timestamp, TimestampSDKType } from "../../../../google/protobuf/timestamp";
 import { Duration, DurationAmino, DurationSDKType } from "../../../../google/protobuf/duration";
-import * as _m0 from "protobufjs/minimal";
+import { BinaryReader, BinaryWriter } from "../../../../binary";
 import { isSet, fromJsonTimestamp, fromTimestamp } from "../../../../helpers";
 /** BasketCredit represents the information for a credit batch inside a basket. */
 export interface BasketCredit {
@@ -20,13 +20,13 @@ export interface BasketCreditProtoMsg {
 /** BasketCredit represents the information for a credit batch inside a basket. */
 export interface BasketCreditAmino {
   /** batch_denom is the unique ID of the credit batch. */
-  batch_denom: string;
+  batch_denom?: string;
   /**
    * amount is the number of credits being put into or taken out of the basket.
    * Decimal values are acceptable within the precision of the corresponding
    *  credit type for this batch.
    */
-  amount: string;
+  amount?: string;
 }
 export interface BasketCreditAminoMsg {
   type: "/regen.ecocredit.basket.v1.BasketCredit";
@@ -47,7 +47,7 @@ export interface DateCriteria {
    * allowed into the basket. At most only one of `start_date_window`,
    * `min_start_date`, and `years_in_the_past` can be set for a basket.
    */
-  minStartDate: Timestamp;
+  minStartDate?: Timestamp;
   /**
    * start_date_window (optional) is a duration of time measured into the past
    * which sets a cutoff for batch start dates when adding new credits to the
@@ -56,7 +56,7 @@ export interface DateCriteria {
    * basket. At most only one of `start_date_window`, `min_start_date`, and
    * `years_in_the_past` can be set for a basket.
    */
-  startDateWindow: Duration;
+  startDateWindow?: Duration;
   /**
    * years_in_the_past (optional) is the number of years into the past which
    * sets a cutoff for the batch start dates when adding new credits to the
@@ -83,7 +83,7 @@ export interface DateCriteriaAmino {
    * allowed into the basket. At most only one of `start_date_window`,
    * `min_start_date`, and `years_in_the_past` can be set for a basket.
    */
-  min_start_date?: TimestampAmino;
+  min_start_date?: string;
   /**
    * start_date_window (optional) is a duration of time measured into the past
    * which sets a cutoff for batch start dates when adding new credits to the
@@ -103,7 +103,7 @@ export interface DateCriteriaAmino {
    * 
    * Since Revision 1
    */
-  years_in_the_past: number;
+  years_in_the_past?: number;
 }
 export interface DateCriteriaAminoMsg {
   type: "/regen.ecocredit.basket.v1.DateCriteria";
@@ -114,8 +114,8 @@ export interface DateCriteriaAminoMsg {
  * At most, only one of the values should be set.
  */
 export interface DateCriteriaSDKType {
-  min_start_date: TimestampSDKType;
-  start_date_window: DurationSDKType;
+  min_start_date?: TimestampSDKType;
+  start_date_window?: DurationSDKType;
   years_in_the_past: number;
 }
 function createBaseBasketCredit(): BasketCredit {
@@ -125,7 +125,8 @@ function createBaseBasketCredit(): BasketCredit {
   };
 }
 export const BasketCredit = {
-  encode(message: BasketCredit, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  typeUrl: "/regen.ecocredit.basket.v1.BasketCredit",
+  encode(message: BasketCredit, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.batchDenom !== "") {
       writer.uint32(10).string(message.batchDenom);
     }
@@ -134,8 +135,8 @@ export const BasketCredit = {
     }
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): BasketCredit {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): BasketCredit {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseBasketCredit();
     while (reader.pos < end) {
@@ -173,15 +174,19 @@ export const BasketCredit = {
     return message;
   },
   fromAmino(object: BasketCreditAmino): BasketCredit {
-    return {
-      batchDenom: object.batch_denom,
-      amount: object.amount
-    };
+    const message = createBaseBasketCredit();
+    if (object.batch_denom !== undefined && object.batch_denom !== null) {
+      message.batchDenom = object.batch_denom;
+    }
+    if (object.amount !== undefined && object.amount !== null) {
+      message.amount = object.amount;
+    }
+    return message;
   },
   toAmino(message: BasketCredit): BasketCreditAmino {
     const obj: any = {};
-    obj.batch_denom = message.batchDenom;
-    obj.amount = message.amount;
+    obj.batch_denom = message.batchDenom === "" ? undefined : message.batchDenom;
+    obj.amount = message.amount === "" ? undefined : message.amount;
     return obj;
   },
   fromAminoMsg(object: BasketCreditAminoMsg): BasketCredit {
@@ -208,7 +213,8 @@ function createBaseDateCriteria(): DateCriteria {
   };
 }
 export const DateCriteria = {
-  encode(message: DateCriteria, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  typeUrl: "/regen.ecocredit.basket.v1.DateCriteria",
+  encode(message: DateCriteria, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.minStartDate !== undefined) {
       Timestamp.encode(message.minStartDate, writer.uint32(10).fork()).ldelim();
     }
@@ -220,8 +226,8 @@ export const DateCriteria = {
     }
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): DateCriteria {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): DateCriteria {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseDateCriteria();
     while (reader.pos < end) {
@@ -265,17 +271,23 @@ export const DateCriteria = {
     return message;
   },
   fromAmino(object: DateCriteriaAmino): DateCriteria {
-    return {
-      minStartDate: object?.min_start_date ? Timestamp.fromAmino(object.min_start_date) : undefined,
-      startDateWindow: object?.start_date_window ? Duration.fromAmino(object.start_date_window) : undefined,
-      yearsInThePast: object.years_in_the_past
-    };
+    const message = createBaseDateCriteria();
+    if (object.min_start_date !== undefined && object.min_start_date !== null) {
+      message.minStartDate = Timestamp.fromAmino(object.min_start_date);
+    }
+    if (object.start_date_window !== undefined && object.start_date_window !== null) {
+      message.startDateWindow = Duration.fromAmino(object.start_date_window);
+    }
+    if (object.years_in_the_past !== undefined && object.years_in_the_past !== null) {
+      message.yearsInThePast = object.years_in_the_past;
+    }
+    return message;
   },
   toAmino(message: DateCriteria): DateCriteriaAmino {
     const obj: any = {};
     obj.min_start_date = message.minStartDate ? Timestamp.toAmino(message.minStartDate) : undefined;
     obj.start_date_window = message.startDateWindow ? Duration.toAmino(message.startDateWindow) : undefined;
-    obj.years_in_the_past = message.yearsInThePast;
+    obj.years_in_the_past = message.yearsInThePast === 0 ? undefined : message.yearsInThePast;
     return obj;
   },
   fromAminoMsg(object: DateCriteriaAminoMsg): DateCriteria {

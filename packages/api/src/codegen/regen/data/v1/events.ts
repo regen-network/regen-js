@@ -1,5 +1,5 @@
-import { Long, isSet } from "../../../helpers";
-import * as _m0 from "protobufjs/minimal";
+import { BinaryReader, BinaryWriter } from "../../../binary";
+import { isSet } from "../../../helpers";
 /** EventAnchor is an event emitted when data is anchored on chain. */
 export interface EventAnchor {
   /** iri is the IRI of the data anchored on chain. */
@@ -12,7 +12,7 @@ export interface EventAnchorProtoMsg {
 /** EventAnchor is an event emitted when data is anchored on chain. */
 export interface EventAnchorAmino {
   /** iri is the IRI of the data anchored on chain. */
-  iri: string;
+  iri?: string;
 }
 export interface EventAnchorAminoMsg {
   type: "/regen.data.v1.EventAnchor";
@@ -39,12 +39,12 @@ export interface EventAttestProtoMsg {
 /** EventAttest is an event emitted when data is attested to on chain. */
 export interface EventAttestAmino {
   /** iri is the IRI of the data attested to. */
-  iri: string;
+  iri?: string;
   /**
    * attestor is the address of the account that has attested to the veracity of
    * the data.
    */
-  attestor: string;
+  attestor?: string;
 }
 export interface EventAttestAminoMsg {
   type: "/regen.data.v1.EventAttest";
@@ -58,7 +58,7 @@ export interface EventAttestSDKType {
 /** EventDefineResolver is an event emitted when a resolved is defined on chain. */
 export interface EventDefineResolver {
   /** id is the ID of the defined resolver. */
-  id: Long;
+  id: bigint;
 }
 export interface EventDefineResolverProtoMsg {
   typeUrl: "/regen.data.v1.EventDefineResolver";
@@ -67,7 +67,7 @@ export interface EventDefineResolverProtoMsg {
 /** EventDefineResolver is an event emitted when a resolved is defined on chain. */
 export interface EventDefineResolverAmino {
   /** id is the ID of the defined resolver. */
-  id: string;
+  id?: string;
 }
 export interface EventDefineResolverAminoMsg {
   type: "/regen.data.v1.EventDefineResolver";
@@ -75,7 +75,7 @@ export interface EventDefineResolverAminoMsg {
 }
 /** EventDefineResolver is an event emitted when a resolved is defined on chain. */
 export interface EventDefineResolverSDKType {
-  id: Long;
+  id: bigint;
 }
 /**
  * EventRegisterResolver is an event emitted when data is registered to a
@@ -83,7 +83,7 @@ export interface EventDefineResolverSDKType {
  */
 export interface EventRegisterResolver {
   /** id is the ID of the resolver that the data was registered to. */
-  id: Long;
+  id: bigint;
   /** iri is the IRI of the data that was registered. */
   iri: string;
 }
@@ -97,9 +97,9 @@ export interface EventRegisterResolverProtoMsg {
  */
 export interface EventRegisterResolverAmino {
   /** id is the ID of the resolver that the data was registered to. */
-  id: string;
+  id?: string;
   /** iri is the IRI of the data that was registered. */
-  iri: string;
+  iri?: string;
 }
 export interface EventRegisterResolverAminoMsg {
   type: "/regen.data.v1.EventRegisterResolver";
@@ -110,7 +110,7 @@ export interface EventRegisterResolverAminoMsg {
  * resolver on chain.
  */
 export interface EventRegisterResolverSDKType {
-  id: Long;
+  id: bigint;
   iri: string;
 }
 function createBaseEventAnchor(): EventAnchor {
@@ -119,14 +119,15 @@ function createBaseEventAnchor(): EventAnchor {
   };
 }
 export const EventAnchor = {
-  encode(message: EventAnchor, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  typeUrl: "/regen.data.v1.EventAnchor",
+  encode(message: EventAnchor, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.iri !== "") {
       writer.uint32(10).string(message.iri);
     }
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): EventAnchor {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): EventAnchor {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseEventAnchor();
     while (reader.pos < end) {
@@ -158,13 +159,15 @@ export const EventAnchor = {
     return message;
   },
   fromAmino(object: EventAnchorAmino): EventAnchor {
-    return {
-      iri: object.iri
-    };
+    const message = createBaseEventAnchor();
+    if (object.iri !== undefined && object.iri !== null) {
+      message.iri = object.iri;
+    }
+    return message;
   },
   toAmino(message: EventAnchor): EventAnchorAmino {
     const obj: any = {};
-    obj.iri = message.iri;
+    obj.iri = message.iri === "" ? undefined : message.iri;
     return obj;
   },
   fromAminoMsg(object: EventAnchorAminoMsg): EventAnchor {
@@ -190,7 +193,8 @@ function createBaseEventAttest(): EventAttest {
   };
 }
 export const EventAttest = {
-  encode(message: EventAttest, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  typeUrl: "/regen.data.v1.EventAttest",
+  encode(message: EventAttest, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.iri !== "") {
       writer.uint32(10).string(message.iri);
     }
@@ -199,8 +203,8 @@ export const EventAttest = {
     }
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): EventAttest {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): EventAttest {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseEventAttest();
     while (reader.pos < end) {
@@ -238,15 +242,19 @@ export const EventAttest = {
     return message;
   },
   fromAmino(object: EventAttestAmino): EventAttest {
-    return {
-      iri: object.iri,
-      attestor: object.attestor
-    };
+    const message = createBaseEventAttest();
+    if (object.iri !== undefined && object.iri !== null) {
+      message.iri = object.iri;
+    }
+    if (object.attestor !== undefined && object.attestor !== null) {
+      message.attestor = object.attestor;
+    }
+    return message;
   },
   toAmino(message: EventAttest): EventAttestAmino {
     const obj: any = {};
-    obj.iri = message.iri;
-    obj.attestor = message.attestor;
+    obj.iri = message.iri === "" ? undefined : message.iri;
+    obj.attestor = message.attestor === "" ? undefined : message.attestor;
     return obj;
   },
   fromAminoMsg(object: EventAttestAminoMsg): EventAttest {
@@ -267,25 +275,26 @@ export const EventAttest = {
 };
 function createBaseEventDefineResolver(): EventDefineResolver {
   return {
-    id: Long.UZERO
+    id: BigInt(0)
   };
 }
 export const EventDefineResolver = {
-  encode(message: EventDefineResolver, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
-    if (!message.id.isZero()) {
+  typeUrl: "/regen.data.v1.EventDefineResolver",
+  encode(message: EventDefineResolver, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
+    if (message.id !== BigInt(0)) {
       writer.uint32(8).uint64(message.id);
     }
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): EventDefineResolver {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): EventDefineResolver {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseEventDefineResolver();
     while (reader.pos < end) {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          message.id = (reader.uint64() as Long);
+          message.id = reader.uint64();
           break;
         default:
           reader.skipType(tag & 7);
@@ -296,27 +305,29 @@ export const EventDefineResolver = {
   },
   fromJSON(object: any): EventDefineResolver {
     return {
-      id: isSet(object.id) ? Long.fromValue(object.id) : Long.UZERO
+      id: isSet(object.id) ? BigInt(object.id.toString()) : BigInt(0)
     };
   },
   toJSON(message: EventDefineResolver): unknown {
     const obj: any = {};
-    message.id !== undefined && (obj.id = (message.id || Long.UZERO).toString());
+    message.id !== undefined && (obj.id = (message.id || BigInt(0)).toString());
     return obj;
   },
   fromPartial(object: Partial<EventDefineResolver>): EventDefineResolver {
     const message = createBaseEventDefineResolver();
-    message.id = object.id !== undefined && object.id !== null ? Long.fromValue(object.id) : Long.UZERO;
+    message.id = object.id !== undefined && object.id !== null ? BigInt(object.id.toString()) : BigInt(0);
     return message;
   },
   fromAmino(object: EventDefineResolverAmino): EventDefineResolver {
-    return {
-      id: Long.fromString(object.id)
-    };
+    const message = createBaseEventDefineResolver();
+    if (object.id !== undefined && object.id !== null) {
+      message.id = BigInt(object.id);
+    }
+    return message;
   },
   toAmino(message: EventDefineResolver): EventDefineResolverAmino {
     const obj: any = {};
-    obj.id = message.id ? message.id.toString() : undefined;
+    obj.id = message.id !== BigInt(0) ? message.id.toString() : undefined;
     return obj;
   },
   fromAminoMsg(object: EventDefineResolverAminoMsg): EventDefineResolver {
@@ -337,13 +348,14 @@ export const EventDefineResolver = {
 };
 function createBaseEventRegisterResolver(): EventRegisterResolver {
   return {
-    id: Long.UZERO,
+    id: BigInt(0),
     iri: ""
   };
 }
 export const EventRegisterResolver = {
-  encode(message: EventRegisterResolver, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
-    if (!message.id.isZero()) {
+  typeUrl: "/regen.data.v1.EventRegisterResolver",
+  encode(message: EventRegisterResolver, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
+    if (message.id !== BigInt(0)) {
       writer.uint32(8).uint64(message.id);
     }
     if (message.iri !== "") {
@@ -351,15 +363,15 @@ export const EventRegisterResolver = {
     }
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): EventRegisterResolver {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): EventRegisterResolver {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseEventRegisterResolver();
     while (reader.pos < end) {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          message.id = (reader.uint64() as Long);
+          message.id = reader.uint64();
           break;
         case 2:
           message.iri = reader.string();
@@ -373,32 +385,36 @@ export const EventRegisterResolver = {
   },
   fromJSON(object: any): EventRegisterResolver {
     return {
-      id: isSet(object.id) ? Long.fromValue(object.id) : Long.UZERO,
+      id: isSet(object.id) ? BigInt(object.id.toString()) : BigInt(0),
       iri: isSet(object.iri) ? String(object.iri) : ""
     };
   },
   toJSON(message: EventRegisterResolver): unknown {
     const obj: any = {};
-    message.id !== undefined && (obj.id = (message.id || Long.UZERO).toString());
+    message.id !== undefined && (obj.id = (message.id || BigInt(0)).toString());
     message.iri !== undefined && (obj.iri = message.iri);
     return obj;
   },
   fromPartial(object: Partial<EventRegisterResolver>): EventRegisterResolver {
     const message = createBaseEventRegisterResolver();
-    message.id = object.id !== undefined && object.id !== null ? Long.fromValue(object.id) : Long.UZERO;
+    message.id = object.id !== undefined && object.id !== null ? BigInt(object.id.toString()) : BigInt(0);
     message.iri = object.iri ?? "";
     return message;
   },
   fromAmino(object: EventRegisterResolverAmino): EventRegisterResolver {
-    return {
-      id: Long.fromString(object.id),
-      iri: object.iri
-    };
+    const message = createBaseEventRegisterResolver();
+    if (object.id !== undefined && object.id !== null) {
+      message.id = BigInt(object.id);
+    }
+    if (object.iri !== undefined && object.iri !== null) {
+      message.iri = object.iri;
+    }
+    return message;
   },
   toAmino(message: EventRegisterResolver): EventRegisterResolverAmino {
     const obj: any = {};
-    obj.id = message.id ? message.id.toString() : undefined;
-    obj.iri = message.iri;
+    obj.id = message.id !== BigInt(0) ? message.id.toString() : undefined;
+    obj.iri = message.iri === "" ? undefined : message.iri;
     return obj;
   },
   fromAminoMsg(object: EventRegisterResolverAminoMsg): EventRegisterResolver {

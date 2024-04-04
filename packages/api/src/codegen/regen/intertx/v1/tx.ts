@@ -1,5 +1,5 @@
 import { Any, AnyAmino, AnySDKType } from "../../../google/protobuf/any";
-import * as _m0 from "protobufjs/minimal";
+import { BinaryReader, BinaryWriter } from "../../../binary";
 import { isSet } from "../../../helpers";
 /** MsgRegisterAccount defines the payload for Msg/RegisterAccount */
 export interface MsgRegisterAccount {
@@ -21,15 +21,15 @@ export interface MsgRegisterAccountProtoMsg {
 /** MsgRegisterAccount defines the payload for Msg/RegisterAccount */
 export interface MsgRegisterAccountAmino {
   /** owner is the address of the interchain account owner. */
-  owner: string;
+  owner?: string;
   /** connection_id is the connection id string (i.e. channel-5). */
-  connection_id: string;
+  connection_id?: string;
   /**
    * version is the application version string. For example, this could be an
    * ICS27 encoded metadata type or an ICS29 encoded metadata type with a nested
    * application version.
    */
-  version: string;
+  version?: string;
 }
 export interface MsgRegisterAccountAminoMsg {
   type: "/regen.intertx.v1.MsgRegisterAccount";
@@ -62,7 +62,7 @@ export interface MsgSubmitTx {
   /** connection_id is the id of the connection. */
   connectionId: string;
   /** msg is the bytes of the transaction msg to send. */
-  msg: Any;
+  msg?: Any;
 }
 export interface MsgSubmitTxProtoMsg {
   typeUrl: "/regen.intertx.v1.MsgSubmitTx";
@@ -71,9 +71,9 @@ export interface MsgSubmitTxProtoMsg {
 /** MsgSubmitTx defines the payload for Msg/SubmitTx */
 export interface MsgSubmitTxAmino {
   /** owner is the owner address of the interchain account. */
-  owner: string;
+  owner?: string;
   /** connection_id is the id of the connection. */
-  connection_id: string;
+  connection_id?: string;
   /** msg is the bytes of the transaction msg to send. */
   msg?: AnyAmino;
 }
@@ -85,7 +85,7 @@ export interface MsgSubmitTxAminoMsg {
 export interface MsgSubmitTxSDKType {
   owner: string;
   connection_id: string;
-  msg: AnySDKType;
+  msg?: AnySDKType;
 }
 /** MsgSubmitTxResponse defines the response for Msg/SubmitTx */
 export interface MsgSubmitTxResponse {}
@@ -109,7 +109,8 @@ function createBaseMsgRegisterAccount(): MsgRegisterAccount {
   };
 }
 export const MsgRegisterAccount = {
-  encode(message: MsgRegisterAccount, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  typeUrl: "/regen.intertx.v1.MsgRegisterAccount",
+  encode(message: MsgRegisterAccount, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.owner !== "") {
       writer.uint32(10).string(message.owner);
     }
@@ -121,8 +122,8 @@ export const MsgRegisterAccount = {
     }
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): MsgRegisterAccount {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): MsgRegisterAccount {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMsgRegisterAccount();
     while (reader.pos < end) {
@@ -166,17 +167,23 @@ export const MsgRegisterAccount = {
     return message;
   },
   fromAmino(object: MsgRegisterAccountAmino): MsgRegisterAccount {
-    return {
-      owner: object.owner,
-      connectionId: object.connection_id,
-      version: object.version
-    };
+    const message = createBaseMsgRegisterAccount();
+    if (object.owner !== undefined && object.owner !== null) {
+      message.owner = object.owner;
+    }
+    if (object.connection_id !== undefined && object.connection_id !== null) {
+      message.connectionId = object.connection_id;
+    }
+    if (object.version !== undefined && object.version !== null) {
+      message.version = object.version;
+    }
+    return message;
   },
   toAmino(message: MsgRegisterAccount): MsgRegisterAccountAmino {
     const obj: any = {};
-    obj.owner = message.owner;
-    obj.connection_id = message.connectionId;
-    obj.version = message.version;
+    obj.owner = message.owner === "" ? undefined : message.owner;
+    obj.connection_id = message.connectionId === "" ? undefined : message.connectionId;
+    obj.version = message.version === "" ? undefined : message.version;
     return obj;
   },
   fromAminoMsg(object: MsgRegisterAccountAminoMsg): MsgRegisterAccount {
@@ -199,11 +206,12 @@ function createBaseMsgRegisterAccountResponse(): MsgRegisterAccountResponse {
   return {};
 }
 export const MsgRegisterAccountResponse = {
-  encode(_: MsgRegisterAccountResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  typeUrl: "/regen.intertx.v1.MsgRegisterAccountResponse",
+  encode(_: MsgRegisterAccountResponse, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): MsgRegisterAccountResponse {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): MsgRegisterAccountResponse {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMsgRegisterAccountResponse();
     while (reader.pos < end) {
@@ -228,7 +236,8 @@ export const MsgRegisterAccountResponse = {
     return message;
   },
   fromAmino(_: MsgRegisterAccountResponseAmino): MsgRegisterAccountResponse {
-    return {};
+    const message = createBaseMsgRegisterAccountResponse();
+    return message;
   },
   toAmino(_: MsgRegisterAccountResponse): MsgRegisterAccountResponseAmino {
     const obj: any = {};
@@ -258,7 +267,8 @@ function createBaseMsgSubmitTx(): MsgSubmitTx {
   };
 }
 export const MsgSubmitTx = {
-  encode(message: MsgSubmitTx, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  typeUrl: "/regen.intertx.v1.MsgSubmitTx",
+  encode(message: MsgSubmitTx, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.owner !== "") {
       writer.uint32(10).string(message.owner);
     }
@@ -270,8 +280,8 @@ export const MsgSubmitTx = {
     }
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): MsgSubmitTx {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): MsgSubmitTx {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMsgSubmitTx();
     while (reader.pos < end) {
@@ -315,16 +325,22 @@ export const MsgSubmitTx = {
     return message;
   },
   fromAmino(object: MsgSubmitTxAmino): MsgSubmitTx {
-    return {
-      owner: object.owner,
-      connectionId: object.connection_id,
-      msg: object?.msg ? Any.fromAmino(object.msg) : undefined
-    };
+    const message = createBaseMsgSubmitTx();
+    if (object.owner !== undefined && object.owner !== null) {
+      message.owner = object.owner;
+    }
+    if (object.connection_id !== undefined && object.connection_id !== null) {
+      message.connectionId = object.connection_id;
+    }
+    if (object.msg !== undefined && object.msg !== null) {
+      message.msg = Any.fromAmino(object.msg);
+    }
+    return message;
   },
   toAmino(message: MsgSubmitTx): MsgSubmitTxAmino {
     const obj: any = {};
-    obj.owner = message.owner;
-    obj.connection_id = message.connectionId;
+    obj.owner = message.owner === "" ? undefined : message.owner;
+    obj.connection_id = message.connectionId === "" ? undefined : message.connectionId;
     obj.msg = message.msg ? Any.toAmino(message.msg) : undefined;
     return obj;
   },
@@ -348,11 +364,12 @@ function createBaseMsgSubmitTxResponse(): MsgSubmitTxResponse {
   return {};
 }
 export const MsgSubmitTxResponse = {
-  encode(_: MsgSubmitTxResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
+  typeUrl: "/regen.intertx.v1.MsgSubmitTxResponse",
+  encode(_: MsgSubmitTxResponse, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     return writer;
   },
-  decode(input: _m0.Reader | Uint8Array, length?: number): MsgSubmitTxResponse {
-    const reader = input instanceof _m0.Reader ? input : new _m0.Reader(input);
+  decode(input: BinaryReader | Uint8Array, length?: number): MsgSubmitTxResponse {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMsgSubmitTxResponse();
     while (reader.pos < end) {
@@ -377,7 +394,8 @@ export const MsgSubmitTxResponse = {
     return message;
   },
   fromAmino(_: MsgSubmitTxResponseAmino): MsgSubmitTxResponse {
-    return {};
+    const message = createBaseMsgSubmitTxResponse();
+    return message;
   },
   toAmino(_: MsgSubmitTxResponse): MsgSubmitTxResponseAmino {
     const obj: any = {};

@@ -1,5 +1,5 @@
 import { Rpc } from "../../../helpers";
-import * as _m0 from "protobufjs/minimal";
+import { BinaryReader } from "../../../binary";
 import { QueryClient, createProtobufRpcClient } from "@cosmjs/stargate";
 import { QueryClassesRequest, QueryClassesResponse, QueryClassesByAdminRequest, QueryClassesByAdminResponse, QueryClassRequest, QueryClassResponse, QueryClassIssuersRequest, QueryClassIssuersResponse, QueryProjectsRequest, QueryProjectsResponse, QueryProjectsByClassRequest, QueryProjectsByClassResponse, QueryProjectsByReferenceIdRequest, QueryProjectsByReferenceIdResponse, QueryProjectsByAdminRequest, QueryProjectsByAdminResponse, QueryProjectRequest, QueryProjectResponse, QueryBatchesRequest, QueryBatchesResponse, QueryBatchesByIssuerRequest, QueryBatchesByIssuerResponse, QueryBatchesByClassRequest, QueryBatchesByClassResponse, QueryBatchesByProjectRequest, QueryBatchesByProjectResponse, QueryBatchRequest, QueryBatchResponse, QueryBalanceRequest, QueryBalanceResponse, QueryBalancesRequest, QueryBalancesResponse, QueryBalancesByBatchRequest, QueryBalancesByBatchResponse, QueryAllBalancesRequest, QueryAllBalancesResponse, QuerySupplyRequest, QuerySupplyResponse, QueryCreditTypesRequest, QueryCreditTypesResponse, QueryParamsRequest, QueryParamsResponse, QueryCreditTypeRequest, QueryCreditTypeResponse, QueryClassCreatorAllowlistRequest, QueryClassCreatorAllowlistResponse, QueryAllowedClassCreatorsRequest, QueryAllowedClassCreatorsResponse, QueryClassFeeRequest, QueryClassFeeResponse, QueryAllowedBridgeChainsRequest, QueryAllowedBridgeChainsResponse } from "./query";
 /** Msg is the regen.ecocredit.v1 Query service. */
@@ -143,140 +143,140 @@ export class QueryClientImpl implements Query {
   }): Promise<QueryClassesResponse> {
     const data = QueryClassesRequest.encode(request).finish();
     const promise = this.rpc.request("regen.ecocredit.v1.Query", "Classes", data);
-    return promise.then(data => QueryClassesResponse.decode(new _m0.Reader(data)));
+    return promise.then(data => QueryClassesResponse.decode(new BinaryReader(data)));
   }
   classesByAdmin(request: QueryClassesByAdminRequest): Promise<QueryClassesByAdminResponse> {
     const data = QueryClassesByAdminRequest.encode(request).finish();
     const promise = this.rpc.request("regen.ecocredit.v1.Query", "ClassesByAdmin", data);
-    return promise.then(data => QueryClassesByAdminResponse.decode(new _m0.Reader(data)));
+    return promise.then(data => QueryClassesByAdminResponse.decode(new BinaryReader(data)));
   }
   class(request: QueryClassRequest): Promise<QueryClassResponse> {
     const data = QueryClassRequest.encode(request).finish();
     const promise = this.rpc.request("regen.ecocredit.v1.Query", "Class", data);
-    return promise.then(data => QueryClassResponse.decode(new _m0.Reader(data)));
+    return promise.then(data => QueryClassResponse.decode(new BinaryReader(data)));
   }
   classIssuers(request: QueryClassIssuersRequest): Promise<QueryClassIssuersResponse> {
     const data = QueryClassIssuersRequest.encode(request).finish();
     const promise = this.rpc.request("regen.ecocredit.v1.Query", "ClassIssuers", data);
-    return promise.then(data => QueryClassIssuersResponse.decode(new _m0.Reader(data)));
+    return promise.then(data => QueryClassIssuersResponse.decode(new BinaryReader(data)));
   }
   projects(request: QueryProjectsRequest = {
     pagination: undefined
   }): Promise<QueryProjectsResponse> {
     const data = QueryProjectsRequest.encode(request).finish();
     const promise = this.rpc.request("regen.ecocredit.v1.Query", "Projects", data);
-    return promise.then(data => QueryProjectsResponse.decode(new _m0.Reader(data)));
+    return promise.then(data => QueryProjectsResponse.decode(new BinaryReader(data)));
   }
   projectsByClass(request: QueryProjectsByClassRequest): Promise<QueryProjectsByClassResponse> {
     const data = QueryProjectsByClassRequest.encode(request).finish();
     const promise = this.rpc.request("regen.ecocredit.v1.Query", "ProjectsByClass", data);
-    return promise.then(data => QueryProjectsByClassResponse.decode(new _m0.Reader(data)));
+    return promise.then(data => QueryProjectsByClassResponse.decode(new BinaryReader(data)));
   }
   projectsByReferenceId(request: QueryProjectsByReferenceIdRequest): Promise<QueryProjectsByReferenceIdResponse> {
     const data = QueryProjectsByReferenceIdRequest.encode(request).finish();
     const promise = this.rpc.request("regen.ecocredit.v1.Query", "ProjectsByReferenceId", data);
-    return promise.then(data => QueryProjectsByReferenceIdResponse.decode(new _m0.Reader(data)));
+    return promise.then(data => QueryProjectsByReferenceIdResponse.decode(new BinaryReader(data)));
   }
   projectsByAdmin(request: QueryProjectsByAdminRequest): Promise<QueryProjectsByAdminResponse> {
     const data = QueryProjectsByAdminRequest.encode(request).finish();
     const promise = this.rpc.request("regen.ecocredit.v1.Query", "ProjectsByAdmin", data);
-    return promise.then(data => QueryProjectsByAdminResponse.decode(new _m0.Reader(data)));
+    return promise.then(data => QueryProjectsByAdminResponse.decode(new BinaryReader(data)));
   }
   project(request: QueryProjectRequest): Promise<QueryProjectResponse> {
     const data = QueryProjectRequest.encode(request).finish();
     const promise = this.rpc.request("regen.ecocredit.v1.Query", "Project", data);
-    return promise.then(data => QueryProjectResponse.decode(new _m0.Reader(data)));
+    return promise.then(data => QueryProjectResponse.decode(new BinaryReader(data)));
   }
   batches(request: QueryBatchesRequest = {
     pagination: undefined
   }): Promise<QueryBatchesResponse> {
     const data = QueryBatchesRequest.encode(request).finish();
     const promise = this.rpc.request("regen.ecocredit.v1.Query", "Batches", data);
-    return promise.then(data => QueryBatchesResponse.decode(new _m0.Reader(data)));
+    return promise.then(data => QueryBatchesResponse.decode(new BinaryReader(data)));
   }
   batchesByIssuer(request: QueryBatchesByIssuerRequest): Promise<QueryBatchesByIssuerResponse> {
     const data = QueryBatchesByIssuerRequest.encode(request).finish();
     const promise = this.rpc.request("regen.ecocredit.v1.Query", "BatchesByIssuer", data);
-    return promise.then(data => QueryBatchesByIssuerResponse.decode(new _m0.Reader(data)));
+    return promise.then(data => QueryBatchesByIssuerResponse.decode(new BinaryReader(data)));
   }
   batchesByClass(request: QueryBatchesByClassRequest): Promise<QueryBatchesByClassResponse> {
     const data = QueryBatchesByClassRequest.encode(request).finish();
     const promise = this.rpc.request("regen.ecocredit.v1.Query", "BatchesByClass", data);
-    return promise.then(data => QueryBatchesByClassResponse.decode(new _m0.Reader(data)));
+    return promise.then(data => QueryBatchesByClassResponse.decode(new BinaryReader(data)));
   }
   batchesByProject(request: QueryBatchesByProjectRequest): Promise<QueryBatchesByProjectResponse> {
     const data = QueryBatchesByProjectRequest.encode(request).finish();
     const promise = this.rpc.request("regen.ecocredit.v1.Query", "BatchesByProject", data);
-    return promise.then(data => QueryBatchesByProjectResponse.decode(new _m0.Reader(data)));
+    return promise.then(data => QueryBatchesByProjectResponse.decode(new BinaryReader(data)));
   }
   batch(request: QueryBatchRequest): Promise<QueryBatchResponse> {
     const data = QueryBatchRequest.encode(request).finish();
     const promise = this.rpc.request("regen.ecocredit.v1.Query", "Batch", data);
-    return promise.then(data => QueryBatchResponse.decode(new _m0.Reader(data)));
+    return promise.then(data => QueryBatchResponse.decode(new BinaryReader(data)));
   }
   balance(request: QueryBalanceRequest): Promise<QueryBalanceResponse> {
     const data = QueryBalanceRequest.encode(request).finish();
     const promise = this.rpc.request("regen.ecocredit.v1.Query", "Balance", data);
-    return promise.then(data => QueryBalanceResponse.decode(new _m0.Reader(data)));
+    return promise.then(data => QueryBalanceResponse.decode(new BinaryReader(data)));
   }
   balances(request: QueryBalancesRequest): Promise<QueryBalancesResponse> {
     const data = QueryBalancesRequest.encode(request).finish();
     const promise = this.rpc.request("regen.ecocredit.v1.Query", "Balances", data);
-    return promise.then(data => QueryBalancesResponse.decode(new _m0.Reader(data)));
+    return promise.then(data => QueryBalancesResponse.decode(new BinaryReader(data)));
   }
   balancesByBatch(request: QueryBalancesByBatchRequest): Promise<QueryBalancesByBatchResponse> {
     const data = QueryBalancesByBatchRequest.encode(request).finish();
     const promise = this.rpc.request("regen.ecocredit.v1.Query", "BalancesByBatch", data);
-    return promise.then(data => QueryBalancesByBatchResponse.decode(new _m0.Reader(data)));
+    return promise.then(data => QueryBalancesByBatchResponse.decode(new BinaryReader(data)));
   }
   allBalances(request: QueryAllBalancesRequest = {
     pagination: undefined
   }): Promise<QueryAllBalancesResponse> {
     const data = QueryAllBalancesRequest.encode(request).finish();
     const promise = this.rpc.request("regen.ecocredit.v1.Query", "AllBalances", data);
-    return promise.then(data => QueryAllBalancesResponse.decode(new _m0.Reader(data)));
+    return promise.then(data => QueryAllBalancesResponse.decode(new BinaryReader(data)));
   }
   supply(request: QuerySupplyRequest): Promise<QuerySupplyResponse> {
     const data = QuerySupplyRequest.encode(request).finish();
     const promise = this.rpc.request("regen.ecocredit.v1.Query", "Supply", data);
-    return promise.then(data => QuerySupplyResponse.decode(new _m0.Reader(data)));
+    return promise.then(data => QuerySupplyResponse.decode(new BinaryReader(data)));
   }
   creditTypes(request: QueryCreditTypesRequest = {}): Promise<QueryCreditTypesResponse> {
     const data = QueryCreditTypesRequest.encode(request).finish();
     const promise = this.rpc.request("regen.ecocredit.v1.Query", "CreditTypes", data);
-    return promise.then(data => QueryCreditTypesResponse.decode(new _m0.Reader(data)));
+    return promise.then(data => QueryCreditTypesResponse.decode(new BinaryReader(data)));
   }
   params(request: QueryParamsRequest = {}): Promise<QueryParamsResponse> {
     const data = QueryParamsRequest.encode(request).finish();
     const promise = this.rpc.request("regen.ecocredit.v1.Query", "Params", data);
-    return promise.then(data => QueryParamsResponse.decode(new _m0.Reader(data)));
+    return promise.then(data => QueryParamsResponse.decode(new BinaryReader(data)));
   }
   creditType(request: QueryCreditTypeRequest): Promise<QueryCreditTypeResponse> {
     const data = QueryCreditTypeRequest.encode(request).finish();
     const promise = this.rpc.request("regen.ecocredit.v1.Query", "CreditType", data);
-    return promise.then(data => QueryCreditTypeResponse.decode(new _m0.Reader(data)));
+    return promise.then(data => QueryCreditTypeResponse.decode(new BinaryReader(data)));
   }
   classCreatorAllowlist(request: QueryClassCreatorAllowlistRequest = {}): Promise<QueryClassCreatorAllowlistResponse> {
     const data = QueryClassCreatorAllowlistRequest.encode(request).finish();
     const promise = this.rpc.request("regen.ecocredit.v1.Query", "ClassCreatorAllowlist", data);
-    return promise.then(data => QueryClassCreatorAllowlistResponse.decode(new _m0.Reader(data)));
+    return promise.then(data => QueryClassCreatorAllowlistResponse.decode(new BinaryReader(data)));
   }
   allowedClassCreators(request: QueryAllowedClassCreatorsRequest = {
     pagination: undefined
   }): Promise<QueryAllowedClassCreatorsResponse> {
     const data = QueryAllowedClassCreatorsRequest.encode(request).finish();
     const promise = this.rpc.request("regen.ecocredit.v1.Query", "AllowedClassCreators", data);
-    return promise.then(data => QueryAllowedClassCreatorsResponse.decode(new _m0.Reader(data)));
+    return promise.then(data => QueryAllowedClassCreatorsResponse.decode(new BinaryReader(data)));
   }
   classFee(request: QueryClassFeeRequest = {}): Promise<QueryClassFeeResponse> {
     const data = QueryClassFeeRequest.encode(request).finish();
     const promise = this.rpc.request("regen.ecocredit.v1.Query", "ClassFee", data);
-    return promise.then(data => QueryClassFeeResponse.decode(new _m0.Reader(data)));
+    return promise.then(data => QueryClassFeeResponse.decode(new BinaryReader(data)));
   }
   allowedBridgeChains(request: QueryAllowedBridgeChainsRequest = {}): Promise<QueryAllowedBridgeChainsResponse> {
     const data = QueryAllowedBridgeChainsRequest.encode(request).finish();
     const promise = this.rpc.request("regen.ecocredit.v1.Query", "AllowedBridgeChains", data);
-    return promise.then(data => QueryAllowedBridgeChainsResponse.decode(new _m0.Reader(data)));
+    return promise.then(data => QueryAllowedBridgeChainsResponse.decode(new BinaryReader(data)));
   }
 }
 export const createRpcQueryExtension = (base: QueryClient) => {
