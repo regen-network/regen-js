@@ -15,7 +15,7 @@ const msgAttestAminoType = 'regen-ledger/MsgAttest';
 export const attestTypeUrl = '/' + MsgAttest.$type;
 
 type AminoContentHash_Graph = {
-  hash: Uint8Array;
+  hash: string;
   digest_algorithm?: DigestAlgorithm;
   canonicalization_algorithm?: GraphCanonicalizationAlgorithm;
   merkle_tree?: GraphMerkleTree;
@@ -37,7 +37,7 @@ export function attestConverter(): AminoConverter {
     }: MsgAttest): AminoMsgAttest['value'] => ({
       attestor,
       content_hashes: contentHashes.map(contentHash => ({
-        hash: contentHash.hash,
+        hash: base64FromBytes(contentHash.hash),
         digest_algorithm: omitDefault(contentHash.digestAlgorithm),
         canonicalization_algorithm: omitDefault(
           contentHash.canonicalizationAlgorithm,
@@ -52,11 +52,28 @@ export function attestConverter(): AminoConverter {
       attestor,
       contentHashes: content_hashes.map(contentHash => ({
         $type: ContentHash_Graph.$type,
-        hash: contentHash.hash,
+        hash: bytesFromBase64(contentHash.hash),
         digestAlgorithm: contentHash.digest_algorithm || 0,
         canonicalizationAlgorithm: contentHash.canonicalization_algorithm || 0,
         merkleTree: contentHash.merkle_tree || 0,
       })),
     }),
   };
+}
+
+function bytesFromBase64(b64: string): Uint8Array {
+  const bin = window.atob(b64);
+  const arr = new Uint8Array(bin.length);
+  for (let i = 0; i < bin.length; ++i) {
+    arr[i] = bin.charCodeAt(i);
+  }
+  return arr;
+}
+
+function base64FromBytes(arr: Uint8Array): string {
+  const bin: string[] = [];
+  arr.forEach(byte => {
+    bin.push(String.fromCharCode(byte));
+  });
+  return window.btoa(bin.join(''));
 }

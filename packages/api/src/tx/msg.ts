@@ -43,7 +43,7 @@ export async function setupTxExtension(
 
   const registry = new Registry([...defaultRegistryTypes, ...customRegistry]);
   const aminoTypes = new AminoTypes(createDefaultTypes());
-  console.log('aminoTypes', aminoTypes);
+
   const signingClient = await createStargateSigningClient(
     connection.endpoint,
     connection.signer,
