@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.7.0](https://github.com/regen-network/regen-js/compare/v0.6.0...v0.7.0) (2024-08-05)
+
+
+### Features
+
+* add amino data MsgAttest converter ([739163b](https://github.com/regen-network/regen-js/commit/739163b341ff466d14fdd7df8025ffd7c0cadfe4))
+
+
+
+
+
 # [0.6.0](https://github.com/regen-network/regen-js/compare/v0.3.0...v0.6.0) (2023-03-27)
 
 
