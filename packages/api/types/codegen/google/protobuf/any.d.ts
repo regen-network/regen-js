@@ -1,4 +1,4 @@
-import * as _m0 from "protobufjs/minimal";
+import { BinaryReader, BinaryWriter } from "../../binary";
 /**
  * `Any` contains an arbitrary serialized protocol buffer message along with a
  * URL that describes the type of the serialized message.
@@ -81,7 +81,7 @@ import * as _m0 from "protobufjs/minimal";
  *     }
  */
 export interface Any {
-    $typeUrl?: string;
+    $typeUrl?: "/google.protobuf.Any" | string;
     /**
      * A URL/resource name that uniquely identifies the type of the serialized
      * protocol buffer message. This string must contain at least
@@ -320,13 +320,14 @@ export interface AnyAminoMsg {
  *     }
  */
 export interface AnySDKType {
-    $typeUrl?: string;
+    $typeUrl?: "/google.protobuf.Any" | string;
     type_url: string;
     value: Uint8Array;
 }
 export declare const Any: {
-    encode(message: Any, writer?: _m0.Writer): _m0.Writer;
-    decode(input: _m0.Reader | Uint8Array, length?: number): Any;
+    typeUrl: string;
+    encode(message: Any, writer?: BinaryWriter): BinaryWriter;
+    decode(input: BinaryReader | Uint8Array, length?: number): Any;
     fromJSON(object: any): Any;
     toJSON(message: Any): unknown;
     fromPartial(object: Partial<Any>): Any;

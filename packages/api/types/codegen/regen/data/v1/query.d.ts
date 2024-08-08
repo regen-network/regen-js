@@ -1,8 +1,7 @@
 import { ContentHash, ContentHashAmino, ContentHashSDKType } from "./types";
 import { PageRequest, PageRequestAmino, PageRequestSDKType, PageResponse, PageResponseAmino, PageResponseSDKType } from "../../../cosmos/base/query/v1beta1/pagination";
-import { Timestamp, TimestampAmino, TimestampSDKType } from "../../../google/protobuf/timestamp";
-import { Long } from "../../../helpers";
-import * as _m0 from "protobufjs/minimal";
+import { Timestamp, TimestampSDKType } from "../../../google/protobuf/timestamp";
+import { BinaryReader, BinaryWriter } from "../../../binary";
 /** QueryAnchorByIRIRequest is the Query/AnchorByIRI request type. */
 export interface QueryAnchorByIRIRequest {
     /** iri is the IRI of the anchored data. */
@@ -15,7 +14,7 @@ export interface QueryAnchorByIRIRequestProtoMsg {
 /** QueryAnchorByIRIRequest is the Query/AnchorByIRI request type. */
 export interface QueryAnchorByIRIRequestAmino {
     /** iri is the IRI of the anchored data. */
-    iri: string;
+    iri?: string;
 }
 export interface QueryAnchorByIRIRequestAminoMsg {
     type: "/regen.data.v1.QueryAnchorByIRIRequest";
@@ -28,7 +27,7 @@ export interface QueryAnchorByIRIRequestSDKType {
 /** QueryAnchorByIRIResponse is the Query/AnchorByIRI response type. */
 export interface QueryAnchorByIRIResponse {
     /** anchor is information about the data anchor. */
-    anchor: AnchorInfo;
+    anchor?: AnchorInfo;
 }
 export interface QueryAnchorByIRIResponseProtoMsg {
     typeUrl: "/regen.data.v1.QueryAnchorByIRIResponse";
@@ -45,12 +44,12 @@ export interface QueryAnchorByIRIResponseAminoMsg {
 }
 /** QueryAnchorByIRIResponse is the Query/AnchorByIRI response type. */
 export interface QueryAnchorByIRIResponseSDKType {
-    anchor: AnchorInfoSDKType;
+    anchor?: AnchorInfoSDKType;
 }
 /** QueryAnchorByHashRequest is the Query/AnchorByHash request type. */
 export interface QueryAnchorByHashRequest {
     /** content_hash is the ContentHash of the anchored data. */
-    contentHash: ContentHash;
+    contentHash?: ContentHash;
 }
 export interface QueryAnchorByHashRequestProtoMsg {
     typeUrl: "/regen.data.v1.QueryAnchorByHashRequest";
@@ -67,12 +66,12 @@ export interface QueryAnchorByHashRequestAminoMsg {
 }
 /** QueryAnchorByHashRequest is the Query/AnchorByHash request type. */
 export interface QueryAnchorByHashRequestSDKType {
-    content_hash: ContentHashSDKType;
+    content_hash?: ContentHashSDKType;
 }
 /** QueryAnchorByHashResponse is the Query/AnchorByHash response type. */
 export interface QueryAnchorByHashResponse {
     /** anchor is information about the data anchor. */
-    anchor: AnchorInfo;
+    anchor?: AnchorInfo;
 }
 export interface QueryAnchorByHashResponseProtoMsg {
     typeUrl: "/regen.data.v1.QueryAnchorByHashResponse";
@@ -89,7 +88,7 @@ export interface QueryAnchorByHashResponseAminoMsg {
 }
 /** QueryAnchorByHashResponse is the Query/AnchorByHash response type. */
 export interface QueryAnchorByHashResponseSDKType {
-    anchor: AnchorInfoSDKType;
+    anchor?: AnchorInfoSDKType;
 }
 /**
  * QueryAttestationsByAttestorRequest is the Query/AttestationsByAttestor
@@ -99,7 +98,7 @@ export interface QueryAttestationsByAttestorRequest {
     /** attestor is the address of the attestor. */
     attestor: string;
     /** pagination is the PageRequest to use for pagination. */
-    pagination: PageRequest;
+    pagination?: PageRequest;
 }
 export interface QueryAttestationsByAttestorRequestProtoMsg {
     typeUrl: "/regen.data.v1.QueryAttestationsByAttestorRequest";
@@ -111,7 +110,7 @@ export interface QueryAttestationsByAttestorRequestProtoMsg {
  */
 export interface QueryAttestationsByAttestorRequestAmino {
     /** attestor is the address of the attestor. */
-    attestor: string;
+    attestor?: string;
     /** pagination is the PageRequest to use for pagination. */
     pagination?: PageRequestAmino;
 }
@@ -125,7 +124,7 @@ export interface QueryAttestationsByAttestorRequestAminoMsg {
  */
 export interface QueryAttestationsByAttestorRequestSDKType {
     attestor: string;
-    pagination: PageRequestSDKType;
+    pagination?: PageRequestSDKType;
 }
 /**
  * QueryAttestationsByAttestorResponse is the Query/AttestationsByAttestor
@@ -135,7 +134,7 @@ export interface QueryAttestationsByAttestorResponse {
     /** attestations are the attestations by the attestor. */
     attestations: AttestationInfo[];
     /** pagination is the pagination PageResponse. */
-    pagination: PageResponse;
+    pagination?: PageResponse;
 }
 export interface QueryAttestationsByAttestorResponseProtoMsg {
     typeUrl: "/regen.data.v1.QueryAttestationsByAttestorResponse";
@@ -147,7 +146,7 @@ export interface QueryAttestationsByAttestorResponseProtoMsg {
  */
 export interface QueryAttestationsByAttestorResponseAmino {
     /** attestations are the attestations by the attestor. */
-    attestations: AttestationInfoAmino[];
+    attestations?: AttestationInfoAmino[];
     /** pagination is the pagination PageResponse. */
     pagination?: PageResponseAmino;
 }
@@ -161,14 +160,14 @@ export interface QueryAttestationsByAttestorResponseAminoMsg {
  */
 export interface QueryAttestationsByAttestorResponseSDKType {
     attestations: AttestationInfoSDKType[];
-    pagination: PageResponseSDKType;
+    pagination?: PageResponseSDKType;
 }
 /** QueryAttestationsByIRIRequest is the Query/AttestationsByIRI request type. */
 export interface QueryAttestationsByIRIRequest {
     /** iri is the IRI of the anchored data. */
     iri: string;
     /** pagination is the PageRequest to use for pagination. */
-    pagination: PageRequest;
+    pagination?: PageRequest;
 }
 export interface QueryAttestationsByIRIRequestProtoMsg {
     typeUrl: "/regen.data.v1.QueryAttestationsByIRIRequest";
@@ -177,7 +176,7 @@ export interface QueryAttestationsByIRIRequestProtoMsg {
 /** QueryAttestationsByIRIRequest is the Query/AttestationsByIRI request type. */
 export interface QueryAttestationsByIRIRequestAmino {
     /** iri is the IRI of the anchored data. */
-    iri: string;
+    iri?: string;
     /** pagination is the PageRequest to use for pagination. */
     pagination?: PageRequestAmino;
 }
@@ -188,14 +187,14 @@ export interface QueryAttestationsByIRIRequestAminoMsg {
 /** QueryAttestationsByIRIRequest is the Query/AttestationsByIRI request type. */
 export interface QueryAttestationsByIRIRequestSDKType {
     iri: string;
-    pagination: PageRequestSDKType;
+    pagination?: PageRequestSDKType;
 }
 /** QueryAttestationsByIRIResponse is the Query/AttestationsByIRI response type. */
 export interface QueryAttestationsByIRIResponse {
     /** attestations are the attestations that have been made to the anchored data. */
     attestations: AttestationInfo[];
     /** pagination is the pagination PageResponse. */
-    pagination: PageResponse;
+    pagination?: PageResponse;
 }
 export interface QueryAttestationsByIRIResponseProtoMsg {
     typeUrl: "/regen.data.v1.QueryAttestationsByIRIResponse";
@@ -204,7 +203,7 @@ export interface QueryAttestationsByIRIResponseProtoMsg {
 /** QueryAttestationsByIRIResponse is the Query/AttestationsByIRI response type. */
 export interface QueryAttestationsByIRIResponseAmino {
     /** attestations are the attestations that have been made to the anchored data. */
-    attestations: AttestationInfoAmino[];
+    attestations?: AttestationInfoAmino[];
     /** pagination is the pagination PageResponse. */
     pagination?: PageResponseAmino;
 }
@@ -215,14 +214,14 @@ export interface QueryAttestationsByIRIResponseAminoMsg {
 /** QueryAttestationsByIRIResponse is the Query/AttestationsByIRI response type. */
 export interface QueryAttestationsByIRIResponseSDKType {
     attestations: AttestationInfoSDKType[];
-    pagination: PageResponseSDKType;
+    pagination?: PageResponseSDKType;
 }
 /** QueryAttestationsByHashRequest is the Query/AttestationsByHash request type. */
 export interface QueryAttestationsByHashRequest {
     /** content_hash is the ContentHash of the anchored data. */
-    contentHash: ContentHash;
+    contentHash?: ContentHash;
     /** pagination is the PageRequest to use for pagination. */
-    pagination: PageRequest;
+    pagination?: PageRequest;
 }
 export interface QueryAttestationsByHashRequestProtoMsg {
     typeUrl: "/regen.data.v1.QueryAttestationsByHashRequest";
@@ -241,8 +240,8 @@ export interface QueryAttestationsByHashRequestAminoMsg {
 }
 /** QueryAttestationsByHashRequest is the Query/AttestationsByHash request type. */
 export interface QueryAttestationsByHashRequestSDKType {
-    content_hash: ContentHashSDKType;
-    pagination: PageRequestSDKType;
+    content_hash?: ContentHashSDKType;
+    pagination?: PageRequestSDKType;
 }
 /**
  * QueryAttestationsByHashResponse is the Query/AttestationsByHash response
@@ -252,7 +251,7 @@ export interface QueryAttestationsByHashResponse {
     /** attestations are the attestations that have been made to the anchored data. */
     attestations: AttestationInfo[];
     /** pagination is the pagination PageResponse. */
-    pagination: PageResponse;
+    pagination?: PageResponse;
 }
 export interface QueryAttestationsByHashResponseProtoMsg {
     typeUrl: "/regen.data.v1.QueryAttestationsByHashResponse";
@@ -264,7 +263,7 @@ export interface QueryAttestationsByHashResponseProtoMsg {
  */
 export interface QueryAttestationsByHashResponseAmino {
     /** attestations are the attestations that have been made to the anchored data. */
-    attestations: AttestationInfoAmino[];
+    attestations?: AttestationInfoAmino[];
     /** pagination is the pagination PageResponse. */
     pagination?: PageResponseAmino;
 }
@@ -278,12 +277,12 @@ export interface QueryAttestationsByHashResponseAminoMsg {
  */
 export interface QueryAttestationsByHashResponseSDKType {
     attestations: AttestationInfoSDKType[];
-    pagination: PageResponseSDKType;
+    pagination?: PageResponseSDKType;
 }
 /** QueryResolverRequest is the Query/Resolver request type. */
 export interface QueryResolverRequest {
     /** id is the ID of the resolver. */
-    id: Long;
+    id: bigint;
 }
 export interface QueryResolverRequestProtoMsg {
     typeUrl: "/regen.data.v1.QueryResolverRequest";
@@ -292,7 +291,7 @@ export interface QueryResolverRequestProtoMsg {
 /** QueryResolverRequest is the Query/Resolver request type. */
 export interface QueryResolverRequestAmino {
     /** id is the ID of the resolver. */
-    id: string;
+    id?: string;
 }
 export interface QueryResolverRequestAminoMsg {
     type: "/regen.data.v1.QueryResolverRequest";
@@ -300,12 +299,12 @@ export interface QueryResolverRequestAminoMsg {
 }
 /** QueryResolverRequest is the Query/Resolver request type. */
 export interface QueryResolverRequestSDKType {
-    id: Long;
+    id: bigint;
 }
 /** QueryResolverResponse is the Query/Resolver response type. */
 export interface QueryResolverResponse {
     /** resolver is information about the resolver. */
-    resolver: ResolverInfo;
+    resolver?: ResolverInfo;
 }
 export interface QueryResolverResponseProtoMsg {
     typeUrl: "/regen.data.v1.QueryResolverResponse";
@@ -322,14 +321,14 @@ export interface QueryResolverResponseAminoMsg {
 }
 /** QueryResolverResponse is the Query/Resolver response type. */
 export interface QueryResolverResponseSDKType {
-    resolver: ResolverInfoSDKType;
+    resolver?: ResolverInfoSDKType;
 }
 /** QueryResolversByIRIRequest is the Query/ResolversByIRI request type. */
 export interface QueryResolversByIRIRequest {
     /** iri is the IRI of the anchored data. */
     iri: string;
     /** pagination is the PageRequest to use for pagination. */
-    pagination: PageRequest;
+    pagination?: PageRequest;
 }
 export interface QueryResolversByIRIRequestProtoMsg {
     typeUrl: "/regen.data.v1.QueryResolversByIRIRequest";
@@ -338,7 +337,7 @@ export interface QueryResolversByIRIRequestProtoMsg {
 /** QueryResolversByIRIRequest is the Query/ResolversByIRI request type. */
 export interface QueryResolversByIRIRequestAmino {
     /** iri is the IRI of the anchored data. */
-    iri: string;
+    iri?: string;
     /** pagination is the PageRequest to use for pagination. */
     pagination?: PageRequestAmino;
 }
@@ -349,14 +348,14 @@ export interface QueryResolversByIRIRequestAminoMsg {
 /** QueryResolversByIRIRequest is the Query/ResolversByIRI request type. */
 export interface QueryResolversByIRIRequestSDKType {
     iri: string;
-    pagination: PageRequestSDKType;
+    pagination?: PageRequestSDKType;
 }
 /** QueryResolversByIRIResponse is the Query/ResolversByIRI response type. */
 export interface QueryResolversByIRIResponse {
     /** resolvers are the resolvers that have registered the anchored data. */
     resolvers: ResolverInfo[];
     /** pagination is the PageResponse to use for pagination. */
-    pagination: PageResponse;
+    pagination?: PageResponse;
 }
 export interface QueryResolversByIRIResponseProtoMsg {
     typeUrl: "/regen.data.v1.QueryResolversByIRIResponse";
@@ -365,7 +364,7 @@ export interface QueryResolversByIRIResponseProtoMsg {
 /** QueryResolversByIRIResponse is the Query/ResolversByIRI response type. */
 export interface QueryResolversByIRIResponseAmino {
     /** resolvers are the resolvers that have registered the anchored data. */
-    resolvers: ResolverInfoAmino[];
+    resolvers?: ResolverInfoAmino[];
     /** pagination is the PageResponse to use for pagination. */
     pagination?: PageResponseAmino;
 }
@@ -376,14 +375,14 @@ export interface QueryResolversByIRIResponseAminoMsg {
 /** QueryResolversByIRIResponse is the Query/ResolversByIRI response type. */
 export interface QueryResolversByIRIResponseSDKType {
     resolvers: ResolverInfoSDKType[];
-    pagination: PageResponseSDKType;
+    pagination?: PageResponseSDKType;
 }
 /** QueryResolversByHashRequest is the Query/ResolversByHash request type. */
 export interface QueryResolversByHashRequest {
     /** content_hash is the ContentHash of the anchored data. */
-    contentHash: ContentHash;
+    contentHash?: ContentHash;
     /** pagination is the PageRequest to use for pagination. */
-    pagination: PageRequest;
+    pagination?: PageRequest;
 }
 export interface QueryResolversByHashRequestProtoMsg {
     typeUrl: "/regen.data.v1.QueryResolversByHashRequest";
@@ -402,15 +401,15 @@ export interface QueryResolversByHashRequestAminoMsg {
 }
 /** QueryResolversByHashRequest is the Query/ResolversByHash request type. */
 export interface QueryResolversByHashRequestSDKType {
-    content_hash: ContentHashSDKType;
-    pagination: PageRequestSDKType;
+    content_hash?: ContentHashSDKType;
+    pagination?: PageRequestSDKType;
 }
 /** QueryResolversByHashResponse is the Query/ResolversByHash response type. */
 export interface QueryResolversByHashResponse {
     /** resolvers are the resolvers that have registered the data. */
     resolvers: ResolverInfo[];
     /** pagination is the PageResponse to use for pagination. */
-    pagination: PageResponse;
+    pagination?: PageResponse;
 }
 export interface QueryResolversByHashResponseProtoMsg {
     typeUrl: "/regen.data.v1.QueryResolversByHashResponse";
@@ -419,7 +418,7 @@ export interface QueryResolversByHashResponseProtoMsg {
 /** QueryResolversByHashResponse is the Query/ResolversByHash response type. */
 export interface QueryResolversByHashResponseAmino {
     /** resolvers are the resolvers that have registered the data. */
-    resolvers: ResolverInfoAmino[];
+    resolvers?: ResolverInfoAmino[];
     /** pagination is the PageResponse to use for pagination. */
     pagination?: PageResponseAmino;
 }
@@ -430,14 +429,14 @@ export interface QueryResolversByHashResponseAminoMsg {
 /** QueryResolversByHashResponse is the Query/ResolversByHash response type. */
 export interface QueryResolversByHashResponseSDKType {
     resolvers: ResolverInfoSDKType[];
-    pagination: PageResponseSDKType;
+    pagination?: PageResponseSDKType;
 }
 /** QueryResolversByURLRequest is the Query/ResolversByURL request type. */
 export interface QueryResolversByURLRequest {
     /** url is the URL of the resolver. */
     url: string;
     /** pagination is the PageRequest to use for pagination. */
-    pagination: PageRequest;
+    pagination?: PageRequest;
 }
 export interface QueryResolversByURLRequestProtoMsg {
     typeUrl: "/regen.data.v1.QueryResolversByURLRequest";
@@ -446,7 +445,7 @@ export interface QueryResolversByURLRequestProtoMsg {
 /** QueryResolversByURLRequest is the Query/ResolversByURL request type. */
 export interface QueryResolversByURLRequestAmino {
     /** url is the URL of the resolver. */
-    url: string;
+    url?: string;
     /** pagination is the PageRequest to use for pagination. */
     pagination?: PageRequestAmino;
 }
@@ -457,14 +456,14 @@ export interface QueryResolversByURLRequestAminoMsg {
 /** QueryResolversByURLRequest is the Query/ResolversByURL request type. */
 export interface QueryResolversByURLRequestSDKType {
     url: string;
-    pagination: PageRequestSDKType;
+    pagination?: PageRequestSDKType;
 }
 /** QueryResolversByURLResponse is the Query/ResolversByURL response type. */
 export interface QueryResolversByURLResponse {
     /** resolvers are the resolvers that have a matching URL. */
     resolvers: ResolverInfo[];
     /** pagination is the PageResponse to use for pagination. */
-    pagination: PageResponse;
+    pagination?: PageResponse;
 }
 export interface QueryResolversByURLResponseProtoMsg {
     typeUrl: "/regen.data.v1.QueryResolversByURLResponse";
@@ -473,7 +472,7 @@ export interface QueryResolversByURLResponseProtoMsg {
 /** QueryResolversByURLResponse is the Query/ResolversByURL response type. */
 export interface QueryResolversByURLResponseAmino {
     /** resolvers are the resolvers that have a matching URL. */
-    resolvers: ResolverInfoAmino[];
+    resolvers?: ResolverInfoAmino[];
     /** pagination is the PageResponse to use for pagination. */
     pagination?: PageResponseAmino;
 }
@@ -484,7 +483,7 @@ export interface QueryResolversByURLResponseAminoMsg {
 /** QueryResolversByURLResponse is the Query/ResolversByURL response type. */
 export interface QueryResolversByURLResponseSDKType {
     resolvers: ResolverInfoSDKType[];
-    pagination: PageResponseSDKType;
+    pagination?: PageResponseSDKType;
 }
 /** ConvertIRIToHashRequest is the Query/ConvertIRIToHash request type. */
 export interface ConvertIRIToHashRequest {
@@ -498,7 +497,7 @@ export interface ConvertIRIToHashRequestProtoMsg {
 /** ConvertIRIToHashRequest is the Query/ConvertIRIToHash request type. */
 export interface ConvertIRIToHashRequestAmino {
     /** iri is the IRI to convert to a ContentHash. */
-    iri: string;
+    iri?: string;
 }
 export interface ConvertIRIToHashRequestAminoMsg {
     type: "/regen.data.v1.ConvertIRIToHashRequest";
@@ -511,7 +510,7 @@ export interface ConvertIRIToHashRequestSDKType {
 /** ConvertIRIToHashResponse is the Query/ConvertIRIToHash response type. */
 export interface ConvertIRIToHashResponse {
     /** content_hash is the ContentHash converted from the IRI. */
-    contentHash: ContentHash;
+    contentHash?: ContentHash;
 }
 export interface ConvertIRIToHashResponseProtoMsg {
     typeUrl: "/regen.data.v1.ConvertIRIToHashResponse";
@@ -528,12 +527,12 @@ export interface ConvertIRIToHashResponseAminoMsg {
 }
 /** ConvertIRIToHashResponse is the Query/ConvertIRIToHash response type. */
 export interface ConvertIRIToHashResponseSDKType {
-    content_hash: ContentHashSDKType;
+    content_hash?: ContentHashSDKType;
 }
 /** ConvertHashToIRIRequest is the Query/ConvertHashToIRI request type. */
 export interface ConvertHashToIRIRequest {
     /** content_hash is the ContentHash to convert to an IRI. */
-    contentHash: ContentHash;
+    contentHash?: ContentHash;
 }
 export interface ConvertHashToIRIRequestProtoMsg {
     typeUrl: "/regen.data.v1.ConvertHashToIRIRequest";
@@ -550,7 +549,7 @@ export interface ConvertHashToIRIRequestAminoMsg {
 }
 /** ConvertHashToIRIRequest is the Query/ConvertHashToIRI request type. */
 export interface ConvertHashToIRIRequestSDKType {
-    content_hash: ContentHashSDKType;
+    content_hash?: ContentHashSDKType;
 }
 /** ConvertHashToIRIResponse is the Query/ConvertHashToIRI response type. */
 export interface ConvertHashToIRIResponse {
@@ -564,7 +563,7 @@ export interface ConvertHashToIRIResponseProtoMsg {
 /** ConvertHashToIRIResponse is the Query/ConvertHashToIRI response type. */
 export interface ConvertHashToIRIResponseAmino {
     /** iri is the IRI converted from the ContentHash. */
-    iri: string;
+    iri?: string;
 }
 export interface ConvertHashToIRIResponseAminoMsg {
     type: "/regen.data.v1.ConvertHashToIRIResponse";
@@ -579,9 +578,9 @@ export interface AnchorInfo {
     /** iri is the IRI of the anchored data. */
     iri: string;
     /** content_hash is the ContentHash of the anchored data. */
-    contentHash: ContentHash;
+    contentHash?: ContentHash;
     /** timestamp is the time at which the data was anchored. */
-    timestamp: Timestamp;
+    timestamp?: Timestamp;
 }
 export interface AnchorInfoProtoMsg {
     typeUrl: "/regen.data.v1.AnchorInfo";
@@ -590,11 +589,11 @@ export interface AnchorInfoProtoMsg {
 /** AnchorInfo is the information for a data anchor. */
 export interface AnchorInfoAmino {
     /** iri is the IRI of the anchored data. */
-    iri: string;
+    iri?: string;
     /** content_hash is the ContentHash of the anchored data. */
     content_hash?: ContentHashAmino;
     /** timestamp is the time at which the data was anchored. */
-    timestamp?: TimestampAmino;
+    timestamp?: string;
 }
 export interface AnchorInfoAminoMsg {
     type: "/regen.data.v1.AnchorInfo";
@@ -603,8 +602,8 @@ export interface AnchorInfoAminoMsg {
 /** AnchorInfo is the information for a data anchor. */
 export interface AnchorInfoSDKType {
     iri: string;
-    content_hash: ContentHashSDKType;
-    timestamp: TimestampSDKType;
+    content_hash?: ContentHashSDKType;
+    timestamp?: TimestampSDKType;
 }
 /** AttestationInfo is the information for an attestation. */
 export interface AttestationInfo {
@@ -613,7 +612,7 @@ export interface AttestationInfo {
     /** attestor is the address of the account that attested to the anchored data. */
     attestor: string;
     /** timestamp is the time at which the data was attested to. */
-    timestamp: Timestamp;
+    timestamp?: Timestamp;
 }
 export interface AttestationInfoProtoMsg {
     typeUrl: "/regen.data.v1.AttestationInfo";
@@ -622,11 +621,11 @@ export interface AttestationInfoProtoMsg {
 /** AttestationInfo is the information for an attestation. */
 export interface AttestationInfoAmino {
     /** iri is the IRI of the anchored data. */
-    iri: string;
+    iri?: string;
     /** attestor is the address of the account that attested to the anchored data. */
-    attestor: string;
+    attestor?: string;
     /** timestamp is the time at which the data was attested to. */
-    timestamp?: TimestampAmino;
+    timestamp?: string;
 }
 export interface AttestationInfoAminoMsg {
     type: "/regen.data.v1.AttestationInfo";
@@ -636,12 +635,12 @@ export interface AttestationInfoAminoMsg {
 export interface AttestationInfoSDKType {
     iri: string;
     attestor: string;
-    timestamp: TimestampSDKType;
+    timestamp?: TimestampSDKType;
 }
 /** ResolverInfo is the information for a resolver. */
 export interface ResolverInfo {
     /** id is the ID of the resolver. */
-    id: Long;
+    id: bigint;
     /** url is the URL of the resolver. */
     url: string;
     /** manager is the address of the account that manages the resolver. */
@@ -654,11 +653,11 @@ export interface ResolverInfoProtoMsg {
 /** ResolverInfo is the information for a resolver. */
 export interface ResolverInfoAmino {
     /** id is the ID of the resolver. */
-    id: string;
+    id?: string;
     /** url is the URL of the resolver. */
-    url: string;
+    url?: string;
     /** manager is the address of the account that manages the resolver. */
-    manager: string;
+    manager?: string;
 }
 export interface ResolverInfoAminoMsg {
     type: "/regen.data.v1.ResolverInfo";
@@ -666,13 +665,14 @@ export interface ResolverInfoAminoMsg {
 }
 /** ResolverInfo is the information for a resolver. */
 export interface ResolverInfoSDKType {
-    id: Long;
+    id: bigint;
     url: string;
     manager: string;
 }
 export declare const QueryAnchorByIRIRequest: {
-    encode(message: QueryAnchorByIRIRequest, writer?: _m0.Writer): _m0.Writer;
-    decode(input: _m0.Reader | Uint8Array, length?: number): QueryAnchorByIRIRequest;
+    typeUrl: string;
+    encode(message: QueryAnchorByIRIRequest, writer?: BinaryWriter): BinaryWriter;
+    decode(input: BinaryReader | Uint8Array, length?: number): QueryAnchorByIRIRequest;
     fromJSON(object: any): QueryAnchorByIRIRequest;
     toJSON(message: QueryAnchorByIRIRequest): unknown;
     fromPartial(object: Partial<QueryAnchorByIRIRequest>): QueryAnchorByIRIRequest;
@@ -684,8 +684,9 @@ export declare const QueryAnchorByIRIRequest: {
     toProtoMsg(message: QueryAnchorByIRIRequest): QueryAnchorByIRIRequestProtoMsg;
 };
 export declare const QueryAnchorByIRIResponse: {
-    encode(message: QueryAnchorByIRIResponse, writer?: _m0.Writer): _m0.Writer;
-    decode(input: _m0.Reader | Uint8Array, length?: number): QueryAnchorByIRIResponse;
+    typeUrl: string;
+    encode(message: QueryAnchorByIRIResponse, writer?: BinaryWriter): BinaryWriter;
+    decode(input: BinaryReader | Uint8Array, length?: number): QueryAnchorByIRIResponse;
     fromJSON(object: any): QueryAnchorByIRIResponse;
     toJSON(message: QueryAnchorByIRIResponse): unknown;
     fromPartial(object: Partial<QueryAnchorByIRIResponse>): QueryAnchorByIRIResponse;
@@ -697,8 +698,9 @@ export declare const QueryAnchorByIRIResponse: {
     toProtoMsg(message: QueryAnchorByIRIResponse): QueryAnchorByIRIResponseProtoMsg;
 };
 export declare const QueryAnchorByHashRequest: {
-    encode(message: QueryAnchorByHashRequest, writer?: _m0.Writer): _m0.Writer;
-    decode(input: _m0.Reader | Uint8Array, length?: number): QueryAnchorByHashRequest;
+    typeUrl: string;
+    encode(message: QueryAnchorByHashRequest, writer?: BinaryWriter): BinaryWriter;
+    decode(input: BinaryReader | Uint8Array, length?: number): QueryAnchorByHashRequest;
     fromJSON(object: any): QueryAnchorByHashRequest;
     toJSON(message: QueryAnchorByHashRequest): unknown;
     fromPartial(object: Partial<QueryAnchorByHashRequest>): QueryAnchorByHashRequest;
@@ -710,8 +712,9 @@ export declare const QueryAnchorByHashRequest: {
     toProtoMsg(message: QueryAnchorByHashRequest): QueryAnchorByHashRequestProtoMsg;
 };
 export declare const QueryAnchorByHashResponse: {
-    encode(message: QueryAnchorByHashResponse, writer?: _m0.Writer): _m0.Writer;
-    decode(input: _m0.Reader | Uint8Array, length?: number): QueryAnchorByHashResponse;
+    typeUrl: string;
+    encode(message: QueryAnchorByHashResponse, writer?: BinaryWriter): BinaryWriter;
+    decode(input: BinaryReader | Uint8Array, length?: number): QueryAnchorByHashResponse;
     fromJSON(object: any): QueryAnchorByHashResponse;
     toJSON(message: QueryAnchorByHashResponse): unknown;
     fromPartial(object: Partial<QueryAnchorByHashResponse>): QueryAnchorByHashResponse;
@@ -723,8 +726,9 @@ export declare const QueryAnchorByHashResponse: {
     toProtoMsg(message: QueryAnchorByHashResponse): QueryAnchorByHashResponseProtoMsg;
 };
 export declare const QueryAttestationsByAttestorRequest: {
-    encode(message: QueryAttestationsByAttestorRequest, writer?: _m0.Writer): _m0.Writer;
-    decode(input: _m0.Reader | Uint8Array, length?: number): QueryAttestationsByAttestorRequest;
+    typeUrl: string;
+    encode(message: QueryAttestationsByAttestorRequest, writer?: BinaryWriter): BinaryWriter;
+    decode(input: BinaryReader | Uint8Array, length?: number): QueryAttestationsByAttestorRequest;
     fromJSON(object: any): QueryAttestationsByAttestorRequest;
     toJSON(message: QueryAttestationsByAttestorRequest): unknown;
     fromPartial(object: Partial<QueryAttestationsByAttestorRequest>): QueryAttestationsByAttestorRequest;
@@ -736,8 +740,9 @@ export declare const QueryAttestationsByAttestorRequest: {
     toProtoMsg(message: QueryAttestationsByAttestorRequest): QueryAttestationsByAttestorRequestProtoMsg;
 };
 export declare const QueryAttestationsByAttestorResponse: {
-    encode(message: QueryAttestationsByAttestorResponse, writer?: _m0.Writer): _m0.Writer;
-    decode(input: _m0.Reader | Uint8Array, length?: number): QueryAttestationsByAttestorResponse;
+    typeUrl: string;
+    encode(message: QueryAttestationsByAttestorResponse, writer?: BinaryWriter): BinaryWriter;
+    decode(input: BinaryReader | Uint8Array, length?: number): QueryAttestationsByAttestorResponse;
     fromJSON(object: any): QueryAttestationsByAttestorResponse;
     toJSON(message: QueryAttestationsByAttestorResponse): unknown;
     fromPartial(object: Partial<QueryAttestationsByAttestorResponse>): QueryAttestationsByAttestorResponse;
@@ -749,8 +754,9 @@ export declare const QueryAttestationsByAttestorResponse: {
     toProtoMsg(message: QueryAttestationsByAttestorResponse): QueryAttestationsByAttestorResponseProtoMsg;
 };
 export declare const QueryAttestationsByIRIRequest: {
-    encode(message: QueryAttestationsByIRIRequest, writer?: _m0.Writer): _m0.Writer;
-    decode(input: _m0.Reader | Uint8Array, length?: number): QueryAttestationsByIRIRequest;
+    typeUrl: string;
+    encode(message: QueryAttestationsByIRIRequest, writer?: BinaryWriter): BinaryWriter;
+    decode(input: BinaryReader | Uint8Array, length?: number): QueryAttestationsByIRIRequest;
     fromJSON(object: any): QueryAttestationsByIRIRequest;
     toJSON(message: QueryAttestationsByIRIRequest): unknown;
     fromPartial(object: Partial<QueryAttestationsByIRIRequest>): QueryAttestationsByIRIRequest;
@@ -762,8 +768,9 @@ export declare const QueryAttestationsByIRIRequest: {
     toProtoMsg(message: QueryAttestationsByIRIRequest): QueryAttestationsByIRIRequestProtoMsg;
 };
 export declare const QueryAttestationsByIRIResponse: {
-    encode(message: QueryAttestationsByIRIResponse, writer?: _m0.Writer): _m0.Writer;
-    decode(input: _m0.Reader | Uint8Array, length?: number): QueryAttestationsByIRIResponse;
+    typeUrl: string;
+    encode(message: QueryAttestationsByIRIResponse, writer?: BinaryWriter): BinaryWriter;
+    decode(input: BinaryReader | Uint8Array, length?: number): QueryAttestationsByIRIResponse;
     fromJSON(object: any): QueryAttestationsByIRIResponse;
     toJSON(message: QueryAttestationsByIRIResponse): unknown;
     fromPartial(object: Partial<QueryAttestationsByIRIResponse>): QueryAttestationsByIRIResponse;
@@ -775,8 +782,9 @@ export declare const QueryAttestationsByIRIResponse: {
     toProtoMsg(message: QueryAttestationsByIRIResponse): QueryAttestationsByIRIResponseProtoMsg;
 };
 export declare const QueryAttestationsByHashRequest: {
-    encode(message: QueryAttestationsByHashRequest, writer?: _m0.Writer): _m0.Writer;
-    decode(input: _m0.Reader | Uint8Array, length?: number): QueryAttestationsByHashRequest;
+    typeUrl: string;
+    encode(message: QueryAttestationsByHashRequest, writer?: BinaryWriter): BinaryWriter;
+    decode(input: BinaryReader | Uint8Array, length?: number): QueryAttestationsByHashRequest;
     fromJSON(object: any): QueryAttestationsByHashRequest;
     toJSON(message: QueryAttestationsByHashRequest): unknown;
     fromPartial(object: Partial<QueryAttestationsByHashRequest>): QueryAttestationsByHashRequest;
@@ -788,8 +796,9 @@ export declare const QueryAttestationsByHashRequest: {
     toProtoMsg(message: QueryAttestationsByHashRequest): QueryAttestationsByHashRequestProtoMsg;
 };
 export declare const QueryAttestationsByHashResponse: {
-    encode(message: QueryAttestationsByHashResponse, writer?: _m0.Writer): _m0.Writer;
-    decode(input: _m0.Reader | Uint8Array, length?: number): QueryAttestationsByHashResponse;
+    typeUrl: string;
+    encode(message: QueryAttestationsByHashResponse, writer?: BinaryWriter): BinaryWriter;
+    decode(input: BinaryReader | Uint8Array, length?: number): QueryAttestationsByHashResponse;
     fromJSON(object: any): QueryAttestationsByHashResponse;
     toJSON(message: QueryAttestationsByHashResponse): unknown;
     fromPartial(object: Partial<QueryAttestationsByHashResponse>): QueryAttestationsByHashResponse;
@@ -801,8 +810,9 @@ export declare const QueryAttestationsByHashResponse: {
     toProtoMsg(message: QueryAttestationsByHashResponse): QueryAttestationsByHashResponseProtoMsg;
 };
 export declare const QueryResolverRequest: {
-    encode(message: QueryResolverRequest, writer?: _m0.Writer): _m0.Writer;
-    decode(input: _m0.Reader | Uint8Array, length?: number): QueryResolverRequest;
+    typeUrl: string;
+    encode(message: QueryResolverRequest, writer?: BinaryWriter): BinaryWriter;
+    decode(input: BinaryReader | Uint8Array, length?: number): QueryResolverRequest;
     fromJSON(object: any): QueryResolverRequest;
     toJSON(message: QueryResolverRequest): unknown;
     fromPartial(object: Partial<QueryResolverRequest>): QueryResolverRequest;
@@ -814,8 +824,9 @@ export declare const QueryResolverRequest: {
     toProtoMsg(message: QueryResolverRequest): QueryResolverRequestProtoMsg;
 };
 export declare const QueryResolverResponse: {
-    encode(message: QueryResolverResponse, writer?: _m0.Writer): _m0.Writer;
-    decode(input: _m0.Reader | Uint8Array, length?: number): QueryResolverResponse;
+    typeUrl: string;
+    encode(message: QueryResolverResponse, writer?: BinaryWriter): BinaryWriter;
+    decode(input: BinaryReader | Uint8Array, length?: number): QueryResolverResponse;
     fromJSON(object: any): QueryResolverResponse;
     toJSON(message: QueryResolverResponse): unknown;
     fromPartial(object: Partial<QueryResolverResponse>): QueryResolverResponse;
@@ -827,8 +838,9 @@ export declare const QueryResolverResponse: {
     toProtoMsg(message: QueryResolverResponse): QueryResolverResponseProtoMsg;
 };
 export declare const QueryResolversByIRIRequest: {
-    encode(message: QueryResolversByIRIRequest, writer?: _m0.Writer): _m0.Writer;
-    decode(input: _m0.Reader | Uint8Array, length?: number): QueryResolversByIRIRequest;
+    typeUrl: string;
+    encode(message: QueryResolversByIRIRequest, writer?: BinaryWriter): BinaryWriter;
+    decode(input: BinaryReader | Uint8Array, length?: number): QueryResolversByIRIRequest;
     fromJSON(object: any): QueryResolversByIRIRequest;
     toJSON(message: QueryResolversByIRIRequest): unknown;
     fromPartial(object: Partial<QueryResolversByIRIRequest>): QueryResolversByIRIRequest;
@@ -840,8 +852,9 @@ export declare const QueryResolversByIRIRequest: {
     toProtoMsg(message: QueryResolversByIRIRequest): QueryResolversByIRIRequestProtoMsg;
 };
 export declare const QueryResolversByIRIResponse: {
-    encode(message: QueryResolversByIRIResponse, writer?: _m0.Writer): _m0.Writer;
-    decode(input: _m0.Reader | Uint8Array, length?: number): QueryResolversByIRIResponse;
+    typeUrl: string;
+    encode(message: QueryResolversByIRIResponse, writer?: BinaryWriter): BinaryWriter;
+    decode(input: BinaryReader | Uint8Array, length?: number): QueryResolversByIRIResponse;
     fromJSON(object: any): QueryResolversByIRIResponse;
     toJSON(message: QueryResolversByIRIResponse): unknown;
     fromPartial(object: Partial<QueryResolversByIRIResponse>): QueryResolversByIRIResponse;
@@ -853,8 +866,9 @@ export declare const QueryResolversByIRIResponse: {
     toProtoMsg(message: QueryResolversByIRIResponse): QueryResolversByIRIResponseProtoMsg;
 };
 export declare const QueryResolversByHashRequest: {
-    encode(message: QueryResolversByHashRequest, writer?: _m0.Writer): _m0.Writer;
-    decode(input: _m0.Reader | Uint8Array, length?: number): QueryResolversByHashRequest;
+    typeUrl: string;
+    encode(message: QueryResolversByHashRequest, writer?: BinaryWriter): BinaryWriter;
+    decode(input: BinaryReader | Uint8Array, length?: number): QueryResolversByHashRequest;
     fromJSON(object: any): QueryResolversByHashRequest;
     toJSON(message: QueryResolversByHashRequest): unknown;
     fromPartial(object: Partial<QueryResolversByHashRequest>): QueryResolversByHashRequest;
@@ -866,8 +880,9 @@ export declare const QueryResolversByHashRequest: {
     toProtoMsg(message: QueryResolversByHashRequest): QueryResolversByHashRequestProtoMsg;
 };
 export declare const QueryResolversByHashResponse: {
-    encode(message: QueryResolversByHashResponse, writer?: _m0.Writer): _m0.Writer;
-    decode(input: _m0.Reader | Uint8Array, length?: number): QueryResolversByHashResponse;
+    typeUrl: string;
+    encode(message: QueryResolversByHashResponse, writer?: BinaryWriter): BinaryWriter;
+    decode(input: BinaryReader | Uint8Array, length?: number): QueryResolversByHashResponse;
     fromJSON(object: any): QueryResolversByHashResponse;
     toJSON(message: QueryResolversByHashResponse): unknown;
     fromPartial(object: Partial<QueryResolversByHashResponse>): QueryResolversByHashResponse;
@@ -879,8 +894,9 @@ export declare const QueryResolversByHashResponse: {
     toProtoMsg(message: QueryResolversByHashResponse): QueryResolversByHashResponseProtoMsg;
 };
 export declare const QueryResolversByURLRequest: {
-    encode(message: QueryResolversByURLRequest, writer?: _m0.Writer): _m0.Writer;
-    decode(input: _m0.Reader | Uint8Array, length?: number): QueryResolversByURLRequest;
+    typeUrl: string;
+    encode(message: QueryResolversByURLRequest, writer?: BinaryWriter): BinaryWriter;
+    decode(input: BinaryReader | Uint8Array, length?: number): QueryResolversByURLRequest;
     fromJSON(object: any): QueryResolversByURLRequest;
     toJSON(message: QueryResolversByURLRequest): unknown;
     fromPartial(object: Partial<QueryResolversByURLRequest>): QueryResolversByURLRequest;
@@ -892,8 +908,9 @@ export declare const QueryResolversByURLRequest: {
     toProtoMsg(message: QueryResolversByURLRequest): QueryResolversByURLRequestProtoMsg;
 };
 export declare const QueryResolversByURLResponse: {
-    encode(message: QueryResolversByURLResponse, writer?: _m0.Writer): _m0.Writer;
-    decode(input: _m0.Reader | Uint8Array, length?: number): QueryResolversByURLResponse;
+    typeUrl: string;
+    encode(message: QueryResolversByURLResponse, writer?: BinaryWriter): BinaryWriter;
+    decode(input: BinaryReader | Uint8Array, length?: number): QueryResolversByURLResponse;
     fromJSON(object: any): QueryResolversByURLResponse;
     toJSON(message: QueryResolversByURLResponse): unknown;
     fromPartial(object: Partial<QueryResolversByURLResponse>): QueryResolversByURLResponse;
@@ -905,8 +922,9 @@ export declare const QueryResolversByURLResponse: {
     toProtoMsg(message: QueryResolversByURLResponse): QueryResolversByURLResponseProtoMsg;
 };
 export declare const ConvertIRIToHashRequest: {
-    encode(message: ConvertIRIToHashRequest, writer?: _m0.Writer): _m0.Writer;
-    decode(input: _m0.Reader | Uint8Array, length?: number): ConvertIRIToHashRequest;
+    typeUrl: string;
+    encode(message: ConvertIRIToHashRequest, writer?: BinaryWriter): BinaryWriter;
+    decode(input: BinaryReader | Uint8Array, length?: number): ConvertIRIToHashRequest;
     fromJSON(object: any): ConvertIRIToHashRequest;
     toJSON(message: ConvertIRIToHashRequest): unknown;
     fromPartial(object: Partial<ConvertIRIToHashRequest>): ConvertIRIToHashRequest;
@@ -918,8 +936,9 @@ export declare const ConvertIRIToHashRequest: {
     toProtoMsg(message: ConvertIRIToHashRequest): ConvertIRIToHashRequestProtoMsg;
 };
 export declare const ConvertIRIToHashResponse: {
-    encode(message: ConvertIRIToHashResponse, writer?: _m0.Writer): _m0.Writer;
-    decode(input: _m0.Reader | Uint8Array, length?: number): ConvertIRIToHashResponse;
+    typeUrl: string;
+    encode(message: ConvertIRIToHashResponse, writer?: BinaryWriter): BinaryWriter;
+    decode(input: BinaryReader | Uint8Array, length?: number): ConvertIRIToHashResponse;
     fromJSON(object: any): ConvertIRIToHashResponse;
     toJSON(message: ConvertIRIToHashResponse): unknown;
     fromPartial(object: Partial<ConvertIRIToHashResponse>): ConvertIRIToHashResponse;
@@ -931,8 +950,9 @@ export declare const ConvertIRIToHashResponse: {
     toProtoMsg(message: ConvertIRIToHashResponse): ConvertIRIToHashResponseProtoMsg;
 };
 export declare const ConvertHashToIRIRequest: {
-    encode(message: ConvertHashToIRIRequest, writer?: _m0.Writer): _m0.Writer;
-    decode(input: _m0.Reader | Uint8Array, length?: number): ConvertHashToIRIRequest;
+    typeUrl: string;
+    encode(message: ConvertHashToIRIRequest, writer?: BinaryWriter): BinaryWriter;
+    decode(input: BinaryReader | Uint8Array, length?: number): ConvertHashToIRIRequest;
     fromJSON(object: any): ConvertHashToIRIRequest;
     toJSON(message: ConvertHashToIRIRequest): unknown;
     fromPartial(object: Partial<ConvertHashToIRIRequest>): ConvertHashToIRIRequest;
@@ -944,8 +964,9 @@ export declare const ConvertHashToIRIRequest: {
     toProtoMsg(message: ConvertHashToIRIRequest): ConvertHashToIRIRequestProtoMsg;
 };
 export declare const ConvertHashToIRIResponse: {
-    encode(message: ConvertHashToIRIResponse, writer?: _m0.Writer): _m0.Writer;
-    decode(input: _m0.Reader | Uint8Array, length?: number): ConvertHashToIRIResponse;
+    typeUrl: string;
+    encode(message: ConvertHashToIRIResponse, writer?: BinaryWriter): BinaryWriter;
+    decode(input: BinaryReader | Uint8Array, length?: number): ConvertHashToIRIResponse;
     fromJSON(object: any): ConvertHashToIRIResponse;
     toJSON(message: ConvertHashToIRIResponse): unknown;
     fromPartial(object: Partial<ConvertHashToIRIResponse>): ConvertHashToIRIResponse;
@@ -957,8 +978,9 @@ export declare const ConvertHashToIRIResponse: {
     toProtoMsg(message: ConvertHashToIRIResponse): ConvertHashToIRIResponseProtoMsg;
 };
 export declare const AnchorInfo: {
-    encode(message: AnchorInfo, writer?: _m0.Writer): _m0.Writer;
-    decode(input: _m0.Reader | Uint8Array, length?: number): AnchorInfo;
+    typeUrl: string;
+    encode(message: AnchorInfo, writer?: BinaryWriter): BinaryWriter;
+    decode(input: BinaryReader | Uint8Array, length?: number): AnchorInfo;
     fromJSON(object: any): AnchorInfo;
     toJSON(message: AnchorInfo): unknown;
     fromPartial(object: Partial<AnchorInfo>): AnchorInfo;
@@ -970,8 +992,9 @@ export declare const AnchorInfo: {
     toProtoMsg(message: AnchorInfo): AnchorInfoProtoMsg;
 };
 export declare const AttestationInfo: {
-    encode(message: AttestationInfo, writer?: _m0.Writer): _m0.Writer;
-    decode(input: _m0.Reader | Uint8Array, length?: number): AttestationInfo;
+    typeUrl: string;
+    encode(message: AttestationInfo, writer?: BinaryWriter): BinaryWriter;
+    decode(input: BinaryReader | Uint8Array, length?: number): AttestationInfo;
     fromJSON(object: any): AttestationInfo;
     toJSON(message: AttestationInfo): unknown;
     fromPartial(object: Partial<AttestationInfo>): AttestationInfo;
@@ -983,8 +1006,9 @@ export declare const AttestationInfo: {
     toProtoMsg(message: AttestationInfo): AttestationInfoProtoMsg;
 };
 export declare const ResolverInfo: {
-    encode(message: ResolverInfo, writer?: _m0.Writer): _m0.Writer;
-    decode(input: _m0.Reader | Uint8Array, length?: number): ResolverInfo;
+    typeUrl: string;
+    encode(message: ResolverInfo, writer?: BinaryWriter): BinaryWriter;
+    decode(input: BinaryReader | Uint8Array, length?: number): ResolverInfo;
     fromJSON(object: any): ResolverInfo;
     toJSON(message: ResolverInfo): unknown;
     fromPartial(object: Partial<ResolverInfo>): ResolverInfo;

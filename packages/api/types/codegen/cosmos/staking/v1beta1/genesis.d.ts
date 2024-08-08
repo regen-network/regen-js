@@ -1,6 +1,5 @@
 import { Params, ParamsAmino, ParamsSDKType, Validator, ValidatorAmino, ValidatorSDKType, Delegation, DelegationAmino, DelegationSDKType, UnbondingDelegation, UnbondingDelegationAmino, UnbondingDelegationSDKType, Redelegation, RedelegationAmino, RedelegationSDKType } from "./staking";
-import { Long } from "../../../helpers";
-import * as _m0 from "protobufjs/minimal";
+import { BinaryReader, BinaryWriter } from "../../../binary";
 /** GenesisState defines the staking module's genesis state. */
 export interface GenesisState {
     /** params defines all the paramaters of related to deposit. */
@@ -37,21 +36,21 @@ export interface GenesisStateAmino {
      * last_total_power tracks the total amounts of bonded tokens recorded during
      * the previous end block.
      */
-    last_total_power: Uint8Array;
+    last_total_power?: string;
     /**
      * last_validator_powers is a special index that provides a historical list
      * of the last-block's bonded validators.
      */
-    last_validator_powers: LastValidatorPowerAmino[];
+    last_validator_powers?: LastValidatorPowerAmino[];
     /** delegations defines the validator set at genesis. */
-    validators: ValidatorAmino[];
+    validators?: ValidatorAmino[];
     /** delegations defines the delegations active at genesis. */
-    delegations: DelegationAmino[];
+    delegations?: DelegationAmino[];
     /** unbonding_delegations defines the unbonding delegations active at genesis. */
-    unbonding_delegations: UnbondingDelegationAmino[];
+    unbonding_delegations?: UnbondingDelegationAmino[];
     /** redelegations defines the redelegations active at genesis. */
-    redelegations: RedelegationAmino[];
-    exported: boolean;
+    redelegations?: RedelegationAmino[];
+    exported?: boolean;
 }
 export interface GenesisStateAminoMsg {
     type: "cosmos-sdk/GenesisState";
@@ -73,7 +72,7 @@ export interface LastValidatorPower {
     /** address is the address of the validator. */
     address: string;
     /** power defines the power of the validator. */
-    power: Long;
+    power: bigint;
 }
 export interface LastValidatorPowerProtoMsg {
     typeUrl: "/cosmos.staking.v1beta1.LastValidatorPower";
@@ -82,9 +81,9 @@ export interface LastValidatorPowerProtoMsg {
 /** LastValidatorPower required for validator set update logic. */
 export interface LastValidatorPowerAmino {
     /** address is the address of the validator. */
-    address: string;
+    address?: string;
     /** power defines the power of the validator. */
-    power: string;
+    power?: string;
 }
 export interface LastValidatorPowerAminoMsg {
     type: "cosmos-sdk/LastValidatorPower";
@@ -93,11 +92,12 @@ export interface LastValidatorPowerAminoMsg {
 /** LastValidatorPower required for validator set update logic. */
 export interface LastValidatorPowerSDKType {
     address: string;
-    power: Long;
+    power: bigint;
 }
 export declare const GenesisState: {
-    encode(message: GenesisState, writer?: _m0.Writer): _m0.Writer;
-    decode(input: _m0.Reader | Uint8Array, length?: number): GenesisState;
+    typeUrl: string;
+    encode(message: GenesisState, writer?: BinaryWriter): BinaryWriter;
+    decode(input: BinaryReader | Uint8Array, length?: number): GenesisState;
     fromJSON(object: any): GenesisState;
     toJSON(message: GenesisState): unknown;
     fromPartial(object: Partial<GenesisState>): GenesisState;
@@ -110,8 +110,9 @@ export declare const GenesisState: {
     toProtoMsg(message: GenesisState): GenesisStateProtoMsg;
 };
 export declare const LastValidatorPower: {
-    encode(message: LastValidatorPower, writer?: _m0.Writer): _m0.Writer;
-    decode(input: _m0.Reader | Uint8Array, length?: number): LastValidatorPower;
+    typeUrl: string;
+    encode(message: LastValidatorPower, writer?: BinaryWriter): BinaryWriter;
+    decode(input: BinaryReader | Uint8Array, length?: number): LastValidatorPower;
     fromJSON(object: any): LastValidatorPower;
     toJSON(message: LastValidatorPower): unknown;
     fromPartial(object: Partial<LastValidatorPower>): LastValidatorPower;

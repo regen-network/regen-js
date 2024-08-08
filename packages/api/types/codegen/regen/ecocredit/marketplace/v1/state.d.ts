@@ -1,24 +1,23 @@
-import { Timestamp, TimestampAmino, TimestampSDKType } from "../../../../google/protobuf/timestamp";
-import { Long } from "../../../../helpers";
-import * as _m0 from "protobufjs/minimal";
+import { Timestamp, TimestampSDKType } from "../../../../google/protobuf/timestamp";
+import { BinaryReader, BinaryWriter } from "../../../../binary";
 /** SellOrder represents the information for a sell order. */
 export interface SellOrder {
     /** id is the unique ID of sell order. */
-    id: Long;
+    id: bigint;
     /** seller is the address of the account that is selling credits. */
     seller: Uint8Array;
     /**
      * batch_key is the table row identifier of the credit batch used internally
      * for efficient lookups. This links a sell order to a credit batch.
      */
-    batchKey: Long;
+    batchKey: bigint;
     /** quantity is the decimal quantity of credits being sold. */
     quantity: string;
     /**
      * market_id is the market in which this sell order exists and specifies
      * the bank_denom that ask_amount corresponds to forming the ask_price.
      */
-    marketId: Long;
+    marketId: bigint;
     /**
      * ask_amount is the integer amount (encoded as a string) that the seller is
      * asking for each credit unit of the batch. Each credit unit of the batch
@@ -36,7 +35,7 @@ export interface SellOrder {
      * expiration is an optional timestamp when the sell order expires. When the
      * expiration time is reached, the sell order is removed from state.
      */
-    expiration: Timestamp;
+    expiration?: Timestamp;
     /**
      * maker indicates that this is a maker order, meaning that when it hit
      * the order book, there were no matching buy orders.
@@ -50,44 +49,44 @@ export interface SellOrderProtoMsg {
 /** SellOrder represents the information for a sell order. */
 export interface SellOrderAmino {
     /** id is the unique ID of sell order. */
-    id: string;
+    id?: string;
     /** seller is the address of the account that is selling credits. */
-    seller: Uint8Array;
+    seller?: string;
     /**
      * batch_key is the table row identifier of the credit batch used internally
      * for efficient lookups. This links a sell order to a credit batch.
      */
-    batch_key: string;
+    batch_key?: string;
     /** quantity is the decimal quantity of credits being sold. */
-    quantity: string;
+    quantity?: string;
     /**
      * market_id is the market in which this sell order exists and specifies
      * the bank_denom that ask_amount corresponds to forming the ask_price.
      */
-    market_id: string;
+    market_id?: string;
     /**
      * ask_amount is the integer amount (encoded as a string) that the seller is
      * asking for each credit unit of the batch. Each credit unit of the batch
      * will be sold for at least the ask_amount. The ask_amount corresponds to the
      * Market.denom to form the ask price.
      */
-    ask_amount: string;
+    ask_amount?: string;
     /**
      * disable_auto_retire disables auto-retirement of credits which allows a
      * buyer to disable auto-retirement in their buy order enabling them to
      * resell the credits to another buyer.
      */
-    disable_auto_retire: boolean;
+    disable_auto_retire?: boolean;
     /**
      * expiration is an optional timestamp when the sell order expires. When the
      * expiration time is reached, the sell order is removed from state.
      */
-    expiration?: TimestampAmino;
+    expiration?: string;
     /**
      * maker indicates that this is a maker order, meaning that when it hit
      * the order book, there were no matching buy orders.
      */
-    maker: boolean;
+    maker?: boolean;
 }
 export interface SellOrderAminoMsg {
     type: "/regen.ecocredit.marketplace.v1.SellOrder";
@@ -95,14 +94,14 @@ export interface SellOrderAminoMsg {
 }
 /** SellOrder represents the information for a sell order. */
 export interface SellOrderSDKType {
-    id: Long;
+    id: bigint;
     seller: Uint8Array;
-    batch_key: Long;
+    batch_key: bigint;
     quantity: string;
-    market_id: Long;
+    market_id: bigint;
     ask_amount: string;
     disable_auto_retire: boolean;
-    expiration: TimestampSDKType;
+    expiration?: TimestampSDKType;
     maker: boolean;
 }
 /** AllowedDenom represents the information for an allowed ask/bid denom. */
@@ -128,18 +127,18 @@ export interface AllowedDenomProtoMsg {
 /** AllowedDenom represents the information for an allowed ask/bid denom. */
 export interface AllowedDenomAmino {
     /** denom is the bank denom to allow (ex. ibc/GLKHDSG423SGS) */
-    bank_denom: string;
+    bank_denom?: string;
     /**
      * display_denom is the denom to display to the user and is informational.
      * Because the denom is likely an IBC denom, this should be chosen by
      * governance to represent the consensus trusted name of the denom.
      */
-    display_denom: string;
+    display_denom?: string;
     /**
      * exponent is the exponent that relates the denom to the display_denom and is
      * informational
      */
-    exponent: number;
+    exponent?: number;
 }
 export interface AllowedDenomAminoMsg {
     type: "/regen.ecocredit.marketplace.v1.AllowedDenom";
@@ -164,7 +163,7 @@ export interface AllowedDenomSDKType {
  */
 export interface Market {
     /** id is the unique ID of the market. */
-    id: Long;
+    id: bigint;
     /** credit_type_abbrev is the abbreviation of the credit type. */
     creditTypeAbbrev: string;
     /** bank_denom is an allowed bank denom. */
@@ -215,11 +214,11 @@ export interface MarketProtoMsg {
  */
 export interface MarketAmino {
     /** id is the unique ID of the market. */
-    id: string;
+    id?: string;
     /** credit_type_abbrev is the abbreviation of the credit type. */
-    credit_type_abbrev: string;
+    credit_type_abbrev?: string;
     /** bank_denom is an allowed bank denom. */
-    bank_denom: string;
+    bank_denom?: string;
     /**
      * precision_modifier is an optional modifier used to convert arbitrary
      * precision integer bank amounts to uint32 values used for sorting in the
@@ -247,7 +246,7 @@ export interface MarketAmino {
      * will need to adjust precision_modifier to allow for higher prices in
      * exchange for less precision at the lower end.
      */
-    precision_modifier: number;
+    precision_modifier?: number;
 }
 export interface MarketAminoMsg {
     type: "/regen.ecocredit.marketplace.v1.Market";
@@ -265,14 +264,15 @@ export interface MarketAminoMsg {
  * with care.
  */
 export interface MarketSDKType {
-    id: Long;
+    id: bigint;
     credit_type_abbrev: string;
     bank_denom: string;
     precision_modifier: number;
 }
 export declare const SellOrder: {
-    encode(message: SellOrder, writer?: _m0.Writer): _m0.Writer;
-    decode(input: _m0.Reader | Uint8Array, length?: number): SellOrder;
+    typeUrl: string;
+    encode(message: SellOrder, writer?: BinaryWriter): BinaryWriter;
+    decode(input: BinaryReader | Uint8Array, length?: number): SellOrder;
     fromJSON(object: any): SellOrder;
     toJSON(message: SellOrder): unknown;
     fromPartial(object: Partial<SellOrder>): SellOrder;
@@ -284,8 +284,9 @@ export declare const SellOrder: {
     toProtoMsg(message: SellOrder): SellOrderProtoMsg;
 };
 export declare const AllowedDenom: {
-    encode(message: AllowedDenom, writer?: _m0.Writer): _m0.Writer;
-    decode(input: _m0.Reader | Uint8Array, length?: number): AllowedDenom;
+    typeUrl: string;
+    encode(message: AllowedDenom, writer?: BinaryWriter): BinaryWriter;
+    decode(input: BinaryReader | Uint8Array, length?: number): AllowedDenom;
     fromJSON(object: any): AllowedDenom;
     toJSON(message: AllowedDenom): unknown;
     fromPartial(object: Partial<AllowedDenom>): AllowedDenom;
@@ -297,8 +298,9 @@ export declare const AllowedDenom: {
     toProtoMsg(message: AllowedDenom): AllowedDenomProtoMsg;
 };
 export declare const Market: {
-    encode(message: Market, writer?: _m0.Writer): _m0.Writer;
-    decode(input: _m0.Reader | Uint8Array, length?: number): Market;
+    typeUrl: string;
+    encode(message: Market, writer?: BinaryWriter): BinaryWriter;
+    decode(input: BinaryReader | Uint8Array, length?: number): Market;
     fromJSON(object: any): Market;
     toJSON(message: Market): unknown;
     fromPartial(object: Partial<Market>): Market;

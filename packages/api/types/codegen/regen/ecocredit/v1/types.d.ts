@@ -1,6 +1,6 @@
 import { Coin, CoinAmino, CoinSDKType } from "../../../cosmos/base/v1beta1/coin";
 import { CreditType, CreditTypeAmino, CreditTypeSDKType } from "./state";
-import * as _m0 from "protobufjs/minimal";
+import { BinaryReader, BinaryWriter } from "../../../binary";
 /**
  * Params defines the updatable global parameters of the ecocredit module for
  * use with the x/params module.
@@ -60,40 +60,40 @@ export interface ParamsAmino {
      * creating a credit class. Any fee listed is accepted and charged to the
      * credit class creator when creating a credit class.
      */
-    credit_class_fee: CoinAmino[];
+    credit_class_fee?: CoinAmino[];
     /**
      * basket_fee is a list of basket creation fees accepted when creating a
      * basket. Any fee listed is accepted and charged to the basket creator when
      * creating a basket.
      */
-    basket_fee: CoinAmino[];
+    basket_fee?: CoinAmino[];
     /**
      * allowed_class_creators is an allowlist defining the addresses with the
      * required permissions to create credit classes when allowlist_enabled is set
      * to true. If allowlist_enabled is set to false, this list has no effect.
      */
-    allowed_class_creators: string[];
+    allowed_class_creators?: string[];
     /**
      * allowlist_enabled determines whether or not the allowlist for creating
      * credit classes is enabled. When set to true, only the addresses listed in
      * allowed_class_creators can create credit classes. When set to false, any
      * address can create credit classes.
      */
-    allowlist_enabled: boolean;
+    allowlist_enabled?: boolean;
     /**
      * allowed_denoms is a list of bank denoms allowed to be used in the ask price
      * of sell orders.
      *
      * Since Revision 2
      */
-    allowed_denoms: AllowedDenomAmino[];
+    allowed_denoms?: AllowedDenomAmino[];
     /**
      * AllowedBridgeChains is a list of chain names that are allowed to be used in
      * bridge operations.
      *
      * Since Revision 2
      */
-    allowed_bridge_chains: string[];
+    allowed_bridge_chains?: string[];
 }
 export interface ParamsAminoMsg {
     type: "/regen.ecocredit.v1.Params";
@@ -125,9 +125,9 @@ export interface CreditsProtoMsg {
 /** Credits represents a simple structure for credits. */
 export interface CreditsAmino {
     /** batch_denom is the denom of the credit batch. */
-    batch_denom: string;
+    batch_denom?: string;
     /** amount is the amount of credits. */
-    amount: string;
+    amount?: string;
 }
 export interface CreditsAminoMsg {
     type: "/regen.ecocredit.v1.Credits";
@@ -181,19 +181,19 @@ export interface BatchIssuanceProtoMsg {
 /** BatchIssuance represents a simple structure for a credit batch issuance. */
 export interface BatchIssuanceAmino {
     /** recipient is the address of the account receiving the issued credits. */
-    recipient: string;
+    recipient?: string;
     /**
      * tradable_amount is the amount of credits that the recipient will receive in
      * a tradable state. The number of decimal places must be less than or equal
      * to the credit type precision.
      */
-    tradable_amount: string;
+    tradable_amount?: string;
     /**
      * retired_amount is the amount of credits that the recipient will receive in
      * a retired state. The number of decimal places must be less than or equal to
      * the credit type precision.
      */
-    retired_amount: string;
+    retired_amount?: string;
     /**
      * retirement_jurisdiction is the jurisdiction of the recipient and is only
      * required if retired_amount is positive. A jurisdiction has the following
@@ -204,7 +204,7 @@ export interface BatchIssuanceAmino {
      * sub-national-code and postal-code are optional and can be added for
      * increased precision.
      */
-    retirement_jurisdiction: string;
+    retirement_jurisdiction?: string;
     /**
      * retirement_reason is any arbitrary string that specifies the reason for
      * retiring credits. The reason will be included in EventRetire and is not
@@ -212,7 +212,7 @@ export interface BatchIssuanceAmino {
      *
      * Since Revision 2
      */
-    retirement_reason: string;
+    retirement_reason?: string;
 }
 export interface BatchIssuanceAminoMsg {
     type: "/regen.ecocredit.v1.BatchIssuance";
@@ -268,12 +268,12 @@ export interface OriginTxAmino {
      * id is the transaction ID of an originating transaction or operation based
      * on a type (i.e. transaction ID, serial number).
      */
-    id: string;
+    id?: string;
     /**
      * source is the source chain or registry of the transaction originating the
      * mint process (e.g. polygon, ethereum, verra).
      */
-    source: string;
+    source?: string;
     /**
      * contract is the address of the contract on the source chain that was
      * executed when creating the transaction. This address will be stored in
@@ -281,12 +281,12 @@ export interface OriginTxAmino {
      * used when sending credits back to the source chain. This field can be left
      * blank if credits are bridged from a non-contract-based source.
      */
-    contract: string;
+    contract?: string;
     /**
      * note is a reference note for accounting that will be included in an event
      * emitted from either Msg/CreateBatch or Msg/MintBatchCredits.
      */
-    note: string;
+    note?: string;
 }
 export interface OriginTxAminoMsg {
     type: "/regen.ecocredit.v1.OriginTx";
@@ -316,7 +316,7 @@ export interface CreditTypeProposal {
      * credit_type is the credit type to be added to the network if the proposal
      * passes.
      */
-    creditType: CreditType;
+    creditType?: CreditType;
 }
 export interface CreditTypeProposalProtoMsg {
     typeUrl: "/regen.ecocredit.v1.CreditTypeProposal";
@@ -329,9 +329,9 @@ export interface CreditTypeProposalProtoMsg {
  */
 export interface CreditTypeProposalAmino {
     /** title is the title of the proposal. */
-    title: string;
+    title?: string;
     /** description is the description of the proposal. */
-    description: string;
+    description?: string;
     /**
      * credit_type is the credit type to be added to the network if the proposal
      * passes.
@@ -350,7 +350,7 @@ export interface CreditTypeProposalAminoMsg {
 export interface CreditTypeProposalSDKType {
     title: string;
     description: string;
-    credit_type: CreditTypeSDKType;
+    credit_type?: CreditTypeSDKType;
 }
 /**
  * AllowedDenom represents the information for an allowed ask denom.
@@ -389,18 +389,18 @@ export interface AllowedDenomProtoMsg {
  */
 export interface AllowedDenomAmino {
     /** denom is the bank denom to allow (ex. ibc/GLKHDSG423SGS) */
-    bank_denom: string;
+    bank_denom?: string;
     /**
      * display_denom is the denom to display to the user and is informational.
      * Because the denom is likely an IBC denom, this should be chosen by
      * governance to represent the consensus trusted name of the denom.
      */
-    display_denom: string;
+    display_denom?: string;
     /**
      * exponent is the exponent that relates the denom to the display_denom and is
      * informational
      */
-    exponent: number;
+    exponent?: number;
 }
 export interface AllowedDenomAminoMsg {
     type: "/regen.ecocredit.v1.AllowedDenom";
@@ -420,8 +420,9 @@ export interface AllowedDenomSDKType {
     exponent: number;
 }
 export declare const Params: {
-    encode(message: Params, writer?: _m0.Writer): _m0.Writer;
-    decode(input: _m0.Reader | Uint8Array, length?: number): Params;
+    typeUrl: string;
+    encode(message: Params, writer?: BinaryWriter): BinaryWriter;
+    decode(input: BinaryReader | Uint8Array, length?: number): Params;
     fromJSON(object: any): Params;
     toJSON(message: Params): unknown;
     fromPartial(object: Partial<Params>): Params;
@@ -433,8 +434,9 @@ export declare const Params: {
     toProtoMsg(message: Params): ParamsProtoMsg;
 };
 export declare const Credits: {
-    encode(message: Credits, writer?: _m0.Writer): _m0.Writer;
-    decode(input: _m0.Reader | Uint8Array, length?: number): Credits;
+    typeUrl: string;
+    encode(message: Credits, writer?: BinaryWriter): BinaryWriter;
+    decode(input: BinaryReader | Uint8Array, length?: number): Credits;
     fromJSON(object: any): Credits;
     toJSON(message: Credits): unknown;
     fromPartial(object: Partial<Credits>): Credits;
@@ -446,8 +448,9 @@ export declare const Credits: {
     toProtoMsg(message: Credits): CreditsProtoMsg;
 };
 export declare const BatchIssuance: {
-    encode(message: BatchIssuance, writer?: _m0.Writer): _m0.Writer;
-    decode(input: _m0.Reader | Uint8Array, length?: number): BatchIssuance;
+    typeUrl: string;
+    encode(message: BatchIssuance, writer?: BinaryWriter): BinaryWriter;
+    decode(input: BinaryReader | Uint8Array, length?: number): BatchIssuance;
     fromJSON(object: any): BatchIssuance;
     toJSON(message: BatchIssuance): unknown;
     fromPartial(object: Partial<BatchIssuance>): BatchIssuance;
@@ -459,8 +462,9 @@ export declare const BatchIssuance: {
     toProtoMsg(message: BatchIssuance): BatchIssuanceProtoMsg;
 };
 export declare const OriginTx: {
-    encode(message: OriginTx, writer?: _m0.Writer): _m0.Writer;
-    decode(input: _m0.Reader | Uint8Array, length?: number): OriginTx;
+    typeUrl: string;
+    encode(message: OriginTx, writer?: BinaryWriter): BinaryWriter;
+    decode(input: BinaryReader | Uint8Array, length?: number): OriginTx;
     fromJSON(object: any): OriginTx;
     toJSON(message: OriginTx): unknown;
     fromPartial(object: Partial<OriginTx>): OriginTx;
@@ -472,8 +476,9 @@ export declare const OriginTx: {
     toProtoMsg(message: OriginTx): OriginTxProtoMsg;
 };
 export declare const CreditTypeProposal: {
-    encode(message: CreditTypeProposal, writer?: _m0.Writer): _m0.Writer;
-    decode(input: _m0.Reader | Uint8Array, length?: number): CreditTypeProposal;
+    typeUrl: string;
+    encode(message: CreditTypeProposal, writer?: BinaryWriter): BinaryWriter;
+    decode(input: BinaryReader | Uint8Array, length?: number): CreditTypeProposal;
     fromJSON(object: any): CreditTypeProposal;
     toJSON(message: CreditTypeProposal): unknown;
     fromPartial(object: Partial<CreditTypeProposal>): CreditTypeProposal;
@@ -485,8 +490,9 @@ export declare const CreditTypeProposal: {
     toProtoMsg(message: CreditTypeProposal): CreditTypeProposalProtoMsg;
 };
 export declare const AllowedDenom: {
-    encode(message: AllowedDenom, writer?: _m0.Writer): _m0.Writer;
-    decode(input: _m0.Reader | Uint8Array, length?: number): AllowedDenom;
+    typeUrl: string;
+    encode(message: AllowedDenom, writer?: BinaryWriter): BinaryWriter;
+    decode(input: BinaryReader | Uint8Array, length?: number): AllowedDenom;
     fromJSON(object: any): AllowedDenom;
     toJSON(message: AllowedDenom): unknown;
     fromPartial(object: Partial<AllowedDenom>): AllowedDenom;

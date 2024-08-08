@@ -2,7 +2,7 @@ import { PageRequest, PageRequestAmino, PageRequestSDKType, PageResponse, PageRe
 import { Basket, BasketAmino, BasketSDKType, BasketBalance, BasketBalanceAmino, BasketBalanceSDKType } from "./state";
 import { DateCriteria, DateCriteriaAmino, DateCriteriaSDKType } from "./types";
 import { Coin, CoinAmino, CoinSDKType } from "../../../../cosmos/base/v1beta1/coin";
-import * as _m0 from "protobufjs/minimal";
+import { BinaryReader, BinaryWriter } from "../../../../binary";
 /** QueryBasketRequest is the Query/Basket request type. */
 export interface QueryBasketRequest {
     /** basket_denom represents the denom of the basket to query. */
@@ -15,7 +15,7 @@ export interface QueryBasketRequestProtoMsg {
 /** QueryBasketRequest is the Query/Basket request type. */
 export interface QueryBasketRequestAmino {
     /** basket_denom represents the denom of the basket to query. */
-    basket_denom: string;
+    basket_denom?: string;
 }
 export interface QueryBasketRequestAminoMsg {
     type: "/regen.ecocredit.basket.v1.QueryBasketRequest";
@@ -35,7 +35,7 @@ export interface QueryBasketResponse {
      * basket_info is available using BasketInfo.
      */
     /** @deprecated */
-    basket: Basket;
+    basket?: Basket;
     /** classes are the credit classes that can be deposited in the basket. */
     classes: string[];
     /**
@@ -43,7 +43,7 @@ export interface QueryBasketResponse {
      *
      * Since Revision 1
      */
-    basketInfo: BasketInfo;
+    basketInfo?: BasketInfo;
 }
 export interface QueryBasketResponseProtoMsg {
     typeUrl: "/regen.ecocredit.basket.v1.QueryBasketResponse";
@@ -61,7 +61,7 @@ export interface QueryBasketResponseAmino {
     /** @deprecated */
     basket?: BasketAmino;
     /** classes are the credit classes that can be deposited in the basket. */
-    classes: string[];
+    classes?: string[];
     /**
      * basket_info is the queried basket.
      *
@@ -76,14 +76,14 @@ export interface QueryBasketResponseAminoMsg {
 /** QueryBasketResponse is the Query/Basket response type. */
 export interface QueryBasketResponseSDKType {
     /** @deprecated */
-    basket: BasketSDKType;
+    basket?: BasketSDKType;
     classes: string[];
-    basket_info: BasketInfoSDKType;
+    basket_info?: BasketInfoSDKType;
 }
 /** QueryBasketsRequest is the Query/Baskets request type. */
 export interface QueryBasketsRequest {
     /** pagination defines an optional pagination for the request. */
-    pagination: PageRequest;
+    pagination?: PageRequest;
 }
 export interface QueryBasketsRequestProtoMsg {
     typeUrl: "/regen.ecocredit.basket.v1.QueryBasketsRequest";
@@ -100,7 +100,7 @@ export interface QueryBasketsRequestAminoMsg {
 }
 /** QueryBasketsRequest is the Query/Baskets request type. */
 export interface QueryBasketsRequestSDKType {
-    pagination: PageRequestSDKType;
+    pagination?: PageRequestSDKType;
 }
 /** QueryBasketsResponse is the Query/Baskets response type. */
 export interface QueryBasketsResponse {
@@ -114,7 +114,7 @@ export interface QueryBasketsResponse {
     /** @deprecated */
     baskets: Basket[];
     /** pagination defines the pagination in the response. */
-    pagination: PageResponse;
+    pagination?: PageResponse;
     /**
      * baskets_info are the fetched baskets.
      *
@@ -136,7 +136,7 @@ export interface QueryBasketsResponseAmino {
      * baskets_info is available using BasketInfo.
      */
     /** @deprecated */
-    baskets: BasketAmino[];
+    baskets?: BasketAmino[];
     /** pagination defines the pagination in the response. */
     pagination?: PageResponseAmino;
     /**
@@ -144,7 +144,7 @@ export interface QueryBasketsResponseAmino {
      *
      * Since Revision 1
      */
-    baskets_info: BasketInfoAmino[];
+    baskets_info?: BasketInfoAmino[];
 }
 export interface QueryBasketsResponseAminoMsg {
     type: "/regen.ecocredit.basket.v1.QueryBasketsResponse";
@@ -154,7 +154,7 @@ export interface QueryBasketsResponseAminoMsg {
 export interface QueryBasketsResponseSDKType {
     /** @deprecated */
     baskets: BasketSDKType[];
-    pagination: PageResponseSDKType;
+    pagination?: PageResponseSDKType;
     baskets_info: BasketInfoSDKType[];
 }
 /** QueryBasketBalancesRequest is the Query/BasketBalances request type. */
@@ -162,7 +162,7 @@ export interface QueryBasketBalancesRequest {
     /** basket_denom is the denom of the basket. */
     basketDenom: string;
     /** pagination defines an optional pagination for the request. */
-    pagination: PageRequest;
+    pagination?: PageRequest;
 }
 export interface QueryBasketBalancesRequestProtoMsg {
     typeUrl: "/regen.ecocredit.basket.v1.QueryBasketBalancesRequest";
@@ -171,7 +171,7 @@ export interface QueryBasketBalancesRequestProtoMsg {
 /** QueryBasketBalancesRequest is the Query/BasketBalances request type. */
 export interface QueryBasketBalancesRequestAmino {
     /** basket_denom is the denom of the basket. */
-    basket_denom: string;
+    basket_denom?: string;
     /** pagination defines an optional pagination for the request. */
     pagination?: PageRequestAmino;
 }
@@ -182,7 +182,7 @@ export interface QueryBasketBalancesRequestAminoMsg {
 /** QueryBasketBalancesRequest is the Query/BasketBalances request type. */
 export interface QueryBasketBalancesRequestSDKType {
     basket_denom: string;
-    pagination: PageRequestSDKType;
+    pagination?: PageRequestSDKType;
 }
 /** QueryBasketBalancesResponse is the Query/BasketBalances response type. */
 export interface QueryBasketBalancesResponse {
@@ -196,7 +196,7 @@ export interface QueryBasketBalancesResponse {
     /** @deprecated */
     balances: BasketBalance[];
     /** pagination defines the pagination in the response. */
-    pagination: PageResponse;
+    pagination?: PageResponse;
     /**
      * balances_info is a list of credit balances in the basket.
      *
@@ -218,7 +218,7 @@ export interface QueryBasketBalancesResponseAmino {
      * version. In the meantime baskets_info is available using BasketBalanceInfo.
      */
     /** @deprecated */
-    balances: BasketBalanceAmino[];
+    balances?: BasketBalanceAmino[];
     /** pagination defines the pagination in the response. */
     pagination?: PageResponseAmino;
     /**
@@ -226,7 +226,7 @@ export interface QueryBasketBalancesResponseAmino {
      *
      * Since Revision 1
      */
-    balances_info: BasketBalanceInfoAmino[];
+    balances_info?: BasketBalanceInfoAmino[];
 }
 export interface QueryBasketBalancesResponseAminoMsg {
     type: "/regen.ecocredit.basket.v1.QueryBasketBalancesResponse";
@@ -236,7 +236,7 @@ export interface QueryBasketBalancesResponseAminoMsg {
 export interface QueryBasketBalancesResponseSDKType {
     /** @deprecated */
     balances: BasketBalanceSDKType[];
-    pagination: PageResponseSDKType;
+    pagination?: PageResponseSDKType;
     balances_info: BasketBalanceInfoSDKType[];
 }
 /** QueryBasketBalanceRequest is the Query/BasketBalance request type. */
@@ -253,9 +253,9 @@ export interface QueryBasketBalanceRequestProtoMsg {
 /** QueryBasketBalanceRequest is the Query/BasketBalance request type. */
 export interface QueryBasketBalanceRequestAmino {
     /** basket_denom is the denom of the basket. */
-    basket_denom: string;
+    basket_denom?: string;
     /** batch_denom is the denom of the credit batch. */
-    batch_denom: string;
+    batch_denom?: string;
 }
 export interface QueryBasketBalanceRequestAminoMsg {
     type: "/regen.ecocredit.basket.v1.QueryBasketBalanceRequest";
@@ -278,7 +278,7 @@ export interface QueryBasketBalanceResponseProtoMsg {
 /** QueryBasketBalanceResponse is the Query/BasketBalance response type. */
 export interface QueryBasketBalanceResponseAmino {
     /** balance is the amount of the queried credit batch in the basket. */
-    balance: string;
+    balance?: string;
 }
 export interface QueryBasketBalanceResponseAminoMsg {
     type: "/regen.ecocredit.basket.v1.QueryBasketBalanceResponse";
@@ -309,7 +309,7 @@ export interface BasketInfo {
      */
     creditTypeAbbrev: string;
     /** date_criteria is the date criteria for batches admitted to the basket. */
-    dateCriteria: DateCriteria;
+    dateCriteria?: DateCriteria;
     /** exponent is the exponent for converting credits to/from basket tokens. */
     exponent: number;
     /**
@@ -325,32 +325,32 @@ export interface BasketInfoProtoMsg {
 /** BasketInfo is the human-readable basket information. */
 export interface BasketInfoAmino {
     /** basket_denom is the basket bank denom. */
-    basket_denom: string;
+    basket_denom?: string;
     /**
      * name is the unique name of the basket specified in MsgCreate. Basket
      * names must be unique across all credit types and choices of exponent
      * above and beyond the uniqueness constraint on basket_denom.
      */
-    name: string;
+    name?: string;
     /**
      * disable_auto_retire indicates whether or not the credits will be retired
      * upon withdraw from the basket.
      */
-    disable_auto_retire: boolean;
+    disable_auto_retire?: boolean;
     /**
      * credit_type_abbrev is the abbreviation of the credit type this basket is
      * able to hold.
      */
-    credit_type_abbrev: string;
+    credit_type_abbrev?: string;
     /** date_criteria is the date criteria for batches admitted to the basket. */
     date_criteria?: DateCriteriaAmino;
     /** exponent is the exponent for converting credits to/from basket tokens. */
-    exponent: number;
+    exponent?: number;
     /**
      * curator is the address of the basket curator who is able to change certain
      * basket settings.
      */
-    curator: string;
+    curator?: string;
 }
 export interface BasketInfoAminoMsg {
     type: "/regen.ecocredit.basket.v1.BasketInfo";
@@ -362,7 +362,7 @@ export interface BasketInfoSDKType {
     name: string;
     disable_auto_retire: boolean;
     credit_type_abbrev: string;
-    date_criteria: DateCriteriaSDKType;
+    date_criteria?: DateCriteriaSDKType;
     exponent: number;
     curator: string;
 }
@@ -380,9 +380,9 @@ export interface BasketBalanceInfoProtoMsg {
 /** BasketBalanceInfo is the human-readable basket balance information. */
 export interface BasketBalanceInfoAmino {
     /** batch_denom is the denom of the credit batch */
-    batch_denom: string;
+    batch_denom?: string;
     /** balance is the amount of ecocredits held in the basket */
-    balance: string;
+    balance?: string;
 }
 export interface BasketBalanceInfoAminoMsg {
     type: "/regen.ecocredit.basket.v1.BasketBalanceInfo";
@@ -432,7 +432,7 @@ export interface QueryBasketFeeResponse {
      * fee is the basket creation fee. If not set, a basket creation fee is not
      * required.
      */
-    fee: Coin;
+    fee?: Coin;
 }
 export interface QueryBasketFeeResponseProtoMsg {
     typeUrl: "/regen.ecocredit.basket.v1.QueryBasketFeeResponse";
@@ -460,11 +460,12 @@ export interface QueryBasketFeeResponseAminoMsg {
  * Since Revision 2
  */
 export interface QueryBasketFeeResponseSDKType {
-    fee: CoinSDKType;
+    fee?: CoinSDKType;
 }
 export declare const QueryBasketRequest: {
-    encode(message: QueryBasketRequest, writer?: _m0.Writer): _m0.Writer;
-    decode(input: _m0.Reader | Uint8Array, length?: number): QueryBasketRequest;
+    typeUrl: string;
+    encode(message: QueryBasketRequest, writer?: BinaryWriter): BinaryWriter;
+    decode(input: BinaryReader | Uint8Array, length?: number): QueryBasketRequest;
     fromJSON(object: any): QueryBasketRequest;
     toJSON(message: QueryBasketRequest): unknown;
     fromPartial(object: Partial<QueryBasketRequest>): QueryBasketRequest;
@@ -476,8 +477,9 @@ export declare const QueryBasketRequest: {
     toProtoMsg(message: QueryBasketRequest): QueryBasketRequestProtoMsg;
 };
 export declare const QueryBasketResponse: {
-    encode(message: QueryBasketResponse, writer?: _m0.Writer): _m0.Writer;
-    decode(input: _m0.Reader | Uint8Array, length?: number): QueryBasketResponse;
+    typeUrl: string;
+    encode(message: QueryBasketResponse, writer?: BinaryWriter): BinaryWriter;
+    decode(input: BinaryReader | Uint8Array, length?: number): QueryBasketResponse;
     fromJSON(object: any): QueryBasketResponse;
     toJSON(message: QueryBasketResponse): unknown;
     fromPartial(object: Partial<QueryBasketResponse>): QueryBasketResponse;
@@ -489,8 +491,9 @@ export declare const QueryBasketResponse: {
     toProtoMsg(message: QueryBasketResponse): QueryBasketResponseProtoMsg;
 };
 export declare const QueryBasketsRequest: {
-    encode(message: QueryBasketsRequest, writer?: _m0.Writer): _m0.Writer;
-    decode(input: _m0.Reader | Uint8Array, length?: number): QueryBasketsRequest;
+    typeUrl: string;
+    encode(message: QueryBasketsRequest, writer?: BinaryWriter): BinaryWriter;
+    decode(input: BinaryReader | Uint8Array, length?: number): QueryBasketsRequest;
     fromJSON(object: any): QueryBasketsRequest;
     toJSON(message: QueryBasketsRequest): unknown;
     fromPartial(object: Partial<QueryBasketsRequest>): QueryBasketsRequest;
@@ -502,8 +505,9 @@ export declare const QueryBasketsRequest: {
     toProtoMsg(message: QueryBasketsRequest): QueryBasketsRequestProtoMsg;
 };
 export declare const QueryBasketsResponse: {
-    encode(message: QueryBasketsResponse, writer?: _m0.Writer): _m0.Writer;
-    decode(input: _m0.Reader | Uint8Array, length?: number): QueryBasketsResponse;
+    typeUrl: string;
+    encode(message: QueryBasketsResponse, writer?: BinaryWriter): BinaryWriter;
+    decode(input: BinaryReader | Uint8Array, length?: number): QueryBasketsResponse;
     fromJSON(object: any): QueryBasketsResponse;
     toJSON(message: QueryBasketsResponse): unknown;
     fromPartial(object: Partial<QueryBasketsResponse>): QueryBasketsResponse;
@@ -515,8 +519,9 @@ export declare const QueryBasketsResponse: {
     toProtoMsg(message: QueryBasketsResponse): QueryBasketsResponseProtoMsg;
 };
 export declare const QueryBasketBalancesRequest: {
-    encode(message: QueryBasketBalancesRequest, writer?: _m0.Writer): _m0.Writer;
-    decode(input: _m0.Reader | Uint8Array, length?: number): QueryBasketBalancesRequest;
+    typeUrl: string;
+    encode(message: QueryBasketBalancesRequest, writer?: BinaryWriter): BinaryWriter;
+    decode(input: BinaryReader | Uint8Array, length?: number): QueryBasketBalancesRequest;
     fromJSON(object: any): QueryBasketBalancesRequest;
     toJSON(message: QueryBasketBalancesRequest): unknown;
     fromPartial(object: Partial<QueryBasketBalancesRequest>): QueryBasketBalancesRequest;
@@ -528,8 +533,9 @@ export declare const QueryBasketBalancesRequest: {
     toProtoMsg(message: QueryBasketBalancesRequest): QueryBasketBalancesRequestProtoMsg;
 };
 export declare const QueryBasketBalancesResponse: {
-    encode(message: QueryBasketBalancesResponse, writer?: _m0.Writer): _m0.Writer;
-    decode(input: _m0.Reader | Uint8Array, length?: number): QueryBasketBalancesResponse;
+    typeUrl: string;
+    encode(message: QueryBasketBalancesResponse, writer?: BinaryWriter): BinaryWriter;
+    decode(input: BinaryReader | Uint8Array, length?: number): QueryBasketBalancesResponse;
     fromJSON(object: any): QueryBasketBalancesResponse;
     toJSON(message: QueryBasketBalancesResponse): unknown;
     fromPartial(object: Partial<QueryBasketBalancesResponse>): QueryBasketBalancesResponse;
@@ -541,8 +547,9 @@ export declare const QueryBasketBalancesResponse: {
     toProtoMsg(message: QueryBasketBalancesResponse): QueryBasketBalancesResponseProtoMsg;
 };
 export declare const QueryBasketBalanceRequest: {
-    encode(message: QueryBasketBalanceRequest, writer?: _m0.Writer): _m0.Writer;
-    decode(input: _m0.Reader | Uint8Array, length?: number): QueryBasketBalanceRequest;
+    typeUrl: string;
+    encode(message: QueryBasketBalanceRequest, writer?: BinaryWriter): BinaryWriter;
+    decode(input: BinaryReader | Uint8Array, length?: number): QueryBasketBalanceRequest;
     fromJSON(object: any): QueryBasketBalanceRequest;
     toJSON(message: QueryBasketBalanceRequest): unknown;
     fromPartial(object: Partial<QueryBasketBalanceRequest>): QueryBasketBalanceRequest;
@@ -554,8 +561,9 @@ export declare const QueryBasketBalanceRequest: {
     toProtoMsg(message: QueryBasketBalanceRequest): QueryBasketBalanceRequestProtoMsg;
 };
 export declare const QueryBasketBalanceResponse: {
-    encode(message: QueryBasketBalanceResponse, writer?: _m0.Writer): _m0.Writer;
-    decode(input: _m0.Reader | Uint8Array, length?: number): QueryBasketBalanceResponse;
+    typeUrl: string;
+    encode(message: QueryBasketBalanceResponse, writer?: BinaryWriter): BinaryWriter;
+    decode(input: BinaryReader | Uint8Array, length?: number): QueryBasketBalanceResponse;
     fromJSON(object: any): QueryBasketBalanceResponse;
     toJSON(message: QueryBasketBalanceResponse): unknown;
     fromPartial(object: Partial<QueryBasketBalanceResponse>): QueryBasketBalanceResponse;
@@ -567,8 +575,9 @@ export declare const QueryBasketBalanceResponse: {
     toProtoMsg(message: QueryBasketBalanceResponse): QueryBasketBalanceResponseProtoMsg;
 };
 export declare const BasketInfo: {
-    encode(message: BasketInfo, writer?: _m0.Writer): _m0.Writer;
-    decode(input: _m0.Reader | Uint8Array, length?: number): BasketInfo;
+    typeUrl: string;
+    encode(message: BasketInfo, writer?: BinaryWriter): BinaryWriter;
+    decode(input: BinaryReader | Uint8Array, length?: number): BasketInfo;
     fromJSON(object: any): BasketInfo;
     toJSON(message: BasketInfo): unknown;
     fromPartial(object: Partial<BasketInfo>): BasketInfo;
@@ -580,8 +589,9 @@ export declare const BasketInfo: {
     toProtoMsg(message: BasketInfo): BasketInfoProtoMsg;
 };
 export declare const BasketBalanceInfo: {
-    encode(message: BasketBalanceInfo, writer?: _m0.Writer): _m0.Writer;
-    decode(input: _m0.Reader | Uint8Array, length?: number): BasketBalanceInfo;
+    typeUrl: string;
+    encode(message: BasketBalanceInfo, writer?: BinaryWriter): BinaryWriter;
+    decode(input: BinaryReader | Uint8Array, length?: number): BasketBalanceInfo;
     fromJSON(object: any): BasketBalanceInfo;
     toJSON(message: BasketBalanceInfo): unknown;
     fromPartial(object: Partial<BasketBalanceInfo>): BasketBalanceInfo;
@@ -593,8 +603,9 @@ export declare const BasketBalanceInfo: {
     toProtoMsg(message: BasketBalanceInfo): BasketBalanceInfoProtoMsg;
 };
 export declare const QueryBasketFeeRequest: {
-    encode(_: QueryBasketFeeRequest, writer?: _m0.Writer): _m0.Writer;
-    decode(input: _m0.Reader | Uint8Array, length?: number): QueryBasketFeeRequest;
+    typeUrl: string;
+    encode(_: QueryBasketFeeRequest, writer?: BinaryWriter): BinaryWriter;
+    decode(input: BinaryReader | Uint8Array, length?: number): QueryBasketFeeRequest;
     fromJSON(_: any): QueryBasketFeeRequest;
     toJSON(_: QueryBasketFeeRequest): unknown;
     fromPartial(_: Partial<QueryBasketFeeRequest>): QueryBasketFeeRequest;
@@ -606,8 +617,9 @@ export declare const QueryBasketFeeRequest: {
     toProtoMsg(message: QueryBasketFeeRequest): QueryBasketFeeRequestProtoMsg;
 };
 export declare const QueryBasketFeeResponse: {
-    encode(message: QueryBasketFeeResponse, writer?: _m0.Writer): _m0.Writer;
-    decode(input: _m0.Reader | Uint8Array, length?: number): QueryBasketFeeResponse;
+    typeUrl: string;
+    encode(message: QueryBasketFeeResponse, writer?: BinaryWriter): BinaryWriter;
+    decode(input: BinaryReader | Uint8Array, length?: number): QueryBasketFeeResponse;
     fromJSON(object: any): QueryBasketFeeResponse;
     toJSON(message: QueryBasketFeeResponse): unknown;
     fromPartial(object: Partial<QueryBasketFeeResponse>): QueryBasketFeeResponse;

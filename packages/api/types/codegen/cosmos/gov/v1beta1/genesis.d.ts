@@ -1,10 +1,9 @@
 import { Deposit, DepositAmino, DepositSDKType, Vote, VoteAmino, VoteSDKType, Proposal, ProposalAmino, ProposalSDKType, DepositParams, DepositParamsAmino, DepositParamsSDKType, VotingParams, VotingParamsAmino, VotingParamsSDKType, TallyParams, TallyParamsAmino, TallyParamsSDKType } from "./gov";
-import { Long } from "../../../helpers";
-import * as _m0 from "protobufjs/minimal";
+import { BinaryReader, BinaryWriter } from "../../../binary";
 /** GenesisState defines the gov module's genesis state. */
 export interface GenesisState {
     /** starting_proposal_id is the ID of the starting proposal. */
-    startingProposalId: Long;
+    startingProposalId: bigint;
     /** deposits defines all the deposits present at genesis. */
     deposits: Deposit[];
     /** votes defines all the votes present at genesis. */
@@ -25,13 +24,13 @@ export interface GenesisStateProtoMsg {
 /** GenesisState defines the gov module's genesis state. */
 export interface GenesisStateAmino {
     /** starting_proposal_id is the ID of the starting proposal. */
-    starting_proposal_id: string;
+    starting_proposal_id?: string;
     /** deposits defines all the deposits present at genesis. */
-    deposits: DepositAmino[];
+    deposits?: DepositAmino[];
     /** votes defines all the votes present at genesis. */
-    votes: VoteAmino[];
+    votes?: VoteAmino[];
     /** proposals defines all the proposals present at genesis. */
-    proposals: ProposalAmino[];
+    proposals?: ProposalAmino[];
     /** params defines all the paramaters of related to deposit. */
     deposit_params?: DepositParamsAmino;
     /** params defines all the paramaters of related to voting. */
@@ -45,7 +44,7 @@ export interface GenesisStateAminoMsg {
 }
 /** GenesisState defines the gov module's genesis state. */
 export interface GenesisStateSDKType {
-    starting_proposal_id: Long;
+    starting_proposal_id: bigint;
     deposits: DepositSDKType[];
     votes: VoteSDKType[];
     proposals: ProposalSDKType[];
@@ -54,8 +53,9 @@ export interface GenesisStateSDKType {
     tally_params: TallyParamsSDKType;
 }
 export declare const GenesisState: {
-    encode(message: GenesisState, writer?: _m0.Writer): _m0.Writer;
-    decode(input: _m0.Reader | Uint8Array, length?: number): GenesisState;
+    typeUrl: string;
+    encode(message: GenesisState, writer?: BinaryWriter): BinaryWriter;
+    decode(input: BinaryReader | Uint8Array, length?: number): GenesisState;
     fromJSON(object: any): GenesisState;
     toJSON(message: GenesisState): unknown;
     fromPartial(object: Partial<GenesisState>): GenesisState;

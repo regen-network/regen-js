@@ -1,7 +1,6 @@
-import { Timestamp, TimestampAmino, TimestampSDKType } from "../../../google/protobuf/timestamp";
+import { Timestamp, TimestampSDKType } from "../../../google/protobuf/timestamp";
 import { Coin, CoinAmino, CoinSDKType } from "../../../cosmos/base/v1beta1/coin";
-import { Long } from "../../../helpers";
-import * as _m0 from "protobufjs/minimal";
+import { BinaryReader, BinaryWriter } from "../../../binary";
 /**
  * CreditType defines the measurement unit/precision of a certain credit type
  * (e.g. carbon, biodiversity...)
@@ -32,13 +31,13 @@ export interface CreditTypeAmino {
      * abbreviation is a 1-3 character uppercase abbreviation of the CreditType
      * name, used in batch denominations within the CreditType. It must be unique.
      */
-    abbreviation: string;
+    abbreviation?: string;
     /** name is the name of the credit type (e.g. carbon, biodiversity). */
-    name: string;
+    name?: string;
     /** unit is the measurement unit of the credit type (e.g. kg, ton). */
-    unit: string;
+    unit?: string;
     /** precision is the decimal precision of the credit type. */
-    precision: number;
+    precision?: number;
 }
 export interface CreditTypeAminoMsg {
     type: "/regen.ecocredit.v1.CreditType";
@@ -60,7 +59,7 @@ export interface Class {
      * key is the table row identifier of the credit class used internally for
      * efficient lookups. This identifier is auto-incrementing.
      */
-    key: Long;
+    key: bigint;
     /**
      * id is the unique identifier of the credit class auto-generated from the
      * credit type abbreviation and the credit class sequence number.
@@ -83,18 +82,18 @@ export interface ClassAmino {
      * key is the table row identifier of the credit class used internally for
      * efficient lookups. This identifier is auto-incrementing.
      */
-    key: string;
+    key?: string;
     /**
      * id is the unique identifier of the credit class auto-generated from the
      * credit type abbreviation and the credit class sequence number.
      */
-    id: string;
+    id?: string;
     /** admin is the admin of the credit class. */
-    admin: Uint8Array;
+    admin?: string;
     /** metadata is any arbitrary metadata to attached to the credit class. */
-    metadata: string;
+    metadata?: string;
     /** credit_type_abbrev is the abbreviation of the credit type. */
-    credit_type_abbrev: string;
+    credit_type_abbrev?: string;
 }
 export interface ClassAminoMsg {
     type: "/regen.ecocredit.v1.Class";
@@ -102,7 +101,7 @@ export interface ClassAminoMsg {
 }
 /** Class represents the high-level on-chain information for a credit class. */
 export interface ClassSDKType {
-    key: Long;
+    key: bigint;
     id: string;
     admin: Uint8Array;
     metadata: string;
@@ -117,7 +116,7 @@ export interface ClassIssuer {
      * class_key is the table row identifier of the credit class used internally
      * for efficient lookups. This links a class issuer to a credit class.
      */
-    classKey: Long;
+    classKey: bigint;
     /** issuer is the approved issuer of the credit class. */
     issuer: Uint8Array;
 }
@@ -134,9 +133,9 @@ export interface ClassIssuerAmino {
      * class_key is the table row identifier of the credit class used internally
      * for efficient lookups. This links a class issuer to a credit class.
      */
-    class_key: string;
+    class_key?: string;
     /** issuer is the approved issuer of the credit class. */
-    issuer: Uint8Array;
+    issuer?: string;
 }
 export interface ClassIssuerAminoMsg {
     type: "/regen.ecocredit.v1.ClassIssuer";
@@ -147,7 +146,7 @@ export interface ClassIssuerAminoMsg {
  * issuers
  */
 export interface ClassIssuerSDKType {
-    class_key: Long;
+    class_key: bigint;
     issuer: Uint8Array;
 }
 /** Project represents the high-level on-chain information for a project. */
@@ -156,7 +155,7 @@ export interface Project {
      * key is the table row identifier of the project used internally for
      * efficient lookups. This identifier is auto-incrementing.
      */
-    key: Long;
+    key: bigint;
     /**
      * id is the unique identifier of the project either auto-generated from the
      * credit class id and project sequence number or provided upon creation.
@@ -168,7 +167,7 @@ export interface Project {
      * class_key is the table row identifier of the credit class used internally
      * for efficient lookups. This links a project to a credit class.
      */
-    classKey: Long;
+    classKey: bigint;
     /**
      * jurisdiction is the jurisdiction of the project.
      * Full documentation can be found in MsgCreateProject.jurisdiction.
@@ -189,28 +188,28 @@ export interface ProjectAmino {
      * key is the table row identifier of the project used internally for
      * efficient lookups. This identifier is auto-incrementing.
      */
-    key: string;
+    key?: string;
     /**
      * id is the unique identifier of the project either auto-generated from the
      * credit class id and project sequence number or provided upon creation.
      */
-    id: string;
+    id?: string;
     /** admin is the admin of the project. */
-    admin: Uint8Array;
+    admin?: string;
     /**
      * class_key is the table row identifier of the credit class used internally
      * for efficient lookups. This links a project to a credit class.
      */
-    class_key: string;
+    class_key?: string;
     /**
      * jurisdiction is the jurisdiction of the project.
      * Full documentation can be found in MsgCreateProject.jurisdiction.
      */
-    jurisdiction: string;
+    jurisdiction?: string;
     /** metadata is any arbitrary metadata attached to the project. */
-    metadata: string;
+    metadata?: string;
     /** reference_id is any arbitrary string used to reference the project. */
-    reference_id: string;
+    reference_id?: string;
 }
 export interface ProjectAminoMsg {
     type: "/regen.ecocredit.v1.Project";
@@ -218,10 +217,10 @@ export interface ProjectAminoMsg {
 }
 /** Project represents the high-level on-chain information for a project. */
 export interface ProjectSDKType {
-    key: Long;
+    key: bigint;
     id: string;
     admin: Uint8Array;
-    class_key: Long;
+    class_key: bigint;
     jurisdiction: string;
     metadata: string;
     reference_id: string;
@@ -232,7 +231,7 @@ export interface Batch {
      * key is the table row identifier of the credit batch used internally for
      * efficient lookups. This identifier is auto-incrementing.
      */
-    key: Long;
+    key: bigint;
     /**
      * issuer is the address that created the batch and which is
      * authorized to mint more credits if open=true.
@@ -242,7 +241,7 @@ export interface Batch {
      * project_key is the table row identifier of the credit class used internally
      * for efficient lookups. This links a credit batch to a project.
      */
-    projectKey: Long;
+    projectKey: bigint;
     /**
      * denom is the unique identifier of the credit batch formed from the
      * project id, the batch sequence number, and the start and end date of the
@@ -255,14 +254,14 @@ export interface Batch {
      * start_date is the beginning of the period during which this credit batch
      * was quantified and verified.
      */
-    startDate: Timestamp;
+    startDate?: Timestamp;
     /**
      * end_date is the end of the period during which this credit batch was
      * quantified and verified.
      */
-    endDate: Timestamp;
+    endDate?: Timestamp;
     /** issuance_date is the timestamp when the credit batch was issued. */
-    issuanceDate: Timestamp;
+    issuanceDate?: Timestamp;
     /**
      * open tells if it's possible to mint new credits in the future.
      * Once `open` is set to false, it can't be toggled any more.
@@ -279,42 +278,42 @@ export interface BatchAmino {
      * key is the table row identifier of the credit batch used internally for
      * efficient lookups. This identifier is auto-incrementing.
      */
-    key: string;
+    key?: string;
     /**
      * issuer is the address that created the batch and which is
      * authorized to mint more credits if open=true.
      */
-    issuer: Uint8Array;
+    issuer?: string;
     /**
      * project_key is the table row identifier of the credit class used internally
      * for efficient lookups. This links a credit batch to a project.
      */
-    project_key: string;
+    project_key?: string;
     /**
      * denom is the unique identifier of the credit batch formed from the
      * project id, the batch sequence number, and the start and end date of the
      * credit batch.
      */
-    denom: string;
+    denom?: string;
     /** metadata is any arbitrary metadata attached to the credit batch. */
-    metadata: string;
+    metadata?: string;
     /**
      * start_date is the beginning of the period during which this credit batch
      * was quantified and verified.
      */
-    start_date?: TimestampAmino;
+    start_date?: string;
     /**
      * end_date is the end of the period during which this credit batch was
      * quantified and verified.
      */
-    end_date?: TimestampAmino;
+    end_date?: string;
     /** issuance_date is the timestamp when the credit batch was issued. */
-    issuance_date?: TimestampAmino;
+    issuance_date?: string;
     /**
      * open tells if it's possible to mint new credits in the future.
      * Once `open` is set to false, it can't be toggled any more.
      */
-    open: boolean;
+    open?: boolean;
 }
 export interface BatchAminoMsg {
     type: "/regen.ecocredit.v1.Batch";
@@ -322,14 +321,14 @@ export interface BatchAminoMsg {
 }
 /** Batch represents the high-level on-chain information for a credit batch. */
 export interface BatchSDKType {
-    key: Long;
+    key: bigint;
     issuer: Uint8Array;
-    project_key: Long;
+    project_key: bigint;
     denom: string;
     metadata: string;
-    start_date: TimestampSDKType;
-    end_date: TimestampSDKType;
-    issuance_date: TimestampSDKType;
+    start_date?: TimestampSDKType;
+    end_date?: TimestampSDKType;
+    issuance_date?: TimestampSDKType;
     open: boolean;
 }
 /**
@@ -346,7 +345,7 @@ export interface ClassSequence {
      * next_sequence is the next sequence number for a credit class within the
      * credit type. The sequence number is used to generate a class id.
      */
-    nextSequence: Long;
+    nextSequence: bigint;
 }
 export interface ClassSequenceProtoMsg {
     typeUrl: "/regen.ecocredit.v1.ClassSequence";
@@ -361,12 +360,12 @@ export interface ClassSequenceAmino {
      * credit_type_abbrev is the credit type abbreviation. This links a class
      * sequence to a credit type.
      */
-    credit_type_abbrev: string;
+    credit_type_abbrev?: string;
     /**
      * next_sequence is the next sequence number for a credit class within the
      * credit type. The sequence number is used to generate a class id.
      */
-    next_sequence: string;
+    next_sequence?: string;
 }
 export interface ClassSequenceAminoMsg {
     type: "/regen.ecocredit.v1.ClassSequence";
@@ -378,7 +377,7 @@ export interface ClassSequenceAminoMsg {
  */
 export interface ClassSequenceSDKType {
     credit_type_abbrev: string;
-    next_sequence: Long;
+    next_sequence: bigint;
 }
 /**
  * ProjectSequence stores and increments the sequence number for projects within
@@ -389,12 +388,12 @@ export interface ProjectSequence {
      * class_key is the table row identifier of the credit class used internally
      * for efficient lookups. This links a project sequence to a credit class.
      */
-    classKey: Long;
+    classKey: bigint;
     /**
      * next_sequence is the next sequence number for a project within the credit
      * class. The sequence number is used to generate a project id.
      */
-    nextSequence: Long;
+    nextSequence: bigint;
 }
 export interface ProjectSequenceProtoMsg {
     typeUrl: "/regen.ecocredit.v1.ProjectSequence";
@@ -409,12 +408,12 @@ export interface ProjectSequenceAmino {
      * class_key is the table row identifier of the credit class used internally
      * for efficient lookups. This links a project sequence to a credit class.
      */
-    class_key: string;
+    class_key?: string;
     /**
      * next_sequence is the next sequence number for a project within the credit
      * class. The sequence number is used to generate a project id.
      */
-    next_sequence: string;
+    next_sequence?: string;
 }
 export interface ProjectSequenceAminoMsg {
     type: "/regen.ecocredit.v1.ProjectSequence";
@@ -425,8 +424,8 @@ export interface ProjectSequenceAminoMsg {
  * a credit class.
  */
 export interface ProjectSequenceSDKType {
-    class_key: Long;
-    next_sequence: Long;
+    class_key: bigint;
+    next_sequence: bigint;
 }
 /**
  * BatchSequence stores and increments the sequence number for credit batches
@@ -437,12 +436,12 @@ export interface BatchSequence {
      * project_key is the table row identifier of the project used internally for
      * efficient lookups. This links a batch sequence to a project.
      */
-    projectKey: Long;
+    projectKey: bigint;
     /**
      * next_sequence is the next sequence number for a credit batch within the
      * project. The sequence number is used to generate a batch denom.
      */
-    nextSequence: Long;
+    nextSequence: bigint;
 }
 export interface BatchSequenceProtoMsg {
     typeUrl: "/regen.ecocredit.v1.BatchSequence";
@@ -457,12 +456,12 @@ export interface BatchSequenceAmino {
      * project_key is the table row identifier of the project used internally for
      * efficient lookups. This links a batch sequence to a project.
      */
-    project_key: string;
+    project_key?: string;
     /**
      * next_sequence is the next sequence number for a credit batch within the
      * project. The sequence number is used to generate a batch denom.
      */
-    next_sequence: string;
+    next_sequence?: string;
 }
 export interface BatchSequenceAminoMsg {
     type: "/regen.ecocredit.v1.BatchSequence";
@@ -473,8 +472,8 @@ export interface BatchSequenceAminoMsg {
  * within a project.
  */
 export interface BatchSequenceSDKType {
-    project_key: Long;
-    next_sequence: Long;
+    project_key: bigint;
+    next_sequence: bigint;
 }
 /** BatchBalance stores each accounts credit balance. */
 export interface BatchBalance {
@@ -482,7 +481,7 @@ export interface BatchBalance {
      * batch_key is the table row identifier of the credit batch used internally
      * for efficient lookups. This links a batch balance to a credit batch.
      */
-    batchKey: Long;
+    batchKey: bigint;
     /** address is the address of the account that owns the credits. */
     address: Uint8Array;
     /** tradable_amount is the total number of tradable credits owned by address. */
@@ -507,20 +506,20 @@ export interface BatchBalanceAmino {
      * batch_key is the table row identifier of the credit batch used internally
      * for efficient lookups. This links a batch balance to a credit batch.
      */
-    batch_key: string;
+    batch_key?: string;
     /** address is the address of the account that owns the credits. */
-    address: Uint8Array;
+    address?: string;
     /** tradable_amount is the total number of tradable credits owned by address. */
-    tradable_amount: string;
+    tradable_amount?: string;
     /** retired_amount is the total number of retired credits owned by address. */
-    retired_amount: string;
+    retired_amount?: string;
     /**
      * escrowed_amount is the total number of escrowed credits owned by address
      * and held in escrow by the marketplace. Credits are held in escrow when a
      * sell order is created and taken out of escrow when the sell order is either
      * cancelled, updated with a reduced quantity, or processed.
      */
-    escrowed_amount: string;
+    escrowed_amount?: string;
 }
 export interface BatchBalanceAminoMsg {
     type: "/regen.ecocredit.v1.BatchBalance";
@@ -528,7 +527,7 @@ export interface BatchBalanceAminoMsg {
 }
 /** BatchBalance stores each accounts credit balance. */
 export interface BatchBalanceSDKType {
-    batch_key: Long;
+    batch_key: bigint;
     address: Uint8Array;
     tradable_amount: string;
     retired_amount: string;
@@ -540,7 +539,7 @@ export interface BatchSupply {
      * batch_key is the table row identifier of the credit batch used internally
      * for efficient lookups. This links a batch supply to a credit batch.
      */
-    batchKey: Long;
+    batchKey: bigint;
     /**
      * tradable_amount is the total number of tradable credits in the credit
      * batch. Tradable credits may be retired in which case they will be removed
@@ -574,7 +573,7 @@ export interface BatchSupplyAmino {
      * batch_key is the table row identifier of the credit batch used internally
      * for efficient lookups. This links a batch supply to a credit batch.
      */
-    batch_key: string;
+    batch_key?: string;
     /**
      * tradable_amount is the total number of tradable credits in the credit
      * batch. Tradable credits may be retired in which case they will be removed
@@ -583,20 +582,20 @@ export interface BatchSupplyAmino {
      * and tracked in cancelled_amount. The sum of the tradable, retired, and
      * cancelled amounts will always equal the original credit issuance amount.
      */
-    tradable_amount: string;
+    tradable_amount?: string;
     /**
      * retired_amount is the total amount of credits that have been retired in the
      * credit batch. The sum of the tradable, retired, and cancelled amounts will
      * always equal the original credit issuance amount.
      */
-    retired_amount: string;
+    retired_amount?: string;
     /**
      * cancelled_amount is the number of credits in the batch that have been
      * cancelled, effectively undoing the issuance. The sum of the tradable,
      * retired, and cancelled amounts will always equal the original credit
      * issuance amount.
      */
-    cancelled_amount: string;
+    cancelled_amount?: string;
 }
 export interface BatchSupplyAminoMsg {
     type: "/regen.ecocredit.v1.BatchSupply";
@@ -604,7 +603,7 @@ export interface BatchSupplyAminoMsg {
 }
 /** BatchSupply stores the supply of credits for a credit batch. */
 export interface BatchSupplySDKType {
-    batch_key: Long;
+    batch_key: bigint;
     tradable_amount: string;
     retired_amount: string;
     cancelled_amount: string;
@@ -623,7 +622,7 @@ export interface OriginTxIndex {
      * to prevent malicious credit class issuers from blocking bridge operations
      * taking place within another credit class.
      */
-    classKey: Long;
+    classKey: bigint;
     /**
      * id is the transaction ID of an originating transaction or operation
      * based on a type (i.e. transaction ID, serial number).
@@ -653,17 +652,17 @@ export interface OriginTxIndexAmino {
      * to prevent malicious credit class issuers from blocking bridge operations
      * taking place within another credit class.
      */
-    class_key: string;
+    class_key?: string;
     /**
      * id is the transaction ID of an originating transaction or operation
      * based on a type (i.e. transaction ID, serial number).
      */
-    id: string;
+    id?: string;
     /**
      * source is the source chain or registry of the transaction originating
      * the mint process (e.g. polygon, ethereum, verra).
      */
-    source: string;
+    source?: string;
 }
 export interface OriginTxIndexAminoMsg {
     type: "/regen.ecocredit.v1.OriginTxIndex";
@@ -677,7 +676,7 @@ export interface OriginTxIndexAminoMsg {
  * bridge operations taking place within another credit class.
  */
 export interface OriginTxIndexSDKType {
-    class_key: Long;
+    class_key: bigint;
     id: string;
     source: string;
 }
@@ -692,14 +691,14 @@ export interface BatchContract {
      * batch_key is the table row identifier of the credit batch used internally
      * for efficient lookups. This links an external contract to a credit batch.
      */
-    batchKey: Long;
+    batchKey: bigint;
     /**
      * class_key is the table row identifier of the credit class within which the
      * credit batch exists. A contract is unique within the scope of a credit
      * class to prevent malicious credit class issuers from blocking bridge
      * operations taking place within another credit class.
      */
-    classKey: Long;
+    classKey: bigint;
     /**
      * contract is the address of the contract on the source chain that was
      * executed when creating the transaction. This address will be used when
@@ -722,20 +721,20 @@ export interface BatchContractAmino {
      * batch_key is the table row identifier of the credit batch used internally
      * for efficient lookups. This links an external contract to a credit batch.
      */
-    batch_key: string;
+    batch_key?: string;
     /**
      * class_key is the table row identifier of the credit class within which the
      * credit batch exists. A contract is unique within the scope of a credit
      * class to prevent malicious credit class issuers from blocking bridge
      * operations taking place within another credit class.
      */
-    class_key: string;
+    class_key?: string;
     /**
      * contract is the address of the contract on the source chain that was
      * executed when creating the transaction. This address will be used when
      * sending credits back to the source chain.
      */
-    contract: string;
+    contract?: string;
 }
 export interface BatchContractAminoMsg {
     type: "/regen.ecocredit.v1.BatchContract";
@@ -748,8 +747,8 @@ export interface BatchContractAminoMsg {
  * have been bridged will always be bridged back to the original contract.
  */
 export interface BatchContractSDKType {
-    batch_key: Long;
-    class_key: Long;
+    batch_key: bigint;
+    class_key: bigint;
     contract: string;
 }
 /**
@@ -778,7 +777,7 @@ export interface ClassCreatorAllowlistProtoMsg {
  */
 export interface ClassCreatorAllowlistAmino {
     /** enabled is whether or not the allow list is enabled. */
-    enabled: boolean;
+    enabled?: boolean;
 }
 export interface ClassCreatorAllowlistAminoMsg {
     type: "/regen.ecocredit.v1.ClassCreatorAllowlist";
@@ -817,7 +816,7 @@ export interface AllowedClassCreatorProtoMsg {
  */
 export interface AllowedClassCreatorAmino {
     /** address is the address that is allowed to create credit classes */
-    address: Uint8Array;
+    address?: string;
 }
 export interface AllowedClassCreatorAminoMsg {
     type: "/regen.ecocredit.v1.AllowedClassCreator";
@@ -843,7 +842,7 @@ export interface ClassFee {
      * fee is the credit class creation fee. If not set, a credit class creation
      * fee is not required.
      */
-    fee: Coin;
+    fee?: Coin;
 }
 export interface ClassFeeProtoMsg {
     typeUrl: "/regen.ecocredit.v1.ClassFee";
@@ -873,7 +872,7 @@ export interface ClassFeeAminoMsg {
  * Since Revision 2
  */
 export interface ClassFeeSDKType {
-    fee: CoinSDKType;
+    fee?: CoinSDKType;
 }
 /**
  * AllowedBridgeChain is a list of chains that are allowed to be used in
@@ -901,7 +900,7 @@ export interface AllowedBridgeChainProtoMsg {
  */
 export interface AllowedBridgeChainAmino {
     /** chain_name is the name of the chain allowed to bridge ecocredits to. */
-    chain_name: string;
+    chain_name?: string;
 }
 export interface AllowedBridgeChainAminoMsg {
     type: "/regen.ecocredit.v1.AllowedBridgeChain";
@@ -919,8 +918,9 @@ export interface AllowedBridgeChainSDKType {
     chain_name: string;
 }
 export declare const CreditType: {
-    encode(message: CreditType, writer?: _m0.Writer): _m0.Writer;
-    decode(input: _m0.Reader | Uint8Array, length?: number): CreditType;
+    typeUrl: string;
+    encode(message: CreditType, writer?: BinaryWriter): BinaryWriter;
+    decode(input: BinaryReader | Uint8Array, length?: number): CreditType;
     fromJSON(object: any): CreditType;
     toJSON(message: CreditType): unknown;
     fromPartial(object: Partial<CreditType>): CreditType;
@@ -932,8 +932,9 @@ export declare const CreditType: {
     toProtoMsg(message: CreditType): CreditTypeProtoMsg;
 };
 export declare const Class: {
-    encode(message: Class, writer?: _m0.Writer): _m0.Writer;
-    decode(input: _m0.Reader | Uint8Array, length?: number): Class;
+    typeUrl: string;
+    encode(message: Class, writer?: BinaryWriter): BinaryWriter;
+    decode(input: BinaryReader | Uint8Array, length?: number): Class;
     fromJSON(object: any): Class;
     toJSON(message: Class): unknown;
     fromPartial(object: Partial<Class>): Class;
@@ -945,8 +946,9 @@ export declare const Class: {
     toProtoMsg(message: Class): ClassProtoMsg;
 };
 export declare const ClassIssuer: {
-    encode(message: ClassIssuer, writer?: _m0.Writer): _m0.Writer;
-    decode(input: _m0.Reader | Uint8Array, length?: number): ClassIssuer;
+    typeUrl: string;
+    encode(message: ClassIssuer, writer?: BinaryWriter): BinaryWriter;
+    decode(input: BinaryReader | Uint8Array, length?: number): ClassIssuer;
     fromJSON(object: any): ClassIssuer;
     toJSON(message: ClassIssuer): unknown;
     fromPartial(object: Partial<ClassIssuer>): ClassIssuer;
@@ -958,8 +960,9 @@ export declare const ClassIssuer: {
     toProtoMsg(message: ClassIssuer): ClassIssuerProtoMsg;
 };
 export declare const Project: {
-    encode(message: Project, writer?: _m0.Writer): _m0.Writer;
-    decode(input: _m0.Reader | Uint8Array, length?: number): Project;
+    typeUrl: string;
+    encode(message: Project, writer?: BinaryWriter): BinaryWriter;
+    decode(input: BinaryReader | Uint8Array, length?: number): Project;
     fromJSON(object: any): Project;
     toJSON(message: Project): unknown;
     fromPartial(object: Partial<Project>): Project;
@@ -971,8 +974,9 @@ export declare const Project: {
     toProtoMsg(message: Project): ProjectProtoMsg;
 };
 export declare const Batch: {
-    encode(message: Batch, writer?: _m0.Writer): _m0.Writer;
-    decode(input: _m0.Reader | Uint8Array, length?: number): Batch;
+    typeUrl: string;
+    encode(message: Batch, writer?: BinaryWriter): BinaryWriter;
+    decode(input: BinaryReader | Uint8Array, length?: number): Batch;
     fromJSON(object: any): Batch;
     toJSON(message: Batch): unknown;
     fromPartial(object: Partial<Batch>): Batch;
@@ -984,8 +988,9 @@ export declare const Batch: {
     toProtoMsg(message: Batch): BatchProtoMsg;
 };
 export declare const ClassSequence: {
-    encode(message: ClassSequence, writer?: _m0.Writer): _m0.Writer;
-    decode(input: _m0.Reader | Uint8Array, length?: number): ClassSequence;
+    typeUrl: string;
+    encode(message: ClassSequence, writer?: BinaryWriter): BinaryWriter;
+    decode(input: BinaryReader | Uint8Array, length?: number): ClassSequence;
     fromJSON(object: any): ClassSequence;
     toJSON(message: ClassSequence): unknown;
     fromPartial(object: Partial<ClassSequence>): ClassSequence;
@@ -997,8 +1002,9 @@ export declare const ClassSequence: {
     toProtoMsg(message: ClassSequence): ClassSequenceProtoMsg;
 };
 export declare const ProjectSequence: {
-    encode(message: ProjectSequence, writer?: _m0.Writer): _m0.Writer;
-    decode(input: _m0.Reader | Uint8Array, length?: number): ProjectSequence;
+    typeUrl: string;
+    encode(message: ProjectSequence, writer?: BinaryWriter): BinaryWriter;
+    decode(input: BinaryReader | Uint8Array, length?: number): ProjectSequence;
     fromJSON(object: any): ProjectSequence;
     toJSON(message: ProjectSequence): unknown;
     fromPartial(object: Partial<ProjectSequence>): ProjectSequence;
@@ -1010,8 +1016,9 @@ export declare const ProjectSequence: {
     toProtoMsg(message: ProjectSequence): ProjectSequenceProtoMsg;
 };
 export declare const BatchSequence: {
-    encode(message: BatchSequence, writer?: _m0.Writer): _m0.Writer;
-    decode(input: _m0.Reader | Uint8Array, length?: number): BatchSequence;
+    typeUrl: string;
+    encode(message: BatchSequence, writer?: BinaryWriter): BinaryWriter;
+    decode(input: BinaryReader | Uint8Array, length?: number): BatchSequence;
     fromJSON(object: any): BatchSequence;
     toJSON(message: BatchSequence): unknown;
     fromPartial(object: Partial<BatchSequence>): BatchSequence;
@@ -1023,8 +1030,9 @@ export declare const BatchSequence: {
     toProtoMsg(message: BatchSequence): BatchSequenceProtoMsg;
 };
 export declare const BatchBalance: {
-    encode(message: BatchBalance, writer?: _m0.Writer): _m0.Writer;
-    decode(input: _m0.Reader | Uint8Array, length?: number): BatchBalance;
+    typeUrl: string;
+    encode(message: BatchBalance, writer?: BinaryWriter): BinaryWriter;
+    decode(input: BinaryReader | Uint8Array, length?: number): BatchBalance;
     fromJSON(object: any): BatchBalance;
     toJSON(message: BatchBalance): unknown;
     fromPartial(object: Partial<BatchBalance>): BatchBalance;
@@ -1036,8 +1044,9 @@ export declare const BatchBalance: {
     toProtoMsg(message: BatchBalance): BatchBalanceProtoMsg;
 };
 export declare const BatchSupply: {
-    encode(message: BatchSupply, writer?: _m0.Writer): _m0.Writer;
-    decode(input: _m0.Reader | Uint8Array, length?: number): BatchSupply;
+    typeUrl: string;
+    encode(message: BatchSupply, writer?: BinaryWriter): BinaryWriter;
+    decode(input: BinaryReader | Uint8Array, length?: number): BatchSupply;
     fromJSON(object: any): BatchSupply;
     toJSON(message: BatchSupply): unknown;
     fromPartial(object: Partial<BatchSupply>): BatchSupply;
@@ -1049,8 +1058,9 @@ export declare const BatchSupply: {
     toProtoMsg(message: BatchSupply): BatchSupplyProtoMsg;
 };
 export declare const OriginTxIndex: {
-    encode(message: OriginTxIndex, writer?: _m0.Writer): _m0.Writer;
-    decode(input: _m0.Reader | Uint8Array, length?: number): OriginTxIndex;
+    typeUrl: string;
+    encode(message: OriginTxIndex, writer?: BinaryWriter): BinaryWriter;
+    decode(input: BinaryReader | Uint8Array, length?: number): OriginTxIndex;
     fromJSON(object: any): OriginTxIndex;
     toJSON(message: OriginTxIndex): unknown;
     fromPartial(object: Partial<OriginTxIndex>): OriginTxIndex;
@@ -1062,8 +1072,9 @@ export declare const OriginTxIndex: {
     toProtoMsg(message: OriginTxIndex): OriginTxIndexProtoMsg;
 };
 export declare const BatchContract: {
-    encode(message: BatchContract, writer?: _m0.Writer): _m0.Writer;
-    decode(input: _m0.Reader | Uint8Array, length?: number): BatchContract;
+    typeUrl: string;
+    encode(message: BatchContract, writer?: BinaryWriter): BinaryWriter;
+    decode(input: BinaryReader | Uint8Array, length?: number): BatchContract;
     fromJSON(object: any): BatchContract;
     toJSON(message: BatchContract): unknown;
     fromPartial(object: Partial<BatchContract>): BatchContract;
@@ -1075,8 +1086,9 @@ export declare const BatchContract: {
     toProtoMsg(message: BatchContract): BatchContractProtoMsg;
 };
 export declare const ClassCreatorAllowlist: {
-    encode(message: ClassCreatorAllowlist, writer?: _m0.Writer): _m0.Writer;
-    decode(input: _m0.Reader | Uint8Array, length?: number): ClassCreatorAllowlist;
+    typeUrl: string;
+    encode(message: ClassCreatorAllowlist, writer?: BinaryWriter): BinaryWriter;
+    decode(input: BinaryReader | Uint8Array, length?: number): ClassCreatorAllowlist;
     fromJSON(object: any): ClassCreatorAllowlist;
     toJSON(message: ClassCreatorAllowlist): unknown;
     fromPartial(object: Partial<ClassCreatorAllowlist>): ClassCreatorAllowlist;
@@ -1088,8 +1100,9 @@ export declare const ClassCreatorAllowlist: {
     toProtoMsg(message: ClassCreatorAllowlist): ClassCreatorAllowlistProtoMsg;
 };
 export declare const AllowedClassCreator: {
-    encode(message: AllowedClassCreator, writer?: _m0.Writer): _m0.Writer;
-    decode(input: _m0.Reader | Uint8Array, length?: number): AllowedClassCreator;
+    typeUrl: string;
+    encode(message: AllowedClassCreator, writer?: BinaryWriter): BinaryWriter;
+    decode(input: BinaryReader | Uint8Array, length?: number): AllowedClassCreator;
     fromJSON(object: any): AllowedClassCreator;
     toJSON(message: AllowedClassCreator): unknown;
     fromPartial(object: Partial<AllowedClassCreator>): AllowedClassCreator;
@@ -1101,8 +1114,9 @@ export declare const AllowedClassCreator: {
     toProtoMsg(message: AllowedClassCreator): AllowedClassCreatorProtoMsg;
 };
 export declare const ClassFee: {
-    encode(message: ClassFee, writer?: _m0.Writer): _m0.Writer;
-    decode(input: _m0.Reader | Uint8Array, length?: number): ClassFee;
+    typeUrl: string;
+    encode(message: ClassFee, writer?: BinaryWriter): BinaryWriter;
+    decode(input: BinaryReader | Uint8Array, length?: number): ClassFee;
     fromJSON(object: any): ClassFee;
     toJSON(message: ClassFee): unknown;
     fromPartial(object: Partial<ClassFee>): ClassFee;
@@ -1114,8 +1128,9 @@ export declare const ClassFee: {
     toProtoMsg(message: ClassFee): ClassFeeProtoMsg;
 };
 export declare const AllowedBridgeChain: {
-    encode(message: AllowedBridgeChain, writer?: _m0.Writer): _m0.Writer;
-    decode(input: _m0.Reader | Uint8Array, length?: number): AllowedBridgeChain;
+    typeUrl: string;
+    encode(message: AllowedBridgeChain, writer?: BinaryWriter): BinaryWriter;
+    decode(input: BinaryReader | Uint8Array, length?: number): AllowedBridgeChain;
     fromJSON(object: any): AllowedBridgeChain;
     toJSON(message: AllowedBridgeChain): unknown;
     fromPartial(object: Partial<AllowedBridgeChain>): AllowedBridgeChain;

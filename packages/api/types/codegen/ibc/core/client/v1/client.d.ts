@@ -1,7 +1,6 @@
 import { Any, AnyAmino, AnySDKType } from "../../../../google/protobuf/any";
 import { Plan, PlanAmino, PlanSDKType } from "../../../../cosmos/upgrade/v1beta1/upgrade";
-import { Long } from "../../../../helpers";
-import * as _m0 from "protobufjs/minimal";
+import { BinaryReader, BinaryWriter } from "../../../../binary";
 /**
  * IdentifiedClientState defines a client state with an additional client
  * identifier field.
@@ -10,7 +9,7 @@ export interface IdentifiedClientState {
     /** client identifier */
     clientId: string;
     /** client state */
-    clientState: Any;
+    clientState?: Any;
 }
 export interface IdentifiedClientStateProtoMsg {
     typeUrl: "/ibc.core.client.v1.IdentifiedClientState";
@@ -22,7 +21,7 @@ export interface IdentifiedClientStateProtoMsg {
  */
 export interface IdentifiedClientStateAmino {
     /** client identifier */
-    client_id: string;
+    client_id?: string;
     /** client state */
     client_state?: AnyAmino;
 }
@@ -36,7 +35,7 @@ export interface IdentifiedClientStateAminoMsg {
  */
 export interface IdentifiedClientStateSDKType {
     client_id: string;
-    client_state: AnySDKType;
+    client_state?: AnySDKType;
 }
 /**
  * ConsensusStateWithHeight defines a consensus state with an additional height
@@ -46,7 +45,7 @@ export interface ConsensusStateWithHeight {
     /** consensus state height */
     height: Height;
     /** consensus state */
-    consensusState: Any;
+    consensusState?: Any;
 }
 export interface ConsensusStateWithHeightProtoMsg {
     typeUrl: "/ibc.core.client.v1.ConsensusStateWithHeight";
@@ -72,7 +71,7 @@ export interface ConsensusStateWithHeightAminoMsg {
  */
 export interface ConsensusStateWithHeightSDKType {
     height: HeightSDKType;
-    consensus_state: AnySDKType;
+    consensus_state?: AnySDKType;
 }
 /**
  * ClientConsensusStates defines all the stored consensus states for a given
@@ -94,9 +93,9 @@ export interface ClientConsensusStatesProtoMsg {
  */
 export interface ClientConsensusStatesAmino {
     /** client identifier */
-    client_id: string;
+    client_id?: string;
     /** consensus states and their heights associated with the client */
-    consensus_states: ConsensusStateWithHeightAmino[];
+    consensus_states?: ConsensusStateWithHeightAmino[];
 }
 export interface ClientConsensusStatesAminoMsg {
     type: "cosmos-sdk/ClientConsensusStates";
@@ -117,7 +116,7 @@ export interface ClientConsensusStatesSDKType {
  * chain parameters (with exception to latest height, frozen height, and chain-id).
  */
 export interface ClientUpdateProposal {
-    $typeUrl?: string;
+    $typeUrl?: "/ibc.core.client.v1.ClientUpdateProposal";
     /** the title of the update proposal */
     title: string;
     /** the description of the proposal */
@@ -142,16 +141,16 @@ export interface ClientUpdateProposalProtoMsg {
  */
 export interface ClientUpdateProposalAmino {
     /** the title of the update proposal */
-    title: string;
+    title?: string;
     /** the description of the proposal */
-    description: string;
+    description?: string;
     /** the client identifier for the client to be updated if the proposal passes */
-    subject_client_id: string;
+    subject_client_id?: string;
     /**
      * the substitute client identifier for the client standing in for the subject
      * client
      */
-    substitute_client_id: string;
+    substitute_client_id?: string;
 }
 export interface ClientUpdateProposalAminoMsg {
     type: "cosmos-sdk/ClientUpdateProposal";
@@ -164,7 +163,7 @@ export interface ClientUpdateProposalAminoMsg {
  * chain parameters (with exception to latest height, frozen height, and chain-id).
  */
 export interface ClientUpdateProposalSDKType {
-    $typeUrl?: string;
+    $typeUrl?: "/ibc.core.client.v1.ClientUpdateProposal";
     title: string;
     description: string;
     subject_client_id: string;
@@ -175,7 +174,7 @@ export interface ClientUpdateProposalSDKType {
  * upgrade.
  */
 export interface UpgradeProposal {
-    $typeUrl?: string;
+    $typeUrl?: "/ibc.core.client.v1.UpgradeProposal";
     title: string;
     description: string;
     plan: Plan;
@@ -187,7 +186,7 @@ export interface UpgradeProposal {
      * of the chain. This will allow IBC connections to persist smoothly across
      * planned chain upgrades
      */
-    upgradedClientState: Any;
+    upgradedClientState?: Any;
 }
 export interface UpgradeProposalProtoMsg {
     typeUrl: "/ibc.core.client.v1.UpgradeProposal";
@@ -198,8 +197,8 @@ export interface UpgradeProposalProtoMsg {
  * upgrade.
  */
 export interface UpgradeProposalAmino {
-    title: string;
-    description: string;
+    title?: string;
+    description?: string;
     plan?: PlanAmino;
     /**
      * An UpgradedClientState must be provided to perform an IBC breaking upgrade.
@@ -220,11 +219,11 @@ export interface UpgradeProposalAminoMsg {
  * upgrade.
  */
 export interface UpgradeProposalSDKType {
-    $typeUrl?: string;
+    $typeUrl?: "/ibc.core.client.v1.UpgradeProposal";
     title: string;
     description: string;
     plan: PlanSDKType;
-    upgraded_client_state: AnySDKType;
+    upgraded_client_state?: AnySDKType;
 }
 /**
  * Height is a monotonically increasing data type
@@ -240,9 +239,9 @@ export interface UpgradeProposalSDKType {
  */
 export interface Height {
     /** the revision that the client is currently on */
-    revisionNumber: Long;
+    revisionNumber: bigint;
     /** the height within the given revision */
-    revisionHeight: Long;
+    revisionHeight: bigint;
 }
 export interface HeightProtoMsg {
     typeUrl: "/ibc.core.client.v1.Height";
@@ -262,9 +261,9 @@ export interface HeightProtoMsg {
  */
 export interface HeightAmino {
     /** the revision that the client is currently on */
-    revision_number: string;
+    revision_number?: string;
     /** the height within the given revision */
-    revision_height: string;
+    revision_height?: string;
 }
 export interface HeightAminoMsg {
     type: "cosmos-sdk/Height";
@@ -283,8 +282,8 @@ export interface HeightAminoMsg {
  * gets reset
  */
 export interface HeightSDKType {
-    revision_number: Long;
-    revision_height: Long;
+    revision_number: bigint;
+    revision_height: bigint;
 }
 /** Params defines the set of IBC light client parameters. */
 export interface Params {
@@ -298,7 +297,7 @@ export interface ParamsProtoMsg {
 /** Params defines the set of IBC light client parameters. */
 export interface ParamsAmino {
     /** allowed_clients defines the list of allowed client state types. */
-    allowed_clients: string[];
+    allowed_clients?: string[];
 }
 export interface ParamsAminoMsg {
     type: "cosmos-sdk/Params";
@@ -309,8 +308,9 @@ export interface ParamsSDKType {
     allowed_clients: string[];
 }
 export declare const IdentifiedClientState: {
-    encode(message: IdentifiedClientState, writer?: _m0.Writer): _m0.Writer;
-    decode(input: _m0.Reader | Uint8Array, length?: number): IdentifiedClientState;
+    typeUrl: string;
+    encode(message: IdentifiedClientState, writer?: BinaryWriter): BinaryWriter;
+    decode(input: BinaryReader | Uint8Array, length?: number): IdentifiedClientState;
     fromJSON(object: any): IdentifiedClientState;
     toJSON(message: IdentifiedClientState): unknown;
     fromPartial(object: Partial<IdentifiedClientState>): IdentifiedClientState;
@@ -323,8 +323,9 @@ export declare const IdentifiedClientState: {
     toProtoMsg(message: IdentifiedClientState): IdentifiedClientStateProtoMsg;
 };
 export declare const ConsensusStateWithHeight: {
-    encode(message: ConsensusStateWithHeight, writer?: _m0.Writer): _m0.Writer;
-    decode(input: _m0.Reader | Uint8Array, length?: number): ConsensusStateWithHeight;
+    typeUrl: string;
+    encode(message: ConsensusStateWithHeight, writer?: BinaryWriter): BinaryWriter;
+    decode(input: BinaryReader | Uint8Array, length?: number): ConsensusStateWithHeight;
     fromJSON(object: any): ConsensusStateWithHeight;
     toJSON(message: ConsensusStateWithHeight): unknown;
     fromPartial(object: Partial<ConsensusStateWithHeight>): ConsensusStateWithHeight;
@@ -337,8 +338,9 @@ export declare const ConsensusStateWithHeight: {
     toProtoMsg(message: ConsensusStateWithHeight): ConsensusStateWithHeightProtoMsg;
 };
 export declare const ClientConsensusStates: {
-    encode(message: ClientConsensusStates, writer?: _m0.Writer): _m0.Writer;
-    decode(input: _m0.Reader | Uint8Array, length?: number): ClientConsensusStates;
+    typeUrl: string;
+    encode(message: ClientConsensusStates, writer?: BinaryWriter): BinaryWriter;
+    decode(input: BinaryReader | Uint8Array, length?: number): ClientConsensusStates;
     fromJSON(object: any): ClientConsensusStates;
     toJSON(message: ClientConsensusStates): unknown;
     fromPartial(object: Partial<ClientConsensusStates>): ClientConsensusStates;
@@ -351,8 +353,9 @@ export declare const ClientConsensusStates: {
     toProtoMsg(message: ClientConsensusStates): ClientConsensusStatesProtoMsg;
 };
 export declare const ClientUpdateProposal: {
-    encode(message: ClientUpdateProposal, writer?: _m0.Writer): _m0.Writer;
-    decode(input: _m0.Reader | Uint8Array, length?: number): ClientUpdateProposal;
+    typeUrl: string;
+    encode(message: ClientUpdateProposal, writer?: BinaryWriter): BinaryWriter;
+    decode(input: BinaryReader | Uint8Array, length?: number): ClientUpdateProposal;
     fromJSON(object: any): ClientUpdateProposal;
     toJSON(message: ClientUpdateProposal): unknown;
     fromPartial(object: Partial<ClientUpdateProposal>): ClientUpdateProposal;
@@ -365,8 +368,9 @@ export declare const ClientUpdateProposal: {
     toProtoMsg(message: ClientUpdateProposal): ClientUpdateProposalProtoMsg;
 };
 export declare const UpgradeProposal: {
-    encode(message: UpgradeProposal, writer?: _m0.Writer): _m0.Writer;
-    decode(input: _m0.Reader | Uint8Array, length?: number): UpgradeProposal;
+    typeUrl: string;
+    encode(message: UpgradeProposal, writer?: BinaryWriter): BinaryWriter;
+    decode(input: BinaryReader | Uint8Array, length?: number): UpgradeProposal;
     fromJSON(object: any): UpgradeProposal;
     toJSON(message: UpgradeProposal): unknown;
     fromPartial(object: Partial<UpgradeProposal>): UpgradeProposal;
@@ -379,8 +383,9 @@ export declare const UpgradeProposal: {
     toProtoMsg(message: UpgradeProposal): UpgradeProposalProtoMsg;
 };
 export declare const Height: {
-    encode(message: Height, writer?: _m0.Writer): _m0.Writer;
-    decode(input: _m0.Reader | Uint8Array, length?: number): Height;
+    typeUrl: string;
+    encode(message: Height, writer?: BinaryWriter): BinaryWriter;
+    decode(input: BinaryReader | Uint8Array, length?: number): Height;
     fromJSON(object: any): Height;
     toJSON(message: Height): unknown;
     fromPartial(object: Partial<Height>): Height;
@@ -393,8 +398,9 @@ export declare const Height: {
     toProtoMsg(message: Height): HeightProtoMsg;
 };
 export declare const Params: {
-    encode(message: Params, writer?: _m0.Writer): _m0.Writer;
-    decode(input: _m0.Reader | Uint8Array, length?: number): Params;
+    typeUrl: string;
+    encode(message: Params, writer?: BinaryWriter): BinaryWriter;
+    decode(input: BinaryReader | Uint8Array, length?: number): Params;
     fromJSON(object: any): Params;
     toJSON(message: Params): unknown;
     fromPartial(object: Partial<Params>): Params;

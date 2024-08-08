@@ -1,4 +1,4 @@
-import * as _m0 from "protobufjs/minimal";
+import { BinaryReader, BinaryWriter } from "../../../../binary";
 /**
  * DenomTrace contains the base denomination for ICS20 fungible tokens and the
  * source tracing information path.
@@ -25,9 +25,9 @@ export interface DenomTraceAmino {
      * path defines the chain of port/channel identifiers used for tracing the
      * source of the fungible token.
      */
-    path: string;
+    path?: string;
     /** base denomination of the relayed fungible token. */
-    base_denom: string;
+    base_denom?: string;
 }
 export interface DenomTraceAminoMsg {
     type: "cosmos-sdk/DenomTrace";
@@ -74,12 +74,12 @@ export interface ParamsAmino {
      * send_enabled enables or disables all cross-chain token transfers from this
      * chain.
      */
-    send_enabled: boolean;
+    send_enabled?: boolean;
     /**
      * receive_enabled enables or disables all cross-chain token transfers to this
      * chain.
      */
-    receive_enabled: boolean;
+    receive_enabled?: boolean;
 }
 export interface ParamsAminoMsg {
     type: "cosmos-sdk/Params";
@@ -96,8 +96,9 @@ export interface ParamsSDKType {
     receive_enabled: boolean;
 }
 export declare const DenomTrace: {
-    encode(message: DenomTrace, writer?: _m0.Writer): _m0.Writer;
-    decode(input: _m0.Reader | Uint8Array, length?: number): DenomTrace;
+    typeUrl: string;
+    encode(message: DenomTrace, writer?: BinaryWriter): BinaryWriter;
+    decode(input: BinaryReader | Uint8Array, length?: number): DenomTrace;
     fromJSON(object: any): DenomTrace;
     toJSON(message: DenomTrace): unknown;
     fromPartial(object: Partial<DenomTrace>): DenomTrace;
@@ -110,8 +111,9 @@ export declare const DenomTrace: {
     toProtoMsg(message: DenomTrace): DenomTraceProtoMsg;
 };
 export declare const Params: {
-    encode(message: Params, writer?: _m0.Writer): _m0.Writer;
-    decode(input: _m0.Reader | Uint8Array, length?: number): Params;
+    typeUrl: string;
+    encode(message: Params, writer?: BinaryWriter): BinaryWriter;
+    decode(input: BinaryReader | Uint8Array, length?: number): Params;
     fromJSON(object: any): Params;
     toJSON(message: Params): unknown;
     fromPartial(object: Partial<Params>): Params;

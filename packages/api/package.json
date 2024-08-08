@@ -31,7 +31,7 @@
     "build:module": "cross-env MODULE=true babel src --out-dir module --delete-dir-on-start  --extensions \".tsx,.ts,.js\"",
     "build:ts": "tsc --project ./tsconfig.json",
     "build": "yarn build:module && yarn build:main",
-    "codegen": "cross-env NODE_ENV=development babel-node scripts/codegen.js"
+    "codegen": "ts-node scripts/codegen.js"
   },
   "dependencies": {
     "@babel/runtime": "^7.22.5",

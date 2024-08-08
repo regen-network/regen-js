@@ -1,5 +1,5 @@
 import { Plan, PlanAmino, PlanSDKType } from "./upgrade";
-import * as _m0 from "protobufjs/minimal";
+import { BinaryReader, BinaryWriter } from "../../../binary";
 /**
  * MsgSoftwareUpgrade is the Msg/SoftwareUpgrade request type.
  *
@@ -22,7 +22,7 @@ export interface MsgSoftwareUpgradeProtoMsg {
  */
 export interface MsgSoftwareUpgradeAmino {
     /** authority is the address of the governance account. */
-    authority: string;
+    authority?: string;
     /** plan is the upgrade plan. */
     plan?: PlanAmino;
 }
@@ -88,7 +88,7 @@ export interface MsgCancelUpgradeProtoMsg {
  */
 export interface MsgCancelUpgradeAmino {
     /** authority is the address of the governance account. */
-    authority: string;
+    authority?: string;
 }
 export interface MsgCancelUpgradeAminoMsg {
     type: "cosmos-sdk/MsgCancelUpgrade";
@@ -132,8 +132,9 @@ export interface MsgCancelUpgradeResponseAminoMsg {
 export interface MsgCancelUpgradeResponseSDKType {
 }
 export declare const MsgSoftwareUpgrade: {
-    encode(message: MsgSoftwareUpgrade, writer?: _m0.Writer): _m0.Writer;
-    decode(input: _m0.Reader | Uint8Array, length?: number): MsgSoftwareUpgrade;
+    typeUrl: string;
+    encode(message: MsgSoftwareUpgrade, writer?: BinaryWriter): BinaryWriter;
+    decode(input: BinaryReader | Uint8Array, length?: number): MsgSoftwareUpgrade;
     fromJSON(object: any): MsgSoftwareUpgrade;
     toJSON(message: MsgSoftwareUpgrade): unknown;
     fromPartial(object: Partial<MsgSoftwareUpgrade>): MsgSoftwareUpgrade;
@@ -146,8 +147,9 @@ export declare const MsgSoftwareUpgrade: {
     toProtoMsg(message: MsgSoftwareUpgrade): MsgSoftwareUpgradeProtoMsg;
 };
 export declare const MsgSoftwareUpgradeResponse: {
-    encode(_: MsgSoftwareUpgradeResponse, writer?: _m0.Writer): _m0.Writer;
-    decode(input: _m0.Reader | Uint8Array, length?: number): MsgSoftwareUpgradeResponse;
+    typeUrl: string;
+    encode(_: MsgSoftwareUpgradeResponse, writer?: BinaryWriter): BinaryWriter;
+    decode(input: BinaryReader | Uint8Array, length?: number): MsgSoftwareUpgradeResponse;
     fromJSON(_: any): MsgSoftwareUpgradeResponse;
     toJSON(_: MsgSoftwareUpgradeResponse): unknown;
     fromPartial(_: Partial<MsgSoftwareUpgradeResponse>): MsgSoftwareUpgradeResponse;
@@ -160,8 +162,9 @@ export declare const MsgSoftwareUpgradeResponse: {
     toProtoMsg(message: MsgSoftwareUpgradeResponse): MsgSoftwareUpgradeResponseProtoMsg;
 };
 export declare const MsgCancelUpgrade: {
-    encode(message: MsgCancelUpgrade, writer?: _m0.Writer): _m0.Writer;
-    decode(input: _m0.Reader | Uint8Array, length?: number): MsgCancelUpgrade;
+    typeUrl: string;
+    encode(message: MsgCancelUpgrade, writer?: BinaryWriter): BinaryWriter;
+    decode(input: BinaryReader | Uint8Array, length?: number): MsgCancelUpgrade;
     fromJSON(object: any): MsgCancelUpgrade;
     toJSON(message: MsgCancelUpgrade): unknown;
     fromPartial(object: Partial<MsgCancelUpgrade>): MsgCancelUpgrade;
@@ -174,8 +177,9 @@ export declare const MsgCancelUpgrade: {
     toProtoMsg(message: MsgCancelUpgrade): MsgCancelUpgradeProtoMsg;
 };
 export declare const MsgCancelUpgradeResponse: {
-    encode(_: MsgCancelUpgradeResponse, writer?: _m0.Writer): _m0.Writer;
-    decode(input: _m0.Reader | Uint8Array, length?: number): MsgCancelUpgradeResponse;
+    typeUrl: string;
+    encode(_: MsgCancelUpgradeResponse, writer?: BinaryWriter): BinaryWriter;
+    decode(input: BinaryReader | Uint8Array, length?: number): MsgCancelUpgradeResponse;
     fromJSON(_: any): MsgCancelUpgradeResponse;
     toJSON(_: MsgCancelUpgradeResponse): unknown;
     fromPartial(_: Partial<MsgCancelUpgradeResponse>): MsgCancelUpgradeResponse;

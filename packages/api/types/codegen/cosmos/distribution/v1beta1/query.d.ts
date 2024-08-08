@@ -1,8 +1,7 @@
 import { PageRequest, PageRequestAmino, PageRequestSDKType, PageResponse, PageResponseAmino, PageResponseSDKType } from "../../base/query/v1beta1/pagination";
 import { Params, ParamsAmino, ParamsSDKType, ValidatorOutstandingRewards, ValidatorOutstandingRewardsAmino, ValidatorOutstandingRewardsSDKType, ValidatorAccumulatedCommission, ValidatorAccumulatedCommissionAmino, ValidatorAccumulatedCommissionSDKType, ValidatorSlashEvent, ValidatorSlashEventAmino, ValidatorSlashEventSDKType, DelegationDelegatorReward, DelegationDelegatorRewardAmino, DelegationDelegatorRewardSDKType } from "./distribution";
 import { DecCoin, DecCoinAmino, DecCoinSDKType } from "../../base/v1beta1/coin";
-import { Long } from "../../../helpers";
-import * as _m0 from "protobufjs/minimal";
+import { BinaryReader, BinaryWriter } from "../../../binary";
 /** QueryParamsRequest is the request type for the Query/Params RPC method. */
 export interface QueryParamsRequest {
 }
@@ -60,7 +59,7 @@ export interface QueryValidatorOutstandingRewardsRequestProtoMsg {
  */
 export interface QueryValidatorOutstandingRewardsRequestAmino {
     /** validator_address defines the validator address to query for. */
-    validator_address: string;
+    validator_address?: string;
 }
 export interface QueryValidatorOutstandingRewardsRequestAminoMsg {
     type: "cosmos-sdk/QueryValidatorOutstandingRewardsRequest";
@@ -120,7 +119,7 @@ export interface QueryValidatorCommissionRequestProtoMsg {
  */
 export interface QueryValidatorCommissionRequestAmino {
     /** validator_address defines the validator address to query for. */
-    validator_address: string;
+    validator_address?: string;
 }
 export interface QueryValidatorCommissionRequestAminoMsg {
     type: "cosmos-sdk/QueryValidatorCommissionRequest";
@@ -172,11 +171,11 @@ export interface QueryValidatorSlashesRequest {
     /** validator_address defines the validator address to query for. */
     validatorAddress: string;
     /** starting_height defines the optional starting height to query the slashes. */
-    startingHeight: Long;
+    startingHeight: bigint;
     /** starting_height defines the optional ending height to query the slashes. */
-    endingHeight: Long;
+    endingHeight: bigint;
     /** pagination defines an optional pagination for the request. */
-    pagination: PageRequest;
+    pagination?: PageRequest;
 }
 export interface QueryValidatorSlashesRequestProtoMsg {
     typeUrl: "/cosmos.distribution.v1beta1.QueryValidatorSlashesRequest";
@@ -188,11 +187,11 @@ export interface QueryValidatorSlashesRequestProtoMsg {
  */
 export interface QueryValidatorSlashesRequestAmino {
     /** validator_address defines the validator address to query for. */
-    validator_address: string;
+    validator_address?: string;
     /** starting_height defines the optional starting height to query the slashes. */
-    starting_height: string;
+    starting_height?: string;
     /** starting_height defines the optional ending height to query the slashes. */
-    ending_height: string;
+    ending_height?: string;
     /** pagination defines an optional pagination for the request. */
     pagination?: PageRequestAmino;
 }
@@ -206,9 +205,9 @@ export interface QueryValidatorSlashesRequestAminoMsg {
  */
 export interface QueryValidatorSlashesRequestSDKType {
     validator_address: string;
-    starting_height: Long;
-    ending_height: Long;
-    pagination: PageRequestSDKType;
+    starting_height: bigint;
+    ending_height: bigint;
+    pagination?: PageRequestSDKType;
 }
 /**
  * QueryValidatorSlashesResponse is the response type for the
@@ -218,7 +217,7 @@ export interface QueryValidatorSlashesResponse {
     /** slashes defines the slashes the validator received. */
     slashes: ValidatorSlashEvent[];
     /** pagination defines the pagination in the response. */
-    pagination: PageResponse;
+    pagination?: PageResponse;
 }
 export interface QueryValidatorSlashesResponseProtoMsg {
     typeUrl: "/cosmos.distribution.v1beta1.QueryValidatorSlashesResponse";
@@ -230,7 +229,7 @@ export interface QueryValidatorSlashesResponseProtoMsg {
  */
 export interface QueryValidatorSlashesResponseAmino {
     /** slashes defines the slashes the validator received. */
-    slashes: ValidatorSlashEventAmino[];
+    slashes?: ValidatorSlashEventAmino[];
     /** pagination defines the pagination in the response. */
     pagination?: PageResponseAmino;
 }
@@ -244,7 +243,7 @@ export interface QueryValidatorSlashesResponseAminoMsg {
  */
 export interface QueryValidatorSlashesResponseSDKType {
     slashes: ValidatorSlashEventSDKType[];
-    pagination: PageResponseSDKType;
+    pagination?: PageResponseSDKType;
 }
 /**
  * QueryDelegationRewardsRequest is the request type for the
@@ -266,9 +265,9 @@ export interface QueryDelegationRewardsRequestProtoMsg {
  */
 export interface QueryDelegationRewardsRequestAmino {
     /** delegator_address defines the delegator address to query for. */
-    delegator_address: string;
+    delegator_address?: string;
     /** validator_address defines the validator address to query for. */
-    validator_address: string;
+    validator_address?: string;
 }
 export interface QueryDelegationRewardsRequestAminoMsg {
     type: "cosmos-sdk/QueryDelegationRewardsRequest";
@@ -300,7 +299,7 @@ export interface QueryDelegationRewardsResponseProtoMsg {
  */
 export interface QueryDelegationRewardsResponseAmino {
     /** rewards defines the rewards accrued by a delegation. */
-    rewards: DecCoinAmino[];
+    rewards?: DecCoinAmino[];
 }
 export interface QueryDelegationRewardsResponseAminoMsg {
     type: "cosmos-sdk/QueryDelegationRewardsResponse";
@@ -331,7 +330,7 @@ export interface QueryDelegationTotalRewardsRequestProtoMsg {
  */
 export interface QueryDelegationTotalRewardsRequestAmino {
     /** delegator_address defines the delegator address to query for. */
-    delegator_address: string;
+    delegator_address?: string;
 }
 export interface QueryDelegationTotalRewardsRequestAminoMsg {
     type: "cosmos-sdk/QueryDelegationTotalRewardsRequest";
@@ -364,9 +363,9 @@ export interface QueryDelegationTotalRewardsResponseProtoMsg {
  */
 export interface QueryDelegationTotalRewardsResponseAmino {
     /** rewards defines all the rewards accrued by a delegator. */
-    rewards: DelegationDelegatorRewardAmino[];
+    rewards?: DelegationDelegatorRewardAmino[];
     /** total defines the sum of all the rewards. */
-    total: DecCoinAmino[];
+    total?: DecCoinAmino[];
 }
 export interface QueryDelegationTotalRewardsResponseAminoMsg {
     type: "cosmos-sdk/QueryDelegationTotalRewardsResponse";
@@ -398,7 +397,7 @@ export interface QueryDelegatorValidatorsRequestProtoMsg {
  */
 export interface QueryDelegatorValidatorsRequestAmino {
     /** delegator_address defines the delegator address to query for. */
-    delegator_address: string;
+    delegator_address?: string;
 }
 export interface QueryDelegatorValidatorsRequestAminoMsg {
     type: "cosmos-sdk/QueryDelegatorValidatorsRequest";
@@ -429,7 +428,7 @@ export interface QueryDelegatorValidatorsResponseProtoMsg {
  */
 export interface QueryDelegatorValidatorsResponseAmino {
     /** validators defines the validators a delegator is delegating for. */
-    validators: string[];
+    validators?: string[];
 }
 export interface QueryDelegatorValidatorsResponseAminoMsg {
     type: "cosmos-sdk/QueryDelegatorValidatorsResponse";
@@ -460,7 +459,7 @@ export interface QueryDelegatorWithdrawAddressRequestProtoMsg {
  */
 export interface QueryDelegatorWithdrawAddressRequestAmino {
     /** delegator_address defines the delegator address to query for. */
-    delegator_address: string;
+    delegator_address?: string;
 }
 export interface QueryDelegatorWithdrawAddressRequestAminoMsg {
     type: "cosmos-sdk/QueryDelegatorWithdrawAddressRequest";
@@ -491,7 +490,7 @@ export interface QueryDelegatorWithdrawAddressResponseProtoMsg {
  */
 export interface QueryDelegatorWithdrawAddressResponseAmino {
     /** withdraw_address defines the delegator address to query for. */
-    withdraw_address: string;
+    withdraw_address?: string;
 }
 export interface QueryDelegatorWithdrawAddressResponseAminoMsg {
     type: "cosmos-sdk/QueryDelegatorWithdrawAddressResponse";
@@ -548,7 +547,7 @@ export interface QueryCommunityPoolResponseProtoMsg {
  */
 export interface QueryCommunityPoolResponseAmino {
     /** pool defines community pool's coins. */
-    pool: DecCoinAmino[];
+    pool?: DecCoinAmino[];
 }
 export interface QueryCommunityPoolResponseAminoMsg {
     type: "cosmos-sdk/QueryCommunityPoolResponse";
@@ -562,8 +561,9 @@ export interface QueryCommunityPoolResponseSDKType {
     pool: DecCoinSDKType[];
 }
 export declare const QueryParamsRequest: {
-    encode(_: QueryParamsRequest, writer?: _m0.Writer): _m0.Writer;
-    decode(input: _m0.Reader | Uint8Array, length?: number): QueryParamsRequest;
+    typeUrl: string;
+    encode(_: QueryParamsRequest, writer?: BinaryWriter): BinaryWriter;
+    decode(input: BinaryReader | Uint8Array, length?: number): QueryParamsRequest;
     fromJSON(_: any): QueryParamsRequest;
     toJSON(_: QueryParamsRequest): unknown;
     fromPartial(_: Partial<QueryParamsRequest>): QueryParamsRequest;
@@ -576,8 +576,9 @@ export declare const QueryParamsRequest: {
     toProtoMsg(message: QueryParamsRequest): QueryParamsRequestProtoMsg;
 };
 export declare const QueryParamsResponse: {
-    encode(message: QueryParamsResponse, writer?: _m0.Writer): _m0.Writer;
-    decode(input: _m0.Reader | Uint8Array, length?: number): QueryParamsResponse;
+    typeUrl: string;
+    encode(message: QueryParamsResponse, writer?: BinaryWriter): BinaryWriter;
+    decode(input: BinaryReader | Uint8Array, length?: number): QueryParamsResponse;
     fromJSON(object: any): QueryParamsResponse;
     toJSON(message: QueryParamsResponse): unknown;
     fromPartial(object: Partial<QueryParamsResponse>): QueryParamsResponse;
@@ -590,8 +591,9 @@ export declare const QueryParamsResponse: {
     toProtoMsg(message: QueryParamsResponse): QueryParamsResponseProtoMsg;
 };
 export declare const QueryValidatorOutstandingRewardsRequest: {
-    encode(message: QueryValidatorOutstandingRewardsRequest, writer?: _m0.Writer): _m0.Writer;
-    decode(input: _m0.Reader | Uint8Array, length?: number): QueryValidatorOutstandingRewardsRequest;
+    typeUrl: string;
+    encode(message: QueryValidatorOutstandingRewardsRequest, writer?: BinaryWriter): BinaryWriter;
+    decode(input: BinaryReader | Uint8Array, length?: number): QueryValidatorOutstandingRewardsRequest;
     fromJSON(object: any): QueryValidatorOutstandingRewardsRequest;
     toJSON(message: QueryValidatorOutstandingRewardsRequest): unknown;
     fromPartial(object: Partial<QueryValidatorOutstandingRewardsRequest>): QueryValidatorOutstandingRewardsRequest;
@@ -604,8 +606,9 @@ export declare const QueryValidatorOutstandingRewardsRequest: {
     toProtoMsg(message: QueryValidatorOutstandingRewardsRequest): QueryValidatorOutstandingRewardsRequestProtoMsg;
 };
 export declare const QueryValidatorOutstandingRewardsResponse: {
-    encode(message: QueryValidatorOutstandingRewardsResponse, writer?: _m0.Writer): _m0.Writer;
-    decode(input: _m0.Reader | Uint8Array, length?: number): QueryValidatorOutstandingRewardsResponse;
+    typeUrl: string;
+    encode(message: QueryValidatorOutstandingRewardsResponse, writer?: BinaryWriter): BinaryWriter;
+    decode(input: BinaryReader | Uint8Array, length?: number): QueryValidatorOutstandingRewardsResponse;
     fromJSON(object: any): QueryValidatorOutstandingRewardsResponse;
     toJSON(message: QueryValidatorOutstandingRewardsResponse): unknown;
     fromPartial(object: Partial<QueryValidatorOutstandingRewardsResponse>): QueryValidatorOutstandingRewardsResponse;
@@ -618,8 +621,9 @@ export declare const QueryValidatorOutstandingRewardsResponse: {
     toProtoMsg(message: QueryValidatorOutstandingRewardsResponse): QueryValidatorOutstandingRewardsResponseProtoMsg;
 };
 export declare const QueryValidatorCommissionRequest: {
-    encode(message: QueryValidatorCommissionRequest, writer?: _m0.Writer): _m0.Writer;
-    decode(input: _m0.Reader | Uint8Array, length?: number): QueryValidatorCommissionRequest;
+    typeUrl: string;
+    encode(message: QueryValidatorCommissionRequest, writer?: BinaryWriter): BinaryWriter;
+    decode(input: BinaryReader | Uint8Array, length?: number): QueryValidatorCommissionRequest;
     fromJSON(object: any): QueryValidatorCommissionRequest;
     toJSON(message: QueryValidatorCommissionRequest): unknown;
     fromPartial(object: Partial<QueryValidatorCommissionRequest>): QueryValidatorCommissionRequest;
@@ -632,8 +636,9 @@ export declare const QueryValidatorCommissionRequest: {
     toProtoMsg(message: QueryValidatorCommissionRequest): QueryValidatorCommissionRequestProtoMsg;
 };
 export declare const QueryValidatorCommissionResponse: {
-    encode(message: QueryValidatorCommissionResponse, writer?: _m0.Writer): _m0.Writer;
-    decode(input: _m0.Reader | Uint8Array, length?: number): QueryValidatorCommissionResponse;
+    typeUrl: string;
+    encode(message: QueryValidatorCommissionResponse, writer?: BinaryWriter): BinaryWriter;
+    decode(input: BinaryReader | Uint8Array, length?: number): QueryValidatorCommissionResponse;
     fromJSON(object: any): QueryValidatorCommissionResponse;
     toJSON(message: QueryValidatorCommissionResponse): unknown;
     fromPartial(object: Partial<QueryValidatorCommissionResponse>): QueryValidatorCommissionResponse;
@@ -646,8 +651,9 @@ export declare const QueryValidatorCommissionResponse: {
     toProtoMsg(message: QueryValidatorCommissionResponse): QueryValidatorCommissionResponseProtoMsg;
 };
 export declare const QueryValidatorSlashesRequest: {
-    encode(message: QueryValidatorSlashesRequest, writer?: _m0.Writer): _m0.Writer;
-    decode(input: _m0.Reader | Uint8Array, length?: number): QueryValidatorSlashesRequest;
+    typeUrl: string;
+    encode(message: QueryValidatorSlashesRequest, writer?: BinaryWriter): BinaryWriter;
+    decode(input: BinaryReader | Uint8Array, length?: number): QueryValidatorSlashesRequest;
     fromJSON(object: any): QueryValidatorSlashesRequest;
     toJSON(message: QueryValidatorSlashesRequest): unknown;
     fromPartial(object: Partial<QueryValidatorSlashesRequest>): QueryValidatorSlashesRequest;
@@ -660,8 +666,9 @@ export declare const QueryValidatorSlashesRequest: {
     toProtoMsg(message: QueryValidatorSlashesRequest): QueryValidatorSlashesRequestProtoMsg;
 };
 export declare const QueryValidatorSlashesResponse: {
-    encode(message: QueryValidatorSlashesResponse, writer?: _m0.Writer): _m0.Writer;
-    decode(input: _m0.Reader | Uint8Array, length?: number): QueryValidatorSlashesResponse;
+    typeUrl: string;
+    encode(message: QueryValidatorSlashesResponse, writer?: BinaryWriter): BinaryWriter;
+    decode(input: BinaryReader | Uint8Array, length?: number): QueryValidatorSlashesResponse;
     fromJSON(object: any): QueryValidatorSlashesResponse;
     toJSON(message: QueryValidatorSlashesResponse): unknown;
     fromPartial(object: Partial<QueryValidatorSlashesResponse>): QueryValidatorSlashesResponse;
@@ -674,8 +681,9 @@ export declare const QueryValidatorSlashesResponse: {
     toProtoMsg(message: QueryValidatorSlashesResponse): QueryValidatorSlashesResponseProtoMsg;
 };
 export declare const QueryDelegationRewardsRequest: {
-    encode(message: QueryDelegationRewardsRequest, writer?: _m0.Writer): _m0.Writer;
-    decode(input: _m0.Reader | Uint8Array, length?: number): QueryDelegationRewardsRequest;
+    typeUrl: string;
+    encode(message: QueryDelegationRewardsRequest, writer?: BinaryWriter): BinaryWriter;
+    decode(input: BinaryReader | Uint8Array, length?: number): QueryDelegationRewardsRequest;
     fromJSON(object: any): QueryDelegationRewardsRequest;
     toJSON(message: QueryDelegationRewardsRequest): unknown;
     fromPartial(object: Partial<QueryDelegationRewardsRequest>): QueryDelegationRewardsRequest;
@@ -688,8 +696,9 @@ export declare const QueryDelegationRewardsRequest: {
     toProtoMsg(message: QueryDelegationRewardsRequest): QueryDelegationRewardsRequestProtoMsg;
 };
 export declare const QueryDelegationRewardsResponse: {
-    encode(message: QueryDelegationRewardsResponse, writer?: _m0.Writer): _m0.Writer;
-    decode(input: _m0.Reader | Uint8Array, length?: number): QueryDelegationRewardsResponse;
+    typeUrl: string;
+    encode(message: QueryDelegationRewardsResponse, writer?: BinaryWriter): BinaryWriter;
+    decode(input: BinaryReader | Uint8Array, length?: number): QueryDelegationRewardsResponse;
     fromJSON(object: any): QueryDelegationRewardsResponse;
     toJSON(message: QueryDelegationRewardsResponse): unknown;
     fromPartial(object: Partial<QueryDelegationRewardsResponse>): QueryDelegationRewardsResponse;
@@ -702,8 +711,9 @@ export declare const QueryDelegationRewardsResponse: {
     toProtoMsg(message: QueryDelegationRewardsResponse): QueryDelegationRewardsResponseProtoMsg;
 };
 export declare const QueryDelegationTotalRewardsRequest: {
-    encode(message: QueryDelegationTotalRewardsRequest, writer?: _m0.Writer): _m0.Writer;
-    decode(input: _m0.Reader | Uint8Array, length?: number): QueryDelegationTotalRewardsRequest;
+    typeUrl: string;
+    encode(message: QueryDelegationTotalRewardsRequest, writer?: BinaryWriter): BinaryWriter;
+    decode(input: BinaryReader | Uint8Array, length?: number): QueryDelegationTotalRewardsRequest;
     fromJSON(object: any): QueryDelegationTotalRewardsRequest;
     toJSON(message: QueryDelegationTotalRewardsRequest): unknown;
     fromPartial(object: Partial<QueryDelegationTotalRewardsRequest>): QueryDelegationTotalRewardsRequest;
@@ -716,8 +726,9 @@ export declare const QueryDelegationTotalRewardsRequest: {
     toProtoMsg(message: QueryDelegationTotalRewardsRequest): QueryDelegationTotalRewardsRequestProtoMsg;
 };
 export declare const QueryDelegationTotalRewardsResponse: {
-    encode(message: QueryDelegationTotalRewardsResponse, writer?: _m0.Writer): _m0.Writer;
-    decode(input: _m0.Reader | Uint8Array, length?: number): QueryDelegationTotalRewardsResponse;
+    typeUrl: string;
+    encode(message: QueryDelegationTotalRewardsResponse, writer?: BinaryWriter): BinaryWriter;
+    decode(input: BinaryReader | Uint8Array, length?: number): QueryDelegationTotalRewardsResponse;
     fromJSON(object: any): QueryDelegationTotalRewardsResponse;
     toJSON(message: QueryDelegationTotalRewardsResponse): unknown;
     fromPartial(object: Partial<QueryDelegationTotalRewardsResponse>): QueryDelegationTotalRewardsResponse;
@@ -730,8 +741,9 @@ export declare const QueryDelegationTotalRewardsResponse: {
     toProtoMsg(message: QueryDelegationTotalRewardsResponse): QueryDelegationTotalRewardsResponseProtoMsg;
 };
 export declare const QueryDelegatorValidatorsRequest: {
-    encode(message: QueryDelegatorValidatorsRequest, writer?: _m0.Writer): _m0.Writer;
-    decode(input: _m0.Reader | Uint8Array, length?: number): QueryDelegatorValidatorsRequest;
+    typeUrl: string;
+    encode(message: QueryDelegatorValidatorsRequest, writer?: BinaryWriter): BinaryWriter;
+    decode(input: BinaryReader | Uint8Array, length?: number): QueryDelegatorValidatorsRequest;
     fromJSON(object: any): QueryDelegatorValidatorsRequest;
     toJSON(message: QueryDelegatorValidatorsRequest): unknown;
     fromPartial(object: Partial<QueryDelegatorValidatorsRequest>): QueryDelegatorValidatorsRequest;
@@ -744,8 +756,9 @@ export declare const QueryDelegatorValidatorsRequest: {
     toProtoMsg(message: QueryDelegatorValidatorsRequest): QueryDelegatorValidatorsRequestProtoMsg;
 };
 export declare const QueryDelegatorValidatorsResponse: {
-    encode(message: QueryDelegatorValidatorsResponse, writer?: _m0.Writer): _m0.Writer;
-    decode(input: _m0.Reader | Uint8Array, length?: number): QueryDelegatorValidatorsResponse;
+    typeUrl: string;
+    encode(message: QueryDelegatorValidatorsResponse, writer?: BinaryWriter): BinaryWriter;
+    decode(input: BinaryReader | Uint8Array, length?: number): QueryDelegatorValidatorsResponse;
     fromJSON(object: any): QueryDelegatorValidatorsResponse;
     toJSON(message: QueryDelegatorValidatorsResponse): unknown;
     fromPartial(object: Partial<QueryDelegatorValidatorsResponse>): QueryDelegatorValidatorsResponse;
@@ -758,8 +771,9 @@ export declare const QueryDelegatorValidatorsResponse: {
     toProtoMsg(message: QueryDelegatorValidatorsResponse): QueryDelegatorValidatorsResponseProtoMsg;
 };
 export declare const QueryDelegatorWithdrawAddressRequest: {
-    encode(message: QueryDelegatorWithdrawAddressRequest, writer?: _m0.Writer): _m0.Writer;
-    decode(input: _m0.Reader | Uint8Array, length?: number): QueryDelegatorWithdrawAddressRequest;
+    typeUrl: string;
+    encode(message: QueryDelegatorWithdrawAddressRequest, writer?: BinaryWriter): BinaryWriter;
+    decode(input: BinaryReader | Uint8Array, length?: number): QueryDelegatorWithdrawAddressRequest;
     fromJSON(object: any): QueryDelegatorWithdrawAddressRequest;
     toJSON(message: QueryDelegatorWithdrawAddressRequest): unknown;
     fromPartial(object: Partial<QueryDelegatorWithdrawAddressRequest>): QueryDelegatorWithdrawAddressRequest;
@@ -772,8 +786,9 @@ export declare const QueryDelegatorWithdrawAddressRequest: {
     toProtoMsg(message: QueryDelegatorWithdrawAddressRequest): QueryDelegatorWithdrawAddressRequestProtoMsg;
 };
 export declare const QueryDelegatorWithdrawAddressResponse: {
-    encode(message: QueryDelegatorWithdrawAddressResponse, writer?: _m0.Writer): _m0.Writer;
-    decode(input: _m0.Reader | Uint8Array, length?: number): QueryDelegatorWithdrawAddressResponse;
+    typeUrl: string;
+    encode(message: QueryDelegatorWithdrawAddressResponse, writer?: BinaryWriter): BinaryWriter;
+    decode(input: BinaryReader | Uint8Array, length?: number): QueryDelegatorWithdrawAddressResponse;
     fromJSON(object: any): QueryDelegatorWithdrawAddressResponse;
     toJSON(message: QueryDelegatorWithdrawAddressResponse): unknown;
     fromPartial(object: Partial<QueryDelegatorWithdrawAddressResponse>): QueryDelegatorWithdrawAddressResponse;
@@ -786,8 +801,9 @@ export declare const QueryDelegatorWithdrawAddressResponse: {
     toProtoMsg(message: QueryDelegatorWithdrawAddressResponse): QueryDelegatorWithdrawAddressResponseProtoMsg;
 };
 export declare const QueryCommunityPoolRequest: {
-    encode(_: QueryCommunityPoolRequest, writer?: _m0.Writer): _m0.Writer;
-    decode(input: _m0.Reader | Uint8Array, length?: number): QueryCommunityPoolRequest;
+    typeUrl: string;
+    encode(_: QueryCommunityPoolRequest, writer?: BinaryWriter): BinaryWriter;
+    decode(input: BinaryReader | Uint8Array, length?: number): QueryCommunityPoolRequest;
     fromJSON(_: any): QueryCommunityPoolRequest;
     toJSON(_: QueryCommunityPoolRequest): unknown;
     fromPartial(_: Partial<QueryCommunityPoolRequest>): QueryCommunityPoolRequest;
@@ -800,8 +816,9 @@ export declare const QueryCommunityPoolRequest: {
     toProtoMsg(message: QueryCommunityPoolRequest): QueryCommunityPoolRequestProtoMsg;
 };
 export declare const QueryCommunityPoolResponse: {
-    encode(message: QueryCommunityPoolResponse, writer?: _m0.Writer): _m0.Writer;
-    decode(input: _m0.Reader | Uint8Array, length?: number): QueryCommunityPoolResponse;
+    typeUrl: string;
+    encode(message: QueryCommunityPoolResponse, writer?: BinaryWriter): BinaryWriter;
+    decode(input: BinaryReader | Uint8Array, length?: number): QueryCommunityPoolResponse;
     fromJSON(object: any): QueryCommunityPoolResponse;
     toJSON(message: QueryCommunityPoolResponse): unknown;
     fromPartial(object: Partial<QueryCommunityPoolResponse>): QueryCommunityPoolResponse;

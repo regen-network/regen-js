@@ -1,6 +1,6 @@
 import { PageRequest, PageRequestAmino, PageRequestSDKType, PageResponse, PageResponseAmino, PageResponseSDKType } from "../../base/query/v1beta1/pagination";
 import { Params, ParamsAmino, ParamsSDKType, ValidatorSigningInfo, ValidatorSigningInfoAmino, ValidatorSigningInfoSDKType } from "./slashing";
-import * as _m0 from "protobufjs/minimal";
+import { BinaryReader, BinaryWriter } from "../../../binary";
 /** QueryParamsRequest is the request type for the Query/Params RPC method */
 export interface QueryParamsRequest {
 }
@@ -56,7 +56,7 @@ export interface QuerySigningInfoRequestProtoMsg {
  */
 export interface QuerySigningInfoRequestAmino {
     /** cons_address is the address to query signing info of */
-    cons_address: string;
+    cons_address?: string;
 }
 export interface QuerySigningInfoRequestAminoMsg {
     type: "cosmos-sdk/QuerySigningInfoRequest";
@@ -105,7 +105,7 @@ export interface QuerySigningInfoResponseSDKType {
  * method
  */
 export interface QuerySigningInfosRequest {
-    pagination: PageRequest;
+    pagination?: PageRequest;
 }
 export interface QuerySigningInfosRequestProtoMsg {
     typeUrl: "/cosmos.slashing.v1beta1.QuerySigningInfosRequest";
@@ -127,7 +127,7 @@ export interface QuerySigningInfosRequestAminoMsg {
  * method
  */
 export interface QuerySigningInfosRequestSDKType {
-    pagination: PageRequestSDKType;
+    pagination?: PageRequestSDKType;
 }
 /**
  * QuerySigningInfosResponse is the response type for the Query/SigningInfos RPC
@@ -136,7 +136,7 @@ export interface QuerySigningInfosRequestSDKType {
 export interface QuerySigningInfosResponse {
     /** info is the signing info of all validators */
     info: ValidatorSigningInfo[];
-    pagination: PageResponse;
+    pagination?: PageResponse;
 }
 export interface QuerySigningInfosResponseProtoMsg {
     typeUrl: "/cosmos.slashing.v1beta1.QuerySigningInfosResponse";
@@ -148,7 +148,7 @@ export interface QuerySigningInfosResponseProtoMsg {
  */
 export interface QuerySigningInfosResponseAmino {
     /** info is the signing info of all validators */
-    info: ValidatorSigningInfoAmino[];
+    info?: ValidatorSigningInfoAmino[];
     pagination?: PageResponseAmino;
 }
 export interface QuerySigningInfosResponseAminoMsg {
@@ -161,11 +161,12 @@ export interface QuerySigningInfosResponseAminoMsg {
  */
 export interface QuerySigningInfosResponseSDKType {
     info: ValidatorSigningInfoSDKType[];
-    pagination: PageResponseSDKType;
+    pagination?: PageResponseSDKType;
 }
 export declare const QueryParamsRequest: {
-    encode(_: QueryParamsRequest, writer?: _m0.Writer): _m0.Writer;
-    decode(input: _m0.Reader | Uint8Array, length?: number): QueryParamsRequest;
+    typeUrl: string;
+    encode(_: QueryParamsRequest, writer?: BinaryWriter): BinaryWriter;
+    decode(input: BinaryReader | Uint8Array, length?: number): QueryParamsRequest;
     fromJSON(_: any): QueryParamsRequest;
     toJSON(_: QueryParamsRequest): unknown;
     fromPartial(_: Partial<QueryParamsRequest>): QueryParamsRequest;
@@ -178,8 +179,9 @@ export declare const QueryParamsRequest: {
     toProtoMsg(message: QueryParamsRequest): QueryParamsRequestProtoMsg;
 };
 export declare const QueryParamsResponse: {
-    encode(message: QueryParamsResponse, writer?: _m0.Writer): _m0.Writer;
-    decode(input: _m0.Reader | Uint8Array, length?: number): QueryParamsResponse;
+    typeUrl: string;
+    encode(message: QueryParamsResponse, writer?: BinaryWriter): BinaryWriter;
+    decode(input: BinaryReader | Uint8Array, length?: number): QueryParamsResponse;
     fromJSON(object: any): QueryParamsResponse;
     toJSON(message: QueryParamsResponse): unknown;
     fromPartial(object: Partial<QueryParamsResponse>): QueryParamsResponse;
@@ -192,8 +194,9 @@ export declare const QueryParamsResponse: {
     toProtoMsg(message: QueryParamsResponse): QueryParamsResponseProtoMsg;
 };
 export declare const QuerySigningInfoRequest: {
-    encode(message: QuerySigningInfoRequest, writer?: _m0.Writer): _m0.Writer;
-    decode(input: _m0.Reader | Uint8Array, length?: number): QuerySigningInfoRequest;
+    typeUrl: string;
+    encode(message: QuerySigningInfoRequest, writer?: BinaryWriter): BinaryWriter;
+    decode(input: BinaryReader | Uint8Array, length?: number): QuerySigningInfoRequest;
     fromJSON(object: any): QuerySigningInfoRequest;
     toJSON(message: QuerySigningInfoRequest): unknown;
     fromPartial(object: Partial<QuerySigningInfoRequest>): QuerySigningInfoRequest;
@@ -206,8 +209,9 @@ export declare const QuerySigningInfoRequest: {
     toProtoMsg(message: QuerySigningInfoRequest): QuerySigningInfoRequestProtoMsg;
 };
 export declare const QuerySigningInfoResponse: {
-    encode(message: QuerySigningInfoResponse, writer?: _m0.Writer): _m0.Writer;
-    decode(input: _m0.Reader | Uint8Array, length?: number): QuerySigningInfoResponse;
+    typeUrl: string;
+    encode(message: QuerySigningInfoResponse, writer?: BinaryWriter): BinaryWriter;
+    decode(input: BinaryReader | Uint8Array, length?: number): QuerySigningInfoResponse;
     fromJSON(object: any): QuerySigningInfoResponse;
     toJSON(message: QuerySigningInfoResponse): unknown;
     fromPartial(object: Partial<QuerySigningInfoResponse>): QuerySigningInfoResponse;
@@ -220,8 +224,9 @@ export declare const QuerySigningInfoResponse: {
     toProtoMsg(message: QuerySigningInfoResponse): QuerySigningInfoResponseProtoMsg;
 };
 export declare const QuerySigningInfosRequest: {
-    encode(message: QuerySigningInfosRequest, writer?: _m0.Writer): _m0.Writer;
-    decode(input: _m0.Reader | Uint8Array, length?: number): QuerySigningInfosRequest;
+    typeUrl: string;
+    encode(message: QuerySigningInfosRequest, writer?: BinaryWriter): BinaryWriter;
+    decode(input: BinaryReader | Uint8Array, length?: number): QuerySigningInfosRequest;
     fromJSON(object: any): QuerySigningInfosRequest;
     toJSON(message: QuerySigningInfosRequest): unknown;
     fromPartial(object: Partial<QuerySigningInfosRequest>): QuerySigningInfosRequest;
@@ -234,8 +239,9 @@ export declare const QuerySigningInfosRequest: {
     toProtoMsg(message: QuerySigningInfosRequest): QuerySigningInfosRequestProtoMsg;
 };
 export declare const QuerySigningInfosResponse: {
-    encode(message: QuerySigningInfosResponse, writer?: _m0.Writer): _m0.Writer;
-    decode(input: _m0.Reader | Uint8Array, length?: number): QuerySigningInfosResponse;
+    typeUrl: string;
+    encode(message: QuerySigningInfosResponse, writer?: BinaryWriter): BinaryWriter;
+    decode(input: BinaryReader | Uint8Array, length?: number): QuerySigningInfosResponse;
     fromJSON(object: any): QuerySigningInfosResponse;
     toJSON(message: QuerySigningInfosResponse): unknown;
     fromPartial(object: Partial<QuerySigningInfosResponse>): QuerySigningInfosResponse;

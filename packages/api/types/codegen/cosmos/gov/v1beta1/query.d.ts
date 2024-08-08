@@ -1,11 +1,10 @@
 import { ProposalStatus, Proposal, ProposalAmino, ProposalSDKType, Vote, VoteAmino, VoteSDKType, VotingParams, VotingParamsAmino, VotingParamsSDKType, DepositParams, DepositParamsAmino, DepositParamsSDKType, TallyParams, TallyParamsAmino, TallyParamsSDKType, Deposit, DepositAmino, DepositSDKType, TallyResult, TallyResultAmino, TallyResultSDKType } from "./gov";
 import { PageRequest, PageRequestAmino, PageRequestSDKType, PageResponse, PageResponseAmino, PageResponseSDKType } from "../../base/query/v1beta1/pagination";
-import { Long } from "../../../helpers";
-import * as _m0 from "protobufjs/minimal";
+import { BinaryReader, BinaryWriter } from "../../../binary";
 /** QueryProposalRequest is the request type for the Query/Proposal RPC method. */
 export interface QueryProposalRequest {
     /** proposal_id defines the unique id of the proposal. */
-    proposalId: Long;
+    proposalId: bigint;
 }
 export interface QueryProposalRequestProtoMsg {
     typeUrl: "/cosmos.gov.v1beta1.QueryProposalRequest";
@@ -14,7 +13,7 @@ export interface QueryProposalRequestProtoMsg {
 /** QueryProposalRequest is the request type for the Query/Proposal RPC method. */
 export interface QueryProposalRequestAmino {
     /** proposal_id defines the unique id of the proposal. */
-    proposal_id: string;
+    proposal_id?: string;
 }
 export interface QueryProposalRequestAminoMsg {
     type: "cosmos-sdk/QueryProposalRequest";
@@ -22,7 +21,7 @@ export interface QueryProposalRequestAminoMsg {
 }
 /** QueryProposalRequest is the request type for the Query/Proposal RPC method. */
 export interface QueryProposalRequestSDKType {
-    proposal_id: Long;
+    proposal_id: bigint;
 }
 /** QueryProposalResponse is the response type for the Query/Proposal RPC method. */
 export interface QueryProposalResponse {
@@ -53,7 +52,7 @@ export interface QueryProposalsRequest {
     /** depositor defines the deposit addresses from the proposals. */
     depositor: string;
     /** pagination defines an optional pagination for the request. */
-    pagination: PageRequest;
+    pagination?: PageRequest;
 }
 export interface QueryProposalsRequestProtoMsg {
     typeUrl: "/cosmos.gov.v1beta1.QueryProposalsRequest";
@@ -62,11 +61,11 @@ export interface QueryProposalsRequestProtoMsg {
 /** QueryProposalsRequest is the request type for the Query/Proposals RPC method. */
 export interface QueryProposalsRequestAmino {
     /** proposal_status defines the status of the proposals. */
-    proposal_status: ProposalStatus;
+    proposal_status?: ProposalStatus;
     /** voter defines the voter address for the proposals. */
-    voter: string;
+    voter?: string;
     /** depositor defines the deposit addresses from the proposals. */
-    depositor: string;
+    depositor?: string;
     /** pagination defines an optional pagination for the request. */
     pagination?: PageRequestAmino;
 }
@@ -79,7 +78,7 @@ export interface QueryProposalsRequestSDKType {
     proposal_status: ProposalStatus;
     voter: string;
     depositor: string;
-    pagination: PageRequestSDKType;
+    pagination?: PageRequestSDKType;
 }
 /**
  * QueryProposalsResponse is the response type for the Query/Proposals RPC
@@ -88,7 +87,7 @@ export interface QueryProposalsRequestSDKType {
 export interface QueryProposalsResponse {
     proposals: Proposal[];
     /** pagination defines the pagination in the response. */
-    pagination: PageResponse;
+    pagination?: PageResponse;
 }
 export interface QueryProposalsResponseProtoMsg {
     typeUrl: "/cosmos.gov.v1beta1.QueryProposalsResponse";
@@ -99,7 +98,7 @@ export interface QueryProposalsResponseProtoMsg {
  * method.
  */
 export interface QueryProposalsResponseAmino {
-    proposals: ProposalAmino[];
+    proposals?: ProposalAmino[];
     /** pagination defines the pagination in the response. */
     pagination?: PageResponseAmino;
 }
@@ -113,12 +112,12 @@ export interface QueryProposalsResponseAminoMsg {
  */
 export interface QueryProposalsResponseSDKType {
     proposals: ProposalSDKType[];
-    pagination: PageResponseSDKType;
+    pagination?: PageResponseSDKType;
 }
 /** QueryVoteRequest is the request type for the Query/Vote RPC method. */
 export interface QueryVoteRequest {
     /** proposal_id defines the unique id of the proposal. */
-    proposalId: Long;
+    proposalId: bigint;
     /** voter defines the voter address for the proposals. */
     voter: string;
 }
@@ -129,9 +128,9 @@ export interface QueryVoteRequestProtoMsg {
 /** QueryVoteRequest is the request type for the Query/Vote RPC method. */
 export interface QueryVoteRequestAmino {
     /** proposal_id defines the unique id of the proposal. */
-    proposal_id: string;
+    proposal_id?: string;
     /** voter defines the voter address for the proposals. */
-    voter: string;
+    voter?: string;
 }
 export interface QueryVoteRequestAminoMsg {
     type: "cosmos-sdk/QueryVoteRequest";
@@ -139,7 +138,7 @@ export interface QueryVoteRequestAminoMsg {
 }
 /** QueryVoteRequest is the request type for the Query/Vote RPC method. */
 export interface QueryVoteRequestSDKType {
-    proposal_id: Long;
+    proposal_id: bigint;
     voter: string;
 }
 /** QueryVoteResponse is the response type for the Query/Vote RPC method. */
@@ -167,9 +166,9 @@ export interface QueryVoteResponseSDKType {
 /** QueryVotesRequest is the request type for the Query/Votes RPC method. */
 export interface QueryVotesRequest {
     /** proposal_id defines the unique id of the proposal. */
-    proposalId: Long;
+    proposalId: bigint;
     /** pagination defines an optional pagination for the request. */
-    pagination: PageRequest;
+    pagination?: PageRequest;
 }
 export interface QueryVotesRequestProtoMsg {
     typeUrl: "/cosmos.gov.v1beta1.QueryVotesRequest";
@@ -178,7 +177,7 @@ export interface QueryVotesRequestProtoMsg {
 /** QueryVotesRequest is the request type for the Query/Votes RPC method. */
 export interface QueryVotesRequestAmino {
     /** proposal_id defines the unique id of the proposal. */
-    proposal_id: string;
+    proposal_id?: string;
     /** pagination defines an optional pagination for the request. */
     pagination?: PageRequestAmino;
 }
@@ -188,15 +187,15 @@ export interface QueryVotesRequestAminoMsg {
 }
 /** QueryVotesRequest is the request type for the Query/Votes RPC method. */
 export interface QueryVotesRequestSDKType {
-    proposal_id: Long;
-    pagination: PageRequestSDKType;
+    proposal_id: bigint;
+    pagination?: PageRequestSDKType;
 }
 /** QueryVotesResponse is the response type for the Query/Votes RPC method. */
 export interface QueryVotesResponse {
     /** votes defined the queried votes. */
     votes: Vote[];
     /** pagination defines the pagination in the response. */
-    pagination: PageResponse;
+    pagination?: PageResponse;
 }
 export interface QueryVotesResponseProtoMsg {
     typeUrl: "/cosmos.gov.v1beta1.QueryVotesResponse";
@@ -205,7 +204,7 @@ export interface QueryVotesResponseProtoMsg {
 /** QueryVotesResponse is the response type for the Query/Votes RPC method. */
 export interface QueryVotesResponseAmino {
     /** votes defined the queried votes. */
-    votes: VoteAmino[];
+    votes?: VoteAmino[];
     /** pagination defines the pagination in the response. */
     pagination?: PageResponseAmino;
 }
@@ -216,7 +215,7 @@ export interface QueryVotesResponseAminoMsg {
 /** QueryVotesResponse is the response type for the Query/Votes RPC method. */
 export interface QueryVotesResponseSDKType {
     votes: VoteSDKType[];
-    pagination: PageResponseSDKType;
+    pagination?: PageResponseSDKType;
 }
 /** QueryParamsRequest is the request type for the Query/Params RPC method. */
 export interface QueryParamsRequest {
@@ -236,7 +235,7 @@ export interface QueryParamsRequestAmino {
      * params_type defines which parameters to query for, can be one of "voting",
      * "tallying" or "deposit".
      */
-    params_type: string;
+    params_type?: string;
 }
 export interface QueryParamsRequestAminoMsg {
     type: "cosmos-sdk/QueryParamsRequest";
@@ -281,7 +280,7 @@ export interface QueryParamsResponseSDKType {
 /** QueryDepositRequest is the request type for the Query/Deposit RPC method. */
 export interface QueryDepositRequest {
     /** proposal_id defines the unique id of the proposal. */
-    proposalId: Long;
+    proposalId: bigint;
     /** depositor defines the deposit addresses from the proposals. */
     depositor: string;
 }
@@ -292,9 +291,9 @@ export interface QueryDepositRequestProtoMsg {
 /** QueryDepositRequest is the request type for the Query/Deposit RPC method. */
 export interface QueryDepositRequestAmino {
     /** proposal_id defines the unique id of the proposal. */
-    proposal_id: string;
+    proposal_id?: string;
     /** depositor defines the deposit addresses from the proposals. */
-    depositor: string;
+    depositor?: string;
 }
 export interface QueryDepositRequestAminoMsg {
     type: "cosmos-sdk/QueryDepositRequest";
@@ -302,7 +301,7 @@ export interface QueryDepositRequestAminoMsg {
 }
 /** QueryDepositRequest is the request type for the Query/Deposit RPC method. */
 export interface QueryDepositRequestSDKType {
-    proposal_id: Long;
+    proposal_id: bigint;
     depositor: string;
 }
 /** QueryDepositResponse is the response type for the Query/Deposit RPC method. */
@@ -330,9 +329,9 @@ export interface QueryDepositResponseSDKType {
 /** QueryDepositsRequest is the request type for the Query/Deposits RPC method. */
 export interface QueryDepositsRequest {
     /** proposal_id defines the unique id of the proposal. */
-    proposalId: Long;
+    proposalId: bigint;
     /** pagination defines an optional pagination for the request. */
-    pagination: PageRequest;
+    pagination?: PageRequest;
 }
 export interface QueryDepositsRequestProtoMsg {
     typeUrl: "/cosmos.gov.v1beta1.QueryDepositsRequest";
@@ -341,7 +340,7 @@ export interface QueryDepositsRequestProtoMsg {
 /** QueryDepositsRequest is the request type for the Query/Deposits RPC method. */
 export interface QueryDepositsRequestAmino {
     /** proposal_id defines the unique id of the proposal. */
-    proposal_id: string;
+    proposal_id?: string;
     /** pagination defines an optional pagination for the request. */
     pagination?: PageRequestAmino;
 }
@@ -351,14 +350,14 @@ export interface QueryDepositsRequestAminoMsg {
 }
 /** QueryDepositsRequest is the request type for the Query/Deposits RPC method. */
 export interface QueryDepositsRequestSDKType {
-    proposal_id: Long;
-    pagination: PageRequestSDKType;
+    proposal_id: bigint;
+    pagination?: PageRequestSDKType;
 }
 /** QueryDepositsResponse is the response type for the Query/Deposits RPC method. */
 export interface QueryDepositsResponse {
     deposits: Deposit[];
     /** pagination defines the pagination in the response. */
-    pagination: PageResponse;
+    pagination?: PageResponse;
 }
 export interface QueryDepositsResponseProtoMsg {
     typeUrl: "/cosmos.gov.v1beta1.QueryDepositsResponse";
@@ -366,7 +365,7 @@ export interface QueryDepositsResponseProtoMsg {
 }
 /** QueryDepositsResponse is the response type for the Query/Deposits RPC method. */
 export interface QueryDepositsResponseAmino {
-    deposits: DepositAmino[];
+    deposits?: DepositAmino[];
     /** pagination defines the pagination in the response. */
     pagination?: PageResponseAmino;
 }
@@ -377,12 +376,12 @@ export interface QueryDepositsResponseAminoMsg {
 /** QueryDepositsResponse is the response type for the Query/Deposits RPC method. */
 export interface QueryDepositsResponseSDKType {
     deposits: DepositSDKType[];
-    pagination: PageResponseSDKType;
+    pagination?: PageResponseSDKType;
 }
 /** QueryTallyResultRequest is the request type for the Query/Tally RPC method. */
 export interface QueryTallyResultRequest {
     /** proposal_id defines the unique id of the proposal. */
-    proposalId: Long;
+    proposalId: bigint;
 }
 export interface QueryTallyResultRequestProtoMsg {
     typeUrl: "/cosmos.gov.v1beta1.QueryTallyResultRequest";
@@ -391,7 +390,7 @@ export interface QueryTallyResultRequestProtoMsg {
 /** QueryTallyResultRequest is the request type for the Query/Tally RPC method. */
 export interface QueryTallyResultRequestAmino {
     /** proposal_id defines the unique id of the proposal. */
-    proposal_id: string;
+    proposal_id?: string;
 }
 export interface QueryTallyResultRequestAminoMsg {
     type: "cosmos-sdk/QueryTallyResultRequest";
@@ -399,7 +398,7 @@ export interface QueryTallyResultRequestAminoMsg {
 }
 /** QueryTallyResultRequest is the request type for the Query/Tally RPC method. */
 export interface QueryTallyResultRequestSDKType {
-    proposal_id: Long;
+    proposal_id: bigint;
 }
 /** QueryTallyResultResponse is the response type for the Query/Tally RPC method. */
 export interface QueryTallyResultResponse {
@@ -424,8 +423,9 @@ export interface QueryTallyResultResponseSDKType {
     tally: TallyResultSDKType;
 }
 export declare const QueryProposalRequest: {
-    encode(message: QueryProposalRequest, writer?: _m0.Writer): _m0.Writer;
-    decode(input: _m0.Reader | Uint8Array, length?: number): QueryProposalRequest;
+    typeUrl: string;
+    encode(message: QueryProposalRequest, writer?: BinaryWriter): BinaryWriter;
+    decode(input: BinaryReader | Uint8Array, length?: number): QueryProposalRequest;
     fromJSON(object: any): QueryProposalRequest;
     toJSON(message: QueryProposalRequest): unknown;
     fromPartial(object: Partial<QueryProposalRequest>): QueryProposalRequest;
@@ -438,8 +438,9 @@ export declare const QueryProposalRequest: {
     toProtoMsg(message: QueryProposalRequest): QueryProposalRequestProtoMsg;
 };
 export declare const QueryProposalResponse: {
-    encode(message: QueryProposalResponse, writer?: _m0.Writer): _m0.Writer;
-    decode(input: _m0.Reader | Uint8Array, length?: number): QueryProposalResponse;
+    typeUrl: string;
+    encode(message: QueryProposalResponse, writer?: BinaryWriter): BinaryWriter;
+    decode(input: BinaryReader | Uint8Array, length?: number): QueryProposalResponse;
     fromJSON(object: any): QueryProposalResponse;
     toJSON(message: QueryProposalResponse): unknown;
     fromPartial(object: Partial<QueryProposalResponse>): QueryProposalResponse;
@@ -452,8 +453,9 @@ export declare const QueryProposalResponse: {
     toProtoMsg(message: QueryProposalResponse): QueryProposalResponseProtoMsg;
 };
 export declare const QueryProposalsRequest: {
-    encode(message: QueryProposalsRequest, writer?: _m0.Writer): _m0.Writer;
-    decode(input: _m0.Reader | Uint8Array, length?: number): QueryProposalsRequest;
+    typeUrl: string;
+    encode(message: QueryProposalsRequest, writer?: BinaryWriter): BinaryWriter;
+    decode(input: BinaryReader | Uint8Array, length?: number): QueryProposalsRequest;
     fromJSON(object: any): QueryProposalsRequest;
     toJSON(message: QueryProposalsRequest): unknown;
     fromPartial(object: Partial<QueryProposalsRequest>): QueryProposalsRequest;
@@ -466,8 +468,9 @@ export declare const QueryProposalsRequest: {
     toProtoMsg(message: QueryProposalsRequest): QueryProposalsRequestProtoMsg;
 };
 export declare const QueryProposalsResponse: {
-    encode(message: QueryProposalsResponse, writer?: _m0.Writer): _m0.Writer;
-    decode(input: _m0.Reader | Uint8Array, length?: number): QueryProposalsResponse;
+    typeUrl: string;
+    encode(message: QueryProposalsResponse, writer?: BinaryWriter): BinaryWriter;
+    decode(input: BinaryReader | Uint8Array, length?: number): QueryProposalsResponse;
     fromJSON(object: any): QueryProposalsResponse;
     toJSON(message: QueryProposalsResponse): unknown;
     fromPartial(object: Partial<QueryProposalsResponse>): QueryProposalsResponse;
@@ -480,8 +483,9 @@ export declare const QueryProposalsResponse: {
     toProtoMsg(message: QueryProposalsResponse): QueryProposalsResponseProtoMsg;
 };
 export declare const QueryVoteRequest: {
-    encode(message: QueryVoteRequest, writer?: _m0.Writer): _m0.Writer;
-    decode(input: _m0.Reader | Uint8Array, length?: number): QueryVoteRequest;
+    typeUrl: string;
+    encode(message: QueryVoteRequest, writer?: BinaryWriter): BinaryWriter;
+    decode(input: BinaryReader | Uint8Array, length?: number): QueryVoteRequest;
     fromJSON(object: any): QueryVoteRequest;
     toJSON(message: QueryVoteRequest): unknown;
     fromPartial(object: Partial<QueryVoteRequest>): QueryVoteRequest;
@@ -494,8 +498,9 @@ export declare const QueryVoteRequest: {
     toProtoMsg(message: QueryVoteRequest): QueryVoteRequestProtoMsg;
 };
 export declare const QueryVoteResponse: {
-    encode(message: QueryVoteResponse, writer?: _m0.Writer): _m0.Writer;
-    decode(input: _m0.Reader | Uint8Array, length?: number): QueryVoteResponse;
+    typeUrl: string;
+    encode(message: QueryVoteResponse, writer?: BinaryWriter): BinaryWriter;
+    decode(input: BinaryReader | Uint8Array, length?: number): QueryVoteResponse;
     fromJSON(object: any): QueryVoteResponse;
     toJSON(message: QueryVoteResponse): unknown;
     fromPartial(object: Partial<QueryVoteResponse>): QueryVoteResponse;
@@ -508,8 +513,9 @@ export declare const QueryVoteResponse: {
     toProtoMsg(message: QueryVoteResponse): QueryVoteResponseProtoMsg;
 };
 export declare const QueryVotesRequest: {
-    encode(message: QueryVotesRequest, writer?: _m0.Writer): _m0.Writer;
-    decode(input: _m0.Reader | Uint8Array, length?: number): QueryVotesRequest;
+    typeUrl: string;
+    encode(message: QueryVotesRequest, writer?: BinaryWriter): BinaryWriter;
+    decode(input: BinaryReader | Uint8Array, length?: number): QueryVotesRequest;
     fromJSON(object: any): QueryVotesRequest;
     toJSON(message: QueryVotesRequest): unknown;
     fromPartial(object: Partial<QueryVotesRequest>): QueryVotesRequest;
@@ -522,8 +528,9 @@ export declare const QueryVotesRequest: {
     toProtoMsg(message: QueryVotesRequest): QueryVotesRequestProtoMsg;
 };
 export declare const QueryVotesResponse: {
-    encode(message: QueryVotesResponse, writer?: _m0.Writer): _m0.Writer;
-    decode(input: _m0.Reader | Uint8Array, length?: number): QueryVotesResponse;
+    typeUrl: string;
+    encode(message: QueryVotesResponse, writer?: BinaryWriter): BinaryWriter;
+    decode(input: BinaryReader | Uint8Array, length?: number): QueryVotesResponse;
     fromJSON(object: any): QueryVotesResponse;
     toJSON(message: QueryVotesResponse): unknown;
     fromPartial(object: Partial<QueryVotesResponse>): QueryVotesResponse;
@@ -536,8 +543,9 @@ export declare const QueryVotesResponse: {
     toProtoMsg(message: QueryVotesResponse): QueryVotesResponseProtoMsg;
 };
 export declare const QueryParamsRequest: {
-    encode(message: QueryParamsRequest, writer?: _m0.Writer): _m0.Writer;
-    decode(input: _m0.Reader | Uint8Array, length?: number): QueryParamsRequest;
+    typeUrl: string;
+    encode(message: QueryParamsRequest, writer?: BinaryWriter): BinaryWriter;
+    decode(input: BinaryReader | Uint8Array, length?: number): QueryParamsRequest;
     fromJSON(object: any): QueryParamsRequest;
     toJSON(message: QueryParamsRequest): unknown;
     fromPartial(object: Partial<QueryParamsRequest>): QueryParamsRequest;
@@ -550,8 +558,9 @@ export declare const QueryParamsRequest: {
     toProtoMsg(message: QueryParamsRequest): QueryParamsRequestProtoMsg;
 };
 export declare const QueryParamsResponse: {
-    encode(message: QueryParamsResponse, writer?: _m0.Writer): _m0.Writer;
-    decode(input: _m0.Reader | Uint8Array, length?: number): QueryParamsResponse;
+    typeUrl: string;
+    encode(message: QueryParamsResponse, writer?: BinaryWriter): BinaryWriter;
+    decode(input: BinaryReader | Uint8Array, length?: number): QueryParamsResponse;
     fromJSON(object: any): QueryParamsResponse;
     toJSON(message: QueryParamsResponse): unknown;
     fromPartial(object: Partial<QueryParamsResponse>): QueryParamsResponse;
@@ -564,8 +573,9 @@ export declare const QueryParamsResponse: {
     toProtoMsg(message: QueryParamsResponse): QueryParamsResponseProtoMsg;
 };
 export declare const QueryDepositRequest: {
-    encode(message: QueryDepositRequest, writer?: _m0.Writer): _m0.Writer;
-    decode(input: _m0.Reader | Uint8Array, length?: number): QueryDepositRequest;
+    typeUrl: string;
+    encode(message: QueryDepositRequest, writer?: BinaryWriter): BinaryWriter;
+    decode(input: BinaryReader | Uint8Array, length?: number): QueryDepositRequest;
     fromJSON(object: any): QueryDepositRequest;
     toJSON(message: QueryDepositRequest): unknown;
     fromPartial(object: Partial<QueryDepositRequest>): QueryDepositRequest;
@@ -578,8 +588,9 @@ export declare const QueryDepositRequest: {
     toProtoMsg(message: QueryDepositRequest): QueryDepositRequestProtoMsg;
 };
 export declare const QueryDepositResponse: {
-    encode(message: QueryDepositResponse, writer?: _m0.Writer): _m0.Writer;
-    decode(input: _m0.Reader | Uint8Array, length?: number): QueryDepositResponse;
+    typeUrl: string;
+    encode(message: QueryDepositResponse, writer?: BinaryWriter): BinaryWriter;
+    decode(input: BinaryReader | Uint8Array, length?: number): QueryDepositResponse;
     fromJSON(object: any): QueryDepositResponse;
     toJSON(message: QueryDepositResponse): unknown;
     fromPartial(object: Partial<QueryDepositResponse>): QueryDepositResponse;
@@ -592,8 +603,9 @@ export declare const QueryDepositResponse: {
     toProtoMsg(message: QueryDepositResponse): QueryDepositResponseProtoMsg;
 };
 export declare const QueryDepositsRequest: {
-    encode(message: QueryDepositsRequest, writer?: _m0.Writer): _m0.Writer;
-    decode(input: _m0.Reader | Uint8Array, length?: number): QueryDepositsRequest;
+    typeUrl: string;
+    encode(message: QueryDepositsRequest, writer?: BinaryWriter): BinaryWriter;
+    decode(input: BinaryReader | Uint8Array, length?: number): QueryDepositsRequest;
     fromJSON(object: any): QueryDepositsRequest;
     toJSON(message: QueryDepositsRequest): unknown;
     fromPartial(object: Partial<QueryDepositsRequest>): QueryDepositsRequest;
@@ -606,8 +618,9 @@ export declare const QueryDepositsRequest: {
     toProtoMsg(message: QueryDepositsRequest): QueryDepositsRequestProtoMsg;
 };
 export declare const QueryDepositsResponse: {
-    encode(message: QueryDepositsResponse, writer?: _m0.Writer): _m0.Writer;
-    decode(input: _m0.Reader | Uint8Array, length?: number): QueryDepositsResponse;
+    typeUrl: string;
+    encode(message: QueryDepositsResponse, writer?: BinaryWriter): BinaryWriter;
+    decode(input: BinaryReader | Uint8Array, length?: number): QueryDepositsResponse;
     fromJSON(object: any): QueryDepositsResponse;
     toJSON(message: QueryDepositsResponse): unknown;
     fromPartial(object: Partial<QueryDepositsResponse>): QueryDepositsResponse;
@@ -620,8 +633,9 @@ export declare const QueryDepositsResponse: {
     toProtoMsg(message: QueryDepositsResponse): QueryDepositsResponseProtoMsg;
 };
 export declare const QueryTallyResultRequest: {
-    encode(message: QueryTallyResultRequest, writer?: _m0.Writer): _m0.Writer;
-    decode(input: _m0.Reader | Uint8Array, length?: number): QueryTallyResultRequest;
+    typeUrl: string;
+    encode(message: QueryTallyResultRequest, writer?: BinaryWriter): BinaryWriter;
+    decode(input: BinaryReader | Uint8Array, length?: number): QueryTallyResultRequest;
     fromJSON(object: any): QueryTallyResultRequest;
     toJSON(message: QueryTallyResultRequest): unknown;
     fromPartial(object: Partial<QueryTallyResultRequest>): QueryTallyResultRequest;
@@ -634,8 +648,9 @@ export declare const QueryTallyResultRequest: {
     toProtoMsg(message: QueryTallyResultRequest): QueryTallyResultRequestProtoMsg;
 };
 export declare const QueryTallyResultResponse: {
-    encode(message: QueryTallyResultResponse, writer?: _m0.Writer): _m0.Writer;
-    decode(input: _m0.Reader | Uint8Array, length?: number): QueryTallyResultResponse;
+    typeUrl: string;
+    encode(message: QueryTallyResultResponse, writer?: BinaryWriter): BinaryWriter;
+    decode(input: BinaryReader | Uint8Array, length?: number): QueryTallyResultResponse;
     fromJSON(object: any): QueryTallyResultResponse;
     toJSON(message: QueryTallyResultResponse): unknown;
     fromPartial(object: Partial<QueryTallyResultResponse>): QueryTallyResultResponse;

@@ -1,5 +1,5 @@
 import { Params, ParamsAmino, ParamsSDKType, ClassInfo, ClassInfoAmino, ClassInfoSDKType, BatchInfo, BatchInfoAmino, BatchInfoSDKType, CreditTypeSeq, CreditTypeSeqAmino, CreditTypeSeqSDKType } from "./types";
-import * as _m0 from "protobufjs/minimal";
+import { BinaryReader, BinaryWriter } from "../../../binary";
 /** GenesisState defines ecocredit module's genesis state. */
 export interface GenesisState {
     /**
@@ -30,15 +30,15 @@ export interface GenesisStateAmino {
      */
     params?: ParamsAmino;
     /** class_info is the list of credit class info. */
-    class_info: ClassInfoAmino[];
+    class_info?: ClassInfoAmino[];
     /** batch_info is the list of credit batch info. */
-    batch_info: BatchInfoAmino[];
+    batch_info?: BatchInfoAmino[];
     /** sequences is the list of credit type sequence. */
-    sequences: CreditTypeSeqAmino[];
+    sequences?: CreditTypeSeqAmino[];
     /** balances is the list of credit batch tradable/retired units. */
-    balances: BalanceAmino[];
+    balances?: BalanceAmino[];
     /** supplies is the list of credit batch tradable/retired supply. */
-    supplies: SupplyAmino[];
+    supplies?: SupplyAmino[];
 }
 export interface GenesisStateAminoMsg {
     type: "/regen.ecocredit.v1alpha1.GenesisState";
@@ -77,13 +77,13 @@ export interface BalanceProtoMsg {
  */
 export interface BalanceAmino {
     /** address is the account address of the account holding credits. */
-    address: string;
+    address?: string;
     /** batch_denom is the unique ID of the credit batch. */
-    batch_denom: string;
+    batch_denom?: string;
     /** tradable_balance is the tradable balance of the credit batch. */
-    tradable_balance: string;
+    tradable_balance?: string;
     /** retired_balance is the retired balance of the credit batch. */
-    retired_balance: string;
+    retired_balance?: string;
 }
 export interface BalanceAminoMsg {
     type: "/regen.ecocredit.v1alpha1.Balance";
@@ -115,11 +115,11 @@ export interface SupplyProtoMsg {
 /** Supply represents a tradable or retired supply of a credit batch. */
 export interface SupplyAmino {
     /** batch_denom is the unique ID of the credit batch. */
-    batch_denom: string;
+    batch_denom?: string;
     /** tradable_supply is the tradable supply of the credit batch. */
-    tradable_supply: string;
+    tradable_supply?: string;
     /** retired_supply is the retired supply of the credit batch. */
-    retired_supply: string;
+    retired_supply?: string;
 }
 export interface SupplyAminoMsg {
     type: "/regen.ecocredit.v1alpha1.Supply";
@@ -132,8 +132,9 @@ export interface SupplySDKType {
     retired_supply: string;
 }
 export declare const GenesisState: {
-    encode(message: GenesisState, writer?: _m0.Writer): _m0.Writer;
-    decode(input: _m0.Reader | Uint8Array, length?: number): GenesisState;
+    typeUrl: string;
+    encode(message: GenesisState, writer?: BinaryWriter): BinaryWriter;
+    decode(input: BinaryReader | Uint8Array, length?: number): GenesisState;
     fromJSON(object: any): GenesisState;
     toJSON(message: GenesisState): unknown;
     fromPartial(object: Partial<GenesisState>): GenesisState;
@@ -145,8 +146,9 @@ export declare const GenesisState: {
     toProtoMsg(message: GenesisState): GenesisStateProtoMsg;
 };
 export declare const Balance: {
-    encode(message: Balance, writer?: _m0.Writer): _m0.Writer;
-    decode(input: _m0.Reader | Uint8Array, length?: number): Balance;
+    typeUrl: string;
+    encode(message: Balance, writer?: BinaryWriter): BinaryWriter;
+    decode(input: BinaryReader | Uint8Array, length?: number): Balance;
     fromJSON(object: any): Balance;
     toJSON(message: Balance): unknown;
     fromPartial(object: Partial<Balance>): Balance;
@@ -158,8 +160,9 @@ export declare const Balance: {
     toProtoMsg(message: Balance): BalanceProtoMsg;
 };
 export declare const Supply: {
-    encode(message: Supply, writer?: _m0.Writer): _m0.Writer;
-    decode(input: _m0.Reader | Uint8Array, length?: number): Supply;
+    typeUrl: string;
+    encode(message: Supply, writer?: BinaryWriter): BinaryWriter;
+    decode(input: BinaryReader | Uint8Array, length?: number): Supply;
     fromJSON(object: any): Supply;
     toJSON(message: Supply): unknown;
     fromPartial(object: Partial<Supply>): Supply;

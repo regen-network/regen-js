@@ -1,19 +1,18 @@
 import { PublicKey, PublicKeyAmino, PublicKeySDKType } from "../crypto/keys";
-import { Long } from "../../helpers";
-import * as _m0 from "protobufjs/minimal";
+import { BinaryReader, BinaryWriter } from "../../binary";
 export interface ValidatorSet {
     validators: Validator[];
-    proposer: Validator;
-    totalVotingPower: Long;
+    proposer?: Validator;
+    totalVotingPower: bigint;
 }
 export interface ValidatorSetProtoMsg {
     typeUrl: "/tendermint.types.ValidatorSet";
     value: Uint8Array;
 }
 export interface ValidatorSetAmino {
-    validators: ValidatorAmino[];
+    validators?: ValidatorAmino[];
     proposer?: ValidatorAmino;
-    total_voting_power: string;
+    total_voting_power?: string;
 }
 export interface ValidatorSetAminoMsg {
     type: "/tendermint.types.ValidatorSet";
@@ -21,24 +20,24 @@ export interface ValidatorSetAminoMsg {
 }
 export interface ValidatorSetSDKType {
     validators: ValidatorSDKType[];
-    proposer: ValidatorSDKType;
-    total_voting_power: Long;
+    proposer?: ValidatorSDKType;
+    total_voting_power: bigint;
 }
 export interface Validator {
     address: Uint8Array;
     pubKey: PublicKey;
-    votingPower: Long;
-    proposerPriority: Long;
+    votingPower: bigint;
+    proposerPriority: bigint;
 }
 export interface ValidatorProtoMsg {
     typeUrl: "/tendermint.types.Validator";
     value: Uint8Array;
 }
 export interface ValidatorAmino {
-    address: Uint8Array;
+    address?: string;
     pub_key?: PublicKeyAmino;
-    voting_power: string;
-    proposer_priority: string;
+    voting_power?: string;
+    proposer_priority?: string;
 }
 export interface ValidatorAminoMsg {
     type: "/tendermint.types.Validator";
@@ -47,12 +46,12 @@ export interface ValidatorAminoMsg {
 export interface ValidatorSDKType {
     address: Uint8Array;
     pub_key: PublicKeySDKType;
-    voting_power: Long;
-    proposer_priority: Long;
+    voting_power: bigint;
+    proposer_priority: bigint;
 }
 export interface SimpleValidator {
-    pubKey: PublicKey;
-    votingPower: Long;
+    pubKey?: PublicKey;
+    votingPower: bigint;
 }
 export interface SimpleValidatorProtoMsg {
     typeUrl: "/tendermint.types.SimpleValidator";
@@ -60,19 +59,20 @@ export interface SimpleValidatorProtoMsg {
 }
 export interface SimpleValidatorAmino {
     pub_key?: PublicKeyAmino;
-    voting_power: string;
+    voting_power?: string;
 }
 export interface SimpleValidatorAminoMsg {
     type: "/tendermint.types.SimpleValidator";
     value: SimpleValidatorAmino;
 }
 export interface SimpleValidatorSDKType {
-    pub_key: PublicKeySDKType;
-    voting_power: Long;
+    pub_key?: PublicKeySDKType;
+    voting_power: bigint;
 }
 export declare const ValidatorSet: {
-    encode(message: ValidatorSet, writer?: _m0.Writer): _m0.Writer;
-    decode(input: _m0.Reader | Uint8Array, length?: number): ValidatorSet;
+    typeUrl: string;
+    encode(message: ValidatorSet, writer?: BinaryWriter): BinaryWriter;
+    decode(input: BinaryReader | Uint8Array, length?: number): ValidatorSet;
     fromJSON(object: any): ValidatorSet;
     toJSON(message: ValidatorSet): unknown;
     fromPartial(object: Partial<ValidatorSet>): ValidatorSet;
@@ -84,8 +84,9 @@ export declare const ValidatorSet: {
     toProtoMsg(message: ValidatorSet): ValidatorSetProtoMsg;
 };
 export declare const Validator: {
-    encode(message: Validator, writer?: _m0.Writer): _m0.Writer;
-    decode(input: _m0.Reader | Uint8Array, length?: number): Validator;
+    typeUrl: string;
+    encode(message: Validator, writer?: BinaryWriter): BinaryWriter;
+    decode(input: BinaryReader | Uint8Array, length?: number): Validator;
     fromJSON(object: any): Validator;
     toJSON(message: Validator): unknown;
     fromPartial(object: Partial<Validator>): Validator;
@@ -97,8 +98,9 @@ export declare const Validator: {
     toProtoMsg(message: Validator): ValidatorProtoMsg;
 };
 export declare const SimpleValidator: {
-    encode(message: SimpleValidator, writer?: _m0.Writer): _m0.Writer;
-    decode(input: _m0.Reader | Uint8Array, length?: number): SimpleValidator;
+    typeUrl: string;
+    encode(message: SimpleValidator, writer?: BinaryWriter): BinaryWriter;
+    decode(input: BinaryReader | Uint8Array, length?: number): SimpleValidator;
     fromJSON(object: any): SimpleValidator;
     toJSON(message: SimpleValidator): unknown;
     fromPartial(object: Partial<SimpleValidator>): SimpleValidator;

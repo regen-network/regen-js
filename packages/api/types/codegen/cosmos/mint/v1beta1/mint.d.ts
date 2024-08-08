@@ -1,5 +1,4 @@
-import { Long } from "../../../helpers";
-import * as _m0 from "protobufjs/minimal";
+import { BinaryReader, BinaryWriter } from "../../../binary";
 /** Minter represents the minting state. */
 export interface Minter {
     /** current annual inflation rate */
@@ -14,9 +13,9 @@ export interface MinterProtoMsg {
 /** Minter represents the minting state. */
 export interface MinterAmino {
     /** current annual inflation rate */
-    inflation: string;
+    inflation?: string;
     /** current annual expected provisions */
-    annual_provisions: string;
+    annual_provisions?: string;
 }
 export interface MinterAminoMsg {
     type: "cosmos-sdk/Minter";
@@ -40,7 +39,7 @@ export interface Params {
     /** goal of percent bonded atoms */
     goalBonded: string;
     /** expected blocks per year */
-    blocksPerYear: Long;
+    blocksPerYear: bigint;
 }
 export interface ParamsProtoMsg {
     typeUrl: "/cosmos.mint.v1beta1.Params";
@@ -49,17 +48,17 @@ export interface ParamsProtoMsg {
 /** Params holds parameters for the mint module. */
 export interface ParamsAmino {
     /** type of coin to mint */
-    mint_denom: string;
+    mint_denom?: string;
     /** maximum annual change in inflation rate */
-    inflation_rate_change: string;
+    inflation_rate_change?: string;
     /** maximum inflation rate */
-    inflation_max: string;
+    inflation_max?: string;
     /** minimum inflation rate */
-    inflation_min: string;
+    inflation_min?: string;
     /** goal of percent bonded atoms */
-    goal_bonded: string;
+    goal_bonded?: string;
     /** expected blocks per year */
-    blocks_per_year: string;
+    blocks_per_year?: string;
 }
 export interface ParamsAminoMsg {
     type: "cosmos-sdk/Params";
@@ -72,11 +71,12 @@ export interface ParamsSDKType {
     inflation_max: string;
     inflation_min: string;
     goal_bonded: string;
-    blocks_per_year: Long;
+    blocks_per_year: bigint;
 }
 export declare const Minter: {
-    encode(message: Minter, writer?: _m0.Writer): _m0.Writer;
-    decode(input: _m0.Reader | Uint8Array, length?: number): Minter;
+    typeUrl: string;
+    encode(message: Minter, writer?: BinaryWriter): BinaryWriter;
+    decode(input: BinaryReader | Uint8Array, length?: number): Minter;
     fromJSON(object: any): Minter;
     toJSON(message: Minter): unknown;
     fromPartial(object: Partial<Minter>): Minter;
@@ -89,8 +89,9 @@ export declare const Minter: {
     toProtoMsg(message: Minter): MinterProtoMsg;
 };
 export declare const Params: {
-    encode(message: Params, writer?: _m0.Writer): _m0.Writer;
-    decode(input: _m0.Reader | Uint8Array, length?: number): Params;
+    typeUrl: string;
+    encode(message: Params, writer?: BinaryWriter): BinaryWriter;
+    decode(input: BinaryReader | Uint8Array, length?: number): Params;
     fromJSON(object: any): Params;
     toJSON(message: Params): unknown;
     fromPartial(object: Partial<Params>): Params;

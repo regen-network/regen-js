@@ -1,5 +1,5 @@
 import { BasketCredit, BasketCreditAmino, BasketCreditSDKType } from "./types";
-import * as _m0 from "protobufjs/minimal";
+import { BinaryReader, BinaryWriter } from "../../../../binary";
 /** EventCreate is an event emitted when a basket is created. */
 export interface EventCreate {
     /** basket_denom is the basket bank denom. */
@@ -21,7 +21,7 @@ export interface EventCreateProtoMsg {
 /** EventCreate is an event emitted when a basket is created. */
 export interface EventCreateAmino {
     /** basket_denom is the basket bank denom. */
-    basket_denom: string;
+    basket_denom?: string;
     /**
      * curator is the address of the basket curator who is able to change certain
      * basket settings.
@@ -30,7 +30,7 @@ export interface EventCreateAmino {
      * removed in the next version.
      */
     /** @deprecated */
-    curator: string;
+    curator?: string;
 }
 export interface EventCreateAminoMsg {
     type: "/regen.ecocredit.basket.v1.EventCreate";
@@ -78,9 +78,9 @@ export interface EventPutProtoMsg {
  */
 export interface EventPutAmino {
     /** owner is the owner of the credits put into the basket. */
-    owner: string;
+    owner?: string;
     /** basket_denom is the basket bank denom that the credits were added to. */
-    basket_denom: string;
+    basket_denom?: string;
     /**
      * credits are the credits that were added to the basket.
      *
@@ -88,7 +88,7 @@ export interface EventPutAmino {
      * removed in the next version.
      */
     /** @deprecated */
-    credits: BasketCreditAmino[];
+    credits?: BasketCreditAmino[];
     /**
      * amount is the integer number of basket tokens converted from credits.
      *
@@ -96,7 +96,7 @@ export interface EventPutAmino {
      * removed in the next version.
      */
     /** @deprecated */
-    amount: string;
+    amount?: string;
 }
 export interface EventPutAminoMsg {
     type: "/regen.ecocredit.basket.v1.EventPut";
@@ -150,9 +150,9 @@ export interface EventTakeProtoMsg {
  */
 export interface EventTakeAmino {
     /** owner is the owner of the credits taken from the basket. */
-    owner: string;
+    owner?: string;
     /** basket_denom is the basket bank denom that credits were taken from. */
-    basket_denom: string;
+    basket_denom?: string;
     /**
      * credits are the credits that were taken from the basket.
      *
@@ -160,7 +160,7 @@ export interface EventTakeAmino {
      * removed in the next version.
      */
     /** @deprecated */
-    credits: BasketCreditAmino[];
+    credits?: BasketCreditAmino[];
     /**
      * amount is the integer number of basket tokens converted to credits.
      *
@@ -168,7 +168,7 @@ export interface EventTakeAmino {
      * removed in the next version.
      */
     /** @deprecated */
-    amount: string;
+    amount?: string;
 }
 export interface EventTakeAminoMsg {
     type: "/regen.ecocredit.basket.v1.EventTake";
@@ -206,7 +206,7 @@ export interface EventUpdateCuratorProtoMsg {
  */
 export interface EventUpdateCuratorAmino {
     /** denom is the basket denom. */
-    denom: string;
+    denom?: string;
 }
 export interface EventUpdateCuratorAminoMsg {
     type: "/regen.ecocredit.basket.v1.EventUpdateCurator";
@@ -242,7 +242,7 @@ export interface EventUpdateDateCriteriaProtoMsg {
  */
 export interface EventUpdateDateCriteriaAmino {
     /** denom is the basket denom. */
-    denom: string;
+    denom?: string;
 }
 export interface EventUpdateDateCriteriaAminoMsg {
     type: "/regen.ecocredit.basket.v1.EventUpdateDateCriteria";
@@ -258,8 +258,9 @@ export interface EventUpdateDateCriteriaSDKType {
     denom: string;
 }
 export declare const EventCreate: {
-    encode(message: EventCreate, writer?: _m0.Writer): _m0.Writer;
-    decode(input: _m0.Reader | Uint8Array, length?: number): EventCreate;
+    typeUrl: string;
+    encode(message: EventCreate, writer?: BinaryWriter): BinaryWriter;
+    decode(input: BinaryReader | Uint8Array, length?: number): EventCreate;
     fromJSON(object: any): EventCreate;
     toJSON(message: EventCreate): unknown;
     fromPartial(object: Partial<EventCreate>): EventCreate;
@@ -271,8 +272,9 @@ export declare const EventCreate: {
     toProtoMsg(message: EventCreate): EventCreateProtoMsg;
 };
 export declare const EventPut: {
-    encode(message: EventPut, writer?: _m0.Writer): _m0.Writer;
-    decode(input: _m0.Reader | Uint8Array, length?: number): EventPut;
+    typeUrl: string;
+    encode(message: EventPut, writer?: BinaryWriter): BinaryWriter;
+    decode(input: BinaryReader | Uint8Array, length?: number): EventPut;
     fromJSON(object: any): EventPut;
     toJSON(message: EventPut): unknown;
     fromPartial(object: Partial<EventPut>): EventPut;
@@ -284,8 +286,9 @@ export declare const EventPut: {
     toProtoMsg(message: EventPut): EventPutProtoMsg;
 };
 export declare const EventTake: {
-    encode(message: EventTake, writer?: _m0.Writer): _m0.Writer;
-    decode(input: _m0.Reader | Uint8Array, length?: number): EventTake;
+    typeUrl: string;
+    encode(message: EventTake, writer?: BinaryWriter): BinaryWriter;
+    decode(input: BinaryReader | Uint8Array, length?: number): EventTake;
     fromJSON(object: any): EventTake;
     toJSON(message: EventTake): unknown;
     fromPartial(object: Partial<EventTake>): EventTake;
@@ -297,8 +300,9 @@ export declare const EventTake: {
     toProtoMsg(message: EventTake): EventTakeProtoMsg;
 };
 export declare const EventUpdateCurator: {
-    encode(message: EventUpdateCurator, writer?: _m0.Writer): _m0.Writer;
-    decode(input: _m0.Reader | Uint8Array, length?: number): EventUpdateCurator;
+    typeUrl: string;
+    encode(message: EventUpdateCurator, writer?: BinaryWriter): BinaryWriter;
+    decode(input: BinaryReader | Uint8Array, length?: number): EventUpdateCurator;
     fromJSON(object: any): EventUpdateCurator;
     toJSON(message: EventUpdateCurator): unknown;
     fromPartial(object: Partial<EventUpdateCurator>): EventUpdateCurator;
@@ -310,8 +314,9 @@ export declare const EventUpdateCurator: {
     toProtoMsg(message: EventUpdateCurator): EventUpdateCuratorProtoMsg;
 };
 export declare const EventUpdateDateCriteria: {
-    encode(message: EventUpdateDateCriteria, writer?: _m0.Writer): _m0.Writer;
-    decode(input: _m0.Reader | Uint8Array, length?: number): EventUpdateDateCriteria;
+    typeUrl: string;
+    encode(message: EventUpdateDateCriteria, writer?: BinaryWriter): BinaryWriter;
+    decode(input: BinaryReader | Uint8Array, length?: number): EventUpdateDateCriteria;
     fromJSON(object: any): EventUpdateDateCriteria;
     toJSON(message: EventUpdateDateCriteria): unknown;
     fromPartial(object: Partial<EventUpdateDateCriteria>): EventUpdateDateCriteria;

@@ -1,28 +1,28 @@
-import { Long } from "../../../helpers";
-import * as _m0 from "protobufjs/minimal";
+import { BinaryReader, BinaryWriter } from "../../../binary";
 export interface BitArray {
-    bits: Long;
-    elems: Long[];
+    bits: bigint;
+    elems: bigint[];
 }
 export interface BitArrayProtoMsg {
     typeUrl: "/tendermint.libs.bits.BitArray";
     value: Uint8Array;
 }
 export interface BitArrayAmino {
-    bits: string;
-    elems: string[];
+    bits?: string;
+    elems?: string[];
 }
 export interface BitArrayAminoMsg {
     type: "/tendermint.libs.bits.BitArray";
     value: BitArrayAmino;
 }
 export interface BitArraySDKType {
-    bits: Long;
-    elems: Long[];
+    bits: bigint;
+    elems: bigint[];
 }
 export declare const BitArray: {
-    encode(message: BitArray, writer?: _m0.Writer): _m0.Writer;
-    decode(input: _m0.Reader | Uint8Array, length?: number): BitArray;
+    typeUrl: string;
+    encode(message: BitArray, writer?: BinaryWriter): BinaryWriter;
+    decode(input: BinaryReader | Uint8Array, length?: number): BitArray;
     fromJSON(object: any): BitArray;
     toJSON(message: BitArray): unknown;
     fromPartial(object: Partial<BitArray>): BitArray;

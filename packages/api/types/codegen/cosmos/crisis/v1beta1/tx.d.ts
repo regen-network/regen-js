@@ -1,4 +1,4 @@
-import * as _m0 from "protobufjs/minimal";
+import { BinaryReader, BinaryWriter } from "../../../binary";
 /** MsgVerifyInvariant represents a message to verify a particular invariance. */
 export interface MsgVerifyInvariant {
     sender: string;
@@ -11,9 +11,9 @@ export interface MsgVerifyInvariantProtoMsg {
 }
 /** MsgVerifyInvariant represents a message to verify a particular invariance. */
 export interface MsgVerifyInvariantAmino {
-    sender: string;
-    invariant_module_name: string;
-    invariant_route: string;
+    sender?: string;
+    invariant_module_name?: string;
+    invariant_route?: string;
 }
 export interface MsgVerifyInvariantAminoMsg {
     type: "cosmos-sdk/MsgVerifyInvariant";
@@ -43,8 +43,9 @@ export interface MsgVerifyInvariantResponseAminoMsg {
 export interface MsgVerifyInvariantResponseSDKType {
 }
 export declare const MsgVerifyInvariant: {
-    encode(message: MsgVerifyInvariant, writer?: _m0.Writer): _m0.Writer;
-    decode(input: _m0.Reader | Uint8Array, length?: number): MsgVerifyInvariant;
+    typeUrl: string;
+    encode(message: MsgVerifyInvariant, writer?: BinaryWriter): BinaryWriter;
+    decode(input: BinaryReader | Uint8Array, length?: number): MsgVerifyInvariant;
     fromJSON(object: any): MsgVerifyInvariant;
     toJSON(message: MsgVerifyInvariant): unknown;
     fromPartial(object: Partial<MsgVerifyInvariant>): MsgVerifyInvariant;
@@ -57,8 +58,9 @@ export declare const MsgVerifyInvariant: {
     toProtoMsg(message: MsgVerifyInvariant): MsgVerifyInvariantProtoMsg;
 };
 export declare const MsgVerifyInvariantResponse: {
-    encode(_: MsgVerifyInvariantResponse, writer?: _m0.Writer): _m0.Writer;
-    decode(input: _m0.Reader | Uint8Array, length?: number): MsgVerifyInvariantResponse;
+    typeUrl: string;
+    encode(_: MsgVerifyInvariantResponse, writer?: BinaryWriter): BinaryWriter;
+    decode(input: BinaryReader | Uint8Array, length?: number): MsgVerifyInvariantResponse;
     fromJSON(_: any): MsgVerifyInvariantResponse;
     toJSON(_: MsgVerifyInvariantResponse): unknown;
     fromPartial(_: Partial<MsgVerifyInvariantResponse>): MsgVerifyInvariantResponse;

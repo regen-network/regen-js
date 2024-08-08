@@ -1,7 +1,6 @@
-import { Timestamp, TimestampAmino, TimestampSDKType } from "../../../google/protobuf/timestamp";
+import { Timestamp, TimestampSDKType } from "../../../google/protobuf/timestamp";
 import { Duration, DurationAmino, DurationSDKType } from "../../../google/protobuf/duration";
-import { Long } from "../../../helpers";
-import * as _m0 from "protobufjs/minimal";
+import { BinaryReader, BinaryWriter } from "../../../binary";
 /**
  * ValidatorSigningInfo defines a validator's signing info for monitoring their
  * liveness activity.
@@ -9,13 +8,13 @@ import * as _m0 from "protobufjs/minimal";
 export interface ValidatorSigningInfo {
     address: string;
     /** Height at which validator was first a candidate OR was unjailed */
-    startHeight: Long;
+    startHeight: bigint;
     /**
      * Index which is incremented each time the validator was a bonded
      * in a block and may have signed a precommit or not. This in conjunction with the
      * `SignedBlocksWindow` param determines the index in the `MissedBlocksBitArray`.
      */
-    indexOffset: Long;
+    indexOffset: bigint;
     /** Timestamp until which the validator is jailed due to liveness downtime. */
     jailedUntil: Timestamp;
     /**
@@ -27,7 +26,7 @@ export interface ValidatorSigningInfo {
      * A counter kept to avoid unnecessary array reads.
      * Note that `Sum(MissedBlocksBitArray)` always equals `MissedBlocksCounter`.
      */
-    missedBlocksCounter: Long;
+    missedBlocksCounter: bigint;
 }
 export interface ValidatorSigningInfoProtoMsg {
     typeUrl: "/cosmos.slashing.v1beta1.ValidatorSigningInfo";
@@ -38,27 +37,27 @@ export interface ValidatorSigningInfoProtoMsg {
  * liveness activity.
  */
 export interface ValidatorSigningInfoAmino {
-    address: string;
+    address?: string;
     /** Height at which validator was first a candidate OR was unjailed */
-    start_height: string;
+    start_height?: string;
     /**
      * Index which is incremented each time the validator was a bonded
      * in a block and may have signed a precommit or not. This in conjunction with the
      * `SignedBlocksWindow` param determines the index in the `MissedBlocksBitArray`.
      */
-    index_offset: string;
+    index_offset?: string;
     /** Timestamp until which the validator is jailed due to liveness downtime. */
-    jailed_until?: TimestampAmino;
+    jailed_until?: string;
     /**
      * Whether or not a validator has been tombstoned (killed out of validator set). It is set
      * once the validator commits an equivocation or for any other configured misbehiavor.
      */
-    tombstoned: boolean;
+    tombstoned?: boolean;
     /**
      * A counter kept to avoid unnecessary array reads.
      * Note that `Sum(MissedBlocksBitArray)` always equals `MissedBlocksCounter`.
      */
-    missed_blocks_counter: string;
+    missed_blocks_counter?: string;
 }
 export interface ValidatorSigningInfoAminoMsg {
     type: "cosmos-sdk/ValidatorSigningInfo";
@@ -70,15 +69,15 @@ export interface ValidatorSigningInfoAminoMsg {
  */
 export interface ValidatorSigningInfoSDKType {
     address: string;
-    start_height: Long;
-    index_offset: Long;
+    start_height: bigint;
+    index_offset: bigint;
     jailed_until: TimestampSDKType;
     tombstoned: boolean;
-    missed_blocks_counter: Long;
+    missed_blocks_counter: bigint;
 }
 /** Params represents the parameters used for by the slashing module. */
 export interface Params {
-    signedBlocksWindow: Long;
+    signedBlocksWindow: bigint;
     minSignedPerWindow: Uint8Array;
     downtimeJailDuration: Duration;
     slashFractionDoubleSign: Uint8Array;
@@ -90,11 +89,11 @@ export interface ParamsProtoMsg {
 }
 /** Params represents the parameters used for by the slashing module. */
 export interface ParamsAmino {
-    signed_blocks_window: string;
-    min_signed_per_window: Uint8Array;
+    signed_blocks_window?: string;
+    min_signed_per_window?: string;
     downtime_jail_duration?: DurationAmino;
-    slash_fraction_double_sign: Uint8Array;
-    slash_fraction_downtime: Uint8Array;
+    slash_fraction_double_sign?: string;
+    slash_fraction_downtime?: string;
 }
 export interface ParamsAminoMsg {
     type: "cosmos-sdk/Params";
@@ -102,15 +101,16 @@ export interface ParamsAminoMsg {
 }
 /** Params represents the parameters used for by the slashing module. */
 export interface ParamsSDKType {
-    signed_blocks_window: Long;
+    signed_blocks_window: bigint;
     min_signed_per_window: Uint8Array;
     downtime_jail_duration: DurationSDKType;
     slash_fraction_double_sign: Uint8Array;
     slash_fraction_downtime: Uint8Array;
 }
 export declare const ValidatorSigningInfo: {
-    encode(message: ValidatorSigningInfo, writer?: _m0.Writer): _m0.Writer;
-    decode(input: _m0.Reader | Uint8Array, length?: number): ValidatorSigningInfo;
+    typeUrl: string;
+    encode(message: ValidatorSigningInfo, writer?: BinaryWriter): BinaryWriter;
+    decode(input: BinaryReader | Uint8Array, length?: number): ValidatorSigningInfo;
     fromJSON(object: any): ValidatorSigningInfo;
     toJSON(message: ValidatorSigningInfo): unknown;
     fromPartial(object: Partial<ValidatorSigningInfo>): ValidatorSigningInfo;
@@ -123,8 +123,9 @@ export declare const ValidatorSigningInfo: {
     toProtoMsg(message: ValidatorSigningInfo): ValidatorSigningInfoProtoMsg;
 };
 export declare const Params: {
-    encode(message: Params, writer?: _m0.Writer): _m0.Writer;
-    decode(input: _m0.Reader | Uint8Array, length?: number): Params;
+    typeUrl: string;
+    encode(message: Params, writer?: BinaryWriter): BinaryWriter;
+    decode(input: BinaryReader | Uint8Array, length?: number): Params;
     fromJSON(object: any): Params;
     toJSON(message: Params): unknown;
     fromPartial(object: Partial<Params>): Params;

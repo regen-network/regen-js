@@ -1,4 +1,4 @@
-import * as _m0 from "protobufjs/minimal";
+import { BinaryReader, BinaryWriter } from "../binary";
 export declare enum ScalarType {
     SCALAR_TYPE_UNSPECIFIED = 0,
     SCALAR_TYPE_STRING = 1,
@@ -42,12 +42,12 @@ export interface InterfaceDescriptorAmino {
      * package.name, ex. for the package a.b and interface named C, the
      * fully-qualified name will be a.b.C.
      */
-    name: string;
+    name?: string;
     /**
      * description is a human-readable description of the interface and its
      * purpose.
      */
-    description: string;
+    description?: string;
 }
 export interface InterfaceDescriptorAminoMsg {
     type: "/cosmos_proto.InterfaceDescriptor";
@@ -112,20 +112,20 @@ export interface ScalarDescriptorAmino {
      * package.name, ex. for the package a.b and scalar named C, the
      * fully-qualified name will be a.b.C.
      */
-    name: string;
+    name?: string;
     /**
      * description is a human-readable description of the scalar and its
      * encoding format. For instance a big integer or decimal scalar should
      * specify precisely the expected encoding format.
      */
-    description: string;
+    description?: string;
     /**
      * field_type is the type of field with which this scalar can be used.
      * Scalars can be used with one and only one type of field so that
      * encoding standards and simple and clear. Currently only string and
      * bytes fields are supported for scalars.
      */
-    field_type: ScalarType[];
+    field_type?: ScalarType[];
 }
 export interface ScalarDescriptorAminoMsg {
     type: "/cosmos_proto.ScalarDescriptor";
@@ -146,8 +146,9 @@ export interface ScalarDescriptorSDKType {
     field_type: ScalarType[];
 }
 export declare const InterfaceDescriptor: {
-    encode(message: InterfaceDescriptor, writer?: _m0.Writer): _m0.Writer;
-    decode(input: _m0.Reader | Uint8Array, length?: number): InterfaceDescriptor;
+    typeUrl: string;
+    encode(message: InterfaceDescriptor, writer?: BinaryWriter): BinaryWriter;
+    decode(input: BinaryReader | Uint8Array, length?: number): InterfaceDescriptor;
     fromJSON(object: any): InterfaceDescriptor;
     toJSON(message: InterfaceDescriptor): unknown;
     fromPartial(object: Partial<InterfaceDescriptor>): InterfaceDescriptor;
@@ -159,8 +160,9 @@ export declare const InterfaceDescriptor: {
     toProtoMsg(message: InterfaceDescriptor): InterfaceDescriptorProtoMsg;
 };
 export declare const ScalarDescriptor: {
-    encode(message: ScalarDescriptor, writer?: _m0.Writer): _m0.Writer;
-    decode(input: _m0.Reader | Uint8Array, length?: number): ScalarDescriptor;
+    typeUrl: string;
+    encode(message: ScalarDescriptor, writer?: BinaryWriter): BinaryWriter;
+    decode(input: BinaryReader | Uint8Array, length?: number): ScalarDescriptor;
     fromJSON(object: any): ScalarDescriptor;
     toJSON(message: ScalarDescriptor): unknown;
     fromPartial(object: Partial<ScalarDescriptor>): ScalarDescriptor;

@@ -1,6 +1,6 @@
 import { PageRequest, PageRequestAmino, PageRequestSDKType, PageResponse, PageResponseAmino, PageResponseSDKType } from "../../base/query/v1beta1/pagination";
 import { Any, AnyAmino, AnySDKType } from "../../../google/protobuf/any";
-import * as _m0 from "protobufjs/minimal";
+import { BinaryReader, BinaryWriter } from "../../../binary";
 /** QueryEvidenceRequest is the request type for the Query/Evidence RPC method. */
 export interface QueryEvidenceRequest {
     /** evidence_hash defines the hash of the requested evidence. */
@@ -13,7 +13,7 @@ export interface QueryEvidenceRequestProtoMsg {
 /** QueryEvidenceRequest is the request type for the Query/Evidence RPC method. */
 export interface QueryEvidenceRequestAmino {
     /** evidence_hash defines the hash of the requested evidence. */
-    evidence_hash: Uint8Array;
+    evidence_hash?: string;
 }
 export interface QueryEvidenceRequestAminoMsg {
     type: "cosmos-sdk/QueryEvidenceRequest";
@@ -26,7 +26,7 @@ export interface QueryEvidenceRequestSDKType {
 /** QueryEvidenceResponse is the response type for the Query/Evidence RPC method. */
 export interface QueryEvidenceResponse {
     /** evidence returns the requested evidence. */
-    evidence: Any;
+    evidence?: Any;
 }
 export interface QueryEvidenceResponseProtoMsg {
     typeUrl: "/cosmos.evidence.v1beta1.QueryEvidenceResponse";
@@ -43,7 +43,7 @@ export interface QueryEvidenceResponseAminoMsg {
 }
 /** QueryEvidenceResponse is the response type for the Query/Evidence RPC method. */
 export interface QueryEvidenceResponseSDKType {
-    evidence: AnySDKType;
+    evidence?: AnySDKType;
 }
 /**
  * QueryEvidenceRequest is the request type for the Query/AllEvidence RPC
@@ -51,7 +51,7 @@ export interface QueryEvidenceResponseSDKType {
  */
 export interface QueryAllEvidenceRequest {
     /** pagination defines an optional pagination for the request. */
-    pagination: PageRequest;
+    pagination?: PageRequest;
 }
 export interface QueryAllEvidenceRequestProtoMsg {
     typeUrl: "/cosmos.evidence.v1beta1.QueryAllEvidenceRequest";
@@ -74,7 +74,7 @@ export interface QueryAllEvidenceRequestAminoMsg {
  * method.
  */
 export interface QueryAllEvidenceRequestSDKType {
-    pagination: PageRequestSDKType;
+    pagination?: PageRequestSDKType;
 }
 /**
  * QueryAllEvidenceResponse is the response type for the Query/AllEvidence RPC
@@ -84,7 +84,7 @@ export interface QueryAllEvidenceResponse {
     /** evidence returns all evidences. */
     evidence: Any[];
     /** pagination defines the pagination in the response. */
-    pagination: PageResponse;
+    pagination?: PageResponse;
 }
 export interface QueryAllEvidenceResponseProtoMsg {
     typeUrl: "/cosmos.evidence.v1beta1.QueryAllEvidenceResponse";
@@ -96,7 +96,7 @@ export interface QueryAllEvidenceResponseProtoMsg {
  */
 export interface QueryAllEvidenceResponseAmino {
     /** evidence returns all evidences. */
-    evidence: AnyAmino[];
+    evidence?: AnyAmino[];
     /** pagination defines the pagination in the response. */
     pagination?: PageResponseAmino;
 }
@@ -110,11 +110,12 @@ export interface QueryAllEvidenceResponseAminoMsg {
  */
 export interface QueryAllEvidenceResponseSDKType {
     evidence: AnySDKType[];
-    pagination: PageResponseSDKType;
+    pagination?: PageResponseSDKType;
 }
 export declare const QueryEvidenceRequest: {
-    encode(message: QueryEvidenceRequest, writer?: _m0.Writer): _m0.Writer;
-    decode(input: _m0.Reader | Uint8Array, length?: number): QueryEvidenceRequest;
+    typeUrl: string;
+    encode(message: QueryEvidenceRequest, writer?: BinaryWriter): BinaryWriter;
+    decode(input: BinaryReader | Uint8Array, length?: number): QueryEvidenceRequest;
     fromJSON(object: any): QueryEvidenceRequest;
     toJSON(message: QueryEvidenceRequest): unknown;
     fromPartial(object: Partial<QueryEvidenceRequest>): QueryEvidenceRequest;
@@ -127,8 +128,9 @@ export declare const QueryEvidenceRequest: {
     toProtoMsg(message: QueryEvidenceRequest): QueryEvidenceRequestProtoMsg;
 };
 export declare const QueryEvidenceResponse: {
-    encode(message: QueryEvidenceResponse, writer?: _m0.Writer): _m0.Writer;
-    decode(input: _m0.Reader | Uint8Array, length?: number): QueryEvidenceResponse;
+    typeUrl: string;
+    encode(message: QueryEvidenceResponse, writer?: BinaryWriter): BinaryWriter;
+    decode(input: BinaryReader | Uint8Array, length?: number): QueryEvidenceResponse;
     fromJSON(object: any): QueryEvidenceResponse;
     toJSON(message: QueryEvidenceResponse): unknown;
     fromPartial(object: Partial<QueryEvidenceResponse>): QueryEvidenceResponse;
@@ -141,8 +143,9 @@ export declare const QueryEvidenceResponse: {
     toProtoMsg(message: QueryEvidenceResponse): QueryEvidenceResponseProtoMsg;
 };
 export declare const QueryAllEvidenceRequest: {
-    encode(message: QueryAllEvidenceRequest, writer?: _m0.Writer): _m0.Writer;
-    decode(input: _m0.Reader | Uint8Array, length?: number): QueryAllEvidenceRequest;
+    typeUrl: string;
+    encode(message: QueryAllEvidenceRequest, writer?: BinaryWriter): BinaryWriter;
+    decode(input: BinaryReader | Uint8Array, length?: number): QueryAllEvidenceRequest;
     fromJSON(object: any): QueryAllEvidenceRequest;
     toJSON(message: QueryAllEvidenceRequest): unknown;
     fromPartial(object: Partial<QueryAllEvidenceRequest>): QueryAllEvidenceRequest;
@@ -155,8 +158,9 @@ export declare const QueryAllEvidenceRequest: {
     toProtoMsg(message: QueryAllEvidenceRequest): QueryAllEvidenceRequestProtoMsg;
 };
 export declare const QueryAllEvidenceResponse: {
-    encode(message: QueryAllEvidenceResponse, writer?: _m0.Writer): _m0.Writer;
-    decode(input: _m0.Reader | Uint8Array, length?: number): QueryAllEvidenceResponse;
+    typeUrl: string;
+    encode(message: QueryAllEvidenceResponse, writer?: BinaryWriter): BinaryWriter;
+    decode(input: BinaryReader | Uint8Array, length?: number): QueryAllEvidenceResponse;
     fromJSON(object: any): QueryAllEvidenceResponse;
     toJSON(message: QueryAllEvidenceResponse): unknown;
     fromPartial(object: Partial<QueryAllEvidenceResponse>): QueryAllEvidenceResponse;

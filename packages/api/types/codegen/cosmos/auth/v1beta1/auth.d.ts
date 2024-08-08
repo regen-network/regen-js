@@ -1,17 +1,16 @@
 import { Any, AnyAmino, AnySDKType } from "../../../google/protobuf/any";
-import { Long } from "../../../helpers";
-import * as _m0 from "protobufjs/minimal";
+import { BinaryReader, BinaryWriter } from "../../../binary";
 /**
  * BaseAccount defines a base account type. It contains all the necessary fields
  * for basic account functionality. Any custom account type should extend this
  * type for additional functionality (e.g. vesting).
  */
 export interface BaseAccount {
-    $typeUrl?: string;
+    $typeUrl?: "/cosmos.auth.v1beta1.BaseAccount";
     address: string;
-    pubKey: Any;
-    accountNumber: Long;
-    sequence: Long;
+    pubKey?: Any;
+    accountNumber: bigint;
+    sequence: bigint;
 }
 export interface BaseAccountProtoMsg {
     typeUrl: "/cosmos.auth.v1beta1.BaseAccount";
@@ -23,10 +22,10 @@ export interface BaseAccountProtoMsg {
  * type for additional functionality (e.g. vesting).
  */
 export interface BaseAccountAmino {
-    address: string;
+    address?: string;
     pub_key?: AnyAmino;
-    account_number: string;
-    sequence: string;
+    account_number?: string;
+    sequence?: string;
 }
 export interface BaseAccountAminoMsg {
     type: "cosmos-sdk/BaseAccount";
@@ -38,16 +37,16 @@ export interface BaseAccountAminoMsg {
  * type for additional functionality (e.g. vesting).
  */
 export interface BaseAccountSDKType {
-    $typeUrl?: string;
+    $typeUrl?: "/cosmos.auth.v1beta1.BaseAccount";
     address: string;
-    pub_key: AnySDKType;
-    account_number: Long;
-    sequence: Long;
+    pub_key?: AnySDKType;
+    account_number: bigint;
+    sequence: bigint;
 }
 /** ModuleAccount defines an account for modules that holds coins on a pool. */
 export interface ModuleAccount {
-    $typeUrl?: string;
-    baseAccount: BaseAccount;
+    $typeUrl?: "/cosmos.auth.v1beta1.ModuleAccount";
+    baseAccount?: BaseAccount;
     name: string;
     permissions: string[];
 }
@@ -58,8 +57,8 @@ export interface ModuleAccountProtoMsg {
 /** ModuleAccount defines an account for modules that holds coins on a pool. */
 export interface ModuleAccountAmino {
     base_account?: BaseAccountAmino;
-    name: string;
-    permissions: string[];
+    name?: string;
+    permissions?: string[];
 }
 export interface ModuleAccountAminoMsg {
     type: "cosmos-sdk/ModuleAccount";
@@ -67,18 +66,18 @@ export interface ModuleAccountAminoMsg {
 }
 /** ModuleAccount defines an account for modules that holds coins on a pool. */
 export interface ModuleAccountSDKType {
-    $typeUrl?: string;
-    base_account: BaseAccountSDKType;
+    $typeUrl?: "/cosmos.auth.v1beta1.ModuleAccount";
+    base_account?: BaseAccountSDKType;
     name: string;
     permissions: string[];
 }
 /** Params defines the parameters for the auth module. */
 export interface Params {
-    maxMemoCharacters: Long;
-    txSigLimit: Long;
-    txSizeCostPerByte: Long;
-    sigVerifyCostEd25519: Long;
-    sigVerifyCostSecp256k1: Long;
+    maxMemoCharacters: bigint;
+    txSigLimit: bigint;
+    txSizeCostPerByte: bigint;
+    sigVerifyCostEd25519: bigint;
+    sigVerifyCostSecp256k1: bigint;
 }
 export interface ParamsProtoMsg {
     typeUrl: "/cosmos.auth.v1beta1.Params";
@@ -86,11 +85,11 @@ export interface ParamsProtoMsg {
 }
 /** Params defines the parameters for the auth module. */
 export interface ParamsAmino {
-    max_memo_characters: string;
-    tx_sig_limit: string;
-    tx_size_cost_per_byte: string;
-    sig_verify_cost_ed25519: string;
-    sig_verify_cost_secp256k1: string;
+    max_memo_characters?: string;
+    tx_sig_limit?: string;
+    tx_size_cost_per_byte?: string;
+    sig_verify_cost_ed25519?: string;
+    sig_verify_cost_secp256k1?: string;
 }
 export interface ParamsAminoMsg {
     type: "cosmos-sdk/Params";
@@ -98,15 +97,16 @@ export interface ParamsAminoMsg {
 }
 /** Params defines the parameters for the auth module. */
 export interface ParamsSDKType {
-    max_memo_characters: Long;
-    tx_sig_limit: Long;
-    tx_size_cost_per_byte: Long;
-    sig_verify_cost_ed25519: Long;
-    sig_verify_cost_secp256k1: Long;
+    max_memo_characters: bigint;
+    tx_sig_limit: bigint;
+    tx_size_cost_per_byte: bigint;
+    sig_verify_cost_ed25519: bigint;
+    sig_verify_cost_secp256k1: bigint;
 }
 export declare const BaseAccount: {
-    encode(message: BaseAccount, writer?: _m0.Writer): _m0.Writer;
-    decode(input: _m0.Reader | Uint8Array, length?: number): BaseAccount;
+    typeUrl: string;
+    encode(message: BaseAccount, writer?: BinaryWriter): BinaryWriter;
+    decode(input: BinaryReader | Uint8Array, length?: number): BaseAccount;
     fromJSON(object: any): BaseAccount;
     toJSON(message: BaseAccount): unknown;
     fromPartial(object: Partial<BaseAccount>): BaseAccount;
@@ -119,8 +119,9 @@ export declare const BaseAccount: {
     toProtoMsg(message: BaseAccount): BaseAccountProtoMsg;
 };
 export declare const ModuleAccount: {
-    encode(message: ModuleAccount, writer?: _m0.Writer): _m0.Writer;
-    decode(input: _m0.Reader | Uint8Array, length?: number): ModuleAccount;
+    typeUrl: string;
+    encode(message: ModuleAccount, writer?: BinaryWriter): BinaryWriter;
+    decode(input: BinaryReader | Uint8Array, length?: number): ModuleAccount;
     fromJSON(object: any): ModuleAccount;
     toJSON(message: ModuleAccount): unknown;
     fromPartial(object: Partial<ModuleAccount>): ModuleAccount;
@@ -133,8 +134,9 @@ export declare const ModuleAccount: {
     toProtoMsg(message: ModuleAccount): ModuleAccountProtoMsg;
 };
 export declare const Params: {
-    encode(message: Params, writer?: _m0.Writer): _m0.Writer;
-    decode(input: _m0.Reader | Uint8Array, length?: number): Params;
+    typeUrl: string;
+    encode(message: Params, writer?: BinaryWriter): BinaryWriter;
+    decode(input: BinaryReader | Uint8Array, length?: number): Params;
     fromJSON(object: any): Params;
     toJSON(message: Params): unknown;
     fromPartial(object: Partial<Params>): Params;

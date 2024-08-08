@@ -1,7 +1,6 @@
-import { Timestamp, TimestampAmino, TimestampSDKType } from "../../../google/protobuf/timestamp";
+import { Timestamp, TimestampSDKType } from "../../../google/protobuf/timestamp";
 import { Any, AnyAmino, AnySDKType } from "../../../google/protobuf/any";
-import { Long } from "../../../helpers";
-import * as _m0 from "protobufjs/minimal";
+import { BinaryReader, BinaryWriter } from "../../../binary";
 /** Plan specifies information about a planned upgrade and when it should occur. */
 export interface Plan {
     /**
@@ -25,7 +24,7 @@ export interface Plan {
      * The height at which the upgrade must be performed.
      * Only used if Time is not set.
      */
-    height: Long;
+    height: bigint;
     /**
      * Any application specific upgrade info to be included on-chain
      * such as a git commit that validators could automatically upgrade to
@@ -37,7 +36,7 @@ export interface Plan {
      * If this field is not empty, an error will be thrown.
      */
     /** @deprecated */
-    upgradedClientState: Any;
+    upgradedClientState?: Any;
 }
 export interface PlanProtoMsg {
     typeUrl: "/cosmos.upgrade.v1beta1.Plan";
@@ -54,24 +53,24 @@ export interface PlanAmino {
      * assumed that the software is out-of-date when the upgrade Time or Height is
      * reached and the software will exit.
      */
-    name: string;
+    name?: string;
     /**
      * Deprecated: Time based upgrades have been deprecated. Time based upgrade logic
      * has been removed from the SDK.
      * If this field is not empty, an error will be thrown.
      */
     /** @deprecated */
-    time?: TimestampAmino;
+    time?: string;
     /**
      * The height at which the upgrade must be performed.
      * Only used if Time is not set.
      */
-    height: string;
+    height?: string;
     /**
      * Any application specific upgrade info to be included on-chain
      * such as a git commit that validators could automatically upgrade to
      */
-    info: string;
+    info?: string;
     /**
      * Deprecated: UpgradedClientState field has been deprecated. IBC upgrade logic has been
      * moved to the IBC module in the sub module 02-client.
@@ -89,10 +88,10 @@ export interface PlanSDKType {
     name: string;
     /** @deprecated */
     time: TimestampSDKType;
-    height: Long;
+    height: bigint;
     info: string;
     /** @deprecated */
-    upgraded_client_state: AnySDKType;
+    upgraded_client_state?: AnySDKType;
 }
 /**
  * SoftwareUpgradeProposal is a gov Content type for initiating a software
@@ -102,7 +101,7 @@ export interface PlanSDKType {
  */
 /** @deprecated */
 export interface SoftwareUpgradeProposal {
-    $typeUrl?: string;
+    $typeUrl?: "/cosmos.upgrade.v1beta1.SoftwareUpgradeProposal";
     title: string;
     description: string;
     plan: Plan;
@@ -119,8 +118,8 @@ export interface SoftwareUpgradeProposalProtoMsg {
  */
 /** @deprecated */
 export interface SoftwareUpgradeProposalAmino {
-    title: string;
-    description: string;
+    title?: string;
+    description?: string;
     plan?: PlanAmino;
 }
 export interface SoftwareUpgradeProposalAminoMsg {
@@ -135,7 +134,7 @@ export interface SoftwareUpgradeProposalAminoMsg {
  */
 /** @deprecated */
 export interface SoftwareUpgradeProposalSDKType {
-    $typeUrl?: string;
+    $typeUrl?: "/cosmos.upgrade.v1beta1.SoftwareUpgradeProposal";
     title: string;
     description: string;
     plan: PlanSDKType;
@@ -148,7 +147,7 @@ export interface SoftwareUpgradeProposalSDKType {
  */
 /** @deprecated */
 export interface CancelSoftwareUpgradeProposal {
-    $typeUrl?: string;
+    $typeUrl?: "/cosmos.upgrade.v1beta1.CancelSoftwareUpgradeProposal";
     title: string;
     description: string;
 }
@@ -164,8 +163,8 @@ export interface CancelSoftwareUpgradeProposalProtoMsg {
  */
 /** @deprecated */
 export interface CancelSoftwareUpgradeProposalAmino {
-    title: string;
-    description: string;
+    title?: string;
+    description?: string;
 }
 export interface CancelSoftwareUpgradeProposalAminoMsg {
     type: "cosmos-sdk/CancelSoftwareUpgradeProposal";
@@ -179,7 +178,7 @@ export interface CancelSoftwareUpgradeProposalAminoMsg {
  */
 /** @deprecated */
 export interface CancelSoftwareUpgradeProposalSDKType {
-    $typeUrl?: string;
+    $typeUrl?: "/cosmos.upgrade.v1beta1.CancelSoftwareUpgradeProposal";
     title: string;
     description: string;
 }
@@ -192,7 +191,7 @@ export interface ModuleVersion {
     /** name of the app module */
     name: string;
     /** consensus version of the app module */
-    version: Long;
+    version: bigint;
 }
 export interface ModuleVersionProtoMsg {
     typeUrl: "/cosmos.upgrade.v1beta1.ModuleVersion";
@@ -205,9 +204,9 @@ export interface ModuleVersionProtoMsg {
  */
 export interface ModuleVersionAmino {
     /** name of the app module */
-    name: string;
+    name?: string;
     /** consensus version of the app module */
-    version: string;
+    version?: string;
 }
 export interface ModuleVersionAminoMsg {
     type: "cosmos-sdk/ModuleVersion";
@@ -220,11 +219,12 @@ export interface ModuleVersionAminoMsg {
  */
 export interface ModuleVersionSDKType {
     name: string;
-    version: Long;
+    version: bigint;
 }
 export declare const Plan: {
-    encode(message: Plan, writer?: _m0.Writer): _m0.Writer;
-    decode(input: _m0.Reader | Uint8Array, length?: number): Plan;
+    typeUrl: string;
+    encode(message: Plan, writer?: BinaryWriter): BinaryWriter;
+    decode(input: BinaryReader | Uint8Array, length?: number): Plan;
     fromJSON(object: any): Plan;
     toJSON(message: Plan): unknown;
     fromPartial(object: Partial<Plan>): Plan;
@@ -237,8 +237,9 @@ export declare const Plan: {
     toProtoMsg(message: Plan): PlanProtoMsg;
 };
 export declare const SoftwareUpgradeProposal: {
-    encode(message: SoftwareUpgradeProposal, writer?: _m0.Writer): _m0.Writer;
-    decode(input: _m0.Reader | Uint8Array, length?: number): SoftwareUpgradeProposal;
+    typeUrl: string;
+    encode(message: SoftwareUpgradeProposal, writer?: BinaryWriter): BinaryWriter;
+    decode(input: BinaryReader | Uint8Array, length?: number): SoftwareUpgradeProposal;
     fromJSON(object: any): SoftwareUpgradeProposal;
     toJSON(message: SoftwareUpgradeProposal): unknown;
     fromPartial(object: Partial<SoftwareUpgradeProposal>): SoftwareUpgradeProposal;
@@ -251,8 +252,9 @@ export declare const SoftwareUpgradeProposal: {
     toProtoMsg(message: SoftwareUpgradeProposal): SoftwareUpgradeProposalProtoMsg;
 };
 export declare const CancelSoftwareUpgradeProposal: {
-    encode(message: CancelSoftwareUpgradeProposal, writer?: _m0.Writer): _m0.Writer;
-    decode(input: _m0.Reader | Uint8Array, length?: number): CancelSoftwareUpgradeProposal;
+    typeUrl: string;
+    encode(message: CancelSoftwareUpgradeProposal, writer?: BinaryWriter): BinaryWriter;
+    decode(input: BinaryReader | Uint8Array, length?: number): CancelSoftwareUpgradeProposal;
     fromJSON(object: any): CancelSoftwareUpgradeProposal;
     toJSON(message: CancelSoftwareUpgradeProposal): unknown;
     fromPartial(object: Partial<CancelSoftwareUpgradeProposal>): CancelSoftwareUpgradeProposal;
@@ -265,8 +267,9 @@ export declare const CancelSoftwareUpgradeProposal: {
     toProtoMsg(message: CancelSoftwareUpgradeProposal): CancelSoftwareUpgradeProposalProtoMsg;
 };
 export declare const ModuleVersion: {
-    encode(message: ModuleVersion, writer?: _m0.Writer): _m0.Writer;
-    decode(input: _m0.Reader | Uint8Array, length?: number): ModuleVersion;
+    typeUrl: string;
+    encode(message: ModuleVersion, writer?: BinaryWriter): BinaryWriter;
+    decode(input: BinaryReader | Uint8Array, length?: number): ModuleVersion;
     fromJSON(object: any): ModuleVersion;
     toJSON(message: ModuleVersion): unknown;
     fromPartial(object: Partial<ModuleVersion>): ModuleVersion;

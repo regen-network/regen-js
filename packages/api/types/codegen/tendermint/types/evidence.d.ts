@@ -1,8 +1,7 @@
 import { Vote, VoteAmino, VoteSDKType, LightBlock, LightBlockAmino, LightBlockSDKType } from "./types";
-import { Timestamp, TimestampAmino, TimestampSDKType } from "../../google/protobuf/timestamp";
+import { Timestamp, TimestampSDKType } from "../../google/protobuf/timestamp";
 import { Validator, ValidatorAmino, ValidatorSDKType } from "./validator";
-import { Long } from "../../helpers";
-import * as _m0 from "protobufjs/minimal";
+import { BinaryReader, BinaryWriter } from "../../binary";
 export interface Evidence {
     duplicateVoteEvidence?: DuplicateVoteEvidence;
     lightClientAttackEvidence?: LightClientAttackEvidence;
@@ -25,10 +24,10 @@ export interface EvidenceSDKType {
 }
 /** DuplicateVoteEvidence contains evidence of a validator signed two conflicting votes. */
 export interface DuplicateVoteEvidence {
-    voteA: Vote;
-    voteB: Vote;
-    totalVotingPower: Long;
-    validatorPower: Long;
+    voteA?: Vote;
+    voteB?: Vote;
+    totalVotingPower: bigint;
+    validatorPower: bigint;
     timestamp: Timestamp;
 }
 export interface DuplicateVoteEvidenceProtoMsg {
@@ -39,9 +38,9 @@ export interface DuplicateVoteEvidenceProtoMsg {
 export interface DuplicateVoteEvidenceAmino {
     vote_a?: VoteAmino;
     vote_b?: VoteAmino;
-    total_voting_power: string;
-    validator_power: string;
-    timestamp?: TimestampAmino;
+    total_voting_power?: string;
+    validator_power?: string;
+    timestamp?: string;
 }
 export interface DuplicateVoteEvidenceAminoMsg {
     type: "/tendermint.types.DuplicateVoteEvidence";
@@ -49,18 +48,18 @@ export interface DuplicateVoteEvidenceAminoMsg {
 }
 /** DuplicateVoteEvidence contains evidence of a validator signed two conflicting votes. */
 export interface DuplicateVoteEvidenceSDKType {
-    vote_a: VoteSDKType;
-    vote_b: VoteSDKType;
-    total_voting_power: Long;
-    validator_power: Long;
+    vote_a?: VoteSDKType;
+    vote_b?: VoteSDKType;
+    total_voting_power: bigint;
+    validator_power: bigint;
     timestamp: TimestampSDKType;
 }
 /** LightClientAttackEvidence contains evidence of a set of validators attempting to mislead a light client. */
 export interface LightClientAttackEvidence {
-    conflictingBlock: LightBlock;
-    commonHeight: Long;
+    conflictingBlock?: LightBlock;
+    commonHeight: bigint;
     byzantineValidators: Validator[];
-    totalVotingPower: Long;
+    totalVotingPower: bigint;
     timestamp: Timestamp;
 }
 export interface LightClientAttackEvidenceProtoMsg {
@@ -70,10 +69,10 @@ export interface LightClientAttackEvidenceProtoMsg {
 /** LightClientAttackEvidence contains evidence of a set of validators attempting to mislead a light client. */
 export interface LightClientAttackEvidenceAmino {
     conflicting_block?: LightBlockAmino;
-    common_height: string;
-    byzantine_validators: ValidatorAmino[];
-    total_voting_power: string;
-    timestamp?: TimestampAmino;
+    common_height?: string;
+    byzantine_validators?: ValidatorAmino[];
+    total_voting_power?: string;
+    timestamp?: string;
 }
 export interface LightClientAttackEvidenceAminoMsg {
     type: "/tendermint.types.LightClientAttackEvidence";
@@ -81,10 +80,10 @@ export interface LightClientAttackEvidenceAminoMsg {
 }
 /** LightClientAttackEvidence contains evidence of a set of validators attempting to mislead a light client. */
 export interface LightClientAttackEvidenceSDKType {
-    conflicting_block: LightBlockSDKType;
-    common_height: Long;
+    conflicting_block?: LightBlockSDKType;
+    common_height: bigint;
     byzantine_validators: ValidatorSDKType[];
-    total_voting_power: Long;
+    total_voting_power: bigint;
     timestamp: TimestampSDKType;
 }
 export interface EvidenceList {
@@ -95,7 +94,7 @@ export interface EvidenceListProtoMsg {
     value: Uint8Array;
 }
 export interface EvidenceListAmino {
-    evidence: EvidenceAmino[];
+    evidence?: EvidenceAmino[];
 }
 export interface EvidenceListAminoMsg {
     type: "/tendermint.types.EvidenceList";
@@ -105,8 +104,9 @@ export interface EvidenceListSDKType {
     evidence: EvidenceSDKType[];
 }
 export declare const Evidence: {
-    encode(message: Evidence, writer?: _m0.Writer): _m0.Writer;
-    decode(input: _m0.Reader | Uint8Array, length?: number): Evidence;
+    typeUrl: string;
+    encode(message: Evidence, writer?: BinaryWriter): BinaryWriter;
+    decode(input: BinaryReader | Uint8Array, length?: number): Evidence;
     fromJSON(object: any): Evidence;
     toJSON(message: Evidence): unknown;
     fromPartial(object: Partial<Evidence>): Evidence;
@@ -118,8 +118,9 @@ export declare const Evidence: {
     toProtoMsg(message: Evidence): EvidenceProtoMsg;
 };
 export declare const DuplicateVoteEvidence: {
-    encode(message: DuplicateVoteEvidence, writer?: _m0.Writer): _m0.Writer;
-    decode(input: _m0.Reader | Uint8Array, length?: number): DuplicateVoteEvidence;
+    typeUrl: string;
+    encode(message: DuplicateVoteEvidence, writer?: BinaryWriter): BinaryWriter;
+    decode(input: BinaryReader | Uint8Array, length?: number): DuplicateVoteEvidence;
     fromJSON(object: any): DuplicateVoteEvidence;
     toJSON(message: DuplicateVoteEvidence): unknown;
     fromPartial(object: Partial<DuplicateVoteEvidence>): DuplicateVoteEvidence;
@@ -131,8 +132,9 @@ export declare const DuplicateVoteEvidence: {
     toProtoMsg(message: DuplicateVoteEvidence): DuplicateVoteEvidenceProtoMsg;
 };
 export declare const LightClientAttackEvidence: {
-    encode(message: LightClientAttackEvidence, writer?: _m0.Writer): _m0.Writer;
-    decode(input: _m0.Reader | Uint8Array, length?: number): LightClientAttackEvidence;
+    typeUrl: string;
+    encode(message: LightClientAttackEvidence, writer?: BinaryWriter): BinaryWriter;
+    decode(input: BinaryReader | Uint8Array, length?: number): LightClientAttackEvidence;
     fromJSON(object: any): LightClientAttackEvidence;
     toJSON(message: LightClientAttackEvidence): unknown;
     fromPartial(object: Partial<LightClientAttackEvidence>): LightClientAttackEvidence;
@@ -144,8 +146,9 @@ export declare const LightClientAttackEvidence: {
     toProtoMsg(message: LightClientAttackEvidence): LightClientAttackEvidenceProtoMsg;
 };
 export declare const EvidenceList: {
-    encode(message: EvidenceList, writer?: _m0.Writer): _m0.Writer;
-    decode(input: _m0.Reader | Uint8Array, length?: number): EvidenceList;
+    typeUrl: string;
+    encode(message: EvidenceList, writer?: BinaryWriter): BinaryWriter;
+    decode(input: BinaryReader | Uint8Array, length?: number): EvidenceList;
     fromJSON(object: any): EvidenceList;
     toJSON(message: EvidenceList): unknown;
     fromPartial(object: Partial<EvidenceList>): EvidenceList;

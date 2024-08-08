@@ -1,5 +1,5 @@
 import { Any, AnyAmino, AnySDKType } from "../../../google/protobuf/any";
-import * as _m0 from "protobufjs/minimal";
+import { BinaryReader, BinaryWriter } from "../../../binary";
 /** MsgRegisterAccount defines the payload for Msg/RegisterAccount */
 export interface MsgRegisterAccount {
     /** owner is the address of the interchain account owner. */
@@ -20,15 +20,15 @@ export interface MsgRegisterAccountProtoMsg {
 /** MsgRegisterAccount defines the payload for Msg/RegisterAccount */
 export interface MsgRegisterAccountAmino {
     /** owner is the address of the interchain account owner. */
-    owner: string;
+    owner?: string;
     /** connection_id is the connection id string (i.e. channel-5). */
-    connection_id: string;
+    connection_id?: string;
     /**
      * version is the application version string. For example, this could be an
      * ICS27 encoded metadata type or an ICS29 encoded metadata type with a nested
      * application version.
      */
-    version: string;
+    version?: string;
 }
 export interface MsgRegisterAccountAminoMsg {
     type: "/regen.intertx.v1.MsgRegisterAccount";
@@ -64,7 +64,7 @@ export interface MsgSubmitTx {
     /** connection_id is the id of the connection. */
     connectionId: string;
     /** msg is the bytes of the transaction msg to send. */
-    msg: Any;
+    msg?: Any;
 }
 export interface MsgSubmitTxProtoMsg {
     typeUrl: "/regen.intertx.v1.MsgSubmitTx";
@@ -73,9 +73,9 @@ export interface MsgSubmitTxProtoMsg {
 /** MsgSubmitTx defines the payload for Msg/SubmitTx */
 export interface MsgSubmitTxAmino {
     /** owner is the owner address of the interchain account. */
-    owner: string;
+    owner?: string;
     /** connection_id is the id of the connection. */
-    connection_id: string;
+    connection_id?: string;
     /** msg is the bytes of the transaction msg to send. */
     msg?: AnyAmino;
 }
@@ -87,7 +87,7 @@ export interface MsgSubmitTxAminoMsg {
 export interface MsgSubmitTxSDKType {
     owner: string;
     connection_id: string;
-    msg: AnySDKType;
+    msg?: AnySDKType;
 }
 /** MsgSubmitTxResponse defines the response for Msg/SubmitTx */
 export interface MsgSubmitTxResponse {
@@ -107,8 +107,9 @@ export interface MsgSubmitTxResponseAminoMsg {
 export interface MsgSubmitTxResponseSDKType {
 }
 export declare const MsgRegisterAccount: {
-    encode(message: MsgRegisterAccount, writer?: _m0.Writer): _m0.Writer;
-    decode(input: _m0.Reader | Uint8Array, length?: number): MsgRegisterAccount;
+    typeUrl: string;
+    encode(message: MsgRegisterAccount, writer?: BinaryWriter): BinaryWriter;
+    decode(input: BinaryReader | Uint8Array, length?: number): MsgRegisterAccount;
     fromJSON(object: any): MsgRegisterAccount;
     toJSON(message: MsgRegisterAccount): unknown;
     fromPartial(object: Partial<MsgRegisterAccount>): MsgRegisterAccount;
@@ -120,8 +121,9 @@ export declare const MsgRegisterAccount: {
     toProtoMsg(message: MsgRegisterAccount): MsgRegisterAccountProtoMsg;
 };
 export declare const MsgRegisterAccountResponse: {
-    encode(_: MsgRegisterAccountResponse, writer?: _m0.Writer): _m0.Writer;
-    decode(input: _m0.Reader | Uint8Array, length?: number): MsgRegisterAccountResponse;
+    typeUrl: string;
+    encode(_: MsgRegisterAccountResponse, writer?: BinaryWriter): BinaryWriter;
+    decode(input: BinaryReader | Uint8Array, length?: number): MsgRegisterAccountResponse;
     fromJSON(_: any): MsgRegisterAccountResponse;
     toJSON(_: MsgRegisterAccountResponse): unknown;
     fromPartial(_: Partial<MsgRegisterAccountResponse>): MsgRegisterAccountResponse;
@@ -133,8 +135,9 @@ export declare const MsgRegisterAccountResponse: {
     toProtoMsg(message: MsgRegisterAccountResponse): MsgRegisterAccountResponseProtoMsg;
 };
 export declare const MsgSubmitTx: {
-    encode(message: MsgSubmitTx, writer?: _m0.Writer): _m0.Writer;
-    decode(input: _m0.Reader | Uint8Array, length?: number): MsgSubmitTx;
+    typeUrl: string;
+    encode(message: MsgSubmitTx, writer?: BinaryWriter): BinaryWriter;
+    decode(input: BinaryReader | Uint8Array, length?: number): MsgSubmitTx;
     fromJSON(object: any): MsgSubmitTx;
     toJSON(message: MsgSubmitTx): unknown;
     fromPartial(object: Partial<MsgSubmitTx>): MsgSubmitTx;
@@ -146,8 +149,9 @@ export declare const MsgSubmitTx: {
     toProtoMsg(message: MsgSubmitTx): MsgSubmitTxProtoMsg;
 };
 export declare const MsgSubmitTxResponse: {
-    encode(_: MsgSubmitTxResponse, writer?: _m0.Writer): _m0.Writer;
-    decode(input: _m0.Reader | Uint8Array, length?: number): MsgSubmitTxResponse;
+    typeUrl: string;
+    encode(_: MsgSubmitTxResponse, writer?: BinaryWriter): BinaryWriter;
+    decode(input: BinaryReader | Uint8Array, length?: number): MsgSubmitTxResponse;
     fromJSON(_: any): MsgSubmitTxResponse;
     toJSON(_: MsgSubmitTxResponse): unknown;
     fromPartial(_: Partial<MsgSubmitTxResponse>): MsgSubmitTxResponse;

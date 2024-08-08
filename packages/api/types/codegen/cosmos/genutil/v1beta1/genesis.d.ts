@@ -1,4 +1,4 @@
-import * as _m0 from "protobufjs/minimal";
+import { BinaryReader, BinaryWriter } from "../../../binary";
 /** GenesisState defines the raw genesis transaction in JSON. */
 export interface GenesisState {
     /** gen_txs defines the genesis transactions. */
@@ -11,7 +11,7 @@ export interface GenesisStateProtoMsg {
 /** GenesisState defines the raw genesis transaction in JSON. */
 export interface GenesisStateAmino {
     /** gen_txs defines the genesis transactions. */
-    gen_txs: Uint8Array[];
+    gen_txs: string[];
 }
 export interface GenesisStateAminoMsg {
     type: "cosmos-sdk/GenesisState";
@@ -22,8 +22,9 @@ export interface GenesisStateSDKType {
     gen_txs: Uint8Array[];
 }
 export declare const GenesisState: {
-    encode(message: GenesisState, writer?: _m0.Writer): _m0.Writer;
-    decode(input: _m0.Reader | Uint8Array, length?: number): GenesisState;
+    typeUrl: string;
+    encode(message: GenesisState, writer?: BinaryWriter): BinaryWriter;
+    decode(input: BinaryReader | Uint8Array, length?: number): GenesisState;
     fromJSON(object: any): GenesisState;
     toJSON(message: GenesisState): unknown;
     fromPartial(object: Partial<GenesisState>): GenesisState;

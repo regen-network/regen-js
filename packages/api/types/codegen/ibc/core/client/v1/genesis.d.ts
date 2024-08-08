@@ -1,6 +1,5 @@
 import { IdentifiedClientState, IdentifiedClientStateAmino, IdentifiedClientStateSDKType, ClientConsensusStates, ClientConsensusStatesAmino, ClientConsensusStatesSDKType, Params, ParamsAmino, ParamsSDKType } from "./client";
-import { Long } from "../../../../helpers";
-import * as _m0 from "protobufjs/minimal";
+import { BinaryReader, BinaryWriter } from "../../../../binary";
 /** GenesisState defines the ibc client submodule's genesis state. */
 export interface GenesisState {
     /** client states with their corresponding identifiers */
@@ -13,7 +12,7 @@ export interface GenesisState {
     /** create localhost on initialization */
     createLocalhost: boolean;
     /** the sequence for the next generated client identifier */
-    nextClientSequence: Long;
+    nextClientSequence: bigint;
 }
 export interface GenesisStateProtoMsg {
     typeUrl: "/ibc.core.client.v1.GenesisState";
@@ -22,16 +21,16 @@ export interface GenesisStateProtoMsg {
 /** GenesisState defines the ibc client submodule's genesis state. */
 export interface GenesisStateAmino {
     /** client states with their corresponding identifiers */
-    clients: IdentifiedClientStateAmino[];
+    clients?: IdentifiedClientStateAmino[];
     /** consensus states from each client */
-    clients_consensus: ClientConsensusStatesAmino[];
+    clients_consensus?: ClientConsensusStatesAmino[];
     /** metadata from each client */
-    clients_metadata: IdentifiedGenesisMetadataAmino[];
+    clients_metadata?: IdentifiedGenesisMetadataAmino[];
     params?: ParamsAmino;
     /** create localhost on initialization */
-    create_localhost: boolean;
+    create_localhost?: boolean;
     /** the sequence for the next generated client identifier */
-    next_client_sequence: string;
+    next_client_sequence?: string;
 }
 export interface GenesisStateAminoMsg {
     type: "cosmos-sdk/GenesisState";
@@ -44,7 +43,7 @@ export interface GenesisStateSDKType {
     clients_metadata: IdentifiedGenesisMetadataSDKType[];
     params: ParamsSDKType;
     create_localhost: boolean;
-    next_client_sequence: Long;
+    next_client_sequence: bigint;
 }
 /**
  * GenesisMetadata defines the genesis type for metadata that clients may return
@@ -66,9 +65,9 @@ export interface GenesisMetadataProtoMsg {
  */
 export interface GenesisMetadataAmino {
     /** store key of metadata without clientID-prefix */
-    key: Uint8Array;
+    key?: string;
     /** metadata value */
-    value: Uint8Array;
+    value?: string;
 }
 export interface GenesisMetadataAminoMsg {
     type: "cosmos-sdk/GenesisMetadata";
@@ -99,8 +98,8 @@ export interface IdentifiedGenesisMetadataProtoMsg {
  * client id.
  */
 export interface IdentifiedGenesisMetadataAmino {
-    client_id: string;
-    client_metadata: GenesisMetadataAmino[];
+    client_id?: string;
+    client_metadata?: GenesisMetadataAmino[];
 }
 export interface IdentifiedGenesisMetadataAminoMsg {
     type: "cosmos-sdk/IdentifiedGenesisMetadata";
@@ -115,8 +114,9 @@ export interface IdentifiedGenesisMetadataSDKType {
     client_metadata: GenesisMetadataSDKType[];
 }
 export declare const GenesisState: {
-    encode(message: GenesisState, writer?: _m0.Writer): _m0.Writer;
-    decode(input: _m0.Reader | Uint8Array, length?: number): GenesisState;
+    typeUrl: string;
+    encode(message: GenesisState, writer?: BinaryWriter): BinaryWriter;
+    decode(input: BinaryReader | Uint8Array, length?: number): GenesisState;
     fromJSON(object: any): GenesisState;
     toJSON(message: GenesisState): unknown;
     fromPartial(object: Partial<GenesisState>): GenesisState;
@@ -129,8 +129,9 @@ export declare const GenesisState: {
     toProtoMsg(message: GenesisState): GenesisStateProtoMsg;
 };
 export declare const GenesisMetadata: {
-    encode(message: GenesisMetadata, writer?: _m0.Writer): _m0.Writer;
-    decode(input: _m0.Reader | Uint8Array, length?: number): GenesisMetadata;
+    typeUrl: string;
+    encode(message: GenesisMetadata, writer?: BinaryWriter): BinaryWriter;
+    decode(input: BinaryReader | Uint8Array, length?: number): GenesisMetadata;
     fromJSON(object: any): GenesisMetadata;
     toJSON(message: GenesisMetadata): unknown;
     fromPartial(object: Partial<GenesisMetadata>): GenesisMetadata;
@@ -143,8 +144,9 @@ export declare const GenesisMetadata: {
     toProtoMsg(message: GenesisMetadata): GenesisMetadataProtoMsg;
 };
 export declare const IdentifiedGenesisMetadata: {
-    encode(message: IdentifiedGenesisMetadata, writer?: _m0.Writer): _m0.Writer;
-    decode(input: _m0.Reader | Uint8Array, length?: number): IdentifiedGenesisMetadata;
+    typeUrl: string;
+    encode(message: IdentifiedGenesisMetadata, writer?: BinaryWriter): BinaryWriter;
+    decode(input: BinaryReader | Uint8Array, length?: number): IdentifiedGenesisMetadata;
     fromJSON(object: any): IdentifiedGenesisMetadata;
     toJSON(message: IdentifiedGenesisMetadata): unknown;
     fromPartial(object: Partial<IdentifiedGenesisMetadata>): IdentifiedGenesisMetadata;

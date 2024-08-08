@@ -1,5 +1,5 @@
 import { OriginTx, OriginTxAmino, OriginTxSDKType } from "./types";
-import * as _m0 from "protobufjs/minimal";
+import { BinaryReader, BinaryWriter } from "../../../binary";
 /** EventCreateClass is an event emitted when a credit class is created. */
 export interface EventCreateClass {
     /** class_id is the unique identifier of the credit class. */
@@ -12,7 +12,7 @@ export interface EventCreateClassProtoMsg {
 /** EventCreateClass is an event emitted when a credit class is created. */
 export interface EventCreateClassAmino {
     /** class_id is the unique identifier of the credit class. */
-    class_id: string;
+    class_id?: string;
 }
 export interface EventCreateClassAminoMsg {
     type: "/regen.ecocredit.v1.EventCreateClass";
@@ -34,7 +34,7 @@ export interface EventCreateProjectProtoMsg {
 /** EventCreateProject is an event emitted when a project is created. */
 export interface EventCreateProjectAmino {
     /** project_id is the unique identifier of the project. */
-    project_id: string;
+    project_id?: string;
 }
 export interface EventCreateProjectAminoMsg {
     type: "/regen.ecocredit.v1.EventCreateProject";
@@ -52,7 +52,7 @@ export interface EventCreateBatch {
      * origin_tx is the transaction from another chain or registry that triggered
      * the creation of the credit batch.
      */
-    originTx: OriginTx;
+    originTx?: OriginTx;
 }
 export interface EventCreateBatchProtoMsg {
     typeUrl: "/regen.ecocredit.v1.EventCreateBatch";
@@ -61,7 +61,7 @@ export interface EventCreateBatchProtoMsg {
 /** EventCreateBatch is an event emitted when a credit batch is created. */
 export interface EventCreateBatchAmino {
     /** batch_denom is the unique identifier of the credit batch. */
-    batch_denom: string;
+    batch_denom?: string;
     /**
      * origin_tx is the transaction from another chain or registry that triggered
      * the creation of the credit batch.
@@ -75,7 +75,7 @@ export interface EventCreateBatchAminoMsg {
 /** EventCreateBatch is an event emitted when a credit batch is created. */
 export interface EventCreateBatchSDKType {
     batch_denom: string;
-    origin_tx: OriginTxSDKType;
+    origin_tx?: OriginTxSDKType;
 }
 /**
  * EventMint is an event emitted when credits are minted either when creating a
@@ -105,11 +105,11 @@ export interface EventMintAmino {
      * batch_denom is the unique identifier of the credit batch within which the
      * credits were minted.
      */
-    batch_denom: string;
+    batch_denom?: string;
     /** tradable_amount is the amount of tradable credits minted. */
-    tradable_amount: string;
+    tradable_amount?: string;
     /** retired_amount is the amount of retired credits minted. */
-    retired_amount: string;
+    retired_amount?: string;
 }
 export interface EventMintAminoMsg {
     type: "/regen.ecocredit.v1.EventMint";
@@ -138,7 +138,7 @@ export interface EventMintBatchCredits {
      * origin_tx is the transaction from another chain or registry that triggered
      * the minting of credits within the credit batch.
      */
-    originTx: OriginTx;
+    originTx?: OriginTx;
 }
 export interface EventMintBatchCreditsProtoMsg {
     typeUrl: "/regen.ecocredit.v1.EventMintBatchCredits";
@@ -153,7 +153,7 @@ export interface EventMintBatchCreditsAmino {
      * batch_denom is the unique identifier of the credit batch within which the
      * credits were minted.
      */
-    batch_denom: string;
+    batch_denom?: string;
     /**
      * origin_tx is the transaction from another chain or registry that triggered
      * the minting of credits within the credit batch.
@@ -170,7 +170,7 @@ export interface EventMintBatchCreditsAminoMsg {
  */
 export interface EventMintBatchCreditsSDKType {
     batch_denom: string;
-    origin_tx: OriginTxSDKType;
+    origin_tx?: OriginTxSDKType;
 }
 /**
  * EventTransfer is an event emitted when credits are transferred from one
@@ -213,20 +213,20 @@ export interface EventTransferAmino {
      * case that the credits were transferred from a module, this will be the
      * module address (i.e. either the ecocredit module or basket submodule).
      */
-    sender: string;
+    sender?: string;
     /**
      * recipient is the recipient of the credits. In the case that the credits
      * were transferred to a base account, this will be the account address. In
      * the case that the credits were transferred to a module, this will be the
      * module address (i.e. either the ecocredit module or basket submodule).
      */
-    recipient: string;
+    recipient?: string;
     /** batch_denom is the unique identifier of the credit batch. */
-    batch_denom: string;
+    batch_denom?: string;
     /** tradable_amount is the decimal number of tradable credits received. */
-    tradable_amount: string;
+    tradable_amount?: string;
     /** retired_amount is the decimal number of retired credits received. */
-    retired_amount: string;
+    retired_amount?: string;
 }
 export interface EventTransferAminoMsg {
     type: "/regen.ecocredit.v1.EventTransfer";
@@ -297,14 +297,14 @@ export interface EventRetireAmino {
      * retired upon taking from a basket using basket.Msg/Take, or retired upon
      * purchase using marketplace.Msg/BuyDirect.
      */
-    owner: string;
+    owner?: string;
     /**
      * batch_denom is the unique identifier of the credit batch within which the
      * credits were retired.
      */
-    batch_denom: string;
+    batch_denom?: string;
     /** amount is the decimal number of credits that have been retired. */
-    amount: string;
+    amount?: string;
     /**
      * jurisdiction is the jurisdiction of the beneficiary or buyer of the retired
      * credits. It is a string of the form
@@ -312,14 +312,14 @@ export interface EventRetireAmino {
      * fields conforming to ISO 3166-2, and postal-code being up to 64
      * alphanumeric characters.
      */
-    jurisdiction: string;
+    jurisdiction?: string;
     /**
      * reason is any arbitrary string that specifies the reason for retiring
      * credits.
      *
      * Since Revision 2
      */
-    reason: string;
+    reason?: string;
 }
 export interface EventRetireAminoMsg {
     type: "/regen.ecocredit.v1.EventRetire";
@@ -366,16 +366,16 @@ export interface EventCancelProtoMsg {
  */
 export interface EventCancelAmino {
     /** owner is the address of the account that cancelled the credits. */
-    owner: string;
+    owner?: string;
     /**
      * batch_denom is the unique identifier of the credit batch within which the
      * credits were cancelled.
      */
-    batch_denom: string;
+    batch_denom?: string;
     /** amount is the decimal number of credits that have been cancelled. */
-    amount: string;
+    amount?: string;
     /** reason is the reason the credits were cancelled. */
-    reason: string;
+    reason?: string;
 }
 export interface EventCancelAminoMsg {
     type: "/regen.ecocredit.v1.EventCancel";
@@ -410,7 +410,7 @@ export interface EventUpdateClassAdminProtoMsg {
  */
 export interface EventUpdateClassAdminAmino {
     /** class_id is the unique identifier of the class that was updated. */
-    class_id: string;
+    class_id?: string;
 }
 export interface EventUpdateClassAdminAminoMsg {
     type: "/regen.ecocredit.v1.EventUpdateClassAdmin";
@@ -441,7 +441,7 @@ export interface EventUpdateClassIssuersProtoMsg {
  */
 export interface EventUpdateClassIssuersAmino {
     /** class_id is the unique identifier of the class that was updated. */
-    class_id: string;
+    class_id?: string;
 }
 export interface EventUpdateClassIssuersAminoMsg {
     type: "/regen.ecocredit.v1.EventUpdateClassIssuers";
@@ -472,7 +472,7 @@ export interface EventUpdateClassMetadataProtoMsg {
  */
 export interface EventUpdateClassMetadataAmino {
     /** class_id is the unique identifier of the class that was updated. */
-    class_id: string;
+    class_id?: string;
 }
 export interface EventUpdateClassMetadataAminoMsg {
     type: "/regen.ecocredit.v1.EventUpdateClassMetadata";
@@ -497,7 +497,7 @@ export interface EventUpdateProjectAdminProtoMsg {
 /** EventUpdateProjectAdmin is emitted when the project admin is changed. */
 export interface EventUpdateProjectAdminAmino {
     /** project_id is the unique identifier of the project that was updated. */
-    project_id: string;
+    project_id?: string;
 }
 export interface EventUpdateProjectAdminAminoMsg {
     type: "/regen.ecocredit.v1.EventUpdateProjectAdmin";
@@ -519,7 +519,7 @@ export interface EventUpdateProjectMetadataProtoMsg {
 /** EventUpdateProjectMetadata is emitted when the project metadata is changed. */
 export interface EventUpdateProjectMetadataAmino {
     /** project_id is the unique identifier of the project that was updated. */
-    project_id: string;
+    project_id?: string;
 }
 export interface EventUpdateProjectMetadataAminoMsg {
     type: "/regen.ecocredit.v1.EventUpdateProjectMetadata";
@@ -551,7 +551,7 @@ export interface EventUpdateBatchMetadataProtoMsg {
  */
 export interface EventUpdateBatchMetadataAmino {
     /** batch_denom is the unique identifier of the batch that was updated. */
-    batch_denom: string;
+    batch_denom?: string;
 }
 export interface EventUpdateBatchMetadataAminoMsg {
     type: "/regen.ecocredit.v1.EventUpdateBatchMetadata";
@@ -578,7 +578,7 @@ export interface EventSealBatchProtoMsg {
 /** EventSealBatch is emitted when a batch is sealed. */
 export interface EventSealBatchAmino {
     /** batch_denom is the denom of the batch that was sealed. */
-    batch_denom: string;
+    batch_denom?: string;
 }
 export interface EventSealBatchAminoMsg {
     type: "/regen.ecocredit.v1.EventSealBatch";
@@ -600,7 +600,7 @@ export interface EventAddCreditTypeProtoMsg {
 /** EventAddCreditType is emitted when governance approves a new credit type. */
 export interface EventAddCreditTypeAmino {
     /** abbreviation is the abbreviation of the credit type. */
-    abbreviation: string;
+    abbreviation?: string;
 }
 export interface EventAddCreditTypeAminoMsg {
     type: "/regen.ecocredit.v1.EventAddCreditType";
@@ -640,25 +640,25 @@ export interface EventBridgeProtoMsg {
 /** EventBridge is emitted when credits are bridged to another chain. */
 export interface EventBridgeAmino {
     /** target is the target chain. */
-    target: string;
+    target?: string;
     /** recipient is the recipient address. */
-    recipient: string;
+    recipient?: string;
     /** contract is the contract address. */
-    contract: string;
+    contract?: string;
     /** amount is the amount of credits. */
-    amount: string;
+    amount?: string;
     /**
      * owner is the owner address.
      *
      * Since Revision 1
      */
-    owner: string;
+    owner?: string;
     /**
      * batch_denom is the credit batch denom.
      *
      * Since Revision 3
      */
-    batch_denom: string;
+    batch_denom?: string;
 }
 export interface EventBridgeAminoMsg {
     type: "/regen.ecocredit.v1.EventBridge";
@@ -697,7 +697,7 @@ export interface EventBridgeReceive {
      *
      * Since Revision 3
      */
-    originTx: OriginTx;
+    originTx?: OriginTx;
 }
 export interface EventBridgeReceiveProtoMsg {
     typeUrl: "/regen.ecocredit.v1.EventBridgeReceive";
@@ -709,18 +709,18 @@ export interface EventBridgeReceiveAmino {
      * project_id is the unique identifier of the project that was either created
      * or the existing project within which the credit batch exists.
      */
-    project_id: string;
+    project_id?: string;
     /**
      * batch_denom is the unique identifier of the credit batch either created
      * or within which the credits were dynamically minted.
      */
-    batch_denom: string;
+    batch_denom?: string;
     /**
      * amount is the amount of credits.
      *
      * Since Revision 3
      */
-    amount: string;
+    amount?: string;
     /**
      * origin_tx is the transaction from another chain or registry that triggered
      * the minting of credits within the credit batch.
@@ -738,11 +738,12 @@ export interface EventBridgeReceiveSDKType {
     project_id: string;
     batch_denom: string;
     amount: string;
-    origin_tx: OriginTxSDKType;
+    origin_tx?: OriginTxSDKType;
 }
 export declare const EventCreateClass: {
-    encode(message: EventCreateClass, writer?: _m0.Writer): _m0.Writer;
-    decode(input: _m0.Reader | Uint8Array, length?: number): EventCreateClass;
+    typeUrl: string;
+    encode(message: EventCreateClass, writer?: BinaryWriter): BinaryWriter;
+    decode(input: BinaryReader | Uint8Array, length?: number): EventCreateClass;
     fromJSON(object: any): EventCreateClass;
     toJSON(message: EventCreateClass): unknown;
     fromPartial(object: Partial<EventCreateClass>): EventCreateClass;
@@ -754,8 +755,9 @@ export declare const EventCreateClass: {
     toProtoMsg(message: EventCreateClass): EventCreateClassProtoMsg;
 };
 export declare const EventCreateProject: {
-    encode(message: EventCreateProject, writer?: _m0.Writer): _m0.Writer;
-    decode(input: _m0.Reader | Uint8Array, length?: number): EventCreateProject;
+    typeUrl: string;
+    encode(message: EventCreateProject, writer?: BinaryWriter): BinaryWriter;
+    decode(input: BinaryReader | Uint8Array, length?: number): EventCreateProject;
     fromJSON(object: any): EventCreateProject;
     toJSON(message: EventCreateProject): unknown;
     fromPartial(object: Partial<EventCreateProject>): EventCreateProject;
@@ -767,8 +769,9 @@ export declare const EventCreateProject: {
     toProtoMsg(message: EventCreateProject): EventCreateProjectProtoMsg;
 };
 export declare const EventCreateBatch: {
-    encode(message: EventCreateBatch, writer?: _m0.Writer): _m0.Writer;
-    decode(input: _m0.Reader | Uint8Array, length?: number): EventCreateBatch;
+    typeUrl: string;
+    encode(message: EventCreateBatch, writer?: BinaryWriter): BinaryWriter;
+    decode(input: BinaryReader | Uint8Array, length?: number): EventCreateBatch;
     fromJSON(object: any): EventCreateBatch;
     toJSON(message: EventCreateBatch): unknown;
     fromPartial(object: Partial<EventCreateBatch>): EventCreateBatch;
@@ -780,8 +783,9 @@ export declare const EventCreateBatch: {
     toProtoMsg(message: EventCreateBatch): EventCreateBatchProtoMsg;
 };
 export declare const EventMint: {
-    encode(message: EventMint, writer?: _m0.Writer): _m0.Writer;
-    decode(input: _m0.Reader | Uint8Array, length?: number): EventMint;
+    typeUrl: string;
+    encode(message: EventMint, writer?: BinaryWriter): BinaryWriter;
+    decode(input: BinaryReader | Uint8Array, length?: number): EventMint;
     fromJSON(object: any): EventMint;
     toJSON(message: EventMint): unknown;
     fromPartial(object: Partial<EventMint>): EventMint;
@@ -793,8 +797,9 @@ export declare const EventMint: {
     toProtoMsg(message: EventMint): EventMintProtoMsg;
 };
 export declare const EventMintBatchCredits: {
-    encode(message: EventMintBatchCredits, writer?: _m0.Writer): _m0.Writer;
-    decode(input: _m0.Reader | Uint8Array, length?: number): EventMintBatchCredits;
+    typeUrl: string;
+    encode(message: EventMintBatchCredits, writer?: BinaryWriter): BinaryWriter;
+    decode(input: BinaryReader | Uint8Array, length?: number): EventMintBatchCredits;
     fromJSON(object: any): EventMintBatchCredits;
     toJSON(message: EventMintBatchCredits): unknown;
     fromPartial(object: Partial<EventMintBatchCredits>): EventMintBatchCredits;
@@ -806,8 +811,9 @@ export declare const EventMintBatchCredits: {
     toProtoMsg(message: EventMintBatchCredits): EventMintBatchCreditsProtoMsg;
 };
 export declare const EventTransfer: {
-    encode(message: EventTransfer, writer?: _m0.Writer): _m0.Writer;
-    decode(input: _m0.Reader | Uint8Array, length?: number): EventTransfer;
+    typeUrl: string;
+    encode(message: EventTransfer, writer?: BinaryWriter): BinaryWriter;
+    decode(input: BinaryReader | Uint8Array, length?: number): EventTransfer;
     fromJSON(object: any): EventTransfer;
     toJSON(message: EventTransfer): unknown;
     fromPartial(object: Partial<EventTransfer>): EventTransfer;
@@ -819,8 +825,9 @@ export declare const EventTransfer: {
     toProtoMsg(message: EventTransfer): EventTransferProtoMsg;
 };
 export declare const EventRetire: {
-    encode(message: EventRetire, writer?: _m0.Writer): _m0.Writer;
-    decode(input: _m0.Reader | Uint8Array, length?: number): EventRetire;
+    typeUrl: string;
+    encode(message: EventRetire, writer?: BinaryWriter): BinaryWriter;
+    decode(input: BinaryReader | Uint8Array, length?: number): EventRetire;
     fromJSON(object: any): EventRetire;
     toJSON(message: EventRetire): unknown;
     fromPartial(object: Partial<EventRetire>): EventRetire;
@@ -832,8 +839,9 @@ export declare const EventRetire: {
     toProtoMsg(message: EventRetire): EventRetireProtoMsg;
 };
 export declare const EventCancel: {
-    encode(message: EventCancel, writer?: _m0.Writer): _m0.Writer;
-    decode(input: _m0.Reader | Uint8Array, length?: number): EventCancel;
+    typeUrl: string;
+    encode(message: EventCancel, writer?: BinaryWriter): BinaryWriter;
+    decode(input: BinaryReader | Uint8Array, length?: number): EventCancel;
     fromJSON(object: any): EventCancel;
     toJSON(message: EventCancel): unknown;
     fromPartial(object: Partial<EventCancel>): EventCancel;
@@ -845,8 +853,9 @@ export declare const EventCancel: {
     toProtoMsg(message: EventCancel): EventCancelProtoMsg;
 };
 export declare const EventUpdateClassAdmin: {
-    encode(message: EventUpdateClassAdmin, writer?: _m0.Writer): _m0.Writer;
-    decode(input: _m0.Reader | Uint8Array, length?: number): EventUpdateClassAdmin;
+    typeUrl: string;
+    encode(message: EventUpdateClassAdmin, writer?: BinaryWriter): BinaryWriter;
+    decode(input: BinaryReader | Uint8Array, length?: number): EventUpdateClassAdmin;
     fromJSON(object: any): EventUpdateClassAdmin;
     toJSON(message: EventUpdateClassAdmin): unknown;
     fromPartial(object: Partial<EventUpdateClassAdmin>): EventUpdateClassAdmin;
@@ -858,8 +867,9 @@ export declare const EventUpdateClassAdmin: {
     toProtoMsg(message: EventUpdateClassAdmin): EventUpdateClassAdminProtoMsg;
 };
 export declare const EventUpdateClassIssuers: {
-    encode(message: EventUpdateClassIssuers, writer?: _m0.Writer): _m0.Writer;
-    decode(input: _m0.Reader | Uint8Array, length?: number): EventUpdateClassIssuers;
+    typeUrl: string;
+    encode(message: EventUpdateClassIssuers, writer?: BinaryWriter): BinaryWriter;
+    decode(input: BinaryReader | Uint8Array, length?: number): EventUpdateClassIssuers;
     fromJSON(object: any): EventUpdateClassIssuers;
     toJSON(message: EventUpdateClassIssuers): unknown;
     fromPartial(object: Partial<EventUpdateClassIssuers>): EventUpdateClassIssuers;
@@ -871,8 +881,9 @@ export declare const EventUpdateClassIssuers: {
     toProtoMsg(message: EventUpdateClassIssuers): EventUpdateClassIssuersProtoMsg;
 };
 export declare const EventUpdateClassMetadata: {
-    encode(message: EventUpdateClassMetadata, writer?: _m0.Writer): _m0.Writer;
-    decode(input: _m0.Reader | Uint8Array, length?: number): EventUpdateClassMetadata;
+    typeUrl: string;
+    encode(message: EventUpdateClassMetadata, writer?: BinaryWriter): BinaryWriter;
+    decode(input: BinaryReader | Uint8Array, length?: number): EventUpdateClassMetadata;
     fromJSON(object: any): EventUpdateClassMetadata;
     toJSON(message: EventUpdateClassMetadata): unknown;
     fromPartial(object: Partial<EventUpdateClassMetadata>): EventUpdateClassMetadata;
@@ -884,8 +895,9 @@ export declare const EventUpdateClassMetadata: {
     toProtoMsg(message: EventUpdateClassMetadata): EventUpdateClassMetadataProtoMsg;
 };
 export declare const EventUpdateProjectAdmin: {
-    encode(message: EventUpdateProjectAdmin, writer?: _m0.Writer): _m0.Writer;
-    decode(input: _m0.Reader | Uint8Array, length?: number): EventUpdateProjectAdmin;
+    typeUrl: string;
+    encode(message: EventUpdateProjectAdmin, writer?: BinaryWriter): BinaryWriter;
+    decode(input: BinaryReader | Uint8Array, length?: number): EventUpdateProjectAdmin;
     fromJSON(object: any): EventUpdateProjectAdmin;
     toJSON(message: EventUpdateProjectAdmin): unknown;
     fromPartial(object: Partial<EventUpdateProjectAdmin>): EventUpdateProjectAdmin;
@@ -897,8 +909,9 @@ export declare const EventUpdateProjectAdmin: {
     toProtoMsg(message: EventUpdateProjectAdmin): EventUpdateProjectAdminProtoMsg;
 };
 export declare const EventUpdateProjectMetadata: {
-    encode(message: EventUpdateProjectMetadata, writer?: _m0.Writer): _m0.Writer;
-    decode(input: _m0.Reader | Uint8Array, length?: number): EventUpdateProjectMetadata;
+    typeUrl: string;
+    encode(message: EventUpdateProjectMetadata, writer?: BinaryWriter): BinaryWriter;
+    decode(input: BinaryReader | Uint8Array, length?: number): EventUpdateProjectMetadata;
     fromJSON(object: any): EventUpdateProjectMetadata;
     toJSON(message: EventUpdateProjectMetadata): unknown;
     fromPartial(object: Partial<EventUpdateProjectMetadata>): EventUpdateProjectMetadata;
@@ -910,8 +923,9 @@ export declare const EventUpdateProjectMetadata: {
     toProtoMsg(message: EventUpdateProjectMetadata): EventUpdateProjectMetadataProtoMsg;
 };
 export declare const EventUpdateBatchMetadata: {
-    encode(message: EventUpdateBatchMetadata, writer?: _m0.Writer): _m0.Writer;
-    decode(input: _m0.Reader | Uint8Array, length?: number): EventUpdateBatchMetadata;
+    typeUrl: string;
+    encode(message: EventUpdateBatchMetadata, writer?: BinaryWriter): BinaryWriter;
+    decode(input: BinaryReader | Uint8Array, length?: number): EventUpdateBatchMetadata;
     fromJSON(object: any): EventUpdateBatchMetadata;
     toJSON(message: EventUpdateBatchMetadata): unknown;
     fromPartial(object: Partial<EventUpdateBatchMetadata>): EventUpdateBatchMetadata;
@@ -923,8 +937,9 @@ export declare const EventUpdateBatchMetadata: {
     toProtoMsg(message: EventUpdateBatchMetadata): EventUpdateBatchMetadataProtoMsg;
 };
 export declare const EventSealBatch: {
-    encode(message: EventSealBatch, writer?: _m0.Writer): _m0.Writer;
-    decode(input: _m0.Reader | Uint8Array, length?: number): EventSealBatch;
+    typeUrl: string;
+    encode(message: EventSealBatch, writer?: BinaryWriter): BinaryWriter;
+    decode(input: BinaryReader | Uint8Array, length?: number): EventSealBatch;
     fromJSON(object: any): EventSealBatch;
     toJSON(message: EventSealBatch): unknown;
     fromPartial(object: Partial<EventSealBatch>): EventSealBatch;
@@ -936,8 +951,9 @@ export declare const EventSealBatch: {
     toProtoMsg(message: EventSealBatch): EventSealBatchProtoMsg;
 };
 export declare const EventAddCreditType: {
-    encode(message: EventAddCreditType, writer?: _m0.Writer): _m0.Writer;
-    decode(input: _m0.Reader | Uint8Array, length?: number): EventAddCreditType;
+    typeUrl: string;
+    encode(message: EventAddCreditType, writer?: BinaryWriter): BinaryWriter;
+    decode(input: BinaryReader | Uint8Array, length?: number): EventAddCreditType;
     fromJSON(object: any): EventAddCreditType;
     toJSON(message: EventAddCreditType): unknown;
     fromPartial(object: Partial<EventAddCreditType>): EventAddCreditType;
@@ -949,8 +965,9 @@ export declare const EventAddCreditType: {
     toProtoMsg(message: EventAddCreditType): EventAddCreditTypeProtoMsg;
 };
 export declare const EventBridge: {
-    encode(message: EventBridge, writer?: _m0.Writer): _m0.Writer;
-    decode(input: _m0.Reader | Uint8Array, length?: number): EventBridge;
+    typeUrl: string;
+    encode(message: EventBridge, writer?: BinaryWriter): BinaryWriter;
+    decode(input: BinaryReader | Uint8Array, length?: number): EventBridge;
     fromJSON(object: any): EventBridge;
     toJSON(message: EventBridge): unknown;
     fromPartial(object: Partial<EventBridge>): EventBridge;
@@ -962,8 +979,9 @@ export declare const EventBridge: {
     toProtoMsg(message: EventBridge): EventBridgeProtoMsg;
 };
 export declare const EventBridgeReceive: {
-    encode(message: EventBridgeReceive, writer?: _m0.Writer): _m0.Writer;
-    decode(input: _m0.Reader | Uint8Array, length?: number): EventBridgeReceive;
+    typeUrl: string;
+    encode(message: EventBridgeReceive, writer?: BinaryWriter): BinaryWriter;
+    decode(input: BinaryReader | Uint8Array, length?: number): EventBridgeReceive;
     fromJSON(object: any): EventBridgeReceive;
     toJSON(message: EventBridgeReceive): unknown;
     fromPartial(object: Partial<EventBridgeReceive>): EventBridgeReceive;

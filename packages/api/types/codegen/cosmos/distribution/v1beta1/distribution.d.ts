@@ -1,6 +1,5 @@
 import { DecCoin, DecCoinAmino, DecCoinSDKType, Coin, CoinAmino, CoinSDKType } from "../../base/v1beta1/coin";
-import { Long } from "../../../helpers";
-import * as _m0 from "protobufjs/minimal";
+import { BinaryReader, BinaryWriter } from "../../../binary";
 /** Params defines the set of params for the distribution module. */
 export interface Params {
     communityTax: string;
@@ -14,10 +13,10 @@ export interface ParamsProtoMsg {
 }
 /** Params defines the set of params for the distribution module. */
 export interface ParamsAmino {
-    community_tax: string;
-    base_proposer_reward: string;
-    bonus_proposer_reward: string;
-    withdraw_addr_enabled: boolean;
+    community_tax?: string;
+    base_proposer_reward?: string;
+    bonus_proposer_reward?: string;
+    withdraw_addr_enabled?: boolean;
 }
 export interface ParamsAminoMsg {
     type: "cosmos-sdk/Params";
@@ -67,8 +66,8 @@ export interface ValidatorHistoricalRewardsProtoMsg {
  *  + one per validator for the zeroeth period, set on initialization
  */
 export interface ValidatorHistoricalRewardsAmino {
-    cumulative_reward_ratio: DecCoinAmino[];
-    reference_count: number;
+    cumulative_reward_ratio?: DecCoinAmino[];
+    reference_count?: number;
 }
 export interface ValidatorHistoricalRewardsAminoMsg {
     type: "cosmos-sdk/ValidatorHistoricalRewards";
@@ -99,7 +98,7 @@ export interface ValidatorHistoricalRewardsSDKType {
  */
 export interface ValidatorCurrentRewards {
     rewards: DecCoin[];
-    period: Long;
+    period: bigint;
 }
 export interface ValidatorCurrentRewardsProtoMsg {
     typeUrl: "/cosmos.distribution.v1beta1.ValidatorCurrentRewards";
@@ -111,8 +110,8 @@ export interface ValidatorCurrentRewardsProtoMsg {
  * each block as long as the validator's tokens remain constant.
  */
 export interface ValidatorCurrentRewardsAmino {
-    rewards: DecCoinAmino[];
-    period: string;
+    rewards?: DecCoinAmino[];
+    period?: string;
 }
 export interface ValidatorCurrentRewardsAminoMsg {
     type: "cosmos-sdk/ValidatorCurrentRewards";
@@ -125,7 +124,7 @@ export interface ValidatorCurrentRewardsAminoMsg {
  */
 export interface ValidatorCurrentRewardsSDKType {
     rewards: DecCoinSDKType[];
-    period: Long;
+    period: bigint;
 }
 /**
  * ValidatorAccumulatedCommission represents accumulated commission
@@ -143,7 +142,7 @@ export interface ValidatorAccumulatedCommissionProtoMsg {
  * for a validator kept as a running counter, can be withdrawn at any time.
  */
 export interface ValidatorAccumulatedCommissionAmino {
-    commission: DecCoinAmino[];
+    commission?: DecCoinAmino[];
 }
 export interface ValidatorAccumulatedCommissionAminoMsg {
     type: "cosmos-sdk/ValidatorAccumulatedCommission";
@@ -172,7 +171,7 @@ export interface ValidatorOutstandingRewardsProtoMsg {
  * for a validator inexpensive to track, allows simple sanity checks.
  */
 export interface ValidatorOutstandingRewardsAmino {
-    rewards: DecCoinAmino[];
+    rewards?: DecCoinAmino[];
 }
 export interface ValidatorOutstandingRewardsAminoMsg {
     type: "cosmos-sdk/ValidatorOutstandingRewards";
@@ -192,7 +191,7 @@ export interface ValidatorOutstandingRewardsSDKType {
  * for delegations which are withdrawn after a slash has occurred.
  */
 export interface ValidatorSlashEvent {
-    validatorPeriod: Long;
+    validatorPeriod: bigint;
     fraction: string;
 }
 export interface ValidatorSlashEventProtoMsg {
@@ -206,8 +205,8 @@ export interface ValidatorSlashEventProtoMsg {
  * for delegations which are withdrawn after a slash has occurred.
  */
 export interface ValidatorSlashEventAmino {
-    validator_period: string;
-    fraction: string;
+    validator_period?: string;
+    fraction?: string;
 }
 export interface ValidatorSlashEventAminoMsg {
     type: "cosmos-sdk/ValidatorSlashEvent";
@@ -220,7 +219,7 @@ export interface ValidatorSlashEventAminoMsg {
  * for delegations which are withdrawn after a slash has occurred.
  */
 export interface ValidatorSlashEventSDKType {
-    validator_period: Long;
+    validator_period: bigint;
     fraction: string;
 }
 /** ValidatorSlashEvents is a collection of ValidatorSlashEvent messages. */
@@ -233,7 +232,7 @@ export interface ValidatorSlashEventsProtoMsg {
 }
 /** ValidatorSlashEvents is a collection of ValidatorSlashEvent messages. */
 export interface ValidatorSlashEventsAmino {
-    validator_slash_events: ValidatorSlashEventAmino[];
+    validator_slash_events?: ValidatorSlashEventAmino[];
 }
 export interface ValidatorSlashEventsAminoMsg {
     type: "cosmos-sdk/ValidatorSlashEvents";
@@ -253,7 +252,7 @@ export interface FeePoolProtoMsg {
 }
 /** FeePool is the global fee pool for distribution. */
 export interface FeePoolAmino {
-    community_pool: DecCoinAmino[];
+    community_pool?: DecCoinAmino[];
 }
 export interface FeePoolAminoMsg {
     type: "cosmos-sdk/FeePool";
@@ -269,7 +268,7 @@ export interface FeePoolSDKType {
  * recipient account.
  */
 export interface CommunityPoolSpendProposal {
-    $typeUrl?: string;
+    $typeUrl?: "/cosmos.distribution.v1beta1.CommunityPoolSpendProposal";
     title: string;
     description: string;
     recipient: string;
@@ -285,10 +284,10 @@ export interface CommunityPoolSpendProposalProtoMsg {
  * recipient account.
  */
 export interface CommunityPoolSpendProposalAmino {
-    title: string;
-    description: string;
-    recipient: string;
-    amount: CoinAmino[];
+    title?: string;
+    description?: string;
+    recipient?: string;
+    amount?: CoinAmino[];
 }
 export interface CommunityPoolSpendProposalAminoMsg {
     type: "cosmos-sdk/CommunityPoolSpendProposal";
@@ -300,7 +299,7 @@ export interface CommunityPoolSpendProposalAminoMsg {
  * recipient account.
  */
 export interface CommunityPoolSpendProposalSDKType {
-    $typeUrl?: string;
+    $typeUrl?: "/cosmos.distribution.v1beta1.CommunityPoolSpendProposal";
     title: string;
     description: string;
     recipient: string;
@@ -315,9 +314,9 @@ export interface CommunityPoolSpendProposalSDKType {
  * thus sdk.Dec is used.
  */
 export interface DelegatorStartingInfo {
-    previousPeriod: Long;
+    previousPeriod: bigint;
     stake: string;
-    height: Long;
+    height: bigint;
 }
 export interface DelegatorStartingInfoProtoMsg {
     typeUrl: "/cosmos.distribution.v1beta1.DelegatorStartingInfo";
@@ -332,8 +331,8 @@ export interface DelegatorStartingInfoProtoMsg {
  * thus sdk.Dec is used.
  */
 export interface DelegatorStartingInfoAmino {
-    previous_period: string;
-    stake: string;
+    previous_period?: string;
+    stake?: string;
     height: string;
 }
 export interface DelegatorStartingInfoAminoMsg {
@@ -349,9 +348,9 @@ export interface DelegatorStartingInfoAminoMsg {
  * thus sdk.Dec is used.
  */
 export interface DelegatorStartingInfoSDKType {
-    previous_period: Long;
+    previous_period: bigint;
     stake: string;
-    height: Long;
+    height: bigint;
 }
 /**
  * DelegationDelegatorReward represents the properties
@@ -370,8 +369,8 @@ export interface DelegationDelegatorRewardProtoMsg {
  * of a delegator's delegation reward.
  */
 export interface DelegationDelegatorRewardAmino {
-    validator_address: string;
-    reward: DecCoinAmino[];
+    validator_address?: string;
+    reward?: DecCoinAmino[];
 }
 export interface DelegationDelegatorRewardAminoMsg {
     type: "cosmos-sdk/DelegationDelegatorReward";
@@ -390,7 +389,7 @@ export interface DelegationDelegatorRewardSDKType {
  * with a deposit
  */
 export interface CommunityPoolSpendProposalWithDeposit {
-    $typeUrl?: string;
+    $typeUrl?: "/cosmos.distribution.v1beta1.CommunityPoolSpendProposalWithDeposit";
     title: string;
     description: string;
     recipient: string;
@@ -406,11 +405,11 @@ export interface CommunityPoolSpendProposalWithDepositProtoMsg {
  * with a deposit
  */
 export interface CommunityPoolSpendProposalWithDepositAmino {
-    title: string;
-    description: string;
-    recipient: string;
-    amount: string;
-    deposit: string;
+    title?: string;
+    description?: string;
+    recipient?: string;
+    amount?: string;
+    deposit?: string;
 }
 export interface CommunityPoolSpendProposalWithDepositAminoMsg {
     type: "cosmos-sdk/CommunityPoolSpendProposalWithDeposit";
@@ -421,7 +420,7 @@ export interface CommunityPoolSpendProposalWithDepositAminoMsg {
  * with a deposit
  */
 export interface CommunityPoolSpendProposalWithDepositSDKType {
-    $typeUrl?: string;
+    $typeUrl?: "/cosmos.distribution.v1beta1.CommunityPoolSpendProposalWithDeposit";
     title: string;
     description: string;
     recipient: string;
@@ -429,8 +428,9 @@ export interface CommunityPoolSpendProposalWithDepositSDKType {
     deposit: string;
 }
 export declare const Params: {
-    encode(message: Params, writer?: _m0.Writer): _m0.Writer;
-    decode(input: _m0.Reader | Uint8Array, length?: number): Params;
+    typeUrl: string;
+    encode(message: Params, writer?: BinaryWriter): BinaryWriter;
+    decode(input: BinaryReader | Uint8Array, length?: number): Params;
     fromJSON(object: any): Params;
     toJSON(message: Params): unknown;
     fromPartial(object: Partial<Params>): Params;
@@ -443,8 +443,9 @@ export declare const Params: {
     toProtoMsg(message: Params): ParamsProtoMsg;
 };
 export declare const ValidatorHistoricalRewards: {
-    encode(message: ValidatorHistoricalRewards, writer?: _m0.Writer): _m0.Writer;
-    decode(input: _m0.Reader | Uint8Array, length?: number): ValidatorHistoricalRewards;
+    typeUrl: string;
+    encode(message: ValidatorHistoricalRewards, writer?: BinaryWriter): BinaryWriter;
+    decode(input: BinaryReader | Uint8Array, length?: number): ValidatorHistoricalRewards;
     fromJSON(object: any): ValidatorHistoricalRewards;
     toJSON(message: ValidatorHistoricalRewards): unknown;
     fromPartial(object: Partial<ValidatorHistoricalRewards>): ValidatorHistoricalRewards;
@@ -457,8 +458,9 @@ export declare const ValidatorHistoricalRewards: {
     toProtoMsg(message: ValidatorHistoricalRewards): ValidatorHistoricalRewardsProtoMsg;
 };
 export declare const ValidatorCurrentRewards: {
-    encode(message: ValidatorCurrentRewards, writer?: _m0.Writer): _m0.Writer;
-    decode(input: _m0.Reader | Uint8Array, length?: number): ValidatorCurrentRewards;
+    typeUrl: string;
+    encode(message: ValidatorCurrentRewards, writer?: BinaryWriter): BinaryWriter;
+    decode(input: BinaryReader | Uint8Array, length?: number): ValidatorCurrentRewards;
     fromJSON(object: any): ValidatorCurrentRewards;
     toJSON(message: ValidatorCurrentRewards): unknown;
     fromPartial(object: Partial<ValidatorCurrentRewards>): ValidatorCurrentRewards;
@@ -471,8 +473,9 @@ export declare const ValidatorCurrentRewards: {
     toProtoMsg(message: ValidatorCurrentRewards): ValidatorCurrentRewardsProtoMsg;
 };
 export declare const ValidatorAccumulatedCommission: {
-    encode(message: ValidatorAccumulatedCommission, writer?: _m0.Writer): _m0.Writer;
-    decode(input: _m0.Reader | Uint8Array, length?: number): ValidatorAccumulatedCommission;
+    typeUrl: string;
+    encode(message: ValidatorAccumulatedCommission, writer?: BinaryWriter): BinaryWriter;
+    decode(input: BinaryReader | Uint8Array, length?: number): ValidatorAccumulatedCommission;
     fromJSON(object: any): ValidatorAccumulatedCommission;
     toJSON(message: ValidatorAccumulatedCommission): unknown;
     fromPartial(object: Partial<ValidatorAccumulatedCommission>): ValidatorAccumulatedCommission;
@@ -485,8 +488,9 @@ export declare const ValidatorAccumulatedCommission: {
     toProtoMsg(message: ValidatorAccumulatedCommission): ValidatorAccumulatedCommissionProtoMsg;
 };
 export declare const ValidatorOutstandingRewards: {
-    encode(message: ValidatorOutstandingRewards, writer?: _m0.Writer): _m0.Writer;
-    decode(input: _m0.Reader | Uint8Array, length?: number): ValidatorOutstandingRewards;
+    typeUrl: string;
+    encode(message: ValidatorOutstandingRewards, writer?: BinaryWriter): BinaryWriter;
+    decode(input: BinaryReader | Uint8Array, length?: number): ValidatorOutstandingRewards;
     fromJSON(object: any): ValidatorOutstandingRewards;
     toJSON(message: ValidatorOutstandingRewards): unknown;
     fromPartial(object: Partial<ValidatorOutstandingRewards>): ValidatorOutstandingRewards;
@@ -499,8 +503,9 @@ export declare const ValidatorOutstandingRewards: {
     toProtoMsg(message: ValidatorOutstandingRewards): ValidatorOutstandingRewardsProtoMsg;
 };
 export declare const ValidatorSlashEvent: {
-    encode(message: ValidatorSlashEvent, writer?: _m0.Writer): _m0.Writer;
-    decode(input: _m0.Reader | Uint8Array, length?: number): ValidatorSlashEvent;
+    typeUrl: string;
+    encode(message: ValidatorSlashEvent, writer?: BinaryWriter): BinaryWriter;
+    decode(input: BinaryReader | Uint8Array, length?: number): ValidatorSlashEvent;
     fromJSON(object: any): ValidatorSlashEvent;
     toJSON(message: ValidatorSlashEvent): unknown;
     fromPartial(object: Partial<ValidatorSlashEvent>): ValidatorSlashEvent;
@@ -513,8 +518,9 @@ export declare const ValidatorSlashEvent: {
     toProtoMsg(message: ValidatorSlashEvent): ValidatorSlashEventProtoMsg;
 };
 export declare const ValidatorSlashEvents: {
-    encode(message: ValidatorSlashEvents, writer?: _m0.Writer): _m0.Writer;
-    decode(input: _m0.Reader | Uint8Array, length?: number): ValidatorSlashEvents;
+    typeUrl: string;
+    encode(message: ValidatorSlashEvents, writer?: BinaryWriter): BinaryWriter;
+    decode(input: BinaryReader | Uint8Array, length?: number): ValidatorSlashEvents;
     fromJSON(object: any): ValidatorSlashEvents;
     toJSON(message: ValidatorSlashEvents): unknown;
     fromPartial(object: Partial<ValidatorSlashEvents>): ValidatorSlashEvents;
@@ -527,8 +533,9 @@ export declare const ValidatorSlashEvents: {
     toProtoMsg(message: ValidatorSlashEvents): ValidatorSlashEventsProtoMsg;
 };
 export declare const FeePool: {
-    encode(message: FeePool, writer?: _m0.Writer): _m0.Writer;
-    decode(input: _m0.Reader | Uint8Array, length?: number): FeePool;
+    typeUrl: string;
+    encode(message: FeePool, writer?: BinaryWriter): BinaryWriter;
+    decode(input: BinaryReader | Uint8Array, length?: number): FeePool;
     fromJSON(object: any): FeePool;
     toJSON(message: FeePool): unknown;
     fromPartial(object: Partial<FeePool>): FeePool;
@@ -541,8 +548,9 @@ export declare const FeePool: {
     toProtoMsg(message: FeePool): FeePoolProtoMsg;
 };
 export declare const CommunityPoolSpendProposal: {
-    encode(message: CommunityPoolSpendProposal, writer?: _m0.Writer): _m0.Writer;
-    decode(input: _m0.Reader | Uint8Array, length?: number): CommunityPoolSpendProposal;
+    typeUrl: string;
+    encode(message: CommunityPoolSpendProposal, writer?: BinaryWriter): BinaryWriter;
+    decode(input: BinaryReader | Uint8Array, length?: number): CommunityPoolSpendProposal;
     fromJSON(object: any): CommunityPoolSpendProposal;
     toJSON(message: CommunityPoolSpendProposal): unknown;
     fromPartial(object: Partial<CommunityPoolSpendProposal>): CommunityPoolSpendProposal;
@@ -555,8 +563,9 @@ export declare const CommunityPoolSpendProposal: {
     toProtoMsg(message: CommunityPoolSpendProposal): CommunityPoolSpendProposalProtoMsg;
 };
 export declare const DelegatorStartingInfo: {
-    encode(message: DelegatorStartingInfo, writer?: _m0.Writer): _m0.Writer;
-    decode(input: _m0.Reader | Uint8Array, length?: number): DelegatorStartingInfo;
+    typeUrl: string;
+    encode(message: DelegatorStartingInfo, writer?: BinaryWriter): BinaryWriter;
+    decode(input: BinaryReader | Uint8Array, length?: number): DelegatorStartingInfo;
     fromJSON(object: any): DelegatorStartingInfo;
     toJSON(message: DelegatorStartingInfo): unknown;
     fromPartial(object: Partial<DelegatorStartingInfo>): DelegatorStartingInfo;
@@ -569,8 +578,9 @@ export declare const DelegatorStartingInfo: {
     toProtoMsg(message: DelegatorStartingInfo): DelegatorStartingInfoProtoMsg;
 };
 export declare const DelegationDelegatorReward: {
-    encode(message: DelegationDelegatorReward, writer?: _m0.Writer): _m0.Writer;
-    decode(input: _m0.Reader | Uint8Array, length?: number): DelegationDelegatorReward;
+    typeUrl: string;
+    encode(message: DelegationDelegatorReward, writer?: BinaryWriter): BinaryWriter;
+    decode(input: BinaryReader | Uint8Array, length?: number): DelegationDelegatorReward;
     fromJSON(object: any): DelegationDelegatorReward;
     toJSON(message: DelegationDelegatorReward): unknown;
     fromPartial(object: Partial<DelegationDelegatorReward>): DelegationDelegatorReward;
@@ -583,8 +593,9 @@ export declare const DelegationDelegatorReward: {
     toProtoMsg(message: DelegationDelegatorReward): DelegationDelegatorRewardProtoMsg;
 };
 export declare const CommunityPoolSpendProposalWithDeposit: {
-    encode(message: CommunityPoolSpendProposalWithDeposit, writer?: _m0.Writer): _m0.Writer;
-    decode(input: _m0.Reader | Uint8Array, length?: number): CommunityPoolSpendProposalWithDeposit;
+    typeUrl: string;
+    encode(message: CommunityPoolSpendProposalWithDeposit, writer?: BinaryWriter): BinaryWriter;
+    decode(input: BinaryReader | Uint8Array, length?: number): CommunityPoolSpendProposalWithDeposit;
     fromJSON(object: any): CommunityPoolSpendProposalWithDeposit;
     toJSON(message: CommunityPoolSpendProposalWithDeposit): unknown;
     fromPartial(object: Partial<CommunityPoolSpendProposalWithDeposit>): CommunityPoolSpendProposalWithDeposit;

@@ -1,12 +1,11 @@
-import { Long } from "../../helpers";
-import * as _m0 from "protobufjs/minimal";
+import { BinaryReader, BinaryWriter } from "../../binary";
 /**
  * App includes the protocol and software version for the application.
  * This information is included in ResponseInfo. The App.Protocol can be
  * updated in ResponseEndBlock.
  */
 export interface App {
-    protocol: Long;
+    protocol: bigint;
     software: string;
 }
 export interface AppProtoMsg {
@@ -19,8 +18,8 @@ export interface AppProtoMsg {
  * updated in ResponseEndBlock.
  */
 export interface AppAmino {
-    protocol: string;
-    software: string;
+    protocol?: string;
+    software?: string;
 }
 export interface AppAminoMsg {
     type: "/tendermint.version.App";
@@ -32,7 +31,7 @@ export interface AppAminoMsg {
  * updated in ResponseEndBlock.
  */
 export interface AppSDKType {
-    protocol: Long;
+    protocol: bigint;
     software: string;
 }
 /**
@@ -41,8 +40,8 @@ export interface AppSDKType {
  * state transition machine.
  */
 export interface Consensus {
-    block: Long;
-    app: Long;
+    block: bigint;
+    app: bigint;
 }
 export interface ConsensusProtoMsg {
     typeUrl: "/tendermint.version.Consensus";
@@ -54,8 +53,8 @@ export interface ConsensusProtoMsg {
  * state transition machine.
  */
 export interface ConsensusAmino {
-    block: string;
-    app: string;
+    block?: string;
+    app?: string;
 }
 export interface ConsensusAminoMsg {
     type: "/tendermint.version.Consensus";
@@ -67,12 +66,13 @@ export interface ConsensusAminoMsg {
  * state transition machine.
  */
 export interface ConsensusSDKType {
-    block: Long;
-    app: Long;
+    block: bigint;
+    app: bigint;
 }
 export declare const App: {
-    encode(message: App, writer?: _m0.Writer): _m0.Writer;
-    decode(input: _m0.Reader | Uint8Array, length?: number): App;
+    typeUrl: string;
+    encode(message: App, writer?: BinaryWriter): BinaryWriter;
+    decode(input: BinaryReader | Uint8Array, length?: number): App;
     fromJSON(object: any): App;
     toJSON(message: App): unknown;
     fromPartial(object: Partial<App>): App;
@@ -84,8 +84,9 @@ export declare const App: {
     toProtoMsg(message: App): AppProtoMsg;
 };
 export declare const Consensus: {
-    encode(message: Consensus, writer?: _m0.Writer): _m0.Writer;
-    decode(input: _m0.Reader | Uint8Array, length?: number): Consensus;
+    typeUrl: string;
+    encode(message: Consensus, writer?: BinaryWriter): BinaryWriter;
+    decode(input: BinaryReader | Uint8Array, length?: number): Consensus;
     fromJSON(object: any): Consensus;
     toJSON(message: Consensus): unknown;
     fromPartial(object: Partial<Consensus>): Consensus;

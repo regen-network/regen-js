@@ -1,8 +1,7 @@
-import { Long } from "../../helpers";
-import * as _m0 from "protobufjs/minimal";
+import { BinaryReader, BinaryWriter } from "../../binary";
 export interface Proof {
-    total: Long;
-    index: Long;
+    total: bigint;
+    index: bigint;
     leafHash: Uint8Array;
     aunts: Uint8Array[];
 }
@@ -11,18 +10,18 @@ export interface ProofProtoMsg {
     value: Uint8Array;
 }
 export interface ProofAmino {
-    total: string;
-    index: string;
-    leaf_hash: Uint8Array;
-    aunts: Uint8Array[];
+    total?: string;
+    index?: string;
+    leaf_hash?: string;
+    aunts?: string[];
 }
 export interface ProofAminoMsg {
     type: "/tendermint.crypto.Proof";
     value: ProofAmino;
 }
 export interface ProofSDKType {
-    total: Long;
-    index: Long;
+    total: bigint;
+    index: bigint;
     leaf_hash: Uint8Array;
     aunts: Uint8Array[];
 }
@@ -30,7 +29,7 @@ export interface ValueOp {
     /** Encoded in ProofOp.Key. */
     key: Uint8Array;
     /** To encode in ProofOp.Data */
-    proof: Proof;
+    proof?: Proof;
 }
 export interface ValueOpProtoMsg {
     typeUrl: "/tendermint.crypto.ValueOp";
@@ -38,7 +37,7 @@ export interface ValueOpProtoMsg {
 }
 export interface ValueOpAmino {
     /** Encoded in ProofOp.Key. */
-    key: Uint8Array;
+    key?: string;
     /** To encode in ProofOp.Data */
     proof?: ProofAmino;
 }
@@ -48,7 +47,7 @@ export interface ValueOpAminoMsg {
 }
 export interface ValueOpSDKType {
     key: Uint8Array;
-    proof: ProofSDKType;
+    proof?: ProofSDKType;
 }
 export interface DominoOp {
     key: string;
@@ -60,9 +59,9 @@ export interface DominoOpProtoMsg {
     value: Uint8Array;
 }
 export interface DominoOpAmino {
-    key: string;
-    input: string;
-    output: string;
+    key?: string;
+    input?: string;
+    output?: string;
 }
 export interface DominoOpAminoMsg {
     type: "/tendermint.crypto.DominoOp";
@@ -93,9 +92,9 @@ export interface ProofOpProtoMsg {
  * for example neighbouring node hash
  */
 export interface ProofOpAmino {
-    type: string;
-    key: Uint8Array;
-    data: Uint8Array;
+    type?: string;
+    key?: string;
+    data?: string;
 }
 export interface ProofOpAminoMsg {
     type: "/tendermint.crypto.ProofOp";
@@ -121,7 +120,7 @@ export interface ProofOpsProtoMsg {
 }
 /** ProofOps is Merkle proof defined by the list of ProofOps */
 export interface ProofOpsAmino {
-    ops: ProofOpAmino[];
+    ops?: ProofOpAmino[];
 }
 export interface ProofOpsAminoMsg {
     type: "/tendermint.crypto.ProofOps";
@@ -132,8 +131,9 @@ export interface ProofOpsSDKType {
     ops: ProofOpSDKType[];
 }
 export declare const Proof: {
-    encode(message: Proof, writer?: _m0.Writer): _m0.Writer;
-    decode(input: _m0.Reader | Uint8Array, length?: number): Proof;
+    typeUrl: string;
+    encode(message: Proof, writer?: BinaryWriter): BinaryWriter;
+    decode(input: BinaryReader | Uint8Array, length?: number): Proof;
     fromJSON(object: any): Proof;
     toJSON(message: Proof): unknown;
     fromPartial(object: Partial<Proof>): Proof;
@@ -145,8 +145,9 @@ export declare const Proof: {
     toProtoMsg(message: Proof): ProofProtoMsg;
 };
 export declare const ValueOp: {
-    encode(message: ValueOp, writer?: _m0.Writer): _m0.Writer;
-    decode(input: _m0.Reader | Uint8Array, length?: number): ValueOp;
+    typeUrl: string;
+    encode(message: ValueOp, writer?: BinaryWriter): BinaryWriter;
+    decode(input: BinaryReader | Uint8Array, length?: number): ValueOp;
     fromJSON(object: any): ValueOp;
     toJSON(message: ValueOp): unknown;
     fromPartial(object: Partial<ValueOp>): ValueOp;
@@ -158,8 +159,9 @@ export declare const ValueOp: {
     toProtoMsg(message: ValueOp): ValueOpProtoMsg;
 };
 export declare const DominoOp: {
-    encode(message: DominoOp, writer?: _m0.Writer): _m0.Writer;
-    decode(input: _m0.Reader | Uint8Array, length?: number): DominoOp;
+    typeUrl: string;
+    encode(message: DominoOp, writer?: BinaryWriter): BinaryWriter;
+    decode(input: BinaryReader | Uint8Array, length?: number): DominoOp;
     fromJSON(object: any): DominoOp;
     toJSON(message: DominoOp): unknown;
     fromPartial(object: Partial<DominoOp>): DominoOp;
@@ -171,8 +173,9 @@ export declare const DominoOp: {
     toProtoMsg(message: DominoOp): DominoOpProtoMsg;
 };
 export declare const ProofOp: {
-    encode(message: ProofOp, writer?: _m0.Writer): _m0.Writer;
-    decode(input: _m0.Reader | Uint8Array, length?: number): ProofOp;
+    typeUrl: string;
+    encode(message: ProofOp, writer?: BinaryWriter): BinaryWriter;
+    decode(input: BinaryReader | Uint8Array, length?: number): ProofOp;
     fromJSON(object: any): ProofOp;
     toJSON(message: ProofOp): unknown;
     fromPartial(object: Partial<ProofOp>): ProofOp;
@@ -184,8 +187,9 @@ export declare const ProofOp: {
     toProtoMsg(message: ProofOp): ProofOpProtoMsg;
 };
 export declare const ProofOps: {
-    encode(message: ProofOps, writer?: _m0.Writer): _m0.Writer;
-    decode(input: _m0.Reader | Uint8Array, length?: number): ProofOps;
+    typeUrl: string;
+    encode(message: ProofOps, writer?: BinaryWriter): BinaryWriter;
+    decode(input: BinaryReader | Uint8Array, length?: number): ProofOps;
     fromJSON(object: any): ProofOps;
     toJSON(message: ProofOps): unknown;
     fromPartial(object: Partial<ProofOps>): ProofOps;

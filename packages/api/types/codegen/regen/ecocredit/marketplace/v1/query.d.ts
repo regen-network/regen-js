@@ -1,12 +1,11 @@
 import { PageRequest, PageRequestAmino, PageRequestSDKType, PageResponse, PageResponseAmino, PageResponseSDKType } from "../../../../cosmos/base/query/v1beta1/pagination";
 import { AllowedDenom, AllowedDenomAmino, AllowedDenomSDKType } from "./state";
-import { Timestamp, TimestampAmino, TimestampSDKType } from "../../../../google/protobuf/timestamp";
-import { Long } from "../../../../helpers";
-import * as _m0 from "protobufjs/minimal";
+import { Timestamp, TimestampSDKType } from "../../../../google/protobuf/timestamp";
+import { BinaryReader, BinaryWriter } from "../../../../binary";
 /** QuerySellOrderRequest is the Query/SellOrder request type. */
 export interface QuerySellOrderRequest {
     /** sell_order_id is the id of the requested sell order. */
-    sellOrderId: Long;
+    sellOrderId: bigint;
 }
 export interface QuerySellOrderRequestProtoMsg {
     typeUrl: "/regen.ecocredit.marketplace.v1.QuerySellOrderRequest";
@@ -15,7 +14,7 @@ export interface QuerySellOrderRequestProtoMsg {
 /** QuerySellOrderRequest is the Query/SellOrder request type. */
 export interface QuerySellOrderRequestAmino {
     /** sell_order_id is the id of the requested sell order. */
-    sell_order_id: string;
+    sell_order_id?: string;
 }
 export interface QuerySellOrderRequestAminoMsg {
     type: "/regen.ecocredit.marketplace.v1.QuerySellOrderRequest";
@@ -23,12 +22,12 @@ export interface QuerySellOrderRequestAminoMsg {
 }
 /** QuerySellOrderRequest is the Query/SellOrder request type. */
 export interface QuerySellOrderRequestSDKType {
-    sell_order_id: Long;
+    sell_order_id: bigint;
 }
 /** QuerySellOrderResponse is the Query/SellOrder response type. */
 export interface QuerySellOrderResponse {
     /** sell_order contains all information related to a sell order. */
-    sellOrder: SellOrderInfo;
+    sellOrder?: SellOrderInfo;
 }
 export interface QuerySellOrderResponseProtoMsg {
     typeUrl: "/regen.ecocredit.marketplace.v1.QuerySellOrderResponse";
@@ -45,12 +44,12 @@ export interface QuerySellOrderResponseAminoMsg {
 }
 /** QuerySellOrderResponse is the Query/SellOrder response type. */
 export interface QuerySellOrderResponseSDKType {
-    sell_order: SellOrderInfoSDKType;
+    sell_order?: SellOrderInfoSDKType;
 }
 /** QuerySellOrdersRequest is the Query/SellOrders request type. */
 export interface QuerySellOrdersRequest {
     /** pagination defines an optional pagination for the request. */
-    pagination: PageRequest;
+    pagination?: PageRequest;
 }
 export interface QuerySellOrdersRequestProtoMsg {
     typeUrl: "/regen.ecocredit.marketplace.v1.QuerySellOrdersRequest";
@@ -67,14 +66,14 @@ export interface QuerySellOrdersRequestAminoMsg {
 }
 /** QuerySellOrdersRequest is the Query/SellOrders request type. */
 export interface QuerySellOrdersRequestSDKType {
-    pagination: PageRequestSDKType;
+    pagination?: PageRequestSDKType;
 }
 /** QuerySellOrdersResponse is the Query/SellOrders response type. */
 export interface QuerySellOrdersResponse {
     /** sell_orders is a list of sell orders. */
     sellOrders: SellOrderInfo[];
     /** pagination defines the pagination in the response. */
-    pagination: PageResponse;
+    pagination?: PageResponse;
 }
 export interface QuerySellOrdersResponseProtoMsg {
     typeUrl: "/regen.ecocredit.marketplace.v1.QuerySellOrdersResponse";
@@ -83,7 +82,7 @@ export interface QuerySellOrdersResponseProtoMsg {
 /** QuerySellOrdersResponse is the Query/SellOrders response type. */
 export interface QuerySellOrdersResponseAmino {
     /** sell_orders is a list of sell orders. */
-    sell_orders: SellOrderInfoAmino[];
+    sell_orders?: SellOrderInfoAmino[];
     /** pagination defines the pagination in the response. */
     pagination?: PageResponseAmino;
 }
@@ -94,7 +93,7 @@ export interface QuerySellOrdersResponseAminoMsg {
 /** QuerySellOrdersResponse is the Query/SellOrders response type. */
 export interface QuerySellOrdersResponseSDKType {
     sell_orders: SellOrderInfoSDKType[];
-    pagination: PageResponseSDKType;
+    pagination?: PageResponseSDKType;
 }
 /**
  * QuerySellOrdersByBatchRequest is the Query/SellOrdersByBatch
@@ -104,7 +103,7 @@ export interface QuerySellOrdersByBatchRequest {
     /** batch_denom is an ecocredit denom */
     batchDenom: string;
     /** pagination defines an optional pagination for the request. */
-    pagination: PageRequest;
+    pagination?: PageRequest;
 }
 export interface QuerySellOrdersByBatchRequestProtoMsg {
     typeUrl: "/regen.ecocredit.marketplace.v1.QuerySellOrdersByBatchRequest";
@@ -116,7 +115,7 @@ export interface QuerySellOrdersByBatchRequestProtoMsg {
  */
 export interface QuerySellOrdersByBatchRequestAmino {
     /** batch_denom is an ecocredit denom */
-    batch_denom: string;
+    batch_denom?: string;
     /** pagination defines an optional pagination for the request. */
     pagination?: PageRequestAmino;
 }
@@ -130,7 +129,7 @@ export interface QuerySellOrdersByBatchRequestAminoMsg {
  */
 export interface QuerySellOrdersByBatchRequestSDKType {
     batch_denom: string;
-    pagination: PageRequestSDKType;
+    pagination?: PageRequestSDKType;
 }
 /**
  * QuerySellOrdersByBatchResponse is the Query/SellOrdersByBatch
@@ -140,7 +139,7 @@ export interface QuerySellOrdersByBatchResponse {
     /** sell_orders is a list of sell orders. */
     sellOrders: SellOrderInfo[];
     /** pagination defines an optional pagination for the response. */
-    pagination: PageResponse;
+    pagination?: PageResponse;
 }
 export interface QuerySellOrdersByBatchResponseProtoMsg {
     typeUrl: "/regen.ecocredit.marketplace.v1.QuerySellOrdersByBatchResponse";
@@ -152,7 +151,7 @@ export interface QuerySellOrdersByBatchResponseProtoMsg {
  */
 export interface QuerySellOrdersByBatchResponseAmino {
     /** sell_orders is a list of sell orders. */
-    sell_orders: SellOrderInfoAmino[];
+    sell_orders?: SellOrderInfoAmino[];
     /** pagination defines an optional pagination for the response. */
     pagination?: PageResponseAmino;
 }
@@ -166,7 +165,7 @@ export interface QuerySellOrdersByBatchResponseAminoMsg {
  */
 export interface QuerySellOrdersByBatchResponseSDKType {
     sell_orders: SellOrderInfoSDKType[];
-    pagination: PageResponseSDKType;
+    pagination?: PageResponseSDKType;
 }
 /**
  * QuerySellOrdersBySellerRequest is the Query/SellOrdersBySeller request
@@ -176,7 +175,7 @@ export interface QuerySellOrdersBySellerRequest {
     /** seller is the address of the account that is selling credits. */
     seller: string;
     /** pagination defines an optional pagination for the request. */
-    pagination: PageRequest;
+    pagination?: PageRequest;
 }
 export interface QuerySellOrdersBySellerRequestProtoMsg {
     typeUrl: "/regen.ecocredit.marketplace.v1.QuerySellOrdersBySellerRequest";
@@ -188,7 +187,7 @@ export interface QuerySellOrdersBySellerRequestProtoMsg {
  */
 export interface QuerySellOrdersBySellerRequestAmino {
     /** seller is the address of the account that is selling credits. */
-    seller: string;
+    seller?: string;
     /** pagination defines an optional pagination for the request. */
     pagination?: PageRequestAmino;
 }
@@ -202,7 +201,7 @@ export interface QuerySellOrdersBySellerRequestAminoMsg {
  */
 export interface QuerySellOrdersBySellerRequestSDKType {
     seller: string;
-    pagination: PageRequestSDKType;
+    pagination?: PageRequestSDKType;
 }
 /**
  * QuerySellOrdersBySellerResponse is the Query/SellOrdersBySellerResponse
@@ -212,7 +211,7 @@ export interface QuerySellOrdersBySellerResponse {
     /** sell_orders is a list of sell orders. */
     sellOrders: SellOrderInfo[];
     /** pagination defines an optional pagination for the response. */
-    pagination: PageResponse;
+    pagination?: PageResponse;
 }
 export interface QuerySellOrdersBySellerResponseProtoMsg {
     typeUrl: "/regen.ecocredit.marketplace.v1.QuerySellOrdersBySellerResponse";
@@ -224,7 +223,7 @@ export interface QuerySellOrdersBySellerResponseProtoMsg {
  */
 export interface QuerySellOrdersBySellerResponseAmino {
     /** sell_orders is a list of sell orders. */
-    sell_orders: SellOrderInfoAmino[];
+    sell_orders?: SellOrderInfoAmino[];
     /** pagination defines an optional pagination for the response. */
     pagination?: PageResponseAmino;
 }
@@ -238,12 +237,12 @@ export interface QuerySellOrdersBySellerResponseAminoMsg {
  */
 export interface QuerySellOrdersBySellerResponseSDKType {
     sell_orders: SellOrderInfoSDKType[];
-    pagination: PageResponseSDKType;
+    pagination?: PageResponseSDKType;
 }
 /** QueryAllowedDenomsRequest is the Query/AllowedDenoms request type. */
 export interface QueryAllowedDenomsRequest {
     /** pagination defines an optional pagination for the request. */
-    pagination: PageRequest;
+    pagination?: PageRequest;
 }
 export interface QueryAllowedDenomsRequestProtoMsg {
     typeUrl: "/regen.ecocredit.marketplace.v1.QueryAllowedDenomsRequest";
@@ -260,7 +259,7 @@ export interface QueryAllowedDenomsRequestAminoMsg {
 }
 /** QueryAllowedDenomsRequest is the Query/AllowedDenoms request type. */
 export interface QueryAllowedDenomsRequestSDKType {
-    pagination: PageRequestSDKType;
+    pagination?: PageRequestSDKType;
 }
 /** QueryAllowedDenomsResponse is the Query/AllowedDenoms response type. */
 export interface QueryAllowedDenomsResponse {
@@ -270,7 +269,7 @@ export interface QueryAllowedDenomsResponse {
      */
     allowedDenoms: AllowedDenom[];
     /** pagination defines an optional pagination for the response. */
-    pagination: PageResponse;
+    pagination?: PageResponse;
 }
 export interface QueryAllowedDenomsResponseProtoMsg {
     typeUrl: "/regen.ecocredit.marketplace.v1.QueryAllowedDenomsResponse";
@@ -282,7 +281,7 @@ export interface QueryAllowedDenomsResponseAmino {
      * allowed_denoms is a list of coin denoms allowed to use in the ask price of
      * sell orders.
      */
-    allowed_denoms: AllowedDenomAmino[];
+    allowed_denoms?: AllowedDenomAmino[];
     /** pagination defines an optional pagination for the response. */
     pagination?: PageResponseAmino;
 }
@@ -293,12 +292,12 @@ export interface QueryAllowedDenomsResponseAminoMsg {
 /** QueryAllowedDenomsResponse is the Query/AllowedDenoms response type. */
 export interface QueryAllowedDenomsResponseSDKType {
     allowed_denoms: AllowedDenomSDKType[];
-    pagination: PageResponseSDKType;
+    pagination?: PageResponseSDKType;
 }
 /** SellOrderInfo is the human-readable sell order information. */
 export interface SellOrderInfo {
     /** id is the unique ID of sell order. */
-    id: Long;
+    id: bigint;
     /** seller is the address of the account that is selling credits. */
     seller: string;
     /** batch_denom is denom of the credit batch being sold. */
@@ -323,7 +322,7 @@ export interface SellOrderInfo {
      * expiration is an optional timestamp when the sell order expires. When the
      * expiration time is reached, the sell order is removed from state.
      */
-    expiration: Timestamp;
+    expiration?: Timestamp;
 }
 export interface SellOrderInfoProtoMsg {
     typeUrl: "/regen.ecocredit.marketplace.v1.SellOrderInfo";
@@ -332,32 +331,32 @@ export interface SellOrderInfoProtoMsg {
 /** SellOrderInfo is the human-readable sell order information. */
 export interface SellOrderInfoAmino {
     /** id is the unique ID of sell order. */
-    id: string;
+    id?: string;
     /** seller is the address of the account that is selling credits. */
-    seller: string;
+    seller?: string;
     /** batch_denom is denom of the credit batch being sold. */
-    batch_denom: string;
+    batch_denom?: string;
     /** quantity is the decimal quantity of credits being sold. */
-    quantity: string;
+    quantity?: string;
     /** ask_denom is the denom used in the ask price of the sell order. */
-    ask_denom: string;
+    ask_denom?: string;
     /**
      * ask_amount is the amount that the seller is asking for each credit unit of
      * the batch. Each credit unit of the batch will be sold for at least the
      * ask_amount.
      */
-    ask_amount: string;
+    ask_amount?: string;
     /**
      * disable_auto_retire disables auto-retirement of credits which allows a
      * buyer to disable auto-retirement in their buy order enabling them to
      * resell the credits to another buyer.
      */
-    disable_auto_retire: boolean;
+    disable_auto_retire?: boolean;
     /**
      * expiration is an optional timestamp when the sell order expires. When the
      * expiration time is reached, the sell order is removed from state.
      */
-    expiration?: TimestampAmino;
+    expiration?: string;
 }
 export interface SellOrderInfoAminoMsg {
     type: "/regen.ecocredit.marketplace.v1.SellOrderInfo";
@@ -365,18 +364,19 @@ export interface SellOrderInfoAminoMsg {
 }
 /** SellOrderInfo is the human-readable sell order information. */
 export interface SellOrderInfoSDKType {
-    id: Long;
+    id: bigint;
     seller: string;
     batch_denom: string;
     quantity: string;
     ask_denom: string;
     ask_amount: string;
     disable_auto_retire: boolean;
-    expiration: TimestampSDKType;
+    expiration?: TimestampSDKType;
 }
 export declare const QuerySellOrderRequest: {
-    encode(message: QuerySellOrderRequest, writer?: _m0.Writer): _m0.Writer;
-    decode(input: _m0.Reader | Uint8Array, length?: number): QuerySellOrderRequest;
+    typeUrl: string;
+    encode(message: QuerySellOrderRequest, writer?: BinaryWriter): BinaryWriter;
+    decode(input: BinaryReader | Uint8Array, length?: number): QuerySellOrderRequest;
     fromJSON(object: any): QuerySellOrderRequest;
     toJSON(message: QuerySellOrderRequest): unknown;
     fromPartial(object: Partial<QuerySellOrderRequest>): QuerySellOrderRequest;
@@ -388,8 +388,9 @@ export declare const QuerySellOrderRequest: {
     toProtoMsg(message: QuerySellOrderRequest): QuerySellOrderRequestProtoMsg;
 };
 export declare const QuerySellOrderResponse: {
-    encode(message: QuerySellOrderResponse, writer?: _m0.Writer): _m0.Writer;
-    decode(input: _m0.Reader | Uint8Array, length?: number): QuerySellOrderResponse;
+    typeUrl: string;
+    encode(message: QuerySellOrderResponse, writer?: BinaryWriter): BinaryWriter;
+    decode(input: BinaryReader | Uint8Array, length?: number): QuerySellOrderResponse;
     fromJSON(object: any): QuerySellOrderResponse;
     toJSON(message: QuerySellOrderResponse): unknown;
     fromPartial(object: Partial<QuerySellOrderResponse>): QuerySellOrderResponse;
@@ -401,8 +402,9 @@ export declare const QuerySellOrderResponse: {
     toProtoMsg(message: QuerySellOrderResponse): QuerySellOrderResponseProtoMsg;
 };
 export declare const QuerySellOrdersRequest: {
-    encode(message: QuerySellOrdersRequest, writer?: _m0.Writer): _m0.Writer;
-    decode(input: _m0.Reader | Uint8Array, length?: number): QuerySellOrdersRequest;
+    typeUrl: string;
+    encode(message: QuerySellOrdersRequest, writer?: BinaryWriter): BinaryWriter;
+    decode(input: BinaryReader | Uint8Array, length?: number): QuerySellOrdersRequest;
     fromJSON(object: any): QuerySellOrdersRequest;
     toJSON(message: QuerySellOrdersRequest): unknown;
     fromPartial(object: Partial<QuerySellOrdersRequest>): QuerySellOrdersRequest;
@@ -414,8 +416,9 @@ export declare const QuerySellOrdersRequest: {
     toProtoMsg(message: QuerySellOrdersRequest): QuerySellOrdersRequestProtoMsg;
 };
 export declare const QuerySellOrdersResponse: {
-    encode(message: QuerySellOrdersResponse, writer?: _m0.Writer): _m0.Writer;
-    decode(input: _m0.Reader | Uint8Array, length?: number): QuerySellOrdersResponse;
+    typeUrl: string;
+    encode(message: QuerySellOrdersResponse, writer?: BinaryWriter): BinaryWriter;
+    decode(input: BinaryReader | Uint8Array, length?: number): QuerySellOrdersResponse;
     fromJSON(object: any): QuerySellOrdersResponse;
     toJSON(message: QuerySellOrdersResponse): unknown;
     fromPartial(object: Partial<QuerySellOrdersResponse>): QuerySellOrdersResponse;
@@ -427,8 +430,9 @@ export declare const QuerySellOrdersResponse: {
     toProtoMsg(message: QuerySellOrdersResponse): QuerySellOrdersResponseProtoMsg;
 };
 export declare const QuerySellOrdersByBatchRequest: {
-    encode(message: QuerySellOrdersByBatchRequest, writer?: _m0.Writer): _m0.Writer;
-    decode(input: _m0.Reader | Uint8Array, length?: number): QuerySellOrdersByBatchRequest;
+    typeUrl: string;
+    encode(message: QuerySellOrdersByBatchRequest, writer?: BinaryWriter): BinaryWriter;
+    decode(input: BinaryReader | Uint8Array, length?: number): QuerySellOrdersByBatchRequest;
     fromJSON(object: any): QuerySellOrdersByBatchRequest;
     toJSON(message: QuerySellOrdersByBatchRequest): unknown;
     fromPartial(object: Partial<QuerySellOrdersByBatchRequest>): QuerySellOrdersByBatchRequest;
@@ -440,8 +444,9 @@ export declare const QuerySellOrdersByBatchRequest: {
     toProtoMsg(message: QuerySellOrdersByBatchRequest): QuerySellOrdersByBatchRequestProtoMsg;
 };
 export declare const QuerySellOrdersByBatchResponse: {
-    encode(message: QuerySellOrdersByBatchResponse, writer?: _m0.Writer): _m0.Writer;
-    decode(input: _m0.Reader | Uint8Array, length?: number): QuerySellOrdersByBatchResponse;
+    typeUrl: string;
+    encode(message: QuerySellOrdersByBatchResponse, writer?: BinaryWriter): BinaryWriter;
+    decode(input: BinaryReader | Uint8Array, length?: number): QuerySellOrdersByBatchResponse;
     fromJSON(object: any): QuerySellOrdersByBatchResponse;
     toJSON(message: QuerySellOrdersByBatchResponse): unknown;
     fromPartial(object: Partial<QuerySellOrdersByBatchResponse>): QuerySellOrdersByBatchResponse;
@@ -453,8 +458,9 @@ export declare const QuerySellOrdersByBatchResponse: {
     toProtoMsg(message: QuerySellOrdersByBatchResponse): QuerySellOrdersByBatchResponseProtoMsg;
 };
 export declare const QuerySellOrdersBySellerRequest: {
-    encode(message: QuerySellOrdersBySellerRequest, writer?: _m0.Writer): _m0.Writer;
-    decode(input: _m0.Reader | Uint8Array, length?: number): QuerySellOrdersBySellerRequest;
+    typeUrl: string;
+    encode(message: QuerySellOrdersBySellerRequest, writer?: BinaryWriter): BinaryWriter;
+    decode(input: BinaryReader | Uint8Array, length?: number): QuerySellOrdersBySellerRequest;
     fromJSON(object: any): QuerySellOrdersBySellerRequest;
     toJSON(message: QuerySellOrdersBySellerRequest): unknown;
     fromPartial(object: Partial<QuerySellOrdersBySellerRequest>): QuerySellOrdersBySellerRequest;
@@ -466,8 +472,9 @@ export declare const QuerySellOrdersBySellerRequest: {
     toProtoMsg(message: QuerySellOrdersBySellerRequest): QuerySellOrdersBySellerRequestProtoMsg;
 };
 export declare const QuerySellOrdersBySellerResponse: {
-    encode(message: QuerySellOrdersBySellerResponse, writer?: _m0.Writer): _m0.Writer;
-    decode(input: _m0.Reader | Uint8Array, length?: number): QuerySellOrdersBySellerResponse;
+    typeUrl: string;
+    encode(message: QuerySellOrdersBySellerResponse, writer?: BinaryWriter): BinaryWriter;
+    decode(input: BinaryReader | Uint8Array, length?: number): QuerySellOrdersBySellerResponse;
     fromJSON(object: any): QuerySellOrdersBySellerResponse;
     toJSON(message: QuerySellOrdersBySellerResponse): unknown;
     fromPartial(object: Partial<QuerySellOrdersBySellerResponse>): QuerySellOrdersBySellerResponse;
@@ -479,8 +486,9 @@ export declare const QuerySellOrdersBySellerResponse: {
     toProtoMsg(message: QuerySellOrdersBySellerResponse): QuerySellOrdersBySellerResponseProtoMsg;
 };
 export declare const QueryAllowedDenomsRequest: {
-    encode(message: QueryAllowedDenomsRequest, writer?: _m0.Writer): _m0.Writer;
-    decode(input: _m0.Reader | Uint8Array, length?: number): QueryAllowedDenomsRequest;
+    typeUrl: string;
+    encode(message: QueryAllowedDenomsRequest, writer?: BinaryWriter): BinaryWriter;
+    decode(input: BinaryReader | Uint8Array, length?: number): QueryAllowedDenomsRequest;
     fromJSON(object: any): QueryAllowedDenomsRequest;
     toJSON(message: QueryAllowedDenomsRequest): unknown;
     fromPartial(object: Partial<QueryAllowedDenomsRequest>): QueryAllowedDenomsRequest;
@@ -492,8 +500,9 @@ export declare const QueryAllowedDenomsRequest: {
     toProtoMsg(message: QueryAllowedDenomsRequest): QueryAllowedDenomsRequestProtoMsg;
 };
 export declare const QueryAllowedDenomsResponse: {
-    encode(message: QueryAllowedDenomsResponse, writer?: _m0.Writer): _m0.Writer;
-    decode(input: _m0.Reader | Uint8Array, length?: number): QueryAllowedDenomsResponse;
+    typeUrl: string;
+    encode(message: QueryAllowedDenomsResponse, writer?: BinaryWriter): BinaryWriter;
+    decode(input: BinaryReader | Uint8Array, length?: number): QueryAllowedDenomsResponse;
     fromJSON(object: any): QueryAllowedDenomsResponse;
     toJSON(message: QueryAllowedDenomsResponse): unknown;
     fromPartial(object: Partial<QueryAllowedDenomsResponse>): QueryAllowedDenomsResponse;
@@ -505,8 +514,9 @@ export declare const QueryAllowedDenomsResponse: {
     toProtoMsg(message: QueryAllowedDenomsResponse): QueryAllowedDenomsResponseProtoMsg;
 };
 export declare const SellOrderInfo: {
-    encode(message: SellOrderInfo, writer?: _m0.Writer): _m0.Writer;
-    decode(input: _m0.Reader | Uint8Array, length?: number): SellOrderInfo;
+    typeUrl: string;
+    encode(message: SellOrderInfo, writer?: BinaryWriter): BinaryWriter;
+    decode(input: BinaryReader | Uint8Array, length?: number): SellOrderInfo;
     fromJSON(object: any): SellOrderInfo;
     toJSON(message: SellOrderInfo): unknown;
     fromPartial(object: Partial<SellOrderInfo>): SellOrderInfo;

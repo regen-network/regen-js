@@ -1,11 +1,10 @@
-import { Long } from "../../../../helpers";
-import * as _m0 from "protobufjs/minimal";
+import { BinaryReader, BinaryWriter } from "../../../../binary";
 /**
  * CommitInfo defines commit information used by the multi-store when committing
  * a version/height.
  */
 export interface CommitInfo {
-    version: Long;
+    version: bigint;
     storeInfos: StoreInfo[];
 }
 export interface CommitInfoProtoMsg {
@@ -17,8 +16,8 @@ export interface CommitInfoProtoMsg {
  * a version/height.
  */
 export interface CommitInfoAmino {
-    version: string;
-    store_infos: StoreInfoAmino[];
+    version?: string;
+    store_infos?: StoreInfoAmino[];
 }
 export interface CommitInfoAminoMsg {
     type: "cosmos-sdk/CommitInfo";
@@ -29,7 +28,7 @@ export interface CommitInfoAminoMsg {
  * a version/height.
  */
 export interface CommitInfoSDKType {
-    version: Long;
+    version: bigint;
     store_infos: StoreInfoSDKType[];
 }
 /**
@@ -49,7 +48,7 @@ export interface StoreInfoProtoMsg {
  * between a store name and the commit ID.
  */
 export interface StoreInfoAmino {
-    name: string;
+    name?: string;
     commit_id?: CommitIDAmino;
 }
 export interface StoreInfoAminoMsg {
@@ -69,7 +68,7 @@ export interface StoreInfoSDKType {
  * committed.
  */
 export interface CommitID {
-    version: Long;
+    version: bigint;
     hash: Uint8Array;
 }
 export interface CommitIDProtoMsg {
@@ -81,8 +80,8 @@ export interface CommitIDProtoMsg {
  * committed.
  */
 export interface CommitIDAmino {
-    version: string;
-    hash: Uint8Array;
+    version?: string;
+    hash?: string;
 }
 export interface CommitIDAminoMsg {
     type: "cosmos-sdk/CommitID";
@@ -93,12 +92,13 @@ export interface CommitIDAminoMsg {
  * committed.
  */
 export interface CommitIDSDKType {
-    version: Long;
+    version: bigint;
     hash: Uint8Array;
 }
 export declare const CommitInfo: {
-    encode(message: CommitInfo, writer?: _m0.Writer): _m0.Writer;
-    decode(input: _m0.Reader | Uint8Array, length?: number): CommitInfo;
+    typeUrl: string;
+    encode(message: CommitInfo, writer?: BinaryWriter): BinaryWriter;
+    decode(input: BinaryReader | Uint8Array, length?: number): CommitInfo;
     fromJSON(object: any): CommitInfo;
     toJSON(message: CommitInfo): unknown;
     fromPartial(object: Partial<CommitInfo>): CommitInfo;
@@ -111,8 +111,9 @@ export declare const CommitInfo: {
     toProtoMsg(message: CommitInfo): CommitInfoProtoMsg;
 };
 export declare const StoreInfo: {
-    encode(message: StoreInfo, writer?: _m0.Writer): _m0.Writer;
-    decode(input: _m0.Reader | Uint8Array, length?: number): StoreInfo;
+    typeUrl: string;
+    encode(message: StoreInfo, writer?: BinaryWriter): BinaryWriter;
+    decode(input: BinaryReader | Uint8Array, length?: number): StoreInfo;
     fromJSON(object: any): StoreInfo;
     toJSON(message: StoreInfo): unknown;
     fromPartial(object: Partial<StoreInfo>): StoreInfo;
@@ -125,8 +126,9 @@ export declare const StoreInfo: {
     toProtoMsg(message: StoreInfo): StoreInfoProtoMsg;
 };
 export declare const CommitID: {
-    encode(message: CommitID, writer?: _m0.Writer): _m0.Writer;
-    decode(input: _m0.Reader | Uint8Array, length?: number): CommitID;
+    typeUrl: string;
+    encode(message: CommitID, writer?: BinaryWriter): BinaryWriter;
+    decode(input: BinaryReader | Uint8Array, length?: number): CommitID;
     fromJSON(object: any): CommitID;
     toJSON(message: CommitID): unknown;
     fromPartial(object: Partial<CommitID>): CommitID;

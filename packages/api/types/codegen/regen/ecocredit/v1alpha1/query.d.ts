@@ -1,6 +1,6 @@
 import { PageRequest, PageRequestAmino, PageRequestSDKType, PageResponse, PageResponseAmino, PageResponseSDKType } from "../../../cosmos/base/query/v1beta1/pagination";
 import { Params, ParamsAmino, ParamsSDKType, ClassInfo, ClassInfoAmino, ClassInfoSDKType, BatchInfo, BatchInfoAmino, BatchInfoSDKType, CreditType, CreditTypeAmino, CreditTypeSDKType } from "./types";
-import * as _m0 from "protobufjs/minimal";
+import { BinaryReader, BinaryWriter } from "../../../binary";
 /** QueryParamsRequest is the Query/Params request type. */
 export interface QueryParamsRequest {
 }
@@ -21,7 +21,7 @@ export interface QueryParamsRequestSDKType {
 /** QueryParamsResponse is the Query/Params response type. */
 export interface QueryParamsResponse {
     /** params defines the parameters of the ecocredit module. */
-    params: Params;
+    params?: Params;
 }
 export interface QueryParamsResponseProtoMsg {
     typeUrl: "/regen.ecocredit.v1alpha1.QueryParamsResponse";
@@ -38,12 +38,12 @@ export interface QueryParamsResponseAminoMsg {
 }
 /** QueryParamsResponse is the Query/Params response type. */
 export interface QueryParamsResponseSDKType {
-    params: ParamsSDKType;
+    params?: ParamsSDKType;
 }
 /** QueryClassesRequest is the Query/Classes request type. */
 export interface QueryClassesRequest {
     /** pagination defines an optional pagination for the request. */
-    pagination: PageRequest;
+    pagination?: PageRequest;
 }
 export interface QueryClassesRequestProtoMsg {
     typeUrl: "/regen.ecocredit.v1alpha1.QueryClassesRequest";
@@ -60,14 +60,14 @@ export interface QueryClassesRequestAminoMsg {
 }
 /** QueryClassesRequest is the Query/Classes request type. */
 export interface QueryClassesRequestSDKType {
-    pagination: PageRequestSDKType;
+    pagination?: PageRequestSDKType;
 }
 /** QueryClassesResponse is the Query/Classes response type. */
 export interface QueryClassesResponse {
     /** classes are the fetched credit classes. */
     classes: ClassInfo[];
     /** pagination defines the pagination in the response. */
-    pagination: PageResponse;
+    pagination?: PageResponse;
 }
 export interface QueryClassesResponseProtoMsg {
     typeUrl: "/regen.ecocredit.v1alpha1.QueryClassesResponse";
@@ -76,7 +76,7 @@ export interface QueryClassesResponseProtoMsg {
 /** QueryClassesResponse is the Query/Classes response type. */
 export interface QueryClassesResponseAmino {
     /** classes are the fetched credit classes. */
-    classes: ClassInfoAmino[];
+    classes?: ClassInfoAmino[];
     /** pagination defines the pagination in the response. */
     pagination?: PageResponseAmino;
 }
@@ -87,7 +87,7 @@ export interface QueryClassesResponseAminoMsg {
 /** QueryClassesResponse is the Query/Classes response type. */
 export interface QueryClassesResponseSDKType {
     classes: ClassInfoSDKType[];
-    pagination: PageResponseSDKType;
+    pagination?: PageResponseSDKType;
 }
 /** QueryClassInfoRequest is the Query/ClassInfo request type. */
 export interface QueryClassInfoRequest {
@@ -101,7 +101,7 @@ export interface QueryClassInfoRequestProtoMsg {
 /** QueryClassInfoRequest is the Query/ClassInfo request type. */
 export interface QueryClassInfoRequestAmino {
     /** class_id is the unique ID of credit class to query. */
-    class_id: string;
+    class_id?: string;
 }
 export interface QueryClassInfoRequestAminoMsg {
     type: "/regen.ecocredit.v1alpha1.QueryClassInfoRequest";
@@ -114,7 +114,7 @@ export interface QueryClassInfoRequestSDKType {
 /** QueryClassInfoResponse is the Query/ClassInfo request type. */
 export interface QueryClassInfoResponse {
     /** info is the ClassInfo for the credit class. */
-    info: ClassInfo;
+    info?: ClassInfo;
 }
 export interface QueryClassInfoResponseProtoMsg {
     typeUrl: "/regen.ecocredit.v1alpha1.QueryClassInfoResponse";
@@ -131,14 +131,14 @@ export interface QueryClassInfoResponseAminoMsg {
 }
 /** QueryClassInfoResponse is the Query/ClassInfo request type. */
 export interface QueryClassInfoResponseSDKType {
-    info: ClassInfoSDKType;
+    info?: ClassInfoSDKType;
 }
 /** QueryBatchesRequest is the Query/Batches request type. */
 export interface QueryBatchesRequest {
     /** class_id is the unique ID of the credit class to query. */
     classId: string;
     /** pagination defines an optional pagination for the request. */
-    pagination: PageRequest;
+    pagination?: PageRequest;
 }
 export interface QueryBatchesRequestProtoMsg {
     typeUrl: "/regen.ecocredit.v1alpha1.QueryBatchesRequest";
@@ -147,7 +147,7 @@ export interface QueryBatchesRequestProtoMsg {
 /** QueryBatchesRequest is the Query/Batches request type. */
 export interface QueryBatchesRequestAmino {
     /** class_id is the unique ID of the credit class to query. */
-    class_id: string;
+    class_id?: string;
     /** pagination defines an optional pagination for the request. */
     pagination?: PageRequestAmino;
 }
@@ -158,14 +158,14 @@ export interface QueryBatchesRequestAminoMsg {
 /** QueryBatchesRequest is the Query/Batches request type. */
 export interface QueryBatchesRequestSDKType {
     class_id: string;
-    pagination: PageRequestSDKType;
+    pagination?: PageRequestSDKType;
 }
 /** QueryBatchesResponse is the Query/Batches response type. */
 export interface QueryBatchesResponse {
     /** batches are the fetched credit batches within the class. */
     batches: BatchInfo[];
     /** pagination defines the pagination in the response. */
-    pagination: PageResponse;
+    pagination?: PageResponse;
 }
 export interface QueryBatchesResponseProtoMsg {
     typeUrl: "/regen.ecocredit.v1alpha1.QueryBatchesResponse";
@@ -174,7 +174,7 @@ export interface QueryBatchesResponseProtoMsg {
 /** QueryBatchesResponse is the Query/Batches response type. */
 export interface QueryBatchesResponseAmino {
     /** batches are the fetched credit batches within the class. */
-    batches: BatchInfoAmino[];
+    batches?: BatchInfoAmino[];
     /** pagination defines the pagination in the response. */
     pagination?: PageResponseAmino;
 }
@@ -185,7 +185,7 @@ export interface QueryBatchesResponseAminoMsg {
 /** QueryBatchesResponse is the Query/Batches response type. */
 export interface QueryBatchesResponseSDKType {
     batches: BatchInfoSDKType[];
-    pagination: PageResponseSDKType;
+    pagination?: PageResponseSDKType;
 }
 /** QueryBatchInfoRequest is the Query/BatchInfo request type. */
 export interface QueryBatchInfoRequest {
@@ -199,7 +199,7 @@ export interface QueryBatchInfoRequestProtoMsg {
 /** QueryBatchInfoRequest is the Query/BatchInfo request type. */
 export interface QueryBatchInfoRequestAmino {
     /** batch_denom is the unique ID of credit batch to query. */
-    batch_denom: string;
+    batch_denom?: string;
 }
 export interface QueryBatchInfoRequestAminoMsg {
     type: "/regen.ecocredit.v1alpha1.QueryBatchInfoRequest";
@@ -212,7 +212,7 @@ export interface QueryBatchInfoRequestSDKType {
 /** QueryBatchInfoResponse is the Query/BatchInfo response type. */
 export interface QueryBatchInfoResponse {
     /** info is the BatchInfo for the credit batch. */
-    info: BatchInfo;
+    info?: BatchInfo;
 }
 export interface QueryBatchInfoResponseProtoMsg {
     typeUrl: "/regen.ecocredit.v1alpha1.QueryBatchInfoResponse";
@@ -229,7 +229,7 @@ export interface QueryBatchInfoResponseAminoMsg {
 }
 /** QueryBatchInfoResponse is the Query/BatchInfo response type. */
 export interface QueryBatchInfoResponseSDKType {
-    info: BatchInfoSDKType;
+    info?: BatchInfoSDKType;
 }
 /** QueryBalanceRequest is the Query/Balance request type. */
 export interface QueryBalanceRequest {
@@ -245,9 +245,9 @@ export interface QueryBalanceRequestProtoMsg {
 /** QueryBalanceRequest is the Query/Balance request type. */
 export interface QueryBalanceRequestAmino {
     /** account is the address of the account whose balance is being queried. */
-    account: string;
+    account?: string;
     /** batch_denom is the unique ID of credit batch balance to query. */
-    batch_denom: string;
+    batch_denom?: string;
 }
 export interface QueryBalanceRequestAminoMsg {
     type: "/regen.ecocredit.v1alpha1.QueryBalanceRequest";
@@ -272,9 +272,9 @@ export interface QueryBalanceResponseProtoMsg {
 /** QueryBalanceResponse is the Query/Balance response type. */
 export interface QueryBalanceResponseAmino {
     /** tradable_amount is the decimal number of tradable credits. */
-    tradable_amount: string;
+    tradable_amount?: string;
     /** retired_amount is the decimal number of retired credits. */
-    retired_amount: string;
+    retired_amount?: string;
 }
 export interface QueryBalanceResponseAminoMsg {
     type: "/regen.ecocredit.v1alpha1.QueryBalanceResponse";
@@ -297,7 +297,7 @@ export interface QuerySupplyRequestProtoMsg {
 /** QuerySupplyRequest is the Query/Supply request type. */
 export interface QuerySupplyRequestAmino {
     /** batch_denom is the unique ID of credit batch to query. */
-    batch_denom: string;
+    batch_denom?: string;
 }
 export interface QuerySupplyRequestAminoMsg {
     type: "/regen.ecocredit.v1alpha1.QuerySupplyRequest";
@@ -330,12 +330,12 @@ export interface QuerySupplyResponseAmino {
      * tradable_supply is the decimal number of tradable credits in the batch
      * supply.
      */
-    tradable_supply: string;
+    tradable_supply?: string;
     /**
      * retired_supply is the decimal number of retired credits in the batch
      * supply.
      */
-    retired_supply: string;
+    retired_supply?: string;
 }
 export interface QuerySupplyResponseAminoMsg {
     type: "/regen.ecocredit.v1alpha1.QuerySupplyResponse";
@@ -375,7 +375,7 @@ export interface QueryCreditTypesResponseProtoMsg {
 /** QueryCreditTypesRequest is the Query/Credit_Types response type */
 export interface QueryCreditTypesResponseAmino {
     /** list of credit types */
-    credit_types: CreditTypeAmino[];
+    credit_types?: CreditTypeAmino[];
 }
 export interface QueryCreditTypesResponseAminoMsg {
     type: "/regen.ecocredit.v1alpha1.QueryCreditTypesResponse";
@@ -386,8 +386,9 @@ export interface QueryCreditTypesResponseSDKType {
     credit_types: CreditTypeSDKType[];
 }
 export declare const QueryParamsRequest: {
-    encode(_: QueryParamsRequest, writer?: _m0.Writer): _m0.Writer;
-    decode(input: _m0.Reader | Uint8Array, length?: number): QueryParamsRequest;
+    typeUrl: string;
+    encode(_: QueryParamsRequest, writer?: BinaryWriter): BinaryWriter;
+    decode(input: BinaryReader | Uint8Array, length?: number): QueryParamsRequest;
     fromJSON(_: any): QueryParamsRequest;
     toJSON(_: QueryParamsRequest): unknown;
     fromPartial(_: Partial<QueryParamsRequest>): QueryParamsRequest;
@@ -399,8 +400,9 @@ export declare const QueryParamsRequest: {
     toProtoMsg(message: QueryParamsRequest): QueryParamsRequestProtoMsg;
 };
 export declare const QueryParamsResponse: {
-    encode(message: QueryParamsResponse, writer?: _m0.Writer): _m0.Writer;
-    decode(input: _m0.Reader | Uint8Array, length?: number): QueryParamsResponse;
+    typeUrl: string;
+    encode(message: QueryParamsResponse, writer?: BinaryWriter): BinaryWriter;
+    decode(input: BinaryReader | Uint8Array, length?: number): QueryParamsResponse;
     fromJSON(object: any): QueryParamsResponse;
     toJSON(message: QueryParamsResponse): unknown;
     fromPartial(object: Partial<QueryParamsResponse>): QueryParamsResponse;
@@ -412,8 +414,9 @@ export declare const QueryParamsResponse: {
     toProtoMsg(message: QueryParamsResponse): QueryParamsResponseProtoMsg;
 };
 export declare const QueryClassesRequest: {
-    encode(message: QueryClassesRequest, writer?: _m0.Writer): _m0.Writer;
-    decode(input: _m0.Reader | Uint8Array, length?: number): QueryClassesRequest;
+    typeUrl: string;
+    encode(message: QueryClassesRequest, writer?: BinaryWriter): BinaryWriter;
+    decode(input: BinaryReader | Uint8Array, length?: number): QueryClassesRequest;
     fromJSON(object: any): QueryClassesRequest;
     toJSON(message: QueryClassesRequest): unknown;
     fromPartial(object: Partial<QueryClassesRequest>): QueryClassesRequest;
@@ -425,8 +428,9 @@ export declare const QueryClassesRequest: {
     toProtoMsg(message: QueryClassesRequest): QueryClassesRequestProtoMsg;
 };
 export declare const QueryClassesResponse: {
-    encode(message: QueryClassesResponse, writer?: _m0.Writer): _m0.Writer;
-    decode(input: _m0.Reader | Uint8Array, length?: number): QueryClassesResponse;
+    typeUrl: string;
+    encode(message: QueryClassesResponse, writer?: BinaryWriter): BinaryWriter;
+    decode(input: BinaryReader | Uint8Array, length?: number): QueryClassesResponse;
     fromJSON(object: any): QueryClassesResponse;
     toJSON(message: QueryClassesResponse): unknown;
     fromPartial(object: Partial<QueryClassesResponse>): QueryClassesResponse;
@@ -438,8 +442,9 @@ export declare const QueryClassesResponse: {
     toProtoMsg(message: QueryClassesResponse): QueryClassesResponseProtoMsg;
 };
 export declare const QueryClassInfoRequest: {
-    encode(message: QueryClassInfoRequest, writer?: _m0.Writer): _m0.Writer;
-    decode(input: _m0.Reader | Uint8Array, length?: number): QueryClassInfoRequest;
+    typeUrl: string;
+    encode(message: QueryClassInfoRequest, writer?: BinaryWriter): BinaryWriter;
+    decode(input: BinaryReader | Uint8Array, length?: number): QueryClassInfoRequest;
     fromJSON(object: any): QueryClassInfoRequest;
     toJSON(message: QueryClassInfoRequest): unknown;
     fromPartial(object: Partial<QueryClassInfoRequest>): QueryClassInfoRequest;
@@ -451,8 +456,9 @@ export declare const QueryClassInfoRequest: {
     toProtoMsg(message: QueryClassInfoRequest): QueryClassInfoRequestProtoMsg;
 };
 export declare const QueryClassInfoResponse: {
-    encode(message: QueryClassInfoResponse, writer?: _m0.Writer): _m0.Writer;
-    decode(input: _m0.Reader | Uint8Array, length?: number): QueryClassInfoResponse;
+    typeUrl: string;
+    encode(message: QueryClassInfoResponse, writer?: BinaryWriter): BinaryWriter;
+    decode(input: BinaryReader | Uint8Array, length?: number): QueryClassInfoResponse;
     fromJSON(object: any): QueryClassInfoResponse;
     toJSON(message: QueryClassInfoResponse): unknown;
     fromPartial(object: Partial<QueryClassInfoResponse>): QueryClassInfoResponse;
@@ -464,8 +470,9 @@ export declare const QueryClassInfoResponse: {
     toProtoMsg(message: QueryClassInfoResponse): QueryClassInfoResponseProtoMsg;
 };
 export declare const QueryBatchesRequest: {
-    encode(message: QueryBatchesRequest, writer?: _m0.Writer): _m0.Writer;
-    decode(input: _m0.Reader | Uint8Array, length?: number): QueryBatchesRequest;
+    typeUrl: string;
+    encode(message: QueryBatchesRequest, writer?: BinaryWriter): BinaryWriter;
+    decode(input: BinaryReader | Uint8Array, length?: number): QueryBatchesRequest;
     fromJSON(object: any): QueryBatchesRequest;
     toJSON(message: QueryBatchesRequest): unknown;
     fromPartial(object: Partial<QueryBatchesRequest>): QueryBatchesRequest;
@@ -477,8 +484,9 @@ export declare const QueryBatchesRequest: {
     toProtoMsg(message: QueryBatchesRequest): QueryBatchesRequestProtoMsg;
 };
 export declare const QueryBatchesResponse: {
-    encode(message: QueryBatchesResponse, writer?: _m0.Writer): _m0.Writer;
-    decode(input: _m0.Reader | Uint8Array, length?: number): QueryBatchesResponse;
+    typeUrl: string;
+    encode(message: QueryBatchesResponse, writer?: BinaryWriter): BinaryWriter;
+    decode(input: BinaryReader | Uint8Array, length?: number): QueryBatchesResponse;
     fromJSON(object: any): QueryBatchesResponse;
     toJSON(message: QueryBatchesResponse): unknown;
     fromPartial(object: Partial<QueryBatchesResponse>): QueryBatchesResponse;
@@ -490,8 +498,9 @@ export declare const QueryBatchesResponse: {
     toProtoMsg(message: QueryBatchesResponse): QueryBatchesResponseProtoMsg;
 };
 export declare const QueryBatchInfoRequest: {
-    encode(message: QueryBatchInfoRequest, writer?: _m0.Writer): _m0.Writer;
-    decode(input: _m0.Reader | Uint8Array, length?: number): QueryBatchInfoRequest;
+    typeUrl: string;
+    encode(message: QueryBatchInfoRequest, writer?: BinaryWriter): BinaryWriter;
+    decode(input: BinaryReader | Uint8Array, length?: number): QueryBatchInfoRequest;
     fromJSON(object: any): QueryBatchInfoRequest;
     toJSON(message: QueryBatchInfoRequest): unknown;
     fromPartial(object: Partial<QueryBatchInfoRequest>): QueryBatchInfoRequest;
@@ -503,8 +512,9 @@ export declare const QueryBatchInfoRequest: {
     toProtoMsg(message: QueryBatchInfoRequest): QueryBatchInfoRequestProtoMsg;
 };
 export declare const QueryBatchInfoResponse: {
-    encode(message: QueryBatchInfoResponse, writer?: _m0.Writer): _m0.Writer;
-    decode(input: _m0.Reader | Uint8Array, length?: number): QueryBatchInfoResponse;
+    typeUrl: string;
+    encode(message: QueryBatchInfoResponse, writer?: BinaryWriter): BinaryWriter;
+    decode(input: BinaryReader | Uint8Array, length?: number): QueryBatchInfoResponse;
     fromJSON(object: any): QueryBatchInfoResponse;
     toJSON(message: QueryBatchInfoResponse): unknown;
     fromPartial(object: Partial<QueryBatchInfoResponse>): QueryBatchInfoResponse;
@@ -516,8 +526,9 @@ export declare const QueryBatchInfoResponse: {
     toProtoMsg(message: QueryBatchInfoResponse): QueryBatchInfoResponseProtoMsg;
 };
 export declare const QueryBalanceRequest: {
-    encode(message: QueryBalanceRequest, writer?: _m0.Writer): _m0.Writer;
-    decode(input: _m0.Reader | Uint8Array, length?: number): QueryBalanceRequest;
+    typeUrl: string;
+    encode(message: QueryBalanceRequest, writer?: BinaryWriter): BinaryWriter;
+    decode(input: BinaryReader | Uint8Array, length?: number): QueryBalanceRequest;
     fromJSON(object: any): QueryBalanceRequest;
     toJSON(message: QueryBalanceRequest): unknown;
     fromPartial(object: Partial<QueryBalanceRequest>): QueryBalanceRequest;
@@ -529,8 +540,9 @@ export declare const QueryBalanceRequest: {
     toProtoMsg(message: QueryBalanceRequest): QueryBalanceRequestProtoMsg;
 };
 export declare const QueryBalanceResponse: {
-    encode(message: QueryBalanceResponse, writer?: _m0.Writer): _m0.Writer;
-    decode(input: _m0.Reader | Uint8Array, length?: number): QueryBalanceResponse;
+    typeUrl: string;
+    encode(message: QueryBalanceResponse, writer?: BinaryWriter): BinaryWriter;
+    decode(input: BinaryReader | Uint8Array, length?: number): QueryBalanceResponse;
     fromJSON(object: any): QueryBalanceResponse;
     toJSON(message: QueryBalanceResponse): unknown;
     fromPartial(object: Partial<QueryBalanceResponse>): QueryBalanceResponse;
@@ -542,8 +554,9 @@ export declare const QueryBalanceResponse: {
     toProtoMsg(message: QueryBalanceResponse): QueryBalanceResponseProtoMsg;
 };
 export declare const QuerySupplyRequest: {
-    encode(message: QuerySupplyRequest, writer?: _m0.Writer): _m0.Writer;
-    decode(input: _m0.Reader | Uint8Array, length?: number): QuerySupplyRequest;
+    typeUrl: string;
+    encode(message: QuerySupplyRequest, writer?: BinaryWriter): BinaryWriter;
+    decode(input: BinaryReader | Uint8Array, length?: number): QuerySupplyRequest;
     fromJSON(object: any): QuerySupplyRequest;
     toJSON(message: QuerySupplyRequest): unknown;
     fromPartial(object: Partial<QuerySupplyRequest>): QuerySupplyRequest;
@@ -555,8 +568,9 @@ export declare const QuerySupplyRequest: {
     toProtoMsg(message: QuerySupplyRequest): QuerySupplyRequestProtoMsg;
 };
 export declare const QuerySupplyResponse: {
-    encode(message: QuerySupplyResponse, writer?: _m0.Writer): _m0.Writer;
-    decode(input: _m0.Reader | Uint8Array, length?: number): QuerySupplyResponse;
+    typeUrl: string;
+    encode(message: QuerySupplyResponse, writer?: BinaryWriter): BinaryWriter;
+    decode(input: BinaryReader | Uint8Array, length?: number): QuerySupplyResponse;
     fromJSON(object: any): QuerySupplyResponse;
     toJSON(message: QuerySupplyResponse): unknown;
     fromPartial(object: Partial<QuerySupplyResponse>): QuerySupplyResponse;
@@ -568,8 +582,9 @@ export declare const QuerySupplyResponse: {
     toProtoMsg(message: QuerySupplyResponse): QuerySupplyResponseProtoMsg;
 };
 export declare const QueryCreditTypesRequest: {
-    encode(_: QueryCreditTypesRequest, writer?: _m0.Writer): _m0.Writer;
-    decode(input: _m0.Reader | Uint8Array, length?: number): QueryCreditTypesRequest;
+    typeUrl: string;
+    encode(_: QueryCreditTypesRequest, writer?: BinaryWriter): BinaryWriter;
+    decode(input: BinaryReader | Uint8Array, length?: number): QueryCreditTypesRequest;
     fromJSON(_: any): QueryCreditTypesRequest;
     toJSON(_: QueryCreditTypesRequest): unknown;
     fromPartial(_: Partial<QueryCreditTypesRequest>): QueryCreditTypesRequest;
@@ -581,8 +596,9 @@ export declare const QueryCreditTypesRequest: {
     toProtoMsg(message: QueryCreditTypesRequest): QueryCreditTypesRequestProtoMsg;
 };
 export declare const QueryCreditTypesResponse: {
-    encode(message: QueryCreditTypesResponse, writer?: _m0.Writer): _m0.Writer;
-    decode(input: _m0.Reader | Uint8Array, length?: number): QueryCreditTypesResponse;
+    typeUrl: string;
+    encode(message: QueryCreditTypesResponse, writer?: BinaryWriter): BinaryWriter;
+    decode(input: BinaryReader | Uint8Array, length?: number): QueryCreditTypesResponse;
     fromJSON(object: any): QueryCreditTypesResponse;
     toJSON(message: QueryCreditTypesResponse): unknown;
     fromPartial(object: Partial<QueryCreditTypesResponse>): QueryCreditTypesResponse;

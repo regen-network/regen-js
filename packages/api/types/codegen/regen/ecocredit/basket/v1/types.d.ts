@@ -1,6 +1,6 @@
-import { Timestamp, TimestampAmino, TimestampSDKType } from "../../../../google/protobuf/timestamp";
+import { Timestamp, TimestampSDKType } from "../../../../google/protobuf/timestamp";
 import { Duration, DurationAmino, DurationSDKType } from "../../../../google/protobuf/duration";
-import * as _m0 from "protobufjs/minimal";
+import { BinaryReader, BinaryWriter } from "../../../../binary";
 /** BasketCredit represents the information for a credit batch inside a basket. */
 export interface BasketCredit {
     /** batch_denom is the unique ID of the credit batch. */
@@ -19,13 +19,13 @@ export interface BasketCreditProtoMsg {
 /** BasketCredit represents the information for a credit batch inside a basket. */
 export interface BasketCreditAmino {
     /** batch_denom is the unique ID of the credit batch. */
-    batch_denom: string;
+    batch_denom?: string;
     /**
      * amount is the number of credits being put into or taken out of the basket.
      * Decimal values are acceptable within the precision of the corresponding
      *  credit type for this batch.
      */
-    amount: string;
+    amount?: string;
 }
 export interface BasketCreditAminoMsg {
     type: "/regen.ecocredit.basket.v1.BasketCredit";
@@ -46,7 +46,7 @@ export interface DateCriteria {
      * allowed into the basket. At most only one of `start_date_window`,
      * `min_start_date`, and `years_in_the_past` can be set for a basket.
      */
-    minStartDate: Timestamp;
+    minStartDate?: Timestamp;
     /**
      * start_date_window (optional) is a duration of time measured into the past
      * which sets a cutoff for batch start dates when adding new credits to the
@@ -55,7 +55,7 @@ export interface DateCriteria {
      * basket. At most only one of `start_date_window`, `min_start_date`, and
      * `years_in_the_past` can be set for a basket.
      */
-    startDateWindow: Duration;
+    startDateWindow?: Duration;
     /**
      * years_in_the_past (optional) is the number of years into the past which
      * sets a cutoff for the batch start dates when adding new credits to the
@@ -82,7 +82,7 @@ export interface DateCriteriaAmino {
      * allowed into the basket. At most only one of `start_date_window`,
      * `min_start_date`, and `years_in_the_past` can be set for a basket.
      */
-    min_start_date?: TimestampAmino;
+    min_start_date?: string;
     /**
      * start_date_window (optional) is a duration of time measured into the past
      * which sets a cutoff for batch start dates when adding new credits to the
@@ -102,7 +102,7 @@ export interface DateCriteriaAmino {
      *
      * Since Revision 1
      */
-    years_in_the_past: number;
+    years_in_the_past?: number;
 }
 export interface DateCriteriaAminoMsg {
     type: "/regen.ecocredit.basket.v1.DateCriteria";
@@ -113,13 +113,14 @@ export interface DateCriteriaAminoMsg {
  * At most, only one of the values should be set.
  */
 export interface DateCriteriaSDKType {
-    min_start_date: TimestampSDKType;
-    start_date_window: DurationSDKType;
+    min_start_date?: TimestampSDKType;
+    start_date_window?: DurationSDKType;
     years_in_the_past: number;
 }
 export declare const BasketCredit: {
-    encode(message: BasketCredit, writer?: _m0.Writer): _m0.Writer;
-    decode(input: _m0.Reader | Uint8Array, length?: number): BasketCredit;
+    typeUrl: string;
+    encode(message: BasketCredit, writer?: BinaryWriter): BinaryWriter;
+    decode(input: BinaryReader | Uint8Array, length?: number): BasketCredit;
     fromJSON(object: any): BasketCredit;
     toJSON(message: BasketCredit): unknown;
     fromPartial(object: Partial<BasketCredit>): BasketCredit;
@@ -131,8 +132,9 @@ export declare const BasketCredit: {
     toProtoMsg(message: BasketCredit): BasketCreditProtoMsg;
 };
 export declare const DateCriteria: {
-    encode(message: DateCriteria, writer?: _m0.Writer): _m0.Writer;
-    decode(input: _m0.Reader | Uint8Array, length?: number): DateCriteria;
+    typeUrl: string;
+    encode(message: DateCriteria, writer?: BinaryWriter): BinaryWriter;
+    decode(input: BinaryReader | Uint8Array, length?: number): DateCriteria;
     fromJSON(object: any): DateCriteria;
     toJSON(message: DateCriteria): unknown;
     fromPartial(object: Partial<DateCriteria>): DateCriteria;

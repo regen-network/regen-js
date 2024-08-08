@@ -1,5 +1,5 @@
 import { Grant, GrantAmino, GrantSDKType } from "./feegrant";
-import * as _m0 from "protobufjs/minimal";
+import { BinaryReader, BinaryWriter } from "../../../binary";
 /** GenesisState contains a set of fee allowances, persisted from the store */
 export interface GenesisState {
     allowances: Grant[];
@@ -10,7 +10,7 @@ export interface GenesisStateProtoMsg {
 }
 /** GenesisState contains a set of fee allowances, persisted from the store */
 export interface GenesisStateAmino {
-    allowances: GrantAmino[];
+    allowances?: GrantAmino[];
 }
 export interface GenesisStateAminoMsg {
     type: "cosmos-sdk/GenesisState";
@@ -21,8 +21,9 @@ export interface GenesisStateSDKType {
     allowances: GrantSDKType[];
 }
 export declare const GenesisState: {
-    encode(message: GenesisState, writer?: _m0.Writer): _m0.Writer;
-    decode(input: _m0.Reader | Uint8Array, length?: number): GenesisState;
+    typeUrl: string;
+    encode(message: GenesisState, writer?: BinaryWriter): BinaryWriter;
+    decode(input: BinaryReader | Uint8Array, length?: number): GenesisState;
     fromJSON(object: any): GenesisState;
     toJSON(message: GenesisState): unknown;
     fromPartial(object: Partial<GenesisState>): GenesisState;

@@ -1,6 +1,5 @@
-import { Timestamp, TimestampAmino, TimestampSDKType } from "../../../google/protobuf/timestamp";
-import { Long } from "../../../helpers";
-import * as _m0 from "protobufjs/minimal";
+import { Timestamp, TimestampSDKType } from "../../../google/protobuf/timestamp";
+import { BinaryReader, BinaryWriter } from "../../../binary";
 /** DataID stores a compact data ID and its full IRI. */
 export interface DataID {
     /** id is the compact automatically-generated data ID. */
@@ -15,9 +14,9 @@ export interface DataIDProtoMsg {
 /** DataID stores a compact data ID and its full IRI. */
 export interface DataIDAmino {
     /** id is the compact automatically-generated data ID. */
-    id: Uint8Array;
+    id?: string;
     /** iri is the IRI of the data which contains its full ContentHash. */
-    iri: string;
+    iri?: string;
 }
 export interface DataIDAminoMsg {
     type: "/regen.data.v1.DataID";
@@ -36,7 +35,7 @@ export interface DataAnchor {
      * timestamp is the anchor timestamp for this object - the time at which
      * it was first known to the blockchain.
      */
-    timestamp: Timestamp;
+    timestamp?: Timestamp;
 }
 export interface DataAnchorProtoMsg {
     typeUrl: "/regen.data.v1.DataAnchor";
@@ -45,12 +44,12 @@ export interface DataAnchorProtoMsg {
 /** DataAnchor stores the anchor timestamp for a data object. */
 export interface DataAnchorAmino {
     /** id is the compact data ID. */
-    id: Uint8Array;
+    id?: string;
     /**
      * timestamp is the anchor timestamp for this object - the time at which
      * it was first known to the blockchain.
      */
-    timestamp?: TimestampAmino;
+    timestamp?: string;
 }
 export interface DataAnchorAminoMsg {
     type: "/regen.data.v1.DataAnchor";
@@ -59,7 +58,7 @@ export interface DataAnchorAminoMsg {
 /** DataAnchor stores the anchor timestamp for a data object. */
 export interface DataAnchorSDKType {
     id: Uint8Array;
-    timestamp: TimestampSDKType;
+    timestamp?: TimestampSDKType;
 }
 /** DataAttestor is a join table for associating data IDs and attestors. */
 export interface DataAttestor {
@@ -68,7 +67,7 @@ export interface DataAttestor {
     /** attestor is the account address of the attestor. */
     attestor: Uint8Array;
     /** timestamp is the time at which the attestor signed this data object. */
-    timestamp: Timestamp;
+    timestamp?: Timestamp;
 }
 export interface DataAttestorProtoMsg {
     typeUrl: "/regen.data.v1.DataAttestor";
@@ -77,11 +76,11 @@ export interface DataAttestorProtoMsg {
 /** DataAttestor is a join table for associating data IDs and attestors. */
 export interface DataAttestorAmino {
     /** id is the compact data ID. */
-    id: Uint8Array;
+    id?: string;
     /** attestor is the account address of the attestor. */
-    attestor: Uint8Array;
+    attestor?: string;
     /** timestamp is the time at which the attestor signed this data object. */
-    timestamp?: TimestampAmino;
+    timestamp?: string;
 }
 export interface DataAttestorAminoMsg {
     type: "/regen.data.v1.DataAttestor";
@@ -91,12 +90,12 @@ export interface DataAttestorAminoMsg {
 export interface DataAttestorSDKType {
     id: Uint8Array;
     attestor: Uint8Array;
-    timestamp: TimestampSDKType;
+    timestamp?: TimestampSDKType;
 }
 /** Resolver describes a data resolver. */
 export interface Resolver {
     /** id is the ID of the resolver. */
-    id: Long;
+    id: bigint;
     /** url is the URL of the resolver. */
     url: string;
     /**
@@ -112,14 +111,14 @@ export interface ResolverProtoMsg {
 /** Resolver describes a data resolver. */
 export interface ResolverAmino {
     /** id is the ID of the resolver. */
-    id: string;
+    id?: string;
     /** url is the URL of the resolver. */
-    url: string;
+    url?: string;
     /**
      * manager is the bytes address of the resolver manager who is allowed
      * to make calls to Msg/RegisterResolver for this resolver.
      */
-    manager: Uint8Array;
+    manager?: string;
 }
 export interface ResolverAminoMsg {
     type: "/regen.data.v1.Resolver";
@@ -127,7 +126,7 @@ export interface ResolverAminoMsg {
 }
 /** Resolver describes a data resolver. */
 export interface ResolverSDKType {
-    id: Long;
+    id: bigint;
     url: string;
     manager: Uint8Array;
 }
@@ -139,7 +138,7 @@ export interface DataResolver {
     /** id is the compact data ID. */
     id: Uint8Array;
     /** resolver_id is the ID of the resolver. */
-    resolverId: Long;
+    resolverId: bigint;
 }
 export interface DataResolverProtoMsg {
     typeUrl: "/regen.data.v1.DataResolver";
@@ -151,9 +150,9 @@ export interface DataResolverProtoMsg {
  */
 export interface DataResolverAmino {
     /** id is the compact data ID. */
-    id: Uint8Array;
+    id?: string;
     /** resolver_id is the ID of the resolver. */
-    resolver_id: string;
+    resolver_id?: string;
 }
 export interface DataResolverAminoMsg {
     type: "/regen.data.v1.DataResolver";
@@ -165,11 +164,12 @@ export interface DataResolverAminoMsg {
  */
 export interface DataResolverSDKType {
     id: Uint8Array;
-    resolver_id: Long;
+    resolver_id: bigint;
 }
 export declare const DataID: {
-    encode(message: DataID, writer?: _m0.Writer): _m0.Writer;
-    decode(input: _m0.Reader | Uint8Array, length?: number): DataID;
+    typeUrl: string;
+    encode(message: DataID, writer?: BinaryWriter): BinaryWriter;
+    decode(input: BinaryReader | Uint8Array, length?: number): DataID;
     fromJSON(object: any): DataID;
     toJSON(message: DataID): unknown;
     fromPartial(object: Partial<DataID>): DataID;
@@ -181,8 +181,9 @@ export declare const DataID: {
     toProtoMsg(message: DataID): DataIDProtoMsg;
 };
 export declare const DataAnchor: {
-    encode(message: DataAnchor, writer?: _m0.Writer): _m0.Writer;
-    decode(input: _m0.Reader | Uint8Array, length?: number): DataAnchor;
+    typeUrl: string;
+    encode(message: DataAnchor, writer?: BinaryWriter): BinaryWriter;
+    decode(input: BinaryReader | Uint8Array, length?: number): DataAnchor;
     fromJSON(object: any): DataAnchor;
     toJSON(message: DataAnchor): unknown;
     fromPartial(object: Partial<DataAnchor>): DataAnchor;
@@ -194,8 +195,9 @@ export declare const DataAnchor: {
     toProtoMsg(message: DataAnchor): DataAnchorProtoMsg;
 };
 export declare const DataAttestor: {
-    encode(message: DataAttestor, writer?: _m0.Writer): _m0.Writer;
-    decode(input: _m0.Reader | Uint8Array, length?: number): DataAttestor;
+    typeUrl: string;
+    encode(message: DataAttestor, writer?: BinaryWriter): BinaryWriter;
+    decode(input: BinaryReader | Uint8Array, length?: number): DataAttestor;
     fromJSON(object: any): DataAttestor;
     toJSON(message: DataAttestor): unknown;
     fromPartial(object: Partial<DataAttestor>): DataAttestor;
@@ -207,8 +209,9 @@ export declare const DataAttestor: {
     toProtoMsg(message: DataAttestor): DataAttestorProtoMsg;
 };
 export declare const Resolver: {
-    encode(message: Resolver, writer?: _m0.Writer): _m0.Writer;
-    decode(input: _m0.Reader | Uint8Array, length?: number): Resolver;
+    typeUrl: string;
+    encode(message: Resolver, writer?: BinaryWriter): BinaryWriter;
+    decode(input: BinaryReader | Uint8Array, length?: number): Resolver;
     fromJSON(object: any): Resolver;
     toJSON(message: Resolver): unknown;
     fromPartial(object: Partial<Resolver>): Resolver;
@@ -220,8 +223,9 @@ export declare const Resolver: {
     toProtoMsg(message: Resolver): ResolverProtoMsg;
 };
 export declare const DataResolver: {
-    encode(message: DataResolver, writer?: _m0.Writer): _m0.Writer;
-    decode(input: _m0.Reader | Uint8Array, length?: number): DataResolver;
+    typeUrl: string;
+    encode(message: DataResolver, writer?: BinaryWriter): BinaryWriter;
+    decode(input: BinaryReader | Uint8Array, length?: number): DataResolver;
     fromJSON(object: any): DataResolver;
     toJSON(message: DataResolver): unknown;
     fromPartial(object: Partial<DataResolver>): DataResolver;

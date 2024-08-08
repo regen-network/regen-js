@@ -1,8 +1,7 @@
 import { PageRequest, PageRequestAmino, PageRequestSDKType, PageResponse, PageResponseAmino, PageResponseSDKType } from "../../base/query/v1beta1/pagination";
 import { Any, AnyProtoMsg, AnyAmino, AnySDKType } from "../../../google/protobuf/any";
 import { Params, ParamsAmino, ParamsSDKType, BaseAccount, BaseAccountProtoMsg, BaseAccountSDKType, ModuleAccount, ModuleAccountProtoMsg, ModuleAccountSDKType } from "./auth";
-import { Long } from "../../../helpers";
-import * as _m0 from "protobufjs/minimal";
+import { BinaryReader, BinaryWriter } from "../../../binary";
 /**
  * QueryAccountsRequest is the request type for the Query/Accounts RPC method.
  *
@@ -10,7 +9,7 @@ import * as _m0 from "protobufjs/minimal";
  */
 export interface QueryAccountsRequest {
     /** pagination defines an optional pagination for the request. */
-    pagination: PageRequest;
+    pagination?: PageRequest;
 }
 export interface QueryAccountsRequestProtoMsg {
     typeUrl: "/cosmos.auth.v1beta1.QueryAccountsRequest";
@@ -35,7 +34,7 @@ export interface QueryAccountsRequestAminoMsg {
  * Since: cosmos-sdk 0.43
  */
 export interface QueryAccountsRequestSDKType {
-    pagination: PageRequestSDKType;
+    pagination?: PageRequestSDKType;
 }
 /**
  * QueryAccountsResponse is the response type for the Query/Accounts RPC method.
@@ -46,7 +45,7 @@ export interface QueryAccountsResponse {
     /** accounts are the existing accounts */
     accounts: (BaseAccount & Any)[] | Any[];
     /** pagination defines the pagination in the response. */
-    pagination: PageResponse;
+    pagination?: PageResponse;
 }
 export interface QueryAccountsResponseProtoMsg {
     typeUrl: "/cosmos.auth.v1beta1.QueryAccountsResponse";
@@ -62,7 +61,7 @@ export type QueryAccountsResponseEncoded = Omit<QueryAccountsResponse, "accounts
  */
 export interface QueryAccountsResponseAmino {
     /** accounts are the existing accounts */
-    accounts: AnyAmino[];
+    accounts?: AnyAmino[];
     /** pagination defines the pagination in the response. */
     pagination?: PageResponseAmino;
 }
@@ -77,7 +76,7 @@ export interface QueryAccountsResponseAminoMsg {
  */
 export interface QueryAccountsResponseSDKType {
     accounts: (BaseAccountSDKType | AnySDKType)[];
-    pagination: PageResponseSDKType;
+    pagination?: PageResponseSDKType;
 }
 /** QueryAccountRequest is the request type for the Query/Account RPC method. */
 export interface QueryAccountRequest {
@@ -91,7 +90,7 @@ export interface QueryAccountRequestProtoMsg {
 /** QueryAccountRequest is the request type for the Query/Account RPC method. */
 export interface QueryAccountRequestAmino {
     /** address defines the address to query for. */
-    address: string;
+    address?: string;
 }
 export interface QueryAccountRequestAminoMsg {
     type: "cosmos-sdk/QueryAccountRequest";
@@ -104,7 +103,7 @@ export interface QueryAccountRequestSDKType {
 /** QueryAccountResponse is the response type for the Query/Account RPC method. */
 export interface QueryAccountResponse {
     /** account defines the account of the corresponding address. */
-    account: (BaseAccount & Any) | undefined;
+    account?: (BaseAccount & Any) | undefined;
 }
 export interface QueryAccountResponseProtoMsg {
     typeUrl: "/cosmos.auth.v1beta1.QueryAccountResponse";
@@ -124,7 +123,7 @@ export interface QueryAccountResponseAminoMsg {
 }
 /** QueryAccountResponse is the response type for the Query/Account RPC method. */
 export interface QueryAccountResponseSDKType {
-    account: BaseAccountSDKType | AnySDKType | undefined;
+    account?: BaseAccountSDKType | AnySDKType | undefined;
 }
 /** QueryParamsRequest is the request type for the Query/Params RPC method. */
 export interface QueryParamsRequest {
@@ -215,7 +214,7 @@ export type QueryModuleAccountsResponseEncoded = Omit<QueryModuleAccountsRespons
  * Since: cosmos-sdk 0.46
  */
 export interface QueryModuleAccountsResponseAmino {
-    accounts: AnyAmino[];
+    accounts?: AnyAmino[];
 }
 export interface QueryModuleAccountsResponseAminoMsg {
     type: "cosmos-sdk/QueryModuleAccountsResponse";
@@ -239,7 +238,7 @@ export interface QueryModuleAccountByNameRequestProtoMsg {
 }
 /** QueryModuleAccountByNameRequest is the request type for the Query/ModuleAccountByName RPC method. */
 export interface QueryModuleAccountByNameRequestAmino {
-    name: string;
+    name?: string;
 }
 export interface QueryModuleAccountByNameRequestAminoMsg {
     type: "cosmos-sdk/QueryModuleAccountByNameRequest";
@@ -251,7 +250,7 @@ export interface QueryModuleAccountByNameRequestSDKType {
 }
 /** QueryModuleAccountByNameResponse is the response type for the Query/ModuleAccountByName RPC method. */
 export interface QueryModuleAccountByNameResponse {
-    account: (ModuleAccount & Any) | undefined;
+    account?: (ModuleAccount & Any) | undefined;
 }
 export interface QueryModuleAccountByNameResponseProtoMsg {
     typeUrl: "/cosmos.auth.v1beta1.QueryModuleAccountByNameResponse";
@@ -270,7 +269,7 @@ export interface QueryModuleAccountByNameResponseAminoMsg {
 }
 /** QueryModuleAccountByNameResponse is the response type for the Query/ModuleAccountByName RPC method. */
 export interface QueryModuleAccountByNameResponseSDKType {
-    account: ModuleAccountSDKType | AnySDKType | undefined;
+    account?: ModuleAccountSDKType | AnySDKType | undefined;
 }
 /**
  * Bech32PrefixRequest is the request type for Bech32Prefix rpc method.
@@ -319,7 +318,7 @@ export interface Bech32PrefixResponseProtoMsg {
  * Since: cosmos-sdk 0.46
  */
 export interface Bech32PrefixResponseAmino {
-    bech32_prefix: string;
+    bech32_prefix?: string;
 }
 export interface Bech32PrefixResponseAminoMsg {
     type: "cosmos-sdk/Bech32PrefixResponse";
@@ -351,7 +350,7 @@ export interface AddressBytesToStringRequestProtoMsg {
  * Since: cosmos-sdk 0.46
  */
 export interface AddressBytesToStringRequestAmino {
-    address_bytes: Uint8Array;
+    address_bytes?: string;
 }
 export interface AddressBytesToStringRequestAminoMsg {
     type: "cosmos-sdk/AddressBytesToStringRequest";
@@ -383,7 +382,7 @@ export interface AddressBytesToStringResponseProtoMsg {
  * Since: cosmos-sdk 0.46
  */
 export interface AddressBytesToStringResponseAmino {
-    address_string: string;
+    address_string?: string;
 }
 export interface AddressBytesToStringResponseAminoMsg {
     type: "cosmos-sdk/AddressBytesToStringResponse";
@@ -415,7 +414,7 @@ export interface AddressStringToBytesRequestProtoMsg {
  * Since: cosmos-sdk 0.46
  */
 export interface AddressStringToBytesRequestAmino {
-    address_string: string;
+    address_string?: string;
 }
 export interface AddressStringToBytesRequestAminoMsg {
     type: "cosmos-sdk/AddressStringToBytesRequest";
@@ -447,7 +446,7 @@ export interface AddressStringToBytesResponseProtoMsg {
  * Since: cosmos-sdk 0.46
  */
 export interface AddressStringToBytesResponseAmino {
-    address_bytes: Uint8Array;
+    address_bytes?: string;
 }
 export interface AddressStringToBytesResponseAminoMsg {
     type: "cosmos-sdk/AddressStringToBytesResponse";
@@ -472,7 +471,7 @@ export interface QueryAccountAddressByIDRequest {
      * should have been an uint64 (like all account numbers), and will be
      * updated to uint64 in a future version of the auth query.
      */
-    id: Long;
+    id: bigint;
 }
 export interface QueryAccountAddressByIDRequestProtoMsg {
     typeUrl: "/cosmos.auth.v1beta1.QueryAccountAddressByIDRequest";
@@ -489,7 +488,7 @@ export interface QueryAccountAddressByIDRequestAmino {
      * should have been an uint64 (like all account numbers), and will be
      * updated to uint64 in a future version of the auth query.
      */
-    id: string;
+    id?: string;
 }
 export interface QueryAccountAddressByIDRequestAminoMsg {
     type: "cosmos-sdk/QueryAccountAddressByIDRequest";
@@ -501,7 +500,7 @@ export interface QueryAccountAddressByIDRequestAminoMsg {
  * Since: cosmos-sdk 0.46.2
  */
 export interface QueryAccountAddressByIDRequestSDKType {
-    id: Long;
+    id: bigint;
 }
 /**
  * QueryAccountAddressByIDResponse is the response type for AccountAddressByID rpc method
@@ -521,7 +520,7 @@ export interface QueryAccountAddressByIDResponseProtoMsg {
  * Since: cosmos-sdk 0.46.2
  */
 export interface QueryAccountAddressByIDResponseAmino {
-    account_address: string;
+    account_address?: string;
 }
 export interface QueryAccountAddressByIDResponseAminoMsg {
     type: "cosmos-sdk/QueryAccountAddressByIDResponse";
@@ -536,8 +535,9 @@ export interface QueryAccountAddressByIDResponseSDKType {
     account_address: string;
 }
 export declare const QueryAccountsRequest: {
-    encode(message: QueryAccountsRequest, writer?: _m0.Writer): _m0.Writer;
-    decode(input: _m0.Reader | Uint8Array, length?: number): QueryAccountsRequest;
+    typeUrl: string;
+    encode(message: QueryAccountsRequest, writer?: BinaryWriter): BinaryWriter;
+    decode(input: BinaryReader | Uint8Array, length?: number): QueryAccountsRequest;
     fromJSON(object: any): QueryAccountsRequest;
     toJSON(message: QueryAccountsRequest): unknown;
     fromPartial(object: Partial<QueryAccountsRequest>): QueryAccountsRequest;
@@ -550,8 +550,9 @@ export declare const QueryAccountsRequest: {
     toProtoMsg(message: QueryAccountsRequest): QueryAccountsRequestProtoMsg;
 };
 export declare const QueryAccountsResponse: {
-    encode(message: QueryAccountsResponse, writer?: _m0.Writer): _m0.Writer;
-    decode(input: _m0.Reader | Uint8Array, length?: number): QueryAccountsResponse;
+    typeUrl: string;
+    encode(message: QueryAccountsResponse, writer?: BinaryWriter): BinaryWriter;
+    decode(input: BinaryReader | Uint8Array, length?: number): QueryAccountsResponse;
     fromJSON(object: any): QueryAccountsResponse;
     toJSON(message: QueryAccountsResponse): unknown;
     fromPartial(object: Partial<QueryAccountsResponse>): QueryAccountsResponse;
@@ -564,8 +565,9 @@ export declare const QueryAccountsResponse: {
     toProtoMsg(message: QueryAccountsResponse): QueryAccountsResponseProtoMsg;
 };
 export declare const QueryAccountRequest: {
-    encode(message: QueryAccountRequest, writer?: _m0.Writer): _m0.Writer;
-    decode(input: _m0.Reader | Uint8Array, length?: number): QueryAccountRequest;
+    typeUrl: string;
+    encode(message: QueryAccountRequest, writer?: BinaryWriter): BinaryWriter;
+    decode(input: BinaryReader | Uint8Array, length?: number): QueryAccountRequest;
     fromJSON(object: any): QueryAccountRequest;
     toJSON(message: QueryAccountRequest): unknown;
     fromPartial(object: Partial<QueryAccountRequest>): QueryAccountRequest;
@@ -578,8 +580,9 @@ export declare const QueryAccountRequest: {
     toProtoMsg(message: QueryAccountRequest): QueryAccountRequestProtoMsg;
 };
 export declare const QueryAccountResponse: {
-    encode(message: QueryAccountResponse, writer?: _m0.Writer): _m0.Writer;
-    decode(input: _m0.Reader | Uint8Array, length?: number): QueryAccountResponse;
+    typeUrl: string;
+    encode(message: QueryAccountResponse, writer?: BinaryWriter): BinaryWriter;
+    decode(input: BinaryReader | Uint8Array, length?: number): QueryAccountResponse;
     fromJSON(object: any): QueryAccountResponse;
     toJSON(message: QueryAccountResponse): unknown;
     fromPartial(object: Partial<QueryAccountResponse>): QueryAccountResponse;
@@ -592,8 +595,9 @@ export declare const QueryAccountResponse: {
     toProtoMsg(message: QueryAccountResponse): QueryAccountResponseProtoMsg;
 };
 export declare const QueryParamsRequest: {
-    encode(_: QueryParamsRequest, writer?: _m0.Writer): _m0.Writer;
-    decode(input: _m0.Reader | Uint8Array, length?: number): QueryParamsRequest;
+    typeUrl: string;
+    encode(_: QueryParamsRequest, writer?: BinaryWriter): BinaryWriter;
+    decode(input: BinaryReader | Uint8Array, length?: number): QueryParamsRequest;
     fromJSON(_: any): QueryParamsRequest;
     toJSON(_: QueryParamsRequest): unknown;
     fromPartial(_: Partial<QueryParamsRequest>): QueryParamsRequest;
@@ -606,8 +610,9 @@ export declare const QueryParamsRequest: {
     toProtoMsg(message: QueryParamsRequest): QueryParamsRequestProtoMsg;
 };
 export declare const QueryParamsResponse: {
-    encode(message: QueryParamsResponse, writer?: _m0.Writer): _m0.Writer;
-    decode(input: _m0.Reader | Uint8Array, length?: number): QueryParamsResponse;
+    typeUrl: string;
+    encode(message: QueryParamsResponse, writer?: BinaryWriter): BinaryWriter;
+    decode(input: BinaryReader | Uint8Array, length?: number): QueryParamsResponse;
     fromJSON(object: any): QueryParamsResponse;
     toJSON(message: QueryParamsResponse): unknown;
     fromPartial(object: Partial<QueryParamsResponse>): QueryParamsResponse;
@@ -620,8 +625,9 @@ export declare const QueryParamsResponse: {
     toProtoMsg(message: QueryParamsResponse): QueryParamsResponseProtoMsg;
 };
 export declare const QueryModuleAccountsRequest: {
-    encode(_: QueryModuleAccountsRequest, writer?: _m0.Writer): _m0.Writer;
-    decode(input: _m0.Reader | Uint8Array, length?: number): QueryModuleAccountsRequest;
+    typeUrl: string;
+    encode(_: QueryModuleAccountsRequest, writer?: BinaryWriter): BinaryWriter;
+    decode(input: BinaryReader | Uint8Array, length?: number): QueryModuleAccountsRequest;
     fromJSON(_: any): QueryModuleAccountsRequest;
     toJSON(_: QueryModuleAccountsRequest): unknown;
     fromPartial(_: Partial<QueryModuleAccountsRequest>): QueryModuleAccountsRequest;
@@ -634,8 +640,9 @@ export declare const QueryModuleAccountsRequest: {
     toProtoMsg(message: QueryModuleAccountsRequest): QueryModuleAccountsRequestProtoMsg;
 };
 export declare const QueryModuleAccountsResponse: {
-    encode(message: QueryModuleAccountsResponse, writer?: _m0.Writer): _m0.Writer;
-    decode(input: _m0.Reader | Uint8Array, length?: number): QueryModuleAccountsResponse;
+    typeUrl: string;
+    encode(message: QueryModuleAccountsResponse, writer?: BinaryWriter): BinaryWriter;
+    decode(input: BinaryReader | Uint8Array, length?: number): QueryModuleAccountsResponse;
     fromJSON(object: any): QueryModuleAccountsResponse;
     toJSON(message: QueryModuleAccountsResponse): unknown;
     fromPartial(object: Partial<QueryModuleAccountsResponse>): QueryModuleAccountsResponse;
@@ -648,8 +655,9 @@ export declare const QueryModuleAccountsResponse: {
     toProtoMsg(message: QueryModuleAccountsResponse): QueryModuleAccountsResponseProtoMsg;
 };
 export declare const QueryModuleAccountByNameRequest: {
-    encode(message: QueryModuleAccountByNameRequest, writer?: _m0.Writer): _m0.Writer;
-    decode(input: _m0.Reader | Uint8Array, length?: number): QueryModuleAccountByNameRequest;
+    typeUrl: string;
+    encode(message: QueryModuleAccountByNameRequest, writer?: BinaryWriter): BinaryWriter;
+    decode(input: BinaryReader | Uint8Array, length?: number): QueryModuleAccountByNameRequest;
     fromJSON(object: any): QueryModuleAccountByNameRequest;
     toJSON(message: QueryModuleAccountByNameRequest): unknown;
     fromPartial(object: Partial<QueryModuleAccountByNameRequest>): QueryModuleAccountByNameRequest;
@@ -662,8 +670,9 @@ export declare const QueryModuleAccountByNameRequest: {
     toProtoMsg(message: QueryModuleAccountByNameRequest): QueryModuleAccountByNameRequestProtoMsg;
 };
 export declare const QueryModuleAccountByNameResponse: {
-    encode(message: QueryModuleAccountByNameResponse, writer?: _m0.Writer): _m0.Writer;
-    decode(input: _m0.Reader | Uint8Array, length?: number): QueryModuleAccountByNameResponse;
+    typeUrl: string;
+    encode(message: QueryModuleAccountByNameResponse, writer?: BinaryWriter): BinaryWriter;
+    decode(input: BinaryReader | Uint8Array, length?: number): QueryModuleAccountByNameResponse;
     fromJSON(object: any): QueryModuleAccountByNameResponse;
     toJSON(message: QueryModuleAccountByNameResponse): unknown;
     fromPartial(object: Partial<QueryModuleAccountByNameResponse>): QueryModuleAccountByNameResponse;
@@ -676,8 +685,9 @@ export declare const QueryModuleAccountByNameResponse: {
     toProtoMsg(message: QueryModuleAccountByNameResponse): QueryModuleAccountByNameResponseProtoMsg;
 };
 export declare const Bech32PrefixRequest: {
-    encode(_: Bech32PrefixRequest, writer?: _m0.Writer): _m0.Writer;
-    decode(input: _m0.Reader | Uint8Array, length?: number): Bech32PrefixRequest;
+    typeUrl: string;
+    encode(_: Bech32PrefixRequest, writer?: BinaryWriter): BinaryWriter;
+    decode(input: BinaryReader | Uint8Array, length?: number): Bech32PrefixRequest;
     fromJSON(_: any): Bech32PrefixRequest;
     toJSON(_: Bech32PrefixRequest): unknown;
     fromPartial(_: Partial<Bech32PrefixRequest>): Bech32PrefixRequest;
@@ -690,8 +700,9 @@ export declare const Bech32PrefixRequest: {
     toProtoMsg(message: Bech32PrefixRequest): Bech32PrefixRequestProtoMsg;
 };
 export declare const Bech32PrefixResponse: {
-    encode(message: Bech32PrefixResponse, writer?: _m0.Writer): _m0.Writer;
-    decode(input: _m0.Reader | Uint8Array, length?: number): Bech32PrefixResponse;
+    typeUrl: string;
+    encode(message: Bech32PrefixResponse, writer?: BinaryWriter): BinaryWriter;
+    decode(input: BinaryReader | Uint8Array, length?: number): Bech32PrefixResponse;
     fromJSON(object: any): Bech32PrefixResponse;
     toJSON(message: Bech32PrefixResponse): unknown;
     fromPartial(object: Partial<Bech32PrefixResponse>): Bech32PrefixResponse;
@@ -704,8 +715,9 @@ export declare const Bech32PrefixResponse: {
     toProtoMsg(message: Bech32PrefixResponse): Bech32PrefixResponseProtoMsg;
 };
 export declare const AddressBytesToStringRequest: {
-    encode(message: AddressBytesToStringRequest, writer?: _m0.Writer): _m0.Writer;
-    decode(input: _m0.Reader | Uint8Array, length?: number): AddressBytesToStringRequest;
+    typeUrl: string;
+    encode(message: AddressBytesToStringRequest, writer?: BinaryWriter): BinaryWriter;
+    decode(input: BinaryReader | Uint8Array, length?: number): AddressBytesToStringRequest;
     fromJSON(object: any): AddressBytesToStringRequest;
     toJSON(message: AddressBytesToStringRequest): unknown;
     fromPartial(object: Partial<AddressBytesToStringRequest>): AddressBytesToStringRequest;
@@ -718,8 +730,9 @@ export declare const AddressBytesToStringRequest: {
     toProtoMsg(message: AddressBytesToStringRequest): AddressBytesToStringRequestProtoMsg;
 };
 export declare const AddressBytesToStringResponse: {
-    encode(message: AddressBytesToStringResponse, writer?: _m0.Writer): _m0.Writer;
-    decode(input: _m0.Reader | Uint8Array, length?: number): AddressBytesToStringResponse;
+    typeUrl: string;
+    encode(message: AddressBytesToStringResponse, writer?: BinaryWriter): BinaryWriter;
+    decode(input: BinaryReader | Uint8Array, length?: number): AddressBytesToStringResponse;
     fromJSON(object: any): AddressBytesToStringResponse;
     toJSON(message: AddressBytesToStringResponse): unknown;
     fromPartial(object: Partial<AddressBytesToStringResponse>): AddressBytesToStringResponse;
@@ -732,8 +745,9 @@ export declare const AddressBytesToStringResponse: {
     toProtoMsg(message: AddressBytesToStringResponse): AddressBytesToStringResponseProtoMsg;
 };
 export declare const AddressStringToBytesRequest: {
-    encode(message: AddressStringToBytesRequest, writer?: _m0.Writer): _m0.Writer;
-    decode(input: _m0.Reader | Uint8Array, length?: number): AddressStringToBytesRequest;
+    typeUrl: string;
+    encode(message: AddressStringToBytesRequest, writer?: BinaryWriter): BinaryWriter;
+    decode(input: BinaryReader | Uint8Array, length?: number): AddressStringToBytesRequest;
     fromJSON(object: any): AddressStringToBytesRequest;
     toJSON(message: AddressStringToBytesRequest): unknown;
     fromPartial(object: Partial<AddressStringToBytesRequest>): AddressStringToBytesRequest;
@@ -746,8 +760,9 @@ export declare const AddressStringToBytesRequest: {
     toProtoMsg(message: AddressStringToBytesRequest): AddressStringToBytesRequestProtoMsg;
 };
 export declare const AddressStringToBytesResponse: {
-    encode(message: AddressStringToBytesResponse, writer?: _m0.Writer): _m0.Writer;
-    decode(input: _m0.Reader | Uint8Array, length?: number): AddressStringToBytesResponse;
+    typeUrl: string;
+    encode(message: AddressStringToBytesResponse, writer?: BinaryWriter): BinaryWriter;
+    decode(input: BinaryReader | Uint8Array, length?: number): AddressStringToBytesResponse;
     fromJSON(object: any): AddressStringToBytesResponse;
     toJSON(message: AddressStringToBytesResponse): unknown;
     fromPartial(object: Partial<AddressStringToBytesResponse>): AddressStringToBytesResponse;
@@ -760,8 +775,9 @@ export declare const AddressStringToBytesResponse: {
     toProtoMsg(message: AddressStringToBytesResponse): AddressStringToBytesResponseProtoMsg;
 };
 export declare const QueryAccountAddressByIDRequest: {
-    encode(message: QueryAccountAddressByIDRequest, writer?: _m0.Writer): _m0.Writer;
-    decode(input: _m0.Reader | Uint8Array, length?: number): QueryAccountAddressByIDRequest;
+    typeUrl: string;
+    encode(message: QueryAccountAddressByIDRequest, writer?: BinaryWriter): BinaryWriter;
+    decode(input: BinaryReader | Uint8Array, length?: number): QueryAccountAddressByIDRequest;
     fromJSON(object: any): QueryAccountAddressByIDRequest;
     toJSON(message: QueryAccountAddressByIDRequest): unknown;
     fromPartial(object: Partial<QueryAccountAddressByIDRequest>): QueryAccountAddressByIDRequest;
@@ -774,8 +790,9 @@ export declare const QueryAccountAddressByIDRequest: {
     toProtoMsg(message: QueryAccountAddressByIDRequest): QueryAccountAddressByIDRequestProtoMsg;
 };
 export declare const QueryAccountAddressByIDResponse: {
-    encode(message: QueryAccountAddressByIDResponse, writer?: _m0.Writer): _m0.Writer;
-    decode(input: _m0.Reader | Uint8Array, length?: number): QueryAccountAddressByIDResponse;
+    typeUrl: string;
+    encode(message: QueryAccountAddressByIDResponse, writer?: BinaryWriter): BinaryWriter;
+    decode(input: BinaryReader | Uint8Array, length?: number): QueryAccountAddressByIDResponse;
     fromJSON(object: any): QueryAccountAddressByIDResponse;
     toJSON(message: QueryAccountAddressByIDResponse): unknown;
     fromPartial(object: Partial<QueryAccountAddressByIDResponse>): QueryAccountAddressByIDResponse;
@@ -787,9 +804,9 @@ export declare const QueryAccountAddressByIDResponse: {
     toProto(message: QueryAccountAddressByIDResponse): Uint8Array;
     toProtoMsg(message: QueryAccountAddressByIDResponse): QueryAccountAddressByIDResponseProtoMsg;
 };
-export declare const AccountI_InterfaceDecoder: (input: _m0.Reader | Uint8Array) => BaseAccount | Any;
+export declare const AccountI_InterfaceDecoder: (input: BinaryReader | Uint8Array) => BaseAccount | Any;
 export declare const AccountI_FromAmino: (content: AnyAmino) => Any;
 export declare const AccountI_ToAmino: (content: Any) => AnyAmino;
-export declare const ModuleAccountI_InterfaceDecoder: (input: _m0.Reader | Uint8Array) => ModuleAccount | Any;
+export declare const ModuleAccountI_InterfaceDecoder: (input: BinaryReader | Uint8Array) => ModuleAccount | Any;
 export declare const ModuleAccountI_FromAmino: (content: AnyAmino) => Any;
 export declare const ModuleAccountI_ToAmino: (content: Any) => AnyAmino;

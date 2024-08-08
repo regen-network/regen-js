@@ -6,8 +6,9 @@ export declare const cosmos_proto: {
     ScalarTypeSDKType: typeof _1.ScalarType;
     ScalarTypeAmino: typeof _1.ScalarType;
     InterfaceDescriptor: {
-        encode(message: _1.InterfaceDescriptor, writer?: import("protobufjs").Writer): import("protobufjs").Writer;
-        decode(input: Uint8Array | import("protobufjs").Reader, length?: number | undefined): _1.InterfaceDescriptor;
+        typeUrl: string;
+        encode(message: _1.InterfaceDescriptor, writer?: import("..").BinaryWriter): import("..").BinaryWriter;
+        decode(input: Uint8Array | import("..").BinaryReader, length?: number | undefined): _1.InterfaceDescriptor;
         fromJSON(object: any): _1.InterfaceDescriptor;
         toJSON(message: _1.InterfaceDescriptor): unknown;
         fromPartial(object: Partial<_1.InterfaceDescriptor>): _1.InterfaceDescriptor;
@@ -19,8 +20,9 @@ export declare const cosmos_proto: {
         toProtoMsg(message: _1.InterfaceDescriptor): _1.InterfaceDescriptorProtoMsg;
     };
     ScalarDescriptor: {
-        encode(message: _1.ScalarDescriptor, writer?: import("protobufjs").Writer): import("protobufjs").Writer;
-        decode(input: Uint8Array | import("protobufjs").Reader, length?: number | undefined): _1.ScalarDescriptor;
+        typeUrl: string;
+        encode(message: _1.ScalarDescriptor, writer?: import("..").BinaryWriter): import("..").BinaryWriter;
+        decode(input: Uint8Array | import("..").BinaryReader, length?: number | undefined): _1.ScalarDescriptor;
         fromJSON(object: any): _1.ScalarDescriptor;
         toJSON(message: _1.ScalarDescriptor): unknown;
         fromPartial(object: Partial<_1.ScalarDescriptor>): _1.ScalarDescriptor;

@@ -1,5 +1,4 @@
-import { Long } from "../../../helpers";
-import * as _m0 from "protobufjs/minimal";
+import { BinaryReader, BinaryWriter } from "../../../binary";
 /** EventAnchor is an event emitted when data is anchored on chain. */
 export interface EventAnchor {
     /** iri is the IRI of the data anchored on chain. */
@@ -12,7 +11,7 @@ export interface EventAnchorProtoMsg {
 /** EventAnchor is an event emitted when data is anchored on chain. */
 export interface EventAnchorAmino {
     /** iri is the IRI of the data anchored on chain. */
-    iri: string;
+    iri?: string;
 }
 export interface EventAnchorAminoMsg {
     type: "/regen.data.v1.EventAnchor";
@@ -39,12 +38,12 @@ export interface EventAttestProtoMsg {
 /** EventAttest is an event emitted when data is attested to on chain. */
 export interface EventAttestAmino {
     /** iri is the IRI of the data attested to. */
-    iri: string;
+    iri?: string;
     /**
      * attestor is the address of the account that has attested to the veracity of
      * the data.
      */
-    attestor: string;
+    attestor?: string;
 }
 export interface EventAttestAminoMsg {
     type: "/regen.data.v1.EventAttest";
@@ -58,7 +57,7 @@ export interface EventAttestSDKType {
 /** EventDefineResolver is an event emitted when a resolved is defined on chain. */
 export interface EventDefineResolver {
     /** id is the ID of the defined resolver. */
-    id: Long;
+    id: bigint;
 }
 export interface EventDefineResolverProtoMsg {
     typeUrl: "/regen.data.v1.EventDefineResolver";
@@ -67,7 +66,7 @@ export interface EventDefineResolverProtoMsg {
 /** EventDefineResolver is an event emitted when a resolved is defined on chain. */
 export interface EventDefineResolverAmino {
     /** id is the ID of the defined resolver. */
-    id: string;
+    id?: string;
 }
 export interface EventDefineResolverAminoMsg {
     type: "/regen.data.v1.EventDefineResolver";
@@ -75,7 +74,7 @@ export interface EventDefineResolverAminoMsg {
 }
 /** EventDefineResolver is an event emitted when a resolved is defined on chain. */
 export interface EventDefineResolverSDKType {
-    id: Long;
+    id: bigint;
 }
 /**
  * EventRegisterResolver is an event emitted when data is registered to a
@@ -83,7 +82,7 @@ export interface EventDefineResolverSDKType {
  */
 export interface EventRegisterResolver {
     /** id is the ID of the resolver that the data was registered to. */
-    id: Long;
+    id: bigint;
     /** iri is the IRI of the data that was registered. */
     iri: string;
 }
@@ -97,9 +96,9 @@ export interface EventRegisterResolverProtoMsg {
  */
 export interface EventRegisterResolverAmino {
     /** id is the ID of the resolver that the data was registered to. */
-    id: string;
+    id?: string;
     /** iri is the IRI of the data that was registered. */
-    iri: string;
+    iri?: string;
 }
 export interface EventRegisterResolverAminoMsg {
     type: "/regen.data.v1.EventRegisterResolver";
@@ -110,12 +109,13 @@ export interface EventRegisterResolverAminoMsg {
  * resolver on chain.
  */
 export interface EventRegisterResolverSDKType {
-    id: Long;
+    id: bigint;
     iri: string;
 }
 export declare const EventAnchor: {
-    encode(message: EventAnchor, writer?: _m0.Writer): _m0.Writer;
-    decode(input: _m0.Reader | Uint8Array, length?: number): EventAnchor;
+    typeUrl: string;
+    encode(message: EventAnchor, writer?: BinaryWriter): BinaryWriter;
+    decode(input: BinaryReader | Uint8Array, length?: number): EventAnchor;
     fromJSON(object: any): EventAnchor;
     toJSON(message: EventAnchor): unknown;
     fromPartial(object: Partial<EventAnchor>): EventAnchor;
@@ -127,8 +127,9 @@ export declare const EventAnchor: {
     toProtoMsg(message: EventAnchor): EventAnchorProtoMsg;
 };
 export declare const EventAttest: {
-    encode(message: EventAttest, writer?: _m0.Writer): _m0.Writer;
-    decode(input: _m0.Reader | Uint8Array, length?: number): EventAttest;
+    typeUrl: string;
+    encode(message: EventAttest, writer?: BinaryWriter): BinaryWriter;
+    decode(input: BinaryReader | Uint8Array, length?: number): EventAttest;
     fromJSON(object: any): EventAttest;
     toJSON(message: EventAttest): unknown;
     fromPartial(object: Partial<EventAttest>): EventAttest;
@@ -140,8 +141,9 @@ export declare const EventAttest: {
     toProtoMsg(message: EventAttest): EventAttestProtoMsg;
 };
 export declare const EventDefineResolver: {
-    encode(message: EventDefineResolver, writer?: _m0.Writer): _m0.Writer;
-    decode(input: _m0.Reader | Uint8Array, length?: number): EventDefineResolver;
+    typeUrl: string;
+    encode(message: EventDefineResolver, writer?: BinaryWriter): BinaryWriter;
+    decode(input: BinaryReader | Uint8Array, length?: number): EventDefineResolver;
     fromJSON(object: any): EventDefineResolver;
     toJSON(message: EventDefineResolver): unknown;
     fromPartial(object: Partial<EventDefineResolver>): EventDefineResolver;
@@ -153,8 +155,9 @@ export declare const EventDefineResolver: {
     toProtoMsg(message: EventDefineResolver): EventDefineResolverProtoMsg;
 };
 export declare const EventRegisterResolver: {
-    encode(message: EventRegisterResolver, writer?: _m0.Writer): _m0.Writer;
-    decode(input: _m0.Reader | Uint8Array, length?: number): EventRegisterResolver;
+    typeUrl: string;
+    encode(message: EventRegisterResolver, writer?: BinaryWriter): BinaryWriter;
+    decode(input: BinaryReader | Uint8Array, length?: number): EventRegisterResolver;
     fromJSON(object: any): EventRegisterResolver;
     toJSON(message: EventRegisterResolver): unknown;
     fromPartial(object: Partial<EventRegisterResolver>): EventRegisterResolver;

@@ -1,4 +1,4 @@
-import * as _m0 from "protobufjs/minimal";
+import { BinaryReader, BinaryWriter } from "../../../../binary";
 /**
  * MultiSignature wraps the signatures from a multisig.LegacyAminoPubKey.
  * See cosmos.tx.v1betata1.ModeInfo.Multi for how to specify which signers
@@ -17,7 +17,7 @@ export interface MultiSignatureProtoMsg {
  * signed and with which modes.
  */
 export interface MultiSignatureAmino {
-    signatures: Uint8Array[];
+    signatures?: string[];
 }
 export interface MultiSignatureAminoMsg {
     type: "cosmos-sdk/MultiSignature";
@@ -52,8 +52,8 @@ export interface CompactBitArrayProtoMsg {
  * This is not thread safe, and is not intended for concurrent usage.
  */
 export interface CompactBitArrayAmino {
-    extra_bits_stored: number;
-    elems: Uint8Array;
+    extra_bits_stored?: number;
+    elems?: string;
 }
 export interface CompactBitArrayAminoMsg {
     type: "cosmos-sdk/CompactBitArray";
@@ -70,8 +70,9 @@ export interface CompactBitArraySDKType {
     elems: Uint8Array;
 }
 export declare const MultiSignature: {
-    encode(message: MultiSignature, writer?: _m0.Writer): _m0.Writer;
-    decode(input: _m0.Reader | Uint8Array, length?: number): MultiSignature;
+    typeUrl: string;
+    encode(message: MultiSignature, writer?: BinaryWriter): BinaryWriter;
+    decode(input: BinaryReader | Uint8Array, length?: number): MultiSignature;
     fromJSON(object: any): MultiSignature;
     toJSON(message: MultiSignature): unknown;
     fromPartial(object: Partial<MultiSignature>): MultiSignature;
@@ -84,8 +85,9 @@ export declare const MultiSignature: {
     toProtoMsg(message: MultiSignature): MultiSignatureProtoMsg;
 };
 export declare const CompactBitArray: {
-    encode(message: CompactBitArray, writer?: _m0.Writer): _m0.Writer;
-    decode(input: _m0.Reader | Uint8Array, length?: number): CompactBitArray;
+    typeUrl: string;
+    encode(message: CompactBitArray, writer?: BinaryWriter): BinaryWriter;
+    decode(input: BinaryReader | Uint8Array, length?: number): CompactBitArray;
     fromJSON(object: any): CompactBitArray;
     toJSON(message: CompactBitArray): unknown;
     fromPartial(object: Partial<CompactBitArray>): CompactBitArray;

@@ -19,7 +19,7 @@ telescope({
     },
     interfaces: {
       enabled: true,
-      useUnionTypes: false,
+      useUnionTypes: true,
     },
     prototypes: {
       includePackageVar: false,

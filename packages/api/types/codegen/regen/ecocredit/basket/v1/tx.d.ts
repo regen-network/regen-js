@@ -1,6 +1,6 @@
 import { DateCriteria, DateCriteriaAmino, DateCriteriaSDKType, BasketCredit, BasketCreditAmino, BasketCreditSDKType } from "./types";
 import { Coin, CoinAmino, CoinSDKType } from "../../../../cosmos/base/v1beta1/coin";
-import * as _m0 from "protobufjs/minimal";
+import { BinaryReader, BinaryWriter } from "../../../../binary";
 /** MsgCreateBasket is the Msg/CreateBasket request type. */
 export interface MsgCreate {
     /**
@@ -50,7 +50,7 @@ export interface MsgCreate {
      * date_criteria is the date criteria for batches admitted to the basket.
      * At most, only one of the date criteria fields can be set.
      */
-    dateCriteria: DateCriteria;
+    dateCriteria?: DateCriteria;
     /**
      * fee is the basket creation fee. A fee is not required if no fee exists
      * in the basket fee parameter. The fee must be greater than or equal to the
@@ -75,7 +75,7 @@ export interface MsgCreateAmino {
      * curator is the address of the basket curator who is able to change certain
      * basket settings.
      */
-    curator: string;
+    curator?: string;
     /**
      * name will be used to together with prefix to create a bank denom for this
      * basket token. It can be between 3-8 alphanumeric characters, with the
@@ -85,12 +85,12 @@ export interface MsgCreateAmino {
      * `eco.<prefix><credit_type_abbrev>.<name>` where prefix is the prefix of
      * a standard SI unit derived from credit type precision.
      */
-    name: string;
+    name?: string;
     /**
      * description is a human-readable description of the basket denom that should
      * be at most 256 characters.
      */
-    description: string;
+    description?: string;
     /**
      * Deprecated (Since Revision 1): This field is no longer used and will be
      * removed in the next version. The value of credit type precision is always
@@ -98,7 +98,7 @@ export interface MsgCreateAmino {
      * bank denom metadata, and converting credits to/from basket tokens.
      */
     /** @deprecated */
-    exponent: number;
+    exponent?: number;
     /**
      * disable_auto_retire allows auto-retirement to be disabled.
      * The credits will be auto-retired if disable_auto_retire is
@@ -106,14 +106,14 @@ export interface MsgCreateAmino {
      * address picking them from the basket, in which case they will remain
      * tradable.
      */
-    disable_auto_retire: boolean;
+    disable_auto_retire?: boolean;
     /**
      * credit_type_abbrev is the abbreviation of the credit type this basket is
      * able to hold.
      */
-    credit_type_abbrev: string;
+    credit_type_abbrev?: string;
     /** allowed_classes are the credit classes allowed to be put in the basket */
-    allowed_classes: string[];
+    allowed_classes?: string[];
     /**
      * date_criteria is the date criteria for batches admitted to the basket.
      * At most, only one of the date criteria fields can be set.
@@ -131,7 +131,7 @@ export interface MsgCreateAmino {
      * This field will be updated to a single fee rather than a list of fees in
      * the next version to reflect these requirements.
      */
-    fee: CoinAmino[];
+    fee?: CoinAmino[];
 }
 export interface MsgCreateAminoMsg {
     type: "regen.basket/MsgCreate";
@@ -147,7 +147,7 @@ export interface MsgCreateSDKType {
     disable_auto_retire: boolean;
     credit_type_abbrev: string;
     allowed_classes: string[];
-    date_criteria: DateCriteriaSDKType;
+    date_criteria?: DateCriteriaSDKType;
     fee: CoinSDKType[];
 }
 /** MsgCreateBasketResponse is the Msg/CreateBasket response type. */
@@ -162,7 +162,7 @@ export interface MsgCreateResponseProtoMsg {
 /** MsgCreateBasketResponse is the Msg/CreateBasket response type. */
 export interface MsgCreateResponseAmino {
     /** basket_denom is the unique denomination ID of the newly created basket. */
-    basket_denom: string;
+    basket_denom?: string;
 }
 export interface MsgCreateResponseAminoMsg {
     type: "/regen.ecocredit.basket.v1.MsgCreateResponse";
@@ -191,14 +191,14 @@ export interface MsgPutProtoMsg {
 /** MsgAddToBasket is the Msg/AddToBasket request type. */
 export interface MsgPutAmino {
     /** owner is the owner of credits being put into the basket. */
-    owner: string;
+    owner?: string;
     /** basket_denom is the basket denom to add credits to. */
-    basket_denom: string;
+    basket_denom?: string;
     /**
      * credits are credits to add to the basket. If they do not match the basket's
      * admission criteria, the operation will fail.
      */
-    credits: BasketCreditAmino[];
+    credits?: BasketCreditAmino[];
 }
 export interface MsgPutAminoMsg {
     type: "regen.basket/MsgPut";
@@ -222,7 +222,7 @@ export interface MsgPutResponseProtoMsg {
 /** MsgAddToBasketResponse is the Msg/AddToBasket response type. */
 export interface MsgPutResponseAmino {
     /** amount_received is the integer amount of basket tokens received. */
-    amount_received: string;
+    amount_received?: string;
 }
 export interface MsgPutResponseAminoMsg {
     type: "/regen.ecocredit.basket.v1.MsgPutResponse";
@@ -281,11 +281,11 @@ export interface MsgTakeProtoMsg {
 /** MsgTakeFromBasket is the Msg/TakeFromBasket request type. */
 export interface MsgTakeAmino {
     /** owner is the owner of the basket tokens. */
-    owner: string;
+    owner?: string;
     /** basket_denom is the basket bank denom to take credits from. */
-    basket_denom: string;
+    basket_denom?: string;
     /** amount is the integer number of basket tokens to convert into credits. */
-    amount: string;
+    amount?: string;
     /**
      * retirement_location is the optional retirement jurisdiction for the
      * credits which will be used only if retire_on_take is true.
@@ -295,7 +295,7 @@ export interface MsgTakeAmino {
      * set and retirement_jurisdiction will be used if both are set.
      */
     /** @deprecated */
-    retirement_location: string;
+    retirement_location?: string;
     /**
      * retire_on_take is a boolean that dictates whether the ecocredits
      * received in exchange for the basket tokens will be received as
@@ -303,14 +303,14 @@ export interface MsgTakeAmino {
      * false, retire_on_take MUST be set to true, and a retirement jurisdiction
      * must be provided.
      */
-    retire_on_take: boolean;
+    retire_on_take?: boolean;
     /**
      * retirement_jurisdiction is the optional retirement jurisdiction for the
      * credits which will be used only if retire_on_take is true.
      *
      * Since Revision 1
      */
-    retirement_jurisdiction: string;
+    retirement_jurisdiction?: string;
     /**
      * retirement_reason is any arbitrary string that specifies the reason for
      * retiring credits. The reason will be included in EventRetire and is not
@@ -318,7 +318,7 @@ export interface MsgTakeAmino {
      *
      * Since Revision 2
      */
-    retirement_reason: string;
+    retirement_reason?: string;
 }
 export interface MsgTakeAminoMsg {
     type: "regen.basket/MsgTake";
@@ -347,7 +347,7 @@ export interface MsgTakeResponseProtoMsg {
 /** MsgTakeFromBasketResponse is the Msg/TakeFromBasket response type. */
 export interface MsgTakeResponseAmino {
     /** credits are the credits taken out of the basket. */
-    credits: BasketCreditAmino[];
+    credits?: BasketCreditAmino[];
 }
 export interface MsgTakeResponseAminoMsg {
     type: "/regen.ecocredit.basket.v1.MsgTakeResponse";
@@ -369,7 +369,7 @@ export interface MsgUpdateBasketFee {
      * fee is the basket creation fee. If not set, the basket creation fee will be
      * removed and no fee will be required to create a basket.
      */
-    fee: Coin;
+    fee?: Coin;
 }
 export interface MsgUpdateBasketFeeProtoMsg {
     typeUrl: "/regen.ecocredit.basket.v1.MsgUpdateBasketFee";
@@ -382,7 +382,7 @@ export interface MsgUpdateBasketFeeProtoMsg {
  */
 export interface MsgUpdateBasketFeeAmino {
     /** authority is the address of the governance account. */
-    authority: string;
+    authority?: string;
     /**
      * fee is the basket creation fee. If not set, the basket creation fee will be
      * removed and no fee will be required to create a basket.
@@ -400,7 +400,7 @@ export interface MsgUpdateBasketFeeAminoMsg {
  */
 export interface MsgUpdateBasketFeeSDKType {
     authority: string;
-    fee: CoinSDKType;
+    fee?: CoinSDKType;
 }
 /**
  * MsgUpdateBasketFeeResponse is the Msg/UpdateBasketFee response type.
@@ -458,14 +458,14 @@ export interface MsgUpdateCuratorProtoMsg {
  */
 export interface MsgUpdateCuratorAmino {
     /** curator is the address of the basket curator. */
-    curator: string;
+    curator?: string;
     /** denom is the unique identifier of the basket. */
-    denom: string;
+    denom?: string;
     /**
      * new_curator is the address of the account that will become the
      * new curator of the basket.
      */
-    new_curator: string;
+    new_curator?: string;
 }
 export interface MsgUpdateCuratorAminoMsg {
     type: "regen.basket/MsgUpdateCurator";
@@ -524,7 +524,7 @@ export interface MsgUpdateDateCriteria {
      * new_date_criteria is the new date criteria for batches admitted to the
      * basket. At most, only one of the date criteria fields can be set.
      */
-    newDateCriteria: DateCriteria;
+    newDateCriteria?: DateCriteria;
 }
 export interface MsgUpdateDateCriteriaProtoMsg {
     typeUrl: "/regen.ecocredit.basket.v1.MsgUpdateDateCriteria";
@@ -537,9 +537,9 @@ export interface MsgUpdateDateCriteriaProtoMsg {
  */
 export interface MsgUpdateDateCriteriaAmino {
     /** authority is the address of the governance account. */
-    authority: string;
+    authority?: string;
     /** denom is the unique identifier of the basket. */
-    denom: string;
+    denom?: string;
     /**
      * new_date_criteria is the new date criteria for batches admitted to the
      * basket. At most, only one of the date criteria fields can be set.
@@ -558,7 +558,7 @@ export interface MsgUpdateDateCriteriaAminoMsg {
 export interface MsgUpdateDateCriteriaSDKType {
     authority: string;
     denom: string;
-    new_date_criteria: DateCriteriaSDKType;
+    new_date_criteria?: DateCriteriaSDKType;
 }
 /**
  * MsgUpdateDateCriteriaResponse is the Msg/UpdateDateCriteria response type.
@@ -590,8 +590,9 @@ export interface MsgUpdateDateCriteriaResponseAminoMsg {
 export interface MsgUpdateDateCriteriaResponseSDKType {
 }
 export declare const MsgCreate: {
-    encode(message: MsgCreate, writer?: _m0.Writer): _m0.Writer;
-    decode(input: _m0.Reader | Uint8Array, length?: number): MsgCreate;
+    typeUrl: string;
+    encode(message: MsgCreate, writer?: BinaryWriter): BinaryWriter;
+    decode(input: BinaryReader | Uint8Array, length?: number): MsgCreate;
     fromJSON(object: any): MsgCreate;
     toJSON(message: MsgCreate): unknown;
     fromPartial(object: Partial<MsgCreate>): MsgCreate;
@@ -604,8 +605,9 @@ export declare const MsgCreate: {
     toProtoMsg(message: MsgCreate): MsgCreateProtoMsg;
 };
 export declare const MsgCreateResponse: {
-    encode(message: MsgCreateResponse, writer?: _m0.Writer): _m0.Writer;
-    decode(input: _m0.Reader | Uint8Array, length?: number): MsgCreateResponse;
+    typeUrl: string;
+    encode(message: MsgCreateResponse, writer?: BinaryWriter): BinaryWriter;
+    decode(input: BinaryReader | Uint8Array, length?: number): MsgCreateResponse;
     fromJSON(object: any): MsgCreateResponse;
     toJSON(message: MsgCreateResponse): unknown;
     fromPartial(object: Partial<MsgCreateResponse>): MsgCreateResponse;
@@ -617,8 +619,9 @@ export declare const MsgCreateResponse: {
     toProtoMsg(message: MsgCreateResponse): MsgCreateResponseProtoMsg;
 };
 export declare const MsgPut: {
-    encode(message: MsgPut, writer?: _m0.Writer): _m0.Writer;
-    decode(input: _m0.Reader | Uint8Array, length?: number): MsgPut;
+    typeUrl: string;
+    encode(message: MsgPut, writer?: BinaryWriter): BinaryWriter;
+    decode(input: BinaryReader | Uint8Array, length?: number): MsgPut;
     fromJSON(object: any): MsgPut;
     toJSON(message: MsgPut): unknown;
     fromPartial(object: Partial<MsgPut>): MsgPut;
@@ -631,8 +634,9 @@ export declare const MsgPut: {
     toProtoMsg(message: MsgPut): MsgPutProtoMsg;
 };
 export declare const MsgPutResponse: {
-    encode(message: MsgPutResponse, writer?: _m0.Writer): _m0.Writer;
-    decode(input: _m0.Reader | Uint8Array, length?: number): MsgPutResponse;
+    typeUrl: string;
+    encode(message: MsgPutResponse, writer?: BinaryWriter): BinaryWriter;
+    decode(input: BinaryReader | Uint8Array, length?: number): MsgPutResponse;
     fromJSON(object: any): MsgPutResponse;
     toJSON(message: MsgPutResponse): unknown;
     fromPartial(object: Partial<MsgPutResponse>): MsgPutResponse;
@@ -644,8 +648,9 @@ export declare const MsgPutResponse: {
     toProtoMsg(message: MsgPutResponse): MsgPutResponseProtoMsg;
 };
 export declare const MsgTake: {
-    encode(message: MsgTake, writer?: _m0.Writer): _m0.Writer;
-    decode(input: _m0.Reader | Uint8Array, length?: number): MsgTake;
+    typeUrl: string;
+    encode(message: MsgTake, writer?: BinaryWriter): BinaryWriter;
+    decode(input: BinaryReader | Uint8Array, length?: number): MsgTake;
     fromJSON(object: any): MsgTake;
     toJSON(message: MsgTake): unknown;
     fromPartial(object: Partial<MsgTake>): MsgTake;
@@ -658,8 +663,9 @@ export declare const MsgTake: {
     toProtoMsg(message: MsgTake): MsgTakeProtoMsg;
 };
 export declare const MsgTakeResponse: {
-    encode(message: MsgTakeResponse, writer?: _m0.Writer): _m0.Writer;
-    decode(input: _m0.Reader | Uint8Array, length?: number): MsgTakeResponse;
+    typeUrl: string;
+    encode(message: MsgTakeResponse, writer?: BinaryWriter): BinaryWriter;
+    decode(input: BinaryReader | Uint8Array, length?: number): MsgTakeResponse;
     fromJSON(object: any): MsgTakeResponse;
     toJSON(message: MsgTakeResponse): unknown;
     fromPartial(object: Partial<MsgTakeResponse>): MsgTakeResponse;
@@ -671,8 +677,9 @@ export declare const MsgTakeResponse: {
     toProtoMsg(message: MsgTakeResponse): MsgTakeResponseProtoMsg;
 };
 export declare const MsgUpdateBasketFee: {
-    encode(message: MsgUpdateBasketFee, writer?: _m0.Writer): _m0.Writer;
-    decode(input: _m0.Reader | Uint8Array, length?: number): MsgUpdateBasketFee;
+    typeUrl: string;
+    encode(message: MsgUpdateBasketFee, writer?: BinaryWriter): BinaryWriter;
+    decode(input: BinaryReader | Uint8Array, length?: number): MsgUpdateBasketFee;
     fromJSON(object: any): MsgUpdateBasketFee;
     toJSON(message: MsgUpdateBasketFee): unknown;
     fromPartial(object: Partial<MsgUpdateBasketFee>): MsgUpdateBasketFee;
@@ -685,8 +692,9 @@ export declare const MsgUpdateBasketFee: {
     toProtoMsg(message: MsgUpdateBasketFee): MsgUpdateBasketFeeProtoMsg;
 };
 export declare const MsgUpdateBasketFeeResponse: {
-    encode(_: MsgUpdateBasketFeeResponse, writer?: _m0.Writer): _m0.Writer;
-    decode(input: _m0.Reader | Uint8Array, length?: number): MsgUpdateBasketFeeResponse;
+    typeUrl: string;
+    encode(_: MsgUpdateBasketFeeResponse, writer?: BinaryWriter): BinaryWriter;
+    decode(input: BinaryReader | Uint8Array, length?: number): MsgUpdateBasketFeeResponse;
     fromJSON(_: any): MsgUpdateBasketFeeResponse;
     toJSON(_: MsgUpdateBasketFeeResponse): unknown;
     fromPartial(_: Partial<MsgUpdateBasketFeeResponse>): MsgUpdateBasketFeeResponse;
@@ -698,8 +706,9 @@ export declare const MsgUpdateBasketFeeResponse: {
     toProtoMsg(message: MsgUpdateBasketFeeResponse): MsgUpdateBasketFeeResponseProtoMsg;
 };
 export declare const MsgUpdateCurator: {
-    encode(message: MsgUpdateCurator, writer?: _m0.Writer): _m0.Writer;
-    decode(input: _m0.Reader | Uint8Array, length?: number): MsgUpdateCurator;
+    typeUrl: string;
+    encode(message: MsgUpdateCurator, writer?: BinaryWriter): BinaryWriter;
+    decode(input: BinaryReader | Uint8Array, length?: number): MsgUpdateCurator;
     fromJSON(object: any): MsgUpdateCurator;
     toJSON(message: MsgUpdateCurator): unknown;
     fromPartial(object: Partial<MsgUpdateCurator>): MsgUpdateCurator;
@@ -712,8 +721,9 @@ export declare const MsgUpdateCurator: {
     toProtoMsg(message: MsgUpdateCurator): MsgUpdateCuratorProtoMsg;
 };
 export declare const MsgUpdateCuratorResponse: {
-    encode(_: MsgUpdateCuratorResponse, writer?: _m0.Writer): _m0.Writer;
-    decode(input: _m0.Reader | Uint8Array, length?: number): MsgUpdateCuratorResponse;
+    typeUrl: string;
+    encode(_: MsgUpdateCuratorResponse, writer?: BinaryWriter): BinaryWriter;
+    decode(input: BinaryReader | Uint8Array, length?: number): MsgUpdateCuratorResponse;
     fromJSON(_: any): MsgUpdateCuratorResponse;
     toJSON(_: MsgUpdateCuratorResponse): unknown;
     fromPartial(_: Partial<MsgUpdateCuratorResponse>): MsgUpdateCuratorResponse;
@@ -725,8 +735,9 @@ export declare const MsgUpdateCuratorResponse: {
     toProtoMsg(message: MsgUpdateCuratorResponse): MsgUpdateCuratorResponseProtoMsg;
 };
 export declare const MsgUpdateDateCriteria: {
-    encode(message: MsgUpdateDateCriteria, writer?: _m0.Writer): _m0.Writer;
-    decode(input: _m0.Reader | Uint8Array, length?: number): MsgUpdateDateCriteria;
+    typeUrl: string;
+    encode(message: MsgUpdateDateCriteria, writer?: BinaryWriter): BinaryWriter;
+    decode(input: BinaryReader | Uint8Array, length?: number): MsgUpdateDateCriteria;
     fromJSON(object: any): MsgUpdateDateCriteria;
     toJSON(message: MsgUpdateDateCriteria): unknown;
     fromPartial(object: Partial<MsgUpdateDateCriteria>): MsgUpdateDateCriteria;
@@ -739,8 +750,9 @@ export declare const MsgUpdateDateCriteria: {
     toProtoMsg(message: MsgUpdateDateCriteria): MsgUpdateDateCriteriaProtoMsg;
 };
 export declare const MsgUpdateDateCriteriaResponse: {
-    encode(_: MsgUpdateDateCriteriaResponse, writer?: _m0.Writer): _m0.Writer;
-    decode(input: _m0.Reader | Uint8Array, length?: number): MsgUpdateDateCriteriaResponse;
+    typeUrl: string;
+    encode(_: MsgUpdateDateCriteriaResponse, writer?: BinaryWriter): BinaryWriter;
+    decode(input: BinaryReader | Uint8Array, length?: number): MsgUpdateDateCriteriaResponse;
     fromJSON(_: any): MsgUpdateDateCriteriaResponse;
     toJSON(_: MsgUpdateDateCriteriaResponse): unknown;
     fromPartial(_: Partial<MsgUpdateDateCriteriaResponse>): MsgUpdateDateCriteriaResponse;

@@ -1,4 +1,4 @@
-import * as _m0 from "protobufjs/minimal";
+import { BinaryReader, BinaryWriter } from "../../../binary";
 /** DigestAlgorithm is the hash digest algorithm */
 export declare enum DigestAlgorithm {
     /** DIGEST_ALGORITHM_UNSPECIFIED - unspecified and invalid */
@@ -88,13 +88,13 @@ export interface ContentHash {
      * the guarantee that the canonical hash will not change. The media type for
      * "raw" data is defined by the MediaType enum.
      */
-    raw: ContentHash_Raw;
+    raw?: ContentHash_Raw;
     /**
      * Graph specifies graph data that conforms to the RDF data model.
      * The canonicalization algorithm used for an RDF graph is specified by
      * GraphCanonicalizationAlgorithm.
      */
-    graph: ContentHash_Graph;
+    graph?: ContentHash_Graph;
 }
 export interface ContentHashProtoMsg {
     typeUrl: "/regen.data.v1.ContentHash";
@@ -125,8 +125,8 @@ export interface ContentHashAminoMsg {
 }
 /** ContentHash specifies a hash-based content identifier for a piece of data. */
 export interface ContentHashSDKType {
-    raw: ContentHash_RawSDKType;
-    graph: ContentHash_GraphSDKType;
+    raw?: ContentHash_RawSDKType;
+    graph?: ContentHash_GraphSDKType;
 }
 /** Raw is the content hash type used for raw data. */
 export interface ContentHash_Raw {
@@ -150,11 +150,11 @@ export interface ContentHash_RawAmino {
      * hash represents the hash of the data based on the specified
      * digest_algorithm.
      */
-    hash: Uint8Array;
+    hash?: string;
     /** digest_algorithm represents the hash digest algorithm. */
-    digest_algorithm: DigestAlgorithm;
+    digest_algorithm?: DigestAlgorithm;
     /** media_type represents the media type for raw data. */
-    media_type: RawMediaType;
+    media_type?: RawMediaType;
 }
 export interface ContentHash_RawAminoMsg {
     type: "/regen.data.v1.Raw";
@@ -193,16 +193,16 @@ export interface ContentHash_GraphAmino {
      * hash represents the hash of the data based on the specified
      * digest_algorithm.
      */
-    hash: Uint8Array;
+    hash?: string;
     /** digest_algorithm represents the hash digest algorithm. */
-    digest_algorithm: DigestAlgorithm;
+    digest_algorithm?: DigestAlgorithm;
     /**
      * graph_canonicalization_algorithm represents the RDF graph
      * canonicalization algorithm.
      */
-    canonicalization_algorithm: GraphCanonicalizationAlgorithm;
+    canonicalization_algorithm?: GraphCanonicalizationAlgorithm;
     /** merkle_tree is the merkle tree type used for the graph hash, if any. */
-    merkle_tree: GraphMerkleTree;
+    merkle_tree?: GraphMerkleTree;
 }
 export interface ContentHash_GraphAminoMsg {
     type: "/regen.data.v1.Graph";
@@ -227,7 +227,7 @@ export interface ContentHashesProtoMsg {
 /** ContentHashes contains list of content ContentHash. */
 export interface ContentHashesAmino {
     /** data is a list of content hashes which the resolver claims to serve. */
-    content_hashes: ContentHashAmino[];
+    content_hashes?: ContentHashAmino[];
 }
 export interface ContentHashesAminoMsg {
     type: "/regen.data.v1.ContentHashes";
@@ -238,8 +238,9 @@ export interface ContentHashesSDKType {
     content_hashes: ContentHashSDKType[];
 }
 export declare const ContentHash: {
-    encode(message: ContentHash, writer?: _m0.Writer): _m0.Writer;
-    decode(input: _m0.Reader | Uint8Array, length?: number): ContentHash;
+    typeUrl: string;
+    encode(message: ContentHash, writer?: BinaryWriter): BinaryWriter;
+    decode(input: BinaryReader | Uint8Array, length?: number): ContentHash;
     fromJSON(object: any): ContentHash;
     toJSON(message: ContentHash): unknown;
     fromPartial(object: Partial<ContentHash>): ContentHash;
@@ -251,8 +252,9 @@ export declare const ContentHash: {
     toProtoMsg(message: ContentHash): ContentHashProtoMsg;
 };
 export declare const ContentHash_Raw: {
-    encode(message: ContentHash_Raw, writer?: _m0.Writer): _m0.Writer;
-    decode(input: _m0.Reader | Uint8Array, length?: number): ContentHash_Raw;
+    typeUrl: string;
+    encode(message: ContentHash_Raw, writer?: BinaryWriter): BinaryWriter;
+    decode(input: BinaryReader | Uint8Array, length?: number): ContentHash_Raw;
     fromJSON(object: any): ContentHash_Raw;
     toJSON(message: ContentHash_Raw): unknown;
     fromPartial(object: Partial<ContentHash_Raw>): ContentHash_Raw;
@@ -264,8 +266,9 @@ export declare const ContentHash_Raw: {
     toProtoMsg(message: ContentHash_Raw): ContentHash_RawProtoMsg;
 };
 export declare const ContentHash_Graph: {
-    encode(message: ContentHash_Graph, writer?: _m0.Writer): _m0.Writer;
-    decode(input: _m0.Reader | Uint8Array, length?: number): ContentHash_Graph;
+    typeUrl: string;
+    encode(message: ContentHash_Graph, writer?: BinaryWriter): BinaryWriter;
+    decode(input: BinaryReader | Uint8Array, length?: number): ContentHash_Graph;
     fromJSON(object: any): ContentHash_Graph;
     toJSON(message: ContentHash_Graph): unknown;
     fromPartial(object: Partial<ContentHash_Graph>): ContentHash_Graph;
@@ -277,8 +280,9 @@ export declare const ContentHash_Graph: {
     toProtoMsg(message: ContentHash_Graph): ContentHash_GraphProtoMsg;
 };
 export declare const ContentHashes: {
-    encode(message: ContentHashes, writer?: _m0.Writer): _m0.Writer;
-    decode(input: _m0.Reader | Uint8Array, length?: number): ContentHashes;
+    typeUrl: string;
+    encode(message: ContentHashes, writer?: BinaryWriter): BinaryWriter;
+    decode(input: BinaryReader | Uint8Array, length?: number): ContentHashes;
     fromJSON(object: any): ContentHashes;
     toJSON(message: ContentHashes): unknown;
     fromPartial(object: Partial<ContentHashes>): ContentHashes;

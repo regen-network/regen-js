@@ -1,4 +1,4 @@
-import * as _m0 from "protobufjs/minimal";
+import { BinaryReader, BinaryWriter } from "../../../binary";
 /**
  * QueryInterchainAccountRequest is the request type for the
  * Query/InterchainAccountAddress RPC
@@ -19,9 +19,9 @@ export interface QueryInterchainAccountRequestProtoMsg {
  */
 export interface QueryInterchainAccountRequestAmino {
     /** owner is the address of the account that owns the ICA. */
-    owner: string;
+    owner?: string;
     /** connection_id is the connection the ICA claimed. */
-    connection_id: string;
+    connection_id?: string;
 }
 export interface QueryInterchainAccountRequestAminoMsg {
     type: "/regen.intertx.v1.QueryInterchainAccountRequest";
@@ -53,7 +53,7 @@ export interface QueryInterchainAccountResponseProtoMsg {
  */
 export interface QueryInterchainAccountResponseAmino {
     /** interchain_account_address is the address of the ICA. */
-    interchain_account_address: string;
+    interchain_account_address?: string;
 }
 export interface QueryInterchainAccountResponseAminoMsg {
     type: "/regen.intertx.v1.QueryInterchainAccountResponse";
@@ -67,8 +67,9 @@ export interface QueryInterchainAccountResponseSDKType {
     interchain_account_address: string;
 }
 export declare const QueryInterchainAccountRequest: {
-    encode(message: QueryInterchainAccountRequest, writer?: _m0.Writer): _m0.Writer;
-    decode(input: _m0.Reader | Uint8Array, length?: number): QueryInterchainAccountRequest;
+    typeUrl: string;
+    encode(message: QueryInterchainAccountRequest, writer?: BinaryWriter): BinaryWriter;
+    decode(input: BinaryReader | Uint8Array, length?: number): QueryInterchainAccountRequest;
     fromJSON(object: any): QueryInterchainAccountRequest;
     toJSON(message: QueryInterchainAccountRequest): unknown;
     fromPartial(object: Partial<QueryInterchainAccountRequest>): QueryInterchainAccountRequest;
@@ -80,8 +81,9 @@ export declare const QueryInterchainAccountRequest: {
     toProtoMsg(message: QueryInterchainAccountRequest): QueryInterchainAccountRequestProtoMsg;
 };
 export declare const QueryInterchainAccountResponse: {
-    encode(message: QueryInterchainAccountResponse, writer?: _m0.Writer): _m0.Writer;
-    decode(input: _m0.Reader | Uint8Array, length?: number): QueryInterchainAccountResponse;
+    typeUrl: string;
+    encode(message: QueryInterchainAccountResponse, writer?: BinaryWriter): BinaryWriter;
+    decode(input: BinaryReader | Uint8Array, length?: number): QueryInterchainAccountResponse;
     fromJSON(object: any): QueryInterchainAccountResponse;
     toJSON(message: QueryInterchainAccountResponse): unknown;
     fromPartial(object: Partial<QueryInterchainAccountResponse>): QueryInterchainAccountResponse;

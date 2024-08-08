@@ -1,6 +1,5 @@
 import { Params, ParamsAmino, ParamsSDKType, ValidatorSigningInfo, ValidatorSigningInfoAmino, ValidatorSigningInfoSDKType } from "./slashing";
-import { Long } from "../../../helpers";
-import * as _m0 from "protobufjs/minimal";
+import { BinaryReader, BinaryWriter } from "../../../binary";
 /** GenesisState defines the slashing module's genesis state. */
 export interface GenesisState {
     /** params defines all the paramaters of related to deposit. */
@@ -28,12 +27,12 @@ export interface GenesisStateAmino {
      * signing_infos represents a map between validator addresses and their
      * signing infos.
      */
-    signing_infos: SigningInfoAmino[];
+    signing_infos?: SigningInfoAmino[];
     /**
      * missed_blocks represents a map between validator addresses and their
      * missed blocks.
      */
-    missed_blocks: ValidatorMissedBlocksAmino[];
+    missed_blocks?: ValidatorMissedBlocksAmino[];
 }
 export interface GenesisStateAminoMsg {
     type: "cosmos-sdk/GenesisState";
@@ -59,7 +58,7 @@ export interface SigningInfoProtoMsg {
 /** SigningInfo stores validator signing info of corresponding address. */
 export interface SigningInfoAmino {
     /** address is the validator address. */
-    address: string;
+    address?: string;
     /** validator_signing_info represents the signing info of this validator. */
     validator_signing_info?: ValidatorSigningInfoAmino;
 }
@@ -92,9 +91,9 @@ export interface ValidatorMissedBlocksProtoMsg {
  */
 export interface ValidatorMissedBlocksAmino {
     /** address is the validator address. */
-    address: string;
+    address?: string;
     /** missed_blocks is an array of missed blocks by the validator. */
-    missed_blocks: MissedBlockAmino[];
+    missed_blocks?: MissedBlockAmino[];
 }
 export interface ValidatorMissedBlocksAminoMsg {
     type: "cosmos-sdk/ValidatorMissedBlocks";
@@ -111,7 +110,7 @@ export interface ValidatorMissedBlocksSDKType {
 /** MissedBlock contains height and missed status as boolean. */
 export interface MissedBlock {
     /** index is the height at which the block was missed. */
-    index: Long;
+    index: bigint;
     /** missed is the missed status. */
     missed: boolean;
 }
@@ -122,9 +121,9 @@ export interface MissedBlockProtoMsg {
 /** MissedBlock contains height and missed status as boolean. */
 export interface MissedBlockAmino {
     /** index is the height at which the block was missed. */
-    index: string;
+    index?: string;
     /** missed is the missed status. */
-    missed: boolean;
+    missed?: boolean;
 }
 export interface MissedBlockAminoMsg {
     type: "cosmos-sdk/MissedBlock";
@@ -132,12 +131,13 @@ export interface MissedBlockAminoMsg {
 }
 /** MissedBlock contains height and missed status as boolean. */
 export interface MissedBlockSDKType {
-    index: Long;
+    index: bigint;
     missed: boolean;
 }
 export declare const GenesisState: {
-    encode(message: GenesisState, writer?: _m0.Writer): _m0.Writer;
-    decode(input: _m0.Reader | Uint8Array, length?: number): GenesisState;
+    typeUrl: string;
+    encode(message: GenesisState, writer?: BinaryWriter): BinaryWriter;
+    decode(input: BinaryReader | Uint8Array, length?: number): GenesisState;
     fromJSON(object: any): GenesisState;
     toJSON(message: GenesisState): unknown;
     fromPartial(object: Partial<GenesisState>): GenesisState;
@@ -150,8 +150,9 @@ export declare const GenesisState: {
     toProtoMsg(message: GenesisState): GenesisStateProtoMsg;
 };
 export declare const SigningInfo: {
-    encode(message: SigningInfo, writer?: _m0.Writer): _m0.Writer;
-    decode(input: _m0.Reader | Uint8Array, length?: number): SigningInfo;
+    typeUrl: string;
+    encode(message: SigningInfo, writer?: BinaryWriter): BinaryWriter;
+    decode(input: BinaryReader | Uint8Array, length?: number): SigningInfo;
     fromJSON(object: any): SigningInfo;
     toJSON(message: SigningInfo): unknown;
     fromPartial(object: Partial<SigningInfo>): SigningInfo;
@@ -164,8 +165,9 @@ export declare const SigningInfo: {
     toProtoMsg(message: SigningInfo): SigningInfoProtoMsg;
 };
 export declare const ValidatorMissedBlocks: {
-    encode(message: ValidatorMissedBlocks, writer?: _m0.Writer): _m0.Writer;
-    decode(input: _m0.Reader | Uint8Array, length?: number): ValidatorMissedBlocks;
+    typeUrl: string;
+    encode(message: ValidatorMissedBlocks, writer?: BinaryWriter): BinaryWriter;
+    decode(input: BinaryReader | Uint8Array, length?: number): ValidatorMissedBlocks;
     fromJSON(object: any): ValidatorMissedBlocks;
     toJSON(message: ValidatorMissedBlocks): unknown;
     fromPartial(object: Partial<ValidatorMissedBlocks>): ValidatorMissedBlocks;
@@ -178,8 +180,9 @@ export declare const ValidatorMissedBlocks: {
     toProtoMsg(message: ValidatorMissedBlocks): ValidatorMissedBlocksProtoMsg;
 };
 export declare const MissedBlock: {
-    encode(message: MissedBlock, writer?: _m0.Writer): _m0.Writer;
-    decode(input: _m0.Reader | Uint8Array, length?: number): MissedBlock;
+    typeUrl: string;
+    encode(message: MissedBlock, writer?: BinaryWriter): BinaryWriter;
+    decode(input: BinaryReader | Uint8Array, length?: number): MissedBlock;
     fromJSON(object: any): MissedBlock;
     toJSON(message: MissedBlock): unknown;
     fromPartial(object: Partial<MissedBlock>): MissedBlock;

@@ -1,5 +1,4 @@
-import { Long } from "../../helpers";
-import * as _m0 from "protobufjs/minimal";
+import { BinaryReader, BinaryWriter } from "../../binary";
 export interface NetAddress {
     id: string;
     ip: string;
@@ -10,9 +9,9 @@ export interface NetAddressProtoMsg {
     value: Uint8Array;
 }
 export interface NetAddressAmino {
-    id: string;
-    ip: string;
-    port: number;
+    id?: string;
+    ip?: string;
+    port?: number;
 }
 export interface NetAddressAminoMsg {
     type: "/tendermint.p2p.NetAddress";
@@ -24,27 +23,27 @@ export interface NetAddressSDKType {
     port: number;
 }
 export interface ProtocolVersion {
-    p2p: Long;
-    block: Long;
-    app: Long;
+    p2p: bigint;
+    block: bigint;
+    app: bigint;
 }
 export interface ProtocolVersionProtoMsg {
     typeUrl: "/tendermint.p2p.ProtocolVersion";
     value: Uint8Array;
 }
 export interface ProtocolVersionAmino {
-    p2p: string;
-    block: string;
-    app: string;
+    p2p?: string;
+    block?: string;
+    app?: string;
 }
 export interface ProtocolVersionAminoMsg {
     type: "/tendermint.p2p.ProtocolVersion";
     value: ProtocolVersionAmino;
 }
 export interface ProtocolVersionSDKType {
-    p2p: Long;
-    block: Long;
-    app: Long;
+    p2p: bigint;
+    block: bigint;
+    app: bigint;
 }
 export interface DefaultNodeInfo {
     protocolVersion: ProtocolVersion;
@@ -62,12 +61,12 @@ export interface DefaultNodeInfoProtoMsg {
 }
 export interface DefaultNodeInfoAmino {
     protocol_version?: ProtocolVersionAmino;
-    default_node_id: string;
-    listen_addr: string;
-    network: string;
-    version: string;
-    channels: Uint8Array;
-    moniker: string;
+    default_node_id?: string;
+    listen_addr?: string;
+    network?: string;
+    version?: string;
+    channels?: string;
+    moniker?: string;
     other?: DefaultNodeInfoOtherAmino;
 }
 export interface DefaultNodeInfoAminoMsg {
@@ -93,8 +92,8 @@ export interface DefaultNodeInfoOtherProtoMsg {
     value: Uint8Array;
 }
 export interface DefaultNodeInfoOtherAmino {
-    tx_index: string;
-    rpc_address: string;
+    tx_index?: string;
+    rpc_address?: string;
 }
 export interface DefaultNodeInfoOtherAminoMsg {
     type: "/tendermint.p2p.DefaultNodeInfoOther";
@@ -105,8 +104,9 @@ export interface DefaultNodeInfoOtherSDKType {
     rpc_address: string;
 }
 export declare const NetAddress: {
-    encode(message: NetAddress, writer?: _m0.Writer): _m0.Writer;
-    decode(input: _m0.Reader | Uint8Array, length?: number): NetAddress;
+    typeUrl: string;
+    encode(message: NetAddress, writer?: BinaryWriter): BinaryWriter;
+    decode(input: BinaryReader | Uint8Array, length?: number): NetAddress;
     fromJSON(object: any): NetAddress;
     toJSON(message: NetAddress): unknown;
     fromPartial(object: Partial<NetAddress>): NetAddress;
@@ -118,8 +118,9 @@ export declare const NetAddress: {
     toProtoMsg(message: NetAddress): NetAddressProtoMsg;
 };
 export declare const ProtocolVersion: {
-    encode(message: ProtocolVersion, writer?: _m0.Writer): _m0.Writer;
-    decode(input: _m0.Reader | Uint8Array, length?: number): ProtocolVersion;
+    typeUrl: string;
+    encode(message: ProtocolVersion, writer?: BinaryWriter): BinaryWriter;
+    decode(input: BinaryReader | Uint8Array, length?: number): ProtocolVersion;
     fromJSON(object: any): ProtocolVersion;
     toJSON(message: ProtocolVersion): unknown;
     fromPartial(object: Partial<ProtocolVersion>): ProtocolVersion;
@@ -131,8 +132,9 @@ export declare const ProtocolVersion: {
     toProtoMsg(message: ProtocolVersion): ProtocolVersionProtoMsg;
 };
 export declare const DefaultNodeInfo: {
-    encode(message: DefaultNodeInfo, writer?: _m0.Writer): _m0.Writer;
-    decode(input: _m0.Reader | Uint8Array, length?: number): DefaultNodeInfo;
+    typeUrl: string;
+    encode(message: DefaultNodeInfo, writer?: BinaryWriter): BinaryWriter;
+    decode(input: BinaryReader | Uint8Array, length?: number): DefaultNodeInfo;
     fromJSON(object: any): DefaultNodeInfo;
     toJSON(message: DefaultNodeInfo): unknown;
     fromPartial(object: Partial<DefaultNodeInfo>): DefaultNodeInfo;
@@ -144,8 +146,9 @@ export declare const DefaultNodeInfo: {
     toProtoMsg(message: DefaultNodeInfo): DefaultNodeInfoProtoMsg;
 };
 export declare const DefaultNodeInfoOther: {
-    encode(message: DefaultNodeInfoOther, writer?: _m0.Writer): _m0.Writer;
-    decode(input: _m0.Reader | Uint8Array, length?: number): DefaultNodeInfoOther;
+    typeUrl: string;
+    encode(message: DefaultNodeInfoOther, writer?: BinaryWriter): BinaryWriter;
+    decode(input: BinaryReader | Uint8Array, length?: number): DefaultNodeInfoOther;
     fromJSON(object: any): DefaultNodeInfoOther;
     toJSON(message: DefaultNodeInfoOther): unknown;
     fromPartial(object: Partial<DefaultNodeInfoOther>): DefaultNodeInfoOther;

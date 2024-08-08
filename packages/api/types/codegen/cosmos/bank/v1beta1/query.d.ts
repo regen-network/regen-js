@@ -1,7 +1,7 @@
 import { PageRequest, PageRequestAmino, PageRequestSDKType, PageResponse, PageResponseAmino, PageResponseSDKType } from "../../base/query/v1beta1/pagination";
 import { Coin, CoinAmino, CoinSDKType } from "../../base/v1beta1/coin";
 import { Params, ParamsAmino, ParamsSDKType, Metadata, MetadataAmino, MetadataSDKType } from "./bank";
-import * as _m0 from "protobufjs/minimal";
+import { BinaryReader, BinaryWriter } from "../../../binary";
 /** QueryBalanceRequest is the request type for the Query/Balance RPC method. */
 export interface QueryBalanceRequest {
     /** address is the address to query balances for. */
@@ -16,9 +16,9 @@ export interface QueryBalanceRequestProtoMsg {
 /** QueryBalanceRequest is the request type for the Query/Balance RPC method. */
 export interface QueryBalanceRequestAmino {
     /** address is the address to query balances for. */
-    address: string;
+    address?: string;
     /** denom is the coin denom to query balances for. */
-    denom: string;
+    denom?: string;
 }
 export interface QueryBalanceRequestAminoMsg {
     type: "cosmos-sdk/QueryBalanceRequest";
@@ -32,7 +32,7 @@ export interface QueryBalanceRequestSDKType {
 /** QueryBalanceResponse is the response type for the Query/Balance RPC method. */
 export interface QueryBalanceResponse {
     /** balance is the balance of the coin. */
-    balance: Coin;
+    balance?: Coin;
 }
 export interface QueryBalanceResponseProtoMsg {
     typeUrl: "/cosmos.bank.v1beta1.QueryBalanceResponse";
@@ -49,14 +49,14 @@ export interface QueryBalanceResponseAminoMsg {
 }
 /** QueryBalanceResponse is the response type for the Query/Balance RPC method. */
 export interface QueryBalanceResponseSDKType {
-    balance: CoinSDKType;
+    balance?: CoinSDKType;
 }
 /** QueryBalanceRequest is the request type for the Query/AllBalances RPC method. */
 export interface QueryAllBalancesRequest {
     /** address is the address to query balances for. */
     address: string;
     /** pagination defines an optional pagination for the request. */
-    pagination: PageRequest;
+    pagination?: PageRequest;
 }
 export interface QueryAllBalancesRequestProtoMsg {
     typeUrl: "/cosmos.bank.v1beta1.QueryAllBalancesRequest";
@@ -65,7 +65,7 @@ export interface QueryAllBalancesRequestProtoMsg {
 /** QueryBalanceRequest is the request type for the Query/AllBalances RPC method. */
 export interface QueryAllBalancesRequestAmino {
     /** address is the address to query balances for. */
-    address: string;
+    address?: string;
     /** pagination defines an optional pagination for the request. */
     pagination?: PageRequestAmino;
 }
@@ -76,7 +76,7 @@ export interface QueryAllBalancesRequestAminoMsg {
 /** QueryBalanceRequest is the request type for the Query/AllBalances RPC method. */
 export interface QueryAllBalancesRequestSDKType {
     address: string;
-    pagination: PageRequestSDKType;
+    pagination?: PageRequestSDKType;
 }
 /**
  * QueryAllBalancesResponse is the response type for the Query/AllBalances RPC
@@ -86,7 +86,7 @@ export interface QueryAllBalancesResponse {
     /** balances is the balances of all the coins. */
     balances: Coin[];
     /** pagination defines the pagination in the response. */
-    pagination: PageResponse;
+    pagination?: PageResponse;
 }
 export interface QueryAllBalancesResponseProtoMsg {
     typeUrl: "/cosmos.bank.v1beta1.QueryAllBalancesResponse";
@@ -98,7 +98,7 @@ export interface QueryAllBalancesResponseProtoMsg {
  */
 export interface QueryAllBalancesResponseAmino {
     /** balances is the balances of all the coins. */
-    balances: CoinAmino[];
+    balances?: CoinAmino[];
     /** pagination defines the pagination in the response. */
     pagination?: PageResponseAmino;
 }
@@ -112,7 +112,7 @@ export interface QueryAllBalancesResponseAminoMsg {
  */
 export interface QueryAllBalancesResponseSDKType {
     balances: CoinSDKType[];
-    pagination: PageResponseSDKType;
+    pagination?: PageResponseSDKType;
 }
 /**
  * QuerySpendableBalancesRequest defines the gRPC request structure for querying
@@ -124,7 +124,7 @@ export interface QuerySpendableBalancesRequest {
     /** address is the address to query spendable balances for. */
     address: string;
     /** pagination defines an optional pagination for the request. */
-    pagination: PageRequest;
+    pagination?: PageRequest;
 }
 export interface QuerySpendableBalancesRequestProtoMsg {
     typeUrl: "/cosmos.bank.v1beta1.QuerySpendableBalancesRequest";
@@ -138,7 +138,7 @@ export interface QuerySpendableBalancesRequestProtoMsg {
  */
 export interface QuerySpendableBalancesRequestAmino {
     /** address is the address to query spendable balances for. */
-    address: string;
+    address?: string;
     /** pagination defines an optional pagination for the request. */
     pagination?: PageRequestAmino;
 }
@@ -154,7 +154,7 @@ export interface QuerySpendableBalancesRequestAminoMsg {
  */
 export interface QuerySpendableBalancesRequestSDKType {
     address: string;
-    pagination: PageRequestSDKType;
+    pagination?: PageRequestSDKType;
 }
 /**
  * QuerySpendableBalancesResponse defines the gRPC response structure for querying
@@ -166,7 +166,7 @@ export interface QuerySpendableBalancesResponse {
     /** balances is the spendable balances of all the coins. */
     balances: Coin[];
     /** pagination defines the pagination in the response. */
-    pagination: PageResponse;
+    pagination?: PageResponse;
 }
 export interface QuerySpendableBalancesResponseProtoMsg {
     typeUrl: "/cosmos.bank.v1beta1.QuerySpendableBalancesResponse";
@@ -180,7 +180,7 @@ export interface QuerySpendableBalancesResponseProtoMsg {
  */
 export interface QuerySpendableBalancesResponseAmino {
     /** balances is the spendable balances of all the coins. */
-    balances: CoinAmino[];
+    balances?: CoinAmino[];
     /** pagination defines the pagination in the response. */
     pagination?: PageResponseAmino;
 }
@@ -196,7 +196,7 @@ export interface QuerySpendableBalancesResponseAminoMsg {
  */
 export interface QuerySpendableBalancesResponseSDKType {
     balances: CoinSDKType[];
-    pagination: PageResponseSDKType;
+    pagination?: PageResponseSDKType;
 }
 /**
  * QueryTotalSupplyRequest is the request type for the Query/TotalSupply RPC
@@ -208,7 +208,7 @@ export interface QueryTotalSupplyRequest {
      *
      * Since: cosmos-sdk 0.43
      */
-    pagination: PageRequest;
+    pagination?: PageRequest;
 }
 export interface QueryTotalSupplyRequestProtoMsg {
     typeUrl: "/cosmos.bank.v1beta1.QueryTotalSupplyRequest";
@@ -235,7 +235,7 @@ export interface QueryTotalSupplyRequestAminoMsg {
  * method.
  */
 export interface QueryTotalSupplyRequestSDKType {
-    pagination: PageRequestSDKType;
+    pagination?: PageRequestSDKType;
 }
 /**
  * QueryTotalSupplyResponse is the response type for the Query/TotalSupply RPC
@@ -249,7 +249,7 @@ export interface QueryTotalSupplyResponse {
      *
      * Since: cosmos-sdk 0.43
      */
-    pagination: PageResponse;
+    pagination?: PageResponse;
 }
 export interface QueryTotalSupplyResponseProtoMsg {
     typeUrl: "/cosmos.bank.v1beta1.QueryTotalSupplyResponse";
@@ -261,7 +261,7 @@ export interface QueryTotalSupplyResponseProtoMsg {
  */
 export interface QueryTotalSupplyResponseAmino {
     /** supply is the supply of the coins */
-    supply: CoinAmino[];
+    supply?: CoinAmino[];
     /**
      * pagination defines the pagination in the response.
      *
@@ -279,7 +279,7 @@ export interface QueryTotalSupplyResponseAminoMsg {
  */
 export interface QueryTotalSupplyResponseSDKType {
     supply: CoinSDKType[];
-    pagination: PageResponseSDKType;
+    pagination?: PageResponseSDKType;
 }
 /** QuerySupplyOfRequest is the request type for the Query/SupplyOf RPC method. */
 export interface QuerySupplyOfRequest {
@@ -293,7 +293,7 @@ export interface QuerySupplyOfRequestProtoMsg {
 /** QuerySupplyOfRequest is the request type for the Query/SupplyOf RPC method. */
 export interface QuerySupplyOfRequestAmino {
     /** denom is the coin denom to query balances for. */
-    denom: string;
+    denom?: string;
 }
 export interface QuerySupplyOfRequestAminoMsg {
     type: "cosmos-sdk/QuerySupplyOfRequest";
@@ -365,7 +365,7 @@ export interface QueryParamsResponseSDKType {
 /** QueryDenomsMetadataRequest is the request type for the Query/DenomsMetadata RPC method. */
 export interface QueryDenomsMetadataRequest {
     /** pagination defines an optional pagination for the request. */
-    pagination: PageRequest;
+    pagination?: PageRequest;
 }
 export interface QueryDenomsMetadataRequestProtoMsg {
     typeUrl: "/cosmos.bank.v1beta1.QueryDenomsMetadataRequest";
@@ -382,7 +382,7 @@ export interface QueryDenomsMetadataRequestAminoMsg {
 }
 /** QueryDenomsMetadataRequest is the request type for the Query/DenomsMetadata RPC method. */
 export interface QueryDenomsMetadataRequestSDKType {
-    pagination: PageRequestSDKType;
+    pagination?: PageRequestSDKType;
 }
 /**
  * QueryDenomsMetadataResponse is the response type for the Query/DenomsMetadata RPC
@@ -392,7 +392,7 @@ export interface QueryDenomsMetadataResponse {
     /** metadata provides the client information for all the registered tokens. */
     metadatas: Metadata[];
     /** pagination defines the pagination in the response. */
-    pagination: PageResponse;
+    pagination?: PageResponse;
 }
 export interface QueryDenomsMetadataResponseProtoMsg {
     typeUrl: "/cosmos.bank.v1beta1.QueryDenomsMetadataResponse";
@@ -404,7 +404,7 @@ export interface QueryDenomsMetadataResponseProtoMsg {
  */
 export interface QueryDenomsMetadataResponseAmino {
     /** metadata provides the client information for all the registered tokens. */
-    metadatas: MetadataAmino[];
+    metadatas?: MetadataAmino[];
     /** pagination defines the pagination in the response. */
     pagination?: PageResponseAmino;
 }
@@ -418,7 +418,7 @@ export interface QueryDenomsMetadataResponseAminoMsg {
  */
 export interface QueryDenomsMetadataResponseSDKType {
     metadatas: MetadataSDKType[];
-    pagination: PageResponseSDKType;
+    pagination?: PageResponseSDKType;
 }
 /** QueryDenomMetadataRequest is the request type for the Query/DenomMetadata RPC method. */
 export interface QueryDenomMetadataRequest {
@@ -432,7 +432,7 @@ export interface QueryDenomMetadataRequestProtoMsg {
 /** QueryDenomMetadataRequest is the request type for the Query/DenomMetadata RPC method. */
 export interface QueryDenomMetadataRequestAmino {
     /** denom is the coin denom to query the metadata for. */
-    denom: string;
+    denom?: string;
 }
 export interface QueryDenomMetadataRequestAminoMsg {
     type: "cosmos-sdk/QueryDenomMetadataRequest";
@@ -482,7 +482,7 @@ export interface QueryDenomOwnersRequest {
     /** denom defines the coin denomination to query all account holders for. */
     denom: string;
     /** pagination defines an optional pagination for the request. */
-    pagination: PageRequest;
+    pagination?: PageRequest;
 }
 export interface QueryDenomOwnersRequestProtoMsg {
     typeUrl: "/cosmos.bank.v1beta1.QueryDenomOwnersRequest";
@@ -495,7 +495,7 @@ export interface QueryDenomOwnersRequestProtoMsg {
  */
 export interface QueryDenomOwnersRequestAmino {
     /** denom defines the coin denomination to query all account holders for. */
-    denom: string;
+    denom?: string;
     /** pagination defines an optional pagination for the request. */
     pagination?: PageRequestAmino;
 }
@@ -510,7 +510,7 @@ export interface QueryDenomOwnersRequestAminoMsg {
  */
 export interface QueryDenomOwnersRequestSDKType {
     denom: string;
-    pagination: PageRequestSDKType;
+    pagination?: PageRequestSDKType;
 }
 /**
  * DenomOwner defines structure representing an account that owns or holds a
@@ -538,7 +538,7 @@ export interface DenomOwnerProtoMsg {
  */
 export interface DenomOwnerAmino {
     /** address defines the address that owns a particular denomination. */
-    address: string;
+    address?: string;
     /** balance is the balance of the denominated coin for an account. */
     balance?: CoinAmino;
 }
@@ -565,7 +565,7 @@ export interface DenomOwnerSDKType {
 export interface QueryDenomOwnersResponse {
     denomOwners: DenomOwner[];
     /** pagination defines the pagination in the response. */
-    pagination: PageResponse;
+    pagination?: PageResponse;
 }
 export interface QueryDenomOwnersResponseProtoMsg {
     typeUrl: "/cosmos.bank.v1beta1.QueryDenomOwnersResponse";
@@ -577,7 +577,7 @@ export interface QueryDenomOwnersResponseProtoMsg {
  * Since: cosmos-sdk 0.46
  */
 export interface QueryDenomOwnersResponseAmino {
-    denom_owners: DenomOwnerAmino[];
+    denom_owners?: DenomOwnerAmino[];
     /** pagination defines the pagination in the response. */
     pagination?: PageResponseAmino;
 }
@@ -592,11 +592,12 @@ export interface QueryDenomOwnersResponseAminoMsg {
  */
 export interface QueryDenomOwnersResponseSDKType {
     denom_owners: DenomOwnerSDKType[];
-    pagination: PageResponseSDKType;
+    pagination?: PageResponseSDKType;
 }
 export declare const QueryBalanceRequest: {
-    encode(message: QueryBalanceRequest, writer?: _m0.Writer): _m0.Writer;
-    decode(input: _m0.Reader | Uint8Array, length?: number): QueryBalanceRequest;
+    typeUrl: string;
+    encode(message: QueryBalanceRequest, writer?: BinaryWriter): BinaryWriter;
+    decode(input: BinaryReader | Uint8Array, length?: number): QueryBalanceRequest;
     fromJSON(object: any): QueryBalanceRequest;
     toJSON(message: QueryBalanceRequest): unknown;
     fromPartial(object: Partial<QueryBalanceRequest>): QueryBalanceRequest;
@@ -609,8 +610,9 @@ export declare const QueryBalanceRequest: {
     toProtoMsg(message: QueryBalanceRequest): QueryBalanceRequestProtoMsg;
 };
 export declare const QueryBalanceResponse: {
-    encode(message: QueryBalanceResponse, writer?: _m0.Writer): _m0.Writer;
-    decode(input: _m0.Reader | Uint8Array, length?: number): QueryBalanceResponse;
+    typeUrl: string;
+    encode(message: QueryBalanceResponse, writer?: BinaryWriter): BinaryWriter;
+    decode(input: BinaryReader | Uint8Array, length?: number): QueryBalanceResponse;
     fromJSON(object: any): QueryBalanceResponse;
     toJSON(message: QueryBalanceResponse): unknown;
     fromPartial(object: Partial<QueryBalanceResponse>): QueryBalanceResponse;
@@ -623,8 +625,9 @@ export declare const QueryBalanceResponse: {
     toProtoMsg(message: QueryBalanceResponse): QueryBalanceResponseProtoMsg;
 };
 export declare const QueryAllBalancesRequest: {
-    encode(message: QueryAllBalancesRequest, writer?: _m0.Writer): _m0.Writer;
-    decode(input: _m0.Reader | Uint8Array, length?: number): QueryAllBalancesRequest;
+    typeUrl: string;
+    encode(message: QueryAllBalancesRequest, writer?: BinaryWriter): BinaryWriter;
+    decode(input: BinaryReader | Uint8Array, length?: number): QueryAllBalancesRequest;
     fromJSON(object: any): QueryAllBalancesRequest;
     toJSON(message: QueryAllBalancesRequest): unknown;
     fromPartial(object: Partial<QueryAllBalancesRequest>): QueryAllBalancesRequest;
@@ -637,8 +640,9 @@ export declare const QueryAllBalancesRequest: {
     toProtoMsg(message: QueryAllBalancesRequest): QueryAllBalancesRequestProtoMsg;
 };
 export declare const QueryAllBalancesResponse: {
-    encode(message: QueryAllBalancesResponse, writer?: _m0.Writer): _m0.Writer;
-    decode(input: _m0.Reader | Uint8Array, length?: number): QueryAllBalancesResponse;
+    typeUrl: string;
+    encode(message: QueryAllBalancesResponse, writer?: BinaryWriter): BinaryWriter;
+    decode(input: BinaryReader | Uint8Array, length?: number): QueryAllBalancesResponse;
     fromJSON(object: any): QueryAllBalancesResponse;
     toJSON(message: QueryAllBalancesResponse): unknown;
     fromPartial(object: Partial<QueryAllBalancesResponse>): QueryAllBalancesResponse;
@@ -651,8 +655,9 @@ export declare const QueryAllBalancesResponse: {
     toProtoMsg(message: QueryAllBalancesResponse): QueryAllBalancesResponseProtoMsg;
 };
 export declare const QuerySpendableBalancesRequest: {
-    encode(message: QuerySpendableBalancesRequest, writer?: _m0.Writer): _m0.Writer;
-    decode(input: _m0.Reader | Uint8Array, length?: number): QuerySpendableBalancesRequest;
+    typeUrl: string;
+    encode(message: QuerySpendableBalancesRequest, writer?: BinaryWriter): BinaryWriter;
+    decode(input: BinaryReader | Uint8Array, length?: number): QuerySpendableBalancesRequest;
     fromJSON(object: any): QuerySpendableBalancesRequest;
     toJSON(message: QuerySpendableBalancesRequest): unknown;
     fromPartial(object: Partial<QuerySpendableBalancesRequest>): QuerySpendableBalancesRequest;
@@ -665,8 +670,9 @@ export declare const QuerySpendableBalancesRequest: {
     toProtoMsg(message: QuerySpendableBalancesRequest): QuerySpendableBalancesRequestProtoMsg;
 };
 export declare const QuerySpendableBalancesResponse: {
-    encode(message: QuerySpendableBalancesResponse, writer?: _m0.Writer): _m0.Writer;
-    decode(input: _m0.Reader | Uint8Array, length?: number): QuerySpendableBalancesResponse;
+    typeUrl: string;
+    encode(message: QuerySpendableBalancesResponse, writer?: BinaryWriter): BinaryWriter;
+    decode(input: BinaryReader | Uint8Array, length?: number): QuerySpendableBalancesResponse;
     fromJSON(object: any): QuerySpendableBalancesResponse;
     toJSON(message: QuerySpendableBalancesResponse): unknown;
     fromPartial(object: Partial<QuerySpendableBalancesResponse>): QuerySpendableBalancesResponse;
@@ -679,8 +685,9 @@ export declare const QuerySpendableBalancesResponse: {
     toProtoMsg(message: QuerySpendableBalancesResponse): QuerySpendableBalancesResponseProtoMsg;
 };
 export declare const QueryTotalSupplyRequest: {
-    encode(message: QueryTotalSupplyRequest, writer?: _m0.Writer): _m0.Writer;
-    decode(input: _m0.Reader | Uint8Array, length?: number): QueryTotalSupplyRequest;
+    typeUrl: string;
+    encode(message: QueryTotalSupplyRequest, writer?: BinaryWriter): BinaryWriter;
+    decode(input: BinaryReader | Uint8Array, length?: number): QueryTotalSupplyRequest;
     fromJSON(object: any): QueryTotalSupplyRequest;
     toJSON(message: QueryTotalSupplyRequest): unknown;
     fromPartial(object: Partial<QueryTotalSupplyRequest>): QueryTotalSupplyRequest;
@@ -693,8 +700,9 @@ export declare const QueryTotalSupplyRequest: {
     toProtoMsg(message: QueryTotalSupplyRequest): QueryTotalSupplyRequestProtoMsg;
 };
 export declare const QueryTotalSupplyResponse: {
-    encode(message: QueryTotalSupplyResponse, writer?: _m0.Writer): _m0.Writer;
-    decode(input: _m0.Reader | Uint8Array, length?: number): QueryTotalSupplyResponse;
+    typeUrl: string;
+    encode(message: QueryTotalSupplyResponse, writer?: BinaryWriter): BinaryWriter;
+    decode(input: BinaryReader | Uint8Array, length?: number): QueryTotalSupplyResponse;
     fromJSON(object: any): QueryTotalSupplyResponse;
     toJSON(message: QueryTotalSupplyResponse): unknown;
     fromPartial(object: Partial<QueryTotalSupplyResponse>): QueryTotalSupplyResponse;
@@ -707,8 +715,9 @@ export declare const QueryTotalSupplyResponse: {
     toProtoMsg(message: QueryTotalSupplyResponse): QueryTotalSupplyResponseProtoMsg;
 };
 export declare const QuerySupplyOfRequest: {
-    encode(message: QuerySupplyOfRequest, writer?: _m0.Writer): _m0.Writer;
-    decode(input: _m0.Reader | Uint8Array, length?: number): QuerySupplyOfRequest;
+    typeUrl: string;
+    encode(message: QuerySupplyOfRequest, writer?: BinaryWriter): BinaryWriter;
+    decode(input: BinaryReader | Uint8Array, length?: number): QuerySupplyOfRequest;
     fromJSON(object: any): QuerySupplyOfRequest;
     toJSON(message: QuerySupplyOfRequest): unknown;
     fromPartial(object: Partial<QuerySupplyOfRequest>): QuerySupplyOfRequest;
@@ -721,8 +730,9 @@ export declare const QuerySupplyOfRequest: {
     toProtoMsg(message: QuerySupplyOfRequest): QuerySupplyOfRequestProtoMsg;
 };
 export declare const QuerySupplyOfResponse: {
-    encode(message: QuerySupplyOfResponse, writer?: _m0.Writer): _m0.Writer;
-    decode(input: _m0.Reader | Uint8Array, length?: number): QuerySupplyOfResponse;
+    typeUrl: string;
+    encode(message: QuerySupplyOfResponse, writer?: BinaryWriter): BinaryWriter;
+    decode(input: BinaryReader | Uint8Array, length?: number): QuerySupplyOfResponse;
     fromJSON(object: any): QuerySupplyOfResponse;
     toJSON(message: QuerySupplyOfResponse): unknown;
     fromPartial(object: Partial<QuerySupplyOfResponse>): QuerySupplyOfResponse;
@@ -735,8 +745,9 @@ export declare const QuerySupplyOfResponse: {
     toProtoMsg(message: QuerySupplyOfResponse): QuerySupplyOfResponseProtoMsg;
 };
 export declare const QueryParamsRequest: {
-    encode(_: QueryParamsRequest, writer?: _m0.Writer): _m0.Writer;
-    decode(input: _m0.Reader | Uint8Array, length?: number): QueryParamsRequest;
+    typeUrl: string;
+    encode(_: QueryParamsRequest, writer?: BinaryWriter): BinaryWriter;
+    decode(input: BinaryReader | Uint8Array, length?: number): QueryParamsRequest;
     fromJSON(_: any): QueryParamsRequest;
     toJSON(_: QueryParamsRequest): unknown;
     fromPartial(_: Partial<QueryParamsRequest>): QueryParamsRequest;
@@ -749,8 +760,9 @@ export declare const QueryParamsRequest: {
     toProtoMsg(message: QueryParamsRequest): QueryParamsRequestProtoMsg;
 };
 export declare const QueryParamsResponse: {
-    encode(message: QueryParamsResponse, writer?: _m0.Writer): _m0.Writer;
-    decode(input: _m0.Reader | Uint8Array, length?: number): QueryParamsResponse;
+    typeUrl: string;
+    encode(message: QueryParamsResponse, writer?: BinaryWriter): BinaryWriter;
+    decode(input: BinaryReader | Uint8Array, length?: number): QueryParamsResponse;
     fromJSON(object: any): QueryParamsResponse;
     toJSON(message: QueryParamsResponse): unknown;
     fromPartial(object: Partial<QueryParamsResponse>): QueryParamsResponse;
@@ -763,8 +775,9 @@ export declare const QueryParamsResponse: {
     toProtoMsg(message: QueryParamsResponse): QueryParamsResponseProtoMsg;
 };
 export declare const QueryDenomsMetadataRequest: {
-    encode(message: QueryDenomsMetadataRequest, writer?: _m0.Writer): _m0.Writer;
-    decode(input: _m0.Reader | Uint8Array, length?: number): QueryDenomsMetadataRequest;
+    typeUrl: string;
+    encode(message: QueryDenomsMetadataRequest, writer?: BinaryWriter): BinaryWriter;
+    decode(input: BinaryReader | Uint8Array, length?: number): QueryDenomsMetadataRequest;
     fromJSON(object: any): QueryDenomsMetadataRequest;
     toJSON(message: QueryDenomsMetadataRequest): unknown;
     fromPartial(object: Partial<QueryDenomsMetadataRequest>): QueryDenomsMetadataRequest;
@@ -777,8 +790,9 @@ export declare const QueryDenomsMetadataRequest: {
     toProtoMsg(message: QueryDenomsMetadataRequest): QueryDenomsMetadataRequestProtoMsg;
 };
 export declare const QueryDenomsMetadataResponse: {
-    encode(message: QueryDenomsMetadataResponse, writer?: _m0.Writer): _m0.Writer;
-    decode(input: _m0.Reader | Uint8Array, length?: number): QueryDenomsMetadataResponse;
+    typeUrl: string;
+    encode(message: QueryDenomsMetadataResponse, writer?: BinaryWriter): BinaryWriter;
+    decode(input: BinaryReader | Uint8Array, length?: number): QueryDenomsMetadataResponse;
     fromJSON(object: any): QueryDenomsMetadataResponse;
     toJSON(message: QueryDenomsMetadataResponse): unknown;
     fromPartial(object: Partial<QueryDenomsMetadataResponse>): QueryDenomsMetadataResponse;
@@ -791,8 +805,9 @@ export declare const QueryDenomsMetadataResponse: {
     toProtoMsg(message: QueryDenomsMetadataResponse): QueryDenomsMetadataResponseProtoMsg;
 };
 export declare const QueryDenomMetadataRequest: {
-    encode(message: QueryDenomMetadataRequest, writer?: _m0.Writer): _m0.Writer;
-    decode(input: _m0.Reader | Uint8Array, length?: number): QueryDenomMetadataRequest;
+    typeUrl: string;
+    encode(message: QueryDenomMetadataRequest, writer?: BinaryWriter): BinaryWriter;
+    decode(input: BinaryReader | Uint8Array, length?: number): QueryDenomMetadataRequest;
     fromJSON(object: any): QueryDenomMetadataRequest;
     toJSON(message: QueryDenomMetadataRequest): unknown;
     fromPartial(object: Partial<QueryDenomMetadataRequest>): QueryDenomMetadataRequest;
@@ -805,8 +820,9 @@ export declare const QueryDenomMetadataRequest: {
     toProtoMsg(message: QueryDenomMetadataRequest): QueryDenomMetadataRequestProtoMsg;
 };
 export declare const QueryDenomMetadataResponse: {
-    encode(message: QueryDenomMetadataResponse, writer?: _m0.Writer): _m0.Writer;
-    decode(input: _m0.Reader | Uint8Array, length?: number): QueryDenomMetadataResponse;
+    typeUrl: string;
+    encode(message: QueryDenomMetadataResponse, writer?: BinaryWriter): BinaryWriter;
+    decode(input: BinaryReader | Uint8Array, length?: number): QueryDenomMetadataResponse;
     fromJSON(object: any): QueryDenomMetadataResponse;
     toJSON(message: QueryDenomMetadataResponse): unknown;
     fromPartial(object: Partial<QueryDenomMetadataResponse>): QueryDenomMetadataResponse;
@@ -819,8 +835,9 @@ export declare const QueryDenomMetadataResponse: {
     toProtoMsg(message: QueryDenomMetadataResponse): QueryDenomMetadataResponseProtoMsg;
 };
 export declare const QueryDenomOwnersRequest: {
-    encode(message: QueryDenomOwnersRequest, writer?: _m0.Writer): _m0.Writer;
-    decode(input: _m0.Reader | Uint8Array, length?: number): QueryDenomOwnersRequest;
+    typeUrl: string;
+    encode(message: QueryDenomOwnersRequest, writer?: BinaryWriter): BinaryWriter;
+    decode(input: BinaryReader | Uint8Array, length?: number): QueryDenomOwnersRequest;
     fromJSON(object: any): QueryDenomOwnersRequest;
     toJSON(message: QueryDenomOwnersRequest): unknown;
     fromPartial(object: Partial<QueryDenomOwnersRequest>): QueryDenomOwnersRequest;
@@ -833,8 +850,9 @@ export declare const QueryDenomOwnersRequest: {
     toProtoMsg(message: QueryDenomOwnersRequest): QueryDenomOwnersRequestProtoMsg;
 };
 export declare const DenomOwner: {
-    encode(message: DenomOwner, writer?: _m0.Writer): _m0.Writer;
-    decode(input: _m0.Reader | Uint8Array, length?: number): DenomOwner;
+    typeUrl: string;
+    encode(message: DenomOwner, writer?: BinaryWriter): BinaryWriter;
+    decode(input: BinaryReader | Uint8Array, length?: number): DenomOwner;
     fromJSON(object: any): DenomOwner;
     toJSON(message: DenomOwner): unknown;
     fromPartial(object: Partial<DenomOwner>): DenomOwner;
@@ -847,8 +865,9 @@ export declare const DenomOwner: {
     toProtoMsg(message: DenomOwner): DenomOwnerProtoMsg;
 };
 export declare const QueryDenomOwnersResponse: {
-    encode(message: QueryDenomOwnersResponse, writer?: _m0.Writer): _m0.Writer;
-    decode(input: _m0.Reader | Uint8Array, length?: number): QueryDenomOwnersResponse;
+    typeUrl: string;
+    encode(message: QueryDenomOwnersResponse, writer?: BinaryWriter): BinaryWriter;
+    decode(input: BinaryReader | Uint8Array, length?: number): QueryDenomOwnersResponse;
     fromJSON(object: any): QueryDenomOwnersResponse;
     toJSON(message: QueryDenomOwnersResponse): unknown;
     fromPartial(object: Partial<QueryDenomOwnersResponse>): QueryDenomOwnersResponse;

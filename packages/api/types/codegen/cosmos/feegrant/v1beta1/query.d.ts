@@ -1,6 +1,6 @@
 import { PageRequest, PageRequestAmino, PageRequestSDKType, PageResponse, PageResponseAmino, PageResponseSDKType } from "../../base/query/v1beta1/pagination";
 import { Grant, GrantAmino, GrantSDKType } from "./feegrant";
-import * as _m0 from "protobufjs/minimal";
+import { BinaryReader, BinaryWriter } from "../../../binary";
 /** QueryAllowanceRequest is the request type for the Query/Allowance RPC method. */
 export interface QueryAllowanceRequest {
     /** granter is the address of the user granting an allowance of their funds. */
@@ -15,9 +15,9 @@ export interface QueryAllowanceRequestProtoMsg {
 /** QueryAllowanceRequest is the request type for the Query/Allowance RPC method. */
 export interface QueryAllowanceRequestAmino {
     /** granter is the address of the user granting an allowance of their funds. */
-    granter: string;
+    granter?: string;
     /** grantee is the address of the user being granted an allowance of another user's funds. */
-    grantee: string;
+    grantee?: string;
 }
 export interface QueryAllowanceRequestAminoMsg {
     type: "cosmos-sdk/QueryAllowanceRequest";
@@ -31,7 +31,7 @@ export interface QueryAllowanceRequestSDKType {
 /** QueryAllowanceResponse is the response type for the Query/Allowance RPC method. */
 export interface QueryAllowanceResponse {
     /** allowance is a allowance granted for grantee by granter. */
-    allowance: Grant;
+    allowance?: Grant;
 }
 export interface QueryAllowanceResponseProtoMsg {
     typeUrl: "/cosmos.feegrant.v1beta1.QueryAllowanceResponse";
@@ -48,13 +48,13 @@ export interface QueryAllowanceResponseAminoMsg {
 }
 /** QueryAllowanceResponse is the response type for the Query/Allowance RPC method. */
 export interface QueryAllowanceResponseSDKType {
-    allowance: GrantSDKType;
+    allowance?: GrantSDKType;
 }
 /** QueryAllowancesRequest is the request type for the Query/Allowances RPC method. */
 export interface QueryAllowancesRequest {
     grantee: string;
     /** pagination defines an pagination for the request. */
-    pagination: PageRequest;
+    pagination?: PageRequest;
 }
 export interface QueryAllowancesRequestProtoMsg {
     typeUrl: "/cosmos.feegrant.v1beta1.QueryAllowancesRequest";
@@ -62,7 +62,7 @@ export interface QueryAllowancesRequestProtoMsg {
 }
 /** QueryAllowancesRequest is the request type for the Query/Allowances RPC method. */
 export interface QueryAllowancesRequestAmino {
-    grantee: string;
+    grantee?: string;
     /** pagination defines an pagination for the request. */
     pagination?: PageRequestAmino;
 }
@@ -73,14 +73,14 @@ export interface QueryAllowancesRequestAminoMsg {
 /** QueryAllowancesRequest is the request type for the Query/Allowances RPC method. */
 export interface QueryAllowancesRequestSDKType {
     grantee: string;
-    pagination: PageRequestSDKType;
+    pagination?: PageRequestSDKType;
 }
 /** QueryAllowancesResponse is the response type for the Query/Allowances RPC method. */
 export interface QueryAllowancesResponse {
     /** allowances are allowance's granted for grantee by granter. */
     allowances: Grant[];
     /** pagination defines an pagination for the response. */
-    pagination: PageResponse;
+    pagination?: PageResponse;
 }
 export interface QueryAllowancesResponseProtoMsg {
     typeUrl: "/cosmos.feegrant.v1beta1.QueryAllowancesResponse";
@@ -89,7 +89,7 @@ export interface QueryAllowancesResponseProtoMsg {
 /** QueryAllowancesResponse is the response type for the Query/Allowances RPC method. */
 export interface QueryAllowancesResponseAmino {
     /** allowances are allowance's granted for grantee by granter. */
-    allowances: GrantAmino[];
+    allowances?: GrantAmino[];
     /** pagination defines an pagination for the response. */
     pagination?: PageResponseAmino;
 }
@@ -100,7 +100,7 @@ export interface QueryAllowancesResponseAminoMsg {
 /** QueryAllowancesResponse is the response type for the Query/Allowances RPC method. */
 export interface QueryAllowancesResponseSDKType {
     allowances: GrantSDKType[];
-    pagination: PageResponseSDKType;
+    pagination?: PageResponseSDKType;
 }
 /**
  * QueryAllowancesByGranterRequest is the request type for the Query/AllowancesByGranter RPC method.
@@ -110,7 +110,7 @@ export interface QueryAllowancesResponseSDKType {
 export interface QueryAllowancesByGranterRequest {
     granter: string;
     /** pagination defines an pagination for the request. */
-    pagination: PageRequest;
+    pagination?: PageRequest;
 }
 export interface QueryAllowancesByGranterRequestProtoMsg {
     typeUrl: "/cosmos.feegrant.v1beta1.QueryAllowancesByGranterRequest";
@@ -122,7 +122,7 @@ export interface QueryAllowancesByGranterRequestProtoMsg {
  * Since: cosmos-sdk 0.46
  */
 export interface QueryAllowancesByGranterRequestAmino {
-    granter: string;
+    granter?: string;
     /** pagination defines an pagination for the request. */
     pagination?: PageRequestAmino;
 }
@@ -137,7 +137,7 @@ export interface QueryAllowancesByGranterRequestAminoMsg {
  */
 export interface QueryAllowancesByGranterRequestSDKType {
     granter: string;
-    pagination: PageRequestSDKType;
+    pagination?: PageRequestSDKType;
 }
 /**
  * QueryAllowancesByGranterResponse is the response type for the Query/AllowancesByGranter RPC method.
@@ -148,7 +148,7 @@ export interface QueryAllowancesByGranterResponse {
     /** allowances that have been issued by the granter. */
     allowances: Grant[];
     /** pagination defines an pagination for the response. */
-    pagination: PageResponse;
+    pagination?: PageResponse;
 }
 export interface QueryAllowancesByGranterResponseProtoMsg {
     typeUrl: "/cosmos.feegrant.v1beta1.QueryAllowancesByGranterResponse";
@@ -161,7 +161,7 @@ export interface QueryAllowancesByGranterResponseProtoMsg {
  */
 export interface QueryAllowancesByGranterResponseAmino {
     /** allowances that have been issued by the granter. */
-    allowances: GrantAmino[];
+    allowances?: GrantAmino[];
     /** pagination defines an pagination for the response. */
     pagination?: PageResponseAmino;
 }
@@ -176,11 +176,12 @@ export interface QueryAllowancesByGranterResponseAminoMsg {
  */
 export interface QueryAllowancesByGranterResponseSDKType {
     allowances: GrantSDKType[];
-    pagination: PageResponseSDKType;
+    pagination?: PageResponseSDKType;
 }
 export declare const QueryAllowanceRequest: {
-    encode(message: QueryAllowanceRequest, writer?: _m0.Writer): _m0.Writer;
-    decode(input: _m0.Reader | Uint8Array, length?: number): QueryAllowanceRequest;
+    typeUrl: string;
+    encode(message: QueryAllowanceRequest, writer?: BinaryWriter): BinaryWriter;
+    decode(input: BinaryReader | Uint8Array, length?: number): QueryAllowanceRequest;
     fromJSON(object: any): QueryAllowanceRequest;
     toJSON(message: QueryAllowanceRequest): unknown;
     fromPartial(object: Partial<QueryAllowanceRequest>): QueryAllowanceRequest;
@@ -193,8 +194,9 @@ export declare const QueryAllowanceRequest: {
     toProtoMsg(message: QueryAllowanceRequest): QueryAllowanceRequestProtoMsg;
 };
 export declare const QueryAllowanceResponse: {
-    encode(message: QueryAllowanceResponse, writer?: _m0.Writer): _m0.Writer;
-    decode(input: _m0.Reader | Uint8Array, length?: number): QueryAllowanceResponse;
+    typeUrl: string;
+    encode(message: QueryAllowanceResponse, writer?: BinaryWriter): BinaryWriter;
+    decode(input: BinaryReader | Uint8Array, length?: number): QueryAllowanceResponse;
     fromJSON(object: any): QueryAllowanceResponse;
     toJSON(message: QueryAllowanceResponse): unknown;
     fromPartial(object: Partial<QueryAllowanceResponse>): QueryAllowanceResponse;
@@ -207,8 +209,9 @@ export declare const QueryAllowanceResponse: {
     toProtoMsg(message: QueryAllowanceResponse): QueryAllowanceResponseProtoMsg;
 };
 export declare const QueryAllowancesRequest: {
-    encode(message: QueryAllowancesRequest, writer?: _m0.Writer): _m0.Writer;
-    decode(input: _m0.Reader | Uint8Array, length?: number): QueryAllowancesRequest;
+    typeUrl: string;
+    encode(message: QueryAllowancesRequest, writer?: BinaryWriter): BinaryWriter;
+    decode(input: BinaryReader | Uint8Array, length?: number): QueryAllowancesRequest;
     fromJSON(object: any): QueryAllowancesRequest;
     toJSON(message: QueryAllowancesRequest): unknown;
     fromPartial(object: Partial<QueryAllowancesRequest>): QueryAllowancesRequest;
@@ -221,8 +224,9 @@ export declare const QueryAllowancesRequest: {
     toProtoMsg(message: QueryAllowancesRequest): QueryAllowancesRequestProtoMsg;
 };
 export declare const QueryAllowancesResponse: {
-    encode(message: QueryAllowancesResponse, writer?: _m0.Writer): _m0.Writer;
-    decode(input: _m0.Reader | Uint8Array, length?: number): QueryAllowancesResponse;
+    typeUrl: string;
+    encode(message: QueryAllowancesResponse, writer?: BinaryWriter): BinaryWriter;
+    decode(input: BinaryReader | Uint8Array, length?: number): QueryAllowancesResponse;
     fromJSON(object: any): QueryAllowancesResponse;
     toJSON(message: QueryAllowancesResponse): unknown;
     fromPartial(object: Partial<QueryAllowancesResponse>): QueryAllowancesResponse;
@@ -235,8 +239,9 @@ export declare const QueryAllowancesResponse: {
     toProtoMsg(message: QueryAllowancesResponse): QueryAllowancesResponseProtoMsg;
 };
 export declare const QueryAllowancesByGranterRequest: {
-    encode(message: QueryAllowancesByGranterRequest, writer?: _m0.Writer): _m0.Writer;
-    decode(input: _m0.Reader | Uint8Array, length?: number): QueryAllowancesByGranterRequest;
+    typeUrl: string;
+    encode(message: QueryAllowancesByGranterRequest, writer?: BinaryWriter): BinaryWriter;
+    decode(input: BinaryReader | Uint8Array, length?: number): QueryAllowancesByGranterRequest;
     fromJSON(object: any): QueryAllowancesByGranterRequest;
     toJSON(message: QueryAllowancesByGranterRequest): unknown;
     fromPartial(object: Partial<QueryAllowancesByGranterRequest>): QueryAllowancesByGranterRequest;
@@ -249,8 +254,9 @@ export declare const QueryAllowancesByGranterRequest: {
     toProtoMsg(message: QueryAllowancesByGranterRequest): QueryAllowancesByGranterRequestProtoMsg;
 };
 export declare const QueryAllowancesByGranterResponse: {
-    encode(message: QueryAllowancesByGranterResponse, writer?: _m0.Writer): _m0.Writer;
-    decode(input: _m0.Reader | Uint8Array, length?: number): QueryAllowancesByGranterResponse;
+    typeUrl: string;
+    encode(message: QueryAllowancesByGranterResponse, writer?: BinaryWriter): BinaryWriter;
+    decode(input: BinaryReader | Uint8Array, length?: number): QueryAllowancesByGranterResponse;
     fromJSON(object: any): QueryAllowancesByGranterResponse;
     toJSON(message: QueryAllowancesByGranterResponse): unknown;
     fromPartial(object: Partial<QueryAllowancesByGranterResponse>): QueryAllowancesByGranterResponse;

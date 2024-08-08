@@ -1,15 +1,14 @@
 import { DateCriteria, DateCriteriaAmino, DateCriteriaSDKType } from "./types";
-import { Timestamp, TimestampAmino, TimestampSDKType } from "../../../../google/protobuf/timestamp";
+import { Timestamp, TimestampSDKType } from "../../../../google/protobuf/timestamp";
 import { Coin, CoinAmino, CoinSDKType } from "../../../../cosmos/base/v1beta1/coin";
-import { Long } from "../../../../helpers";
-import * as _m0 from "protobufjs/minimal";
+import { BinaryReader, BinaryWriter } from "../../../../binary";
 /** Basket represents a basket in state. */
 export interface Basket {
     /**
      * id is the uint64 ID of the basket. It is used internally for reducing
      * storage space.
      */
-    id: Long;
+    id: bigint;
     /**
      * basket_denom is the basket bank denom formed from name and credit type with
      * the format `eco.<prefix><credit_type_abbrev>.<name>` where prefix is the
@@ -45,7 +44,7 @@ export interface Basket {
      */
     creditTypeAbbrev: string;
     /** date_criteria is the date criteria for batches admitted to the basket. */
-    dateCriteria: DateCriteria;
+    dateCriteria?: DateCriteria;
     /**
      * Deprecated (Since Revision 1): This field is no longer used and will be
      * removed in the next version. The value of credit type precision is always
@@ -72,7 +71,7 @@ export interface BasketAmino {
      * id is the uint64 ID of the basket. It is used internally for reducing
      * storage space.
      */
-    id: string;
+    id?: string;
     /**
      * basket_denom is the basket bank denom formed from name and credit type with
      * the format `eco.<prefix><credit_type_abbrev>.<name>` where prefix is the
@@ -90,23 +89,23 @@ export interface BasketAmino {
      *   21 - z (zepto)
      *   24 - y (yocto)
      */
-    basket_denom: string;
+    basket_denom?: string;
     /**
      * name is the unique name of the basket specified in MsgCreate. Basket
      * names must be unique across all credit types and choices of exponent
      * above and beyond the uniqueness constraint on basket_denom.
      */
-    name: string;
+    name?: string;
     /**
      * disable_auto_retire indicates whether or not the credits will be retired
      * upon withdraw from the basket.
      */
-    disable_auto_retire: boolean;
+    disable_auto_retire?: boolean;
     /**
      * credit_type_abbrev is the abbreviation of the credit type this basket is
      * able to hold.
      */
-    credit_type_abbrev: string;
+    credit_type_abbrev?: string;
     /** date_criteria is the date criteria for batches admitted to the basket. */
     date_criteria?: DateCriteriaAmino;
     /**
@@ -116,14 +115,14 @@ export interface BasketAmino {
      * field will be set to the value of credit type precision until removed.
      */
     /** @deprecated */
-    exponent: number;
+    exponent?: number;
     /**
      * curator is the address of the basket curator who is able to change certain
      * basket settings.
      *
      * Since Revision 1
      */
-    curator: Uint8Array;
+    curator?: string;
 }
 export interface BasketAminoMsg {
     type: "/regen.ecocredit.basket.v1.Basket";
@@ -131,12 +130,12 @@ export interface BasketAminoMsg {
 }
 /** Basket represents a basket in state. */
 export interface BasketSDKType {
-    id: Long;
+    id: bigint;
     basket_denom: string;
     name: string;
     disable_auto_retire: boolean;
     credit_type_abbrev: string;
-    date_criteria: DateCriteriaSDKType;
+    date_criteria?: DateCriteriaSDKType;
     /** @deprecated */
     exponent: number;
     curator: Uint8Array;
@@ -144,7 +143,7 @@ export interface BasketSDKType {
 /** BasketClass describes a credit class that can be deposited in a basket. */
 export interface BasketClass {
     /** basket_id is the ID of the basket */
-    basketId: Long;
+    basketId: bigint;
     /**
      * class_id is the id of the credit class that is allowed to be deposited in
      * the basket
@@ -158,12 +157,12 @@ export interface BasketClassProtoMsg {
 /** BasketClass describes a credit class that can be deposited in a basket. */
 export interface BasketClassAmino {
     /** basket_id is the ID of the basket */
-    basket_id: string;
+    basket_id?: string;
     /**
      * class_id is the id of the credit class that is allowed to be deposited in
      * the basket
      */
-    class_id: string;
+    class_id?: string;
 }
 export interface BasketClassAminoMsg {
     type: "/regen.ecocredit.basket.v1.BasketClass";
@@ -171,13 +170,13 @@ export interface BasketClassAminoMsg {
 }
 /** BasketClass describes a credit class that can be deposited in a basket. */
 export interface BasketClassSDKType {
-    basket_id: Long;
+    basket_id: bigint;
     class_id: string;
 }
 /** BasketBalance stores the amount of credits from a batch in a basket */
 export interface BasketBalance {
     /** basket_id is the ID of the basket */
-    basketId: Long;
+    basketId: bigint;
     /** batch_denom is the denom of the credit batch */
     batchDenom: string;
     /** balance is the amount of ecocredits held in the basket */
@@ -186,7 +185,7 @@ export interface BasketBalance {
      * batch_start_date is the start date of the batch. This field is used
      * to create an index which is used to remove the oldest credits first.
      */
-    batchStartDate: Timestamp;
+    batchStartDate?: Timestamp;
 }
 export interface BasketBalanceProtoMsg {
     typeUrl: "/regen.ecocredit.basket.v1.BasketBalance";
@@ -195,16 +194,16 @@ export interface BasketBalanceProtoMsg {
 /** BasketBalance stores the amount of credits from a batch in a basket */
 export interface BasketBalanceAmino {
     /** basket_id is the ID of the basket */
-    basket_id: string;
+    basket_id?: string;
     /** batch_denom is the denom of the credit batch */
-    batch_denom: string;
+    batch_denom?: string;
     /** balance is the amount of ecocredits held in the basket */
-    balance: string;
+    balance?: string;
     /**
      * batch_start_date is the start date of the batch. This field is used
      * to create an index which is used to remove the oldest credits first.
      */
-    batch_start_date?: TimestampAmino;
+    batch_start_date?: string;
 }
 export interface BasketBalanceAminoMsg {
     type: "/regen.ecocredit.basket.v1.BasketBalance";
@@ -212,10 +211,10 @@ export interface BasketBalanceAminoMsg {
 }
 /** BasketBalance stores the amount of credits from a batch in a basket */
 export interface BasketBalanceSDKType {
-    basket_id: Long;
+    basket_id: bigint;
     batch_denom: string;
     balance: string;
-    batch_start_date: TimestampSDKType;
+    batch_start_date?: TimestampSDKType;
 }
 /**
  * BasketFee is the basket creation fee. If not set, a basket creation fee is
@@ -228,7 +227,7 @@ export interface BasketFee {
      * fee is the basket creation fee. If not set, a basket creation fee is not
      * required.
      */
-    fee: Coin;
+    fee?: Coin;
 }
 export interface BasketFeeProtoMsg {
     typeUrl: "/regen.ecocredit.basket.v1.BasketFee";
@@ -258,11 +257,12 @@ export interface BasketFeeAminoMsg {
  * Since Revision 2
  */
 export interface BasketFeeSDKType {
-    fee: CoinSDKType;
+    fee?: CoinSDKType;
 }
 export declare const Basket: {
-    encode(message: Basket, writer?: _m0.Writer): _m0.Writer;
-    decode(input: _m0.Reader | Uint8Array, length?: number): Basket;
+    typeUrl: string;
+    encode(message: Basket, writer?: BinaryWriter): BinaryWriter;
+    decode(input: BinaryReader | Uint8Array, length?: number): Basket;
     fromJSON(object: any): Basket;
     toJSON(message: Basket): unknown;
     fromPartial(object: Partial<Basket>): Basket;
@@ -274,8 +274,9 @@ export declare const Basket: {
     toProtoMsg(message: Basket): BasketProtoMsg;
 };
 export declare const BasketClass: {
-    encode(message: BasketClass, writer?: _m0.Writer): _m0.Writer;
-    decode(input: _m0.Reader | Uint8Array, length?: number): BasketClass;
+    typeUrl: string;
+    encode(message: BasketClass, writer?: BinaryWriter): BinaryWriter;
+    decode(input: BinaryReader | Uint8Array, length?: number): BasketClass;
     fromJSON(object: any): BasketClass;
     toJSON(message: BasketClass): unknown;
     fromPartial(object: Partial<BasketClass>): BasketClass;
@@ -287,8 +288,9 @@ export declare const BasketClass: {
     toProtoMsg(message: BasketClass): BasketClassProtoMsg;
 };
 export declare const BasketBalance: {
-    encode(message: BasketBalance, writer?: _m0.Writer): _m0.Writer;
-    decode(input: _m0.Reader | Uint8Array, length?: number): BasketBalance;
+    typeUrl: string;
+    encode(message: BasketBalance, writer?: BinaryWriter): BinaryWriter;
+    decode(input: BinaryReader | Uint8Array, length?: number): BasketBalance;
     fromJSON(object: any): BasketBalance;
     toJSON(message: BasketBalance): unknown;
     fromPartial(object: Partial<BasketBalance>): BasketBalance;
@@ -300,8 +302,9 @@ export declare const BasketBalance: {
     toProtoMsg(message: BasketBalance): BasketBalanceProtoMsg;
 };
 export declare const BasketFee: {
-    encode(message: BasketFee, writer?: _m0.Writer): _m0.Writer;
-    decode(input: _m0.Reader | Uint8Array, length?: number): BasketFee;
+    typeUrl: string;
+    encode(message: BasketFee, writer?: BinaryWriter): BinaryWriter;
+    decode(input: BinaryReader | Uint8Array, length?: number): BasketFee;
     fromJSON(object: any): BasketFee;
     toJSON(message: BasketFee): unknown;
     fromPartial(object: Partial<BasketFee>): BasketFee;

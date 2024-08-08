@@ -3,8 +3,7 @@ import { PageRequest, PageRequestAmino, PageRequestSDKType, PageResponse, PageRe
 import { TxResponse, TxResponseAmino, TxResponseSDKType, GasInfo, GasInfoAmino, GasInfoSDKType, Result, ResultAmino, ResultSDKType } from "../../base/abci/v1beta1/abci";
 import { BlockID, BlockIDAmino, BlockIDSDKType } from "../../../tendermint/types/types";
 import { Block, BlockAmino, BlockSDKType } from "../../../tendermint/types/block";
-import { Long } from "../../../helpers";
-import * as _m0 from "protobufjs/minimal";
+import { BinaryReader, BinaryWriter } from "../../../binary";
 /** OrderBy defines the sorting order */
 export declare enum OrderBy {
     /** ORDER_BY_UNSPECIFIED - ORDER_BY_UNSPECIFIED specifies an unknown sorting order. OrderBy defaults to ASC in this case. */
@@ -56,15 +55,15 @@ export interface GetTxsEventRequest {
      * Deprecated post v0.46.x: use page and limit instead.
      */
     /** @deprecated */
-    pagination: PageRequest;
+    pagination?: PageRequest;
     orderBy: OrderBy;
     /** page is the page number to query, starts at 1. If not provided, will default to first page. */
-    page: Long;
+    page: bigint;
     /**
      * limit is the total number of results to be returned in the result page.
      * If left empty it will default to a value to be set by each app.
      */
-    limit: Long;
+    limit: bigint;
 }
 export interface GetTxsEventRequestProtoMsg {
     typeUrl: "/cosmos.tx.v1beta1.GetTxsEventRequest";
@@ -76,21 +75,21 @@ export interface GetTxsEventRequestProtoMsg {
  */
 export interface GetTxsEventRequestAmino {
     /** events is the list of transaction event type. */
-    events: string[];
+    events?: string[];
     /**
      * pagination defines a pagination for the request.
      * Deprecated post v0.46.x: use page and limit instead.
      */
     /** @deprecated */
     pagination?: PageRequestAmino;
-    order_by: OrderBy;
+    order_by?: OrderBy;
     /** page is the page number to query, starts at 1. If not provided, will default to first page. */
-    page: string;
+    page?: string;
     /**
      * limit is the total number of results to be returned in the result page.
      * If left empty it will default to a value to be set by each app.
      */
-    limit: string;
+    limit?: string;
 }
 export interface GetTxsEventRequestAminoMsg {
     type: "cosmos-sdk/GetTxsEventRequest";
@@ -103,10 +102,10 @@ export interface GetTxsEventRequestAminoMsg {
 export interface GetTxsEventRequestSDKType {
     events: string[];
     /** @deprecated */
-    pagination: PageRequestSDKType;
+    pagination?: PageRequestSDKType;
     order_by: OrderBy;
-    page: Long;
-    limit: Long;
+    page: bigint;
+    limit: bigint;
 }
 /**
  * GetTxsEventResponse is the response type for the Service.TxsByEvents
@@ -122,9 +121,9 @@ export interface GetTxsEventResponse {
      * Deprecated post v0.46.x: use total instead.
      */
     /** @deprecated */
-    pagination: PageResponse;
+    pagination?: PageResponse;
     /** total is total number of results available */
-    total: Long;
+    total: bigint;
 }
 export interface GetTxsEventResponseProtoMsg {
     typeUrl: "/cosmos.tx.v1beta1.GetTxsEventResponse";
@@ -136,9 +135,9 @@ export interface GetTxsEventResponseProtoMsg {
  */
 export interface GetTxsEventResponseAmino {
     /** txs is the list of queried transactions. */
-    txs: TxAmino[];
+    txs?: TxAmino[];
     /** tx_responses is the list of queried TxResponses. */
-    tx_responses: TxResponseAmino[];
+    tx_responses?: TxResponseAmino[];
     /**
      * pagination defines a pagination for the response.
      * Deprecated post v0.46.x: use total instead.
@@ -146,7 +145,7 @@ export interface GetTxsEventResponseAmino {
     /** @deprecated */
     pagination?: PageResponseAmino;
     /** total is total number of results available */
-    total: string;
+    total?: string;
 }
 export interface GetTxsEventResponseAminoMsg {
     type: "cosmos-sdk/GetTxsEventResponse";
@@ -160,8 +159,8 @@ export interface GetTxsEventResponseSDKType {
     txs: TxSDKType[];
     tx_responses: TxResponseSDKType[];
     /** @deprecated */
-    pagination: PageResponseSDKType;
-    total: Long;
+    pagination?: PageResponseSDKType;
+    total: bigint;
 }
 /**
  * BroadcastTxRequest is the request type for the Service.BroadcastTxRequest
@@ -182,8 +181,8 @@ export interface BroadcastTxRequestProtoMsg {
  */
 export interface BroadcastTxRequestAmino {
     /** tx_bytes is the raw transaction. */
-    tx_bytes: Uint8Array;
-    mode: BroadcastMode;
+    tx_bytes?: string;
+    mode?: BroadcastMode;
 }
 export interface BroadcastTxRequestAminoMsg {
     type: "cosmos-sdk/BroadcastTxRequest";
@@ -203,7 +202,7 @@ export interface BroadcastTxRequestSDKType {
  */
 export interface BroadcastTxResponse {
     /** tx_response is the queried TxResponses. */
-    txResponse: TxResponse;
+    txResponse?: TxResponse;
 }
 export interface BroadcastTxResponseProtoMsg {
     typeUrl: "/cosmos.tx.v1beta1.BroadcastTxResponse";
@@ -226,7 +225,7 @@ export interface BroadcastTxResponseAminoMsg {
  * Service.BroadcastTx method.
  */
 export interface BroadcastTxResponseSDKType {
-    tx_response: TxResponseSDKType;
+    tx_response?: TxResponseSDKType;
 }
 /**
  * SimulateRequest is the request type for the Service.Simulate
@@ -238,7 +237,7 @@ export interface SimulateRequest {
      * Deprecated. Send raw tx bytes instead.
      */
     /** @deprecated */
-    tx: Tx;
+    tx?: Tx;
     /**
      * tx_bytes is the raw transaction.
      *
@@ -266,7 +265,7 @@ export interface SimulateRequestAmino {
      *
      * Since: cosmos-sdk 0.43
      */
-    tx_bytes: Uint8Array;
+    tx_bytes?: string;
 }
 export interface SimulateRequestAminoMsg {
     type: "cosmos-sdk/SimulateRequest";
@@ -278,7 +277,7 @@ export interface SimulateRequestAminoMsg {
  */
 export interface SimulateRequestSDKType {
     /** @deprecated */
-    tx: TxSDKType;
+    tx?: TxSDKType;
     tx_bytes: Uint8Array;
 }
 /**
@@ -287,9 +286,9 @@ export interface SimulateRequestSDKType {
  */
 export interface SimulateResponse {
     /** gas_info is the information about gas used in the simulation. */
-    gasInfo: GasInfo;
+    gasInfo?: GasInfo;
     /** result is the result of the simulation. */
-    result: Result;
+    result?: Result;
 }
 export interface SimulateResponseProtoMsg {
     typeUrl: "/cosmos.tx.v1beta1.SimulateResponse";
@@ -314,8 +313,8 @@ export interface SimulateResponseAminoMsg {
  * Service.SimulateRPC method.
  */
 export interface SimulateResponseSDKType {
-    gas_info: GasInfoSDKType;
-    result: ResultSDKType;
+    gas_info?: GasInfoSDKType;
+    result?: ResultSDKType;
 }
 /**
  * GetTxRequest is the request type for the Service.GetTx
@@ -335,7 +334,7 @@ export interface GetTxRequestProtoMsg {
  */
 export interface GetTxRequestAmino {
     /** hash is the tx hash to query, encoded as a hex string. */
-    hash: string;
+    hash?: string;
 }
 export interface GetTxRequestAminoMsg {
     type: "cosmos-sdk/GetTxRequest";
@@ -351,9 +350,9 @@ export interface GetTxRequestSDKType {
 /** GetTxResponse is the response type for the Service.GetTx method. */
 export interface GetTxResponse {
     /** tx is the queried transaction. */
-    tx: Tx;
+    tx?: Tx;
     /** tx_response is the queried TxResponses. */
-    txResponse: TxResponse;
+    txResponse?: TxResponse;
 }
 export interface GetTxResponseProtoMsg {
     typeUrl: "/cosmos.tx.v1beta1.GetTxResponse";
@@ -372,8 +371,8 @@ export interface GetTxResponseAminoMsg {
 }
 /** GetTxResponse is the response type for the Service.GetTx method. */
 export interface GetTxResponseSDKType {
-    tx: TxSDKType;
-    tx_response: TxResponseSDKType;
+    tx?: TxSDKType;
+    tx_response?: TxResponseSDKType;
 }
 /**
  * GetBlockWithTxsRequest is the request type for the Service.GetBlockWithTxs
@@ -383,9 +382,9 @@ export interface GetTxResponseSDKType {
  */
 export interface GetBlockWithTxsRequest {
     /** height is the height of the block to query. */
-    height: Long;
+    height: bigint;
     /** pagination defines a pagination for the request. */
-    pagination: PageRequest;
+    pagination?: PageRequest;
 }
 export interface GetBlockWithTxsRequestProtoMsg {
     typeUrl: "/cosmos.tx.v1beta1.GetBlockWithTxsRequest";
@@ -399,7 +398,7 @@ export interface GetBlockWithTxsRequestProtoMsg {
  */
 export interface GetBlockWithTxsRequestAmino {
     /** height is the height of the block to query. */
-    height: string;
+    height?: string;
     /** pagination defines a pagination for the request. */
     pagination?: PageRequestAmino;
 }
@@ -414,8 +413,8 @@ export interface GetBlockWithTxsRequestAminoMsg {
  * Since: cosmos-sdk 0.45.2
  */
 export interface GetBlockWithTxsRequestSDKType {
-    height: Long;
-    pagination: PageRequestSDKType;
+    height: bigint;
+    pagination?: PageRequestSDKType;
 }
 /**
  * GetBlockWithTxsResponse is the response type for the Service.GetBlockWithTxs method.
@@ -425,10 +424,10 @@ export interface GetBlockWithTxsRequestSDKType {
 export interface GetBlockWithTxsResponse {
     /** txs are the transactions in the block. */
     txs: Tx[];
-    blockId: BlockID;
-    block: Block;
+    blockId?: BlockID;
+    block?: Block;
     /** pagination defines a pagination for the response. */
-    pagination: PageResponse;
+    pagination?: PageResponse;
 }
 export interface GetBlockWithTxsResponseProtoMsg {
     typeUrl: "/cosmos.tx.v1beta1.GetBlockWithTxsResponse";
@@ -441,7 +440,7 @@ export interface GetBlockWithTxsResponseProtoMsg {
  */
 export interface GetBlockWithTxsResponseAmino {
     /** txs are the transactions in the block. */
-    txs: TxAmino[];
+    txs?: TxAmino[];
     block_id?: BlockIDAmino;
     block?: BlockAmino;
     /** pagination defines a pagination for the response. */
@@ -458,13 +457,14 @@ export interface GetBlockWithTxsResponseAminoMsg {
  */
 export interface GetBlockWithTxsResponseSDKType {
     txs: TxSDKType[];
-    block_id: BlockIDSDKType;
-    block: BlockSDKType;
-    pagination: PageResponseSDKType;
+    block_id?: BlockIDSDKType;
+    block?: BlockSDKType;
+    pagination?: PageResponseSDKType;
 }
 export declare const GetTxsEventRequest: {
-    encode(message: GetTxsEventRequest, writer?: _m0.Writer): _m0.Writer;
-    decode(input: _m0.Reader | Uint8Array, length?: number): GetTxsEventRequest;
+    typeUrl: string;
+    encode(message: GetTxsEventRequest, writer?: BinaryWriter): BinaryWriter;
+    decode(input: BinaryReader | Uint8Array, length?: number): GetTxsEventRequest;
     fromJSON(object: any): GetTxsEventRequest;
     toJSON(message: GetTxsEventRequest): unknown;
     fromPartial(object: Partial<GetTxsEventRequest>): GetTxsEventRequest;
@@ -477,8 +477,9 @@ export declare const GetTxsEventRequest: {
     toProtoMsg(message: GetTxsEventRequest): GetTxsEventRequestProtoMsg;
 };
 export declare const GetTxsEventResponse: {
-    encode(message: GetTxsEventResponse, writer?: _m0.Writer): _m0.Writer;
-    decode(input: _m0.Reader | Uint8Array, length?: number): GetTxsEventResponse;
+    typeUrl: string;
+    encode(message: GetTxsEventResponse, writer?: BinaryWriter): BinaryWriter;
+    decode(input: BinaryReader | Uint8Array, length?: number): GetTxsEventResponse;
     fromJSON(object: any): GetTxsEventResponse;
     toJSON(message: GetTxsEventResponse): unknown;
     fromPartial(object: Partial<GetTxsEventResponse>): GetTxsEventResponse;
@@ -491,8 +492,9 @@ export declare const GetTxsEventResponse: {
     toProtoMsg(message: GetTxsEventResponse): GetTxsEventResponseProtoMsg;
 };
 export declare const BroadcastTxRequest: {
-    encode(message: BroadcastTxRequest, writer?: _m0.Writer): _m0.Writer;
-    decode(input: _m0.Reader | Uint8Array, length?: number): BroadcastTxRequest;
+    typeUrl: string;
+    encode(message: BroadcastTxRequest, writer?: BinaryWriter): BinaryWriter;
+    decode(input: BinaryReader | Uint8Array, length?: number): BroadcastTxRequest;
     fromJSON(object: any): BroadcastTxRequest;
     toJSON(message: BroadcastTxRequest): unknown;
     fromPartial(object: Partial<BroadcastTxRequest>): BroadcastTxRequest;
@@ -505,8 +507,9 @@ export declare const BroadcastTxRequest: {
     toProtoMsg(message: BroadcastTxRequest): BroadcastTxRequestProtoMsg;
 };
 export declare const BroadcastTxResponse: {
-    encode(message: BroadcastTxResponse, writer?: _m0.Writer): _m0.Writer;
-    decode(input: _m0.Reader | Uint8Array, length?: number): BroadcastTxResponse;
+    typeUrl: string;
+    encode(message: BroadcastTxResponse, writer?: BinaryWriter): BinaryWriter;
+    decode(input: BinaryReader | Uint8Array, length?: number): BroadcastTxResponse;
     fromJSON(object: any): BroadcastTxResponse;
     toJSON(message: BroadcastTxResponse): unknown;
     fromPartial(object: Partial<BroadcastTxResponse>): BroadcastTxResponse;
@@ -519,8 +522,9 @@ export declare const BroadcastTxResponse: {
     toProtoMsg(message: BroadcastTxResponse): BroadcastTxResponseProtoMsg;
 };
 export declare const SimulateRequest: {
-    encode(message: SimulateRequest, writer?: _m0.Writer): _m0.Writer;
-    decode(input: _m0.Reader | Uint8Array, length?: number): SimulateRequest;
+    typeUrl: string;
+    encode(message: SimulateRequest, writer?: BinaryWriter): BinaryWriter;
+    decode(input: BinaryReader | Uint8Array, length?: number): SimulateRequest;
     fromJSON(object: any): SimulateRequest;
     toJSON(message: SimulateRequest): unknown;
     fromPartial(object: Partial<SimulateRequest>): SimulateRequest;
@@ -533,8 +537,9 @@ export declare const SimulateRequest: {
     toProtoMsg(message: SimulateRequest): SimulateRequestProtoMsg;
 };
 export declare const SimulateResponse: {
-    encode(message: SimulateResponse, writer?: _m0.Writer): _m0.Writer;
-    decode(input: _m0.Reader | Uint8Array, length?: number): SimulateResponse;
+    typeUrl: string;
+    encode(message: SimulateResponse, writer?: BinaryWriter): BinaryWriter;
+    decode(input: BinaryReader | Uint8Array, length?: number): SimulateResponse;
     fromJSON(object: any): SimulateResponse;
     toJSON(message: SimulateResponse): unknown;
     fromPartial(object: Partial<SimulateResponse>): SimulateResponse;
@@ -547,8 +552,9 @@ export declare const SimulateResponse: {
     toProtoMsg(message: SimulateResponse): SimulateResponseProtoMsg;
 };
 export declare const GetTxRequest: {
-    encode(message: GetTxRequest, writer?: _m0.Writer): _m0.Writer;
-    decode(input: _m0.Reader | Uint8Array, length?: number): GetTxRequest;
+    typeUrl: string;
+    encode(message: GetTxRequest, writer?: BinaryWriter): BinaryWriter;
+    decode(input: BinaryReader | Uint8Array, length?: number): GetTxRequest;
     fromJSON(object: any): GetTxRequest;
     toJSON(message: GetTxRequest): unknown;
     fromPartial(object: Partial<GetTxRequest>): GetTxRequest;
@@ -561,8 +567,9 @@ export declare const GetTxRequest: {
     toProtoMsg(message: GetTxRequest): GetTxRequestProtoMsg;
 };
 export declare const GetTxResponse: {
-    encode(message: GetTxResponse, writer?: _m0.Writer): _m0.Writer;
-    decode(input: _m0.Reader | Uint8Array, length?: number): GetTxResponse;
+    typeUrl: string;
+    encode(message: GetTxResponse, writer?: BinaryWriter): BinaryWriter;
+    decode(input: BinaryReader | Uint8Array, length?: number): GetTxResponse;
     fromJSON(object: any): GetTxResponse;
     toJSON(message: GetTxResponse): unknown;
     fromPartial(object: Partial<GetTxResponse>): GetTxResponse;
@@ -575,8 +582,9 @@ export declare const GetTxResponse: {
     toProtoMsg(message: GetTxResponse): GetTxResponseProtoMsg;
 };
 export declare const GetBlockWithTxsRequest: {
-    encode(message: GetBlockWithTxsRequest, writer?: _m0.Writer): _m0.Writer;
-    decode(input: _m0.Reader | Uint8Array, length?: number): GetBlockWithTxsRequest;
+    typeUrl: string;
+    encode(message: GetBlockWithTxsRequest, writer?: BinaryWriter): BinaryWriter;
+    decode(input: BinaryReader | Uint8Array, length?: number): GetBlockWithTxsRequest;
     fromJSON(object: any): GetBlockWithTxsRequest;
     toJSON(message: GetBlockWithTxsRequest): unknown;
     fromPartial(object: Partial<GetBlockWithTxsRequest>): GetBlockWithTxsRequest;
@@ -589,8 +597,9 @@ export declare const GetBlockWithTxsRequest: {
     toProtoMsg(message: GetBlockWithTxsRequest): GetBlockWithTxsRequestProtoMsg;
 };
 export declare const GetBlockWithTxsResponse: {
-    encode(message: GetBlockWithTxsResponse, writer?: _m0.Writer): _m0.Writer;
-    decode(input: _m0.Reader | Uint8Array, length?: number): GetBlockWithTxsResponse;
+    typeUrl: string;
+    encode(message: GetBlockWithTxsResponse, writer?: BinaryWriter): BinaryWriter;
+    decode(input: BinaryReader | Uint8Array, length?: number): GetBlockWithTxsResponse;
     fromJSON(object: any): GetBlockWithTxsResponse;
     toJSON(message: GetBlockWithTxsResponse): unknown;
     fromPartial(object: Partial<GetBlockWithTxsResponse>): GetBlockWithTxsResponse;

@@ -1,8 +1,7 @@
-import { Long } from "../../../../helpers";
-import * as _m0 from "protobufjs/minimal";
+import { BinaryReader, BinaryWriter } from "../../../../binary";
 /** Snapshot contains Tendermint state sync snapshot info. */
 export interface Snapshot {
-    height: Long;
+    height: bigint;
     format: number;
     chunks: number;
     hash: Uint8Array;
@@ -14,10 +13,10 @@ export interface SnapshotProtoMsg {
 }
 /** Snapshot contains Tendermint state sync snapshot info. */
 export interface SnapshotAmino {
-    height: string;
-    format: number;
-    chunks: number;
-    hash: Uint8Array;
+    height?: string;
+    format?: number;
+    chunks?: number;
+    hash?: string;
     metadata?: MetadataAmino;
 }
 export interface SnapshotAminoMsg {
@@ -26,7 +25,7 @@ export interface SnapshotAminoMsg {
 }
 /** Snapshot contains Tendermint state sync snapshot info. */
 export interface SnapshotSDKType {
-    height: Long;
+    height: bigint;
     format: number;
     chunks: number;
     hash: Uint8Array;
@@ -44,7 +43,7 @@ export interface MetadataProtoMsg {
 /** Metadata contains SDK-specific snapshot metadata. */
 export interface MetadataAmino {
     /** SHA-256 chunk hashes */
-    chunk_hashes: Uint8Array[];
+    chunk_hashes?: string[];
 }
 export interface MetadataAminoMsg {
     type: "cosmos-sdk/Metadata";
@@ -119,7 +118,7 @@ export interface SnapshotStoreItemProtoMsg {
  * Since: cosmos-sdk 0.46
  */
 export interface SnapshotStoreItemAmino {
-    name: string;
+    name?: string;
 }
 export interface SnapshotStoreItemAminoMsg {
     type: "cosmos-sdk/SnapshotStoreItem";
@@ -142,7 +141,7 @@ export interface SnapshotIAVLItem {
     key: Uint8Array;
     value: Uint8Array;
     /** version is block height */
-    version: Long;
+    version: bigint;
     /** height is depth of the tree. */
     height: number;
 }
@@ -156,12 +155,12 @@ export interface SnapshotIAVLItemProtoMsg {
  * Since: cosmos-sdk 0.46
  */
 export interface SnapshotIAVLItemAmino {
-    key: Uint8Array;
-    value: Uint8Array;
+    key?: string;
+    value?: string;
     /** version is block height */
-    version: string;
+    version?: string;
     /** height is depth of the tree. */
-    height: number;
+    height?: number;
 }
 export interface SnapshotIAVLItemAminoMsg {
     type: "cosmos-sdk/SnapshotIAVLItem";
@@ -175,7 +174,7 @@ export interface SnapshotIAVLItemAminoMsg {
 export interface SnapshotIAVLItemSDKType {
     key: Uint8Array;
     value: Uint8Array;
-    version: Long;
+    version: bigint;
     height: number;
 }
 /**
@@ -197,8 +196,8 @@ export interface SnapshotExtensionMetaProtoMsg {
  * Since: cosmos-sdk 0.46
  */
 export interface SnapshotExtensionMetaAmino {
-    name: string;
-    format: number;
+    name?: string;
+    format?: number;
 }
 export interface SnapshotExtensionMetaAminoMsg {
     type: "cosmos-sdk/SnapshotExtensionMeta";
@@ -231,7 +230,7 @@ export interface SnapshotExtensionPayloadProtoMsg {
  * Since: cosmos-sdk 0.46
  */
 export interface SnapshotExtensionPayloadAmino {
-    payload: Uint8Array;
+    payload?: string;
 }
 export interface SnapshotExtensionPayloadAminoMsg {
     type: "cosmos-sdk/SnapshotExtensionPayload";
@@ -264,8 +263,8 @@ export interface SnapshotKVItemProtoMsg {
  * Since: cosmos-sdk 0.46
  */
 export interface SnapshotKVItemAmino {
-    key: Uint8Array;
-    value: Uint8Array;
+    key?: string;
+    value?: string;
 }
 export interface SnapshotKVItemAminoMsg {
     type: "cosmos-sdk/SnapshotKVItem";
@@ -298,7 +297,7 @@ export interface SnapshotSchemaProtoMsg {
  * Since: cosmos-sdk 0.46
  */
 export interface SnapshotSchemaAmino {
-    keys: Uint8Array[];
+    keys?: string[];
 }
 export interface SnapshotSchemaAminoMsg {
     type: "cosmos-sdk/SnapshotSchema";
@@ -313,8 +312,9 @@ export interface SnapshotSchemaSDKType {
     keys: Uint8Array[];
 }
 export declare const Snapshot: {
-    encode(message: Snapshot, writer?: _m0.Writer): _m0.Writer;
-    decode(input: _m0.Reader | Uint8Array, length?: number): Snapshot;
+    typeUrl: string;
+    encode(message: Snapshot, writer?: BinaryWriter): BinaryWriter;
+    decode(input: BinaryReader | Uint8Array, length?: number): Snapshot;
     fromJSON(object: any): Snapshot;
     toJSON(message: Snapshot): unknown;
     fromPartial(object: Partial<Snapshot>): Snapshot;
@@ -327,8 +327,9 @@ export declare const Snapshot: {
     toProtoMsg(message: Snapshot): SnapshotProtoMsg;
 };
 export declare const Metadata: {
-    encode(message: Metadata, writer?: _m0.Writer): _m0.Writer;
-    decode(input: _m0.Reader | Uint8Array, length?: number): Metadata;
+    typeUrl: string;
+    encode(message: Metadata, writer?: BinaryWriter): BinaryWriter;
+    decode(input: BinaryReader | Uint8Array, length?: number): Metadata;
     fromJSON(object: any): Metadata;
     toJSON(message: Metadata): unknown;
     fromPartial(object: Partial<Metadata>): Metadata;
@@ -341,8 +342,9 @@ export declare const Metadata: {
     toProtoMsg(message: Metadata): MetadataProtoMsg;
 };
 export declare const SnapshotItem: {
-    encode(message: SnapshotItem, writer?: _m0.Writer): _m0.Writer;
-    decode(input: _m0.Reader | Uint8Array, length?: number): SnapshotItem;
+    typeUrl: string;
+    encode(message: SnapshotItem, writer?: BinaryWriter): BinaryWriter;
+    decode(input: BinaryReader | Uint8Array, length?: number): SnapshotItem;
     fromJSON(object: any): SnapshotItem;
     toJSON(message: SnapshotItem): unknown;
     fromPartial(object: Partial<SnapshotItem>): SnapshotItem;
@@ -355,8 +357,9 @@ export declare const SnapshotItem: {
     toProtoMsg(message: SnapshotItem): SnapshotItemProtoMsg;
 };
 export declare const SnapshotStoreItem: {
-    encode(message: SnapshotStoreItem, writer?: _m0.Writer): _m0.Writer;
-    decode(input: _m0.Reader | Uint8Array, length?: number): SnapshotStoreItem;
+    typeUrl: string;
+    encode(message: SnapshotStoreItem, writer?: BinaryWriter): BinaryWriter;
+    decode(input: BinaryReader | Uint8Array, length?: number): SnapshotStoreItem;
     fromJSON(object: any): SnapshotStoreItem;
     toJSON(message: SnapshotStoreItem): unknown;
     fromPartial(object: Partial<SnapshotStoreItem>): SnapshotStoreItem;
@@ -369,8 +372,9 @@ export declare const SnapshotStoreItem: {
     toProtoMsg(message: SnapshotStoreItem): SnapshotStoreItemProtoMsg;
 };
 export declare const SnapshotIAVLItem: {
-    encode(message: SnapshotIAVLItem, writer?: _m0.Writer): _m0.Writer;
-    decode(input: _m0.Reader | Uint8Array, length?: number): SnapshotIAVLItem;
+    typeUrl: string;
+    encode(message: SnapshotIAVLItem, writer?: BinaryWriter): BinaryWriter;
+    decode(input: BinaryReader | Uint8Array, length?: number): SnapshotIAVLItem;
     fromJSON(object: any): SnapshotIAVLItem;
     toJSON(message: SnapshotIAVLItem): unknown;
     fromPartial(object: Partial<SnapshotIAVLItem>): SnapshotIAVLItem;
@@ -383,8 +387,9 @@ export declare const SnapshotIAVLItem: {
     toProtoMsg(message: SnapshotIAVLItem): SnapshotIAVLItemProtoMsg;
 };
 export declare const SnapshotExtensionMeta: {
-    encode(message: SnapshotExtensionMeta, writer?: _m0.Writer): _m0.Writer;
-    decode(input: _m0.Reader | Uint8Array, length?: number): SnapshotExtensionMeta;
+    typeUrl: string;
+    encode(message: SnapshotExtensionMeta, writer?: BinaryWriter): BinaryWriter;
+    decode(input: BinaryReader | Uint8Array, length?: number): SnapshotExtensionMeta;
     fromJSON(object: any): SnapshotExtensionMeta;
     toJSON(message: SnapshotExtensionMeta): unknown;
     fromPartial(object: Partial<SnapshotExtensionMeta>): SnapshotExtensionMeta;
@@ -397,8 +402,9 @@ export declare const SnapshotExtensionMeta: {
     toProtoMsg(message: SnapshotExtensionMeta): SnapshotExtensionMetaProtoMsg;
 };
 export declare const SnapshotExtensionPayload: {
-    encode(message: SnapshotExtensionPayload, writer?: _m0.Writer): _m0.Writer;
-    decode(input: _m0.Reader | Uint8Array, length?: number): SnapshotExtensionPayload;
+    typeUrl: string;
+    encode(message: SnapshotExtensionPayload, writer?: BinaryWriter): BinaryWriter;
+    decode(input: BinaryReader | Uint8Array, length?: number): SnapshotExtensionPayload;
     fromJSON(object: any): SnapshotExtensionPayload;
     toJSON(message: SnapshotExtensionPayload): unknown;
     fromPartial(object: Partial<SnapshotExtensionPayload>): SnapshotExtensionPayload;
@@ -411,8 +417,9 @@ export declare const SnapshotExtensionPayload: {
     toProtoMsg(message: SnapshotExtensionPayload): SnapshotExtensionPayloadProtoMsg;
 };
 export declare const SnapshotKVItem: {
-    encode(message: SnapshotKVItem, writer?: _m0.Writer): _m0.Writer;
-    decode(input: _m0.Reader | Uint8Array, length?: number): SnapshotKVItem;
+    typeUrl: string;
+    encode(message: SnapshotKVItem, writer?: BinaryWriter): BinaryWriter;
+    decode(input: BinaryReader | Uint8Array, length?: number): SnapshotKVItem;
     fromJSON(object: any): SnapshotKVItem;
     toJSON(message: SnapshotKVItem): unknown;
     fromPartial(object: Partial<SnapshotKVItem>): SnapshotKVItem;
@@ -425,8 +432,9 @@ export declare const SnapshotKVItem: {
     toProtoMsg(message: SnapshotKVItem): SnapshotKVItemProtoMsg;
 };
 export declare const SnapshotSchema: {
-    encode(message: SnapshotSchema, writer?: _m0.Writer): _m0.Writer;
-    decode(input: _m0.Reader | Uint8Array, length?: number): SnapshotSchema;
+    typeUrl: string;
+    encode(message: SnapshotSchema, writer?: BinaryWriter): BinaryWriter;
+    decode(input: BinaryReader | Uint8Array, length?: number): SnapshotSchema;
     fromJSON(object: any): SnapshotSchema;
     toJSON(message: SnapshotSchema): unknown;
     fromPartial(object: Partial<SnapshotSchema>): SnapshotSchema;

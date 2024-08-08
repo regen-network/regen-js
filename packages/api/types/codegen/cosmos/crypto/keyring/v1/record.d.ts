@@ -1,12 +1,12 @@
 import { Any, AnyAmino, AnySDKType } from "../../../../google/protobuf/any";
 import { BIP44Params, BIP44ParamsAmino, BIP44ParamsSDKType } from "../../hd/v1/hd";
-import * as _m0 from "protobufjs/minimal";
+import { BinaryReader, BinaryWriter } from "../../../../binary";
 /** Record is used for representing a key in the keyring. */
 export interface Record {
     /** name represents a name of Record */
     name: string;
     /** pub_key represents a public key in any format */
-    pubKey: Any;
+    pubKey?: Any;
     /** local stores the private key locally. */
     local?: Record_Local;
     /** ledger stores the information about a Ledger key. */
@@ -23,7 +23,7 @@ export interface RecordProtoMsg {
 /** Record is used for representing a key in the keyring. */
 export interface RecordAmino {
     /** name represents a name of Record */
-    name: string;
+    name?: string;
     /** pub_key represents a public key in any format */
     pub_key?: AnyAmino;
     /** local stores the private key locally. */
@@ -42,7 +42,7 @@ export interface RecordAminoMsg {
 /** Record is used for representing a key in the keyring. */
 export interface RecordSDKType {
     name: string;
-    pub_key: AnySDKType;
+    pub_key?: AnySDKType;
     local?: Record_LocalSDKType;
     ledger?: Record_LedgerSDKType;
     multi?: Record_MultiSDKType;
@@ -53,7 +53,7 @@ export interface RecordSDKType {
  * Local item
  */
 export interface Record_Local {
-    privKey: Any;
+    privKey?: Any;
 }
 export interface Record_LocalProtoMsg {
     typeUrl: "/cosmos.crypto.keyring.v1.Local";
@@ -75,11 +75,11 @@ export interface Record_LocalAminoMsg {
  * Local item
  */
 export interface Record_LocalSDKType {
-    priv_key: AnySDKType;
+    priv_key?: AnySDKType;
 }
 /** Ledger item */
 export interface Record_Ledger {
-    path: BIP44Params;
+    path?: BIP44Params;
 }
 export interface Record_LedgerProtoMsg {
     typeUrl: "/cosmos.crypto.keyring.v1.Ledger";
@@ -95,7 +95,7 @@ export interface Record_LedgerAminoMsg {
 }
 /** Ledger item */
 export interface Record_LedgerSDKType {
-    path: BIP44ParamsSDKType;
+    path?: BIP44ParamsSDKType;
 }
 /** Multi item */
 export interface Record_Multi {
@@ -132,8 +132,9 @@ export interface Record_OfflineAminoMsg {
 export interface Record_OfflineSDKType {
 }
 export declare const Record: {
-    encode(message: Record, writer?: _m0.Writer): _m0.Writer;
-    decode(input: _m0.Reader | Uint8Array, length?: number): Record;
+    typeUrl: string;
+    encode(message: Record, writer?: BinaryWriter): BinaryWriter;
+    decode(input: BinaryReader | Uint8Array, length?: number): Record;
     fromJSON(object: any): Record;
     toJSON(message: Record): unknown;
     fromPartial(object: Partial<Record>): Record;
@@ -146,8 +147,9 @@ export declare const Record: {
     toProtoMsg(message: Record): RecordProtoMsg;
 };
 export declare const Record_Local: {
-    encode(message: Record_Local, writer?: _m0.Writer): _m0.Writer;
-    decode(input: _m0.Reader | Uint8Array, length?: number): Record_Local;
+    typeUrl: string;
+    encode(message: Record_Local, writer?: BinaryWriter): BinaryWriter;
+    decode(input: BinaryReader | Uint8Array, length?: number): Record_Local;
     fromJSON(object: any): Record_Local;
     toJSON(message: Record_Local): unknown;
     fromPartial(object: Partial<Record_Local>): Record_Local;
@@ -160,8 +162,9 @@ export declare const Record_Local: {
     toProtoMsg(message: Record_Local): Record_LocalProtoMsg;
 };
 export declare const Record_Ledger: {
-    encode(message: Record_Ledger, writer?: _m0.Writer): _m0.Writer;
-    decode(input: _m0.Reader | Uint8Array, length?: number): Record_Ledger;
+    typeUrl: string;
+    encode(message: Record_Ledger, writer?: BinaryWriter): BinaryWriter;
+    decode(input: BinaryReader | Uint8Array, length?: number): Record_Ledger;
     fromJSON(object: any): Record_Ledger;
     toJSON(message: Record_Ledger): unknown;
     fromPartial(object: Partial<Record_Ledger>): Record_Ledger;
@@ -174,8 +177,9 @@ export declare const Record_Ledger: {
     toProtoMsg(message: Record_Ledger): Record_LedgerProtoMsg;
 };
 export declare const Record_Multi: {
-    encode(_: Record_Multi, writer?: _m0.Writer): _m0.Writer;
-    decode(input: _m0.Reader | Uint8Array, length?: number): Record_Multi;
+    typeUrl: string;
+    encode(_: Record_Multi, writer?: BinaryWriter): BinaryWriter;
+    decode(input: BinaryReader | Uint8Array, length?: number): Record_Multi;
     fromJSON(_: any): Record_Multi;
     toJSON(_: Record_Multi): unknown;
     fromPartial(_: Partial<Record_Multi>): Record_Multi;
@@ -188,8 +192,9 @@ export declare const Record_Multi: {
     toProtoMsg(message: Record_Multi): Record_MultiProtoMsg;
 };
 export declare const Record_Offline: {
-    encode(_: Record_Offline, writer?: _m0.Writer): _m0.Writer;
-    decode(input: _m0.Reader | Uint8Array, length?: number): Record_Offline;
+    typeUrl: string;
+    encode(_: Record_Offline, writer?: BinaryWriter): BinaryWriter;
+    decode(input: BinaryReader | Uint8Array, length?: number): Record_Offline;
     fromJSON(_: any): Record_Offline;
     toJSON(_: Record_Offline): unknown;
     fromPartial(_: Partial<Record_Offline>): Record_Offline;

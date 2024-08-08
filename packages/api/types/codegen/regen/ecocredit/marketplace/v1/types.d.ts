@@ -1,5 +1,5 @@
 import { AllowedDenom, AllowedDenomAmino, AllowedDenomSDKType } from "./state";
-import * as _m0 from "protobufjs/minimal";
+import { BinaryReader, BinaryWriter } from "../../../../binary";
 /**
  * AllowDenomProposal is a gov Content type for approving a denom for use in the
  * marketplace.
@@ -16,7 +16,7 @@ export interface AllowDenomProposal {
      * denom contains coin denom information that will be added to the
      * list of allowed denoms for use in the marketplace.
      */
-    denom: AllowedDenom;
+    denom?: AllowedDenom;
 }
 export interface AllowDenomProposalProtoMsg {
     typeUrl: "/regen.ecocredit.marketplace.v1.AllowDenomProposal";
@@ -31,9 +31,9 @@ export interface AllowDenomProposalProtoMsg {
  */
 export interface AllowDenomProposalAmino {
     /** title is the title of the proposal. */
-    title: string;
+    title?: string;
     /** description is the description of the proposal. */
-    description: string;
+    description?: string;
     /**
      * denom contains coin denom information that will be added to the
      * list of allowed denoms for use in the marketplace.
@@ -54,11 +54,12 @@ export interface AllowDenomProposalAminoMsg {
 export interface AllowDenomProposalSDKType {
     title: string;
     description: string;
-    denom: AllowedDenomSDKType;
+    denom?: AllowedDenomSDKType;
 }
 export declare const AllowDenomProposal: {
-    encode(message: AllowDenomProposal, writer?: _m0.Writer): _m0.Writer;
-    decode(input: _m0.Reader | Uint8Array, length?: number): AllowDenomProposal;
+    typeUrl: string;
+    encode(message: AllowDenomProposal, writer?: BinaryWriter): BinaryWriter;
+    decode(input: BinaryReader | Uint8Array, length?: number): AllowDenomProposal;
     fromJSON(object: any): AllowDenomProposal;
     toJSON(message: AllowDenomProposal): unknown;
     fromPartial(object: Partial<AllowDenomProposal>): AllowDenomProposal;

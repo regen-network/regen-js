@@ -1,5 +1,5 @@
 import { Coin, CoinAmino, CoinSDKType } from "../../base/v1beta1/coin";
-import * as _m0 from "protobufjs/minimal";
+import { BinaryReader, BinaryWriter } from "../../../binary";
 /**
  * SendAuthorization allows the grantee to spend up to spend_limit coins from
  * the granter's account.
@@ -7,7 +7,7 @@ import * as _m0 from "protobufjs/minimal";
  * Since: cosmos-sdk 0.43
  */
 export interface SendAuthorization {
-    $typeUrl?: string;
+    $typeUrl?: "/cosmos.bank.v1beta1.SendAuthorization";
     spendLimit: Coin[];
 }
 export interface SendAuthorizationProtoMsg {
@@ -21,7 +21,7 @@ export interface SendAuthorizationProtoMsg {
  * Since: cosmos-sdk 0.43
  */
 export interface SendAuthorizationAmino {
-    spend_limit: CoinAmino[];
+    spend_limit?: CoinAmino[];
 }
 export interface SendAuthorizationAminoMsg {
     type: "cosmos-sdk/SendAuthorization";
@@ -34,12 +34,13 @@ export interface SendAuthorizationAminoMsg {
  * Since: cosmos-sdk 0.43
  */
 export interface SendAuthorizationSDKType {
-    $typeUrl?: string;
+    $typeUrl?: "/cosmos.bank.v1beta1.SendAuthorization";
     spend_limit: CoinSDKType[];
 }
 export declare const SendAuthorization: {
-    encode(message: SendAuthorization, writer?: _m0.Writer): _m0.Writer;
-    decode(input: _m0.Reader | Uint8Array, length?: number): SendAuthorization;
+    typeUrl: string;
+    encode(message: SendAuthorization, writer?: BinaryWriter): BinaryWriter;
+    decode(input: BinaryReader | Uint8Array, length?: number): SendAuthorization;
     fromJSON(object: any): SendAuthorization;
     toJSON(message: SendAuthorization): unknown;
     fromPartial(object: Partial<SendAuthorization>): SendAuthorization;

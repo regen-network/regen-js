@@ -1,6 +1,6 @@
 import { PageRequest, PageRequestAmino, PageRequestSDKType, PageResponse, PageResponseAmino, PageResponseSDKType } from "../../base/query/v1beta1/pagination";
 import { Grant, GrantAmino, GrantSDKType, GrantAuthorization, GrantAuthorizationAmino, GrantAuthorizationSDKType } from "./authz";
-import * as _m0 from "protobufjs/minimal";
+import { BinaryReader, BinaryWriter } from "../../../binary";
 /** QueryGrantsRequest is the request type for the Query/Grants RPC method. */
 export interface QueryGrantsRequest {
     granter: string;
@@ -8,7 +8,7 @@ export interface QueryGrantsRequest {
     /** Optional, msg_type_url, when set, will query only grants matching given msg type. */
     msgTypeUrl: string;
     /** pagination defines an pagination for the request. */
-    pagination: PageRequest;
+    pagination?: PageRequest;
 }
 export interface QueryGrantsRequestProtoMsg {
     typeUrl: "/cosmos.authz.v1beta1.QueryGrantsRequest";
@@ -16,10 +16,10 @@ export interface QueryGrantsRequestProtoMsg {
 }
 /** QueryGrantsRequest is the request type for the Query/Grants RPC method. */
 export interface QueryGrantsRequestAmino {
-    granter: string;
-    grantee: string;
+    granter?: string;
+    grantee?: string;
     /** Optional, msg_type_url, when set, will query only grants matching given msg type. */
-    msg_type_url: string;
+    msg_type_url?: string;
     /** pagination defines an pagination for the request. */
     pagination?: PageRequestAmino;
 }
@@ -32,14 +32,14 @@ export interface QueryGrantsRequestSDKType {
     granter: string;
     grantee: string;
     msg_type_url: string;
-    pagination: PageRequestSDKType;
+    pagination?: PageRequestSDKType;
 }
 /** QueryGrantsResponse is the response type for the Query/Authorizations RPC method. */
 export interface QueryGrantsResponse {
     /** authorizations is a list of grants granted for grantee by granter. */
     grants: Grant[];
     /** pagination defines an pagination for the response. */
-    pagination: PageResponse;
+    pagination?: PageResponse;
 }
 export interface QueryGrantsResponseProtoMsg {
     typeUrl: "/cosmos.authz.v1beta1.QueryGrantsResponse";
@@ -48,7 +48,7 @@ export interface QueryGrantsResponseProtoMsg {
 /** QueryGrantsResponse is the response type for the Query/Authorizations RPC method. */
 export interface QueryGrantsResponseAmino {
     /** authorizations is a list of grants granted for grantee by granter. */
-    grants: GrantAmino[];
+    grants?: GrantAmino[];
     /** pagination defines an pagination for the response. */
     pagination?: PageResponseAmino;
 }
@@ -59,13 +59,13 @@ export interface QueryGrantsResponseAminoMsg {
 /** QueryGrantsResponse is the response type for the Query/Authorizations RPC method. */
 export interface QueryGrantsResponseSDKType {
     grants: GrantSDKType[];
-    pagination: PageResponseSDKType;
+    pagination?: PageResponseSDKType;
 }
 /** QueryGranterGrantsRequest is the request type for the Query/GranterGrants RPC method. */
 export interface QueryGranterGrantsRequest {
     granter: string;
     /** pagination defines an pagination for the request. */
-    pagination: PageRequest;
+    pagination?: PageRequest;
 }
 export interface QueryGranterGrantsRequestProtoMsg {
     typeUrl: "/cosmos.authz.v1beta1.QueryGranterGrantsRequest";
@@ -73,7 +73,7 @@ export interface QueryGranterGrantsRequestProtoMsg {
 }
 /** QueryGranterGrantsRequest is the request type for the Query/GranterGrants RPC method. */
 export interface QueryGranterGrantsRequestAmino {
-    granter: string;
+    granter?: string;
     /** pagination defines an pagination for the request. */
     pagination?: PageRequestAmino;
 }
@@ -84,14 +84,14 @@ export interface QueryGranterGrantsRequestAminoMsg {
 /** QueryGranterGrantsRequest is the request type for the Query/GranterGrants RPC method. */
 export interface QueryGranterGrantsRequestSDKType {
     granter: string;
-    pagination: PageRequestSDKType;
+    pagination?: PageRequestSDKType;
 }
 /** QueryGranterGrantsResponse is the response type for the Query/GranterGrants RPC method. */
 export interface QueryGranterGrantsResponse {
     /** grants is a list of grants granted by the granter. */
     grants: GrantAuthorization[];
     /** pagination defines an pagination for the response. */
-    pagination: PageResponse;
+    pagination?: PageResponse;
 }
 export interface QueryGranterGrantsResponseProtoMsg {
     typeUrl: "/cosmos.authz.v1beta1.QueryGranterGrantsResponse";
@@ -100,7 +100,7 @@ export interface QueryGranterGrantsResponseProtoMsg {
 /** QueryGranterGrantsResponse is the response type for the Query/GranterGrants RPC method. */
 export interface QueryGranterGrantsResponseAmino {
     /** grants is a list of grants granted by the granter. */
-    grants: GrantAuthorizationAmino[];
+    grants?: GrantAuthorizationAmino[];
     /** pagination defines an pagination for the response. */
     pagination?: PageResponseAmino;
 }
@@ -111,13 +111,13 @@ export interface QueryGranterGrantsResponseAminoMsg {
 /** QueryGranterGrantsResponse is the response type for the Query/GranterGrants RPC method. */
 export interface QueryGranterGrantsResponseSDKType {
     grants: GrantAuthorizationSDKType[];
-    pagination: PageResponseSDKType;
+    pagination?: PageResponseSDKType;
 }
 /** QueryGranteeGrantsRequest is the request type for the Query/IssuedGrants RPC method. */
 export interface QueryGranteeGrantsRequest {
     grantee: string;
     /** pagination defines an pagination for the request. */
-    pagination: PageRequest;
+    pagination?: PageRequest;
 }
 export interface QueryGranteeGrantsRequestProtoMsg {
     typeUrl: "/cosmos.authz.v1beta1.QueryGranteeGrantsRequest";
@@ -125,7 +125,7 @@ export interface QueryGranteeGrantsRequestProtoMsg {
 }
 /** QueryGranteeGrantsRequest is the request type for the Query/IssuedGrants RPC method. */
 export interface QueryGranteeGrantsRequestAmino {
-    grantee: string;
+    grantee?: string;
     /** pagination defines an pagination for the request. */
     pagination?: PageRequestAmino;
 }
@@ -136,14 +136,14 @@ export interface QueryGranteeGrantsRequestAminoMsg {
 /** QueryGranteeGrantsRequest is the request type for the Query/IssuedGrants RPC method. */
 export interface QueryGranteeGrantsRequestSDKType {
     grantee: string;
-    pagination: PageRequestSDKType;
+    pagination?: PageRequestSDKType;
 }
 /** QueryGranteeGrantsResponse is the response type for the Query/GranteeGrants RPC method. */
 export interface QueryGranteeGrantsResponse {
     /** grants is a list of grants granted to the grantee. */
     grants: GrantAuthorization[];
     /** pagination defines an pagination for the response. */
-    pagination: PageResponse;
+    pagination?: PageResponse;
 }
 export interface QueryGranteeGrantsResponseProtoMsg {
     typeUrl: "/cosmos.authz.v1beta1.QueryGranteeGrantsResponse";
@@ -152,7 +152,7 @@ export interface QueryGranteeGrantsResponseProtoMsg {
 /** QueryGranteeGrantsResponse is the response type for the Query/GranteeGrants RPC method. */
 export interface QueryGranteeGrantsResponseAmino {
     /** grants is a list of grants granted to the grantee. */
-    grants: GrantAuthorizationAmino[];
+    grants?: GrantAuthorizationAmino[];
     /** pagination defines an pagination for the response. */
     pagination?: PageResponseAmino;
 }
@@ -163,11 +163,12 @@ export interface QueryGranteeGrantsResponseAminoMsg {
 /** QueryGranteeGrantsResponse is the response type for the Query/GranteeGrants RPC method. */
 export interface QueryGranteeGrantsResponseSDKType {
     grants: GrantAuthorizationSDKType[];
-    pagination: PageResponseSDKType;
+    pagination?: PageResponseSDKType;
 }
 export declare const QueryGrantsRequest: {
-    encode(message: QueryGrantsRequest, writer?: _m0.Writer): _m0.Writer;
-    decode(input: _m0.Reader | Uint8Array, length?: number): QueryGrantsRequest;
+    typeUrl: string;
+    encode(message: QueryGrantsRequest, writer?: BinaryWriter): BinaryWriter;
+    decode(input: BinaryReader | Uint8Array, length?: number): QueryGrantsRequest;
     fromJSON(object: any): QueryGrantsRequest;
     toJSON(message: QueryGrantsRequest): unknown;
     fromPartial(object: Partial<QueryGrantsRequest>): QueryGrantsRequest;
@@ -180,8 +181,9 @@ export declare const QueryGrantsRequest: {
     toProtoMsg(message: QueryGrantsRequest): QueryGrantsRequestProtoMsg;
 };
 export declare const QueryGrantsResponse: {
-    encode(message: QueryGrantsResponse, writer?: _m0.Writer): _m0.Writer;
-    decode(input: _m0.Reader | Uint8Array, length?: number): QueryGrantsResponse;
+    typeUrl: string;
+    encode(message: QueryGrantsResponse, writer?: BinaryWriter): BinaryWriter;
+    decode(input: BinaryReader | Uint8Array, length?: number): QueryGrantsResponse;
     fromJSON(object: any): QueryGrantsResponse;
     toJSON(message: QueryGrantsResponse): unknown;
     fromPartial(object: Partial<QueryGrantsResponse>): QueryGrantsResponse;
@@ -194,8 +196,9 @@ export declare const QueryGrantsResponse: {
     toProtoMsg(message: QueryGrantsResponse): QueryGrantsResponseProtoMsg;
 };
 export declare const QueryGranterGrantsRequest: {
-    encode(message: QueryGranterGrantsRequest, writer?: _m0.Writer): _m0.Writer;
-    decode(input: _m0.Reader | Uint8Array, length?: number): QueryGranterGrantsRequest;
+    typeUrl: string;
+    encode(message: QueryGranterGrantsRequest, writer?: BinaryWriter): BinaryWriter;
+    decode(input: BinaryReader | Uint8Array, length?: number): QueryGranterGrantsRequest;
     fromJSON(object: any): QueryGranterGrantsRequest;
     toJSON(message: QueryGranterGrantsRequest): unknown;
     fromPartial(object: Partial<QueryGranterGrantsRequest>): QueryGranterGrantsRequest;
@@ -208,8 +211,9 @@ export declare const QueryGranterGrantsRequest: {
     toProtoMsg(message: QueryGranterGrantsRequest): QueryGranterGrantsRequestProtoMsg;
 };
 export declare const QueryGranterGrantsResponse: {
-    encode(message: QueryGranterGrantsResponse, writer?: _m0.Writer): _m0.Writer;
-    decode(input: _m0.Reader | Uint8Array, length?: number): QueryGranterGrantsResponse;
+    typeUrl: string;
+    encode(message: QueryGranterGrantsResponse, writer?: BinaryWriter): BinaryWriter;
+    decode(input: BinaryReader | Uint8Array, length?: number): QueryGranterGrantsResponse;
     fromJSON(object: any): QueryGranterGrantsResponse;
     toJSON(message: QueryGranterGrantsResponse): unknown;
     fromPartial(object: Partial<QueryGranterGrantsResponse>): QueryGranterGrantsResponse;
@@ -222,8 +226,9 @@ export declare const QueryGranterGrantsResponse: {
     toProtoMsg(message: QueryGranterGrantsResponse): QueryGranterGrantsResponseProtoMsg;
 };
 export declare const QueryGranteeGrantsRequest: {
-    encode(message: QueryGranteeGrantsRequest, writer?: _m0.Writer): _m0.Writer;
-    decode(input: _m0.Reader | Uint8Array, length?: number): QueryGranteeGrantsRequest;
+    typeUrl: string;
+    encode(message: QueryGranteeGrantsRequest, writer?: BinaryWriter): BinaryWriter;
+    decode(input: BinaryReader | Uint8Array, length?: number): QueryGranteeGrantsRequest;
     fromJSON(object: any): QueryGranteeGrantsRequest;
     toJSON(message: QueryGranteeGrantsRequest): unknown;
     fromPartial(object: Partial<QueryGranteeGrantsRequest>): QueryGranteeGrantsRequest;
@@ -236,8 +241,9 @@ export declare const QueryGranteeGrantsRequest: {
     toProtoMsg(message: QueryGranteeGrantsRequest): QueryGranteeGrantsRequestProtoMsg;
 };
 export declare const QueryGranteeGrantsResponse: {
-    encode(message: QueryGranteeGrantsResponse, writer?: _m0.Writer): _m0.Writer;
-    decode(input: _m0.Reader | Uint8Array, length?: number): QueryGranteeGrantsResponse;
+    typeUrl: string;
+    encode(message: QueryGranteeGrantsResponse, writer?: BinaryWriter): BinaryWriter;
+    decode(input: BinaryReader | Uint8Array, length?: number): QueryGranteeGrantsResponse;
     fromJSON(object: any): QueryGranteeGrantsResponse;
     toJSON(message: QueryGranteeGrantsResponse): unknown;
     fromPartial(object: Partial<QueryGranteeGrantsResponse>): QueryGranteeGrantsResponse;

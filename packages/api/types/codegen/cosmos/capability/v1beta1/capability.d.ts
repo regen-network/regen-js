@@ -1,11 +1,10 @@
-import { Long } from "../../../helpers";
-import * as _m0 from "protobufjs/minimal";
+import { BinaryReader, BinaryWriter } from "../../../binary";
 /**
  * Capability defines an implementation of an object capability. The index
  * provided to a Capability must be globally unique.
  */
 export interface Capability {
-    index: Long;
+    index: bigint;
 }
 export interface CapabilityProtoMsg {
     typeUrl: "/cosmos.capability.v1beta1.Capability";
@@ -16,7 +15,7 @@ export interface CapabilityProtoMsg {
  * provided to a Capability must be globally unique.
  */
 export interface CapabilityAmino {
-    index: string;
+    index?: string;
 }
 export interface CapabilityAminoMsg {
     type: "cosmos-sdk/Capability";
@@ -27,7 +26,7 @@ export interface CapabilityAminoMsg {
  * provided to a Capability must be globally unique.
  */
 export interface CapabilitySDKType {
-    index: Long;
+    index: bigint;
 }
 /**
  * Owner defines a single capability owner. An owner is defined by the name of
@@ -46,8 +45,8 @@ export interface OwnerProtoMsg {
  * capability and the module name.
  */
 export interface OwnerAmino {
-    module: string;
-    name: string;
+    module?: string;
+    name?: string;
 }
 export interface OwnerAminoMsg {
     type: "cosmos-sdk/Owner";
@@ -77,7 +76,7 @@ export interface CapabilityOwnersProtoMsg {
  * owners must be unique.
  */
 export interface CapabilityOwnersAmino {
-    owners: OwnerAmino[];
+    owners?: OwnerAmino[];
 }
 export interface CapabilityOwnersAminoMsg {
     type: "cosmos-sdk/CapabilityOwners";
@@ -91,8 +90,9 @@ export interface CapabilityOwnersSDKType {
     owners: OwnerSDKType[];
 }
 export declare const Capability: {
-    encode(message: Capability, writer?: _m0.Writer): _m0.Writer;
-    decode(input: _m0.Reader | Uint8Array, length?: number): Capability;
+    typeUrl: string;
+    encode(message: Capability, writer?: BinaryWriter): BinaryWriter;
+    decode(input: BinaryReader | Uint8Array, length?: number): Capability;
     fromJSON(object: any): Capability;
     toJSON(message: Capability): unknown;
     fromPartial(object: Partial<Capability>): Capability;
@@ -105,8 +105,9 @@ export declare const Capability: {
     toProtoMsg(message: Capability): CapabilityProtoMsg;
 };
 export declare const Owner: {
-    encode(message: Owner, writer?: _m0.Writer): _m0.Writer;
-    decode(input: _m0.Reader | Uint8Array, length?: number): Owner;
+    typeUrl: string;
+    encode(message: Owner, writer?: BinaryWriter): BinaryWriter;
+    decode(input: BinaryReader | Uint8Array, length?: number): Owner;
     fromJSON(object: any): Owner;
     toJSON(message: Owner): unknown;
     fromPartial(object: Partial<Owner>): Owner;
@@ -119,8 +120,9 @@ export declare const Owner: {
     toProtoMsg(message: Owner): OwnerProtoMsg;
 };
 export declare const CapabilityOwners: {
-    encode(message: CapabilityOwners, writer?: _m0.Writer): _m0.Writer;
-    decode(input: _m0.Reader | Uint8Array, length?: number): CapabilityOwners;
+    typeUrl: string;
+    encode(message: CapabilityOwners, writer?: BinaryWriter): BinaryWriter;
+    decode(input: BinaryReader | Uint8Array, length?: number): CapabilityOwners;
     fromJSON(object: any): CapabilityOwners;
     toJSON(message: CapabilityOwners): unknown;
     fromPartial(object: Partial<CapabilityOwners>): CapabilityOwners;

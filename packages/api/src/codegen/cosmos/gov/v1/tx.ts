@@ -70,7 +70,7 @@ export interface MsgSubmitProposalResponseSDKType {
  */
 export interface MsgExecLegacyContent {
   /** content is the proposal's content. */
-  content?: (TextProposal & Any) | undefined;
+  content?: TextProposal | Any | undefined;
   /** authority must be the gov module address. */
   authority: string;
 }

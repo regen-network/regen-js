@@ -1,5 +1,5 @@
 import { ParamChange, ParamChangeAmino, ParamChangeSDKType } from "./params";
-import * as _m0 from "protobufjs/minimal";
+import { BinaryReader, BinaryWriter } from "../../../binary";
 /** QueryParamsRequest is request type for the Query/Params RPC method. */
 export interface QueryParamsRequest {
     /** subspace defines the module to query the parameter for. */
@@ -14,9 +14,9 @@ export interface QueryParamsRequestProtoMsg {
 /** QueryParamsRequest is request type for the Query/Params RPC method. */
 export interface QueryParamsRequestAmino {
     /** subspace defines the module to query the parameter for. */
-    subspace: string;
+    subspace?: string;
     /** key defines the key of the parameter in the subspace. */
-    key: string;
+    key?: string;
 }
 export interface QueryParamsRequestAminoMsg {
     type: "cosmos-sdk/QueryParamsRequest";
@@ -101,7 +101,7 @@ export interface QuerySubspacesResponseProtoMsg {
  * Since: cosmos-sdk 0.46
  */
 export interface QuerySubspacesResponseAmino {
-    subspaces: SubspaceAmino[];
+    subspaces?: SubspaceAmino[];
 }
 export interface QuerySubspacesResponseAminoMsg {
     type: "cosmos-sdk/QuerySubspacesResponse";
@@ -137,8 +137,8 @@ export interface SubspaceProtoMsg {
  * Since: cosmos-sdk 0.46
  */
 export interface SubspaceAmino {
-    subspace: string;
-    keys: string[];
+    subspace?: string;
+    keys?: string[];
 }
 export interface SubspaceAminoMsg {
     type: "cosmos-sdk/Subspace";
@@ -155,8 +155,9 @@ export interface SubspaceSDKType {
     keys: string[];
 }
 export declare const QueryParamsRequest: {
-    encode(message: QueryParamsRequest, writer?: _m0.Writer): _m0.Writer;
-    decode(input: _m0.Reader | Uint8Array, length?: number): QueryParamsRequest;
+    typeUrl: string;
+    encode(message: QueryParamsRequest, writer?: BinaryWriter): BinaryWriter;
+    decode(input: BinaryReader | Uint8Array, length?: number): QueryParamsRequest;
     fromJSON(object: any): QueryParamsRequest;
     toJSON(message: QueryParamsRequest): unknown;
     fromPartial(object: Partial<QueryParamsRequest>): QueryParamsRequest;
@@ -169,8 +170,9 @@ export declare const QueryParamsRequest: {
     toProtoMsg(message: QueryParamsRequest): QueryParamsRequestProtoMsg;
 };
 export declare const QueryParamsResponse: {
-    encode(message: QueryParamsResponse, writer?: _m0.Writer): _m0.Writer;
-    decode(input: _m0.Reader | Uint8Array, length?: number): QueryParamsResponse;
+    typeUrl: string;
+    encode(message: QueryParamsResponse, writer?: BinaryWriter): BinaryWriter;
+    decode(input: BinaryReader | Uint8Array, length?: number): QueryParamsResponse;
     fromJSON(object: any): QueryParamsResponse;
     toJSON(message: QueryParamsResponse): unknown;
     fromPartial(object: Partial<QueryParamsResponse>): QueryParamsResponse;
@@ -183,8 +185,9 @@ export declare const QueryParamsResponse: {
     toProtoMsg(message: QueryParamsResponse): QueryParamsResponseProtoMsg;
 };
 export declare const QuerySubspacesRequest: {
-    encode(_: QuerySubspacesRequest, writer?: _m0.Writer): _m0.Writer;
-    decode(input: _m0.Reader | Uint8Array, length?: number): QuerySubspacesRequest;
+    typeUrl: string;
+    encode(_: QuerySubspacesRequest, writer?: BinaryWriter): BinaryWriter;
+    decode(input: BinaryReader | Uint8Array, length?: number): QuerySubspacesRequest;
     fromJSON(_: any): QuerySubspacesRequest;
     toJSON(_: QuerySubspacesRequest): unknown;
     fromPartial(_: Partial<QuerySubspacesRequest>): QuerySubspacesRequest;
@@ -197,8 +200,9 @@ export declare const QuerySubspacesRequest: {
     toProtoMsg(message: QuerySubspacesRequest): QuerySubspacesRequestProtoMsg;
 };
 export declare const QuerySubspacesResponse: {
-    encode(message: QuerySubspacesResponse, writer?: _m0.Writer): _m0.Writer;
-    decode(input: _m0.Reader | Uint8Array, length?: number): QuerySubspacesResponse;
+    typeUrl: string;
+    encode(message: QuerySubspacesResponse, writer?: BinaryWriter): BinaryWriter;
+    decode(input: BinaryReader | Uint8Array, length?: number): QuerySubspacesResponse;
     fromJSON(object: any): QuerySubspacesResponse;
     toJSON(message: QuerySubspacesResponse): unknown;
     fromPartial(object: Partial<QuerySubspacesResponse>): QuerySubspacesResponse;
@@ -211,8 +215,9 @@ export declare const QuerySubspacesResponse: {
     toProtoMsg(message: QuerySubspacesResponse): QuerySubspacesResponseProtoMsg;
 };
 export declare const Subspace: {
-    encode(message: Subspace, writer?: _m0.Writer): _m0.Writer;
-    decode(input: _m0.Reader | Uint8Array, length?: number): Subspace;
+    typeUrl: string;
+    encode(message: Subspace, writer?: BinaryWriter): BinaryWriter;
+    decode(input: BinaryReader | Uint8Array, length?: number): Subspace;
     fromJSON(object: any): Subspace;
     toJSON(message: Subspace): unknown;
     fromPartial(object: Partial<Subspace>): Subspace;

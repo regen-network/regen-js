@@ -1,7 +1,7 @@
-import * as _m0 from "protobufjs/minimal";
+import { BinaryReader, BinaryWriter } from "../../../binary";
 /** ParameterChangeProposal defines a proposal to change one or more parameters. */
 export interface ParameterChangeProposal {
-    $typeUrl?: string;
+    $typeUrl?: "/cosmos.params.v1beta1.ParameterChangeProposal";
     title: string;
     description: string;
     changes: ParamChange[];
@@ -12,9 +12,9 @@ export interface ParameterChangeProposalProtoMsg {
 }
 /** ParameterChangeProposal defines a proposal to change one or more parameters. */
 export interface ParameterChangeProposalAmino {
-    title: string;
-    description: string;
-    changes: ParamChangeAmino[];
+    title?: string;
+    description?: string;
+    changes?: ParamChangeAmino[];
 }
 export interface ParameterChangeProposalAminoMsg {
     type: "cosmos-sdk/ParameterChangeProposal";
@@ -22,7 +22,7 @@ export interface ParameterChangeProposalAminoMsg {
 }
 /** ParameterChangeProposal defines a proposal to change one or more parameters. */
 export interface ParameterChangeProposalSDKType {
-    $typeUrl?: string;
+    $typeUrl?: "/cosmos.params.v1beta1.ParameterChangeProposal";
     title: string;
     description: string;
     changes: ParamChangeSDKType[];
@@ -45,9 +45,9 @@ export interface ParamChangeProtoMsg {
  * ParameterChangeProposal.
  */
 export interface ParamChangeAmino {
-    subspace: string;
-    key: string;
-    value: string;
+    subspace?: string;
+    key?: string;
+    value?: string;
 }
 export interface ParamChangeAminoMsg {
     type: "cosmos-sdk/ParamChange";
@@ -63,8 +63,9 @@ export interface ParamChangeSDKType {
     value: string;
 }
 export declare const ParameterChangeProposal: {
-    encode(message: ParameterChangeProposal, writer?: _m0.Writer): _m0.Writer;
-    decode(input: _m0.Reader | Uint8Array, length?: number): ParameterChangeProposal;
+    typeUrl: string;
+    encode(message: ParameterChangeProposal, writer?: BinaryWriter): BinaryWriter;
+    decode(input: BinaryReader | Uint8Array, length?: number): ParameterChangeProposal;
     fromJSON(object: any): ParameterChangeProposal;
     toJSON(message: ParameterChangeProposal): unknown;
     fromPartial(object: Partial<ParameterChangeProposal>): ParameterChangeProposal;
@@ -77,8 +78,9 @@ export declare const ParameterChangeProposal: {
     toProtoMsg(message: ParameterChangeProposal): ParameterChangeProposalProtoMsg;
 };
 export declare const ParamChange: {
-    encode(message: ParamChange, writer?: _m0.Writer): _m0.Writer;
-    decode(input: _m0.Reader | Uint8Array, length?: number): ParamChange;
+    typeUrl: string;
+    encode(message: ParamChange, writer?: BinaryWriter): BinaryWriter;
+    decode(input: BinaryReader | Uint8Array, length?: number): ParamChange;
     fromJSON(object: any): ParamChange;
     toJSON(message: ParamChange): unknown;
     fromPartial(object: Partial<ParamChange>): ParamChange;

@@ -7,7 +7,7 @@ import { isSet, bytesFromBase64, base64FromBytes } from "../../../helpers";
  */
 export interface MsgSubmitEvidence {
   submitter: string;
-  evidence?: (Any) | undefined;
+  evidence?: Any | undefined;
 }
 export interface MsgSubmitEvidenceProtoMsg {
   typeUrl: "/cosmos.evidence.v1beta1.MsgSubmitEvidence";

@@ -1,7 +1,6 @@
 import { Coin, CoinAmino, CoinSDKType } from "../../../../cosmos/base/v1beta1/coin";
-import { Timestamp, TimestampAmino, TimestampSDKType } from "../../../../google/protobuf/timestamp";
-import { Long } from "../../../../helpers";
-import * as _m0 from "protobufjs/minimal";
+import { Timestamp, TimestampSDKType } from "../../../../google/protobuf/timestamp";
+import { BinaryReader, BinaryWriter } from "../../../../binary";
 /** MsgSell is the Msg/Sell request type. */
 export interface MsgSell {
     /** seller is the address of the account that is selling credits. */
@@ -16,9 +15,9 @@ export interface MsgSellProtoMsg {
 /** MsgSell is the Msg/Sell request type. */
 export interface MsgSellAmino {
     /** seller is the address of the account that is selling credits. */
-    seller: string;
+    seller?: string;
     /** orders are the sell orders being created. */
-    orders: MsgSell_OrderAmino[];
+    orders?: MsgSell_OrderAmino[];
 }
 export interface MsgSellAminoMsg {
     type: "regen.marketplace/MsgSell";
@@ -46,7 +45,7 @@ export interface MsgSell_Order {
      * batch_denom. Each credit unit of the batch will be sold for at least the
      * ask_price or more.
      */
-    askPrice: Coin;
+    askPrice?: Coin;
     /**
      * disable_auto_retire disables auto-retirement of credits which allows a
      * buyer to disable auto-retirement in their buy order enabling them to
@@ -57,7 +56,7 @@ export interface MsgSell_Order {
      * expiration is an optional timestamp when the sell order expires. When the
      * expiration time is reached, the sell order is removed from state.
      */
-    expiration: Timestamp;
+    expiration?: Timestamp;
 }
 export interface MsgSell_OrderProtoMsg {
     typeUrl: "/regen.ecocredit.marketplace.v1.Order";
@@ -66,7 +65,7 @@ export interface MsgSell_OrderProtoMsg {
 /** Order is the content of a new sell order. */
 export interface MsgSell_OrderAmino {
     /** batch_denom is the credit batch being sold. */
-    batch_denom: string;
+    batch_denom?: string;
     /**
      * quantity is the quantity of credits being sold from this batch. If it is
      * less then the balance of credits the owner has available at the time this
@@ -74,7 +73,7 @@ export interface MsgSell_OrderAmino {
      * owner's balance. However, if the balance of credits is less than this
      * quantity at the time the sell order is created, the operation will fail.
      */
-    quantity: string;
+    quantity?: string;
     /**
      * ask_price is the price the seller is asking for each unit of the
      * batch_denom. Each credit unit of the batch will be sold for at least the
@@ -86,12 +85,12 @@ export interface MsgSell_OrderAmino {
      * buyer to disable auto-retirement in their buy order enabling them to
      * resell the credits to another buyer.
      */
-    disable_auto_retire: boolean;
+    disable_auto_retire?: boolean;
     /**
      * expiration is an optional timestamp when the sell order expires. When the
      * expiration time is reached, the sell order is removed from state.
      */
-    expiration?: TimestampAmino;
+    expiration?: string;
 }
 export interface MsgSell_OrderAminoMsg {
     type: "/regen.ecocredit.marketplace.v1.Order";
@@ -101,14 +100,14 @@ export interface MsgSell_OrderAminoMsg {
 export interface MsgSell_OrderSDKType {
     batch_denom: string;
     quantity: string;
-    ask_price: CoinSDKType;
+    ask_price?: CoinSDKType;
     disable_auto_retire: boolean;
-    expiration: TimestampSDKType;
+    expiration?: TimestampSDKType;
 }
 /** MsgSellResponse is the Msg/Sell response type. */
 export interface MsgSellResponse {
     /** sell_order_ids are the sell order IDs of the newly created sell orders. */
-    sellOrderIds: Long[];
+    sellOrderIds: bigint[];
 }
 export interface MsgSellResponseProtoMsg {
     typeUrl: "/regen.ecocredit.marketplace.v1.MsgSellResponse";
@@ -117,7 +116,7 @@ export interface MsgSellResponseProtoMsg {
 /** MsgSellResponse is the Msg/Sell response type. */
 export interface MsgSellResponseAmino {
     /** sell_order_ids are the sell order IDs of the newly created sell orders. */
-    sell_order_ids: string[];
+    sell_order_ids?: string[];
 }
 export interface MsgSellResponseAminoMsg {
     type: "/regen.ecocredit.marketplace.v1.MsgSellResponse";
@@ -125,7 +124,7 @@ export interface MsgSellResponseAminoMsg {
 }
 /** MsgSellResponse is the Msg/Sell response type. */
 export interface MsgSellResponseSDKType {
-    sell_order_ids: Long[];
+    sell_order_ids: bigint[];
 }
 /** MsgUpdateSellOrders is the Msg/UpdateSellOrders request type. */
 export interface MsgUpdateSellOrders {
@@ -141,9 +140,9 @@ export interface MsgUpdateSellOrdersProtoMsg {
 /** MsgUpdateSellOrders is the Msg/UpdateSellOrders request type. */
 export interface MsgUpdateSellOrdersAmino {
     /** seller is the address of the account that is selling credits. */
-    seller: string;
+    seller?: string;
     /** updates are updates to existing sell orders. */
-    updates: MsgUpdateSellOrders_UpdateAmino[];
+    updates?: MsgUpdateSellOrders_UpdateAmino[];
 }
 export interface MsgUpdateSellOrdersAminoMsg {
     type: "regen.marketplace/MsgUpdateSellOrders";
@@ -157,11 +156,11 @@ export interface MsgUpdateSellOrdersSDKType {
 /** Update is an update to an existing sell order. */
 export interface MsgUpdateSellOrders_Update {
     /** sell_order_id is the ID of an existing sell order. */
-    sellOrderId: Long;
+    sellOrderId: bigint;
     /** new_quantity is the updated quantity of credits available to sell. */
     newQuantity: string;
     /** new_ask_price is the new ask price for this sell order */
-    newAskPrice: Coin;
+    newAskPrice?: Coin;
     /**
      * disable_auto_retire updates the disable_auto_retire field in the sell
      * order.
@@ -171,7 +170,7 @@ export interface MsgUpdateSellOrders_Update {
      * new_expiration is an optional timestamp when the sell order expires. When
      * the expiration time is reached, the sell order is removed from state.
      */
-    newExpiration: Timestamp;
+    newExpiration?: Timestamp;
 }
 export interface MsgUpdateSellOrders_UpdateProtoMsg {
     typeUrl: "/regen.ecocredit.marketplace.v1.Update";
@@ -180,21 +179,21 @@ export interface MsgUpdateSellOrders_UpdateProtoMsg {
 /** Update is an update to an existing sell order. */
 export interface MsgUpdateSellOrders_UpdateAmino {
     /** sell_order_id is the ID of an existing sell order. */
-    sell_order_id: string;
+    sell_order_id?: string;
     /** new_quantity is the updated quantity of credits available to sell. */
-    new_quantity: string;
+    new_quantity?: string;
     /** new_ask_price is the new ask price for this sell order */
     new_ask_price?: CoinAmino;
     /**
      * disable_auto_retire updates the disable_auto_retire field in the sell
      * order.
      */
-    disable_auto_retire: boolean;
+    disable_auto_retire?: boolean;
     /**
      * new_expiration is an optional timestamp when the sell order expires. When
      * the expiration time is reached, the sell order is removed from state.
      */
-    new_expiration?: TimestampAmino;
+    new_expiration?: string;
 }
 export interface MsgUpdateSellOrders_UpdateAminoMsg {
     type: "/regen.ecocredit.marketplace.v1.Update";
@@ -202,11 +201,11 @@ export interface MsgUpdateSellOrders_UpdateAminoMsg {
 }
 /** Update is an update to an existing sell order. */
 export interface MsgUpdateSellOrders_UpdateSDKType {
-    sell_order_id: Long;
+    sell_order_id: bigint;
     new_quantity: string;
-    new_ask_price: CoinSDKType;
+    new_ask_price?: CoinSDKType;
     disable_auto_retire: boolean;
-    new_expiration: TimestampSDKType;
+    new_expiration?: TimestampSDKType;
 }
 /** MsgUpdateSellOrdersResponse is the Msg/UpdateSellOrders response type. */
 export interface MsgUpdateSellOrdersResponse {
@@ -233,7 +232,7 @@ export interface MsgCancelSellOrder {
      */
     seller: string;
     /** sell_order_id is the id of the seller order to cancel. */
-    sellOrderId: Long;
+    sellOrderId: bigint;
 }
 export interface MsgCancelSellOrderProtoMsg {
     typeUrl: "/regen.ecocredit.marketplace.v1.MsgCancelSellOrder";
@@ -245,9 +244,9 @@ export interface MsgCancelSellOrderAmino {
      * seller is the address of the account that created the sell order and is
      * therefore authorized to cancel the sell order.
      */
-    seller: string;
+    seller?: string;
     /** sell_order_id is the id of the seller order to cancel. */
-    sell_order_id: string;
+    sell_order_id?: string;
 }
 export interface MsgCancelSellOrderAminoMsg {
     type: "regen.marketplace/MsgCancelSellOrder";
@@ -256,7 +255,7 @@ export interface MsgCancelSellOrderAminoMsg {
 /** MsgCancelSellOrder is the Msg/CancelSellOrder request type. */
 export interface MsgCancelSellOrderSDKType {
     seller: string;
-    sell_order_id: Long;
+    sell_order_id: bigint;
 }
 /** MsgCancelSellOrder is the Msg/CancelSellOrder response type. */
 export interface MsgCancelSellOrderResponse {
@@ -289,9 +288,9 @@ export interface MsgBuyDirectProtoMsg {
 /** MsgBuyDirect is the Msg/BuyDirect request type. */
 export interface MsgBuyDirectAmino {
     /** buyer is the address of the account that is buying credits. */
-    buyer: string;
+    buyer?: string;
     /** orders is a list of orders for ecocredits. */
-    orders: MsgBuyDirect_OrderAmino[];
+    orders?: MsgBuyDirect_OrderAmino[];
 }
 export interface MsgBuyDirectAminoMsg {
     type: "regen.marketplace/MsgBuyDirect";
@@ -308,11 +307,11 @@ export interface MsgBuyDirect_Order {
      * sell_order_id is the sell order ID against which the buyer is trying
      * to buy.
      */
-    sellOrderId: Long;
+    sellOrderId: bigint;
     /** quantity is the quantity of credits to buy. */
     quantity: string;
     /** bid_price is the price the buyer is willing to pay per credit. */
-    bidPrice: Coin;
+    bidPrice?: Coin;
     /**
      * disable_auto_retire allows auto-retirement to be disabled. If it is set
      * to true the credits will not auto-retire and can be resold assuming that
@@ -345,9 +344,9 @@ export interface MsgBuyDirect_OrderAmino {
      * sell_order_id is the sell order ID against which the buyer is trying
      * to buy.
      */
-    sell_order_id: string;
+    sell_order_id?: string;
     /** quantity is the quantity of credits to buy. */
-    quantity: string;
+    quantity?: string;
     /** bid_price is the price the buyer is willing to pay per credit. */
     bid_price?: CoinAmino;
     /**
@@ -357,12 +356,12 @@ export interface MsgBuyDirect_OrderAmino {
      * order hasn't disabled auto-retirement and the buy order tries to disable
      * it, that buy order will fail.
      */
-    disable_auto_retire: boolean;
+    disable_auto_retire?: boolean;
     /**
      * retirement_jurisdiction is the optional retirement jurisdiction for the
      * credits which will be used only if disable_auto_retire is false.
      */
-    retirement_jurisdiction: string;
+    retirement_jurisdiction?: string;
     /**
      * retirement_reason is any arbitrary string that specifies the reason for
      * retiring credits. The reason will be included in EventRetire and is not
@@ -370,7 +369,7 @@ export interface MsgBuyDirect_OrderAmino {
      *
      * Since Revision 1
      */
-    retirement_reason: string;
+    retirement_reason?: string;
 }
 export interface MsgBuyDirect_OrderAminoMsg {
     type: "/regen.ecocredit.marketplace.v1.Order";
@@ -378,9 +377,9 @@ export interface MsgBuyDirect_OrderAminoMsg {
 }
 /** Order contains the information needed to purchase an ecocredit. */
 export interface MsgBuyDirect_OrderSDKType {
-    sell_order_id: Long;
+    sell_order_id: bigint;
     quantity: string;
-    bid_price: CoinSDKType;
+    bid_price?: CoinSDKType;
     disable_auto_retire: boolean;
     retirement_jurisdiction: string;
     retirement_reason: string;
@@ -435,20 +434,20 @@ export interface MsgAddAllowedDenomProtoMsg {
  */
 export interface MsgAddAllowedDenomAmino {
     /** authority is the address of the governance account. */
-    authority: string;
+    authority?: string;
     /** denom is the bank denom to allow (ex. ibc/GLKHDSG423SGS) */
-    bank_denom: string;
+    bank_denom?: string;
     /**
      * display_denom is the denom to display to the user and is informational.
      * Because the denom is likely an IBC denom, this should be chosen by
      * governance to represent the consensus trusted name of the denom.
      */
-    display_denom: string;
+    display_denom?: string;
     /**
      * exponent is the exponent that relates the denom to the display_denom and is
      * informational
      */
-    exponent: number;
+    exponent?: number;
 }
 export interface MsgAddAllowedDenomAminoMsg {
     type: "regen.marketplace/MsgAddAllowedDenom";
@@ -516,9 +515,9 @@ export interface MsgRemoveAllowedDenomProtoMsg {
  */
 export interface MsgRemoveAllowedDenomAmino {
     /** authority is the address of the governance account. */
-    authority: string;
+    authority?: string;
     /** denom is the denom to remove (ex. ibc/GLKHDSG423SGS) */
-    denom: string;
+    denom?: string;
 }
 export interface MsgRemoveAllowedDenomAminoMsg {
     type: "regen.marketplace/MsgRemoveAllowedDenom";
@@ -563,8 +562,9 @@ export interface MsgRemoveAllowedDenomResponseAminoMsg {
 export interface MsgRemoveAllowedDenomResponseSDKType {
 }
 export declare const MsgSell: {
-    encode(message: MsgSell, writer?: _m0.Writer): _m0.Writer;
-    decode(input: _m0.Reader | Uint8Array, length?: number): MsgSell;
+    typeUrl: string;
+    encode(message: MsgSell, writer?: BinaryWriter): BinaryWriter;
+    decode(input: BinaryReader | Uint8Array, length?: number): MsgSell;
     fromJSON(object: any): MsgSell;
     toJSON(message: MsgSell): unknown;
     fromPartial(object: Partial<MsgSell>): MsgSell;
@@ -577,8 +577,9 @@ export declare const MsgSell: {
     toProtoMsg(message: MsgSell): MsgSellProtoMsg;
 };
 export declare const MsgSell_Order: {
-    encode(message: MsgSell_Order, writer?: _m0.Writer): _m0.Writer;
-    decode(input: _m0.Reader | Uint8Array, length?: number): MsgSell_Order;
+    typeUrl: string;
+    encode(message: MsgSell_Order, writer?: BinaryWriter): BinaryWriter;
+    decode(input: BinaryReader | Uint8Array, length?: number): MsgSell_Order;
     fromJSON(object: any): MsgSell_Order;
     toJSON(message: MsgSell_Order): unknown;
     fromPartial(object: Partial<MsgSell_Order>): MsgSell_Order;
@@ -590,8 +591,9 @@ export declare const MsgSell_Order: {
     toProtoMsg(message: MsgSell_Order): MsgSell_OrderProtoMsg;
 };
 export declare const MsgSellResponse: {
-    encode(message: MsgSellResponse, writer?: _m0.Writer): _m0.Writer;
-    decode(input: _m0.Reader | Uint8Array, length?: number): MsgSellResponse;
+    typeUrl: string;
+    encode(message: MsgSellResponse, writer?: BinaryWriter): BinaryWriter;
+    decode(input: BinaryReader | Uint8Array, length?: number): MsgSellResponse;
     fromJSON(object: any): MsgSellResponse;
     toJSON(message: MsgSellResponse): unknown;
     fromPartial(object: Partial<MsgSellResponse>): MsgSellResponse;
@@ -603,8 +605,9 @@ export declare const MsgSellResponse: {
     toProtoMsg(message: MsgSellResponse): MsgSellResponseProtoMsg;
 };
 export declare const MsgUpdateSellOrders: {
-    encode(message: MsgUpdateSellOrders, writer?: _m0.Writer): _m0.Writer;
-    decode(input: _m0.Reader | Uint8Array, length?: number): MsgUpdateSellOrders;
+    typeUrl: string;
+    encode(message: MsgUpdateSellOrders, writer?: BinaryWriter): BinaryWriter;
+    decode(input: BinaryReader | Uint8Array, length?: number): MsgUpdateSellOrders;
     fromJSON(object: any): MsgUpdateSellOrders;
     toJSON(message: MsgUpdateSellOrders): unknown;
     fromPartial(object: Partial<MsgUpdateSellOrders>): MsgUpdateSellOrders;
@@ -617,8 +620,9 @@ export declare const MsgUpdateSellOrders: {
     toProtoMsg(message: MsgUpdateSellOrders): MsgUpdateSellOrdersProtoMsg;
 };
 export declare const MsgUpdateSellOrders_Update: {
-    encode(message: MsgUpdateSellOrders_Update, writer?: _m0.Writer): _m0.Writer;
-    decode(input: _m0.Reader | Uint8Array, length?: number): MsgUpdateSellOrders_Update;
+    typeUrl: string;
+    encode(message: MsgUpdateSellOrders_Update, writer?: BinaryWriter): BinaryWriter;
+    decode(input: BinaryReader | Uint8Array, length?: number): MsgUpdateSellOrders_Update;
     fromJSON(object: any): MsgUpdateSellOrders_Update;
     toJSON(message: MsgUpdateSellOrders_Update): unknown;
     fromPartial(object: Partial<MsgUpdateSellOrders_Update>): MsgUpdateSellOrders_Update;
@@ -630,8 +634,9 @@ export declare const MsgUpdateSellOrders_Update: {
     toProtoMsg(message: MsgUpdateSellOrders_Update): MsgUpdateSellOrders_UpdateProtoMsg;
 };
 export declare const MsgUpdateSellOrdersResponse: {
-    encode(_: MsgUpdateSellOrdersResponse, writer?: _m0.Writer): _m0.Writer;
-    decode(input: _m0.Reader | Uint8Array, length?: number): MsgUpdateSellOrdersResponse;
+    typeUrl: string;
+    encode(_: MsgUpdateSellOrdersResponse, writer?: BinaryWriter): BinaryWriter;
+    decode(input: BinaryReader | Uint8Array, length?: number): MsgUpdateSellOrdersResponse;
     fromJSON(_: any): MsgUpdateSellOrdersResponse;
     toJSON(_: MsgUpdateSellOrdersResponse): unknown;
     fromPartial(_: Partial<MsgUpdateSellOrdersResponse>): MsgUpdateSellOrdersResponse;
@@ -643,8 +648,9 @@ export declare const MsgUpdateSellOrdersResponse: {
     toProtoMsg(message: MsgUpdateSellOrdersResponse): MsgUpdateSellOrdersResponseProtoMsg;
 };
 export declare const MsgCancelSellOrder: {
-    encode(message: MsgCancelSellOrder, writer?: _m0.Writer): _m0.Writer;
-    decode(input: _m0.Reader | Uint8Array, length?: number): MsgCancelSellOrder;
+    typeUrl: string;
+    encode(message: MsgCancelSellOrder, writer?: BinaryWriter): BinaryWriter;
+    decode(input: BinaryReader | Uint8Array, length?: number): MsgCancelSellOrder;
     fromJSON(object: any): MsgCancelSellOrder;
     toJSON(message: MsgCancelSellOrder): unknown;
     fromPartial(object: Partial<MsgCancelSellOrder>): MsgCancelSellOrder;
@@ -657,8 +663,9 @@ export declare const MsgCancelSellOrder: {
     toProtoMsg(message: MsgCancelSellOrder): MsgCancelSellOrderProtoMsg;
 };
 export declare const MsgCancelSellOrderResponse: {
-    encode(_: MsgCancelSellOrderResponse, writer?: _m0.Writer): _m0.Writer;
-    decode(input: _m0.Reader | Uint8Array, length?: number): MsgCancelSellOrderResponse;
+    typeUrl: string;
+    encode(_: MsgCancelSellOrderResponse, writer?: BinaryWriter): BinaryWriter;
+    decode(input: BinaryReader | Uint8Array, length?: number): MsgCancelSellOrderResponse;
     fromJSON(_: any): MsgCancelSellOrderResponse;
     toJSON(_: MsgCancelSellOrderResponse): unknown;
     fromPartial(_: Partial<MsgCancelSellOrderResponse>): MsgCancelSellOrderResponse;
@@ -670,8 +677,9 @@ export declare const MsgCancelSellOrderResponse: {
     toProtoMsg(message: MsgCancelSellOrderResponse): MsgCancelSellOrderResponseProtoMsg;
 };
 export declare const MsgBuyDirect: {
-    encode(message: MsgBuyDirect, writer?: _m0.Writer): _m0.Writer;
-    decode(input: _m0.Reader | Uint8Array, length?: number): MsgBuyDirect;
+    typeUrl: string;
+    encode(message: MsgBuyDirect, writer?: BinaryWriter): BinaryWriter;
+    decode(input: BinaryReader | Uint8Array, length?: number): MsgBuyDirect;
     fromJSON(object: any): MsgBuyDirect;
     toJSON(message: MsgBuyDirect): unknown;
     fromPartial(object: Partial<MsgBuyDirect>): MsgBuyDirect;
@@ -684,8 +692,9 @@ export declare const MsgBuyDirect: {
     toProtoMsg(message: MsgBuyDirect): MsgBuyDirectProtoMsg;
 };
 export declare const MsgBuyDirect_Order: {
-    encode(message: MsgBuyDirect_Order, writer?: _m0.Writer): _m0.Writer;
-    decode(input: _m0.Reader | Uint8Array, length?: number): MsgBuyDirect_Order;
+    typeUrl: string;
+    encode(message: MsgBuyDirect_Order, writer?: BinaryWriter): BinaryWriter;
+    decode(input: BinaryReader | Uint8Array, length?: number): MsgBuyDirect_Order;
     fromJSON(object: any): MsgBuyDirect_Order;
     toJSON(message: MsgBuyDirect_Order): unknown;
     fromPartial(object: Partial<MsgBuyDirect_Order>): MsgBuyDirect_Order;
@@ -697,8 +706,9 @@ export declare const MsgBuyDirect_Order: {
     toProtoMsg(message: MsgBuyDirect_Order): MsgBuyDirect_OrderProtoMsg;
 };
 export declare const MsgBuyDirectResponse: {
-    encode(_: MsgBuyDirectResponse, writer?: _m0.Writer): _m0.Writer;
-    decode(input: _m0.Reader | Uint8Array, length?: number): MsgBuyDirectResponse;
+    typeUrl: string;
+    encode(_: MsgBuyDirectResponse, writer?: BinaryWriter): BinaryWriter;
+    decode(input: BinaryReader | Uint8Array, length?: number): MsgBuyDirectResponse;
     fromJSON(_: any): MsgBuyDirectResponse;
     toJSON(_: MsgBuyDirectResponse): unknown;
     fromPartial(_: Partial<MsgBuyDirectResponse>): MsgBuyDirectResponse;
@@ -710,8 +720,9 @@ export declare const MsgBuyDirectResponse: {
     toProtoMsg(message: MsgBuyDirectResponse): MsgBuyDirectResponseProtoMsg;
 };
 export declare const MsgAddAllowedDenom: {
-    encode(message: MsgAddAllowedDenom, writer?: _m0.Writer): _m0.Writer;
-    decode(input: _m0.Reader | Uint8Array, length?: number): MsgAddAllowedDenom;
+    typeUrl: string;
+    encode(message: MsgAddAllowedDenom, writer?: BinaryWriter): BinaryWriter;
+    decode(input: BinaryReader | Uint8Array, length?: number): MsgAddAllowedDenom;
     fromJSON(object: any): MsgAddAllowedDenom;
     toJSON(message: MsgAddAllowedDenom): unknown;
     fromPartial(object: Partial<MsgAddAllowedDenom>): MsgAddAllowedDenom;
@@ -724,8 +735,9 @@ export declare const MsgAddAllowedDenom: {
     toProtoMsg(message: MsgAddAllowedDenom): MsgAddAllowedDenomProtoMsg;
 };
 export declare const MsgAddAllowedDenomResponse: {
-    encode(_: MsgAddAllowedDenomResponse, writer?: _m0.Writer): _m0.Writer;
-    decode(input: _m0.Reader | Uint8Array, length?: number): MsgAddAllowedDenomResponse;
+    typeUrl: string;
+    encode(_: MsgAddAllowedDenomResponse, writer?: BinaryWriter): BinaryWriter;
+    decode(input: BinaryReader | Uint8Array, length?: number): MsgAddAllowedDenomResponse;
     fromJSON(_: any): MsgAddAllowedDenomResponse;
     toJSON(_: MsgAddAllowedDenomResponse): unknown;
     fromPartial(_: Partial<MsgAddAllowedDenomResponse>): MsgAddAllowedDenomResponse;
@@ -737,8 +749,9 @@ export declare const MsgAddAllowedDenomResponse: {
     toProtoMsg(message: MsgAddAllowedDenomResponse): MsgAddAllowedDenomResponseProtoMsg;
 };
 export declare const MsgRemoveAllowedDenom: {
-    encode(message: MsgRemoveAllowedDenom, writer?: _m0.Writer): _m0.Writer;
-    decode(input: _m0.Reader | Uint8Array, length?: number): MsgRemoveAllowedDenom;
+    typeUrl: string;
+    encode(message: MsgRemoveAllowedDenom, writer?: BinaryWriter): BinaryWriter;
+    decode(input: BinaryReader | Uint8Array, length?: number): MsgRemoveAllowedDenom;
     fromJSON(object: any): MsgRemoveAllowedDenom;
     toJSON(message: MsgRemoveAllowedDenom): unknown;
     fromPartial(object: Partial<MsgRemoveAllowedDenom>): MsgRemoveAllowedDenom;
@@ -751,8 +764,9 @@ export declare const MsgRemoveAllowedDenom: {
     toProtoMsg(message: MsgRemoveAllowedDenom): MsgRemoveAllowedDenomProtoMsg;
 };
 export declare const MsgRemoveAllowedDenomResponse: {
-    encode(_: MsgRemoveAllowedDenomResponse, writer?: _m0.Writer): _m0.Writer;
-    decode(input: _m0.Reader | Uint8Array, length?: number): MsgRemoveAllowedDenomResponse;
+    typeUrl: string;
+    encode(_: MsgRemoveAllowedDenomResponse, writer?: BinaryWriter): BinaryWriter;
+    decode(input: BinaryReader | Uint8Array, length?: number): MsgRemoveAllowedDenomResponse;
     fromJSON(_: any): MsgRemoveAllowedDenomResponse;
     toJSON(_: MsgRemoveAllowedDenomResponse): unknown;
     fromPartial(_: Partial<MsgRemoveAllowedDenomResponse>): MsgRemoveAllowedDenomResponse;

@@ -1,14 +1,13 @@
-import { Timestamp, TimestampAmino, TimestampSDKType } from "../../../google/protobuf/timestamp";
-import { Long } from "../../../helpers";
-import * as _m0 from "protobufjs/minimal";
+import { Timestamp, TimestampSDKType } from "../../../google/protobuf/timestamp";
+import { BinaryReader, BinaryWriter } from "../../../binary";
 /**
  * Equivocation implements the Evidence interface and defines evidence of double
  * signing misbehavior.
  */
 export interface Equivocation {
-    height: Long;
+    height: bigint;
     time: Timestamp;
-    power: Long;
+    power: bigint;
     consensusAddress: string;
 }
 export interface EquivocationProtoMsg {
@@ -20,10 +19,10 @@ export interface EquivocationProtoMsg {
  * signing misbehavior.
  */
 export interface EquivocationAmino {
-    height: string;
-    time?: TimestampAmino;
-    power: string;
-    consensus_address: string;
+    height?: string;
+    time?: string;
+    power?: string;
+    consensus_address?: string;
 }
 export interface EquivocationAminoMsg {
     type: "cosmos-sdk/Equivocation";
@@ -34,14 +33,15 @@ export interface EquivocationAminoMsg {
  * signing misbehavior.
  */
 export interface EquivocationSDKType {
-    height: Long;
+    height: bigint;
     time: TimestampSDKType;
-    power: Long;
+    power: bigint;
     consensus_address: string;
 }
 export declare const Equivocation: {
-    encode(message: Equivocation, writer?: _m0.Writer): _m0.Writer;
-    decode(input: _m0.Reader | Uint8Array, length?: number): Equivocation;
+    typeUrl: string;
+    encode(message: Equivocation, writer?: BinaryWriter): BinaryWriter;
+    decode(input: BinaryReader | Uint8Array, length?: number): Equivocation;
     fromJSON(object: any): Equivocation;
     toJSON(message: Equivocation): unknown;
     fromPartial(object: Partial<Equivocation>): Equivocation;

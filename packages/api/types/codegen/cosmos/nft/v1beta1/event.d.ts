@@ -1,4 +1,4 @@
-import * as _m0 from "protobufjs/minimal";
+import { BinaryReader, BinaryWriter } from "../../../binary";
 /** EventSend is emitted on Msg/Send */
 export interface EventSend {
     classId: string;
@@ -12,10 +12,10 @@ export interface EventSendProtoMsg {
 }
 /** EventSend is emitted on Msg/Send */
 export interface EventSendAmino {
-    class_id: string;
-    id: string;
-    sender: string;
-    receiver: string;
+    class_id?: string;
+    id?: string;
+    sender?: string;
+    receiver?: string;
 }
 export interface EventSendAminoMsg {
     type: "cosmos-sdk/EventSend";
@@ -40,9 +40,9 @@ export interface EventMintProtoMsg {
 }
 /** EventMint is emitted on Mint */
 export interface EventMintAmino {
-    class_id: string;
-    id: string;
-    owner: string;
+    class_id?: string;
+    id?: string;
+    owner?: string;
 }
 export interface EventMintAminoMsg {
     type: "cosmos-sdk/EventMint";
@@ -66,9 +66,9 @@ export interface EventBurnProtoMsg {
 }
 /** EventBurn is emitted on Burn */
 export interface EventBurnAmino {
-    class_id: string;
-    id: string;
-    owner: string;
+    class_id?: string;
+    id?: string;
+    owner?: string;
 }
 export interface EventBurnAminoMsg {
     type: "cosmos-sdk/EventBurn";
@@ -81,8 +81,9 @@ export interface EventBurnSDKType {
     owner: string;
 }
 export declare const EventSend: {
-    encode(message: EventSend, writer?: _m0.Writer): _m0.Writer;
-    decode(input: _m0.Reader | Uint8Array, length?: number): EventSend;
+    typeUrl: string;
+    encode(message: EventSend, writer?: BinaryWriter): BinaryWriter;
+    decode(input: BinaryReader | Uint8Array, length?: number): EventSend;
     fromJSON(object: any): EventSend;
     toJSON(message: EventSend): unknown;
     fromPartial(object: Partial<EventSend>): EventSend;
@@ -95,8 +96,9 @@ export declare const EventSend: {
     toProtoMsg(message: EventSend): EventSendProtoMsg;
 };
 export declare const EventMint: {
-    encode(message: EventMint, writer?: _m0.Writer): _m0.Writer;
-    decode(input: _m0.Reader | Uint8Array, length?: number): EventMint;
+    typeUrl: string;
+    encode(message: EventMint, writer?: BinaryWriter): BinaryWriter;
+    decode(input: BinaryReader | Uint8Array, length?: number): EventMint;
     fromJSON(object: any): EventMint;
     toJSON(message: EventMint): unknown;
     fromPartial(object: Partial<EventMint>): EventMint;
@@ -109,8 +111,9 @@ export declare const EventMint: {
     toProtoMsg(message: EventMint): EventMintProtoMsg;
 };
 export declare const EventBurn: {
-    encode(message: EventBurn, writer?: _m0.Writer): _m0.Writer;
-    decode(input: _m0.Reader | Uint8Array, length?: number): EventBurn;
+    typeUrl: string;
+    encode(message: EventBurn, writer?: BinaryWriter): BinaryWriter;
+    decode(input: BinaryReader | Uint8Array, length?: number): EventBurn;
     fromJSON(object: any): EventBurn;
     toJSON(message: EventBurn): unknown;
     fromPartial(object: Partial<EventBurn>): EventBurn;

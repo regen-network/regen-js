@@ -8,7 +8,7 @@ import { isSet } from "../../../helpers";
  * proposal Content.
  */
 export interface MsgSubmitProposal {
-  content?: (TextProposal & Any) | undefined;
+  content?: TextProposal | Any | undefined;
   initialDeposit: Coin[];
   proposer: string;
 }

@@ -1,4 +1,4 @@
-import * as _m0 from "protobufjs/minimal";
+import { BinaryReader, BinaryWriter } from "../../../binary";
 /** StorageType */
 export declare enum StorageType {
     /**
@@ -61,12 +61,12 @@ export interface ModuleSchemaDescriptorProtoMsg {
 }
 /** ModuleSchemaDescriptor describe's a module's ORM schema. */
 export interface ModuleSchemaDescriptorAmino {
-    schema_file: ModuleSchemaDescriptor_FileEntryAmino[];
+    schema_file?: ModuleSchemaDescriptor_FileEntryAmino[];
     /**
      * prefix is an optional prefix that precedes all keys in this module's
      * store.
      */
-    prefix: Uint8Array;
+    prefix?: string;
 }
 export interface ModuleSchemaDescriptorAminoMsg {
     type: "cosmos-sdk/ModuleSchemaDescriptor";
@@ -107,19 +107,19 @@ export interface ModuleSchemaDescriptor_FileEntryAmino {
      * id is a prefix that will be varint encoded and prepended to all the
      * table keys specified in the file's tables.
      */
-    id: number;
+    id?: number;
     /**
      * proto_file_name is the name of a file .proto in that contains
      * table definitions. The .proto file must be in a package that the
      * module has referenced using cosmos.app.v1.ModuleDescriptor.use_package.
      */
-    proto_file_name: string;
+    proto_file_name?: string;
     /**
      * storage_type optionally indicates the type of storage this file's
      * tables should used. If it is left unspecified, the default KV-storage
      * of the app will be used.
      */
-    storage_type: StorageType;
+    storage_type?: StorageType;
 }
 export interface ModuleSchemaDescriptor_FileEntryAminoMsg {
     type: "cosmos-sdk/FileEntry";
@@ -132,8 +132,9 @@ export interface ModuleSchemaDescriptor_FileEntrySDKType {
     storage_type: StorageType;
 }
 export declare const ModuleSchemaDescriptor: {
-    encode(message: ModuleSchemaDescriptor, writer?: _m0.Writer): _m0.Writer;
-    decode(input: _m0.Reader | Uint8Array, length?: number): ModuleSchemaDescriptor;
+    typeUrl: string;
+    encode(message: ModuleSchemaDescriptor, writer?: BinaryWriter): BinaryWriter;
+    decode(input: BinaryReader | Uint8Array, length?: number): ModuleSchemaDescriptor;
     fromJSON(object: any): ModuleSchemaDescriptor;
     toJSON(message: ModuleSchemaDescriptor): unknown;
     fromPartial(object: Partial<ModuleSchemaDescriptor>): ModuleSchemaDescriptor;
@@ -146,8 +147,9 @@ export declare const ModuleSchemaDescriptor: {
     toProtoMsg(message: ModuleSchemaDescriptor): ModuleSchemaDescriptorProtoMsg;
 };
 export declare const ModuleSchemaDescriptor_FileEntry: {
-    encode(message: ModuleSchemaDescriptor_FileEntry, writer?: _m0.Writer): _m0.Writer;
-    decode(input: _m0.Reader | Uint8Array, length?: number): ModuleSchemaDescriptor_FileEntry;
+    typeUrl: string;
+    encode(message: ModuleSchemaDescriptor_FileEntry, writer?: BinaryWriter): BinaryWriter;
+    decode(input: BinaryReader | Uint8Array, length?: number): ModuleSchemaDescriptor_FileEntry;
     fromJSON(object: any): ModuleSchemaDescriptor_FileEntry;
     toJSON(message: ModuleSchemaDescriptor_FileEntry): unknown;
     fromPartial(object: Partial<ModuleSchemaDescriptor_FileEntry>): ModuleSchemaDescriptor_FileEntry;

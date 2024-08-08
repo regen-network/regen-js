@@ -1,5 +1,5 @@
 import { Config, ConfigAmino, ConfigSDKType } from "./config";
-import * as _m0 from "protobufjs/minimal";
+import { BinaryReader, BinaryWriter } from "../../../binary";
 /** QueryConfigRequest is the Query/Config request type. */
 export interface QueryConfigRequest {
 }
@@ -20,7 +20,7 @@ export interface QueryConfigRequestSDKType {
 /** QueryConfigRequest is the Query/Config response type. */
 export interface QueryConfigResponse {
     /** config is the current app config. */
-    config: Config;
+    config?: Config;
 }
 export interface QueryConfigResponseProtoMsg {
     typeUrl: "/cosmos.app.v1alpha1.QueryConfigResponse";
@@ -37,11 +37,12 @@ export interface QueryConfigResponseAminoMsg {
 }
 /** QueryConfigRequest is the Query/Config response type. */
 export interface QueryConfigResponseSDKType {
-    config: ConfigSDKType;
+    config?: ConfigSDKType;
 }
 export declare const QueryConfigRequest: {
-    encode(_: QueryConfigRequest, writer?: _m0.Writer): _m0.Writer;
-    decode(input: _m0.Reader | Uint8Array, length?: number): QueryConfigRequest;
+    typeUrl: string;
+    encode(_: QueryConfigRequest, writer?: BinaryWriter): BinaryWriter;
+    decode(input: BinaryReader | Uint8Array, length?: number): QueryConfigRequest;
     fromJSON(_: any): QueryConfigRequest;
     toJSON(_: QueryConfigRequest): unknown;
     fromPartial(_: Partial<QueryConfigRequest>): QueryConfigRequest;
@@ -54,8 +55,9 @@ export declare const QueryConfigRequest: {
     toProtoMsg(message: QueryConfigRequest): QueryConfigRequestProtoMsg;
 };
 export declare const QueryConfigResponse: {
-    encode(message: QueryConfigResponse, writer?: _m0.Writer): _m0.Writer;
-    decode(input: _m0.Reader | Uint8Array, length?: number): QueryConfigResponse;
+    typeUrl: string;
+    encode(message: QueryConfigResponse, writer?: BinaryWriter): BinaryWriter;
+    decode(input: BinaryReader | Uint8Array, length?: number): QueryConfigResponse;
     fromJSON(object: any): QueryConfigResponse;
     toJSON(message: QueryConfigResponse): unknown;
     fromPartial(object: Partial<QueryConfigResponse>): QueryConfigResponse;

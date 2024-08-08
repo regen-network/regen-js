@@ -1,21 +1,21 @@
-import * as _m0 from "protobufjs/minimal";
+import { BinaryReader, BinaryWriter } from "../../../../binary";
 /** AppDescriptor describes a cosmos-sdk based application */
 export interface AppDescriptor {
     /**
      * AuthnDescriptor provides information on how to authenticate transactions on the application
      * NOTE: experimental and subject to change in future releases.
      */
-    authn: AuthnDescriptor;
+    authn?: AuthnDescriptor;
     /** chain provides the chain descriptor */
-    chain: ChainDescriptor;
+    chain?: ChainDescriptor;
     /** codec provides metadata information regarding codec related types */
-    codec: CodecDescriptor;
+    codec?: CodecDescriptor;
     /** configuration provides metadata information regarding the sdk.Config type */
-    configuration: ConfigurationDescriptor;
+    configuration?: ConfigurationDescriptor;
     /** query_services provides metadata information regarding the available queriable endpoints */
-    queryServices: QueryServicesDescriptor;
+    queryServices?: QueryServicesDescriptor;
     /** tx provides metadata information regarding how to send transactions to the given application */
-    tx: TxDescriptor;
+    tx?: TxDescriptor;
 }
 export interface AppDescriptorProtoMsg {
     typeUrl: "/cosmos.base.reflection.v2alpha1.AppDescriptor";
@@ -45,12 +45,12 @@ export interface AppDescriptorAminoMsg {
 }
 /** AppDescriptor describes a cosmos-sdk based application */
 export interface AppDescriptorSDKType {
-    authn: AuthnDescriptorSDKType;
-    chain: ChainDescriptorSDKType;
-    codec: CodecDescriptorSDKType;
-    configuration: ConfigurationDescriptorSDKType;
-    query_services: QueryServicesDescriptorSDKType;
-    tx: TxDescriptorSDKType;
+    authn?: AuthnDescriptorSDKType;
+    chain?: ChainDescriptorSDKType;
+    codec?: CodecDescriptorSDKType;
+    configuration?: ConfigurationDescriptorSDKType;
+    query_services?: QueryServicesDescriptorSDKType;
+    tx?: TxDescriptorSDKType;
 }
 /** TxDescriptor describes the accepted transaction type */
 export interface TxDescriptor {
@@ -74,9 +74,9 @@ export interface TxDescriptorAmino {
      * it is not meant to support polymorphism of transaction types, it is supposed to be used by
      * reflection clients to understand if they can handle a specific transaction type in an application.
      */
-    fullname: string;
+    fullname?: string;
     /** msgs lists the accepted application messages (sdk.Msg) */
-    msgs: MsgDescriptorAmino[];
+    msgs?: MsgDescriptorAmino[];
 }
 export interface TxDescriptorAminoMsg {
     type: "cosmos-sdk/TxDescriptor";
@@ -105,7 +105,7 @@ export interface AuthnDescriptorProtoMsg {
  */
 export interface AuthnDescriptorAmino {
     /** sign_modes defines the supported signature algorithm */
-    sign_modes: SigningModeDescriptorAmino[];
+    sign_modes?: SigningModeDescriptorAmino[];
 }
 export interface AuthnDescriptorAminoMsg {
     type: "cosmos-sdk/AuthnDescriptor";
@@ -147,14 +147,14 @@ export interface SigningModeDescriptorProtoMsg {
  */
 export interface SigningModeDescriptorAmino {
     /** name defines the unique name of the signing mode */
-    name: string;
+    name?: string;
     /** number is the unique int32 identifier for the sign_mode enum */
-    number: number;
+    number?: number;
     /**
      * authn_info_provider_method_fullname defines the fullname of the method to call to get
      * the metadata required to authenticate using the provided sign_modes
      */
-    authn_info_provider_method_fullname: string;
+    authn_info_provider_method_fullname?: string;
 }
 export interface SigningModeDescriptorAminoMsg {
     type: "cosmos-sdk/SigningModeDescriptor";
@@ -183,7 +183,7 @@ export interface ChainDescriptorProtoMsg {
 /** ChainDescriptor describes chain information of the application */
 export interface ChainDescriptorAmino {
     /** id is the chain id */
-    id: string;
+    id?: string;
 }
 export interface ChainDescriptorAminoMsg {
     type: "cosmos-sdk/ChainDescriptor";
@@ -205,7 +205,7 @@ export interface CodecDescriptorProtoMsg {
 /** CodecDescriptor describes the registered interfaces and provides metadata information on the types */
 export interface CodecDescriptorAmino {
     /** interfaces is a list of the registerted interfaces descriptors */
-    interfaces: InterfaceDescriptorAmino[];
+    interfaces?: InterfaceDescriptorAmino[];
 }
 export interface CodecDescriptorAminoMsg {
     type: "cosmos-sdk/CodecDescriptor";
@@ -234,14 +234,14 @@ export interface InterfaceDescriptorProtoMsg {
 /** InterfaceDescriptor describes the implementation of an interface */
 export interface InterfaceDescriptorAmino {
     /** fullname is the name of the interface */
-    fullname: string;
+    fullname?: string;
     /**
      * interface_accepting_messages contains information regarding the proto messages which contain the interface as
      * google.protobuf.Any field
      */
-    interface_accepting_messages: InterfaceAcceptingMessageDescriptorAmino[];
+    interface_accepting_messages?: InterfaceAcceptingMessageDescriptorAmino[];
     /** interface_implementers is a list of the descriptors of the interface implementers */
-    interface_implementers: InterfaceImplementerDescriptorAmino[];
+    interface_implementers?: InterfaceImplementerDescriptorAmino[];
 }
 export interface InterfaceDescriptorAminoMsg {
     type: "cosmos-sdk/InterfaceDescriptor";
@@ -272,14 +272,14 @@ export interface InterfaceImplementerDescriptorProtoMsg {
 /** InterfaceImplementerDescriptor describes an interface implementer */
 export interface InterfaceImplementerDescriptorAmino {
     /** fullname is the protobuf queryable name of the interface implementer */
-    fullname: string;
+    fullname?: string;
     /**
      * type_url defines the type URL used when marshalling the type as any
      * this is required so we can provide type safe google.protobuf.Any marshalling and
      * unmarshalling, making sure that we don't accept just 'any' type
      * in our interface fields
      */
-    type_url: string;
+    type_url?: string;
 }
 export interface InterfaceImplementerDescriptorAminoMsg {
     type: "cosmos-sdk/InterfaceImplementerDescriptor";
@@ -314,13 +314,13 @@ export interface InterfaceAcceptingMessageDescriptorProtoMsg {
  */
 export interface InterfaceAcceptingMessageDescriptorAmino {
     /** fullname is the protobuf fullname of the type containing the interface */
-    fullname: string;
+    fullname?: string;
     /**
      * field_descriptor_names is a list of the protobuf name (not fullname) of the field
      * which contains the interface as google.protobuf.Any (the interface is the same, but
      * it can be in multiple fields of the same proto message)
      */
-    field_descriptor_names: string[];
+    field_descriptor_names?: string[];
 }
 export interface InterfaceAcceptingMessageDescriptorAminoMsg {
     type: "cosmos-sdk/InterfaceAcceptingMessageDescriptor";
@@ -346,7 +346,7 @@ export interface ConfigurationDescriptorProtoMsg {
 /** ConfigurationDescriptor contains metadata information on the sdk.Config */
 export interface ConfigurationDescriptorAmino {
     /** bech32_account_address_prefix is the account address prefix */
-    bech32_account_address_prefix: string;
+    bech32_account_address_prefix?: string;
 }
 export interface ConfigurationDescriptorAminoMsg {
     type: "cosmos-sdk/ConfigurationDescriptor";
@@ -368,7 +368,7 @@ export interface MsgDescriptorProtoMsg {
 /** MsgDescriptor describes a cosmos-sdk message that can be delivered with a transaction */
 export interface MsgDescriptorAmino {
     /** msg_type_url contains the TypeURL of a sdk.Msg. */
-    msg_type_url: string;
+    msg_type_url?: string;
 }
 export interface MsgDescriptorAminoMsg {
     type: "cosmos-sdk/MsgDescriptor";
@@ -398,7 +398,7 @@ export interface GetAuthnDescriptorRequestSDKType {
 /** GetAuthnDescriptorResponse is the response returned by the GetAuthnDescriptor RPC */
 export interface GetAuthnDescriptorResponse {
     /** authn describes how to authenticate to the application when sending transactions */
-    authn: AuthnDescriptor;
+    authn?: AuthnDescriptor;
 }
 export interface GetAuthnDescriptorResponseProtoMsg {
     typeUrl: "/cosmos.base.reflection.v2alpha1.GetAuthnDescriptorResponse";
@@ -415,7 +415,7 @@ export interface GetAuthnDescriptorResponseAminoMsg {
 }
 /** GetAuthnDescriptorResponse is the response returned by the GetAuthnDescriptor RPC */
 export interface GetAuthnDescriptorResponseSDKType {
-    authn: AuthnDescriptorSDKType;
+    authn?: AuthnDescriptorSDKType;
 }
 /** GetChainDescriptorRequest is the request used for the GetChainDescriptor RPC */
 export interface GetChainDescriptorRequest {
@@ -437,7 +437,7 @@ export interface GetChainDescriptorRequestSDKType {
 /** GetChainDescriptorResponse is the response returned by the GetChainDescriptor RPC */
 export interface GetChainDescriptorResponse {
     /** chain describes application chain information */
-    chain: ChainDescriptor;
+    chain?: ChainDescriptor;
 }
 export interface GetChainDescriptorResponseProtoMsg {
     typeUrl: "/cosmos.base.reflection.v2alpha1.GetChainDescriptorResponse";
@@ -454,7 +454,7 @@ export interface GetChainDescriptorResponseAminoMsg {
 }
 /** GetChainDescriptorResponse is the response returned by the GetChainDescriptor RPC */
 export interface GetChainDescriptorResponseSDKType {
-    chain: ChainDescriptorSDKType;
+    chain?: ChainDescriptorSDKType;
 }
 /** GetCodecDescriptorRequest is the request used for the GetCodecDescriptor RPC */
 export interface GetCodecDescriptorRequest {
@@ -476,7 +476,7 @@ export interface GetCodecDescriptorRequestSDKType {
 /** GetCodecDescriptorResponse is the response returned by the GetCodecDescriptor RPC */
 export interface GetCodecDescriptorResponse {
     /** codec describes the application codec such as registered interfaces and implementations */
-    codec: CodecDescriptor;
+    codec?: CodecDescriptor;
 }
 export interface GetCodecDescriptorResponseProtoMsg {
     typeUrl: "/cosmos.base.reflection.v2alpha1.GetCodecDescriptorResponse";
@@ -493,7 +493,7 @@ export interface GetCodecDescriptorResponseAminoMsg {
 }
 /** GetCodecDescriptorResponse is the response returned by the GetCodecDescriptor RPC */
 export interface GetCodecDescriptorResponseSDKType {
-    codec: CodecDescriptorSDKType;
+    codec?: CodecDescriptorSDKType;
 }
 /** GetConfigurationDescriptorRequest is the request used for the GetConfigurationDescriptor RPC */
 export interface GetConfigurationDescriptorRequest {
@@ -515,7 +515,7 @@ export interface GetConfigurationDescriptorRequestSDKType {
 /** GetConfigurationDescriptorResponse is the response returned by the GetConfigurationDescriptor RPC */
 export interface GetConfigurationDescriptorResponse {
     /** config describes the application's sdk.Config */
-    config: ConfigurationDescriptor;
+    config?: ConfigurationDescriptor;
 }
 export interface GetConfigurationDescriptorResponseProtoMsg {
     typeUrl: "/cosmos.base.reflection.v2alpha1.GetConfigurationDescriptorResponse";
@@ -532,7 +532,7 @@ export interface GetConfigurationDescriptorResponseAminoMsg {
 }
 /** GetConfigurationDescriptorResponse is the response returned by the GetConfigurationDescriptor RPC */
 export interface GetConfigurationDescriptorResponseSDKType {
-    config: ConfigurationDescriptorSDKType;
+    config?: ConfigurationDescriptorSDKType;
 }
 /** GetQueryServicesDescriptorRequest is the request used for the GetQueryServicesDescriptor RPC */
 export interface GetQueryServicesDescriptorRequest {
@@ -554,7 +554,7 @@ export interface GetQueryServicesDescriptorRequestSDKType {
 /** GetQueryServicesDescriptorResponse is the response returned by the GetQueryServicesDescriptor RPC */
 export interface GetQueryServicesDescriptorResponse {
     /** queries provides information on the available queryable services */
-    queries: QueryServicesDescriptor;
+    queries?: QueryServicesDescriptor;
 }
 export interface GetQueryServicesDescriptorResponseProtoMsg {
     typeUrl: "/cosmos.base.reflection.v2alpha1.GetQueryServicesDescriptorResponse";
@@ -571,7 +571,7 @@ export interface GetQueryServicesDescriptorResponseAminoMsg {
 }
 /** GetQueryServicesDescriptorResponse is the response returned by the GetQueryServicesDescriptor RPC */
 export interface GetQueryServicesDescriptorResponseSDKType {
-    queries: QueryServicesDescriptorSDKType;
+    queries?: QueryServicesDescriptorSDKType;
 }
 /** GetTxDescriptorRequest is the request used for the GetTxDescriptor RPC */
 export interface GetTxDescriptorRequest {
@@ -596,7 +596,7 @@ export interface GetTxDescriptorResponse {
      * tx provides information on msgs that can be forwarded to the application
      * alongside the accepted transaction protobuf type
      */
-    tx: TxDescriptor;
+    tx?: TxDescriptor;
 }
 export interface GetTxDescriptorResponseProtoMsg {
     typeUrl: "/cosmos.base.reflection.v2alpha1.GetTxDescriptorResponse";
@@ -616,7 +616,7 @@ export interface GetTxDescriptorResponseAminoMsg {
 }
 /** GetTxDescriptorResponse is the response returned by the GetTxDescriptor RPC */
 export interface GetTxDescriptorResponseSDKType {
-    tx: TxDescriptorSDKType;
+    tx?: TxDescriptorSDKType;
 }
 /** QueryServicesDescriptor contains the list of cosmos-sdk queriable services */
 export interface QueryServicesDescriptor {
@@ -630,7 +630,7 @@ export interface QueryServicesDescriptorProtoMsg {
 /** QueryServicesDescriptor contains the list of cosmos-sdk queriable services */
 export interface QueryServicesDescriptorAmino {
     /** query_services is a list of cosmos-sdk QueryServiceDescriptor */
-    query_services: QueryServiceDescriptorAmino[];
+    query_services?: QueryServiceDescriptorAmino[];
 }
 export interface QueryServicesDescriptorAminoMsg {
     type: "cosmos-sdk/QueryServicesDescriptor";
@@ -656,11 +656,11 @@ export interface QueryServiceDescriptorProtoMsg {
 /** QueryServiceDescriptor describes a cosmos-sdk queryable service */
 export interface QueryServiceDescriptorAmino {
     /** fullname is the protobuf fullname of the service descriptor */
-    fullname: string;
+    fullname?: string;
     /** is_module describes if this service is actually exposed by an application's module */
-    is_module: boolean;
+    is_module?: boolean;
     /** methods provides a list of query service methods */
-    methods: QueryMethodDescriptorAmino[];
+    methods?: QueryMethodDescriptorAmino[];
 }
 export interface QueryServiceDescriptorAminoMsg {
     type: "cosmos-sdk/QueryServiceDescriptor";
@@ -697,12 +697,12 @@ export interface QueryMethodDescriptorProtoMsg {
  */
 export interface QueryMethodDescriptorAmino {
     /** name is the protobuf name (not fullname) of the method */
-    name: string;
+    name?: string;
     /**
      * full_query_path is the path that can be used to query
      * this method via tendermint abci.Query
      */
-    full_query_path: string;
+    full_query_path?: string;
 }
 export interface QueryMethodDescriptorAminoMsg {
     type: "cosmos-sdk/QueryMethodDescriptor";
@@ -718,8 +718,9 @@ export interface QueryMethodDescriptorSDKType {
     full_query_path: string;
 }
 export declare const AppDescriptor: {
-    encode(message: AppDescriptor, writer?: _m0.Writer): _m0.Writer;
-    decode(input: _m0.Reader | Uint8Array, length?: number): AppDescriptor;
+    typeUrl: string;
+    encode(message: AppDescriptor, writer?: BinaryWriter): BinaryWriter;
+    decode(input: BinaryReader | Uint8Array, length?: number): AppDescriptor;
     fromJSON(object: any): AppDescriptor;
     toJSON(message: AppDescriptor): unknown;
     fromPartial(object: Partial<AppDescriptor>): AppDescriptor;
@@ -732,8 +733,9 @@ export declare const AppDescriptor: {
     toProtoMsg(message: AppDescriptor): AppDescriptorProtoMsg;
 };
 export declare const TxDescriptor: {
-    encode(message: TxDescriptor, writer?: _m0.Writer): _m0.Writer;
-    decode(input: _m0.Reader | Uint8Array, length?: number): TxDescriptor;
+    typeUrl: string;
+    encode(message: TxDescriptor, writer?: BinaryWriter): BinaryWriter;
+    decode(input: BinaryReader | Uint8Array, length?: number): TxDescriptor;
     fromJSON(object: any): TxDescriptor;
     toJSON(message: TxDescriptor): unknown;
     fromPartial(object: Partial<TxDescriptor>): TxDescriptor;
@@ -746,8 +748,9 @@ export declare const TxDescriptor: {
     toProtoMsg(message: TxDescriptor): TxDescriptorProtoMsg;
 };
 export declare const AuthnDescriptor: {
-    encode(message: AuthnDescriptor, writer?: _m0.Writer): _m0.Writer;
-    decode(input: _m0.Reader | Uint8Array, length?: number): AuthnDescriptor;
+    typeUrl: string;
+    encode(message: AuthnDescriptor, writer?: BinaryWriter): BinaryWriter;
+    decode(input: BinaryReader | Uint8Array, length?: number): AuthnDescriptor;
     fromJSON(object: any): AuthnDescriptor;
     toJSON(message: AuthnDescriptor): unknown;
     fromPartial(object: Partial<AuthnDescriptor>): AuthnDescriptor;
@@ -760,8 +763,9 @@ export declare const AuthnDescriptor: {
     toProtoMsg(message: AuthnDescriptor): AuthnDescriptorProtoMsg;
 };
 export declare const SigningModeDescriptor: {
-    encode(message: SigningModeDescriptor, writer?: _m0.Writer): _m0.Writer;
-    decode(input: _m0.Reader | Uint8Array, length?: number): SigningModeDescriptor;
+    typeUrl: string;
+    encode(message: SigningModeDescriptor, writer?: BinaryWriter): BinaryWriter;
+    decode(input: BinaryReader | Uint8Array, length?: number): SigningModeDescriptor;
     fromJSON(object: any): SigningModeDescriptor;
     toJSON(message: SigningModeDescriptor): unknown;
     fromPartial(object: Partial<SigningModeDescriptor>): SigningModeDescriptor;
@@ -774,8 +778,9 @@ export declare const SigningModeDescriptor: {
     toProtoMsg(message: SigningModeDescriptor): SigningModeDescriptorProtoMsg;
 };
 export declare const ChainDescriptor: {
-    encode(message: ChainDescriptor, writer?: _m0.Writer): _m0.Writer;
-    decode(input: _m0.Reader | Uint8Array, length?: number): ChainDescriptor;
+    typeUrl: string;
+    encode(message: ChainDescriptor, writer?: BinaryWriter): BinaryWriter;
+    decode(input: BinaryReader | Uint8Array, length?: number): ChainDescriptor;
     fromJSON(object: any): ChainDescriptor;
     toJSON(message: ChainDescriptor): unknown;
     fromPartial(object: Partial<ChainDescriptor>): ChainDescriptor;
@@ -788,8 +793,9 @@ export declare const ChainDescriptor: {
     toProtoMsg(message: ChainDescriptor): ChainDescriptorProtoMsg;
 };
 export declare const CodecDescriptor: {
-    encode(message: CodecDescriptor, writer?: _m0.Writer): _m0.Writer;
-    decode(input: _m0.Reader | Uint8Array, length?: number): CodecDescriptor;
+    typeUrl: string;
+    encode(message: CodecDescriptor, writer?: BinaryWriter): BinaryWriter;
+    decode(input: BinaryReader | Uint8Array, length?: number): CodecDescriptor;
     fromJSON(object: any): CodecDescriptor;
     toJSON(message: CodecDescriptor): unknown;
     fromPartial(object: Partial<CodecDescriptor>): CodecDescriptor;
@@ -802,8 +808,9 @@ export declare const CodecDescriptor: {
     toProtoMsg(message: CodecDescriptor): CodecDescriptorProtoMsg;
 };
 export declare const InterfaceDescriptor: {
-    encode(message: InterfaceDescriptor, writer?: _m0.Writer): _m0.Writer;
-    decode(input: _m0.Reader | Uint8Array, length?: number): InterfaceDescriptor;
+    typeUrl: string;
+    encode(message: InterfaceDescriptor, writer?: BinaryWriter): BinaryWriter;
+    decode(input: BinaryReader | Uint8Array, length?: number): InterfaceDescriptor;
     fromJSON(object: any): InterfaceDescriptor;
     toJSON(message: InterfaceDescriptor): unknown;
     fromPartial(object: Partial<InterfaceDescriptor>): InterfaceDescriptor;
@@ -816,8 +823,9 @@ export declare const InterfaceDescriptor: {
     toProtoMsg(message: InterfaceDescriptor): InterfaceDescriptorProtoMsg;
 };
 export declare const InterfaceImplementerDescriptor: {
-    encode(message: InterfaceImplementerDescriptor, writer?: _m0.Writer): _m0.Writer;
-    decode(input: _m0.Reader | Uint8Array, length?: number): InterfaceImplementerDescriptor;
+    typeUrl: string;
+    encode(message: InterfaceImplementerDescriptor, writer?: BinaryWriter): BinaryWriter;
+    decode(input: BinaryReader | Uint8Array, length?: number): InterfaceImplementerDescriptor;
     fromJSON(object: any): InterfaceImplementerDescriptor;
     toJSON(message: InterfaceImplementerDescriptor): unknown;
     fromPartial(object: Partial<InterfaceImplementerDescriptor>): InterfaceImplementerDescriptor;
@@ -830,8 +838,9 @@ export declare const InterfaceImplementerDescriptor: {
     toProtoMsg(message: InterfaceImplementerDescriptor): InterfaceImplementerDescriptorProtoMsg;
 };
 export declare const InterfaceAcceptingMessageDescriptor: {
-    encode(message: InterfaceAcceptingMessageDescriptor, writer?: _m0.Writer): _m0.Writer;
-    decode(input: _m0.Reader | Uint8Array, length?: number): InterfaceAcceptingMessageDescriptor;
+    typeUrl: string;
+    encode(message: InterfaceAcceptingMessageDescriptor, writer?: BinaryWriter): BinaryWriter;
+    decode(input: BinaryReader | Uint8Array, length?: number): InterfaceAcceptingMessageDescriptor;
     fromJSON(object: any): InterfaceAcceptingMessageDescriptor;
     toJSON(message: InterfaceAcceptingMessageDescriptor): unknown;
     fromPartial(object: Partial<InterfaceAcceptingMessageDescriptor>): InterfaceAcceptingMessageDescriptor;
@@ -844,8 +853,9 @@ export declare const InterfaceAcceptingMessageDescriptor: {
     toProtoMsg(message: InterfaceAcceptingMessageDescriptor): InterfaceAcceptingMessageDescriptorProtoMsg;
 };
 export declare const ConfigurationDescriptor: {
-    encode(message: ConfigurationDescriptor, writer?: _m0.Writer): _m0.Writer;
-    decode(input: _m0.Reader | Uint8Array, length?: number): ConfigurationDescriptor;
+    typeUrl: string;
+    encode(message: ConfigurationDescriptor, writer?: BinaryWriter): BinaryWriter;
+    decode(input: BinaryReader | Uint8Array, length?: number): ConfigurationDescriptor;
     fromJSON(object: any): ConfigurationDescriptor;
     toJSON(message: ConfigurationDescriptor): unknown;
     fromPartial(object: Partial<ConfigurationDescriptor>): ConfigurationDescriptor;
@@ -858,8 +868,9 @@ export declare const ConfigurationDescriptor: {
     toProtoMsg(message: ConfigurationDescriptor): ConfigurationDescriptorProtoMsg;
 };
 export declare const MsgDescriptor: {
-    encode(message: MsgDescriptor, writer?: _m0.Writer): _m0.Writer;
-    decode(input: _m0.Reader | Uint8Array, length?: number): MsgDescriptor;
+    typeUrl: string;
+    encode(message: MsgDescriptor, writer?: BinaryWriter): BinaryWriter;
+    decode(input: BinaryReader | Uint8Array, length?: number): MsgDescriptor;
     fromJSON(object: any): MsgDescriptor;
     toJSON(message: MsgDescriptor): unknown;
     fromPartial(object: Partial<MsgDescriptor>): MsgDescriptor;
@@ -872,8 +883,9 @@ export declare const MsgDescriptor: {
     toProtoMsg(message: MsgDescriptor): MsgDescriptorProtoMsg;
 };
 export declare const GetAuthnDescriptorRequest: {
-    encode(_: GetAuthnDescriptorRequest, writer?: _m0.Writer): _m0.Writer;
-    decode(input: _m0.Reader | Uint8Array, length?: number): GetAuthnDescriptorRequest;
+    typeUrl: string;
+    encode(_: GetAuthnDescriptorRequest, writer?: BinaryWriter): BinaryWriter;
+    decode(input: BinaryReader | Uint8Array, length?: number): GetAuthnDescriptorRequest;
     fromJSON(_: any): GetAuthnDescriptorRequest;
     toJSON(_: GetAuthnDescriptorRequest): unknown;
     fromPartial(_: Partial<GetAuthnDescriptorRequest>): GetAuthnDescriptorRequest;
@@ -886,8 +898,9 @@ export declare const GetAuthnDescriptorRequest: {
     toProtoMsg(message: GetAuthnDescriptorRequest): GetAuthnDescriptorRequestProtoMsg;
 };
 export declare const GetAuthnDescriptorResponse: {
-    encode(message: GetAuthnDescriptorResponse, writer?: _m0.Writer): _m0.Writer;
-    decode(input: _m0.Reader | Uint8Array, length?: number): GetAuthnDescriptorResponse;
+    typeUrl: string;
+    encode(message: GetAuthnDescriptorResponse, writer?: BinaryWriter): BinaryWriter;
+    decode(input: BinaryReader | Uint8Array, length?: number): GetAuthnDescriptorResponse;
     fromJSON(object: any): GetAuthnDescriptorResponse;
     toJSON(message: GetAuthnDescriptorResponse): unknown;
     fromPartial(object: Partial<GetAuthnDescriptorResponse>): GetAuthnDescriptorResponse;
@@ -900,8 +913,9 @@ export declare const GetAuthnDescriptorResponse: {
     toProtoMsg(message: GetAuthnDescriptorResponse): GetAuthnDescriptorResponseProtoMsg;
 };
 export declare const GetChainDescriptorRequest: {
-    encode(_: GetChainDescriptorRequest, writer?: _m0.Writer): _m0.Writer;
-    decode(input: _m0.Reader | Uint8Array, length?: number): GetChainDescriptorRequest;
+    typeUrl: string;
+    encode(_: GetChainDescriptorRequest, writer?: BinaryWriter): BinaryWriter;
+    decode(input: BinaryReader | Uint8Array, length?: number): GetChainDescriptorRequest;
     fromJSON(_: any): GetChainDescriptorRequest;
     toJSON(_: GetChainDescriptorRequest): unknown;
     fromPartial(_: Partial<GetChainDescriptorRequest>): GetChainDescriptorRequest;
@@ -914,8 +928,9 @@ export declare const GetChainDescriptorRequest: {
     toProtoMsg(message: GetChainDescriptorRequest): GetChainDescriptorRequestProtoMsg;
 };
 export declare const GetChainDescriptorResponse: {
-    encode(message: GetChainDescriptorResponse, writer?: _m0.Writer): _m0.Writer;
-    decode(input: _m0.Reader | Uint8Array, length?: number): GetChainDescriptorResponse;
+    typeUrl: string;
+    encode(message: GetChainDescriptorResponse, writer?: BinaryWriter): BinaryWriter;
+    decode(input: BinaryReader | Uint8Array, length?: number): GetChainDescriptorResponse;
     fromJSON(object: any): GetChainDescriptorResponse;
     toJSON(message: GetChainDescriptorResponse): unknown;
     fromPartial(object: Partial<GetChainDescriptorResponse>): GetChainDescriptorResponse;
@@ -928,8 +943,9 @@ export declare const GetChainDescriptorResponse: {
     toProtoMsg(message: GetChainDescriptorResponse): GetChainDescriptorResponseProtoMsg;
 };
 export declare const GetCodecDescriptorRequest: {
-    encode(_: GetCodecDescriptorRequest, writer?: _m0.Writer): _m0.Writer;
-    decode(input: _m0.Reader | Uint8Array, length?: number): GetCodecDescriptorRequest;
+    typeUrl: string;
+    encode(_: GetCodecDescriptorRequest, writer?: BinaryWriter): BinaryWriter;
+    decode(input: BinaryReader | Uint8Array, length?: number): GetCodecDescriptorRequest;
     fromJSON(_: any): GetCodecDescriptorRequest;
     toJSON(_: GetCodecDescriptorRequest): unknown;
     fromPartial(_: Partial<GetCodecDescriptorRequest>): GetCodecDescriptorRequest;
@@ -942,8 +958,9 @@ export declare const GetCodecDescriptorRequest: {
     toProtoMsg(message: GetCodecDescriptorRequest): GetCodecDescriptorRequestProtoMsg;
 };
 export declare const GetCodecDescriptorResponse: {
-    encode(message: GetCodecDescriptorResponse, writer?: _m0.Writer): _m0.Writer;
-    decode(input: _m0.Reader | Uint8Array, length?: number): GetCodecDescriptorResponse;
+    typeUrl: string;
+    encode(message: GetCodecDescriptorResponse, writer?: BinaryWriter): BinaryWriter;
+    decode(input: BinaryReader | Uint8Array, length?: number): GetCodecDescriptorResponse;
     fromJSON(object: any): GetCodecDescriptorResponse;
     toJSON(message: GetCodecDescriptorResponse): unknown;
     fromPartial(object: Partial<GetCodecDescriptorResponse>): GetCodecDescriptorResponse;
@@ -956,8 +973,9 @@ export declare const GetCodecDescriptorResponse: {
     toProtoMsg(message: GetCodecDescriptorResponse): GetCodecDescriptorResponseProtoMsg;
 };
 export declare const GetConfigurationDescriptorRequest: {
-    encode(_: GetConfigurationDescriptorRequest, writer?: _m0.Writer): _m0.Writer;
-    decode(input: _m0.Reader | Uint8Array, length?: number): GetConfigurationDescriptorRequest;
+    typeUrl: string;
+    encode(_: GetConfigurationDescriptorRequest, writer?: BinaryWriter): BinaryWriter;
+    decode(input: BinaryReader | Uint8Array, length?: number): GetConfigurationDescriptorRequest;
     fromJSON(_: any): GetConfigurationDescriptorRequest;
     toJSON(_: GetConfigurationDescriptorRequest): unknown;
     fromPartial(_: Partial<GetConfigurationDescriptorRequest>): GetConfigurationDescriptorRequest;
@@ -970,8 +988,9 @@ export declare const GetConfigurationDescriptorRequest: {
     toProtoMsg(message: GetConfigurationDescriptorRequest): GetConfigurationDescriptorRequestProtoMsg;
 };
 export declare const GetConfigurationDescriptorResponse: {
-    encode(message: GetConfigurationDescriptorResponse, writer?: _m0.Writer): _m0.Writer;
-    decode(input: _m0.Reader | Uint8Array, length?: number): GetConfigurationDescriptorResponse;
+    typeUrl: string;
+    encode(message: GetConfigurationDescriptorResponse, writer?: BinaryWriter): BinaryWriter;
+    decode(input: BinaryReader | Uint8Array, length?: number): GetConfigurationDescriptorResponse;
     fromJSON(object: any): GetConfigurationDescriptorResponse;
     toJSON(message: GetConfigurationDescriptorResponse): unknown;
     fromPartial(object: Partial<GetConfigurationDescriptorResponse>): GetConfigurationDescriptorResponse;
@@ -984,8 +1003,9 @@ export declare const GetConfigurationDescriptorResponse: {
     toProtoMsg(message: GetConfigurationDescriptorResponse): GetConfigurationDescriptorResponseProtoMsg;
 };
 export declare const GetQueryServicesDescriptorRequest: {
-    encode(_: GetQueryServicesDescriptorRequest, writer?: _m0.Writer): _m0.Writer;
-    decode(input: _m0.Reader | Uint8Array, length?: number): GetQueryServicesDescriptorRequest;
+    typeUrl: string;
+    encode(_: GetQueryServicesDescriptorRequest, writer?: BinaryWriter): BinaryWriter;
+    decode(input: BinaryReader | Uint8Array, length?: number): GetQueryServicesDescriptorRequest;
     fromJSON(_: any): GetQueryServicesDescriptorRequest;
     toJSON(_: GetQueryServicesDescriptorRequest): unknown;
     fromPartial(_: Partial<GetQueryServicesDescriptorRequest>): GetQueryServicesDescriptorRequest;
@@ -998,8 +1018,9 @@ export declare const GetQueryServicesDescriptorRequest: {
     toProtoMsg(message: GetQueryServicesDescriptorRequest): GetQueryServicesDescriptorRequestProtoMsg;
 };
 export declare const GetQueryServicesDescriptorResponse: {
-    encode(message: GetQueryServicesDescriptorResponse, writer?: _m0.Writer): _m0.Writer;
-    decode(input: _m0.Reader | Uint8Array, length?: number): GetQueryServicesDescriptorResponse;
+    typeUrl: string;
+    encode(message: GetQueryServicesDescriptorResponse, writer?: BinaryWriter): BinaryWriter;
+    decode(input: BinaryReader | Uint8Array, length?: number): GetQueryServicesDescriptorResponse;
     fromJSON(object: any): GetQueryServicesDescriptorResponse;
     toJSON(message: GetQueryServicesDescriptorResponse): unknown;
     fromPartial(object: Partial<GetQueryServicesDescriptorResponse>): GetQueryServicesDescriptorResponse;
@@ -1012,8 +1033,9 @@ export declare const GetQueryServicesDescriptorResponse: {
     toProtoMsg(message: GetQueryServicesDescriptorResponse): GetQueryServicesDescriptorResponseProtoMsg;
 };
 export declare const GetTxDescriptorRequest: {
-    encode(_: GetTxDescriptorRequest, writer?: _m0.Writer): _m0.Writer;
-    decode(input: _m0.Reader | Uint8Array, length?: number): GetTxDescriptorRequest;
+    typeUrl: string;
+    encode(_: GetTxDescriptorRequest, writer?: BinaryWriter): BinaryWriter;
+    decode(input: BinaryReader | Uint8Array, length?: number): GetTxDescriptorRequest;
     fromJSON(_: any): GetTxDescriptorRequest;
     toJSON(_: GetTxDescriptorRequest): unknown;
     fromPartial(_: Partial<GetTxDescriptorRequest>): GetTxDescriptorRequest;
@@ -1026,8 +1048,9 @@ export declare const GetTxDescriptorRequest: {
     toProtoMsg(message: GetTxDescriptorRequest): GetTxDescriptorRequestProtoMsg;
 };
 export declare const GetTxDescriptorResponse: {
-    encode(message: GetTxDescriptorResponse, writer?: _m0.Writer): _m0.Writer;
-    decode(input: _m0.Reader | Uint8Array, length?: number): GetTxDescriptorResponse;
+    typeUrl: string;
+    encode(message: GetTxDescriptorResponse, writer?: BinaryWriter): BinaryWriter;
+    decode(input: BinaryReader | Uint8Array, length?: number): GetTxDescriptorResponse;
     fromJSON(object: any): GetTxDescriptorResponse;
     toJSON(message: GetTxDescriptorResponse): unknown;
     fromPartial(object: Partial<GetTxDescriptorResponse>): GetTxDescriptorResponse;
@@ -1040,8 +1063,9 @@ export declare const GetTxDescriptorResponse: {
     toProtoMsg(message: GetTxDescriptorResponse): GetTxDescriptorResponseProtoMsg;
 };
 export declare const QueryServicesDescriptor: {
-    encode(message: QueryServicesDescriptor, writer?: _m0.Writer): _m0.Writer;
-    decode(input: _m0.Reader | Uint8Array, length?: number): QueryServicesDescriptor;
+    typeUrl: string;
+    encode(message: QueryServicesDescriptor, writer?: BinaryWriter): BinaryWriter;
+    decode(input: BinaryReader | Uint8Array, length?: number): QueryServicesDescriptor;
     fromJSON(object: any): QueryServicesDescriptor;
     toJSON(message: QueryServicesDescriptor): unknown;
     fromPartial(object: Partial<QueryServicesDescriptor>): QueryServicesDescriptor;
@@ -1054,8 +1078,9 @@ export declare const QueryServicesDescriptor: {
     toProtoMsg(message: QueryServicesDescriptor): QueryServicesDescriptorProtoMsg;
 };
 export declare const QueryServiceDescriptor: {
-    encode(message: QueryServiceDescriptor, writer?: _m0.Writer): _m0.Writer;
-    decode(input: _m0.Reader | Uint8Array, length?: number): QueryServiceDescriptor;
+    typeUrl: string;
+    encode(message: QueryServiceDescriptor, writer?: BinaryWriter): BinaryWriter;
+    decode(input: BinaryReader | Uint8Array, length?: number): QueryServiceDescriptor;
     fromJSON(object: any): QueryServiceDescriptor;
     toJSON(message: QueryServiceDescriptor): unknown;
     fromPartial(object: Partial<QueryServiceDescriptor>): QueryServiceDescriptor;
@@ -1068,8 +1093,9 @@ export declare const QueryServiceDescriptor: {
     toProtoMsg(message: QueryServiceDescriptor): QueryServiceDescriptorProtoMsg;
 };
 export declare const QueryMethodDescriptor: {
-    encode(message: QueryMethodDescriptor, writer?: _m0.Writer): _m0.Writer;
-    decode(input: _m0.Reader | Uint8Array, length?: number): QueryMethodDescriptor;
+    typeUrl: string;
+    encode(message: QueryMethodDescriptor, writer?: BinaryWriter): BinaryWriter;
+    decode(input: BinaryReader | Uint8Array, length?: number): QueryMethodDescriptor;
     fromJSON(object: any): QueryMethodDescriptor;
     toJSON(message: QueryMethodDescriptor): unknown;
     fromPartial(object: Partial<QueryMethodDescriptor>): QueryMethodDescriptor;

@@ -1,10 +1,9 @@
 import { ProposalExecutorResult } from "./types";
-import { Long } from "../../../helpers";
-import * as _m0 from "protobufjs/minimal";
+import { BinaryReader, BinaryWriter } from "../../../binary";
 /** EventCreateGroup is an event emitted when a group is created. */
 export interface EventCreateGroup {
     /** group_id is the unique ID of the group. */
-    groupId: Long;
+    groupId: bigint;
 }
 export interface EventCreateGroupProtoMsg {
     typeUrl: "/cosmos.group.v1.EventCreateGroup";
@@ -13,7 +12,7 @@ export interface EventCreateGroupProtoMsg {
 /** EventCreateGroup is an event emitted when a group is created. */
 export interface EventCreateGroupAmino {
     /** group_id is the unique ID of the group. */
-    group_id: string;
+    group_id?: string;
 }
 export interface EventCreateGroupAminoMsg {
     type: "cosmos-sdk/EventCreateGroup";
@@ -21,12 +20,12 @@ export interface EventCreateGroupAminoMsg {
 }
 /** EventCreateGroup is an event emitted when a group is created. */
 export interface EventCreateGroupSDKType {
-    group_id: Long;
+    group_id: bigint;
 }
 /** EventUpdateGroup is an event emitted when a group is updated. */
 export interface EventUpdateGroup {
     /** group_id is the unique ID of the group. */
-    groupId: Long;
+    groupId: bigint;
 }
 export interface EventUpdateGroupProtoMsg {
     typeUrl: "/cosmos.group.v1.EventUpdateGroup";
@@ -35,7 +34,7 @@ export interface EventUpdateGroupProtoMsg {
 /** EventUpdateGroup is an event emitted when a group is updated. */
 export interface EventUpdateGroupAmino {
     /** group_id is the unique ID of the group. */
-    group_id: string;
+    group_id?: string;
 }
 export interface EventUpdateGroupAminoMsg {
     type: "cosmos-sdk/EventUpdateGroup";
@@ -43,7 +42,7 @@ export interface EventUpdateGroupAminoMsg {
 }
 /** EventUpdateGroup is an event emitted when a group is updated. */
 export interface EventUpdateGroupSDKType {
-    group_id: Long;
+    group_id: bigint;
 }
 /** EventCreateGroupPolicy is an event emitted when a group policy is created. */
 export interface EventCreateGroupPolicy {
@@ -57,7 +56,7 @@ export interface EventCreateGroupPolicyProtoMsg {
 /** EventCreateGroupPolicy is an event emitted when a group policy is created. */
 export interface EventCreateGroupPolicyAmino {
     /** address is the account address of the group policy. */
-    address: string;
+    address?: string;
 }
 export interface EventCreateGroupPolicyAminoMsg {
     type: "cosmos-sdk/EventCreateGroupPolicy";
@@ -79,7 +78,7 @@ export interface EventUpdateGroupPolicyProtoMsg {
 /** EventUpdateGroupPolicy is an event emitted when a group policy is updated. */
 export interface EventUpdateGroupPolicyAmino {
     /** address is the account address of the group policy. */
-    address: string;
+    address?: string;
 }
 export interface EventUpdateGroupPolicyAminoMsg {
     type: "cosmos-sdk/EventUpdateGroupPolicy";
@@ -92,7 +91,7 @@ export interface EventUpdateGroupPolicySDKType {
 /** EventSubmitProposal is an event emitted when a proposal is created. */
 export interface EventSubmitProposal {
     /** proposal_id is the unique ID of the proposal. */
-    proposalId: Long;
+    proposalId: bigint;
 }
 export interface EventSubmitProposalProtoMsg {
     typeUrl: "/cosmos.group.v1.EventSubmitProposal";
@@ -101,7 +100,7 @@ export interface EventSubmitProposalProtoMsg {
 /** EventSubmitProposal is an event emitted when a proposal is created. */
 export interface EventSubmitProposalAmino {
     /** proposal_id is the unique ID of the proposal. */
-    proposal_id: string;
+    proposal_id?: string;
 }
 export interface EventSubmitProposalAminoMsg {
     type: "cosmos-sdk/EventSubmitProposal";
@@ -109,12 +108,12 @@ export interface EventSubmitProposalAminoMsg {
 }
 /** EventSubmitProposal is an event emitted when a proposal is created. */
 export interface EventSubmitProposalSDKType {
-    proposal_id: Long;
+    proposal_id: bigint;
 }
 /** EventWithdrawProposal is an event emitted when a proposal is withdrawn. */
 export interface EventWithdrawProposal {
     /** proposal_id is the unique ID of the proposal. */
-    proposalId: Long;
+    proposalId: bigint;
 }
 export interface EventWithdrawProposalProtoMsg {
     typeUrl: "/cosmos.group.v1.EventWithdrawProposal";
@@ -123,7 +122,7 @@ export interface EventWithdrawProposalProtoMsg {
 /** EventWithdrawProposal is an event emitted when a proposal is withdrawn. */
 export interface EventWithdrawProposalAmino {
     /** proposal_id is the unique ID of the proposal. */
-    proposal_id: string;
+    proposal_id?: string;
 }
 export interface EventWithdrawProposalAminoMsg {
     type: "cosmos-sdk/EventWithdrawProposal";
@@ -131,12 +130,12 @@ export interface EventWithdrawProposalAminoMsg {
 }
 /** EventWithdrawProposal is an event emitted when a proposal is withdrawn. */
 export interface EventWithdrawProposalSDKType {
-    proposal_id: Long;
+    proposal_id: bigint;
 }
 /** EventVote is an event emitted when a voter votes on a proposal. */
 export interface EventVote {
     /** proposal_id is the unique ID of the proposal. */
-    proposalId: Long;
+    proposalId: bigint;
 }
 export interface EventVoteProtoMsg {
     typeUrl: "/cosmos.group.v1.EventVote";
@@ -145,7 +144,7 @@ export interface EventVoteProtoMsg {
 /** EventVote is an event emitted when a voter votes on a proposal. */
 export interface EventVoteAmino {
     /** proposal_id is the unique ID of the proposal. */
-    proposal_id: string;
+    proposal_id?: string;
 }
 export interface EventVoteAminoMsg {
     type: "cosmos-sdk/EventVote";
@@ -153,12 +152,12 @@ export interface EventVoteAminoMsg {
 }
 /** EventVote is an event emitted when a voter votes on a proposal. */
 export interface EventVoteSDKType {
-    proposal_id: Long;
+    proposal_id: bigint;
 }
 /** EventExec is an event emitted when a proposal is executed. */
 export interface EventExec {
     /** proposal_id is the unique ID of the proposal. */
-    proposalId: Long;
+    proposalId: bigint;
     /** result is the proposal execution result. */
     result: ProposalExecutorResult;
     /** logs contains error logs in case the execution result is FAILURE. */
@@ -171,11 +170,11 @@ export interface EventExecProtoMsg {
 /** EventExec is an event emitted when a proposal is executed. */
 export interface EventExecAmino {
     /** proposal_id is the unique ID of the proposal. */
-    proposal_id: string;
+    proposal_id?: string;
     /** result is the proposal execution result. */
-    result: ProposalExecutorResult;
+    result?: ProposalExecutorResult;
     /** logs contains error logs in case the execution result is FAILURE. */
-    logs: string;
+    logs?: string;
 }
 export interface EventExecAminoMsg {
     type: "cosmos-sdk/EventExec";
@@ -183,14 +182,14 @@ export interface EventExecAminoMsg {
 }
 /** EventExec is an event emitted when a proposal is executed. */
 export interface EventExecSDKType {
-    proposal_id: Long;
+    proposal_id: bigint;
     result: ProposalExecutorResult;
     logs: string;
 }
 /** EventLeaveGroup is an event emitted when group member leaves the group. */
 export interface EventLeaveGroup {
     /** group_id is the unique ID of the group. */
-    groupId: Long;
+    groupId: bigint;
     /** address is the account address of the group member. */
     address: string;
 }
@@ -201,9 +200,9 @@ export interface EventLeaveGroupProtoMsg {
 /** EventLeaveGroup is an event emitted when group member leaves the group. */
 export interface EventLeaveGroupAmino {
     /** group_id is the unique ID of the group. */
-    group_id: string;
+    group_id?: string;
     /** address is the account address of the group member. */
-    address: string;
+    address?: string;
 }
 export interface EventLeaveGroupAminoMsg {
     type: "cosmos-sdk/EventLeaveGroup";
@@ -211,12 +210,13 @@ export interface EventLeaveGroupAminoMsg {
 }
 /** EventLeaveGroup is an event emitted when group member leaves the group. */
 export interface EventLeaveGroupSDKType {
-    group_id: Long;
+    group_id: bigint;
     address: string;
 }
 export declare const EventCreateGroup: {
-    encode(message: EventCreateGroup, writer?: _m0.Writer): _m0.Writer;
-    decode(input: _m0.Reader | Uint8Array, length?: number): EventCreateGroup;
+    typeUrl: string;
+    encode(message: EventCreateGroup, writer?: BinaryWriter): BinaryWriter;
+    decode(input: BinaryReader | Uint8Array, length?: number): EventCreateGroup;
     fromJSON(object: any): EventCreateGroup;
     toJSON(message: EventCreateGroup): unknown;
     fromPartial(object: Partial<EventCreateGroup>): EventCreateGroup;
@@ -229,8 +229,9 @@ export declare const EventCreateGroup: {
     toProtoMsg(message: EventCreateGroup): EventCreateGroupProtoMsg;
 };
 export declare const EventUpdateGroup: {
-    encode(message: EventUpdateGroup, writer?: _m0.Writer): _m0.Writer;
-    decode(input: _m0.Reader | Uint8Array, length?: number): EventUpdateGroup;
+    typeUrl: string;
+    encode(message: EventUpdateGroup, writer?: BinaryWriter): BinaryWriter;
+    decode(input: BinaryReader | Uint8Array, length?: number): EventUpdateGroup;
     fromJSON(object: any): EventUpdateGroup;
     toJSON(message: EventUpdateGroup): unknown;
     fromPartial(object: Partial<EventUpdateGroup>): EventUpdateGroup;
@@ -243,8 +244,9 @@ export declare const EventUpdateGroup: {
     toProtoMsg(message: EventUpdateGroup): EventUpdateGroupProtoMsg;
 };
 export declare const EventCreateGroupPolicy: {
-    encode(message: EventCreateGroupPolicy, writer?: _m0.Writer): _m0.Writer;
-    decode(input: _m0.Reader | Uint8Array, length?: number): EventCreateGroupPolicy;
+    typeUrl: string;
+    encode(message: EventCreateGroupPolicy, writer?: BinaryWriter): BinaryWriter;
+    decode(input: BinaryReader | Uint8Array, length?: number): EventCreateGroupPolicy;
     fromJSON(object: any): EventCreateGroupPolicy;
     toJSON(message: EventCreateGroupPolicy): unknown;
     fromPartial(object: Partial<EventCreateGroupPolicy>): EventCreateGroupPolicy;
@@ -257,8 +259,9 @@ export declare const EventCreateGroupPolicy: {
     toProtoMsg(message: EventCreateGroupPolicy): EventCreateGroupPolicyProtoMsg;
 };
 export declare const EventUpdateGroupPolicy: {
-    encode(message: EventUpdateGroupPolicy, writer?: _m0.Writer): _m0.Writer;
-    decode(input: _m0.Reader | Uint8Array, length?: number): EventUpdateGroupPolicy;
+    typeUrl: string;
+    encode(message: EventUpdateGroupPolicy, writer?: BinaryWriter): BinaryWriter;
+    decode(input: BinaryReader | Uint8Array, length?: number): EventUpdateGroupPolicy;
     fromJSON(object: any): EventUpdateGroupPolicy;
     toJSON(message: EventUpdateGroupPolicy): unknown;
     fromPartial(object: Partial<EventUpdateGroupPolicy>): EventUpdateGroupPolicy;
@@ -271,8 +274,9 @@ export declare const EventUpdateGroupPolicy: {
     toProtoMsg(message: EventUpdateGroupPolicy): EventUpdateGroupPolicyProtoMsg;
 };
 export declare const EventSubmitProposal: {
-    encode(message: EventSubmitProposal, writer?: _m0.Writer): _m0.Writer;
-    decode(input: _m0.Reader | Uint8Array, length?: number): EventSubmitProposal;
+    typeUrl: string;
+    encode(message: EventSubmitProposal, writer?: BinaryWriter): BinaryWriter;
+    decode(input: BinaryReader | Uint8Array, length?: number): EventSubmitProposal;
     fromJSON(object: any): EventSubmitProposal;
     toJSON(message: EventSubmitProposal): unknown;
     fromPartial(object: Partial<EventSubmitProposal>): EventSubmitProposal;
@@ -285,8 +289,9 @@ export declare const EventSubmitProposal: {
     toProtoMsg(message: EventSubmitProposal): EventSubmitProposalProtoMsg;
 };
 export declare const EventWithdrawProposal: {
-    encode(message: EventWithdrawProposal, writer?: _m0.Writer): _m0.Writer;
-    decode(input: _m0.Reader | Uint8Array, length?: number): EventWithdrawProposal;
+    typeUrl: string;
+    encode(message: EventWithdrawProposal, writer?: BinaryWriter): BinaryWriter;
+    decode(input: BinaryReader | Uint8Array, length?: number): EventWithdrawProposal;
     fromJSON(object: any): EventWithdrawProposal;
     toJSON(message: EventWithdrawProposal): unknown;
     fromPartial(object: Partial<EventWithdrawProposal>): EventWithdrawProposal;
@@ -299,8 +304,9 @@ export declare const EventWithdrawProposal: {
     toProtoMsg(message: EventWithdrawProposal): EventWithdrawProposalProtoMsg;
 };
 export declare const EventVote: {
-    encode(message: EventVote, writer?: _m0.Writer): _m0.Writer;
-    decode(input: _m0.Reader | Uint8Array, length?: number): EventVote;
+    typeUrl: string;
+    encode(message: EventVote, writer?: BinaryWriter): BinaryWriter;
+    decode(input: BinaryReader | Uint8Array, length?: number): EventVote;
     fromJSON(object: any): EventVote;
     toJSON(message: EventVote): unknown;
     fromPartial(object: Partial<EventVote>): EventVote;
@@ -313,8 +319,9 @@ export declare const EventVote: {
     toProtoMsg(message: EventVote): EventVoteProtoMsg;
 };
 export declare const EventExec: {
-    encode(message: EventExec, writer?: _m0.Writer): _m0.Writer;
-    decode(input: _m0.Reader | Uint8Array, length?: number): EventExec;
+    typeUrl: string;
+    encode(message: EventExec, writer?: BinaryWriter): BinaryWriter;
+    decode(input: BinaryReader | Uint8Array, length?: number): EventExec;
     fromJSON(object: any): EventExec;
     toJSON(message: EventExec): unknown;
     fromPartial(object: Partial<EventExec>): EventExec;
@@ -327,8 +334,9 @@ export declare const EventExec: {
     toProtoMsg(message: EventExec): EventExecProtoMsg;
 };
 export declare const EventLeaveGroup: {
-    encode(message: EventLeaveGroup, writer?: _m0.Writer): _m0.Writer;
-    decode(input: _m0.Reader | Uint8Array, length?: number): EventLeaveGroup;
+    typeUrl: string;
+    encode(message: EventLeaveGroup, writer?: BinaryWriter): BinaryWriter;
+    decode(input: BinaryReader | Uint8Array, length?: number): EventLeaveGroup;
     fromJSON(object: any): EventLeaveGroup;
     toJSON(message: EventLeaveGroup): unknown;
     fromPartial(object: Partial<EventLeaveGroup>): EventLeaveGroup;

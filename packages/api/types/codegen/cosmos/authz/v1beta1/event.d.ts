@@ -1,4 +1,4 @@
-import * as _m0 from "protobufjs/minimal";
+import { BinaryReader, BinaryWriter } from "../../../binary";
 /** EventGrant is emitted on Msg/Grant */
 export interface EventGrant {
     /** Msg type URL for which an autorization is granted */
@@ -15,11 +15,11 @@ export interface EventGrantProtoMsg {
 /** EventGrant is emitted on Msg/Grant */
 export interface EventGrantAmino {
     /** Msg type URL for which an autorization is granted */
-    msg_type_url: string;
+    msg_type_url?: string;
     /** Granter account address */
-    granter: string;
+    granter?: string;
     /** Grantee account address */
-    grantee: string;
+    grantee?: string;
 }
 export interface EventGrantAminoMsg {
     type: "cosmos-sdk/EventGrant";
@@ -47,11 +47,11 @@ export interface EventRevokeProtoMsg {
 /** EventRevoke is emitted on Msg/Revoke */
 export interface EventRevokeAmino {
     /** Msg type URL for which an autorization is revoked */
-    msg_type_url: string;
+    msg_type_url?: string;
     /** Granter account address */
-    granter: string;
+    granter?: string;
     /** Grantee account address */
-    grantee: string;
+    grantee?: string;
 }
 export interface EventRevokeAminoMsg {
     type: "cosmos-sdk/EventRevoke";
@@ -64,8 +64,9 @@ export interface EventRevokeSDKType {
     grantee: string;
 }
 export declare const EventGrant: {
-    encode(message: EventGrant, writer?: _m0.Writer): _m0.Writer;
-    decode(input: _m0.Reader | Uint8Array, length?: number): EventGrant;
+    typeUrl: string;
+    encode(message: EventGrant, writer?: BinaryWriter): BinaryWriter;
+    decode(input: BinaryReader | Uint8Array, length?: number): EventGrant;
     fromJSON(object: any): EventGrant;
     toJSON(message: EventGrant): unknown;
     fromPartial(object: Partial<EventGrant>): EventGrant;
@@ -78,8 +79,9 @@ export declare const EventGrant: {
     toProtoMsg(message: EventGrant): EventGrantProtoMsg;
 };
 export declare const EventRevoke: {
-    encode(message: EventRevoke, writer?: _m0.Writer): _m0.Writer;
-    decode(input: _m0.Reader | Uint8Array, length?: number): EventRevoke;
+    typeUrl: string;
+    encode(message: EventRevoke, writer?: BinaryWriter): BinaryWriter;
+    decode(input: BinaryReader | Uint8Array, length?: number): EventRevoke;
     fromJSON(object: any): EventRevoke;
     toJSON(message: EventRevoke): unknown;
     fromPartial(object: Partial<EventRevoke>): EventRevoke;

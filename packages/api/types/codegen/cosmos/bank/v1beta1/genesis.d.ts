@@ -1,6 +1,6 @@
 import { Params, ParamsAmino, ParamsSDKType, Metadata, MetadataAmino, MetadataSDKType } from "./bank";
 import { Coin, CoinAmino, CoinSDKType } from "../../base/v1beta1/coin";
-import * as _m0 from "protobufjs/minimal";
+import { BinaryReader, BinaryWriter } from "../../../binary";
 /** GenesisState defines the bank module's genesis state. */
 export interface GenesisState {
     /** params defines all the paramaters of the module. */
@@ -24,14 +24,14 @@ export interface GenesisStateAmino {
     /** params defines all the paramaters of the module. */
     params?: ParamsAmino;
     /** balances is an array containing the balances of all the accounts. */
-    balances: BalanceAmino[];
+    balances?: BalanceAmino[];
     /**
      * supply represents the total supply. If it is left empty, then supply will be calculated based on the provided
      * balances. Otherwise, it will be used to validate that the sum of the balances equals this amount.
      */
-    supply: CoinAmino[];
+    supply?: CoinAmino[];
     /** denom_metadata defines the metadata of the differents coins. */
-    denom_metadata: MetadataAmino[];
+    denom_metadata?: MetadataAmino[];
 }
 export interface GenesisStateAminoMsg {
     type: "cosmos-sdk/GenesisState";
@@ -64,9 +64,9 @@ export interface BalanceProtoMsg {
  */
 export interface BalanceAmino {
     /** address is the address of the balance holder. */
-    address: string;
+    address?: string;
     /** coins defines the different coins this balance holds. */
-    coins: CoinAmino[];
+    coins?: CoinAmino[];
 }
 export interface BalanceAminoMsg {
     type: "cosmos-sdk/Balance";
@@ -81,8 +81,9 @@ export interface BalanceSDKType {
     coins: CoinSDKType[];
 }
 export declare const GenesisState: {
-    encode(message: GenesisState, writer?: _m0.Writer): _m0.Writer;
-    decode(input: _m0.Reader | Uint8Array, length?: number): GenesisState;
+    typeUrl: string;
+    encode(message: GenesisState, writer?: BinaryWriter): BinaryWriter;
+    decode(input: BinaryReader | Uint8Array, length?: number): GenesisState;
     fromJSON(object: any): GenesisState;
     toJSON(message: GenesisState): unknown;
     fromPartial(object: Partial<GenesisState>): GenesisState;
@@ -95,8 +96,9 @@ export declare const GenesisState: {
     toProtoMsg(message: GenesisState): GenesisStateProtoMsg;
 };
 export declare const Balance: {
-    encode(message: Balance, writer?: _m0.Writer): _m0.Writer;
-    decode(input: _m0.Reader | Uint8Array, length?: number): Balance;
+    typeUrl: string;
+    encode(message: Balance, writer?: BinaryWriter): BinaryWriter;
+    decode(input: BinaryReader | Uint8Array, length?: number): Balance;
     fromJSON(object: any): Balance;
     toJSON(message: Balance): unknown;
     fromPartial(object: Partial<Balance>): Balance;

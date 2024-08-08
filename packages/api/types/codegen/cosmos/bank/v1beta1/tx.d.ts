@@ -1,6 +1,6 @@
 import { Coin, CoinAmino, CoinSDKType } from "../../base/v1beta1/coin";
 import { Input, InputAmino, InputSDKType, Output, OutputAmino, OutputSDKType } from "./bank";
-import * as _m0 from "protobufjs/minimal";
+import { BinaryReader, BinaryWriter } from "../../../binary";
 /** MsgSend represents a message to send coins from one account to another. */
 export interface MsgSend {
     fromAddress: string;
@@ -13,9 +13,9 @@ export interface MsgSendProtoMsg {
 }
 /** MsgSend represents a message to send coins from one account to another. */
 export interface MsgSendAmino {
-    from_address: string;
-    to_address: string;
-    amount: CoinAmino[];
+    from_address?: string;
+    to_address?: string;
+    amount?: CoinAmino[];
 }
 export interface MsgSendAminoMsg {
     type: "cosmos-sdk/MsgSend";
@@ -55,8 +55,8 @@ export interface MsgMultiSendProtoMsg {
 }
 /** MsgMultiSend represents an arbitrary multi-in, multi-out send message. */
 export interface MsgMultiSendAmino {
-    inputs: InputAmino[];
-    outputs: OutputAmino[];
+    inputs?: InputAmino[];
+    outputs?: OutputAmino[];
 }
 export interface MsgMultiSendAminoMsg {
     type: "cosmos-sdk/MsgMultiSend";
@@ -85,8 +85,9 @@ export interface MsgMultiSendResponseAminoMsg {
 export interface MsgMultiSendResponseSDKType {
 }
 export declare const MsgSend: {
-    encode(message: MsgSend, writer?: _m0.Writer): _m0.Writer;
-    decode(input: _m0.Reader | Uint8Array, length?: number): MsgSend;
+    typeUrl: string;
+    encode(message: MsgSend, writer?: BinaryWriter): BinaryWriter;
+    decode(input: BinaryReader | Uint8Array, length?: number): MsgSend;
     fromJSON(object: any): MsgSend;
     toJSON(message: MsgSend): unknown;
     fromPartial(object: Partial<MsgSend>): MsgSend;
@@ -99,8 +100,9 @@ export declare const MsgSend: {
     toProtoMsg(message: MsgSend): MsgSendProtoMsg;
 };
 export declare const MsgSendResponse: {
-    encode(_: MsgSendResponse, writer?: _m0.Writer): _m0.Writer;
-    decode(input: _m0.Reader | Uint8Array, length?: number): MsgSendResponse;
+    typeUrl: string;
+    encode(_: MsgSendResponse, writer?: BinaryWriter): BinaryWriter;
+    decode(input: BinaryReader | Uint8Array, length?: number): MsgSendResponse;
     fromJSON(_: any): MsgSendResponse;
     toJSON(_: MsgSendResponse): unknown;
     fromPartial(_: Partial<MsgSendResponse>): MsgSendResponse;
@@ -113,8 +115,9 @@ export declare const MsgSendResponse: {
     toProtoMsg(message: MsgSendResponse): MsgSendResponseProtoMsg;
 };
 export declare const MsgMultiSend: {
-    encode(message: MsgMultiSend, writer?: _m0.Writer): _m0.Writer;
-    decode(input: _m0.Reader | Uint8Array, length?: number): MsgMultiSend;
+    typeUrl: string;
+    encode(message: MsgMultiSend, writer?: BinaryWriter): BinaryWriter;
+    decode(input: BinaryReader | Uint8Array, length?: number): MsgMultiSend;
     fromJSON(object: any): MsgMultiSend;
     toJSON(message: MsgMultiSend): unknown;
     fromPartial(object: Partial<MsgMultiSend>): MsgMultiSend;
@@ -127,8 +130,9 @@ export declare const MsgMultiSend: {
     toProtoMsg(message: MsgMultiSend): MsgMultiSendProtoMsg;
 };
 export declare const MsgMultiSendResponse: {
-    encode(_: MsgMultiSendResponse, writer?: _m0.Writer): _m0.Writer;
-    decode(input: _m0.Reader | Uint8Array, length?: number): MsgMultiSendResponse;
+    typeUrl: string;
+    encode(_: MsgMultiSendResponse, writer?: BinaryWriter): BinaryWriter;
+    decode(input: BinaryReader | Uint8Array, length?: number): MsgMultiSendResponse;
     fromJSON(_: any): MsgMultiSendResponse;
     toJSON(_: MsgMultiSendResponse): unknown;
     fromPartial(_: Partial<MsgMultiSendResponse>): MsgMultiSendResponse;

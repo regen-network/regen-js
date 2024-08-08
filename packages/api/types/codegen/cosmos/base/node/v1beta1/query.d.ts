@@ -1,4 +1,4 @@
-import * as _m0 from "protobufjs/minimal";
+import { BinaryReader, BinaryWriter } from "../../../../binary";
 /** ConfigRequest defines the request structure for the Config gRPC query. */
 export interface ConfigRequest {
 }
@@ -26,7 +26,7 @@ export interface ConfigResponseProtoMsg {
 }
 /** ConfigResponse defines the response structure for the Config gRPC query. */
 export interface ConfigResponseAmino {
-    minimum_gas_price: string;
+    minimum_gas_price?: string;
 }
 export interface ConfigResponseAminoMsg {
     type: "cosmos-sdk/ConfigResponse";
@@ -37,8 +37,9 @@ export interface ConfigResponseSDKType {
     minimum_gas_price: string;
 }
 export declare const ConfigRequest: {
-    encode(_: ConfigRequest, writer?: _m0.Writer): _m0.Writer;
-    decode(input: _m0.Reader | Uint8Array, length?: number): ConfigRequest;
+    typeUrl: string;
+    encode(_: ConfigRequest, writer?: BinaryWriter): BinaryWriter;
+    decode(input: BinaryReader | Uint8Array, length?: number): ConfigRequest;
     fromJSON(_: any): ConfigRequest;
     toJSON(_: ConfigRequest): unknown;
     fromPartial(_: Partial<ConfigRequest>): ConfigRequest;
@@ -51,8 +52,9 @@ export declare const ConfigRequest: {
     toProtoMsg(message: ConfigRequest): ConfigRequestProtoMsg;
 };
 export declare const ConfigResponse: {
-    encode(message: ConfigResponse, writer?: _m0.Writer): _m0.Writer;
-    decode(input: _m0.Reader | Uint8Array, length?: number): ConfigResponse;
+    typeUrl: string;
+    encode(message: ConfigResponse, writer?: BinaryWriter): BinaryWriter;
+    decode(input: BinaryReader | Uint8Array, length?: number): ConfigResponse;
     fromJSON(object: any): ConfigResponse;
     toJSON(message: ConfigResponse): unknown;
     fromPartial(object: Partial<ConfigResponse>): ConfigResponse;

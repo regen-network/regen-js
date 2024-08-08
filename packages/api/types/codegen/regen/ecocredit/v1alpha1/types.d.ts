@@ -1,7 +1,6 @@
-import { Timestamp, TimestampAmino, TimestampSDKType } from "../../../google/protobuf/timestamp";
+import { Timestamp, TimestampSDKType } from "../../../google/protobuf/timestamp";
 import { Coin, CoinAmino, CoinSDKType } from "../../../cosmos/base/v1beta1/coin";
-import { Long } from "../../../helpers";
-import * as _m0 from "protobufjs/minimal";
+import { BinaryReader, BinaryWriter } from "../../../binary";
 /** ClassInfo represents the high-level on-chain information for a credit class. */
 export interface ClassInfo {
     /** class_id is the unique ID of credit class. */
@@ -16,9 +15,9 @@ export interface ClassInfo {
      * credit_type describes the type of credit (e.g. carbon, biodiversity), as
      * well as unit and precision.
      */
-    creditType: CreditType;
+    creditType?: CreditType;
     /** The number of batches issued in this credit class. */
-    numBatches: Long;
+    numBatches: bigint;
 }
 export interface ClassInfoProtoMsg {
     typeUrl: "/regen.ecocredit.v1alpha1.ClassInfo";
@@ -27,20 +26,20 @@ export interface ClassInfoProtoMsg {
 /** ClassInfo represents the high-level on-chain information for a credit class. */
 export interface ClassInfoAmino {
     /** class_id is the unique ID of credit class. */
-    class_id: string;
+    class_id?: string;
     /** admin is the admin of the credit class. */
-    admin: string;
+    admin?: string;
     /** issuers are the approved issuers of the credit class. */
-    issuers: string[];
+    issuers?: string[];
     /** metadata is any arbitrary metadata to attached to the credit class. */
-    metadata: Uint8Array;
+    metadata?: string;
     /**
      * credit_type describes the type of credit (e.g. carbon, biodiversity), as
      * well as unit and precision.
      */
     credit_type?: CreditTypeAmino;
     /** The number of batches issued in this credit class. */
-    num_batches: string;
+    num_batches?: string;
 }
 export interface ClassInfoAminoMsg {
     type: "/regen.ecocredit.v1alpha1.ClassInfo";
@@ -52,8 +51,8 @@ export interface ClassInfoSDKType {
     admin: string;
     issuers: string[];
     metadata: Uint8Array;
-    credit_type: CreditTypeSDKType;
-    num_batches: Long;
+    credit_type?: CreditTypeSDKType;
+    num_batches: bigint;
 }
 /** BatchInfo represents the high-level on-chain information for a credit batch. */
 export interface BatchInfo {
@@ -84,12 +83,12 @@ export interface BatchInfo {
      * start_date is the beginning of the period during which this credit batch
      * was quantified and verified.
      */
-    startDate: Timestamp;
+    startDate?: Timestamp;
     /**
      * end_date is the end of the period during which this credit batch was
      * quantified and verified.
      */
-    endDate: Timestamp;
+    endDate?: Timestamp;
     /**
      * project_location is the location of the project backing the credits in this
      * batch. Full documentation can be found in MsgCreateBatch.project_location.
@@ -103,11 +102,11 @@ export interface BatchInfoProtoMsg {
 /** BatchInfo represents the high-level on-chain information for a credit batch. */
 export interface BatchInfoAmino {
     /** class_id is the unique ID of credit class. */
-    class_id: string;
+    class_id?: string;
     /** batch_denom is the unique ID of credit batch. */
-    batch_denom: string;
+    batch_denom?: string;
     /** issuer is the issuer of the credit batch. */
-    issuer: string;
+    issuer?: string;
     /**
      * total_amount is the total number of active credits in the credit batch.
      * Some of the issued credits may be cancelled and will be removed from
@@ -115,31 +114,31 @@ export interface BatchInfoAmino {
      * amount_cancelled will always sum to the original amount of credits that
      * were issued.
      */
-    total_amount: string;
+    total_amount?: string;
     /** metadata is any arbitrary metadata attached to the credit batch. */
-    metadata: Uint8Array;
+    metadata?: string;
     /**
      * amount_cancelled is the number of credits in the batch that have been
      * cancelled, effectively undoing there issuance. The sum of total_amount and
      * amount_cancelled will always sum to the original amount of credits that
      * were issued.
      */
-    amount_cancelled: string;
+    amount_cancelled?: string;
     /**
      * start_date is the beginning of the period during which this credit batch
      * was quantified and verified.
      */
-    start_date?: TimestampAmino;
+    start_date?: string;
     /**
      * end_date is the end of the period during which this credit batch was
      * quantified and verified.
      */
-    end_date?: TimestampAmino;
+    end_date?: string;
     /**
      * project_location is the location of the project backing the credits in this
      * batch. Full documentation can be found in MsgCreateBatch.project_location.
      */
-    project_location: string;
+    project_location?: string;
 }
 export interface BatchInfoAminoMsg {
     type: "/regen.ecocredit.v1alpha1.BatchInfo";
@@ -153,8 +152,8 @@ export interface BatchInfoSDKType {
     total_amount: string;
     metadata: Uint8Array;
     amount_cancelled: string;
-    start_date: TimestampSDKType;
-    end_date: TimestampSDKType;
+    start_date?: TimestampSDKType;
+    end_date?: TimestampSDKType;
     project_location: string;
 }
 /**
@@ -189,21 +188,21 @@ export interface ParamsProtoMsg {
  */
 export interface ParamsAmino {
     /** credit_class_fee is the fixed fee charged on creation of a new credit class */
-    credit_class_fee: CoinAmino[];
+    credit_class_fee?: CoinAmino[];
     /**
      * allowed_class_creators is an allowlist defining the addresses with
      * the required permissions to create credit classes
      */
-    allowed_class_creators: string[];
+    allowed_class_creators?: string[];
     /**
      * allowlist_enabled is a param that enables/disables the allowlist for credit
      * creation
      */
-    allowlist_enabled: boolean;
+    allowlist_enabled?: boolean;
     /** credit_types is a list of definitions for credit types */
-    credit_types: CreditTypeAmino[];
+    credit_types?: CreditTypeAmino[];
     /** basket_creation_fee is the fee to create a new basket denom. */
-    basket_creation_fee: CoinAmino[];
+    basket_creation_fee?: CoinAmino[];
 }
 export interface ParamsAminoMsg {
     type: "/regen.ecocredit.v1alpha1.Params";
@@ -247,16 +246,16 @@ export interface CreditTypeProtoMsg {
  */
 export interface CreditTypeAmino {
     /** the type of credit (e.g. carbon, biodiversity, etc) */
-    name: string;
+    name?: string;
     /**
      * abbreviation is a 1-3 character uppercase abbreviation of the CreditType
      * name, used in batch denominations within the CreditType. It must be unique.
      */
-    abbreviation: string;
+    abbreviation?: string;
     /** the measurement unit (e.g. kg, ton, etc) */
-    unit: string;
+    unit?: string;
     /** the decimal precision */
-    precision: number;
+    precision?: number;
 }
 export interface CreditTypeAminoMsg {
     type: "/regen.ecocredit.v1alpha1.CreditType";
@@ -280,7 +279,7 @@ export interface CreditTypeSeq {
     /** The credit type abbreviation */
     abbreviation: string;
     /** The sequence number of classes of the credit type */
-    seqNumber: Long;
+    seqNumber: bigint;
 }
 export interface CreditTypeSeqProtoMsg {
     typeUrl: "/regen.ecocredit.v1alpha1.CreditTypeSeq";
@@ -292,9 +291,9 @@ export interface CreditTypeSeqProtoMsg {
  */
 export interface CreditTypeSeqAmino {
     /** The credit type abbreviation */
-    abbreviation: string;
+    abbreviation?: string;
     /** The sequence number of classes of the credit type */
-    seq_number: string;
+    seq_number?: string;
 }
 export interface CreditTypeSeqAminoMsg {
     type: "/regen.ecocredit.v1alpha1.CreditTypeSeq";
@@ -306,11 +305,12 @@ export interface CreditTypeSeqAminoMsg {
  */
 export interface CreditTypeSeqSDKType {
     abbreviation: string;
-    seq_number: Long;
+    seq_number: bigint;
 }
 export declare const ClassInfo: {
-    encode(message: ClassInfo, writer?: _m0.Writer): _m0.Writer;
-    decode(input: _m0.Reader | Uint8Array, length?: number): ClassInfo;
+    typeUrl: string;
+    encode(message: ClassInfo, writer?: BinaryWriter): BinaryWriter;
+    decode(input: BinaryReader | Uint8Array, length?: number): ClassInfo;
     fromJSON(object: any): ClassInfo;
     toJSON(message: ClassInfo): unknown;
     fromPartial(object: Partial<ClassInfo>): ClassInfo;
@@ -322,8 +322,9 @@ export declare const ClassInfo: {
     toProtoMsg(message: ClassInfo): ClassInfoProtoMsg;
 };
 export declare const BatchInfo: {
-    encode(message: BatchInfo, writer?: _m0.Writer): _m0.Writer;
-    decode(input: _m0.Reader | Uint8Array, length?: number): BatchInfo;
+    typeUrl: string;
+    encode(message: BatchInfo, writer?: BinaryWriter): BinaryWriter;
+    decode(input: BinaryReader | Uint8Array, length?: number): BatchInfo;
     fromJSON(object: any): BatchInfo;
     toJSON(message: BatchInfo): unknown;
     fromPartial(object: Partial<BatchInfo>): BatchInfo;
@@ -335,8 +336,9 @@ export declare const BatchInfo: {
     toProtoMsg(message: BatchInfo): BatchInfoProtoMsg;
 };
 export declare const Params: {
-    encode(message: Params, writer?: _m0.Writer): _m0.Writer;
-    decode(input: _m0.Reader | Uint8Array, length?: number): Params;
+    typeUrl: string;
+    encode(message: Params, writer?: BinaryWriter): BinaryWriter;
+    decode(input: BinaryReader | Uint8Array, length?: number): Params;
     fromJSON(object: any): Params;
     toJSON(message: Params): unknown;
     fromPartial(object: Partial<Params>): Params;
@@ -348,8 +350,9 @@ export declare const Params: {
     toProtoMsg(message: Params): ParamsProtoMsg;
 };
 export declare const CreditType: {
-    encode(message: CreditType, writer?: _m0.Writer): _m0.Writer;
-    decode(input: _m0.Reader | Uint8Array, length?: number): CreditType;
+    typeUrl: string;
+    encode(message: CreditType, writer?: BinaryWriter): BinaryWriter;
+    decode(input: BinaryReader | Uint8Array, length?: number): CreditType;
     fromJSON(object: any): CreditType;
     toJSON(message: CreditType): unknown;
     fromPartial(object: Partial<CreditType>): CreditType;
@@ -361,8 +364,9 @@ export declare const CreditType: {
     toProtoMsg(message: CreditType): CreditTypeProtoMsg;
 };
 export declare const CreditTypeSeq: {
-    encode(message: CreditTypeSeq, writer?: _m0.Writer): _m0.Writer;
-    decode(input: _m0.Reader | Uint8Array, length?: number): CreditTypeSeq;
+    typeUrl: string;
+    encode(message: CreditTypeSeq, writer?: BinaryWriter): BinaryWriter;
+    decode(input: BinaryReader | Uint8Array, length?: number): CreditTypeSeq;
     fromJSON(object: any): CreditTypeSeq;
     toJSON(message: CreditTypeSeq): unknown;
     fromPartial(object: Partial<CreditTypeSeq>): CreditTypeSeq;

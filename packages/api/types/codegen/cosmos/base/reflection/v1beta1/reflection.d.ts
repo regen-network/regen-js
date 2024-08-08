@@ -1,4 +1,4 @@
-import * as _m0 from "protobufjs/minimal";
+import { BinaryReader, BinaryWriter } from "../../../../binary";
 /** ListAllInterfacesRequest is the request type of the ListAllInterfaces RPC. */
 export interface ListAllInterfacesRequest {
 }
@@ -28,7 +28,7 @@ export interface ListAllInterfacesResponseProtoMsg {
 /** ListAllInterfacesResponse is the response type of the ListAllInterfaces RPC. */
 export interface ListAllInterfacesResponseAmino {
     /** interface_names is an array of all the registered interfaces. */
-    interface_names: string[];
+    interface_names?: string[];
 }
 export interface ListAllInterfacesResponseAminoMsg {
     type: "cosmos-sdk/ListAllInterfacesResponse";
@@ -56,7 +56,7 @@ export interface ListImplementationsRequestProtoMsg {
  */
 export interface ListImplementationsRequestAmino {
     /** interface_name defines the interface to query the implementations for. */
-    interface_name: string;
+    interface_name?: string;
 }
 export interface ListImplementationsRequestAminoMsg {
     type: "cosmos-sdk/ListImplementationsRequest";
@@ -85,7 +85,7 @@ export interface ListImplementationsResponseProtoMsg {
  * RPC.
  */
 export interface ListImplementationsResponseAmino {
-    implementation_message_names: string[];
+    implementation_message_names?: string[];
 }
 export interface ListImplementationsResponseAminoMsg {
     type: "cosmos-sdk/ListImplementationsResponse";
@@ -99,8 +99,9 @@ export interface ListImplementationsResponseSDKType {
     implementation_message_names: string[];
 }
 export declare const ListAllInterfacesRequest: {
-    encode(_: ListAllInterfacesRequest, writer?: _m0.Writer): _m0.Writer;
-    decode(input: _m0.Reader | Uint8Array, length?: number): ListAllInterfacesRequest;
+    typeUrl: string;
+    encode(_: ListAllInterfacesRequest, writer?: BinaryWriter): BinaryWriter;
+    decode(input: BinaryReader | Uint8Array, length?: number): ListAllInterfacesRequest;
     fromJSON(_: any): ListAllInterfacesRequest;
     toJSON(_: ListAllInterfacesRequest): unknown;
     fromPartial(_: Partial<ListAllInterfacesRequest>): ListAllInterfacesRequest;
@@ -113,8 +114,9 @@ export declare const ListAllInterfacesRequest: {
     toProtoMsg(message: ListAllInterfacesRequest): ListAllInterfacesRequestProtoMsg;
 };
 export declare const ListAllInterfacesResponse: {
-    encode(message: ListAllInterfacesResponse, writer?: _m0.Writer): _m0.Writer;
-    decode(input: _m0.Reader | Uint8Array, length?: number): ListAllInterfacesResponse;
+    typeUrl: string;
+    encode(message: ListAllInterfacesResponse, writer?: BinaryWriter): BinaryWriter;
+    decode(input: BinaryReader | Uint8Array, length?: number): ListAllInterfacesResponse;
     fromJSON(object: any): ListAllInterfacesResponse;
     toJSON(message: ListAllInterfacesResponse): unknown;
     fromPartial(object: Partial<ListAllInterfacesResponse>): ListAllInterfacesResponse;
@@ -127,8 +129,9 @@ export declare const ListAllInterfacesResponse: {
     toProtoMsg(message: ListAllInterfacesResponse): ListAllInterfacesResponseProtoMsg;
 };
 export declare const ListImplementationsRequest: {
-    encode(message: ListImplementationsRequest, writer?: _m0.Writer): _m0.Writer;
-    decode(input: _m0.Reader | Uint8Array, length?: number): ListImplementationsRequest;
+    typeUrl: string;
+    encode(message: ListImplementationsRequest, writer?: BinaryWriter): BinaryWriter;
+    decode(input: BinaryReader | Uint8Array, length?: number): ListImplementationsRequest;
     fromJSON(object: any): ListImplementationsRequest;
     toJSON(message: ListImplementationsRequest): unknown;
     fromPartial(object: Partial<ListImplementationsRequest>): ListImplementationsRequest;
@@ -141,8 +144,9 @@ export declare const ListImplementationsRequest: {
     toProtoMsg(message: ListImplementationsRequest): ListImplementationsRequestProtoMsg;
 };
 export declare const ListImplementationsResponse: {
-    encode(message: ListImplementationsResponse, writer?: _m0.Writer): _m0.Writer;
-    decode(input: _m0.Reader | Uint8Array, length?: number): ListImplementationsResponse;
+    typeUrl: string;
+    encode(message: ListImplementationsResponse, writer?: BinaryWriter): BinaryWriter;
+    decode(input: BinaryReader | Uint8Array, length?: number): ListImplementationsResponse;
     fromJSON(object: any): ListImplementationsResponse;
     toJSON(message: ListImplementationsResponse): unknown;
     fromPartial(object: Partial<ListImplementationsResponse>): ListImplementationsResponse;

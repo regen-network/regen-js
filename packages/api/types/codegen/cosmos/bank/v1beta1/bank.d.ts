@@ -1,5 +1,5 @@
 import { Coin, CoinAmino, CoinSDKType } from "../../base/v1beta1/coin";
-import * as _m0 from "protobufjs/minimal";
+import { BinaryReader, BinaryWriter } from "../../../binary";
 /** Params defines the parameters for the bank module. */
 export interface Params {
     sendEnabled: SendEnabled[];
@@ -11,8 +11,8 @@ export interface ParamsProtoMsg {
 }
 /** Params defines the parameters for the bank module. */
 export interface ParamsAmino {
-    send_enabled: SendEnabledAmino[];
-    default_send_enabled: boolean;
+    send_enabled?: SendEnabledAmino[];
+    default_send_enabled?: boolean;
 }
 export interface ParamsAminoMsg {
     type: "cosmos-sdk/Params";
@@ -40,8 +40,8 @@ export interface SendEnabledProtoMsg {
  * sendable).
  */
 export interface SendEnabledAmino {
-    denom: string;
-    enabled: boolean;
+    denom?: string;
+    enabled?: boolean;
 }
 export interface SendEnabledAminoMsg {
     type: "cosmos-sdk/SendEnabled";
@@ -66,8 +66,8 @@ export interface InputProtoMsg {
 }
 /** Input models transaction input. */
 export interface InputAmino {
-    address: string;
-    coins: CoinAmino[];
+    address?: string;
+    coins?: CoinAmino[];
 }
 export interface InputAminoMsg {
     type: "cosmos-sdk/Input";
@@ -89,8 +89,8 @@ export interface OutputProtoMsg {
 }
 /** Output models transaction outputs. */
 export interface OutputAmino {
-    address: string;
-    coins: CoinAmino[];
+    address?: string;
+    coins?: CoinAmino[];
 }
 export interface OutputAminoMsg {
     type: "cosmos-sdk/Output";
@@ -108,7 +108,7 @@ export interface OutputSDKType {
  */
 /** @deprecated */
 export interface Supply {
-    $typeUrl?: string;
+    $typeUrl?: "/cosmos.bank.v1beta1.Supply";
     total: Coin[];
 }
 export interface SupplyProtoMsg {
@@ -122,7 +122,7 @@ export interface SupplyProtoMsg {
  */
 /** @deprecated */
 export interface SupplyAmino {
-    total: CoinAmino[];
+    total?: CoinAmino[];
 }
 export interface SupplyAminoMsg {
     type: "cosmos-sdk/Supply";
@@ -135,7 +135,7 @@ export interface SupplyAminoMsg {
  */
 /** @deprecated */
 export interface SupplySDKType {
-    $typeUrl?: string;
+    $typeUrl?: "/cosmos.bank.v1beta1.Supply";
     total: CoinSDKType[];
 }
 /**
@@ -166,7 +166,7 @@ export interface DenomUnitProtoMsg {
  */
 export interface DenomUnitAmino {
     /** denom represents the string name of the given denom unit (e.g uatom). */
-    denom: string;
+    denom?: string;
     /**
      * exponent represents power of 10 exponent that one must
      * raise the base_denom to in order to equal the given DenomUnit's denom
@@ -174,9 +174,9 @@ export interface DenomUnitAmino {
      * (e.g. with a base_denom of uatom, one can create a DenomUnit of 'atom' with
      * exponent = 6, thus: 1 atom = 10^6 uatom).
      */
-    exponent: number;
+    exponent?: number;
     /** aliases is a list of string aliases for the given denom */
-    aliases: string[];
+    aliases?: string[];
 }
 export interface DenomUnitAminoMsg {
     type: "cosmos-sdk/DenomUnit";
@@ -242,42 +242,42 @@ export interface MetadataProtoMsg {
  * a basic token.
  */
 export interface MetadataAmino {
-    description: string;
+    description?: string;
     /** denom_units represents the list of DenomUnit's for a given coin */
-    denom_units: DenomUnitAmino[];
+    denom_units?: DenomUnitAmino[];
     /** base represents the base denom (should be the DenomUnit with exponent = 0). */
-    base: string;
+    base?: string;
     /**
      * display indicates the suggested denom that should be
      * displayed in clients.
      */
-    display: string;
+    display?: string;
     /**
      * name defines the name of the token (eg: Cosmos Atom)
      *
      * Since: cosmos-sdk 0.43
      */
-    name: string;
+    name?: string;
     /**
      * symbol is the token symbol usually shown on exchanges (eg: ATOM). This can
      * be the same as the display.
      *
      * Since: cosmos-sdk 0.43
      */
-    symbol: string;
+    symbol?: string;
     /**
      * URI to a document (on or off-chain) that contains additional information. Optional.
      *
      * Since: cosmos-sdk 0.46
      */
-    uri: string;
+    uri?: string;
     /**
      * URIHash is a sha256 hash of a document pointed by URI. It's used to verify that
      * the document didn't change. Optional.
      *
      * Since: cosmos-sdk 0.46
      */
-    uri_hash: string;
+    uri_hash?: string;
 }
 export interface MetadataAminoMsg {
     type: "cosmos-sdk/Metadata";
@@ -298,8 +298,9 @@ export interface MetadataSDKType {
     uri_hash: string;
 }
 export declare const Params: {
-    encode(message: Params, writer?: _m0.Writer): _m0.Writer;
-    decode(input: _m0.Reader | Uint8Array, length?: number): Params;
+    typeUrl: string;
+    encode(message: Params, writer?: BinaryWriter): BinaryWriter;
+    decode(input: BinaryReader | Uint8Array, length?: number): Params;
     fromJSON(object: any): Params;
     toJSON(message: Params): unknown;
     fromPartial(object: Partial<Params>): Params;
@@ -312,8 +313,9 @@ export declare const Params: {
     toProtoMsg(message: Params): ParamsProtoMsg;
 };
 export declare const SendEnabled: {
-    encode(message: SendEnabled, writer?: _m0.Writer): _m0.Writer;
-    decode(input: _m0.Reader | Uint8Array, length?: number): SendEnabled;
+    typeUrl: string;
+    encode(message: SendEnabled, writer?: BinaryWriter): BinaryWriter;
+    decode(input: BinaryReader | Uint8Array, length?: number): SendEnabled;
     fromJSON(object: any): SendEnabled;
     toJSON(message: SendEnabled): unknown;
     fromPartial(object: Partial<SendEnabled>): SendEnabled;
@@ -326,8 +328,9 @@ export declare const SendEnabled: {
     toProtoMsg(message: SendEnabled): SendEnabledProtoMsg;
 };
 export declare const Input: {
-    encode(message: Input, writer?: _m0.Writer): _m0.Writer;
-    decode(input: _m0.Reader | Uint8Array, length?: number): Input;
+    typeUrl: string;
+    encode(message: Input, writer?: BinaryWriter): BinaryWriter;
+    decode(input: BinaryReader | Uint8Array, length?: number): Input;
     fromJSON(object: any): Input;
     toJSON(message: Input): unknown;
     fromPartial(object: Partial<Input>): Input;
@@ -340,8 +343,9 @@ export declare const Input: {
     toProtoMsg(message: Input): InputProtoMsg;
 };
 export declare const Output: {
-    encode(message: Output, writer?: _m0.Writer): _m0.Writer;
-    decode(input: _m0.Reader | Uint8Array, length?: number): Output;
+    typeUrl: string;
+    encode(message: Output, writer?: BinaryWriter): BinaryWriter;
+    decode(input: BinaryReader | Uint8Array, length?: number): Output;
     fromJSON(object: any): Output;
     toJSON(message: Output): unknown;
     fromPartial(object: Partial<Output>): Output;
@@ -354,8 +358,9 @@ export declare const Output: {
     toProtoMsg(message: Output): OutputProtoMsg;
 };
 export declare const Supply: {
-    encode(message: Supply, writer?: _m0.Writer): _m0.Writer;
-    decode(input: _m0.Reader | Uint8Array, length?: number): Supply;
+    typeUrl: string;
+    encode(message: Supply, writer?: BinaryWriter): BinaryWriter;
+    decode(input: BinaryReader | Uint8Array, length?: number): Supply;
     fromJSON(object: any): Supply;
     toJSON(message: Supply): unknown;
     fromPartial(object: Partial<Supply>): Supply;
@@ -368,8 +373,9 @@ export declare const Supply: {
     toProtoMsg(message: Supply): SupplyProtoMsg;
 };
 export declare const DenomUnit: {
-    encode(message: DenomUnit, writer?: _m0.Writer): _m0.Writer;
-    decode(input: _m0.Reader | Uint8Array, length?: number): DenomUnit;
+    typeUrl: string;
+    encode(message: DenomUnit, writer?: BinaryWriter): BinaryWriter;
+    decode(input: BinaryReader | Uint8Array, length?: number): DenomUnit;
     fromJSON(object: any): DenomUnit;
     toJSON(message: DenomUnit): unknown;
     fromPartial(object: Partial<DenomUnit>): DenomUnit;
@@ -382,8 +388,9 @@ export declare const DenomUnit: {
     toProtoMsg(message: DenomUnit): DenomUnitProtoMsg;
 };
 export declare const Metadata: {
-    encode(message: Metadata, writer?: _m0.Writer): _m0.Writer;
-    decode(input: _m0.Reader | Uint8Array, length?: number): Metadata;
+    typeUrl: string;
+    encode(message: Metadata, writer?: BinaryWriter): BinaryWriter;
+    decode(input: BinaryReader | Uint8Array, length?: number): Metadata;
     fromJSON(object: any): Metadata;
     toJSON(message: Metadata): unknown;
     fromPartial(object: Partial<Metadata>): Metadata;
