@@ -4,7 +4,7 @@ import {
   MsgSell,
   MsgSell_Order,
 } from '../../../../../generated/regen/ecocredit/marketplace/v1/tx';
-import { AminoDate } from '../../converter-utils';
+import { AminoDate } from '../../../converter-utils';
 
 const msgSellAminoType = 'regen.marketplace/MsgSell';
 

@@ -6,7 +6,7 @@ import {
   MsgBuyDirect_Order,
 } from '../../../../../generated/regen/ecocredit/marketplace/v1/tx';
 import { AminoCoin } from './sell_amino';
-import { omitDefault } from '../../converter-utils';
+import { omitDefault } from '../../../converter-utils';
 
 const msgBuyDirectAmnioType = 'regen.marketplace/MsgBuyDirect';
 
