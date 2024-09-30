@@ -17,7 +17,7 @@
 		"build:api": "yarn workspace @regen-network/api build",
     "build": "lerna run build --stream",
 		"lerna:deploy": "yarn build && lerna version --conventional-commits && lerna publish from-git",
-    "lint": "lerna run lint --parallel",
+    "lint": "eslint --ext js,ts,tsx .",
     "test": "lerna run test --stream --scope @regen-network/api",
     "codegen": "lerna run codegen --stream --scope @regen-network/api",
 		"start": "yarn workspace @regen-network/api-demo start",

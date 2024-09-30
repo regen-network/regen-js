@@ -24,7 +24,6 @@
     "prepare": "npm run build",
     "codegen": "ts-node scripts/codegen.ts",
     "build": "npm run clean; tsc; tsc -p tsconfig.esm.json; npm run copy",
-    "lint": "eslint --ext js,ts,tsx .",
     "test": "jest",
     "test:watch": "jest --watch"
   },
