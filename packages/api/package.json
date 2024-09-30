@@ -7,7 +7,6 @@
   "module": "esm/index.js",
   "types": "index.d.ts",
   "license": "Apache-2.0",
-  "homepage": "https://github.com/regen-network/api",
   "repository": {
     "type": "git",
     "url": "https://github.com/regen-network/regen-js"
