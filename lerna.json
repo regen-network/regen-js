@@ -1,13 +1,23 @@
 {
+  "lerna": "6",
+  "conventionalCommits": true,
+  "npmClient": "yarn",
+  "npmClientArgs": [
+    "--no-lockfile"
+  ],
+  "packages": [
+    "packages/*"
+  ],
+	"version": "independent",
+  "registry": "https://registry.npmjs.org",
 	"command": {
 		"version": {
-			"message": "chore(release): Publish %s"
-		}
+			"message": "chore(release): publish"
+		},
+		"publish": {
+      "allowBranch": "main",
+      "message": "chore(release): publish"
+    }
 	},
-	"npmClient": "yarn",
-	"useWorkspaces": true,
-	"packages": [
-		"packages/*"
-	],
-	"version": "0.6.0"
+	"useWorkspaces": true
 }

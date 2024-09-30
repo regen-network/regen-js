@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from 'react';
 
 import { regen } from '@regen-network/api';
-import { QueryProjectsByClassResponseSDKType } from '@regen-network/api/types/codegen/regen/ecocredit/v1/query';
-import { PageRequest } from '@regen-network/api/types/codegen/helpers';
+import { QueryProjectsByClassResponseSDKType } from '@regen-network/api/regen/ecocredit/v1/query';
+import { PageRequest } from '@regen-network/api/helpers';
 
 export function LCDRegen(): React.ReactElement {
   const [result, setResult] = useState<

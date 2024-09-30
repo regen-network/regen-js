@@ -1,9 +1,8 @@
-import Long from 'long';
 import React, { useEffect, useState } from 'react';
 
 import { cosmos } from '@regen-network/api';
-import { QueryAllBalancesResponse } from '@regen-network/api/types/codegen/cosmos/bank/v1beta1/query';
-import { PageRequest } from '@regen-network/api/types/codegen/helpers';
+import { QueryAllBalancesResponse } from '@regen-network/api/cosmos/bank/v1beta1/query';
+import { PageRequest } from '@regen-network/api/helpers';
 
 export function RPCCosmos(): React.ReactElement {
   const [result, setResult] = useState<QueryAllBalancesResponse | undefined>(
@@ -24,8 +23,8 @@ export function RPCCosmos(): React.ReactElement {
           address: 'regen1df675r9vnf7pdedn4sf26svdsem3ugavgxmy46',
           pagination: {
             key: new Uint8Array(0),
-            limit: Long.fromNumber(0),
-            offset: Long.fromNumber(0),
+            limit: BigInt(0),
+            offset: BigInt(0),
           } as PageRequest,
         })
         .then(setResult)
@@ -38,10 +37,10 @@ export function RPCCosmos(): React.ReactElement {
   return (
     <div>
       <h3>{'RPC Queries > cosmos bank balances'}</h3>
-      {'Response: '}
+      {'Balances: '}
       <code>
         {result ? (
-          JSON.stringify(result)
+          JSON.stringify(result.balances)
         ) : error ? (
           <span>{error.message}</span>
         ) : (

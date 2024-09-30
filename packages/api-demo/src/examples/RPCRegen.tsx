@@ -1,9 +1,8 @@
-import Long from 'long';
 import React, { useEffect, useState } from 'react';
 
 import { regen } from '@regen-network/api';
-import { QueryProjectsByClassResponse } from '@regen-network/api/types/codegen/regen/ecocredit/v1/query';
-import { PageRequest } from '@regen-network/api/types/codegen/helpers';
+import { QueryProjectsByClassResponse } from '@regen-network/api/regen/ecocredit/v1/query';
+import { PageRequest } from '@regen-network/api/helpers';
 
 export function RPCRegen(): React.ReactElement {
   const [result, setResult] = useState<
@@ -24,8 +23,8 @@ export function RPCRegen(): React.ReactElement {
           classId: 'C01',
           pagination: {
             key: new Uint8Array(0),
-            limit: Long.fromNumber(0),
-            offset: Long.fromNumber(0),
+            limit: BigInt(0),
+            offset: BigInt(0),
           } as PageRequest,
         })
         .then(setResult)

@@ -3,7 +3,11 @@
   "version": "v1.0.0-alpha5",
   "author": "admin@regen.network",
   "description": "Javascript API for Regen Ledger",
+  "main": "index.js",
+  "module": "esm/index.js",
+  "types": "index.d.ts",
   "license": "Apache-2.0",
+  "homepage": "https://github.com/regen-network/api",
   "repository": {
     "type": "git",
     "url": "https://github.com/regen-network/regen-js"
@@ -11,57 +15,30 @@
   "bugs": {
     "url": "https://github.com/regen-network/regen-js/issues"
   },
-  "main": "main/index.js",
-  "module": "module/index.js",
-  "typings": "types/index.js",
-  "directories": {
-    "lib": "src"
-  },
-  "files": [
-    "src",
-    "types",
-    "main",
-    "module"
-  ],
   "publishConfig": {
-    "access": "public"
+    "access": "public",
+    "directory": "dist"
   },
   "scripts": {
-    "build:main": "cross-env BABEL_ENV=production babel src --out-dir main --delete-dir-on-start --extensions \".tsx,.ts,.js\"",
-    "build:module": "cross-env MODULE=true babel src --out-dir module --delete-dir-on-start  --extensions \".tsx,.ts,.js\"",
-    "build:ts": "tsc --project ./tsconfig.json",
-    "build": "yarn build:module && yarn build:main",
-    "codegen": "ts-node scripts/codegen.js"
-  },
-  "dependencies": {
-    "@babel/runtime": "^7.22.5",
-    "@cosmjs/amino": "^0.31.0",
-    "@cosmjs/proto-signing": "^0.31.0",
-    "@cosmjs/stargate": "^0.31.0",
-    "@cosmjs/tendermint-rpc": "^0.31.0",
-    "@cosmology/lcd": "^0.13.3",
-    "protobufjs": "^7.2.4"
+    "copy": "copyfiles -f ../../LICENSE README.md package.json dist",
+    "clean": "rimraf dist/**",
+    "prepare": "npm run build",
+    "codegen": "ts-node scripts/codegen.ts",
+    "build": "npm run clean; tsc; tsc -p tsconfig.esm.json; npm run copy",
+    "lint": "eslint . --fix",
+    "test": "jest",
+    "test:watch": "jest --watch"
   },
   "devDependencies": {
-    "@babel/cli": "^7.22.5",
-    "@babel/core": "7.22.5",
-    "@babel/node": "^7.22.5",
-    "@babel/plugin-proposal-class-properties": "^7.18.6",
-    "@babel/plugin-proposal-export-default-from": "^7.22.5",
-    "@babel/plugin-proposal-nullish-coalescing-operator": "^7.18.6",
-    "@babel/plugin-proposal-numeric-separator": "^7.18.6",
-    "@babel/plugin-proposal-object-rest-spread": "^7.20.7",
-    "@babel/plugin-proposal-optional-chaining": "^7.21.0",
-    "@babel/plugin-transform-runtime": "^7.22.5",
-    "@babel/preset-env": "^7.22.5",
-    "@babel/preset-typescript": "^7.22.5",
-    "@cosmology/telescope": "^1.5.2",
-    "babel-core": "7.0.0-bridge.0",
-    "babel-watch": "^7.8.0",
-    "cross-env": "^7.0.3",
-    "long": "^5.2.3",
-    "regenerator-runtime": "^0.13.11",
-    "rimraf": "^5.0.1",
-    "typescript": "^5.1.6"
-  }
+    "@cosmology/telescope": "^1.5.2"
+  },
+  "dependencies": {
+    "@cosmjs/encoding": "0.31.0",
+    "@cosmjs/math": "0.31.0",
+    "@cosmjs/amino": "0.31.0",
+    "@cosmjs/proto-signing": "0.31.0",
+    "@cosmjs/stargate": "0.31.0",
+    "@cosmology/lcd": "^0.13.4"
+  },
+  "keywords": []
 }

@@ -1,24 +1,16 @@
 {
-	"compilerOptions": {
-		"jsx": "react-jsx",
-		"esModuleInterop": true,
-		"forceConsistentCasingInFileNames": true,
-		"moduleResolution": "node",
-		"newLine": "LF",
-		"noFallthroughCasesInSwitch": true,
-		"noImplicitAny": true,
-		"noImplicitReturns": true,
-		"noImplicitThis": true,
-		"noUnusedLocals": false,
-		"noUnusedParameters": false,
-		"pretty": true,
-		"removeComments": false,
-		"skipLibCheck": true,
-		"strict": true,
-		"downlevelIteration": true,
-		"typeRoots": ["./node_modules/@types"]
-	},
-	"exclude": ["**/lib/**/*"],
-	"ecmaVersion": 6,
-	"sourceType": "module",
+  "compilerOptions": {
+    "target": "es2022",
+    "module": "commonjs",
+    "esModuleInterop": true,
+    "forceConsistentCasingInFileNames": true,
+    "strict": true,
+    "strictNullChecks": false,
+    "skipLibCheck": true,
+    "sourceMap": false,
+    "declaration": true,
+    "resolveJsonModule": true,
+    "moduleResolution": "node"
+  },
+  "exclude": ["dist", "node_modules"]
 }
