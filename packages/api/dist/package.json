@@ -1,0 +1,43 @@
+{
+  "name": "@regen-network/api",
+  "version": "v1.0.0-alpha5",
+  "author": "admin@regen.network",
+  "description": "Javascript API for Regen Ledger",
+  "main": "index.js",
+  "module": "esm/index.js",
+  "types": "index.d.ts",
+  "license": "Apache-2.0",
+  "homepage": "https://github.com/regen-network/api",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/regen-network/regen-js"
+  },
+  "bugs": {
+    "url": "https://github.com/regen-network/regen-js/issues"
+  },
+  "publishConfig": {
+    "access": "public",
+    "directory": "dist"
+  },
+  "scripts": {
+    "copy": "copyfiles -f ../../LICENSE README.md package.json dist",
+    "clean": "rimraf dist/**",
+    "prepare": "npm run build",
+    "codegen": "ts-node scripts/codegen.ts",
+    "build": "npm run clean; tsc; tsc -p tsconfig.esm.json; npm run copy",
+    "lint": "eslint . --fix",
+    "test": "jest",
+    "test:watch": "jest --watch"
+  },
+  "devDependencies": {
+    "@cosmology/telescope": "^1.5.2"
+  },
+  "dependencies": {
+    "@cosmjs/encoding": "0.31.0",
+    "@cosmjs/math": "0.31.0",
+    "@cosmjs/amino": "0.31.0",
+    "@cosmjs/proto-signing": "0.31.0",
+    "@cosmjs/stargate": "0.31.0"
+  },
+  "keywords": []
+}
