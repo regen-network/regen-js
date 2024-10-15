@@ -1,6 +1,6 @@
 {
   "name": "@regen-network/api",
-  "version": "v1.0.0-alpha5",
+  "version": "v1.0.0-alpha6",
   "author": "admin@regen.network",
   "description": "Javascript API for Regen Ledger",
   "main": "index.js",
