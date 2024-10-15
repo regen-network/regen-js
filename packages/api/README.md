@@ -1,307 +1,323 @@
 # @regen-network/api
 
+<p align="center">
+  <img src="https://user-images.githubusercontent.com/545047/188804067-28e67e5e-0214-4449-ab04-2e0c564a6885.svg" width="80"><br />
+    Javascript API for Regen Ledger
+</p>
 
-## 🚧 Warning
+<p align="center" width="100%">
+  <a href="https://github.com/regen-network/api/actions/workflows/run-tests.yml">
+    <img height="20" src="https://github.com/regen-network/api/actions/workflows/run-tests.yml/badge.svg" />
+  </a>
+   <a href="https://github.com/regen-network/api/blob/main/LICENSE"><img height="20" src="https://img.shields.io/badge/license-MIT-blue.svg"></a>
+</p>
 
-This API is still under heavy construction, be ready for unexpected breaking changes.
 
-The `v1.0.0-alpha4` and `v1.0.0-alpha5` release tags include manual overrides of generated code in `src` in order to resolve a downstream issue within [regen-network/groups-ui](https://github.com/regen-network/groups-ui). For more information, see [#84](https://github.com/regen-network/regen-js/pull/84).
-
-## Table of Contents
-
-- [Install](#install)
-- [Usage](#usage)
-  - [LCD Queries](#lcd-queries)
-  - [RPC Queries](#rpc-queries)
-  - [Composing Messages](#composing-messages)
-  - [Signing Messages](#signing-messages)
-- [Development](#development)
-  - [Codegen](#codegen)
-  - [Updating types](#updating-types)
-  - [Publishing](#publishing)
-- [Credits](#credits)
-
-## Install
+## install
 
 ```sh
-yarn add @regen-network/api@v1.0.0-alpha5
+npm install @regen-network/api
 ```
+## Table of contents
+
+- [@regen-network/api](#@regen-network/api)
+  - [Install](#install)
+  - [Table of contents](#table-of-contents)
+- [Usage](#usage)
+    - [RPC Clients](#rpc-clients)
+    - [Composing Messages](#composing-messages)
+        - Cosmos, CosmWasm, and IBC
+            - [CosmWasm](#cosmwasm-messages)
+            - [IBC](#ibc-messages)
+            - [Cosmos](#cosmos-messages)
+- [Wallets and Signers](#connecting-with-wallets-and-signing-messages)
+    - [Stargate Client](#initializing-the-stargate-client)
+    - [Creating Signers](#creating-signers)
+    - [Broadcasting Messages](#broadcasting-messages)
+- [Advanced Usage](#advanced-usage)
+- [Developing](#developing)
+- [Codegen](#codegen)
+- [Publishing](#publishing)
+- [Related](#related)
+- [Credits](#credits)
 
 ## Usage
+### RPC Clients
 
-### LCD Queries
+```js
+import { regen } from '@regen-network/api';
 
-Example query using a cosmos module:
+const { createRPCQueryClient } = regen.ClientFactory; 
+const client = await createRPCQueryClient({ rpcEndpoint: RPC_ENDPOINT });
 
-```ts
-import { cosmos } from "@regen-network/api"
-import { PageRequest } from "@regen-network/api/types/codegen/helpers"
+// now you can query the cosmos modules
+const balance = await client.cosmos.bank.v1beta1
+    .allBalances({ address: 'regen1addresshere' });
 
-const { createLCDClient } = cosmos.ClientFactory
-
-const client = await createLCDClient({
-  restEndpoint: "http://localhost:1317",
-})
-
-const response = await client.cosmos.bank.v1beta1.allBalances({
-  address: "regen1df675r9vnf7pdedn4sf26svdsem3ugavgxmy46",
-  pagination: { countTotal: true } as PageRequest,
-})
+// you can also query the regen modules
+const balances = await client.regen.exchange.v1beta1
+    .exchangeBalances()
 ```
-
-See [LCDCosmos.tsx](../api-demo/src/examples/LCDCosmos.tsx) for an example within the `api-demo` application.
-
-Example query using a regen module:
-
-```ts
-import { regen } from "@regen-network/api"
-import { PageRequest } from "@regen-network/api/types/codegen/helpers"
-
-const { createLCDClient } = regen.ClientFactory
-
-const client = await createLCDClient({
-  restEndpoint: "http://localhost:1317",
-})
-
-const response = await client.regen.ecocredit.v1.projectByClass({
-  classId: "C01",
-  pagination: { countTotal: true } as PageRequest,
-})
-```
-
-See [LCDRegen.tsx](../api-demo/src/examples/LCDRegen.tsx) for an example within the `api-demo` application.
-
-### RPC Queries
-
-Example query using a cosmos module:
-
-```ts
-import { cosmos } from "@regen-network/api"
-import { PageRequest } from "@regen-network/api/types/codegen/helpers"
-
-import Long from "long"
-
-const { createRPCQueryClient } = cosmos.ClientFactory
-
-const client = await createRPCQueryClient({
-  rpcEndpoint: "http://localhost:26657",
-})
-
-const response = await client.cosmos.bank.v1beta1.allBalances({
-  address: "regen1df675r9vnf7pdedn4sf26svdsem3ugavgxmy46",
-  pagination: {
-    key: new Uint8Array(0),
-    limit: Long.fromNumber(0),
-    offset: Long.fromNumber(0),
-  } as PageRequest,
-})
-```
-
-See [RPCCosmos.tsx](../api-demo/src/examples/RPCCosmos.tsx) for an example within the `api-demo` application.
-
-Example query using a regen module:
-
-```ts
-import { regen } from "@regen-network/api"
-import { PageRequest } from "@regen-network/api/types/codegen/helpers"
-
-import Long from "long"
-
-const { createRPCQueryClient } = regen.ClientFactory
-
-const client = await createRPCQueryClient({
-  rpcEndpoint: "http://localhost:26657",
-})
-
-const response = await client.regen.ecocredit.v1.projectByClass({
-  classId: "C01",
-  pagination: {
-    key: new Uint8Array(0),
-    limit: Long.fromNumber(0),
-    offset: Long.fromNumber(0),
-  } as PageRequest,
-})
-```
-
-See [RPCRegen.tsx](../api-demo/src/examples/RPCRegen.tsx) for an example within the `api-demo` application.
 
 ### Composing Messages
 
-Example message using a cosmos module:
+Import the `regen` object from `@regen-network/api`. 
 
-```ts
-import { cosmos, getSigningCosmosClient } from "@regen-network/api"
+```js
+import { regen } from '@regen-network/api';
 
-const { send } = cosmos.bank.v1beta1.MessageComposer.withTypeUrl
+const {
+    createSpotLimitOrder,
+    createSpotMarketOrder,
+    deposit
+} = regen.exchange.v1beta1.MessageComposer.withTypeUrl;
+```
+
+#### CosmWasm Messages
+
+```js
+import { cosmwasm } from "@regen-network/api";
+
+const {
+    clearAdmin,
+    executeContract,
+    instantiateContract,
+    migrateContract,
+    storeCode,
+    updateAdmin
+} = cosmwasm.wasm.v1.MessageComposer.withTypeUrl;
+```
+
+#### IBC Messages
+
+```js
+import { ibc } from '@regen-network/api';
+
+const {
+    transfer
+} = ibc.applications.transfer.v1.MessageComposer.withTypeUrl
+```
+
+#### Cosmos Messages
+
+```js
+import { cosmos } from '@regen-network/api';
+
+const {
+    fundCommunityPool,
+    setWithdrawAddress,
+    withdrawDelegatorReward,
+    withdrawValidatorCommission
+} = cosmos.distribution.v1beta1.MessageComposer.fromPartial;
+
+const {
+    multiSend,
+    send
+} = cosmos.bank.v1beta1.MessageComposer.fromPartial;
+
+const {
+    beginRedelegate,
+    createValidator,
+    delegate,
+    editValidator,
+    undelegate
+} = cosmos.staking.v1beta1.MessageComposer.fromPartial;
+
+const {
+    deposit,
+    submitProposal,
+    vote,
+    voteWeighted
+} = cosmos.gov.v1beta1.MessageComposer.fromPartial;
+```
+
+## Connecting with Wallets and Signing Messages
+
+⚡️ For web interfaces, we recommend using [cosmos-kit](https://github.com/cosmology-tech/cosmos-kit). Continue below to see how to manually construct signers and clients.
+
+Here are the docs on [creating signers](https://docs.cosmology.zone/cosmos-kit) in cosmos-kit that can be used with Keplr and other wallets.
+
+### Initializing the Stargate Client
+
+Use `getSigningRegenClient` to get your `SigningStargateClient`, with the proto/amino messages full-loaded. No need to manually add amino types, just require and initialize the client:
+
+```js
+import { getSigningRegenClient } from 'api';
+
+const stargateClient = await getSigningRegenClient({
+  rpcEndpoint,
+  signer // OfflineSigner
+});
+```
+### Creating Signers
+
+To broadcast messages, you can create signers with a variety of options:
+
+* [cosmos-kit](https://docs.cosmology.zone/cosmos-kit) (recommended)
+* [keplr](https://docs.keplr.app/api/cosmjs.html)
+* [cosmjs](https://gist.github.com/webmaster128/8444d42a7eceeda2544c8a59fbd7e1d9)
+### Amino Signer
+
+Likely you'll want to use the Amino, so unless you need proto, you should use this one:
+
+```js
+import { getOfflineSignerAmino as getOfflineSigner } from 'cosmjs-utils';
+```
+### Proto Signer
+
+```js
+import { getOfflineSignerProto as getOfflineSigner } from 'cosmjs-utils';
+```
+
+WARNING: NOT RECOMMENDED TO USE PLAIN-TEXT MNEMONICS. Please take care of your security and use best practices such as AES encryption and/or methods from 12factor applications.
+
+```js
+import { chains } from 'chain-registry';
+
+const mnemonic =
+  'unfold client turtle either pilot stock floor glow toward bullet car science';
+  const chain = chains.find(({ chain_name }) => chain_name === 'regen');
+  const signer = await getOfflineSigner({
+    mnemonic,
+    chain
+  });
+```
+### Broadcasting Messages
+
+Now that you have your `stargateClient`, you can broadcast messages:
+
+```js
+const { send } = cosmos.bank.v1beta1.MessageComposer.withTypeUrl;
 
 const msg = send({
-  amount: [
+    amount: [
     {
-      denom: "uregen",
-      amount: "10000",
-    },
-  ],
-  toAddress: "regen156d26rl52y3wl865pr5x9q2vqetuw9kf0642sa",
-  fromAddress: "regen1df675r9vnf7pdedn4sf26svdsem3ugavgxmy46",
-})
-```
+        denom: 'coin',
+        amount: '1000'
+    }
+    ],
+    toAddress: address,
+    fromAddress: address
+});
 
-See [MsgCosmos.tsx](../api-demo/src/examples/MsgCosmos.tsx) for an example within the `api-demo` application.
-
-Example message using a regen module:
-
-```ts
-import { regen, getSigningCosmosClient } from "@regen-network/api"
-
-const { createProject } = regen.ecocredit.v1.MessageComposer.withTypeUrl
-
-const msg = createProject({
-  admin: "regen1df675r9vnf7pdedn4sf26svdsem3ugavgxmy46",
-  classId: "C01",
-  metadata: "regen:13toVgf5UjYBz6J29x28pLQyjKz5FpcW3f4bT5uRKGxGREWGKjEdXYG.rdf",
-  jurisdiction: "US-WA",
-})
-```
-
-See [MsgRegen.tsx](../api-demo/src/examples/MsgRegen.tsx) for an example within the `api-demo` application.
-
-### Signing Messages
-
-Example using a cosmos client (includes encoding for cosmos modules):
-
-```ts
-import { getSigningCosmosClient } from "@regen-network/api"
-
-const { keplr } = window
-
-const offlineSigner = keplr.getOfflineSigner("regen-local")
-
-const [account] = await offlineSigner.getAccounts()
-
-const signingClient = await getSigningCosmosClient({
-  rpcEndpoint: "http://localhost:26657",
-  signer: offlineSigner,
-})
-
-const fee = {
-  amount: [
+const fee: StdFee = {
+    amount: [
     {
-      denom: "uregen",
-      amount: "5000",
-    },
-  ],
-  gas: "100000",
-}
-
-await signingClient.signAndBroadcast(account.address, [msg], fee)
+        denom: 'coin',
+        amount: '864'
+    }
+    ],
+    gas: '86364'
+};
+const response = await stargateClient.signAndBroadcast(address, [msg], fee);
 ```
 
-See [MsgCosmos.tsx](../api-demo/src/examples/MsgCosmos.tsx) for an example within the `api-demo` application.
+## Advanced Usage
 
-Example using a regen client (includes encoding for regen modules):
 
-```ts
-import { getSigningRegenClient } from "@regen-network/api"
+If you want to manually construct a stargate client
 
-const { keplr } = window
+```js
+import { OfflineSigner, GeneratedType, Registry } from "@cosmjs/proto-signing";
+import { AminoTypes, SigningStargateClient } from "@cosmjs/stargate";
 
-const offlineSigner = keplr.getOfflineSigner("regen-local")
+import { 
+    cosmosAminoConverters,
+    cosmosProtoRegistry,
+    cosmwasmAminoConverters,
+    cosmwasmProtoRegistry,
+    ibcProtoRegistry,
+    ibcAminoConverters,
+    regenAminoConverters,
+    regenProtoRegistry
+} from 'api';
 
-const [account] = await offlineSigner.getAccounts()
+const signer: OfflineSigner = /* create your signer (see above)  */
+const rpcEndpint = 'https://rpc.cosmos.directory/regen'; // or another URL
 
-const signingClient = await getSigningRegenClient({
-  rpcEndpoint: "http://localhost:26657",
-  signer: offlineSigner,
-})
+const protoRegistry: ReadonlyArray<[string, GeneratedType]> = [
+    ...cosmosProtoRegistry,
+    ...cosmwasmProtoRegistry,
+    ...ibcProtoRegistry,
+    ...regenProtoRegistry
+];
 
-const fee = {
-  amount: [
-    {
-      denom: "uregen",
-      amount: "5000",
-    },
-  ],
-  gas: "100000",
-}
+const aminoConverters = {
+    ...cosmosAminoConverters,
+    ...cosmwasmAminoConverters,
+    ...ibcAminoConverters,
+    ...regenAminoConverters
+};
 
-await signingClient.signAndBroadcast(account.address, [msg], fee)
-```
+const registry = new Registry(protoRegistry);
+const aminoTypes = new AminoTypes(aminoConverters);
 
-See [MsgRegen.tsx](../api-demo/src/examples/MsgRegen.tsx) for an example within the `api-demo` application.
-
-Example using cosmjs and support for both cosmos and regen modules:
-
-```ts
-import { Registry } from "@cosmjs/proto-signing"
-import { AminoTypes, SigningStargateClient } from "@cosmjs/stargate"
-import {
-  cosmosAminoConverters,
-  cosmosProtoRegistry,
-  regenAminoConverters,
-  regenProtoRegistry,
-} from "@regen-network/api"
-
-const { keplr } = window
-
-const offlineSigner = keplr.getOfflineSigner("regen-local")
-
-const [account] = await offlineSigner.getAccounts()
-
-const registry = new Registry({ ...cosmosProtoRegistry, ...regenProtoRegistry })
-
-const signingClient = await SigningStargateClient.connectWithSigner(
-  "http://localhost:26657",
-  offlineSigner,
-  {
+const stargateClient = await SigningStargateClient.connectWithSigner(rpcEndpoint, signer, {
     registry,
-    aminoTypes: new AminoTypes({
-      ...cosmosAminoConverters,
-      ...regenAminoConverters,
-    }),
-  },
-)
-
-const fee = {
-  amount: [
-    {
-      denom: "uregen",
-      amount: "5000",
-    },
-  ],
-  gas: "100000",
-}
-
-await signingClient.signAndBroadcast(account.address, [msg], fee)
+    aminoTypes
+});
 ```
 
-See [MsgMultiple.tsx](../api-demo/src/examples/MsgMultiple.tsx) for an example within the `api-demo` application.
+## Developing
 
-## Development
+When first cloning the repo:
 
-Install dependencies:
-
-```sh
+```
 yarn
-```
-
-Generate code from proto:
-
-```sh
-yarn codegen
-```
-
-Compile and build library:
-
-```sh
 yarn build
 ```
 
-Compile and build `src` code:
+### Codegen
 
-```sh
-yarn build:ts
+Look inside of `scripts/codegen.ts` and configure the settings for bundling your SDK and contracts into `@regen-network/api`:
+
 ```
+yarn codegen
+```
+
+### Publishing
+
+To publish, use `lerna`:
+
+```
+lerna publish
+```
+
+You can publish patch, minor, or major versions:
+
+```
+lerna publish minor
+```
+
+If you absolutely need to publish manually using npm, ensure to do it this way, and publish from the `dist/` directory for proper tree-shaking module paths:
+
+```
+cd ./packages/<your-telescope-module>
+yarn build
+cd dist
+npm publish
+```
+
+
+## Related
+
+Checkout these related projects:
+
+* [@cosmology/telescope](https://github.com/cosmology-tech/telescope) Your Frontend Companion for Building with TypeScript with Cosmos SDK Modules.
+* [@cosmwasm/ts-codegen](https://github.com/CosmWasm/ts-codegen) Convert your CosmWasm smart contracts into dev-friendly TypeScript classes.
+* [chain-registry](https://github.com/cosmology-tech/chain-registry) Everything from token symbols, logos, and IBC denominations for all assets you want to support in your application.
+* [cosmos-kit](https://github.com/cosmology-tech/cosmos-kit) Experience the convenience of connecting with a variety of web3 wallets through a single, streamlined interface.
+* [create-cosmos-app](https://github.com/cosmology-tech/create-cosmos-app) Set up a modern Cosmos app by running one command.
+* [interchain-ui](https://github.com/cosmology-tech/interchain-ui) The Interchain Design System, empowering developers with a flexible, easy-to-use UI kit.
+* [starship](https://github.com/cosmology-tech/starship) Unified Testing and Development for the Interchain.
 
 ## Credits
 
-This package is built on [osmonauts/telescope](https://github.com/osmosis-labs/telescope) with initial guidance from [pyramation/tmpl-telescope-module](https://github.com/pyramation/tmpl-telescope-module).
+🛠 Built by Cosmology — if you like our tools, please consider delegating to [our validator ⚛️](https://cosmology.zone/validator)
+
+
+## Disclaimer
+
+AS DESCRIBED IN THE LICENSES, THE SOFTWARE IS PROVIDED “AS IS”, AT YOUR OWN RISK, AND WITHOUT WARRANTIES OF ANY KIND.
+
+No developer or entity involved in creating this software will be liable for any claims or damages whatsoever associated with your use, inability to use, or your interaction with other users of the code, including any direct, indirect, incidental, special, exemplary, punitive or consequential damages, or loss of profits, cryptocurrencies, tokens, or anything else of value.

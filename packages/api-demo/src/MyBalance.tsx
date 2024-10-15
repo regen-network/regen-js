@@ -1,4 +1,4 @@
-import { QueryAllBalancesResponseSDKType } from '@regen-network/api/types/codegen/cosmos/bank/v1beta1/query';
+import { QueryAllBalancesResponseSDKType } from '@regen-network/api/cosmos/bank/v1beta1/query';
 import React, { useState } from 'react';
 
 export function MyBalance({ client }: { client: any }): React.ReactElement {

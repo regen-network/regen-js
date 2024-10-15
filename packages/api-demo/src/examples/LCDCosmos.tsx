@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from 'react';
 
 import { cosmos } from '@regen-network/api';
-import { QueryAllBalancesResponseSDKType } from '@regen-network/api/types/codegen/cosmos/bank/v1beta1/query';
-import { PageRequest } from '@regen-network/api/types/codegen/helpers';
+import { QueryAllBalancesResponseSDKType } from '@regen-network/api/cosmos/bank/v1beta1/query';
+import { PageRequest } from '@regen-network/api/helpers';
 
 export function LCDCosmos(): React.ReactElement {
   const [result, setResult] = useState<
