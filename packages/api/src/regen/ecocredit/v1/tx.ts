@@ -1,8 +1,8 @@
 //@ts-nocheck
 import { Coin, CoinAmino, CoinSDKType } from "../../../cosmos/base/v1beta1/coin";
+import { ProjectEnrollmentStatus, CreditType, CreditTypeAmino, CreditTypeSDKType } from "./state";
 import { BatchIssuance, BatchIssuanceAmino, BatchIssuanceSDKType, OriginTx, OriginTxAmino, OriginTxSDKType, Credits, CreditsAmino, CreditsSDKType } from "./types";
 import { Timestamp } from "../../../google/protobuf/timestamp";
-import { CreditType, CreditTypeAmino, CreditTypeSDKType } from "./state";
 import { BinaryReader, BinaryWriter } from "../../../binary";
 import { toTimestamp, fromTimestamp } from "../../../helpers";
 /**
@@ -207,6 +207,14 @@ export interface MsgCreateProject {
    * maximum length of 32 characters.
    */
   referenceId: string;
+  /**
+   * fee is the project creation fee. An equal fee is required if the project
+   * creation fee parameter is set. The provided fee can be greater than the
+   * parameter, but only the amount in the parameter will be charged.
+   * 
+   * Since Revision 3
+   */
+  fee?: Coin;
 }
 export interface MsgCreateProjectProtoMsg {
   typeUrl: "/regen.ecocredit.v1.MsgCreateProject";
@@ -247,6 +255,14 @@ export interface MsgCreateProjectAmino {
    * maximum length of 32 characters.
    */
   reference_id?: string;
+  /**
+   * fee is the project creation fee. An equal fee is required if the project
+   * creation fee parameter is set. The provided fee can be greater than the
+   * parameter, but only the amount in the parameter will be charged.
+   * 
+   * Since Revision 3
+   */
+  fee?: CoinAmino;
 }
 export interface MsgCreateProjectAminoMsg {
   type: "regen/MsgCreateProject";
@@ -259,6 +275,7 @@ export interface MsgCreateProjectSDKType {
   metadata: string;
   jurisdiction: string;
   reference_id: string;
+  fee?: CoinSDKType;
 }
 /** MsgCreateProjectResponse is the Msg/CreateProject response type. */
 export interface MsgCreateProjectResponse {
@@ -282,11 +299,279 @@ export interface MsgCreateProjectResponseAminoMsg {
 export interface MsgCreateProjectResponseSDKType {
   project_id: string;
 }
+/** MsgCreateUnregisteredProject is the Msg/CreateUnregisteredProject request type. */
+export interface MsgCreateUnregisteredProject {
+  /**
+   * admin is the address of the account creating the project that will become
+   * the admin of the project upon creation.
+   */
+  admin: string;
+  /**
+   * metadata is any arbitrary string with a maximum length of 256 characters
+   * that includes or references metadata to attach to the project.
+   */
+  metadata: string;
+  /**
+   * jurisdiction is the jurisdiction of the project. A jurisdiction has with
+   * the format: <country-code>[-<sub-national-code>[ <postal-code>]]
+   * The country-code must be 2 alphabetic characters, the sub-national-code
+   * can be 1-3 alphanumeric characters, and the postal-code can be up to 64
+   * alphanumeric characters. Only the country-code is required, while the
+   * sub-national-code and postal-code are optional and can be added for
+   * increased precision.
+   */
+  jurisdiction: string;
+  /**
+   * reference_id is any arbitrary string used to reference the project with a
+   * maximum length of 32 characters.
+   */
+  referenceId: string;
+  /**
+   * fee is the project creation fee. An equal fee is required if the project
+   * creation fee parameter is set. The provided fee can be greater than the
+   * parameter, but only the amount in the parameter will be charged.
+   * 
+   * Since Revision 3
+   */
+  fee?: Coin;
+}
+export interface MsgCreateUnregisteredProjectProtoMsg {
+  typeUrl: "/regen.ecocredit.v1.MsgCreateUnregisteredProject";
+  value: Uint8Array;
+}
+/** MsgCreateUnregisteredProject is the Msg/CreateUnregisteredProject request type. */
+export interface MsgCreateUnregisteredProjectAmino {
+  /**
+   * admin is the address of the account creating the project that will become
+   * the admin of the project upon creation.
+   */
+  admin?: string;
+  /**
+   * metadata is any arbitrary string with a maximum length of 256 characters
+   * that includes or references metadata to attach to the project.
+   */
+  metadata?: string;
+  /**
+   * jurisdiction is the jurisdiction of the project. A jurisdiction has with
+   * the format: <country-code>[-<sub-national-code>[ <postal-code>]]
+   * The country-code must be 2 alphabetic characters, the sub-national-code
+   * can be 1-3 alphanumeric characters, and the postal-code can be up to 64
+   * alphanumeric characters. Only the country-code is required, while the
+   * sub-national-code and postal-code are optional and can be added for
+   * increased precision.
+   */
+  jurisdiction?: string;
+  /**
+   * reference_id is any arbitrary string used to reference the project with a
+   * maximum length of 32 characters.
+   */
+  reference_id?: string;
+  /**
+   * fee is the project creation fee. An equal fee is required if the project
+   * creation fee parameter is set. The provided fee can be greater than the
+   * parameter, but only the amount in the parameter will be charged.
+   * 
+   * Since Revision 3
+   */
+  fee?: CoinAmino;
+}
+export interface MsgCreateUnregisteredProjectAminoMsg {
+  type: "/regen.ecocredit.v1.MsgCreateUnregisteredProject";
+  value: MsgCreateUnregisteredProjectAmino;
+}
+/** MsgCreateUnregisteredProject is the Msg/CreateUnregisteredProject request type. */
+export interface MsgCreateUnregisteredProjectSDKType {
+  admin: string;
+  metadata: string;
+  jurisdiction: string;
+  reference_id: string;
+  fee?: CoinSDKType;
+}
+/** MsgCreateUnregisteredProjectResponse is the Msg/CreateUnregisteredProject response type. */
+export interface MsgCreateUnregisteredProjectResponse {
+  /** project_id is the unique identifier of the project. */
+  projectId: string;
+}
+export interface MsgCreateUnregisteredProjectResponseProtoMsg {
+  typeUrl: "/regen.ecocredit.v1.MsgCreateUnregisteredProjectResponse";
+  value: Uint8Array;
+}
+/** MsgCreateUnregisteredProjectResponse is the Msg/CreateUnregisteredProject response type. */
+export interface MsgCreateUnregisteredProjectResponseAmino {
+  /** project_id is the unique identifier of the project. */
+  project_id?: string;
+}
+export interface MsgCreateUnregisteredProjectResponseAminoMsg {
+  type: "/regen.ecocredit.v1.MsgCreateUnregisteredProjectResponse";
+  value: MsgCreateUnregisteredProjectResponseAmino;
+}
+/** MsgCreateUnregisteredProjectResponse is the Msg/CreateUnregisteredProject response type. */
+export interface MsgCreateUnregisteredProjectResponseSDKType {
+  project_id: string;
+}
+/** MsgCreateOrUpdateApplication is the Msg/CreateOrUpdateApplication request type. */
+export interface MsgCreateOrUpdateApplication {
+  /**
+   * project_admin is the address of the account that is the admin of the
+   * project which is applying to the credit class.
+   */
+  projectAdmin: string;
+  /**
+   * project_id is the identifier of the project which is applying to
+   * the credit class.
+   */
+  projectId: string;
+  /**
+   * class_id is the identifier of the credit class which the project is
+   * applying to.
+   */
+  classId: string;
+  /**
+   * metadata is any optional arbitrary string with a maximum length of 256 characters
+   * that includes or references any metadata relevant to the application.
+   * This could be used as a digital reference to the actual contents of the application.
+   */
+  metadata: string;
+  /**
+   * withdraw is a boolean that indicates whether the application is being
+   * withdrawn rather than updated.
+   */
+  withdraw: boolean;
+}
+export interface MsgCreateOrUpdateApplicationProtoMsg {
+  typeUrl: "/regen.ecocredit.v1.MsgCreateOrUpdateApplication";
+  value: Uint8Array;
+}
+/** MsgCreateOrUpdateApplication is the Msg/CreateOrUpdateApplication request type. */
+export interface MsgCreateOrUpdateApplicationAmino {
+  /**
+   * project_admin is the address of the account that is the admin of the
+   * project which is applying to the credit class.
+   */
+  project_admin?: string;
+  /**
+   * project_id is the identifier of the project which is applying to
+   * the credit class.
+   */
+  project_id?: string;
+  /**
+   * class_id is the identifier of the credit class which the project is
+   * applying to.
+   */
+  class_id?: string;
+  /**
+   * metadata is any optional arbitrary string with a maximum length of 256 characters
+   * that includes or references any metadata relevant to the application.
+   * This could be used as a digital reference to the actual contents of the application.
+   */
+  metadata?: string;
+  /**
+   * withdraw is a boolean that indicates whether the application is being
+   * withdrawn rather than updated.
+   */
+  withdraw?: boolean;
+}
+export interface MsgCreateOrUpdateApplicationAminoMsg {
+  type: "/regen.ecocredit.v1.MsgCreateOrUpdateApplication";
+  value: MsgCreateOrUpdateApplicationAmino;
+}
+/** MsgCreateOrUpdateApplication is the Msg/CreateOrUpdateApplication request type. */
+export interface MsgCreateOrUpdateApplicationSDKType {
+  project_admin: string;
+  project_id: string;
+  class_id: string;
+  metadata: string;
+  withdraw: boolean;
+}
+/** MsgCreateOrUpdateApplicationResponse is the Msg/CreateOrUpdateApplication response type. */
+export interface MsgCreateOrUpdateApplicationResponse {}
+export interface MsgCreateOrUpdateApplicationResponseProtoMsg {
+  typeUrl: "/regen.ecocredit.v1.MsgCreateOrUpdateApplicationResponse";
+  value: Uint8Array;
+}
+/** MsgCreateOrUpdateApplicationResponse is the Msg/CreateOrUpdateApplication response type. */
+export interface MsgCreateOrUpdateApplicationResponseAmino {}
+export interface MsgCreateOrUpdateApplicationResponseAminoMsg {
+  type: "/regen.ecocredit.v1.MsgCreateOrUpdateApplicationResponse";
+  value: MsgCreateOrUpdateApplicationResponseAmino;
+}
+/** MsgCreateOrUpdateApplicationResponse is the Msg/CreateOrUpdateApplication response type. */
+export interface MsgCreateOrUpdateApplicationResponseSDKType {}
+/** MsgUpdateProjectEnrollment is the Msg/UpdateProjectEnrollment request type. */
+export interface MsgUpdateProjectEnrollment {
+  /**
+   * issuer is the address of the account that is the issuer of the credit class
+   * which is updating the project enrollment status.
+   */
+  issuer: string;
+  /** project_id is the identifier of the project. */
+  projectId: string;
+  /** class_id is the identifier of the credit class. */
+  classId: string;
+  /** new_status is the new status of the project enrollment. */
+  newStatus: ProjectEnrollmentStatus;
+  /**
+   * metadata is any optiopnal arbitrary string with a maximum length of 256 characters
+   * that includes or references the reason for the approving, requesting changes
+   * to, or rejecting the application, or terminating the project.
+   */
+  metadata: string;
+}
+export interface MsgUpdateProjectEnrollmentProtoMsg {
+  typeUrl: "/regen.ecocredit.v1.MsgUpdateProjectEnrollment";
+  value: Uint8Array;
+}
+/** MsgUpdateProjectEnrollment is the Msg/UpdateProjectEnrollment request type. */
+export interface MsgUpdateProjectEnrollmentAmino {
+  /**
+   * issuer is the address of the account that is the issuer of the credit class
+   * which is updating the project enrollment status.
+   */
+  issuer?: string;
+  /** project_id is the identifier of the project. */
+  project_id?: string;
+  /** class_id is the identifier of the credit class. */
+  class_id?: string;
+  /** new_status is the new status of the project enrollment. */
+  new_status?: ProjectEnrollmentStatus;
+  /**
+   * metadata is any optiopnal arbitrary string with a maximum length of 256 characters
+   * that includes or references the reason for the approving, requesting changes
+   * to, or rejecting the application, or terminating the project.
+   */
+  metadata?: string;
+}
+export interface MsgUpdateProjectEnrollmentAminoMsg {
+  type: "/regen.ecocredit.v1.MsgUpdateProjectEnrollment";
+  value: MsgUpdateProjectEnrollmentAmino;
+}
+/** MsgUpdateProjectEnrollment is the Msg/UpdateProjectEnrollment request type. */
+export interface MsgUpdateProjectEnrollmentSDKType {
+  issuer: string;
+  project_id: string;
+  class_id: string;
+  new_status: ProjectEnrollmentStatus;
+  metadata: string;
+}
+/** MsgEvaluateProjectEnrollmentResponse is the Msg/EvaluateProjectEnrollment response type. */
+export interface MsgUpdateProjectEnrollmentResponse {}
+export interface MsgUpdateProjectEnrollmentResponseProtoMsg {
+  typeUrl: "/regen.ecocredit.v1.MsgUpdateProjectEnrollmentResponse";
+  value: Uint8Array;
+}
+/** MsgEvaluateProjectEnrollmentResponse is the Msg/EvaluateProjectEnrollment response type. */
+export interface MsgUpdateProjectEnrollmentResponseAmino {}
+export interface MsgUpdateProjectEnrollmentResponseAminoMsg {
+  type: "/regen.ecocredit.v1.MsgUpdateProjectEnrollmentResponse";
+  value: MsgUpdateProjectEnrollmentResponseAmino;
+}
+/** MsgEvaluateProjectEnrollmentResponse is the Msg/EvaluateProjectEnrollment response type. */
+export interface MsgUpdateProjectEnrollmentResponseSDKType {}
 /** MsgCreateBatch is the Msg/CreateBatch request type. */
 export interface MsgCreateBatch {
   /**
    * issuer is the address of the account issuing the credits and must be an
-   * approved issuer within the credit class of the project.
+   * approved issuer within a credit class of the project.
    */
   issuer: string;
   /**
@@ -329,6 +614,13 @@ export interface MsgCreateBatch {
    * chain or registry as a result of a bridge operation.
    */
   originTx?: OriginTx;
+  /**
+   * class_id is the unique identifier of the credit class under which the
+   * credit batch will be created.
+   * 
+   * Since Revision 3
+   */
+  classId: string;
 }
 export interface MsgCreateBatchProtoMsg {
   typeUrl: "/regen.ecocredit.v1.MsgCreateBatch";
@@ -338,7 +630,7 @@ export interface MsgCreateBatchProtoMsg {
 export interface MsgCreateBatchAmino {
   /**
    * issuer is the address of the account issuing the credits and must be an
-   * approved issuer within the credit class of the project.
+   * approved issuer within a credit class of the project.
    */
   issuer?: string;
   /**
@@ -381,6 +673,13 @@ export interface MsgCreateBatchAmino {
    * chain or registry as a result of a bridge operation.
    */
   origin_tx?: OriginTxAmino;
+  /**
+   * class_id is the unique identifier of the credit class under which the
+   * credit batch will be created.
+   * 
+   * Since Revision 3
+   */
+  class_id?: string;
 }
 export interface MsgCreateBatchAminoMsg {
   type: "regen/MsgCreateBatch";
@@ -396,6 +695,7 @@ export interface MsgCreateBatchSDKType {
   end_date?: Date;
   open: boolean;
   origin_tx?: OriginTxSDKType;
+  class_id: string;
 }
 /** MsgCreateBatchResponse is the Msg/CreateBatch response type. */
 export interface MsgCreateBatchResponse {
@@ -1713,6 +2013,53 @@ export interface MsgUpdateClassFeeResponseAminoMsg {
  * Since Revision 2
  */
 export interface MsgUpdateClassFeeResponseSDKType {}
+/** MsgUpdateProjectFee is the Msg/UpdateProjectFee request type. */
+export interface MsgUpdateProjectFee {
+  /** authority is the address of the governance account. */
+  authority: string;
+  /**
+   * fee is the project creation fee. If not set, the project creation fee will
+   * be removed and no fee will be required to create a project.
+   */
+  fee?: Coin;
+}
+export interface MsgUpdateProjectFeeProtoMsg {
+  typeUrl: "/regen.ecocredit.v1.MsgUpdateProjectFee";
+  value: Uint8Array;
+}
+/** MsgUpdateProjectFee is the Msg/UpdateProjectFee request type. */
+export interface MsgUpdateProjectFeeAmino {
+  /** authority is the address of the governance account. */
+  authority?: string;
+  /**
+   * fee is the project creation fee. If not set, the project creation fee will
+   * be removed and no fee will be required to create a project.
+   */
+  fee?: CoinAmino;
+}
+export interface MsgUpdateProjectFeeAminoMsg {
+  type: "/regen.ecocredit.v1.MsgUpdateProjectFee";
+  value: MsgUpdateProjectFeeAmino;
+}
+/** MsgUpdateProjectFee is the Msg/UpdateProjectFee request type. */
+export interface MsgUpdateProjectFeeSDKType {
+  authority: string;
+  fee?: CoinSDKType;
+}
+/** MsgUpdateProjectFeeResponse is the Msg/UpdateProjectFee response type. */
+export interface MsgUpdateProjectFeeResponse {}
+export interface MsgUpdateProjectFeeResponseProtoMsg {
+  typeUrl: "/regen.ecocredit.v1.MsgUpdateProjectFeeResponse";
+  value: Uint8Array;
+}
+/** MsgUpdateProjectFeeResponse is the Msg/UpdateProjectFee response type. */
+export interface MsgUpdateProjectFeeResponseAmino {}
+export interface MsgUpdateProjectFeeResponseAminoMsg {
+  type: "/regen.ecocredit.v1.MsgUpdateProjectFeeResponse";
+  value: MsgUpdateProjectFeeResponseAmino;
+}
+/** MsgUpdateProjectFeeResponse is the Msg/UpdateProjectFee response type. */
+export interface MsgUpdateProjectFeeResponseSDKType {}
 /**
  * MsgAddAllowedBridgeChain is the Msg/AddAllowedBridgeChain request type.
  * 
@@ -1861,6 +2208,82 @@ export interface MsgRemoveAllowedBridgeChainResponseAminoMsg {
  * Since Revision 2
  */
 export interface MsgRemoveAllowedBridgeChainResponseSDKType {}
+/**
+ * MsgBurnRegen is the Msg/BurnRegen request type.
+ * 
+ * Since Revision 3
+ */
+export interface MsgBurnRegen {
+  /** burner is the address of the account burning REGEN tokens. */
+  burner: string;
+  /** amount is the integer amount of uregen tokens to burn. */
+  amount: string;
+  /**
+   * reason is any arbitrary string that specifies the reason for burning
+   * REGEN tokens. It may be at most 256 characters long.
+   */
+  reason: string;
+}
+export interface MsgBurnRegenProtoMsg {
+  typeUrl: "/regen.ecocredit.v1.MsgBurnRegen";
+  value: Uint8Array;
+}
+/**
+ * MsgBurnRegen is the Msg/BurnRegen request type.
+ * 
+ * Since Revision 3
+ */
+export interface MsgBurnRegenAmino {
+  /** burner is the address of the account burning REGEN tokens. */
+  burner?: string;
+  /** amount is the integer amount of uregen tokens to burn. */
+  amount?: string;
+  /**
+   * reason is any arbitrary string that specifies the reason for burning
+   * REGEN tokens. It may be at most 256 characters long.
+   */
+  reason?: string;
+}
+export interface MsgBurnRegenAminoMsg {
+  type: "/regen.ecocredit.v1.MsgBurnRegen";
+  value: MsgBurnRegenAmino;
+}
+/**
+ * MsgBurnRegen is the Msg/BurnRegen request type.
+ * 
+ * Since Revision 3
+ */
+export interface MsgBurnRegenSDKType {
+  burner: string;
+  amount: string;
+  reason: string;
+}
+/**
+ * MsgBurnResponse is the Msg/Burn response type.
+ * 
+ * Since Revision 3
+ */
+export interface MsgBurnRegenResponse {}
+export interface MsgBurnRegenResponseProtoMsg {
+  typeUrl: "/regen.ecocredit.v1.MsgBurnRegenResponse";
+  value: Uint8Array;
+}
+/**
+ * MsgBurnResponse is the Msg/Burn response type.
+ * 
+ * Since Revision 3
+ */
+export interface MsgBurnRegenResponseAmino {}
+export interface MsgBurnRegenResponseAminoMsg {
+  type: "/regen.ecocredit.v1.MsgBurnRegenResponse";
+  value: MsgBurnRegenResponseAmino;
+}
+/**
+ * MsgBurnResponse is the Msg/Burn response type.
+ * 
+ * Since Revision 3
+ */
+export interface MsgBurnRegenResponseSDKType {}
 function createBaseMsgAddCreditType(): MsgAddCreditType {
   return {
     authority: "",
@@ -2180,7 +2603,8 @@ function createBaseMsgCreateProject(): MsgCreateProject {
     classId: "",
     metadata: "",
     jurisdiction: "",
-    referenceId: ""
+    referenceId: "",
+    fee: undefined
   };
 }
 export const MsgCreateProject = {
@@ -2200,6 +2624,9 @@ export const MsgCreateProject = {
     }
     if (message.referenceId !== "") {
       writer.uint32(42).string(message.referenceId);
+    }
+    if (message.fee !== undefined) {
+      Coin.encode(message.fee, writer.uint32(50).fork()).ldelim();
     }
     return writer;
   },
@@ -2225,6 +2652,9 @@ export const MsgCreateProject = {
         case 5:
           message.referenceId = reader.string();
           break;
+        case 6:
+          message.fee = Coin.decode(reader, reader.uint32());
+          break;
         default:
           reader.skipType(tag & 7);
           break;
@@ -2239,6 +2669,7 @@ export const MsgCreateProject = {
     message.metadata = object.metadata ?? "";
     message.jurisdiction = object.jurisdiction ?? "";
     message.referenceId = object.referenceId ?? "";
+    message.fee = object.fee !== undefined && object.fee !== null ? Coin.fromPartial(object.fee) : undefined;
     return message;
   },
   fromAmino(object: MsgCreateProjectAmino): MsgCreateProject {
@@ -2258,6 +2689,9 @@ export const MsgCreateProject = {
     if (object.reference_id !== undefined && object.reference_id !== null) {
       message.referenceId = object.reference_id;
     }
+    if (object.fee !== undefined && object.fee !== null) {
+      message.fee = Coin.fromAmino(object.fee);
+    }
     return message;
   },
   toAmino(message: MsgCreateProject): MsgCreateProjectAmino {
@@ -2267,6 +2701,7 @@ export const MsgCreateProject = {
     obj.metadata = message.metadata === "" ? undefined : message.metadata;
     obj.jurisdiction = message.jurisdiction === "" ? undefined : message.jurisdiction;
     obj.reference_id = message.referenceId === "" ? undefined : message.referenceId;
+    obj.fee = message.fee ? Coin.toAmino(message.fee) : undefined;
     return obj;
   },
   fromAminoMsg(object: MsgCreateProjectAminoMsg): MsgCreateProject {
@@ -2354,6 +2789,502 @@ export const MsgCreateProjectResponse = {
     };
   }
 };
+function createBaseMsgCreateUnregisteredProject(): MsgCreateUnregisteredProject {
+  return {
+    admin: "",
+    metadata: "",
+    jurisdiction: "",
+    referenceId: "",
+    fee: undefined
+  };
+}
+export const MsgCreateUnregisteredProject = {
+  typeUrl: "/regen.ecocredit.v1.MsgCreateUnregisteredProject",
+  encode(message: MsgCreateUnregisteredProject, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
+    if (message.admin !== "") {
+      writer.uint32(10).string(message.admin);
+    }
+    if (message.metadata !== "") {
+      writer.uint32(18).string(message.metadata);
+    }
+    if (message.jurisdiction !== "") {
+      writer.uint32(26).string(message.jurisdiction);
+    }
+    if (message.referenceId !== "") {
+      writer.uint32(34).string(message.referenceId);
+    }
+    if (message.fee !== undefined) {
+      Coin.encode(message.fee, writer.uint32(42).fork()).ldelim();
+    }
+    return writer;
+  },
+  decode(input: BinaryReader | Uint8Array, length?: number): MsgCreateUnregisteredProject {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+    let end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseMsgCreateUnregisteredProject();
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+        case 1:
+          message.admin = reader.string();
+          break;
+        case 2:
+          message.metadata = reader.string();
+          break;
+        case 3:
+          message.jurisdiction = reader.string();
+          break;
+        case 4:
+          message.referenceId = reader.string();
+          break;
+        case 5:
+          message.fee = Coin.decode(reader, reader.uint32());
+          break;
+        default:
+          reader.skipType(tag & 7);
+          break;
+      }
+    }
+    return message;
+  },
+  fromPartial(object: Partial<MsgCreateUnregisteredProject>): MsgCreateUnregisteredProject {
+    const message = createBaseMsgCreateUnregisteredProject();
+    message.admin = object.admin ?? "";
+    message.metadata = object.metadata ?? "";
+    message.jurisdiction = object.jurisdiction ?? "";
+    message.referenceId = object.referenceId ?? "";
+    message.fee = object.fee !== undefined && object.fee !== null ? Coin.fromPartial(object.fee) : undefined;
+    return message;
+  },
+  fromAmino(object: MsgCreateUnregisteredProjectAmino): MsgCreateUnregisteredProject {
+    const message = createBaseMsgCreateUnregisteredProject();
+    if (object.admin !== undefined && object.admin !== null) {
+      message.admin = object.admin;
+    }
+    if (object.metadata !== undefined && object.metadata !== null) {
+      message.metadata = object.metadata;
+    }
+    if (object.jurisdiction !== undefined && object.jurisdiction !== null) {
+      message.jurisdiction = object.jurisdiction;
+    }
+    if (object.reference_id !== undefined && object.reference_id !== null) {
+      message.referenceId = object.reference_id;
+    }
+    if (object.fee !== undefined && object.fee !== null) {
+      message.fee = Coin.fromAmino(object.fee);
+    }
+    return message;
+  },
+  toAmino(message: MsgCreateUnregisteredProject): MsgCreateUnregisteredProjectAmino {
+    const obj: any = {};
+    obj.admin = message.admin === "" ? undefined : message.admin;
+    obj.metadata = message.metadata === "" ? undefined : message.metadata;
+    obj.jurisdiction = message.jurisdiction === "" ? undefined : message.jurisdiction;
+    obj.reference_id = message.referenceId === "" ? undefined : message.referenceId;
+    obj.fee = message.fee ? Coin.toAmino(message.fee) : undefined;
+    return obj;
+  },
+  fromAminoMsg(object: MsgCreateUnregisteredProjectAminoMsg): MsgCreateUnregisteredProject {
+    return MsgCreateUnregisteredProject.fromAmino(object.value);
+  },
+  fromProtoMsg(message: MsgCreateUnregisteredProjectProtoMsg): MsgCreateUnregisteredProject {
+    return MsgCreateUnregisteredProject.decode(message.value);
+  },
+  toProto(message: MsgCreateUnregisteredProject): Uint8Array {
+    return MsgCreateUnregisteredProject.encode(message).finish();
+  },
+  toProtoMsg(message: MsgCreateUnregisteredProject): MsgCreateUnregisteredProjectProtoMsg {
+    return {
+      typeUrl: "/regen.ecocredit.v1.MsgCreateUnregisteredProject",
+      value: MsgCreateUnregisteredProject.encode(message).finish()
+    };
+  }
+};
+function createBaseMsgCreateUnregisteredProjectResponse(): MsgCreateUnregisteredProjectResponse {
+  return {
+    projectId: ""
+  };
+}
+export const MsgCreateUnregisteredProjectResponse = {
+  typeUrl: "/regen.ecocredit.v1.MsgCreateUnregisteredProjectResponse",
+  encode(message: MsgCreateUnregisteredProjectResponse, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
+    if (message.projectId !== "") {
+      writer.uint32(10).string(message.projectId);
+    }
+    return writer;
+  },
+  decode(input: BinaryReader | Uint8Array, length?: number): MsgCreateUnregisteredProjectResponse {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+    let end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseMsgCreateUnregisteredProjectResponse();
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+        case 1:
+          message.projectId = reader.string();
+          break;
+        default:
+          reader.skipType(tag & 7);
+          break;
+      }
+    }
+    return message;
+  },
+  fromPartial(object: Partial<MsgCreateUnregisteredProjectResponse>): MsgCreateUnregisteredProjectResponse {
+    const message = createBaseMsgCreateUnregisteredProjectResponse();
+    message.projectId = object.projectId ?? "";
+    return message;
+  },
+  fromAmino(object: MsgCreateUnregisteredProjectResponseAmino): MsgCreateUnregisteredProjectResponse {
+    const message = createBaseMsgCreateUnregisteredProjectResponse();
+    if (object.project_id !== undefined && object.project_id !== null) {
+      message.projectId = object.project_id;
+    }
+    return message;
+  },
+  toAmino(message: MsgCreateUnregisteredProjectResponse): MsgCreateUnregisteredProjectResponseAmino {
+    const obj: any = {};
+    obj.project_id = message.projectId === "" ? undefined : message.projectId;
+    return obj;
+  },
+  fromAminoMsg(object: MsgCreateUnregisteredProjectResponseAminoMsg): MsgCreateUnregisteredProjectResponse {
+    return MsgCreateUnregisteredProjectResponse.fromAmino(object.value);
+  },
+  fromProtoMsg(message: MsgCreateUnregisteredProjectResponseProtoMsg): MsgCreateUnregisteredProjectResponse {
+    return MsgCreateUnregisteredProjectResponse.decode(message.value);
+  },
+  toProto(message: MsgCreateUnregisteredProjectResponse): Uint8Array {
+    return MsgCreateUnregisteredProjectResponse.encode(message).finish();
+  },
+  toProtoMsg(message: MsgCreateUnregisteredProjectResponse): MsgCreateUnregisteredProjectResponseProtoMsg {
+    return {
+      typeUrl: "/regen.ecocredit.v1.MsgCreateUnregisteredProjectResponse",
+      value: MsgCreateUnregisteredProjectResponse.encode(message).finish()
+    };
+  }
+};
+function createBaseMsgCreateOrUpdateApplication(): MsgCreateOrUpdateApplication {
+  return {
+    projectAdmin: "",
+    projectId: "",
+    classId: "",
+    metadata: "",
+    withdraw: false
+  };
+}
+export const MsgCreateOrUpdateApplication = {
+  typeUrl: "/regen.ecocredit.v1.MsgCreateOrUpdateApplication",
+  encode(message: MsgCreateOrUpdateApplication, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
+    if (message.projectAdmin !== "") {
+      writer.uint32(10).string(message.projectAdmin);
+    }
+    if (message.projectId !== "") {
+      writer.uint32(18).string(message.projectId);
+    }
+    if (message.classId !== "") {
+      writer.uint32(26).string(message.classId);
+    }
+    if (message.metadata !== "") {
+      writer.uint32(34).string(message.metadata);
+    }
+    if (message.withdraw === true) {
+      writer.uint32(40).bool(message.withdraw);
+    }
+    return writer;
+  },
+  decode(input: BinaryReader | Uint8Array, length?: number): MsgCreateOrUpdateApplication {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+    let end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseMsgCreateOrUpdateApplication();
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+        case 1:
+          message.projectAdmin = reader.string();
+          break;
+        case 2:
+          message.projectId = reader.string();
+          break;
+        case 3:
+          message.classId = reader.string();
+          break;
+        case 4:
+          message.metadata = reader.string();
+          break;
+        case 5:
+          message.withdraw = reader.bool();
+          break;
+        default:
+          reader.skipType(tag & 7);
+          break;
+      }
+    }
+    return message;
+  },
+  fromPartial(object: Partial<MsgCreateOrUpdateApplication>): MsgCreateOrUpdateApplication {
+    const message = createBaseMsgCreateOrUpdateApplication();
+    message.projectAdmin = object.projectAdmin ?? "";
+    message.projectId = object.projectId ?? "";
+    message.classId = object.classId ?? "";
+    message.metadata = object.metadata ?? "";
+    message.withdraw = object.withdraw ?? false;
+    return message;
+  },
+  fromAmino(object: MsgCreateOrUpdateApplicationAmino): MsgCreateOrUpdateApplication {
+    const message = createBaseMsgCreateOrUpdateApplication();
+    if (object.project_admin !== undefined && object.project_admin !== null) {
+      message.projectAdmin = object.project_admin;
+    }
+    if (object.project_id !== undefined && object.project_id !== null) {
+      message.projectId = object.project_id;
+    }
+    if (object.class_id !== undefined && object.class_id !== null) {
+      message.classId = object.class_id;
+    }
+    if (object.metadata !== undefined && object.metadata !== null) {
+      message.metadata = object.metadata;
+    }
+    if (object.withdraw !== undefined && object.withdraw !== null) {
+      message.withdraw = object.withdraw;
+    }
+    return message;
+  },
+  toAmino(message: MsgCreateOrUpdateApplication): MsgCreateOrUpdateApplicationAmino {
+    const obj: any = {};
+    obj.project_admin = message.projectAdmin === "" ? undefined : message.projectAdmin;
+    obj.project_id = message.projectId === "" ? undefined : message.projectId;
+    obj.class_id = message.classId === "" ? undefined : message.classId;
+    obj.metadata = message.metadata === "" ? undefined : message.metadata;
+    obj.withdraw = message.withdraw === false ? undefined : message.withdraw;
+    return obj;
+  },
+  fromAminoMsg(object: MsgCreateOrUpdateApplicationAminoMsg): MsgCreateOrUpdateApplication {
+    return MsgCreateOrUpdateApplication.fromAmino(object.value);
+  },
+  fromProtoMsg(message: MsgCreateOrUpdateApplicationProtoMsg): MsgCreateOrUpdateApplication {
+    return MsgCreateOrUpdateApplication.decode(message.value);
+  },
+  toProto(message: MsgCreateOrUpdateApplication): Uint8Array {
+    return MsgCreateOrUpdateApplication.encode(message).finish();
+  },
+  toProtoMsg(message: MsgCreateOrUpdateApplication): MsgCreateOrUpdateApplicationProtoMsg {
+    return {
+      typeUrl: "/regen.ecocredit.v1.MsgCreateOrUpdateApplication",
+      value: MsgCreateOrUpdateApplication.encode(message).finish()
+    };
+  }
+};
+function createBaseMsgCreateOrUpdateApplicationResponse(): MsgCreateOrUpdateApplicationResponse {
+  return {};
+}
+export const MsgCreateOrUpdateApplicationResponse = {
+  typeUrl: "/regen.ecocredit.v1.MsgCreateOrUpdateApplicationResponse",
+  encode(_: MsgCreateOrUpdateApplicationResponse, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
+    return writer;
+  },
+  decode(input: BinaryReader | Uint8Array, length?: number): MsgCreateOrUpdateApplicationResponse {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+    let end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseMsgCreateOrUpdateApplicationResponse();
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+        default:
+          reader.skipType(tag & 7);
+          break;
+      }
+    }
+    return message;
+  },
+  fromPartial(_: Partial<MsgCreateOrUpdateApplicationResponse>): MsgCreateOrUpdateApplicationResponse {
+    const message = createBaseMsgCreateOrUpdateApplicationResponse();
+    return message;
+  },
+  fromAmino(_: MsgCreateOrUpdateApplicationResponseAmino): MsgCreateOrUpdateApplicationResponse {
+    const message = createBaseMsgCreateOrUpdateApplicationResponse();
+    return message;
+  },
+  toAmino(_: MsgCreateOrUpdateApplicationResponse): MsgCreateOrUpdateApplicationResponseAmino {
+    const obj: any = {};
+    return obj;
+  },
+  fromAminoMsg(object: MsgCreateOrUpdateApplicationResponseAminoMsg): MsgCreateOrUpdateApplicationResponse {
+    return MsgCreateOrUpdateApplicationResponse.fromAmino(object.value);
+  },
+  fromProtoMsg(message: MsgCreateOrUpdateApplicationResponseProtoMsg): MsgCreateOrUpdateApplicationResponse {
+    return MsgCreateOrUpdateApplicationResponse.decode(message.value);
+  },
+  toProto(message: MsgCreateOrUpdateApplicationResponse): Uint8Array {
+    return MsgCreateOrUpdateApplicationResponse.encode(message).finish();
+  },
+  toProtoMsg(message: MsgCreateOrUpdateApplicationResponse): MsgCreateOrUpdateApplicationResponseProtoMsg {
+    return {
+      typeUrl: "/regen.ecocredit.v1.MsgCreateOrUpdateApplicationResponse",
+      value: MsgCreateOrUpdateApplicationResponse.encode(message).finish()
+    };
+  }
+};
+function createBaseMsgUpdateProjectEnrollment(): MsgUpdateProjectEnrollment {
+  return {
+    issuer: "",
+    projectId: "",
+    classId: "",
+    newStatus: 0,
+    metadata: ""
+  };
+}
+export const MsgUpdateProjectEnrollment = {
+  typeUrl: "/regen.ecocredit.v1.MsgUpdateProjectEnrollment",
+  encode(message: MsgUpdateProjectEnrollment, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
+    if (message.issuer !== "") {
+      writer.uint32(10).string(message.issuer);
+    }
+    if (message.projectId !== "") {
+      writer.uint32(18).string(message.projectId);
+    }
+    if (message.classId !== "") {
+      writer.uint32(26).string(message.classId);
+    }
+    if (message.newStatus !== 0) {
+      writer.uint32(32).int32(message.newStatus);
+    }
+    if (message.metadata !== "") {
+      writer.uint32(42).string(message.metadata);
+    }
+    return writer;
+  },
+  decode(input: BinaryReader | Uint8Array, length?: number): MsgUpdateProjectEnrollment {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+    let end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseMsgUpdateProjectEnrollment();
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+        case 1:
+          message.issuer = reader.string();
+          break;
+        case 2:
+          message.projectId = reader.string();
+          break;
+        case 3:
+          message.classId = reader.string();
+          break;
+        case 4:
+          message.newStatus = (reader.int32() as any);
+          break;
+        case 5:
+          message.metadata = reader.string();
+          break;
+        default:
+          reader.skipType(tag & 7);
+          break;
+      }
+    }
+    return message;
+  },
+  fromPartial(object: Partial<MsgUpdateProjectEnrollment>): MsgUpdateProjectEnrollment {
+    const message = createBaseMsgUpdateProjectEnrollment();
+    message.issuer = object.issuer ?? "";
+    message.projectId = object.projectId ?? "";
+    message.classId = object.classId ?? "";
+    message.newStatus = object.newStatus ?? 0;
+    message.metadata = object.metadata ?? "";
+    return message;
+  },
+  fromAmino(object: MsgUpdateProjectEnrollmentAmino): MsgUpdateProjectEnrollment {
+    const message = createBaseMsgUpdateProjectEnrollment();
+    if (object.issuer !== undefined && object.issuer !== null) {
+      message.issuer = object.issuer;
+    }
+    if (object.project_id !== undefined && object.project_id !== null) {
+      message.projectId = object.project_id;
+    }
+    if (object.class_id !== undefined && object.class_id !== null) {
+      message.classId = object.class_id;
+    }
+    if (object.new_status !== undefined && object.new_status !== null) {
+      message.newStatus = object.new_status;
+    }
+    if (object.metadata !== undefined && object.metadata !== null) {
+      message.metadata = object.metadata;
+    }
+    return message;
+  },
+  toAmino(message: MsgUpdateProjectEnrollment): MsgUpdateProjectEnrollmentAmino {
+    const obj: any = {};
+    obj.issuer = message.issuer === "" ? undefined : message.issuer;
+    obj.project_id = message.projectId === "" ? undefined : message.projectId;
+    obj.class_id = message.classId === "" ? undefined : message.classId;
+    obj.new_status = message.newStatus === 0 ? undefined : message.newStatus;
+    obj.metadata = message.metadata === "" ? undefined : message.metadata;
+    return obj;
+  },
+  fromAminoMsg(object: MsgUpdateProjectEnrollmentAminoMsg): MsgUpdateProjectEnrollment {
+    return MsgUpdateProjectEnrollment.fromAmino(object.value);
+  },
+  fromProtoMsg(message: MsgUpdateProjectEnrollmentProtoMsg): MsgUpdateProjectEnrollment {
+    return MsgUpdateProjectEnrollment.decode(message.value);
+  },
+  toProto(message: MsgUpdateProjectEnrollment): Uint8Array {
+    return MsgUpdateProjectEnrollment.encode(message).finish();
+  },
+  toProtoMsg(message: MsgUpdateProjectEnrollment): MsgUpdateProjectEnrollmentProtoMsg {
+    return {
+      typeUrl: "/regen.ecocredit.v1.MsgUpdateProjectEnrollment",
+      value: MsgUpdateProjectEnrollment.encode(message).finish()
+    };
+  }
+};
+function createBaseMsgUpdateProjectEnrollmentResponse(): MsgUpdateProjectEnrollmentResponse {
+  return {};
+}
+export const MsgUpdateProjectEnrollmentResponse = {
+  typeUrl: "/regen.ecocredit.v1.MsgUpdateProjectEnrollmentResponse",
+  encode(_: MsgUpdateProjectEnrollmentResponse, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
+    return writer;
+  },
+  decode(input: BinaryReader | Uint8Array, length?: number): MsgUpdateProjectEnrollmentResponse {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+    let end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseMsgUpdateProjectEnrollmentResponse();
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+        default:
+          reader.skipType(tag & 7);
+          break;
+      }
+    }
+    return message;
+  },
+  fromPartial(_: Partial<MsgUpdateProjectEnrollmentResponse>): MsgUpdateProjectEnrollmentResponse {
+    const message = createBaseMsgUpdateProjectEnrollmentResponse();
+    return message;
+  },
+  fromAmino(_: MsgUpdateProjectEnrollmentResponseAmino): MsgUpdateProjectEnrollmentResponse {
+    const message = createBaseMsgUpdateProjectEnrollmentResponse();
+    return message;
+  },
+  toAmino(_: MsgUpdateProjectEnrollmentResponse): MsgUpdateProjectEnrollmentResponseAmino {
+    const obj: any = {};
+    return obj;
+  },
+  fromAminoMsg(object: MsgUpdateProjectEnrollmentResponseAminoMsg): MsgUpdateProjectEnrollmentResponse {
+    return MsgUpdateProjectEnrollmentResponse.fromAmino(object.value);
+  },
+  fromProtoMsg(message: MsgUpdateProjectEnrollmentResponseProtoMsg): MsgUpdateProjectEnrollmentResponse {
+    return MsgUpdateProjectEnrollmentResponse.decode(message.value);
+  },
+  toProto(message: MsgUpdateProjectEnrollmentResponse): Uint8Array {
+    return MsgUpdateProjectEnrollmentResponse.encode(message).finish();
+  },
+  toProtoMsg(message: MsgUpdateProjectEnrollmentResponse): MsgUpdateProjectEnrollmentResponseProtoMsg {
+    return {
+      typeUrl: "/regen.ecocredit.v1.MsgUpdateProjectEnrollmentResponse",
+      value: MsgUpdateProjectEnrollmentResponse.encode(message).finish()
+    };
+  }
+};
 function createBaseMsgCreateBatch(): MsgCreateBatch {
   return {
     issuer: "",
@@ -2363,7 +3294,8 @@ function createBaseMsgCreateBatch(): MsgCreateBatch {
     startDate: undefined,
     endDate: undefined,
     open: false,
-    originTx: undefined
+    originTx: undefined,
+    classId: ""
   };
 }
 export const MsgCreateBatch = {
@@ -2392,6 +3324,9 @@ export const MsgCreateBatch = {
     }
     if (message.originTx !== undefined) {
       OriginTx.encode(message.originTx, writer.uint32(66).fork()).ldelim();
+    }
+    if (message.classId !== "") {
+      writer.uint32(74).string(message.classId);
     }
     return writer;
   },
@@ -2426,6 +3361,9 @@ export const MsgCreateBatch = {
         case 8:
           message.originTx = OriginTx.decode(reader, reader.uint32());
           break;
+        case 9:
+          message.classId = reader.string();
+          break;
         default:
           reader.skipType(tag & 7);
           break;
@@ -2443,6 +3381,7 @@ export const MsgCreateBatch = {
     message.endDate = object.endDate ?? undefined;
     message.open = object.open ?? false;
     message.originTx = object.originTx !== undefined && object.originTx !== null ? OriginTx.fromPartial(object.originTx) : undefined;
+    message.classId = object.classId ?? "";
     return message;
   },
   fromAmino(object: MsgCreateBatchAmino): MsgCreateBatch {
@@ -2469,6 +3408,9 @@ export const MsgCreateBatch = {
     if (object.origin_tx !== undefined && object.origin_tx !== null) {
       message.originTx = OriginTx.fromAmino(object.origin_tx);
     }
+    if (object.class_id !== undefined && object.class_id !== null) {
+      message.classId = object.class_id;
+    }
     return message;
   },
   toAmino(message: MsgCreateBatch): MsgCreateBatchAmino {
@@ -2485,6 +3427,7 @@ export const MsgCreateBatch = {
     obj.end_date = message.endDate ? Timestamp.toAmino(toTimestamp(message.endDate)) : undefined;
     obj.open = message.open === false ? undefined : message.open;
     obj.origin_tx = message.originTx ? OriginTx.toAmino(message.originTx) : undefined;
+    obj.class_id = message.classId === "" ? undefined : message.classId;
     return obj;
   },
   fromAminoMsg(object: MsgCreateBatchAminoMsg): MsgCreateBatch {
@@ -5363,6 +6306,131 @@ export const MsgUpdateClassFeeResponse = {
     };
   }
 };
+function createBaseMsgUpdateProjectFee(): MsgUpdateProjectFee {
+  return {
+    authority: "",
+    fee: undefined
+  };
+}
+export const MsgUpdateProjectFee = {
+  typeUrl: "/regen.ecocredit.v1.MsgUpdateProjectFee",
+  encode(message: MsgUpdateProjectFee, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
+    if (message.authority !== "") {
+      writer.uint32(10).string(message.authority);
+    }
+    if (message.fee !== undefined) {
+      Coin.encode(message.fee, writer.uint32(18).fork()).ldelim();
+    }
+    return writer;
+  },
+  decode(input: BinaryReader | Uint8Array, length?: number): MsgUpdateProjectFee {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+    let end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseMsgUpdateProjectFee();
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+        case 1:
+          message.authority = reader.string();
+          break;
+        case 2:
+          message.fee = Coin.decode(reader, reader.uint32());
+          break;
+        default:
+          reader.skipType(tag & 7);
+          break;
+      }
+    }
+    return message;
+  },
+  fromPartial(object: Partial<MsgUpdateProjectFee>): MsgUpdateProjectFee {
+    const message = createBaseMsgUpdateProjectFee();
+    message.authority = object.authority ?? "";
+    message.fee = object.fee !== undefined && object.fee !== null ? Coin.fromPartial(object.fee) : undefined;
+    return message;
+  },
+  fromAmino(object: MsgUpdateProjectFeeAmino): MsgUpdateProjectFee {
+    const message = createBaseMsgUpdateProjectFee();
+    if (object.authority !== undefined && object.authority !== null) {
+      message.authority = object.authority;
+    }
+    if (object.fee !== undefined && object.fee !== null) {
+      message.fee = Coin.fromAmino(object.fee);
+    }
+    return message;
+  },
+  toAmino(message: MsgUpdateProjectFee): MsgUpdateProjectFeeAmino {
+    const obj: any = {};
+    obj.authority = message.authority === "" ? undefined : message.authority;
+    obj.fee = message.fee ? Coin.toAmino(message.fee) : undefined;
+    return obj;
+  },
+  fromAminoMsg(object: MsgUpdateProjectFeeAminoMsg): MsgUpdateProjectFee {
+    return MsgUpdateProjectFee.fromAmino(object.value);
+  },
+  fromProtoMsg(message: MsgUpdateProjectFeeProtoMsg): MsgUpdateProjectFee {
+    return MsgUpdateProjectFee.decode(message.value);
+  },
+  toProto(message: MsgUpdateProjectFee): Uint8Array {
+    return MsgUpdateProjectFee.encode(message).finish();
+  },
+  toProtoMsg(message: MsgUpdateProjectFee): MsgUpdateProjectFeeProtoMsg {
+    return {
+      typeUrl: "/regen.ecocredit.v1.MsgUpdateProjectFee",
+      value: MsgUpdateProjectFee.encode(message).finish()
+    };
+  }
+};
+function createBaseMsgUpdateProjectFeeResponse(): MsgUpdateProjectFeeResponse {
+  return {};
+}
+export const MsgUpdateProjectFeeResponse = {
+  typeUrl: "/regen.ecocredit.v1.MsgUpdateProjectFeeResponse",
+  encode(_: MsgUpdateProjectFeeResponse, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
+    return writer;
+  },
+  decode(input: BinaryReader | Uint8Array, length?: number): MsgUpdateProjectFeeResponse {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+    let end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseMsgUpdateProjectFeeResponse();
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+        default:
+          reader.skipType(tag & 7);
+          break;
+      }
+    }
+    return message;
+  },
+  fromPartial(_: Partial<MsgUpdateProjectFeeResponse>): MsgUpdateProjectFeeResponse {
+    const message = createBaseMsgUpdateProjectFeeResponse();
+    return message;
+  },
+  fromAmino(_: MsgUpdateProjectFeeResponseAmino): MsgUpdateProjectFeeResponse {
+    const message = createBaseMsgUpdateProjectFeeResponse();
+    return message;
+  },
+  toAmino(_: MsgUpdateProjectFeeResponse): MsgUpdateProjectFeeResponseAmino {
+    const obj: any = {};
+    return obj;
+  },
+  fromAminoMsg(object: MsgUpdateProjectFeeResponseAminoMsg): MsgUpdateProjectFeeResponse {
+    return MsgUpdateProjectFeeResponse.fromAmino(object.value);
+  },
+  fromProtoMsg(message: MsgUpdateProjectFeeResponseProtoMsg): MsgUpdateProjectFeeResponse {
+    return MsgUpdateProjectFeeResponse.decode(message.value);
+  },
+  toProto(message: MsgUpdateProjectFeeResponse): Uint8Array {
+    return MsgUpdateProjectFeeResponse.encode(message).finish();
+  },
+  toProtoMsg(message: MsgUpdateProjectFeeResponse): MsgUpdateProjectFeeResponseProtoMsg {
+    return {
+      typeUrl: "/regen.ecocredit.v1.MsgUpdateProjectFeeResponse",
+      value: MsgUpdateProjectFeeResponse.encode(message).finish()
+    };
+  }
+};
 function createBaseMsgAddAllowedBridgeChain(): MsgAddAllowedBridgeChain {
   return {
     authority: "",
@@ -5622,6 +6690,143 @@ export const MsgRemoveAllowedBridgeChainResponse = {
     return {
       typeUrl: "/regen.ecocredit.v1.MsgRemoveAllowedBridgeChainResponse",
       value: MsgRemoveAllowedBridgeChainResponse.encode(message).finish()
+    };
+  }
+};
+function createBaseMsgBurnRegen(): MsgBurnRegen {
+  return {
+    burner: "",
+    amount: "",
+    reason: ""
+  };
+}
+export const MsgBurnRegen = {
+  typeUrl: "/regen.ecocredit.v1.MsgBurnRegen",
+  encode(message: MsgBurnRegen, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
+    if (message.burner !== "") {
+      writer.uint32(10).string(message.burner);
+    }
+    if (message.amount !== "") {
+      writer.uint32(18).string(message.amount);
+    }
+    if (message.reason !== "") {
+      writer.uint32(26).string(message.reason);
+    }
+    return writer;
+  },
+  decode(input: BinaryReader | Uint8Array, length?: number): MsgBurnRegen {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+    let end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseMsgBurnRegen();
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+        case 1:
+          message.burner = reader.string();
+          break;
+        case 2:
+          message.amount = reader.string();
+          break;
+        case 3:
+          message.reason = reader.string();
+          break;
+        default:
+          reader.skipType(tag & 7);
+          break;
+      }
+    }
+    return message;
+  },
+  fromPartial(object: Partial<MsgBurnRegen>): MsgBurnRegen {
+    const message = createBaseMsgBurnRegen();
+    message.burner = object.burner ?? "";
+    message.amount = object.amount ?? "";
+    message.reason = object.reason ?? "";
+    return message;
+  },
+  fromAmino(object: MsgBurnRegenAmino): MsgBurnRegen {
+    const message = createBaseMsgBurnRegen();
+    if (object.burner !== undefined && object.burner !== null) {
+      message.burner = object.burner;
+    }
+    if (object.amount !== undefined && object.amount !== null) {
+      message.amount = object.amount;
+    }
+    if (object.reason !== undefined && object.reason !== null) {
+      message.reason = object.reason;
+    }
+    return message;
+  },
+  toAmino(message: MsgBurnRegen): MsgBurnRegenAmino {
+    const obj: any = {};
+    obj.burner = message.burner === "" ? undefined : message.burner;
+    obj.amount = message.amount === "" ? undefined : message.amount;
+    obj.reason = message.reason === "" ? undefined : message.reason;
+    return obj;
+  },
+  fromAminoMsg(object: MsgBurnRegenAminoMsg): MsgBurnRegen {
+    return MsgBurnRegen.fromAmino(object.value);
+  },
+  fromProtoMsg(message: MsgBurnRegenProtoMsg): MsgBurnRegen {
+    return MsgBurnRegen.decode(message.value);
+  },
+  toProto(message: MsgBurnRegen): Uint8Array {
+    return MsgBurnRegen.encode(message).finish();
+  },
+  toProtoMsg(message: MsgBurnRegen): MsgBurnRegenProtoMsg {
+    return {
+      typeUrl: "/regen.ecocredit.v1.MsgBurnRegen",
+      value: MsgBurnRegen.encode(message).finish()
+    };
+  }
+};
+function createBaseMsgBurnRegenResponse(): MsgBurnRegenResponse {
+  return {};
+}
+export const MsgBurnRegenResponse = {
+  typeUrl: "/regen.ecocredit.v1.MsgBurnRegenResponse",
+  encode(_: MsgBurnRegenResponse, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
+    return writer;
+  },
+  decode(input: BinaryReader | Uint8Array, length?: number): MsgBurnRegenResponse {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+    let end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseMsgBurnRegenResponse();
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+        default:
+          reader.skipType(tag & 7);
+          break;
+      }
+    }
+    return message;
+  },
+  fromPartial(_: Partial<MsgBurnRegenResponse>): MsgBurnRegenResponse {
+    const message = createBaseMsgBurnRegenResponse();
+    return message;
+  },
+  fromAmino(_: MsgBurnRegenResponseAmino): MsgBurnRegenResponse {
+    const message = createBaseMsgBurnRegenResponse();
+    return message;
+  },
+  toAmino(_: MsgBurnRegenResponse): MsgBurnRegenResponseAmino {
+    const obj: any = {};
+    return obj;
+  },
+  fromAminoMsg(object: MsgBurnRegenResponseAminoMsg): MsgBurnRegenResponse {
+    return MsgBurnRegenResponse.fromAmino(object.value);
+  },
+  fromProtoMsg(message: MsgBurnRegenResponseProtoMsg): MsgBurnRegenResponse {
+    return MsgBurnRegenResponse.decode(message.value);
+  },
+  toProto(message: MsgBurnRegenResponse): Uint8Array {
+    return MsgBurnRegenResponse.encode(message).finish();
+  },
+  toProtoMsg(message: MsgBurnRegenResponse): MsgBurnRegenResponseProtoMsg {
+    return {
+      typeUrl: "/regen.ecocredit.v1.MsgBurnRegenResponse",
+      value: MsgBurnRegenResponse.encode(message).finish()
     };
   }
 };

@@ -1,4 +1,5 @@
 //@ts-nocheck
+import { Coin, CoinAmino, CoinSDKType } from "../../../../cosmos/base/v1beta1/coin";
 import { BinaryReader, BinaryWriter } from "../../../../binary";
 /** EventSell is an event emitted when a sell order is created. */
 export interface EventSell {
@@ -29,6 +30,20 @@ export interface EventBuyDirect {
    * purchased from.
    */
   sellOrderId: bigint;
+  /** seller is the address of the account that sold the credits. */
+  seller: string;
+  /**
+   * seller_fee_paid is the amount of coins paid by the seller
+   * to the marketplace as a fee for facilitating the sale.
+   */
+  sellerFeePaid?: Coin;
+  /** buyer is the address of the account that purchased the credits. */
+  buyer: string;
+  /**
+   * buyer_fee_paid is the amount of coins paid by the buyer
+   * to the marketplace as a fee for facilitating the sale.
+   */
+  buyerFeePaid?: Coin;
 }
 export interface EventBuyDirectProtoMsg {
   typeUrl: "/regen.ecocredit.marketplace.v1.EventBuyDirect";
@@ -41,6 +56,20 @@ export interface EventBuyDirectAmino {
    * purchased from.
    */
   sell_order_id?: string;
+  /** seller is the address of the account that sold the credits. */
+  seller?: string;
+  /**
+   * seller_fee_paid is the amount of coins paid by the seller
+   * to the marketplace as a fee for facilitating the sale.
+   */
+  seller_fee_paid?: CoinAmino;
+  /** buyer is the address of the account that purchased the credits. */
+  buyer?: string;
+  /**
+   * buyer_fee_paid is the amount of coins paid by the buyer
+   * to the marketplace as a fee for facilitating the sale.
+   */
+  buyer_fee_paid?: CoinAmino;
 }
 export interface EventBuyDirectAminoMsg {
   type: "/regen.ecocredit.marketplace.v1.EventBuyDirect";
@@ -49,6 +78,10 @@ export interface EventBuyDirectAminoMsg {
 /** EventBuyDirect is an event emitted when a direct buy order is processed. */
 export interface EventBuyDirectSDKType {
   sell_order_id: bigint;
+  seller: string;
+  seller_fee_paid?: CoinSDKType;
+  buyer: string;
+  buyer_fee_paid?: CoinSDKType;
 }
 /** EventUpdateSellOrder is an event emitted when a sell order is updated. */
 export interface EventUpdateSellOrder {
@@ -224,7 +257,7 @@ export const EventSell = {
   },
   toAmino(message: EventSell): EventSellAmino {
     const obj: any = {};
-    obj.sell_order_id = message.sellOrderId !== BigInt(0) ? message.sellOrderId.toString() : undefined;
+    obj.sell_order_id = message.sellOrderId !== BigInt(0) ? message.sellOrderId?.toString() : undefined;
     return obj;
   },
   fromAminoMsg(object: EventSellAminoMsg): EventSell {
@@ -245,7 +278,11 @@ export const EventSell = {
 };
 function createBaseEventBuyDirect(): EventBuyDirect {
   return {
-    sellOrderId: BigInt(0)
+    sellOrderId: BigInt(0),
+    seller: "",
+    sellerFeePaid: undefined,
+    buyer: "",
+    buyerFeePaid: undefined
   };
 }
 export const EventBuyDirect = {
@@ -253,6 +290,18 @@ export const EventBuyDirect = {
   encode(message: EventBuyDirect, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.sellOrderId !== BigInt(0)) {
       writer.uint32(8).uint64(message.sellOrderId);
+    }
+    if (message.seller !== "") {
+      writer.uint32(18).string(message.seller);
+    }
+    if (message.sellerFeePaid !== undefined) {
+      Coin.encode(message.sellerFeePaid, writer.uint32(26).fork()).ldelim();
+    }
+    if (message.buyer !== "") {
+      writer.uint32(34).string(message.buyer);
+    }
+    if (message.buyerFeePaid !== undefined) {
+      Coin.encode(message.buyerFeePaid, writer.uint32(42).fork()).ldelim();
     }
     return writer;
   },
@@ -266,6 +315,18 @@ export const EventBuyDirect = {
         case 1:
           message.sellOrderId = reader.uint64();
           break;
+        case 2:
+          message.seller = reader.string();
+          break;
+        case 3:
+          message.sellerFeePaid = Coin.decode(reader, reader.uint32());
+          break;
+        case 4:
+          message.buyer = reader.string();
+          break;
+        case 5:
+          message.buyerFeePaid = Coin.decode(reader, reader.uint32());
+          break;
         default:
           reader.skipType(tag & 7);
           break;
@@ -276,6 +337,10 @@ export const EventBuyDirect = {
   fromPartial(object: Partial<EventBuyDirect>): EventBuyDirect {
     const message = createBaseEventBuyDirect();
     message.sellOrderId = object.sellOrderId !== undefined && object.sellOrderId !== null ? BigInt(object.sellOrderId.toString()) : BigInt(0);
+    message.seller = object.seller ?? "";
+    message.sellerFeePaid = object.sellerFeePaid !== undefined && object.sellerFeePaid !== null ? Coin.fromPartial(object.sellerFeePaid) : undefined;
+    message.buyer = object.buyer ?? "";
+    message.buyerFeePaid = object.buyerFeePaid !== undefined && object.buyerFeePaid !== null ? Coin.fromPartial(object.buyerFeePaid) : undefined;
     return message;
   },
   fromAmino(object: EventBuyDirectAmino): EventBuyDirect {
@@ -283,11 +348,27 @@ export const EventBuyDirect = {
     if (object.sell_order_id !== undefined && object.sell_order_id !== null) {
       message.sellOrderId = BigInt(object.sell_order_id);
     }
+    if (object.seller !== undefined && object.seller !== null) {
+      message.seller = object.seller;
+    }
+    if (object.seller_fee_paid !== undefined && object.seller_fee_paid !== null) {
+      message.sellerFeePaid = Coin.fromAmino(object.seller_fee_paid);
+    }
+    if (object.buyer !== undefined && object.buyer !== null) {
+      message.buyer = object.buyer;
+    }
+    if (object.buyer_fee_paid !== undefined && object.buyer_fee_paid !== null) {
+      message.buyerFeePaid = Coin.fromAmino(object.buyer_fee_paid);
+    }
     return message;
   },
   toAmino(message: EventBuyDirect): EventBuyDirectAmino {
     const obj: any = {};
-    obj.sell_order_id = message.sellOrderId !== BigInt(0) ? message.sellOrderId.toString() : undefined;
+    obj.sell_order_id = message.sellOrderId !== BigInt(0) ? message.sellOrderId?.toString() : undefined;
+    obj.seller = message.seller === "" ? undefined : message.seller;
+    obj.seller_fee_paid = message.sellerFeePaid ? Coin.toAmino(message.sellerFeePaid) : undefined;
+    obj.buyer = message.buyer === "" ? undefined : message.buyer;
+    obj.buyer_fee_paid = message.buyerFeePaid ? Coin.toAmino(message.buyerFeePaid) : undefined;
     return obj;
   },
   fromAminoMsg(object: EventBuyDirectAminoMsg): EventBuyDirect {
@@ -350,7 +431,7 @@ export const EventUpdateSellOrder = {
   },
   toAmino(message: EventUpdateSellOrder): EventUpdateSellOrderAmino {
     const obj: any = {};
-    obj.sell_order_id = message.sellOrderId !== BigInt(0) ? message.sellOrderId.toString() : undefined;
+    obj.sell_order_id = message.sellOrderId !== BigInt(0) ? message.sellOrderId?.toString() : undefined;
     return obj;
   },
   fromAminoMsg(object: EventUpdateSellOrderAminoMsg): EventUpdateSellOrder {
@@ -413,7 +494,7 @@ export const EventCancelSellOrder = {
   },
   toAmino(message: EventCancelSellOrder): EventCancelSellOrderAmino {
     const obj: any = {};
-    obj.sell_order_id = message.sellOrderId !== BigInt(0) ? message.sellOrderId.toString() : undefined;
+    obj.sell_order_id = message.sellOrderId !== BigInt(0) ? message.sellOrderId?.toString() : undefined;
     return obj;
   },
   fromAminoMsg(object: EventCancelSellOrderAminoMsg): EventCancelSellOrder {

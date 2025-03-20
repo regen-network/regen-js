@@ -1,7 +1,7 @@
 //@ts-nocheck
 import { Rpc } from "../../../../helpers";
 import { BinaryReader } from "../../../../binary";
-import { MsgSell, MsgSellResponse, MsgUpdateSellOrders, MsgUpdateSellOrdersResponse, MsgCancelSellOrder, MsgCancelSellOrderResponse, MsgBuyDirect, MsgBuyDirectResponse, MsgAddAllowedDenom, MsgAddAllowedDenomResponse, MsgRemoveAllowedDenom, MsgRemoveAllowedDenomResponse } from "./tx";
+import { MsgSell, MsgSellResponse, MsgUpdateSellOrders, MsgUpdateSellOrdersResponse, MsgCancelSellOrder, MsgCancelSellOrderResponse, MsgBuyDirect, MsgBuyDirectResponse, MsgAddAllowedDenom, MsgAddAllowedDenomResponse, MsgRemoveAllowedDenom, MsgRemoveAllowedDenomResponse, MsgGovSetFeeParams, MsgGovSetFeeParamsResponse, MsgGovSendFromFeePool, MsgGovSendFromFeePoolResponse } from "./tx";
 /** Msg is the regen.ecocredit.marketplace.v1 Msg service. */
 export interface Msg {
   /** Sell creates new sell orders. */
@@ -25,6 +25,19 @@ export interface Msg {
    * Since Revision 1
    */
   removeAllowedDenom(request: MsgRemoveAllowedDenom): Promise<MsgRemoveAllowedDenomResponse>;
+  /**
+   * SetFeeParams is a governance method that sets the marketplace fees.
+   * 
+   * Since Revision 3
+   */
+  govSetFeeParams(request: MsgGovSetFeeParams): Promise<MsgGovSetFeeParamsResponse>;
+  /**
+   * GovSendFromFeePool is a governance method that allows the sending of the
+   * marketplace fees.
+   * 
+   * Since Revision 3
+   */
+  govSendFromFeePool(request: MsgGovSendFromFeePool): Promise<MsgGovSendFromFeePoolResponse>;
 }
 export class MsgClientImpl implements Msg {
   private readonly rpc: Rpc;
@@ -36,6 +49,8 @@ export class MsgClientImpl implements Msg {
     this.buyDirect = this.buyDirect.bind(this);
     this.addAllowedDenom = this.addAllowedDenom.bind(this);
     this.removeAllowedDenom = this.removeAllowedDenom.bind(this);
+    this.govSetFeeParams = this.govSetFeeParams.bind(this);
+    this.govSendFromFeePool = this.govSendFromFeePool.bind(this);
   }
   sell(request: MsgSell): Promise<MsgSellResponse> {
     const data = MsgSell.encode(request).finish();
@@ -66,5 +81,15 @@ export class MsgClientImpl implements Msg {
     const data = MsgRemoveAllowedDenom.encode(request).finish();
     const promise = this.rpc.request("regen.ecocredit.marketplace.v1.Msg", "RemoveAllowedDenom", data);
     return promise.then(data => MsgRemoveAllowedDenomResponse.decode(new BinaryReader(data)));
+  }
+  govSetFeeParams(request: MsgGovSetFeeParams): Promise<MsgGovSetFeeParamsResponse> {
+    const data = MsgGovSetFeeParams.encode(request).finish();
+    const promise = this.rpc.request("regen.ecocredit.marketplace.v1.Msg", "GovSetFeeParams", data);
+    return promise.then(data => MsgGovSetFeeParamsResponse.decode(new BinaryReader(data)));
+  }
+  govSendFromFeePool(request: MsgGovSendFromFeePool): Promise<MsgGovSendFromFeePoolResponse> {
+    const data = MsgGovSendFromFeePool.encode(request).finish();
+    const promise = this.rpc.request("regen.ecocredit.marketplace.v1.Msg", "GovSendFromFeePool", data);
+    return promise.then(data => MsgGovSendFromFeePoolResponse.decode(new BinaryReader(data)));
   }
 }

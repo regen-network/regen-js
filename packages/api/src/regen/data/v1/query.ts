@@ -1423,7 +1423,7 @@ export const QueryResolverRequest = {
   },
   toAmino(message: QueryResolverRequest): QueryResolverRequestAmino {
     const obj: any = {};
-    obj.id = message.id !== BigInt(0) ? message.id.toString() : undefined;
+    obj.id = message.id !== BigInt(0) ? message.id?.toString() : undefined;
     return obj;
   },
   fromAminoMsg(object: QueryResolverRequestAminoMsg): QueryResolverRequest {
@@ -2453,7 +2453,7 @@ export const ResolverInfo = {
   },
   toAmino(message: ResolverInfo): ResolverInfoAmino {
     const obj: any = {};
-    obj.id = message.id !== BigInt(0) ? message.id.toString() : undefined;
+    obj.id = message.id !== BigInt(0) ? message.id?.toString() : undefined;
     obj.url = message.url === "" ? undefined : message.url;
     obj.manager = message.manager === "" ? undefined : message.manager;
     return obj;

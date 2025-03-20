@@ -2,7 +2,7 @@
 import { Rpc } from "../../../helpers";
 import { BinaryReader } from "../../../binary";
 import { QueryClient, createProtobufRpcClient } from "@cosmjs/stargate";
-import { QueryClassesRequest, QueryClassesResponse, QueryClassesByAdminRequest, QueryClassesByAdminResponse, QueryClassRequest, QueryClassResponse, QueryClassIssuersRequest, QueryClassIssuersResponse, QueryProjectsRequest, QueryProjectsResponse, QueryProjectsByClassRequest, QueryProjectsByClassResponse, QueryProjectsByReferenceIdRequest, QueryProjectsByReferenceIdResponse, QueryProjectsByAdminRequest, QueryProjectsByAdminResponse, QueryProjectRequest, QueryProjectResponse, QueryBatchesRequest, QueryBatchesResponse, QueryBatchesByIssuerRequest, QueryBatchesByIssuerResponse, QueryBatchesByClassRequest, QueryBatchesByClassResponse, QueryBatchesByProjectRequest, QueryBatchesByProjectResponse, QueryBatchRequest, QueryBatchResponse, QueryBalanceRequest, QueryBalanceResponse, QueryBalancesRequest, QueryBalancesResponse, QueryBalancesByBatchRequest, QueryBalancesByBatchResponse, QueryAllBalancesRequest, QueryAllBalancesResponse, QuerySupplyRequest, QuerySupplyResponse, QueryCreditTypesRequest, QueryCreditTypesResponse, QueryParamsRequest, QueryParamsResponse, QueryCreditTypeRequest, QueryCreditTypeResponse, QueryClassCreatorAllowlistRequest, QueryClassCreatorAllowlistResponse, QueryAllowedClassCreatorsRequest, QueryAllowedClassCreatorsResponse, QueryClassFeeRequest, QueryClassFeeResponse, QueryAllowedBridgeChainsRequest, QueryAllowedBridgeChainsResponse } from "./query";
+import { QueryClassesRequest, QueryClassesResponse, QueryClassesByAdminRequest, QueryClassesByAdminResponse, QueryClassRequest, QueryClassResponse, QueryClassIssuersRequest, QueryClassIssuersResponse, QueryProjectsRequest, QueryProjectsResponse, QueryProjectsByClassRequest, QueryProjectsByClassResponse, QueryProjectsByReferenceIdRequest, QueryProjectsByReferenceIdResponse, QueryProjectsByAdminRequest, QueryProjectsByAdminResponse, QueryProjectRequest, QueryProjectResponse, QueryBatchesRequest, QueryBatchesResponse, QueryBatchesByIssuerRequest, QueryBatchesByIssuerResponse, QueryBatchesByClassRequest, QueryBatchesByClassResponse, QueryBatchesByProjectRequest, QueryBatchesByProjectResponse, QueryBatchRequest, QueryBatchResponse, QueryBalanceRequest, QueryBalanceResponse, QueryBalancesRequest, QueryBalancesResponse, QueryBalancesByBatchRequest, QueryBalancesByBatchResponse, QueryAllBalancesRequest, QueryAllBalancesResponse, QuerySupplyRequest, QuerySupplyResponse, QueryCreditTypesRequest, QueryCreditTypesResponse, QueryParamsRequest, QueryParamsResponse, QueryCreditTypeRequest, QueryCreditTypeResponse, QueryClassCreatorAllowlistRequest, QueryClassCreatorAllowlistResponse, QueryAllowedClassCreatorsRequest, QueryAllowedClassCreatorsResponse, QueryClassFeeRequest, QueryClassFeeResponse, QueryAllowedBridgeChainsRequest, QueryAllowedBridgeChainsResponse, QueryProjectEnrollmentRequest, QueryProjectEnrollmentResponse, QueryProjectEnrollmentsRequest, QueryProjectEnrollmentsResponse } from "./query";
 /** Msg is the regen.ecocredit.v1 Query service. */
 export interface Query {
   /** Classes queries for all credit classes with pagination. */
@@ -107,6 +107,18 @@ export interface Query {
    * Since Revision 2
    */
   allowedBridgeChains(request?: QueryAllowedBridgeChainsRequest): Promise<QueryAllowedBridgeChainsResponse>;
+  /**
+   * ProjectEnrollment queries information about a project's enrollment in a
+   * credit class.
+   * 
+   * Since Revision 3
+   */
+  projectEnrollment(request: QueryProjectEnrollmentRequest): Promise<QueryProjectEnrollmentResponse>;
+  /**
+   * ProjectEnrollments queries all credit class enrollments associated with a
+   * project.
+   */
+  projectEnrollments(request: QueryProjectEnrollmentsRequest): Promise<QueryProjectEnrollmentsResponse>;
 }
 export class QueryClientImpl implements Query {
   private readonly rpc: Rpc;
@@ -138,6 +150,8 @@ export class QueryClientImpl implements Query {
     this.allowedClassCreators = this.allowedClassCreators.bind(this);
     this.classFee = this.classFee.bind(this);
     this.allowedBridgeChains = this.allowedBridgeChains.bind(this);
+    this.projectEnrollment = this.projectEnrollment.bind(this);
+    this.projectEnrollments = this.projectEnrollments.bind(this);
   }
   classes(request: QueryClassesRequest = {
     pagination: undefined
@@ -279,6 +293,16 @@ export class QueryClientImpl implements Query {
     const promise = this.rpc.request("regen.ecocredit.v1.Query", "AllowedBridgeChains", data);
     return promise.then(data => QueryAllowedBridgeChainsResponse.decode(new BinaryReader(data)));
   }
+  projectEnrollment(request: QueryProjectEnrollmentRequest): Promise<QueryProjectEnrollmentResponse> {
+    const data = QueryProjectEnrollmentRequest.encode(request).finish();
+    const promise = this.rpc.request("regen.ecocredit.v1.Query", "ProjectEnrollment", data);
+    return promise.then(data => QueryProjectEnrollmentResponse.decode(new BinaryReader(data)));
+  }
+  projectEnrollments(request: QueryProjectEnrollmentsRequest): Promise<QueryProjectEnrollmentsResponse> {
+    const data = QueryProjectEnrollmentsRequest.encode(request).finish();
+    const promise = this.rpc.request("regen.ecocredit.v1.Query", "ProjectEnrollments", data);
+    return promise.then(data => QueryProjectEnrollmentsResponse.decode(new BinaryReader(data)));
+  }
 }
 export const createRpcQueryExtension = (base: QueryClient) => {
   const rpc = createProtobufRpcClient(base);
@@ -361,6 +385,12 @@ export const createRpcQueryExtension = (base: QueryClient) => {
     },
     allowedBridgeChains(request?: QueryAllowedBridgeChainsRequest): Promise<QueryAllowedBridgeChainsResponse> {
       return queryService.allowedBridgeChains(request);
+    },
+    projectEnrollment(request: QueryProjectEnrollmentRequest): Promise<QueryProjectEnrollmentResponse> {
+      return queryService.projectEnrollment(request);
+    },
+    projectEnrollments(request: QueryProjectEnrollmentsRequest): Promise<QueryProjectEnrollmentsResponse> {
+      return queryService.projectEnrollments(request);
     }
   };
 };

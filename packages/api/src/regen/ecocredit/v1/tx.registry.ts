@@ -1,7 +1,7 @@
 //@ts-nocheck
 import { GeneratedType, Registry } from "@cosmjs/proto-signing";
-import { MsgCreateClass, MsgCreateProject, MsgCreateBatch, MsgMintBatchCredits, MsgSealBatch, MsgSend, MsgRetire, MsgCancel, MsgUpdateClassAdmin, MsgUpdateClassIssuers, MsgUpdateClassMetadata, MsgUpdateProjectAdmin, MsgUpdateProjectMetadata, MsgUpdateBatchMetadata, MsgBridge, MsgBridgeReceive, MsgAddCreditType, MsgSetClassCreatorAllowlist, MsgAddClassCreator, MsgRemoveClassCreator, MsgUpdateClassFee, MsgAddAllowedBridgeChain, MsgRemoveAllowedBridgeChain } from "./tx";
-export const registry: ReadonlyArray<[string, GeneratedType]> = [["/regen.ecocredit.v1.MsgCreateClass", MsgCreateClass], ["/regen.ecocredit.v1.MsgCreateProject", MsgCreateProject], ["/regen.ecocredit.v1.MsgCreateBatch", MsgCreateBatch], ["/regen.ecocredit.v1.MsgMintBatchCredits", MsgMintBatchCredits], ["/regen.ecocredit.v1.MsgSealBatch", MsgSealBatch], ["/regen.ecocredit.v1.MsgSend", MsgSend], ["/regen.ecocredit.v1.MsgRetire", MsgRetire], ["/regen.ecocredit.v1.MsgCancel", MsgCancel], ["/regen.ecocredit.v1.MsgUpdateClassAdmin", MsgUpdateClassAdmin], ["/regen.ecocredit.v1.MsgUpdateClassIssuers", MsgUpdateClassIssuers], ["/regen.ecocredit.v1.MsgUpdateClassMetadata", MsgUpdateClassMetadata], ["/regen.ecocredit.v1.MsgUpdateProjectAdmin", MsgUpdateProjectAdmin], ["/regen.ecocredit.v1.MsgUpdateProjectMetadata", MsgUpdateProjectMetadata], ["/regen.ecocredit.v1.MsgUpdateBatchMetadata", MsgUpdateBatchMetadata], ["/regen.ecocredit.v1.MsgBridge", MsgBridge], ["/regen.ecocredit.v1.MsgBridgeReceive", MsgBridgeReceive], ["/regen.ecocredit.v1.MsgAddCreditType", MsgAddCreditType], ["/regen.ecocredit.v1.MsgSetClassCreatorAllowlist", MsgSetClassCreatorAllowlist], ["/regen.ecocredit.v1.MsgAddClassCreator", MsgAddClassCreator], ["/regen.ecocredit.v1.MsgRemoveClassCreator", MsgRemoveClassCreator], ["/regen.ecocredit.v1.MsgUpdateClassFee", MsgUpdateClassFee], ["/regen.ecocredit.v1.MsgAddAllowedBridgeChain", MsgAddAllowedBridgeChain], ["/regen.ecocredit.v1.MsgRemoveAllowedBridgeChain", MsgRemoveAllowedBridgeChain]];
+import { MsgCreateClass, MsgCreateProject, MsgCreateUnregisteredProject, MsgCreateOrUpdateApplication, MsgUpdateProjectEnrollment, MsgCreateBatch, MsgMintBatchCredits, MsgSealBatch, MsgSend, MsgRetire, MsgCancel, MsgUpdateClassAdmin, MsgUpdateClassIssuers, MsgUpdateClassMetadata, MsgUpdateProjectAdmin, MsgUpdateProjectMetadata, MsgUpdateBatchMetadata, MsgBridge, MsgBridgeReceive, MsgAddCreditType, MsgSetClassCreatorAllowlist, MsgAddClassCreator, MsgRemoveClassCreator, MsgUpdateClassFee, MsgUpdateProjectFee, MsgAddAllowedBridgeChain, MsgRemoveAllowedBridgeChain, MsgBurnRegen } from "./tx";
+export const registry: ReadonlyArray<[string, GeneratedType]> = [["/regen.ecocredit.v1.MsgCreateClass", MsgCreateClass], ["/regen.ecocredit.v1.MsgCreateProject", MsgCreateProject], ["/regen.ecocredit.v1.MsgCreateUnregisteredProject", MsgCreateUnregisteredProject], ["/regen.ecocredit.v1.MsgCreateOrUpdateApplication", MsgCreateOrUpdateApplication], ["/regen.ecocredit.v1.MsgUpdateProjectEnrollment", MsgUpdateProjectEnrollment], ["/regen.ecocredit.v1.MsgCreateBatch", MsgCreateBatch], ["/regen.ecocredit.v1.MsgMintBatchCredits", MsgMintBatchCredits], ["/regen.ecocredit.v1.MsgSealBatch", MsgSealBatch], ["/regen.ecocredit.v1.MsgSend", MsgSend], ["/regen.ecocredit.v1.MsgRetire", MsgRetire], ["/regen.ecocredit.v1.MsgCancel", MsgCancel], ["/regen.ecocredit.v1.MsgUpdateClassAdmin", MsgUpdateClassAdmin], ["/regen.ecocredit.v1.MsgUpdateClassIssuers", MsgUpdateClassIssuers], ["/regen.ecocredit.v1.MsgUpdateClassMetadata", MsgUpdateClassMetadata], ["/regen.ecocredit.v1.MsgUpdateProjectAdmin", MsgUpdateProjectAdmin], ["/regen.ecocredit.v1.MsgUpdateProjectMetadata", MsgUpdateProjectMetadata], ["/regen.ecocredit.v1.MsgUpdateBatchMetadata", MsgUpdateBatchMetadata], ["/regen.ecocredit.v1.MsgBridge", MsgBridge], ["/regen.ecocredit.v1.MsgBridgeReceive", MsgBridgeReceive], ["/regen.ecocredit.v1.MsgAddCreditType", MsgAddCreditType], ["/regen.ecocredit.v1.MsgSetClassCreatorAllowlist", MsgSetClassCreatorAllowlist], ["/regen.ecocredit.v1.MsgAddClassCreator", MsgAddClassCreator], ["/regen.ecocredit.v1.MsgRemoveClassCreator", MsgRemoveClassCreator], ["/regen.ecocredit.v1.MsgUpdateClassFee", MsgUpdateClassFee], ["/regen.ecocredit.v1.MsgUpdateProjectFee", MsgUpdateProjectFee], ["/regen.ecocredit.v1.MsgAddAllowedBridgeChain", MsgAddAllowedBridgeChain], ["/regen.ecocredit.v1.MsgRemoveAllowedBridgeChain", MsgRemoveAllowedBridgeChain], ["/regen.ecocredit.v1.MsgBurnRegen", MsgBurnRegen]];
 export const load = (protoRegistry: Registry) => {
   registry.forEach(([typeUrl, mod]) => {
     protoRegistry.register(typeUrl, mod);
@@ -19,6 +19,24 @@ export const MessageComposer = {
       return {
         typeUrl: "/regen.ecocredit.v1.MsgCreateProject",
         value: MsgCreateProject.encode(value).finish()
+      };
+    },
+    createUnregisteredProject(value: MsgCreateUnregisteredProject) {
+      return {
+        typeUrl: "/regen.ecocredit.v1.MsgCreateUnregisteredProject",
+        value: MsgCreateUnregisteredProject.encode(value).finish()
+      };
+    },
+    createOrUpdateApplication(value: MsgCreateOrUpdateApplication) {
+      return {
+        typeUrl: "/regen.ecocredit.v1.MsgCreateOrUpdateApplication",
+        value: MsgCreateOrUpdateApplication.encode(value).finish()
+      };
+    },
+    updateProjectEnrollment(value: MsgUpdateProjectEnrollment) {
+      return {
+        typeUrl: "/regen.ecocredit.v1.MsgUpdateProjectEnrollment",
+        value: MsgUpdateProjectEnrollment.encode(value).finish()
       };
     },
     createBatch(value: MsgCreateBatch) {
@@ -135,6 +153,12 @@ export const MessageComposer = {
         value: MsgUpdateClassFee.encode(value).finish()
       };
     },
+    updateProjectFee(value: MsgUpdateProjectFee) {
+      return {
+        typeUrl: "/regen.ecocredit.v1.MsgUpdateProjectFee",
+        value: MsgUpdateProjectFee.encode(value).finish()
+      };
+    },
     addAllowedBridgeChain(value: MsgAddAllowedBridgeChain) {
       return {
         typeUrl: "/regen.ecocredit.v1.MsgAddAllowedBridgeChain",
@@ -145,6 +169,12 @@ export const MessageComposer = {
       return {
         typeUrl: "/regen.ecocredit.v1.MsgRemoveAllowedBridgeChain",
         value: MsgRemoveAllowedBridgeChain.encode(value).finish()
+      };
+    },
+    burnRegen(value: MsgBurnRegen) {
+      return {
+        typeUrl: "/regen.ecocredit.v1.MsgBurnRegen",
+        value: MsgBurnRegen.encode(value).finish()
       };
     }
   },
@@ -158,6 +188,24 @@ export const MessageComposer = {
     createProject(value: MsgCreateProject) {
       return {
         typeUrl: "/regen.ecocredit.v1.MsgCreateProject",
+        value
+      };
+    },
+    createUnregisteredProject(value: MsgCreateUnregisteredProject) {
+      return {
+        typeUrl: "/regen.ecocredit.v1.MsgCreateUnregisteredProject",
+        value
+      };
+    },
+    createOrUpdateApplication(value: MsgCreateOrUpdateApplication) {
+      return {
+        typeUrl: "/regen.ecocredit.v1.MsgCreateOrUpdateApplication",
+        value
+      };
+    },
+    updateProjectEnrollment(value: MsgUpdateProjectEnrollment) {
+      return {
+        typeUrl: "/regen.ecocredit.v1.MsgUpdateProjectEnrollment",
         value
       };
     },
@@ -275,6 +323,12 @@ export const MessageComposer = {
         value
       };
     },
+    updateProjectFee(value: MsgUpdateProjectFee) {
+      return {
+        typeUrl: "/regen.ecocredit.v1.MsgUpdateProjectFee",
+        value
+      };
+    },
     addAllowedBridgeChain(value: MsgAddAllowedBridgeChain) {
       return {
         typeUrl: "/regen.ecocredit.v1.MsgAddAllowedBridgeChain",
@@ -284,6 +338,12 @@ export const MessageComposer = {
     removeAllowedBridgeChain(value: MsgRemoveAllowedBridgeChain) {
       return {
         typeUrl: "/regen.ecocredit.v1.MsgRemoveAllowedBridgeChain",
+        value
+      };
+    },
+    burnRegen(value: MsgBurnRegen) {
+      return {
+        typeUrl: "/regen.ecocredit.v1.MsgBurnRegen",
         value
       };
     }
@@ -299,6 +359,24 @@ export const MessageComposer = {
       return {
         typeUrl: "/regen.ecocredit.v1.MsgCreateProject",
         value: MsgCreateProject.fromPartial(value)
+      };
+    },
+    createUnregisteredProject(value: MsgCreateUnregisteredProject) {
+      return {
+        typeUrl: "/regen.ecocredit.v1.MsgCreateUnregisteredProject",
+        value: MsgCreateUnregisteredProject.fromPartial(value)
+      };
+    },
+    createOrUpdateApplication(value: MsgCreateOrUpdateApplication) {
+      return {
+        typeUrl: "/regen.ecocredit.v1.MsgCreateOrUpdateApplication",
+        value: MsgCreateOrUpdateApplication.fromPartial(value)
+      };
+    },
+    updateProjectEnrollment(value: MsgUpdateProjectEnrollment) {
+      return {
+        typeUrl: "/regen.ecocredit.v1.MsgUpdateProjectEnrollment",
+        value: MsgUpdateProjectEnrollment.fromPartial(value)
       };
     },
     createBatch(value: MsgCreateBatch) {
@@ -415,6 +493,12 @@ export const MessageComposer = {
         value: MsgUpdateClassFee.fromPartial(value)
       };
     },
+    updateProjectFee(value: MsgUpdateProjectFee) {
+      return {
+        typeUrl: "/regen.ecocredit.v1.MsgUpdateProjectFee",
+        value: MsgUpdateProjectFee.fromPartial(value)
+      };
+    },
     addAllowedBridgeChain(value: MsgAddAllowedBridgeChain) {
       return {
         typeUrl: "/regen.ecocredit.v1.MsgAddAllowedBridgeChain",
@@ -425,6 +509,12 @@ export const MessageComposer = {
       return {
         typeUrl: "/regen.ecocredit.v1.MsgRemoveAllowedBridgeChain",
         value: MsgRemoveAllowedBridgeChain.fromPartial(value)
+      };
+    },
+    burnRegen(value: MsgBurnRegen) {
+      return {
+        typeUrl: "/regen.ecocredit.v1.MsgBurnRegen",
+        value: MsgBurnRegen.fromPartial(value)
       };
     }
   }

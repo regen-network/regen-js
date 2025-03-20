@@ -1,5 +1,5 @@
 //@ts-nocheck
-import { MsgCreateClass, MsgCreateProject, MsgCreateBatch, MsgMintBatchCredits, MsgSealBatch, MsgSend, MsgRetire, MsgCancel, MsgUpdateClassAdmin, MsgUpdateClassIssuers, MsgUpdateClassMetadata, MsgUpdateProjectAdmin, MsgUpdateProjectMetadata, MsgUpdateBatchMetadata, MsgBridge, MsgBridgeReceive, MsgAddCreditType, MsgSetClassCreatorAllowlist, MsgAddClassCreator, MsgRemoveClassCreator, MsgUpdateClassFee, MsgAddAllowedBridgeChain, MsgRemoveAllowedBridgeChain } from "./tx";
+import { MsgCreateClass, MsgCreateProject, MsgCreateUnregisteredProject, MsgCreateOrUpdateApplication, MsgUpdateProjectEnrollment, MsgCreateBatch, MsgMintBatchCredits, MsgSealBatch, MsgSend, MsgRetire, MsgCancel, MsgUpdateClassAdmin, MsgUpdateClassIssuers, MsgUpdateClassMetadata, MsgUpdateProjectAdmin, MsgUpdateProjectMetadata, MsgUpdateBatchMetadata, MsgBridge, MsgBridgeReceive, MsgAddCreditType, MsgSetClassCreatorAllowlist, MsgAddClassCreator, MsgRemoveClassCreator, MsgUpdateClassFee, MsgUpdateProjectFee, MsgAddAllowedBridgeChain, MsgRemoveAllowedBridgeChain, MsgBurnRegen } from "./tx";
 export const AminoConverter = {
   "/regen.ecocredit.v1.MsgCreateClass": {
     aminoType: "regen/MsgCreateClass",
@@ -10,6 +10,21 @@ export const AminoConverter = {
     aminoType: "regen/MsgCreateProject",
     toAmino: MsgCreateProject.toAmino,
     fromAmino: MsgCreateProject.fromAmino
+  },
+  "/regen.ecocredit.v1.MsgCreateUnregisteredProject": {
+    aminoType: "/regen.ecocredit.v1.MsgCreateUnregisteredProject",
+    toAmino: MsgCreateUnregisteredProject.toAmino,
+    fromAmino: MsgCreateUnregisteredProject.fromAmino
+  },
+  "/regen.ecocredit.v1.MsgCreateOrUpdateApplication": {
+    aminoType: "/regen.ecocredit.v1.MsgCreateOrUpdateApplication",
+    toAmino: MsgCreateOrUpdateApplication.toAmino,
+    fromAmino: MsgCreateOrUpdateApplication.fromAmino
+  },
+  "/regen.ecocredit.v1.MsgUpdateProjectEnrollment": {
+    aminoType: "/regen.ecocredit.v1.MsgUpdateProjectEnrollment",
+    toAmino: MsgUpdateProjectEnrollment.toAmino,
+    fromAmino: MsgUpdateProjectEnrollment.fromAmino
   },
   "/regen.ecocredit.v1.MsgCreateBatch": {
     aminoType: "regen/MsgCreateBatch",
@@ -106,6 +121,11 @@ export const AminoConverter = {
     toAmino: MsgUpdateClassFee.toAmino,
     fromAmino: MsgUpdateClassFee.fromAmino
   },
+  "/regen.ecocredit.v1.MsgUpdateProjectFee": {
+    aminoType: "/regen.ecocredit.v1.MsgUpdateProjectFee",
+    toAmino: MsgUpdateProjectFee.toAmino,
+    fromAmino: MsgUpdateProjectFee.fromAmino
+  },
   "/regen.ecocredit.v1.MsgAddAllowedBridgeChain": {
     aminoType: "regen/MsgAddAllowedBridgeChain",
     toAmino: MsgAddAllowedBridgeChain.toAmino,
@@ -115,5 +135,10 @@ export const AminoConverter = {
     aminoType: "regen/MsgRemoveAllowedBridgeChain",
     toAmino: MsgRemoveAllowedBridgeChain.toAmino,
     fromAmino: MsgRemoveAllowedBridgeChain.fromAmino
+  },
+  "/regen.ecocredit.v1.MsgBurnRegen": {
+    aminoType: "/regen.ecocredit.v1.MsgBurnRegen",
+    toAmino: MsgBurnRegen.toAmino,
+    fromAmino: MsgBurnRegen.fromAmino
   }
 };

@@ -1,17 +1,17 @@
 export const AMINO_MAP = {
   // NOTE: amino types for cosmos and ibc modules are registered by telescope
 
-  // regen.data.v1
-  '/regen.data.v1.MsgAnchor': {
+  // regen.data.v2
+  '/regen.data.v2.MsgAnchor': {
     aminoType: 'regen-ledger/MsgAnchor',
   },
-  '/regen.data.v1.MsgAttest': {
+  '/regen.data.v2.MsgAttest': {
     aminoType: 'regen-ledger/MsgAttest',
   },
-  '/regen.data.v1.MsgDefineResolver': {
+  '/regen.data.v2.MsgDefineResolver': {
     aminoType: 'regen-ledger/MsgDefineResolver',
   },
-  '/regen.data.v1.MsgRegisterResolver': {
+  '/regen.data.v2.MsgRegisterResolver': {
     aminoType: 'regen-ledger/MsgRegisterResolver',
   },
 

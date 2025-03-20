@@ -1,7 +1,7 @@
 //@ts-nocheck
 import { setPaginationParams } from "../../../helpers";
 import { LCDClient } from "@cosmology/lcd";
-import { QueryClassesRequest, QueryClassesResponseSDKType, QueryClassesByAdminRequest, QueryClassesByAdminResponseSDKType, QueryClassRequest, QueryClassResponseSDKType, QueryClassIssuersRequest, QueryClassIssuersResponseSDKType, QueryProjectsRequest, QueryProjectsResponseSDKType, QueryProjectsByClassRequest, QueryProjectsByClassResponseSDKType, QueryProjectsByReferenceIdRequest, QueryProjectsByReferenceIdResponseSDKType, QueryProjectsByAdminRequest, QueryProjectsByAdminResponseSDKType, QueryProjectRequest, QueryProjectResponseSDKType, QueryBatchesRequest, QueryBatchesResponseSDKType, QueryBatchesByIssuerRequest, QueryBatchesByIssuerResponseSDKType, QueryBatchesByClassRequest, QueryBatchesByClassResponseSDKType, QueryBatchesByProjectRequest, QueryBatchesByProjectResponseSDKType, QueryBatchRequest, QueryBatchResponseSDKType, QueryBalanceRequest, QueryBalanceResponseSDKType, QueryBalancesRequest, QueryBalancesResponseSDKType, QueryBalancesByBatchRequest, QueryBalancesByBatchResponseSDKType, QueryAllBalancesRequest, QueryAllBalancesResponseSDKType, QuerySupplyRequest, QuerySupplyResponseSDKType, QueryCreditTypesRequest, QueryCreditTypesResponseSDKType, QueryParamsRequest, QueryParamsResponseSDKType, QueryCreditTypeRequest, QueryCreditTypeResponseSDKType, QueryClassCreatorAllowlistRequest, QueryClassCreatorAllowlistResponseSDKType, QueryAllowedClassCreatorsRequest, QueryAllowedClassCreatorsResponseSDKType, QueryClassFeeRequest, QueryClassFeeResponseSDKType, QueryAllowedBridgeChainsRequest, QueryAllowedBridgeChainsResponseSDKType } from "./query";
+import { QueryClassesRequest, QueryClassesResponseSDKType, QueryClassesByAdminRequest, QueryClassesByAdminResponseSDKType, QueryClassRequest, QueryClassResponseSDKType, QueryClassIssuersRequest, QueryClassIssuersResponseSDKType, QueryProjectsRequest, QueryProjectsResponseSDKType, QueryProjectsByClassRequest, QueryProjectsByClassResponseSDKType, QueryProjectsByReferenceIdRequest, QueryProjectsByReferenceIdResponseSDKType, QueryProjectsByAdminRequest, QueryProjectsByAdminResponseSDKType, QueryProjectRequest, QueryProjectResponseSDKType, QueryBatchesRequest, QueryBatchesResponseSDKType, QueryBatchesByIssuerRequest, QueryBatchesByIssuerResponseSDKType, QueryBatchesByClassRequest, QueryBatchesByClassResponseSDKType, QueryBatchesByProjectRequest, QueryBatchesByProjectResponseSDKType, QueryBatchRequest, QueryBatchResponseSDKType, QueryBalanceRequest, QueryBalanceResponseSDKType, QueryBalancesRequest, QueryBalancesResponseSDKType, QueryBalancesByBatchRequest, QueryBalancesByBatchResponseSDKType, QueryAllBalancesRequest, QueryAllBalancesResponseSDKType, QuerySupplyRequest, QuerySupplyResponseSDKType, QueryCreditTypesRequest, QueryCreditTypesResponseSDKType, QueryParamsRequest, QueryParamsResponseSDKType, QueryCreditTypeRequest, QueryCreditTypeResponseSDKType, QueryClassCreatorAllowlistRequest, QueryClassCreatorAllowlistResponseSDKType, QueryAllowedClassCreatorsRequest, QueryAllowedClassCreatorsResponseSDKType, QueryClassFeeRequest, QueryClassFeeResponseSDKType, QueryAllowedBridgeChainsRequest, QueryAllowedBridgeChainsResponseSDKType, QueryProjectEnrollmentRequest, QueryProjectEnrollmentResponseSDKType, QueryProjectEnrollmentsRequest, QueryProjectEnrollmentsResponseSDKType } from "./query";
 export class LCDQueryClient {
   req: LCDClient;
   constructor({
@@ -36,6 +36,8 @@ export class LCDQueryClient {
     this.allowedClassCreators = this.allowedClassCreators.bind(this);
     this.classFee = this.classFee.bind(this);
     this.allowedBridgeChains = this.allowedBridgeChains.bind(this);
+    this.projectEnrollment = this.projectEnrollment.bind(this);
+    this.projectEnrollments = this.projectEnrollments.bind(this);
   }
   /* Classes queries for all credit classes with pagination. */
   async classes(params: QueryClassesRequest = {
@@ -290,5 +292,25 @@ export class LCDQueryClient {
   async allowedBridgeChains(_params: QueryAllowedBridgeChainsRequest = {}): Promise<QueryAllowedBridgeChainsResponseSDKType> {
     const endpoint = `regen/ecocredit/v1/allowed-bridge-chains`;
     return await this.req.get<QueryAllowedBridgeChainsResponseSDKType>(endpoint);
+  }
+  /* ProjectEnrollment queries information about a project's enrollment in a
+   credit class.
+  
+   Since Revision 3 */
+  async projectEnrollment(params: QueryProjectEnrollmentRequest): Promise<QueryProjectEnrollmentResponseSDKType> {
+    const endpoint = `regen/ecocredit/v1/project/${params.projectId}/enrollments/${params.classId}`;
+    return await this.req.get<QueryProjectEnrollmentResponseSDKType>(endpoint);
+  }
+  /* ProjectEnrollments queries all credit class enrollments associated with a
+   project. */
+  async projectEnrollments(params: QueryProjectEnrollmentsRequest): Promise<QueryProjectEnrollmentsResponseSDKType> {
+    const options: any = {
+      params: {}
+    };
+    if (typeof params?.pagination !== "undefined") {
+      setPaginationParams(options, params.pagination);
+    }
+    const endpoint = `regen/ecocredit/v1/project/${params.projectId}/enrollments`;
+    return await this.req.get<QueryProjectEnrollmentsResponseSDKType>(endpoint, options);
   }
 }

@@ -1,6 +1,6 @@
 //@ts-nocheck
 import { PageRequest, PageRequestAmino, PageRequestSDKType, PageResponse, PageResponseAmino, PageResponseSDKType } from "../../../cosmos/base/query/v1beta1/pagination";
-import { CreditType, CreditTypeAmino, CreditTypeSDKType } from "./state";
+import { CreditType, CreditTypeAmino, CreditTypeSDKType, ProjectEnrollment, ProjectEnrollmentAmino, ProjectEnrollmentSDKType } from "./state";
 import { Params, ParamsAmino, ParamsSDKType } from "./types";
 import { Timestamp } from "../../../google/protobuf/timestamp";
 import { Coin, CoinAmino, CoinSDKType } from "../../../cosmos/base/v1beta1/coin";
@@ -1730,6 +1730,157 @@ export interface QueryAllowedBridgeChainsResponseAminoMsg {
  */
 export interface QueryAllowedBridgeChainsResponseSDKType {
   allowed_bridge_chains: string[];
+}
+/**
+ * QueryProjectEnrollmentRequest is the Query/ProjectEnrollment request type.
+ * 
+ * Since Revision 3
+ */
+export interface QueryProjectEnrollmentRequest {
+  /** project_id is the unique identifier of the project to query. */
+  projectId: string;
+  /** class_id is the unique identifier of the credit class to query. */
+  classId: string;
+}
+export interface QueryProjectEnrollmentRequestProtoMsg {
+  typeUrl: "/regen.ecocredit.v1.QueryProjectEnrollmentRequest";
+  value: Uint8Array;
+}
+/**
+ * QueryProjectEnrollmentRequest is the Query/ProjectEnrollment request type.
+ * 
+ * Since Revision 3
+ */
+export interface QueryProjectEnrollmentRequestAmino {
+  /** project_id is the unique identifier of the project to query. */
+  project_id?: string;
+  /** class_id is the unique identifier of the credit class to query. */
+  class_id?: string;
+}
+export interface QueryProjectEnrollmentRequestAminoMsg {
+  type: "/regen.ecocredit.v1.QueryProjectEnrollmentRequest";
+  value: QueryProjectEnrollmentRequestAmino;
+}
+/**
+ * QueryProjectEnrollmentRequest is the Query/ProjectEnrollment request type.
+ * 
+ * Since Revision 3
+ */
+export interface QueryProjectEnrollmentRequestSDKType {
+  project_id: string;
+  class_id: string;
+}
+/**
+ * QueryProjectEnrollmentResponse is the Query/ProjectEnrollment response type.
+ * 
+ * Since Revision 3
+ */
+export interface QueryProjectEnrollmentResponse {
+  /** project_class is the fetched project class relationship. */
+  projectClass?: ProjectEnrollment;
+}
+export interface QueryProjectEnrollmentResponseProtoMsg {
+  typeUrl: "/regen.ecocredit.v1.QueryProjectEnrollmentResponse";
+  value: Uint8Array;
+}
+/**
+ * QueryProjectEnrollmentResponse is the Query/ProjectEnrollment response type.
+ * 
+ * Since Revision 3
+ */
+export interface QueryProjectEnrollmentResponseAmino {
+  /** project_class is the fetched project class relationship. */
+  project_class?: ProjectEnrollmentAmino;
+}
+export interface QueryProjectEnrollmentResponseAminoMsg {
+  type: "/regen.ecocredit.v1.QueryProjectEnrollmentResponse";
+  value: QueryProjectEnrollmentResponseAmino;
+}
+/**
+ * QueryProjectEnrollmentResponse is the Query/ProjectEnrollment response type.
+ * 
+ * Since Revision 3
+ */
+export interface QueryProjectEnrollmentResponseSDKType {
+  project_class?: ProjectEnrollmentSDKType;
+}
+/**
+ * QueryProjectEnrollmentsRequest is the Query/ProjectEnrollments request type.
+ * 
+ * Since Revision 3
+ */
+export interface QueryProjectEnrollmentsRequest {
+  /** project_id is the unique identifier of the project to query. */
+  projectId: string;
+  /** pagination defines an optional pagination for the request. */
+  pagination?: PageRequest;
+}
+export interface QueryProjectEnrollmentsRequestProtoMsg {
+  typeUrl: "/regen.ecocredit.v1.QueryProjectEnrollmentsRequest";
+  value: Uint8Array;
+}
+/**
+ * QueryProjectEnrollmentsRequest is the Query/ProjectEnrollments request type.
+ * 
+ * Since Revision 3
+ */
+export interface QueryProjectEnrollmentsRequestAmino {
+  /** project_id is the unique identifier of the project to query. */
+  project_id?: string;
+  /** pagination defines an optional pagination for the request. */
+  pagination?: PageRequestAmino;
+}
+export interface QueryProjectEnrollmentsRequestAminoMsg {
+  type: "/regen.ecocredit.v1.QueryProjectEnrollmentsRequest";
+  value: QueryProjectEnrollmentsRequestAmino;
+}
+/**
+ * QueryProjectEnrollmentsRequest is the Query/ProjectEnrollments request type.
+ * 
+ * Since Revision 3
+ */
+export interface QueryProjectEnrollmentsRequestSDKType {
+  project_id: string;
+  pagination?: PageRequestSDKType;
+}
+/**
+ * QueryProjectEnrollmentsResponse is the Query/ProjectEnrollments response type.
+ * 
+ * Since Revision 3
+ */
+export interface QueryProjectEnrollmentsResponse {
+  /** enrollments are the fetched project credit class enrollments. */
+  enrollments: ProjectEnrollment[];
+  /** pagination defines the pagination in the response. */
+  pagination?: PageResponse;
+}
+export interface QueryProjectEnrollmentsResponseProtoMsg {
+  typeUrl: "/regen.ecocredit.v1.QueryProjectEnrollmentsResponse";
+  value: Uint8Array;
+}
+/**
+ * QueryProjectEnrollmentsResponse is the Query/ProjectEnrollments response type.
+ * 
+ * Since Revision 3
+ */
+export interface QueryProjectEnrollmentsResponseAmino {
+  /** enrollments are the fetched project credit class enrollments. */
+  enrollments?: ProjectEnrollmentAmino[];
+  /** pagination defines the pagination in the response. */
+  pagination?: PageResponseAmino;
+}
+export interface QueryProjectEnrollmentsResponseAminoMsg {
+  type: "/regen.ecocredit.v1.QueryProjectEnrollmentsResponse";
+  value: QueryProjectEnrollmentsResponseAmino;
+}
+/**
+ * QueryProjectEnrollmentsResponse is the Query/ProjectEnrollments response type.
+ * 
+ * Since Revision 3
+ */
+export interface QueryProjectEnrollmentsResponseSDKType {
+  enrollments: ProjectEnrollmentSDKType[];
+  pagination?: PageResponseSDKType;
 }
 function createBaseQueryClassesRequest(): QueryClassesRequest {
   return {
@@ -5789,6 +5940,296 @@ export const QueryAllowedBridgeChainsResponse = {
     return {
       typeUrl: "/regen.ecocredit.v1.QueryAllowedBridgeChainsResponse",
       value: QueryAllowedBridgeChainsResponse.encode(message).finish()
+    };
+  }
+};
+function createBaseQueryProjectEnrollmentRequest(): QueryProjectEnrollmentRequest {
+  return {
+    projectId: "",
+    classId: ""
+  };
+}
+export const QueryProjectEnrollmentRequest = {
+  typeUrl: "/regen.ecocredit.v1.QueryProjectEnrollmentRequest",
+  encode(message: QueryProjectEnrollmentRequest, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
+    if (message.projectId !== "") {
+      writer.uint32(10).string(message.projectId);
+    }
+    if (message.classId !== "") {
+      writer.uint32(18).string(message.classId);
+    }
+    return writer;
+  },
+  decode(input: BinaryReader | Uint8Array, length?: number): QueryProjectEnrollmentRequest {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+    let end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseQueryProjectEnrollmentRequest();
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+        case 1:
+          message.projectId = reader.string();
+          break;
+        case 2:
+          message.classId = reader.string();
+          break;
+        default:
+          reader.skipType(tag & 7);
+          break;
+      }
+    }
+    return message;
+  },
+  fromPartial(object: Partial<QueryProjectEnrollmentRequest>): QueryProjectEnrollmentRequest {
+    const message = createBaseQueryProjectEnrollmentRequest();
+    message.projectId = object.projectId ?? "";
+    message.classId = object.classId ?? "";
+    return message;
+  },
+  fromAmino(object: QueryProjectEnrollmentRequestAmino): QueryProjectEnrollmentRequest {
+    const message = createBaseQueryProjectEnrollmentRequest();
+    if (object.project_id !== undefined && object.project_id !== null) {
+      message.projectId = object.project_id;
+    }
+    if (object.class_id !== undefined && object.class_id !== null) {
+      message.classId = object.class_id;
+    }
+    return message;
+  },
+  toAmino(message: QueryProjectEnrollmentRequest): QueryProjectEnrollmentRequestAmino {
+    const obj: any = {};
+    obj.project_id = message.projectId === "" ? undefined : message.projectId;
+    obj.class_id = message.classId === "" ? undefined : message.classId;
+    return obj;
+  },
+  fromAminoMsg(object: QueryProjectEnrollmentRequestAminoMsg): QueryProjectEnrollmentRequest {
+    return QueryProjectEnrollmentRequest.fromAmino(object.value);
+  },
+  fromProtoMsg(message: QueryProjectEnrollmentRequestProtoMsg): QueryProjectEnrollmentRequest {
+    return QueryProjectEnrollmentRequest.decode(message.value);
+  },
+  toProto(message: QueryProjectEnrollmentRequest): Uint8Array {
+    return QueryProjectEnrollmentRequest.encode(message).finish();
+  },
+  toProtoMsg(message: QueryProjectEnrollmentRequest): QueryProjectEnrollmentRequestProtoMsg {
+    return {
+      typeUrl: "/regen.ecocredit.v1.QueryProjectEnrollmentRequest",
+      value: QueryProjectEnrollmentRequest.encode(message).finish()
+    };
+  }
+};
+function createBaseQueryProjectEnrollmentResponse(): QueryProjectEnrollmentResponse {
+  return {
+    projectClass: undefined
+  };
+}
+export const QueryProjectEnrollmentResponse = {
+  typeUrl: "/regen.ecocredit.v1.QueryProjectEnrollmentResponse",
+  encode(message: QueryProjectEnrollmentResponse, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
+    if (message.projectClass !== undefined) {
+      ProjectEnrollment.encode(message.projectClass, writer.uint32(10).fork()).ldelim();
+    }
+    return writer;
+  },
+  decode(input: BinaryReader | Uint8Array, length?: number): QueryProjectEnrollmentResponse {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+    let end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseQueryProjectEnrollmentResponse();
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+        case 1:
+          message.projectClass = ProjectEnrollment.decode(reader, reader.uint32());
+          break;
+        default:
+          reader.skipType(tag & 7);
+          break;
+      }
+    }
+    return message;
+  },
+  fromPartial(object: Partial<QueryProjectEnrollmentResponse>): QueryProjectEnrollmentResponse {
+    const message = createBaseQueryProjectEnrollmentResponse();
+    message.projectClass = object.projectClass !== undefined && object.projectClass !== null ? ProjectEnrollment.fromPartial(object.projectClass) : undefined;
+    return message;
+  },
+  fromAmino(object: QueryProjectEnrollmentResponseAmino): QueryProjectEnrollmentResponse {
+    const message = createBaseQueryProjectEnrollmentResponse();
+    if (object.project_class !== undefined && object.project_class !== null) {
+      message.projectClass = ProjectEnrollment.fromAmino(object.project_class);
+    }
+    return message;
+  },
+  toAmino(message: QueryProjectEnrollmentResponse): QueryProjectEnrollmentResponseAmino {
+    const obj: any = {};
+    obj.project_class = message.projectClass ? ProjectEnrollment.toAmino(message.projectClass) : undefined;
+    return obj;
+  },
+  fromAminoMsg(object: QueryProjectEnrollmentResponseAminoMsg): QueryProjectEnrollmentResponse {
+    return QueryProjectEnrollmentResponse.fromAmino(object.value);
+  },
+  fromProtoMsg(message: QueryProjectEnrollmentResponseProtoMsg): QueryProjectEnrollmentResponse {
+    return QueryProjectEnrollmentResponse.decode(message.value);
+  },
+  toProto(message: QueryProjectEnrollmentResponse): Uint8Array {
+    return QueryProjectEnrollmentResponse.encode(message).finish();
+  },
+  toProtoMsg(message: QueryProjectEnrollmentResponse): QueryProjectEnrollmentResponseProtoMsg {
+    return {
+      typeUrl: "/regen.ecocredit.v1.QueryProjectEnrollmentResponse",
+      value: QueryProjectEnrollmentResponse.encode(message).finish()
+    };
+  }
+};
+function createBaseQueryProjectEnrollmentsRequest(): QueryProjectEnrollmentsRequest {
+  return {
+    projectId: "",
+    pagination: undefined
+  };
+}
+export const QueryProjectEnrollmentsRequest = {
+  typeUrl: "/regen.ecocredit.v1.QueryProjectEnrollmentsRequest",
+  encode(message: QueryProjectEnrollmentsRequest, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
+    if (message.projectId !== "") {
+      writer.uint32(10).string(message.projectId);
+    }
+    if (message.pagination !== undefined) {
+      PageRequest.encode(message.pagination, writer.uint32(18).fork()).ldelim();
+    }
+    return writer;
+  },
+  decode(input: BinaryReader | Uint8Array, length?: number): QueryProjectEnrollmentsRequest {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+    let end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseQueryProjectEnrollmentsRequest();
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+        case 1:
+          message.projectId = reader.string();
+          break;
+        case 2:
+          message.pagination = PageRequest.decode(reader, reader.uint32());
+          break;
+        default:
+          reader.skipType(tag & 7);
+          break;
+      }
+    }
+    return message;
+  },
+  fromPartial(object: Partial<QueryProjectEnrollmentsRequest>): QueryProjectEnrollmentsRequest {
+    const message = createBaseQueryProjectEnrollmentsRequest();
+    message.projectId = object.projectId ?? "";
+    message.pagination = object.pagination !== undefined && object.pagination !== null ? PageRequest.fromPartial(object.pagination) : undefined;
+    return message;
+  },
+  fromAmino(object: QueryProjectEnrollmentsRequestAmino): QueryProjectEnrollmentsRequest {
+    const message = createBaseQueryProjectEnrollmentsRequest();
+    if (object.project_id !== undefined && object.project_id !== null) {
+      message.projectId = object.project_id;
+    }
+    if (object.pagination !== undefined && object.pagination !== null) {
+      message.pagination = PageRequest.fromAmino(object.pagination);
+    }
+    return message;
+  },
+  toAmino(message: QueryProjectEnrollmentsRequest): QueryProjectEnrollmentsRequestAmino {
+    const obj: any = {};
+    obj.project_id = message.projectId === "" ? undefined : message.projectId;
+    obj.pagination = message.pagination ? PageRequest.toAmino(message.pagination) : undefined;
+    return obj;
+  },
+  fromAminoMsg(object: QueryProjectEnrollmentsRequestAminoMsg): QueryProjectEnrollmentsRequest {
+    return QueryProjectEnrollmentsRequest.fromAmino(object.value);
+  },
+  fromProtoMsg(message: QueryProjectEnrollmentsRequestProtoMsg): QueryProjectEnrollmentsRequest {
+    return QueryProjectEnrollmentsRequest.decode(message.value);
+  },
+  toProto(message: QueryProjectEnrollmentsRequest): Uint8Array {
+    return QueryProjectEnrollmentsRequest.encode(message).finish();
+  },
+  toProtoMsg(message: QueryProjectEnrollmentsRequest): QueryProjectEnrollmentsRequestProtoMsg {
+    return {
+      typeUrl: "/regen.ecocredit.v1.QueryProjectEnrollmentsRequest",
+      value: QueryProjectEnrollmentsRequest.encode(message).finish()
+    };
+  }
+};
+function createBaseQueryProjectEnrollmentsResponse(): QueryProjectEnrollmentsResponse {
+  return {
+    enrollments: [],
+    pagination: undefined
+  };
+}
+export const QueryProjectEnrollmentsResponse = {
+  typeUrl: "/regen.ecocredit.v1.QueryProjectEnrollmentsResponse",
+  encode(message: QueryProjectEnrollmentsResponse, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
+    for (const v of message.enrollments) {
+      ProjectEnrollment.encode(v!, writer.uint32(10).fork()).ldelim();
+    }
+    if (message.pagination !== undefined) {
+      PageResponse.encode(message.pagination, writer.uint32(18).fork()).ldelim();
+    }
+    return writer;
+  },
+  decode(input: BinaryReader | Uint8Array, length?: number): QueryProjectEnrollmentsResponse {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+    let end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseQueryProjectEnrollmentsResponse();
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+        case 1:
+          message.enrollments.push(ProjectEnrollment.decode(reader, reader.uint32()));
+          break;
+        case 2:
+          message.pagination = PageResponse.decode(reader, reader.uint32());
+          break;
+        default:
+          reader.skipType(tag & 7);
+          break;
+      }
+    }
+    return message;
+  },
+  fromPartial(object: Partial<QueryProjectEnrollmentsResponse>): QueryProjectEnrollmentsResponse {
+    const message = createBaseQueryProjectEnrollmentsResponse();
+    message.enrollments = object.enrollments?.map(e => ProjectEnrollment.fromPartial(e)) || [];
+    message.pagination = object.pagination !== undefined && object.pagination !== null ? PageResponse.fromPartial(object.pagination) : undefined;
+    return message;
+  },
+  fromAmino(object: QueryProjectEnrollmentsResponseAmino): QueryProjectEnrollmentsResponse {
+    const message = createBaseQueryProjectEnrollmentsResponse();
+    message.enrollments = object.enrollments?.map(e => ProjectEnrollment.fromAmino(e)) || [];
+    if (object.pagination !== undefined && object.pagination !== null) {
+      message.pagination = PageResponse.fromAmino(object.pagination);
+    }
+    return message;
+  },
+  toAmino(message: QueryProjectEnrollmentsResponse): QueryProjectEnrollmentsResponseAmino {
+    const obj: any = {};
+    if (message.enrollments) {
+      obj.enrollments = message.enrollments.map(e => e ? ProjectEnrollment.toAmino(e) : undefined);
+    } else {
+      obj.enrollments = message.enrollments;
+    }
+    obj.pagination = message.pagination ? PageResponse.toAmino(message.pagination) : undefined;
+    return obj;
+  },
+  fromAminoMsg(object: QueryProjectEnrollmentsResponseAminoMsg): QueryProjectEnrollmentsResponse {
+    return QueryProjectEnrollmentsResponse.fromAmino(object.value);
+  },
+  fromProtoMsg(message: QueryProjectEnrollmentsResponseProtoMsg): QueryProjectEnrollmentsResponse {
+    return QueryProjectEnrollmentsResponse.decode(message.value);
+  },
+  toProto(message: QueryProjectEnrollmentsResponse): Uint8Array {
+    return QueryProjectEnrollmentsResponse.encode(message).finish();
+  },
+  toProtoMsg(message: QueryProjectEnrollmentsResponse): QueryProjectEnrollmentsResponseProtoMsg {
+    return {
+      typeUrl: "/regen.ecocredit.v1.QueryProjectEnrollmentsResponse",
+      value: QueryProjectEnrollmentsResponse.encode(message).finish()
     };
   }
 };

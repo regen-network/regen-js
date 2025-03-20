@@ -1,4 +1,5 @@
 //@ts-nocheck
+import { FeeParams, FeeParamsAmino, FeeParamsSDKType } from "./state";
 import { Coin, CoinAmino, CoinSDKType } from "../../../../cosmos/base/v1beta1/coin";
 import { Timestamp } from "../../../../google/protobuf/timestamp";
 import { BinaryReader, BinaryWriter } from "../../../../binary";
@@ -329,6 +330,14 @@ export interface MsgBuyDirect_Order {
    * Since Revision 1
    */
   retirementReason: string;
+  /**
+   * max_fee_amount is the maximum amount of buyer side fees being paid to the marketplace.
+   * If the marketplace fees end up being greater than this amount, the transaction will fail.
+   * Fees are always paid in the same denomination as the bid price.
+   * 
+   * Since Revision 3
+   */
+  maxFeeAmount?: Coin;
 }
 export interface MsgBuyDirect_OrderProtoMsg {
   typeUrl: "/regen.ecocredit.marketplace.v1.Order";
@@ -366,6 +375,14 @@ export interface MsgBuyDirect_OrderAmino {
    * Since Revision 1
    */
   retirement_reason?: string;
+  /**
+   * max_fee_amount is the maximum amount of buyer side fees being paid to the marketplace.
+   * If the marketplace fees end up being greater than this amount, the transaction will fail.
+   * Fees are always paid in the same denomination as the bid price.
+   * 
+   * Since Revision 3
+   */
+  max_fee_amount?: CoinAmino;
 }
 export interface MsgBuyDirect_OrderAminoMsg {
   type: "/regen.ecocredit.marketplace.v1.Order";
@@ -379,6 +396,7 @@ export interface MsgBuyDirect_OrderSDKType {
   disable_auto_retire: boolean;
   retirement_jurisdiction: string;
   retirement_reason: string;
+  max_fee_amount?: CoinSDKType;
 }
 /** MsgBuyDirectResponse is the Msg/BuyDirect response type. */
 export interface MsgBuyDirectResponse {}
@@ -548,6 +566,93 @@ export interface MsgRemoveAllowedDenomResponseAminoMsg {
  * Since Revision 1
  */
 export interface MsgRemoveAllowedDenomResponseSDKType {}
+/** MsgSetFeeParams is the Msg/SetFeeParams request type. */
+export interface MsgGovSetFeeParams {
+  /** authority is the address of the governance account. */
+  authority: string;
+  /** fees are the marketplace fees being set. */
+  fees?: FeeParams;
+}
+export interface MsgGovSetFeeParamsProtoMsg {
+  typeUrl: "/regen.ecocredit.marketplace.v1.MsgGovSetFeeParams";
+  value: Uint8Array;
+}
+/** MsgSetFeeParams is the Msg/SetFeeParams request type. */
+export interface MsgGovSetFeeParamsAmino {
+  /** authority is the address of the governance account. */
+  authority?: string;
+  /** fees are the marketplace fees being set. */
+  fees?: FeeParamsAmino;
+}
+export interface MsgGovSetFeeParamsAminoMsg {
+  type: "/regen.ecocredit.marketplace.v1.MsgGovSetFeeParams";
+  value: MsgGovSetFeeParamsAmino;
+}
+/** MsgSetFeeParams is the Msg/SetFeeParams request type. */
+export interface MsgGovSetFeeParamsSDKType {
+  authority: string;
+  fees?: FeeParamsSDKType;
+}
+/** MsgSetFeeParamsResponse is the Msg/SetFeeParams response type. */
+export interface MsgGovSetFeeParamsResponse {}
+export interface MsgGovSetFeeParamsResponseProtoMsg {
+  typeUrl: "/regen.ecocredit.marketplace.v1.MsgGovSetFeeParamsResponse";
+  value: Uint8Array;
+}
+/** MsgSetFeeParamsResponse is the Msg/SetFeeParams response type. */
+export interface MsgGovSetFeeParamsResponseAmino {}
+export interface MsgGovSetFeeParamsResponseAminoMsg {
+  type: "/regen.ecocredit.marketplace.v1.MsgGovSetFeeParamsResponse";
+  value: MsgGovSetFeeParamsResponseAmino;
+}
+/** MsgSetFeeParamsResponse is the Msg/SetFeeParams response type. */
+export interface MsgGovSetFeeParamsResponseSDKType {}
+/** MsgSendFromFeePool is the Msg/SendFromFeePool request type. */
+export interface MsgGovSendFromFeePool {
+  /** authority is the address of the governance account. */
+  authority: string;
+  /** recipient is the address of the account that will receive the funds. */
+  recipient: string;
+  /** coins is the amount of coins to send from the fee pool. */
+  coins: Coin[];
+}
+export interface MsgGovSendFromFeePoolProtoMsg {
+  typeUrl: "/regen.ecocredit.marketplace.v1.MsgGovSendFromFeePool";
+  value: Uint8Array;
+}
+/** MsgSendFromFeePool is the Msg/SendFromFeePool request type. */
+export interface MsgGovSendFromFeePoolAmino {
+  /** authority is the address of the governance account. */
+  authority?: string;
+  /** recipient is the address of the account that will receive the funds. */
+  recipient?: string;
+  /** coins is the amount of coins to send from the fee pool. */
+  coins?: CoinAmino[];
+}
+export interface MsgGovSendFromFeePoolAminoMsg {
+  type: "/regen.ecocredit.marketplace.v1.MsgGovSendFromFeePool";
+  value: MsgGovSendFromFeePoolAmino;
+}
+/** MsgSendFromFeePool is the Msg/SendFromFeePool request type. */
+export interface MsgGovSendFromFeePoolSDKType {
+  authority: string;
+  recipient: string;
+  coins: CoinSDKType[];
+}
+/** MsgSendFromFeePoolResponse is the Msg/SendFromFeePool response type. */
+export interface MsgGovSendFromFeePoolResponse {}
+export interface MsgGovSendFromFeePoolResponseProtoMsg {
+  typeUrl: "/regen.ecocredit.marketplace.v1.MsgGovSendFromFeePoolResponse";
+  value: Uint8Array;
+}
+/** MsgSendFromFeePoolResponse is the Msg/SendFromFeePool response type. */
+export interface MsgGovSendFromFeePoolResponseAmino {}
+export interface MsgGovSendFromFeePoolResponseAminoMsg {
+  type: "/regen.ecocredit.marketplace.v1.MsgGovSendFromFeePoolResponse";
+  value: MsgGovSendFromFeePoolResponseAmino;
+}
+/** MsgSendFromFeePoolResponse is the Msg/SendFromFeePool response type. */
+export interface MsgGovSendFromFeePoolResponseSDKType {}
 function createBaseMsgSell(): MsgSell {
   return {
     seller: "",
@@ -987,7 +1092,7 @@ export const MsgUpdateSellOrders_Update = {
   },
   toAmino(message: MsgUpdateSellOrders_Update): MsgUpdateSellOrders_UpdateAmino {
     const obj: any = {};
-    obj.sell_order_id = message.sellOrderId !== BigInt(0) ? message.sellOrderId.toString() : undefined;
+    obj.sell_order_id = message.sellOrderId !== BigInt(0) ? message.sellOrderId?.toString() : undefined;
     obj.new_quantity = message.newQuantity === "" ? undefined : message.newQuantity;
     obj.new_ask_price = message.newAskPrice ? Coin.toAmino(message.newAskPrice) : undefined;
     obj.disable_auto_retire = message.disableAutoRetire === false ? undefined : message.disableAutoRetire;
@@ -1116,7 +1221,7 @@ export const MsgCancelSellOrder = {
   toAmino(message: MsgCancelSellOrder): MsgCancelSellOrderAmino {
     const obj: any = {};
     obj.seller = message.seller === "" ? undefined : message.seller;
-    obj.sell_order_id = message.sellOrderId !== BigInt(0) ? message.sellOrderId.toString() : undefined;
+    obj.sell_order_id = message.sellOrderId !== BigInt(0) ? message.sellOrderId?.toString() : undefined;
     return obj;
   },
   fromAminoMsg(object: MsgCancelSellOrderAminoMsg): MsgCancelSellOrder {
@@ -1281,7 +1386,8 @@ function createBaseMsgBuyDirect_Order(): MsgBuyDirect_Order {
     bidPrice: undefined,
     disableAutoRetire: false,
     retirementJurisdiction: "",
-    retirementReason: ""
+    retirementReason: "",
+    maxFeeAmount: undefined
   };
 }
 export const MsgBuyDirect_Order = {
@@ -1304,6 +1410,9 @@ export const MsgBuyDirect_Order = {
     }
     if (message.retirementReason !== "") {
       writer.uint32(58).string(message.retirementReason);
+    }
+    if (message.maxFeeAmount !== undefined) {
+      Coin.encode(message.maxFeeAmount, writer.uint32(66).fork()).ldelim();
     }
     return writer;
   },
@@ -1332,6 +1441,9 @@ export const MsgBuyDirect_Order = {
         case 7:
           message.retirementReason = reader.string();
           break;
+        case 8:
+          message.maxFeeAmount = Coin.decode(reader, reader.uint32());
+          break;
         default:
           reader.skipType(tag & 7);
           break;
@@ -1347,6 +1459,7 @@ export const MsgBuyDirect_Order = {
     message.disableAutoRetire = object.disableAutoRetire ?? false;
     message.retirementJurisdiction = object.retirementJurisdiction ?? "";
     message.retirementReason = object.retirementReason ?? "";
+    message.maxFeeAmount = object.maxFeeAmount !== undefined && object.maxFeeAmount !== null ? Coin.fromPartial(object.maxFeeAmount) : undefined;
     return message;
   },
   fromAmino(object: MsgBuyDirect_OrderAmino): MsgBuyDirect_Order {
@@ -1369,16 +1482,20 @@ export const MsgBuyDirect_Order = {
     if (object.retirement_reason !== undefined && object.retirement_reason !== null) {
       message.retirementReason = object.retirement_reason;
     }
+    if (object.max_fee_amount !== undefined && object.max_fee_amount !== null) {
+      message.maxFeeAmount = Coin.fromAmino(object.max_fee_amount);
+    }
     return message;
   },
   toAmino(message: MsgBuyDirect_Order): MsgBuyDirect_OrderAmino {
     const obj: any = {};
-    obj.sell_order_id = message.sellOrderId !== BigInt(0) ? message.sellOrderId.toString() : undefined;
+    obj.sell_order_id = message.sellOrderId !== BigInt(0) ? message.sellOrderId?.toString() : undefined;
     obj.quantity = message.quantity === "" ? undefined : message.quantity;
     obj.bid_price = message.bidPrice ? Coin.toAmino(message.bidPrice) : undefined;
     obj.disable_auto_retire = message.disableAutoRetire === false ? undefined : message.disableAutoRetire;
     obj.retirement_jurisdiction = message.retirementJurisdiction === "" ? undefined : message.retirementJurisdiction;
     obj.retirement_reason = message.retirementReason === "" ? undefined : message.retirementReason;
+    obj.max_fee_amount = message.maxFeeAmount ? Coin.toAmino(message.maxFeeAmount) : undefined;
     return obj;
   },
   fromAminoMsg(object: MsgBuyDirect_OrderAminoMsg): MsgBuyDirect_Order {
@@ -1730,6 +1847,270 @@ export const MsgRemoveAllowedDenomResponse = {
     return {
       typeUrl: "/regen.ecocredit.marketplace.v1.MsgRemoveAllowedDenomResponse",
       value: MsgRemoveAllowedDenomResponse.encode(message).finish()
+    };
+  }
+};
+function createBaseMsgGovSetFeeParams(): MsgGovSetFeeParams {
+  return {
+    authority: "",
+    fees: undefined
+  };
+}
+export const MsgGovSetFeeParams = {
+  typeUrl: "/regen.ecocredit.marketplace.v1.MsgGovSetFeeParams",
+  encode(message: MsgGovSetFeeParams, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
+    if (message.authority !== "") {
+      writer.uint32(10).string(message.authority);
+    }
+    if (message.fees !== undefined) {
+      FeeParams.encode(message.fees, writer.uint32(18).fork()).ldelim();
+    }
+    return writer;
+  },
+  decode(input: BinaryReader | Uint8Array, length?: number): MsgGovSetFeeParams {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+    let end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseMsgGovSetFeeParams();
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+        case 1:
+          message.authority = reader.string();
+          break;
+        case 2:
+          message.fees = FeeParams.decode(reader, reader.uint32());
+          break;
+        default:
+          reader.skipType(tag & 7);
+          break;
+      }
+    }
+    return message;
+  },
+  fromPartial(object: Partial<MsgGovSetFeeParams>): MsgGovSetFeeParams {
+    const message = createBaseMsgGovSetFeeParams();
+    message.authority = object.authority ?? "";
+    message.fees = object.fees !== undefined && object.fees !== null ? FeeParams.fromPartial(object.fees) : undefined;
+    return message;
+  },
+  fromAmino(object: MsgGovSetFeeParamsAmino): MsgGovSetFeeParams {
+    const message = createBaseMsgGovSetFeeParams();
+    if (object.authority !== undefined && object.authority !== null) {
+      message.authority = object.authority;
+    }
+    if (object.fees !== undefined && object.fees !== null) {
+      message.fees = FeeParams.fromAmino(object.fees);
+    }
+    return message;
+  },
+  toAmino(message: MsgGovSetFeeParams): MsgGovSetFeeParamsAmino {
+    const obj: any = {};
+    obj.authority = message.authority === "" ? undefined : message.authority;
+    obj.fees = message.fees ? FeeParams.toAmino(message.fees) : undefined;
+    return obj;
+  },
+  fromAminoMsg(object: MsgGovSetFeeParamsAminoMsg): MsgGovSetFeeParams {
+    return MsgGovSetFeeParams.fromAmino(object.value);
+  },
+  fromProtoMsg(message: MsgGovSetFeeParamsProtoMsg): MsgGovSetFeeParams {
+    return MsgGovSetFeeParams.decode(message.value);
+  },
+  toProto(message: MsgGovSetFeeParams): Uint8Array {
+    return MsgGovSetFeeParams.encode(message).finish();
+  },
+  toProtoMsg(message: MsgGovSetFeeParams): MsgGovSetFeeParamsProtoMsg {
+    return {
+      typeUrl: "/regen.ecocredit.marketplace.v1.MsgGovSetFeeParams",
+      value: MsgGovSetFeeParams.encode(message).finish()
+    };
+  }
+};
+function createBaseMsgGovSetFeeParamsResponse(): MsgGovSetFeeParamsResponse {
+  return {};
+}
+export const MsgGovSetFeeParamsResponse = {
+  typeUrl: "/regen.ecocredit.marketplace.v1.MsgGovSetFeeParamsResponse",
+  encode(_: MsgGovSetFeeParamsResponse, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
+    return writer;
+  },
+  decode(input: BinaryReader | Uint8Array, length?: number): MsgGovSetFeeParamsResponse {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+    let end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseMsgGovSetFeeParamsResponse();
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+        default:
+          reader.skipType(tag & 7);
+          break;
+      }
+    }
+    return message;
+  },
+  fromPartial(_: Partial<MsgGovSetFeeParamsResponse>): MsgGovSetFeeParamsResponse {
+    const message = createBaseMsgGovSetFeeParamsResponse();
+    return message;
+  },
+  fromAmino(_: MsgGovSetFeeParamsResponseAmino): MsgGovSetFeeParamsResponse {
+    const message = createBaseMsgGovSetFeeParamsResponse();
+    return message;
+  },
+  toAmino(_: MsgGovSetFeeParamsResponse): MsgGovSetFeeParamsResponseAmino {
+    const obj: any = {};
+    return obj;
+  },
+  fromAminoMsg(object: MsgGovSetFeeParamsResponseAminoMsg): MsgGovSetFeeParamsResponse {
+    return MsgGovSetFeeParamsResponse.fromAmino(object.value);
+  },
+  fromProtoMsg(message: MsgGovSetFeeParamsResponseProtoMsg): MsgGovSetFeeParamsResponse {
+    return MsgGovSetFeeParamsResponse.decode(message.value);
+  },
+  toProto(message: MsgGovSetFeeParamsResponse): Uint8Array {
+    return MsgGovSetFeeParamsResponse.encode(message).finish();
+  },
+  toProtoMsg(message: MsgGovSetFeeParamsResponse): MsgGovSetFeeParamsResponseProtoMsg {
+    return {
+      typeUrl: "/regen.ecocredit.marketplace.v1.MsgGovSetFeeParamsResponse",
+      value: MsgGovSetFeeParamsResponse.encode(message).finish()
+    };
+  }
+};
+function createBaseMsgGovSendFromFeePool(): MsgGovSendFromFeePool {
+  return {
+    authority: "",
+    recipient: "",
+    coins: []
+  };
+}
+export const MsgGovSendFromFeePool = {
+  typeUrl: "/regen.ecocredit.marketplace.v1.MsgGovSendFromFeePool",
+  encode(message: MsgGovSendFromFeePool, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
+    if (message.authority !== "") {
+      writer.uint32(10).string(message.authority);
+    }
+    if (message.recipient !== "") {
+      writer.uint32(18).string(message.recipient);
+    }
+    for (const v of message.coins) {
+      Coin.encode(v!, writer.uint32(26).fork()).ldelim();
+    }
+    return writer;
+  },
+  decode(input: BinaryReader | Uint8Array, length?: number): MsgGovSendFromFeePool {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+    let end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseMsgGovSendFromFeePool();
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+        case 1:
+          message.authority = reader.string();
+          break;
+        case 2:
+          message.recipient = reader.string();
+          break;
+        case 3:
+          message.coins.push(Coin.decode(reader, reader.uint32()));
+          break;
+        default:
+          reader.skipType(tag & 7);
+          break;
+      }
+    }
+    return message;
+  },
+  fromPartial(object: Partial<MsgGovSendFromFeePool>): MsgGovSendFromFeePool {
+    const message = createBaseMsgGovSendFromFeePool();
+    message.authority = object.authority ?? "";
+    message.recipient = object.recipient ?? "";
+    message.coins = object.coins?.map(e => Coin.fromPartial(e)) || [];
+    return message;
+  },
+  fromAmino(object: MsgGovSendFromFeePoolAmino): MsgGovSendFromFeePool {
+    const message = createBaseMsgGovSendFromFeePool();
+    if (object.authority !== undefined && object.authority !== null) {
+      message.authority = object.authority;
+    }
+    if (object.recipient !== undefined && object.recipient !== null) {
+      message.recipient = object.recipient;
+    }
+    message.coins = object.coins?.map(e => Coin.fromAmino(e)) || [];
+    return message;
+  },
+  toAmino(message: MsgGovSendFromFeePool): MsgGovSendFromFeePoolAmino {
+    const obj: any = {};
+    obj.authority = message.authority === "" ? undefined : message.authority;
+    obj.recipient = message.recipient === "" ? undefined : message.recipient;
+    if (message.coins) {
+      obj.coins = message.coins.map(e => e ? Coin.toAmino(e) : undefined);
+    } else {
+      obj.coins = message.coins;
+    }
+    return obj;
+  },
+  fromAminoMsg(object: MsgGovSendFromFeePoolAminoMsg): MsgGovSendFromFeePool {
+    return MsgGovSendFromFeePool.fromAmino(object.value);
+  },
+  fromProtoMsg(message: MsgGovSendFromFeePoolProtoMsg): MsgGovSendFromFeePool {
+    return MsgGovSendFromFeePool.decode(message.value);
+  },
+  toProto(message: MsgGovSendFromFeePool): Uint8Array {
+    return MsgGovSendFromFeePool.encode(message).finish();
+  },
+  toProtoMsg(message: MsgGovSendFromFeePool): MsgGovSendFromFeePoolProtoMsg {
+    return {
+      typeUrl: "/regen.ecocredit.marketplace.v1.MsgGovSendFromFeePool",
+      value: MsgGovSendFromFeePool.encode(message).finish()
+    };
+  }
+};
+function createBaseMsgGovSendFromFeePoolResponse(): MsgGovSendFromFeePoolResponse {
+  return {};
+}
+export const MsgGovSendFromFeePoolResponse = {
+  typeUrl: "/regen.ecocredit.marketplace.v1.MsgGovSendFromFeePoolResponse",
+  encode(_: MsgGovSendFromFeePoolResponse, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
+    return writer;
+  },
+  decode(input: BinaryReader | Uint8Array, length?: number): MsgGovSendFromFeePoolResponse {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+    let end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseMsgGovSendFromFeePoolResponse();
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+        default:
+          reader.skipType(tag & 7);
+          break;
+      }
+    }
+    return message;
+  },
+  fromPartial(_: Partial<MsgGovSendFromFeePoolResponse>): MsgGovSendFromFeePoolResponse {
+    const message = createBaseMsgGovSendFromFeePoolResponse();
+    return message;
+  },
+  fromAmino(_: MsgGovSendFromFeePoolResponseAmino): MsgGovSendFromFeePoolResponse {
+    const message = createBaseMsgGovSendFromFeePoolResponse();
+    return message;
+  },
+  toAmino(_: MsgGovSendFromFeePoolResponse): MsgGovSendFromFeePoolResponseAmino {
+    const obj: any = {};
+    return obj;
+  },
+  fromAminoMsg(object: MsgGovSendFromFeePoolResponseAminoMsg): MsgGovSendFromFeePoolResponse {
+    return MsgGovSendFromFeePoolResponse.fromAmino(object.value);
+  },
+  fromProtoMsg(message: MsgGovSendFromFeePoolResponseProtoMsg): MsgGovSendFromFeePoolResponse {
+    return MsgGovSendFromFeePoolResponse.decode(message.value);
+  },
+  toProto(message: MsgGovSendFromFeePoolResponse): Uint8Array {
+    return MsgGovSendFromFeePoolResponse.encode(message).finish();
+  },
+  toProtoMsg(message: MsgGovSendFromFeePoolResponse): MsgGovSendFromFeePoolResponseProtoMsg {
+    return {
+      typeUrl: "/regen.ecocredit.marketplace.v1.MsgGovSendFromFeePoolResponse",
+      value: MsgGovSendFromFeePoolResponse.encode(message).finish()
     };
   }
 };

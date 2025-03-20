@@ -471,7 +471,7 @@ export const Resolver = {
   },
   toAmino(message: Resolver): ResolverAmino {
     const obj: any = {};
-    obj.id = message.id !== BigInt(0) ? message.id.toString() : undefined;
+    obj.id = message.id !== BigInt(0) ? message.id?.toString() : undefined;
     obj.url = message.url === "" ? undefined : message.url;
     obj.manager = message.manager ? base64FromBytes(message.manager) : undefined;
     return obj;
@@ -548,7 +548,7 @@ export const DataResolver = {
   toAmino(message: DataResolver): DataResolverAmino {
     const obj: any = {};
     obj.id = message.id ? base64FromBytes(message.id) : undefined;
-    obj.resolver_id = message.resolverId !== BigInt(0) ? message.resolverId.toString() : undefined;
+    obj.resolver_id = message.resolverId !== BigInt(0) ? message.resolverId?.toString() : undefined;
     return obj;
   },
   fromAminoMsg(object: DataResolverAminoMsg): DataResolver {

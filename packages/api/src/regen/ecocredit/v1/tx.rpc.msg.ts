@@ -1,7 +1,7 @@
 //@ts-nocheck
 import { Rpc } from "../../../helpers";
 import { BinaryReader } from "../../../binary";
-import { MsgCreateClass, MsgCreateClassResponse, MsgCreateProject, MsgCreateProjectResponse, MsgCreateBatch, MsgCreateBatchResponse, MsgMintBatchCredits, MsgMintBatchCreditsResponse, MsgSealBatch, MsgSealBatchResponse, MsgSend, MsgSendResponse, MsgRetire, MsgRetireResponse, MsgCancel, MsgCancelResponse, MsgUpdateClassAdmin, MsgUpdateClassAdminResponse, MsgUpdateClassIssuers, MsgUpdateClassIssuersResponse, MsgUpdateClassMetadata, MsgUpdateClassMetadataResponse, MsgUpdateProjectAdmin, MsgUpdateProjectAdminResponse, MsgUpdateProjectMetadata, MsgUpdateProjectMetadataResponse, MsgUpdateBatchMetadata, MsgUpdateBatchMetadataResponse, MsgBridge, MsgBridgeResponse, MsgBridgeReceive, MsgBridgeReceiveResponse, MsgAddCreditType, MsgAddCreditTypeResponse, MsgSetClassCreatorAllowlist, MsgSetClassCreatorAllowlistResponse, MsgAddClassCreator, MsgAddClassCreatorResponse, MsgRemoveClassCreator, MsgRemoveClassCreatorResponse, MsgUpdateClassFee, MsgUpdateClassFeeResponse, MsgAddAllowedBridgeChain, MsgAddAllowedBridgeChainResponse, MsgRemoveAllowedBridgeChain, MsgRemoveAllowedBridgeChainResponse } from "./tx";
+import { MsgCreateClass, MsgCreateClassResponse, MsgCreateProject, MsgCreateProjectResponse, MsgCreateUnregisteredProject, MsgCreateUnregisteredProjectResponse, MsgCreateOrUpdateApplication, MsgCreateOrUpdateApplicationResponse, MsgUpdateProjectEnrollment, MsgUpdateProjectEnrollmentResponse, MsgCreateBatch, MsgCreateBatchResponse, MsgMintBatchCredits, MsgMintBatchCreditsResponse, MsgSealBatch, MsgSealBatchResponse, MsgSend, MsgSendResponse, MsgRetire, MsgRetireResponse, MsgCancel, MsgCancelResponse, MsgUpdateClassAdmin, MsgUpdateClassAdminResponse, MsgUpdateClassIssuers, MsgUpdateClassIssuersResponse, MsgUpdateClassMetadata, MsgUpdateClassMetadataResponse, MsgUpdateProjectAdmin, MsgUpdateProjectAdminResponse, MsgUpdateProjectMetadata, MsgUpdateProjectMetadataResponse, MsgUpdateBatchMetadata, MsgUpdateBatchMetadataResponse, MsgBridge, MsgBridgeResponse, MsgBridgeReceive, MsgBridgeReceiveResponse, MsgAddCreditType, MsgAddCreditTypeResponse, MsgSetClassCreatorAllowlist, MsgSetClassCreatorAllowlistResponse, MsgAddClassCreator, MsgAddClassCreatorResponse, MsgRemoveClassCreator, MsgRemoveClassCreatorResponse, MsgUpdateClassFee, MsgUpdateClassFeeResponse, MsgUpdateProjectFee, MsgUpdateProjectFeeResponse, MsgAddAllowedBridgeChain, MsgAddAllowedBridgeChainResponse, MsgRemoveAllowedBridgeChain, MsgRemoveAllowedBridgeChainResponse, MsgBurnRegen, MsgBurnRegenResponse } from "./tx";
 /** Msg is the regen.ecocredit.v1 Msg service. */
 export interface Msg {
   /**
@@ -20,6 +20,45 @@ export interface Msg {
    * class. The creator becomes the admin of the project upon creation.
    */
   createProject(request: MsgCreateProject): Promise<MsgCreateProjectResponse>;
+  /**
+   * CreateUnregisteredProject creates a new project without registering it
+   * under a credit class. This method is intended to be used by project proponents
+   * who are not yet ready to register their project under a credit class, but who
+   * want to create a project and receive a project ID.
+   */
+  createUnregisteredProject(request: MsgCreateUnregisteredProject): Promise<MsgCreateUnregisteredProjectResponse>;
+  /**
+   * CreateOrUpdateApplicaton creates a new project credit class application, updates
+   * the metadata for an existing one when changes have been requested, or withdraws
+   * the application. When an application is withdrawn, its data will be deleted from
+   * state and the project may apply again to the same credit class in the future.
+   * 
+   * Since Revision 3
+   */
+  createOrUpdateApplication(request: MsgCreateOrUpdateApplication): Promise<MsgCreateOrUpdateApplicationResponse>;
+  /**
+   * UpdateProjectEnrollment allows a credit class issuer to evaluate a project
+   * application - either approving, requesting changes to, or
+   * rejecting it, or to terminate an existing enrollment.
+   * Any issuer in the credit class may update the project credit
+   * class enrollment status using this method. If more sophisticated rules are
+   * required to coordinate between different issuers, the credit class admin
+   * should set up an on or off-chain governance process to coordinate this.
+   * Issuers may not admit projects into credit classes using this method
+   * without the project first creating an application. For an issuer to
+   * admit a project into a credit class without an
+   * application the CreateProject method should be used instead.
+   * 
+   * If a project has not yet been accepted then the issuer may change the
+   * status to either changes requested, accepted or rejected. If the status
+   * is already accepted, the issuer may only change the status to terminated.
+   * Whenever a project is rejected or terminated, the project's enrollment
+   * the enrollment state will be deleted and the project may apply again
+   * to the same credit class in the future.
+   * 
+   * Since Revision 3
+   */
+  updateProjectEnrollment(request: MsgUpdateProjectEnrollment): Promise<MsgUpdateProjectEnrollmentResponse>;
   /**
    * CreateBatch creates a new batch of credits under the given project with a
    * start and end date representing the monitoring period, a list of credits to
@@ -161,6 +200,15 @@ export interface Msg {
    */
   updateClassFee(request: MsgUpdateClassFee): Promise<MsgUpdateClassFeeResponse>;
   /**
+   * UpdateProjectFee is a governance method that allows for updating the
+   * project creation fee. If no fee is specified in the request, the project
+   * creation fee will be removed and no fee will be required to create a
+   * project.
+   * 
+   * Since Revision 3
+   */
+  updateProjectFee(request: MsgUpdateProjectFee): Promise<MsgUpdateProjectFeeResponse>;
+  /**
    * AddAllowedBridgeChain is a governance method that allows for the
    * addition of a chain to bridge ecocredits to.
    * 
@@ -174,6 +222,12 @@ export interface Msg {
    * Since Revision 2
    */
   removeAllowedBridgeChain(request: MsgRemoveAllowedBridgeChain): Promise<MsgRemoveAllowedBridgeChainResponse>;
+  /**
+   * BurnRegen burns REGEN tokens to account for platform fees when creating or transferring credits.
+   * 
+   * Since Revision 3
+   */
+  burnRegen(request: MsgBurnRegen): Promise<MsgBurnRegenResponse>;
 }
 export class MsgClientImpl implements Msg {
   private readonly rpc: Rpc;
@@ -181,6 +235,9 @@ export class MsgClientImpl implements Msg {
     this.rpc = rpc;
     this.createClass = this.createClass.bind(this);
     this.createProject = this.createProject.bind(this);
+    this.createUnregisteredProject = this.createUnregisteredProject.bind(this);
+    this.createOrUpdateApplication = this.createOrUpdateApplication.bind(this);
+    this.updateProjectEnrollment = this.updateProjectEnrollment.bind(this);
     this.createBatch = this.createBatch.bind(this);
     this.mintBatchCredits = this.mintBatchCredits.bind(this);
     this.sealBatch = this.sealBatch.bind(this);
@@ -200,8 +257,10 @@ export class MsgClientImpl implements Msg {
     this.addClassCreator = this.addClassCreator.bind(this);
     this.removeClassCreator = this.removeClassCreator.bind(this);
     this.updateClassFee = this.updateClassFee.bind(this);
+    this.updateProjectFee = this.updateProjectFee.bind(this);
     this.addAllowedBridgeChain = this.addAllowedBridgeChain.bind(this);
     this.removeAllowedBridgeChain = this.removeAllowedBridgeChain.bind(this);
+    this.burnRegen = this.burnRegen.bind(this);
   }
   createClass(request: MsgCreateClass): Promise<MsgCreateClassResponse> {
     const data = MsgCreateClass.encode(request).finish();
@@ -212,6 +271,21 @@ export class MsgClientImpl implements Msg {
     const data = MsgCreateProject.encode(request).finish();
     const promise = this.rpc.request("regen.ecocredit.v1.Msg", "CreateProject", data);
     return promise.then(data => MsgCreateProjectResponse.decode(new BinaryReader(data)));
+  }
+  createUnregisteredProject(request: MsgCreateUnregisteredProject): Promise<MsgCreateUnregisteredProjectResponse> {
+    const data = MsgCreateUnregisteredProject.encode(request).finish();
+    const promise = this.rpc.request("regen.ecocredit.v1.Msg", "CreateUnregisteredProject", data);
+    return promise.then(data => MsgCreateUnregisteredProjectResponse.decode(new BinaryReader(data)));
+  }
+  createOrUpdateApplication(request: MsgCreateOrUpdateApplication): Promise<MsgCreateOrUpdateApplicationResponse> {
+    const data = MsgCreateOrUpdateApplication.encode(request).finish();
+    const promise = this.rpc.request("regen.ecocredit.v1.Msg", "CreateOrUpdateApplication", data);
+    return promise.then(data => MsgCreateOrUpdateApplicationResponse.decode(new BinaryReader(data)));
+  }
+  updateProjectEnrollment(request: MsgUpdateProjectEnrollment): Promise<MsgUpdateProjectEnrollmentResponse> {
+    const data = MsgUpdateProjectEnrollment.encode(request).finish();
+    const promise = this.rpc.request("regen.ecocredit.v1.Msg", "UpdateProjectEnrollment", data);
+    return promise.then(data => MsgUpdateProjectEnrollmentResponse.decode(new BinaryReader(data)));
   }
   createBatch(request: MsgCreateBatch): Promise<MsgCreateBatchResponse> {
     const data = MsgCreateBatch.encode(request).finish();
@@ -308,6 +382,11 @@ export class MsgClientImpl implements Msg {
     const promise = this.rpc.request("regen.ecocredit.v1.Msg", "UpdateClassFee", data);
     return promise.then(data => MsgUpdateClassFeeResponse.decode(new BinaryReader(data)));
   }
+  updateProjectFee(request: MsgUpdateProjectFee): Promise<MsgUpdateProjectFeeResponse> {
+    const data = MsgUpdateProjectFee.encode(request).finish();
+    const promise = this.rpc.request("regen.ecocredit.v1.Msg", "UpdateProjectFee", data);
+    return promise.then(data => MsgUpdateProjectFeeResponse.decode(new BinaryReader(data)));
+  }
   addAllowedBridgeChain(request: MsgAddAllowedBridgeChain): Promise<MsgAddAllowedBridgeChainResponse> {
     const data = MsgAddAllowedBridgeChain.encode(request).finish();
     const promise = this.rpc.request("regen.ecocredit.v1.Msg", "AddAllowedBridgeChain", data);
@@ -317,5 +396,10 @@ export class MsgClientImpl implements Msg {
     const data = MsgRemoveAllowedBridgeChain.encode(request).finish();
     const promise = this.rpc.request("regen.ecocredit.v1.Msg", "RemoveAllowedBridgeChain", data);
     return promise.then(data => MsgRemoveAllowedBridgeChainResponse.decode(new BinaryReader(data)));
+  }
+  burnRegen(request: MsgBurnRegen): Promise<MsgBurnRegenResponse> {
+    const data = MsgBurnRegen.encode(request).finish();
+    const promise = this.rpc.request("regen.ecocredit.v1.Msg", "BurnRegen", data);
+    return promise.then(data => MsgBurnRegenResponse.decode(new BinaryReader(data)));
   }
 }
