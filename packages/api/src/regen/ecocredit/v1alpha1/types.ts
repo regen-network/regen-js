@@ -415,7 +415,7 @@ export const ClassInfo = {
     }
     obj.metadata = message.metadata ? base64FromBytes(message.metadata) : undefined;
     obj.credit_type = message.creditType ? CreditType.toAmino(message.creditType) : undefined;
-    obj.num_batches = message.numBatches !== BigInt(0) ? message.numBatches.toString() : undefined;
+    obj.num_batches = message.numBatches !== BigInt(0) ? message.numBatches?.toString() : undefined;
     return obj;
   },
   fromAminoMsg(object: ClassInfoAminoMsg): ClassInfo {
@@ -867,7 +867,7 @@ export const CreditTypeSeq = {
   toAmino(message: CreditTypeSeq): CreditTypeSeqAmino {
     const obj: any = {};
     obj.abbreviation = message.abbreviation === "" ? undefined : message.abbreviation;
-    obj.seq_number = message.seqNumber !== BigInt(0) ? message.seqNumber.toString() : undefined;
+    obj.seq_number = message.seqNumber !== BigInt(0) ? message.seqNumber?.toString() : undefined;
     return obj;
   },
   fromAminoMsg(object: CreditTypeSeqAminoMsg): CreditTypeSeq {

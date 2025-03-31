@@ -295,7 +295,7 @@ export const EventDefineResolver = {
   },
   toAmino(message: EventDefineResolver): EventDefineResolverAmino {
     const obj: any = {};
-    obj.id = message.id !== BigInt(0) ? message.id.toString() : undefined;
+    obj.id = message.id !== BigInt(0) ? message.id?.toString() : undefined;
     return obj;
   },
   fromAminoMsg(object: EventDefineResolverAminoMsg): EventDefineResolver {
@@ -369,7 +369,7 @@ export const EventRegisterResolver = {
   },
   toAmino(message: EventRegisterResolver): EventRegisterResolverAmino {
     const obj: any = {};
-    obj.id = message.id !== BigInt(0) ? message.id.toString() : undefined;
+    obj.id = message.id !== BigInt(0) ? message.id?.toString() : undefined;
     obj.iri = message.iri === "" ? undefined : message.iri;
     return obj;
   },

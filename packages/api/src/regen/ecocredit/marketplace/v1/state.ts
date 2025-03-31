@@ -271,6 +271,71 @@ export interface MarketSDKType {
   bank_denom: string;
   precision_modifier: number;
 }
+/**
+ * FeeParams represents the marketplace fee parameters. Fees will be charged in the
+ * same denom that the order is denominated in and deposited into the marketplace
+ * fee pool, except when the denom is regen, in which case the fees will be
+ * burned. Fees in the fee pool are expected to burned by governance in a manual
+ * process unless governance agrees to a different approach.
+ */
+export interface FeeParams {
+  /**
+   * buyer_percentage_fee is the decimal percentage fee charged to the buyer.
+   * The string 0.03 means a 3.0% fee.
+   * This fee will be added to the total price of a buy order and is denominated
+   * in the same denom as the buy order's bid denom.
+   */
+  buyerPercentageFee: string;
+  /**
+   * seller_percentage_fee is the decimal percentage fee charged to the seller.
+   * The string 0.03 means a 3.0% fee.
+   * This fee will be subtracted from the total proceeds of a sell order distributed to the seller
+   * and is denominated in the same denom as the sell order's ask denom.
+   */
+  sellerPercentageFee: string;
+}
+export interface FeeParamsProtoMsg {
+  typeUrl: "/regen.ecocredit.marketplace.v1.FeeParams";
+  value: Uint8Array;
+}
+/**
+ * FeeParams represents the marketplace fee parameters. Fees will be charged in the
+ * same denom that the order is denominated in and deposited into the marketplace
+ * fee pool, except when the denom is regen, in which case the fees will be
+ * burned. Fees in the fee pool are expected to burned by governance in a manual
+ * process unless governance agrees to a different approach.
+ */
+export interface FeeParamsAmino {
+  /**
+   * buyer_percentage_fee is the decimal percentage fee charged to the buyer.
+   * The string 0.03 means a 3.0% fee.
+   * This fee will be added to the total price of a buy order and is denominated
+   * in the same denom as the buy order's bid denom.
+   */
+  buyer_percentage_fee?: string;
+  /**
+   * seller_percentage_fee is the decimal percentage fee charged to the seller.
+   * The string 0.03 means a 3.0% fee.
+   * This fee will be subtracted from the total proceeds of a sell order distributed to the seller
+   * and is denominated in the same denom as the sell order's ask denom.
+   */
+  seller_percentage_fee?: string;
+}
+export interface FeeParamsAminoMsg {
+  type: "/regen.ecocredit.marketplace.v1.FeeParams";
+  value: FeeParamsAmino;
+}
+/**
+ * FeeParams represents the marketplace fee parameters. Fees will be charged in the
+ * same denom that the order is denominated in and deposited into the marketplace
+ * fee pool, except when the denom is regen, in which case the fees will be
+ * burned. Fees in the fee pool are expected to burned by governance in a manual
+ * process unless governance agrees to a different approach.
+ */
+export interface FeeParamsSDKType {
+  buyer_percentage_fee: string;
+  seller_percentage_fee: string;
+}
 function createBaseSellOrder(): SellOrder {
   return {
     id: BigInt(0),
@@ -403,11 +468,11 @@ export const SellOrder = {
   },
   toAmino(message: SellOrder): SellOrderAmino {
     const obj: any = {};
-    obj.id = message.id !== BigInt(0) ? message.id.toString() : undefined;
+    obj.id = message.id !== BigInt(0) ? message.id?.toString() : undefined;
     obj.seller = message.seller ? base64FromBytes(message.seller) : undefined;
-    obj.batch_key = message.batchKey !== BigInt(0) ? message.batchKey.toString() : undefined;
+    obj.batch_key = message.batchKey !== BigInt(0) ? message.batchKey?.toString() : undefined;
     obj.quantity = message.quantity === "" ? undefined : message.quantity;
-    obj.market_id = message.marketId !== BigInt(0) ? message.marketId.toString() : undefined;
+    obj.market_id = message.marketId !== BigInt(0) ? message.marketId?.toString() : undefined;
     obj.ask_amount = message.askAmount === "" ? undefined : message.askAmount;
     obj.disable_auto_retire = message.disableAutoRetire === false ? undefined : message.disableAutoRetire;
     obj.expiration = message.expiration ? Timestamp.toAmino(toTimestamp(message.expiration)) : undefined;
@@ -594,7 +659,7 @@ export const Market = {
   },
   toAmino(message: Market): MarketAmino {
     const obj: any = {};
-    obj.id = message.id !== BigInt(0) ? message.id.toString() : undefined;
+    obj.id = message.id !== BigInt(0) ? message.id?.toString() : undefined;
     obj.credit_type_abbrev = message.creditTypeAbbrev === "" ? undefined : message.creditTypeAbbrev;
     obj.bank_denom = message.bankDenom === "" ? undefined : message.bankDenom;
     obj.precision_modifier = message.precisionModifier === 0 ? undefined : message.precisionModifier;
@@ -613,6 +678,81 @@ export const Market = {
     return {
       typeUrl: "/regen.ecocredit.marketplace.v1.Market",
       value: Market.encode(message).finish()
+    };
+  }
+};
+function createBaseFeeParams(): FeeParams {
+  return {
+    buyerPercentageFee: "",
+    sellerPercentageFee: ""
+  };
+}
+export const FeeParams = {
+  typeUrl: "/regen.ecocredit.marketplace.v1.FeeParams",
+  encode(message: FeeParams, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
+    if (message.buyerPercentageFee !== "") {
+      writer.uint32(10).string(message.buyerPercentageFee);
+    }
+    if (message.sellerPercentageFee !== "") {
+      writer.uint32(18).string(message.sellerPercentageFee);
+    }
+    return writer;
+  },
+  decode(input: BinaryReader | Uint8Array, length?: number): FeeParams {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+    let end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseFeeParams();
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+        case 1:
+          message.buyerPercentageFee = reader.string();
+          break;
+        case 2:
+          message.sellerPercentageFee = reader.string();
+          break;
+        default:
+          reader.skipType(tag & 7);
+          break;
+      }
+    }
+    return message;
+  },
+  fromPartial(object: Partial<FeeParams>): FeeParams {
+    const message = createBaseFeeParams();
+    message.buyerPercentageFee = object.buyerPercentageFee ?? "";
+    message.sellerPercentageFee = object.sellerPercentageFee ?? "";
+    return message;
+  },
+  fromAmino(object: FeeParamsAmino): FeeParams {
+    const message = createBaseFeeParams();
+    if (object.buyer_percentage_fee !== undefined && object.buyer_percentage_fee !== null) {
+      message.buyerPercentageFee = object.buyer_percentage_fee;
+    }
+    if (object.seller_percentage_fee !== undefined && object.seller_percentage_fee !== null) {
+      message.sellerPercentageFee = object.seller_percentage_fee;
+    }
+    return message;
+  },
+  toAmino(message: FeeParams): FeeParamsAmino {
+    const obj: any = {};
+    obj.buyer_percentage_fee = message.buyerPercentageFee === "" ? undefined : message.buyerPercentageFee;
+    obj.seller_percentage_fee = message.sellerPercentageFee === "" ? undefined : message.sellerPercentageFee;
+    return obj;
+  },
+  fromAminoMsg(object: FeeParamsAminoMsg): FeeParams {
+    return FeeParams.fromAmino(object.value);
+  },
+  fromProtoMsg(message: FeeParamsProtoMsg): FeeParams {
+    return FeeParams.decode(message.value);
+  },
+  toProto(message: FeeParams): Uint8Array {
+    return FeeParams.encode(message).finish();
+  },
+  toProtoMsg(message: FeeParams): FeeParamsProtoMsg {
+    return {
+      typeUrl: "/regen.ecocredit.marketplace.v1.FeeParams",
+      value: FeeParams.encode(message).finish()
     };
   }
 };

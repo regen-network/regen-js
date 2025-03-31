@@ -419,7 +419,7 @@ export const QuerySellOrderRequest = {
   },
   toAmino(message: QuerySellOrderRequest): QuerySellOrderRequestAmino {
     const obj: any = {};
-    obj.sell_order_id = message.sellOrderId !== BigInt(0) ? message.sellOrderId.toString() : undefined;
+    obj.sell_order_id = message.sellOrderId !== BigInt(0) ? message.sellOrderId?.toString() : undefined;
     return obj;
   },
   fromAminoMsg(object: QuerySellOrderRequestAminoMsg): QuerySellOrderRequest {
@@ -1206,7 +1206,7 @@ export const SellOrderInfo = {
   },
   toAmino(message: SellOrderInfo): SellOrderInfoAmino {
     const obj: any = {};
-    obj.id = message.id !== BigInt(0) ? message.id.toString() : undefined;
+    obj.id = message.id !== BigInt(0) ? message.id?.toString() : undefined;
     obj.seller = message.seller === "" ? undefined : message.seller;
     obj.batch_denom = message.batchDenom === "" ? undefined : message.batchDenom;
     obj.quantity = message.quantity === "" ? undefined : message.quantity;

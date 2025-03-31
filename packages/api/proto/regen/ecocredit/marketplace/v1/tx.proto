@@ -6,6 +6,7 @@ import "cosmos/base/v1beta1/coin.proto";
 import "cosmos/msg/v1/msg.proto";
 import "gogoproto/gogo.proto";
 import "google/protobuf/timestamp.proto";
+import "regen/ecocredit/marketplace/v1/state.proto";
 
 option go_package = "github.com/regen-network/regen-ledger/x/ecocredit/marketplace/types/v1";
 
@@ -36,6 +37,20 @@ service Msg {
   // Since Revision 1
   rpc RemoveAllowedDenom(MsgRemoveAllowedDenom)
       returns (MsgRemoveAllowedDenomResponse);
+
+  // SetFeeParams is a governance method that sets the marketplace fees.
+  //
+  // Since Revision 3
+  rpc GovSetFeeParams(MsgGovSetFeeParams)
+      returns (MsgGovSetFeeParamsResponse);
+
+  // GovSendFromFeePool is a governance method that allows the sending of the
+  // marketplace fees.
+  //
+  // Since Revision 3
+  rpc GovSendFromFeePool(MsgGovSendFromFeePool)
+      returns (MsgGovSendFromFeePoolResponse);
+
 }
 
 // MsgSell is the Msg/Sell request type.
@@ -174,6 +189,13 @@ message MsgBuyDirect {
     //
     // Since Revision 1
     string retirement_reason = 7;
+
+    // max_fee_amount is the maximum amount of buyer side fees being paid to the marketplace.
+    // If the marketplace fees end up being greater than this amount, the transaction will fail.
+    // Fees are always paid in the same denomination as the bid price.
+    //
+    // Since Revision 3
+    cosmos.base.v1beta1.Coin max_fee_amount = 8;
   }
 }
 
@@ -223,3 +245,37 @@ message MsgRemoveAllowedDenom {
 //
 // Since Revision 1
 message MsgRemoveAllowedDenomResponse {}
+
+// MsgSetFeeParams is the Msg/SetFeeParams request type.
+message MsgGovSetFeeParams {
+  option (cosmos.msg.v1.signer) = "authority";
+
+  // authority is the address of the governance account.
+  string authority = 1;
+
+  // fees are the marketplace fees being set.
+  FeeParams fees = 2;
+}
+
+// MsgSetFeeParamsResponse is the Msg/SetFeeParams response type.
+message MsgGovSetFeeParamsResponse {}
+
+// MsgSendFromFeePool is the Msg/SendFromFeePool request type.
+message MsgGovSendFromFeePool {
+  option (cosmos.msg.v1.signer) = "authority";
+
+  // authority is the address of the governance account.
+  string authority = 1;
+
+  // recipient is the address of the account that will receive the funds.
+  string recipient = 2;
+
+  // coins is the amount of coins to send from the fee pool.
+  repeated cosmos.base.v1beta1.Coin coins = 3 [
+    (gogoproto.nullable)     = false,
+    (gogoproto.castrepeated) = "github.com/cosmos/cosmos-sdk/types.Coins"
+  ];
+}
+
+// MsgSendFromFeePoolResponse is the Msg/SendFromFeePool response type.
+message MsgGovSendFromFeePoolResponse {}

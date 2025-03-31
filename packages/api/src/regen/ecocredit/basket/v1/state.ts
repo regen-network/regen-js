@@ -382,7 +382,7 @@ export const Basket = {
   },
   toAmino(message: Basket): BasketAmino {
     const obj: any = {};
-    obj.id = message.id !== BigInt(0) ? message.id.toString() : undefined;
+    obj.id = message.id !== BigInt(0) ? message.id?.toString() : undefined;
     obj.basket_denom = message.basketDenom === "" ? undefined : message.basketDenom;
     obj.name = message.name === "" ? undefined : message.name;
     obj.disable_auto_retire = message.disableAutoRetire === false ? undefined : message.disableAutoRetire;
@@ -463,7 +463,7 @@ export const BasketClass = {
   },
   toAmino(message: BasketClass): BasketClassAmino {
     const obj: any = {};
-    obj.basket_id = message.basketId !== BigInt(0) ? message.basketId.toString() : undefined;
+    obj.basket_id = message.basketId !== BigInt(0) ? message.basketId?.toString() : undefined;
     obj.class_id = message.classId === "" ? undefined : message.classId;
     return obj;
   },
@@ -560,7 +560,7 @@ export const BasketBalance = {
   },
   toAmino(message: BasketBalance): BasketBalanceAmino {
     const obj: any = {};
-    obj.basket_id = message.basketId !== BigInt(0) ? message.basketId.toString() : undefined;
+    obj.basket_id = message.basketId !== BigInt(0) ? message.basketId?.toString() : undefined;
     obj.batch_denom = message.batchDenom === "" ? undefined : message.batchDenom;
     obj.balance = message.balance === "" ? undefined : message.balance;
     obj.batch_start_date = message.batchStartDate ? Timestamp.toAmino(toTimestamp(message.batchStartDate)) : undefined;

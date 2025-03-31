@@ -1,5 +1,5 @@
 //@ts-nocheck
-import { MsgSell, MsgUpdateSellOrders, MsgCancelSellOrder, MsgBuyDirect, MsgAddAllowedDenom, MsgRemoveAllowedDenom } from "./tx";
+import { MsgSell, MsgUpdateSellOrders, MsgCancelSellOrder, MsgBuyDirect, MsgAddAllowedDenom, MsgRemoveAllowedDenom, MsgGovSetFeeParams, MsgGovSendFromFeePool } from "./tx";
 export const AminoConverter = {
   "/regen.ecocredit.marketplace.v1.MsgSell": {
     aminoType: "regen.marketplace/MsgSell",
@@ -30,5 +30,15 @@ export const AminoConverter = {
     aminoType: "regen.marketplace/MsgRemoveAllowedDenom",
     toAmino: MsgRemoveAllowedDenom.toAmino,
     fromAmino: MsgRemoveAllowedDenom.fromAmino
+  },
+  "/regen.ecocredit.marketplace.v1.MsgGovSetFeeParams": {
+    aminoType: "/regen.ecocredit.marketplace.v1.MsgGovSetFeeParams",
+    toAmino: MsgGovSetFeeParams.toAmino,
+    fromAmino: MsgGovSetFeeParams.fromAmino
+  },
+  "/regen.ecocredit.marketplace.v1.MsgGovSendFromFeePool": {
+    aminoType: "/regen.ecocredit.marketplace.v1.MsgGovSendFromFeePool",
+    toAmino: MsgGovSendFromFeePool.toAmino,
+    fromAmino: MsgGovSendFromFeePool.fromAmino
   }
 };

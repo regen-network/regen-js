@@ -55,7 +55,8 @@ export const createRPCQueryClient = async ({
     },
     regen: {
       data: {
-        v1: (await import("./data/v1/query.rpc.Query")).createRpcQueryExtension(client)
+        v1: (await import("./data/v1/query.rpc.Query")).createRpcQueryExtension(client),
+        v2: (await import("./data/v2/query.rpc.Query")).createRpcQueryExtension(client)
       },
       ecocredit: {
         basket: {

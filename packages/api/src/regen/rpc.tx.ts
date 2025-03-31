@@ -37,7 +37,8 @@ export const createRPCMsgClient = async ({
   },
   regen: {
     data: {
-      v1: new (await import("./data/v1/tx.rpc.msg")).MsgClientImpl(rpc)
+      v1: new (await import("./data/v1/tx.rpc.msg")).MsgClientImpl(rpc),
+      v2: new (await import("./data/v2/tx.rpc.msg")).MsgClientImpl(rpc)
     },
     ecocredit: {
       basket: {

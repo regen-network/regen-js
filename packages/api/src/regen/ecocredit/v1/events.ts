@@ -1,6 +1,65 @@
 //@ts-nocheck
 import { OriginTx, OriginTxAmino, OriginTxSDKType } from "./types";
+import { ProjectEnrollmentStatus } from "./state";
 import { BinaryReader, BinaryWriter } from "../../../binary";
+/** Action describes an action taken on an application. */
+export enum EventUpdateApplication_Action {
+  /** ACTION_UNSPECIFIED - ACTION_UNSPECIFIED is the default value for the action and is invalid. */
+  ACTION_UNSPECIFIED = 0,
+  /**
+   * ACTION_CREATE - ACTION_CREATE is the action taken when a project admin creates an
+   * application to a credit class.
+   */
+  ACTION_CREATE = 1,
+  /**
+   * ACTION_UPDATE - ACTION_UPDATE is the action taken when a project admin updates an
+   * application to a credit class.
+   */
+  ACTION_UPDATE = 2,
+  /**
+   * ACTION_WITHDRAW - ACTION_WITHDRAW is the action taken when a project admin withdraws an
+   * application to a credit class.
+   */
+  ACTION_WITHDRAW = 3,
+  UNRECOGNIZED = -1,
+}
+export const EventUpdateApplication_ActionSDKType = EventUpdateApplication_Action;
+export const EventUpdateApplication_ActionAmino = EventUpdateApplication_Action;
+export function eventUpdateApplication_ActionFromJSON(object: any): EventUpdateApplication_Action {
+  switch (object) {
+    case 0:
+    case "ACTION_UNSPECIFIED":
+      return EventUpdateApplication_Action.ACTION_UNSPECIFIED;
+    case 1:
+    case "ACTION_CREATE":
+      return EventUpdateApplication_Action.ACTION_CREATE;
+    case 2:
+    case "ACTION_UPDATE":
+      return EventUpdateApplication_Action.ACTION_UPDATE;
+    case 3:
+    case "ACTION_WITHDRAW":
+      return EventUpdateApplication_Action.ACTION_WITHDRAW;
+    case -1:
+    case "UNRECOGNIZED":
+    default:
+      return EventUpdateApplication_Action.UNRECOGNIZED;
+  }
+}
+export function eventUpdateApplication_ActionToJSON(object: EventUpdateApplication_Action): string {
+  switch (object) {
+    case EventUpdateApplication_Action.ACTION_UNSPECIFIED:
+      return "ACTION_UNSPECIFIED";
+    case EventUpdateApplication_Action.ACTION_CREATE:
+      return "ACTION_CREATE";
+    case EventUpdateApplication_Action.ACTION_UPDATE:
+      return "ACTION_UPDATE";
+    case EventUpdateApplication_Action.ACTION_WITHDRAW:
+      return "ACTION_WITHDRAW";
+    case EventUpdateApplication_Action.UNRECOGNIZED:
+    default:
+      return "UNRECOGNIZED";
+  }
+}
 /** EventCreateClass is an event emitted when a credit class is created. */
 export interface EventCreateClass {
   /** class_id is the unique identifier of the credit class. */
@@ -740,6 +799,152 @@ export interface EventBridgeReceiveSDKType {
   batch_denom: string;
   amount: string;
   origin_tx?: OriginTxSDKType;
+}
+/** EventBurnRegen is an event emitted when REGEN is burned to account for credit origination, transfer, etc. */
+export interface EventBurnRegen {
+  /** burner is the address that burned REGEN. */
+  burner: string;
+  /** amount is the integer amount of uregen burned. */
+  amount: string;
+  /** reason is the reason for the burn. */
+  reason: string;
+}
+export interface EventBurnRegenProtoMsg {
+  typeUrl: "/regen.ecocredit.v1.EventBurnRegen";
+  value: Uint8Array;
+}
+/** EventBurnRegen is an event emitted when REGEN is burned to account for credit origination, transfer, etc. */
+export interface EventBurnRegenAmino {
+  /** burner is the address that burned REGEN. */
+  burner?: string;
+  /** amount is the integer amount of uregen burned. */
+  amount?: string;
+  /** reason is the reason for the burn. */
+  reason?: string;
+}
+export interface EventBurnRegenAminoMsg {
+  type: "/regen.ecocredit.v1.EventBurnRegen";
+  value: EventBurnRegenAmino;
+}
+/** EventBurnRegen is an event emitted when REGEN is burned to account for credit origination, transfer, etc. */
+export interface EventBurnRegenSDKType {
+  burner: string;
+  amount: string;
+  reason: string;
+}
+/**
+ * EventUpdateApplication is emitted when a project admin creates, updates
+ * or withdraws a project's application to a credit class.
+ */
+export interface EventUpdateApplication {
+  /** project_id is the unique identifier of the project that was updated. */
+  projectId: string;
+  /** class_id is the unique identifier of the class that was updated. */
+  classId: string;
+  /** action is the action that was taken on the application. */
+  action: EventUpdateApplication_Action;
+  /** new_application_metadata is any new application metadata. */
+  newApplicationMetadata: string;
+}
+export interface EventUpdateApplicationProtoMsg {
+  typeUrl: "/regen.ecocredit.v1.EventUpdateApplication";
+  value: Uint8Array;
+}
+/**
+ * EventUpdateApplication is emitted when a project admin creates, updates
+ * or withdraws a project's application to a credit class.
+ */
+export interface EventUpdateApplicationAmino {
+  /** project_id is the unique identifier of the project that was updated. */
+  project_id?: string;
+  /** class_id is the unique identifier of the class that was updated. */
+  class_id?: string;
+  /** action is the action that was taken on the application. */
+  action?: EventUpdateApplication_Action;
+  /** new_application_metadata is any new application metadata. */
+  new_application_metadata?: string;
+}
+export interface EventUpdateApplicationAminoMsg {
+  type: "/regen.ecocredit.v1.EventUpdateApplication";
+  value: EventUpdateApplicationAmino;
+}
+/**
+ * EventUpdateApplication is emitted when a project admin creates, updates
+ * or withdraws a project's application to a credit class.
+ */
+export interface EventUpdateApplicationSDKType {
+  project_id: string;
+  class_id: string;
+  action: EventUpdateApplication_Action;
+  new_application_metadata: string;
+}
+/**
+ * EventUpdateProjectEnrollment is emitted when a credit class issuer updates
+ * the enrollment status of a project.
+ */
+export interface EventUpdateProjectEnrollment {
+  /**
+   * issuer is the address of the credit class issuer which evaluated the
+   * project.
+   */
+  issuer: string;
+  /** project_id is the unique identifier of the project that was evaluated. */
+  projectId: string;
+  /**
+   * class_id is the unique identifier of the class in which the project was
+   * evaluated.
+   */
+  classId: string;
+  /** old_status is the old status of the project class relationship. */
+  oldStatus: ProjectEnrollmentStatus;
+  /** new_status is the new status of the project class relationship. */
+  newStatus: ProjectEnrollmentStatus;
+  /** new_enrollment_metadata is any new enrollment metadata. */
+  newEnrollmentMetadata: string;
+}
+export interface EventUpdateProjectEnrollmentProtoMsg {
+  typeUrl: "/regen.ecocredit.v1.EventUpdateProjectEnrollment";
+  value: Uint8Array;
+}
+/**
+ * EventUpdateProjectEnrollment is emitted when a credit class issuer updates
+ * the enrollment status of a project.
+ */
+export interface EventUpdateProjectEnrollmentAmino {
+  /**
+   * issuer is the address of the credit class issuer which evaluated the
+   * project.
+   */
+  issuer?: string;
+  /** project_id is the unique identifier of the project that was evaluated. */
+  project_id?: string;
+  /**
+   * class_id is the unique identifier of the class in which the project was
+   * evaluated.
+   */
+  class_id?: string;
+  /** old_status is the old status of the project class relationship. */
+  old_status?: ProjectEnrollmentStatus;
+  /** new_status is the new status of the project class relationship. */
+  new_status?: ProjectEnrollmentStatus;
+  /** new_enrollment_metadata is any new enrollment metadata. */
+  new_enrollment_metadata?: string;
+}
+export interface EventUpdateProjectEnrollmentAminoMsg {
+  type: "/regen.ecocredit.v1.EventUpdateProjectEnrollment";
+  value: EventUpdateProjectEnrollmentAmino;
+}
+/**
+ * EventUpdateProjectEnrollment is emitted when a credit class issuer updates
+ * the enrollment status of a project.
+ */
+export interface EventUpdateProjectEnrollmentSDKType {
+  issuer: string;
+  project_id: string;
+  class_id: string;
+  old_status: ProjectEnrollmentStatus;
+  new_status: ProjectEnrollmentStatus;
+  new_enrollment_metadata: string;
 }
 function createBaseEventCreateClass(): EventCreateClass {
   return {
@@ -2148,6 +2353,315 @@ export const EventBridgeReceive = {
     return {
       typeUrl: "/regen.ecocredit.v1.EventBridgeReceive",
       value: EventBridgeReceive.encode(message).finish()
+    };
+  }
+};
+function createBaseEventBurnRegen(): EventBurnRegen {
+  return {
+    burner: "",
+    amount: "",
+    reason: ""
+  };
+}
+export const EventBurnRegen = {
+  typeUrl: "/regen.ecocredit.v1.EventBurnRegen",
+  encode(message: EventBurnRegen, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
+    if (message.burner !== "") {
+      writer.uint32(10).string(message.burner);
+    }
+    if (message.amount !== "") {
+      writer.uint32(18).string(message.amount);
+    }
+    if (message.reason !== "") {
+      writer.uint32(26).string(message.reason);
+    }
+    return writer;
+  },
+  decode(input: BinaryReader | Uint8Array, length?: number): EventBurnRegen {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+    let end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseEventBurnRegen();
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+        case 1:
+          message.burner = reader.string();
+          break;
+        case 2:
+          message.amount = reader.string();
+          break;
+        case 3:
+          message.reason = reader.string();
+          break;
+        default:
+          reader.skipType(tag & 7);
+          break;
+      }
+    }
+    return message;
+  },
+  fromPartial(object: Partial<EventBurnRegen>): EventBurnRegen {
+    const message = createBaseEventBurnRegen();
+    message.burner = object.burner ?? "";
+    message.amount = object.amount ?? "";
+    message.reason = object.reason ?? "";
+    return message;
+  },
+  fromAmino(object: EventBurnRegenAmino): EventBurnRegen {
+    const message = createBaseEventBurnRegen();
+    if (object.burner !== undefined && object.burner !== null) {
+      message.burner = object.burner;
+    }
+    if (object.amount !== undefined && object.amount !== null) {
+      message.amount = object.amount;
+    }
+    if (object.reason !== undefined && object.reason !== null) {
+      message.reason = object.reason;
+    }
+    return message;
+  },
+  toAmino(message: EventBurnRegen): EventBurnRegenAmino {
+    const obj: any = {};
+    obj.burner = message.burner === "" ? undefined : message.burner;
+    obj.amount = message.amount === "" ? undefined : message.amount;
+    obj.reason = message.reason === "" ? undefined : message.reason;
+    return obj;
+  },
+  fromAminoMsg(object: EventBurnRegenAminoMsg): EventBurnRegen {
+    return EventBurnRegen.fromAmino(object.value);
+  },
+  fromProtoMsg(message: EventBurnRegenProtoMsg): EventBurnRegen {
+    return EventBurnRegen.decode(message.value);
+  },
+  toProto(message: EventBurnRegen): Uint8Array {
+    return EventBurnRegen.encode(message).finish();
+  },
+  toProtoMsg(message: EventBurnRegen): EventBurnRegenProtoMsg {
+    return {
+      typeUrl: "/regen.ecocredit.v1.EventBurnRegen",
+      value: EventBurnRegen.encode(message).finish()
+    };
+  }
+};
+function createBaseEventUpdateApplication(): EventUpdateApplication {
+  return {
+    projectId: "",
+    classId: "",
+    action: 0,
+    newApplicationMetadata: ""
+  };
+}
+export const EventUpdateApplication = {
+  typeUrl: "/regen.ecocredit.v1.EventUpdateApplication",
+  encode(message: EventUpdateApplication, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
+    if (message.projectId !== "") {
+      writer.uint32(10).string(message.projectId);
+    }
+    if (message.classId !== "") {
+      writer.uint32(18).string(message.classId);
+    }
+    if (message.action !== 0) {
+      writer.uint32(24).int32(message.action);
+    }
+    if (message.newApplicationMetadata !== "") {
+      writer.uint32(34).string(message.newApplicationMetadata);
+    }
+    return writer;
+  },
+  decode(input: BinaryReader | Uint8Array, length?: number): EventUpdateApplication {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+    let end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseEventUpdateApplication();
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+        case 1:
+          message.projectId = reader.string();
+          break;
+        case 2:
+          message.classId = reader.string();
+          break;
+        case 3:
+          message.action = (reader.int32() as any);
+          break;
+        case 4:
+          message.newApplicationMetadata = reader.string();
+          break;
+        default:
+          reader.skipType(tag & 7);
+          break;
+      }
+    }
+    return message;
+  },
+  fromPartial(object: Partial<EventUpdateApplication>): EventUpdateApplication {
+    const message = createBaseEventUpdateApplication();
+    message.projectId = object.projectId ?? "";
+    message.classId = object.classId ?? "";
+    message.action = object.action ?? 0;
+    message.newApplicationMetadata = object.newApplicationMetadata ?? "";
+    return message;
+  },
+  fromAmino(object: EventUpdateApplicationAmino): EventUpdateApplication {
+    const message = createBaseEventUpdateApplication();
+    if (object.project_id !== undefined && object.project_id !== null) {
+      message.projectId = object.project_id;
+    }
+    if (object.class_id !== undefined && object.class_id !== null) {
+      message.classId = object.class_id;
+    }
+    if (object.action !== undefined && object.action !== null) {
+      message.action = object.action;
+    }
+    if (object.new_application_metadata !== undefined && object.new_application_metadata !== null) {
+      message.newApplicationMetadata = object.new_application_metadata;
+    }
+    return message;
+  },
+  toAmino(message: EventUpdateApplication): EventUpdateApplicationAmino {
+    const obj: any = {};
+    obj.project_id = message.projectId === "" ? undefined : message.projectId;
+    obj.class_id = message.classId === "" ? undefined : message.classId;
+    obj.action = message.action === 0 ? undefined : message.action;
+    obj.new_application_metadata = message.newApplicationMetadata === "" ? undefined : message.newApplicationMetadata;
+    return obj;
+  },
+  fromAminoMsg(object: EventUpdateApplicationAminoMsg): EventUpdateApplication {
+    return EventUpdateApplication.fromAmino(object.value);
+  },
+  fromProtoMsg(message: EventUpdateApplicationProtoMsg): EventUpdateApplication {
+    return EventUpdateApplication.decode(message.value);
+  },
+  toProto(message: EventUpdateApplication): Uint8Array {
+    return EventUpdateApplication.encode(message).finish();
+  },
+  toProtoMsg(message: EventUpdateApplication): EventUpdateApplicationProtoMsg {
+    return {
+      typeUrl: "/regen.ecocredit.v1.EventUpdateApplication",
+      value: EventUpdateApplication.encode(message).finish()
+    };
+  }
+};
+function createBaseEventUpdateProjectEnrollment(): EventUpdateProjectEnrollment {
+  return {
+    issuer: "",
+    projectId: "",
+    classId: "",
+    oldStatus: 0,
+    newStatus: 0,
+    newEnrollmentMetadata: ""
+  };
+}
+export const EventUpdateProjectEnrollment = {
+  typeUrl: "/regen.ecocredit.v1.EventUpdateProjectEnrollment",
+  encode(message: EventUpdateProjectEnrollment, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
+    if (message.issuer !== "") {
+      writer.uint32(10).string(message.issuer);
+    }
+    if (message.projectId !== "") {
+      writer.uint32(18).string(message.projectId);
+    }
+    if (message.classId !== "") {
+      writer.uint32(26).string(message.classId);
+    }
+    if (message.oldStatus !== 0) {
+      writer.uint32(32).int32(message.oldStatus);
+    }
+    if (message.newStatus !== 0) {
+      writer.uint32(40).int32(message.newStatus);
+    }
+    if (message.newEnrollmentMetadata !== "") {
+      writer.uint32(50).string(message.newEnrollmentMetadata);
+    }
+    return writer;
+  },
+  decode(input: BinaryReader | Uint8Array, length?: number): EventUpdateProjectEnrollment {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+    let end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseEventUpdateProjectEnrollment();
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+        case 1:
+          message.issuer = reader.string();
+          break;
+        case 2:
+          message.projectId = reader.string();
+          break;
+        case 3:
+          message.classId = reader.string();
+          break;
+        case 4:
+          message.oldStatus = (reader.int32() as any);
+          break;
+        case 5:
+          message.newStatus = (reader.int32() as any);
+          break;
+        case 6:
+          message.newEnrollmentMetadata = reader.string();
+          break;
+        default:
+          reader.skipType(tag & 7);
+          break;
+      }
+    }
+    return message;
+  },
+  fromPartial(object: Partial<EventUpdateProjectEnrollment>): EventUpdateProjectEnrollment {
+    const message = createBaseEventUpdateProjectEnrollment();
+    message.issuer = object.issuer ?? "";
+    message.projectId = object.projectId ?? "";
+    message.classId = object.classId ?? "";
+    message.oldStatus = object.oldStatus ?? 0;
+    message.newStatus = object.newStatus ?? 0;
+    message.newEnrollmentMetadata = object.newEnrollmentMetadata ?? "";
+    return message;
+  },
+  fromAmino(object: EventUpdateProjectEnrollmentAmino): EventUpdateProjectEnrollment {
+    const message = createBaseEventUpdateProjectEnrollment();
+    if (object.issuer !== undefined && object.issuer !== null) {
+      message.issuer = object.issuer;
+    }
+    if (object.project_id !== undefined && object.project_id !== null) {
+      message.projectId = object.project_id;
+    }
+    if (object.class_id !== undefined && object.class_id !== null) {
+      message.classId = object.class_id;
+    }
+    if (object.old_status !== undefined && object.old_status !== null) {
+      message.oldStatus = object.old_status;
+    }
+    if (object.new_status !== undefined && object.new_status !== null) {
+      message.newStatus = object.new_status;
+    }
+    if (object.new_enrollment_metadata !== undefined && object.new_enrollment_metadata !== null) {
+      message.newEnrollmentMetadata = object.new_enrollment_metadata;
+    }
+    return message;
+  },
+  toAmino(message: EventUpdateProjectEnrollment): EventUpdateProjectEnrollmentAmino {
+    const obj: any = {};
+    obj.issuer = message.issuer === "" ? undefined : message.issuer;
+    obj.project_id = message.projectId === "" ? undefined : message.projectId;
+    obj.class_id = message.classId === "" ? undefined : message.classId;
+    obj.old_status = message.oldStatus === 0 ? undefined : message.oldStatus;
+    obj.new_status = message.newStatus === 0 ? undefined : message.newStatus;
+    obj.new_enrollment_metadata = message.newEnrollmentMetadata === "" ? undefined : message.newEnrollmentMetadata;
+    return obj;
+  },
+  fromAminoMsg(object: EventUpdateProjectEnrollmentAminoMsg): EventUpdateProjectEnrollment {
+    return EventUpdateProjectEnrollment.fromAmino(object.value);
+  },
+  fromProtoMsg(message: EventUpdateProjectEnrollmentProtoMsg): EventUpdateProjectEnrollment {
+    return EventUpdateProjectEnrollment.decode(message.value);
+  },
+  toProto(message: EventUpdateProjectEnrollment): Uint8Array {
+    return EventUpdateProjectEnrollment.encode(message).finish();
+  },
+  toProtoMsg(message: EventUpdateProjectEnrollment): EventUpdateProjectEnrollmentProtoMsg {
+    return {
+      typeUrl: "/regen.ecocredit.v1.EventUpdateProjectEnrollment",
+      value: EventUpdateProjectEnrollment.encode(message).finish()
     };
   }
 };

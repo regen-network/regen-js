@@ -85,6 +85,9 @@ export const createLCDClient = async ({
       data: {
         v1: new (await import("./data/v1/query.lcd")).LCDQueryClient({
           requestClient
+        }),
+        v2: new (await import("./data/v2/query.lcd")).LCDQueryClient({
+          requestClient
         })
       },
       ecocredit: {

@@ -1,7 +1,7 @@
 //@ts-nocheck
 import { GeneratedType, Registry } from "@cosmjs/proto-signing";
-import { MsgSell, MsgUpdateSellOrders, MsgCancelSellOrder, MsgBuyDirect, MsgAddAllowedDenom, MsgRemoveAllowedDenom } from "./tx";
-export const registry: ReadonlyArray<[string, GeneratedType]> = [["/regen.ecocredit.marketplace.v1.MsgSell", MsgSell], ["/regen.ecocredit.marketplace.v1.MsgUpdateSellOrders", MsgUpdateSellOrders], ["/regen.ecocredit.marketplace.v1.MsgCancelSellOrder", MsgCancelSellOrder], ["/regen.ecocredit.marketplace.v1.MsgBuyDirect", MsgBuyDirect], ["/regen.ecocredit.marketplace.v1.MsgAddAllowedDenom", MsgAddAllowedDenom], ["/regen.ecocredit.marketplace.v1.MsgRemoveAllowedDenom", MsgRemoveAllowedDenom]];
+import { MsgSell, MsgUpdateSellOrders, MsgCancelSellOrder, MsgBuyDirect, MsgAddAllowedDenom, MsgRemoveAllowedDenom, MsgGovSetFeeParams, MsgGovSendFromFeePool } from "./tx";
+export const registry: ReadonlyArray<[string, GeneratedType]> = [["/regen.ecocredit.marketplace.v1.MsgSell", MsgSell], ["/regen.ecocredit.marketplace.v1.MsgUpdateSellOrders", MsgUpdateSellOrders], ["/regen.ecocredit.marketplace.v1.MsgCancelSellOrder", MsgCancelSellOrder], ["/regen.ecocredit.marketplace.v1.MsgBuyDirect", MsgBuyDirect], ["/regen.ecocredit.marketplace.v1.MsgAddAllowedDenom", MsgAddAllowedDenom], ["/regen.ecocredit.marketplace.v1.MsgRemoveAllowedDenom", MsgRemoveAllowedDenom], ["/regen.ecocredit.marketplace.v1.MsgGovSetFeeParams", MsgGovSetFeeParams], ["/regen.ecocredit.marketplace.v1.MsgGovSendFromFeePool", MsgGovSendFromFeePool]];
 export const load = (protoRegistry: Registry) => {
   registry.forEach(([typeUrl, mod]) => {
     protoRegistry.register(typeUrl, mod);
@@ -44,6 +44,18 @@ export const MessageComposer = {
         typeUrl: "/regen.ecocredit.marketplace.v1.MsgRemoveAllowedDenom",
         value: MsgRemoveAllowedDenom.encode(value).finish()
       };
+    },
+    govSetFeeParams(value: MsgGovSetFeeParams) {
+      return {
+        typeUrl: "/regen.ecocredit.marketplace.v1.MsgGovSetFeeParams",
+        value: MsgGovSetFeeParams.encode(value).finish()
+      };
+    },
+    govSendFromFeePool(value: MsgGovSendFromFeePool) {
+      return {
+        typeUrl: "/regen.ecocredit.marketplace.v1.MsgGovSendFromFeePool",
+        value: MsgGovSendFromFeePool.encode(value).finish()
+      };
     }
   },
   withTypeUrl: {
@@ -80,6 +92,18 @@ export const MessageComposer = {
     removeAllowedDenom(value: MsgRemoveAllowedDenom) {
       return {
         typeUrl: "/regen.ecocredit.marketplace.v1.MsgRemoveAllowedDenom",
+        value
+      };
+    },
+    govSetFeeParams(value: MsgGovSetFeeParams) {
+      return {
+        typeUrl: "/regen.ecocredit.marketplace.v1.MsgGovSetFeeParams",
+        value
+      };
+    },
+    govSendFromFeePool(value: MsgGovSendFromFeePool) {
+      return {
+        typeUrl: "/regen.ecocredit.marketplace.v1.MsgGovSendFromFeePool",
         value
       };
     }
@@ -119,6 +143,18 @@ export const MessageComposer = {
       return {
         typeUrl: "/regen.ecocredit.marketplace.v1.MsgRemoveAllowedDenom",
         value: MsgRemoveAllowedDenom.fromPartial(value)
+      };
+    },
+    govSetFeeParams(value: MsgGovSetFeeParams) {
+      return {
+        typeUrl: "/regen.ecocredit.marketplace.v1.MsgGovSetFeeParams",
+        value: MsgGovSetFeeParams.fromPartial(value)
+      };
+    },
+    govSendFromFeePool(value: MsgGovSendFromFeePool) {
+      return {
+        typeUrl: "/regen.ecocredit.marketplace.v1.MsgGovSendFromFeePool",
+        value: MsgGovSendFromFeePool.fromPartial(value)
       };
     }
   }

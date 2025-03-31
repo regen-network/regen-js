@@ -4,6 +4,85 @@ import { Coin, CoinAmino, CoinSDKType } from "../../../cosmos/base/v1beta1/coin"
 import { BinaryReader, BinaryWriter } from "../../../binary";
 import { bytesFromBase64, base64FromBytes, toTimestamp, fromTimestamp } from "../../../helpers";
 /**
+ * Application represents the evaluation status that a credit class issuer
+ * assigns to a credit class application.
+ */
+export enum ProjectEnrollmentStatus {
+  /**
+   * PROJECT_ENROLLMENT_STATUS_UNSPECIFIED - PROJECT_ENROLLMENT_STATUS_UNSPECIFIED indicates that a credit class application
+   * has been submitted but not evaluated.
+   */
+  PROJECT_ENROLLMENT_STATUS_UNSPECIFIED = 0,
+  /**
+   * PROJECT_ENROLLMENT_STATUS_ACCEPTED - PROJECT_ENROLLMENT_STATUS_ACCEPTED indicates that the project has been
+   * accepted into the credit class.
+   */
+  PROJECT_ENROLLMENT_STATUS_ACCEPTED = 1,
+  /**
+   * PROJECT_ENROLLMENT_STATUS_CHANGES_REQUESTED - PROJECT_ENROLLMENT_STATUS_CHANGES_REQUESTED indicates that an application to
+   * a credit class has been reviewed and that changes to the application have
+   * been requested. It can also be used to indicate that a project within a credit
+   * class has had its status reassessed and that changes to the project are
+   * requested in order to continue in the credit class.
+   */
+  PROJECT_ENROLLMENT_STATUS_CHANGES_REQUESTED = 2,
+  /**
+   * PROJECT_ENROLLMENT_STATUS_REJECTED - PROJECT_ENROLLMENT_STATUS_REJECTED indicates that the application has been
+   * rejected and that the project will not be accepted into the credit class.
+   */
+  PROJECT_ENROLLMENT_STATUS_REJECTED = 3,
+  /**
+   * PROJECT_ENROLLMENT_STATUS_TERMINATED - PROJECT_ENROLLMENT_STATUS_TERMINATED indicates that the project has been
+   * terminated from the credit class. This status is used when a project the
+   * was previously accepted into the credit class but has been removed or
+   * completed.
+   */
+  PROJECT_ENROLLMENT_STATUS_TERMINATED = 4,
+  UNRECOGNIZED = -1,
+}
+export const ProjectEnrollmentStatusSDKType = ProjectEnrollmentStatus;
+export const ProjectEnrollmentStatusAmino = ProjectEnrollmentStatus;
+export function projectEnrollmentStatusFromJSON(object: any): ProjectEnrollmentStatus {
+  switch (object) {
+    case 0:
+    case "PROJECT_ENROLLMENT_STATUS_UNSPECIFIED":
+      return ProjectEnrollmentStatus.PROJECT_ENROLLMENT_STATUS_UNSPECIFIED;
+    case 1:
+    case "PROJECT_ENROLLMENT_STATUS_ACCEPTED":
+      return ProjectEnrollmentStatus.PROJECT_ENROLLMENT_STATUS_ACCEPTED;
+    case 2:
+    case "PROJECT_ENROLLMENT_STATUS_CHANGES_REQUESTED":
+      return ProjectEnrollmentStatus.PROJECT_ENROLLMENT_STATUS_CHANGES_REQUESTED;
+    case 3:
+    case "PROJECT_ENROLLMENT_STATUS_REJECTED":
+      return ProjectEnrollmentStatus.PROJECT_ENROLLMENT_STATUS_REJECTED;
+    case 4:
+    case "PROJECT_ENROLLMENT_STATUS_TERMINATED":
+      return ProjectEnrollmentStatus.PROJECT_ENROLLMENT_STATUS_TERMINATED;
+    case -1:
+    case "UNRECOGNIZED":
+    default:
+      return ProjectEnrollmentStatus.UNRECOGNIZED;
+  }
+}
+export function projectEnrollmentStatusToJSON(object: ProjectEnrollmentStatus): string {
+  switch (object) {
+    case ProjectEnrollmentStatus.PROJECT_ENROLLMENT_STATUS_UNSPECIFIED:
+      return "PROJECT_ENROLLMENT_STATUS_UNSPECIFIED";
+    case ProjectEnrollmentStatus.PROJECT_ENROLLMENT_STATUS_ACCEPTED:
+      return "PROJECT_ENROLLMENT_STATUS_ACCEPTED";
+    case ProjectEnrollmentStatus.PROJECT_ENROLLMENT_STATUS_CHANGES_REQUESTED:
+      return "PROJECT_ENROLLMENT_STATUS_CHANGES_REQUESTED";
+    case ProjectEnrollmentStatus.PROJECT_ENROLLMENT_STATUS_REJECTED:
+      return "PROJECT_ENROLLMENT_STATUS_REJECTED";
+    case ProjectEnrollmentStatus.PROJECT_ENROLLMENT_STATUS_TERMINATED:
+      return "PROJECT_ENROLLMENT_STATUS_TERMINATED";
+    case ProjectEnrollmentStatus.UNRECOGNIZED:
+    default:
+      return "UNRECOGNIZED";
+  }
+}
+/**
  * CreditType defines the measurement unit/precision of a certain credit type
  * (e.g. carbon, biodiversity...)
  */
@@ -246,8 +325,9 @@ export interface Batch {
   projectKey: bigint;
   /**
    * denom is the unique identifier of the credit batch formed from the
-   * project id, the batch sequence number, and the start and end date of the
-   * credit batch.
+   * credit class ID (or just project ID for old project IDs which included the credit class),
+   * project id, the batch sequence number, and the start and
+   * end date of the credit batch.
    */
   denom: string;
   /** metadata is any arbitrary metadata attached to the credit batch. */
@@ -269,6 +349,11 @@ export interface Batch {
    * Once `open` is set to false, it can't be toggled any more.
    */
   open: boolean;
+  /**
+   * class_key is the table row identifier of the credit class used internally
+   * for efficient lookups. This links a batch to a credit class.
+   */
+  classKey: bigint;
 }
 export interface BatchProtoMsg {
   typeUrl: "/regen.ecocredit.v1.Batch";
@@ -293,8 +378,9 @@ export interface BatchAmino {
   project_key?: string;
   /**
    * denom is the unique identifier of the credit batch formed from the
-   * project id, the batch sequence number, and the start and end date of the
-   * credit batch.
+   * credit class ID (or just project ID for old project IDs which included the credit class),
+   * project id, the batch sequence number, and the start and
+   * end date of the credit batch.
    */
   denom?: string;
   /** metadata is any arbitrary metadata attached to the credit batch. */
@@ -316,6 +402,11 @@ export interface BatchAmino {
    * Once `open` is set to false, it can't be toggled any more.
    */
   open?: boolean;
+  /**
+   * class_key is the table row identifier of the credit class used internally
+   * for efficient lookups. This links a batch to a credit class.
+   */
+  class_key?: string;
 }
 export interface BatchAminoMsg {
   type: "/regen.ecocredit.v1.Batch";
@@ -332,6 +423,7 @@ export interface BatchSDKType {
   end_date?: Date;
   issuance_date?: Date;
   open: boolean;
+  class_key: bigint;
 }
 /**
  * ClassSequence stores and increments the sequence number for credit classes
@@ -919,6 +1011,115 @@ export interface AllowedBridgeChainAminoMsg {
 export interface AllowedBridgeChainSDKType {
   chain_name: string;
 }
+/** ProjectEnrollment stores the data a project's enrollment in a credit class. */
+export interface ProjectEnrollment {
+  /**
+   * project_key is the table row identifier of the project used internally for
+   * efficient lookups.
+   */
+  projectKey: bigint;
+  /**
+   * class_key is the table row identifier of the credit class used internally
+   * for efficient lookups.
+   */
+  classKey: bigint;
+  /** status is the status of the enrollment. */
+  status: ProjectEnrollmentStatus;
+  /**
+   * application_metadata is any arbitrary metadata set by the project
+   * admin related to its application to the credit class.
+   */
+  applicationMetadata: string;
+  /**
+   * enrollment_metadata is any arbitrary metadata set by the credit class
+   * admin evaluating the project's application to the credit class.
+   */
+  enrollmentMetadata: string;
+}
+export interface ProjectEnrollmentProtoMsg {
+  typeUrl: "/regen.ecocredit.v1.ProjectEnrollment";
+  value: Uint8Array;
+}
+/** ProjectEnrollment stores the data a project's enrollment in a credit class. */
+export interface ProjectEnrollmentAmino {
+  /**
+   * project_key is the table row identifier of the project used internally for
+   * efficient lookups.
+   */
+  project_key?: string;
+  /**
+   * class_key is the table row identifier of the credit class used internally
+   * for efficient lookups.
+   */
+  class_key?: string;
+  /** status is the status of the enrollment. */
+  status?: ProjectEnrollmentStatus;
+  /**
+   * application_metadata is any arbitrary metadata set by the project
+   * admin related to its application to the credit class.
+   */
+  application_metadata?: string;
+  /**
+   * enrollment_metadata is any arbitrary metadata set by the credit class
+   * admin evaluating the project's application to the credit class.
+   */
+  enrollment_metadata?: string;
+}
+export interface ProjectEnrollmentAminoMsg {
+  type: "/regen.ecocredit.v1.ProjectEnrollment";
+  value: ProjectEnrollmentAmino;
+}
+/** ProjectEnrollment stores the data a project's enrollment in a credit class. */
+export interface ProjectEnrollmentSDKType {
+  project_key: bigint;
+  class_key: bigint;
+  status: ProjectEnrollmentStatus;
+  application_metadata: string;
+  enrollment_metadata: string;
+}
+/**
+ * ProjectFee is the project creation fee. If not set, a project creation fee is
+ * not required. This table is controlled via governance.
+ * 
+ * Since Revision 3
+ */
+export interface ProjectFee {
+  /**
+   * fee is the project creation fee. If not set, a project creation fee is not
+   * required.
+   */
+  fee?: Coin;
+}
+export interface ProjectFeeProtoMsg {
+  typeUrl: "/regen.ecocredit.v1.ProjectFee";
+  value: Uint8Array;
+}
+/**
+ * ProjectFee is the project creation fee. If not set, a project creation fee is
+ * not required. This table is controlled via governance.
+ * 
+ * Since Revision 3
+ */
+export interface ProjectFeeAmino {
+  /**
+   * fee is the project creation fee. If not set, a project creation fee is not
+   * required.
+   */
+  fee?: CoinAmino;
+}
+export interface ProjectFeeAminoMsg {
+  type: "/regen.ecocredit.v1.ProjectFee";
+  value: ProjectFeeAmino;
+}
+/**
+ * ProjectFee is the project creation fee. If not set, a project creation fee is
+ * not required. This table is controlled via governance.
+ * 
+ * Since Revision 3
+ */
+export interface ProjectFeeSDKType {
+  fee?: CoinSDKType;
+}
 function createBaseCreditType(): CreditType {
   return {
     abbreviation: "",
@@ -1106,7 +1307,7 @@ export const Class = {
   },
   toAmino(message: Class): ClassAmino {
     const obj: any = {};
-    obj.key = message.key !== BigInt(0) ? message.key.toString() : undefined;
+    obj.key = message.key !== BigInt(0) ? message.key?.toString() : undefined;
     obj.id = message.id === "" ? undefined : message.id;
     obj.admin = message.admin ? base64FromBytes(message.admin) : undefined;
     obj.metadata = message.metadata === "" ? undefined : message.metadata;
@@ -1184,7 +1385,7 @@ export const ClassIssuer = {
   },
   toAmino(message: ClassIssuer): ClassIssuerAmino {
     const obj: any = {};
-    obj.class_key = message.classKey !== BigInt(0) ? message.classKey.toString() : undefined;
+    obj.class_key = message.classKey !== BigInt(0) ? message.classKey?.toString() : undefined;
     obj.issuer = message.issuer ? base64FromBytes(message.issuer) : undefined;
     return obj;
   },
@@ -1314,10 +1515,10 @@ export const Project = {
   },
   toAmino(message: Project): ProjectAmino {
     const obj: any = {};
-    obj.key = message.key !== BigInt(0) ? message.key.toString() : undefined;
+    obj.key = message.key !== BigInt(0) ? message.key?.toString() : undefined;
     obj.id = message.id === "" ? undefined : message.id;
     obj.admin = message.admin ? base64FromBytes(message.admin) : undefined;
-    obj.class_key = message.classKey !== BigInt(0) ? message.classKey.toString() : undefined;
+    obj.class_key = message.classKey !== BigInt(0) ? message.classKey?.toString() : undefined;
     obj.jurisdiction = message.jurisdiction === "" ? undefined : message.jurisdiction;
     obj.metadata = message.metadata === "" ? undefined : message.metadata;
     obj.reference_id = message.referenceId === "" ? undefined : message.referenceId;
@@ -1349,7 +1550,8 @@ function createBaseBatch(): Batch {
     startDate: undefined,
     endDate: undefined,
     issuanceDate: undefined,
-    open: false
+    open: false,
+    classKey: BigInt(0)
   };
 }
 export const Batch = {
@@ -1381,6 +1583,9 @@ export const Batch = {
     }
     if (message.open === true) {
       writer.uint32(72).bool(message.open);
+    }
+    if (message.classKey !== BigInt(0)) {
+      writer.uint32(80).uint64(message.classKey);
     }
     return writer;
   },
@@ -1418,6 +1623,9 @@ export const Batch = {
         case 9:
           message.open = reader.bool();
           break;
+        case 10:
+          message.classKey = reader.uint64();
+          break;
         default:
           reader.skipType(tag & 7);
           break;
@@ -1436,6 +1644,7 @@ export const Batch = {
     message.endDate = object.endDate ?? undefined;
     message.issuanceDate = object.issuanceDate ?? undefined;
     message.open = object.open ?? false;
+    message.classKey = object.classKey !== undefined && object.classKey !== null ? BigInt(object.classKey.toString()) : BigInt(0);
     return message;
   },
   fromAmino(object: BatchAmino): Batch {
@@ -1467,19 +1676,23 @@ export const Batch = {
     if (object.open !== undefined && object.open !== null) {
       message.open = object.open;
     }
+    if (object.class_key !== undefined && object.class_key !== null) {
+      message.classKey = BigInt(object.class_key);
+    }
     return message;
   },
   toAmino(message: Batch): BatchAmino {
     const obj: any = {};
-    obj.key = message.key !== BigInt(0) ? message.key.toString() : undefined;
+    obj.key = message.key !== BigInt(0) ? message.key?.toString() : undefined;
     obj.issuer = message.issuer ? base64FromBytes(message.issuer) : undefined;
-    obj.project_key = message.projectKey !== BigInt(0) ? message.projectKey.toString() : undefined;
+    obj.project_key = message.projectKey !== BigInt(0) ? message.projectKey?.toString() : undefined;
     obj.denom = message.denom === "" ? undefined : message.denom;
     obj.metadata = message.metadata === "" ? undefined : message.metadata;
     obj.start_date = message.startDate ? Timestamp.toAmino(toTimestamp(message.startDate)) : undefined;
     obj.end_date = message.endDate ? Timestamp.toAmino(toTimestamp(message.endDate)) : undefined;
     obj.issuance_date = message.issuanceDate ? Timestamp.toAmino(toTimestamp(message.issuanceDate)) : undefined;
     obj.open = message.open === false ? undefined : message.open;
+    obj.class_key = message.classKey !== BigInt(0) ? message.classKey?.toString() : undefined;
     return obj;
   },
   fromAminoMsg(object: BatchAminoMsg): Batch {
@@ -1554,7 +1767,7 @@ export const ClassSequence = {
   toAmino(message: ClassSequence): ClassSequenceAmino {
     const obj: any = {};
     obj.credit_type_abbrev = message.creditTypeAbbrev === "" ? undefined : message.creditTypeAbbrev;
-    obj.next_sequence = message.nextSequence !== BigInt(0) ? message.nextSequence.toString() : undefined;
+    obj.next_sequence = message.nextSequence !== BigInt(0) ? message.nextSequence?.toString() : undefined;
     return obj;
   },
   fromAminoMsg(object: ClassSequenceAminoMsg): ClassSequence {
@@ -1628,8 +1841,8 @@ export const ProjectSequence = {
   },
   toAmino(message: ProjectSequence): ProjectSequenceAmino {
     const obj: any = {};
-    obj.class_key = message.classKey !== BigInt(0) ? message.classKey.toString() : undefined;
-    obj.next_sequence = message.nextSequence !== BigInt(0) ? message.nextSequence.toString() : undefined;
+    obj.class_key = message.classKey !== BigInt(0) ? message.classKey?.toString() : undefined;
+    obj.next_sequence = message.nextSequence !== BigInt(0) ? message.nextSequence?.toString() : undefined;
     return obj;
   },
   fromAminoMsg(object: ProjectSequenceAminoMsg): ProjectSequence {
@@ -1703,8 +1916,8 @@ export const BatchSequence = {
   },
   toAmino(message: BatchSequence): BatchSequenceAmino {
     const obj: any = {};
-    obj.project_key = message.projectKey !== BigInt(0) ? message.projectKey.toString() : undefined;
-    obj.next_sequence = message.nextSequence !== BigInt(0) ? message.nextSequence.toString() : undefined;
+    obj.project_key = message.projectKey !== BigInt(0) ? message.projectKey?.toString() : undefined;
+    obj.next_sequence = message.nextSequence !== BigInt(0) ? message.nextSequence?.toString() : undefined;
     return obj;
   },
   fromAminoMsg(object: BatchSequenceAminoMsg): BatchSequence {
@@ -1811,7 +2024,7 @@ export const BatchBalance = {
   },
   toAmino(message: BatchBalance): BatchBalanceAmino {
     const obj: any = {};
-    obj.batch_key = message.batchKey !== BigInt(0) ? message.batchKey.toString() : undefined;
+    obj.batch_key = message.batchKey !== BigInt(0) ? message.batchKey?.toString() : undefined;
     obj.address = message.address ? base64FromBytes(message.address) : undefined;
     obj.tradable_amount = message.tradableAmount === "" ? undefined : message.tradableAmount;
     obj.retired_amount = message.retiredAmount === "" ? undefined : message.retiredAmount;
@@ -1911,7 +2124,7 @@ export const BatchSupply = {
   },
   toAmino(message: BatchSupply): BatchSupplyAmino {
     const obj: any = {};
-    obj.batch_key = message.batchKey !== BigInt(0) ? message.batchKey.toString() : undefined;
+    obj.batch_key = message.batchKey !== BigInt(0) ? message.batchKey?.toString() : undefined;
     obj.tradable_amount = message.tradableAmount === "" ? undefined : message.tradableAmount;
     obj.retired_amount = message.retiredAmount === "" ? undefined : message.retiredAmount;
     obj.cancelled_amount = message.cancelledAmount === "" ? undefined : message.cancelledAmount;
@@ -1999,7 +2212,7 @@ export const OriginTxIndex = {
   },
   toAmino(message: OriginTxIndex): OriginTxIndexAmino {
     const obj: any = {};
-    obj.class_key = message.classKey !== BigInt(0) ? message.classKey.toString() : undefined;
+    obj.class_key = message.classKey !== BigInt(0) ? message.classKey?.toString() : undefined;
     obj.id = message.id === "" ? undefined : message.id;
     obj.source = message.source === "" ? undefined : message.source;
     return obj;
@@ -2086,8 +2299,8 @@ export const BatchContract = {
   },
   toAmino(message: BatchContract): BatchContractAmino {
     const obj: any = {};
-    obj.batch_key = message.batchKey !== BigInt(0) ? message.batchKey.toString() : undefined;
-    obj.class_key = message.classKey !== BigInt(0) ? message.classKey.toString() : undefined;
+    obj.batch_key = message.batchKey !== BigInt(0) ? message.batchKey?.toString() : undefined;
+    obj.class_key = message.classKey !== BigInt(0) ? message.classKey?.toString() : undefined;
     obj.contract = message.contract === "" ? undefined : message.contract;
     return obj;
   },
@@ -2356,6 +2569,180 @@ export const AllowedBridgeChain = {
     return {
       typeUrl: "/regen.ecocredit.v1.AllowedBridgeChain",
       value: AllowedBridgeChain.encode(message).finish()
+    };
+  }
+};
+function createBaseProjectEnrollment(): ProjectEnrollment {
+  return {
+    projectKey: BigInt(0),
+    classKey: BigInt(0),
+    status: 0,
+    applicationMetadata: "",
+    enrollmentMetadata: ""
+  };
+}
+export const ProjectEnrollment = {
+  typeUrl: "/regen.ecocredit.v1.ProjectEnrollment",
+  encode(message: ProjectEnrollment, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
+    if (message.projectKey !== BigInt(0)) {
+      writer.uint32(8).uint64(message.projectKey);
+    }
+    if (message.classKey !== BigInt(0)) {
+      writer.uint32(24).uint64(message.classKey);
+    }
+    if (message.status !== 0) {
+      writer.uint32(32).int32(message.status);
+    }
+    if (message.applicationMetadata !== "") {
+      writer.uint32(42).string(message.applicationMetadata);
+    }
+    if (message.enrollmentMetadata !== "") {
+      writer.uint32(50).string(message.enrollmentMetadata);
+    }
+    return writer;
+  },
+  decode(input: BinaryReader | Uint8Array, length?: number): ProjectEnrollment {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+    let end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseProjectEnrollment();
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+        case 1:
+          message.projectKey = reader.uint64();
+          break;
+        case 3:
+          message.classKey = reader.uint64();
+          break;
+        case 4:
+          message.status = (reader.int32() as any);
+          break;
+        case 5:
+          message.applicationMetadata = reader.string();
+          break;
+        case 6:
+          message.enrollmentMetadata = reader.string();
+          break;
+        default:
+          reader.skipType(tag & 7);
+          break;
+      }
+    }
+    return message;
+  },
+  fromPartial(object: Partial<ProjectEnrollment>): ProjectEnrollment {
+    const message = createBaseProjectEnrollment();
+    message.projectKey = object.projectKey !== undefined && object.projectKey !== null ? BigInt(object.projectKey.toString()) : BigInt(0);
+    message.classKey = object.classKey !== undefined && object.classKey !== null ? BigInt(object.classKey.toString()) : BigInt(0);
+    message.status = object.status ?? 0;
+    message.applicationMetadata = object.applicationMetadata ?? "";
+    message.enrollmentMetadata = object.enrollmentMetadata ?? "";
+    return message;
+  },
+  fromAmino(object: ProjectEnrollmentAmino): ProjectEnrollment {
+    const message = createBaseProjectEnrollment();
+    if (object.project_key !== undefined && object.project_key !== null) {
+      message.projectKey = BigInt(object.project_key);
+    }
+    if (object.class_key !== undefined && object.class_key !== null) {
+      message.classKey = BigInt(object.class_key);
+    }
+    if (object.status !== undefined && object.status !== null) {
+      message.status = object.status;
+    }
+    if (object.application_metadata !== undefined && object.application_metadata !== null) {
+      message.applicationMetadata = object.application_metadata;
+    }
+    if (object.enrollment_metadata !== undefined && object.enrollment_metadata !== null) {
+      message.enrollmentMetadata = object.enrollment_metadata;
+    }
+    return message;
+  },
+  toAmino(message: ProjectEnrollment): ProjectEnrollmentAmino {
+    const obj: any = {};
+    obj.project_key = message.projectKey !== BigInt(0) ? message.projectKey?.toString() : undefined;
+    obj.class_key = message.classKey !== BigInt(0) ? message.classKey?.toString() : undefined;
+    obj.status = message.status === 0 ? undefined : message.status;
+    obj.application_metadata = message.applicationMetadata === "" ? undefined : message.applicationMetadata;
+    obj.enrollment_metadata = message.enrollmentMetadata === "" ? undefined : message.enrollmentMetadata;
+    return obj;
+  },
+  fromAminoMsg(object: ProjectEnrollmentAminoMsg): ProjectEnrollment {
+    return ProjectEnrollment.fromAmino(object.value);
+  },
+  fromProtoMsg(message: ProjectEnrollmentProtoMsg): ProjectEnrollment {
+    return ProjectEnrollment.decode(message.value);
+  },
+  toProto(message: ProjectEnrollment): Uint8Array {
+    return ProjectEnrollment.encode(message).finish();
+  },
+  toProtoMsg(message: ProjectEnrollment): ProjectEnrollmentProtoMsg {
+    return {
+      typeUrl: "/regen.ecocredit.v1.ProjectEnrollment",
+      value: ProjectEnrollment.encode(message).finish()
+    };
+  }
+};
+function createBaseProjectFee(): ProjectFee {
+  return {
+    fee: undefined
+  };
+}
+export const ProjectFee = {
+  typeUrl: "/regen.ecocredit.v1.ProjectFee",
+  encode(message: ProjectFee, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
+    if (message.fee !== undefined) {
+      Coin.encode(message.fee, writer.uint32(10).fork()).ldelim();
+    }
+    return writer;
+  },
+  decode(input: BinaryReader | Uint8Array, length?: number): ProjectFee {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+    let end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseProjectFee();
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+        case 1:
+          message.fee = Coin.decode(reader, reader.uint32());
+          break;
+        default:
+          reader.skipType(tag & 7);
+          break;
+      }
+    }
+    return message;
+  },
+  fromPartial(object: Partial<ProjectFee>): ProjectFee {
+    const message = createBaseProjectFee();
+    message.fee = object.fee !== undefined && object.fee !== null ? Coin.fromPartial(object.fee) : undefined;
+    return message;
+  },
+  fromAmino(object: ProjectFeeAmino): ProjectFee {
+    const message = createBaseProjectFee();
+    if (object.fee !== undefined && object.fee !== null) {
+      message.fee = Coin.fromAmino(object.fee);
+    }
+    return message;
+  },
+  toAmino(message: ProjectFee): ProjectFeeAmino {
+    const obj: any = {};
+    obj.fee = message.fee ? Coin.toAmino(message.fee) : undefined;
+    return obj;
+  },
+  fromAminoMsg(object: ProjectFeeAminoMsg): ProjectFee {
+    return ProjectFee.fromAmino(object.value);
+  },
+  fromProtoMsg(message: ProjectFeeProtoMsg): ProjectFee {
+    return ProjectFee.decode(message.value);
+  },
+  toProto(message: ProjectFee): Uint8Array {
+    return ProjectFee.encode(message).finish();
+  },
+  toProtoMsg(message: ProjectFee): ProjectFeeProtoMsg {
+    return {
+      typeUrl: "/regen.ecocredit.v1.ProjectFee",
+      value: ProjectFee.encode(message).finish()
     };
   }
 };
