@@ -49,7 +49,7 @@ export const options: TelescopeInput = {
     },
 
     bundle: {
-      enabled: true,
+      enabled: false,
     },
 
     tsDisable: {
