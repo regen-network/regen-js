@@ -25,9 +25,6 @@ service Query {
       returns (QueryClassesByAdminResponse) {
     option (google.api.http) = {
       get : "/regen/ecocredit/v1/classes-by-admin/{admin}"
-      // additional_bindings : [
-      //   {get : "/regen/ecocredit/v1/classes/admin/{admin}"}
-      // ]
     };
   }
 
@@ -35,7 +32,6 @@ service Query {
   rpc Class(QueryClassRequest) returns (QueryClassResponse) {
     option (google.api.http) = {
       get : "/regen/ecocredit/v1/class/{class_id}"
-      // additional_bindings : [ {get : "/regen/ecocredit/v1/classes/{class_id}"} ]
     };
   }
 
@@ -44,9 +40,6 @@ service Query {
       returns (QueryClassIssuersResponse) {
     option (google.api.http) = {
       get : "/regen/ecocredit/v1/class-issuers/{class_id}"
-      // additional_bindings : [
-      //   {get : "/regen/ecocredit/v1/classes/{class_id}/issuers"}
-      // ]
     };
   }
 
@@ -60,10 +53,6 @@ service Query {
       returns (QueryProjectsByClassResponse) {
     option (google.api.http) = {
       get : "/regen/ecocredit/v1/projects-by-class/{class_id}"
-      // additional_bindings : [
-      //   {get : "/regen/ecocredit/v1/projects/class/{class_id}"},
-      //   {get : "/regen/ecocredit/v1/classes/{class_id}/projects"}
-      // ]
     };
   }
 
@@ -73,9 +62,6 @@ service Query {
       returns (QueryProjectsByReferenceIdResponse) {
     option (google.api.http) = {
       get : "/regen/ecocredit/v1/projects-by-reference-id/{reference_id}"
-      // additional_bindings : [
-      //   {get : "/regen/ecocredit/v1/projects/reference-id/{reference_id}"}
-      // ]
     };
   }
 
@@ -85,9 +71,6 @@ service Query {
       returns (QueryProjectsByAdminResponse) {
     option (google.api.http) = {
       get : "/regen/ecocredit/v1/projects-by-admin/{admin}"
-      // additional_bindings : [
-      //   {get : "/regen/ecocredit/v1/projects/admin/{admin}"}
-      // ]
     };
   }
 
@@ -95,9 +78,6 @@ service Query {
   rpc Project(QueryProjectRequest) returns (QueryProjectResponse) {
     option (google.api.http) = {
       get : "/regen/ecocredit/v1/project/{project_id}"
-      // additional_bindings : [
-      //   {get : "/regen/ecocredit/v1/projects/{project_id}"}
-      // ]
     };
   }
 
@@ -111,9 +91,6 @@ service Query {
       returns (QueryBatchesByIssuerResponse) {
     option (google.api.http) = {
       get : "/regen/ecocredit/v1/batches-by-issuer/{issuer}"
-      // additional_bindings : [
-      //   {get : "/regen/ecocredit/v1/batches/issuer/{issuer}"}
-      // ]
     };
   }
 
@@ -122,9 +99,6 @@ service Query {
       returns (QueryBatchesByClassResponse) {
     option (google.api.http) = {
       get : "/regen/ecocredit/v1/batches-by-class/{class_id}"
-      // additional_bindings : [
-      //   {get : "/regen/ecocredit/v1/batches/class/{class_id}"}
-      // ]
     };
   }
 
@@ -134,9 +108,6 @@ service Query {
       returns (QueryBatchesByProjectResponse) {
     option (google.api.http) = {
       get : "/regen/ecocredit/v1/batches-by-project/{project_id}"
-      // additional_bindings : [
-      //   {get : "/regen/ecocredit/v1/batches/project/{project_id}"}
-      // ]
     };
   }
 
@@ -144,9 +115,6 @@ service Query {
   rpc Batch(QueryBatchRequest) returns (QueryBatchResponse) {
     option (google.api.http) = {
       get : "/regen/ecocredit/v1/batch/{batch_denom}"
-      // additional_bindings : [
-      //   {get : "/regen/ecocredit/v1/batches/{batch_denom}"}
-      // ]
     };
   }
 
@@ -155,10 +123,6 @@ service Query {
   rpc Balance(QueryBalanceRequest) returns (QueryBalanceResponse) {
     option (google.api.http) = {
       get : "/regen/ecocredit/v1/balance/{batch_denom}/{address}"
-      // additional_bindings : [
-      //   {get : "/regen/ecocredit/v1/batches/{batch_denom}/balance/{address}"},
-      //   {get : "/regen/ecocredit/v1/balances/{address}/batch/{batch_denom}"}
-      // ]
     };
   }
 
@@ -174,9 +138,6 @@ service Query {
       returns (QueryBalancesByBatchResponse) {
     option (google.api.http) = {
       get : "/regen/ecocredit/v1/balances-by-batch/{batch_denom}"
-      // additional_bindings : [
-      //   {get : "/regen/ecocredit/v1/batches/{batch_denom}/balances"}
-      // ]
     };
   }
 
@@ -186,7 +147,6 @@ service Query {
   rpc AllBalances(QueryAllBalancesRequest) returns (QueryAllBalancesResponse) {
     option (google.api.http) = {
       get : "/regen/ecocredit/v1/all-balances"
-      // additional_bindings : [ {get : "/regen/ecocredit/v1/balances"} ]
     };
   }
 
@@ -194,9 +154,6 @@ service Query {
   rpc Supply(QuerySupplyRequest) returns (QuerySupplyResponse) {
     option (google.api.http) = {
       get : "/regen/ecocredit/v1/supply/{batch_denom}"
-      // additional_bindings : [
-      //   {get : "/regen/ecocredit/v1/batches/{batch_denom}/supply"}
-      // ]
     };
   }
 
@@ -219,9 +176,6 @@ service Query {
   rpc CreditType(QueryCreditTypeRequest) returns (QueryCreditTypeResponse) {
     option (google.api.http) = {
       get : "/regen/ecocredit/v1/credit-type/{abbreviation}"
-      // additional_bindings : [
-      //   {get : "/regen/ecocredit/v1/credit-types/{abbreviation}"}
-      // ]
     };
   }
 

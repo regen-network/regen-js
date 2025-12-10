@@ -1,7 +1,7 @@
 //@ts-nocheck
 import { Rpc } from "../../../helpers";
 import { BinaryReader } from "../../../binary";
-import { MsgSetWithdrawAddress, MsgSetWithdrawAddressResponse, MsgWithdrawDelegatorReward, MsgWithdrawDelegatorRewardResponse, MsgWithdrawValidatorCommission, MsgWithdrawValidatorCommissionResponse, MsgFundCommunityPool, MsgFundCommunityPoolResponse } from "./tx";
+import { MsgSetWithdrawAddress, MsgSetWithdrawAddressResponse, MsgWithdrawDelegatorReward, MsgWithdrawDelegatorRewardResponse, MsgWithdrawValidatorCommission, MsgWithdrawValidatorCommissionResponse, MsgFundCommunityPool, MsgFundCommunityPoolResponse, MsgUpdateParams, MsgUpdateParamsResponse, MsgCommunityPoolSpend, MsgCommunityPoolSpendResponse, MsgDepositValidatorRewardsPool, MsgDepositValidatorRewardsPoolResponse } from "./tx";
 /** Msg defines the distribution Msg service. */
 export interface Msg {
   /**
@@ -22,8 +22,29 @@ export interface Msg {
   /**
    * FundCommunityPool defines a method to allow an account to directly
    * fund the community pool.
+   * 
+   * WARNING: This method will fail if an external community pool is used.
    */
   fundCommunityPool(request: MsgFundCommunityPool): Promise<MsgFundCommunityPoolResponse>;
+  /**
+   * UpdateParams defines a governance operation for updating the x/distribution
+   * module parameters. The authority is defined in the keeper.
+   */
+  updateParams(request: MsgUpdateParams): Promise<MsgUpdateParamsResponse>;
+  /**
+   * CommunityPoolSpend defines a governance operation for sending tokens from
+   * the community pool in the x/distribution module to another account, which
+   * could be the governance module itself. The authority is defined in the
+   * keeper.
+   * 
+   * WARNING: This method will fail if an external community pool is used.
+   */
+  communityPoolSpend(request: MsgCommunityPoolSpend): Promise<MsgCommunityPoolSpendResponse>;
+  /**
+   * DepositValidatorRewardsPool defines a method to provide additional rewards
+   * to delegators to a specific validator.
+   */
+  depositValidatorRewardsPool(request: MsgDepositValidatorRewardsPool): Promise<MsgDepositValidatorRewardsPoolResponse>;
 }
 export class MsgClientImpl implements Msg {
   private readonly rpc: Rpc;
@@ -33,6 +54,9 @@ export class MsgClientImpl implements Msg {
     this.withdrawDelegatorReward = this.withdrawDelegatorReward.bind(this);
     this.withdrawValidatorCommission = this.withdrawValidatorCommission.bind(this);
     this.fundCommunityPool = this.fundCommunityPool.bind(this);
+    this.updateParams = this.updateParams.bind(this);
+    this.communityPoolSpend = this.communityPoolSpend.bind(this);
+    this.depositValidatorRewardsPool = this.depositValidatorRewardsPool.bind(this);
   }
   setWithdrawAddress(request: MsgSetWithdrawAddress): Promise<MsgSetWithdrawAddressResponse> {
     const data = MsgSetWithdrawAddress.encode(request).finish();
@@ -53,5 +77,20 @@ export class MsgClientImpl implements Msg {
     const data = MsgFundCommunityPool.encode(request).finish();
     const promise = this.rpc.request("cosmos.distribution.v1beta1.Msg", "FundCommunityPool", data);
     return promise.then(data => MsgFundCommunityPoolResponse.decode(new BinaryReader(data)));
+  }
+  updateParams(request: MsgUpdateParams): Promise<MsgUpdateParamsResponse> {
+    const data = MsgUpdateParams.encode(request).finish();
+    const promise = this.rpc.request("cosmos.distribution.v1beta1.Msg", "UpdateParams", data);
+    return promise.then(data => MsgUpdateParamsResponse.decode(new BinaryReader(data)));
+  }
+  communityPoolSpend(request: MsgCommunityPoolSpend): Promise<MsgCommunityPoolSpendResponse> {
+    const data = MsgCommunityPoolSpend.encode(request).finish();
+    const promise = this.rpc.request("cosmos.distribution.v1beta1.Msg", "CommunityPoolSpend", data);
+    return promise.then(data => MsgCommunityPoolSpendResponse.decode(new BinaryReader(data)));
+  }
+  depositValidatorRewardsPool(request: MsgDepositValidatorRewardsPool): Promise<MsgDepositValidatorRewardsPoolResponse> {
+    const data = MsgDepositValidatorRewardsPool.encode(request).finish();
+    const promise = this.rpc.request("cosmos.distribution.v1beta1.Msg", "DepositValidatorRewardsPool", data);
+    return promise.then(data => MsgDepositValidatorRewardsPoolResponse.decode(new BinaryReader(data)));
   }
 }

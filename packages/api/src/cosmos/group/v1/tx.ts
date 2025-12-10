@@ -489,7 +489,7 @@ export interface MsgUpdateGroupPolicyMetadata {
   admin: string;
   /** group_policy_address is the account address of group policy. */
   groupPolicyAddress: string;
-  /** metadata is the updated group policy metadata. */
+  /** metadata is the group policy metadata to be updated. */
   metadata: string;
 }
 export interface MsgUpdateGroupPolicyMetadataProtoMsg {
@@ -502,7 +502,7 @@ export interface MsgUpdateGroupPolicyMetadataAmino {
   admin?: string;
   /** group_policy_address is the account address of group policy. */
   group_policy_address?: string;
-  /** metadata is the updated group policy metadata. */
+  /** metadata is the group policy metadata to be updated. */
   metadata?: string;
 }
 export interface MsgUpdateGroupPolicyMetadataAminoMsg {
@@ -538,7 +538,7 @@ export interface MsgSubmitProposal {
    * Proposers signatures will be counted as yes votes.
    */
   proposers: string[];
-  /** metadata is any arbitrary metadata to attached to the proposal. */
+  /** metadata is any arbitrary metadata attached to the proposal. */
   metadata: string;
   /** messages is a list of `sdk.Msg`s that will be executed if the proposal passes. */
   messages: Any[];
@@ -548,6 +548,10 @@ export interface MsgSubmitProposal {
    * If so, proposers signatures are considered as Yes votes.
    */
   exec: Exec;
+  /** title is the title of the proposal. */
+  title: string;
+  /** summary is the summary of the proposal. */
+  summary: string;
 }
 export interface MsgSubmitProposalProtoMsg {
   typeUrl: "/cosmos.group.v1.MsgSubmitProposal";
@@ -562,7 +566,7 @@ export interface MsgSubmitProposalAmino {
    * Proposers signatures will be counted as yes votes.
    */
   proposers?: string[];
-  /** metadata is any arbitrary metadata to attached to the proposal. */
+  /** metadata is any arbitrary metadata attached to the proposal. */
   metadata?: string;
   /** messages is a list of `sdk.Msg`s that will be executed if the proposal passes. */
   messages?: AnyAmino[];
@@ -572,6 +576,10 @@ export interface MsgSubmitProposalAmino {
    * If so, proposers signatures are considered as Yes votes.
    */
   exec?: Exec;
+  /** title is the title of the proposal. */
+  title?: string;
+  /** summary is the summary of the proposal. */
+  summary?: string;
 }
 export interface MsgSubmitProposalAminoMsg {
   type: "cosmos-sdk/group/MsgSubmitProposal";
@@ -584,6 +592,8 @@ export interface MsgSubmitProposalSDKType {
   metadata: string;
   messages: AnySDKType[];
   exec: Exec;
+  title: string;
+  summary: string;
 }
 /** MsgSubmitProposalResponse is the Msg/SubmitProposal response type. */
 export interface MsgSubmitProposalResponse {
@@ -656,7 +666,7 @@ export interface MsgVote {
   voter: string;
   /** option is the voter's choice on the proposal. */
   option: VoteOption;
-  /** metadata is any arbitrary metadata to attached to the vote. */
+  /** metadata is any arbitrary metadata attached to the vote. */
   metadata: string;
   /**
    * exec defines whether the proposal should be executed
@@ -676,7 +686,7 @@ export interface MsgVoteAmino {
   voter?: string;
   /** option is the voter's choice on the proposal. */
   option?: VoteOption;
-  /** metadata is any arbitrary metadata to attached to the vote. */
+  /** metadata is any arbitrary metadata attached to the vote. */
   metadata?: string;
   /**
    * exec defines whether the proposal should be executed
@@ -1455,7 +1465,7 @@ export const MsgCreateGroupPolicy = {
           message.metadata = reader.string();
           break;
         case 4:
-          message.decisionPolicy = (DecisionPolicy_InterfaceDecoder(reader) as Any);
+          message.decisionPolicy = (Cosmos_groupv1DecisionPolicy_InterfaceDecoder(reader) as Any);
           break;
         default:
           reader.skipType(tag & 7);
@@ -1484,7 +1494,7 @@ export const MsgCreateGroupPolicy = {
       message.metadata = object.metadata;
     }
     if (object.decision_policy !== undefined && object.decision_policy !== null) {
-      message.decisionPolicy = DecisionPolicy_FromAmino(object.decision_policy);
+      message.decisionPolicy = Cosmos_groupv1DecisionPolicy_FromAmino(object.decision_policy);
     }
     return message;
   },
@@ -1493,7 +1503,7 @@ export const MsgCreateGroupPolicy = {
     obj.admin = message.admin === "" ? undefined : message.admin;
     obj.group_id = message.groupId !== BigInt(0) ? message.groupId?.toString() : undefined;
     obj.metadata = message.metadata === "" ? undefined : message.metadata;
-    obj.decision_policy = message.decisionPolicy ? DecisionPolicy_ToAmino((message.decisionPolicy as Any)) : undefined;
+    obj.decision_policy = message.decisionPolicy ? Cosmos_groupv1DecisionPolicy_ToAmino((message.decisionPolicy as Any)) : undefined;
     return obj;
   },
   fromAminoMsg(object: MsgCreateGroupPolicyAminoMsg): MsgCreateGroupPolicy {
@@ -1792,7 +1802,7 @@ export const MsgCreateGroupWithPolicy = {
           message.groupPolicyAsAdmin = reader.bool();
           break;
         case 6:
-          message.decisionPolicy = (DecisionPolicy_InterfaceDecoder(reader) as Any);
+          message.decisionPolicy = (Cosmos_groupv1DecisionPolicy_InterfaceDecoder(reader) as Any);
           break;
         default:
           reader.skipType(tag & 7);
@@ -1827,7 +1837,7 @@ export const MsgCreateGroupWithPolicy = {
       message.groupPolicyAsAdmin = object.group_policy_as_admin;
     }
     if (object.decision_policy !== undefined && object.decision_policy !== null) {
-      message.decisionPolicy = DecisionPolicy_FromAmino(object.decision_policy);
+      message.decisionPolicy = Cosmos_groupv1DecisionPolicy_FromAmino(object.decision_policy);
     }
     return message;
   },
@@ -1842,7 +1852,7 @@ export const MsgCreateGroupWithPolicy = {
     obj.group_metadata = message.groupMetadata === "" ? undefined : message.groupMetadata;
     obj.group_policy_metadata = message.groupPolicyMetadata === "" ? undefined : message.groupPolicyMetadata;
     obj.group_policy_as_admin = message.groupPolicyAsAdmin === false ? undefined : message.groupPolicyAsAdmin;
-    obj.decision_policy = message.decisionPolicy ? DecisionPolicy_ToAmino((message.decisionPolicy as Any)) : undefined;
+    obj.decision_policy = message.decisionPolicy ? Cosmos_groupv1DecisionPolicy_ToAmino((message.decisionPolicy as Any)) : undefined;
     return obj;
   },
   fromAminoMsg(object: MsgCreateGroupWithPolicyAminoMsg): MsgCreateGroupWithPolicy {
@@ -1983,7 +1993,7 @@ export const MsgUpdateGroupPolicyDecisionPolicy = {
           message.groupPolicyAddress = reader.string();
           break;
         case 3:
-          message.decisionPolicy = (DecisionPolicy_InterfaceDecoder(reader) as Any);
+          message.decisionPolicy = (Cosmos_groupv1DecisionPolicy_InterfaceDecoder(reader) as Any);
           break;
         default:
           reader.skipType(tag & 7);
@@ -2008,7 +2018,7 @@ export const MsgUpdateGroupPolicyDecisionPolicy = {
       message.groupPolicyAddress = object.group_policy_address;
     }
     if (object.decision_policy !== undefined && object.decision_policy !== null) {
-      message.decisionPolicy = DecisionPolicy_FromAmino(object.decision_policy);
+      message.decisionPolicy = Cosmos_groupv1DecisionPolicy_FromAmino(object.decision_policy);
     }
     return message;
   },
@@ -2016,7 +2026,7 @@ export const MsgUpdateGroupPolicyDecisionPolicy = {
     const obj: any = {};
     obj.admin = message.admin === "" ? undefined : message.admin;
     obj.group_policy_address = message.groupPolicyAddress === "" ? undefined : message.groupPolicyAddress;
-    obj.decision_policy = message.decisionPolicy ? DecisionPolicy_ToAmino((message.decisionPolicy as Any)) : undefined;
+    obj.decision_policy = message.decisionPolicy ? Cosmos_groupv1DecisionPolicy_ToAmino((message.decisionPolicy as Any)) : undefined;
     return obj;
   },
   fromAminoMsg(object: MsgUpdateGroupPolicyDecisionPolicyAminoMsg): MsgUpdateGroupPolicyDecisionPolicy {
@@ -2252,7 +2262,9 @@ function createBaseMsgSubmitProposal(): MsgSubmitProposal {
     proposers: [],
     metadata: "",
     messages: [],
-    exec: 0
+    exec: 0,
+    title: "",
+    summary: ""
   };
 }
 export const MsgSubmitProposal = {
@@ -2272,6 +2284,12 @@ export const MsgSubmitProposal = {
     }
     if (message.exec !== 0) {
       writer.uint32(40).int32(message.exec);
+    }
+    if (message.title !== "") {
+      writer.uint32(50).string(message.title);
+    }
+    if (message.summary !== "") {
+      writer.uint32(58).string(message.summary);
     }
     return writer;
   },
@@ -2297,6 +2315,12 @@ export const MsgSubmitProposal = {
         case 5:
           message.exec = (reader.int32() as any);
           break;
+        case 6:
+          message.title = reader.string();
+          break;
+        case 7:
+          message.summary = reader.string();
+          break;
         default:
           reader.skipType(tag & 7);
           break;
@@ -2311,6 +2335,8 @@ export const MsgSubmitProposal = {
     message.metadata = object.metadata ?? "";
     message.messages = object.messages?.map(e => Any.fromPartial(e)) || [];
     message.exec = object.exec ?? 0;
+    message.title = object.title ?? "";
+    message.summary = object.summary ?? "";
     return message;
   },
   fromAmino(object: MsgSubmitProposalAmino): MsgSubmitProposal {
@@ -2325,6 +2351,12 @@ export const MsgSubmitProposal = {
     message.messages = object.messages?.map(e => Any.fromAmino(e)) || [];
     if (object.exec !== undefined && object.exec !== null) {
       message.exec = object.exec;
+    }
+    if (object.title !== undefined && object.title !== null) {
+      message.title = object.title;
+    }
+    if (object.summary !== undefined && object.summary !== null) {
+      message.summary = object.summary;
     }
     return message;
   },
@@ -2343,6 +2375,8 @@ export const MsgSubmitProposal = {
       obj.messages = message.messages;
     }
     obj.exec = message.exec === 0 ? undefined : message.exec;
+    obj.title = message.title === "" ? undefined : message.title;
+    obj.summary = message.summary === "" ? undefined : message.summary;
     return obj;
   },
   fromAminoMsg(object: MsgSubmitProposalAminoMsg): MsgSubmitProposal {
@@ -3033,7 +3067,7 @@ export const MsgLeaveGroupResponse = {
     };
   }
 };
-export const DecisionPolicy_InterfaceDecoder = (input: BinaryReader | Uint8Array): ThresholdDecisionPolicy | PercentageDecisionPolicy | Any => {
+export const Cosmos_groupv1DecisionPolicy_InterfaceDecoder = (input: BinaryReader | Uint8Array): ThresholdDecisionPolicy | PercentageDecisionPolicy | Any => {
   const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
   const data = Any.decode(reader, reader.uint32());
   switch (data.typeUrl) {
@@ -3045,7 +3079,7 @@ export const DecisionPolicy_InterfaceDecoder = (input: BinaryReader | Uint8Array
       return data;
   }
 };
-export const DecisionPolicy_FromAmino = (content: AnyAmino): Any => {
+export const Cosmos_groupv1DecisionPolicy_FromAmino = (content: AnyAmino): Any => {
   switch (content.type) {
     case "cosmos-sdk/ThresholdDecisionPolicy":
       return Any.fromPartial({
@@ -3061,7 +3095,7 @@ export const DecisionPolicy_FromAmino = (content: AnyAmino): Any => {
       return Any.fromAmino(content);
   }
 };
-export const DecisionPolicy_ToAmino = (content: Any) => {
+export const Cosmos_groupv1DecisionPolicy_ToAmino = (content: Any) => {
   switch (content.typeUrl) {
     case "/cosmos.group.v1.ThresholdDecisionPolicy":
       return {

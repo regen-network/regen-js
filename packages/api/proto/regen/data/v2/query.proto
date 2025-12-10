@@ -16,7 +16,6 @@ service Query {
   rpc AnchorByIRI(QueryAnchorByIRIRequest) returns (QueryAnchorByIRIResponse) {
     option (google.api.http) = {
       get : "/regen/data/v2/anchor-by-iri/{iri}"
-      // additional_bindings : [ {get : "/regen/data/v2/anchors/iri/{iri}"} ]
     };
   }
 
@@ -26,9 +25,6 @@ service Query {
     option (google.api.http) = {
       post : "/regen/data/v2/anchor-by-hash"
       body : "*"
-      // additional_bindings : [
-      //   {post : "/regen/data/v2/anchors/hash" body : "*"}
-      // ]
     };
   }
 
@@ -37,9 +33,6 @@ service Query {
       returns (QueryAttestationsByAttestorResponse) {
     option (google.api.http) = {
       get : "/regen/data/v2/attestations-by-attestor/{attestor}"
-      // additional_bindings : [
-      //   {get : "/regen/data/v2/attestations/attestor/{attestor}"}
-      // ]
     };
   }
 
@@ -48,7 +41,6 @@ service Query {
       returns (QueryAttestationsByIRIResponse) {
     option (google.api.http) = {
       get : "/regen/data/v2/attestations-by-iri/{iri}"
-      // additional_bindings : [ {get : "/regen/data/v2/attestations/iri/{iri}"} ]
     };
   }
 
@@ -59,9 +51,6 @@ service Query {
     option (google.api.http) = {
       post : "/regen/data/v2/attestations-by-hash"
       body : "*"
-      // additional_bindings : [
-      //   {post : "/regen/data/v2/attestations/hash" body : "*"}
-      // ]
     };
   }
 
@@ -69,7 +58,6 @@ service Query {
   rpc Resolver(QueryResolverRequest) returns (QueryResolverResponse) {
     option (google.api.http) = {
       get : "/regen/data/v2/resolver/{id}"
-      // additional_bindings : [ {get : "/regen/data/v2/resolvers/{id}"} ]
     };
   }
 
@@ -79,7 +67,6 @@ service Query {
       returns (QueryResolversByIRIResponse) {
     option (google.api.http) = {
       get : "/regen/data/v2/resolvers-by-iri/{iri}"
-      // additional_bindings : [ {get : "/regen/data/v2/resolvers/iri/{iri}"} ]
     };
   }
 
@@ -90,9 +77,6 @@ service Query {
     option (google.api.http) = {
       post : "/regen/data/v2/resolvers-by-hash"
       body : "*"
-      // additional_bindings : [
-      //   {post : "/regen/data/v2/resolvers/hash" body : "*"}
-      // ]
     };
   }
 
@@ -102,9 +86,6 @@ service Query {
     option (google.api.http) = {
       post : "/regen/data/v2/resolvers-by-url"
       body : "*"
-      // additional_bindings : [
-      //   {post : "/regen/data/v2/resolvers/url" body : "*"}
-      // ]
     };
   }
 

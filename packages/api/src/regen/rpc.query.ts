@@ -24,8 +24,20 @@ export const createRPCQueryClient = async ({
           v1beta1: (await import("../cosmos/base/node/v1beta1/query.rpc.Service")).createRpcQueryExtension(client)
         }
       },
+      circuit: {
+        v1: (await import("../cosmos/circuit/v1/query.rpc.Query")).createRpcQueryExtension(client)
+      },
+      consensus: {
+        v1: (await import("../cosmos/consensus/v1/query.rpc.Query")).createRpcQueryExtension(client)
+      },
+      counter: {
+        v1: (await import("../cosmos/counter/v1/query.rpc.Query")).createRpcQueryExtension(client)
+      },
       distribution: {
         v1beta1: (await import("../cosmos/distribution/v1beta1/query.rpc.Query")).createRpcQueryExtension(client)
+      },
+      epochs: {
+        v1beta1: (await import("../cosmos/epochs/v1beta1/query.rpc.Query")).createRpcQueryExtension(client)
       },
       feegrant: {
         v1beta1: (await import("../cosmos/feegrant/v1beta1/query.rpc.Query")).createRpcQueryExtension(client)
@@ -42,6 +54,9 @@ export const createRPCQueryClient = async ({
       },
       params: {
         v1beta1: (await import("../cosmos/params/v1beta1/query.rpc.Query")).createRpcQueryExtension(client)
+      },
+      protocolpool: {
+        v1: (await import("../cosmos/protocolpool/v1/query.rpc.Query")).createRpcQueryExtension(client)
       },
       staking: {
         v1beta1: (await import("../cosmos/staking/v1beta1/query.rpc.Query")).createRpcQueryExtension(client)
@@ -67,9 +82,6 @@ export const createRPCQueryClient = async ({
         },
         v1: (await import("./ecocredit/v1/query.rpc.Query")).createRpcQueryExtension(client),
         v1alpha1: (await import("./ecocredit/v1alpha1/query.rpc.Query")).createRpcQueryExtension(client)
-      },
-      intertx: {
-        v1: (await import("./intertx/v1/query.rpc.Query")).createRpcQueryExtension(client)
       }
     }
   };

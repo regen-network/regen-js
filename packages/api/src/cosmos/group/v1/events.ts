@@ -1,5 +1,5 @@
 //@ts-nocheck
-import { ProposalExecutorResult } from "./types";
+import { ProposalExecutorResult, ProposalStatus, TallyResult, TallyResultAmino, TallyResultSDKType } from "./types";
 import { BinaryReader, BinaryWriter } from "../../../binary";
 /** EventCreateGroup is an event emitted when a group is created. */
 export interface EventCreateGroup {
@@ -213,6 +213,65 @@ export interface EventLeaveGroupAminoMsg {
 export interface EventLeaveGroupSDKType {
   group_id: bigint;
   address: string;
+}
+/** EventProposalPruned is an event emitted when a proposal is pruned. */
+export interface EventProposalPruned {
+  /** proposal_id is the unique ID of the proposal. */
+  proposalId: bigint;
+  /** status is the proposal status (UNSPECIFIED, SUBMITTED, ACCEPTED, REJECTED, ABORTED, WITHDRAWN). */
+  status: ProposalStatus;
+  /** tally_result is the proposal tally result (when applicable). */
+  tallyResult?: TallyResult;
+}
+export interface EventProposalPrunedProtoMsg {
+  typeUrl: "/cosmos.group.v1.EventProposalPruned";
+  value: Uint8Array;
+}
+/** EventProposalPruned is an event emitted when a proposal is pruned. */
+export interface EventProposalPrunedAmino {
+  /** proposal_id is the unique ID of the proposal. */
+  proposal_id?: string;
+  /** status is the proposal status (UNSPECIFIED, SUBMITTED, ACCEPTED, REJECTED, ABORTED, WITHDRAWN). */
+  status?: ProposalStatus;
+  /** tally_result is the proposal tally result (when applicable). */
+  tally_result?: TallyResultAmino;
+}
+export interface EventProposalPrunedAminoMsg {
+  type: "cosmos-sdk/EventProposalPruned";
+  value: EventProposalPrunedAmino;
+}
+/** EventProposalPruned is an event emitted when a proposal is pruned. */
+export interface EventProposalPrunedSDKType {
+  proposal_id: bigint;
+  status: ProposalStatus;
+  tally_result?: TallyResultSDKType;
+}
+/** EventTallyError is an event emitted when a proposal tally failed with an error. */
+export interface EventTallyError {
+  /** proposal_id is the unique ID of the proposal. */
+  proposalId: bigint;
+  /** error_message is the raw error output */
+  errorMessage: string;
+}
+export interface EventTallyErrorProtoMsg {
+  typeUrl: "/cosmos.group.v1.EventTallyError";
+  value: Uint8Array;
+}
+/** EventTallyError is an event emitted when a proposal tally failed with an error. */
+export interface EventTallyErrorAmino {
+  /** proposal_id is the unique ID of the proposal. */
+  proposal_id?: string;
+  /** error_message is the raw error output */
+  error_message?: string;
+}
+export interface EventTallyErrorAminoMsg {
+  type: "cosmos-sdk/EventTallyError";
+  value: EventTallyErrorAmino;
+}
+/** EventTallyError is an event emitted when a proposal tally failed with an error. */
+export interface EventTallyErrorSDKType {
+  proposal_id: bigint;
+  error_message: string;
 }
 function createBaseEventCreateGroup(): EventCreateGroup {
   return {
@@ -868,6 +927,180 @@ export const EventLeaveGroup = {
     return {
       typeUrl: "/cosmos.group.v1.EventLeaveGroup",
       value: EventLeaveGroup.encode(message).finish()
+    };
+  }
+};
+function createBaseEventProposalPruned(): EventProposalPruned {
+  return {
+    proposalId: BigInt(0),
+    status: 0,
+    tallyResult: undefined
+  };
+}
+export const EventProposalPruned = {
+  typeUrl: "/cosmos.group.v1.EventProposalPruned",
+  encode(message: EventProposalPruned, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
+    if (message.proposalId !== BigInt(0)) {
+      writer.uint32(8).uint64(message.proposalId);
+    }
+    if (message.status !== 0) {
+      writer.uint32(16).int32(message.status);
+    }
+    if (message.tallyResult !== undefined) {
+      TallyResult.encode(message.tallyResult, writer.uint32(26).fork()).ldelim();
+    }
+    return writer;
+  },
+  decode(input: BinaryReader | Uint8Array, length?: number): EventProposalPruned {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+    let end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseEventProposalPruned();
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+        case 1:
+          message.proposalId = reader.uint64();
+          break;
+        case 2:
+          message.status = (reader.int32() as any);
+          break;
+        case 3:
+          message.tallyResult = TallyResult.decode(reader, reader.uint32());
+          break;
+        default:
+          reader.skipType(tag & 7);
+          break;
+      }
+    }
+    return message;
+  },
+  fromPartial(object: Partial<EventProposalPruned>): EventProposalPruned {
+    const message = createBaseEventProposalPruned();
+    message.proposalId = object.proposalId !== undefined && object.proposalId !== null ? BigInt(object.proposalId.toString()) : BigInt(0);
+    message.status = object.status ?? 0;
+    message.tallyResult = object.tallyResult !== undefined && object.tallyResult !== null ? TallyResult.fromPartial(object.tallyResult) : undefined;
+    return message;
+  },
+  fromAmino(object: EventProposalPrunedAmino): EventProposalPruned {
+    const message = createBaseEventProposalPruned();
+    if (object.proposal_id !== undefined && object.proposal_id !== null) {
+      message.proposalId = BigInt(object.proposal_id);
+    }
+    if (object.status !== undefined && object.status !== null) {
+      message.status = object.status;
+    }
+    if (object.tally_result !== undefined && object.tally_result !== null) {
+      message.tallyResult = TallyResult.fromAmino(object.tally_result);
+    }
+    return message;
+  },
+  toAmino(message: EventProposalPruned): EventProposalPrunedAmino {
+    const obj: any = {};
+    obj.proposal_id = message.proposalId !== BigInt(0) ? message.proposalId?.toString() : undefined;
+    obj.status = message.status === 0 ? undefined : message.status;
+    obj.tally_result = message.tallyResult ? TallyResult.toAmino(message.tallyResult) : undefined;
+    return obj;
+  },
+  fromAminoMsg(object: EventProposalPrunedAminoMsg): EventProposalPruned {
+    return EventProposalPruned.fromAmino(object.value);
+  },
+  toAminoMsg(message: EventProposalPruned): EventProposalPrunedAminoMsg {
+    return {
+      type: "cosmos-sdk/EventProposalPruned",
+      value: EventProposalPruned.toAmino(message)
+    };
+  },
+  fromProtoMsg(message: EventProposalPrunedProtoMsg): EventProposalPruned {
+    return EventProposalPruned.decode(message.value);
+  },
+  toProto(message: EventProposalPruned): Uint8Array {
+    return EventProposalPruned.encode(message).finish();
+  },
+  toProtoMsg(message: EventProposalPruned): EventProposalPrunedProtoMsg {
+    return {
+      typeUrl: "/cosmos.group.v1.EventProposalPruned",
+      value: EventProposalPruned.encode(message).finish()
+    };
+  }
+};
+function createBaseEventTallyError(): EventTallyError {
+  return {
+    proposalId: BigInt(0),
+    errorMessage: ""
+  };
+}
+export const EventTallyError = {
+  typeUrl: "/cosmos.group.v1.EventTallyError",
+  encode(message: EventTallyError, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
+    if (message.proposalId !== BigInt(0)) {
+      writer.uint32(8).uint64(message.proposalId);
+    }
+    if (message.errorMessage !== "") {
+      writer.uint32(18).string(message.errorMessage);
+    }
+    return writer;
+  },
+  decode(input: BinaryReader | Uint8Array, length?: number): EventTallyError {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+    let end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseEventTallyError();
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+        case 1:
+          message.proposalId = reader.uint64();
+          break;
+        case 2:
+          message.errorMessage = reader.string();
+          break;
+        default:
+          reader.skipType(tag & 7);
+          break;
+      }
+    }
+    return message;
+  },
+  fromPartial(object: Partial<EventTallyError>): EventTallyError {
+    const message = createBaseEventTallyError();
+    message.proposalId = object.proposalId !== undefined && object.proposalId !== null ? BigInt(object.proposalId.toString()) : BigInt(0);
+    message.errorMessage = object.errorMessage ?? "";
+    return message;
+  },
+  fromAmino(object: EventTallyErrorAmino): EventTallyError {
+    const message = createBaseEventTallyError();
+    if (object.proposal_id !== undefined && object.proposal_id !== null) {
+      message.proposalId = BigInt(object.proposal_id);
+    }
+    if (object.error_message !== undefined && object.error_message !== null) {
+      message.errorMessage = object.error_message;
+    }
+    return message;
+  },
+  toAmino(message: EventTallyError): EventTallyErrorAmino {
+    const obj: any = {};
+    obj.proposal_id = message.proposalId !== BigInt(0) ? message.proposalId?.toString() : undefined;
+    obj.error_message = message.errorMessage === "" ? undefined : message.errorMessage;
+    return obj;
+  },
+  fromAminoMsg(object: EventTallyErrorAminoMsg): EventTallyError {
+    return EventTallyError.fromAmino(object.value);
+  },
+  toAminoMsg(message: EventTallyError): EventTallyErrorAminoMsg {
+    return {
+      type: "cosmos-sdk/EventTallyError",
+      value: EventTallyError.toAmino(message)
+    };
+  },
+  fromProtoMsg(message: EventTallyErrorProtoMsg): EventTallyError {
+    return EventTallyError.decode(message.value);
+  },
+  toProto(message: EventTallyError): Uint8Array {
+    return EventTallyError.encode(message).finish();
+  },
+  toProtoMsg(message: EventTallyError): EventTallyErrorProtoMsg {
+    return {
+      typeUrl: "/cosmos.group.v1.EventTallyError",
+      value: EventTallyError.encode(message).finish()
     };
   }
 };

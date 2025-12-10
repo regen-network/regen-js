@@ -17,9 +17,6 @@ service Query {
   rpc Basket(QueryBasketRequest) returns (QueryBasketResponse) {
     option (google.api.http) = {
       get : "/regen/ecocredit/basket/v1/basket/{basket_denom}"
-      // additional_bindings : [
-      //   {get : "/regen/ecocredit/basket/v1/baskets/{basket_denom}"}
-      // ]
     };
   }
 
@@ -33,9 +30,6 @@ service Query {
       returns (QueryBasketBalancesResponse) {
     option (google.api.http) = {
       get : "/regen/ecocredit/basket/v1/basket-balances/{basket_denom}"
-      // additional_bindings : [
-      //   {get : "/regen/ecocredit/basket/v1/baskets/{basket_denom}/balances"}
-      // ]
     };
   }
 
@@ -45,10 +39,6 @@ service Query {
     option (google.api.http) = {
       get : "/regen/ecocredit/basket/v1/basket-balance/{basket_denom}/"
             "{batch_denom}"
-      // additional_bindings : [ {
-      //   get : "/regen/ecocredit/basket/v1/baskets/{basket_denom}/balances/"
-      //         "{batch_denom}"
-      // } ]
     };
   }
 

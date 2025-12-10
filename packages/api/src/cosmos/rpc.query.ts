@@ -24,8 +24,20 @@ export const createRPCQueryClient = async ({
           v1beta1: (await import("./base/node/v1beta1/query.rpc.Service")).createRpcQueryExtension(client)
         }
       },
+      circuit: {
+        v1: (await import("./circuit/v1/query.rpc.Query")).createRpcQueryExtension(client)
+      },
+      consensus: {
+        v1: (await import("./consensus/v1/query.rpc.Query")).createRpcQueryExtension(client)
+      },
+      counter: {
+        v1: (await import("./counter/v1/query.rpc.Query")).createRpcQueryExtension(client)
+      },
       distribution: {
         v1beta1: (await import("./distribution/v1beta1/query.rpc.Query")).createRpcQueryExtension(client)
+      },
+      epochs: {
+        v1beta1: (await import("./epochs/v1beta1/query.rpc.Query")).createRpcQueryExtension(client)
       },
       feegrant: {
         v1beta1: (await import("./feegrant/v1beta1/query.rpc.Query")).createRpcQueryExtension(client)
@@ -42,6 +54,9 @@ export const createRPCQueryClient = async ({
       },
       params: {
         v1beta1: (await import("./params/v1beta1/query.rpc.Query")).createRpcQueryExtension(client)
+      },
+      protocolpool: {
+        v1: (await import("./protocolpool/v1/query.rpc.Query")).createRpcQueryExtension(client)
       },
       staking: {
         v1beta1: (await import("./staking/v1beta1/query.rpc.Query")).createRpcQueryExtension(client)

@@ -1,10 +1,11 @@
 //@ts-nocheck
 import { Any, AnyAmino, AnySDKType } from "../../../google/protobuf/any";
+import { Timestamp } from "../../../google/protobuf/timestamp";
 import { SignMode } from "../signing/v1beta1/signing";
 import { CompactBitArray, CompactBitArrayAmino, CompactBitArraySDKType } from "../../crypto/multisig/v1beta1/multisig";
 import { Coin, CoinAmino, CoinSDKType } from "../../base/v1beta1/coin";
 import { BinaryReader, BinaryWriter } from "../../../binary";
-import { bytesFromBase64, base64FromBytes } from "../../../helpers";
+import { bytesFromBase64, base64FromBytes, toTimestamp, fromTimestamp } from "../../../helpers";
 /** Tx is the standard type used for broadcasting transactions. */
 export interface Tx {
   /** body is the processable content of the transaction */
@@ -181,8 +182,6 @@ export interface SignDocSDKType {
 /**
  * SignDocDirectAux is the type used for generating sign bytes for
  * SIGN_MODE_DIRECT_AUX.
- * 
- * Since: cosmos-sdk 0.46
  */
 export interface SignDocDirectAux {
   /**
@@ -202,14 +201,8 @@ export interface SignDocDirectAux {
   accountNumber: bigint;
   /** sequence is the sequence number of the signing account. */
   sequence: bigint;
-  /**
-   * Tip is the optional tip used for transactions fees paid in another denom.
-   * It should be left empty if the signer is not the tipper for this
-   * transaction.
-   * 
-   * This field is ignored if the chain didn't enable tips, i.e. didn't add the
-   * `TipDecorator` in its posthandler.
-   */
+  /** tips have been depreacted and should not be used */
+  /** @deprecated */
   tip?: Tip;
 }
 export interface SignDocDirectAuxProtoMsg {
@@ -219,8 +212,6 @@ export interface SignDocDirectAuxProtoMsg {
 /**
  * SignDocDirectAux is the type used for generating sign bytes for
  * SIGN_MODE_DIRECT_AUX.
- * 
- * Since: cosmos-sdk 0.46
  */
 export interface SignDocDirectAuxAmino {
   /**
@@ -240,14 +231,8 @@ export interface SignDocDirectAuxAmino {
   account_number?: string;
   /** sequence is the sequence number of the signing account. */
   sequence?: string;
-  /**
-   * Tip is the optional tip used for transactions fees paid in another denom.
-   * It should be left empty if the signer is not the tipper for this
-   * transaction.
-   * 
-   * This field is ignored if the chain didn't enable tips, i.e. didn't add the
-   * `TipDecorator` in its posthandler.
-   */
+  /** tips have been depreacted and should not be used */
+  /** @deprecated */
   tip?: TipAmino;
 }
 export interface SignDocDirectAuxAminoMsg {
@@ -257,8 +242,6 @@ export interface SignDocDirectAuxAminoMsg {
 /**
  * SignDocDirectAux is the type used for generating sign bytes for
  * SIGN_MODE_DIRECT_AUX.
- * 
- * Since: cosmos-sdk 0.46
  */
 export interface SignDocDirectAuxSDKType {
   body_bytes: Uint8Array;
@@ -266,6 +249,7 @@ export interface SignDocDirectAuxSDKType {
   chain_id: string;
   account_number: bigint;
   sequence: bigint;
+  /** @deprecated */
   tip?: TipSDKType;
 }
 /** TxBody is the body of a transaction that all signers sign over. */
@@ -283,14 +267,40 @@ export interface TxBody {
   /**
    * memo is any arbitrary note/comment to be added to the transaction.
    * WARNING: in clients, any publicly exposed text should not be called memo,
-   * but should be called `note` instead (see https://github.com/cosmos/cosmos-sdk/issues/9122).
+   * but should be called `note` instead (see
+   * https://github.com/cosmos/cosmos-sdk/issues/9122).
    */
   memo: string;
   /**
-   * timeout is the block height after which this transaction will not
-   * be processed by the chain
+   * timeout_height is the block height after which this transaction will not
+   * be processed by the chain.
    */
   timeoutHeight: bigint;
+  /**
+   * unordered, when set to true, indicates that the transaction signer(s)
+   * intend for the transaction to be evaluated and executed in an un-ordered
+   * fashion. Specifically, the account's nonce will NOT be checked or
+   * incremented, which allows for fire-and-forget as well as concurrent
+   * transaction execution.
+   * 
+   * Note, when set to true, the existing 'timeout_timestamp' value must
+   * be set and will be used to correspond to a timestamp in which the transaction is deemed
+   * valid.
+   * 
+   * When true, the sequence value MUST be 0, and any transaction with unordered=true and a non-zero sequence value will
+   * be rejected.
+   * External services that make assumptions about sequence values may need to be updated because of this.
+   */
+  unordered: boolean;
+  /**
+   * timeout_timestamp is the block time after which this transaction will not
+   * be processed by the chain.
+   * 
+   * Note, if unordered=true this value MUST be set
+   * and will act as a short-lived TTL in which the transaction is deemed valid
+   * and kept in memory to prevent duplicates.
+   */
+  timeoutTimestamp?: Date;
   /**
    * extension_options are arbitrary options that can be added by chains
    * when the default options are not sufficient. If any of these are present
@@ -323,14 +333,40 @@ export interface TxBodyAmino {
   /**
    * memo is any arbitrary note/comment to be added to the transaction.
    * WARNING: in clients, any publicly exposed text should not be called memo,
-   * but should be called `note` instead (see https://github.com/cosmos/cosmos-sdk/issues/9122).
+   * but should be called `note` instead (see
+   * https://github.com/cosmos/cosmos-sdk/issues/9122).
    */
   memo?: string;
   /**
-   * timeout is the block height after which this transaction will not
-   * be processed by the chain
+   * timeout_height is the block height after which this transaction will not
+   * be processed by the chain.
    */
   timeout_height?: string;
+  /**
+   * unordered, when set to true, indicates that the transaction signer(s)
+   * intend for the transaction to be evaluated and executed in an un-ordered
+   * fashion. Specifically, the account's nonce will NOT be checked or
+   * incremented, which allows for fire-and-forget as well as concurrent
+   * transaction execution.
+   * 
+   * Note, when set to true, the existing 'timeout_timestamp' value must
+   * be set and will be used to correspond to a timestamp in which the transaction is deemed
+   * valid.
+   * 
+   * When true, the sequence value MUST be 0, and any transaction with unordered=true and a non-zero sequence value will
+   * be rejected.
+   * External services that make assumptions about sequence values may need to be updated because of this.
+   */
+  unordered?: boolean;
+  /**
+   * timeout_timestamp is the block time after which this transaction will not
+   * be processed by the chain.
+   * 
+   * Note, if unordered=true this value MUST be set
+   * and will act as a short-lived TTL in which the transaction is deemed valid
+   * and kept in memory to prevent duplicates.
+   */
+  timeout_timestamp?: string;
   /**
    * extension_options are arbitrary options that can be added by chains
    * when the default options are not sufficient. If any of these are present
@@ -353,6 +389,8 @@ export interface TxBodySDKType {
   messages: AnySDKType[];
   memo: string;
   timeout_height: bigint;
+  unordered: boolean;
+  timeout_timestamp?: Date;
   extension_options: AnySDKType[];
   non_critical_extension_options: AnySDKType[];
 }
@@ -380,9 +418,8 @@ export interface AuthInfo {
    * 
    * This field is ignored if the chain didn't enable tips, i.e. didn't add the
    * `TipDecorator` in its posthandler.
-   * 
-   * Since: cosmos-sdk 0.46
    */
+  /** @deprecated */
   tip?: Tip;
 }
 export interface AuthInfoProtoMsg {
@@ -413,9 +450,8 @@ export interface AuthInfoAmino {
    * 
    * This field is ignored if the chain didn't enable tips, i.e. didn't add the
    * `TipDecorator` in its posthandler.
-   * 
-   * Since: cosmos-sdk 0.46
    */
+  /** @deprecated */
   tip?: TipAmino;
 }
 export interface AuthInfoAminoMsg {
@@ -429,6 +465,7 @@ export interface AuthInfoAminoMsg {
 export interface AuthInfoSDKType {
   signer_infos: SignerInfoSDKType[];
   fee?: FeeSDKType;
+  /** @deprecated */
   tip?: TipSDKType;
 }
 /**
@@ -602,15 +639,17 @@ export interface Fee {
    */
   gasLimit: bigint;
   /**
-   * if unset, the first signer is responsible for paying the fees. If set, the specified account must pay the fees.
-   * the payer must be a tx signer (and thus have signed this field in AuthInfo).
-   * setting this field does *not* change the ordering of required signers for the transaction.
+   * if unset, the first signer is responsible for paying the fees. If set, the
+   * specified account must pay the fees. the payer must be a tx signer (and
+   * thus have signed this field in AuthInfo). setting this field does *not*
+   * change the ordering of required signers for the transaction.
    */
   payer: string;
   /**
-   * if set, the fee payer (either the first signer or the value of the payer field) requests that a fee grant be used
-   * to pay fees instead of the fee payer's own balance. If an appropriate fee grant does not exist or the chain does
-   * not support fee grants, this will fail
+   * if set, the fee payer (either the first signer or the value of the payer
+   * field) requests that a fee grant be used to pay fees instead of the fee
+   * payer's own balance. If an appropriate fee grant does not exist or the
+   * chain does not support fee grants, this will fail
    */
   granter: string;
 }
@@ -625,22 +664,24 @@ export interface FeeProtoMsg {
  */
 export interface FeeAmino {
   /** amount is the amount of coins to be paid as a fee */
-  amount?: CoinAmino[];
+  amount: CoinAmino[];
   /**
    * gas_limit is the maximum gas that can be used in transaction processing
    * before an out of gas error occurs
    */
   gas_limit?: string;
   /**
-   * if unset, the first signer is responsible for paying the fees. If set, the specified account must pay the fees.
-   * the payer must be a tx signer (and thus have signed this field in AuthInfo).
-   * setting this field does *not* change the ordering of required signers for the transaction.
+   * if unset, the first signer is responsible for paying the fees. If set, the
+   * specified account must pay the fees. the payer must be a tx signer (and
+   * thus have signed this field in AuthInfo). setting this field does *not*
+   * change the ordering of required signers for the transaction.
    */
   payer?: string;
   /**
-   * if set, the fee payer (either the first signer or the value of the payer field) requests that a fee grant be used
-   * to pay fees instead of the fee payer's own balance. If an appropriate fee grant does not exist or the chain does
-   * not support fee grants, this will fail
+   * if set, the fee payer (either the first signer or the value of the payer
+   * field) requests that a fee grant be used to pay fees instead of the fee
+   * payer's own balance. If an appropriate fee grant does not exist or the
+   * chain does not support fee grants, this will fail
    */
   granter?: string;
 }
@@ -659,11 +700,8 @@ export interface FeeSDKType {
   payer: string;
   granter: string;
 }
-/**
- * Tip is the tip used for meta-transactions.
- * 
- * Since: cosmos-sdk 0.46
- */
+/** Tip is the tip used for meta-transactions. */
+/** @deprecated */
 export interface Tip {
   /** amount is the amount of the tip */
   amount: Coin[];
@@ -674,14 +712,11 @@ export interface TipProtoMsg {
   typeUrl: "/cosmos.tx.v1beta1.Tip";
   value: Uint8Array;
 }
-/**
- * Tip is the tip used for meta-transactions.
- * 
- * Since: cosmos-sdk 0.46
- */
+/** Tip is the tip used for meta-transactions. */
+/** @deprecated */
 export interface TipAmino {
   /** amount is the amount of the tip */
-  amount?: CoinAmino[];
+  amount: CoinAmino[];
   /** tipper is the address of the account paying for the tip */
   tipper?: string;
 }
@@ -689,11 +724,8 @@ export interface TipAminoMsg {
   type: "cosmos-sdk/Tip";
   value: TipAmino;
 }
-/**
- * Tip is the tip used for meta-transactions.
- * 
- * Since: cosmos-sdk 0.46
- */
+/** Tip is the tip used for meta-transactions. */
+/** @deprecated */
 export interface TipSDKType {
   amount: CoinSDKType[];
   tipper: string;
@@ -703,8 +735,6 @@ export interface TipSDKType {
  * tipper) builds and sends to the fee payer (who will build and broadcast the
  * actual tx). AuxSignerData is not a valid tx in itself, and will be rejected
  * by the node if sent directly as-is.
- * 
- * Since: cosmos-sdk 0.46
  */
 export interface AuxSignerData {
   /**
@@ -733,8 +763,6 @@ export interface AuxSignerDataProtoMsg {
  * tipper) builds and sends to the fee payer (who will build and broadcast the
  * actual tx). AuxSignerData is not a valid tx in itself, and will be rejected
  * by the node if sent directly as-is.
- * 
- * Since: cosmos-sdk 0.46
  */
 export interface AuxSignerDataAmino {
   /**
@@ -763,8 +791,6 @@ export interface AuxSignerDataAminoMsg {
  * tipper) builds and sends to the fee payer (who will build and broadcast the
  * actual tx). AuxSignerData is not a valid tx in itself, and will be rejected
  * by the node if sent directly as-is.
- * 
- * Since: cosmos-sdk 0.46
  */
 export interface AuxSignerDataSDKType {
   address: string;
@@ -1201,6 +1227,8 @@ function createBaseTxBody(): TxBody {
     messages: [],
     memo: "",
     timeoutHeight: BigInt(0),
+    unordered: false,
+    timeoutTimestamp: undefined,
     extensionOptions: [],
     nonCriticalExtensionOptions: []
   };
@@ -1216,6 +1244,12 @@ export const TxBody = {
     }
     if (message.timeoutHeight !== BigInt(0)) {
       writer.uint32(24).uint64(message.timeoutHeight);
+    }
+    if (message.unordered === true) {
+      writer.uint32(32).bool(message.unordered);
+    }
+    if (message.timeoutTimestamp !== undefined) {
+      Timestamp.encode(toTimestamp(message.timeoutTimestamp), writer.uint32(42).fork()).ldelim();
     }
     for (const v of message.extensionOptions) {
       Any.encode(v!, writer.uint32(8186).fork()).ldelim();
@@ -1241,6 +1275,12 @@ export const TxBody = {
         case 3:
           message.timeoutHeight = reader.uint64();
           break;
+        case 4:
+          message.unordered = reader.bool();
+          break;
+        case 5:
+          message.timeoutTimestamp = fromTimestamp(Timestamp.decode(reader, reader.uint32()));
+          break;
         case 1023:
           message.extensionOptions.push(Any.decode(reader, reader.uint32()));
           break;
@@ -1259,6 +1299,8 @@ export const TxBody = {
     message.messages = object.messages?.map(e => Any.fromPartial(e)) || [];
     message.memo = object.memo ?? "";
     message.timeoutHeight = object.timeoutHeight !== undefined && object.timeoutHeight !== null ? BigInt(object.timeoutHeight.toString()) : BigInt(0);
+    message.unordered = object.unordered ?? false;
+    message.timeoutTimestamp = object.timeoutTimestamp ?? undefined;
     message.extensionOptions = object.extensionOptions?.map(e => Any.fromPartial(e)) || [];
     message.nonCriticalExtensionOptions = object.nonCriticalExtensionOptions?.map(e => Any.fromPartial(e)) || [];
     return message;
@@ -1271,6 +1313,12 @@ export const TxBody = {
     }
     if (object.timeout_height !== undefined && object.timeout_height !== null) {
       message.timeoutHeight = BigInt(object.timeout_height);
+    }
+    if (object.unordered !== undefined && object.unordered !== null) {
+      message.unordered = object.unordered;
+    }
+    if (object.timeout_timestamp !== undefined && object.timeout_timestamp !== null) {
+      message.timeoutTimestamp = fromTimestamp(Timestamp.fromAmino(object.timeout_timestamp));
     }
     message.extensionOptions = object.extension_options?.map(e => Any.fromAmino(e)) || [];
     message.nonCriticalExtensionOptions = object.non_critical_extension_options?.map(e => Any.fromAmino(e)) || [];
@@ -1285,6 +1333,8 @@ export const TxBody = {
     }
     obj.memo = message.memo === "" ? undefined : message.memo;
     obj.timeout_height = message.timeoutHeight !== BigInt(0) ? message.timeoutHeight?.toString() : undefined;
+    obj.unordered = message.unordered === false ? undefined : message.unordered;
+    obj.timeout_timestamp = message.timeoutTimestamp ? Timestamp.toAmino(toTimestamp(message.timeoutTimestamp)) : undefined;
     if (message.extensionOptions) {
       obj.extension_options = message.extensionOptions.map(e => e ? Any.toAmino(e) : undefined);
     } else {

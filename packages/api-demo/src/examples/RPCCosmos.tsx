@@ -26,6 +26,7 @@ export function RPCCosmos(): React.ReactElement {
             limit: BigInt(0),
             offset: BigInt(0),
           } as PageRequest,
+          resolveDenom: true,
         })
         .then(setResult)
         .catch(setError);
