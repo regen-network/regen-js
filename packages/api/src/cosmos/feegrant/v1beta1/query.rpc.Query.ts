@@ -5,15 +5,11 @@ import { QueryClient, createProtobufRpcClient } from "@cosmjs/stargate";
 import { QueryAllowanceRequest, QueryAllowanceResponse, QueryAllowancesRequest, QueryAllowancesResponse, QueryAllowancesByGranterRequest, QueryAllowancesByGranterResponse } from "./query";
 /** Query defines the gRPC querier service. */
 export interface Query {
-  /** Allowance returns fee granted to the grantee by the granter. */
+  /** Allowance returns granted allwance to the grantee by the granter. */
   allowance(request: QueryAllowanceRequest): Promise<QueryAllowanceResponse>;
-  /** Allowances returns all the grants for address. */
+  /** Allowances returns all the grants for the given grantee address. */
   allowances(request: QueryAllowancesRequest): Promise<QueryAllowancesResponse>;
-  /**
-   * AllowancesByGranter returns all the grants given by an address
-   * 
-   * Since: cosmos-sdk 0.46
-   */
+  /** AllowancesByGranter returns all the grants given by an address */
   allowancesByGranter(request: QueryAllowancesByGranterRequest): Promise<QueryAllowancesByGranterResponse>;
 }
 export class QueryClientImpl implements Query {

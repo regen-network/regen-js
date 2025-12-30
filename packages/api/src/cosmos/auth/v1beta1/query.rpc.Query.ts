@@ -2,51 +2,34 @@
 import { Rpc } from "../../../helpers";
 import { BinaryReader } from "../../../binary";
 import { QueryClient, createProtobufRpcClient } from "@cosmjs/stargate";
-import { QueryAccountsRequest, QueryAccountsResponse, QueryAccountRequest, QueryAccountResponse, QueryAccountAddressByIDRequest, QueryAccountAddressByIDResponse, QueryParamsRequest, QueryParamsResponse, QueryModuleAccountsRequest, QueryModuleAccountsResponse, QueryModuleAccountByNameRequest, QueryModuleAccountByNameResponse, Bech32PrefixRequest, Bech32PrefixResponse, AddressBytesToStringRequest, AddressBytesToStringResponse, AddressStringToBytesRequest, AddressStringToBytesResponse } from "./query";
+import { QueryAccountsRequest, QueryAccountsResponse, QueryAccountRequest, QueryAccountResponse, QueryAccountAddressByIDRequest, QueryAccountAddressByIDResponse, QueryParamsRequest, QueryParamsResponse, QueryModuleAccountsRequest, QueryModuleAccountsResponse, QueryModuleAccountByNameRequest, QueryModuleAccountByNameResponse, Bech32PrefixRequest, Bech32PrefixResponse, AddressBytesToStringRequest, AddressBytesToStringResponse, AddressStringToBytesRequest, AddressStringToBytesResponse, QueryAccountInfoRequest, QueryAccountInfoResponse } from "./query";
 /** Query defines the gRPC querier service. */
 export interface Query {
   /**
-   * Accounts returns all the existing accounts
+   * Accounts returns all the existing accounts.
    * 
-   * Since: cosmos-sdk 0.43
+   * When called from another module, this query might consume a high amount of
+   * gas if the pagination field is incorrectly set.
    */
   accounts(request?: QueryAccountsRequest): Promise<QueryAccountsResponse>;
   /** Account returns account details based on address. */
   account(request: QueryAccountRequest): Promise<QueryAccountResponse>;
-  /**
-   * AccountAddressByID returns account address based on account number.
-   * 
-   * Since: cosmos-sdk 0.46.2
-   */
+  /** AccountAddressByID returns account address based on account number. */
   accountAddressByID(request: QueryAccountAddressByIDRequest): Promise<QueryAccountAddressByIDResponse>;
   /** Params queries all parameters. */
   params(request?: QueryParamsRequest): Promise<QueryParamsResponse>;
-  /**
-   * ModuleAccounts returns all the existing module accounts.
-   * 
-   * Since: cosmos-sdk 0.46
-   */
+  /** ModuleAccounts returns all the existing module accounts. */
   moduleAccounts(request?: QueryModuleAccountsRequest): Promise<QueryModuleAccountsResponse>;
   /** ModuleAccountByName returns the module account info by module name */
   moduleAccountByName(request: QueryModuleAccountByNameRequest): Promise<QueryModuleAccountByNameResponse>;
-  /**
-   * Bech32Prefix queries bech32Prefix
-   * 
-   * Since: cosmos-sdk 0.46
-   */
+  /** Bech32Prefix queries bech32Prefix */
   bech32Prefix(request?: Bech32PrefixRequest): Promise<Bech32PrefixResponse>;
-  /**
-   * AddressBytesToString converts Account Address bytes to string
-   * 
-   * Since: cosmos-sdk 0.46
-   */
+  /** AddressBytesToString converts Account Address bytes to string */
   addressBytesToString(request: AddressBytesToStringRequest): Promise<AddressBytesToStringResponse>;
-  /**
-   * AddressStringToBytes converts Address string to bytes
-   * 
-   * Since: cosmos-sdk 0.46
-   */
+  /** AddressStringToBytes converts Address string to bytes */
   addressStringToBytes(request: AddressStringToBytesRequest): Promise<AddressStringToBytesResponse>;
+  /** AccountInfo queries account info which is common to all account types. */
+  accountInfo(request: QueryAccountInfoRequest): Promise<QueryAccountInfoResponse>;
 }
 export class QueryClientImpl implements Query {
   private readonly rpc: Rpc;
@@ -61,6 +44,7 @@ export class QueryClientImpl implements Query {
     this.bech32Prefix = this.bech32Prefix.bind(this);
     this.addressBytesToString = this.addressBytesToString.bind(this);
     this.addressStringToBytes = this.addressStringToBytes.bind(this);
+    this.accountInfo = this.accountInfo.bind(this);
   }
   accounts(request: QueryAccountsRequest = {
     pagination: undefined
@@ -109,6 +93,11 @@ export class QueryClientImpl implements Query {
     const promise = this.rpc.request("cosmos.auth.v1beta1.Query", "AddressStringToBytes", data);
     return promise.then(data => AddressStringToBytesResponse.decode(new BinaryReader(data)));
   }
+  accountInfo(request: QueryAccountInfoRequest): Promise<QueryAccountInfoResponse> {
+    const data = QueryAccountInfoRequest.encode(request).finish();
+    const promise = this.rpc.request("cosmos.auth.v1beta1.Query", "AccountInfo", data);
+    return promise.then(data => QueryAccountInfoResponse.decode(new BinaryReader(data)));
+  }
 }
 export const createRpcQueryExtension = (base: QueryClient) => {
   const rpc = createProtobufRpcClient(base);
@@ -140,6 +129,9 @@ export const createRpcQueryExtension = (base: QueryClient) => {
     },
     addressStringToBytes(request: AddressStringToBytesRequest): Promise<AddressStringToBytesResponse> {
       return queryService.addressStringToBytes(request);
+    },
+    accountInfo(request: QueryAccountInfoRequest): Promise<QueryAccountInfoResponse> {
+      return queryService.accountInfo(request);
     }
   };
 };

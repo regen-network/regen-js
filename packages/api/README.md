@@ -52,7 +52,7 @@ const client = await createRPCQueryClient({ rpcEndpoint: RPC_ENDPOINT });
 
 // now you can query the cosmos modules
 const balance = await client.cosmos.bank.v1beta1
-    .allBalances({ address: 'regen1addresshere' });
+    .allBalances({ address: 'regen1addresshere', resolveDenom: true });
 
 // you can also query the regen modules
 const balances = await client.regen.exchange.v1beta1

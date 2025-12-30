@@ -22,6 +22,7 @@ export function LCDCosmos(): React.ReactElement {
         .allBalances({
           address: 'regen1df675r9vnf7pdedn4sf26svdsem3ugavgxmy46',
           pagination: { countTotal: true } as PageRequest,
+          resolveDenom: true,
         })
         .then(setResult)
         .catch(setError);

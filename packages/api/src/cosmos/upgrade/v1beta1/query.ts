@@ -164,7 +164,6 @@ export interface QueryUpgradedConsensusStateRequestSDKType {
  */
 /** @deprecated */
 export interface QueryUpgradedConsensusStateResponse {
-  /** Since: cosmos-sdk 0.43 */
   upgradedConsensusState: Uint8Array;
 }
 export interface QueryUpgradedConsensusStateResponseProtoMsg {
@@ -177,7 +176,6 @@ export interface QueryUpgradedConsensusStateResponseProtoMsg {
  */
 /** @deprecated */
 export interface QueryUpgradedConsensusStateResponseAmino {
-  /** Since: cosmos-sdk 0.43 */
   upgraded_consensus_state?: string;
 }
 export interface QueryUpgradedConsensusStateResponseAminoMsg {
@@ -195,8 +193,6 @@ export interface QueryUpgradedConsensusStateResponseSDKType {
 /**
  * QueryModuleVersionsRequest is the request type for the Query/ModuleVersions
  * RPC method.
- * 
- * Since: cosmos-sdk 0.43
  */
 export interface QueryModuleVersionsRequest {
   /**
@@ -213,8 +209,6 @@ export interface QueryModuleVersionsRequestProtoMsg {
 /**
  * QueryModuleVersionsRequest is the request type for the Query/ModuleVersions
  * RPC method.
- * 
- * Since: cosmos-sdk 0.43
  */
 export interface QueryModuleVersionsRequestAmino {
   /**
@@ -231,8 +225,6 @@ export interface QueryModuleVersionsRequestAminoMsg {
 /**
  * QueryModuleVersionsRequest is the request type for the Query/ModuleVersions
  * RPC method.
- * 
- * Since: cosmos-sdk 0.43
  */
 export interface QueryModuleVersionsRequestSDKType {
   module_name: string;
@@ -240,8 +232,6 @@ export interface QueryModuleVersionsRequestSDKType {
 /**
  * QueryModuleVersionsResponse is the response type for the Query/ModuleVersions
  * RPC method.
- * 
- * Since: cosmos-sdk 0.43
  */
 export interface QueryModuleVersionsResponse {
   /** module_versions is a list of module names with their consensus versions. */
@@ -254,8 +244,6 @@ export interface QueryModuleVersionsResponseProtoMsg {
 /**
  * QueryModuleVersionsResponse is the response type for the Query/ModuleVersions
  * RPC method.
- * 
- * Since: cosmos-sdk 0.43
  */
 export interface QueryModuleVersionsResponseAmino {
   /** module_versions is a list of module names with their consensus versions. */
@@ -268,43 +256,25 @@ export interface QueryModuleVersionsResponseAminoMsg {
 /**
  * QueryModuleVersionsResponse is the response type for the Query/ModuleVersions
  * RPC method.
- * 
- * Since: cosmos-sdk 0.43
  */
 export interface QueryModuleVersionsResponseSDKType {
   module_versions: ModuleVersionSDKType[];
 }
-/**
- * QueryAuthorityRequest is the request type for Query/Authority
- * 
- * Since: cosmos-sdk 0.46
- */
+/** QueryAuthorityRequest is the request type for Query/Authority */
 export interface QueryAuthorityRequest {}
 export interface QueryAuthorityRequestProtoMsg {
   typeUrl: "/cosmos.upgrade.v1beta1.QueryAuthorityRequest";
   value: Uint8Array;
 }
-/**
- * QueryAuthorityRequest is the request type for Query/Authority
- * 
- * Since: cosmos-sdk 0.46
- */
+/** QueryAuthorityRequest is the request type for Query/Authority */
 export interface QueryAuthorityRequestAmino {}
 export interface QueryAuthorityRequestAminoMsg {
   type: "cosmos-sdk/QueryAuthorityRequest";
   value: QueryAuthorityRequestAmino;
 }
-/**
- * QueryAuthorityRequest is the request type for Query/Authority
- * 
- * Since: cosmos-sdk 0.46
- */
+/** QueryAuthorityRequest is the request type for Query/Authority */
 export interface QueryAuthorityRequestSDKType {}
-/**
- * QueryAuthorityResponse is the response type for Query/Authority
- * 
- * Since: cosmos-sdk 0.46
- */
+/** QueryAuthorityResponse is the response type for Query/Authority */
 export interface QueryAuthorityResponse {
   address: string;
 }
@@ -312,11 +282,7 @@ export interface QueryAuthorityResponseProtoMsg {
   typeUrl: "/cosmos.upgrade.v1beta1.QueryAuthorityResponse";
   value: Uint8Array;
 }
-/**
- * QueryAuthorityResponse is the response type for Query/Authority
- * 
- * Since: cosmos-sdk 0.46
- */
+/** QueryAuthorityResponse is the response type for Query/Authority */
 export interface QueryAuthorityResponseAmino {
   address?: string;
 }
@@ -324,11 +290,7 @@ export interface QueryAuthorityResponseAminoMsg {
   type: "cosmos-sdk/QueryAuthorityResponse";
   value: QueryAuthorityResponseAmino;
 }
-/**
- * QueryAuthorityResponse is the response type for Query/Authority
- * 
- * Since: cosmos-sdk 0.46
- */
+/** QueryAuthorityResponse is the response type for Query/Authority */
 export interface QueryAuthorityResponseSDKType {
   address: string;
 }

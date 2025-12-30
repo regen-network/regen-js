@@ -11,6 +11,7 @@ export interface BaseVestingAccount {
   originalVesting: Coin[];
   delegatedFree: Coin[];
   delegatedVesting: Coin[];
+  /** Vesting end time, as unix timestamp (in seconds). */
   endTime: bigint;
 }
 export interface BaseVestingAccountProtoMsg {
@@ -23,9 +24,10 @@ export interface BaseVestingAccountProtoMsg {
  */
 export interface BaseVestingAccountAmino {
   base_account?: BaseAccountAmino;
-  original_vesting?: CoinAmino[];
-  delegated_free?: CoinAmino[];
-  delegated_vesting?: CoinAmino[];
+  original_vesting: CoinAmino[];
+  delegated_free: CoinAmino[];
+  delegated_vesting: CoinAmino[];
+  /** Vesting end time, as unix timestamp (in seconds). */
   end_time?: string;
 }
 export interface BaseVestingAccountAminoMsg {
@@ -49,6 +51,7 @@ export interface BaseVestingAccountSDKType {
  */
 export interface ContinuousVestingAccount {
   baseVestingAccount?: BaseVestingAccount;
+  /** Vesting start time, as unix timestamp (in seconds). */
   startTime: bigint;
 }
 export interface ContinuousVestingAccountProtoMsg {
@@ -61,6 +64,7 @@ export interface ContinuousVestingAccountProtoMsg {
  */
 export interface ContinuousVestingAccountAmino {
   base_vesting_account?: BaseVestingAccountAmino;
+  /** Vesting start time, as unix timestamp (in seconds). */
   start_time?: string;
 }
 export interface ContinuousVestingAccountAminoMsg {
@@ -109,6 +113,7 @@ export interface DelayedVestingAccountSDKType {
 }
 /** Period defines a length of time and amount of coins that will vest. */
 export interface Period {
+  /** Period duration in seconds. */
   length: bigint;
   amount: Coin[];
 }
@@ -118,8 +123,9 @@ export interface PeriodProtoMsg {
 }
 /** Period defines a length of time and amount of coins that will vest. */
 export interface PeriodAmino {
+  /** Period duration in seconds. */
   length?: string;
-  amount?: CoinAmino[];
+  amount: CoinAmino[];
 }
 export interface PeriodAminoMsg {
   type: "cosmos-sdk/Period";
@@ -150,7 +156,7 @@ export interface PeriodicVestingAccountProtoMsg {
 export interface PeriodicVestingAccountAmino {
   base_vesting_account?: BaseVestingAccountAmino;
   start_time?: string;
-  vesting_periods?: PeriodAmino[];
+  vesting_periods: PeriodAmino[];
 }
 export interface PeriodicVestingAccountAminoMsg {
   type: "cosmos-sdk/PeriodicVestingAccount";
@@ -169,8 +175,6 @@ export interface PeriodicVestingAccountSDKType {
  * PermanentLockedAccount implements the VestingAccount interface. It does
  * not ever release coins, locking them indefinitely. Coins in this account can
  * still be used for delegating and for governance votes even while locked.
- * 
- * Since: cosmos-sdk 0.43
  */
 export interface PermanentLockedAccount {
   baseVestingAccount?: BaseVestingAccount;
@@ -183,8 +187,6 @@ export interface PermanentLockedAccountProtoMsg {
  * PermanentLockedAccount implements the VestingAccount interface. It does
  * not ever release coins, locking them indefinitely. Coins in this account can
  * still be used for delegating and for governance votes even while locked.
- * 
- * Since: cosmos-sdk 0.43
  */
 export interface PermanentLockedAccountAmino {
   base_vesting_account?: BaseVestingAccountAmino;
@@ -197,8 +199,6 @@ export interface PermanentLockedAccountAminoMsg {
  * PermanentLockedAccount implements the VestingAccount interface. It does
  * not ever release coins, locking them indefinitely. Coins in this account can
  * still be used for delegating and for governance votes even while locked.
- * 
- * Since: cosmos-sdk 0.43
  */
 export interface PermanentLockedAccountSDKType {
   base_vesting_account?: BaseVestingAccountSDKType;
